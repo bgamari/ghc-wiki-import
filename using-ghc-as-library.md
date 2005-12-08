@@ -17,6 +17,6 @@ http://cvs.haskell.org/cgi-bin/cvsweb.cgi/fptools/ghc/compiler/main/GHC.hs](http
 
 
 
-Here's an example main program that does it.
+Here's an example main program that does it [Main.hs](/trac/ghc/attachment/wiki/UsingGhcAsLibrary/Main.hs)[](/trac/ghc/raw-attachment/wiki/UsingGhcAsLibrary/Main.hs)
 
 
