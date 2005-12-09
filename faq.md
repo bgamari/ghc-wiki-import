@@ -142,6 +142,9 @@ Compile your program with `-prof -auto-all` (make sure you have the profiling li
 
 
 See [Section 4.14.5, ““Hooks” to change RTS behaviour”](http://www.haskell.org/ghc/docs/latest/html/users_guide/runtime-control.html#rts-hooks).
+
+
+##
 I'm trying to compile my program for parallel execution with the -parallel, and GHC complains with an error like “failed to load interface file for Prelude”.
 
 
