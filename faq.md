@@ -213,7 +213,8 @@ the [ FFI Addendum](http://www.cse.unsw.edu.au/~chak/haskell/ffi/)).
 
 
 
-In GHC the `threadsafe` modifier on a foreign call means the sae as `safe`. (The former is deprecated.)
+In GHC the `threadsafe` modifier on a foreign call means the same as `safe`. 
+(The former is deprecated.)
 
 
 ## Do I have to recompile all my code if I upgrade GHC?
