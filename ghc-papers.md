@@ -1,3 +1,6 @@
+## Papers related to GHC
+
+
 
 Here we've collected together lots of documentation and papers that
 generally describe stuff we've implemented in GHC.
