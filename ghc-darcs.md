@@ -2,7 +2,8 @@
 
 
 
-A source tree consists of the GHC repository, with a set of packages in the libraries directory.  We supply a script to automate the checking out of packages, `darcs-all`.  Checking out a tree goes like this:
+A source tree consists of the GHC repository, with a set of packages in the libraries directory.  We supply a script to automate the checking out of packages, `darcs-all`.  First you should install [
+darcs](http://darcs.net/).  Then, checking out a tree goes like this:
 
 
 ```wiki
