@@ -5,6 +5,10 @@
 This page describes a proposal for a class framework for collection types. Related ticket: [\#666](https://gitlab.staging.haskell.org/ghc/ghc/issues/666)
 
 
+
+Please give me feedback by either mailing me (jeanphilippe.bernardy at gmail.com) or edit this page; or issue tickets (see [CollectionLibraries](collection-libraries)); or any other means. I'm mainly interested in concrete examples where the framework would fall short to meet your needs. 
+
+
 ## Goals, Non-Goals and Working Hypotheses
 
 
