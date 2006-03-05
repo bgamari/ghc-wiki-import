@@ -37,7 +37,7 @@ I'm especially interested in cases where this framework does not fit your applic
 ## References
 
 
-- SPJ's Bulk Types with Sass : [
+- SPJ's Bulk Types with Class : [
   http://research.microsoft.com/%7Esimonpj/Papers/collections.ps.gz](http://research.microsoft.com/%7Esimonpj/Papers/collections.ps.gz)
 - The Edison implementation of Okasaki's Functional Data Structures : [
   http://www.eecs.tufts.edu/\~rdocki01/edison.html](http://www.eecs.tufts.edu/~rdocki01/edison.html);
