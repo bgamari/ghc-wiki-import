@@ -1,4 +1,4 @@
-### Gettig a GHC source tree
+### Getting a GHC source tree
 
 
 
