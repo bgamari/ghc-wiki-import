@@ -184,6 +184,10 @@ If you have commit permission (pretty easy to get, just demonstrate your compete
 
 
 
+Do not forget to `darcs record` your changes first!
+
+
+
 Please test changes before committing: you can run a cut-down version of the full test suite like this:
 
 
