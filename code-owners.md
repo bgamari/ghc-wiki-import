@@ -116,7 +116,7 @@ and a short description of what they're doing or have done.
 - Mark Tullsen
 - Malcolm Wallace
 - N. Xu
-- Ashley Yakeley
+- Ashley Yakeley (Time library)
 
 ## Past contributors
 
