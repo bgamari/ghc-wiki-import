@@ -100,7 +100,8 @@ and a short description of what they're doing or have done.
 - Ross Paterson
 - Sven Panne
 - Simon Peyton Jones
-- Norman Ramsay
+- [
+  Norman Ramsey](http://www.eecs.harvard.edu/nr) (a little refactoring in the back end)
 - Ben Rudiak-Gould
 - Sean Seefried
 - Dominic Steinitz (Cryptographic library)
