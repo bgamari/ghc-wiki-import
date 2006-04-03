@@ -158,7 +158,7 @@ wonderful ways:
 - Juan Quintela
 - Alastair Reid
 - Patrick Sansom
-- Andr&eacute; Santos
+- André Santos
 - Julian Seward
 - Reuben Thomas
 - Phil Trinder
