@@ -118,7 +118,7 @@ and a short description of what they're doing or have done.
 - [
   Norman Ramsey](http://www.eecs.harvard.edu/nr) (a little refactoring in the back end)
 - Ben Rudiak-Gould
-- Sean Seefried
+- Sean Seefried (Plug-in optimisations (in pluggable-branch))
 - Dominic Steinitz (Cryptographic library)
 - Don Stewart (OpenBSD support)
 - Volker Stolz
