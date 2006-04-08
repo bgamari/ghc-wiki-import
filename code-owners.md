@@ -28,6 +28,7 @@ maintain.
   - Gentoo Linux/x86 packages: Gentoo Haskell team
   - Debian GNU/Linux/x86 packages: Ian Lynagh
   - MacOS X (port in progress): Wolfgang Thaller
+  - Fedora Extras packages: Jens Petersen
 
 - **PowerPC**
 
@@ -36,6 +37,7 @@ maintain.
   - Gentoo Linux packages (32 and 64bit): Gentoo Haskell team
   - Debian GNU/Linux/powerpc packages: Ian Lynagh
   - MacOS X: Wolfgang Thaller
+  - Fedora Extras packages: Jens Petersen
 
 - **Sparc**
 
@@ -50,6 +52,7 @@ maintain.
   - Gentoo Linux packages: Gentoo Haskell team
   - Debian GNU/Linux/amd64 packages: Ian Lynagh
   - OpenBSD: Don Stewart
+  - Fedora Extras packages: Jens Petersen
 
 - **Mips64**
 
