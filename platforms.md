@@ -185,6 +185,15 @@ various platforms.  Definitions:
 <th> Yes          </th>
 <th> No                
 </th></tr>
+<tr><th> Sparc        </th>
+<th> OpenBSD         </th>
+<th> sparc-unknown-openbsd   </th>
+<th> Yes          </th>
+<th> Yes  </th>
+<th> No(\*1)                </th>
+<th> Yes          </th>
+<th> No                
+</th></tr>
 <tr><th> x86-64       </th>
 <th> Linux           </th>
 <th> x86\_64-unknown-linux    </th>
@@ -196,7 +205,7 @@ various platforms.  Definitions:
 </th></tr>
 <tr><th> x86-64       </th>
 <th> OpenBSD         </th>
-<th> x86\_64-unknown-openbsd  </th>
+<th> amd64-unknown-openbsd   </th>
 <th> Yes          </th>
 <th> Yes  </th>
 <th> Yes                   </th>
