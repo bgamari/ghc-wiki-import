@@ -162,7 +162,7 @@ various platforms.  Definitions:
 <th> Linux           </th>
 <th> powerpc64-unknown-linux </th>
 <th> Yes          </th>
-<th>      </th>
+<th> No   </th>
 <th> No                    </th>
 <th> Yes          </th>
 <th> No                
