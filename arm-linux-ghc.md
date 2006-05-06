@@ -93,7 +93,13 @@ hard coded to the current location.
 
 
 (1) unroll the ghc source tarball into a new directory.
+
+
+
 (2) ./configure --srcdir=. --with-ghc=/abs/path/to/ghc-inplace
+
+
+
 (3) create a mk/build.mk with these two lines:
 
 
@@ -104,6 +110,9 @@ GhcWithNativeCodeGen = NO
 
 
 (4) make
+
+
+
 (5) make install
 
 
@@ -130,6 +139,9 @@ http://haskell.org/ghc/dist/ghc-testsuite-6.4.2.tar.gz](http://haskell.org/ghc/d
 
 
 (2) untar it in the ghc-6.4.2/ghc directory.
+
+
+
 (3) edit mk/test.mk and change the -e config.time\_prog line to:
 
 
@@ -139,8 +151,17 @@ http://haskell.org/ghc/dist/ghc-testsuite-6.4.2.tar.gz](http://haskell.org/ghc/d
 
 
 (4) cd to test/ghc-regress
+
+
+
 (5) make TEST\_HC=ghc fast 
+
+
+
 or
+
+
+
 (5) make TEST\_HC=ghc \# for a longer test
 
 
