@@ -385,7 +385,7 @@ http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-fem-g0-time-live\_objs.png](h
 
 
 
-fem did not do an G1 collections.
+fem did not do any G1 collections.
 
 
 ## Compiling GHC
