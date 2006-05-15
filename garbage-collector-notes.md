@@ -134,7 +134,7 @@ The existing GC in GHC is a single threaded one. When the RTS detects memory pre
 ## GC Data Structures
 
 
-### Blocks and MegaBlocks
+### Blocks and Mega Blocks
 
 
 
