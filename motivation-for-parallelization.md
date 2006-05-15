@@ -201,3 +201,13 @@ http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-fem-g0-time-live\_objs.png](h
 fem did not do any G1 collections.
 
 
+---
+
+
+
+Roshan James (rpjames \[at\] cs \[dot\] indiana \[dot\] edu)
+
+
+---
+
+
