@@ -245,7 +245,7 @@ Watch out for what files you edit. There are some files in the build process are
 
 
 
-This is a classical magic problem. I got GHC to build on my desktop by it would not my laptop. As a matter of fact when I type in “autoreconf” the machine freezes up after about 30 seconds. Very puzzling. 
+This is a classical magic problem. I got GHC to build on my desktop but it would not my laptop. As a matter of fact when I type in “autoreconf” the machine freezes up after about 30 seconds. Very puzzling. 
 
 
 
