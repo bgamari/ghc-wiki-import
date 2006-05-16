@@ -71,32 +71,20 @@ Here are some plots:
 
 
 [
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-memtest-g0-time-block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-memtest-g0-time-block_dist.png)
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-memtest-g0-avg\_block\_dist-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-memtest-g0-avg_block_dist-time.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-memtest-g0-block\_dist-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-memtest-g0-block_dist-time.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-memtest-g0-live\_objs-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-memtest-g0-live_objs-time.png)
 
 
 
 [
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-memtest-g0-time-avg\_block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-memtest-g0-time-avg_block_dist.png)
-
-
-
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-memtest-g1-avg\_block\_dist-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-memtest-g1-avg_block_dist-time.png)
 [
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-memtest-g0-time-live\_objs.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-memtest-g0-time-live_objs.png)
-
-
-
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-memtest-g1-block\_dist-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-memtest-g1-block_dist-time.png)
 [
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-memtest-g1-time-block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-memtest-g1-time-block_dist.png)
-
-
-
-[
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-memtest-g1-time-avg\_block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-memtest-g1-time-avg_block_dist.png)
-
-
-
-[
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-memtest-g1-time-live\_objs.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-memtest-g1-time-live_objs.png)
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-memtest-g1-live\_objs-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-memtest-g1-live_objs-time.png)
 
 
 
@@ -117,32 +105,20 @@ Plots of real/fulsom (with input 8)
 
 
 [
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-fulsom-g0-time-block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-fulsom-g0-time-block_dist.png)
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-fulsom-g0-avg\_block\_dist-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-fulsom-g0-avg_block_dist-time.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-fulsom-g0-block\_dist-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-fulsom-g0-block_dist-time.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-fulsom-g0-live\_objs-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-fulsom-g0-live_objs-time.png)
 
 
 
 [
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-fulsom-g0-time-avg\_block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-fulsom-g0-time-avg_block_dist.png)
-
-
-
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-fulsom-g1-avg\_block\_dist-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-fulsom-g1-avg_block_dist-time.png)
 [
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-fulsom-g0-time-live\_objs.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-fulsom-g0-time-live_objs.png)
-
-
-
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-fulsom-g1-block\_dist-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-fulsom-g1-block_dist-time.png)
 [
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-fulsom-g1-time-block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-fulsom-g1-time-block_dist.png)
-
-
-
-[
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-fulsom-g1-time-avg\_block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-fulsom-g1-time-avg_block_dist.png)
-
-
-
-[
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-fulsom-g1-time-live\_objs.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-fulsom-g1-time-live_objs.png)
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-fulsom-g1-live\_objs-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-fulsom-g1-live_objs-time.png)
 
 
 
@@ -151,32 +127,20 @@ Plots of real/pic (with input 20000)
 
 
 [
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-pic-g0-time-block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-pic-g0-time-block_dist.png)
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-pic-g0-avg\_block\_dist-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-pic-g0-avg_block_dist-time.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-pic-g0-block\_dist-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-pic-g0-block_dist-time.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-pic-g0-live\_objs-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-pic-g0-live_objs-time.png)
 
 
 
 [
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-pic-g0-time-avg\_block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-pic-g0-time-avg_block_dist.png)
-
-
-
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-pic-g1-avg\_block\_dist-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-pic-g1-avg_block_dist-time.png)
 [
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-pic-g0-time-live\_objs.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-pic-g0-time-live_objs.png)
-
-
-
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-pic-g1-block\_dist-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-pic-g1-block_dist-time.png)
 [
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-pic-g1-time-block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-pic-g1-time-block_dist.png)
-
-
-
-[
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-pic-g1-time-avg\_block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-pic-g1-time-avg_block_dist.png)
-
-
-
-[
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-pic-g1-time-live\_objs.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-pic-g1-time-live_objs.png)
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-pic-g1-live\_objs-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-pic-g1-live_objs-time.png)
 
 
 
@@ -185,21 +149,100 @@ Plots of real/fem (with fem.stdin)
 
 
 [
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-fem-g0-time-block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-fem-g0-time-block_dist.png)
-
-
-
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-fem-g0-avg\_block\_dist-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-fem-g0-avg_block_dist-time.png)
 [
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-fem-g0-time-avg\_block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-fem-g0-time-avg_block_dist.png)
-
-
-
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-fem-g0-block\_dist-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-fem-g0-block_dist-time.png)
 [
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/plot-fem-g0-time-live\_objs.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/plot-fem-g0-time-live_objs.png)
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-fem-g0-live\_objs-time.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-fem-g0-live_objs-time.png)
 
 
 
 fem did not do any G1 collections.
+
+
+
+Here are some slightly differet plots. The following show how number of live objects and block distance are related. One might expect a linear relationship as long as the application consists primarily of objects of the shape. If there are objects that have only one pointer as opposed to ones that have sevral then the block distance would be gretly affected by this. 
+
+
+
+Plots of memtest (the tree application)
+
+
+
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-memtest-g0-avg\_block\_dist-live\_objs.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-memtest-g0-avg_block_dist-live_objs.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-memtest-g1-avg\_block\_dist-live\_objs.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-memtest-g1-avg_block_dist-live_objs.png)
+
+
+
+Plots of real/fulsom (with input 8)
+
+
+
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-fulsom-g0-avg\_block\_dist-live\_objs.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-fulsom-g0-avg_block_dist-live_objs.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-fulsom-g1-avg\_block\_dist-live\_objs.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-fulsom-g1-avg_block_dist-live_objs.png)
+
+
+
+Plots of real/pic (with input 20000)
+
+
+
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-pic-g0-avg\_block\_dist-live\_objs.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-pic-g0-avg_block_dist-live_objs.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-pic-g1-avg\_block\_dist-live\_objs.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-pic-g1-avg_block_dist-live_objs.png)
+
+
+
+Plots of real/fem (with fem.stdin)
+
+
+
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-fem-g0-avg\_block\_dist-live\_objs.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-fem-g0-avg_block_dist-live_objs.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G2/plot-fem-g1-avg\_block\_dist-live\_objs.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G2/plot-fem-g1-avg_block_dist-live_objs.png)
+
+
+
+Finally here are some plots of memtest run with 3 generations instead of 2. 
+
+
+
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G3/plot-memtest-g0-time-avg\_block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G3/plot-memtest-g0-time-avg_block_dist.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G3/plot-memtest-g0-time-block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G3/plot-memtest-g0-time-block_dist.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G3/plot-memtest-g0-time-live\_objs.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G3/plot-memtest-g0-time-live_objs.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G3/plot-memtest-g0-live\_objs-avg\_block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G3/plot-memtest-g0-live_objs-avg_block_dist.png)
+
+
+
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G3/plot-memtest-g1-time-avg\_block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G3/plot-memtest-g1-time-avg_block_dist.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G3/plot-memtest-g1-time-block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G3/plot-memtest-g1-time-block_dist.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G3/plot-memtest-g1-time-live\_objs.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G3/plot-memtest-g1-time-live_objs.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G3/plot-memtest-g1-live\_objs-avg\_block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G3/plot-memtest-g1-live_objs-avg_block_dist.png)
+
+
+
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G3/plot-memtest-g2-time-avg\_block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G3/plot-memtest-g2-time-avg_block_dist.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G3/plot-memtest-g2-time-block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G3/plot-memtest-g2-time-block_dist.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G3/plot-memtest-g2-time-live\_objs.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G3/plot-memtest-g2-time-live_objs.png)
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/G3/plot-memtest-g2-live\_objs-avg\_block\_dist.png](http://www.cs.indiana.edu/~rpjames/HaskellGC/G3/plot-memtest-g2-live_objs-avg_block_dist.png)
 
 
 
