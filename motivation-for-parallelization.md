@@ -7,7 +7,8 @@ Back to the [GarbageCollectorNotes](garbage-collector-notes)
 
 
 The essential idea is best described here:
-\[refer to the flood paper\]
+[
+Parallel Garbage Collection for Shared Memory Multiprocessors (2001)](http://citeseer.ist.psu.edu/flood01parallel.html)
 
 
 
