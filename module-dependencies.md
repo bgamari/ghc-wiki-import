@@ -32,21 +32,18 @@ Compilation order is as follows:
 
 - Now comes the main subtle layer, involving types, classes, type constructors identifiers, expressions, rules, and their operations.
 
+  - Name
+    PrimRep
+
+- PrelNames
+  Var (Name, loop IdInfo.IdInfo, loop Type.Type, loop Type.Kind)
+
 >
 > >
 > > >
-> > > >
-> > > >
-> > > > ** Name
-> > > > **
-> > > >
-> > > >
-> > > > >
-> > > > >
-> > > > > PrimRep
-> > > > >
-> > > > >
-> > > >
+> > >
+> > > o VarEnv, VarSet, ThinAir
+> > >
 > > >
 > >
 >
@@ -54,12 +51,9 @@ Compilation order is as follows:
 >
 > >
 > > >
-> > > >
-> > > >
-> > > > ** PrelNames
-> > > > **
-> > > >
-> > > >
+> > >
+> > > o Class (loop TyCon.TyCon, loop Type.Type)
+> > >
 > > >
 > >
 >
@@ -67,11 +61,9 @@ Compilation order is as follows:
 >
 > >
 > > >
-> > > >
-> > > >
-> > > > o Var (Name, loop IdInfo.IdInfo, loop Type.Type, loop Type.Kind)
-> > > >
-> > > >
+> > >
+> > > o TyCon (loop Type.Type, loop Type.Kind, loop DataCon.DataCon, loop Generics.GenInfo)
+> > >
 > > >
 > >
 >
@@ -79,11 +71,9 @@ Compilation order is as follows:
 >
 > >
 > > >
-> > > >
-> > > >
-> > > > o VarEnv, VarSet, ThinAir
-> > > >
-> > > >
+> > >
+> > > o TypeRep (loop DataCon.DataCon, loop Subst.substTyWith)
+> > >
 > > >
 > >
 >
@@ -91,11 +81,9 @@ Compilation order is as follows:
 >
 > >
 > > >
-> > > >
-> > > >
-> > > > o Class (loop TyCon.TyCon, loop Type.Type)
-> > > >
-> > > >
+> > >
+> > > o Type (loop PprType.pprType, loop Subst.substTyWith)
+> > >
 > > >
 > >
 >
@@ -103,9 +91,13 @@ Compilation order is as follows:
 >
 > >
 > > >
+> > >
+> > > o FieldLabel(Type)
+> > >
+> > >
 > > > >
 > > > >
-> > > > o TyCon (loop Type.Type, loop Type.Kind, loop DataCon.DataCon, loop Generics.GenInfo)
+> > > > TysPrim(Type)
 > > > >
 > > > >
 > > >
@@ -115,9 +107,13 @@ Compilation order is as follows:
 >
 > >
 > > >
+> > >
+> > > o Literal (TysPrim, PprType)
+> > >
+> > >
 > > > >
 > > > >
-> > > > o TypeRep (loop DataCon.DataCon, loop Subst.substTyWith)
+> > > > DataCon (loop PprType, loop Subst.substTyWith, FieldLabel.FieldLabel)
 > > > >
 > > > >
 > > >
@@ -127,9 +123,83 @@ Compilation order is as follows:
 >
 > >
 > > >
+> > >
+> > > o TysWiredIn (loop MkId.mkDataConIds)
+> > >
+> > >
+> >
+>
+
+>
+> >
+> > >
+> > >
+> > > o TcType( lots of TysWiredIn stuff)
+> > >
+> > >
+> >
+>
+
+>
+> >
+> > >
+> > >
+> > > o PprType( lots of TcType stuff )
+> > >
+> > >
+> >
+>
+
+>
+> >
+> > >
+> > >
+> > > o PrimOp (PprType, TysWiredIn)
+> > >
+> > >
+> >
+>
+
+>
+> >
+> > >
+> > >
+> > > o CoreSyn \[does not import Id\]
+> > >
+> > >
+> >
+>
+
+>
+> >
+> > >
+> > >
+> > > o IdInfo (CoreSyn.Unfolding, CoreSyn.CoreRules)
+> > >
+> > >
+> >
+>
+
+>
+> >
+> > >
+> > >
+> > > o Id (lots from IdInfo)
+> > >
+> > >
+> >
+>
+
+>
+> >
+> > >
+> > >
+> > > o CoreFVs
+> > >
+> > >
 > > > >
 > > > >
-> > > > o Type (loop PprType.pprType, loop Subst.substTyWith)
+> > > > PprCore
 > > > >
 > > > >
 > > >
@@ -139,17 +209,9 @@ Compilation order is as follows:
 >
 > >
 > > >
-> > > >
-> > > >
-> > > > o FieldLabel(Type)
-> > > >
-> > > >
-> > > > >
-> > > > >
-> > > > > TysPrim(Type)
-> > > > >
-> > > > >
-> > > >
+> > >
+> > > o CoreUtils (PprCore.pprCoreExpr, CoreFVs.exprFreeVars, CoreSyn.isEvaldUnfolding CoreSyn.maybeUnfoldingTemplate)
+> > >
 > > >
 > >
 >
@@ -157,27 +219,14 @@ Compilation order is as follows:
 >
 > >
 > > >
-> > > >
-> > > >
-> > > > o Literal (TysPrim, PprType)
-> > > >
-> > > >
-> > > > >
-> > > > >
-> > > > > DataCon (loop PprType, loop Subst.substTyWith, FieldLabel.FieldLabel)
-> > > > >
-> > > > >
-> > > >
 > > >
-> >
->
-
->
-> >
+> > > o CoreLint( CoreUtils )
+> > >
 > > >
 > > > >
 > > > >
-> > > > o TysWiredIn (loop MkId.mkDataConIds)
+> > > > OccurAnal (CoreUtils.exprIsTrivial)
+> > > > CoreTidy (CoreUtils.exprArity )
 > > > >
 > > > >
 > > >
@@ -187,9 +236,24 @@ Compilation order is as follows:
 >
 > >
 > > >
+> > >
+> > > o CoreUnfold (OccurAnal.occurAnalyseGlobalExpr)
+> > >
+> > >
+> >
+>
+
+>
+> >
+> > >
+> > >
+> > > o Subst (CoreUnfold.Unfolding, CoreFVs)
+> > >
+> > >
 > > > >
 > > > >
-> > > > o TcType( lots of TysWiredIn stuff)
+> > > > Generics (CoreUnfold.mkTopUnfolding)
+> > > > Rules (CoreUnfold.Unfolding, PprCore.pprTidyIdRules)
 > > > >
 > > > >
 > > >
@@ -199,11 +263,9 @@ Compilation order is as follows:
 >
 > >
 > > >
-> > > >
-> > > >
-> > > > o PprType( lots of TcType stuff )
-> > > >
-> > > >
+> > >
+> > > o MkId (CoreUnfold.mkUnfolding, Subst, Rules.addRule)
+> > >
 > > >
 > >
 >
@@ -211,156 +273,14 @@ Compilation order is as follows:
 >
 > >
 > > >
-> > > >
-> > > >
-> > > > o PrimOp (PprType, TysWiredIn)
-> > > >
-> > > >
 > > >
-> >
->
-
->
-> >
+> > > o PrelInfo (MkId)
+> > >
 > > >
 > > > >
 > > > >
-> > > > o CoreSyn \[does not import Id\]
+> > > > HscTypes( Rules.RuleBase ) 
 > > > >
-> > > >
-> > >
-> >
->
-
->
-> >
-> > >
-> > > >
-> > > >
-> > > > o IdInfo (CoreSyn.Unfolding, CoreSyn.CoreRules)
-> > > >
-> > > >
-> > >
-> >
->
-
->
-> >
-> > >
-> > > >
-> > > >
-> > > > o Id (lots from IdInfo)
-> > > >
-> > > >
-> > >
-> >
->
-
->
-> >
-> > >
-> > > >
-> > > >
-> > > > o CoreFVs
-> > > >
-> > > >
-> > > > >
-> > > > >
-> > > > > PprCore
-> > > > >
-> > > > >
-> > > >
-> > >
-> >
->
-
->
-> >
-> > >
-> > > >
-> > > >
-> > > > o CoreUtils (PprCore.pprCoreExpr, CoreFVs.exprFreeVars, CoreSyn.isEvaldUnfolding CoreSyn.maybeUnfoldingTemplate)
-> > > >
-> > > >
-> > >
-> >
->
-
->
-> >
-> > >
-> > > >
-> > > >
-> > > > o CoreLint( CoreUtils )
-> > > >
-> > > >
-> > > > >
-> > > > >
-> > > > > OccurAnal (CoreUtils.exprIsTrivial)
-> > > > > CoreTidy (CoreUtils.exprArity )
-> > > > >
-> > > > >
-> > > >
-> > >
-> >
->
-
->
-> >
-> > >
-> > > >
-> > > >
-> > > > o CoreUnfold (OccurAnal.occurAnalyseGlobalExpr)
-> > > >
-> > > >
-> > >
-> >
->
-
->
-> >
-> > >
-> > > >
-> > > >
-> > > > o Subst (CoreUnfold.Unfolding, CoreFVs)
-> > > >
-> > > >
-> > > > >
-> > > > >
-> > > > > Generics (CoreUnfold.mkTopUnfolding)
-> > > > > Rules (CoreUnfold.Unfolding, PprCore.pprTidyIdRules)
-> > > > >
-> > > > >
-> > > >
-> > >
-> >
->
-
->
-> >
-> > >
-> > > >
-> > > >
-> > > > o MkId (CoreUnfold.mkUnfolding, Subst, Rules.addRule)
-> > > >
-> > > >
-> > >
-> >
->
-
->
-> >
-> > >
-> > > >
-> > > >
-> > > > o PrelInfo (MkId)
-> > > >
-> > > >
-> > > > >
-> > > > >
-> > > > > HscTypes( Rules.RuleBase ) 
-> > > > >
-> > > > >
 > > > >
 > > >
 > >
