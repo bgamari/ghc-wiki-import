@@ -1,5 +1,5 @@
 
-The Marvellous Module Structure of GHC (possibly outdated, please fix anything that is wrong)
+=The Marvellous Module Structure of GHC= (possibly outdated, please fix anything that is wrong)
 
 
 
@@ -16,7 +16,7 @@ This section of the commentary documents the subtlest part of the module depende
 - Loops are documented by a dependency such as "loop Type.Type". This means tha the module imports Type.Type, but module Type has not yet been compiled, so the import comes from Type.hi-boot. 
 
 
-Compilation order is as follows:
+==Compilation order is as follows:==
 
 
 - First comes a layer of modules that have few interdependencies, and which implement very basic data types:
@@ -62,7 +62,7 @@ Compilation order is as follows:
   - CoreTidy (HscTypes.PersistentCompilerState) 
 
 
-\_HsSyn stuff\_
+==HsSyn stuff==
 
 
 - HsPat.hs-boot
@@ -73,7 +73,7 @@ Compilation order is as follows:
 - HsExpr (HsDecls, HsPat) 
 
 
-\_Library stuff: base package\_
+==Library stuff: base package==
 
 
 - GHC.Base
