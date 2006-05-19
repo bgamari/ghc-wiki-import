@@ -296,6 +296,9 @@ http://www.cs.indiana.edu/\~rpjames/HaskellGC/ds/generations-steps.jpg](http://w
 
 
 Each step contains a pointer to a link list of blocks that are part of the step.
+
+
+
 [
 http://www.cs.indiana.edu/\~rpjames/HaskellGC/ds/step-blocks.jpg](http://www.cs.indiana.edu/~rpjames/HaskellGC/ds/step-blocks.jpg)
 
