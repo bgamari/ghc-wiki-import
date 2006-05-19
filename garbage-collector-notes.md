@@ -216,7 +216,7 @@ GHC generations are divided into steps. The number of steps per generations is a
 
 
 
-Garbage collection happens at the level of generations. So when you say that you are collecting gen 0, you are essentially collecting all the steps in gen 0. If you are collecting gen 4, then you are collecting all the steps in gen 0 to gen 4. Objects that survive a collection are promoted into the next higher step, or into the next higher generation if the onject is already in the highest step of its generation. 
+Garbage collection happens at the level of generations. So when you say that you are collecting gen 0, you are essentially collecting all the steps in gen 0. If you are collecting gen 4, then you are collecting all the steps in gen 0 to gen 4. Objects that survive a collection are promoted into the next higher step, or into the next higher generation if the object is already in the highest step of its generation. 
 
 
 
