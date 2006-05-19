@@ -282,7 +282,7 @@ typedef struct step_ {
 ```
 
 
-These definitions maybe found in rts\\storage.h. 
+These definitions can be found in rts\\storage.h. 
 
 
 
