@@ -26,6 +26,9 @@ The tradeoff is in the fact that every Haskell binary has the RTS compiled into 
 ## [CapabilitiesAndScheduling](capabilities-and-scheduling)
 
 
+## [StgObjectTypes](stg-object-types)
+
+
 ## Stepping into the GC
 
 
