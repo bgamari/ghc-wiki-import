@@ -291,7 +291,13 @@ Here is a little digram of the data structure formed by the generations and step
 
 
 [
-http://www.cs.indiana.edu/\~rpjames/HaskellGC/ds/blocks-steps.jpg](http://www.cs.indiana.edu/~rpjames/HaskellGC/ds/blocks-steps.jpg)
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/ds/generations-steps.jpg](http://www.cs.indiana.edu/~rpjames/HaskellGC/ds/generations-steps.jpg)
+
+
+
+Each step contains a pointer to a link list of blocks that are part of the step.
+[
+http://www.cs.indiana.edu/\~rpjames/HaskellGC/ds/step-blocks.jpg](http://www.cs.indiana.edu/~rpjames/HaskellGC/ds/step-blocks.jpg)
 
 
 ## Allocation
