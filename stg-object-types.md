@@ -96,6 +96,10 @@ for (q = (StgPtr)((StgClosure *)p)->payload; q < end; q++) {
 }
 ```
 
+
+Objects referred to in the newer generation are moved intot the older generation by setting the evac\_gen global and calling the evacuate() function.
+
+
 ---
 
 
