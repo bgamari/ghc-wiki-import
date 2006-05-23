@@ -1,7 +1,7 @@
 # Notes From a Beginning GHC Hacker
 
 
-## General notes on hacking (in Windows)
+## General notes (in Windows)
 
 
 1. [The Building Guide](http://www.haskell.org/ghc/docs/latest/html/building/index.html) is very good, read the appropriate parts.
