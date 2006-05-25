@@ -44,7 +44,7 @@ Definitions:
 
 >
 >
-> Native code generator: GHC can generate assemply code directly for this platform, bypassing gcc.
+> Native code generator: GHC can generate assembly code directly for this platform, bypassing gcc.
 >
 >
 
