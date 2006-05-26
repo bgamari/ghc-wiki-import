@@ -79,7 +79,8 @@ Definitions:
 <th> **GHCi** </th>
 <th> **NCG** </th>
 <th> **f.i. wrapper** </th>
-<th> **Dynamic libraries** 
+<th> **Dynamic libraries** </th>
+<th> **WikiPage** 
 </th></tr>
 <tr><th> x86          </th>
 <th> Windows (MinGW) </th>
@@ -88,7 +89,8 @@ Definitions:
 <th> Yes  </th>
 <th> Yes                   </th>
 <th> Yes          </th>
-<th> No(\*2)            
+<th> No(\*2)            </th>
+<th> 
 </th></tr>
 <tr><th> x86          </th>
 <th> Linux           </th>
@@ -97,7 +99,8 @@ Definitions:
 <th> Yes  </th>
 <th> Yes                   </th>
 <th> Yes          </th>
-<th> No                
+<th> No                </th>
+<th> 
 </th></tr>
 <tr><th> x86          </th>
 <th> FreeBSD         </th>
@@ -106,7 +109,8 @@ Definitions:
 <th> Yes  </th>
 <th> Yes                   </th>
 <th> Yes          </th>
-<th> No                
+<th> No                </th>
+<th> 
 </th></tr>
 <tr><th> x86          </th>
 <th> OpenBSD         </th>
@@ -115,7 +119,8 @@ Definitions:
 <th> Yes  </th>
 <th> Yes                   </th>
 <th> Yes          </th>
-<th> No                
+<th> No                </th>
+<th> 
 </th></tr>
 <tr><th> x86          </th>
 <th> NetBSD          </th>
@@ -124,7 +129,8 @@ Definitions:
 <th> Yes  </th>
 <th> Yes                   </th>
 <th> Yes          </th>
-<th> No                
+<th> No                </th>
+<th> 
 </th></tr>
 <tr><th> x86          </th>
 <th> MacOS X         </th>
@@ -133,7 +139,8 @@ Definitions:
 <th> Yes  </th>
 <th> Yes                   </th>
 <th> Yes          </th>
-<th> No                
+<th> No                </th>
+<th> X86OSXGhc? 
 </th></tr>
 <tr><th> PowerPC      </th>
 <th> AIX             </th>
@@ -142,7 +149,8 @@ Definitions:
 <th>      </th>
 <th> Yes                   </th>
 <th> Yes          </th>
-<th> No                
+<th> No                </th>
+<th> 
 </th></tr>
 <tr><th> PowerPC      </th>
 <th> Linux           </th>
@@ -151,7 +159,8 @@ Definitions:
 <th> Yes  </th>
 <th> Yes                   </th>
 <th> Yes          </th>
-<th> No                
+<th> No                </th>
+<th> 
 </th></tr>
 <tr><th> PowerPC      </th>
 <th> MacOS X         </th>
@@ -160,7 +169,8 @@ Definitions:
 <th> Yes  </th>
 <th> Yes                   </th>
 <th> Yes          </th>
-<th> Yes               
+<th> Yes               </th>
+<th> 
 </th></tr>
 <tr><th> PowerPC64    </th>
 <th> Linux           </th>
@@ -169,7 +179,8 @@ Definitions:
 <th> No   </th>
 <th> No                    </th>
 <th> Yes          </th>
-<th> No                
+<th> No                </th>
+<th> 
 </th></tr>
 <tr><th> Sparc        </th>
 <th> Solaris         </th>
@@ -178,7 +189,8 @@ Definitions:
 <th> Yes  </th>
 <th> No(\*1)                </th>
 <th> Yes          </th>
-<th> No                
+<th> No                </th>
+<th> 
 </th></tr>
 <tr><th> Sparc        </th>
 <th> Linux           </th>
@@ -187,7 +199,8 @@ Definitions:
 <th> Yes  </th>
 <th> No(\*1)                </th>
 <th> Yes          </th>
-<th> No                
+<th> No                </th>
+<th> 
 </th></tr>
 <tr><th> Sparc        </th>
 <th> OpenBSD         </th>
@@ -196,7 +209,8 @@ Definitions:
 <th> Yes  </th>
 <th> No(\*1)                </th>
 <th> Yes          </th>
-<th> No                
+<th> No                </th>
+<th> 
 </th></tr>
 <tr><th> x86-64       </th>
 <th> Linux           </th>
@@ -205,7 +219,8 @@ Definitions:
 <th> Yes  </th>
 <th> Yes                   </th>
 <th> Yes          </th>
-<th> No                
+<th> No                </th>
+<th> 
 </th></tr>
 <tr><th> x86-64       </th>
 <th> OpenBSD         </th>
@@ -214,7 +229,8 @@ Definitions:
 <th> Yes  </th>
 <th> Yes                   </th>
 <th> Yes          </th>
-<th> No                
+<th> No                </th>
+<th> 
 </th></tr>
 <tr><th> Mips64       </th>
 <th> Irix            </th>
@@ -223,7 +239,8 @@ Definitions:
 <th> No   </th>
 <th> No                    </th>
 <th> No           </th>
-<th> No                
+<th> No                </th>
+<th> 
 </th></tr>
 <tr><th> IA-64        </th>
 <th> Linux           </th>
@@ -232,7 +249,8 @@ Definitions:
 <th> Yes  </th>
 <th> No                    </th>
 <th> Yes          </th>
-<th> No                
+<th> No                </th>
+<th> 
 </th></tr>
 <tr><th> Alpha        </th>
 <th> Linux           </th>
@@ -241,7 +259,8 @@ Definitions:
 <th> No   </th>
 <th> No                    </th>
 <th> Yes          </th>
-<th> No                
+<th> No                </th>
+<th> 
 </th></tr>
 <tr><th> HPPA         </th>
 <th> Linux           </th>
@@ -250,7 +269,8 @@ Definitions:
 <th> No   </th>
 <th> No                    </th>
 <th> No           </th>
-<th> No                
+<th> No                </th>
+<th> 
 </th></tr>
 <tr><th> S/390        </th>
 <th> Linux           </th>
@@ -259,7 +279,8 @@ Definitions:
 <th> No   </th>
 <th> No                    </th>
 <th> No           </th>
-<th> No                
+<th> No                </th>
+<th> 
 </th></tr>
 <tr><th> m68k         </th>
 <th> Linux           </th>
@@ -268,7 +289,8 @@ Definitions:
 <th> No   </th>
 <th> No                    </th>
 <th> No           </th>
-<th> No                
+<th> No                </th>
+<th> 
 </th></tr></table>
 
 
