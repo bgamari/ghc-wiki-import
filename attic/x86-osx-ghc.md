@@ -3,7 +3,8 @@ This page is meant to document the current state of GHC on Apple Mac OS X on Int
 
 
 
-DarwinPorts still has GHC as not supported on x86.
+[
+DarwinPorts](http://darwinports.opendarwin.org/) still has GHC as not supported on x86.
 
 
 
