@@ -16,7 +16,7 @@ AudreyTang has contributed another GHC CVS build:
 http://perlcabal.org/\~audreyt/tmp/ghc-6.5.20060526-i686-apple-darwin8.tar.bz2](http://perlcabal.org/~audreyt/tmp/ghc-6.5.20060526-i686-apple-darwin8.tar.bz2)
 
 
-- You still need to manually install GMP.framework in /Library/Frameworks, and libreadline\* in /usr/local/lib, but the Makefile glitches below should be resolved in this build.
+- This build has a post-install script that fixes readline and installs GMP.framework for you, so there's no manual tweaking involved anymore.
 
 ---
 
