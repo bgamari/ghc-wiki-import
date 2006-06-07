@@ -61,3 +61,16 @@ http://users.skynet.be/jyp/Data.Collections.html](http://users.skynet.be/jyp/Dat
   until a consensus is reached on the main issues.
   They should be trival to add though. (eg. partition)
 - write instances for the new Seq type, following List.\[\]
+
+## Note
+
+
+
+Attachment below is outdated.
+
+
+
+use the darcs repo [
+http://darcs.haskell.org/packages/collections](http://darcs.haskell.org/packages/collections)
+
+
