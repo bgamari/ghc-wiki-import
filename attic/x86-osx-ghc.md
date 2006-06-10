@@ -17,6 +17,8 @@ http://pugs.blogs.com/dist/ghc-6.5.20060608-i686-apple-darwin8.tar.bz2](http://p
 
 
 - This build has a post-install script that fixes readline, installs GMP.framework, and runs "ranlib" for you, so there's no manual tweaking involved anymore.
+- An earlier build is available at [
+  http://perlcabal.org/\~audreyt/tmp/ghc-6.5.20060526-i686-apple-darwin8.tar.bz2](http://perlcabal.org/~audreyt/tmp/ghc-6.5.20060526-i686-apple-darwin8.tar.bz2)
 
 ---
 
