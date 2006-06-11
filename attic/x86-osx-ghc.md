@@ -16,7 +16,7 @@ AudreyTang has contributed an updated GHC CVS build:
 http://pugs.blogs.com/dist/ghc-6.5.20060608.tar.bz2](http://pugs.blogs.com/dist/ghc-6.5.20060608.tar.bz2)
 
 
-- This build has a post-install script that fixes readline, installs GMP.framework, and runs "ranlib" for you, so there's no manual tweaking involved anymore
+- This build has a post-install script that fixes readline, installs GMP.framework, and runs "ranlib" for you, so there's no manual tweaking involved anymore.
 - Also note that this build does not have Data.ByteString and Data.ByteString.Char8 as part of the "base" package, because they are not compatible with the same-named modules from the latest fps package, which is going to be merged to GHC real soon now.
 - An earlier build is available at [
   http://perlcabal.org/\~audreyt/tmp/ghc-6.5.20060526-i686-apple-darwin8.tar.bz2](http://perlcabal.org/~audreyt/tmp/ghc-6.5.20060526-i686-apple-darwin8.tar.bz2)
