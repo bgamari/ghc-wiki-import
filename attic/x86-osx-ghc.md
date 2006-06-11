@@ -13,7 +13,7 @@ DarwinPorts](http://darwinports.opendarwin.org/) still has GHC as not supported 
 
 AudreyTang has contributed an updated GHC CVS build:
 [
-http://pugs.blogs.com/dist/ghc-6.5.20060608-i686-apple-darwin8.tar.bz2](http://pugs.blogs.com/dist/ghc-6.5.20060608-i686-apple-darwin8.tar.bz2)
+http://pugs.blogs.com/dist/ghc-6.5.20060608.tar.bz2](http://pugs.blogs.com/dist/ghc-6.5.20060608.tar.bz2)
 
 
 - This build has a post-install script that fixes readline, installs GMP.framework, and runs "ranlib" for you, so there's no manual tweaking involved anymore.
