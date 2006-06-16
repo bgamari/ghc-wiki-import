@@ -63,6 +63,10 @@ fun!
 
 
 
+The deadline for applicaitons is **Friday 23 June**
+
+
+
 *Simon Peyton Jones and Simon Marlow*
 
 
