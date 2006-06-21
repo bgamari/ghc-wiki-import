@@ -81,7 +81,7 @@ Registration is not absolutely required, but any Pizza, manuals, and workspace w
 
 
 
-Zero.  But you’ll may have to feed yourself if you don't register.
+Zero.  But you may have to feed yourself if you don't register.
 
 
 ---
