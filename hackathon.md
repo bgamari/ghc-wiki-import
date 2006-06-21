@@ -6,6 +6,17 @@ GHC is used by lots of people, but its implementation is rather over-centralised
 
 
 
+These days, GHC is more than just a batch compiler:
+
+
+- It's an interactive interpreter
+- It's a (Haskell) library
+
+
+The latter, in particular, opens up new possiblities, such as using GHC to parse and type-check Haskell, before analysing or transforming it with your own program.  However, GHC-as-a-library has a pretty big interface that uses a lot of data types, which will be among the things we'll describe at the hackathon.
+
+
+
 We'll suggest some projects, but you're welcome to come along with your own wacky ideas or itches that you want to scratch, and work on them in an environment with a high-bandwidth connection to developers who really know the innards of GHC.   You could work on something individual, or in small groups.  We anticipate all being in one room, or in a tight group of rooms, so there’d be lots of informal interaction.
 
 
