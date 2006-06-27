@@ -2,6 +2,11 @@
 
 
 
+**NOTE: the deadline for applications has now passed.  Thanks
+to everyone who applied, we'll be contacting applicants shortly.**
+
+
+
 The Glasgow Haskell Compiler (GHC) is now being used by so many people,
 on so many platforms, that at GHC HQ we've been struggling to keep up.
 We're delighted to say that we are now looking to hire a GHC support
@@ -60,10 +65,6 @@ course: please contact Simon Marlow or Simon Peyton Jones for further informatio
 
 The rate of pay is dependent on qualifications and experience.  It'll be
 fun!
-
-
-
-The deadline for applicaitons is **Friday 23 June**
 
 
 
