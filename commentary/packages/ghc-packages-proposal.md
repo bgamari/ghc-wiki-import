@@ -24,7 +24,7 @@ Question 1: Can two different packages contain a module with the same module nam
 
 
 
-I now think that's unreasonable to answer 'no', because that means that EVERY module in EVERY package written by ANYONE must have different module names. That's like saying that every function must have different local variables, and is a serious loss of modularity.  I suspect that this is something about which we can all agree.
+We now think that's unreasonable to answer 'no', because that means that EVERY module in EVERY package written by ANYONE must have different module names. That's like saying that every function must have different local variables, and is a serious loss of modularity.  We suspect that this is something about which we can all agree.
 
 
 
