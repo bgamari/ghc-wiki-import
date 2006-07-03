@@ -10,7 +10,13 @@ A vexed question in the current design of Haskell is the issue of whether a sing
 
 
 
-There are two quite separate issues, addressed in the following two sections
+There are two quite separate issues, addressed in the following two sections.  But before we start, note that we take for granted the following
+
+
+- Each package has a globally-unique name, organised by some social process
+
+
+This assumption is deeply built into Cabal, and lots of things would need to change if it wasn't met.
 
 
 ##
