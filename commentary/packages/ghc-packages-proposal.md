@@ -46,7 +46,7 @@ The authors of packages P1 and P2 didn't need to know about each other, and don'
 
 
 
-The fundamental thing GHC needs to do is to include the package name into the names of entities the package defines.  That means that when compiling a module M you must say what package it is part of:
+The fundamental thing GHC will need to do is to include the package name (and version) into the names of entities the package defines.  That means that when compiling a module M you must say what package it is part of:
 
 
 ```wiki
@@ -73,10 +73,11 @@ Here GHC already has a fairly elaborate scheme (perhaps too elaborate).
 - Then, you can use the `-hide-package` flag to hide an otherwise-exposed package, and the `-package` flag to expose an otherwise-hidden package.
 
 
-By manipulating these flags, you can expose package P1 when compiling module M (say), and expose P2 when compiling module N.  Then M and N could both import module A.B.C, which would come from P1 and P2 respectively. But:
+When GHC incorporates package names in exported symbols, you will be able to expose package P1 when compiling module M (say), and expose P2 when compiling module N by manipulating these flags.  Then M and N could both import module A.B.C, which would come from P1 and P2 respectively. But:
 
 
 - What if you wanted to import A.B.C from P1 and A.B.C from P2 into the *same* module?
+- What if you want to only replace *parts* of P1 (e.g., you want to use an updated version of a module in `base`)?
 - Compiling different modules with different flags in a way that affects the *semantics* (rather than, say, the optimisation level) seems undesirable.
 - To support `--make` in this situation we'd need to allow `-package` flags in the per-module `OPTIONS` pragmas, which isn't currently supported.  (`ghc --make` already gathers those options together for the link step.)
 
