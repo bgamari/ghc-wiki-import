@@ -46,7 +46,7 @@ The authors of packages P1 and P2 didn't need to know about each other, and don'
 
 
 
-The fundamental thing GHC will need to do is to include the package name (and version) into the names of entities the package defines.  That means that when compiling a module M you must say what package it is part of:
+For this to work, GHC must incorporate the package name (and version) into the names of entities the package defines.  That means that when compiling a module M you must say what package it is part of:
 
 
 ```wiki
