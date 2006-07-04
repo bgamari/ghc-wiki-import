@@ -50,7 +50,7 @@ The fundamental thing GHC needs to do is to include the package name into the na
 
 
 ```wiki
-  ghc -c -package-name P1 C.hs
+  ghc -c -package package-name P1 C.hs
 ```
 
 
