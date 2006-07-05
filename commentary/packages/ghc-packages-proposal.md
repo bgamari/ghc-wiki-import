@@ -223,9 +223,21 @@ What we don't like about that is that it needs a new keyword "`from`".  Perhaps 
 
 
 ```wiki
-    import from "base"
-        Prelude hiding (length)
-        Control.Exception
-        qualified Data.List as List
+    import from "base" {
+        Prelude hiding (length) ;
+        Control.Exception ;
+        qualified Data.List as List }
     import from "foo" M( x, y )
+```
+
+
+Here the layout is explicit, but perhaps the layout rule could apply.
+
+
+
+Indeed, we could allow this multiple form even for ordinary imports:
+
+
+```wiki
+   import { A(f); B(g); C(S,T) }
 ```
