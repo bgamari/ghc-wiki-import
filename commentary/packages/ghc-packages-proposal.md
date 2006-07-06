@@ -207,7 +207,7 @@ It is perfectly OK to export entities, or whole modules, imported from other pac
 
 
 
-Should package names be in quotes?  Probably not.  They have a well-defined syntax.
+Should package names be in quotes?  Probably yes, because they have a different lexcal syntax to the rest of Haskell.  ("foo-2.3" would parse as three tokens, "foo", "-",  and "2.3".  
 
 
 
