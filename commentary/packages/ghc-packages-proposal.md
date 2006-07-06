@@ -1,6 +1,8 @@
 
 
-This page summarises our current proposal for packages in GHC.
+
+
+This page summarises our current proposal for packages in GHC. See also Brian Hulley's alternative proposal?
 
 
 ## The problem
