@@ -5,9 +5,8 @@
 
 
 
-This proposal is yet another alternative to GhcPackages and
-GhcPackagesAlternativeProposal.  Large parts overlap with those
-proposals.  To motivate this new proposal, let's consider another
+This proposal is an alternative to GhcPackages.  Large parts overlap with that
+proposal.  To motivate this new proposal, let's consider another
 proposed and desirable feature of the import/export language, which may
 interact in interesting ways with packages.
 
