@@ -5,6 +5,10 @@
 
 
 
+[GhcPackageNamespaces](ghc-package-namespaces)
+
+
+
 This proposal is an alternative to GhcPackages.  Large parts overlap with that
 proposal.  To motivate this new proposal, let's consider another
 proposed and desirable feature of the import/export language, which may
