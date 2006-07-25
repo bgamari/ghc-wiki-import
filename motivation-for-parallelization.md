@@ -31,6 +31,10 @@ The essential idea behind work stealing is that free threads can steal work from
 
 
 
+\[st-scanning-3.jpg\]
+
+
+
 The following program was used to generate some the graphs below. Changing the treeDepth and the nTrees values below one can get the program to have different memory profiles. 
 
 
