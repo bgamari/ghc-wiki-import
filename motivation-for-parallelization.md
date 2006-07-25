@@ -31,7 +31,8 @@ The essential idea behind work stealing is that free threads can steal work from
 
 
 
-\[st-scanning-3.jpg\]
+[
+http://www.cs.indiana.edu/\~rpjames//HaskellGC/ds/st-scanning-3.jpg](http://www.cs.indiana.edu/~rpjames//HaskellGC/ds/st-scanning-3.jpg)
 
 
 
