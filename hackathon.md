@@ -84,6 +84,10 @@ down town and the ICFP venue hotel.
 Web page about the training center we will be using](http://www.beavertonround.biz/meetingrooms.htm)
 
 
+
+not handled: Image
+
+
 ### Registration
 
 
