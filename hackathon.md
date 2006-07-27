@@ -79,6 +79,11 @@ down town and the ICFP venue hotel.
 [ Directions to Galois](http://www.galois.com/files/Directions.pdf)
 
 
+
+[
+Web page about the training center we will be using](http://www.beavertonround.biz/meetingrooms.htm)
+
+
 ### Registration
 
 
