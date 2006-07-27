@@ -21,6 +21,10 @@ Revised features
 
 - We may want to re-implement functional dependencies using associated type synonyms.
 
+
+We keep track of the current [implementation status](type-functions-status).
+
+
 ## Specification and Restrictions
 
 
