@@ -48,7 +48,7 @@ Restrictions:
 ## How It Works
 
 
-### Syntax of type function
+### Syntax of type functions
 
 
 
