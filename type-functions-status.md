@@ -1,6 +1,10 @@
 # Type Functions: Implementation Status
 
 
+
+Back to [TypeFunctions](type-functions).
+
+
 ## Parsing and Renaming
 
 
