@@ -146,7 +146,8 @@ Now, we can extract the associated data type declarations out of instances in `R
 
 
 
-During renaming, AT declarations in classes are checked for being empty (i.e., no constructors and no context) and for conformance of the type parameters with those of the class. We also check all parameters are type variables, and we inherit kind signatures from the corresponding class parameters (if any of these already have kind signatures, we raise an error) - in fact, we inherit the `Name`s of the class parameters. Afterwards, `tcdTyPats` is reset to `Nothing`.
+During renaming, AT declarations in classes are checked for being empty (i.e., no constructors and no context) and for conformance of the type parameters with those of the class. We also check all parameters are type variables, and we inherit kind signatures from the corresponding class parameters (if any of these already have kind signatures, we raise an error) - in fact, we inherit the `Name`s of the class parameters. Afterwards, `tcdTyPats` is reset to `Nothing`.  **!!!The parser now already puts Nothing in when all parameters are variables.  Hence, we can simplify the check and don't need to reset anything.!!'''
+**
 
 
 ### Type checking associated data types
