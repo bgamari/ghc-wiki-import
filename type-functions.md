@@ -55,11 +55,17 @@ Restrictions:
 Type function (kind) signatures are represented by the new declaration form `TyFunction` (of `HsDecls.TyClDecl`).  Syntactically, we recognise kind signatures by either not having an RHS at all (in which the result kind implicitly is \*) or having a result kind separated from the head by `::`.  We require that every type equation has a kind signature in scope.  However, the degenerate case of a type equation where all type arguments are variables is valid without a kind signature (in fact, it may not have any) and coincides with the type synonyms of vanilla Haskell.
 
 
-### Type declarations in classes and indexed types
+### Representation of indexed types
+
+
+#### Type function signatures
 
 
 
-Adding types declarations to classes is fairly straight forward. The `ClassDecl` variant of `TyClDecl` gets a new field `tcdATs`, which contains a list of type declarations - currently, the parser will only allow data type declarations. Similarly, `InstDecl` gets a fourth argument, which is a list of type declarations.
+`HsDecls.TyClDecl` has a new variant `HsFunction` to represent signatures of type functions.  These consist of the name, type parameters, an iso flag, and optionally an explicit result kind.  The type parameters can have kind signatures as usual.
+
+
+#### Type function equations and definitions of associated data types
 
 
 
@@ -68,6 +74,13 @@ More tricky is the addition of type indexes (i.e., non-type variable arguments) 
 
 
 In the parser, we put the original type terms specified as parameters in the field `tcdTyPats`. For top-level declarations, after checking that the parameters are all plain type variables (possibly with a kind signature), we reset `tcdTyPats` to `Nothing` (this already happens during AST construction). `DataDecls` created during parsing Core are already born with `tcdTyPats` being Nothing. (Although, the latter may change.)
+
+
+### Representation of associated types
+
+
+
+Adding types declarations to classes is fairly straight forward. The `ClassDecl` variant of `TyClDecl` gets a new field `tcdATs`, which contains a list of type declarations - currently, the parser will only allow data type declarations. Similarly, `InstDecl` gets a fourth argument, which is a list of type declarations.
 
 
 ### Phasing
