@@ -9,17 +9,11 @@ Back to [TypeFunctions](type-functions).
 **Current:** 
 
 
-- Renaming of associated types synonyms.
+- Renaming of type functions (both associated and not associated).
 - Fix stage-2 build failures.
 
 ## Parsing and Renaming
 
-
-
-Todo (low-level):
-
-
-- Toplevel ty sigs & equations
 
 
 Todo (high-level):
