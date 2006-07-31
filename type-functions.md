@@ -73,7 +73,7 @@ To represent type functions and associated data types, we need to generalise dat
 
 
 - If it is `Nothing`, we have a *vanilla* data type declaration or type synonym declaration and `tcdVars` contains the type parameters of the type constructor.
-- If it is `Just pats`, we have the definition of an associated data type or a type function equations (toplevel or nested in an instance declarations).  Then, 'pats' are type patterns for the type-indexes of the type constructor and `tcdVars` are the variables in those patterns.  Hence, the arity of the type constructor is `length tcdPats` and \*not\* `length tcdVars`.
+- If it is `Just pats`, we have the definition of an associated data type or a type function equations (toplevel or nested in an instance declarations).  Then, 'pats' are type patterns for the type-indexes of the type constructor and `tcdVars` are the variables in those patterns.  Hence, the arity of the type constructor is `length tcdPats` and *not* `length tcdVars`.
 
 
 In both cases (and as before type functions), `tcdVars` collects all variables we need to quantify over.
