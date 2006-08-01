@@ -167,3 +167,5 @@ If you want to come, please add your name to the list below.  Add a sentence or 
 - [
   Iavor S. Diatchki](http://www.csee.ogi.edu/~diatchki), interested in Haskell for systems programming/type checking (general improvement rules)
 - Edsko de Vries, interested in type systems (I work on uniqueness typing, a substructural type system), and generic programming
+- [
+  Chung-chieh Shan](http://www.cs.rutgers.edu/~ccshan/), interested in type systems
