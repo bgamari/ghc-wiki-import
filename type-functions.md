@@ -13,7 +13,7 @@ New features:
 
 
 - Open type-indexed data types and type functions
-- Associated data types and type synonyms in classes, which are type-indexed data types and type functions associated with a class - i.e., associated types are syntactic sugar for type-indexed types and type functions.
+- Associated data types and type synonyms, which are type-indexed data types and type functions associated with a class - i.e., associated types are syntactic sugar for type-indexed types and type functions.
 
 
 Revised features
