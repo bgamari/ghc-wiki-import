@@ -31,7 +31,7 @@ There are several problems with the current GMP implementation:
 >
 >
 > GMP is licensed under the [
-> GNU Lesser General Public License](http://www.gnu.org/copyleft/lesser.html) (LGPL), a kind of "copyleft" license.  According to the terms of the LGPL, paragraph 5, you may distribute a program that is designed to be compiled and dynamically linked with the library under the terms of your choice (i.e., commercially) but if your program incorporates portions of the library, if it is linked statically, then according to paragraph 2 your program is a "derivative"--a "work based on the library"--and you "must cause the whole of the work to be licensed" under the terms of the LGPL (including for free).  
+> GNU Lesser General Public License](http://www.gnu.org/copyleft/lesser.html) (LGPL), a kind of "copyleft" license.  According to the terms of the LGPL, paragraph 5, you may distribute a program that is designed to be compiled and dynamically linked with the library under the terms of your choice (i.e., commercially) but if your program incorporates portions of the library, if it is linked statically, then your program is a "derivative"--a "work based on the library"--and according to paragraph 2, section c, you "must cause the whole of the work to be licensed" *under the terms of the LGPL* (including for free).  
 >
 >
 
