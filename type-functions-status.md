@@ -9,7 +9,6 @@ Back to [TypeFunctions](type-functions).
 **Current:** 
 
 
-- Renaming of default AT synonym definitions in classes.
 - Fix stage-2 build failures.
 
 ## Parsing and Renaming
