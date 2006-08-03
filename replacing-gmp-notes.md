@@ -29,6 +29,15 @@ If you want to help with replacing GMP or do it yourself, you will have to work 
   compiler/cmm](http://darcs.haskell.org/ghc/compiler/cmm/) of the HEAD branch); and,
 - makefiles and configuration scripts.
 
+
+Other basic recommended reading is:
+
+
+- The GHC Commentary: [
+  The Native Code Generator](http://www.cse.unsw.edu.au/~chak/haskell/ghc/comm/the-beast/ncg.html); and,
+- The GHC Commentary: [
+  Style Guidelines for RTS C code](http://www.cse.unsw.edu.au/~chak/haskell/ghc/comm/rts-libs/coding-style.html).
+
 ### Reasons for Replacing GMP as the Bignum library
 
 
@@ -56,7 +65,7 @@ There are several problems with the current GMP implementation:
 
 >
 >
-> In the current GMP implementation, GMP is configured to use GHC's GC memory, so any single binary containing Haskell code compiled with GHC contains the RTS and GMP.  C code in the same binary as GHC-compiled Haskell code cannot access GMP separately due to duplicate-symbols from GMP in both programs.  This problem was noted in [
+> In the current GMP implementation, GMP is configured to use GHC's GC memory, so any single binary containing Haskell code compiled with GHC contains the RTS and GMP.  C code in the same binary as GHC-compiled Haskell code cannot access GMP separately due to duplicate-symbols for GMP function names in both programs.  This problem was noted in [
 > bug Ticket \#311](http://hackage.haskell.org/trac/ghc/ticket/311).  Simon Peyton-Jones suggested that a simple renaming of GHC-GMP functions would solve this problem and Bulat Ziganshin suggested simply using an automated tool to do this.  See [
 > Replacement for GMP](http://www.haskell.org/pipermail/glasgow-haskell-users/2006-August/010679.html).
 >
@@ -76,7 +85,8 @@ There are several problems with the current GMP implementation:
 > Most of the suggestions in this section come from discussions in the glasgow-haskell-users list thread [
 > returning to Cost of Integer](http://www.haskell.org/pipermail/glasgow-haskell-users/2006-July/010654.html).  In particular, [
 > John Meacham's suggestion](http://www.haskell.org/pipermail/glasgow-haskell-users/2006-July/010660.html) to use a ForeignPtr to data held by the normal GMP system library and store the value in an unboxed Int if the number of significant digits in Integer could fit into the size of an Int.  For those who are curious, a guide to GHC primitives is available (in an unformatted version) in ghc/compiler/prelude/primops.txt.pp; here is a link to [
-> CVS version of primops.txt.pp](http://darcs.haskell.org/ghc/compiler/prelude/primops.txt.pp).  You might want to search for the text "section "The word size story."", and especially the text "section "Integer\#"".   The Haskell definition of Integer is in [
+> CVS version of primops.txt.pp](http://darcs.haskell.org/ghc/compiler/prelude/primops.txt.pp).  (See The GHC Commentary [
+> Primitives](http://www.cse.unsw.edu.au/~chak/haskell/ghc/comm/rts-libs/primitives.html) for a description of primops.txt.pp.)You might want to search for the text "section "The word size story."", and especially the text "section "Integer\#"".   The Haskell definition of Integer is in [
 > /packages/base/GHC/Num.lhs](http://darcs.haskell.org/packages/base/GHC/Num.lhs).
 >
 >
