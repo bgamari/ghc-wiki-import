@@ -73,7 +73,7 @@ There are several problems with the current GMP implementation:
 
 >
 >
-> GHC does not have a custom-modified version of GMP (in fact, GHC uses the system build of GMP if that is available).  The custom-memory configuration of GMP uses GMP's [
+> GHC does not have a custom-modified version of GMP (in fact, GHC uses the system build of GMP if that is available).  The memory configuration of GMP uses GMP's [
 > Custom Allocation](http://swox.com/gmp/manual/Custom-Allocation.html#Custom-Allocation) routines.  Alternative libraries may not have this facility built in.
 >
 >
