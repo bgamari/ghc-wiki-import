@@ -65,7 +65,7 @@ There are several problems with the current GMP implementation:
 
 >
 >
-> In the current GMP implementation, GMP is configured to use GHC's GC memory, so any single binary containing Haskell code compiled with GHC contains the RTS and GMP.  C code in the same binary as GHC-compiled Haskell code cannot access GMP separately due to duplicate-symbols for GMP function names in both programs.  This problem was noted in [
+> In the current GMP implementation, GMP is configured to use GHC's GC memory and GMP can only have one allocator for memory.  Since any single binary containing Haskell code compiled with GHC contains the RTS and GMP, C code in the same binary cannot use GMP.  (The C code also cannot access GMP separately due to duplicate-symbols for GMP function names in both programs, but this would be a problem for *any* Bignum library.)  This problem was noted in [
 > bug Ticket \#311](http://hackage.haskell.org/trac/ghc/ticket/311).  Simon Peyton-Jones suggested that a simple renaming of GHC-GMP functions would solve this problem and Bulat Ziganshin suggested simply using an automated tool to do this.  See [
 > Replacement for GMP](http://www.haskell.org/pipermail/glasgow-haskell-users/2006-August/010679.html).
 >
