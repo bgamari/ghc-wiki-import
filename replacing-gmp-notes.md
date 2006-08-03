@@ -55,7 +55,7 @@ There are several problems with the current GMP implementation:
 >
 >
 > The custom-memory configuration of GMP uses GMP's [
-> Custom Allocation](http://swox.com/gmp/manual/Custom-Allocation.html#Custom-Allocation) routines.  Alternative libraries may not have this facility builtin.
+> Custom Allocation](http://swox.com/gmp/manual/Custom-Allocation.html#Custom-Allocation) routines.  Alternative libraries may not have this facility built in.
 >
 >
 
