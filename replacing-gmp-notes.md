@@ -94,15 +94,6 @@ There are several problems with the current GMP implementation:
 >
 >
 
->
->
-> Note that the downside to this approach would mean that: 
->
->
-
-- pointers would have to be constrained (the size of an actual pointer may be greater than 32 bits on some machines (it is not defined by the C99 standard)); and, 
-- either Ints in general would all be 30 or 31 bits, depending on how many bits you need to indicate the ByteArr\#, or you would have to come up with a new primitive type.
-
 ### Overview of the Current GMP Implementation
 
 
