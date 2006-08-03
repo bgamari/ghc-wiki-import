@@ -132,7 +132,7 @@ There are several problems with the current GMP implementation:
 
 >
 >
-> Beware!  The main interest here is replacing GMP--those who have labored many years construction GHC so far retain the purview to accept or reject a proposed solution.
+> Beware!  The main interest here is replacing GMP--GHC is still belongs to the University of Glasgow and those in charge still retain the purview to accept or reject a proposed solution.
 >
 >
 
