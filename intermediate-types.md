@@ -27,7 +27,7 @@ the key aspects that have changed are (and are further described in several sect
 
 - Coercions have been added - The syntax of types now includes coercions which are evidence for type equalities.  There are distinguished coercion variables and a new variant of `TyCon`, with constructor `CoercionTyCon`.  There is also a new `Expr` variant, with constructor `Cast`, which performs a cast given an expression and evidence of the safety of the cast.
 
-- Kinds are now Types - The type Kind is just a synonym for Type.  There are special PrimitiveTyCons that represent kinds.
+- Kinds are now Types - The type `Kind` is just a synonym for `Type`.  There are special PrimitiveTyCons that represent kinds.
 
 - Newtypes are implemented with coercions - The previous ad-hoc mechanism has been replaced with one that uses coercions.
 
@@ -46,7 +46,7 @@ TypeRep, and most of the useful functions on types are defined in
 Type.  TypeRep exports the representation concretely, and should
 probably not be used outside the few places it is already used.  Type
 re-exports everything useful from TypeRep, but exports the
-representation abstractly.  The datatype Type really represents a
+representation abstractly.  The datatype `Type` really represents a
 single syntactic category that includes types, coercions, kinds, and
 super-kinds.
 
@@ -55,14 +55,14 @@ super-kinds.
 
 
 
-Type variables, of type Var, and associated construction and
+Type variables, of type `Var`, and associated construction and
 manipulation functions are defined in the Var module.  There are two
-data constructors that make type variables, TyVar and TcTyVar.
-TcTyVars can be mutable tyvars that are instantiated during type
-checking.  After typechecking, all TcTyVars are turned to TyVars.
-TyVars carry a Bool field, isCoercionVar which is True if the type
-variable is a coercion variable and False otherwise.  The function
-TyVar.isCoVar should be used to test if a type variable is a coercion
+data constructors that make type variables, `TyVar` and `TcTyVar`.
+`TcTyVar`s can be mutable tyvars that are instantiated during type
+checking.  After typechecking, all `TcTyVar`s are turned to `TyVar`s.
+`TyVar`s carry a `Bool` field, `isCoercionVar`, which is `True` if the type
+variable is a coercion variable and `False` otherwise.  The function
+`isCoVar` should be used to test if a type variable is a coercion
 variable.
 
 
@@ -70,23 +70,23 @@ variable.
 
 
 
-Type constructors, of datatype TyCon, are defined in the TyCon module
+Type constructors, of datatype `TyCon`, are defined in the TyCon module
 and exported abstractly.  There are several different sorts of type
 constructors; the most important for understanding the overall
 intermediate language type system are: 
   
 
 
-- AlgTyCon, which are for tycons for datatypes and newtypes and have a field of type AlgTyConRhs which specified whether it is a datatype or newtype and contains further information for each;
-- PrimTyCon, which are for built-in primitive tycons, and are also used to represent base kinds;  
-- CoercionTyCon, which are for special tycons which are meant to represent syntactic forms (and not really type constructors), so they must be saturated to have a kind;
-- SuperKindTyCon, which are tycons that are used to represent super-kinds, also called sorts (which classify kinds as either coercion kinds, CO, or type kinds, TY), SuperKindTyCons are unique in never having a kind.  
+- `AlgTyCon`, which are for tycons for datatypes and newtypes and have a field of type `AlgTyConRhs` which specified whether it is a datatype or newtype and contains further information for each;
+- `PrimTyCon`, which are for built-in primitive tycons, and are also used to represent base kinds;  
+- `CoercionTyCon`, which are for special tycons which are meant to represent syntactic forms (and not really type constructors), so they must be saturated to have a kind;
+- `SuperKindTyCon`, which are tycons that are used to represent super-kinds, also called sorts (which classify kinds as either coercion kinds, CO, or type kinds, TY), `SuperKindTyCon`s are unique in never having a kind.  
 
 
-All TyCon's but SuperKindTyCon and CoercionKindTyCon carry their kind
-in a field called tyConKind, and CoercionKindTyCons carry their
-kinding rule (a function with type \[Type\] -\> Kind) in a field called
-coKindFun.
+All `TyCon`s but `SuperKindTyCon` and `CoercionKindTyCon` carry their kind
+in a field called `tyConKind`, and `CoercionKindTyCons` carry their
+kinding rule (a function with type `[Type] -> Kind`) in a field called
+`coKindFun`.
 
 
 ### Kinds are Types
@@ -94,8 +94,8 @@ coKindFun.
 
 
 We have (as of August 2006) unified types and kinds as members of the
-datatype Type.  Kind is just a synonym for Type.  Basic kinds are now
-represented using type constructors, e.g. the kind \* is represented as
+datatype `Type`.  `Kind` is just a synonym for `Type`.  Basic kinds are now
+represented using type constructors, e.g. the kind `*` is represented as
       
 
 
@@ -106,11 +106,10 @@ represented using type constructors, e.g. the kind \* is represented as
 >
 
 
-where liftedTypeKindTyCon is a built-in PrimTyCon.  The arrow type
-constructor is used as the arrow kind constructor, e.g. the kind \* -\>
+where `liftedTypeKindTyCon` is a built-in `PrimTyCon`.  The arrow type
+constructor is used as the arrow kind constructor, e.g. the kind \`\* -\>
+\*\` is represented internally as
 
-
-- is represented internally as
 
 >
 >
@@ -122,8 +121,8 @@ constructor is used as the arrow kind constructor, e.g. the kind \* -\>
 Kinds and types may be distinguished by looking at their "Kind" using
 the typeKind function.  The "Kind" of a kind is always one of the
 sorts TY (for kinds that classify normal types) or CO (for kinds that
-classify coercion evidence).  The coercion kind, T1 :=: T2, is
-represented by PredTy (EqPred T1 T2).
+classify coercion evidence).  The coercion kind, `T1 :=: T2`, is
+represented by `PredTy (EqPred T1 T2)`.
 
 
 
@@ -136,6 +135,7 @@ type-kinds (kinds of sort TY).
 
 
 ```wiki
+
 		 ?
 		/ \
 	       /   \
@@ -154,6 +154,7 @@ In particular:
 	error :: forall a:?. String -> a
 	(->)  :: ?? -> ? -> *
 	(\(x::t) -> ...)	Here t::?? (i.e. not unboxed tuple)
+
 ```
 
 ### Coercions and Coercion Kinds
@@ -161,19 +162,19 @@ In particular:
 
 
 Coercions are type-level terms which act as evidence for type
-equalities and are classified by a new sort of kind (with the form T1
-:=: T2).  Most of the coercion construction and manipulation functions
+equalities and are classified by a new sort of kind (with the form \`T1
+:=: T2\`).  Most of the coercion construction and manipulation functions
 are found in the Coercion module.
 
 
 
 The syntax of coercions extends the syntax of types (and the type
-Coercion is just a synonym for Type).  By representing coercion
+`Coercion` is just a synonym for `Type`).  By representing coercion
 evidence on the type level, we can take advantage of the existing
 erasure mechanism and keep non-termination out of coercion proofs
 (which is necessary to keep the system sound).  The syntax of
 coercions and types also overlaps a lot.  A normal type is evidence
-for the reflexive coercion, i.e.
+for the reflexive coercion, i.e.,
 
 
 >
@@ -183,8 +184,7 @@ for the reflexive coercion, i.e.
 >
 
 
-There are also coercion variables, which are represented as TyVar's
-for which the isCoercionVar field is True.  Coercion variables are
+Coercion variables are
 used to abstract over evidence of type equality, as in
 
 
@@ -198,37 +198,39 @@ used to abstract over evidence of type equality, as in
 There are also coercion constants that are introduced by the compiler
 to implement some source language features (newtypes for now,
 associated types soon and probably more in the future).  Coercion
-constants are represented as TyCons made with the constructor
-CoercionTyCon. 
+constants are represented as `TyCon`s made with the constructor
+`CoercionTyCon`. 
 
 
 
 Coercions are type level terms and can have normal type constructors applied
 to them.  The action of type constructors on coercions is much like in
-a logical relation.  So if c1 :: T1 :=: T2 then
+a logical relation.  So if `c1 :: T1 :=: T2` then
  
 
 
-<table><tr><th>\[c1\]</th>
-<td>\[T1\] :=: \[T2\]
-</td></tr></table>
+>
+>
+> `[c1] :: [T1] :=: [T2]`
+>
+>
 
 
+and if `c2 :: S1 :=: S2` then
 
-and if c2 :: S1 :=: S2 then
 
-
-<table><tr><th>c1 -\> c2</th>
-<td>(T1 -\> S1 :=: T2 -\> S2)
-</td></tr></table>
-
+>
+>
+> `c1 -> c2 :: (T1 -> S1 :=: T2 -> S2)`
+>
+>
 
 
 The sharing of syntax means that a normal type can be looked at as
 either a type or as coercion evidence, so we use two different kinding
-relations, one to find type-kinds (implemented as Type.typeKind ::
-Type -\> Kind) and one to find coercion-kinds (implemented as
-Coercion.coercionKind :: Coercion -\> Kind).
+relations, one to find type-kinds (implemented in Type as \`typeKind ::
+Type -\> Kind\`) and one to find coercion-kinds (implemented in Coercion as
+`coercionKind :: Coercion -> Kind`).
 
 
 
@@ -262,13 +264,13 @@ coercion kind which need not be reflexive.
 
 
 In most of the compiler, as in the FC paper, coercions are abstracted
-using ForAllTy cv ty where cv is a coercion variable, with a kind of
-the form PredTy (EqPred T1 T2).  However, during type inference it is
+using `ForAllTy cv ty` where `cv` is a coercion variable, with a kind of
+the form `PredTy (EqPred T1 T2)`.  However, during type inference it is
 convenient to treat such coercion qualifiers in the same way other
 class membership or implicit parameter qualifiers are treated.  So
-functions like tcSplitForAllTy and tcSplitPhiTy and tcSplitSigmaTy,
-treat ForAllTy cv ty as if it were FunTy (PredTy (EqPred T1 T2)) ty
-(where PredTy (EqPred T1 T2) is the kind of cv).  Also, several of the dataConXXX functions treat equality
+functions like `tcSplitForAllTy` and `tcSplitPhiTy` and `tcSplitSigmaTy`,
+treat `ForAllTy cv ty` as if it were `FunTy (PredTy (EqPred T1 T2)) ty`
+(where `PredTy (EqPred T1 T2)` is the kind of `cv`).  Also, several of the dataConXXX functions treat equality
 
 
 ### Newtypes are coerced types
