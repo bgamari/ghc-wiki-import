@@ -241,21 +241,13 @@ coercion kind which need not be reflexive.
 ### GADTs
 
 
->
->
-> representation
->
->
+- representation
 
 
  
 
 
->
->
-> wrappers
->
->
+- wrappers
 
 ### Representation of coercion assumptions
 
@@ -304,28 +296,17 @@ Such coercions are always used when the newtype is recursive and are optional fo
 ## Core (the intermediate language)
 
 
+- Exprs
 
-Exprs
+- Casts
 
-
-
-Casts
-
-
-
-Typechecking
-
+- Typechecking
 
 - Environments and substitution
 
 ## Simplification
 
 
+- exprIsConApp\_maybe
 
-exprIsConApp\_maybe
-
-
-
-simplExpr
-
-
+- simplExpr
