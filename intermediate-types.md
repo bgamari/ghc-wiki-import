@@ -184,11 +184,9 @@ Coercion variables are
 used to abstract over evidence of type equality, as in
 
 
->
->
-> `(/\c::(a :=: Bool). \x::a. if (x `cast` c) then 0 else 1) :: (a :=: Bool) => a -> Int`
->
->
+```wiki
+(/\c::(a :=: Bool). \x::a. if (x `cast` c) then 0 else 1) :: (a :=: Bool) => a -> Int
+```
 
 
 There are also coercion constants that are introduced by the compiler
