@@ -113,10 +113,11 @@ There are several problems with the current GMP implementation:
 
 >
 >
-> This current implementation of Integer means that all large Integers (the J\# Int\# ByteArr\#) are at least the size of an Int\# plus a ByteArr, even if there is only one limb (which would fit into an Int, as Int is also the representation of a machine word in current implementations).  The suggestion discussed by John Meacham, [
+> This current implementation of Integer means that there are two separate constructors for small and large Integers (S\# Int\# and J\# Int\# ByteArr\#).  The suggestion discussed by [
+> John Meacham](http://www.haskell.org/pipermail/glasgow-haskell-users/2006-August/010670.html), [
 > Lennart Augustsson](http://www.haskell.org/pipermail/glasgow-haskell-users/2006-August/010664.html), [
 > Simon Marlow](http://www.haskell.org/pipermail/glasgow-haskell-users/2006-August/010677.html) and [
-> Bulat Ziganshin](http://www.haskell.org/pipermail/glasgow-haskell-users/2006-August/010687.html) was to change the representation of Integer so the Int\# could be either a pointer to the Bignum library array of limbs or, if the number of significant digits could fit into say, 31 bits, to use the extra bit as an indicator of that fact and hold the entire value in the Int\#, thereby saving the memory from the ByteArr\# and increasing the speed with an unboxed Int\#.  
+> Bulat Ziganshin](http://www.haskell.org/pipermail/glasgow-haskell-users/2006-August/010687.html) was to change the representation of Integer so the Int\# does the work of S\# and J\#: the Int\# could be either a pointer to the Bignum library array of limbs or, if the number of significant digits could fit into say, 31 bits, to use the extra bit as an indicator of that fact and hold the entire value in the Int\#, thereby saving the memory from S\# and J\#.  
 >
 >
 
