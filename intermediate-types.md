@@ -135,7 +135,6 @@ type-kinds (kinds of sort TY).
 
 
 ```wiki
-
 		 ?
 		/ \
 	       /   \
@@ -154,7 +153,6 @@ In particular:
 	error :: forall a:?. String -> a
 	(->)  :: ?? -> ? -> *
 	(\(x::t) -> ...)	Here t::?? (i.e. not unboxed tuple)
-
 ```
 
 ### Coercions and Coercion Kinds
