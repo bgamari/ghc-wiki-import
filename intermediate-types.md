@@ -179,7 +179,7 @@ for the reflexive coercion, i.e.,
 
 >
 >
-> `Int :: Int :=: Int`
+> ` Int :: Int :=: Int `
 >
 >
 
