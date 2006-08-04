@@ -1,4 +1,4 @@
-### Notes on the FC-based intermediate language
+# Notes on the FC-based intermediate language
 
 
 
@@ -31,7 +31,7 @@ single syntactic category that includes types, coercions, kinds, and
 super-kinds.
 
 
-# Type Variables
+### Type Variables
 
 
 
@@ -46,7 +46,7 @@ TyVar.isCoVar should be used to test if a type variable is a coercion
 variable.
 
 
-# Type Constructors
+### Type Constructors
 
 
 
@@ -57,29 +57,10 @@ intermediate language type system are:
   
 
 
-- AlgTyCon, which are for tycons for datatypes and newtypes and have a
-  field of type AlgTyConRhs which specified whether it is a datatype
-  or newtype and contains further information for each;
-- PrimTyCon, which are for built-in primitive tycons, and are also
-
-
-used to represent base kinds;  
-
-
-- CoercionTyCon, which are for special tycons which are meant to
-
-
-represent syntactic forms (and not really type constructors), so they
-must be saturated to have a kind;
-
-
-- SuperKindTyCon, which are tycons that are used to represent
-
-
-super-kinds, also called sorts (which classify kinds as either
-coercion kinds, CO, or type kinds, TY), SuperKindTyCons are unique in
-never having a kind.  
-
+- AlgTyCon, which are for tycons for datatypes and newtypes and have a field of type AlgTyConRhs which specified whether it is a datatype or newtype and contains further information for each;
+- PrimTyCon, which are for built-in primitive tycons, and are also used to represent base kinds;  
+- CoercionTyCon, which are for special tycons which are meant to represent syntactic forms (and not really type constructors), so they must be saturated to have a kind;
+- SuperKindTyCon, which are tycons that are used to represent super-kinds, also called sorts (which classify kinds as either coercion kinds, CO, or type kinds, TY), SuperKindTyCons are unique in never having a kind.  
 
 
 All TyCon's but SuperKindTyCon and CoercionKindTyCon carry their kind
@@ -88,7 +69,7 @@ kinding rule (a function with type \[Type\] -\> Kind) in a field called
 coKindFun.
 
 
-# Kinds are Types
+### Kinds are Types
 
 
 
@@ -141,35 +122,21 @@ type-kinds (kinds of sort TY).
 	      ??   (#)
 	     /  \
             *   #
-```
 
-
-where        \*    \[LiftedTypeKind\]   means boxed type
-
-
->
->
-> \#    \[UnliftedTypeKind\] means unboxed type
-> (\#)  \[UbxTupleKind\]     means unboxed tuple
-> ??   \[ArgTypeKind\]      is the lub of \*,\#
-> ?    \[OpenTypeKind\]        means any type at all
->
->
-
+where	*    [LiftedTypeKind]   means boxed type
+	#    [UnliftedTypeKind] means unboxed type
+	(#)  [UbxTupleKind]     means unboxed tuple
+	??   [ArgTypeKind]      is the lub of *,#
+	?    [OpenTypeKind]	means any type at all
 
 In particular:
 
+	error :: forall a:?. String -> a
+	(->)  :: ?? -> ? -> *
+	(\(x::t) -> ...)	Here t::?? (i.e. not unboxed tuple)
+```
 
-<table><tr><th>error</th>
-<td>forall a:?. String -\> a
-</td></tr>
-<tr><th>(-\>)</th>
-<td>?? -\> ? -\> \*
-(\\(x::t) -\> ...)        Here t::?? (i.e. not unboxed tuple)
-</td></tr></table>
-
-
-# Coercions and Coercion Kinds
+### Coercions and Coercion Kinds
 
 
 
@@ -251,7 +218,7 @@ the reflexive coercion, while coercion variables have a particular
 coercion kind which need not be reflexive.  
 
 
-# GADTs
+### GADTs
 
 
 >
@@ -270,7 +237,7 @@ coercion kind which need not be reflexive.
 >
 >
 
-# Representation of coercion assumptions
+### Representation of coercion assumptions
 
 
 
@@ -284,7 +251,7 @@ treat ForAllTy cv ty as if it were FunTy (PredTy (EqPred T1 T2)) ty
 (where PredTy (EqPred T1 T2) is the kind of cv).  Also, several of the dataConXXX functions treat equality
 
 
-# Newtypes are coerced types
+### Newtypes are coerced types
 
 
 
