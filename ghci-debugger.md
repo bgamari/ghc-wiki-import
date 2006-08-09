@@ -251,9 +251,9 @@ When it is enabled:
 Ideally, a breakpoint that would witness an exception would stop the execution, no more questions. Sadly, it seems impossible to 'witness' an exception. Throw and catch are essentially primitives (throw\#, throwio\# and catch\#), we could install an exception handler at every breakpoint site but that:
 
 
-- Would add more overhead
+- Would add more overhead 
 - Would require serious instrumentation to embed everything in IO, and thus
-- would alter the evaluation order
+- Would alter the evaluation order
 
 
 So it is not doable via this route.
@@ -264,7 +264,7 @@ We could try and use some tricks. For instance, in every 'throw' we spot, we ins
 
 
 
-For now I am stuck.
+For now I am stuck :S
 
 
 # Pending work
