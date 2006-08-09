@@ -97,6 +97,15 @@ Restrictions:
 ## How It Works
 
 
+
+The details of the implementations are split over a couple of subpages, due to the amount of the material:
+
+
+- syntax and representation,?
+- [renaming,](type-functions-renaming)
+- [type checking,](type-functions-type-checking) and
+- [representation in Core and interfaces.](type-functions-core)
+
 ### Syntax of kind signatures and definitions of indexed types
 
 
