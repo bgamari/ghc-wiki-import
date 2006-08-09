@@ -26,7 +26,7 @@ Signatures for indexed data and newtypes are represented as a special case of `T
 We recognise both forms of kind signatures by the predicate `HsDecls.isKindSigDecl`.
 
 
-### Definitions of indexed types
+### Instances of indexed types
 
 
 
