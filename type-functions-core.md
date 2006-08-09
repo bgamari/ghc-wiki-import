@@ -9,6 +9,10 @@ Type functions have a number of properties in common with class instances; in pa
 
 
 
-The essentials of a module after type checking are in `HscTypes.ModGuts`; in particular, we have two fields `mg_insts :: [Instance]` and `mg_binds :: [CoreRule]` containing all instance heads and all rewrite rules respectively.  Similarly, we now want something like `mg_tyequa :: [TyEqua]` to represent all type equations. 
+The essentials of a module after type checking are in `HscTypes.ModGuts`; in particular, we have two fields `mg_insts :: [Instance]` and `mg_binds :: [CoreRule]` containing all instance heads and all rewrite rules respectively.  Similarly, we now want something like `mg_tyequa :: [TyEqua]` to represent all type equations.
+
+
+
+Refined idea: Instead of duplicating the `InstInfo`/`Instance` infrastructure for instances of indexed types, we could just add a second variant to `InstInfo`.  This has the advantage that functions, such as `tcInstDecls1`, still only have to return a list of `InstInfo` and not two different lists.
 
 
