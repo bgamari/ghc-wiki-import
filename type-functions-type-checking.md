@@ -12,7 +12,7 @@ The workhorse of kind checking type and class declarations is `TcTyClDecls.kcTyC
 In contrast, instances of indexed types are not processed by `TcTyClDecls.tcTyClDecls`, but by `TcInstDcls.tcInstDecls1`, which handles the heads of class instance declarations.  However, the later invokes `TcTyClDecls.tcIdxTyInstDecl` (both directly and indirectly via `IcInstDcls.tcLocalInstDecl1`, the later for associated types).  The function `tcIdxTyInstDecl` shares a lot of code with the `TcTyClDecls.kcTyClDecls` and `TcTyClDecls.tcTyClDecl`.
 
 
-## Type checking indexed data types
+## Type checking indexed types
 
 
 
