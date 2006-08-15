@@ -6,10 +6,10 @@ The map example from *Associated Types with Class* in the new form:
 
 
 ```wiki
-data Map k :: * -> *
+data family Map k :: * -> *
 
-data Map ()     v = MapUnit (Maybe v)
-data Map (a, b) v = MapPair (Map a (Map b v))
+data instance Map ()     v = MapUnit (Maybe v)
+data instance Map (a, b) v = MapPair (Map a (Map b v))
 ```
 
 
@@ -17,7 +17,7 @@ We can define operations on indexed maps using a type class whose instances corr
 
 
 ```wiki
-data Map Int Char = Nonsense
+data instance Map Int Char = Nonsense
 ```
 
 
