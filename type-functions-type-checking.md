@@ -47,7 +47,7 @@ Type synonym families are represented by the standard `TyCon` variant for synony
 </td></tr>
 <tr><th>`data family` and `newtype family`</th>
 <td>
-Data and newtype families are represented by the `TyCon` variant `AlgTyCon`, as are their non-indexed counter parts, with the difference that the field `algTcRhs` has the newly introduced value `OpenAlgTyCon`. 
+Data and newtype families are represented by the `TyCon` variant `AlgTyCon`, as are their non-indexed counter parts, with the difference that the field `algTcRhs` has the one of the newly introduced values `OpenDataTyCon` or `OpenNewTyCon`.
 </td></tr></table>
 
 
