@@ -64,11 +64,7 @@ data SynTyConRhs = OpenSynTyCon Kind    -- *result* kind
 ```
 
 
-Consequently, all functions that dependent on this field need to be extended.  In particular, `TcType.isTauTyCon` regards applications of type family constructors as *tau types*.  (SPJ, is that ok?  Probably not...)
-
-
-
-Moreover, `BuildTyCls.buildSynTyCon`'s last argument is generalised from `Type` to `Either Kind Type`.  If this argument is `Left kind`, we have a type family; otherwise, we have an ordinary type synonym.
+Consequently, all functions that dependent on this field need to be extended.  In particular, `TcType.isTauTyCon` regards applications of type family constructors as *tau types*.  (SPJ, is that ok?  Probably not...)  As a result, `BuildTyCls.buildSynTyCon`'s last argument now also takes a value of type `SynTyConRhs`.
 
 
 #### GHC API
