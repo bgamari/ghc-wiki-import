@@ -103,7 +103,7 @@ The details of the implementation are split over a couple of subpages, due to th
 - [syntax and representation,](type-functions-syntax)
 - [renaming,](type-functions-renaming)
 - [type checking,](type-functions-type-checking) and
-- [representation in Core and in interfaces.](type-functions-core)
+- [desugaring.](type-functions-core)
 
 
  
