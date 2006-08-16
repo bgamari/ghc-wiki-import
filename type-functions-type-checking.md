@@ -64,7 +64,7 @@ data SynTyConRhs = OpenSynTyCon Kind    -- *result* kind
 ```
 
 
-Consequently, all functions that dependent on this field need to be extended.  In particular, `TcType.isTauTyCon` regards applications of type family constructors as *tau types*.  (SPJ, is that ok?  Probably not...)  As a result, `BuildTyCls.buildSynTyCon`'s last argument now also takes a value of type `SynTyConRhs`.
+Consequently, all functions that dependent on this field need to be extended.  In particular, `TcType.isTauTyCon` regards applications of type family constructors as *tau types*, which is why we need to require that the right hand side of each `type instance` declaration is also a tau type.  As a result, `BuildTyCls.buildSynTyCon`'s last argument now also takes a value of type `SynTyConRhs`.
 
 
 #### GHC API
