@@ -9,7 +9,7 @@ Back to [TypeFunctions](type-functions).
 **Current:** 
 
 
-- Compute `TyCon`s resulting from type instance declarations; then, test type checking of declarations of indexed types.
+- Complete `TcTyClsDecls.tcIdxTyInstDecl1` for `TyData`: (1) probably need to generate a new name; (2) produce a `TyCon`, which requires to extend the result type, and (3) produce an equality axiom.  The produced `TyCon` need to be entered into the global environment, including all its `implicitTyThings`, by the caller, namely `TcInstDecls.tcInstDecls1`.
 
 ## Parsing and Renaming
 
@@ -88,8 +88,11 @@ Todo (high-level):
 1. Desugar type functions and equality constraints.
 
 
-Done: Nothing.
+Done:
 
+
+- Representation of kind signatures as `TyCon.TyCon`s.
+- Extension of `Class.Class` by associated `TyCon`s.
 
 ## Testsuite
 
