@@ -34,7 +34,7 @@ Kind signatures are handled by `TcTyClsDecls.tcTyClsDecl` together with all othe
 Instances of indexed types are type checked by `TcTyClDecls.tcIdxTyInstDecl`; i.e., the same functions that performs their kind checking.  Kind checking and type checking of instances of indexed types can be combined, as we don't need to worry as much about recursive dependencies as we have to for standard type declarations.  In particular, the kinds of indexed types are declared by their signature and we don't have to compute any recursiveness information, as we never know whether we reached a fixed point for open types.  (Hence, we conservatively assume indexed types to be always `Recursive`.  This is safe as they are implicit loop breakers due to to implying coercions.)
 
 
-## Representation of indexed families after type checking
+## Core representation of signatures of indexed families
 
 
 
@@ -67,6 +67,13 @@ data SynTyConRhs = OpenSynTyCon Kind    -- *result* kind
 Consequently, all functions that dependent on this field need to be extended.  In particular, `TcType.isTauTyCon` regards applications of type family constructors as *tau types*, which is why we need to require that the right hand side of each `type instance` declaration is also a tau type.  As a result, `BuildTyCls.buildSynTyCon`'s last argument now also takes a value of type `SynTyConRhs`.
 
 
+### Associated types
+
+
+
+Classes are represented by `Class.Class`, which we extend by a new field `classATs` of type `[TyCon]`.  The `Class` structures including embedded `TyCon`s for associated types are constructed at the end of declaration type checking by `TcTyClsDecls.tcTyClDecl1` by way of `BuildTyCl.buildClass`.  The associated types of a class are entered into the global environment by `TcTyClsDecls.tcTyAndClassDecls` when entering all `HscTypes.implicitTyThings` of the toplevel type and class declarations.
+
+
 ### GHC API
 
 
@@ -74,7 +81,10 @@ Consequently, all functions that dependent on this field need to be extended.  I
 The GHC API has a new predicate `isOpenTyCon` with the understanding that it is illegal to invoke `synTyConDefn`, `synTyConRhs`, and `tyConDataCons` on type constructors that fulfil `isOpenTyCon`.
 
 
-## Representation of type equation axioms
+## Core representation of instances of indexed types
+
+
+### Representation of type equation axioms
 
 
 
