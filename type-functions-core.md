@@ -46,9 +46,9 @@ Neverthless, we need to generate a new name for the vanilla data types represent
 
 
 ```wiki
-data AlgTyConParent = OrdinaryTyCon
+data AlgTyConParent = NoParentTyCon
                     | ClassTyCon    Class
-                    | FamInstTyCon  TyCon
+                    | FamilyTyCon   TyCon
 ```
 
 ## Inserting coercions
