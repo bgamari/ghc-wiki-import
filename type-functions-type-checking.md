@@ -116,7 +116,7 @@ which is a generalisation of the old field `algTcClass` of the internal represen
 
 
 
-`DataCon`s of data instances differ from ordinary `DataCon`s by a value of the form `Just typats :: Maybe [Type]` in the new field `dcInstPats`.  It gives the instance patterns at which the data constructor has been declared; e.g., given the declaration
+`DataCon`s of data instances differ from ordinary `DataCon`s by a value of the form `Just typats :: Maybe [Type]` in the new field `dcInstTys`.  It gives the instance patterns at which the data constructor has been declared; e.g., given the declaration
 
 
 ```wiki
@@ -124,7 +124,7 @@ data instance Map (a, b) v = MapPair (Map a (Map b v))
 ```
 
 
-the instance patterns are `[(a, b), v]`.  Whenever the field `dcInstPats` of a `DataCon` is not `Nothing`, the field `algTcParent` of its `TyCon` must be of the form `FamilyTyCon famTyCon`, where `famTyCon` is the `TyCon` of the data family to which the instance belongs.  The exact same information goes into the interface representation `IfaceSyn.IfaceConDecl` with the new field `ifInstPats`.
+the instance types are `[(a, b), v]`.  Whenever the field `dcInstPats` of a `DataCon` is not `Nothing`, the field `algTcParent` of its `TyCon` must be of the form `FamilyTyCon famTyCon`, where `famTyCon` is the `TyCon` of the data family to which the instance belongs.  The exact same information goes into the interface representation `IfaceSyn.IfaceConDecl` with the new field `ifConInstTys`.
 
 
 #### The equality axiom identifying family instance and representation type
