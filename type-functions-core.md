@@ -51,6 +51,10 @@ data AlgTyConParent = NoParentTyCon
                     | FamilyTyCon   TyCon
 ```
 
+
+In contrast to the old `algTcClass` field, the new field also appears in `IfaceSyn.IfaceDecl`.  However, it does so as `Maybe IfaceTyCon` as we still do not want to represent class parent information in interfaces.
+
+
 ## Inserting coercions
 
 
