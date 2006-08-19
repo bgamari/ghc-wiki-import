@@ -52,41 +52,74 @@ We expect that some of you will come with GHC-related projects that you want to 
 
 
 
-Galois will be hosting the meeting.  Their offices are in Beaverton, a suburb of Portland.
-
-
-- Galois will provide a large room, with desks, a projector, and wireless access.
-- We will also have other rooms that can be used for side-projects.
-- Bring your own laptop (capable of building GHC).
-
-<table><tr><th>  Address: </th>
-<th> 12725 SW Millikan Way
-</th></tr>
-<tr><th> </th>
-<th> Suite 290
-</th></tr>
-<tr><th> </th>
-<th> Beaverton, OR 97005
-</th></tr></table>
+The Hackathon will be held at the [
+Kingstad Center](http://www.kingstad.com), near the Galois offices
+on the 14th and 15th. Any additional hacking on the 16th will be held at the Galois offices.
 
 
 
-Galois is located right next to a light-rail line, allowing easy commuting from
+The Kingstand venue has a large room, with desks, a projector, and wireless access. Bring your own laptop
+(capable of building GHC). Galois may also provide some wired access, perhaps to a server with
+a recent version version of Galois.
+
+
+
+On Saturday, we will use the Galois offices, which has several conference rooms and wireless access for
+registered GHC Hackathon attendees.
+
+
+
+Both the Kingstad and the Galois offices is located right next to a light-rail line, allowing easy commuting from
 down town and the ICFP venue hotel. 
+
+
+
+[
+Directions to the Kingstad Center](http://www.kingstad.com/locations/beaverton_fac.html)
+
+
+<table><tr><th> Thur 14th, Fri 15th </th>
+<th>  Address: </th>
+<th>  15450 SW Millikan Way
+</th></tr>
+<tr><th> </th>
+<th> </th>
+<th> Beaverton, OR 97007
+</th></tr></table>
 
 
 
 [ Directions to Galois](http://www.galois.com/files/Directions.pdf)
 
 
+<table><tr><th>   Sat 16th </th>
+<th>  Address: </th>
+<th> 12725 SW Millikan Way
+</th></tr>
+<tr><th> </th>
+<th> </th>
+<th> Suite 290
+</th></tr>
+<tr><th> </th>
+<th> </th>
+<th> Beaverton, OR 97005
+</th></tr></table>
 
-[
-Web page about the training center we will be using](http://www.beavertonround.biz/meetingrooms.htm)
+
+
+Note that the Kingstad center and the Galois offices are actually at different Max stops!
+
+
+## Time
 
 
 
-not handled: Image
+The Hackathon will be open
 
+
+- 9 till 5 - Thur 14th - Kingstad center
+- 9 till 5 - Fri 15th - Kingstad center
+- 9 till (TBD) - Sat 16th - Galois offices
 
 ### Registration
 
