@@ -213,3 +213,4 @@ If you want to come, please add your name to the list below.  Add a sentence or 
 - Ian Lynagh, interested in all parts.
 - Brandon Moore, Yahoo. Interested in types, syntax extension.
 - Ravi Nanavati, Bluespec. Interested in being able to fix GHC bugs before they burn me.
+- Jeffery Zhang, interested in type systems and metaprogramming.
