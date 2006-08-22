@@ -9,7 +9,6 @@ Back to [TypeFunctions](type-functions).
 **Current:** 
 
 
-- Complete `TcTyClsDecls.tcIdxTyInstDecl1` for `TyData`: produce an equality axiom.
 - In the exiting test for datacon validity, `checlValidDataCon`, we need to add a new test that checks for a data instance datacon that its tycon has the `FamilyTyCon` flag set and that it refers to the correct family tycon.
 - Handle `newtype instance`.
 
@@ -94,10 +93,11 @@ Todo (high-level):
 Done:
 
 
-- Representation of kind signatures as `TyCon.TyCon`s.
+- Representation of family kind signatures as `TyCon.TyCon`s.
 - Extension of `Class.Class` by associated `TyCon`s.
 - Extension of `TyCon.TyCon` with a reference to the parent `TyCon` for data instances.
 - Extension of `DataCon.DataCon` with instance types for constructors belonging to data instances.
+- Extension of \`TyCon.TyCon' such that the parent of a data instance is paired with a coercion identifying family instance and representation type.
 
 ## Testsuite
 
