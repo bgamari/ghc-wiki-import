@@ -9,12 +9,17 @@ Back to [TypeFunctions](type-functions).
 **Current:** 
 
 
-- Generate `CoExprFn` in case expressions scrutinising a data instance.
 - In the exiting test for datacon validity, `checlValidDataCon`, we need to add a new test that checks for a data instance datacon that its tycon has the `FamilyTyCon` flag set and that it refers to the correct family tycon.
 - Handle `newtype instance`.
 
 ## Parsing and Renaming
 
+
+
+Todo (low-level):
+
+
+- Probably remove the `iso` flag.
 
 
 Todo (high-level):
@@ -39,17 +44,17 @@ Done:
 Todo (low-level):
 
 
-- RHS of a `type instance` must be a tau type.
 - In an AT definition, no argument variable may be repeated.
-- Check that the arguments of AT instances coincide with the respective instance arguments of their class. This might be a bit more tricky if we want to allow that they can vary syntactically before expansion of type synonyms.
-- Check that each class instance has a definition for every AT and conversely that that all defined associated types are, in fact, part of the class - with the exception of associated synonyms with a default definition. (Do this in the type checker - GHC does the corresponding checks for methods in the type checker, too.)
+- Check that the arguments of AT instances coincide with the respective instance arguments of their class.
+- Check that each class instance has a definition for every AT and conversely that that all defined associated types are, in fact, part of the class. (Do this in the type checker - GHC does the corresponding checks for methods in the type checker, too.)
 - Families declared as an AT, may not receive toplevel type instances.
-- Check that patterns of type indexes don't contain type functions.
 - For each case scrutinising an associated data type, check that all constructors have been defined in a single instance.  (Maybe we can just extend the existing check that ensures that case expressions don't mix constructors of different data types.)
+- RHS of a `type instance` must be a tau type.
+- Check that patterns of type indexes don't contain type functions.
 - Construct `InstInfo` for type equation in `tcIdxTyInstDecl1`.
+- If an associated synonym has a default definition, use that in the instances.  In contrast to methods, this cannot be overridden by a specialised definition.  (Confluence requires that any specialised version is extensionally the same as the default.)
 
 
- 
 Todo (high-level):
 
 
@@ -63,6 +68,7 @@ Done:
 
 - Kind and type checking of kind signatures.
 - Kind and type checking of instance declarations of indexed types.
+- Wrapper generation and type checking of pattern matching for indexed data types (no newtypes yet.)
 
 ## Desugaring
 
@@ -71,6 +77,7 @@ Done:
 Todo (low-level):
 
 
+- Handle new type instances.
 - When a family type is exported/imported, all its instances need to be implicitly imported/exported, just as with classes.
 - Derivings on an associated data type *declaration* need to be inherited by all definitions of that data type in instances.
 
@@ -78,14 +85,14 @@ Todo (low-level):
 Todo (high-level):
 
 
-1. Desugar indexed data types.
-1. Extend interface files.
+1. Extend interface files to include euqality axioms:
 
   - How do we exactly want to represent type equations in interface files?
 
-    - SPJ pointed out that instances are maintained in `InstEnv.InstEnv` with different values for the home packages and others. The definitions of ATs may have to be maintained in a similar way, as they are also incrementally collected during compiling a program.
+    - SPJ pointed out that instances are maintained in `InstEnv.InstEnv` with different values for the home packages and others. Type instances may have to be maintained in a similar way, as they are also incrementally collected during compiling a program.  (We probably include them in the same structure, as they will also be of type `InstInfo`.)
     - `IfaceInst` contains the instance declaration information for interfaces.
   - Export and import lists: The name lists that may appear at class imports and exports can now also contain type names, which is tricky as data type names can carry a list of data constructors.
+
 1. Desugar type functions and equality constraints.
 
 
@@ -97,7 +104,7 @@ Done:
 - Extension of `TyCon.TyCon` with a reference to the parent `TyCon` for data instances.
 - Extension of `DataCon.DataCon` with instance types for constructors belonging to data instances.
 - Extension of `TyCon.TyCon` such that the parent of a data instance is paired with a coercion identifying family instance and representation type.
-- Datacon wrapper uses data instance coercion if applicable.
+- For indexed data types, the datacon wrapper uses data instance coercion and pattern matching casts the scrutinee via an `ExprCoFn` in a `CoPat`.
 
 ## Testsuite
 
