@@ -1,6 +1,10 @@
 # Type Functions: Desugaring
 
 
+
+**TODO** Move this page (logically) before the type checking page (which now also conatins all the details about desugaring) and turn it into an example page that (using the `Map` example) goes through all the details of the concrete representation.
+
+
 ## Desugaring indexed data types
 
 
