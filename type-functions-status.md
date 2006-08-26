@@ -19,13 +19,12 @@ Todo (low-level):
 
 
 - *Imported* data family tycon cannot be extended (GHC claims its not in scope in the data instance declaration) - cf. `MapPS.hs`.
-- Probably remove the `iso` flag.
+- Should family declarations be optional with ATs, too?  (See comment at patch making kinds optional at toplevel declarations.)
 
 
 Todo (high-level):
 
 
-1. Make the kind specification optional in family declarations.  (How to do the representation in the data/newtype case is not entirely clear, as we use the presence of the kind signature at the moment to identify family declarations.)
 1. Parse and rename equality constraints in signatures.
 1. Defaults for associated type synonyms.  (Having both a kind signature and vanilla synonym is problematic as in `RnNames.getLocalDeclBinders` its hard to see that not both of them are defining declarations, which leads to a multiple declarations error.  Defaults are quite different from vanilla synonyms anyway, as they usually have tyvars on their rhs that do not occur on the lhs.)
 1. Import/export lists:
