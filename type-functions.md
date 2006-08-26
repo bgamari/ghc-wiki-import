@@ -42,10 +42,10 @@ Refinement of the specification in the *Beyond Associated Types* paper.  (I'll a
 - Kind signatures of type function have the form
 
   ```wiki
-  type family T a1 .. an :: <kind>
+  type family T a1 .. an [:: <kind>]
   ```
 
-  and introduce `n`-ary type functions (with `n` \>= 1), which may be of higher-kind.  Again, the type variables can have kind signatures.  Equations for an `n`-ary type function must specify exactly `n` arguments, which serve as indexes. 
+  and introduce `n`-ary type functions (with `n` \>= 1), which may be of higher-kind.  Again, the type variables can have kind signatures and the result kind signature is optional, with `*` being the default.  Equations for an `n`-ary type function must specify exactly `n` arguments, which serve as indexes. 
 - Applications of type functions need to supply all indexes after unfolding of all ordinary type synonyms.  (This is the same saturation requirement that we already have on ordinary type synonyms.)
 - Instances of indexed data types/newtypes and equations of type functions have the keyword `instance` after the first keyword.  They otherwise have the same form as ordinary data types/newtypes and type synonyms, respectively, but can have non-variable type indexes in index positions.  Type indexes can include applications of indexed data types and newtypes, but no type functions.
 - Instances of indexed types are only valid if a kind signature for the type constructor is in scope.  The kind of an indexed type is solely determined from the kind signature.  Instances must conform to this kind; in particular, they must have the same number of type indexes.
