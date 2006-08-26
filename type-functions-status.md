@@ -9,7 +9,6 @@ Back to [TypeFunctions](type-functions).
 **Current:** 
 
 
-- Missing static checks and also: In the exiting test for datacon validity, `checlValidDataCon`, we need to add a new test that checks for a data instance datacon that its tycon has the `FamilyTyCon` flag set and that it refers to the correct family tycon.
 - Handle `newtype instance`.
 
 ## Parsing and Renaming
