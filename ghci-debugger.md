@@ -392,7 +392,7 @@ We could try and use some tricks. For instance, in every 'throw' we spot, we ins
 
 
 
-I don't know if a satisfactory solution is possible with the current scheme for dynamic breakpoints.
+I don't know if a satisfactory solution is possible with the current scheme for breakpoints.
 
 
 ## The breakpoints api at ghc-api
