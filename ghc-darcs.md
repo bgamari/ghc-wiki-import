@@ -54,7 +54,7 @@ http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc)</th>
 </th></tr>
 <tr><th>[
 http://darcs.haskell.org/testsuite](http://darcs.haskell.org/testsuite)</th>
-<th>The test suite
+<th>The test suite (requires python 2.4+) 
 </th></tr>
 <tr><th>[ http://darcs.haskell.org/nofib](http://darcs.haskell.org/nofib)</th>
 <th>The benchmark suite
