@@ -153,6 +153,13 @@ NB: The type argument variables of the representation tycon are the free variabl
 As each `data instance` is *represented* by its own `TyCon`, we need to be able to move between the type of the family instance and that of the representation.  We do so by an adaptation of the same method used to implement newtypes with coercions (c.f., [IntermediateTypes](intermediate-types)).  Newtypes store the coercion moving between representation and abstract type in the field `nt_co` of the `NewTyCon` variant of `TyCon.AlgTyConRhs`, whereas representation types for indexed data types use `algTcParent` (see above).  Newtype coercions are constructed by `Coercion.mkNewTypeCoercion`, whereas representation types for indexed data types use a similar function `Coercion.mkDataInstCoercion`, which is invoked by `BuildTyCl.buildAlgTyCon` iff it is passed family and instance type information.
 
 
+### Representation of newtype instances
+
+
+
+We handle newtype instances similar to data instances.  However, newtypes have no separate worker and wrapper, but only a hybrid that is categorised as a worker (see `MkIds.mkDataConIds`).  In particular, this worker gets the wrapper signature as well as an unfolding.  The wrapper signature ensures that the result type of the constructor mentions the family constructor (and not the instance representation constructor).  The body of an ordinary newtype applies the newtype coercion to move from abstract to concrete type.  In the case of a family instance, we compose the newtype coercion with the family coercion to directly move from the abstract family instance to the concrete type.
+
+
 ### Representation of equality axioms
 
 
