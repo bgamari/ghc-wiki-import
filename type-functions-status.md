@@ -9,7 +9,7 @@ Back to [TypeFunctions](type-functions).
 **Current:** 
 
 
-- Handle `newtype instance`: In `MkId.mkDataConIds` extend the newtype worker, which is really a wrapper, such that it composes the two coercions, if its a family instance, in the worker unfolding.  It also need to get a different result type in the wrapper signature.
+- Next: Check for overlapping instances and fix importing/exporting of families and their instances.
 
 ## Parsing and Renaming
 
@@ -67,7 +67,7 @@ Done:
 
 - Kind and type checking of kind signatures.
 - Kind and type checking of instance declarations of indexed types.
-- Wrapper generation and type checking of pattern matching for indexed data types (no newtypes yet.)
+- Wrapper generation and type checking of pattern matching for indexed data and newtypes.
 
 ## Desugaring
 
@@ -76,7 +76,6 @@ Done:
 Todo (low-level):
 
 
-- Handle new type instances.
 - When a family type is exported/imported, all its instances need to be implicitly imported/exported, just as with classes.
 - Derivings on an associated data type *declaration* need to be inherited by all definitions of that data type in instances.
 
