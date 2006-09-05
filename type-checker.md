@@ -1,4 +1,15 @@
+# Typechecker
 
-Hello [](/trac/ghc/attachment/wiki/TypeChecker/diag.png)
+
+
+here is a picture of the type checker
+
+
+
+[](/trac/ghc/attachment/wiki/TypeChecker/diag.png)
+
+
+
+Next paragraph
 
 
