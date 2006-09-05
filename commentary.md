@@ -38,17 +38,6 @@
 -  SM Cmm-\>BCO  (simple compilation scheme, no primops: GHC.PrimopWrappers)
 -  SM Cmm-\>C
 
-## 4. The Runtime (SM)
+## 4. [The Runtime System](commentary/rts)
 
 
-- .c vs. .cmm files
-- diff between .cmm and C--
-- roadmap
-- heap objects, info tables
-- architecture: storage manager, MBlock, Blocks, Storage, GC
-- architecture: scheduler, capabilities, tasks
-- FFI (adjustors)
-- Linker
-- BCO interpreter
-- asyncrhonous & synchronous exceptions
-- STM
