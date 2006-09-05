@@ -172,7 +172,7 @@ RPM spec file
 </td></tr></table>
 
 
-<table><tr><th>`InstallShield`,`WindowsInstaller`</th>
+<table><tr><th>`InstallShield`, `WindowsInstaller`</th>
 <td>
 Windows installer bits
 </td></tr></table>
