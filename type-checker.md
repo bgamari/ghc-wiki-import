@@ -1,4 +1,4 @@
 
-Hello not handled: Image
+Hello [](/trac/ghc/attachment/wiki/TypeChecker/diag.png)
 
 
