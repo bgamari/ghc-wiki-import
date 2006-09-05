@@ -105,7 +105,7 @@ The libraries that are built and distributed with GHC.
 </td></tr></table>
 
 
-<table><tr><th>[includes/](commentary/source-tree/rts)</th>
+<table><tr><th>[includes/](commentary/source-tree/includes)</th>
 <td>
 Header files for the Runtime System and for compiling Haskell via C.
 </td></tr></table>
