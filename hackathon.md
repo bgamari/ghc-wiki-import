@@ -169,3 +169,4 @@ If you want to come, please add your name to the list below.  Add a sentence or 
 - John Matthews, Galois, interested in connecting GHC to the Isabelle theorem prover.
 - Andrew Pimlott, Planning Systems Inc., interested in the dark corners we stumble into during application development, and space profiling.
 - Mathew Mills, language enthusiast relatively new to Haskell.
+- Thomas DuBuisson, generally interested in GHC RTS
