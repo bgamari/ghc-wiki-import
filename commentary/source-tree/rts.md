@@ -2,6 +2,7 @@
 \[ [Up one level](commentary/source-tree) \]
 
 
+
 # GHC Source Tree Roadmap: rts/
 
 
@@ -314,7 +315,7 @@ The runtime's interval timer, used for context switching and profiling.
 </td></tr></table>
 
 
-### C files: the [Commentary/Rts/FFI](commentary/rts/ffi)
+### C files: the [FFI](commentary/rts/ffi)
 
 
 <table><tr><th>[ Adjustor.c](http://darcs.haskell.org/ghc/rts/Adjustor.c)</th>
