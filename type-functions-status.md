@@ -9,7 +9,7 @@ Back to [TypeFunctions](type-functions).
 **Current:** 
 
 
-- Next: Check for overlapping instances and fix importing/exporting of families and their instances.
+- Next: (1) Last bist of import/export functionality; (2) check for overlapping instances.
 
 ## Parsing and Renaming
 
@@ -18,7 +18,6 @@ Back to [TypeFunctions](type-functions).
 Todo (low-level):
 
 
-- *Imported* data family tycon cannot be extended (GHC claims its not in scope in the data instance declaration) - cf. `MapPS.hs`.
 - Should family declarations be optional with ATs, too?  (See comment at patch making kinds optional at toplevel declarations.)
 
 
@@ -47,7 +46,7 @@ Done:
 Todo (low-level):
 
 
-- data/newtype instances may not overlap.  (Such definitions would always be non-confluent.)  We might be able to get away with a lazy check at every place where a value of family type is constructed (i.e., occurences of the datacon wrapper).  Such a value may never be an inhabitant of more than one instance declaration.
+- data/newtype instances may not overlap.  (Such definitions would always be non-confluent.)  We might be able to get away with a lazy check at every place where a value of family type is constructed (i.e., occurences of the datacon wrapper).  Such a value may never be an inhabitant of more than one instance declaration.  No, we won't get away with this...
 - RHS of a `type instance` must be a tau type.
 - Check that patterns of type indexes don't contain type functions.
 - Construct `InstInfo` for type equation in `tcIdxTyInstDecl1`.
@@ -76,7 +75,8 @@ Done:
 Todo (low-level):
 
 
-- When a family type is exported/imported, all its instances need to be implicitly imported/exported, just as with classes.
+- In export and import lists, it must be possible to mention AT names as sub-components of a class.
+- `data instances` and `newtype instances` need to be implicitly exported as are class instances.
 - Derivings on an associated data type *declaration* need to be inherited by all definitions of that data type in instances.
 
 
