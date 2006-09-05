@@ -1,4 +1,4 @@
 
-Hello \[Image(typechecker.png)\]
+Hello not handled: Image
 
 
