@@ -1,3 +1,7 @@
+
+\[ Up: [Commentary](commentary) \]
+
+
 # GHC Commentary: The Runtime System
 
 
@@ -35,13 +39,13 @@ Next, we try to make sense of how it all fits together.
 ## RTS: Contents
 
 
-- What the hell is a `.cmm` file?
-- Layout of heap objects
-- Haskell Execution
-- The Scheduler
-- The Storage Manager
-- So how does `foreign import "wrapper"` work?
-- GHCi support: the byte-code interpreter and dynamic linker
-- Asynchronous exceptions
-- Software Transactional Memory (STM)
+- [What the hell is a {{{.cmm}}} file?](commentary/rts/cmm)
+- [Layout of heap objects](commentary/rts/heap-objects)
+- [Haskell Execution](commentary/rts/haskell-execution)
+- [The Scheduler](commentary/rts/scheduler)
+- [The Storage Manager](commentary/rts/storage)
+- [So how does {{{foreign import "wrapper"}}} work?](commentary/rts/ffi)
+- [GHCi support: the byte-code interpreter and dynamic linker](commentary/rts/interpreter)
+- [Asynchronous exceptions](commentary/rts/async-exceptions)
+- [Software Transactional Memory (STM)](commentary/rts/stm)
 - [Coding conventions in the RTS](commentary/rts/conventions)
