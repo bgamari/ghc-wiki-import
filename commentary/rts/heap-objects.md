@@ -151,7 +151,7 @@ To find out whether a particular object is dynamic or static, use the `HEAP_ALLO
 
 Dynamic objects have a minimum size, because every object must be big
 enough to be overwritten by a
-[forwarding pointer](commentary/rts/heap-objects#) during GC.
+[forwarding pointer](commentary/rts/heap-objects#forwarding-pointers) during GC.
 The minimum size of the payload is given by `MIN_PAYLOAD_SIZE` in [includes/Constants.h](/trac/ghc/browser/ghc/includes/Constants.h).
 
 
@@ -504,7 +504,7 @@ There are several variants of indirection:
   cost center in an indirection, so we can't eliminate the indirection.
 - `IND_OLDGEN_PERM`: same as above, but for the old generation.
 - `IND_STATIC`: a static indirection, arises when we update a `THUNK_STATIC`.  A new `IND_STATIC`
-  is placed on the mutable list when it is created (see `newCaf()` in [rts/Storage.c](/trac/ghc/browser/ghc/rts/Storage.c).
+  is placed on the mutable list when it is created (see `newCaf()` in [rts/Storage.c](/trac/ghc/browser/ghc/rts/Storage.c)).
 
 ### Byte-code objects
 
@@ -549,12 +549,52 @@ There are several variants of indirection:
 `STABLE_NAME`
 
 
-### Thread objects
+### Thread State Objects
 
 
 
-`TSO`
+Closure type `TSO` is a Thread State Object.  It represents the complete state of a thread, including its stack.
 
+
+
+TSOs are ordinary objects that live in the heap, so we can use the existing allocation and garbage collection machinery to manage them.  This gives us one important benefit: the garbage collector can detect when a blocked thread is unreachable, and hence can never become runnable again.  When this happens, we can notify the thread by sending it the `BlockedIndefinitely` exception.
+
+
+
+GHC keeps stacks contiguous, there are no "stack chunk" objects.  This is simpler, but means that when growing a stack we have to copy the old contents to a larger area (see `threadStackOverflow()` in [rts/Schedule.c](/trac/ghc/browser/ghc/rts/Schedule.c)).
+
+
+
+The TSO structure contains several fields.  For full details see [includes/TSO.h](/trac/ghc/browser/ghc/includes/TSO.h).  Some of the more important fields are:
+
+
+- *link*: field for linking TSOs together in a list.  For example, the threads blocked on an `MVar` are kept in
+  a queue threaded through the link field of each TSO.
+- *global\_link*: links all TSOs together; the head of this list is `all_threads` in [rts/Schedule.c](/trac/ghc/browser/ghc/rts/Schedule.c).
+- *what\_next*: how to resume execution of this thread.  The valid values are:
+
+  - `ThreadRunGhc`: continue by returning to the top stack frame.
+  - `ThreadInterpret`: continue by interpreting the BCO on top of the stack.
+  - `ThreadKilled`: this thread has received an exception which was not caught.
+  - `ThreadRelocated`: this thread ran out of stack and has been relocated to a larger TSO; the link field points
+    to its new location.
+  - `ThreadComplete`: this thread has finished and can be garbage collected when it is unreachable.
+- *why\_blocked*: for a blocked thread, indicates why the thread is blocked.  See [includes/Constants.h](/trac/ghc/browser/ghc/includes/Constants.h) for
+  the list of possible values.
+- *block\_info*: for a blocked thread, gives more information about the reason for blockage, eg. when blocked on an
+
+>
+> >
+> > >
+> > >
+> > > MVar, block\_info will point to the MVar.
+> > >
+> > >
+> >
+>
+
+- *bound*: pointer to a [Task](commentary/rts/scheduler#) if this thread is bound
+- *cap*: the [Capability](commentary/rts/scheduler#capabilities) on which this thread resides.
 
 ### STM objects
 
@@ -563,11 +603,11 @@ There are several variants of indirection:
 These object types are used by [STM](commentary/rts/stm): `TVAR_WAIT_QUEUE`, `TVAR`, `TREC_CHUNK`, `TREC_HEADER`.
 
 
-### Forwarding pointers
+### Forwarding Pointers
 
 
 
-The `EVACUATED` object only appears temporarily during GC.  An object which has been copied into to-space (*evacuated*) is replaced by an {{{EVACUATED}} object:
+The `EVACUATED` object only appears temporarily during GC.  An object which has been copied into to-space (*evacuated*) is replaced by an `EVACUATED` object:
 
 
 <table><tr><th> Header </th>
