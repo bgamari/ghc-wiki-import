@@ -57,9 +57,8 @@ near the other ICFP activities. (Note this is changed from the original planned 
 
 
 
-The room has desks, a projector, and wireless access. Bring your own laptop
-(capable of building GHC). Galois may also provide some wired access, perhaps to a server with
-a recent version version of GHC.
+The room has desks, a projector, whiteboards, and wireless access. Bring your own laptop
+(capable of building GHC). 
 
 
 ## Time
