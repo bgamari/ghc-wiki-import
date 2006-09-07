@@ -78,7 +78,7 @@ need to.
 
 
 
-The info table contains all the information that the runtime needs to know about the closure.  The layout of info tables is defined in [includes/InfoTables.h](/trac/ghc/browser/ghc/includes/InfoTables.h).  The basic info table layout looks like this:
+The info table contains all the information that the runtime needs to know about the closure.  The layout of info tables is defined by `StgInfoTable` in [includes/InfoTables.h](/trac/ghc/browser/ghc/includes/InfoTables.h).  The basic info table layout looks like this:
 
 
 
