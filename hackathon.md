@@ -193,3 +193,4 @@ If you want to come, please add your name to the list below.  Add a sentence or 
   Peng Li](http://www.cis.upenn.edu/~lipeng/), UPenn.  Interested in multiprocessor GHC, STM, RTS and I/O libraries.
 
 - Jeffery Zhang, interested in type systems and metaprogramming.
+- Greg Fitzgerald, language enthusiast relatively new to Haskell (comment stolen from Mathew Mills :)
