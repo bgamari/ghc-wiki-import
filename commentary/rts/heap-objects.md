@@ -27,6 +27,9 @@ There are boxed unlifted types: eg. `ByteArray#`.  If you have a value of type `
 Unboxed tuples `(#...#)` are both unlifted and unboxed.  They are represented by multiple values passed in registers or on the stack, according to the [return convention](commentary/rts/haskell-execution).
 
 
+---
+
+
 ## Heap Objects
 
 
@@ -66,6 +69,9 @@ that is, we are careful not to hardcode the offset to the payload
 anywhere, instead we use C struct indexing or `sizeof(StgHeader)`.
 This makes it easy to extend `StgHeader` with new fields if we
 need to.
+
+
+---
 
 
 ## Info Tables
@@ -129,6 +135,9 @@ GHC can generate code that uses the indirect pointer instead; the `TABLES_NEXT_T
 When `TABLES_NEXT_TO_CODE` is off, info tables get another field, `entry`, which points to the entry code.  In a generated object file, each symbol `X_info` representing an info table will have an associated symbol `X_entry` pointing to the entry code (in `TABLES_NEXT_TO_CODE`, the entry symbol is omitted to keep the size of symbol tables down).
 
 
+---
+
+
 ## Dynamic vs. Static objects
 
 
@@ -175,6 +184,9 @@ The static link field resides after the normal payload, so that the
 static variant of an object has compatible layout with the dynamic
 variant.  To access the static link field of a closure, use the
 `STATIC_LINK()` macro from [includes/ClosureMacros.h](/trac/ghc/browser/ghc/includes/ClosureMacros.h).
+
+
+---
 
 
 ## Types of object
@@ -617,28 +629,6 @@ The `EVACUATED` object only appears temporarily during GC.  An object which has 
 
 
 which points to the new location of the object.
-
-
-## The stack, and stack objects
-
-
-### Return addresses
-
-
-
-`RET_BCO`,
-`RET_SMALL`,
-`RET_VEC_SMALL`,
-`RET_BIG`,
-`RET_VEC_BIG`,
-`RET_DYN`,
-`RET_FUN`,
-`UPDATE_FRAME`,
-`CATCH_FRAME`,
-`STOP_FRAME`,
-`ATOMICALLY_FRAME`,
-`CATCH_RETRY_FRAME`,
-`CATCH_STM_FRAME`
 
 
 ## Objects for PAR, GRAN
