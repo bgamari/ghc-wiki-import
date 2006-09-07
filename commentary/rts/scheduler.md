@@ -2,6 +2,7 @@
 \[ Up: [Commentary/Rts](commentary/rts) \]
 
 
+
 # The Scheduler
 
 
@@ -65,9 +66,8 @@ two kinds of Haskell thread:
   OS thread that made the call; all further foreign calls made by
   this Haskell thread are made in the same OS thread.  (this is part
   of the design of the FFI, described in the paper 
-  \[[
-  http://www.haskell.org/\~simonmar/papers/conc-ffi.pdf](http://www.haskell.org/~simonmar/papers/conc-ffi.pdf) Extending the
-  Haskell Foreign Function Inteface with Concurrency\]).
+  [
+  Extending the Haskell Foreign Function Inteface with Concurrency](http://www.haskell.org/~simonmar/papers/conc-ffi.pdf)).
 
 - An *unbound* thread is created by
   `Control.Concurrent.forkIO`.  Foreign calls made by an unbound
