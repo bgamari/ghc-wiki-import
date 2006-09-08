@@ -1,4 +1,8 @@
-# `RdrNames` and `CccName`
+
+\[ Up: [Commentary/Compiler/HscMain](commentary/compiler/hsc-main) \]
+
+
+# `RdrNames` and `OccNames`
 
 
 
@@ -34,7 +38,7 @@ data RdrName
 
 
 A `ModuleName` is just a `FastString` (see [compiler/basicTypes/Module.lhs](/trac/ghc/browser/ghc/compiler/basicTypes/Module.lhs)).  
-But `OccName` is more intersting; next section.
+But `OccName` is more interesting; next section.
 
 
 ## The `OccName` type
