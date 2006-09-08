@@ -141,6 +141,7 @@ If you want to come, please add your name to the list below.  Add a sentence or 
 
 - [
   Kathleen Fisher](http://www.research.att.com/info/kfisher), ATT, interested in adding support for data description to Haskell
+- Greg Fitzgerald, language enthusiast relatively new to Haskell (comment stolen from Mathew Mills :)
 
 - [
   Jeremy Gibbons](http://www.comlab.ox.ac.uk/jeremy.gibbons/), University of Oxford, generally curious about GHC internals - especially advanced aspects of typing
@@ -192,5 +193,5 @@ If you want to come, please add your name to the list below.  Add a sentence or 
 - [
   Peng Li](http://www.cis.upenn.edu/~lipeng/), UPenn.  Interested in multiprocessor GHC, STM, RTS and I/O libraries.
 
+- Kim-Ee Yeoh, interested in documenting, housekeeping, and general opening up of compiler sources to a wider audience
 - Jeffery Zhang, interested in type systems and metaprogramming.
-- Greg Fitzgerald, language enthusiast relatively new to Haskell (comment stolen from Mathew Mills :)
