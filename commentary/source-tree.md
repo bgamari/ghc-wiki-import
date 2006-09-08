@@ -146,7 +146,7 @@ The test suite.
 </td></tr>
 <tr><th>nofib/?</th>
 <td>
-The NoFib benchmark suite (optional separate darcs repo).
+The NoFib benchmark suite.
 </td></tr></table>
 
 
