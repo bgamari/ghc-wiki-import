@@ -2,7 +2,7 @@
 
 
 - [The overall organisation of GHC](commentary/organisation)
-- [Source Tree Roadmap](commentary/source-tree)
+- [Source Tree Roadmap](commentary/source-tree), and [module dependencies](module-dependencies)
 - [The compilation pipeline](commentary/pipeline)
 - [Coding guidelines](commentary/coding-style)
 
