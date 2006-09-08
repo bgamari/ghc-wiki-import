@@ -121,7 +121,6 @@ data AlgTyConParent = NoParentTyCon
                     | FamilyTyCon   TyCon     -- family tycon
                                     [Type]    -- instance types
                                     TyCon     -- representation coercion
-                                    Int       -- unique (module-wide) index
 ```
 
 
@@ -134,10 +133,6 @@ data instance Map (a, b) v = MapPair (Map a (Map b v))
 
 
 the instance types are `[(a, b), v]`.
-
-
-
-The unique index is necessary to generate unqiue names for the derived tycon and coercion of the instance in a way that can be deterministically replicated when slurping in an interface file containing the corresponding interface declarations (which leave the derived tycon and coercion implicit).
 
 
 
