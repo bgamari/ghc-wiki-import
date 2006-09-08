@@ -6,7 +6,7 @@
 
 
 
-The Core language is GHC's central data types.  Core is a very small, explicitly-typed, variant of System.  The exact variant is called System FC, and described by our paper [
+The Core language is GHC's central data types.  Core is a very small, explicitly-typed, variant of System F.  The exact variant is called System FC, and described by our paper [
 System F with equality coercions](http://research.microsoft.com/~simonpj/papers/ext-f).  (Note: the move to FC was done in Autumn 2006, but earlier versions of GHC had a very similar language.)
 
 
