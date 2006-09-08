@@ -1,3 +1,7 @@
+
+\[ Up: [Commentary/Compiler/HscMain](commentary/compiler/hsc-main) \]
+
+
 # The `Core` type
 
 
