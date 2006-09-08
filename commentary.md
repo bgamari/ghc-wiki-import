@@ -22,13 +22,20 @@
 
 
 - Roadmap: [compiling a single module](commentary/compiler/hsc-main)
-- Source-language syntax: [HsSyn](commentary/compiler/hs-syn-type)
-- Names: [RdrName and OccName](commentary/compiler/rdr-name-type), [Name](commentary/compiler/name-type)
-- [Entities](commentary/compiler/entity-types): variables, type constructors, data constructors, and classes.
-- Types: Type
-- [The core language](commentary/compiler/core-syn-type).
-- Cmm.
-- SPJ renamer, typechecker, desugarer, core-\>core
+- Key data types:
+
+  - Source-language syntax: [HsSyn](commentary/compiler/hs-syn-type)
+  - Names: [RdrName and OccName](commentary/compiler/rdr-name-type), [Name](commentary/compiler/name-type)
+  - [Entities](commentary/compiler/entity-types): variables, type constructors, data constructors, and classes.
+  - Types: Type
+  - [The core language](commentary/compiler/core-syn-type).
+  - Cmm.
+- Passes:
+
+  - [Renamer](commentary/compiler/renamer)
+  - Typechecker
+  - Desugarer
+  - Core-\>core
 - SPJ ModIface, ModDetails, ModGuts
 - SPJ Core-\>CorePrep-\>Stg-\>Cmm
 - SM PrimOPs: primops.txt.pp - what is generated from it?
