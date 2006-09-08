@@ -21,8 +21,12 @@
 ## 2. The Compiler
 
 
-- Start in the middle: [compiling a single module](commentary/compiler/hsc-main)
-- The main datatypes: [RdrName and OccName](commentary/compiler/rdr-name-type), [Name](commentary/compiler/name-type), [Var, TyVar, Id, Var, TyCon, DataCon](commentary/compiler/entity-types), Type, Core,  HsSyn, Cmm.
+- Roadmap: [compiling a single module](commentary/compiler/hsc-main)
+- Names: [RdrName and OccName](commentary/compiler/rdr-name-type), [Name](commentary/compiler/name-type)
+- [Entities](commentary/compiler/entity-types): variables, type constructors, data constructors, and classes.
+- Types: Type
+- [The core language](commentary/compiler/core-syn-type).
+- HsSyn, Cmm.
 - SPJ renamer, typechecker, desugarer, core-\>core
 - SPJ ModIface, ModDetails, ModGuts
 - SPJ Core-\>CorePrep-\>Stg-\>Cmm
