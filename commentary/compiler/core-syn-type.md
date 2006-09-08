@@ -6,7 +6,7 @@
 
 
 
-The Core language is GHC's central data types.  Core is a very small, explicitly-typed, variant of System F.  The exact variant is called System FC, and described by our paper [
+The Core language is GHC's central data types.  Core is a very small, explicitly-typed, variant of System.  The exact variant is called System FC, and described by our paper [
 System F with equality coercions](http://research.microsoft.com/~simonpj/papers/ext-f).  (Note: the move to FC was done in Autumn 2006, but earlier versions of GHC had a very similar language.)
 
 
@@ -99,11 +99,11 @@ A case expression is **always strict**, even if there is only one alternative, a
 
 
 ```wiki
-case loop of { DEFAULT -> True
+case error "urk" of { DEFAULT -> True
 ```
 
 
-will loop, rather then returning `True`.
+will call `error`, rather then returning `True`.
 
 
 
@@ -129,7 +129,7 @@ sense to have a name for it!
 
 
 The most common application is to model call-by-value, 
-byf using `case` instead of `let`. For example, here is how we might compile
+by using `case` instead of `let`. For example, here is how we might compile
 the call `f (reverse xs)` if we knew that `f` was strict:
 
 
