@@ -16,7 +16,7 @@ Look at the picture first.  The yellow boxes are compiler passes, while the blue
 
 - The program is initially parsed into the `HsSyn` types (in the [compiler/hsSyn](/trac/ghc/browser/ghc/compiler/hsSyn) directory), a collection of data types that describe the full abstract syntax of Haskell.  `HsSyn` is a pretty big colleciton of types: there are 52 data types when I last counted.  Many are pretty trivial, but a few have a lot of constructors (`HsExpr` has 40).  `HsSyn` represents Haskell its full glory, complete with all syntactic sugar.
 
-- `HsSyn` is parameterised over the types of the variables it contains.  The first three passes of the compiler work like this:
+- `HsSyn` is parameterised over the types of the variables it contains.  The first three passes (the front end) of the compiler work like this:
 
   - The **parser** produces `HsSyn` parameterised by **[RdrName](commentary/compiler/rdr-name-type)**.  To a first approximation, a `RdrName` is just a string.
   - The **renamer** transforms this to `HsSyn` parameterised by **[Name](commentary/compiler/name-type)**.  To a first appoximation, a `Name` is a string plus a `Unique` (number) that uniquely identifies it.
@@ -28,7 +28,7 @@ Look at the picture first.  The yellow boxes are compiler passes, while the blue
 >
 >
 
-- The **desugarer** converts from the massive `HsSyn` type to GHC's intermediate language, `CoreSyn` (in the [compiler/coreSyn](/trac/ghc/browser/ghc/compiler/coreSyn) direcdtory).  This data type is relatively tiny: just eight constructors; again it has its own page.
+- The **desugarer** converts from the massive `HsSyn` type to [GHC's intermediate language, CoreSyn](commentary/compiler/core-syn-type).  This data type is relatively tiny: just eight constructors.
 
 - The **SimplCore** pass ([simplCore/SimplCore.lhs](/trac/ghc/browser/ghc/simplCore/SimplCore.lhs)) is a bunch of Core-to-Core passes that optimise the program.  The main passes are:
 
