@@ -14,17 +14,17 @@ There is a picture that goes with this description, which appears at the bottom 
 Look at the picture first.  The yellow boxes are compiler passes, while the blue stuff on the left gives the data type that moves from one phase to the next.  The entire pipeline for a single module is run by a module called HscMain (in GhcFile(compiler/main/HscMain)).  Here are the steps it goes through:
 
 
-- The program is initially parsed into the `HsSyn` types (in the [compiler/hsSyn](/trac/ghc/browser/ghc/compiler/hsSyn) directory), a collection of data types that describe the full abstract syntax of Haskell.  `HsSyn` is a pretty big colleciton of types: there are 52 data types when I last counted.  Many are pretty trivial, but a few have a lot of constructors (`HsExpr` has 40).  HsSyn represents Haskell its full glory, complete with all syntactic sugar.
+- The program is initially parsed into the `HsSyn` types (in the [compiler/hsSyn](/trac/ghc/browser/ghc/compiler/hsSyn) directory), a collection of data types that describe the full abstract syntax of Haskell.  `HsSyn` is a pretty big colleciton of types: there are 52 data types when I last counted.  Many are pretty trivial, but a few have a lot of constructors (`HsExpr` has 40).  `HsSyn` represents Haskell its full glory, complete with all syntactic sugar.
 
 - `HsSyn` is parameterised over the types of the variables it contains.  The first three passes of the compiler work like this:
 
   - The **parser** produces `HsSyn` parameterised by **[RdrName](commentary/compiler/rdr-name-type)**.  To a first approximation, a `RdrName` is just a string.
   - The **renamer** transforms this to `HsSyn` parameterised by **[Name](commentary/compiler/name-type)**.  To a first appoximation, a `Name` is a string plus a `Unique` (number) that uniquely identifies it.
-  - The **typechecker** transforms this further, to `HsSyn` parameterised by **Id?**.  To a first approximation, an `Id` is a `Name` plus a type.
+  - The **typechecker** transforms this further, to `HsSyn` parameterised by **[Id](commentary/compiler/entity-types)**.  To a first approximation, an `Id` is a `Name` plus a type.
 
 >
 >
-> These three data types are very important, and have their own pages.
+> In addition, the type-checker converts class declarations to `Class`es, and type declarations to `TyCon`s and `DataCon`s.  And of course, the type-checker deals in `Type`s and `TyVar`s. The [data types for these entities](commentary/compiler/entity-types) (`Type`, `TyCon`, `Class`, `Id`, `TyVar`) are pervasive throughout the rest of the compiler.
 >
 >
 
@@ -56,7 +56,7 @@ Look at the picture first.  The yellow boxes are compiler passes, while the blue
 
 - The same, tidied Core program is now fed to the Back End.  First there is a two-stage conversion from `CoreSyn` to `StgSyn`.
 
-  - The first step is called **CorePrep**, a Core-to-Core pass that puts the program into A-normal form (ANF).  In ANF, the argument of every application is a variable or literal; more complicated arguments are let-bound.  Actually `CorePrep` does quite a bit more: there is a detailed list at the top of the file [compiler/coreSyn/CorePrep.lhs](/trac/ghc/browser/ghc/compiler/coreSyn/CorePrep.lhs).
+  - The first step is called **CorePrep**, a Core-to-Core pass that puts the program into A-normal form (ANF).  In ANF, the argument of every application is a variable or literal; more complicated arguments are let-bound.  Actually CorePrep does quite a bit more: there is a detailed list at the top of the file [compiler/coreSyn/CorePrep.lhs](/trac/ghc/browser/ghc/compiler/coreSyn/CorePrep.lhs).
   - The second step, **CoreToStg**, moves to the `StgSyn` data type (the code is in \[GhcFile(stgSyn/CoreToStg.lhs)?\].  The output of CorePrep is carefully arranged to exactly match what `StgSyn` allows (notably ANF), so there is very little work to do. However, `StgSyn` is decorated with lots of redundant information (free variables, let-no-escape indicators), which is generated on-the-fly by `CoreToStg`.
 
 - Next, the **code generator** converts the STG program to a `C--` program.  The code generator is a Big Mother, and lives in directory [compiler/codeGen](/trac/ghc/browser/ghc/compiler/codeGen)  
