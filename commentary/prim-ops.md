@@ -2,7 +2,7 @@
 \[ Up: [Commentary](commentary) \]
 
 
-# Primitive Operations ([PrimOps](commentary/prim-ops))
+# Primitive Operations (PrimOps)
 
 
 
@@ -13,7 +13,7 @@ A PrimOp is a function that cannot be implemented in Haskell, and are provided n
 [PrimOps](commentary/prim-ops) are made available to Haskell code through the virtual module `GHC.Prim`.  This module has no implementation, and its interface never resides on disk: if `GHC.Prim` is imported, we use a built-in `ModIface` value - see `ghcPrimIface` in [compiler/iface/LoadIface.lhs](/trac/ghc/browser/ghc/compiler/iface/LoadIface.lhs).
 
 
-## Implementation of [PrimOps](commentary/prim-ops): MachOps
+## Implementation of PrimOps: MachOps
 
 
 ## The primops.txt.pp file
