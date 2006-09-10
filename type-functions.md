@@ -107,8 +107,9 @@ The details of the implementation are split over a couple of subpages, due to th
 
 - [syntax and representation,](type-functions-syntax)
 - [renaming,](type-functions-renaming)
-- [type checking,](type-functions-type-checking) and
-- [desugaring.](type-functions-core)
+- [type checking,](type-functions-type-checking)
+- [desugaring,](type-functions-core) and
+- [interfaces.](type-functions-iface)
 
 
  
