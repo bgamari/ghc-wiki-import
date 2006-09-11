@@ -30,6 +30,15 @@ from that manual is gradually being incorporated here.
 - [Known pitfalls in building GHC](building/known-problems)
 - [Building under Windows](building/windows)
 
+## Contributed documentation
+
+
+
+Please feel free to add pages here.  In due course, information can be incorporated into the main documentation above.
+
+
+- [ProblemsCompilingGhc](problems-compiling-ghc): Hints about building GHC on Windows platforms  
+
 ## OLD documentation
 
 
