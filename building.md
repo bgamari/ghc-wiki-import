@@ -1,4 +1,4 @@
-# Building GHC
+# Building and Porting GHC
 
 
 
