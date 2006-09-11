@@ -95,7 +95,7 @@ Where:
 - The *SRT bitmap* field is used to support [garbage collection of CAFs](commentary/rts/ca-fs).
 
 - The *layout* field describes the layout of the payload for the garbage collector, and is described in more
-  detail in [Types of Payload Layout](commentary/rts/heap-objects#types-of-payload-layout) below.
+  detail in [Types of Payload Layout](#TypesofPayloadLayout) below.
 
 - The *entry code* for the closure is usually the code that will *evaluate* the closure.  There is one exception:
   for functions, the entry code will apply the function to the arguments given in registers or on the stack, according
@@ -201,7 +201,7 @@ To find out whether a particular object is dynamic or static, use the `HEAP_ALLO
 
 Dynamic objects have a minimum size, because every object must be big
 enough to be overwritten by a
-[forwarding pointer](commentary/rts/heap-objects#forwarding-pointers) during GC.
+forwarding pointer ([Forwarding Pointers](#ForwardingPointers)) during GC.
 The minimum size of the payload is given by `MIN_PAYLOAD_SIZE` in [includes/Constants.h](/trac/ghc/browser/ghc/includes/Constants.h).
 
 
