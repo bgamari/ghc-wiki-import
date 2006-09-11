@@ -1,7 +1,3 @@
-
-\[ Up: [Commentary](commentary) \]
-
-
 # Primitive Operations (PrimOps)
 
 
