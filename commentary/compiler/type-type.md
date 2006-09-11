@@ -190,7 +190,7 @@ GHC uses the following nomenclature for types:
 Examples of type classifications:
 
 
-<table><tr><th> **Type**         </th>
+<table><tr><th>          </th>
 <th> **Primitive** </th>
 <th>        **Boxed**        </th>
 <th> **Lifted** </th>
