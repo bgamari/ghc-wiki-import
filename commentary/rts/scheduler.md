@@ -231,3 +231,6 @@ CPUs on which to run the worker, however).
 ## The Scheduler's main loop
 
 
+## Affinity and migration
+
+
