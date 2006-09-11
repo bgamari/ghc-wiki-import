@@ -564,27 +564,23 @@ before `make stage2` in `compiler`.
 In any directory you should be able to make the following:
 
 
+<table><tr><th>`boot`</th>
+<td>
+does the one-off preparation required to get ready for the real
+work.  Notably, it does `make depend` in all directories that
+contain programs.  It also builds the necessary tools for
+compilation to proceed.
 
-`boot`::
+Invoking the `boot` target explicitly is not normally necessary.
+From the top-level directory, invoking `make` causes {{{make
+boot}}} to be invoked in various subdirectories first, in the right
+order.  Unless you really know what you are doing, it is best to
+always say `make` from the top level first.
 
+If you're working in a subdirectory somewhere and need to update the
+dependencies, `make boot` is a good way to do it.
+</td></tr></table>
 
->
->
-> does the one-off preparation required to get ready for the real
-> work.  Notably, it does `make depend` in all directories that
-> contain programs.  It also builds the necessary tools for
-> compilation to proceed.
->
-> Invoking the `boot` target explicitly is not normally necessary.
-> From the top-level directory, invoking `make` causes {{{make
-> boot}}} to be invoked in various subdirectories first, in the right
-> order.  Unless you really know what you are doing, it is best to
-> always say `make` from the top level first.
->
-> If you're working in a subdirectory somewhere and need to update the
-> dependencies, `make boot` is a good way to do it.
->
->
 
 <table><tr><th>`all`</th>
 <td>
