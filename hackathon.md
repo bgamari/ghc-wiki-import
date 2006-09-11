@@ -57,6 +57,10 @@ near the other ICFP activities. (Note this is changed from the original planned 
 
 
 
+[](/trac/ghc/attachment/wiki/Hackathon/Hackathon%20Map.gif)
+
+
+
 The room has desks, a projector, whiteboards, and wireless access. Bring your own laptop
 (capable of building GHC). 
 
