@@ -22,7 +22,7 @@ from that manual is gradually being incorporated here.
 - [Platforms that GHC currently supports](platforms)
 - [What tools you need](building/prerequisites)
 - [Quick start: just building and installing GHC](building/quick-start)
-- [Quick start: setting up a build tree for developers](building/hacking)
+- [Quick start for developers](building/hacking)
 - [Using the build system](building/using)
 - Architecture of the build system?
 - [Building the documentation](building/docs)
