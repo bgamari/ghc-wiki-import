@@ -1,7 +1,3 @@
-
-\[ Up: [Commentary](commentary) \]
-
-
 # Compiling one module: HscMain
 
 
@@ -16,7 +12,7 @@ Look at the picture first.  The yellow boxes are compiler passes, while the blue
 
 - The program is initially parsed into the [big HsSyn type](commentary/compiler/hs-syn-type).
 
-- `HsSyn` is parameterised over the types of the variables it contains.  The first three passes (the front end) of the compiler work like this:
+- `HsSyn` is parameterised over the types of the term variables it contains.  The first three passes (the front end) of the compiler work like this:
 
   - The **parser** produces `HsSyn` parameterised by **[RdrName](commentary/compiler/rdr-name-type)**.  To a first approximation, a `RdrName` is just a string.
 
@@ -24,15 +20,30 @@ Look at the picture first.  The yellow boxes are compiler passes, while the blue
 
   - The **typechecker** transforms this further, to `HsSyn` parameterised by **[Id](commentary/compiler/entity-types)**.  To a first approximation, an `Id` is a `Name` plus a type. In addition, the type-checker converts class declarations to `Class`es, and type declarations to `TyCon`s and `DataCon`s.  And of course, the type-checker deals in `Type`s and `TyVar`s. The [data types for these entities](commentary/compiler/entity-types) (`Type`, `TyCon`, `Class`, `Id`, `TyVar`) are pervasive throughout the rest of the compiler.
 
-- The **desugarer** converts from the massive `HsSyn` type to [GHC's intermediate language, CoreSyn](commentary/compiler/core-syn-type).  This data type is relatively tiny: just eight constructors.
+- The **desugarer** converts from the massive `HsSyn` type to [GHC's intermediate language, CoreSyn](commentary/compiler/core-syn-type).  This Core-language data type is unusually tiny: just eight constructors.
+
+>
+>
+> This late desugaring is somewhat unusual.  It is much more common to desugar the program before typechecking, or renaming, becuase that presents the renamer and typechecker with a much smaller language to deal with.  However, GHC's organisation means that (a) error messages can display precisely the syntax that the user wrote; and (b) desugaring is not required to preserve type-inference properties.
+>
+>
 
 - The **SimplCore** pass ([simplCore/SimplCore.lhs](/trac/ghc/browser/ghc/simplCore/SimplCore.lhs)) is a bunch of Core-to-Core passes that optimise the program.  The main passes are:
 
-  - The **Simplifier**, which applies lots of small, local optimisations to the program.  The simplifier is big and complicated, because it implements a *lot* of transformations; and tries to make them cascade nicely.
-  - The **float-out** and **float-in** transformations, which move let-bindings outwards and inwards respectively.
-  - The **strictness analyser**.  This actually comprises two passes: the **analayser** itself and the **worker/wrapper** transformation that uses the results of the analysis to transform the program.
+  - The **Simplifier**, which applies lots of small, local optimisations to the program.  The simplifier is big and complicated, because it implements a *lot* of transformations; and tries to make them cascade nicely.  Two papers describe some of the implementation details: [
+    A transformation-based optimiser for Haskell (SCP'98)](http://research.microsoft.com/%7Esimonpj/Papers/comp-by-trans-scp.ps.gz), and [
+    Secrets of the Glasgow Haskell Compiler inliner (JFP'02)](http://research.microsoft.com/%7Esimonpj/Papers/inlining/index.htm).
+
+  - The **float-out** and **float-in** transformations, which move let-bindings outwards and inwards respectively.  See [
+    Let-floating: moving bindings to give faster programs (ICFP '96)](http://research.microsoft.com/%7Esimonpj/papers/float.ps.gz).
+
+  - The **strictness analyser**.  This actually comprises two passes: the **analayser** itself and the **worker/wrapper** transformation that uses the results of the analysis to transform the program.  The same analyser also does [
+    Constructed Product Result analysis](http://research.microsoft.com/%7Esimonpj/Papers/cpr/index.htm).
+
   - The **liberate-case** transformation.
+
   - The **constructor-specialialisation** transformation.
+
   - The **common sub-expression eliminiation** (CSE) transformation.
 
 - Then the **CoreTidy pass** gets the code into a form in which it can be imported into subsequent modules (when using `--make`) and/or put into an interface file.  There are good notes at the top of the file [compiler/main/TidyPgm.lhs](/trac/ghc/browser/ghc/compiler/main/TidyPgm.lhs); the main function is `tidyProgram`, for some reason documented as "Plan B".
