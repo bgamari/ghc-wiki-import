@@ -1,13 +1,8 @@
-
-\[ Up: [Commentary/Compiler/HscMain](commentary/compiler/hsc-main) \]
-
-
 # The `Core` type
 
 
 
-The Core language is GHC's central data types.  Core is a very small, explicitly-typed, variant of System.  The exact variant is called System FC, and described by our paper [
-System F with equality coercions](http://research.microsoft.com/~simonpj/papers/ext-f).  (Note: the move to FC was done in Autumn 2006, but earlier versions of GHC had a very similar language.)
+The Core language is GHC's central data types.  Core is a very small, explicitly-typed, variant of System.  The exact variant is called [System FC](commentary/compiler/fc), which embodies equality constraints and coercions.
 
 
 
@@ -70,7 +65,7 @@ Here are some notes about the individual constructors of `Expr`.
 
 - `Case` expressions need [more explanation](commentary/compiler/core-syn-type#case-expressions).
 
-- `Cast` is used for an FC cast expression.  `Corecion` is a synonym for `Type`.
+- `Cast` is used for an [FC cast expression](commentary/compiler/fc).  `Corecion` is a synonym for `Type`.
 
 - `Note` is used for profiling and debugging information.
 
