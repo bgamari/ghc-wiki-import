@@ -62,8 +62,6 @@ data Var
   = TyVar {
 	varName    :: !Name,
 	realUnique :: FastInt,		-- Key for fast comparison
-					-- Identical to the Unique in the name,
-					-- cached here for speed
 	tyVarKind :: Kind,
         isCoercionVar :: Bool }
 
@@ -87,6 +85,14 @@ data Var
 	idInfo     :: IdInfo,
 	lclDetails :: LocalIdDetails }
 ```
+
+
+Every `Var` has a `Name` and a `realUnique`. The latter is identical to the `Unique` in the `Name`, but is cached in the `Var` for fast comparison.
+
+
+
+Here are some per-flavour notes:
+
 
 <table><tr><th>`TyVar`</th>
 <td>is self explanatory.
