@@ -9,6 +9,6 @@ The `IfaceSyn.IfaceData` variant of `IfaceDecl` contains a new `ifFamInst :: May
 
 
 
-The serialised interface description does not explicitly contain the value of `mi_fa,_insts`.  Instead, the `get` method of `Binary ModIface` (in `BinIface`) constructs the value on the fly.
+The serialised interface description does not explicitly contain the value of `mi_fam_insts`.  Instead, the `get` method of `Binary ModIface` (in `BinIface`) constructs the value on the fly.
 
 
