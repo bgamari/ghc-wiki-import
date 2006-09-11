@@ -61,6 +61,11 @@ The room has desks, a projector, whiteboards, and wireless access. Bring your ow
 (capable of building GHC). 
 
 
+
+Have a look at the [
+TriMet](http://www.trimet.org/) web site for details about how to use Public transportation in Portland.
+
+
 ## Time
 
 
