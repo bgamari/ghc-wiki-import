@@ -1,6 +1,4 @@
 
-\[ Up: [Commentary/Rts](commentary/rts) \]
-
 
 
 # The Scheduler
