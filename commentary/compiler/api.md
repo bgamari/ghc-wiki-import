@@ -29,6 +29,6 @@ The GHC API is the interface exported by [compiler/main/GHC.hs](/trac/ghc/browse
   [compiler/main/DriverMkDepend.hs](/trac/ghc/browser/ghc/compiler/main/DriverMkDepend.hs).
 
 
-Note that since GHC is packaged as a single binary, all of these front-ends are present, and there is a single command-line API.  Everything goes via the `main` function in [compiler/main/Main.hs](/trac/ghc/browser/ghc/compiler/main/Main.hs).
+Note that since GHC is packaged as a single binary, all of these front-ends are present, and there is a single command-line interface implemented in [compiler/main/Main.hs](/trac/ghc/browser/ghc/compiler/main/Main.hs).
 
 
