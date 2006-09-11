@@ -60,8 +60,24 @@ PrimOps are divided into two categories for the purposes of implementation: inli
 ### Inline PrimOps
 
 
+
+Inline PrimOps are operations that can be compiled into a short sequence of code that never needs to allocate, block, or return to the scheduler for any reason.  An inline PrimOp is compiled directly into Cmm? by the [code generator](commentary/compiler/code-gen).  The code for doing this is in [compiler/codeGen/CgPrimOp.hs](/trac/ghc/browser/ghc/compiler/codeGen/CgPrimOp.hs).
+
+
 ### Out-of-line PrimOps
 
+
+
+All other PrimOps are classified as out-of-line, and are implemented by hand-written C-- code in the file [rts/PrimOps.cmm](/trac/ghc/browser/ghc/rts/PrimOps.cmm).  An out-of-line PrimOp is like a Haskell function, except that
+
+
+- PrimOps cannot be partially applied.  Calls to all PrimOps are made at the correct arity; this is ensured by 
+  the CorePrep? pass.
+
+- Out-of-line PrimOps have a special, fixed, [calling convention](commentary/rts/haskell-execution#):
+  all arguments
+  are in the [Commentary/Rts/HaskellExecution](commentary/rts/haskell-execution#registers) registers\] R1-R8.  This is to make it easy to write the
+  C-- code for these PrimOps: we don't have to write code for multiple calling conventions.
 
 ## Adding a new PrimOp
 
