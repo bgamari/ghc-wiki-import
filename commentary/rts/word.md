@@ -1,7 +1,3 @@
-
-\[ Up: [Commentary/Rts](commentary/rts) \]
-
-
 # GHC Commentary: The Word
 
 
