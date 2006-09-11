@@ -1,3 +1,6 @@
+
+
+
 # Primitive Operations (PrimOps)
 
 
@@ -80,5 +83,31 @@ All other PrimOps are classified as out-of-line, and are implemented by hand-wri
   C-- code for these PrimOps: we don't have to write code for multiple calling conventions.
 
 ## Adding a new PrimOp
+
+
+
+To add a new primop, you currently need to update the following files:
+
+
+- [compiler/prelude/primops.txt.pp](/trac/ghc/browser/ghc/compiler/prelude/primops.txt.pp), which includes the
+  type of the primop, and various other properties.  Syntax and
+  examples are in the file.
+
+- if the primop is inline, then:
+  [compiler/codeGen/CgPrimOp.hs](/trac/ghc/browser/ghc/compiler/codeGen/CgPrimOp.hs) defines the translation of
+  the primop into `Cmm`.
+
+
+                
+
+
+- for an out-of-line primop:
+
+  - [includes/StgMiscClosures.h](/trac/ghc/browser/ghc/includes/StgMiscClosures.h) (just add the declaration),
+  - [rts/PrimOps.cmm](/trac/ghc/browser/ghc/rts/PrimOps.cmm) (implement it here)
+  - [rts/Linker.c](/trac/ghc/browser/ghc/rts/Linker.c) (declare the symbol for GHCi)
+
+
+See also [AddingNewPrimitiveOperations](adding-new-primitive-operations), a blow-by-blow description of the process for adding a new out-of-line primop from someone who went through the process.
 
 
