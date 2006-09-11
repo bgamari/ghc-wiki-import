@@ -1,7 +1,3 @@
-
-ShowPage?
-
-
 #
 Data types for Haskell entities: `Id`, `TyVar`, `TyCon`, `DataCon`, and `Class`
 
