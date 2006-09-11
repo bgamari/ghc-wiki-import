@@ -2,9 +2,8 @@
 
 
 - [The overall organisation of GHC](commentary/organisation)
-- [Source Tree Roadmap](commentary/source-tree), and [module dependencies](module-dependencies)
+- [Source Tree Roadmap](commentary/source-tree)
 - [The compilation pipeline](commentary/pipeline)
-- [Coding guidelines](commentary/coding-style)
 
 ## 1. Building (SM)
 
@@ -21,6 +20,7 @@
 ## 2. The Compiler
 
 
+- [Compiler Module Dependencies](module-dependencies)
 - Roadmap: [compiling a single module](commentary/compiler/hsc-main)
 - Key data types:
 
@@ -41,6 +41,7 @@
 - [Primitive Operations (PrimOps)](commentary/prim-ops)
 - SM GHC API
 - SM HscMain upwards: ModSummary, Finder, upsweep, downsweep,
+- [Coding guidelines](commentary/coding-style)
 
 ## 3. Back end (SM)
 
