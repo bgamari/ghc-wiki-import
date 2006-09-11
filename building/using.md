@@ -213,8 +213,8 @@ communicates these snippets of information in two ways:
   thereby make use of configuration information.
 
 
-`configure` takes some optional arguments.  Use {{{./configure
---help}}} to get a list of the available arguments.  Here are some of
+`configure` takes some optional arguments.  Use `./configure --help`
+to get a list of the available arguments.  Here are some of
 the ones you might need:
 
 
