@@ -88,3 +88,13 @@ Please feel free to add new pages here.  In due course information will migrate 
  
 
 
+## Old but useful
+
+
+
+Finally, here are some generally-useful, but now somewhat-out-of-date resources:
+
+
+- [
+  The GHC Commentary](http://www.cse.unsw.edu.au/~chak/haskell/ghc/comm/): Information on the internals of GHC, in various states of up-to-dateness.  We are keen to move this stuff out of its current location and onto this Wiki.  If anyone is willing to help do that, even for just a part in which you are interested, we would be delighted.
+- [GhcPapers](ghc-papers): papers and pointers to other documents that relate to the inner workings of GHC.
