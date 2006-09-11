@@ -5,36 +5,6 @@
 This section of the commentary describes everything between [HscMain](commentary/compiler/hsc-main) and the front-end; that is, the parts of GHC that coordinate the compilation of multiple modules.
 
 
-## Orgainsation of the top of GHC
-
-
-
-[](/trac/ghc/attachment/wiki/Commentary/Compiler/API/ghc-top.png)
-
-
-
-The GHC API is the interface exported by [compiler/main/GHC.hs](/trac/ghc/browser/ghc/compiler/main/GHC.hs).  To compile a Haskell module that uses the GHC API, use the flag `-package ghc` (in GHC 6.6 and later).  GHC itself contains a few front-ends:
-
-
-- The "one-shot" mode, where GHC compiles each file on the command line separately (eg. `ghc -c Foo.hs`).  This mode
-  is implemented directly on top of [HscMain](commentary/compiler/hsc-main), since it compiles only one file at a
-  time.  In fact, this is all that GHC consisted of prior to version 5.00 when GHCi and `--make` were introduced.
-
-- GHCi, the interactive environment, is implemented in [compiler/ghci/InteractiveUI.hs](/trac/ghc/browser/ghc/compiler/ghci/InteractiveUI.hs) and sits squarely on top
-  of the GHC API.
-
-- `--make` is almost a trivial client of the GHC API, and is implemented in [compiler/main/Main.hs](/trac/ghc/browser/ghc/compiler/main/Main.hs).
-
-- `-M`, the Makefile dependency generator, is also a client of the GHC API and is implemented in 
-  [compiler/main/DriverMkDepend.hs](/trac/ghc/browser/ghc/compiler/main/DriverMkDepend.hs).
-
-
-Note that since GHC is packaged as a single binary, all of these front-ends are present, and there is a single command-line interface implemented in [compiler/main/Main.hs](/trac/ghc/browser/ghc/compiler/main/Main.hs).
-
-
-## The GHC API
-
-
 
 The GHC API is rather stateful; the state of an interaction with GHC is stored in an abstract value of type `GHC.Session`.  The only fundamental reason for this choice is that the `Session` models the state of the RTS's linker, which must be single-threaded.
 
@@ -57,7 +27,7 @@ A typical interaction with the GHC API goes something like the following:
 - Perform [Dependency Analysis](#DependencyAnalysis): `depanal`
 - Load (compile) the source files: `load`
 
-### Targets
+## Targets
 
 
 
@@ -68,7 +38,7 @@ The targets specify the source files or modules at the top of the dependency tre
 The `Target` type is defined in [compiler/main/HscTypes.lhs](/trac/ghc/browser/ghc/compiler/main/HscTypes.lhs).  Note that a `Target` includes not just the file or module name, but also optionally the complete source text of the module as a `StringBuffer`: this is to support an interactive development environment where the source file is being edited, and the in-memory copy of the source file is to be used in preference to the version on disk.
 
 
-### Dependency Analysis
+## Dependency Analysis
 
 
 
@@ -79,7 +49,7 @@ The dependency analysis phase determines all the Haskell source files that are t
 The `downsweep` function takes the targets and returns a list of `ModSummary` consisting of all the modules to be compiled/loaded.
 
 
-### The ModSummary type
+## The ModSummary type
 
 
 
@@ -100,7 +70,7 @@ We collect `ModSumary` information for all the modules we are interested in duri
 Converting a given module name into a `ModSummary` is done by `summariseModule` in [compiler/main/GHC.hs](/trac/ghc/browser/ghc/compiler/main/GHC.hs).  Similarly, if we have a filename rather than a module name, we generate a `ModSummary` using `summariseFile`.
 
 
-### Loading (compiling) the Modules
+## Loading (compiling) the Modules
 
 
 
@@ -127,7 +97,7 @@ The process is made more tricky in practice for two reasons:
 - In GHCi, we might just be reloading the program after making some changes, so we don't even want to re-link
   modules for which no dependencies have changed.
 
-### Stable Modules
+## Stable Modules
 
 
 
