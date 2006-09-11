@@ -16,9 +16,9 @@ Please feel free to add maaterial to this commentary: don't worry too much about
 - [Source Tree Roadmap](commentary/source-tree)
 - [The compilation pipeline](commentary/pipeline)
 
-- The Compiler
+- [The Compiler](commentary/compiler)
 
-  - Organisation?: high-level structure
+  - [Organisation](commentary/compiler): high-level structure
   - [Compiler Module Dependencies](module-dependencies)
   - [Compiling one module: HscMain](commentary/compiler/hsc-main)
   - Key data types:
