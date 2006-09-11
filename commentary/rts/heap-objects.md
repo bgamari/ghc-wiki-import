@@ -1,6 +1,4 @@
 
-\[ Up: [Commentary/Rts](commentary/rts) \]
-
 
 
 # GHC Commentary: The Layout of Heap Objects
@@ -262,7 +260,7 @@ Data constructor closure types:
 - `CONSTR_STATIC`: a statically allocated constructor.
 
 
-The entry code for a constructor returns immediately to the topmost stack frame, because the data constructor is already in WHNF.  The return convention may be vectored or non-vectored, depending on the type (see [Commentary/Rts/HaskellExecution](commentary/rts/haskell-execution#)).
+The entry code for a constructor returns immediately to the topmost stack frame, because the data constructor is already in WHNF.  The return convention may be vectored or non-vectored, depending on the type (see [Commentary/Rts/HaskellExecution](commentary/rts/haskell-execution#return-convention)).
 
 
 
@@ -354,7 +352,7 @@ Thunks have pointers-first layout:
 
 As for function closures, the payload contains the free variables of
 the expression.  A thunk differs from a function closure in that it
-can be [updated](commentary/rts/haskell-execution#).
+can be [updated](commentary/rts/haskell-execution#updates).
 
 
 
