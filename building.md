@@ -29,3 +29,8 @@ from that manual is gradually being incorporated here.
 - [Porting GHC](building/porting)
 - [Known pitfalls in building GHC](building/known-problems)
 - [Building under Windows](building/windows)
+
+## OLD documentation
+
+
+- [Building Guide](http://www.haskell.org/ghc/docs/latest/html/building/index.html)
