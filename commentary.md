@@ -47,14 +47,10 @@ Please feel free to add maaterial to this commentary: don't worry too much about
   - SPJ ModIface, ModDetails, ModGuts
   - SPJ Core-\>CorePrep-\>Stg-\>Cmm
   - [The GHC API](commentary/compiler/api)
-  - SM HscMain upwards: ModSummary, Finder, upsweep, downsweep
-
-  - Cross-cutting concerns
-
-    - [Primitive Operations (PrimOps)](commentary/prim-ops)
-    - [Wired-in and known-key things](commentary/compiler/wired-in)
-    - [Packages](commentary/packages)
-    - [Symbol names and the Z-encoding](commentary/compiler/symbol-names)
+  - [Symbol names and the Z-encoding](commentary/compiler/symbol-names)
+  - [Wired-in and known-key things](commentary/compiler/wired-in)
+  - [Packages](commentary/packages)
+  - The Finder?
 
 
   
@@ -78,7 +74,10 @@ Please feel free to add maaterial to this commentary: don't worry too much about
   - [Weak Pointers and Finalizers](commentary/rts/weak)
   - [Coding conventions in the RTS](commentary/rts/conventions)
 
-- [Profiling](commentary/profiling)
+- Cross-cutting concerns: topics which span both the compiler and the RTS
+
+  - [Profiling](commentary/profiling)
+  - [Primitive Operations (PrimOps)](commentary/prim-ops)
 
 ## Contributed Documentation
 
