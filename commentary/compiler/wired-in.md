@@ -1,3 +1,7 @@
+
+ 
+
+
 # Wired-in and known-key things
 
 
@@ -69,7 +73,7 @@ The point about known-key things is that GHC knows its *name*, but not its *defi
 
 
 
-When reading an interface file, GHC might come across "GHC.Base.Eq", which is the name of the `Eq` class.  How does it match up this occurrence in the interface file with `eqClassName` defined in `PrelNames`?  Because the global name cache maintained by the renamer is initialised with all the known-key names.  This is done by the (hard-to-find) function `HscMain.newHscEnv`:
+When reading an interface file, GHC might come across "GHC.Base.Eq", which is the name of the `Eq` class.  How does it match up this occurrence in the interface file with `eqClassName` defined in `PrelNames`?  Because the global name cache maintained by the renamer is initialise with all the known-key names.  This is done by the (hard-to-find) function `HscMain.newHscEnv`:
 
 
 ```wiki
