@@ -84,7 +84,7 @@ then in module `A`}, the function `Q.f` has an External Name `M.f`.
 
 <table><tr><th>`WiredIn`</th>
 <td>
-A `WiredIn` `Name` is a special sort of `External` `Name`, one that is completely known to the compiler (e.g. the `Bool` type constructor).  See [Commentary/Compiler/WiredIn](commentary/compiler/wired-in#).
+A `WiredIn` `Name` is a special sort of `External` `Name`, one that is completely known to the compiler (e.g. the `Bool` type constructor).  See [Commentary/Compiler/WiredIn](commentary/compiler/wired-in).
 </td></tr></table>
 
 
@@ -103,7 +103,9 @@ A `WiredIn` `Name` is a special sort of `External` `Name`, one that is completel
 Here are the sorts of Name an entity can have: 
 
 
-- Class, TyCon: Always have `External` or `WiredIn` Names. 
+- Class: always has an `External` Names. 
+
+- TyCon: always has an `External` or `WiredIn` Name. 
 
 - TyVar: can have `Internal`, or `System` Names; the former are ones arise from instantiating programmer-written type signatures.
 
