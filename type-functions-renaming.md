@@ -40,7 +40,7 @@ Family names in the heads of type instances are usage occurences, not binders.  
 
 
 
-Despite the effort we go to, to get the right `Name` for the family `RdrName`, `getLocalDeclBinders` does not return that name as part of the binders declared by the current binding group - otherwise, we would get a duplicate declaration error.  However, we use the `Name` to specify the correct name parent for the data constructors of the instance.
+Despite the effort we go to, to get the right `Name` for the family `RdrName`, `getLocalDeclBinders` does not return that name as part of the binders declared by the current binding group - otherwise, we would get a duplicate declaration error.  However, we use the `Name` to specify the correct name parent for the data constructors of the instance (see bwlow).
 
 
 ### Renaming of type instances
@@ -51,5 +51,9 @@ There is little extra that needs to be done for type instances.  The main differ
 
 
 ### Name parents & importing and exporting
+
+
+
+GHC, in `RnNames`, derives its knowledge of which names may appear in parenthesis after a type or class name in an import or export list by querying the name parent relation (i.e., invoking `Name.nameParent_maybe`.  Hence, it is crucial that all the data constructors defined in instances of a family get the family name, not the name of the representation tycon, as their name parent.  We go to some effort in `RnNames.newTopSrcBinder` to achieve this when renaming source.  We also need an extra measure, even if of much smaller scale, when sucking declarations from interface files in `LoadIface.loadDecl`.  Here we make the family the name parent for all implicit things of the declaration.
 
 
