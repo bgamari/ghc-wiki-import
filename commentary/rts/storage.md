@@ -13,7 +13,7 @@ GHC's storage manager is designed to be quite flexible: there are a large number
 
 
 
-Source: [includes/Block.h](/trac/ghc/browser/ghc/includes/Block.h), [rts/BlockAlloc.h](/trac/ghc/browser/ghc/rts/BlockAlloc.h), [rts/BlockAlloc.c](/trac/ghc/browser/ghc/rts/BlockAlloc.c).
+Source: [includes/Block.h](/trac/ghc/browser/ghc/includes/Block.h), [rts/BlockAlloc.h](/trac/ghc/browser/ghc/rts/BlockAlloc.h), [rts/BlockAlloc.c](/trac/ghc/browser/ghc/rts/BlockAlloc.c), [rts/MBlock.h](/trac/ghc/browser/ghc/rts/MBlock.h), [rts/MBlock.c](/trac/ghc/browser/ghc/rts/MBlock.c).
 
 
 
@@ -61,8 +61,31 @@ not handled: Image
 
 
 
-We currently have megablocks of 1Mb in size with blocks of 4k in size, but these sizes are easy to change ([includes/Constants.h](/trac/ghc/browser/ghc/includes/Constants.h)).
+We currently have megablocks of 1Mb in size (m = 20) with blocks of 4k in size (k = 12), and these sizes are easy to change  ([includes/Constants.h](/trac/ghc/browser/ghc/includes/Constants.h)).  Block descriptors are currently 32 or 64 bytes depending on the word size (d = 5 or 6).
 
+
+
+So the block allocator has a little more structure:
+
+
+- At the bottom, talking to the OS, is the megablock allocator ([rts/MBlock.c](/trac/ghc/browser/ghc/rts/MBlock.c), [rts/MBlock.h](/trac/ghc/browser/ghc/rts/MBlock.h)).
+  It is responsible for delivering megablocks, correctly aligned, to the upper layers.  It is also responsible for
+  implementing `HEAP_ALLOCED()`: the predicate that tests whether a pointer points to dynamically allocated memory
+  or not.  This is implemented as a simple bitmap lookup on a 32-bit machine, and something more complex on
+  64-bit addressed machines.  See [rts/MBlock.h](/trac/ghc/browser/ghc/rts/MBlock.h) for details.
+
+  Currently, megablocks are never freed back to the OS, except at the end of the program.  This is a potential
+  improvement that could be made.
+
+- Sitting on top of the megablock allocator is the block layer ([includes/Block.h](/trac/ghc/browser/ghc/includes/Block.h), [rts/BlockAlloc.c](/trac/ghc/browser/ghc/rts/BlockAlloc.c)).
+  This layer is responsible for providing:
+
+  - `void *allocGroup(int)`
+  - `void freeGroup(void *)`
+    These functions allocate and deallocate a block *group*: a contiguous sequence of blocks (the degenerate, and common, case
+    is a single block).  The block allocator is responsible for keeping track of free blocks.  Currently it does this by
+    maintaining an ordered (by address) list of free blocks, with contiguous blocks coallesced.  However this is certanly
+    not optimal, and has been shown to be a bottleneck in certain cases - improving this allocation scheme would be good.
 
 ## The Garbage Collector
 
