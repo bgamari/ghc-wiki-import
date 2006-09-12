@@ -44,7 +44,9 @@ Please feel free to add maaterial to this commentary: don't worry too much about
     - Typechecker
     - Desugarer
     - Core-\>core
-    - Core-\>CorePrep-\>Stg-\>Cmm
+    - Core-\>CorePrep
+    - CorePrep-\>Stg?
+    - [The code generator](commentary/compiler/code-gen): Stg-\>Cmm
 
   - [The GHC API](commentary/compiler/api)
 - [Symbol names and the Z-encoding](commentary/compiler/symbol-names)
