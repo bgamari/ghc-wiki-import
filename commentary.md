@@ -24,30 +24,37 @@ Please feel free to add maaterial to this commentary: don't worry too much about
 - [The Compiler](commentary/compiler)
 
   - [Compiler Module Dependencies](module-dependencies)
-  - [Compiling one module: HscMain](commentary/compiler/hsc-main)
-  - Key data types:
+  - [Coding guidelines](commentary/coding-style)
 
-    - [The source language: HsSyn](commentary/compiler/hs-syn-type) 
-    - [RdrNames, Modules, and OccNames](commentary/compiler/rdr-name-type)
-    - [Names](commentary/compiler/name-type)
-    - [Entities](commentary/compiler/entity-types): variables, type constructors, data constructors, and classes.
-    - Types: [Type and Kind](commentary/compiler/type-type), [equality types and coercions](commentary/compiler/fc)
-    - [The core language](commentary/compiler/core-syn-type)
-    - [The STG language](commentary/compiler/stg-syn-type)
-    - [The Cmm language](commentary/compiler/cmm-type)
-  - Passes:
+- [Compiling one module: HscMain](commentary/compiler/hsc-main)
+- Key data types:
 
-    - [Renamer](commentary/compiler/renamer)
-    - Typechecker
-    - Desugarer
-    - Core-\>core
-  - SPJ ModIface, ModDetails, ModGuts
-  - SPJ Core-\>CorePrep-\>Stg-\>Cmm
-  - [The GHC API](commentary/compiler/api)
-  - SM HscMain upwards: ModSummary, Finder, upsweep, downsweep,
+  - [The source language: HsSyn](commentary/compiler/hs-syn-type) 
+  - [RdrNames, Modules, and OccNames](commentary/compiler/rdr-name-type)
+  - [Names](commentary/compiler/name-type)
+  - [Entities](commentary/compiler/entity-types): variables, type constructors, data constructors, and classes.
+  - Types: [Type and Kind](commentary/compiler/type-type), [equality types and coercions](commentary/compiler/fc)
+  - [The core language](commentary/compiler/core-syn-type)
+  - [The STG language](commentary/compiler/stg-syn-type)
+  - [The Cmm language](commentary/compiler/cmm-type)
+- Passes:
+
+  - [Renamer](commentary/compiler/renamer)
+  - Typechecker
+  - Desugarer
+  - Core-\>core
+
+- SPJ ModIface, ModDetails, ModGuts
+- SPJ Core-\>CorePrep-\>Stg-\>Cmm
+- [The GHC API](commentary/compiler/api)
+- SM HscMain upwards: ModSummary, Finder, upsweep, downsweep
+
+- Cross-cutting concerns
+
+  - [Primitive Operations (PrimOps)](commentary/prim-ops)
+  - [Wired-in and known-key things](commentary/compiler/wired-in)
   - [Packages](commentary/packages)
   - [Symbol names and the Z-encoding](commentary/compiler/symbol-names)
-  - [Coding guidelines](commentary/coding-style)
 
 
   
