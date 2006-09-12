@@ -83,6 +83,8 @@ Please feel free to add maaterial to this commentary: don't worry too much about
   - [Profiling](commentary/profiling)
   - [Primitive Operations (PrimOps)](commentary/prim-ops)
 
+- [The Evil Mangler](commentary/evil-mangler)
+
 ## Contributed Documentation
 
 
