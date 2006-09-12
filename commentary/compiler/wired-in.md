@@ -6,7 +6,7 @@
 
 
 
-There are three categories of entities (`Class`es, `TyCon`s, `Id`s) that GHC "knows about"; that is, information about them is baked into GHC's source code.
+There are three categories of entities that GHC "knows about"; that is, information about them is baked into GHC's source code.
 
 
 - [Wired-in things](commentary/compiler/wired-in#wired-in-things)
