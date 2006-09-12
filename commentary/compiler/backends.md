@@ -2,7 +2,7 @@
 
 
 
-After Cmm? has been generated, we have a choice of targets to compile to:
+After [Cmm](commentary/compiler/cmm-type) has been generated, we have a choice of targets to compile to:
 
 
 - [The C code generator](commentary/compiler/backends/ppr-c)
