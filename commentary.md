@@ -46,6 +46,7 @@ Please feel free to add maaterial to this commentary: don't worry too much about
   - [The GHC API](commentary/compiler/api)
   - SM HscMain upwards: ModSummary, Finder, upsweep, downsweep,
   - [Packages](commentary/packages)
+  - [Symbol names and the Z-encoding](commentary/compiler/symbol-names)
   - [Coding guidelines](commentary/coding-style)
 
 
