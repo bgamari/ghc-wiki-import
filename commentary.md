@@ -51,10 +51,10 @@ Please feel free to add maaterial to this commentary: don't worry too much about
   - [Wired-in and known-key things](commentary/compiler/wired-in)
   - [Packages](commentary/compiler/packages)
   - The Finder?
-  - Backends:
+  - [Backends](commentary/compiler/backends):
 
-    - C code generator?
-    - Native code generator?
+    - [C code generator](commentary/compiler/backends/ppr-c)
+    - [Native code generator](commentary/compiler/backends/ncg)
 
 
   
