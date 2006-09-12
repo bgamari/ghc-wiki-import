@@ -44,17 +44,17 @@ Please feel free to add maaterial to this commentary: don't worry too much about
     - Desugarer
     - Core-\>core
 
-- SPJ ModIface, ModDetails, ModGuts
-- SPJ Core-\>CorePrep-\>Stg-\>Cmm
-- [The GHC API](commentary/compiler/api)
-- SM HscMain upwards: ModSummary, Finder, upsweep, downsweep
+  - SPJ ModIface, ModDetails, ModGuts
+  - SPJ Core-\>CorePrep-\>Stg-\>Cmm
+  - [The GHC API](commentary/compiler/api)
+  - SM HscMain upwards: ModSummary, Finder, upsweep, downsweep
 
-- Cross-cutting concerns
+  - Cross-cutting concerns
 
-  - [Primitive Operations (PrimOps)](commentary/prim-ops)
-  - [Wired-in and known-key things](commentary/compiler/wired-in)
-  - [Packages](commentary/packages)
-  - [Symbol names and the Z-encoding](commentary/compiler/symbol-names)
+    - [Primitive Operations (PrimOps)](commentary/prim-ops)
+    - [Wired-in and known-key things](commentary/compiler/wired-in)
+    - [Packages](commentary/packages)
+    - [Symbol names and the Z-encoding](commentary/compiler/symbol-names)
 
 
   
