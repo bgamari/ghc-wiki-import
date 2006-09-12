@@ -52,6 +52,18 @@ There are two options:
   method, but it is easier to allocate contiguous regions (unless the contiguous region is larger than
   a megablock...).
 
+
+We adopt the second approach.  The following diagram shows a megablock:
+
+
+
+not handled: Image
+
+
+
+We currently have megablocks of 1Mb in size with blocks of 4k in size, but these sizes are easy to change ([includes/Constants.h](/trac/ghc/browser/ghc/includes/Constants.h)).
+
+
 ## The Garbage Collector
 
 
