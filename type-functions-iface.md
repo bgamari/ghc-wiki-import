@@ -9,6 +9,10 @@ The `IfaceSyn.IfaceData` variant of `IfaceDecl` contains a new `ifFamInst :: May
 
 
 
-The serialised interface description does not explicitly contain the value of `mi_fam_insts`.  Instead, the `get` method of `Binary ModIface` (in `BinIface`) constructs the value on the fly.
+The `mi_fam_insts` field does not contain any additional information, but instead is just a cached summary of the family instances of the `mi_decls` field.  Hence, the serialised interface description does not explicitly contain the value of `mi_fam_insts`.  Instead, the `get` method of `Binary ModIface` (in `BinIface`) - like all other places producing a `HscTypes.ModIface` - uses `HscTypes.mkIfaceFamInstsCache` to extract the relevant information from the declarations.
+
+
+
+Similarly, `HscTypes.ModDetails` maintains a cached summary of the type checked representations of family instances in `md_fam_insts :: ![FamInstEnv.FamInst]`.  This computed from teh field `md_types` with `HscTypes.mkDetailsFamInstsCache`.
 
 
