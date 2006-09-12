@@ -111,7 +111,7 @@ Some types of object add more fields to the end of the info table, notably funct
 
 
 
-Note that the info table is followed immediately by the entry code, rather than the code being at the end of an indirect pointer.  This both reduces the size of the info table and eliminates one indirection when jumping to the entry code; however, arranging to generate code like this presents some difficulties when compiling via C, see Commentary/Mangler?.  
+Note that the info table is followed immediately by the entry code, rather than the code being at the end of an indirect pointer.  This both reduces the size of the info table and eliminates one indirection when jumping to the entry code; however, arranging to generate code like this presents some difficulties when compiling via C, see [Commentary/EvilMangler](commentary/evil-mangler).  
 
 
 
