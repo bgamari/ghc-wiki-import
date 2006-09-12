@@ -1,7 +1,3 @@
-
-\[ Up: [Commentary/Compiler/HscMain](commentary/compiler/hsc-main) \]
-
-
 # The `Name` type
 
 
@@ -88,7 +84,7 @@ then in module `A`}, the function `Q.f` has an External Name `M.f`.
 
 <table><tr><th>`WiredIn`</th>
 <td>
-A `WiredIn` `Name` is a special sort of `External` `Name`, one that is completely known to the compiler (e.g. the `Bool` type constructor).  In this case the `Name` contains the `TyThing` that it is bound to; no need for lookups here!  
+A `WiredIn` `Name` is a special sort of `External` `Name`, one that is completely known to the compiler (e.g. the `Bool` type constructor).  See [Commentary/Compiler/WiredIn](commentary/compiler/wired-in#).
 </td></tr></table>
 
 
