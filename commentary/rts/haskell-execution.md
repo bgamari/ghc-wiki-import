@@ -33,7 +33,7 @@ During execution of Haskell code the following (virtual) registers are always va
 - `SpLim` points to the last available byte in the current stack.
 
 
-There are bunch of other virtual registers, used for temporarily for argument passing, for words, floats and doubles: `R1` .. `R9`, `RF1` .. `RF4`, `RD1` .. `RD4`.
+There are bunch of other virtual registers, used for temporarily for argument passing, for words, floats and doubles: `R1` .. `R10`, `F1` .. `F4`, `D1` .. `D4`, `L1` .. `L2`.
 
 
 
