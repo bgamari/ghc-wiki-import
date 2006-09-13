@@ -128,7 +128,53 @@ Wikipedia has an [
 article about Hackathons](http://en.wikipedia.org/wiki/Hackathon)
 
 
----
+## Bootstrapping into GHC
+
+
+
+We had some enquiries about whether people should come along with a
+fresh GHC build ready to go, and if so how to go about getting one.
+
+
+
+I'll probably be demonstrating how to set up a build on Thursday, so if
+you want you can wait until then and there should be plenty of time to
+get a working build before Friday.  It's probably a good idea to make
+sure that your machine has the relevant tools, though:
+
+
+>
+>
+> [
+> http://hackage.haskell.org/trac/ghc/wiki/Building/Prerequisites](http://hackage.haskell.org/trac/ghc/wiki/Building/Prerequisites)
+>
+>
+
+
+If you're keen to set up a build beforehand, here's where to look to
+find out how to do it.  I've been moving the build system documentation
+onto the wiki, the top of which is here:
+
+
+>
+>
+> [
+> http://hackage.haskell.org/trac/ghc/wiki/Building](http://hackage.haskell.org/trac/ghc/wiki/Building)
+>
+>
+
+
+In particular, the section "Quick start for developers" should have
+enough to set you up with a build that won't take several days to
+complete, and will be tailored to what you're particularly interested in
+working on.
+
+
+
+There are two branches of the source code now: the HEAD and the 6.6
+branch.  They are still very close, so building either one should be
+fine.  The 6.6 branch darcs repositories are all under
+[ http://darcs.haskell.org/ghc-6.6](http://darcs.haskell.org/ghc-6.6).
 
 
 ## Participants
