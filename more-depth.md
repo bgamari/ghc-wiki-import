@@ -13,7 +13,7 @@ Possible presentation topics for Friday.  **If you'd like to see more on one of 
 
 - How Template Haskell is implemented
 
-- Packages, Cabal, and GHC --- would like to see: Norman Ramsey
+- Packages, Cabal, and GHC --- would like to see: Norman Ramsey, Geoff Washburn
 
 - Details of the GHC-as-a-library API, and how to use it.
 
