@@ -59,14 +59,25 @@ You'll notice that a `Qual` `RdrName` contains a `ModuleName`; which module is r
 
 An `OccName` is more-or-less just a string, like "foo" or "Tree", giving the (unqualified) name of an entity. 
 Well, not quite just a string, because in Haskell a name like "C" could mean a type constructor or data constructor, depending on context. So GHC defines a type OccName (defined in basicTypes/OccName.lhs) that is a pair of a `FastString` and a `NameSpace` indicating which name space the name is drawn from. The data type is defined (abstractly) in [compiler/basicTypes/OccName.lhs](/trac/ghc/browser/ghc/compiler/basicTypes/OccName.lhs):
+{{
+data OccName = OccName 
 
 
-```wiki
-data OccName = OccName NameSpace FastString
-```
+>
+>
+> { occNameSpace  :: NameSpace
+>
+>
+
+<table><tr><th>, occNameFS</th>
+<td>FastString
+}
+</td></tr></table>
 
 
-The `EncodedFS` is a synonym for `FastString` indicating that the string is Z-encoded. (Details in [compiler/basicTypes/OccName.lhs](/trac/ghc/browser/ghc/compiler/basicTypes/OccName.lhs).) Z-encoding encodes funny characters like '%' and '$' into alphabetic characters, like "zp" and "zd", so that they can be used in object-file symbol tables without confusing linkers and suchlike. 
+
+}}}
+`FastString` is a packed string implementation of strings. 
 
 
 
