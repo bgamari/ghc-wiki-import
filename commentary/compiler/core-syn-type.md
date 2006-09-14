@@ -94,7 +94,7 @@ A case expression is **always strict**, even if there is only one alternative, a
 
 
 ```wiki
-case error "urk" of { DEFAULT -> True
+case error "urk" of { DEFAULT -> True }
 ```
 
 
