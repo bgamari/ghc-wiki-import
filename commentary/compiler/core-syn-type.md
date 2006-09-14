@@ -142,7 +142,7 @@ Case expressions have several invariants
  
 
 
-- If there is a `DEFAULT` alternative, it must appear first.
+- If there is a `DEFAULT` alternative, it must appear first.  This makes finding a `DEFAULT` alternative easy, when it exists.
 
 - The remaining non-DEFAULT alternatives must appear in order of
 
