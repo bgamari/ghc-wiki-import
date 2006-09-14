@@ -24,7 +24,7 @@ All of these entities have a `Name`, but that's about all they have in common.  
   	     | AClass   Class
   ```
 
-  For example, a type environment is a map from `Name` to `TyThing`.
+  For example, a type environment is a map from `Name` to `TyThing`.  (The fact that a `Name` tells what name space it belongs to allow, for example, identically named values and types to  sit in a single map.)
 
 
 All these data types are implemented as a big record of information that tells you everything about the entity.  For example, a `TyCon` contains a list of its data constructors; a `DataCon` contains its type (which mentions its `TyCon`); a `Class` contains the `Id`s of all its method selectors; and an `Id` contains its type (which mentions type constructors and classes).  
