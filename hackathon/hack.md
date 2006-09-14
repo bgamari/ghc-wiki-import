@@ -5,13 +5,13 @@
 The Hackathon has started!
 
 
+- To get GHC:
 
-To get GHC:
+  ```wiki
+  darcs get --partial http://kpacha.cs.pdx.edu/ghc
+  ```
 
-
-```wiki
-darcs get --partial http://kpacha.cs.pdx.edu/ghc
-```
+- Then see the [Building](building) page.
 
 ## Menu
 
