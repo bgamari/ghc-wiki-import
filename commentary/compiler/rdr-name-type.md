@@ -79,3 +79,8 @@ data NameSpace = VarName	-- Variables, including "source" data constructors
 	       | TcClsName	-- Type constructors and classes; Haskell has them
 				-- in the same name space for now.
 ```
+
+
+Attaching the names to their name spaces makes it very convenient to build mappings from names to things; where such a mapping might contain two strings that are identical, they can be distinguished by the name space, so when mapping `OccName`s, a single map suffices.
+
+
