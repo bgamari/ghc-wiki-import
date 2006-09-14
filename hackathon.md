@@ -272,4 +272,4 @@ If you want to come, please add your name to the list below.  Add a sentence or 
 
 - Lyle Kopnicky (lyle AT rentrak DOT com), interested in learning more about compiling Haskell.
 - [
-  Lee Pike](http://www.cs.indiana.edu/~lepike/), interested in "Haskell on bare metal" and a lightweight/high-assurance RTS. 
+  Lee Pike](http://www.cs.indiana.edu/~lepike/), Galois.  Interested in "Haskell on bare metal" and a lightweight/high-assurance RTS. 
