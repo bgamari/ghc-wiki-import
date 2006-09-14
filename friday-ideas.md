@@ -1,0 +1,4 @@
+# How Should We Spend Friday?
+
+
+- Hacking the build system (for example)
