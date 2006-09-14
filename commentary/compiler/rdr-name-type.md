@@ -32,6 +32,10 @@ data RdrName
 	--  (c) by Template Haskell, when TH has generated a unique name
 ```
 
+
+User-written code never gets translated into the last two alternatives.  They are used only internally by the compiler.
+
+
 ## The `Module` and `ModuleName` types
 
 
