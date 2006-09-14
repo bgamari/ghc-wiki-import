@@ -95,9 +95,9 @@ TriMet](http://www.trimet.org/) web site for details about how to use Public tra
 The Hackathon will be open
 
 
-- 9 till 5 - Thur 14th
-- 9 till 5 - Fri 15th 
-- 9 till (TBD) - Sat 16th 
+- 9 till 5 - Thur 14th - Breakfast, Lunch and afternoon break snacks.
+- 9 till 5 - Fri 15th - Breakfast, (out for lunch), afternoon break snacks.
+- 9 till 12 - Sat 16th - Breakfast, snacks.
 
 ### Registration
 
