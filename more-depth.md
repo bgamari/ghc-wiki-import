@@ -2,7 +2,8 @@
 
 
 
-Possible presentation topics for Friday.  **If you'd like to see more on one of these, add your name to the line.**
+Possible presentation topics for Friday.  **If you'd like to see more on one of these, add your name to the line.  Or add a new item'''
+**
 
 
 - How the renamer works
