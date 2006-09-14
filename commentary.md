@@ -22,7 +22,7 @@ Please feel free to add material to this commentary: don't worry too much about 
   - [Coding guidelines](commentary/coding-style)
 
   - [Compiling one module: HscMain](commentary/compiler/hsc-main)
-  - Key data types:
+  - Key data types (Simon PJ's diagram is attached at the bottom of this document):
 
     - [The source language: HsSyn](commentary/compiler/hs-syn-type) 
     - [RdrNames, Modules, and OccNames](commentary/compiler/rdr-name-type)
