@@ -103,7 +103,7 @@ An **Orig RdrName thing** has a top-level definition of a `RdrName`, using the `
 - Its `OccName`
 
 
-Again, almost all of these are in [compiler/prelude/PrelNames](/trac/ghc/browser/ghc/compiler/prelude/PrelNames).
+Again, almost all of these are in [compiler/prelude/PrelNames.lhs](/trac/ghc/browser/ghc/compiler/prelude/PrelNames.lhs).
 Example: `PrelNames.not_RDR :: RdrName`.
 
 
