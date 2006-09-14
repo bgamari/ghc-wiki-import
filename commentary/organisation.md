@@ -41,7 +41,7 @@ http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc):: All of GHC: compil
 
 
 [
-http://darcs.hasekll.org/packages/pkg::A](http://darcs.hasekll.org/packages/pkg::A) library package *pkg*.  A certain number of packages are essential to build GHC. They are listed in `libraries/core-packages` and currently comprise: `base`, 
+http://darcs.hasekll.org/packages/pkg](http://darcs.hasekll.org/packages/pkg):: A library package *pkg*.  A certain number of packages are essential to build GHC. They are listed in `libraries/core-packages` and currently comprise: `base`, 
 `Cabal`,
 `haskell98`,
 `readline`,
