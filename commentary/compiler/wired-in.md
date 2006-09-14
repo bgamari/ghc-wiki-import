@@ -10,7 +10,7 @@ There are three categories of entities that GHC "knows about"; that is, informat
 
 
 - [Wired-in things](commentary/compiler/wired-in#wired-in-things) --- GHC knows everything about these
-- [Known-key things](commentary/compiler/wired-in#known-key-things) --- GHC knows the \[i\]name[i](/trac/ghc/i), including the `Unique`, but not the definition
+- [Known-key things](commentary/compiler/wired-in#known-key-things) --- GHC knows the *name*, including the `Unique`, but not the definition
 - [Orig RdrName  things](commentary/compiler/wired-in#orig-rdrname-things) --- GHC knows which module it's defined in
 
 ## Wired-in things
