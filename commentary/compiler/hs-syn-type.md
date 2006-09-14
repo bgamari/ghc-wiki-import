@@ -24,7 +24,7 @@ The `HsSyn` modules live in the [compiler/hsSyn](/trac/ghc/browser/ghc/compiler/
 - [compiler/hsSyn/HsUtils.lhs](/trac/ghc/browser/ghc/compiler/hsSyn/HsUtils.lhs): utility functions (no data types).
 
 
-There is significant of mutual recursion between modules, and hence a couple of `lhs-boot` files. Look at `wiki:ModuleDependencies` to see the dependencies.
+There is significant mutual recursion between modules, and hence a couple of `lhs-boot` files. Look at `wiki:ModuleDependencies` to see the dependencies.
 
 
 
