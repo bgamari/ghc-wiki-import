@@ -34,7 +34,7 @@ An **interface file** supports separate compilation by recording the information
 
 
 
-Interface files are kept in binary, GHC-specific format.  The format of these files changes with each GHC release, but not with patch-level releases.  You can see what's in an interface file (often very useful) thus:
+Interface files are kept in binary, GHC-specific format.  The format of these files changes with each GHC release, but not with patch-level releases.  The format of an interface file can be determined by examining `compiler/iface/IfaceSyn` and `compiler/iface/IfaceType`.  An informal description suitable for a person (not for machine parsing) can be found thus:
 
 
 ```wiki
