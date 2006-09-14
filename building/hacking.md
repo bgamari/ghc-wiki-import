@@ -117,6 +117,10 @@ To just build everything, from the top level:
 ```
 
 
+(See here for [what can go wrong](building/problems).)
+
+
+
 If you see the following ...
 
 
