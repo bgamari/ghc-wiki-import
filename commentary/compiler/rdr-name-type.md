@@ -69,10 +69,6 @@ data OccName = OccName
 ```
 
 
-`FastString` is a packed string implementation of strings. 
-
-
-
 The name spaces are: 
 
 
