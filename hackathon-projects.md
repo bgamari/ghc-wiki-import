@@ -63,6 +63,12 @@ Add your suggestions for the hackathon below...
 
 - Add type parameter to [HsSyn](commentary/compiler/hs-syn-type) for the post-typechecking type to ensure it does not exist until after typechecking 
 
+
+ 
+
+
+- core lint should check the case invariants if it doesn't already
+
 ## Library Projects
 
 
