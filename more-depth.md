@@ -13,3 +13,4 @@
   - explicit heap pointer (allocation pointer)
   - explicit stack pointer
 - What optimizations happen in the simplifier? How do they work?
+- The GHC API and implementation of GHCi
