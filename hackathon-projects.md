@@ -55,6 +55,8 @@ Add your suggestions for the hackathon below...
 
 - `-fmonad-comprehension`: Reuse existing list comprehension code to restore it for arbitrary monads.
 
+- Improve the profiler (longer stacks reported while heap profiling, for example)
+
 ## Library Projects
 
 
