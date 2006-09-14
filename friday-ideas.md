@@ -18,6 +18,7 @@ The above are specific projects or subgroups that might form.  What about more g
   - Resuscitate [ExternalCore](external-core)
   - Low hanging optimizations?
   - STGLint
+  - Work on GHC API, I would like to use it to provide feedback and interactivity to programmers
 - have more explanatory talk sessions led from the front
 - form subgroups for explanatory sessions on different topics (but not to work on a shared project)
 - work on fleshing out the wiki/commentary?
