@@ -12,6 +12,7 @@ The Hackathon has started!
   ```
 
 - Then see the [Building](building) page.
+- simonm: Make sure to adjust build system to warn user if they are using a unsupported version of ghc to build ghc.
 
 ## Menu
 
