@@ -141,6 +141,10 @@ simultaneously than we have real CPUs available.
 
 
 
+Invariant: a task that holds a capability is not blocked in the operating system.
+
+
+
 This makes some parts of the system simpler - for example, we can use
 spin locks that spin indefinitely, because we can ensure that the spin
 lock is only held by a currently executing CPU, and will therefore be
