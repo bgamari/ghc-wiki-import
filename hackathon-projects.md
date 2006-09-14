@@ -67,8 +67,6 @@ Add your suggestions for the hackathon below...
  
 
 
-- core lint should check the case invariants if it doesn't already
-
 ## Library Projects
 
 
