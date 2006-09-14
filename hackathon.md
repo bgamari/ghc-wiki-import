@@ -1,6 +1,13 @@
 
 
 
+# Let's Hack
+
+
+
+Most of the information on this page seems to be pre-hacking data.  Now that you're here, let's start a new page with links to subpages of interest: [Hackathon/Hack](hackathon/hack).
+
+
 # The 2006 GHC hackathon: 14,15 September 2006, Portland
 
 
