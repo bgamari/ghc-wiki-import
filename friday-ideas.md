@@ -15,6 +15,8 @@ The above are specific projects or subgroups that might form.  What about more g
 - form subgroups to work together on shared projects
 
   - Project ideas here?
+  - Resuscitate [ExternalCore](external-core)
+  - STGLint
 - have more explanatory talk sessions led from the front
 - form subgroups for explanatory sessions on different topics (but not to work on a shared project)
 - work on fleshing out the wiki/commentary?
