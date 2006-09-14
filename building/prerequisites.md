@@ -105,6 +105,13 @@ Alex distributions are available from
 </td></tr></table>
 
 
+<table><tr><th>`automake`</th>
+<td>
+GNU automake is needed if you intend to build using
+"./autoreconf". Version 1.9 works.
+</td></tr></table>
+
+
 <table><tr><th>`autoconf`</th>
 <td>
 GNU autoconf is needed if you intend to build from the
