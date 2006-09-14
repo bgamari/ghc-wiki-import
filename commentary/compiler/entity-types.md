@@ -120,7 +120,7 @@ Here are some per-flavour notes:
 
 
 <table><tr><th>`GlobalId`</th>
-<td>is used for fixed, immutable, top-level term variables, notably ones that are imported from other modules.
+<td>is used for fixed, immutable, top-level term variables, notably ones that are imported from other modules.  This means that, for example, the optimizer won't change its properties.
 
 - Always has an `External` or `WiredIn` [Name](commentary/compiler/name-type), and hence has a `Unique` that is globally unique across the whole of a GHC invocation.
 - Always bound at top level. 
