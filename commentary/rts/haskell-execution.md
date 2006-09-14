@@ -41,7 +41,7 @@ In a register-rich machine, many of these virtual registers will be mapped to re
 
 
 
-The code generator knows how many real registers there are, and tries to avoid using virtual registers that aren not mapped to real registers.  So, for example, it does not use `R5` if the latter is memory-mapped; instead, it passes arguments on the stack.
+The code generator knows how many real registers there are, and tries to avoid using virtual registers that are not mapped to real registers.  So, for example, it does not use `R5` if the latter is memory-mapped; instead, it passes arguments on the stack.
 
 
 ## Function Calls
