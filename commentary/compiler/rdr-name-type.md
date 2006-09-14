@@ -62,7 +62,7 @@ Well, not quite just a string, because in Haskell a name like "C" could mean a t
 
 
 ```wiki
-data OccName = OccName NameSpace EncodedFS
+data OccName = OccName NameSpace FastString
 ```
 
 
