@@ -57,6 +57,12 @@ Add your suggestions for the hackathon below...
 
 - Improve the profiler (longer stacks reported while heap profiling, for example)
 
+
+ 
+
+
+- Add type parameter to [HsSyn](commentary/compiler/hs-syn-type) for the post-typechecking type to ensure it does not exist until after typechecking 
+
 ## Library Projects
 
 
