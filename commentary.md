@@ -6,7 +6,7 @@ This tree of wiki pages is a "commentary" on the GHC source code.  It contains a
 
 
 
-Please feel free to add maaterial to this commentary: don't worry too much about accuracy, in due course someone will edit your contribution.  Try to link to source files as much as possible by using this macro: `[[GhcFile(compiler/Makefile)]]` (the usual Trac `source:` macro doesn't work here because the GHC darcs repository isn't integrated into this Trac).  Also try to add appropriate links to other parts of the commentary.
+Please feel free to add material to this commentary: don't worry too much about accuracy, in due course someone will edit your contribution.  Try to link to source files as much as possible by using this macro: `[[GhcFile(compiler/Makefile)]]` (the usual Trac `source:` macro doesn't work here because the GHC darcs repository isn't integrated into this Trac).  Also try to add appropriate links to other parts of the commentary.
 
 
 ## Contents
@@ -18,7 +18,7 @@ Please feel free to add maaterial to this commentary: don't worry too much about
 
 - [The Compiler](commentary/compiler)
 
-  - [Compiler Module Dependencies](module-dependencies)
+  - [Compiler Module Dependencies](module-dependencies) (deals with the arcane mutual recursions among GHC's many data types)
   - [Coding guidelines](commentary/coding-style)
 
   - [Compiling one module: HscMain](commentary/compiler/hsc-main)
