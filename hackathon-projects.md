@@ -84,3 +84,5 @@ Add your suggestions for the hackathon below...
   status: new, status: assigned, status: reopened, type: task, order: priority,
   group: difficulty), or feature requests (Ticket query: status: new,
   status: assigned, status: reopened, type: feature+request, order: priority).
+
+- Guarantee that .hi files and .o files are consistent, possibly by means of some sort of digital signature that would cause a link-time failure
