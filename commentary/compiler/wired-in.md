@@ -62,7 +62,7 @@ A **known-key thing** has a fixed, pre-allocated `Unique` or **key**.  They shou
 - Its `Unique`
 
 
-Almost all known-key names are defined in [compiler/prelude/PrelNames](/trac/ghc/browser/ghc/compiler/prelude/PrelNames); for example: `PrelNames.eqClassName :: Name`.
+Almost all known-key names are defined in [compiler/prelude/PrelNames.lhs](/trac/ghc/browser/ghc/compiler/prelude/PrelNames.lhs); for example: `PrelNames.eqClassName :: Name`.
 
 
 
