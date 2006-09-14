@@ -26,8 +26,8 @@ We begin by discussing the basic abstractions used in the scheduler.
 
 
 
-Source files: [rts/OSThreads.h](/trac/ghc/browser/ghc/rts/OSThreads.h),
-[win32/OSThreads.c](/trac/ghc/browser/ghc/win32/OSThreads.c), [posix/OSThreads.c](/trac/ghc/browser/ghc/posix/OSThreads.c)
+Source files: [include/OSThreads.h](/trac/ghc/browser/ghc/include/OSThreads.h),
+[rts/win32/OSThreads.c](/trac/ghc/browser/ghc/rts/win32/OSThreads.c), [rts/posix/OSThreads.c](/trac/ghc/browser/ghc/rts/posix/OSThreads.c)
 
 
 
