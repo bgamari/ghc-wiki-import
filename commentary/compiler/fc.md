@@ -16,7 +16,7 @@ But that is inadequate to describe GADTs and associated types.  So in 2006 we ex
 
 
 You can find a full description of FC in the paper [
-System F with Type Equality Coercions](http://research.microsoft.com/%7Esimonpj/paper/ext-f).  The notes that follow sketch the implementation of FC in GHC, but without duplicating the contents of the paper.
+http://research.microsoft.com/\~simonpj/papers/ext-f](http://research.microsoft.com/~simonpj/papers/ext-f).  The notes that follow sketch the implementation of FC in GHC, but without duplicating the contents of the paper.
 
 
 
