@@ -88,6 +88,7 @@ call-in is made, a Task is allocated, a new Haskell thread is created,
 and the two are bound together for the duration of the call:
 `task->tso` points to the TSO, and `tso->bound` points to the
 Task.
+If a thread makes a call-in, followed by a call-out, and another call-in and so on, there could be a whole stack of tasks associated with a single OS thread.
 
 
 
