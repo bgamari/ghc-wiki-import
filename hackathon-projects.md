@@ -65,7 +65,9 @@ Add your suggestions for the hackathon below...
  
 
 
-- Add type parameter to [HsSyn](commentary/compiler/hs-syn-type) for the post-typechecking type to ensure it does not exist until after typechecking 
+- Add type parameter to [HsSyn](commentary/compiler/hs-syn-type) for the post-typechecking type to ensure it does not exist until after typechecking
+
+- Improve pretty-printer for Core to have better layout
 
 
  
