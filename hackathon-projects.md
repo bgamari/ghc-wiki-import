@@ -68,17 +68,24 @@ Add your suggestions for the hackathon below...
 - Add type parameter to [HsSyn](commentary/compiler/hs-syn-type) for the post-typechecking type to ensure it does not exist until after typechecking
 
 - Improve pretty-printer for Core to have better layout -- Geoff Washburn may look at this. 
+- Resuscitate [ExternalCore](external-core) -- Do at the same time?
 
 - Improve instance deriving: allow deriving Enum for more types, allow deriving Eq, Ord, Show for GADTs. -- Bjorn Bringert
 
 - Hacking the build system (for example)
+
 - Fix C-- (cmm) output?
-- Resuscitate [ExternalCore](external-core)
+
 - Low hanging optimizations?
+
 - STGLint
+
 - Rewrite the Evil Mangler in Haskell?
+
 - GHC RTS in Cyclone?
+
 - Work on GHC API, I would like to use it to provide feedback and interactivity to programmers
+
 - Hook a multithreaded memory manager into the RTS
 
 ## Library Projects
