@@ -67,11 +67,18 @@ Add your suggestions for the hackathon below...
 
 - Add type parameter to [HsSyn](commentary/compiler/hs-syn-type) for the post-typechecking type to ensure it does not exist until after typechecking
 
-- Improve pretty-printer for Core to have better layout
+- Improve pretty-printer for Core to have better layout -- Geoff Washburn may look at this. 
 
+- Improve instance deriving: allow deriving Enum for more types, allow deriving Eq, Ord, Show for GADTs. -- Bjorn Bringert
 
- 
+- Hacking the build system (for example)
+- Setting up GHC to build the base library using Cabal (since you have the GHC team, the Cabal team and the hmake team in one place!)
 
+  - Isaac Jones - I can be available for general Cabal questions as well. 
+- Hacking on Cabal-Get (not really a GHC thing!)
+
+  - Isaac Jones 
+- Fix C-- (cmm) output?
 
 ## Library Projects
 
