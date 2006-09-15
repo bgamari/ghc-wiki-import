@@ -19,8 +19,8 @@ Possible presentation topics for Friday.  **If you'd like to see more on one of 
 - Past or present efforts in formal verification of GHC components
 
 - Details of the GHC-as-a-library API, and how to use it. -- Norman Ramsey, Andy Gill, Geoff Washburn, Jeffery Zhang, Kathleen Fisher, Ravi Nanavati
-  ** Related: compiling multiple modules: `--make` and all that
-  **
+
+  - Related: compiling multiple modules: `--make` and all that
 
 - More details about vectored returns
 
@@ -59,3 +59,5 @@ Possible presentation topics for Friday.  **If you'd like to see more on one of 
 - The GHC API and implementation of GHCi
 - A breakdown of the size of the various parts of the run-time system
 - Maybe something about the mathematical underpinnings of Haskell and GHC (though I get the feeling I'm the only one lacking a graduate math degree :-) )
+
+  - Perhaps a start would be a resource page on HaskellTypeTheory -- links to type theory courses around the world, survey articles, etc. But aside from type theory though, what else do you mean by "math underpinnings"?
