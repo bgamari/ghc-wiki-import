@@ -102,3 +102,5 @@ Add your suggestions for the hackathon below...
   status: assigned, status: reopened, type: feature+request, order: priority).
 
 - Guarantee that .hi files and .o files are consistent, possibly by means of some sort of digital signature that would cause a link-time failure
+
+- A visualizer that would allow one to step forward and backward through the transformations that the compiler is doing (instead of crawling through endless outputs of `-ddump-*`).
