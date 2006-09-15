@@ -47,6 +47,7 @@ main = defaultErrorHandler defaultDynFlags $ do
   GHC.defaultCleanupHandler flags $ do
     flags <- initPackages flags
     setSessionDynFlags s flags
+    -- your code here
 ```
 
 ## Targets
