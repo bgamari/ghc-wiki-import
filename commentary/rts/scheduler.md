@@ -236,6 +236,10 @@ CPUs on which to run the worker, however).
 ## The Scheduler's main loop
 
 
+
+A transcript of Simon's explanation at the board:
+
+
 ```wiki
 scheduler(cap)
 {
