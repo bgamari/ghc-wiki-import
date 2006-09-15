@@ -21,7 +21,7 @@ It only contains the core libraries (both normal and profiled), though it should
 
 
 
-Unfortunately, this only seems to work if you have DarwinPorts set up in /opt/local, with the readline package installed. There's a tarball of the readline libraries (which unpacks into /usr/local/lib) that might alleviate the problem: [
+Unfortunately, this package only seems to work if you have DarwinPorts set up in /opt/local, with the readline package installed. There's a tarball of the readline libraries (which unpacks into /usr/local/lib) that might alleviate the problem: [
 http://k9.dv8.org/\~atomb/readline.tar.bz2](http://k9.dv8.org/~atomb/readline.tar.bz2)
 
 
