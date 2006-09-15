@@ -79,6 +79,13 @@ Add your suggestions for the hackathon below...
 
   - Isaac Jones 
 - Fix C-- (cmm) output?
+- Resuscitate [ExternalCore](external-core)
+- Low hanging optimizations?
+- STGLint
+- Rewrite the Evil Mangler in Haskell?
+- GHC RTS in Cyclone?
+- Work on GHC API, I would like to use it to provide feedback and interactivity to programmers
+- Hook a multithreaded memory manager into the RTS
 
 ## Library Projects
 
