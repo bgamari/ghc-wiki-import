@@ -34,7 +34,7 @@ Possible presentation topics for Friday.  **If you'd like to see more on one of 
 
   - [
     Example program](http://www.nabble.com/Why-does-this-program-eat-RAM--t2218557.html)  Clifford Beshers
-  - short example posted to cafe by Rodrigues ([
+  - short example posted to cafe by C Rodrigues ([
     http://haskell.org/pipermail/haskell-cafe/2006-June/016171.html](http://haskell.org/pipermail/haskell-cafe/2006-June/016171.html), [
     http://haskell.org/pipermail/haskell-cafe/2006-July/016709.html](http://haskell.org/pipermail/haskell-cafe/2006-July/016709.html))
 
