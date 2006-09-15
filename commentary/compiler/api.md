@@ -22,6 +22,7 @@ Using GHC as a Library](http://haskell.org/haskellwiki/GHC/As_a_library).  Here 
 A typical interaction with the GHC API goes something like the following:
 
 
+- You probably want to wrap the whole program in `defaultErrorHandler defaultDynFlags` to get error messages
 - Initialize the GHC top dir: `init`
 - Create a new session: `newSession`
 - Add some *targets*: `setTargets`, `addTarget`, `guessTarget`
