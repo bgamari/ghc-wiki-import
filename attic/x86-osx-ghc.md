@@ -7,6 +7,22 @@ This page is meant to document the current state of GHC on Apple Mac OS X on Int
 DarwinPorts](http://darwinports.opendarwin.org/) still has GHC as not supported on x86.
 
 
+---
+
+
+
+Another build, from 2006-09-15 (during the Hackathon):
+[
+http://k9.dv8.org/\~atomb/ghc-6.5-20060915.tar.bz2](http://k9.dv8.org/~atomb/ghc-6.5-20060915.tar.bz2)
+
+
+
+It only contains the core libraries (both normal and profiled), though it should be fairly easy to use it to compile any of the extra modules you like. As in previous builds, it requires that GMP.Framework mentioned below.
+
+
+
+-- Aaron Tomb
+
 
 ---
 
