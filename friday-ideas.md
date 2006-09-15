@@ -19,6 +19,7 @@ Add projects ideas you have, and add your name if you're interested in working o
 - Discussing proposed changes to backend and code generation
 - Discussing dynamic linking
 - Strategies in debugging GHC and RTS.
+- Improve instance deriving: allow deriving Enum for more types, allow deriving Eq, Ord, Show for GADTs. -- Bjorn Bringert
 
 ## General Organization
 
