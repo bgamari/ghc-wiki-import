@@ -2,6 +2,10 @@
 
 
 
+See also [FridayIdeas](friday-ideas) - someone should combine these lists :)
+
+
+
 Add your suggestions for the hackathon below...
 
 
