@@ -24,8 +24,6 @@ Add projects ideas you have, and add your name if you're interested in working o
 - Discussing dynamic linking
 - Strategies in debugging GHC and RTS.
 - Improve instance deriving: allow deriving Enum for more types, allow deriving Eq, Ord, Show for GADTs. -- Bjorn Bringert
-- A walkthrough of GHC's intermediate outputs and how they relate to the various stages charted in [
-  http://cvs.haskell.org/trac/ghc/wiki/Commentary/Compiler/HscMain](http://cvs.haskell.org/trac/ghc/wiki/Commentary/Compiler/HscMain)
 
 ## General Organization
 
