@@ -39,12 +39,8 @@ Possible presentation topics for Friday.  **If you'd like to see more on one of 
     http://haskell.org/pipermail/haskell-cafe/2006-July/016709.html](http://haskell.org/pipermail/haskell-cafe/2006-July/016709.html))
   - Cases where allocations seem to be misaccounted ([
     http://cvs.haskell.org/trac/ghc/ticket/680](http://cvs.haskell.org/trac/ghc/ticket/680))
-  - leaks through references (\[[
-    http://haskell.org/pipermail/haskell-cafe/2006-August/017567.html](http://haskell.org/pipermail/haskell-cafe/2006-August/017567.html)
-
-
-\])
-
+  - leaks through references ([
+    http://haskell.org/pipermail/haskell-cafe/2006-August/017567.html](http://haskell.org/pipermail/haskell-cafe/2006-August/017567.html))
 
 ## Suggestions from the floor
 
