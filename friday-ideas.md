@@ -5,6 +5,10 @@
 
 
 
+See also [HackathonProjects](hackathon-projects) - Move these projects there? 
+
+
+
 Add projects ideas you have, and add your name if you're interested in working on them.
 
 
