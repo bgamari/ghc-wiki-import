@@ -33,6 +33,8 @@ Possible presentation topics for Friday.  **If you'd like to see more on one of 
 
 - Reading a nightly snapshot build log
 
+- Understanding the ddump flags, and walkthrough of a Haskell example
+
 ## Suggestions from the floor
 
 
