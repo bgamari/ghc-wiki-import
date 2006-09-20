@@ -190,7 +190,7 @@ http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc).
 - [
   rts/StgPrimFloat.c](http://darcs.haskell.org/ghc/rts/StgPrimFloat.c) (*Modify*: `__encodeDouble`, `__encodeFloat` and `decode` versions defined here refer to GMP; might optimise with bitwise conversion instead of union; conversion depends on whether replacement MP library uses floating point, etc.)
 - [
-  rts/Storage.c](http://darcs.haskell.org/ghc/rts/Storage.c) (*Modify*: `stgAllocForGMP`, `stgReallocForGMP` and `stgDeallocForGMP`; may use as reference for implementation if replacement MP library uses GHC-garbage collected memory)
+  rts/Storage.c](http://darcs.haskell.org/ghc/rts/Storage.c) (*Modify*: `stgAllocForGMP`, `stgReallocForGMP` and `stgDeallocForGMP`; `mp_set_memory_functions(...)`; functions on lines 811, 833, 835, 848; may use as reference for implementation if replacement MP library uses GHC-garbage collected memory)
 - [
   rts/gmp (directory)](http://darcs.haskell.org/ghc/rts/gmp/) (*Modify*: recommended to remove entirely, i.e., do not add conditional compilation for users who want to keep on using GMP)
 
@@ -205,9 +205,9 @@ http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc).
 /* ToDo: this is shockingly inefficient */
 
 #ifndef THREADED_RTS
-section "bss" {
+section "bss" {                              /* "bss" = UninitialisedData, see CmmParse.y:427 */
   mp_tmp1:
-    bits8 [SIZEOF_MP_INT];
+    bits8 [SIZEOF_MP_INT];                   /* SIZEOF_MP_INT created by includes/mkDerivedConstants.c:43-48 */
 }
 
 section "bss" {
@@ -262,8 +262,8 @@ name                                                                    \
   MP_INT__mp_size(mp_tmp2)  = (s2);                                     \
   MP_INT__mp_d(mp_tmp2)	    = BYTE_ARR_CTS(d2);                         \
                                                                         \
-  foreign "C" __gmpz_init(mp_result1 "ptr") [];                            \
-                                                                        \
+  foreign "C" __gmpz_init(mp_result1 "ptr") [];   \  /* This actually initialises GMP as well as mp_result1 */
+                                                  \  /* mp_result1 must subsequently grow to size */
   /* Perform the operation */                                           \
   foreign "C" mp_fun(mp_result1 "ptr",mp_tmp1  "ptr",mp_tmp2  "ptr") []; \
                                                                         \
@@ -287,6 +287,55 @@ results from initialising each struct (`mp_tmp2`, etc.) on each call, in order t
 > (b) use ForeignPtr (in Cmm, Weak Pointers--difficult to implement) to foreign threads holding the the struct/array
 >
 >
+
+
+(2) Primitive Operations in [
+compiler/codeGen/CgPrimOp.hs](http://darcs.haskell.org/ghc/compiler/codeGen/CgPrimOp.hs)
+
+
+
+Related to replacing GMP, some operations in CgPrimOP.hs such as IntAddCOp may benefit from operations defined in a replacement MP library (or, more generally, simple optimisation).  For example:
+
+
+```wiki
+
+emitPrimOp [res_r,res_c] IntAddCOp [aa,bb] live
+{- 
+   With some bit-twiddling, we can define int{Add,Sub}Czh portably in
+   C, and without needing any comparisons.  This may not be the
+   fastest way to do it - if you have better code, please send it! --SDM
+  
+   Return : r = a + b,  c = 0 if no overflow, 1 on overflow.
+  
+   We currently don't make use of the r value if c is != 0 (i.e. 
+   overflow), we just convert to big integers and try again.  This
+   could be improved by making r and c the correct values for
+   plugging into a new J#.  
+   
+   { r = ((I_)(a)) + ((I_)(b));					\
+     c = ((StgWord)(~(((I_)(a))^((I_)(b))) & (((I_)(a))^r)))	\
+         >> (BITS_IN (I_) - 1);					\
+   } 
+   Wading through the mass of bracketry, it seems to reduce to:
+   c = ( (~(a^b)) & (a^r) ) >>unsigned (BITS_IN(I_)-1)
+
+-}
+   = stmtsC [
+        CmmAssign res_r (CmmMachOp mo_wordAdd [aa,bb]),
+        CmmAssign res_c $
+	  CmmMachOp mo_wordUShr [
+		CmmMachOp mo_wordAnd [
+		    CmmMachOp mo_wordNot [CmmMachOp mo_wordXor [aa,bb]],
+		    CmmMachOp mo_wordXor [aa, CmmReg res_r]
+		], 
+	        CmmLit (mkIntCLit (wORD_SIZE_IN_BITS - 1))
+	  ]
+     ]
+```
+
+
+If an integer add were to overflow here, the addition operation would be performed *twice*; even if the integer add did not overflow one extra operation is performed.  Is this an acceptable price for no comparisons?
+
 
 ### Benchmarks for Multi-Precision Libraries
 
