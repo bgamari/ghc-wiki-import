@@ -173,7 +173,9 @@ http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc).
 - [
   includes/MachRegs.h](http://darcs.haskell.org/ghc/includes/MachRegs.h) (*Reference*: general; unrelated to GMP: may be starting point for vectorized Cmm (currently only -fvia-c allows auto-vectorization))
 - [
-  includes/Regs.h](http://darcs.haskell.org/ghc/includes/Regs.h) (*Modify*: references to MP\_INT; Reference: Stg registers, etc.)
+  includes/mkDerivedConstants.c](http://darcs.haskell.org/ghc/includes/mkDerivedConstants.c) (*Modify*: references to GMP `__mpz_struct`: `struct_size(MP_INT)`, `struct_field(MP_INT,_mp_alloc)`, `struct_field(MP_INT,_mp_size)`, `struct_field(MP_INT,_mp_d)` and `ctype(mp_limb_t)`.  Note: mp\_limb\_t generally == unsigned long)
+- [
+  includes/Regs.h](http://darcs.haskell.org/ghc/includes/Regs.h) (*Modify*: references to MP\_INT, `#include "gmp.h"`; Reference: Stg registers, etc.)
 - [
   includes/Rts.h](http://darcs.haskell.org/ghc/includes/Rts.h) (*Modify*: reference to `#include "gmp.h"`, `extern` declarations to `__decodeDouble` and `__decodeFloat`; References to various Stg types and macros)
 - [
@@ -184,9 +186,9 @@ http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc).
 - [
   rts/Makefile](http://darcs.haskell.org/ghc/rts/Makefile) (*Modify*: building GMP library)
 - [
-  PrimOps.cmm](http://darcs.haskell.org/ghc/rts/PrimOps.cmm) (*Modify*: remove GMP references; NOTE: optimisation of `/* ToDo: this is shockingly inefficient */`, see discussion below)
+  rts/PrimOps.cmm](http://darcs.haskell.org/ghc/rts/PrimOps.cmm) (*Modify*: remove GMP references; NOTE: optimisation of `/* ToDo: this is shockingly inefficient */`, see discussion below)
 - [
-  StgPrimFloat.c](http://darcs.haskell.org/ghc/rts/StgPrimFloat.c) (*Modify*: `__encodeDouble`, `__encodeFloat` and `decode` versions defined here refer to GMP; might optimise with bitwise conversion instead of union; conversion depends on whether replacement MP library uses floating point, etc.)
+  rts/StgPrimFloat.c](http://darcs.haskell.org/ghc/rts/StgPrimFloat.c) (*Modify*: `__encodeDouble`, `__encodeFloat` and `decode` versions defined here refer to GMP; might optimise with bitwise conversion instead of union; conversion depends on whether replacement MP library uses floating point, etc.)
 - [
   rts/Storage.c](http://darcs.haskell.org/ghc/rts/Storage.c) (*Modify*: `stgAllocForGMP`, `stgReallocForGMP` and `stgDeallocForGMP`; may use as reference for implementation if replacement MP library uses GHC-garbage collected memory)
 - [
@@ -194,6 +196,108 @@ http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc).
 
 #### Optimisation Opportunities
 
+
+>
+>
+> (1) Initialisation of GMP on every call.  
+>
+>
+
+
+GMP is currently initialised every time it is called from the RTS.  For example, consider the macro in [
+rts/PrimOps.cmm](http://darcs.haskell.org/ghc/rts/PrimOps.cmm):
+
+
+```wiki
+#define GMP_TAKE1_RET1(name,mp_fun)                                     \
+name                                                                    \
+{                                                                       \
+  CInt s1;                                                              \
+  W_ d1;                                                                \
+  FETCH_MP_TEMP(mp_tmp1);                                               \
+  FETCH_MP_TEMP(mp_result1)                                             \
+                                                                        \
+  /* call doYouWantToGC() */                                            \
+  MAYBE_GC(R2_PTR, name);                                               \
+                                                                        \
+  d1 = R2;                                                              \
+  s1 = W_TO_INT(R1);                                                    \
+                                                                        \
+  MP_INT__mp_alloc(mp_tmp1)	= W_TO_INT(StgArrWords_words(d1));      \
+  MP_INT__mp_size(mp_tmp1)	= (s1);                                 \
+  MP_INT__mp_d(mp_tmp1)		= BYTE_ARR_CTS(d1);                     \
+                                                                        \
+  foreign "C" __gmpz_init(mp_result1 "ptr") [];                         \ /* INITIALISATION HERE */
+                                                                        \
+  /* Perform the operation */                                           \
+  foreign "C" mp_fun(mp_result1 "ptr",mp_tmp1 "ptr") [];                \
+                                                                        \
+  RET_NP(TO_W_(MP_INT__mp_size(mp_result1)),                            \
+         MP_INT__mp_d(mp_result1) - SIZEOF_StgArrWords);                \
+}
+```
+
+
+Possible solutions:
+
+
+>
+>
+> (a) wrap the MP library functions (in C, not C--) and test for initialisation there; wrapper should be multi-threaded or reentrant
+>
+>
+
+>
+>
+> (b) maintain initialisation in GHC's RTS
+>
+>
+
+
+(2) The "shockingly inefficient" operation of this code:
+
+
+```wiki
+/* ToDo: this is shockingly inefficient */
+
+#ifndef THREADED_RTS
+section "bss" {
+  mp_tmp1:
+    bits8 [SIZEOF_MP_INT];
+}
+
+section "bss" {
+  mp_tmp2:
+    bits8 [SIZEOF_MP_INT];
+}
+
+section "bss" {
+  mp_result1:
+    bits8 [SIZEOF_MP_INT];
+}
+
+section "bss" {
+  mp_result2:
+    bits8 [SIZEOF_MP_INT];
+}
+#endif
+```
+
+
+should be obvious.  There are at least two possible alternatives to this:
+
+
+>
+>
+> (a) wrap the replacement MP-library array/structure for arbitrary precision integers in a closure so you do not have to rebuild the struct from on each MP-library call; or
+>
+>
+
+>
+>
+> (b) use ForeignPtr (in Cmm, Weak Pointers--difficult to implement) to foreign threads holding the the struct/array
+>
+>
 
 ### Benchmarks for Multi-Precision Libraries
 
