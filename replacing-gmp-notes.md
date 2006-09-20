@@ -159,44 +159,40 @@ http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc).
 
 
 - [
-  configure.ac](http://darcs.haskell.org/ghc/configure.ac) (Modify: remove GMP related material; replace with MP library requirements)
+  configure.ac](http://darcs.haskell.org/ghc/configure.ac) (*Modify*: remove GMP related material; replace with MP library requirements)
 
 - [
-  compiler/prelude/primops.txt.pp](http://darcs.haskell.org/ghc/compiler/prelude/primops.txt.pp)   (Modify: Integer material)
+  compiler/prelude/primops.txt.pp](http://darcs.haskell.org/ghc/compiler/prelude/primops.txt.pp)   (*Modify*: Integer material)
 - [
-  compiler/prelude/PrelNames.lhs](http://darcs.haskell.org/ghc/compiler/prelude/PrelNames.lhs) (Reference: integerTyConName and similar)
+  compiler/prelude/PrelNames.lhs](http://darcs.haskell.org/ghc/compiler/prelude/PrelNames.lhs) (*Reference*: integerTyConName and similar)
 - [
-  compiler/prelude/TysPrim.lhs](http://darcs.haskell.org/ghc/compiler/prelude/TysPrim.lhs)   (Reference)
+  compiler/prelude/TysPrim.lhs](http://darcs.haskell.org/ghc/compiler/prelude/TysPrim.lhs)   (*Reference*)
 
 - [
-  includes/Cmm.h](http://darcs.haskell.org/ghc/includes/Cmm.h) (Modify: cpp test for `#if SIZEOF_mp_limb_t != SIZEOF_VOID_P `)
+  includes/Cmm.h](http://darcs.haskell.org/ghc/includes/Cmm.h) (*Modify*: cpp test for `#if SIZEOF_mp_limb_t != SIZEOF_VOID_P `)
 - [
-  includes/MachRegs.h](http://darcs.haskell.org/ghc/includes/MachRegs.h) (Reference: general; unrelated to GMP: may be starting point for vectorized Cmm (currently only -fvia-c allows auto-vectorization))
+  includes/MachRegs.h](http://darcs.haskell.org/ghc/includes/MachRegs.h) (*Reference*: general; unrelated to GMP: may be starting point for vectorized Cmm (currently only -fvia-c allows auto-vectorization))
 - [
-  includes/Regs.h](http://darcs.haskell.org/ghc/includes/Regs.h) (Modify: references to MP\_INT; Reference: Stg registers, etc.)
+  includes/Regs.h](http://darcs.haskell.org/ghc/includes/Regs.h) (*Modify*: references to MP\_INT; Reference: Stg registers, etc.)
 - [
-  includes/Rts.h](http://darcs.haskell.org/ghc/includes/Rts.h) (Modify: reference to `#include "gmp.h"`, `extern` declarations to `__decodeDouble` and `__decodeFloat`; References to various Stg types and macros)
+  includes/Rts.h](http://darcs.haskell.org/ghc/includes/Rts.h) (*Modify*: reference to `#include "gmp.h"`, `extern` declarations to `__decodeDouble` and `__decodeFloat`; References to various Stg types and macros)
 - [
-  includes/StgMiscClosures.h](http://darcs.haskell.org/ghc/includes/StgMiscClosures.h) (Modify: references to `RTS_FUN(...Integer)` PrimOps; Reference: Weak Pointers, other Stg closures)
+  includes/StgMiscClosures.h](http://darcs.haskell.org/ghc/includes/StgMiscClosures.h) (*Modify*: references to `RTS_FUN(...Integer)` PrimOps; *Reference*: Weak Pointers, other Stg closures)
 
 - [
-  rts/Linker.c](http://darcs.haskell.org/ghc/rts/Linker.c) (Modify: `SymX(__gmpn...)` and related GMP functions)
+  rts/Linker.c](http://darcs.haskell.org/ghc/rts/Linker.c) (*Modify*: `SymX(__gmpn...)` and related GMP functions)
 - [
-  rts/Makefile](http://darcs.haskell.org/ghc/rts/Makefile) (Modify: building GMP library)
+  rts/Makefile](http://darcs.haskell.org/ghc/rts/Makefile) (*Modify*: building GMP library)
 - [
-  PrimOps.cmm](http://darcs.haskell.org/ghc/rts/PrimOps.cmm) (Modify: remove GMP references; NOTE: optimisation of `/* ToDo: this is shockingly inefficient */`, see discussion below)
+  PrimOps.cmm](http://darcs.haskell.org/ghc/rts/PrimOps.cmm) (*Modify*: remove GMP references; NOTE: optimisation of `/* ToDo: this is shockingly inefficient */`, see discussion below)
 - [
-  StgPrimFloat.c](http://darcs.haskell.org/ghc/rts/StgPrimFloat.c) (Modify: `__encodeDouble`, `__encodeFloat` and `decode` versions defined here refer to GMP; might optimise with bitwise conversion instead of union; conversion depends on whether replacement MP library uses floating point, etc.)
+  StgPrimFloat.c](http://darcs.haskell.org/ghc/rts/StgPrimFloat.c) (*Modify*: `__encodeDouble`, `__encodeFloat` and `decode` versions defined here refer to GMP; might optimise with bitwise conversion instead of union; conversion depends on whether replacement MP library uses floating point, etc.)
 - [
-  rts/Storage.c](http://darcs.haskell.org/ghc/rts/Storage.c) (Modify: `stgAllocForGMP`, `stgReallocForGMP` and `stgDeallocForGMP`; may use as reference for implementation if replacement MP library uses GHC-garbage collected memory)
+  rts/Storage.c](http://darcs.haskell.org/ghc/rts/Storage.c) (*Modify*: `stgAllocForGMP`, `stgReallocForGMP` and `stgDeallocForGMP`; may use as reference for implementation if replacement MP library uses GHC-garbage collected memory)
 - [
-  rts/gmp (directory)](http://darcs.haskell.org/ghc/rts/gmp/) (Modify: recommended to remove entirely, i.e., do not add conditional compilation for users who want to keep on using GMP)
+  rts/gmp (directory)](http://darcs.haskell.org/ghc/rts/gmp/) (*Modify*: recommended to remove entirely, i.e., do not add conditional compilation for users who want to keep on using GMP)
 
 #### Optimisation Opportunities
-
-
-
-The current GMP integeration...
 
 
 ### Benchmarks for Multi-Precision Libraries
