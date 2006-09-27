@@ -58,7 +58,7 @@ For this to work, GHC must incorporate the package name (and version) into the n
 
 
 ```wiki
-  ghc -c -package package-name P1 C.hs
+  ghc -c -package-name P1 C.hs
 ```
 
 
