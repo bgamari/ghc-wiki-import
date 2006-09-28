@@ -142,7 +142,7 @@ If the reference to A.B.C is ambiguous, you can qualify the import by adding "`f
 
 
 
-We probably want some special treatment for multiple versions of the same package.  What if you have both "foo-3.9" and "foo-4.0" installed, both exporting A.B.C?  This is jolly useful when you want to keep install new packages, but keep old ones around so you can try your program with the older one.  So we propose that this is not regarded as ambiguous: importing A.B.C gets the latest version, unless some compiler flag (-hide-package) takes it of the running.
+We probably want some special treatment for multiple versions of the same package.  What if you have both "foo-3.9" and "foo-4.0" installed, both exporting A.B.C?  This is jolly useful when you want to install new packages, but keep old ones around so you can try your program with the older one.  So we propose that this is not regarded as ambiguous: importing A.B.C gets the latest version, unless some compiler flag (-hide-package) takes it of the running.
 
 
 
