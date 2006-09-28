@@ -1,3 +1,6 @@
+### Proposal for Package Mounting
+
+
 
 A message by Frederik Eaton to the Haskell mailing list describing this proposal is archived here: [
 http://www.haskell.org/pipermail/libraries/2005-June/004009.html](http://www.haskell.org/pipermail/libraries/2005-June/004009.html). (Note: A proposal by Simon Marlow for "package grafting" predates it: [
