@@ -26,9 +26,9 @@ During execution of Haskell code the following (virtual) registers are always va
 
 - `Hp` points to the byte before the first free byte in the (contiguous) allocation space.
 
-- `HpLim` points to the last avaiable byte in the current chunk of allocation space (see [Heap/Stack check failures](#Heap/Stackcheckfailures)).
+- `HpLim` points to the last available byte in the current chunk of allocation space (see [Heap/Stack check failures](#Heap/Stackcheckfailures)).
 
-- `Sp` points to the youngest allocated byte of stack.  The stack grows downwards.  Why?  Because that means that a return address is at a lower address than the stack frame it "knows about", and that in turn means that we can treat a stack frame very like a heap object, with an info pointer (return address) as its first word.
+- `Sp` points to the youngest allocated byte of stack.  The stack grows downwards.  Why?  Because that means a return address is at a lower address than the stack frame it "knows about", and that in turn means that we can treat a stack frame very like a heap object, with an info pointer (return address) as its first word.
 
 - `SpLim` points to the last (youngest) available byte in the current stack.
 
@@ -70,8 +70,8 @@ Dealing with calls is by far the most complicated bit of the execution model, an
 
 - A **known call** is a call of a function whose binding site is statically visible:
 
-  - The function is bound at top level in this module
-  - The function is bound at top level in another module, and optimistion is on, so we can see the details (notably arity) of the function in the module's interface file.
+  - The function is bound at top level in this module; or,
+  - The function is bound at top level in another module, and optimistion is on, so we can see the details (notably arity) of the function in the module's interface file; or,
   - The function is bound by an `let` binding that encloses the call.
 
 
