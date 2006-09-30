@@ -33,3 +33,4 @@ The quality of the audio or (particularly) video may not be great.  They are int
   Documentation](http://video.google.com/videoplay?docid=-948887441048207316) - general orientation around the wiki (9'01")
 1. [
   Getting and Building](http://video.google.com/videoplay?docid=7166458546326012899), layout of the source tree, how to set up build.mk (23'43")
+1. lots more to come...
