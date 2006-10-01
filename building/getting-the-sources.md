@@ -207,10 +207,6 @@ http://darcs.haskell.org/packages/xhtml](http://darcs.haskell.org/packages/xhtml
 </th></tr></table>
 
 
-
-There are no branches currently; we will use CVS for the 6.4 branch until its end of life, and use darcs for future branches.
-
-
 ### Pulling new patches
 
 
@@ -261,5 +257,44 @@ Please test changes before committing: you can run a cut-down version of the ful
 
 
 You need to have `testsuite` checked out, of course.  Running `make fast` should only take a few minutes.
+
+
+## The 6.6 branch
+
+
+
+There is a branch, for the 6.6 series of GHC releases, of the repositories for
+ghc, testsuite, nofib and the core libraries in the
+
+
+<table><tr><th>[
+http://darcs.haskell.org/ghc-6.6](http://darcs.haskell.org/ghc-6.6)
+</th></tr></table>
+
+
+
+subtree.
+
+
+
+To use this branch instead of the HEAD, replace the first command in the instructions above with
+
+
+```wiki
+  $ darcs get --partial http://darcs.haskell.org/ghc-6.6/ghc
+```
+
+
+and use
+
+
+```wiki
+  $ darcs get --partial http://darcs.haskell.org/ghc-6.6/testsuite
+  $ darcs get --partial http://darcs.haskell.org/ghc-6.6/nofib
+```
+
+
+to get the testsuite and nofib. Otherwise, the commands needed are identical to those for
+working with the HEAD.
 
 
