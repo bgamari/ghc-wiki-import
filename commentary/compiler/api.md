@@ -23,8 +23,8 @@ A typical interaction with the GHC API goes something like the following:
 
 
 - You probably want to wrap the whole program in `defaultErrorHandler defaultDynFlags` to get error messages
-- Initialize the GHC top dir: `init`
 - Create a new session: `newSession`
+- Set the flags: `getSessionDynFlags`, `setSessionDynFlags`.
 - Add some *targets*: `setTargets`, `addTarget`, `guessTarget`
 - Perform [Dependency Analysis](#DependencyAnalysis): `depanal`
 - Load (compile) the source files: `load`
@@ -40,15 +40,21 @@ import GHC
 mode = Interactive
 
 main = defaultErrorHandler defaultDynFlags $ do
-  GHC.init (Just "/usr/local/lib/ghc-6.5")  -- or your build tree!
-  s <- newSession mode
+  s <- newSession mode (Just "/usr/local/lib/ghc-6.5")
   flags <- getSessionDynFlags s
   (flags, _) <- parseDynamicFlags flags []
   GHC.defaultCleanupHandler flags $ do
-    flags <- initPackages flags
-    setSessionDynFlags s flags
+    setSessionDynFlags s flags{ hscTarget=HscInterpreted }
     -- your code here
 ```
+
+
+You must pass the path to `package.conf` as an argument to `newSession`.  
+
+
+
+The `hscTarget` field of `DynFlags` tells the compiler what kind of output to generate from compilation.  There is unfortunately some overlap between this and the `GhcMode` passed to `newSession`; we hope to clean this up in the future, but for now it's probably a good idea to make sure that these two settings are consisent.  That is, if `mode==Interactive`, then `hscTarget==Interpreted`, if `mode==JustTypecheck` then `hscTarget==HscNothing`.
+
 
 ## Targets
 
