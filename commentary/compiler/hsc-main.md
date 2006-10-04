@@ -18,16 +18,24 @@ Look at the picture first.  The yellow boxes are compiler passes, while the blue
 
   - The **typechecker** transforms this further, to `HsSyn` parameterised by **[Id](commentary/compiler/entity-types)**.  To a first approximation, an `Id` is a `Name` plus a type. In addition, the type-checker converts class declarations to `Class`es, and type declarations to `TyCon`s and `DataCon`s.  And of course, the type-checker deals in `Type`s and `TyVar`s. The [data types for these entities](commentary/compiler/entity-types) (`Type`, `TyCon`, `Class`, `Id`, `TyVar`) are pervasive throughout the rest of the compiler.
 
+>
+>
+> These three passes can all produce discover programmer errors, which are sorted and reported to the user.
+>
+>
+
 
  
 
 
-- The **desugarer** converts from the massive `HsSyn` type to [GHC's intermediate language, CoreSyn](commentary/compiler/core-syn-type).  This Core-language data type is unusually tiny: just eight constructors.
+- The **desugarer** ([compiler/deSugar/Desugar](/trac/ghc/browser/ghc/compiler/deSugar/Desugar)) converts from the massive `HsSyn` type to [GHC's intermediate language, CoreSyn](commentary/compiler/core-syn-type).  This Core-language data type is unusually tiny: just eight constructors.
    
   This late desugaring is somewhat unusual.  It is much more common to desugar the program before typechecking, or renaming, becuase that presents the renamer and typechecker with a much smaller language to deal with.  However, GHC's organisation means that
 
   - error messages can display precisely the syntax that the user wrote; and 
   - desugaring is not required to preserve type-inference properties.
+
+  Generally speaking, the desugarer produces user errors or warnings. But it does produce *some*.  In particular, (a) pattern-match overlap warnings are produced here; and (b) when desugaring Template Haskell code quotations, the desugarer may find that `THSyntax` is not expressive enough.  In that case, we must produce an error ([compiler/deSugar/DsMeta](/trac/ghc/browser/ghc/compiler/deSugar/DsMeta)).
 
 - The **SimplCore** pass ([simplCore/SimplCore.lhs](/trac/ghc/browser/ghc/simplCore/SimplCore.lhs)) is a bunch of Core-to-Core passes that optimise the program; see [
   A transformation-based optimiser for Haskell (SCP'98)](http://research.microsoft.com/%7Esimonpj/Papers/comp-by-trans-scp.ps.gz) for a more-or-less accurate overview.  The main passes are:
