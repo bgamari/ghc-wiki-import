@@ -45,6 +45,7 @@ Please feel free to add material to this commentary: don't worry too much about 
 
   - [The GHC API](commentary/compiler/api)
 - [Symbol names and the Z-encoding](commentary/compiler/symbol-names)
+- Template Haskell?
 - [Wired-in and known-key things](commentary/compiler/wired-in)
 - [Packages](commentary/compiler/packages)
 - The Finder?
