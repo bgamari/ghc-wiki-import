@@ -60,7 +60,7 @@ The remaining question is this: **When you say `import A.B.C`, from what package
 
 
 
-GHC already has a fairly elaborate scheme (perhaps too elaborate).
+GHC already has a fairly elaborate scheme (perhaps too elaborate; [documentation here](http://www.haskell.org/ghc/dist/current/docs/users_guide/packages.html))
 
 
 - For a start, you may or may not have a package installed.  
