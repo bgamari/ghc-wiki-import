@@ -46,12 +46,8 @@ The remaining question is this: **When you say `import A.B.C`, from what package
 
 
 - Plan A (GHC's current story)
-- Plan B: mention the package in the import
-- Plan C: grafting.  See [Frederik Eaton's proposal](package-mounting)
-
-
- 
-
+- Plan B: grafting.  An enhancement of plan A; see [Frederik Eaton's proposal](package-mounting)
+- Plan C: optionally specify the package in the import.  An alternative to (B).
 
 ---
 
@@ -79,7 +75,7 @@ So, you can expose package P1 when compiling module M (say), and expose P2 when 
 ---
 
 
-## Plan B: mention the package in the import
+## Plan C: mention the package in the import
 
 
 
