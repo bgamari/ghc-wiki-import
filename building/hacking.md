@@ -17,32 +17,7 @@ that will help get you started right away.  For more detailed documentation
 on the build system, read on to the later sections.
 
 
-## Setting up your build
-
-
-
-The GHC build tree is set up so that, by default, it builds a compiler
-ready for installing and using.  That means full optimisation, and the
-build can take a *long* time.  If you unpack your source tree and
-right away say `./configure; make`, expect to have to wait a while.
-
-
-
-For hacking, you want the build to be quick - quick to build in the
-first place, and quick to rebuild after making changes.  Tuning your
-build setup can make the difference between several hours to build
-GHC, and less than an hour.  Here's how to do it.
-
-
-
-If you're just interested in working on GHC, then you probably don't want
-the "extralibs" libraries that we normally ship with GHC, having these in your
-source tree will just make the build take longer.  So when 
-[getting the sources](building/getting-the-sources), run `darcs-all` without
-the `--extra` option.
-
-
-### `mk/build.mk`
+## Controlling your build: `mk/build.mk`
 
 
 
@@ -57,8 +32,22 @@ There's an example in [mk/build.mk.sample](/trac/ghc/browser/ghc/mk/build.mk.sam
 Alternatively if you want to understand a bit more about what's going on (recommended), read on.
 
 
+## How to make GHC build quickly
 
-A good `mk/build.mk` to start hacking on GHC is:
+
+
+The GHC build tree is set up so that, by default, it builds a compiler
+ready for installing and using.  That means full optimisation, and the
+build can take a *long* time.  If you unpack your source tree and
+right away say `./configure; make`, expect to have to wait a while.
+
+
+
+For hacking, you want the build to be quick - quick to build in the
+first place, and quick to rebuild after making changes.  Tuning your
+build setup can make the difference between several hours to build
+GHC, and less than an hour.  Here are the `build.mk` settings that
+we use to build fast:
 
 
 ```wiki
@@ -68,6 +57,7 @@ GhcStage1HcOpts = -O0 -DDEBUG -W
 GhcLibHcOpts    = -O -fgenerics
 GhcLibWays      =
 SplitObjs       = NO
+GhcBootLibs     = YES
 ```
 
 
@@ -94,7 +84,7 @@ optimisation here, assuming you'll be modifying and testing stage1.
 With optimisation off, rebuilding GHC after modifying it will be
 *much* quicker, not only because the individual compilations will be
 quicker, but also there will be fewer dependencies between modules,
-so less stuff needs to be rebuilt after each modification.
+so much less stuff is recompiled after each modification.
 
 Also we turn on `-DDEBUG`, because that enables assertions and
 debugging code in the compiler itself.  Turning on DEBUG makes
@@ -127,6 +117,21 @@ pieces in the final library, to reduce executable sizes when
 linking against the library.  It can be quite time and
 memory-consuming, so turn it off when you're hacking.
 </td></tr></table>
+
+
+<table><tr><th>`GhcBootLibs = YES`</th>
+<td>
+If you're just interested in working on GHC, then you probably don't want
+to build the "extralibs" libraries that we normally ship with GHC.  
+So when [getting the sources](building/getting-the-sources), 
+run `darcs-all` without the `--extra` option.  Alternatively, even if you have
+the libraries in your tree, you can stop them being built by setting
+`GhcBootLibs` in your `build.mk`.
+</td></tr></table>
+
+
+
+ 
 
 
 ## Actually building the bits
