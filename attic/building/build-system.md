@@ -313,7 +313,7 @@ SRC_HC_OPTS += -O
 
 ```wiki
 $(HS_PROG) : $(OBJS)
-	 $(HC) $(LD_OPTS) $&#60; -o $@
+	 $(HC) $(LD_OPTS) $< -o $@
 ```
 
 >
