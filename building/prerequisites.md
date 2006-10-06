@@ -105,22 +105,16 @@ Alex distributions are available from
 </td></tr></table>
 
 
-<table><tr><th>`automake`</th>
+<table><tr><th>`autoconf` and `automake`</th>
 <td>
-GNU automake is needed if you intend to build using
-"./autoreconf". Version 1.9 works.
-</td></tr></table>
-
-
-<table><tr><th>`autoconf`</th>
-<td>
-GNU autoconf is needed if you intend to build from the
-darcs sources, it is *not* needed if you
+These are needed if you intend to build from the
+darcs sources, they are *not* needed if you
 just intend to build a standard source distribution.
 
 Version 2.52 or later of the autoconf package is required.
 NB. version 2.13 will no longer work, as of GHC version
-6.1.
+6.1.  Version 1.9 of automake is known to work, use others at
+your own risk.
 
 `autoreconf` (from the autoconf package)
 recursively builds `configure` scripts from
@@ -133,9 +127,9 @@ rebuild the corresponding `configure`.
 
 <table><tr><th>`sed`</th>
 <td>
-You need a working `sed` if you are
-going to build from sources.  The build-configuration stuff
-needs it.  GNU sed version 2.0.4 is no good!  It has a bug
+Most Unix installations and Cygwin/MSYS on
+Windows already come with `sed`, so you're probably OK.
+GNU sed version 2.0.4 is no good!  It has a bug
 in it that is tickled by the build-configuration.  2.0.5 is
 OK. Others are probably OK too (assuming we don't create too
 elaborate configure scripts.)
