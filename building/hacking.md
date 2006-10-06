@@ -129,6 +129,12 @@ To just build everything, from the top level:
 ```
 
 
+NB. that's auto**re**conf, not just `autoconf`.  The former
+works recursively, which is necessary because the GHC tree contains
+multiple configure scripts.
+
+
+
 (See here for [what can go wrong](building/problems).)
 
 
@@ -154,7 +160,7 @@ To install the compiler you built, you can say
 ```
 
 
-However, you don't need to install it to use it.  Running `./compiler/stage1/ghc-inplace` from the build tree
+However, you don't need to install GHC to use it.  Running `./compiler/stage1/ghc-inplace` from the build tree
 will invoke the stage1 compiler, and `./compiler/stage2/ghc-inplace` will invoke the stage2 compiler.
 
 
