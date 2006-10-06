@@ -39,11 +39,19 @@ source tree will just make the build take longer.  So when
 the `--extra` option.
 
 
+### `mk/build.mk`
+
+
 
 `mk/build.mk` is a GNU makefile that contains all your build settings.
 By default, this file doesn't exist, and all the parameters are set to
 their defaults in `mk/config.mk` (`mk/config.mk` is the place to look for
 *all* the things you might want to tune).
+
+
+
+There's an example in [mk/build.mk.sample](/trac/ghc/browser/ghc/mk/build.mk.sample), which you can copy to `mk/build.mk` and edit as required.
+Alternatively if you want to understand a bit more about what's going on (recommended), read on.
 
 
 
