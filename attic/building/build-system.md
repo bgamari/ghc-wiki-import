@@ -608,7 +608,7 @@ Almost all the rules look something like this:
 ```wiki
 %.o : %.c
       $(RM) $@
-      $(CC) $(CC_OPTS) -c $&#60; -o $@
+      $(CC) $(CC_OPTS) -c $< -o $@
 ```
 
 
@@ -637,8 +637,8 @@ important one is the Haskell compiler, which is called
 
 Every program's options are are held in a
 `make` variables called
-`&lt;prog&gt;_OPTS`.  the
-`&lt;prog&gt;_OPTS` variables are
+`<prog>_OPTS`.  the
+`<prog>_OPTS` variables are
 defined in `mk/opts.mk`.  Almost all of them
 are defined like this:
 
@@ -914,7 +914,7 @@ in which this happens:
 
 ```wiki
 %.$(way_)o : %.lhs
-      $(HC) $(HC_OPTS) $&#60; -o $@
+      $(HC) $(HC_OPTS) $< -o $@
 ```
 
 >
