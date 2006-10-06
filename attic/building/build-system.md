@@ -86,21 +86,15 @@ sections:
   As its name suggests, `boilerplate.mk`
   consists of a large quantity of standard
   `Makefile` code.  We discuss this
-  boilerplate in more detail in \<xref linkend="sec-boiler"/\>.
+  boilerplate in more detail in [The {{{mk/boilerplate.mk}}} file](#The{{{mk/boilerplate.mk}}}file).
 
->
-> >
-> >
-> > Before the `include` statement, you
-> > must define the `make` variable
-> > `TOP`
-> > to be the top-level directory of the source tree, containing
-> > the `mk`
-> > directory in which the `boilerplate.mk`
-> > file is.  It is *not* OK to simply say
-> >
-> >
->
+  Before the `include` statement, you
+  must define the `make` variable
+  `TOP`
+  to be the top-level directory of the source tree, containing
+  the `mk`
+  directory in which the `boilerplate.mk`
+  file is.  It is *not* OK to simply say
 
 ```wiki
 include ../mk/boilerplate.mk  # NO NO NO
@@ -311,40 +305,33 @@ SRC_HC_OPTS += -O
     `target.mk` has a rule that looks
     like this:
 
-```wiki
-$(HS_PROG) : $(OBJS)
-	 $(HC) $(LD_OPTS) $< -o $@
-```
+    ```wiki
+    $(HS_PROG) : $(OBJS)
+    	 $(HC) $(LD_OPTS) $< -o $@
+    ```
 
->
-> >
-> >
-> > If this rule was in
-> > `boilerplate.mk` then
-> > `$(HS_PROG)`
-> > and
-> > `$(OBJS)`
-> > would not have their final values at the moment
-> > `make` encountered the rule.  Alas,
-> > `make` takes a snapshot of their
-> > current values, and wires that snapshot into the rule.
-> > (In contrast, the commands executed when the rule
-> > "fires" are only substituted at the moment
-> > of firing.)  So, the rule must follow the definitions
-> > given in the `Makefile` itself.
-> >
-> >
->
-
-- Unlike pattern rules, ordinary rules cannot be
-  overriden or replaced by subsequent rules for the same
-  target (at least, not without an error message).
-  Including ordinary rules in
-  `boilerplate.mk` would prevent the
-  user from writing rules for specific targets in specific
-  cases.
-- There are a couple of other reasons I've
-  forgotten, but it doesn't matter too much.
+    If this rule was in
+    `boilerplate.mk` then
+    `$(HS_PROG)`
+    and
+    `$(OBJS)`
+    would not have their final values at the moment
+    `make` encountered the rule.  Alas,
+    `make` takes a snapshot of their
+    current values, and wires that snapshot into the rule.
+    (In contrast, the commands executed when the rule
+    "fires" are only substituted at the moment
+    of firing.)  So, the rule must follow the definitions
+    given in the `Makefile` itself.
+  - Unlike pattern rules, ordinary rules cannot be
+    overriden or replaced by subsequent rules for the same
+    target (at least, not without an error message).
+    Including ordinary rules in
+    `boilerplate.mk` would prevent the
+    user from writing rules for specific targets in specific
+    cases.
+  - There are a couple of other reasons I've
+    forgotten, but it doesn't matter too much.
 
 
              
