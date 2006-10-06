@@ -102,13 +102,9 @@ sections:
 > >
 >
 
->
-> >
-> >
-> > `include ../mk/boilerplate.mk  # NO NO NO`
-> >
-> >
->
+```wiki
+include ../mk/boilerplate.mk  # NO NO NO
+```
 
 >
 > >
@@ -283,13 +279,9 @@ files, and why there have to be two of them.  In general:
 > >
 >
 
->
-> >
-> >
-> > `SRC_HC_OPTS += -O`
-> >
-> >
->
+```wiki
+SRC_HC_OPTS += -O
+```
 
 >
 > >
@@ -938,13 +930,9 @@ in which this happens:
   to build files related to a particular
   `way` in the current directory.  eg.
 
->
-> >
-> >
-> > `$ make way=p`
-> >
-> >
->
+```wiki
+$ make way=p
+```
 
 >
 > >
