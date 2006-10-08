@@ -13,6 +13,6 @@ The `mi_fam_insts` field does not contain any additional information, but instea
 
 
 
-Similarly, `HscTypes.ModDetails` maintains a cached summary of the type checked representations of family instances in `md_fam_insts :: ![FamInstEnv.FamInst]`.  This computed from teh field `md_types` with `HscTypes.mkDetailsFamInstsCache`.
+Similarly, `HscTypes.ModDetails` maintains a cached summary of the type checked representations of family instances in `md_fam_insts :: ![FamInstEnv.FamInst]`.  This computed from the field `md_types` with `HscTypes.mkDetailsFamInstsCache`.
 
 
