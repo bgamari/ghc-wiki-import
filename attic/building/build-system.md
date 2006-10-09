@@ -868,36 +868,24 @@ in which this happens:
   file will match*.  The key pattern rules (in
   `suffix.mk`) look like this:
 
-```wiki
-%.$(way_)o : %.lhs
-      $(HC) $(HC_OPTS) $< -o $@
-```
+  ```wiki
+  %.$(way_)o : %.lhs
+        $(HC) $(HC_OPTS) $< -o $@
+  ```
 
->
-> >
-> >
-> > Neat, eh?
-> >
-> >
->
+  Neat, eh?
 
 - You can invoke `make` with a
   particular `way` setting yourself, in order
   to build files related to a particular
   `way` in the current directory.  eg.
 
-```wiki
-$ make way=p
-```
+  ```wiki
+  $ make way=p
+  ```
 
->
-> >
-> >
-> > will build files for the profiling way only in the current
-> > directory. 
-> >
-> >
->
+  will build files for the profiling way only in the current
+  directory. 
 
 ## When the canned rule isn't right
 
