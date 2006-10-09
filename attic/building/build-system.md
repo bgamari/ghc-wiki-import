@@ -232,27 +232,34 @@ files, and why there have to be two of them.  In general:
     tell `make` how to construct one file
     from another.
 
-
-  `boilerplate.mk` needs to be
-  `include`d at the *top*
-  of each `Makefile`, so that the user can
-  replace the boilerplate definitions or pattern rules by
-  simply giving a new definition or pattern rule in the
-  `Makefile`.  `make`
-  simply takes the last definition as the definitive one.
-
-  Instead of *replacing* boilerplate
-  definitions, it is also quite common to
-  *augment* them. For example, a
-  `Makefile` might say:
-
-  ```wiki
-  SRC_HC_OPTS += -O
-  ```
-
-  thereby adding "`-O`" to
-  the end of
-  `SRC_HC_OPTS`.
+>
+> >
+> >
+> > `boilerplate.mk` needs to be
+> > `include`d at the *top*
+> > of each `Makefile`, so that the user can
+> > replace the boilerplate definitions or pattern rules by
+> > simply giving a new definition or pattern rule in the
+> > `Makefile`.  `make`
+> > simply takes the last definition as the definitive one.
+> >
+> > Instead of *replacing* boilerplate
+> > definitions, it is also quite common to
+> > *augment* them. For example, a
+> > `Makefile` might say:
+> >
+> >
+> > ```wiki
+> > SRC_HC_OPTS += -O
+> > ```
+> >
+> >
+> > thereby adding "`-O`" to
+> > the end of
+> > `SRC_HC_OPTS`.
+> >
+> >
+>
 
 - `target.mk` contains
   `make` rules for the standard targets
@@ -324,7 +331,7 @@ held in a separate file:
 
 
 is the build configuration file we discussed at
-length in \<xref linkend="sec-build-config"/\>.
+length in [getting the build you want](building/using#getting-the-build-you-want).
 
 
 ### `paths.mk`
@@ -468,15 +475,14 @@ defines `make` variables for option
 strings to pass to each program. For example, it defines
 `HC_OPTS`,
 the option strings to pass to the Haskell compiler.  See
-\<xref linkend="sec-suffix"/\>.
+[Pattern rules and options](#Patternrulesandoptions).
 
 
 ### `suffix.mk`
 
 
 
-defines standard pattern rules--see \<xref
-linkend="sec-suffix"/\>.
+defines standard pattern rules--see [Pattern rules and options](#Patternrulesandoptions).
 
 
 
@@ -531,8 +537,7 @@ If host and target are different, then we are building a
 cross-compiler.  For GHC, this means a compiler
 which will generate intermediate .hc files to port to the target
 architecture for bootstrapping.  The libraries and stage 2 compiler
-will be built as HC files for the target system (see \<xref
-linkend="sec-porting-ghc" /\> for details.
+will be built as HC files for the target system (see [Porting GHC](building/porting) for details).
 
 
 
@@ -623,7 +628,7 @@ meaning:
   `mp`.  The variable
   `WAY_CC_OPTS` holds
   options to pass to the C compiler when compiling the
-  standard way.  (\<xref linkend="sec-ways"/\> dicusses
+  standard way.  ([Way management](#Waymanagement) dicusses
   multi-way compilation.)
 
 - `<module>_CC_OPTS`:
@@ -845,8 +850,8 @@ in which this happens:
   `Makefile` to the list of way tags you
   want these targets built for.  The mechanism here is very
   much like the recursive invocation of
-  `make` in sub-directories (\<xref
-  linkend="sec-subdirs"/\>).  It is up to you to set
+  `make` in sub-directories ([Recursion](#Recursion)).
+  It is up to you to set
   `WAYS` in your
   `Makefile`; this is how you control what
   ways will get built.
