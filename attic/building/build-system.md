@@ -1,3 +1,6 @@
+
+
+
 # The `Makefile` architecture
 
 
@@ -86,7 +89,7 @@ sections:
   As its name suggests, `boilerplate.mk`
   consists of a large quantity of standard
   `Makefile` code.  We discuss this
-  boilerplate in more detail in [The {{{mk/boilerplate.mk}}} file](#The{{{mk/boilerplate.mk}}}file).
+  boilerplate in more detail in [The mk/boilerplate.mk file](#Themk/boilerplate.mkfile).
 
   Before the `include` statement, you
   must define the `make` variable
@@ -96,30 +99,24 @@ sections:
   directory in which the `boilerplate.mk`
   file is.  It is *not* OK to simply say
 
-```wiki
-include ../mk/boilerplate.mk  # NO NO NO
-```
+  ```wiki
+  include ../mk/boilerplate.mk  # NO NO NO
+  ```
 
->
-> >
-> >
-> > Why?  Because the `boilerplate.mk`
-> > file needs to know where it is, so that it can, in turn,
-> > `include` other files.  (Unfortunately,
-> > when an `include`d file does an
-> > `include`, the filename is treated relative
-> > to the directory in which `make` is being
-> > run, not the directory in which the
-> > `include`d sits.)  In general,
-> > *every file `foo.mk` assumes
-> > that
-> > `$(TOP)/mk/foo.mk`
-> > refers to itself.* It is up to the
-> > `Makefile` doing the
-> > `include` to ensure this is the case.
-> >
-> >
->
+  Why?  Because the `boilerplate.mk`
+  file needs to know where it is, so that it can, in turn,
+  `include` other files.  (Unfortunately,
+  when an `include`d file does an
+  `include`, the filename is treated relative
+  to the directory in which `make` is being
+  run, not the directory in which the
+  `include`d sits.)  In general,
+  *every file `foo.mk` assumes
+  that
+  `$(TOP)/mk/foo.mk`
+  refers to itself.* It is up to the
+  `Makefile` doing the
+  `include` to ensure this is the case.
 
 - The second section defines the standard
   `make` variable
@@ -140,21 +137,15 @@ include ../mk/boilerplate.mk  # NO NO NO
   discuss the reason later, in \<xref
   linkend="sec-boiler-arch"/\>.
 
->
-> >
-> >
-> > You do not *have* to
-> > `include` the
-> > `target.mk` file.  Instead, you can write
-> > rules of your own for all the standard targets.  Usually,
-> > though, you will find quite a big payoff from using the
-> > canned rules in `target.mk`; the price
-> > tag is that you have to understand what canned rules get
-> > enabled, and what they do (\<xref
-> > linkend="sec-targets"/\>).
-> >
-> >
->
+  You do not *have* to
+  `include` the
+  `target.mk` file.  Instead, you can write
+  rules of your own for all the standard targets.  Usually,
+  though, you will find quite a big payoff from using the
+  canned rules in `target.mk`; the price
+  tag is that you have to understand what canned rules get
+  enabled, and what they do (\<xref
+  linkend="sec-targets"/\>).
 
 
       
@@ -245,47 +236,26 @@ files, and why there have to be two of them.  In general:
     from another.
 
 
-          
+  `boilerplate.mk` needs to be
+  `include`d at the *top*
+  of each `Makefile`, so that the user can
+  replace the boilerplate definitions or pattern rules by
+  simply giving a new definition or pattern rule in the
+  `Makefile`.  `make`
+  simply takes the last definition as the definitive one.
 
+  Instead of *replacing* boilerplate
+  definitions, it is also quite common to
+  *augment* them. For example, a
+  `Makefile` might say:
 
->
-> >
-> >
-> > `boilerplate.mk` needs to be
-> > `include`d at the *top*
-> > of each `Makefile`, so that the user can
-> > replace the boilerplate definitions or pattern rules by
-> > simply giving a new definition or pattern rule in the
-> > `Makefile`.  `make`
-> > simply takes the last definition as the definitive one.
-> >
-> >
->
+  ```wiki
+  SRC_HC_OPTS += -O
+  ```
 
->
-> >
-> >
-> > Instead of *replacing* boilerplate
-> > definitions, it is also quite common to
-> > *augment* them. For example, a
-> > `Makefile` might say:
-> >
-> >
->
-
-```wiki
-SRC_HC_OPTS += -O
-```
-
->
-> >
-> >
-> > thereby adding "`-O`" to
-> > the end of
-> > `SRC_HC_OPTS`.
-> >
-> >
->
+  thereby adding "`-O`" to
+  the end of
+  `SRC_HC_OPTS`.
 
 - `target.mk` contains
   `make` rules for the standard targets
