@@ -133,8 +133,7 @@ sections:
   to make the standard targets ([standard targets](building/using#standard-targets)).  Why, you ask, can't this
   standard code be part of
   `boilerplate.mk`?  Good question.  We
-  discuss the reason later, in \<xref
-  linkend="sec-boiler-arch"/\>.
+  discuss the reason later, in [Boilerplate architecture](#Boilerplatearchitecture).
 
   You do not *have* to
   `include` the
