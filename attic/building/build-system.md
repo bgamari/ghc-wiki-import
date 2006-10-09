@@ -130,8 +130,7 @@ sections:
   code, called
   `target.mk`.
   It contains the rules that tell `make` how
-  to make the standard targets (\<xref
-  linkend="sec-standard-targets"/\>).  Why, you ask, can't this
+  to make the standard targets ([standard targets](building/using#standard-targets)).  Why, you ask, can't this
   standard code be part of
   `boilerplate.mk`?  Good question.  We
   discuss the reason later, in \<xref
@@ -144,8 +143,8 @@ sections:
   though, you will find quite a big payoff from using the
   canned rules in `target.mk`; the price
   tag is that you have to understand what canned rules get
-  enabled, and what they do (\<xref
-  linkend="sec-targets"/\>).
+  enabled, and what they do 
+  [the main mk/target.mk file](#themainmk/target.mkfile).
 
 
       
@@ -259,7 +258,7 @@ files, and why there have to be two of them.  In general:
 
 - `target.mk` contains
   `make` rules for the standard targets
-  described in \<xref linkend="sec-standard-targets"/\>.  These
+  described in [standard targets](building/using#standard-targets).  These
   rules are selectively included, depending on the setting of
   certain `make` variables.  These variables
   are usually set in the middle section of the
@@ -657,8 +656,7 @@ meaning:
 
 
 `target.mk` contains canned rules for
-all the standard targets described in \<xref
-linkend="sec-standard-targets"/\>.  It is complicated by the fact
+all the standard targets described in [standard targets](building/using#standard-targets).  It is complicated by the fact
 that you don't want all of these rules to be active in every
 `Makefile`.  Rather than have a plethora of
 tiny files which you can include selectively, there is a single
@@ -748,7 +746,7 @@ automate.
 
 When `SUBDIRS` is defined,
 `target.mk` includes a rather neat rule for
-the standard targets (\<xref linkend="sec-standard-targets"/\> that
+the standard targets ([standard targets](building/using#standard-targets) that
 simply invokes `make` recursively in each of
 the sub-directories.
 
