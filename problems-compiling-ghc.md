@@ -106,6 +106,10 @@ to the configure options, otherwise I got a bunch of errors involving missing in
 
 
 
+(Maybe problems 5-7 don't matter since I was trying to use cygwin, which I gave up on.)
+
+
+
 --Kirsten Chevalier
 
 
