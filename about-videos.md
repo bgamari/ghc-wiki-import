@@ -33,4 +33,8 @@ The quality of the audio or (particularly) video may not be great.  They are int
   Documentation](http://video.google.com/videoplay?docid=-948887441048207316) - general orientation around the wiki (9'01")
 1. [
   Getting and Building](http://video.google.com/videoplay?docid=7166458546326012899), layout of the source tree, how to set up build.mk (23'43")
-1. lots more to come...
+1. [
+  Compilation Pipeline](http://video.google.co.uk/videoplay?docid=), and interface files (17'30")
+1. [
+  Abstract Syntax](http://video.google.co.uk/videoplay?docid=-8782356823569862556) representation, and how it interacts with parser/renamer/typechecker (1hr03')
+1. still lots more to come...
