@@ -1,3 +1,8 @@
+
+Video: [
+Compilation Pipeline](http://video.google.com/videoplay?docid=-4326420154219711812) and interface files (17'30")
+
+
 # The compilation pipeline
 
 
