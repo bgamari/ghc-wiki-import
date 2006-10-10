@@ -1,6 +1,11 @@
 
 
 
+
+Video: [
+Abstract Syntax Types](http://video.google.com/videoplay?docid=-8782356823569862556) (1hr03")
+
+
 # The `HsSyn` types
 
 
