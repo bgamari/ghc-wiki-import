@@ -33,7 +33,21 @@ Source files: [includes/OSThreads.h](/trac/ghc/browser/ghc/includes/OSThreads.h)
 
 We assume that the OS provides some kind of native threads, and for
 SMP parallelism we assume that the OS will schedule multiple OS
-threads across the available CPUs.  
+threads across the available CPUs.
+
+
+
+OS threads are only used by the runtime for two reasons:
+
+
+- To support non-blocking foreign calls: a foreign call
+  should not block the other Haskell threads in the system from
+  running, and using OS threads is the only way to ensure that.
+
+- To support SMP parallelism.
+
+
+Haskell threads are much lighter-weight (at least 100x) than OS threads.
 
 
 
