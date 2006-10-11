@@ -73,6 +73,10 @@ This makes it easy to extend `StgHeader` with new fields if we
 need to.
 
 
+
+The compiler also needs to know the layout of heap objects, and the way this information is plumbed into the compiler from the C headers in the runtime is described here: [Commentary/Compiler/CodeGen](commentary/compiler/code-gen#storage-manager-representations).
+
+
 ---
 
 
