@@ -25,6 +25,20 @@ case x of { ... }
 GHC jumps to the code for the x closure, which returns when x is evaluated. Commonly, x is already evaluated, and the code for an evaluated constructor just (vector) returns immediately. The idea is to encode the fact that a pointer points to an evaluated object by setting the LSB of the pointer. If the case expression detects that the closure is evaluated, it can avoid the jump and return, which are expensive on modern processors (indirect jumps).
 
 
+<table><tr><th>  </th>
+<th> bits 31..2 </th>
+<th> bits 1 0 
+</th></tr>
+<tr><th> unevaluated closure </th>
+<th> ptr </th>
+<th> 00 
+</th></tr>
+<tr><th> evaluated constructor closure </th>
+<th> ptr </th>
+<th> 01 
+</th></tr></table>
+
+
 
 This would require modifying
 
@@ -38,6 +52,28 @@ This would require modifying
 
 
 We can go a bit further than this, too. Since there are 2 spare bits (4 on a 64-bit machine), we can encode 4 (16) states. Taking 0 to mean "unevaluted", that leaves 3 (15) states to encode the values for the "tag" of the constructor. eg. an evaluated Bool would use 1 to indicate False and 2 to indicate True. An evaluated list cell would use 1 to indicate \[\] and 2 to indicate (:).
+
+
+<table><tr><th>  </th>
+<th> bits 31..2 </th>
+<th> bits 1 0 
+</th></tr>
+<tr><th> unevaluated closure </th>
+<th> ptr </th>
+<th> 00 
+</th></tr>
+<tr><th> cons. no. 1    </th>
+<th> ptr </th>
+<th> 01 
+</th></tr>
+<tr><th> cons. no. 2    </th>
+<th> ptr </th>
+<th> 10 
+</th></tr>
+<tr><th> cons. no. 3    </th>
+<th> ptr </th>
+<th> 11 
+</th></tr></table>
 
 
 
