@@ -104,6 +104,7 @@ Please feel free to add new pages here.  In due course information will migrate 
 - The Runtime System
 
   - [GarbageCollectorNotes](garbage-collector-notes) Notes about GHC's existing single threaded garbage collector and development of a parallel GC.
+  - [SemiTagging](semi-tagging): Describes how the semi-tagging optimisation will be implemented. 
 - [Hackathon presentations](about-videos) (video)
 
 
