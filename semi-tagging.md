@@ -75,3 +75,34 @@ Constructors without children (such as `False` and `True`) only need their tag t
 </th></tr></table>
 
 
+
+This still limits us to data types that have no more than two constructors with children. We can improve on this by noting that pointers will not point to low addresses. So we can make a simple test to distinguish between tags and pointers:
+
+
+<table><tr><th>  </th>
+<th> bits 31..2 </th>
+<th> bits 1 0 </th>
+<th> 
+</th></tr>
+<tr><th> cons. w/no children </th>
+<th> tag </th>
+<th> 01 </th>
+<th> tag \< no. of  constructors
+</th></tr>
+<tr><th> cons. w/ children </th>
+<th> ptr </th>
+<th> 01 </th>
+<th> ptr \>= no. of constructors 
+</th></tr>
+<tr><th> cons. w/children no. 1    </th>
+<th> ptr </th>
+<th> 10 </th>
+<th> 
+</th></tr>
+<tr><th> cons. w/children no. 2    </th>
+<th> ptr </th>
+<th> 11 </th>
+<th> 
+</th></tr></table>
+
+
