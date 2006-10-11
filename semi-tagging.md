@@ -41,6 +41,37 @@ We can go a bit further than this, too. Since there are 2 spare bits (4 on a 64-
 
 
 
-The nice thing about the current approach is that code size is small; implementing the test and jump will certainly add extra code to compiled case expressions. But the gains might be worth it. Complexity-wise this means masking out these bits when following any pointer to a heap object, which means carefully checking most of the runtime. 
+The nice thing about the current approach is that code size is small; implementing the test and jump will certainly add extra code to compiled case expressions. But the gains might be worth it. Complexity-wise this means masking out these bits when following any pointer to a heap object, which means carefully checking most of the runtime.
+
+
+
+This would require modifying all of the above plus modifying
+
+
+- the code generator so that it checks whether the number of constructors is smaller or equal than 3/15.
+
+## Using a tag directly in the pointer
+
+
+
+Constructors without children (such as `False` and `True`) only need their tag to be represented. Hence we can drop the pointer altogether as follows:
+
+
+<table><tr><th>  </th>
+<th> bits 31..2 </th>
+<th> bits 1 0 
+</th></tr>
+<tr><th> cons. w/no children </th>
+<th> tag </th>
+<th> 01 
+</th></tr>
+<tr><th> cons. w/children no. 1    </th>
+<th> ptr </th>
+<th> 10 
+</th></tr>
+<tr><th> cons. w/children no. 2    </th>
+<th> ptr </th>
+<th> 11 
+</th></tr></table>
 
 
