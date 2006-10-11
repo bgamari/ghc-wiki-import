@@ -25,6 +25,10 @@ There are boxed unlifted types: eg. `ByteArray#`.  If you have a value of type `
 Unboxed tuples `(#...#)` are both unlifted and unboxed.  They are represented by multiple values passed in registers or on the stack, according to the [return convention](commentary/rts/haskell-execution).
 
 
+
+Unlifted types cannot currently be used to represent terminating functions: an unlifted type on the right of an arrow is implicitly lifted to include `_|_`.
+
+
 ---
 
 
