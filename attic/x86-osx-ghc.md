@@ -11,6 +11,14 @@ DarwinPorts](http://darwinports.opendarwin.org/) still has GHC as not supported 
 
 
 
+As of 2006-10-11, there is an official binary distribution of GHC 6.6 for Mac OS X (Version 10.4) on the x86 architecture, thanks to AudreyTang. It's available from the main download page: [
+http://haskell.org/ghc/download\_ghc\_66.html\#macosxintel](http://haskell.org/ghc/download_ghc_66.html#macosxintel)
+
+
+---
+
+
+
 Another build, from 2006-09-15 (during the Hackathon):
 [
 http://k9.dv8.org/\~atomb/ghc-6.5-20060915.tar.bz2](http://k9.dv8.org/~atomb/ghc-6.5-20060915.tar.bz2)
