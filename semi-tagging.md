@@ -10,7 +10,7 @@ http://hackage.haskell.org/trac/summer-of-code/ticket/48](http://hackage.haskell
 This page reflects my current understanding on the compiler and the RTS, so if there is something wrong, just yell!
 
 
-## Tagging the LSB of an evaluated closure
+## The starting point
 
 
 
@@ -22,8 +22,36 @@ case x of { ... }
 ```
 
 
-GHC jumps to the code for the x closure, which returns when x is evaluated. Commonly, x is already evaluated, and the code for an evaluated constructor just (vector) returns immediately. The idea is to encode the fact that a pointer points to an evaluated object by setting the LSB of the pointer. If the case expression detects that the closure is evaluated, it can avoid the jump and return, which are expensive on modern processors (indirect jumps).
+GHC jumps to the code for (i.e. "enters") the x closure, which returns when x is evaluated. Commonly, x is already evaluated, and the code for an evaluated constructor just (vector) returns immediately.
 
+
+
+*Alexey: add some example HC code here*
+
+
+## Testing before jumping
+
+
+
+The simplest optimisation is this.  Instead of entering the closure, grab its info pointer, and follow the info pointer to get the tag.  Now test the tag; if it's evaluated, don't enter the closure.  
+
+
+
+The benefit is that processors are typically faster at "test-and-jump to known location" than they are at "jump to this pointer".
+
+
+
+*Alexey: add some example HC code here*
+
+
+## Tagging the LSB of an evaluated closure
+
+
+>
+>
+> The idea is to encode the fact that a pointer points to an evaluated object by setting the LSB of the pointer. If the case expression detects that the closure is evaluated, it can avoid the jump and return, which are expensive on modern processors (indirect jumps).
+>
+>
 
 <table><tr><th>  </th>
 <th> bits 31..2 </th>
