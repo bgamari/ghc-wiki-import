@@ -97,6 +97,10 @@ Constructors without children (such as `False` and `True`) only need their tag t
 <th> bits 31..2 </th>
 <th> bits 1 0 
 </th></tr>
+<tr><th> unevaluated closure </th>
+<th> ptr </th>
+<th> 00 
+</th></tr>
 <tr><th> cons. w/no children </th>
 <th> tag </th>
 <th> 01 
@@ -120,6 +124,11 @@ This still limits us to data types that have no more than two constructors with 
 <th> bits 1 0 </th>
 <th> 
 </th></tr>
+<tr><th> unevaluated closure </th>
+<th> ptr </th>
+<th> 00 </th>
+<th> 
+</th></tr>
 <tr><th> cons. w/no children </th>
 <th> tag </th>
 <th> 01 </th>
@@ -139,6 +148,36 @@ This still limits us to data types that have no more than two constructors with 
 <th> ptr </th>
 <th> 11 </th>
 <th> 
+</th></tr></table>
+
+
+
+Of course this assumes that we don't have data types with too many thousands of constructors.
+
+
+
+It might be possible that the case code for the alternatives above is becoming too complex. We might settle for the following "simple" option:
+
+
+<table><tr><th>  </th>
+<th> bits 31..2 </th>
+<th> bits 1 0 </th>
+<th> 
+</th></tr>
+<tr><th> unevaluated closure </th>
+<th> ptr </th>
+<th> 00 </th>
+<th> 
+</th></tr>
+<tr><th> cons. w/no children </th>
+<th> tag </th>
+<th> 01 </th>
+<th> tag \< no. of  constructors
+</th></tr>
+<tr><th> cons. w/ children </th>
+<th> ptr </th>
+<th> 01 </th>
+<th> ptr \>= no. of constructors 
 </th></tr></table>
 
 
