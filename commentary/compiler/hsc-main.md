@@ -20,7 +20,7 @@ Look at the picture first.  The yellow boxes are compiler passes, while the blue
 
 >
 >
-> These three passes can all produce discover programmer errors, which are sorted and reported to the user.
+> These three passes can all discover programmer errors, which are sorted and reported to the user.
 >
 >
 
