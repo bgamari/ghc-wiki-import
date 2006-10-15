@@ -9,18 +9,3 @@ A `.cmm` file is rather like C--.  The syntax is almost C-- (a few constructs ar
 We use the C preprocessor on `.cmm` files, making extensive use of macros to make writing this low-level code a bit less tedious and error-prone.  Most of our C-- macros are in [includes/Cmm.h](/trac/ghc/browser/ghc/includes/Cmm.h).
 
 
-## Additions over C--
-
-
-
-The `.cmm` syntax includes the 
-
-
-```wiki
-foreign "C" cfunctionname(R1) [R2];
-```
-
-
-I think the \[R2\] part is the (set of) register(s) that you need to save over the call.
-
-
