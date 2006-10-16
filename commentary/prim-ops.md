@@ -111,3 +111,61 @@ To add a new primop, you currently need to update the following files:
 See also [AddingNewPrimitiveOperations](adding-new-primitive-operations), a blow-by-blow description of the process for adding a new out-of-line primop from someone who went through the process.
 
 
+## Explanation of attributes
+
+
+
+`TBV` (To be verified)
+
+
+### has\_side\_effects
+
+
+
+default = False
+
+
+### out\_of\_line
+
+
+
+default = False
+
+
+
+Set to True if there is a function in [PrimOps](commentary/prim-ops).cmm. This also changes to code generator to push the continuation
+of any followon code onto the stack.
+
+
+### commutable
+
+
+
+default = False
+
+
+### needs\_wrapper
+
+
+
+default = False
+
+
+### strictness
+
+
+
+default = \[lazyDmd, ... \] TopRes
+
+
+
+This is the strictness of the PrimOp. Unboxed things should be marked as lazyDmd. (Someone explain why?).
+
+
+### usage
+
+
+
+default = nomangle other
+
+
