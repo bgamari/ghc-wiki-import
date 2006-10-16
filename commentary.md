@@ -39,6 +39,8 @@ Please feel free to add material to this commentary: don't worry too much about 
     - Typechecker
     - Desugarer
     - Core-\>core
+
+      - [Strictness analysis](commentary/compiler/strictness-analysis)
     - Core-\>CorePrep
     - CorePrep-\>Stg?
     - [The code generator](commentary/compiler/code-gen): Stg-\>Cmm
