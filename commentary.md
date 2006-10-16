@@ -103,11 +103,11 @@ Please feel free to add new pages here.  In due course information will migrate 
   - [DebuggingGhcCrashes](debugging-ghc-crashes): how to use gdb to debug a crash in GHC-compiled code.
   - [AddingNewPrimitiveOperations](adding-new-primitive-operations): How to add new primitive operations to GHC Haskell.
   - [Replacing GMP](replacing-gmp-notes): Notes from an effort to replace GMP with another Bignum library.
+  - [ExternalCore](external-core): Describes the process of bringing External Core up to speed. Once finished, this will simply describe what External Core is, and how it works. 
 - The Runtime System
 
   - [GarbageCollectorNotes](garbage-collector-notes) Notes about GHC's existing single threaded garbage collector and development of a parallel GC.
   - [SemiTagging](semi-tagging): Describes how the semi-tagging optimisation will be implemented.
-  - [ExternalCore](external-core): Describes the process of bringing External Core up to speed. Once finished, this will simply describe what External Core is, and how it works. 
 - [Hackathon presentations](about-videos) (video)
 
 
