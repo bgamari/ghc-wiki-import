@@ -92,7 +92,7 @@ version of Cabal.
 Historically this contained the Perl script known as the GHC
 "driver"; in GHC 5.00 the driver was rewritten in Haskell and
 incorporated into GHC itself when we added GHCi and `--make`.
-This directory still contains the mangler?
+This directory still contains the [mangler](commentary/evil-mangler)
 and the splitter? Perl scripts, and a couple
 of wrappers used to invoke GHC on Windows.  Also the package
 database constructed during a GHC build is stored in here.
