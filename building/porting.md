@@ -367,7 +367,7 @@ build:
 
 >
 >
-> `GhcFile(includes/MachRegs.h`:
+> `includes/MachRegs.h`:
 >
 >
 > >
