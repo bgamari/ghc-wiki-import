@@ -283,7 +283,7 @@ Symbols related to a data constructor X:
 - X\_`static_info`: info table for a static instance of X
 - X\_`info`: the *wrapper* for X (a function, equivalent to the
   curried function `X` in Haskell, see
-  Commentary/Compiler/DataCon?).  
+  [Commentary/Compiler/EntityTypes](commentary/compiler/entity-types)).  
 - X\_`closure`: static closure for X's wrapper
 
 ### Function Closures
@@ -419,6 +419,11 @@ table).  If it is evaluated, then it goes ahead and does the
 selection, and then behaves just as if the selector thunk was an
 indirection to the selected field.  If it is not evaluated, it
 treats the selector thunk like any other thunk of that shape.
+
+
+
+This technique comes from the Phil Wadler paper [
+Fixing some space leaks with a garbage collector](http://homepages.inf.ed.ac.uk/wadler/topics/garbage-collection.html), and later Christina von Dorrien who called it "Stingy Evaluation".
 
 
 
