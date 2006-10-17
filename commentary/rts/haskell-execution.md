@@ -52,7 +52,12 @@ Source files: [rts/Apply.h](/trac/ghc/browser/ghc/rts/Apply.h), [rts/Apply.cmm](
 
 
 
-Dealing with calls is by far the most complicated bit of the execution model, and hence of the code generator.  Before we can talk about that, we need some terminology:
+Dealing with calls is by far the most complicated bit of the execution model, and hence of the code generator.  GHC uses an *eval/apply* strategy for compiling function calls; all the details of the design are in the paper [
+Making a fast curry: push/enter vs. eval/apply for higher-order languages](http://www.haskell.org/~simonmar/papers/eval-apply.pdf).
+
+
+
+First, we need some terminology:
 
 
 - The **arity** of a function is the number of lambdas statically used in [the lambda-form of its definition](commentary/compiler/stg-syn-type).  Note that arity is not deducible from the type.  Example:
