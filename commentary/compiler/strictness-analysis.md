@@ -28,11 +28,11 @@ In [compiler/stranal/DmdAnal.lhs](/trac/ghc/browser/ghc/compiler/stranal/DmdAnal
 
 
 ```wiki
-dmdAnal :: SigEnv -> Demands -> CoreExpr -> (DmdType, CoreExpr)
+dmdAnal :: SigEnv -> Demand-> CoreExpr -> (DmdType, CoreExpr)
 ```
 
 
-The first argument is an environment mapping variables onto demand signatures. (ToDo: explain more.) The third argument is the expression being analyzed. `dmdAnal` returns a pair of a new expression (possibly with strictness information added to any [Ids](commentary/compiler/name-type) in it), and a `DmdType`.
+The first argument is an environment mapping variables onto demand signatures. (ToDo: explain more.) The second time is the demand that's being placed on the expression being analyzed, which was determined from the context already. The third argument is the expression being analyzed. `dmdAnal` returns a pair of a new expression (possibly with strictness information added to any [Ids](commentary/compiler/name-type) in it), and a `DmdType`.
 
 
 ## Important datatypes
