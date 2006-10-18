@@ -79,133 +79,38 @@ Optionally, you might want to grab the testsuite and benchmark suite too, which 
   $ darcs get --partial http://darcs.haskell.org/nofib
 ```
 
-## List of repositories
+
+The full list of darcs repositories relating to GHC is at [DarcsRepositories](darcs-repositories).
+
+
+### Getting a branch
 
 
 
-These darcs repositories are related to GHC:
-
-
-<table><tr><th>[
-http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc)</th>
-<th>The main GHC repository
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/testsuite](http://darcs.haskell.org/testsuite)</th>
-<th>The test suite (requires python 2.4+) 
-</th></tr>
-<tr><th>[ http://darcs.haskell.org/nofib](http://darcs.haskell.org/nofib)</th>
-<th>The benchmark suite
-</th></tr></table>
+The above instructions will get the HEAD - the main trunk of GHC development.  There are also branches, from which stable releases are made.  The active branches are listed on [DarcsRepositories](darcs-repositories).
 
 
 
-The following repositories are the "core" packages, that populate the libraries directory of a GHC tree:
+To get a branch, add the branch name after [
+http://darcs.haskell.org/](http://darcs.haskell.org/).  For example, to get the `ghc-6.6` branch, you would fist say 
 
 
-<table><tr><th>[
-http://darcs.haskell.org/packages/base](http://darcs.haskell.org/packages/base)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/Cabal](http://darcs.haskell.org/packages/Cabal)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/haskell98](http://darcs.haskell.org/packages/haskell98)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/readline](http://darcs.haskell.org/packages/readline)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/regex-base](http://darcs.haskell.org/packages/regex-base)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/regex-posix](http://darcs.haskell.org/packages/regex-posix)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/regex-compat](http://darcs.haskell.org/packages/regex-compat)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/stm](http://darcs.haskell.org/packages/stm)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/template-haskell](http://darcs.haskell.org/packages/template-haskell)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/unix](http://darcs.haskell.org/packages/unix)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/Win32](http://darcs.haskell.org/packages/Win32)
-</th></tr></table>
+```wiki
+  $ darcs get --partial http://darcs.haskell.org/ghc-6.6/ghc
+```
+
+
+and then use `darcs-all` as above to get the rest of the respositories.
 
 
 
-And the following repositories are the "extra" packages:
+To get testsuite and/or nofib, you'll need to name the branch repositories:
 
 
-<table><tr><th>[
-http://darcs.haskell.org/packages/ALUT](http://darcs.haskell.org/packages/ALUT)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/GLUT](http://darcs.haskell.org/packages/GLUT)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/HGL](http://darcs.haskell.org/packages/HGL)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/HUnit](http://darcs.haskell.org/packages/HUnit)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/HaXml](http://darcs.haskell.org/packages/HaXml)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/Japi](http://darcs.haskell.org/packages/Japi)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/ObjectIO](http://darcs.haskell.org/packages/ObjectIO)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/OpenAL](http://darcs.haskell.org/packages/OpenAL)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/OpenGL](http://darcs.haskell.org/packages/OpenGL)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/QuickCheck](http://darcs.haskell.org/packages/QuickCheck)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/X11](http://darcs.haskell.org/packages/X11)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/arrows](http://darcs.haskell.org/packages/arrows)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/fgl](http://darcs.haskell.org/packages/fgl)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/haskell-src](http://darcs.haskell.org/packages/haskell-src)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/html](http://darcs.haskell.org/packages/html)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/monads](http://darcs.haskell.org/packages/monads)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/mtl](http://darcs.haskell.org/packages/mtl)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/network](http://darcs.haskell.org/packages/network)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/parsec](http://darcs.haskell.org/packages/parsec)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/time](http://darcs.haskell.org/packages/time)
-</th></tr>
-<tr><th>[
-http://darcs.haskell.org/packages/xhtml](http://darcs.haskell.org/packages/xhtml)
-</th></tr></table>
-
+```wiki
+  $ darcs get --partial http://darcs.haskell.org/ghc-6.6/testsuite
+  $ darcs get --partial http://darcs.haskell.org/ghc-6.6/nofib
+```
 
 ### Pulling new patches
 
@@ -218,83 +123,18 @@ To update your tree from the master repositories, the quickest way is to use the
   $ ./darcs-all pull -a
 ```
 
-### Submitting patches
 
-
-
-To submit patches to the developers, please use `darcs send`.  You don't need any special permission to do this.
-
-
-### Committing changes
-
-
-
-If you have commit permission (pretty easy to get, just demonstrate your competence by sending us a patch or two first), then you can use `darcs push` to commit changes directly to the main repository.
+Note that after pulling new changes, the safest way to continue working is to clean the build tree and start from scratch:
 
 
 ```wiki
-  $ darcs push <account>@darcs.haskell.org:/home/darcs/ghc
+  $ make distclean
+  $ autoreconf
+  $ ./configure
+  $ make
 ```
 
 
-(change `ghc` to the name of the repository if you're pushing changes from one of the sub-repositories, like `testsuite`, or a package such as `base`.  Note: `darcs push` requires that SSH is working and can log in to your account on `darcs.haskell.org`.
-
-
-
-Do not forget to `darcs record` your changes first!
-
-
-
-Please test changes before committing: you can run a cut-down version of the full test suite like this:
-
-
-```wiki
-  $ cd testsuite
-  $ make boot
-  $ cd tests/ghc-regress
-  $ make fast
-```
-
-
-You need to have `testsuite` checked out, of course.  Running `make fast` should only take a few minutes.
-
-
-## The 6.6 branch
-
-
-
-There is a branch, for the 6.6 series of GHC releases, of the repositories for
-ghc, testsuite, nofib and the core libraries in the
-
-
-<table><tr><th>[
-http://darcs.haskell.org/ghc-6.6](http://darcs.haskell.org/ghc-6.6)
-</th></tr></table>
-
-
-
-subtree.
-
-
-
-To use this branch instead of the HEAD, replace the first command in the instructions above with
-
-
-```wiki
-  $ darcs get --partial http://darcs.haskell.org/ghc-6.6/ghc
-```
-
-
-and use
-
-
-```wiki
-  $ darcs get --partial http://darcs.haskell.org/ghc-6.6/testsuite
-  $ darcs get --partial http://darcs.haskell.org/ghc-6.6/nofib
-```
-
-
-to get the testsuite and nofib. Otherwise, the commands needed are identical to those for
-working with the HEAD.
+You may be able to shortcut this procedure if you know what you're doing, or you could just take a risk and if anything goes wrong fall back to the above procedure.
 
 
