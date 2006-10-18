@@ -34,7 +34,11 @@ The quality of the audio or (particularly) video may not be great.  They are int
 1. [
   Getting and Building](http://video.google.com/videoplay?docid=7166458546326012899), layout of the source tree, how to set up build.mk (23'43")
 1. [
-  Compilation Pipeline](http://video.google.com/videoplay?docid=-4326420154219711812), and interface files (17'30")
+  Compilation Pipeline I](http://video.google.com/videoplay?docid=-4326420154219711812), and interface files (17'30")
 1. [
   Abstract Syntax](http://video.google.com/videoplay?docid=-8782356823569862556) representation, and how it interacts with parser/renamer/typechecker (1hr03')
+1. \[ Compilation Pipeline II\], the backend (10'16")
+1. \[ Types and Classes\] internal representation
+1. \[ Specialisation\], getting rid of class dictionaries
+1. \[ GHC Core Language\] and internal representation
 1. still lots more to come...
