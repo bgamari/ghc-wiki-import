@@ -30,7 +30,10 @@ from that manual is gradually being incorporated here.
 - [Building the documentation](building/docs)
 - [Porting GHC](building/porting)
 - [Known pitfalls in building GHC](building/known-problems)
-- [Building under Windows](building/windows)
+- Platform-specific build issues
+
+  - [Building under Windows](building/windows)
+  - [Building under MacOS X](building/mac-osx)
 
 ## Contributed documentation
 
