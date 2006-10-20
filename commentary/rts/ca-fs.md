@@ -1,3 +1,4 @@
-# GHC Commentary: Garbage Collecting CAFs
+
+redirect(wiki:Commentary/Rts/Storage/CAFs)?
 
 
