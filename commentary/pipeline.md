@@ -33,3 +33,11 @@ We start with `Foo.hs` or `Foo.lhs`, the "l" specifing whether literate style is
 - If `-split-objs` is in force, run the **splitter** on `Foo.s`.  This splits `Foo.s` into lots of small files.  The idea is that the static linker will thereby avoid linking dead code.
 
 - Run the assembler on `Foo.s` or, if `-split-objs` in in force, on each individual assembly file.
+
+# The compiler pipeline
+
+
+
+The **compiler itself**, independent of the external tools, is also structured as a pipeline.  For details (and a diagram), see [Commentary/Compiler/HscMain](commentary/compiler/hsc-main)
+
+
