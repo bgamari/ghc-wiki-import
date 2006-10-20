@@ -1,3 +1,8 @@
+
+Video: [
+GHC Core language](http://video.google.com/videoplay?docid=-8778691434558190641) (14'04")
+
+
 # The `Core` type
 
 
