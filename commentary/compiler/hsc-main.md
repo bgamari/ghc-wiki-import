@@ -1,3 +1,8 @@
+
+Video: [
+Compiler Pipeline II](http://video.google.com/videoplay?docid=5254545394467397086) (10'16")
+
+
 # Compiling one module: HscMain
 
 
