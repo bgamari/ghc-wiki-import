@@ -2,14 +2,7 @@
 
 
 
-The compiler itself is written entirely in Haskell, and lives in the many sub-directories of the [compiler](/trac/ghc/browser/ghc/compiler) directory.  Here is a block diagram of its top-level structure:
-
-
-
-[](/trac/ghc/attachment/wiki/Commentary/Compiler/ghc-top.png)
-
-
-## Contents
+The compiler itself is written entirely in Haskell, and lives in the many sub-directories of the [compiler](/trac/ghc/browser/ghc/compiler) directory.  
 
 
 - [Compiler Module Dependencies](module-dependencies) (deals with the arcane mutual recursions among GHC's many data types)
@@ -39,13 +32,20 @@ The compiler itself is written entirely in Haskell, and lives in the many sub-di
   - [C code generator](commentary/compiler/backends/ppr-c)
   - [Native code generator](commentary/compiler/backends/ncg)
 
+## Overall Structure
 
-The GHC API is the interface exported by compiler/main/GHC.hs. To compile a Haskell module that uses the GHC API, use the flag `-package ghc` (in GHC 6.6 and later). GHC itself contains a few front-ends: 
 
 
-- The "one-shot" mode, where GHC compiles each file on the command line separately (eg. `ghc -c Foo.hs`). This mode is implemented
-  directly on top of [HscMain](commentary/compiler/hsc-main), since it compiles only one file at a time. In fact, this is all that   
-  GHC consisted of prior to version 5.00 when GHCi and --make were introduced.
+Here is a block diagram of its top-level structure:
+
+
+
+[](/trac/ghc/attachment/wiki/Commentary/Compiler/ghc-top.png)
+
+
+
+The part called **HscMain** deals with compiling a single module.  On top of this is built the **compilation manager** (in blue) that manages the compilation of multiple modules.  It exports an interface called the **GHC API**.  On top of this API are four small front ends:
+
 
 - GHCi, the interactive environment, is implemented in [compiler/ghci/InteractiveUI.hs](/trac/ghc/browser/ghc/compiler/ghci/InteractiveUI.hs) and sits squarely on top of the GHC
   API.
@@ -59,7 +59,19 @@ The GHC API is the interface exported by compiler/main/GHC.hs. To compile a Hask
 - `-M`, the Makefile dependency generator, is also a client of the GHC API and is implemented in
   [compiler/main/DriverMkDepend.hs](/trac/ghc/browser/ghc/compiler/main/DriverMkDepend.hs). 
 
+- The "one-shot" mode, where GHC compiles each file on the command line separately (eg. `ghc -c Foo.hs`). This mode bypasses teh GHC API, and is implemented
+  directly on top of [HscMain](commentary/compiler/hsc-main), since it compiles only one file at a time. In fact, this is all that   
+  GHC consisted of prior to version 5.00 when GHCi and `--make` were introduced.
 
-Note that since GHC is packaged as a single binary, all of these front-ends are present, and there is a single command-line interface implemented in [compiler/main/Main.hs](/trac/ghc/browser/ghc/compiler/main/Main.hs).
+
+GHC is packaged as a single binary in which all of these front-ends are present, selected by the command-line flags indicated above.  There is a single command-line interface implemented in [compiler/main/Main.hs](/trac/ghc/browser/ghc/compiler/main/Main.hs).
+
+
+
+In adition, GHC is compiled, without its front ends, as a *library* which can be imported by any Haskell program; see Commentary/Compiler/API the GHC API?.
+
+
+
+ 
 
 
