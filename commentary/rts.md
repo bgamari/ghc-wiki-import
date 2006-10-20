@@ -41,6 +41,7 @@ Next, we try to make sense of how it all fits together.
 - [Layout of heap objects](commentary/rts/heap-objects)
 - [Layout of the stack](commentary/rts/stack)
 - Slop?
+- [Sanity Checking](commentary/rts/sanity)
 - [The Haskell Execution model](commentary/rts/haskell-execution)
 - [The Scheduler](commentary/rts/scheduler)
 - [The Storage Manager](commentary/rts/storage)
