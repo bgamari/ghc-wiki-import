@@ -68,7 +68,7 @@ GHC is packaged as a single binary in which all of these front-ends are present,
 
 
 
-In adition, GHC is compiled, without its front ends, as a *library* which can be imported by any Haskell program; see Commentary/Compiler/API the GHC API?.
+In adition, GHC is compiled, without its front ends, as a *library* which can be imported by any Haskell program; see [the GHC API](commentary/compiler/api).
 
 
 
