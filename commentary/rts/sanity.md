@@ -10,7 +10,7 @@ The purpose of sanity checking is to catch bugs in the RTS as early as possible;
 
 
 
-Sanity checking is turned on by the `+RTS -DS` option.  We treat it like an expensive assertion: normal assertions are allowed to take a few extra percent of runtime, so we don't mind having them on all the time in a `DEBUG` runtime, but sanity checking may double the run time of the program or worse.  So the rule of thumb is that expensive assertions go into sanity checking, cheap assertions are on in `DEBUG`, or possibly even on all the time.
+Sanity checking is turned on by the `+RTS -DS` option.  We treat it like an expensive assertion: normal assertions are allowed to take a few extra percent of run time, so we don't mind having them on all the time in a `DEBUG` RTS, but sanity checking may double the run time of the program or worse.  So the rule of thumb is that expensive assertions go into sanity checking, cheap assertions are on in `DEBUG`, or possibly even on all the time.
 
 
 
