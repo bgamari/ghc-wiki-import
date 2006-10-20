@@ -18,6 +18,6 @@ Sanity checking does a complete traversal of the heap after each GC to look for 
 
 
 
-Sanity checking also turns on some other expensive checks: for example in the generic apply code we check that the arguments point to valid closures.
+Sanity checking also turns on some other expensive checks: for example in the [generic apply](commentary/rts/haskell-execution#generic-apply) code we check that the arguments point to valid closures.
 
 
