@@ -21,7 +21,7 @@ With the flag on, any doc comments appearing where they're not expected will res
 
 
 
-Module headers, every type of doc comment and option -- basically all information that the original Haddock can obtain from doc comments can also be parsed by GHC and obtained from the GHC API.  
+Module headers, every type of doc comment and option, basically all information that the original Haddock can obtain from doc comments can also be parsed by GHC and obtained from the GHC API.  
 
 
 # Lexer details
