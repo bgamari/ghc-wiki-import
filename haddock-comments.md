@@ -58,7 +58,7 @@ Before the renaming phase, GHC restructures function definitions into binding gr
 
 
 
-We do this with the top level doc comments as well. There's a problem though: An external program must be able to use the GHC API to associate multiple "next" and "prev" style comments to the right Haskell binding. This can be done by looking at the parsed syntax tree, where the file structure is preserved. But, by going through this restructuring, the renamed syntax loose this structure. We want to be able to use the renamed syntax, so instead of just grouping the comments together, we let the grouping process return a list of `DocEntity`:
+We do this with the top level doc comments as well. There's a problem though: An external program must be able to use the GHC API to associate multiple "next" and "prev" style comments with the right Haskell binding. This can be done by looking at the parsed syntax tree, where the file structure is preserved. But, by going through this restructuring, the renamed syntax loose this structure. We want to be able to use the renamed syntax, so instead of just grouping the comments together, we let the grouping process return a list of `DocEntity`:
 
 
 ```wiki
