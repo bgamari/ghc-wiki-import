@@ -44,7 +44,7 @@ data Token =
 
 
 There are four types of doc comments at this level, each having its own token. Each token contains the entire comment string. 
-Just like the old Haddock, we support "next" and "previous"-type comments, "named" comments and section headings. The options token is used for   specifiying Haddock options. Options are specified using a pragma, like this: {-\# DOCOPTIONS prune, ignore-exports }. You can no longer specify them using dash comments (e.g -- \# prune).
+Just like the original Haddock, we support "next" and "previous"-type comments, "named" comments and section headings. The options token is used for   specifiying Haddock options. Options are specified using a pragma, like this: {-\# DOCOPTIONS prune, ignore-exports }. You can no longer specify them using dash comments (e.g -- \# prune).
 
 
 # Parser details
@@ -55,7 +55,7 @@ The doc tokens appear in a lot of places in the grammar and having a look at [co
 
 
 
-When a doc token is encountered by the parser, it tries to parse the content of the token. This is done by invoking a special Alex lexer ([compiler/parser/HaddockLex.x](/trac/ghc/browser/ghc/compiler/parser/HaddockLex.x)) and Happy parser ([compiler/parser/HaddockParse.y](/trac/ghc/browser/ghc/compiler/parser/HaddockParse.y)), taken directly from the old Haddock sources. This process turns the token into a value of type `HsDoc RdrName`, representing the (internal structure of the) comment. It can then be stored in the Haskell AST by the parser at the appropriate place. A lot of places (constructors) in the AST definition ([compiler/hsSyn](/trac/ghc/browser/ghc/compiler/hsSyn)) allow `HsDoc`s, and more can be added.
+When a doc token is encountered by the parser, it tries to parse the content of the token. This is done by invoking a special Alex lexer ([compiler/parser/HaddockLex.x](/trac/ghc/browser/ghc/compiler/parser/HaddockLex.x)) and Happy parser ([compiler/parser/HaddockParse.y](/trac/ghc/browser/ghc/compiler/parser/HaddockParse.y)), taken directly from the original Haddock sources. This process turns the token into a value of type `HsDoc RdrName`, representing the (internal structure of the) comment. It can then be stored in the Haskell AST by the parser at the appropriate place. A lot of places (constructors) in the AST definition ([compiler/hsSyn](/trac/ghc/browser/ghc/compiler/hsSyn)) allow `HsDoc`s, and more can be added.
 
 
 # Binding groups
