@@ -5,7 +5,7 @@
 
 
 
-Haddock comment support was added to GHC as part of a [
+Haddock comment support was added to GHC by David Waern as part of a [
 Google Summer Of Code](http://code.google.com/soc) project. The aim of the project was to  port the existing Haddock program to use the GHC API. Since the project is now over, GHC can understand Haddock comments (here called doc comments) and they are available through the GHC API. This is a very rough overview of the implementation.
 
 
