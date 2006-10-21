@@ -47,7 +47,7 @@ When a doc token is encountered by the parser, it tries to parse the content of 
 
 
 
-Putting a doc comment at a place where the parser doesn't expect it will result in a parse error.  
+A doc token at a place where the parser doesn't expect it will result in a parse error.
 
 
 # Binding groups
