@@ -65,7 +65,7 @@ data DocEntity name
 ```
 
 
-An external program can now figure out which doc comment belongs to what "entity", i.e what Haskell binding. This solution is also used for the method declarations in classes. 
+An external program can now figure out which doc comment belongs to what "entity", i.e what Haskell binding. This solution is also used for method declarations in classes. 
 
 
 ## The renamer
