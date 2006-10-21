@@ -30,6 +30,7 @@ from that manual is gradually being incorporated here.
 - [Building the documentation](building/docs)
 - [Porting GHC](building/porting)
 - [Known pitfalls in building GHC](building/known-problems)
+- [Running the GHC test framework](building/running-tests)
 - Platform-specific build issues
 
   - [Building under Windows](building/windows)
