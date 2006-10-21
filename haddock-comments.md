@@ -39,7 +39,7 @@ Just like the old Haddock, we support "next" and "previous"-type comments, "name
 
 
 
-The doc tokens can appear in a lot of places in the grammar and having a look at [compiler/parser/Parser.y.pp](/trac/ghc/browser/ghc/compiler/parser/Parser.y.pp) is probably the best way to get an overview of this.   
+The doc tokens appear in a lot of places in the grammar and having a look at [compiler/parser/Parser.y.pp](/trac/ghc/browser/ghc/compiler/parser/Parser.y.pp) is probably the best way to get an overview of this.   
 
 
 
