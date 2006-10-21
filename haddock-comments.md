@@ -95,7 +95,7 @@ The doc comments are present in `ParsedSource` as well as in `RenamedSource`.
 
 
 
-There are three pieces of information besides the ordinary comments themselves that could also be of interest. Those are the doc options, the module-specific doc comment and the Haddock module header information. All of them are available in the `HsModule` data type in the `ParsedSource`. The last two pieces of information may contain names of identifiers, so they are also part of the renamed syntax. They can be obtained from the last two elements in `RenamedSource` 5-tuple, as seen below.
+There are three pieces of information besides the ordinary comments themselves that could also be of interest. Those are the doc options, the module-specific doc comment and the Haddock module header information. All of them are available in the `HsModule` data type in `ParsedSource`. The last two pieces of information may contain names of identifiers, so they are also part of the renamed syntax. They can be obtained from the last two elements in the `RenamedSource` 5-tuple, as seen below.
 
 
 ```wiki
