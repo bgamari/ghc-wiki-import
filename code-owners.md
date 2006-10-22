@@ -139,6 +139,7 @@ and a short description of what they're doing or have done.
 - Malcolm Wallace
 - N. Xu
 - Ashley Yakeley (Time library)
+- David Waern (Haddock comment support)
 
 ## Past contributors
 
