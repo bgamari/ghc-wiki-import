@@ -32,3 +32,27 @@ After calling dmd\_anal on the body of a let, which results in demand type `dmd_
 This might work, but is kind of kludgy.
 
 
+
+This may be *way* too unnecessarily complicated. Can't we just get the same information from the demand on f in the free-var environment of the let body as it is, without changing the environment?
+
+
+
+suppose the demand on f is
+
+
+```wiki
+S1K(S1K(LMX))
+```
+
+
+if f = 
+
+
+```wiki
+(\ x. (\ y. ...))
+```
+
+
+then we can mark the outer two lambdas as being one-shot. Right?
+
+
