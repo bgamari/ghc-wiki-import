@@ -22,7 +22,7 @@ We keep track of demands on partial applications.
 
 
 
-After calling dmd\_anal on the body of a let, which results in demand type `dmd_ty` with DmdEnv `dmd_env`, we do the following for each let-bound variable `f`:
+After calling dmd\_anal on the body of a let, which results in demand type `dmd_ty` with demand env `dmd_env`, we do the following for each let-bound variable `f`:
 
 
 1. Iterate through all the keys in `dmd_env`, finding all applications of `f` to *n* arguments.
