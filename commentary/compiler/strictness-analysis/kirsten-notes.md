@@ -1,0 +1,34 @@
+# Linearity
+
+
+
+Instead of:
+
+
+```wiki
+type DmdEnv = VarEnv Demand
+```
+
+
+we want:
+
+
+```wiki
+type DmdEnv = Env CoreExpr Demand
+```
+
+
+We keep track of demands on partial applications.
+
+
+
+After calling dmd\_anal on the body of a let, which results in demand type `dmd_ty` with DmdEnv `dmd_env`, we do the following for each let-bound variable `f`:
+
+
+1. Iterate through all the keys in `dmd_env`, finding all applications of `f` to *n* arguments.
+1. For each *i* from 1 through *n* (where *n* is `f`'s arity), if each of the applications of `f` to *i* arguments has usage demand `OneOrZero`, then it's safe to mark the corresponding lambda-expression as a one-shot lambda. 
+
+
+This might work, but is kind of kludgy.
+
+
