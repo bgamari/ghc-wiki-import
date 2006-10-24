@@ -433,7 +433,7 @@ these steps:
 > >
 > > >
 > > >
-> > > **expect\_fail**           this test is an expected failure
+> > > **expect\_fail**           this test is an expected failure, i.e. there is a known bug in the compiler, but we don't want to fix it.
 > > >
 > > >
 > >
@@ -569,15 +569,12 @@ these steps:
 > > > > Just compile the program, the
 > > > > compilation should fail (error
 > > > > messages will be in T.stderr).
+> > > > This kind of failure is mandated by the language definition - it does **not** indicate any bug in the compiler.
 > > > >
 > > > >
 > > >
 > >
 >
-
-
-                                
-
 
 >
 > >
@@ -626,7 +623,7 @@ these steps:
 > > > >
 > > > > Compile a multi-module program,
 > > > > and expect the compilation to fail
-> > > > with error messages in T.stderr
+> > > > with error messages in T.stderr.  This kind of failure does **not** indicate a bug in the compiler.
 > > > >
 > > > >
 > > >
