@@ -74,23 +74,6 @@ SMK(SMK(LMX))
 ```
 
 
-because it's called more than once. (But maybe that's okay? If it instead were:
-
-
-```wiki
-let f = \ x. \ y. ... in
-  ...(f 1)...(f 3 4)...
-```
-
-
-then the demand would be:
-
-
-```wiki
-SMK(LMX)
-```
-
-
-and we would know that there was a partial application? Getting confused here.)
+because it's called more than once. We really want the demand to reflect that (f 1) is called only once and (f 3) is called only once, but it doesn't. So it doesn't seem like we can figure out what we need to know just by looking at the demand on f.
 
 
