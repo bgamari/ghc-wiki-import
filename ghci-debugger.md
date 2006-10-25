@@ -251,7 +251,7 @@ The desugarer monad has been extended with an OccEnv of Ids to track the binding
 
 
 The dynamic linker has been modified so that it won't panic if one of the jump functions fails to resolve.
-Now, if the dynamic linker fails to find a HValue for a Name, before looking for a static symbol it will ask 
+Now if the dynamic linker fails to find a HValue for a Name, before looking for a static symbol it will ask 
 
 
 ```wiki
@@ -268,7 +268,13 @@ This is necessary because a TH function might contain a call to a breakpoint fun
 
 
 Why didn't I address the problem by forbidding breakpoints inside TH code? I couldn't find an easy solution for this, considering the user is free to put a manual breakpoint wherever.
+
+
+
 Why did I introduce the default as a special case in the linker?
+
+
+
 I considered other options:
 
 
@@ -300,27 +306,6 @@ The approach followed here has been the well known 'do the simplest thing that c
 The instrumentation is done at the desugarer too, which has been extended accordingly. We distinguish between 'auto' breakpoints, those introduced by the desugarer, and 'normal' breakpoints user created by using the `breakpoint` function directly.
 
 
-## The D in Dynamic Breakpoints
-
-
-
-When we instrument the code we insert a flavor of regular breakpoints which know about their site number. So when one of these is hit, ghci finds out whether that site is enabled and acts accordingly.
-GHCi thus stores a boolean matrix of enabled breakpoint sites. This scheme is realized in [
-Breakpoints.hs](http://darcs.haskell.org/SoC/ghc.debugger/compiler/main/Breakpoints.hs):
-
-
-```wiki
-data BkptTable a  = BkptTable { 
-     breakpoints :: Map.Map a (UArray Int Bool)  -- *An array of breaks, indexed by site number
-   , sites       :: Map.Map a [[(SiteNumber, Int)]] -- *A list of lines, each line can have zero or more sites, which are annotated with a column number
-   }
-```
-
-
-Since this structure needs to be accessed every time a breakpoint is hit and is modified extremely few times in comparison, the goal is to have as fast access time as possible. Most of the overhead is due to this structure.
-It's too bad that I haven't explored alternative designs. (Using bits instead of Bools in the matrix? discard the matrix thing and use an IORef in every breakpoint? some clever trick using the FFI?). 
-
-
 ## Overhead
 
 
@@ -340,7 +325,13 @@ disableAutoBreakpoints :: Session -> IO ()
 
 
 GHCi would keep breakpoints disabled until the user defines the first breakpoint, and thus for normal use we could keep the -fdebugging flag enabled always.
+
+
+
 The problem is that to make the implementation of `disableAutoBreakpoints` (`enableAutoBreakpoints resp.)  effective at all we need to implement it by relinking the `breakpointJumpAuto\` function to a new "do nothing" lambda (to the user-set bkptHandler resp.). 
+
+
+
 This would imply a relink, which is quite annoying to a user of GHCi since any top level bindings are lost. This is why this functionality is only a proof of concept and is disabled for now. I wish I had a better understanding of how the dynamic linker and the top level environment in ghci work.
 
 
@@ -374,6 +365,9 @@ This section is easy. There are NO modifications in the renamer, other than remo
 
 
 *summarize the modifications made to thread the site list of a module from the renamer to the ghc-api*
+
+
+
 TcGblEnv is extended with a dictionary of sites and coordinates (TODO switch the coordinate datatype to the ghc-standard SrcLoc) introduced in the module at the desugarer.
 
 
@@ -421,13 +415,45 @@ Once an 'auto' breakpoint, that is a breakpoint inserted by the renamer, is hit,
 
 ```wiki
 data BkptHandler a = BkptHandler {
-     handleBreakpoint  :: forall b. Session -> [(Id,HValue)] -> BkptLocation a ->  String -> b -> IO b
-   , isAutoBkptEnabled :: Session -> BkptLocation a -> IO Bool
+     -- | What to do once an enabled breakpoint is found
+     handleBreakpoint  :: forall b. Session 
+                                  -> [(Id,HValue)]        -- * Local bindings and their id's
+                                  -> BkptLocation a    -- * Module and Site # 
+                                  ->  String                 -- * A SrcLoc string msg
+                                  -> b                         -- * The arg. to the breakpoint fun
+                                  -> IO b
+     -- | Implementors should return True if the breakpoint is enabled
+   , isAutoBkptEnabled :: Session 
+                                -> BkptLocation a      -- * Module and Site #
+                                -> IO Bool
    }
 ```
 
 
-* to be finished*
+The Ghci debugger is a client of this API as described below.
+
+
+## The D in Dynamic Breakpoints
+
+
+
+In order to implement the 'isAutoBkptEnabled' record, when a breakpoint is hit GHCi must find out whether that site is enabled or not. GHCi thus stores a boolean matrix of enabled breakpoint sites. This scheme is realized in [
+Breakpoints.hs](http://darcs.haskell.org/SoC/ghc.debugger/compiler/main/Breakpoints.hs):
+
+
+```wiki
+data BkptTable a  = BkptTable { 
+     breakpoints :: Map.Map a (UArray Int Bool)  -- *An array of breaks, indexed by site number
+   , sites       :: Map.Map a [[(SiteNumber, Int)]] -- *A list of lines, each line can have zero or more sites, which are annotated with a column number
+   }
+```
+
+
+Since this structure needs to be accessed every time a breakpoint is hit and is modified extremely few times in comparison, the goal is to have as fast access time as possible. All of the overhead in our debugger is going to be caused by this operation.
+
+
+
+It's too bad that I haven't explored alternative designs. (Using bits instead of Bools in the matrix? discard the matrix thing and use an IORef in every breakpoint? some clever trick using the FFI?). 
 
 
 # Pending work
