@@ -37,7 +37,7 @@ C-- code for parts of the runtime that are part of the Haskell execution environ
 example, the implementation of primitives, exceptions, and so on.  A `.cmm` file is
 pseudo C--: more or less C-- syntax with some omissions and some additional macro-like
 extensions implemented by GHC.  The `.cmm` files are compiled using GHC itself: see
-Commentary/Compiler/CmmFiles?.
+[Commentary/Rts/Cmm](commentary/rts/cmm).
 </td></tr></table>
 
 
@@ -58,6 +58,12 @@ however not all of the RTS follows this convention right now.
 <td>
 Hooks for changing the RTS behaviour from client code, eg. changing the default heap size. (see User's Guide
 for more about hooks).
+</td></tr></table>
+
+
+<table><tr><th>`sm/`</th>
+<td>
+The [Storage Manager](commentary/rts/storage).
 </td></tr></table>
 
 
@@ -161,20 +167,47 @@ Implementation of Software Transactional Memory.
 </td></tr></table>
 
 
-### The Storage Manager?
+### The [Storage Manager](commentary/rts/storage)
 
 
-<table><tr><th>[ Arena.c](http://darcs.haskell.org/ghc/rts/Arena.c), [
-Arena.h](http://darcs.haskell.org/ghc/rts/Arena.h)</th>
+<table><tr><th>[
+sm/Storage.c](http://darcs.haskell.org/ghc/rts/sm/Storage.c)</th>
 <td>
-An arena allocator
+Top-level of the storage manager.
 </td></tr></table>
 
 
-<table><tr><th>[ BlockAlloc.c](http://darcs.haskell.org/ghc/rts/BlockAlloc.c), [
-BlockAlloc.h](http://darcs.haskell.org/ghc/rts/BlockAlloc.h)</th>
+<table><tr><th>[ sm/MBlock.c](http://darcs.haskell.org/ghc/rts/sm/MBlock.c), [
+sm/MBlock.h](http://darcs.haskell.org/ghc/rts/sm/MBlock.h), [
+sm/OSMem.h](http://darcs.haskell.org/ghc/rts/sm/OSMem.h)</th>
+<td>
+The "megablock" allocator; this is the thin layer between the RTS and
+the operating system for allocating memory.
+</td></tr></table>
+
+
+<table><tr><th>[
+sm/BlockAlloc.c](http://darcs.haskell.org/ghc/rts/sm/BlockAlloc.c), [
+sm/BlockAlloc.h](http://darcs.haskell.org/ghc/rts/sm/BlockAlloc.h)</th>
 <td>
 The low-level block allocator, requires only `MBlock`.
+</td></tr></table>
+
+
+<table><tr><th>[ sm/GC.c](http://darcs.haskell.org/ghc/rts/sm/GC.c), [
+sm/Scav.c](http://darcs.haskell.org/ghc/rts/sm/Scav.c), [
+sm/Evac.c](http://darcs.haskell.org/ghc/rts/sm/Evac.c), [
+sm/GCUtils.c](http://darcs.haskell.org/ghc/rts/sm/GCUtils.c), [
+sm/MarkWeak.c](http://darcs.haskell.org/ghc/rts/sm/MarkWeak.c)</th>
+<td>
+The generational copying garbage collector.
+</td></tr></table>
+
+
+<table><tr><th>[ sm/Compact.c](http://darcs.haskell.org/ghc/rts/sm/Compact.c), [
+sm/Compact.h](http://darcs.haskell.org/ghc/rts/sm/Compact.h)</th>
+<td>
+The compacting garbage collector.
 </td></tr></table>
 
 
@@ -182,35 +215,6 @@ The low-level block allocator, requires only `MBlock`.
 ClosureFlags.c](http://darcs.haskell.org/ghc/rts/ClosureFlags.c)</th>
 <td>
 Determining properties of various types of closures.
-</td></tr></table>
-
-
-<table><tr><th>[ GC.c](http://darcs.haskell.org/ghc/rts/GC.c)</th>
-<td>
-The generational copying garbage collector.
-</td></tr></table>
-
-
-<table><tr><th>[ GCCompact.c](http://darcs.haskell.org/ghc/rts/GCCompact.c), [
-GCCompact.h](http://darcs.haskell.org/ghc/rts/GCCompact.h)</th>
-<td>
-The compacting garbage collector.
-</td></tr></table>
-
-
-<table><tr><th>[ Hash.c](http://darcs.haskell.org/ghc/rts/Hash.c), [
-Hash.h](http://darcs.haskell.org/ghc/rts/Hash.h)</th>
-<td>
-A generic hash table implementation.
-</td></tr></table>
-
-
-<table><tr><th>[ MBlock.c](http://darcs.haskell.org/ghc/rts/MBlock.c), [
-MBlock.h](http://darcs.haskell.org/ghc/rts/MBlock.h), [
-OSMem.h](http://darcs.haskell.org/ghc/rts/OSMem.h)</th>
-<td>
-The "megablock" allocator; this is the thin layer between the RTS and
-the operating system for allocating memory.
 </td></tr></table>
 
 
@@ -234,16 +238,31 @@ Stable names and stable pointers.
 </td></tr></table>
 
 
-<table><tr><th>[ Storage.c](http://darcs.haskell.org/ghc/rts/Storage.c)</th>
-<td>
-Top-level of the storage manager.
-</td></tr></table>
-
-
 <table><tr><th>[ Weak.c](http://darcs.haskell.org/ghc/rts/Weak.c), [
 Weak.h](http://darcs.haskell.org/ghc/rts/Weak.h)</th>
 <td>
 Weak pointers.
+</td></tr></table>
+
+
+### Data Structures
+
+
+
+Data structure abstractions for use in the RTS:
+
+
+<table><tr><th>[ Arena.c](http://darcs.haskell.org/ghc/rts/Arena.c), [
+Arena.h](http://darcs.haskell.org/ghc/rts/Arena.h)</th>
+<td>
+An arena allocator
+</td></tr></table>
+
+
+<table><tr><th>[ Hash.c](http://darcs.haskell.org/ghc/rts/Hash.c), [
+Hash.h](http://darcs.haskell.org/ghc/rts/Hash.h)</th>
+<td>
+A generic hash table implementation.
 </td></tr></table>
 
 
@@ -290,6 +309,13 @@ Labelling threads.
 Threads.h](http://darcs.haskell.org/ghc/rts/Threads.h)</th>
 <td>
 Various thread-related functionality.
+</td></tr></table>
+
+
+<table><tr><th>[
+ThreadPaused.c](http://darcs.haskell.org/ghc/rts/ThreadPaused.c)</th>
+<td>
+Suspending a thread before it returns to the RTS.
 </td></tr></table>
 
 
