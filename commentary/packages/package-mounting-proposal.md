@@ -32,7 +32,7 @@ For example, the `X11` library currently has module namespace:
 ```
 
 
-In this proposal, it might instead have default mount point `Graphics.X11` and module namespace:
+In this proposal, it might instead have default mount point `Graphics.X11` and (internal) module namespace:
 
 
 ```wiki
@@ -45,7 +45,7 @@ In this proposal, it might instead have default mount point `Graphics.X11` and m
 ```
 
 
-To most users of the X11 package, there would be no change - because of the mounting, modules in that package would still appear with the same names in places where the X11 package is used: `Graphics.X11.Types`, etc. However, if someone wanted to specify a different the mount point, he could use a special compiler option, for instance `-package-base`:
+To most users of the X11 package, there would be no change - because of the mounting, modules in that package would still appear with the same names in places where the X11 package is imported: `Graphics.X11.Types`, etc. However, if someone wanted to specify a different the mount point, he could use a special compiler option, for instance `-package-base`:
 
 
 ```wiki
@@ -69,11 +69,11 @@ or
 
 
 
-However, usually the default mount point would be used. Additionally, Cabal syntax should be extended to support mounting. I would suggest that a mount point appear after a package in the Build-Depends clause of a cabal file:
+However, usually the default mount point would be used. Additionally, Cabal syntax should be extended to support mounting. I would suggest that the optional mount point should appear after a package in the Build-Depends clause of a Cabal file:
 
 
 ```wiki
-  Build-Depends: X11(NewX11)
+  Build-Depends: X11(Graphics.Unix.X11.Xlib)
 ```
 
 
