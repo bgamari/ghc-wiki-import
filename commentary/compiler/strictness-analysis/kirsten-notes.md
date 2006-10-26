@@ -77,7 +77,7 @@ SMK(SMK(LMX))
 because it's called more than once. We really want the demand to reflect that (f 1) is called only once and (f 3) is called only once, but it doesn't. So it doesn't seem like we can figure out what we need to know just by looking at the demand on f.
 
 
-# Linearity =
+# Linearity
 
 
 
