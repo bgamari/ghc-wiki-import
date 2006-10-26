@@ -2,7 +2,11 @@
 
 
 
-A message by Frederik Eaton to the Haskell mailing list describing this proposal is archived here: [
+It may help to refer to the GhcPackages proposal for an introduction to some of the issues mentioned here.
+
+
+
+A message by Frederik Eaton to the Haskell mailing list describing the present proposal is archived: [
 http://www.haskell.org/pipermail/libraries/2005-June/004009.html](http://www.haskell.org/pipermail/libraries/2005-June/004009.html). (Also, see note at the end of this document regarding an earlier proposal by Simon Marlow)
 
 
