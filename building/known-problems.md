@@ -94,5 +94,4 @@ WARNINGS about pitfalls and known "problems":
   ```
 
   Alas, `cpp` doesn't tell you the offending file!
-
   Workaround: don't put weird things in string args to `cpp` macros.
