@@ -1,6 +1,3 @@
-
-
-
 # Known pitfalls in building Glasgow Haskell
 
 
@@ -25,11 +22,10 @@ WARNINGS about pitfalls and known "problems":
 
   in your `build.mk` file.  Then GHC and the other
   tools will use the appropriate directory in all cases.
-1. In compiling some support-code bits, e.g., in `ghc/rts/gmp` and even
-  in `ghc/lib`, you may get a few C-compiler warnings.  We think these
-  are OK.
-1.  When compiling via C, you'll sometimes get "warning: assignment from
-  incompatible pointer type" out of GCC.  Harmless.
+1. You may occasionally see a warning from the C compiler when compiling some
+  Haskell code, eg. "warning: assignment from
+  incompatible pointer type".  These are usually harmless, but it's a good idea to
+  report it on the mailing list so that we can fix it.
 1. Similarly, `ar`chiving warning messages like the following are not
   a problem:
 
@@ -38,46 +34,6 @@ WARNINGS about pitfalls and known "problems":
   ar: filename GlaIOMonad__2_2s.o truncated to GlaIOMonad_
   ...
   ```
-1. In compiling the compiler proper (in `compiler/`), you *may*
-  get an "Out of heap space" error message.  These can vary with the
-  vagaries of different systems, it seems.  The solution is simple:
-
-  - If you're compiling with GHC 4.00 or later, then the
-    *maximum* heap size must have been reached.  This
-    is somewhat unlikely, since the maximum is set to 64M by default.
-    Anyway, you can raise it with the
-    `-optCrts-M<size>` flag (add this flag to
-    `<module>_HC_OPTS`
-    `make` variable in the appropriate
-    `Makefile`).
-  - For GHC \> 4.00, add a suitable `-H` flag to the `Makefile`, as
-    above.
-  - and try again: `make`.  (see \<xref linkend="sec-suffix"/\> for information about
-    `<module>_HC_OPTS`.)
-
-    Alternatively, just cut to the chase:
-
-    ```wiki
-    $ cd ghc/compiler
-    $ make EXTRA_HC_OPTS=-optCrts-M128M
-    ```
-1. If you try to compile some Haskell, and you get errors from GCC about
-  lots of things from `/usr/include/math.h`, then your GCC was
-  mis-installed.  `fixincludes` wasn't run when it should've been.
-
-  As `fixincludes` is now automagically run as part of GCC installation,
-  this bug also suggests that you have an old GCC.
-1. You *may* need to re-`ranlib` your libraries (on Sun4s).
-
-  ```wiki
-  $ cd $(libdir)/ghc-x.xx/sparc-sun-sunos4
-  $ foreach i ( `find . -name '*.a' -print` ) # or other-shell equiv...
-  ?    ranlib $i
-  ?    # or, on some machines: ar s $i
-  ? end
-  ```
-
-  We'd be interested to know if this is still necessary.
 1. GHC's sources go through `cpp` before being compiled, and `cpp` varies
   a bit from one Unix to another.  One particular gotcha is macro calls
   like this:
