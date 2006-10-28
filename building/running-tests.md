@@ -72,6 +72,14 @@ To run the tests one particular way only (eg. GHCi):
 ```
 
 
+To add specific options to the compiler:
+
+
+```wiki
+        make EXTRA_HC_OPTS='+RTS -K32M -RTS' 
+```
+
+
 For more details, see below.
 
 
@@ -140,6 +148,7 @@ The following ways are defined (for GHC, also see the file config/ghc):
         extcore                 -- -fext-core
         optextcore              -- -O -fext-core
         threaded                -- -threaded
+        hpc                     -- -fhpc
 ```
 
 
