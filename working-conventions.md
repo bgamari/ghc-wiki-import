@@ -1,3 +1,9 @@
+
+
+
+# Working conventions for working on GHC
+
+
 ## Coding conventions
 
 
@@ -34,11 +40,7 @@ If you have permission to push patches directly to the repository (pretty easy t
 Do not forget to `darcs record` your changes first!
 
 
-### When to record/push
-
-
-
-Guidelines for pushing patches to GHC:
+### Guidelines for pushing patches
 
 
 - We have separate guidelines for proposing changes to standard libraries; see [
