@@ -99,8 +99,22 @@ The benefit is that processors are typically faster at "test-and-jump to known l
 
 
 
-*Alexey: add some example HC code here*
+Under this scheme, the entry code for the `not` function would look as follows:
 
+
+```wiki
+        if(R2 & 1 == 1) goto tagged
+        ... stack check omitted ...
+        R1 = R2;
+        I64[Sp + (-8)] = sej_info;
+        Sp = Sp + (-8);
+        jump I64[R1];
+tagged:
+        R1 = R2 & ~1;  // mask pointer tag out
+        <extract constructor tag from pointer>
+        if(tag==0) goto sej_0_alt
+        goto sej_1_alt
+```
 
 ## Tagging the LSB of an evaluated closure
 
