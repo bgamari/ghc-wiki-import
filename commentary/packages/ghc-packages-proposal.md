@@ -12,7 +12,12 @@ This page summarises our current proposal for packages in GHC. (See also [an ext
 
 
 
-A vexed question in the current design of Haskell is the issue of whether a single program can contain two modules with the same name.  In Haskell 98 that is absolutely ruled out, and as a result packages are fundamentally non-modular: every package must use a distinct space in the global namespace. 
+A vexed question in the current design of Haskell is the issue of whether a single program can contain two modules with the same name.  In Haskell 98 that is absolutely ruled out.
+As a result, packages are fundamentally non-modular: to avoid collisions *every* module in *every* package written by *anyone* must have different module names.  That's like saying that every function must have different local variables, and is a serious loss of modularity.
+
+
+
+GHC 6.6 makes a significant step forward by lifting this restriction.  However it leaves an open question, which is what this page is about.
 
 
 ## Assumptions
@@ -26,7 +31,7 @@ Before we start, note that we take for granted the following
 
 - **Module names describe *purpose* (what it's for, e.g. `Data.Bits`), whereas package names describe *provenance* (where it comes from, e.g. `"gtkhs"`)**.  We should not mix these two up, and that is a good reason for not combining package and module names into a single grand name.  One quite frequently wants to globally change provenance but not purpose (e.g. compile my program with a new version of package "foo"), without running through all the source files to change the import statements.
 
-- **New: a module name must be unique within its package (only)**.   That is, a single program can use two modules with the same module name, provided they come from different packages.  This is new in GHC 6.6.  The old system (no two modules with the same name in the same program) meant that EVERY module in EVERY package written by ANYONE must have different module names. That's like saying that every function must have different local variables, and is a serious loss of modularity.  Hence the change.
+- **New: a module name must be unique within its package (only)**.   That is, a single program can use two modules with the same module name, provided they come from different packages.  This is new in GHC 6.6.  
 
 
 For all this to work, GHC must incorporate the package name (and version) into the names of entities the package defines.  That means that when compiling a module M you must say what package it is part of:
@@ -48,8 +53,8 @@ The remaining question is this: **When you say `import A.B.C`, from what package
 
 
 - Plan A (GHC's current story)
-- Plan B: grafting.  An enhancement of plan A; see [Frederik Eaton's proposal](package-mounting)
-- Plan C: optionally specify the package in the import.  An alternative to (B), described in a [separate page](package-imports).
+- Plan B: grafting.  An enhancement of plan A; see [Frederik Eaton's proposal](commentary/packages/package-mounting-proposal)
+- Plan C: optionally specify the package in the import.  An alternative to (B), described in a [separate page](commentary/packages/package-imports-proposal).
 
 ---
 
@@ -58,11 +63,11 @@ The remaining question is this: **When you say `import A.B.C`, from what package
 
 
 
-GHC already has a fairly elaborate scheme (perhaps too elaborate; [documentation here](http://www.haskell.org/ghc/dist/current/docs/users_guide/packages.html))
+GHC already has a fairly elaborate scheme (perhaps too elaborate; [documentation here](http://www.haskell.org/ghc/dist/current/docs/users_guide/packages.html)) for deciding what package you mean when you say "import A.B.C":
 
 
-- For a start, you may or may not have a package installed.  
-- Even if you do, the package may or may not be exposed by default (reasoning: you may want old versions of package X to be installed, but not in scope by default).  
+- For a start, it only looks in *installed* packages.  
+- Even for installed packages, the package may or may not be *exposed* by default (reasoning: you may want old versions of package X to be installed, but not in scope by default).  
 - Then, you can use the `-hide-package` flag to hide an otherwise-exposed package, and the `-package` flag to expose an otherwise-hidden package.
 
 
@@ -85,7 +90,7 @@ If we did implement the "`-package` in `OPTIONS` pragma" fix, then is is not cle
 
 
 
-This proposal is described by a [separate page](package-mounting).
+This proposal is described by a [separate page](commentary/packages/package-mounting-proposal).
 
 
 ---
@@ -95,6 +100,6 @@ This proposal is described by a [separate page](package-mounting).
 
 
 
-This proposal is described by a [separate page](package-imports).
+This proposal is described by a [separate page](commentary/packages/package-imports-proposal).
 
 
