@@ -15,7 +15,7 @@ in the form of Ian Lynagh, who has already made a huge difference.
 Other highlights of the last six months are these:
 
 
-- With wonderful support from Galois, we ran a **GHC Hackathon** immediately before ICFP in Portland.  Forty-plus people showed up to have GHC's innards inflicted on them, and appeared unharmed by the experience.
+- With wonderful support from Galois and Portland State University, we ran a **GHC Hackathon** immediately before ICFP in Portland.  Forty-plus people showed up to have GHC's innards inflicted on them, and appeared unharmed by the experience.
 
 >
 > >
@@ -52,6 +52,8 @@ Other highlights of the last six months are these:
 
 - Bjorn Bringert (a GHC Hackathon graduate) implemented **standalone deriving**, which allows you to write a `deriving` declaration anywhere, rather than only where the data type is declared.  Details of the syntax have not yet quite settled.  See also [
   http://www.haskell.org/pipermail/haskell-prime/2006-October/001725.html](http://www.haskell.org/pipermail/haskell-prime/2006-October/001725.html).
+
+- Andy Gill implemented the Haskell Program Coverage Option(**-fhpc**) for GHC, which succesfully bootstrapped GHC. It turns out that the GHC testsuite gives remarkably good coverage over GHC already.
 
 
 Forthcoming excitements:
