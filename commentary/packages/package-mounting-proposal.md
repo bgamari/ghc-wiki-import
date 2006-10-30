@@ -53,11 +53,15 @@ To most users of the X11 package, there would be no change - because of the moun
 ```
 
 
-(so the imported namespace would appear as `Graphics.Unix.X11.Types`, `Graphics.Unix.X11.Xlib`, etc.)
+(so the imported namespace would appear as `Graphics.Unix.X11.Types`, `Graphics.Unix.X11.Xlib`, etc.) Note that the intention is for each `-package-base` option to refer to the package specified in the preceding `-package` option, so to give package `PACKAGE` a mount point of `BASE` we use the syntax
 
 
+```wiki
+  ghc ... -package PACKAGE -package-base BASE ...
+```
 
-or
+
+Ideally one would also be able to link to two different versions of the same package, at different mount points:
 
 
 ```wiki
@@ -69,7 +73,11 @@ or
 
 
 
-However, usually the default mount point would be used. Additionally, Cabal syntax should be extended to support mounting. I would suggest that the optional mount point should appear after a package in the Build-Depends clause of a Cabal file:
+However, usually the default mount point would be sufficient, so most users wouldn't have to learn about `-package-base`.
+
+
+
+Additionally, Cabal syntax should be extended to support mounting. I would suggest that the optional mount point should appear after a package in the Build-Depends clause of a Cabal file:
 
 
 ```wiki
