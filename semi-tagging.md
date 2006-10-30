@@ -149,6 +149,10 @@ This would require modifying
 - the GC and the RTS code to mask out the LSB pointer when dereferencing it,
 - the code generation to test the LSB bit and case expressions and avoid the indirect jump.
 
+
+(Simon, thanks for the example. I was hoping to not have to enter constructor closures but the second bullet example shows why entering constructors can still happen. However, can't the example just be `f xs = head xs`? --Alexey)
+
+
 ## Using more than one bit
 
 
