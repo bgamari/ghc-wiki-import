@@ -2,7 +2,7 @@
 
 
 
-Here I describe the design of the semi-tagging optimisation. Currently most of the text comes from [
+Here I describe the design of the semi-tagging optimisation. Originally the text comes from [
 http://hackage.haskell.org/trac/summer-of-code/ticket/48](http://hackage.haskell.org/trac/summer-of-code/ticket/48)
 
 
@@ -40,7 +40,7 @@ jumps to the boolean argument, passed in `R2`, after pushing a case frame (the c
 
 
 ```wiki
-        ... stack check omitted ...
+        <stack check omitted>
         R1 = R2;
         I64[Sp + (-8)] = sej_info;
         Sp = Sp + (-8);
@@ -104,7 +104,7 @@ Under this scheme, the entry code for the `not` function would look as follows:
 
 ```wiki
         if(R2 & 1 == 1) goto tagged
-        ... stack check omitted ...
+        <stack check omitted>
         R1 = R2;
         I64[Sp + (-8)] = sej_info;
         Sp = Sp + (-8);
