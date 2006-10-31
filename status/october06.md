@@ -35,7 +35,8 @@ Release notes](http://haskell.org/ghc/docs/6.6/html/users_guide/release-6-6.html
   http://hackage.haskell.org/trac/ghc/wiki/GhcPackages](http://hackage.haskell.org/trac/ghc/wiki/GhcPackages).
 
 
-Life still go on, and current HEAD version (download url?) that will ultimately become GHC 6.8 adds new features:
+Life still goes on, and current HEAD version [
+http://darcs.haskell.org/ghc/](http://darcs.haskell.org/ghc/) that will ultimately become GHC 6.8 adds new features:
 
 
 - We completely replaced GHC's intermediate language with **System FC(X)**, an extension of System F with explicit equality witnesses.  This enables GHC to support GADTs and associated types, with two new simple but powerful mechanisms. The paper is at [
