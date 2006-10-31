@@ -42,10 +42,10 @@ Release notes](http://haskell.org/ghc/docs/6.6/html/users_guide/release-6-6.html
 
 
 Life still goes on, and current HEAD version [
-http://darcs.haskell.org/ghc/](http://darcs.haskell.org/ghc/) that will ultimately become GHC 6.8 adds new features:
+http://darcs.haskell.org/ghc/](http://darcs.haskell.org/ghc/) that will ultimately become GHC 6.8 already includes significant new features:
 
 
-- We completely replaced GHC's intermediate language with **System FC(X)**, an extension of System F with explicit equality witnesses.  This enables GHC to support GADTs and associated types, with two new simple but powerful mechanisms. The paper is at [
+- We have completely replaced GHC's intermediate language with **System FC(X)**, an extension of System F with explicit equality witnesses.  This enables GHC to support GADTs and associated types, with two new simple but powerful mechanisms. The paper is at [
   http://research.microsoft.com/%7Esimonpj/papers/ext-f/](http://research.microsoft.com/%7Esimonpj/papers/ext-f/). Much of the conversion work was done by Kevin Donnelly, while he was on an internship at Microsoft.
 
 - Manuel Chakravarty has implemented **type-indexed data types**, a modest generalisation of the *associated data types* of our POPL'05 paper  [
@@ -61,7 +61,7 @@ http://darcs.haskell.org/ghc/](http://darcs.haskell.org/ghc/) that will ultimate
 - Andy Gill implemented the **Haskell Program Coverage** option (**-fhpc**) for GHC, which succesfully bootstrapped GHC. It turns out that the GHC testsuite gives remarkably good coverage over GHC already.
 
 
-We also work on the following features that isn't yet in GHC HEAD but finally should go there and then become a part of GHC 6.8:
+We are now working on lots of new stuff that isn't yet in GHC HEAD, but will end up there if all goes well, and then become a part of GHC 6.8:
 
 
 - Roman Leshchinskiy has been hard at work developing libraries that support **data-parallel computation** in GHC.  It's not quite ready for public consumption, but you can peek at what is going on by looking at the Haskell Wiki: [
