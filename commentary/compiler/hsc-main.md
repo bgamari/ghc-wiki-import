@@ -40,7 +40,7 @@ Look at the picture first.  The yellow boxes are compiler passes, while the blue
   - error messages can display precisely the syntax that the user wrote; and 
   - desugaring is not required to preserve type-inference properties.
 
-  Generally speaking, the desugarer produces user errors or warnings. But it does produce *some*.  In particular, (a) pattern-match overlap warnings are produced here; and (b) when desugaring Template Haskell code quotations, the desugarer may find that `THSyntax` is not expressive enough.  In that case, we must produce an error ([compiler/deSugar/DsMeta](/trac/ghc/browser/ghc/compiler/deSugar/DsMeta)).
+  Generally speaking, the desugarer produces few user errors or warnings. But it does produce *some*.  In particular, (a) pattern-match overlap warnings are produced here; and (b) when desugaring Template Haskell code quotations, the desugarer may find that `THSyntax` is not expressive enough.  In that case, we must produce an error ([compiler/deSugar/DsMeta](/trac/ghc/browser/ghc/compiler/deSugar/DsMeta)).
 
 - The **SimplCore** pass ([simplCore/SimplCore.lhs](/trac/ghc/browser/ghc/simplCore/SimplCore.lhs)) is a bunch of Core-to-Core passes that optimise the program; see [
   A transformation-based optimiser for Haskell (SCP'98)](http://research.microsoft.com/%7Esimonpj/Papers/comp-by-trans-scp.ps.gz) for a more-or-less accurate overview.  The main passes are:
@@ -52,7 +52,7 @@ Look at the picture first.  The yellow boxes are compiler passes, while the blue
   - The **float-out** and **float-in** transformations, which move let-bindings outwards and inwards respectively.  See [
     Let-floating: moving bindings to give faster programs (ICFP '96)](http://research.microsoft.com/%7Esimonpj/papers/float.ps.gz).
 
-  - The **strictness analyser**.  This actually comprises two passes: the **analayser** itself and the **worker/wrapper** transformation that uses the results of the analysis to transform the program.  The same analyser also does [
+  - The **strictness analyser**.  This actually comprises two passes: the **analyser** itself and the **worker/wrapper** transformation that uses the results of the analysis to transform the program.  The same analyser also does [
     Constructed Product Result analysis](http://research.microsoft.com/%7Esimonpj/Papers/cpr/index.htm).
 
   - The **liberate-case** transformation.
