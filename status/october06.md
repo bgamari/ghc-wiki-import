@@ -42,7 +42,7 @@ Release notes](http://haskell.org/ghc/docs/6.6/html/users_guide/release-6-6.html
 
 
 Life still goes on, and current HEAD version [
-http://darcs.haskell.org/ghc/](http://darcs.haskell.org/ghc/) that will ultimately become GHC 6.8 already includes significant new features:
+http://darcs.haskell.org/ghc/](http://darcs.haskell.org/ghc/), that will ultimately become GHC 6.8, already includes significant new features:
 
 
 - We have completely replaced GHC's intermediate language with **System FC(X)**, an extension of System F with explicit equality witnesses.  This enables GHC to support GADTs and associated types, with two new simple but powerful mechanisms. The paper is at [
@@ -58,7 +58,7 @@ http://darcs.haskell.org/ghc/](http://darcs.haskell.org/ghc/) that will ultimate
 - Bjorn Bringert (a GHC Hackathon graduate) implemented **standalone deriving**, which allows you to write a `deriving` declaration anywhere, rather than only where the data type is declared.  Details of the syntax have not yet quite settled.  See also [
   http://www.haskell.org/pipermail/haskell-prime/2006-October/001725.html](http://www.haskell.org/pipermail/haskell-prime/2006-October/001725.html).
 
-- Andy Gill implemented the **Haskell Program Coverage** option (**-fhpc**) for GHC, which succesfully bootstrapped GHC. It turns out that the GHC testsuite gives remarkably good coverage over GHC already.
+- Andy Gill implemented the **Haskell Program Coverage** option (**-fhpc**) for GHC, which is solid enough to be used to test coverage in GHC itself.  (It turns out that the GHC testsuite gives remarkably good coverage over GHC already.)
 
 
 We are now working on lots of new stuff that isn't yet in GHC HEAD, but will end up there if all goes well, and then become a part of GHC 6.8:
