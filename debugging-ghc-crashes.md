@@ -181,7 +181,7 @@ Usually you want to do something along these lines:
 
 Symbols in GHC are encoded using something called the Z-encoding (see
 [
-Encoding.hs](http://darcs.haskell.org/ghc/ghc/compiler/utils/Encoding.hs)).  Basically special symbols are replaced by sequences
+Encoding.hs](http://darcs.haskell.org/ghc/compiler/utils/Encoding.hs)).  Basically special symbols are replaced by sequences
 beginning with `z` or `Z`.  eg. `state#` becomes
 `statezh`.  The letter `z` itself is replaced by `zz`.
 
