@@ -28,10 +28,16 @@ Other highlights of the last six months are these:
 
 
 We (finally) released **GHC 6.6** in October 2006. There was an extended period of release-candidate testing, so we fondly hope that this will be a relatively stable release. Main improvement over GHC 6.4 is support for SMP systems - now GHC can execute several Haskell threads on different cpus/cores. There also lot of other improvements, stare at [
-Release notes](http://haskell.org/ghc/docs/6.6/html/users_guide/release-6-6.html) and jump to [Download](http://www.haskell.org/ghc/download_ghc_66.html) page to get it
+Release notes](http://haskell.org/ghc/docs/6.6/html/users_guide/release-6-6.html) and jump to [Download](http://www.haskell.org/ghc/download_ghc_66.html) page to get it.  Significant new features, all described in modre detail in the release notes, include:
 
 
-- We finally bit the bullet and **lifted the restriction that every module in a Haskell program must have a distinct name**.  Why?  Because it's non-modular: two packages from different authors could accidentally collide.  This change is in GHC 6.6; there are some remaining open choices dicussed here [
+- Support for multi-processors
+- Impredicative polymorphism
+- Bang patterns
+- Unicode source files
+- Further generalisation of newtype deriving
+- Monomorphic pattern bindings
+- Lastly, we finally bit the bullet and lifted the restriction that every module in a Haskell program must have a distinct name.  Why?  Because it's non-modular: two packages from different authors could accidentally collide.  This change is in GHC 6.6; there are some remaining open choices dicussed here [
   http://hackage.haskell.org/trac/ghc/wiki/GhcPackages](http://hackage.haskell.org/trac/ghc/wiki/GhcPackages).
 
 
