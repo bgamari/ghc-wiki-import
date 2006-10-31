@@ -282,7 +282,7 @@ closure for the `Int` value 5.  Closures always consist of an info
 pointer (`GHCziBase_Izh_con_info` in this case, the `I#`
 constructor), followed by any number of payload words (just one word
 containing the value 5, here).  Full details on closure layouts are in
-[ Closures.h](http://darcs.haskell.org/ghc/ghc/includes/Closures.h).
+[ Closures.h](http://darcs.haskell.org/ghc/includes/Closures.h).
 
 
 
@@ -310,7 +310,7 @@ execution.  The *info pointer* of a closure actually points to the
 entry code (this is a trick used by GHC so that the common operation
 of jumping to the entry code for a closure can be done with a single
 indirection).  The layout of info tables is defined in
-[ InfoTables.h](http://darcs.haskell.org/ghc/ghc/includes/InfoTables.h).
+[ InfoTables.h](http://darcs.haskell.org/ghc/includes/InfoTables.h).
 
 
 
@@ -365,7 +365,7 @@ $5 = {srt_offset = 4241688, __pad_srt_offset = 6684481, i = {layout = {
 
 The `type` field tells us what kind of object this is, in this
 case `36`}, which means a `RET_SMALL` stack frame (see
-[ ClosureTypes.h](http://darcs.haskell.org/ghc/ghc/includes/ClosureTypes.h)
+[ ClosureTypes.h](http://darcs.haskell.org/ghc/includes/ClosureTypes.h)
 for a list of closure types, but make sure you are
 looking at the right version of this file for the build you're using,
 because the types do change).
