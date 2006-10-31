@@ -208,7 +208,7 @@ symbol relates to, and *kind* is the kind of symbol:
 
 
 
-(see [ CLabel.hs](http://darcs.haskell.org/ghc/ghc/compiler/cmm/CLabel.hs)
+(see [ CLabel.hs](http://darcs.haskell.org/ghc/compiler/cmm/CLabel.hs)
 for a table of these).
 
 
