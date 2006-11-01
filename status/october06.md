@@ -3,7 +3,7 @@
 
 
 GHC is in good shape. We have no good way to measure how many GHC
-users there are, but if the traffic on the GHC mailing lists is
+users there are but if the traffic on the GHC mailing lists is
 anything to go by, the numbers are increasing quite rapidly. Indeed,
 GHC was rapidly becoming a success-disaster, so that we (Simon &
 Simon) were becoming swamped in GHC-related mail.  Happily,
@@ -20,15 +20,16 @@ Other highlights of the last six months are these:
 >
 > >
 > >
-> > A significant outcome is that we have written a great deal of Wiki material about GHC's implementation (the "commentary"), and about how to build and modify GHC (the "building guide").  Documents with these titles were available before, but had become rather out of date.  These new, up-to-date documents live on the GHC developer's Wiki.  We urge you to read and improve them:   [
+> > A significant outcome is that we have written a great deal of Wiki material about GHC's implementation (the "commentary") and about how to build and modify GHC (the "building guide").  Documents with these titles were available before but had become rather out of date.  These new, up-to-date documents live on the GHC developer's Wiki.  We urge you to read and improve them:   [
 > > http://hackage.haskell.org/trac/ghc/wiki](http://hackage.haskell.org/trac/ghc/wiki) (near the bottom).
 > >
 > >
 >
 
 
-We (finally) released **GHC 6.6** in October 2006. There was an extended period of release-candidate testing, so we fondly hope that this will be a relatively stable release. Main improvement over GHC 6.4 is support for SMP systems - now GHC can execute several Haskell threads on different cpus/cores. There also lot of other improvements, stare at [
-Release notes](http://haskell.org/ghc/docs/6.6/html/users_guide/release-6-6.html) and jump to [Download](http://www.haskell.org/ghc/download_ghc_66.html) page to get it.  Significant new features, all described in modre detail in the release notes, include:
+We (finally) released **GHC 6.6** in October 2006. There was an extended period of release-candidate testing, so we fondly hope that this will be a relatively stable release. The main improvement over GHC 6.4 is support for SMP systems - now GHC can execute several Haskell threads on different cpus/cores. There also many other improvements, listed at [
+Release notes](http://haskell.org/ghc/docs/6.6/html/users_guide/release-6-6.html).  To get GHC 6.6, go to [Download](http://www.haskell.org/ghc/download_ghc_66.html).  Significant new features, all described in more detail in the [
+release notes](http://haskell.org/ghc/docs/6.6/html/users_guide/release-6-6.html), include:
 
 
 - Support for multi-processors
@@ -61,10 +62,10 @@ http://darcs.haskell.org/ghc/](http://darcs.haskell.org/ghc/), that will ultimat
 - Andy Gill implemented the **Haskell Program Coverage** option (**-fhpc**) for GHC, which is solid enough to be used to test coverage in GHC itself.  (It turns out that the GHC testsuite gives remarkably good coverage over GHC already.)
 
 
-We are now working on lots of new stuff that isn't yet in GHC HEAD, but will end up there if all goes well, and then become a part of GHC 6.8:
+We are now working on lots of new stuff that isn't yet in GHC HEAD but will end up there if all goes well and then become a part of GHC 6.8:
 
 
-- Roman Leshchinskiy has been hard at work developing libraries that support **data-parallel computation** in GHC.  It's not quite ready for public consumption, but you can peek at what is going on by looking at the Haskell Wiki: [
+- Roman Leshchinskiy has been hard at work developing libraries that support **data-parallel computation** in GHC.  It's not quite ready for public consumption but you can peek at what is going on by looking at the Haskell Wiki: [
   http://haskell.org/haskellwiki/GHC/Data\_Parallel\_Haskell](http://haskell.org/haskellwiki/GHC/Data_Parallel_Haskell)  Background material here: [
   http://www.cse.unsw.edu.au/\~chak/papers/CKLP01.html](http://www.cse.unsw.edu.au/~chak/papers/CKLP01.html).  We hope to release a first iteration of our **data-parallel extensions** before Christmas.
 
@@ -73,7 +74,7 @@ We are now working on lots of new stuff that isn't yet in GHC HEAD, but will end
 - Simon PJ is determined to finally implement **implication constraints**, which are the key to fixing the interaction between GADTs and type classes.   GHC's users have been very polite about this collection of bugs, but they should really be fixed.  Implication constraints are described by Martin Sulzmann: [
   http://www.comp.nus.edu.sg/\~sulzmann/publications/tr-eadt.ps.gz](http://www.comp.nus.edu.sg/~sulzmann/publications/tr-eadt.ps.gz).
 
-- Once the last bits of indexed data types are done, Manuel will be tackling **indexed type synonyms** (aka type functions), which are considerably tricker, at least so far as type inference is concerned.
+- Once the last bits of indexed data types are done, Manuel will be tackling **indexed type synonyms** (aka type functions), which are considerably trickier, at least so far as type inference is concerned.
 
 
 Simon, Simon, with help from Manuel, Bulat and others, October 2006 :)
