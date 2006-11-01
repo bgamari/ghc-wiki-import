@@ -42,7 +42,8 @@ release notes](http://haskell.org/ghc/docs/6.6/html/users_guide/release-6-6.html
   http://hackage.haskell.org/trac/ghc/wiki/GhcPackages](http://hackage.haskell.org/trac/ghc/wiki/GhcPackages).
 
 
-Life still goes on and current development version (HEAD), that will ultimately become GHC 6.8, already includes significant new features:
+Life still goes on and there is current development version (HEAD), that will ultimately become GHC 6.8. You can find binary snapshots at [download page](http://www.haskell.org/ghc/dist/current/dist/) or build from sources available via [
+darcs repository](http://darcs.haskell.org/ghc/). This version already includes significant new features:
 
 
 - We have completely replaced GHC's intermediate language with **System FC(X)**, an extension of System F with explicit equality witnesses.  This enables GHC to support GADTs and associated types, with two new simple but powerful mechanisms. The paper is at [
@@ -59,9 +60,6 @@ Life still goes on and current development version (HEAD), that will ultimately 
   http://www.haskell.org/pipermail/haskell-prime/2006-October/001725.html](http://www.haskell.org/pipermail/haskell-prime/2006-October/001725.html).
 
 - Andy Gill implemented the **Haskell Program Coverage** option (**-fhpc**) for GHC, which is solid enough to be used to test coverage in GHC itself.  (It turns out that the GHC testsuite gives remarkably good coverage over GHC already.)
-
-- You can find binary snapshots at [download page](http://www.haskell.org/ghc/dist/current/dist/) or build from sources available via [
-  darcs repository](http://darcs.haskell.org/ghc/)
 
 
 We are now working on lots of new stuff that isn't yet in GHC HEAD but will end up there if all goes well and then become a part of GHC 6.8:
