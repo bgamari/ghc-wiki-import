@@ -27,7 +27,7 @@ Other highlights of the last six months are these:
 >
 
 
-We (finally) released **GHC 6.6** in October 2006. There was an extended period of release-candidate testing, so we fondly hope that this will be a relatively stable release. The main improvement over GHC 6.4 is support for SMP systems - now GHC can execute several Haskell threads on different cpus/cores. There also many other improvements, listed at [
+We (finally) released **GHC 6.6** in October 2006. There was an extended period of release-candidate testing, so we fondly hope that this will be a relatively stable release. The main improvement over GHC 6.4 is support for SMP systems - now GHC can execute several Haskell threads on different cpus/cores. There also many other improvements, listed in the [
 Release notes](http://haskell.org/ghc/docs/6.6/html/users_guide/release-6-6.html).  To get GHC 6.6, go to [Download](http://www.haskell.org/ghc/download_ghc_66.html).  Significant new features, all described in more detail in the [
 release notes](http://haskell.org/ghc/docs/6.6/html/users_guide/release-6-6.html), include:
 
