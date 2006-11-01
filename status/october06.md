@@ -42,7 +42,7 @@ release notes](http://haskell.org/ghc/docs/6.6/html/users_guide/release-6-6.html
   http://hackage.haskell.org/trac/ghc/wiki/GhcPackages](http://hackage.haskell.org/trac/ghc/wiki/GhcPackages).
 
 
-Life still goes on, and current HEAD version [
+Life still goes on and current development version (HEAD) [
 http://darcs.haskell.org/ghc/](http://darcs.haskell.org/ghc/), that will ultimately become GHC 6.8, already includes significant new features:
 
 
