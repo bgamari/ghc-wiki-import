@@ -45,7 +45,10 @@ The quality of the audio or (particularly) video may not be great.  They are int
   Specialisation](http://video.google.com/videoplay?docid=4856710845953456851), getting rid of class dictionaries (7'09")
 1. [
   GHC Core Language](http://video.google.com/videoplay?docid=-8778691434558190641) internal representation (14'04")
-1. \[ STG language\] intermediate code (17'21")
-1. \[ CMM language\] C minus minus representation (6'32")
-1. \[ Big picture\] overview of the compiler pipeline (again) (20'23")
+1. [
+  STG language](http://video.google.com/videoplay?docid=-2701204964659708761) intermediate code (17'21")
+1. [
+  CMM language](http://video.google.com/videoplay?docid=-3113809494987135588) C minus minus representation (6'32")
+1. [
+  Big picture](http://video.google.com/videoplay?docid=-7209446285751038574) overview of the compiler pipeline (again) (20'23")
 1. still lots more to come...
