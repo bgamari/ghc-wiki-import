@@ -56,7 +56,7 @@ True_info:
         jump [[Sp]] --address to True alternative;
 
 False_info:
-        jump [[Sp]+4] --address to False alternative>;
+        jump [[Sp]+4] --address to False alternative;
 ```
 
 
@@ -107,6 +107,20 @@ The benefit is that processors are typically faster at "test-and-jump to known l
 Under this scheme, the entry code for the `not` function would look as follows:
 
 
+```wiki
+        <stack check omitted>
+        if([[R2]+tag_offset] == closure_info) goto tagged
+        R1 = R2;
+        I64[Sp + (-8)] = sej_info;
+        Sp = Sp + (-8);
+        jump I64[R1];
+tagged:
+        R1 = R2 & ~1;  // mask pointer tag out
+        <extract constructor tag from pointer>
+        if(tag==0) goto sej_0_alt
+        goto sej_1_alt
+```
+
 ## Tagging the LSB of an evaluated closure
 
 
@@ -145,8 +159,8 @@ This would require modifying
 
 
 ```wiki
-        if(R2 & 1 == 1) goto tagged
         <stack check omitted>
+        if(R2 & 1 == 1) goto tagged
         R1 = R2;
         I64[Sp + (-8)] = sej_info;
         Sp = Sp + (-8);
