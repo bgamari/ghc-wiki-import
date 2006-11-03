@@ -42,7 +42,7 @@ jumps to the boolean argument, passed in `R2`, after pushing a case frame (the c
 ```wiki
         <stack check omitted>
         R1 = R2;
-        I64[Sp + (-8)] = sej_info;
+        I64[Sp + (-8)] = notcont_info;
         Sp = Sp + (-8);
         jump I64[R1];
 ```
@@ -53,10 +53,10 @@ Before looking at the rest of the `not` function, let's look at the code for the
 
 ```wiki
 True_info:
-        jump <address to True alternative>;
+        jump [[Sp]] --address to True alternative;
 
 False_info:
-        jump <address to False alternative>;
+        jump [[Sp]+4] --address to False alternative>;
 ```
 
 
@@ -64,7 +64,12 @@ they just jump to the appropriate case alternative that is evaluating the closur
 
 
 ```wiki
-sej_0_alt() {
+notcont_info {
+  notcont_0_alt,
+  notcont_1_alt
+};
+
+notcont_0_alt() {
         R1 = False_closure;
         Sp = Sp + 8;
         jump <address to False alternative>;
@@ -76,7 +81,7 @@ and the `False` alternative of the `not` function.
 
 
 ```wiki
-sej_1_alt() {
+notcont_1_alt() {
         R1 = True_closure;
         Sp = Sp + 8;
         jump <address to True alternative>;
