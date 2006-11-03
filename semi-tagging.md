@@ -107,20 +107,6 @@ The benefit is that processors are typically faster at "test-and-jump to known l
 Under this scheme, the entry code for the `not` function would look as follows:
 
 
-```wiki
-        if(R2 & 1 == 1) goto tagged
-        <stack check omitted>
-        R1 = R2;
-        I64[Sp + (-8)] = sej_info;
-        Sp = Sp + (-8);
-        jump I64[R1];
-tagged:
-        R1 = R2 & ~1;  // mask pointer tag out
-        <extract constructor tag from pointer>
-        if(tag==0) goto sej_0_alt
-        goto sej_1_alt
-```
-
 ## Tagging the LSB of an evaluated closure
 
 
@@ -157,6 +143,20 @@ This would require modifying
 
 (Simon, thanks for the example. I was hoping to not have to enter constructor closures but the second bullet example shows why entering constructors can still happen. However, can't the example just be `f xs = head xs`? --Alexey)
 
+
+```wiki
+        if(R2 & 1 == 1) goto tagged
+        <stack check omitted>
+        R1 = R2;
+        I64[Sp + (-8)] = sej_info;
+        Sp = Sp + (-8);
+        jump I64[R1];
+tagged:
+        R1 = R2 & ~1;  // mask pointer tag out
+        <extract constructor tag from pointer>
+        if(tag==0) goto sej_0_alt
+        goto sej_1_alt
+```
 
 ## Using more than one bit
 
