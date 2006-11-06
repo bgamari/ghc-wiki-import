@@ -27,7 +27,7 @@ We start with `Foo.hs` or `Foo.lhs`, the "l" specifing whether literate style is
 
 - In the `-fvia-C` case:
 
-  - Run the **C compiler** to generate `Foo.raw_s`.
+  - Run the **C compiler** on `Foo.hc`, to generate `Foo.raw_s`.
   - Run the [Evil Mangler](commentary/evil-mangler), generating `Foo.s`
 
 - If `-split-objs` is in force, run the **splitter** on `Foo.s`.  This splits `Foo.s` into lots of small files.  The idea is that the static linker will thereby avoid linking dead code.
