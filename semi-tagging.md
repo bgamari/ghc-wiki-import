@@ -50,6 +50,10 @@ jumps to the boolean argument, passed in `R2`, after pushing a case frame (the c
 ```
 
 
+(Note that the examples in this page assume a 64-bit architecture, therefore a word consists of 8 bytes.)
+
+
+
 Before looking at the rest of the `not` function, let's look at the code for the `True` and `False` closures
 
 
