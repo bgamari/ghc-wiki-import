@@ -26,7 +26,7 @@ Release notes](http://haskell.org/ghc/docs/6.6/html/users_guide/release-6-6.html
 
 
 - Now GHC can execute several Haskell threads simultaneously on different cpus/cores
-- ByteString type for fast and memory-efficent string manipulations
+- `ByteString` type for fast and memory-efficent string manipulations
 - Unicode source files
 - Further generalisation of newtype deriving
 - Bang patterns to declare function arguments as strict
