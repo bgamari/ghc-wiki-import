@@ -88,6 +88,10 @@ StgWord Main_zdwrepeated_ct[] = {
 ```
 
 
-Here, `Main_zdwrepeated_ct` is actually an `StgEntCounter` (this type is declared in [includes/StgTicky.h](/trac/ghc/browser/ghc/includes/StgTicky.h)). The counters get used by `printRegisteredCounterInfo` in [rts/Ticky.c](/trac/ghc/browser/ghc/rts/Ticky.c), which prints out the ticky reports. The counter fields are accessed using offsets defined in [includes/GHCConstants.h](/trac/ghc/browser/ghc/includes/GHCConstants.h) (`oFFSET_StgEntCounter_*`), which in turn get generated from [includes/mkDerivedConstants.c](/trac/ghc/browser/ghc/includes/mkDerivedConstants.c) (change it and then run `make` in `includes/`. Note that the first 3 fields of the counters are 16-bit ints and so the generated ticky-counter registration code has to reflect that (I fixed a bug where the first field was getting treated as a 32-bit int.)
+Here, `Main_zdwrepeated_ct` is actually an `StgEntCounter` (this type is declared in [includes/StgTicky.h](/trac/ghc/browser/ghc/includes/StgTicky.h)). The counters get used by `printRegisteredCounterInfo` in [rts/Ticky.c](/trac/ghc/browser/ghc/rts/Ticky.c), which prints out the ticky reports. The counter fields are accessed using offsets defined in [includes/GHCConstants.h](/trac/ghc/browser/ghc/includes/GHCConstants.h) (`oFFSET_StgEntCounter_*`), which in turn get generated from [includes/mkDerivedConstants.c](/trac/ghc/browser/ghc/includes/mkDerivedConstants.c) (change it and then run `make` in `includes/`. 
+
+
+
+\<s\>Note that the first 3 fields of the counters are 16-bit ints and so the generated ticky-counter registration code has to reflect that (I fixed a bug where the first field was getting treated as a 32-bit int.)\</s\> I modified the `StgEntCounter` type so that all fields are `StgWord`s, because it seems that the code generator can't cope with anything else anyway (i.e., in the declaration above, `Main_zdwrepeated_ct[]` is an array of `StgWord`s, even though the C type declaration implies that some fields are halfwords.)
 
 
