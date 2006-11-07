@@ -33,6 +33,7 @@ from that manual is gradually being incorporated here.
 - [Running the GHC test framework](building/running-tests)
 - Platform-specific build issues
 
+  - [Platforms, scripts, and file names](building/platforms-scripts-file-names)
   - [Building under Windows](building/windows)
   - [Building under MacOS X](building/mac-osx)
 
