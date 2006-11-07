@@ -8,7 +8,7 @@ anything to go by, the numbers are increasing quite rapidly. Indeed,
 GHC was rapidly becoming a success-disaster, so that we (Simon &
 Simon) were becoming swamped in GHC-related mail.  Happily,
 Microsoft Research has agreed to fund a full-time support engineer,
-in the form of Ian Lynagh, who has already made a huge difference.
+in the form of Ian Lynagh (Igloo), who has already made a huge difference.
 
 
 
