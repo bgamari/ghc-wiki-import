@@ -179,7 +179,7 @@ http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc), created with the `[
 - [rts/Makefile](/trac/ghc/browser/ghc/rts/Makefile) (*Modify*: building GMP library)
 - [rts/PrimOps.cmm](/trac/ghc/browser/ghc/rts/PrimOps.cmm) (*Modify*: remove GMP references; NOTE: optimisation of `/* ToDo: this is shockingly inefficient */`, see discussion below)
 - [rts/StgPrimFloat.c](/trac/ghc/browser/ghc/rts/StgPrimFloat.c) (*Modify*: `__encodeDouble`, `__encodeFloat` and `decode` versions defined here refer to GMP; might optimise with bitwise conversion instead of union; conversion depends on whether replacement MP library uses floating point, etc.)
-- [rts/Storage.c](/trac/ghc/browser/ghc/rts/Storage.c) (*Modify*: `stgAllocForGMP`, `stgReallocForGMP` and `stgDeallocForGMP`; `mp_set_memory_functions(...)`; functions on lines 811, 833, 835, 848; may use as reference for implementation if replacement MP library uses GHC-garbage collected memory)
+- [rts/sm/Storage.c](/trac/ghc/browser/ghc/rts/sm/Storage.c) (*Modify*: `stgAllocForGMP`, `stgReallocForGMP` and `stgDeallocForGMP`; `mp_set_memory_functions(...)`; functions on lines 811, 833, 835, 848; may use as reference for implementation if replacement MP library uses GHC-garbage collected memory)
 - [rts/gmp/](/trac/ghc/browser/ghc/rts/gmp/) (directory) (*Modify*: recommended to remove entirely, i.e., do not add conditional compilation for users who want to keep on using GMP)
 
 #### Optimisation Opportunities
