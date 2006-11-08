@@ -95,3 +95,7 @@ Here, `Main_zdwrepeated_ct` is actually an `StgEntCounter` (this type is declare
 \<s\>Note that the first 3 fields of the counters are 16-bit ints and so the generated ticky-counter registration code has to reflect that (I fixed a bug where the first field was getting treated as a 32-bit int.)\</s\> I modified the `StgEntCounter` type so that all fields are `StgWord`s, because it seems that the code generator can't cope with anything else anyway (i.e., in the declaration above, `Main_zdwrepeated_ct[]` is an array of `StgWord`s, even though the C type declaration implies that some fields are halfwords.)
 
 
+
+In `emitBlackHoleCode` in [compiler/codeGen/CgClosure.lhs](/trac/ghc/browser/ghc/compiler/codeGen/CgClosure.lhs), "eager blackholing" was getting employed in the case where ticky was turned on; this was causing programs to `<<loop>>` when they wouldn't with ticky disabled, so I turned that off.
+
+
