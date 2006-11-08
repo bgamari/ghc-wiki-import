@@ -95,8 +95,7 @@ There are several problems with the current GMP implementation:
 >
 > Most of the suggestions in this section come from discussions in the glasgow-haskell-users list thread [
 > returning to Cost of Integer](http://www.haskell.org/pipermail/glasgow-haskell-users/2006-July/010654.html).  In particular, [
-> John Meacham's suggestion](http://www.haskell.org/pipermail/glasgow-haskell-users/2006-July/010660.html) to use a ForeignPtr to data held by the normal GMP system library and store the value in an unboxed Int if the number of significant digits in Integer could fit into the size of an Int.  For those who are curious, a guide to GHC primitives is available (in an unformatted version) in [/compiler/prelude/primops.txt.pp](/trac/ghc/browser/ghc//compiler/prelude/primops.txt.pp); here is a link to [
-> CVS version of primops.txt.pp](http://darcs.haskell.org/ghc/compiler/prelude/primops.txt.pp).  (See [The (new) GHC Commentary](commentary) [PrimOps](commentary/prim-ops) for a description of primops.txt.pp; and a highly recommended introduction directly related to GMP is [AddingNewPrimitiveOperations](adding-new-primitive-operations).) In primops.txt.pp, you might want to search for the text "section "The word size story."", and especially the text "section "Integer\#"".   The Haskell definition of Integer is in [
+> John Meacham's suggestion](http://www.haskell.org/pipermail/glasgow-haskell-users/2006-July/010660.html) to use a ForeignPtr to data held by the normal GMP system library and store the value in an unboxed Int if the number of significant digits in Integer could fit into the size of an Int.  For those who are curious, a guide to GHC primitives is available (in an unformatted version) in [/compiler/prelude/primops.txt.pp](/trac/ghc/browser/ghc//compiler/prelude/primops.txt.pp); there is a formatted version (from the latest build) at [http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html](http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html).  (See [The (new) GHC Commentary](commentary) [PrimOps](commentary/prim-ops) for a description of primops.txt.pp; and a highly recommended introduction directly related to GMP is [AddingNewPrimitiveOperations](adding-new-primitive-operations).) In primops.txt.pp, you might want to search for the text "section "The word size story."", and especially the text "section "Integer\#"".   The Haskell definition of Integer is in [
 > /packages/base/GHC/Num.lhs](http://darcs.haskell.org/packages/base/GHC/Num.lhs).
 >
 >
@@ -156,44 +155,28 @@ Replacement for GMP(4)](http://www.haskell.org/pipermail/glasgow-haskell-users/2
 
 
 Note: references are relative to the main directory of the source distribution; links below are to the darcs repository at [
-http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc).
+http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc), created with the `[[GhcFile(path/to/file)]]` script (see [Commentary](commentary)).
 
 
-- [
-  configure.ac](http://darcs.haskell.org/ghc/configure.ac) (*Modify*: remove GMP related material; replace with MP library requirements)
+- [configure.ac](/trac/ghc/browser/ghc/configure.ac) (*Modify*: remove GMP related material; replace with MP library requirements)
 
-- [
-  compiler/prelude/primops.txt.pp](http://darcs.haskell.org/ghc/compiler/prelude/primops.txt.pp)   (*Modify*: Integer material)
-- [
-  compiler/prelude/PrelNames.lhs](http://darcs.haskell.org/ghc/compiler/prelude/PrelNames.lhs) (*Reference*: integerTyConName and similar)
-- [
-  compiler/prelude/TysPrim.lhs](http://darcs.haskell.org/ghc/compiler/prelude/TysPrim.lhs)   (*Reference*)
+- [compiler/prelude/primops.txt.pp](/trac/ghc/browser/ghc/compiler/prelude/primops.txt.pp)   (*Modify*: Integer material)
+- [compiler/prelude/PrelNames.lhs](/trac/ghc/browser/ghc/compiler/prelude/PrelNames.lhs) (*Reference*: integerTyConName and similar)
+- \[\[GhcFile(compiler/prelude/TysPrim.lhs)\]   (*Reference*)
 
-- [
-  includes/Cmm.h](http://darcs.haskell.org/ghc/includes/Cmm.h) (*Modify*: cpp test for `#if SIZEOF_mp_limb_t != SIZEOF_VOID_P `)
-- [
-  includes/MachRegs.h](http://darcs.haskell.org/ghc/includes/MachRegs.h) (*Reference*: general; unrelated to GMP: may be starting point for vectorized Cmm (currently only -fvia-c allows auto-vectorization))
-- [
-  includes/mkDerivedConstants.c](http://darcs.haskell.org/ghc/includes/mkDerivedConstants.c) (*Modify*: references to GMP `__mpz_struct`: `struct_size(MP_INT)`, `struct_field(MP_INT,_mp_alloc)`, `struct_field(MP_INT,_mp_size)`, `struct_field(MP_INT,_mp_d)` and `ctype(mp_limb_t)`.  Note: mp\_limb\_t generally == unsigned long)
-- [
-  includes/Regs.h](http://darcs.haskell.org/ghc/includes/Regs.h) (*Modify*: references to MP\_INT, `#include "gmp.h"`; Reference: Stg registers, etc.)
-- [
-  includes/Rts.h](http://darcs.haskell.org/ghc/includes/Rts.h) (*Modify*: reference to `#include "gmp.h"`, `extern` declarations to `__decodeDouble` and `__decodeFloat`; References to various Stg types and macros)
-- [
-  includes/StgMiscClosures.h](http://darcs.haskell.org/ghc/includes/StgMiscClosures.h) (*Modify*: references to `RTS_FUN(...Integer)` PrimOps; *Reference*: Weak Pointers, other Stg closures)
+- [includes/Cmm.h](/trac/ghc/browser/ghc/includes/Cmm.h) (*Modify*: cpp test for `#if SIZEOF_mp_limb_t != SIZEOF_VOID_P `)
+- [includes/MachRegs.h](/trac/ghc/browser/ghc/includes/MachRegs.h) (*Reference*: general; unrelated to GMP: may be starting point for vectorized Cmm (currently only -fvia-c allows auto-vectorization))
+- [includes/mkDerivedConstants.c](/trac/ghc/browser/ghc/includes/mkDerivedConstants.c) (*Modify*: references to GMP `__mpz_struct`: `struct_size(MP_INT)`, `struct_field(MP_INT,_mp_alloc)`, `struct_field(MP_INT,_mp_size)`, `struct_field(MP_INT,_mp_d)` and `ctype(mp_limb_t)`.  Note: mp\_limb\_t generally == unsigned long)
+- [includes/Regs.h](/trac/ghc/browser/ghc/includes/Regs.h) (*Modify*: references to MP\_INT, `#include "gmp.h"`; Reference: Stg registers, etc.)
+- [includes/Rts.h](/trac/ghc/browser/ghc/includes/Rts.h) (*Modify*: reference to `#include "gmp.h"`, `extern` declarations to `__decodeDouble` and `__decodeFloat`; References to various Stg types and macros)
+- [includes/StgMiscClosures.h](/trac/ghc/browser/ghc/includes/StgMiscClosures.h) (*Modify*: references to `RTS_FUN(...Integer)` PrimOps; *Reference*: Weak Pointers, other Stg closures)
 
-- [
-  rts/Linker.c](http://darcs.haskell.org/ghc/rts/Linker.c) (*Modify*: `SymX(__gmpn...)` and related GMP functions)
-- [
-  rts/Makefile](http://darcs.haskell.org/ghc/rts/Makefile) (*Modify*: building GMP library)
-- [
-  rts/PrimOps.cmm](http://darcs.haskell.org/ghc/rts/PrimOps.cmm) (*Modify*: remove GMP references; NOTE: optimisation of `/* ToDo: this is shockingly inefficient */`, see discussion below)
-- [
-  rts/StgPrimFloat.c](http://darcs.haskell.org/ghc/rts/StgPrimFloat.c) (*Modify*: `__encodeDouble`, `__encodeFloat` and `decode` versions defined here refer to GMP; might optimise with bitwise conversion instead of union; conversion depends on whether replacement MP library uses floating point, etc.)
-- [
-  rts/Storage.c](http://darcs.haskell.org/ghc/rts/Storage.c) (*Modify*: `stgAllocForGMP`, `stgReallocForGMP` and `stgDeallocForGMP`; `mp_set_memory_functions(...)`; functions on lines 811, 833, 835, 848; may use as reference for implementation if replacement MP library uses GHC-garbage collected memory)
-- [
-  rts/gmp (directory)](http://darcs.haskell.org/ghc/rts/gmp/) (*Modify*: recommended to remove entirely, i.e., do not add conditional compilation for users who want to keep on using GMP)
+- [rts/Linker.c](/trac/ghc/browser/ghc/rts/Linker.c) (*Modify*: `SymX(__gmpn...)` and related GMP functions)
+- [rts/Makefile](/trac/ghc/browser/ghc/rts/Makefile) (*Modify*: building GMP library)
+- [rts/PrimOps.cmm](/trac/ghc/browser/ghc/rts/PrimOps.cmm) (*Modify*: remove GMP references; NOTE: optimisation of `/* ToDo: this is shockingly inefficient */`, see discussion below)
+- [rts/StgPrimFloat.c](/trac/ghc/browser/ghc/rts/StgPrimFloat.c) (*Modify*: `__encodeDouble`, `__encodeFloat` and `decode` versions defined here refer to GMP; might optimise with bitwise conversion instead of union; conversion depends on whether replacement MP library uses floating point, etc.)
+- [rts/Storage.c](/trac/ghc/browser/ghc/rts/Storage.c) (*Modify*: `stgAllocForGMP`, `stgReallocForGMP` and `stgDeallocForGMP`; `mp_set_memory_functions(...)`; functions on lines 811, 833, 835, 848; may use as reference for implementation if replacement MP library uses GHC-garbage collected memory)
+- [rts/gmp/](/trac/ghc/browser/ghc/rts/gmp/) (directory) (*Modify*: recommended to remove entirely, i.e., do not add conditional compilation for users who want to keep on using GMP)
 
 #### Optimisation Opportunities
 
@@ -206,9 +189,9 @@ http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc).
 /* ToDo: this is shockingly inefficient */
 
 #ifndef THREADED_RTS
-section "bss" {                              /* "bss" = UninitialisedData, see CmmParse.y:427 */
+section "bss" {                           /* "bss" = UninitialisedData, see CmmParse.y:427 */
   mp_tmp1:
-    bits8 [SIZEOF_MP_INT];                   /* SIZEOF_MP_INT created by includes/mkDerivedConstants.c:43-48 */
+    bits8 [SIZEOF_MP_INT];                /* SIZEOF_MP_INT created by includes/mkDerivedConstants.c:43-48 */
 }
 
 section "bss" {
@@ -290,8 +273,7 @@ results from initialising each struct (`mp_tmp2`, etc.) on each call, in order t
 >
 
 
-(2) Primitive Operations in [
-compiler/codeGen/CgPrimOp.hs](http://darcs.haskell.org/ghc/compiler/codeGen/CgPrimOp.hs)
+(2) Primitive Operations in [compiler/codeGen/CgPrimOp.hs](/trac/ghc/browser/ghc/compiler/codeGen/CgPrimOp.hs)
 
 
 
