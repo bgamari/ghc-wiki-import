@@ -25,9 +25,14 @@ If you want to help with replacing GMP or do it yourself, you will have to work 
 
 - how the GC works and how memory from GMP is integrated with it;
 - some C-- (this is fairly basic if you know C well, the only real documentation on C-- itself is in the [
-  C-- manual (PDF)](http://cminusminus.org/extern/man2.pdf), from cminusminus.org; the implementation of C-- for GHC is performed by several Haskell modules in the directory [
-  compiler/cmm](http://darcs.haskell.org/ghc/compiler/cmm/) of the HEAD branch); and,
+  C-- manual (PDF)](http://cminusminus.org/extern/man2.pdf), from cminusminus.org; the implementation of C-- for GHC is performed by several Haskell modules in the directory [compiler/cmm/](/trac/ghc/browser/ghc/compiler/cmm/) of the HEAD branch, see [
+  http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc)); and,
 - makefiles and configuration scripts.
+
+
+A guide to GHC primitives is available (in an unformatted version) in [/compiler/prelude/primops.txt.pp](/trac/ghc/browser/ghc//compiler/prelude/primops.txt.pp); there is a formatted version (from the latest build) at [http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html](http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html).  (See [The (new) GHC Commentary](commentary) [PrimOps](commentary/prim-ops) page for an excellent description of how primitive operations are implemented.  A highly recommended introduction directly related to GMP is [AddingNewPrimitiveOperations](adding-new-primitive-operations).) In primops.txt.pp--better yet, [GHC.Prim](http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html)--you might want to search for the text `"section "The word size story.""`, and especially the text `"section "Integer#""` or just go to [The word size story](http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html#1) and [Integer](http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html#8).   The Haskell definition of Integer is in [
+/packages/base/GHC/Num.lhs](http://darcs.haskell.org/packages/base/GHC/Num.lhs).
+
 
 
 Other basic recommended reading is:
@@ -95,8 +100,7 @@ There are several problems with the current GMP implementation:
 >
 > Most of the suggestions in this section come from discussions in the glasgow-haskell-users list thread [
 > returning to Cost of Integer](http://www.haskell.org/pipermail/glasgow-haskell-users/2006-July/010654.html).  In particular, [
-> John Meacham's suggestion](http://www.haskell.org/pipermail/glasgow-haskell-users/2006-July/010660.html) to use a ForeignPtr to data held by the normal GMP system library and store the value in an unboxed Int if the number of significant digits in Integer could fit into the size of an Int.  For those who are curious, a guide to GHC primitives is available (in an unformatted version) in [/compiler/prelude/primops.txt.pp](/trac/ghc/browser/ghc//compiler/prelude/primops.txt.pp); there is a formatted version (from the latest build) at [http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html](http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html).  (See [The (new) GHC Commentary](commentary) [PrimOps](commentary/prim-ops) for a description of primops.txt.pp; and a highly recommended introduction directly related to GMP is [AddingNewPrimitiveOperations](adding-new-primitive-operations).) In primops.txt.pp, you might want to search for the text "section "The word size story."", and especially the text "section "Integer\#"".   The Haskell definition of Integer is in [
-> /packages/base/GHC/Num.lhs](http://darcs.haskell.org/packages/base/GHC/Num.lhs).
+> John Meacham's suggestion](http://www.haskell.org/pipermail/glasgow-haskell-users/2006-July/010660.html) to use a ForeignPtr to data held by the normal GMP system library and store the value in an unboxed Int if the number of significant digits in Integer could fit into the size of an Int.
 >
 >
 
@@ -189,9 +193,9 @@ http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc), created with the `[
 /* ToDo: this is shockingly inefficient */
 
 #ifndef THREADED_RTS
-section "bss" {                           /* "bss" = UninitialisedData, see CmmParse.y:427 */
+section "bss" {                   /* "bss" = UninitialisedData, see CmmParse.y:427 */
   mp_tmp1:
-    bits8 [SIZEOF_MP_INT];                /* SIZEOF_MP_INT created by includes/mkDerivedConstants.c:43-48 */
+    bits8 [SIZEOF_MP_INT];        /* SIZEOF_MP_INT created by includes/mkDerivedConstants.c:43-48 */
 }
 
 section "bss" {
@@ -246,8 +250,8 @@ name                                                                    \
   MP_INT__mp_size(mp_tmp2)  = (s2);                                     \
   MP_INT__mp_d(mp_tmp2)	    = BYTE_ARR_CTS(d2);                         \
                                                                         \
-  foreign "C" __gmpz_init(mp_result1 "ptr") [];   \  /* This actually initialises GMP as well as mp_result1 */
-                                                  \  /* mp_result1 must subsequently grow to size */
+  foreign "C" __gmpz_init(mp_result1 "ptr") [];\ /* This actually initialises GMP as well as mp_result1 */
+                                               \ /* mp_result1 must subsequently grow to size */
   /* Perform the operation */                                           \
   foreign "C" mp_fun(mp_result1 "ptr",mp_tmp1  "ptr",mp_tmp2  "ptr") []; \
                                                                         \
