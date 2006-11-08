@@ -16,7 +16,7 @@ The GNU MP Bignum Library](http://swox.com/gmp/) (GMP) which supports arbitrary 
 
 
 
-GMP memory is integrated with the RunTime System's (RTS's) Garbage Collector (GC).  GMP memory is allocated from the GC heap, so values produced by GMP are under the control of the RTS and its GC.  The current implementation is memory efficient wile allowing the RTS and its GC to maintain control of GMP evaluations.
+GMP memory is integrated with the [RunTime System's](commentary/rts) (RTS's) [Storage Manager](commentary/rts/storage) (SM)--the RTS's Garbage Collector (GC).  GMP memory is allocated from the GC heap, so values produced by GMP are under the control of the RTS and its GC.  The current implementation is memory efficient wile allowing the RTS and its GC to maintain control of GMP evaluations.
 
 
 
@@ -24,13 +24,13 @@ If you want to help with replacing GMP or do it yourself, you will have to work 
 
 
 - how the GC works and how memory from GMP is integrated with it;
-- some C-- (this is fairly basic if you know C well, the only real documentation on C-- itself is in the [
+- some C-- (this is fairly basic if you know C well, though the same adage for knowing C well holds for C--: if you know enough Assembler to  understand and debug C in Assembler you will be much better off), the only real documentation on C-- itself is in the [
   C-- manual (PDF)](http://cminusminus.org/extern/man2.pdf), from cminusminus.org; the implementation of C-- for GHC is performed by several Haskell modules in the directory [compiler/cmm/](/trac/ghc/browser/ghc/compiler/cmm/) of the HEAD branch, see [
   http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc)); and,
 - makefiles and configuration scripts.
 
 
-A guide to GHC primitives is available (in an unformatted version) in [/compiler/prelude/primops.txt.pp](/trac/ghc/browser/ghc//compiler/prelude/primops.txt.pp); there is a formatted version (from the latest build) at [http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html](http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html).  (See [The (new) GHC Commentary](commentary) [PrimOps](commentary/prim-ops) page for an excellent description of how primitive operations are implemented.  A highly recommended introduction directly related to GMP is [AddingNewPrimitiveOperations](adding-new-primitive-operations).) In primops.txt.pp--better yet, [GHC.Prim](http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html)--you might want to search for the text `"section "The word size story.""`, and especially the text `"section "Integer#""` or just go to [The word size story](http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html#1) and [Integer](http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html#8).   The Haskell definition of Integer is in [
+A guide to GHC primitives is available (in an unformatted version) in [/compiler/prelude/primops.txt.pp](/trac/ghc/browser/ghc//compiler/prelude/primops.txt.pp); there is a formatted version (from the latest build) at [http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html](http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html).  (See [The (new) GHC Commentary](commentary) [PrimOps](commentary/prim-ops) page for an excellent description of how primitive operations are implemented.  A highly recommended introduction directly related to GMP is [AddingNewPrimitiveOperations](adding-new-primitive-operations).) In primops.txt.pp--better yet, [GHC.Prim](http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html)--you might want to search for the text `"section "The word size story.""`, and especially the text `"section "Integer#""` or just go to [The word size story](http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html#1) and [Integer](http://www.haskell.org/ghc/dist/current/docs/libraries/base/GHC-Prim.html#8).   The Haskell definition of the Integer data type is in [
 /packages/base/GHC/Num.lhs](http://darcs.haskell.org/packages/base/GHC/Num.lhs).
 
 
@@ -43,7 +43,7 @@ Other basic recommended reading is:
   The Native Code Generator](http://www.cse.unsw.edu.au/~chak/haskell/ghc/comm/the-beast/ncg.html); and,
 - [
   The (old) GHC Commentary](http://www.cse.unsw.edu.au/~chak/haskell/ghc/comm/): [
-  Style Guidelines for RTS C code](http://www.cse.unsw.edu.au/~chak/haskell/ghc/comm/rts-libs/coding-style.html).
+  Style Guidelines for RTS C code](http://www.cse.unsw.edu.au/~chak/haskell/ghc/comm/rts-libs/coding-style.html) or [The (new) GHC Commentary](commentary): [Style Conventions for RTS C Code](commentary/rts/conventions).
 
 #### *Caveat*
 
@@ -193,9 +193,9 @@ http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc), created with the `[
 /* ToDo: this is shockingly inefficient */
 
 #ifndef THREADED_RTS
-section "bss" {                   /* "bss" = UninitialisedData, see CmmParse.y:427 */
+section "bss" {           /* "bss" = UninitialisedData, see CmmParse.y:427 */
   mp_tmp1:
-    bits8 [SIZEOF_MP_INT];        /* SIZEOF_MP_INT created by includes/mkDerivedConstants.c:43-48 */
+    bits8 [SIZEOF_MP_INT];/* SIZEOF_MP_INT created by includes/mkDerivedConstants.c:43-48 */
 }
 
 section "bss" {
@@ -250,10 +250,12 @@ name                                                                    \
   MP_INT__mp_size(mp_tmp2)  = (s2);                                     \
   MP_INT__mp_d(mp_tmp2)	    = BYTE_ARR_CTS(d2);                         \
                                                                         \
-  foreign "C" __gmpz_init(mp_result1 "ptr") [];\ /* This actually initialises GMP as well as mp_result1 */
-                                               \ /* mp_result1 must subsequently grow to size */
+  /* This actually initialises GMP as well as mp_result1 */             \
+  /* mp_result1 must subsequently grow to size */                       \
+  foreign "C" __gmpz_init(mp_result1 "ptr") [];                         \
+                                                                        \
   /* Perform the operation */                                           \
-  foreign "C" mp_fun(mp_result1 "ptr",mp_tmp1  "ptr",mp_tmp2  "ptr") []; \
+  foreign "C" mp_fun(mp_result1 "ptr",mp_tmp1  "ptr",mp_tmp2  "ptr") [];\
                                                                         \
   RET_NP(TO_W_(MP_INT__mp_size(mp_result1)),                            \
          MP_INT__mp_d(mp_result1) - SIZEOF_StgArrWords);                \
