@@ -159,6 +159,27 @@ The process followed to reconstruct the types of a value as much as possible is:
   - Note that tyvars need renaming to avoid collisions.
 1. refine the type of the subterms (inductively) with the reconstructed type. 
 
+### Compensating Wrapper Constructors
+
+
+
+Worker and Wrapper constructors are a potential headache. The arguments list gets extended with:
+
+
+- Existential Dictionaries
+- Type equality coercions (?)
+- Type Class dictionaries
+
+
+In addition, the types of the arguments may change too, but that is not a problem in our case. We always consider the processed types, not the original ones, since what we are going to find in the heap corresponds to the former. 
+
+
+
+So to recap, all what is being done to compensate is drop the first (n - m) arguments where:
+n - \# arguments of the original constructor
+m - \# arguments of the wrapper constructor, if any, or worker constructor
+
+
 ### About handling suspensions in the interactive environment
 
 
@@ -465,6 +486,8 @@ Interruption at unexpected conditions (expections).
 
 
 
+Rewrite of the Term pretty printer at RtClosureInspect.hs
+Rewrite of the type recovery code
 *Put together all the small todos here*
 
 
