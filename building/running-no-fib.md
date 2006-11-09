@@ -1,4 +1,4 @@
-# Running the NoFib benchmark suite
+# Running the `NoFib` benchmark suite
 
 
 
