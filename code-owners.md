@@ -107,6 +107,7 @@ and a short description of what they're doing or have done.
 - Duncan Coutts (Gentoo packages)
 - [ Iavor S Diatchki](http://www.csee.ogi.edu/~diatchki) ('monadLib' library)
 - Sigbjorn Finne
+- Andy Gill (Haskell Program Coverage)
 - John Goerzen
 - Tim Harris (Transactional memory, concurrency)
 - David Himmelstrup (GHC developer)
@@ -153,7 +154,6 @@ wonderful ways:
 - Kevin Glynn
 - Cordy Hall
 - Kevin Hammond
-- Andy Gill
 - Hans Wolfgang Lloidl
 - John Launchbury
 - Jim Mattson
