@@ -1,3 +1,7 @@
+
+**TODO** Can somebody please merge this with [Building/KnownProblems](building/known-problems)?
+
+
 # Common build problems
 
 
