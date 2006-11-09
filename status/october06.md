@@ -70,8 +70,7 @@ GHC 6.8 status](http://haskell.org/haskellwiki/GHC/6.8) page. At this moment we 
 - Simon PJ is determined to finally implement **implication constraints**, which are the key to fixing the interaction between GADTs and type classes.   GHC's users have been very polite about this collection of bugs, but they should really be fixed.  Implication constraints are described by Martin Sulzmann: [
   http://www.comp.nus.edu.sg/\~sulzmann/publications/tr-eadt.ps.gz](http://www.comp.nus.edu.sg/~sulzmann/publications/tr-eadt.ps.gz).
 
-- Once the last bits of indexed data types are done, Manuel will be tackling [
-  indexed type synonyms](http://haskell.org/haskellwiki/GHC/Indexed_type_synonyms) (aka type functions), which are considerably trickier, at least so far as type inference is concerned.
+- Once the last bits of indexed data types are done, Manuel will be tackling indexed type synonyms (aka type functions), which are considerably trickier, at least so far as type inference is concerned.
 
 
 Simon, Simon and sons, November 2006 :)
