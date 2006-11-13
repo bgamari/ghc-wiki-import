@@ -46,8 +46,3 @@ Please feel free to add pages here.  In due course, information can be incorpora
 
 
 - [ProblemsCompilingGhc](problems-compiling-ghc): Hints about building GHC on Windows platforms  
-
-## OLD documentation
-
-
-- [Building Guide](http://www.haskell.org/ghc/docs/latest/html/building/index.html)
