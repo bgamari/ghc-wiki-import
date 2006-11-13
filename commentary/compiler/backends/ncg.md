@@ -57,11 +57,11 @@ and one header file:
   defines macros used to separate architecture-specific code in the Haskell NCG files; since GHC currently only generates machine code for the architecture on which it was compiled (GHC is not currently a cross-compiler), the Haskell NCG files become considerably smaller after preprocessing; ideally all architecture-specific code would reside in separate files and GHC would have them available to support cross-compiler capabilities.
 
 
-The NCG runs through two main phases: a **machine-independent** phase and a **machine-dependent** phase.  
+The NCG has **machine-independent**  and **machine-dependent** parts.  
 
 
 
-The **machine-independent** phase begins with *Cmm blocks.*  A *Cmm block* is roughly parallel to a Cmm function or procedure in the same way as a compiler may generate a C function into a block of assembler instructions.  *Cmm block*s are held as lists of `Cmm` statements (`[CmmStmt]`, defined in [compiler/cmm/Cmm.hs](/trac/ghc/browser/ghc/compiler/cmm/Cmm.hs), or `type CmmStmts`, defined in [compiler/cmm/CmmUtils.hs](/trac/ghc/browser/ghc/compiler/cmm/CmmUtils.hs)).  A machine-specific (assembler) instruction is represented as a `Instr`. During this phase:
+The **machine-independent** parts begin with *Cmm blocks.*  A *Cmm block* is roughly parallel to a Cmm function or procedure in the same way as a compiler may generate a C function into a block of assembler instructions.  *Cmm block*s are held as lists of `Cmm` statements (`[CmmStmt]`, defined in [compiler/cmm/Cmm.hs](/trac/ghc/browser/ghc/compiler/cmm/Cmm.hs), or `type CmmStmts`, defined in [compiler/cmm/CmmUtils.hs](/trac/ghc/browser/ghc/compiler/cmm/CmmUtils.hs)).  A machine-specific (assembler) instruction is represented as a `Instr`. During this phase:
 
 
 1. each Cmm block is *lazily* converted to abstract machine instructions (`Instr`) operating on an infinite number of registers--since the NCG Haskell files only contain instructions for the host computer on which GHC was compiled, these `Instr` are machine-specific;
