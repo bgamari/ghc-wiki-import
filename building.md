@@ -9,12 +9,6 @@ want.  It also describes the inner workings of the build system, so you
 can extend it, modify it, and use it to build your code.
 
 
-
-The documentation here will eventually replace the
-[Building Guide](http://www.haskell.org/ghc/docs/latest/html/building/index.html).  Text
-from that manual is gradually being incorporated here.
-
-
 ## Contents
 
 
