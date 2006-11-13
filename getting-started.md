@@ -14,4 +14,4 @@ How to get started with hacking on GHC:
 - Useful information about GHC's architecture is in the [Commentary](commentary)
 - Hack away... ask questions on [
   the cvs-ghc mailing list](http://haskell.org/mailman/listinfo/cvs-ghc)
-- Submit patches back, using `darcs send` is the recommended way.
+- [Submit patches back](working-conventions#submitting-patches), using `darcs send` is the recommended way.
