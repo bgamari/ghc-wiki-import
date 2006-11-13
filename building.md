@@ -31,7 +31,7 @@ from that manual is gradually being incorporated here.
 - [Porting GHC](building/porting)
 - [Known pitfalls in building GHC](building/known-problems)
 - [Running the GHC test framework](building/running-tests)
-- [Running the nofib benchmarks](building/running-no-fib)
+- [The NoFib benchmark suite](building/running-no-fib)
 - Platform-specific build issues
 
   - [Platforms, scripts, and file names](building/platforms-scripts-file-names)
