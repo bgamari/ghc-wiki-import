@@ -24,7 +24,7 @@ from that manual is gradually being incorporated here.
 - [Quick start: just building and installing GHC](building/quick-start)
 - [Quick start for developers](building/hacking)
 - [Unregisterised builds](building/unregisterised)
-- [How do re-build after updating or changing GHC?](building/rebuilding)
+- [How do I re-build after updating or changing GHC?](building/rebuilding)
 - [Using the build system](building/using)
 - Architecture of the build system?
 - [Building the documentation](building/docs)
