@@ -1,6 +1,14 @@
 # Native Code Generator
 
 
+
+For other information related to this page, see:
+
+
+- [
+  the Old GHC Commentary: Native Code Generator](http://www.cse.unsw.edu.au/~chak/haskell/ghc/comm/the-beast/ncg.html) page (comments regarding Maximal Munch and register allocation optimisations are mostly still valid)
+- [BackEndNotes](back-end-notes) for optimisation ideas regarding the current NCG
+
 ### Overview: Files, Phases
 
 
