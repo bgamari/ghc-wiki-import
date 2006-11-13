@@ -18,7 +18,7 @@ There are some documents on coding style:
 
 
 
-To submit patches to the developers, please use `darcs send`.  You don't need any special permission to do this.  
+To submit patches to the GHC developers, please use `darcs send` to `cvs-ghc@haskell.org`.  You don't need any special permission to do this.  
 
 
 
