@@ -64,7 +64,7 @@ The NCG runs through two main phases: a **machine-independent** phase and a **ma
 The **machine-independent** phase begins with *Cmm blocks.*  A *Cmm block* is roughly parallel to a Cmm function or procedure in the same way as a compiler may generate a C function into a block of assembler instructions.  *Cmm block*s are held as lists of `Cmm` statements (`[CmmStmt]`, defined in [compiler/cmm/Cmm.hs](/trac/ghc/browser/ghc/compiler/cmm/Cmm.hs), or `type CmmStmts`, defined in [compiler/cmm/CmmUtils.hs](/trac/ghc/browser/ghc/compiler/cmm/CmmUtils.hs)).  A machine-specific (assembler) instruction is represented as a `Instr`. During this phase:
 
 
-1. each Cmm block is *lazily* converted to machine-specific instructions (`Instr`) operating on an infinite number of registers;
+1. each Cmm block is *lazily* converted to abstract machine instructions (`Instr`) operating on an infinite number of registers--since the NCG Haskell files only contain instructions for the host computer on which GHC was compiled, these `Instr` are machine-specific;
 
 1. for each *basic block* (a, contiguous block of instructions with no branches (jumps) in each *`Cmm` block*), real registers are *lazily* allocated based on the number of available registers on the target machine (say, 32 integer and 32 floating-point registers on the PowerPC architecture).
   *Note*: if a basic block simultaneously requires more registers than are available on the target machine and the temporary variable needs to be used (would sill be *live*) after the current instruction, it will be moved (*spilled*) into memory; and,
