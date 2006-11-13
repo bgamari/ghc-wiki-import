@@ -1,6 +1,10 @@
 # Notes on Trac Wiki formatting
 
 
+
+The main guide to the Trac Wiki formatting is [Wiki Formatting](wiki-formatting).  The notes on this page are the GHC team's observations and/or clarifications.
+
+
 ## Formatting list items with multiple paragraphs
 
 
