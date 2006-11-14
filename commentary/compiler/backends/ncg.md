@@ -61,19 +61,20 @@ The NCG has **machine-independent**  and **machine-dependent** parts.
 
 
 
-The **machine-independent** parts relate to generic programming, especially for optimisations, and Cmm.  The main machine-independent parts begin with *Cmm blocks.*  A *Cmm block* is roughly parallel to a Cmm function or procedure in the same way as a compiler may generate a C function into an assembler function composed of smaller *basic blocks* separated by branches (jumps).  *Cmm block*s are held as lists of `Cmm` statements (`[CmmStmt]`, defined in [compiler/cmm/Cmm.hs](/trac/ghc/browser/ghc/compiler/cmm/Cmm.hs), or the `type` synonym `CmmStmts`, defined in [compiler/cmm/CmmUtils.hs](/trac/ghc/browser/ghc/compiler/cmm/CmmUtils.hs)).  A machine-specific (assembler) instruction is represented as a `Instr`.
+The **machine-independent** parts relate to generic operations, especially optimisations, on Cmm code.  The main machine-independent parts begin with *Cmm blocks.*  A *Cmm block* is roughly parallel to a Cmm function or procedure in the same way as a compiler may generate a C function into an assembler symbol used as a label, composed of smaller *basic blocks* (`BasicBlock`) separated by branches (jumps)--every basic block ends in a branch instruction.  *Cmm block*s are held as lists of `Cmm` statements (`[CmmStmt]`, defined in [compiler/cmm/Cmm.hs](/trac/ghc/browser/ghc/compiler/cmm/Cmm.hs), or the `type` synonym `CmmStmts`, defined in [compiler/cmm/CmmUtils.hs](/trac/ghc/browser/ghc/compiler/cmm/CmmUtils.hs)).  A machine-specific (assembler) instruction is represented as a `Instr`.  The machine-independent NCG parts:
 
 
-1. each Cmm block is lazily converted to abstract machine instructions (`Instr`) operating on an infinite number of registers--since the NCG Haskell files only contain instructions for the host computer on which GHC was compiled, these `Instr` are machine-specific;
+1. optimise each Cmm block by reordering its basic blocks from the original order (the `Instr` order from the `Cmm`) to minimise the number of branches between basic blocks, in other words, by maximising fallthrough of execution from one basic block to the next.
 
-1. for each *basic block* (a, contiguous block of instructions with no branches (jumps) in each *`Cmm` block*), real registers are lazily allocated based on the number of available registers on the target machine (say, 32 integer and 32 floating-point registers on the PowerPC architecture).
-  *Note*: if a basic block simultaneously requires more registers than are available on the target machine and the temporary variable needs to be used (would sill be *live*) after the current instruction, it will be moved (*spilled*) into memory; and,
+1. lazily convert each Cmm block to abstract machine instructions (`Instr`) operating on an infinite number of registers--since the NCG Haskell files only contain instructions for the host computer on which GHC was compiled, these `Instr` are machine-specific; and,
 
-1. each Cmm block is optimised by reordering its basic blocks from the original order (the `Instr` order from the `Cmm`) to minimise the number of branches between basic blocks, in other words, by maximising fallthrough of execution from one basic block to the next.
-
-
-The **machine-dependent** parts generally cover :
+1. lazily allocate real registers for each basic block, based on the number of available registers on the target (currently, only the host) machine; for example, 32 integer and 32 floating-point registers on the PowerPC architecture.  The NCG does not currently have support for SIMD registers such as the vector registers for Altivec or any variation of SSE.
+  *Note*: if a basic block simultaneously requires more registers than are available on the target machine and the temporary variable needs to be used (would sill be *live*) after the current instruction, it will be moved (*spilled*) into memory.
 
 
-1. the number and kinds of registers available
-1. 
+The **machine-dependent** parts:
+
+
+1. define the abstract (Haskell) assembler `Instr` for the target (host) machine and convert every Cmm block into it;
+1. define, manage and allocate the real registers available on the target system;
+1. pretty-print the Haskell-assembler to GNU AS (GAS) assembler code
