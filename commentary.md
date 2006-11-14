@@ -45,21 +45,28 @@ Please feel free to add new pages here.  In due course information will migrate 
 
 - The Compiler
 
-  - BeginnersNotes: Some notes about getting started hacking GHC and the structure of the compiler (especially types and typecheck)
   - [TypeFunctions](type-functions): Notes concerning the implementation of type functions and associated types, which was merged in the HEAD during ICFP'06.
   - [IntermediateTypes](intermediate-types): Notes about the type system of GHC's new intermediate language (in the HEAD since ICFP'06)
+  - [DataParallel](data-parallel): Notes about the implementation of Data Parallel Haskell
   - [RewriteRules](rewrite-rules): Notes about the implementation of RULEs in GHC
   - [BackEndNotes](back-end-notes): Some ideas and notes about the back end.
   - [GhciDebugger](ghci-debugger): Some notes about the implementation of the GHCi debugger. Probably uninteresting unless you want to work on the debugger.
-  - [DebuggingGhcCrashes](debugging-ghc-crashes): how to use gdb to debug a crash in GHC-compiled code.
-  - [AddingNewPrimitiveOperations](adding-new-primitive-operations): How to add new primitive operations to GHC Haskell.
+
+    - [AddingNewPrimitiveOperations](adding-new-primitive-operations): How to add new primitive operations to GHC Haskell.
   - [Replacing GMP](replacing-gmp-notes): Notes from an effort to replace GMP with another Bignum library.
   - [ExternalCore](external-core): Describes the process of bringing External Core up to speed. Once finished, this will simply describe what External Core is, and how it works. 
   - [HaddockComments](haddock-comments): Some notes about how the Haddock comment support is implemented.
+
 - The Runtime System
 
   - [GarbageCollectorNotes](garbage-collector-notes) Notes about GHC's existing single threaded garbage collector and development of a parallel GC.
   - [SemiTagging](semi-tagging): Describes how the semi-tagging optimisation will be implemented.
+
+- Getting to grips with the code base
+
+  - BeginnersNotes: Some notes about getting started hacking GHC and the structure of the compiler (especially types and typecheck)
+  - [DebuggingGhcCrashes](debugging-ghc-crashes): how to use gdb to debug a crash in GHC-compiled code.
+
 - [Hackathon presentations](about-videos) (video)
 
 
