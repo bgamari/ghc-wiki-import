@@ -117,7 +117,15 @@ then type
 
 to build and install ghc.  Dependencies will be built and installed automatically. There is
 no need to follow the instructions above for installing readline; this is handled by
-MacPorts dependency mechanism.
+MacPorts dependency mechanism.  If you want to see how the build is progressing, type
+
+
+
+` > sudo port -dv install ghc `
+
+
+
+The "-dv" flags indicate verbose debugging output.  Using these can also help diagnose build problems.
 
 
 
@@ -130,5 +138,10 @@ If the build is interrupted or fails for some reason you must clean up before tr
 
 
 before restarting.
+
+
+
+A nice feature of MacPorts is that you can put its installation directory tree anywhere.
+This allows installations without administrator privileges.
 
 
