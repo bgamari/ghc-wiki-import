@@ -2,7 +2,7 @@
 
 
 
-There has been a vigorous thread on error attribution ("I get a `head []` error; but who called `head`?").  This page summarises some half baked ideas that Simon and I have been discussing. Do by all means edit this page to add comments and further ideas or pointers.  (As usual, *discussion* is best done by email; but this page could be a place to record ideas, design alternatives, list pros and cons etc.)
+There has been a vigorous thread on error attribution ("I get a `head []` error; but who called `head`?").  This page summarises some half baked ideas that Simon and I have been discussing. Do by all means edit this page to add comments and further ideas or pointers.  (As usual, *discussion* is best done by email; but this page could be a place to record ideas, design alternatives, list pros and cons, pointers to related work etc.)
 
 
 
@@ -13,6 +13,7 @@ See also
   The Haskell cafe thread](http://www.haskell.org/pipermail/haskell-cafe/2006-November/019549.html)
 - [
   http://www.cse.unsw.edu.au/\~dons/loch.html](http://www.cse.unsw.edu.au/~dons/loch.html)
+- [ HAT](http://haskell.org/hat)
 
 ## The basic idea
 
