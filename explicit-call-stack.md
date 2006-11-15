@@ -27,7 +27,7 @@ See also
 to pass a string describing the current location to f.
 
 
-1.  But that doesn't help with 'head'.  We want to pass head's site to head. That's what jhc does when you give 'head' the a magic [
+1.  But that doesn't help with 'head'.  We want to pass head's *call site* to head. That's what jhc does when you give 'head' the a magic [
   SRCLOC\_ANNOTATE pragma](http://repetae.net/john/computer/jhc/jhc.html):
 
   - every call to `head` gets replaced with `head_check $currentLocation`
