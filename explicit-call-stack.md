@@ -17,7 +17,7 @@ See also
 ## The basic idea
 
 
-1.  'assert' magically injects the current file location.  One could imagine generalising this a bit so that you could sya
+1.  GHC's 'assert' magically injects the current file location.  One could imagine generalising this a bit so that you could say
 
   ```wiki
   	...(f $currentLocation)...
