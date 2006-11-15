@@ -158,6 +158,9 @@ There are a couple of tricky things about the list of arg-demands:
 
 
 [even more sketchy notes](commentary/compiler/strictness-analysis/kirsten-notes)
-[even more sketchy notes](commentary/compiler/strictness-analysis/examples)
+
+
+
+[Commentary/Compiler/StrictnessAnalysis/Examples](commentary/compiler/strictness-analysis/examples)
 
 
