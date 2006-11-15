@@ -6,8 +6,13 @@ There has been a vigorous thread on error attribution ("I get a `head []` error;
 
 
 
-This page summarises some half baked ideas that Simon and I have been discussing.
+This page summarises some half baked ideas that Simon and I have been discussing. See also
 
+
+- [
+  The Haskell cafe thread](http://www.haskell.org/pipermail/haskell-cafe/2006-November/019549.html)
+- [
+  http://www.cse.unsw.edu.au/\~dons/loch.html](http://www.cse.unsw.edu.au/~dons/loch.html)
 
 ## The basic idea
 
@@ -22,7 +27,8 @@ This page summarises some half baked ideas that Simon and I have been discussing
 to pass a string describing the current location to f.
 
 
-1.  But that doesn't help with 'head'.  We want to pass head's site to head. That's what jhc does when you give 'head' the a magic SRCLOC\_ANNOTATE pragma:
+1.  But that doesn't help with 'head'.  We want to pass head's site to head. That's what jhc does when you give 'head' the a magic [
+  SRCLOC\_ANNOTATE pragma](http://repetae.net/john/computer/jhc/jhc.html):
 
   - every call to `head` gets replaced with `head_check $currentLocation`
   - you get to write `head_check` yourself, with type
