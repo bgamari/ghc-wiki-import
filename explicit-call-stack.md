@@ -2,11 +2,11 @@
 
 
 
-There has been a vigorous thread on error attribution ("I get a `head []` error; but who called `head`?") 
+There has been a vigorous thread on error attribution ("I get a `head []` error; but who called `head`?").  This page summarises some half baked ideas that Simon and I have been discussing. Do by all means edit this page to add comments and further ideas or pointers.
 
 
 
-This page summarises some half baked ideas that Simon and I have been discussing. See also
+See also
 
 
 - [
