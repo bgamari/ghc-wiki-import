@@ -81,7 +81,7 @@ You can apply ANY TIME.  Internships are not just the summer months. Contact one
 
 
 To apply, follow the instructions at [
-http://research.microsoft.com/aboutmsr/jobs/internships/](http://research.microsoft.com/aboutmsr/jobs/internships/), **and** email one of us to say that you have done so. 
+http://research.microsoft.com/aboutmsr/jobs/internships/](http://research.microsoft.com/aboutmsr/jobs/internships/), **and** email one of us to say that you have done so. Do not omit the latter step; across the whole of MSR there are hundreds of applicants.
 
 
 
