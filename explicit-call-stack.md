@@ -2,7 +2,7 @@
 
 
 
-There has been a vigorous thread on error attribution ("I get a `head []` error; but who called `head`?").  This page summarises some half baked ideas that Simon and I have been discussing. Do by all means edit this page to add comments and further ideas or pointers.  (As usual, *discussion* is best done by email; but this could be a place to record ideas, design alternatives, list pros and cons etc.)
+There has been a vigorous thread on error attribution ("I get a `head []` error; but who called `head`?").  This page summarises some half baked ideas that Simon and I have been discussing. Do by all means edit this page to add comments and further ideas or pointers.  (As usual, *discussion* is best done by email; but this page could be a place to record ideas, design alternatives, list pros and cons etc.)
 
 
 
@@ -55,7 +55,7 @@ Now in effect, we build up a call stack.
 1.  In fact, it's very similar to the "cost-centre stack" that GHC builds for profiling, except that it's explicit rather than implicit.  (Which is good.   Of course the stack should be a proper data type, not a String.)
 
 
-However, unlike GHC's profiling stuff, it is \*selective\*.  You can choose to annotate just one function, or 10, or all.  If call an annotated function from an unannotated one, you get only the information that it was called from the unannotated one:
+However, unlike GHC's profiling stuff, it is *selective*.  You can choose to annotate just one function, or 10, or all.  If call an annotated function from an unannotated one, you get only the information that it was called from the unannotated one:
 
 
 ```wiki
@@ -77,7 +77,7 @@ This selectiveness makes it much less heavyweight than GHC's currrent "recompile
 Lots of open questions
 
 
-- It would be great to use the exact same stack value for profiling.  Not so easy...for exmaple, time profiling uses sampling based on timer interrupts that expect to find the current cost centre stack in a particular register.  But a big pay-off; instead of having magic rules in GHC to handle SCC annotations, we could throw the full might of the Simplifier at it.
+- It would be great to use the exact same stack value for profiling.  Not so easy...for example, time profiling uses sampling based on timer interrupts that expect to find the current cost centre stack in a particular register.  But a big pay-off; instead of having magic rules in GHC to handle SCC annotations, we could throw the full might of the Simplifier at it.
 
 
   
