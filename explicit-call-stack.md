@@ -71,6 +71,15 @@ However, unlike GHC's profiling stuff, it is *selective*.  You can choose to ann
 This selectiveness makes it much less heavyweight than GHC's currrent "recompile everything" story.
 
 
+1. The dynamic hpc tracer will allow reverse time-travel, from an exception to the call site,
+
+
+by keeping a small queue of recently ticked locations. This will make it easier to find out 
+what called the error calling function (head, !, !!, etc.), but will require a hpc-trace compiled
+prelude if we want to find places in the prelude that called the error. (A standard prelude
+would find the prelude function that was called that called the error inducing function).
+
+
 ## Open questions
 
 
