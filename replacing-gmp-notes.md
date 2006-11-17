@@ -24,9 +24,9 @@ If you want to help with replacing GMP or do it yourself, you will have to work 
 
 
 - how the GC works and how memory from GMP is integrated with it;
-- some C-- (this is fairly basic if you know C well, though the same adage for knowing C well holds for C--: if you know enough Assembler to  understand and debug C in Assembler you will be much better off), the only real documentation on C-- itself is in the [
+- some C--/Cmm (this is fairly basic if you know C well, though the same adage for knowing C well holds for C--: if you know Assembler well enough to  understand and debug C in it you will be much better off), the only real documentation on C-- itself is in the [
   C-- manual (PDF)](http://cminusminus.org/extern/man2.pdf), from cminusminus.org; the implementation of C-- for GHC is performed by several Haskell modules in the directory [compiler/cmm/](/trac/ghc/browser/ghc/compiler/cmm/) of the HEAD branch, see [
-  http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc)); and,
+  http://darcs.haskell.org/ghc](http://darcs.haskell.org/ghc)), and see [the new Commentary Cmm page](commentary/compiler/cmm-type); and,
 - makefiles and configuration scripts.
 
 
@@ -81,7 +81,7 @@ There are several problems with the current GMP implementation:
 
 >
 >
-> In the current GMP implementation, GMP is configured to use GHC's GC memory and GMP can only have one allocator for memory.  Since any single binary containing Haskell code compiled with GHC contains the RTS and GMP, C code in the same binary cannot use GMP.  This problem was noted in [
+> In the current GMP implementation, GMP is configured to use GHC's GC memory and GMP can only have one allocator for memory.  Since any single binary containing Haskell code compiled with GHC contains the RTS and GMP, C code--including foreign calls to GMP from Haskell code (say you need a GMP function that is not a primitive)--in the same binary cannot use GMP.  This problem was noted in [
 > bug Ticket \#311](http://hackage.haskell.org/trac/ghc/ticket/311).  The Simon Peyton-Jones suggested that a simple renaming of GHC-GMP functions would solve this problem and Bulat Ziganshin suggested simply using an automated tool to do this.  See [
 > Replacement for GMP](http://www.haskell.org/pipermail/glasgow-haskell-users/2006-August/010679.html).  Different function names would make GMP into a separate, custom GHC library leaving the C part of the program free to use GMP.
 >
