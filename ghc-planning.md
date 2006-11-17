@@ -40,6 +40,8 @@ Ian's projects
   test failures are broken and have a bug annotated. Update building guide
   to know about this change.
 
+- **GHC API**.  Respond to Norman Ramsey, Brian Smith, Clemens Fruhwirth.  Propose improvements to the GHC API.  
+
 - **Ghc Performance Index** ([\#1009](https://gitlab.staging.haskell.org/ghc/ghc/issues/1009)).
 
 - **Download statistics**
