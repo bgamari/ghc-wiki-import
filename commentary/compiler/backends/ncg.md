@@ -1,4 +1,4 @@
-# Native Code Generator
+# Native Code Generator (NCG)
 
 
 
@@ -8,12 +8,13 @@ For other information related to this page, see:
 - [
   the Old GHC Commentary: Native Code Generator](http://www.cse.unsw.edu.au/~chak/haskell/ghc/comm/the-beast/ncg.html) page (comments regarding Maximal Munch and register allocation optimisations are mostly still valid)
 - [BackEndNotes](back-end-notes) for optimisation ideas regarding the current NCG
+- The New GHC Commentary Cmm page: [The Cmm language](commentary/compiler/cmm-type) (the NCG code works from Haskell's implementation of C-- and many optimisations in the NCG relate to Cmm)
 
 ### Overview: Files, Parts
 
 
 
-After GHC has produced Cmm (use -ddump-cmm or -ddump-opt-cmm to view), the Native Code Generator (NCG) transforms [Cmm](commentary/compiler/cmm-type) into architecture-specific assembly code.  The NCG is located in [compiler/nativeGen](/trac/ghc/browser/ghc/compiler/nativeGen) and is separated into eight modules:
+After GHC has produced [Cmm](commentary/compiler/cmm-type) (use -ddump-cmm or -ddump-opt-cmm to view), the Native Code Generator (NCG) transforms Cmm into architecture-specific assembly code.  The NCG is located in [compiler/nativeGen](/trac/ghc/browser/ghc/compiler/nativeGen) and is separated into eight modules:
 
 
 - [compiler/nativeGen/AsmCodeGen.lhs](/trac/ghc/browser/ghc/compiler/nativeGen/AsmCodeGen.lhs)
@@ -46,7 +47,7 @@ After GHC has produced Cmm (use -ddump-cmm or -ddump-opt-cmm to view), the Nativ
 
 - [compiler/nativeGen/RegisterAlloc.hs](/trac/ghc/browser/ghc/compiler/nativeGen/RegisterAlloc.hs)
 
-  one of the most complicated modules in the NCG, `RegisterAlloc` manages the allocation of registers for each *basic block* of Haskell-abstracted assembler code: management involves *liveness* analysis, allocation or deletion of temporary registers, *spilling* temporary values to the *spill stack* (memory) and many optimisations.  *Note: much of this detail will be described later; **basic block** is defined below.*
+  one of the most complicated modules in the NCG, `RegisterAlloc` manages the allocation of registers for each *basic block* of Haskell-abstracted assembler code: management involves *liveness* analysis, allocation or deletion of temporary registers, *spilling* temporary values to the *spill stack* (memory) and many optimisations.  *See [The Cmm language](commentary/compiler/cmm-type) for the definition of a *basic block* (in Haskell, *`type CmmBasicBlock =  GenBasicBlock CmmStmt`*).*
 
 
 and one header file:
@@ -61,7 +62,7 @@ The NCG has **machine-independent**  and **machine-dependent** parts.
 
 
 
-The **machine-independent** parts relate to generic operations, especially optimisations, on Cmm code.  The main machine-independent parts begin with *Cmm blocks.*  A *Cmm block* is roughly parallel to a Cmm function or procedure in the same way as a compiler may generate a C function into an assembler symbol used as a label, composed of smaller *basic blocks* (`BasicBlock`) separated by branches (jumps)--every basic block ends in a branch instruction.  *Cmm block*s are held as lists of `Cmm` statements (`[CmmStmt]`, defined in [compiler/cmm/Cmm.hs](/trac/ghc/browser/ghc/compiler/cmm/Cmm.hs), or the `type` synonym `CmmStmts`, defined in [compiler/cmm/CmmUtils.hs](/trac/ghc/browser/ghc/compiler/cmm/CmmUtils.hs)).  A machine-specific (assembler) instruction is represented as a `Instr`.  The machine-independent NCG parts:
+The **machine-independent** parts relate to generic operations, especially optimisations, on Cmm code.  The main machine-independent parts begin with *Cmm blocks.*  (A *Cmm block* is a compilation unit of Cmm code, a file.  See [The Cmm language](commentary/compiler/cmm-type) for a discussion of what a *Cmm block* is but note that *Cmm* is a type synonym for `GenCmmTop CmmStatic CmmStmt`.)  A machine-specific (assembler) instruction is represented as a `Instr`.  The machine-independent NCG parts:
 
 
 1. optimise each Cmm block by reordering its basic blocks from the original order (the `Instr` order from the `Cmm`) to minimise the number of branches between basic blocks, in other words, by maximising fallthrough of execution from one basic block to the next.
