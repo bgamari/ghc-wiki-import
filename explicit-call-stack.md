@@ -32,11 +32,15 @@ to pass a string describing the current location to f.
   SRCLOC\_ANNOTATE pragma](http://repetae.net/john/computer/jhc/jhc.html):
 
   - every call to `head` gets replaced with `head_check $currentLocation`
-  - you get to write `head_check` yourself, with type
+  - in jhc, you get to write `head_check` yourself, with type
 
     ```wiki
     		head_check :: String -> [a] -> a
     ```
+
+
+It'd be nicer if you didn't have to write `head_check` yourself, but instead the compiler wrote it.
+
 
 1.  But what about the caller of the function that calls head?  Obviously we'd like to pass that on too!
 
@@ -50,7 +54,7 @@ to pass a string describing the current location to f.
   ```
 
 
-Now in effect, we build up a call stack.  
+Now in effect, we build up a call stack.  Now we *really* want the compiler to write `foo_check`.
 
 
 1.  In fact, it's very similar to the "cost-centre stack" that GHC builds for profiling, except that it's explicit rather than implicit.  (Which is good.   Of course the stack should be a proper data type, not a String.)
@@ -71,14 +75,7 @@ However, unlike GHC's profiling stuff, it is *selective*.  You can choose to ann
 This selectiveness makes it much less heavyweight than GHC's currrent "recompile everything" story.
 
 
-1. The dynamic hpc tracer will allow reverse time-travel, from an exception to the call site,
-
-
-by keeping a small queue of recently ticked locations. This will make it easier to find out 
-what called the error calling function (head, !, !!, etc.), but will require a hpc-trace compiled
-prelude if we want to find places in the prelude that called the error. (A standard prelude
-would find the prelude function that was called that called the error inducing function).
-
+1. The dynamic hpc tracer will allow reverse time-travel, from an exception to the call site, by keeping a small queue of recently ticked locations. This will make it easier to find out what called the error calling function (head, !, !!, etc.), but will require a hpc-trace compiled prelude if we want to find places in the prelude that called the error. (A standard prelude would find the prelude function that was called that called the error inducing function).
 
 ## Open questions
 
