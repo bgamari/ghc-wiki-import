@@ -1,3 +1,6 @@
+
+
+
 # Package Reorg
 
 
@@ -56,7 +59,7 @@ Here's a straw-man proposal
   Install Packages** etc; the Install Packages are a superset of the
   Core Packages.
 
-## What is in the Core Packages?
+### What is in the Core Packages?
 
 
 
@@ -88,7 +91,7 @@ Questionable:
 Bulat: i think that all regex packages should be included and of course libs that helps testing. overall, it should be any general-purpose lib that porters accept (emlarging these sets makes users live easier, and porters live harder)
 
 
-## The base package
+### The base package
 
 
 
@@ -136,7 +139,7 @@ Some other things, such as arrays and concurrency, have nothing else depending o
 Bulat: my ArrayRef library contains portable implementation of arrays. there is only thin ghc/hugs-specific layer which should be provided by ghcbase/hugsbase libs. except for MPTC problem (IArray/MArray classes has multiple parameters), this library should be easily portable to any other haskell compiler
 
 
-## Other packages
+### Other packages
 
 
 
@@ -178,7 +181,10 @@ the repository for each package.  Currently they are all squashed
 together into the testsuite repository.
 
 
-## Notes about GHC
+## Implementation-specific notes
+
+
+### Notes about GHC
 
 
 
@@ -245,7 +251,7 @@ dependency; but `QuickCheck` is used as part of the test infrastructure
 itself, so we'll make it a GHC Boot Package.)
 
 
-## Notes about Hugs
+### Notes about Hugs
 
 
 
