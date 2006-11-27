@@ -75,7 +75,16 @@ There's a real choice here: Bulat wants (1) and Ian wants (2).
 
 
 
-Here's an initial stab at the "as much as possible" list.
+Initial stab at (1):
+
+
+- `base`
+- `haskell98`
+- `Cabal`
+- `filepath`
+
+
+Initial stab at (2):
 
 
 - `base`
