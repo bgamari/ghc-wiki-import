@@ -31,16 +31,8 @@ points specific to other compilers.
 ## Goals
 
 
-- It would be good to have set of packages that is installed with
-  every Haskell implementation.  This seems to be Bulat's main point
-  in the thread above.
-- It should be possible to upgrade any package, even if that package
-  came with the compiler.
-
-
-Possibly the following are just more detailed expansions of the above two goals:
-
-
+- It would be good to have set of 'core' packages that is installed with
+  every Haskell implementation.  More on this at [PackageReorg/Rationale](commentary/packages/package-reorg/rationale) page
 - Forwards compatibility.  Users would like their programs written against the 'core' packages to continue to work, without
   modification to source text or build system, after upgrading the
   compiler, or its packages, or switching to a different compiler.
@@ -134,6 +126,10 @@ i agree to start with minimal stub, and then proceed with discussing inclusion o
 - portable (is sense of compiler and OS), may be just Haskell' compatible?
 - already widely used
 - shouldn't duplicate existing core libs functionality (?)
+
+
+Exact inclusion, support and exclusion processes?
+
 
 ### The base package
 
