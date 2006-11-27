@@ -79,15 +79,6 @@ Initial stab at (1):
 
 
 - `base`
-- `haskell98`
-- `Cabal`
-- `filepath`
-
-
-Initial stab at (2):
-
-
-- `base`
 - `Cabal`
 - `haskell98`
 - Some `regex` packages (precisely which?)
@@ -96,13 +87,17 @@ Initial stab at (2):
 - `mtl`
 - `time`
 - `network`
+- `QuickCheck` (questionable)
+- `HUnit` (questionable)
 
 
-Questionable:
+Initial stab at (2):
 
 
-- `QuickCheck`
-- `HUnit`
+- `base`
+- `haskell98`
+- `Cabal`
+- `filepath`
 
 
 Bulat: i think that all regex packages should be included and of course libs that helps testing. overall, it should be any general-purpose lib that porters accept (emlarging these sets makes users live easier, and porters live harder)
