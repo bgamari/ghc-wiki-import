@@ -29,9 +29,7 @@ Ian's projects
 
 - **Mailing lists**:
 
-  - Put procmail in front of mailman so we can allow big darcs patches through.
-  - get sudo access on haskell.org
-  - install spam-filtering technology
+  - install spam-filtering technology for the lists
   - reoganise mailing lists: remove cvs-all, resubscribe everyone to the other lists
     (announce beforehand).
 
@@ -40,7 +38,7 @@ Ian's projects
   test failures are broken and have a bug annotated. Update building guide
   to know about this change.
 
-- **GHC API**.  Respond to Norman Ramsey, Brian Smith, Clemens Fruhwirth.  Propose improvements to the GHC API.  
+- **GHC API**. File/reclassify bugs/tasks from the API users.
 
 - **Ghc Performance Index** ([\#1009](https://gitlab.staging.haskell.org/ghc/ghc/issues/1009)).
 
