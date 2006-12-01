@@ -283,6 +283,21 @@ r :: RuleG (GT_ GHC.Base.Unknown TermST GHC.Base.Unknown)
 Note how the type of the binding `r` gets updated during the debugging session.
 
 
+
+This piece of smartness is actually quite dumb and in need of improvement. The criteria to decide whether a new type is more specific than the previous is to unify both and check that the substitution:
+
+
+- Binds at least one vars from the old type to some concrete type (i.e. no vars to vars bindings)
+- Binds no vars from the new type
+
+
+I just noticed that this won't detect refinements as: `Either a b` goes to `Either a a` 
+
+
+
+There is probably an easy to formulate optimum criteria, but I can't figure it out for now :(
+
+
 ### Pretty printing of terms
 
 
