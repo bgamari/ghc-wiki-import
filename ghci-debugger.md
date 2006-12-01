@@ -32,7 +32,7 @@ obtainTerm :: Session -> Bool -> Id -> IO (Maybe Term)
 ```
 
 
-The term datatype is defined at a module `RtClosureInspect` in the ghci folder. This datatype represents a partially evaluated Haskell value as an annotated tree:
+The term datatype is defined at  [compiler/ghci/RtClosureInspect.hs](/trac/ghc/browser/ghc/compiler/ghci/RtClosureInspect.hs). This datatype represents a partially evaluated Haskell value as an annotated tree:
 
 
 ```wiki
@@ -215,12 +215,12 @@ Ideally, we want to lift this restriction on ghci some day. For now, the tyvars 
 
 
 
-The interactive ui uses `GHC.obtainTerm` to implement the :print and :sprint command. The difference is that :print, additionally, binds suspended values.
+The interactive ui uses `obtainTerm` from the ghc-api, which lives at  [compiler/ghci/RtClosureInspect.hs](/trac/ghc/browser/ghc/compiler/ghci/RtClosureInspect.hs), to implement the :print and :sprint command. The difference is that :print, additionally, binds suspended values.
 Thus, suspensions inside semievaluated terms are bound by `:print` to \_t<sub>xx</sub> names in the interactive environment, available for the user. 
 
 
 
-This is done at `InteractiveUI.pprintClosure`, which takes responsibility of instantiating tyvars with  members the `GHC.Base.Unknown` family. A  an associated Show instance is provided that instructs the user to `seq` them to recover the type. 
+This is done at `pprintClosure`in  [compiler/ghci/Debugger.hs](/trac/ghc/browser/ghc/compiler/ghci/Debugger.hs), which takes responsibility of instantiating tyvars with  members the `GHC.Base.Unknown` family. A  an associated Show instance is provided that instructs the user to `seq` them to recover the type. 
 
 
 
@@ -298,16 +298,20 @@ I just noticed that this won't detect refinements as: `Either a b` goes to `Eith
 There is probably an easy to formulate optimum criteria, but I can't figure it out for now :(
 
 
+
+One more thing, newtypes need to be flattened before doing the unification; type reconstruction may not be able to recover the newtype representation. 
+
+
 ### Pretty printing of terms
 
 
 
 We want to customize the printing of some stuff, such as Integers, Floats, Doubles, Lists, Tuples, Arrays, and so on.
-At the `RtClosureInspect` module there is some infrastructure to build a custom printer, with a basic custom printer that covers the enumerated types.
+At the  [compiler/ghci/RtClosureInspect.hs](/trac/ghc/browser/ghc/compiler/ghci/RtClosureInspect.hs) module there is some infrastructure to build a custom printer, with a basic custom printer that covers the enumerated types.
 
 
 
-In InteractiveUI.hs the function `pprintClosure` takes advantage of this and makes use of a custom printer that uses Show instances if available.
+In  [compiler/ghci/Debugger.hs](/trac/ghc/browser/ghc/compiler/ghci/Debugger.hs) the function `pprintClosure` takes advantage of this and makes use of a custom printer that uses Show instances if available.
 
 
 # Breakpoints
@@ -543,8 +547,7 @@ The Ghci debugger is a client of this API as described below.
 
 
 
-In order to implement the 'isAutoBkptEnabled' record, when a breakpoint is hit GHCi must find out whether that site is enabled or not. GHCi thus stores a boolean matrix of enabled breakpoint sites. This scheme is realized in [
-Breakpoints.hs](http://darcs.haskell.org/SoC/ghc.debugger/compiler/main/Breakpoints.hs):
+In order to implement the 'isAutoBkptEnabled' record, when a breakpoint is hit GHCi must find out whether that site is enabled or not. GHCi thus stores a boolean matrix of enabled breakpoint sites. This scheme is realized in \[ [compiler/main/Breakpoints.hs](/trac/ghc/browser/ghc/compiler/main/Breakpoints.hs)\]:
 
 
 ```wiki
@@ -559,7 +562,7 @@ Since this structure needs to be accessed every time a breakpoint is hit and is 
 
 
 
-It's too bad that I haven't explored alternative designs. (Using bits instead of Bools in the matrix? discard the matrix thing and use an IORef in every breakpoint? some clever trick using the FFI?). 
+Alternative designs should be explored. (Using bits instead of Bools in the matrix? discard the matrix thing and use an IORef in every breakpoint? some clever trick using the FFI?). Suggestions are welcome.
 
 
 # Pending work
@@ -571,8 +574,37 @@ Interruption at unexpected conditions (expections).
 
 
 
-Rewrite of the Term pretty printer at RtClosureInspect.hs
+Rewrite of the Term pretty printer at  [compiler/ghci/RtClosureInspect.hs](/trac/ghc/browser/ghc/compiler/ghci/RtClosureInspect.hs)
 Rewrite of the type recovery code
 *Put together all the small todos here*
+
+
+# General Comments
+
+
+## Maintaining the debugger
+
+
+
+The **closure viewer** is a delicate piece of code, as it depends on:
+
+
+- The Type System of GHC Haskell. Changes to the typechecker interface or data structures will most likely kill it.
+- The runtime representation, which may vary between versions but also architectures
+
+
+An extensive suite of tests should be needed to easily detect when it lags back changes in GHC. Fortunately the code itself isn't too long nor spread.
+
+
+
+The **breakpoint instrumentation** on the contrary is spread everywhere the desugarer, but is less likely to break and in less spectacular ways if it does. For instance, one might lose access to implicit parameters in a breakpoint, or things like that. Tricky stuff are Template Haskell, 'deriving' generated code, breakpoint coalescing..
+
+
+
+The **breakpoint desugaring** depends only on the Core representation, which I think is stabilizing soon with System Fc. This is the less likely piece to break in my opinion, and the easiest to restore.
+
+
+
+The **debugger** itself, i.e. the user interface offered by InteractiveUI, should virtually maintain itself once it is bug-free (which I don't claim it is), as long as future changes to ghci itself respect the few things it assumes.
 
 
