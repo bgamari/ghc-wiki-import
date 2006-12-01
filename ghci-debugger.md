@@ -163,23 +163,27 @@ The process followed to reconstruct the types of a value as much as possible is:
 
 
 
-Worker and Wrapper constructors are a potential headache. The arguments list gets extended with:
+Worker and Wrapper constructors are a potential headache for two reasons, extra arguments and variations on the final type. 
 
 
-- Existential Dictionaries
-- Type equality coercions (?)
+
+The arguments list gets extended with:
+
+
+- Existential Dictionaries (?)
 - Type Class dictionaries
+- any other ?
 
 
-In addition, the types of the arguments may change too, but that is not a problem in our case. We always consider the processed types, not the original ones, since what we are going to find in the heap corresponds to the former. 
-
-
-
-So to recap, all what is being done to compensate is drop the first (n - m) arguments where:
+To compensate it suffices to drop the first (m - n) (pointed) pointers of a closure, where:
 
 
 - n - \# arguments of the original constructor
 - m - \# arguments of the wrapper constructor, if any, or worker constructor
+
+
+In addition, the types of the arguments may change, so the closure viewer always consider the final types, not the original ones, since the closure viewer deals with the heap representation of values.
+
 
 ### About handling suspensions in the interactive environment
 
