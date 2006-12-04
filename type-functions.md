@@ -113,7 +113,7 @@ The details of the implementation are split over a couple of subpages, due to th
 - [interfaces.](type-functions-iface)
 
 
- 
+We also have notes on [type checking with indexed synonyms.](type-functions-syn-tc)
 
 
 ## Possible Extensions
