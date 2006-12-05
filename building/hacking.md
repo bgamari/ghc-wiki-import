@@ -250,6 +250,26 @@ override in build.mk.  Remember: don't modify `config.mk` directly (it
 gets overwritten when you run `./configure`).
 
 
+## The fastest GHC build
+
+
+
+The settings that give you the fastest complete GHC build are these:
+
+
+```wiki
+  SRC_HC_OPTS     = -H64m -Onot -fasm
+  GhcStage1HcOpts = -O -fasm
+  GhcStage2HcOpts = -Onot -fasm
+  GhcLibHcOpts    = -Onot -fasm
+  GhcLibWays      =
+  SplitObjs       = NO
+```
+
+
+However, note that the libraries are built without optimisation, so this build isn't very useful.  The stage 2 compiler will be very slow.
+
+
 ## Full optimisation
 
 
