@@ -149,10 +149,10 @@ and a short description of what they're doing or have done.
 - Dylan Thurston
 - Dinko Tenev
 - Mark Tullsen
+- David Waern (Haddock comment support)
 - Malcolm Wallace
 - N. Xu
 - Ashley Yakeley (Time library)
-- David Waern (Haddock comment support)
 
 ## Past contributors
 
