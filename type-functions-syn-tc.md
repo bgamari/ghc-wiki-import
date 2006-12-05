@@ -76,7 +76,7 @@ and under these assumptions we need to verify
 
 
 ```wiki
-T Int] = [Int]
+T [Int] = [Int]
 ```
 
 
