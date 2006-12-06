@@ -84,3 +84,4 @@ This list intended to be in priority order (but of course the prorities might no
 
 
 - **Windows installers**. Want to help Neil get going (see also [\#604](https://gitlab.staging.haskell.org/ghc/ghc/issues/604)).
+- **Merge commentaries**. We should merge all the info from the old commentary into the new one and then remove the old one.
