@@ -17,10 +17,8 @@ Back to [TypeFunctions](type-functions).
 
 
 
-Todo (low-level):
+Todo (low-level): None.
 
-
-- Should family declarations be optional with ATs, too?  (See comment at patch making kinds optional at toplevel declarations.)
 
 
 Todo (high-level):
