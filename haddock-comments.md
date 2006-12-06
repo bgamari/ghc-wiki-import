@@ -1,6 +1,3 @@
-# Work in Progress
-
-
 # A description of the Haddock comment support in GHC
 
 
