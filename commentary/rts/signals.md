@@ -94,6 +94,6 @@ When the runtime is idle, the OS threads will all be waiting inside `yieldCapabi
 
 
 
-The solution we use, on both Windows and POSIX systems, is to pass all signals that arrive to the [IO Manager](commentary/rts/io-manager) thread.  On POSIX this works by sending the signal number down a pipe, on Windows it works by storing the signal number in a buffer and signaling the IO Manager's `Event` object to wake it up.  The IO Manager thread then wakes up and creates a new thread for the signal handler(s), before going back to sleep again.
+The solution we use, on both Windows and POSIX systems, is to pass all signals that arrive to the [IO Manager](commentary/rts/io-manager) thread.  On POSIX this works by sending the signal number down a pipe, on Windows it works by storing the signal number in a buffer and signaling the IO Manager's `Event` object to wake it up.  The IO Manager thread then wakes up and creates a new thread for the signal handler, before going back to sleep again.
 
 
