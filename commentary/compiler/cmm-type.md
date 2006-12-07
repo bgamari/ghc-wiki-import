@@ -509,7 +509,7 @@ Although the C-- specification does not allow the C-- type system to statically 
 
 
 
-Global Registers in Cmm currently have a problem with inlining: because neither [compiler/cmm/PprC.hs](/trac/ghc/browser/ghc/compiler/cmm/PprC.hs) nor the NCG are able to keep Global Registers from clashing with C argument passing registers, Cmm expressions that contain Global Registers cannot be inlined.  For more thorough notes on inlining, see the comments in [compiler/cmm/CmmOpt.hs](/trac/ghc/browser/ghc/compiler/cmm/CmmOpt.hs).
+Global Registers in Cmm currently have a problem with inlining: because neither [compiler/cmm/PprC.hs](/trac/ghc/browser/ghc/compiler/cmm/PprC.hs) nor the NCG are able to keep Global Registers from clashing with C argument passing registers, Cmm expressions that contain Global Registers cannot be inlined into an argument position of a foreign call.  For more thorough notes on inlining, see the comments in [compiler/cmm/CmmOpt.hs](/trac/ghc/browser/ghc/compiler/cmm/CmmOpt.hs).
 
 
 #### Declaration and Initialisation
