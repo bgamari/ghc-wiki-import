@@ -114,12 +114,7 @@ How can we algorithmically check the above statement?
 Roughly, we perform the following two steps.
 
 
-1. Generate the appropriate implication constraint out of the program text.  That's easy cause GHC supports now implication constraints.
-
-
-(there are some potential subtleties, see GENERATEIMP below).
-
-
+1. Generate the appropriate implication constraint out of the program text.  That's easy cause GHC supports now implication constraints. (There are some potential subtleties, see GENERATEIMP below).
 1. Solve the implication constraint by applying axioms and local assumptions until the (local) property is verified. That's the hard part.
 
 
