@@ -1319,6 +1319,10 @@ Cmm generally conforms to the C-- specification for operators and "primitive ope
 The `MachOp` and `CallishMachOp` data types are defined in [compiler/cmm/MachOp.hs](/trac/ghc/browser/ghc/compiler/cmm/MachOp.hs).
 
 
+
+Both Cmm Operators and Primitive Operations are handled in Haskell as [Inline PrimOps](commentary/prim-ops#inline-primops), though what I am calling Cmm *primitive operations* may be implemented as out-of-line foreign calls.
+
+
 #### Operators
 
 
@@ -1374,6 +1378,10 @@ Each `MachOp` generally corresponds to a machine instruction but may have its va
 #### Primitive Operations
 
 
+
+Primitive Operations generally involve more than one machine instruction and may not always be inlined.  
+
+
 ```wiki
 -- These MachOps tend to be implemented by foreign calls in some backends,
 -- so we separate them out.  In Cmm, these can only occur in a
@@ -1408,6 +1416,10 @@ data CallishMachOp
   | MO_F32_Sqrt
   | MO_WriteBarrier
 ```
+
+
+For an example, the floating point sine function, `sinFloat#` in [compiler/prelude/primops.txt.pp](/trac/ghc/browser/ghc/compiler/prelude/primops.txt.pp) is piped through the `callishOp` function in [compiler/codegen/CgPrimOp.hs](/trac/ghc/browser/ghc/compiler/codegen/CgPrimOp.hs) to become `Just MO_F32_Sin`.  The `CallishMachOp` constructor `MO_F32_Sin` is piped through [compiler/nativeGen/MachCodeGen.hs](/trac/ghc/browser/ghc/compiler/nativeGen/MachCodeGen.hs), where the function `genCCall` will (for most architectures) call `outOfLineFloatOp` to issue a call to a C function such as `sin`.
+
 
 ## Cmm Design: Observations and Areas for Potential Improvement
 
