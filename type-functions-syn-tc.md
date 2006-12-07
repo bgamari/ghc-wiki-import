@@ -158,7 +158,6 @@ To solve  `(C implies t1=t2)` with respect to Ax
 
 
 1. We interpret Ax /\\ C as a rewrite system (from left to right).
-
 1. We exhaustively apply rewrite rules on t1 and t2, written t1 --\>\* t1' and t2 --\>\* t2' and check that t1' and t2' are syntactically equivalent.
 
 
@@ -245,10 +244,10 @@ So, we clearly need a better type checking method.
 To solve  `(C implies t1=t2)` with respect to Ax
 
 
-1. a. We interpret Ax /\\ C as a rewrite system (from left to right)       and 
+1. First:
 
-1. perform completion until the rewrite system is confluent.
-
+  1. We interpret Ax /\\ C as a rewrite system (from left to right)   and 
+  1. perform completion until the rewrite system is confluent.
 1. We exhaustively apply rewrite rules on t1 and t2, written t1 --\>\* t1' and t2 --\>\* t2' and check that t1' and t2' are syntactically equivalent.
 
 
