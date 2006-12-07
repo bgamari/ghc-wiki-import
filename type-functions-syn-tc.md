@@ -419,22 +419,20 @@ In the CHR world, we find that
      a=b, c=a, d=a
 ```
 
->
->
-> directly corresponds to
->
->
-> ```wiki
->     S Int = R Int
->     R Int = S Int
-> ```
 
+directly corresponds to
+
+
+```wiki
+S Int = R Int
+R Int = S Int
+```
 
 
 The general cases are as follows.
 
 
-#### axiom vs local assumption case
+#### Axiom vs local assumption case
 
 
 ```wiki
@@ -500,7 +498,7 @@ resulting from completion 'appear' in the CHR derivation
 --> b=b', phi(C) /\ C'
 ```
 
-#### local assumption vs local assumption
+#### Local assumption vs local assumption
 
 
 ```wiki
