@@ -300,3 +300,6 @@ So how does the spark turn into a thread?  When the scheduler spots that the cur
 ## Affinity and migration
 
 
+## Shutting Down
+
+
