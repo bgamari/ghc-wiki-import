@@ -72,10 +72,8 @@ Done:
 
 
 
-Todo (low-level):
+Todo (low-level): None.
 
-
-- Allow deriving clauses at associated data/newtype *declarations*.  They are inherited by all family instances, and the whole family becomes an instance of the derived class.
 
 
 Todo (high-level):
