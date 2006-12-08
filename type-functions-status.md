@@ -9,7 +9,7 @@ Back to [TypeFunctions](type-functions).
 **Current:** 
 
 
-- Handle deriving clauses for data family instances.
+- Handle deriving clauses for data family instances (cf. `Deriving.hs` in testsuite).
 - Where should the family instance consistency check go for GHCi?  `tcGetModuleExports`?  (Where is that function called?)
 
 ## Parsing and Renaming
