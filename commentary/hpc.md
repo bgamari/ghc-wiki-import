@@ -9,7 +9,8 @@ This page describes the Haskell Program Coverage implementation inside GHC.
 The basic idea is this
 
 
-- For each (sub)expression in the Haskell Syntax, write the (sub)expression in a HsTick
+- For each (sub)expression in the Haskell Syntax, write the (sub)expression in a    
+  `HsTick`
 - Each `HsTick` has a module local index number.
 - There is a table (The Mix datastructure) that maps this index number to original source location.
 - Each `HsTick` is mapped in the Desugar pass with: 
@@ -48,8 +49,8 @@ The reason we do not translate tick boxes using.
 ```
 
 
-is tick\<a\> True is a CAF, and gets lifted to top level. This maintain the coverage information, but does not allow for entry counting. If the if/then/else is called 100 times, and no exceptions were thrown, then you would expect the binary tick count to add up to 100. We hope to use Hpc to do path optimization in the future, so real numbers are important.
+is that `tick<a> True` is a CAF, and gets lifted to top level. This maintain the coverage information, but does not allow for entry counting. If the if/then/else is called 100 times, and no exceptions were thrown, then you would expect the binary tick count to add up to 100. We hope to use Hpc to do path optimization in the future, so real numbers are important.
  
-Also, we translate the tick late to allow case-of-case to work, allowing unboxed compares to work without generating boolean intermeduates. We still need to push one optimzation into the simpifier for this to work well.
+Also, we translate the tick late to allow case-of-case to work, allowing unboxed compares to work without generating boolean intermediates. We still need to push one optimization into the simplifier for this to work well.
 
 
