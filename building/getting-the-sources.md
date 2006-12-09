@@ -55,7 +55,7 @@ A source tree consists of the GHC repository, with a set of packages in the libr
 ```
 
 
-**NOTE**: you really want `--partial` when grabbing GHC.  There are some 13000 patches in the repository, which take a long time to download without `--partial`.  The `darcs-all` script automatically adds `--partial` for the packages.
+**NOTE**: You really want `--partial` when grabbing GHC.  There are some 15000 patches in the repository, which take a long time to download without `--partial`.  The `darcs-all` script automatically adds `--partial` for the packages. If you are a developer and you know what you are doing, you can omit `--partial` and use `./darcs-all get --complete` to get a decade of pacthes.
 
 
 
