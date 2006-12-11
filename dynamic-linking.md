@@ -52,11 +52,7 @@ Profiled code isn't yet really position-independent even when `-fPIC` is specifi
 
 
 
-The NCG works. There are a few situations (floating-point constants, ?CmmSwitch) where the x86 NCG doesn't generate truly position-independent code yet, but dynamic linking will still work.
-
-
-
-Support for `-fPIC` in the mangler is buggy on PowerPC and nonexistent on x86. Due to the strange way that dynamic linking is implemented, it will be very hard to generate position-dependent code that correctly links to (Haskell code in) dynamic libraries without the NCG.
+The NCG works. Support for `-fPIC` in the mangler is buggy on PowerPC and nonexistent on x86. Due to the strange way that dynamic linking is implemented, it will be very hard to generate position-dependent code that correctly links to (Haskell code in) dynamic libraries without the NCG.
 
 
 
@@ -72,6 +68,10 @@ There used to be a Windows-specific hack involving static closures because Windo
 
 
 When building a DLL, you have to specify which libraries it depends on; the build system will need to support this. There is a lot of code for building DLLs in the Makefiles, but it probably no longer works and needs to be merged with the new shared library building support.
+
+
+
+Also, since the last time that DLLs worked with GHC on Windows, the GNU linker has gained a new feature. It can now "auto-import" data from shared libraries, making all the windows-specific hacks unnecessary. However, auto-imported data will prevent all sharing of code between processes, every page of code with a reference to data will get written to at load time.
 
 
 ## Darwin TODO
