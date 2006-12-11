@@ -626,7 +626,7 @@ T Int = T Int /\ S Int = S Int
 ---
 
 
-## Restrictions on valid programs
+## Restrictions on type equations
 
 
 
@@ -640,7 +640,9 @@ We impose some syntactic restrictions on programs to ensure that type checking r
 We have three kinds of type variables:
 
 
-- *Schema variables*
+- *Schema variables*: These are type variables in the left-hand side of type equations that maybe instantiated during applying a type equation during type rewriting.  For example, in `type instance F [a] = a`, `a` is a schema variable.
+- *Rigid variables*: These are variables that may not be instantiated (they represent variables in signatures and existentials during matching).
+- *Wobbly variables*: Variables that may be instantiated during unification.
 
 ### Normal type equations
 
@@ -649,12 +651,59 @@ We have three kinds of type variables:
 *Normal type equations* `s = t` obey the following constraints:
 
 
-- *Constructor based*: The left-hand side `s` must have for form `F s1 .. sn` where `F` is a type family and no type family occur in the `si`.
+- *Constructor based*: The left-hand side `s` must have for form `F s1 .. sn` where `F` is a type family and the `si` are formed from data type constructors, schema variables, and rigid variables only (i.e., they may not contain type family constructors or wobbly variables).
 - *Non-overlapping*: For any other axiom or local assumption `s' = t'`, there may not be any substitution *theta*, such that (*theta* `s`) equals (*theta* `s'`).
 - *Left linear*: No schema variable appears more than once in `s`.
-- *Decreasing*: The number of data type constructor and variables symbols occurring in the arguments of a type family in `t` must be strictly less than the number of data type constructor and variable symbols in `s`.
+- *Decreasing*: The number of data type constructor and variables symbols occurring in the arguments of a type family occuring in `t` must be strictly less than the number of data type constructor and variable symbols in `s`.
 
 
-We require that all axioms and local assumptions are normal.  In particular, all type family instances and all equalities in signatures need to be normal.  NB: With `-fundecidable-indexed-types`, we can drop left linearity and decreasingness.
+Examples of normal type equations:
+
+
+```wiki
+data C
+type instance Id a = a
+type instance F [a] = a
+type instance F (C (C a)) = F (C a)
+type instance F (C (C a)) = F (C (Id a))
+type instance F (C (C a)) = C (F (C a))
+type instance F (C (C a)) = (F (C a), F (C a))
+```
+
+
+Examples of type equations that are *not* normal:
+
+
+```wiki
+type instance F [a] = F (Maybe a)            -- Not decreasing
+type instance G a a = a                      -- Not left linear
+type instance F (G a) = a                    -- Not constructor-based
+type instance F (C (C a)) = F (C (Id (C a))) -- Not decreasing
+```
+
+
+Note that `forall a. (G a a = a) => a -> a` is fine, as `a` is a rigid variables, not a schema variable.
+
+
+
+We require that all type family instances are normal.  Moreover, all equalities arising as local assumptions need to be such that they can be normalised (see below).  NB: With `-fundecidable-indexed-types`, we can drop left linearity and decreasingness.
+
+
+### Normalisation of equalities
+
+
+
+Normalisation of an equality `s = t` of arbitrary type terms `s` and `t` leads to a (possibly empty) set of normal equations, or to a type error.  We proceed as follows:
+
+
+1. Reduce `s` and `t` to HNF, giving us `s'` and `t'`.
+1. If `s'` and `t'` are the same variable, we succeed (with no new rule).
+1. If `s'` and `t'` are distinct rigid variables, we fail.
+1. If `s'` or `t'` is a wobbly type variables, instantiate it with the other type (after occurs check).
+1. If `s'` = `C1 ...` and `t' = C2 ...`, where `C1` and `C2` are different data type constructors, we reject the program.
+1. If `s'` = `C s1 .. sn` and `t'` = `C t1 .. tn`, then yield the union of the equations obtained by normalising all `ti = si`.
+
+
+Rejection of local assumptions that after normalisation are either not left linear or not decreasing may lead to incompleteness.  However, this should only happen for programs that combine GADTs and type functions in ellaborate ways.
 
 
