@@ -1,0 +1,47 @@
+## Debugging Support Efforts in GHC
+
+
+
+There are various efforts to add Haskell-level debugging support to GHC. This page
+summarizes them.
+
+
+### The Ghci Debugger
+
+
+
+The [Ghci Debugger](ghci-debugger) was developled under the Google SoC initiative. The implementation is an extension to Ghci, called at debug time, and the main contributions are
+
+
+- A closure viewer, capable of showing intermediate computations without forcing them, and without depending on types (and of course that excludes dependency on Show instances)
+- Adding a basic breakpoint primitive to use in a system of dynamic breakpoints for ghci, which calls ghci in the correct scope.
+
+<table><tr><th> Status: </th>
+<th> Implemented, ??? 
+</th></tr>
+<tr><th> Video: </th>
+<th> ??? 
+</th></tr></table>
+
+
+## The Hpc Tracer (HpcT)
+
+
+
+The Hpc Tracer is a dynamic tracer for Haskell Program Coverage information. HpcT allows you to single step
+through your program, seeing exactly what part of the code was executed when. It also support viewing exception and thread change events, as well as providing a 'Step Back' button which allow you to rewind your program to see what path you took to get to a problematic piece of code (for example head \[\]).
+
+
+
+The primary weakness is the inability to see live datastructures; this debugger/tracer is silent, you can see where you are but not any of your values.
+
+
+<table><tr><th> Status: </th>
+<th> Implemented, ??? 
+</th></tr>
+<tr><th> Video: </th>
+<th> [
+http://videos.unsafeperformio.com/](http://videos.unsafeperformio.com/)??? 
+</th></tr></table>
+
+
