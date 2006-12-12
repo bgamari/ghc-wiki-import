@@ -696,7 +696,7 @@ We require that all type family instances are normal.  Moreover, all equalities 
 Normalisation of an equality `s = t` of arbitrary type terms `s` and `t` (not containing schema variables) leads to a (possibly empty) set of normal equations, or to a type error.  We proceed as follows:
 
 
-1. Reduce `s` and `t` to HNF, giving us `s'` and `t'`.
+1. Reduce `s` and `t` to NF, giving us `s'` and `t'`.
 1. If `s'` and `t'` are the same variable, we succeed (with no new rule).
 1. If `s'` or `t'` is a rigid variable, we fail.  (Reason: cannot instantiate rigid variables.)
 1. If `s'` or `t'` is a wobbly type variables, instantiate it with the other type (after occurs check).
