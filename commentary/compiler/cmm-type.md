@@ -463,7 +463,7 @@ For a description of the `Hp` and `Sp` *virtual registers*, see [The Haskell Exe
 
 
 
-General `GlobalRegs` numbers are decimal integers, see the `parseInteger` function in [compiler/utils/StringBuffer.lhs](/trac/ghc/browser/ghc/compiler/utils/StringBuffer.lhs).  The remainder of the `GlobalReg` constructors, from `Sp` to `BaseReg` are lexical tokens exactly like their name in the data type; `PicBaseReg` does not have a lexical token since it is used only inside the NCG.  
+General `GlobalRegs` numbers are decimal integers, see the `parseInteger` function in [compiler/utils/StringBuffer.lhs](/trac/ghc/browser/ghc/compiler/utils/StringBuffer.lhs).  The remainder of the `GlobalReg` constructors, from `Sp` to `BaseReg` are lexical tokens exactly like their name in the data type; `PicBaseReg` does not have a lexical token since it is used only inside the NCG.  See [Position Independent Code and Dynamic Linking](commentary/position-independent-code) for an in-depth description of PIC implementations in the NCG.
 
 
 
