@@ -136,6 +136,13 @@ We can operationally deal with universally quantified variables by skolemizing t
 End of NOTE
 
 
+## Various refinements of an approach to solve the challenge
+
+
+- [A first (naive) attempt](type-functions-syn-tc/naive)
+- [A second attempt](type-functions-syn-tc/second)
+- [Type equations in GHC](type-functions-syn-tc/ghc)
+
 ## A first (naive) attempt
 
 
