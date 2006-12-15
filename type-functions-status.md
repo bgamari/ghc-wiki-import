@@ -9,7 +9,12 @@ Back to [TypeFunctions](type-functions).
 **Current:** 
 
 
-- Handle deriving clauses for data family instances (cf. `Deriving.hs` in testsuite).
+- Handle deriving clauses for data family instances (cf. `Deriving.hs` in testsuite):
+
+  1. Extend `DerivEqn` to include the types indexes.
+  1. Extend `mk_eqn_help` to return the type indexed in `DerivEqn`.
+  1. Extend `deriveOrdinaryStuff` to handle the extend info.
+  1. Look at newtype deriving for indexed newtypes.
 - Where should the family instance consistency check go for GHCi?  `tcGetModuleExports`?  (Where is that function called?)
 
 ## Parsing and Renaming
