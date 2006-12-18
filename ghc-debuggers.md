@@ -10,7 +10,7 @@ summarizes them.
 
 
 
-The [Ghci Debugger](ghci-debugger) was developled under the Google SoC initiative. The implementation is an extension to Ghci, called at debug time, and the main contributions are
+The [Ghci Debugger](ghci-debugger) was developed under the Google SoC initiative. The implementation is an extension to Ghci, called at debug time, and the main contributions are
 
 
 - A closure viewer, capable of showing intermediate computations without forcing them, and without depending on types (and of course that excludes dependency on Show instances)
@@ -33,7 +33,7 @@ through your program, seeing exactly what part of the code was executed when. It
 
 
 
-The primary weakness is the inability to see live datastructures; this debugger/tracer is silent, you can see where you are but not any of your values.
+The primary weakness is the inability to see live data structures; this debugger/tracer is silent, you can see where you are but not any of your values.
 
 
 <table><tr><th> Status: </th>
@@ -41,7 +41,7 @@ The primary weakness is the inability to see live datastructures; this debugger/
 </th></tr>
 <tr><th> Video: </th>
 <th> [
-http://videos.unsafeperformio.com/](http://videos.unsafeperformio.com/)??? 
+http://movies.unsafeperformio.com/hpctpreview2.mov](http://movies.unsafeperformio.com/hpctpreview2.mov) 
 </th></tr></table>
 
 
