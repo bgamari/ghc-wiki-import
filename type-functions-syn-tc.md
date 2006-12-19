@@ -142,4 +142,4 @@ End of NOTE
 - [A first (naive) attempt](type-functions-syn-tc/naive)
 - [A second attempt](type-functions-syn-tc/second)
 - [Type equations in GHC](type-functions-syn-tc/ghc)
-- MS?
+- [TypeFunctionsSynTC/PlanMS](type-functions-syn-tc/plan-ms)
