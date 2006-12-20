@@ -106,7 +106,7 @@ So long as we have enough budget, we run the following four internship "slots":
 
 
 - Jan-Mar
-- Mar-Jun
+- Apr-Jun
 - July-Sept
 - Oct-Dec
 
