@@ -10,6 +10,8 @@ Back to [TypeFunctions](type-functions).
 
 
 1. Parsing/renaming for equational constraints
+
+  - Equational constraints require `-findexed-types`.
 1. Well-formedness checks for equational constraints
 1. Add type synonym instances to ifaces
 
