@@ -196,3 +196,6 @@
 1. `make clean`
 1. `make`. Doesn't work.
 1. Edit the makefile in the `libiberty` subdir: `CC = gcc`. Again, there's probably a better way...
+1. `make`. Doesn't work.
+1. `make clean`
+1. `make`. Really go back to bed.
