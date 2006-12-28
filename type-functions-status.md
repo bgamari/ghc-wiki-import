@@ -12,6 +12,8 @@ Back to [TypeFunctions](type-functions).
 1. Dictionary handling for equational constraints:
 
   - In the case for ordinary instances in `TcInstDcls.tcInstDecl2`, filter the ids of the super class equalities out of `map instToId sc_dicts`.  (They don't appear explicitly in the \`Hs' representation of the methods binding.)
+  - Similarly with `map instToId meth_dicts` in `TcClassDcl.tcMethodBind`  Maybe we just need a special function to replace all occurences of `map instToId`?  Occurs also in `TcPat.tcConPat`.
+  - We also have `map instToId` in `TcUnify.tcGen`, but here I am not sure yet whether we cans imply drop the coercion variables or have to do something else.
 1. Add type synonym instances to ifaces
 1. Well-formedness checks for equational constraints (i.e., anything beyond the type arguments being boxed, rank 0 types)
 
