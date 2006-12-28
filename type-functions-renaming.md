@@ -50,7 +50,14 @@ Despite the effort we go to, to get the right `Name` for the family `RdrName`, `
 There is little extra that needs to be done for type instances.  The main difference between vanilla synonyms and data/newtype declarations and the indexed variants is that the `tcdTyPats` field is not `Nothing`.  We simply call `rnTyPats` on these fields, which traverses them in the usual way.  Moreover, we need to be careful with the family type constructor in the instance head: it is in an occurence position and needs to be looked up suitably, such that we get a nice "out of scope" error if no appropriate family is in scope.  By the same token, the family names needs to go into the set of free variables.  Finally, `RnSource.rnSrcInstDecl` invokes `RnSource.rnTyClDecl` on all associated types of an instance to rename them.
 
 
-### Name parents & importing and exporting
+## Renaming of equational constraints
+
+
+
+Renaming (by `RnTypes.rnPred`) and kind checking (by `TcHsType.kc_pred`) is straight forward.  Afterwards, `HsPred` is desugared into `TypeRep.PredType`, where the wellformedness of equational constraints in type contexts is further tested by `TcMType.check_pred_ty`; in particular, we require the type arguments to be rank 0.
+
+
+## Name parents & importing and exporting
 
 
 
