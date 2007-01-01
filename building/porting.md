@@ -188,7 +188,7 @@ $ ./configure --enable-hc-boot --enable-hc-boot-unregisterised
 ```
 
 
-You might need to update `configure.in` to recognise the new
+You might need to update `configure.ac` to recognise the new
 platform, and re-generate `configure` with `autoreconf`.
 
 
