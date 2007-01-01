@@ -145,3 +145,4 @@ End of NOTE
 - [Type equations in GHC](type-functions-syn-tc/ghc)
 - [Plan MS](type-functions-syn-tc/plan-ms)
 - [Plan MS revised](type-functions-syn-tc/plan-ms-revised)
+- [Brief comparison](type-functions-syn-tc/comparison)
