@@ -30,7 +30,7 @@ We have separate guidelines for proposing changes to standard libraries; see [
 Library Submissions](http://haskell.org/haskellwiki/Library_submissions).
 
 
-### Bug fixes
+### How to submit a bug fix
 
 
 
@@ -43,7 +43,7 @@ Bug fixes always extremely welcome.  GHC is so large, and is used in such divers
 
 - Please ensure that there is a test case in the regression-test suite that shows up the bug, and which is fixed by your patch.  This test case should be identified in the "Test Case" field of the Trac report.
 
-### New features
+### How to submit a patch for a new feature
 
 
 
