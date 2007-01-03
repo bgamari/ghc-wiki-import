@@ -10,6 +10,7 @@ Back to [TypeFunctions](type-functions).
 
 
 1. Rename `HsDecls.TyFunction` into `TyFamily` and use for both `type family` and `data family` declarations.
+1. Check lookup with `FamInstEnv.lookupFamInstEnv` during deriving.  Is the match too general, as it does one-way matching and not just alpha-renaming?
 1. Dictionary handling for equational constraints:
 
   - Where do we check the details of the formation of equational constraints?  (In `check_pred_ty`?)
