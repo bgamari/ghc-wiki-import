@@ -1,4 +1,4 @@
-# Building GHC on Mac OS X 10.2 in 80 Easy Steps, by Kirsten aged 26 1/52
+# Building GHC on Mac OS X 10.2 in 136 Easy Steps, by Kirsten aged 26 1/52
 
 
 1. grab the HEAD off darcs, per [Building/GettingTheSources](building/getting-the-sources) (no problems here)
