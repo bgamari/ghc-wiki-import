@@ -510,3 +510,5 @@
   ```
 
   1. Okay, I'll just go download readline 5.0 instead. Google says that's "trivial".
+  1. Several days later after getting distracted by other things, try to actually build readline. Realize it's not actually "trivial".
+  1. Buy a PC.
