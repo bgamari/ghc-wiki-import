@@ -14,23 +14,23 @@
 </th></tr>
 <tr><th> GHC.Num </th>
 <th> (+) </th>
-<th>  
+<th> rts/PrimOps.cmm --\> Haskell 
 </th></tr>
 <tr><th> GHC.Num </th>
 <th> (-) </th>
-<th>  
+<th> rts/PrimOps.cmm --\> Haskell 
 </th></tr>
 <tr><th> GHC.Num </th>
 <th> (\*) </th>
-<th>  
+<th> rts/PrimOps.cmm --\> Haskell 
 </th></tr>
 <tr><th> GHC.Num </th>
 <th> div </th>
-<th>  
+<th> rts/PrimOps.cmm --\> Haskell 
 </th></tr>
 <tr><th> GHC.Num </th>
 <th> negate </th>
-<th>  
+<th> rts/PrimOps.cmm --\> Haskell 
 </th></tr>
 <tr><th> GHC.Num </th>
 <th> abs </th>
@@ -42,11 +42,11 @@
 </th></tr>
 <tr><th> GHC.Num </th>
 <th> subtract </th>
-<th>  
+<th> rts/PrimOps.cmm --\> Haskell 
 </th></tr>
 <tr><th> GHC.Num </th>
 <th> even </th>
-<th>  
+<th> rts/PrimOps.cmm --\> Haskell 
 </th></tr>
 <tr><th> GHC.Num </th>
 <th> odd </th>
@@ -54,11 +54,11 @@
 </th></tr>
 <tr><th> GHC.Num </th>
 <th> gcd </th>
-<th>  
+<th> rts/PrimOps.cmm --\> Haskell 
 </th></tr>
 <tr><th> GHC.Num </th>
 <th> lcm </th>
-<th>  
+<th> rts/PrimOps.cmm --\> Haskell 
 </th></tr>
 <tr><th> GHC.Num </th>
 <th> `(^)` </th>
@@ -107,6 +107,10 @@
 <tr><th> GHC.Float </th>
 <th> decodeFloat </th>
 <th> rts/StgPrimFloat.c --\> rts/Rts.h --\> PrimOps.cmm 
+</th></tr>
+<tr><th> GHC.Float </th>
+<th> encodeDouble </th>
+<th> rts/StgPrimFloat.c --\> linked in directly? 
 </th></tr>
 <tr><th> GHC.Float </th>
 <th> decodeDouble </th>
@@ -194,35 +198,35 @@
 <th> **Notes** 
 </th></tr>
 <tr><th> GHC.Prim </th>
-<th> integer2Int </th>
+<th> integer2Int\# </th>
 <th> from rts/PrimOps.cmm 
 </th></tr>
 <tr><th> GHC.Prim </th>
-<th> integer2Word </th>
+<th> integer2Word\# </th>
 <th> from rts/PrimOps.cmm 
 </th></tr>
 <tr><th> GHC.Prim </th>
-<th> int2Integer </th>
+<th> int2Integer\# </th>
 <th> from rts/PrimOps.cmm 
 </th></tr>
 <tr><th> GHC.Prim </th>
-<th> word2Integer </th>
+<th> word2Integer\# </th>
 <th> from rts/PrimOps.cmm 
 </th></tr>
 <tr><th> GHC.Prim </th>
-<th> int64ToInteger </th>
+<th> int64ToInteger\# </th>
 <th> from rts/PrimOps.cmm 
 </th></tr>
 <tr><th> GHC.Prim </th>
-<th> word64ToInteger </th>
+<th> word64ToInteger\# </th>
 <th> from rts/PrimOps.cmm 
 </th></tr>
 <tr><th> GHC.Prim </th>
-<th> decodeDouble </th>
+<th> decodeDouble\# </th>
 <th> from rts/PrimOps.cmm 
 </th></tr>
 <tr><th> GHC.Prim </th>
-<th> decodeFloat </th>
+<th> decodeFloat\# </th>
 <th> from rts/PrimOps.cmm 
 </th></tr>
 <tr><th> GHC.Prim </th>
@@ -300,6 +304,10 @@
 <tr><th> GHC.Float </th>
 <th> decodeFloat </th>
 <th> rts/StgPrimFloat.c --\> rts/Rts.h --\> PrimOps.cmm 
+</th></tr>
+<tr><th> GHC.Float </th>
+<th> encodeDouble </th>
+<th> rts/StgPrimFloat.c --\> rts/Rts.h --\> linked in directly? 
 </th></tr>
 <tr><th> GHC.Float </th>
 <th> decodeDouble </th>
