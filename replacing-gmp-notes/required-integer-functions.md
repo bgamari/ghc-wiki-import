@@ -1,6 +1,13 @@
 # Functions that operate on Integer values
 
 
+
+*Note*: this is a very rough overview of the Integer functions in GHC.  It is not yet even a sketch of functions that a replacement library should implement, although the [Primitive Functions (in Cmm or C)](replacing-gmp-notes/required-integer-functions#) provide an overview of what GMP currently provides.
+
+
+## GHC Functions
+
+
 <table><tr><th> **Module/Class** </th>
 <th> **Haskell Function** </th>
 <th> **Notes** 
@@ -89,6 +96,22 @@
 <th> != </th>
 <th>  
 </th></tr>
+<tr><th> GHC.Float </th>
+<th> floatRadix </th>
+<th> rts/StgPrimFloat.c 
+</th></tr>
+<tr><th> GHC.Float </th>
+<th> encodeFloat </th>
+<th> rts/StgPrimFloat.c --\> linked in directly? 
+</th></tr>
+<tr><th> GHC.Float </th>
+<th> decodeFloat </th>
+<th> rts/StgPrimFloat.c --\> rts/Rts.h --\> PrimOps.cmm 
+</th></tr>
+<tr><th> GHC.Float </th>
+<th> decodeDouble </th>
+<th> rts/StgPrimFloat.c --\> rts/Rts.h --\> PrimOps.cmm 
+</th></tr>
 <tr><th> Data.Bits </th>
 <th> (.&.) </th>
 <th>  
@@ -156,6 +179,19 @@
 <tr><th> Data.Bits </th>
 <th> rotateR </th>
 <th> rotates operate as shifts for Integer 
+</th></tr>
+<tr><th> StringBuffer </th>
+<th> parseInteger </th>
+<th> Haskell function 
+</th></tr></table>
+
+
+## Primitive Functions (in Cmm or C)
+
+
+<table><tr><th> **Module/Class** </th>
+<th> **Haskell Function** </th>
+<th> **Notes** 
 </th></tr>
 <tr><th> GHC.Prim </th>
 <th> integer2Int </th>
@@ -253,10 +289,6 @@
 <th> complementInteger\# </th>
 <th> from rts/PrimOps.cmm 
 </th></tr>
-<tr><th> StringBuffer </th>
-<th> parseInteger </th>
-<th> Haskell function 
-</th></tr>
 <tr><th> GHC.Float </th>
 <th> floatRadix </th>
 <th> rts/StgPrimFloat.c 
@@ -266,11 +298,11 @@
 <th> rts/StgPrimFloat.c --\> linked in directly? 
 </th></tr>
 <tr><th> GHC.Float </th>
-<th> `__decodeFloat` </th>
+<th> decodeFloat </th>
 <th> rts/StgPrimFloat.c --\> rts/Rts.h --\> PrimOps.cmm 
 </th></tr>
 <tr><th> GHC.Float </th>
-<th> `__decodeDouble` </th>
+<th> decodeDouble </th>
 <th> rts/StgPrimFloat.c --\> rts/Rts.h --\> PrimOps.cmm 
 </th></tr></table>
 
