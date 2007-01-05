@@ -35,7 +35,30 @@ The following code will *fail* to produce a floating point exception or NaN on x
 
 
 
-\[in GHCi\]:
-Prelude\> realToFrac (0/0 :: Float) :: Double
+\[in GHCi-6.6 on PowerPC, OS X\]:
+
+
+```wiki
+Prelude> 0.0/0.0
+NaN
+
+Prelude> realToFrac (0.0/0.0) :: Double
+Infinity
+
+Prelude> realToFrac (0.0/0.0 :: Float)
+5.104235503814077e38
+
+Prelude> realToFrac (0.0/0.0 :: Float) :: Double
+5.104235503814077e38
+
+Prelude> realToFrac (1.0/0.0)
+Infinity
+Prelude> realToFrac (1.0/0.0 :: Float)
+3.402823669209385e38
+
+```
+
+
+This bug is not due to the lack of FPU exceptions in Cmm but bears mention as the internal conversion performed in 'realToFrac' on 'Float's and might benefit from FPU exceptions.
 
 
