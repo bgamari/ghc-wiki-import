@@ -29,14 +29,14 @@ The most insidious and unique feature of the GHC implementation with GMP is memo
 ```
 
 
-These special allocation functions bring most GMP memory usage into the GHC heap but do not seem that efficient otherwise.  (I could be wrong --PDT.)  Allocation uses the internal `allocate()` interface, so no garbage collection is performed during a GMP operation.  Note that GMP operations may allocate more memory themselves.  The memory allocated is a simple array of words (`W_`), rounded up to a whole number.
+These special allocation functions bring most GMP memory usage into the GHC heap but do not seem that efficient otherwise.  (I could be wrong --PDT.)  Allocation uses the internal `allocate()` interface, so no garbage collection is performed during a GMP operation.  Note that GMP operations may use these functions to allocate more memory themselves, after being called from Haskell code.  The memory allocated is a simple array of words (`W_`), rounded up to a whole number.
 
 
 ### Special Functions
 
 
 
-GHC adds its own functions for string conversion, least common multiple (lcm) and conversion to and from floating point (floats and doubles).  In particular, the GHC designers decided to perform their own operations for encoding a GMP number (really, the array of mp\_limb\_t) to floating point and doubles.  GMP provides functions for some of these operations:
+GHC adds its own functions for string conversion, least common multiple (lcm) and conversion to and from floating point (floats and doubles).  In particular, the GHC designers decided to perform their own operations for encoding a GMP number (really, the array of mp\_limb\_t) to floating point numbers (floats or doubles).  GMP provides functions for some of these operations:
 
 
 <table><tr><th> **Operation** </th>
