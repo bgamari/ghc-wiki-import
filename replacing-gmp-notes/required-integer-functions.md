@@ -102,7 +102,7 @@
 </th></tr>
 <tr><th> GHC.Float </th>
 <th> encodeFloat </th>
-<th> rts/StgPrimFloat.c --\> linked in directly? 
+<th> rts/StgPrimFloat.c --\> foreign import GHC.Float 
 </th></tr>
 <tr><th> GHC.Float </th>
 <th> decodeFloat </th>
@@ -110,7 +110,7 @@
 </th></tr>
 <tr><th> GHC.Float </th>
 <th> encodeDouble </th>
-<th> rts/StgPrimFloat.c --\> linked in directly? 
+<th> rts/StgPrimFloat.c --\> foreign import GHC.Float 
 </th></tr>
 <tr><th> GHC.Float </th>
 <th> decodeDouble </th>
@@ -299,7 +299,7 @@
 </th></tr>
 <tr><th> GHC.Float </th>
 <th> encodeFloat </th>
-<th> rts/StgPrimFloat.c --\> linked in directly? 
+<th> rts/StgPrimFloat.c --\> foreign import GHC.Float 
 </th></tr>
 <tr><th> GHC.Float </th>
 <th> decodeFloat </th>
@@ -307,7 +307,7 @@
 </th></tr>
 <tr><th> GHC.Float </th>
 <th> encodeDouble </th>
-<th> rts/StgPrimFloat.c --\> rts/Rts.h --\> linked in directly? 
+<th> rts/StgPrimFloat.c --\> foreign import GHC.Float 
 </th></tr>
 <tr><th> GHC.Float </th>
 <th> decodeDouble </th>
