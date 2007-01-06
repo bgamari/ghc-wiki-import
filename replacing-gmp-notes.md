@@ -134,14 +134,15 @@ There are several problems with the current GMP implementation:
 > The current GMP implementation of Integer is:
 >
 >
-> ```wiki
-> data Integer	
+> ```
+> data Integer
 >    = S# Int#              -- small integers
 > #ifndef ILX
 >    | J# Int# ByteArray#   -- large integers
 > #else
 >    | J# Void BigInteger   -- .NET big ints
 > ```
+>
 >
 >
 > where the Int\# counts the number of [
