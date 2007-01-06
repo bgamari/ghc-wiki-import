@@ -131,7 +131,7 @@ There are several problems with the current GMP implementation:
 
 >
 >
-> The current GMP implementation of Integer is:
+> The current GMP implementation of Integer, defined in [libraries/base/GHC/Num.lhs](/trac/ghc/browser/ghc/libraries/base/GHC/Num.lhs), is:
 >
 >
 > ```
