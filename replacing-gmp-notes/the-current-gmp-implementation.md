@@ -117,7 +117,11 @@ Note the problems:
 - certain floating point hardware exceptions (traps) for overflow or underflow may be triggered (though this is not generally the case; note: on x86 machines floating point exceptions may not be triggered but the resulting float may denormalized).
 
 
-Nowhere in this function is there a check for whether the GMP number (the `const mp_limb_t *arr`) may be greater than the size of a double and either warn the user (possibly with an `ArithException` or round the resulting double toward zero.  Compare the problem section in `__encodeDouble` to the exponent check in the internal GMP function, `mpn_get_d`, that avoids overflow by comparing the relative magnitude of the GMP number with the maximum magnitude of the double:
+Nowhere in this function is there a check for whether the GMP number (the `const mp_limb_t *arr`) may be greater than the size of a double and either warn the user (possibly with an `ArithException` or round the resulting double toward zero.  
+
+
+
+Compare the problem section in `__encodeDouble` to the exponent check in the internal GMP function, `mpn_get_d`, that avoids overflow by comparing the relative magnitude of the GMP number with the maximum magnitude of the double:
 
 
 ```wiki
@@ -141,7 +145,24 @@ Nowhere in this function is there a check for whether the GMP number (the `const
 ```
 
 
-(If you want to see the full `mpn_get_d` function, it is in the file `[toplevel gmp source]/mpn/generic/get_d.c` .)  A replacement library for GMP might use the GMP strategies of including a special bitwise conversion (with appropriate masks) and a hardware-based version.  An unconventional solution might perform the rounding manually (but with relatively portable predictability) using interval arithmetic.
+(If you want to see the full `mpn_get_d` function, it is in the file `[toplevel gmp source]/mpn/generic/get_d.c` .)  
+
+
+
+There is no check in the Haskell code *using* `__encodeFloat` or `__encodeDouble`, in [libraries/base/GHC/Float.lhs](/trac/ghc/browser/ghc/libraries/base/GHC/Float.lhs).  For example, the `encodeFloat` Haskell function under class `RealFloat` uses `__encodeDouble` directly:
+
+
+```
+encodeFloat (J# s# d#) e = encodeDouble# s# d# e
+```
+
+
+
+This is not the case with the safer `fromRat` function which ensures the Integer falls in the range of the mantissa (see the source code).
+
+
+
+A replacement library for GMP might use the GMP strategies of including a special bitwise conversion (with appropriate masks) and a hardware-based version.  An unconventional solution might perform the rounding manually (but with relatively portable predictability) using interval arithmetic.  
 
 
 
