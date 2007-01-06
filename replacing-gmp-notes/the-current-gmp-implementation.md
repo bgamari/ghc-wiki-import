@@ -8,3 +8,7 @@ Replacement for GMP(3)](http://www.haskell.org/pipermail/glasgow-haskell-users/2
 Replacement for GMP(4)](http://www.haskell.org/pipermail/glasgow-haskell-users/2006-August/010674.html).
 
 
+
+[](/trac/ghc/attachment/wiki/ReplacingGMPNotes/TheCurrentGMPImplementation/GMP_interface.jpg)
+
+
