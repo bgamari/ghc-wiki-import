@@ -302,41 +302,41 @@ results from initialising each struct (`mp_tmp2`, etc.) on each call, in order t
 Related to replacing GMP, some operations in CgPrimOP.hs such as IntAddCOp may benefit from operations defined in a replacement MP library (or, more generally, simple optimisation).  For example:
 
 
-```wiki
-
+```
 emitPrimOp [res_r,res_c] IntAddCOp [aa,bb] live
-{- 
-   With some bit-twiddling, we can define int{Add,Sub}Czh portably in
-   C, and without needing any comparisons.  This may not be the
-   fastest way to do it - if you have better code, please send it! --SDM
-  
-   Return : r = a + b,  c = 0 if no overflow, 1 on overflow.
-  
-   We currently don't make use of the r value if c is != 0 (i.e. 
-   overflow), we just convert to big integers and try again.  This
-   could be improved by making r and c the correct values for
-   plugging into a new J#.  
-   
-   { r = ((I_)(a)) + ((I_)(b));					\
-     c = ((StgWord)(~(((I_)(a))^((I_)(b))) & (((I_)(a))^r)))	\
-         >> (BITS_IN (I_) - 1);					\
-   } 
-   Wading through the mass of bracketry, it seems to reduce to:
-   c = ( (~(a^b)) & (a^r) ) >>unsigned (BITS_IN(I_)-1)
-
+{-                                                                              
+   With some bit-twiddling, we can define int{Add,Sub}Czh portably in           
+   C, and without needing any comparisons.  This may not be the                 
+   fastest way to do it - if you have better code, please send it! --SDM        
+                                                                                
+   Return : r = a + b,  c = 0 if no overflow, 1 on overflow.                    
+                                                                                
+   We currently don't make use of the r value if c is != 0 (i.e.                
+   overflow), we just convert to big integers and try again.  This              
+   could be improved by making r and c the correct values for                   
+   plugging into a new J#.                                                      
+                                                                                
+        { r = ((I_)(a)) + ((I_)(b));\                                           
+        c = ((StgWord)(~(((I_)(a))^((I_)(b))) & (((I_)(a))^r)))\                
+        >> (BITS_IN (I_) - 1);\                                                 
+   }                                                                            
+   Wading through the mass of bracketry, it seems to reduce to:                 
+   c = ( (~(a^b)) & (a^r) ) >>unsigned (BITS_IN(I_)-1)                          
+                                                                                
 -}
    = stmtsC [
         CmmAssign res_r (CmmMachOp mo_wordAdd [aa,bb]),
         CmmAssign res_c $
-	  CmmMachOp mo_wordUShr [
-		CmmMachOp mo_wordAnd [
-		    CmmMachOp mo_wordNot [CmmMachOp mo_wordXor [aa,bb]],
-		    CmmMachOp mo_wordXor [aa, CmmReg res_r]
-		], 
-	        CmmLit (mkIntCLit (wORD_SIZE_IN_BITS - 1))
-	  ]
-     ]
+          CmmMachOp mo_wordUShr [
+                        CmmMachOp mo_wordAnd [
+                          CmmMachOp mo_wordNot [CmmMachOp mo_wordXor [aa,bb]],
+                          CmmMachOp mo_wordXor [aa, CmmReg res_r]
+                                             ], 
+                        CmmLit (mkIntCLit (wORD_SIZE_IN_BITS - 1))
+                                ]
+           ]
 ```
+
 
 
 If an integer add were to overflow here, the addition operation would be performed *twice*; even if the integer add did not overflow one extra operation is performed.  Is this an acceptable price for no comparisons?
