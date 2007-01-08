@@ -117,7 +117,7 @@ Note the problems:
 - certain floating point hardware exceptions (traps) for overflow or underflow may be triggered (though this is not generally the case; note: on x86 machines floating point exceptions may not be triggered but the resulting float may denormalized).
 
 
-Nowhere in this function is there a check for whether the GMP number (the `const mp_limb_t *arr`) may be greater than the size of a double and either warn the user (possibly with an `ArithException` or round the resulting double toward zero.  
+Nowhere in this function is there a check for whether the GMP number (the `const mp_limb_t *arr`) may be greater than the size of a double and either warn the user, possibly with an `ArithException`, or round the resulting double toward zero.  
 
 
 
@@ -159,6 +159,19 @@ encodeFloat (J# s# d#) e = encodeDouble# s# d# e
 
 
 This is not the case with the safer `fromRat` function which ensures the Integer falls in the range of the mantissa (see the source code).
+
+
+
+The problem with `__encodeFloat` and `__encodeDouble` is normative--a matter of design.  The current implementation places the responsibility for ensuring that large integers converted to floating point numbers do not overflow or underflow and it is practically impossible (with rounding) to join encoding and decoding and come out with a reasonably equivalent result, as in:
+
+
+```
+encodeFloat . decodeFloat
+```
+
+
+
+(Note: this is a standard problem with floating point.  A replacement library could probably do little better.)
 
 
 
