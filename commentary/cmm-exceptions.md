@@ -57,6 +57,6 @@ Prelude> realToFrac (1.0/0.0 :: Float)
 ```
 
 
-This bug is not due to the lack of FPU exceptions in Cmm but bears mention as the internal conversion performed in 'realToFrac' on 'Float's would benefit from FPU exceptions: with Haskell-support for FPU exceptions this realToFrac would be able to issue an exception for NaN, Infinity or rounding errors when converting a Float to a Double and vice versa.  That there is a related problem with rounding errors in the functions 'encodeFloat', 'decodeFloat', 'encodeDouble' and 'decodeDouble', see [ReplacingGMPNotes/TheCurrentGMPImplementation](replacing-gmp-notes/the-current-gmp-implementation).  
+This bug is not due to the lack of FPU exceptions in Cmm but bears mention as the internal conversion performed in 'realToFrac' on 'Float's would benefit from FPU exceptions: with Haskell-support for FPU exceptions this realToFrac would be able to issue an exception for NaN, Infinity or rounding errors when converting a Float to a Double and vice versa.  There is a related problem with rounding errors in the functions 'encodeFloat', 'decodeFloat', 'encodeDouble' and 'decodeDouble', see [ReplacingGMPNotes/TheCurrentGMPImplementation](replacing-gmp-notes/the-current-gmp-implementation).  
 
 
