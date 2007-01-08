@@ -8,6 +8,10 @@
 This page collects questions and advice about building GHC from source.  It is particularly prone to going out of date.  Please help keep it relevant and accurate.  At the moment it's fairly un-structured; please feel free to add structure if that'd make it easier to follow.
 
 
+
+Platform-specific guidance belongs under one of the platform-specific help pages linked from the [Building guide contents page](building).
+
+
 ## Space in TMPDIR
 
 
@@ -166,9 +170,5 @@ machine with more memory or turn off the split-objs feature when you
 configure ghc. Just add `SplitObjs=NO` to your `mk/build.mk` file (which
 may not exist to start with). (The Gentoo ebuild does this
 automatically)
-
-
-
-xargs: /usr/bin/ar: terminated by signal 11
 
 
