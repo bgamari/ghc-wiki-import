@@ -27,11 +27,9 @@ There is at least one problem in GHC that requires FPU exception handling.  See 
 
 
 
-\[Note: placeholder until I can track down the original message --PT\]
-
-
-
-The following code will *fail* to produce a floating point exception or NaN on x86 machines (recall that 0.0/0.0 is NaN *and* a definite FPU exception):
+There was a long message thread on the Haskell-prime mailing list, "realToFrac Issues," beginning with [
+John Meacham's message](http://www.haskell.org/pipermail/haskell-prime/2006-February/000791.html) and ending with [
+Simon Marlow's message](http://www.haskell.org/pipermail/haskell-prime/2006-March/000840.html).  The following code for converting a Float to a Double will *fail* to produce a floating point exception or NaN on x86 machines (recall that 0.0/0.0 is NaN *and* a definite FPU exception):
 
 
 
@@ -59,6 +57,6 @@ Prelude> realToFrac (1.0/0.0 :: Float)
 ```
 
 
-This bug is not due to the lack of FPU exceptions in Cmm but bears mention as the internal conversion performed in 'realToFrac' on 'Float's and might benefit from FPU exceptions.
+This bug is not due to the lack of FPU exceptions in Cmm but bears mention as the internal conversion performed in 'realToFrac' on 'Float's would benefit from FPU exceptions: with Haskell-support for FPU exceptions this realToFrac would be able to issue an exception for NaN, Infinity or rounding errors when converting a Float to a Double and vice versa.  That there is a related problem with rounding errors in the functions 'encodeFloat', 'decodeFloat', 'encodeDouble' and 'decodeDouble', see [ReplacingGMPNotes/TheCurrentGMPImplementation](replacing-gmp-notes/the-current-gmp-implementation).  
 
 
