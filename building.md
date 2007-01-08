@@ -23,11 +23,12 @@ can extend it, modify it, and use it to build your code.
 - Architecture of the build system?
 - [Building the documentation](building/docs)
 - [Porting GHC](building/porting)
-- [Known pitfalls in building GHC](building/known-problems)
 - [Running the GHC test framework](building/running-tests)
 - [The NoFib benchmark suite](building/running-no-fib)
-- Platform-specific build issues
 
+- Help when your build doesn't work
+
+  - [General FAQ for building GHC](building/faq)
   - [Platforms, scripts, and file names](building/platforms-scripts-file-names)
   - [Building under Windows](building/windows)
   - [Building under MacOS X](building/mac-osx)
