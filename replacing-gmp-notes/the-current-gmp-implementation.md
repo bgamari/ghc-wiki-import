@@ -166,7 +166,7 @@ The problem with `__encodeFloat` and `__encodeDouble` is normative--a matter of 
 
 
 ```
-encodeFloat . decodeFloat
+(uncurry encodeFloat) . decodeFloat
 ```
 
 
