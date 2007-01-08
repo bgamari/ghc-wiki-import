@@ -195,13 +195,15 @@ cd ghc-6.6
 ```wiki
 T
 
-./configure --enable-hc-boot --enable-hc-boot-unregisterised --srcdir=.
+$ ./configure --enable-hc-boot --enable-hc-boot-unregisterised --srcdir=.
+$ cd includes
+$ make
 ```
 
 ```wiki
 H
 
-./configure --srcdir=.
+$ ./configure --srcdir=.
 ```
 
 
