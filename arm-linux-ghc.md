@@ -258,6 +258,18 @@ $ touch ghcautoconf.h DerivedConstants.h GHCConstants.h mkDerivedConstants.c
 $ touch mkDerivedConstantsHdr mkDerivedConstants.o mkGHCConstants mkGHCConstants.o
 ```
 
+
+I just followed the guide upto making the hc bundle. I had to comment out this line in H/Makefile:
+
+
+```wiki
+#	echo ghc-$(ProjectVersion)/libraries/haskell-src/Language/Haskell/Parser.hs >> hc-files-to-go
+```
+
+
+because that file does not seem to exist anymore.
+
+
 ## Wrong Stuff
 
 
