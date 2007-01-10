@@ -102,6 +102,10 @@ There is a mode '-fhpc-tracer', which compiles code that talks to the hpc-tracer
 <tr><th>  </th>
 <th> continue till the next breakpoint </th>
 <th> (newline) 
+</th></tr>
+<tr><th> h </th>
+<th> show history of the previous 1024 ticks </th>
+<th> h 
 </th></tr></table>
 
 
