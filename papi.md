@@ -76,7 +76,7 @@ To collect statistics just run make inside nofib as usual, as an example let's c
 
 
 
-The PAPI framework has been used to measure the effects of the [SemiTagging semi-tagging optimisation](wiki-start), in particular, the effects on branch misprediction. We are currently writing a paper and cleaning up the code for this optimisation.
+The PAPI framework has been used to measure the effects of the [semi-tagging optimisation](semi-tagging), in particular, the effects on branch misprediction. We are currently writing a paper and cleaning up the code for this optimisation.
 
 
 # Resources
