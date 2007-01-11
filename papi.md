@@ -87,3 +87,5 @@ The PAPI framework has been used to measure the effects of the [semi-tagging opt
   http://developer.amd.com/article\_print.jsp?id=90](http://developer.amd.com/article_print.jsp?id=90) An article introducing the business of using CPU counters for performance measurement.
 - [
   http://developer.amd.com/articles.jsp?id=2&num=1](http://developer.amd.com/articles.jsp?id=2&num=1) An article introducing AMD's code analyst. It even has pipeline simulation, though I haven't tried it out yet.
+- [
+  http://www.cs.mu.oz.au/\~njn/pubs.html](http://www.cs.mu.oz.au/~njn/pubs.html) The Cache Behaviour of Large Lazy Functional Programs on Stock Hardware.
