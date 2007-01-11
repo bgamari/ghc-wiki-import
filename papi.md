@@ -57,7 +57,15 @@ The help screen provides options to monitor more events:
 
 
 
-to do
+In order to use the nofib suite with PAPI, you have to use apply the three patches at the bottom of this page.
+
+
+1. The first patch adds a PAPI flag to the perl testing script.
+1. The second patch adds a make argument to the nofib suite to enable the collection of PAPI number.
+1. The third patch makes nofib-analyse able to process the output produced in the second patch. The standard nofib-analyse won't cut it.
+
+
+These patches are not submitted to the HEAD (yet?) because they are not mature, but they are useful. Probably the (only?) patch that needs more work is the third one.
 
 
 # Resources
