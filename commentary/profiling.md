@@ -31,3 +31,7 @@ Macros for bumping ticky counters are now defined in [includes/Cmm.h](/trac/ghc/
 Actually, maybe it would make more sense to add a new file, `RtsTicky.h` or something, which contains only ticky counter declarations (the same declarations that still exist in [includes/StgTicky.h](/trac/ghc/browser/ghc/includes/StgTicky.h), which isn't used anymore), and that include that from [includes/RtsExternal.h](/trac/ghc/browser/ghc/includes/RtsExternal.h).
 
 
+
+No -- put actual declarations for counter variables in another file, `TickyCounters.h` or something, and include that only from [rts/Ticky.c](/trac/ghc/browser/ghc/rts/Ticky.c); put *extern* declarations for those counters in `RtsTicky.h`, still included from [includes/RtsExternal.h](/trac/ghc/browser/ghc/includes/RtsExternal.h). Then later we can automatically generate both `RtsTicky.h` and `TickyCounters.h`.
+
+
