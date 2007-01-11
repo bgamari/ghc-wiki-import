@@ -26,6 +26,6 @@ to do
 # Resources
 
 
-- [ http://icl.cs.utk.edu/papi/](http://icl.cs.utk.edu/papi/)
+- [ http://icl.cs.utk.edu/papi/](http://icl.cs.utk.edu/papi/) PAPI home page.
 - [
   http://developer.amd.com/article\_print.jsp?id=90](http://developer.amd.com/article_print.jsp?id=90) An article introducing the business of using CPU counters for performance measurement.
