@@ -27,6 +27,10 @@ You can't use cost-centre profiling and ticky-ticky profiling at the same time; 
 The code for this isn't in the HEAD yet. Should be checked in soon.
 
 
+
+TODO update the GHC manual section on this.
+
+
 ### Using ticky-ticky profiling
 
 
