@@ -1,6 +1,8 @@
 # Kirsten's to-do list
 
 
+- Someday, download a full repo so that I can check that the patches I want to send can be applied to the HEAD. grrrrrrrr
+
 ## Demand analysis
 
 
@@ -44,6 +46,6 @@
 
 
 
-[KirstenSandbox/GhcOldMac](kirsten-sandbox/ghc-old-mac) - building GHC on Mac OS 10.2.1 (the summary: don't do it.)\]
+[KirstenSandbox/GhcOldMac](kirsten-sandbox/ghc-old-mac) - building GHC on Mac OS 10.2.1 (the summary: don't do it.)
 
 
