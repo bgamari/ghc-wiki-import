@@ -81,6 +81,7 @@ Logically, we can express the above as follows:
  |=
 
 
+
 (T [Int] = S [Int]) /\             -- local assumptions
 (T Int = S Int)
 
@@ -147,3 +148,4 @@ End of NOTE
 - [Plan MS revised](type-functions-syn-tc/plan-ms-revised)
 - [Brief comparison](type-functions-syn-tc/comparison)
 - [CHR-style simplification for GHC](type-functions-syn-tc/ghc-chr)
+- [Examples](type-functions-syn-tc/ghc-chr-examples)
