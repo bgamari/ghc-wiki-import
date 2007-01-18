@@ -146,3 +146,4 @@ End of NOTE
 - [Plan MS](type-functions-syn-tc/plan-ms)
 - [Plan MS revised](type-functions-syn-tc/plan-ms-revised)
 - [Brief comparison](type-functions-syn-tc/comparison)
+- [CHR-style simplification for GHC](type-functions-syn-tc/ghc-chr)
