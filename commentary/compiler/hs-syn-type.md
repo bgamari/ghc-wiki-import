@@ -58,7 +58,7 @@ The type checker adds type information to the syntax tree, otherwise leaving it 
 >
 > ```wiki
 >   type RnHsBinds = HsBinds Name ()   -- After renaming
->   type TcHsBines = HsBinds Id Type   -- After type checking
+>   type TcHsBinds = HsBinds Id Type   -- After type checking
 > ```
 >
 >
