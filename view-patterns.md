@@ -10,6 +10,10 @@ Haskell Prime.  I'm thinking of prototyping the idea in GHC, so I'm looking
 for feedback.
 
 
+
+This page is open to editing by anyone.  (Chase the "Wiki notes" link in the sidebar to find out how.)
+
+
 ## The problem
 
 
