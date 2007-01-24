@@ -594,7 +594,7 @@ So matters are not much worse than before.
 ## Related work
 
 
-### Wadler's original paper (POPL 1987)\]
+### Wadler's original paper (POPL 1987)
 
 
 
