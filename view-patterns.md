@@ -95,7 +95,7 @@ form
 
 
 where *expr* is an arbitrary Haskell expression.   I'll call a pattern
-of this form a **view pattern**.
+of this form a **view pattern**. 
 
 
 
@@ -118,6 +118,33 @@ The **typing rule** is similarly simple.
 The expression *expr* must have type
 *t1 `-> Maybe` t2*. Then the pattern *pat* must have type *t2*, and the
 whole pattern (*expr* `->` *pat*) has type *t1*.
+
+
+### Nesting =
+
+
+
+View patterns are just an extra syntactic form of pattern, and they nest inside other patterns, and other patterns nest inside them.  So one can write
+
+
+```wiki
+  f (sing -> x, True) = ...
+  g (Just [sing -> x]) = ...
+  h (Just [sing -> Just x]) = ...
+```
+
+
+And by the same token, view patterns nest inside each other:
+
+
+```wiki
+  k :: [[a]] -> a
+  k (sing -> sing -> x) = x
+```
+
+
+This convenient nesting is perhaps the biggest practical 
+difference between view patterns and pattern guards.
 
 
 ### The value input feature
