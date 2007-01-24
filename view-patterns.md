@@ -388,7 +388,7 @@ module Set( Set, empty, insert, delete, has) where
   
   has :: Eq a => a -> Set a -> Maybe (Set a)
   has x (S xs) | x `elem` xs = Just (xs \\ x)
-	           | otherwise   = Nothing
+               | otherwise   = Nothing
   
   delete :: a -> Set a -> Set a
   delete x (has x -> s) = s
@@ -471,6 +471,8 @@ Here are some other possible syntax choices I've considered:
 
   f (snoc | x xs) = ..		-- Use "|" instead of "->"
   g (bits 3 | b bs) = ...
+
+  f ((x,xs) <- snoc) = ...  -- More like pattern guards
 ```
 
 
