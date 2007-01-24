@@ -2,7 +2,12 @@
 
 
 
-The main guide to the Trac Wiki formatting is [Wiki Formatting](wiki-formatting).  The notes on this page are the GHC team's observations and/or clarifications.
+The GHC Wiki is open to everyone to edit.  **Please help us improve the information here**.  You can easily do this by editing the wiki directly.   Just 
+[log in](/trac/ghc/trac/ghc/login) as user **guest** with password **guest**.  
+
+
+
+The "Help/Guide" link at the top of  every page gives a good description of the markup language etc.  From there you can get to the [main guide to the Trac Wiki formatting](wiki-formatting).  The notes on this page are the GHC team's observations and/or clarifications.
 
 
 ## Formatting list items with multiple paragraphs
