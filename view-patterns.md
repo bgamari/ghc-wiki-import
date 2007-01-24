@@ -462,6 +462,20 @@ But with view pattern you can:
 
 
 
+A disadvantage of the arrow syntax is that it looks a bit confusing
+when it appears in a case expression:
+
+
+```wiki
+  last xs = case xs of
+           (snoc -> x xs) -> x
+```
+
+
+(Also that "x xs" looks a bit like `x` applied to `xs`.)
+
+
+
 Here are some other possible syntax choices I've considered:
 
 
