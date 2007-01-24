@@ -120,7 +120,7 @@ The expression *expr* must have type
 whole pattern (*expr* `->` *pat*) has type *t1*.
 
 
-### Nesting =
+### Nesting
 
 
 
@@ -129,8 +129,8 @@ View patterns are just an extra syntactic form of pattern, and they nest inside 
 
 ```wiki
   f (sing -> x, True) = ...
-  g (Just [sing -> x]) = ...
-  h (Just [sing -> Just x]) = ...
+  g (Just (sing -> x)) = ...
+  h (Just (sing -> Just x)) = ...
 ```
 
 
