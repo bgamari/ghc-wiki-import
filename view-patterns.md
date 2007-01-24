@@ -468,7 +468,7 @@ when it appears in a case expression:
 
 ```wiki
   last xs = case xs of
-           (snoc -> x xs) -> x
+                (snoc -> x xs) -> x
 ```
 
 
