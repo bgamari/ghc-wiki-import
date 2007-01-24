@@ -475,8 +475,25 @@ Here are some other possible syntax choices I've considered:
 
   f (snoc | x xs) = ..		-- Use "|" instead of "->"
   g (bits 3 | b bs) = ...
+```
 
+
+Another possibility is to use a backward arrow, more like pattern guards:
+
+
+```wiki
   f ((x,xs) <- snoc) = ...  -- More like pattern guards
+```
+
+
+But that messes up the left-to-right flow that is useful in some cases.
+For example, compare these:
+
+
+```wiki
+  parsePacket1 (bits 3 -> n (bits n -> val bs)) = ...
+
+  parsePacket2 (n (val bs <- bits n) <- bits 3) = ...
 ```
 
 
