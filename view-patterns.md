@@ -575,6 +575,37 @@ matching (not in semantics but in use).
 The problem that needs to be solved is to introduce abstraction "after the fact".
 
 
+### Nesting
+
+
+
+In the lightweight proposal, view patterns are just an extra syntactic form of pattern, and they nest inside other patterns, and other patterns nest inside them.  So one can write
+
+
+```wiki
+  f (sing -> x, True) = ...
+  g (Just (sing -> x)) = ...
+  h (Just (sing -> Just x)) = ...
+```
+
+
+And by the same token, view patterns nest inside each other:
+
+
+```wiki
+  k :: [[a]] -> a
+  k (sing -> sing -> x) = x
+```
+
+
+This convenient nesting is perhaps the biggest practical 
+difference between view patterns and pattern guards.
+
+
+
+The majority of the proposals allow nesting.
+
+
 ---
 
 
