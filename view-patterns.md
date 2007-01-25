@@ -868,7 +868,17 @@ The examples at the top of this page would look like this with first class patte
 
 
 
-Several proposals suggest first class *abstractions* rather that first-class *patterns*.
+Several proposals suggest first class *abstractions* rather that first-class *patterns*.  By a "first class abstraction" I mean a value of type
+(*something* `->` *something*)
+with a syntax something like
+(`\` *pattern* `->` *body*).
+
+
+
+The abstraction includes both the pattern and the result.  In contrast, view patterns tackle only the syntax of patterns; the pattern of a first-class abstraction.  
+
+
+
 Here are the ones I know of
 
 
