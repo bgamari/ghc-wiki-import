@@ -283,6 +283,10 @@ Here `even` is used as a nullary view pattern, with no sub-patterns
 following the `->`.
 
 
+
+Another variation (call it "extension 1b"), which avoids the tiresome need to define new types, is this: supplying multiple sub-patterns in a view pattern is synonymous with tupling.  Thus `(f -> p1 p2)` would be synonymous with `(f -> (p1,p2))`.  Here the effect is purely syntactic, allowing you to omit parens and commas without confusion.  No new types.  The power-to-weight ratio is probably better for this alternative.
+
+
 ### Possible extension 2: the implicit `Maybe`
 
 
