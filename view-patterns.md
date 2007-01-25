@@ -192,8 +192,18 @@ as an argument to a function thus:
 
 
 Here the first argument `p` can be thought of as a pattern passed to `g`, which
-is used to match the second argument of `g`.
+is used to match the second argument of `g`. 
 
+
+
+Here is another rather cute example:
+
+
+```wiki
+unfoldr :: (b -> Maybe (a, b)) -> b -> [a] 
+unfoldr f (f -> (a, b)) = a : unfoldr f b
+unfoldr f other         = []
+```
 
 ### Possible extension 1: multi-argument view patterns
 
