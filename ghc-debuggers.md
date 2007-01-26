@@ -72,11 +72,9 @@ where \<id\> is a pointer into a data structure in Ghci which contains indentife
 HpcT transforms E like so:
 
 
->
->
-> case tick\_n E of () -\> E
->
->
+```wiki
+case tick_n E of () -> E
+```
 
 
 where n is some kind of unique identifer for the annotation which refers (via a table) to the source location of the breakpoint. 
