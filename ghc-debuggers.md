@@ -93,6 +93,6 @@ The question is, how can we get the performance of tick combined with the variab
 
 
 
-One idea would be to extend Byte Code Objects (BCOs) with additional fields which record the neccessary source information. 
+One idea would be to extend Byte Code Objects (BCOs) with additional fields which record the neccessary source information. A possible addition benefit is that we might be able to use the same information to do a backtrace of the dynamic call stack. Whilst the dynamic call stack may not always be ideal, it may still be useful, and probably better than nothing.
 
 
