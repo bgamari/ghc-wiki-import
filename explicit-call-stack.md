@@ -101,3 +101,11 @@ Lots of open questions
   ```
 
   How would you like to transform this?
+
+## Transformation rules
+
+
+
+Attached in a pdf are the beginnings of some transformation rules to consider.
+
+
