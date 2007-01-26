@@ -49,10 +49,24 @@ http://movies.unsafeperformio.com/hpctpreview2.mov](http://movies.unsafeperformi
 
 
 
-The plan is to take the best ideas from both debuggers and combine them into an even better debugger.
+The plan is to take the best ideas from both debuggers and combine them into an even better debugger. Currently GhciD has support for displaying local variables, but HpcT does not. However, HpcT has more efficient breakpoints.
 
 
 
-Currently GhciD has support for displaying local variables, but HpcT does not. However, HpcT has more efficient breakpoints.
+Let E be the expression we want to break at.
+
+
+
+GhciD transforms E like so:
+
+
+>
+>
+> breakpointJump \<id\> \<vals\> \<srcloc\> E
+>
+>
+
+
+where \<id\> is a pointer into a data structure in Ghci which contains indentifer infos, \<vals\> is a list of values of local variables, and \<srcloc\> is a source location of the breakpoint.
 
 
