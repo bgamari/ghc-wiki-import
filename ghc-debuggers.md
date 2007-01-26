@@ -62,7 +62,7 @@ GhciD transforms E like so:
 
 >
 >
-> breakpointJump \<id\> \<vals\> \<srcloc\> E
+> ` breakpointJump <id> <vals> <srcloc> E `
 >
 >
 
