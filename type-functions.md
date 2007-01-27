@@ -25,6 +25,10 @@ Revised features
 We keep track of the current [implementation status](type-functions-status).
 
 
+
+We also have notes on [type checking with indexed synonyms.](type-functions-syn-tc)
+
+
 ## Specification and Restrictions
 
 
@@ -114,10 +118,6 @@ The details of the implementation are split over a couple of subpages, due to th
 - [type checking,](type-functions-type-checking)
 - [desugaring,](type-functions-core) and
 - [interfaces.](type-functions-iface)
-
-
-We also have notes on [type checking with indexed synonyms.](type-functions-syn-tc)
-
 
 ## Possible Extensions
 
