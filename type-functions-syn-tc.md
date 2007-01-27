@@ -35,6 +35,7 @@ However, type checking with type functions is challenging.
 - [Type equations in GHC](type-functions-syn-tc/ghc)
 - [Plan MS](type-functions-syn-tc/plan-ms)
 - [Plan MS revised](type-functions-syn-tc/plan-ms-revised)
+- [Plan MS revised again](type-functions-syn-tc/plan-ms-revised2)
 - [Brief comparison](type-functions-syn-tc/comparison)
 - [CHR-style simplification for GHC](type-functions-syn-tc/ghc-chr)
 - [Examples](type-functions-syn-tc/ghc-chr-examples)
