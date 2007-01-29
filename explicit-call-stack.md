@@ -149,6 +149,12 @@ This is probably the simplest transformation style possible. Stack traces are pa
 might pass one stack argument for every regular argument of the function.
 
 
+```wiki
+   [[ x :: T ]]   ==>   x :: Trace -> T     , if x is a function binding
+   
+   [[ x :: T ]]   ==>   x :: T              , is x is a CAF binding
+```
+
 
 Attached in a pdf are the beginnings of some transformation rules to consider.
 
