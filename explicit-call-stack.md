@@ -149,6 +149,18 @@ This is probably the simplest transformation style possible. Stack traces are pa
 might pass one stack argument for every regular argument of the function.
 
 
+
+The notation:
+
+
+```wiki
+   [[ E ]]_k
+```
+
+
+for some k, means transform the expression E, with stack value k. 
+
+
 ```wiki
    [[ x :: T ]]   ==>   x :: Trace -> T     , if x is a function binding
    
