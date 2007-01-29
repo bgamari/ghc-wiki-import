@@ -156,16 +156,16 @@ For simplicity we assume:
 which is just a list of function names.
 
 
-### Transformation option 1
+### Notation
 
 
 
-This is probably the simplest transformation style possible. Stack traces are passed to functions at their lexical call sites, which correspond to the places where the function is mentioned in the source code. CAF bindings are treated as roots of stacks, so only function bindings receive stack arguments. In this transformation we can get away with simply passing one stack argument for each function, regardless of how many regular arguments it has. In contrast, other transformation styles
-might pass one stack argument for every regular argument of the function.
+Double square brackets denote the transformation function, which has either one or two arguments, depending on what type of entity it is applied to. In most cases it has one argument, which is just a syntactic construct, but for expressions it
+has an additional argument which represents the current stack value.
 
 
 
-The notation:
+For instance:
 
 
 ```wiki
@@ -173,7 +173,15 @@ The notation:
 ```
 
 
-for some k, means transform the expression E, with stack value k. 
+means transform expression E with k as the current stack value.
+
+
+### Transformation option 1
+
+
+
+This is probably the simplest transformation style possible. Stack traces are passed to functions at their lexical call sites, which correspond to the places where the function is mentioned in the source code. CAF bindings are treated as roots of stacks, so only function bindings receive stack arguments. In this transformation we can get away with simply passing one stack argument for each function, regardless of how many regular arguments it has. In contrast, other transformation styles
+might pass one stack argument for every regular argument of the function.
 
 
 ```wiki
