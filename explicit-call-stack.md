@@ -129,7 +129,11 @@ For the purpose of exploring the rules we need an abstract syntax. Below is one 
 
 
 ```wiki
-   Decls --> x :: T | x = E | data f a1 .. an = K1 .. Km
+   Decls(D) --> x :: T | x = E | data f a1 .. an = K1 .. Km
+
+   Constructors(K) --> k T1 .. Tn
+
+   Types(T) --> f | a | T1 T2
 ```
 
 
