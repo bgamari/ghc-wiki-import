@@ -141,6 +141,21 @@ For the purpose of exploring the rules we need an abstract syntax. Below is one 
    Pats(P)         -->   x   |   k P1 .. Pn
 ```
 
+### Stack representation
+
+
+
+For simplicity we assume:
+
+
+```wiki
+   type Stack = [String]
+```
+
+
+which is just a list of function names.
+
+
 ### Transformation option 1
 
 
