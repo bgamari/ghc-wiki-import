@@ -229,3 +229,16 @@ A problem with this transformation style is that it is sensitive to program tran
 ```wiki
    f = let x = EXP in (\y -> head (foo x))
 ```
+
+
+where EXP is some arbitrary expression. Suppose that head is transformed to accept a stack argument, and foo is not. After transformation the code will become:
+
+
+```wiki
+   f = let x = EXP in (\y -> head ["f"] (foo x))
+```
+
+
+If we get an excpetion in head, the stack trace will tell us that head was called inside f, and f will be the root of the call stack.
+
+
