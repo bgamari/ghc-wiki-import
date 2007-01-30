@@ -196,7 +196,7 @@ And so on.
 
 
 
-As a starting point it is useful to see what Hat does, in particular hat-stack, which is the tool for generating stack traces. The example of `hd []` is exactly the kind of problem that hat-stack is designed to tackle.
+As a starting point it is useful to see what Hat does, in particular hat-stack, which is the tool for generating stack traces. The example of "`hd []`" is exactly the kind of problem that hat-stack is designed to tackle.
 
 
 
@@ -212,6 +212,37 @@ Here is the stack trace generated for the example program. You can see the relev
    (H.hs:16)       (\..) [] | case []                 {- the case analysis of the list in hd -}
    (H.hs:6)        (\..) []                           {- the application of hd in the body of d -}
    (unknown)       d
+```
+
+
+More-or-less this stack resembles:
+
+
+```wiki
+   d -> hd 
+```
+
+
+Curiously, if we change the definition of `hd` to a function binding instead of a pattern binding we get this stack trace instead:
+
+
+```wiki
+   Program terminated with error:
+           hd: empty list
+   Virtual stack trace:
+   (unknown)       {?}
+   (I.hs:17)       error "hd: empty..."
+   (I.hs:16)       hd [] | case []
+   (I.hs:6)        hd []
+   (unknown)       d
+```
+
+
+Which is a little clearer, but still represents:
+
+
+```wiki
+   d -> hd
 ```
 
 ## Transformation rules
