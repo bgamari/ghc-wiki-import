@@ -245,7 +245,7 @@ Here is the output of the two different transformations:
 ```
 
 
-Notice that in the first case the stack passed to `head` and `foo` is simply `["f1"]`, but in the second case it is \`"f2":t".
+Notice that in the first case the stack passed to `head` and `foo` is simply `["f1"]`, but in the second case it is `"f2":t"`.
 
 
 
