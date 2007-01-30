@@ -191,7 +191,15 @@ There are more possibilities, for instance, we could treat CAFs as roots of the 
 ```
 
 
-And so on.
+or by dropping main from the second of the options above:
+
+
+```wiki
+   d -> hd
+```
+
+
+(which is, as we shall see, incidentally what hat-stack does (so it is not unreasonable).
 
 
 ## What does Hat do?
