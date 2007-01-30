@@ -111,7 +111,7 @@ The key issues are:
 
 - **Higher-order calls**. Where does a partially applied function receive its stack trace from? Possible options include:
 
-  1. The lexical call site (corresponding to where the function is mentioned in the source code.
+  1. The lexical call site (corresponding to where the function is mentioned in the source code).
   1. The context in which the function receives a particular argument, for instance the one where it is saturated.  
 
 - **CAFs**. The problem with CAFs is that, at least for expensive ones, we want to preserve the sharing of their evaluation. Therefore we cannot simply extend them into functions which take a stack trace as an argument - this would cause the CAF to be recomputed at each place where it is called. The simplest solution is to make CAFs the roots of call stacks, but it seems like there will be situations where it would be useful to know more about the context in which a CAF was evaluated.
@@ -223,7 +223,7 @@ An advantage of this transformation style is that it handles combinations of tra
 
 
 
-A problem with this transformation style is that it is sensitive to program transformations that might happen in the compiler. For example, it transforms these two functions differently, even though they are semantically equivalent:
+A problem with this transformation style is that it is sensitive to the position of lambdas in the body of a declaration. For example, it transforms these two functions differently, even though they are semantically equivalent:
 
 
 ```wiki
@@ -247,6 +247,6 @@ Notice that in the first case the stack passed to `head` and `foo` is simply `["
 
 
 
-The reason for the difference is that lambda abstractions are transformed differently, depending on whether they are bound directly to a variable, or whether they are just some nested sub-expression.
+One *might* expect the same stack trace to be generated for each declaration.
 
 
