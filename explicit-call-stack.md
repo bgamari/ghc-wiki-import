@@ -199,7 +199,7 @@ or by dropping main from the second of the options above:
 ```
 
 
-(which is, as we shall see, incidentally what hat-stack does (so it is not unreasonable).
+(which is, as we shall see, incidentally what hat-stack does (so it is not unreasonable)).
 
 
 ## What does Hat do?
