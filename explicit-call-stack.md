@@ -106,14 +106,14 @@ Lots of open questions
 
 
 
-Suppose we are to transform the following code:
+Suppose we are to transform the following code. The line numbers in comments are useful later when we consider what hat-stack does.
 
 
 ```wiki
    main = print d
 
    d :: Int
-   d = e []
+   d = e []                                               {- line 6 -}
 
    e :: [Int] -> Int
    e = f 10
@@ -123,8 +123,8 @@ Suppose we are to transform the following code:
                 True  -> \_ -> 3
                 False -> hd
 
-   hd = \x -> case x of
-                 [] -> error "hd: empty list"
+   hd = \x -> case x of                                   {- line 16 -}
+                 [] -> error "hd: empty list"             {- line 17 -}
                  (x:_) -> x
 
    fac :: Int -> Int
@@ -200,17 +200,17 @@ As a starting point it is useful to see what Hat does, in particular hat-stack, 
 
 
 
-Here is the stack trace generated for the example program. I've added comments on the RHS to indicate what some of the entries mean (because they refer to source code locations).
+Here is the stack trace generated for the example program. You can see the relevant line numbers in comments in the source code above. I've added comments to the hat output on the RHS to emphasise what the entries mean, when it is not immediately clear.
 
 
 ```wiki
    Program terminated with error:
            hd: empty list
    Virtual stack trace:
-   (unknown)       {?}
-   (H.hs:17)       error "hd: empty..."
-   (H.hs:16)       (\..) [] | case []
-   (H.hs:6)        (\..) []
+   (unknown)       {?}                                
+   (H.hs:17)       error "hd: empty..."               
+   (H.hs:16)       (\..) [] | case []                 {- the case analysis of the list in hd -}
+   (H.hs:6)        (\..) []                           {- the application of hd in the body of d -}
    (unknown)       d
 ```
 
