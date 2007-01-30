@@ -183,7 +183,7 @@ The difference between these two stacks is how we determine *when* `hd` is calle
 
 
 
-There are more possibilities, for instance, we treat CAFs as roots of the stack, thus dropping `main` and `d` from the first of the options above:
+There are more possibilities, for instance, we could treat CAFs as roots of the stack, thus dropping `main` and `d` from the first of the options above:
 
 
 ```wiki
