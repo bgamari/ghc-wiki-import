@@ -246,7 +246,40 @@ Which is a little clearer, but still represents:
 ```
 
 
-So hat-stack's considers the context in which a function is saturated to be the place where it is called.
+So hat-stack's considers the context in which a function is saturated to be the place where it is called. To make this even more apparent we can eta-expand `e`:
+
+
+```wiki
+   e :: [Int] -> Int
+   e x = f 10 x
+```
+
+
+Now we get this stack trace:
+
+
+```wiki
+   Program terminated with error:
+           hd: empty list
+   Virtual stack trace:
+   (unknown)       {?}
+   (J.hs:17)       error "hd: empty..."
+   (J.hs:16)       hd [] | case []
+   (J.hs:9)        hd []
+   (J.hs:6)        e []
+   (unknown)       d
+```
+
+
+Which is:
+
+
+```wiki
+   d -> e -> hd
+```
+
+
+This is because `hd` now becomes saturated in the body of `e`.
 
 
 ## Transformation rules
