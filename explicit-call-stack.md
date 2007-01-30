@@ -245,6 +245,10 @@ Which is a little clearer, but still represents:
    d -> hd
 ```
 
+
+So hat-stack's considers the context in which a function is saturated to be the place where it is called.
+
+
 ## Transformation rules
 
 
