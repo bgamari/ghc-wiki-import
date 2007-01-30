@@ -134,6 +134,10 @@ Suppose we are to transform the following code:
 ```
 
 
+People probably don't write code like this very much, but nonetheless, it does expose some of the issues we must deal with.
+
+
+
 Here is a basic term-reduction for the program:
 
 
@@ -153,7 +157,39 @@ By the time that `hd` is called on the empty list, the only thing remaining on t
 
 
 
-The question is what stack would you "like" to see in this case?
+The question is what stack would you *like* to see in this case?
+
+
+
+One option is this:
+
+
+```wiki
+   main -> d -> e -> f -> hd
+```
+
+
+Another option is this:
+
+
+```wiki
+   main -> d -> hd
+```
+
+
+The difference between these two stacks is how we determine *when* `hd` is called. Is it in the context where `hd` is first mentioned by name (in the body of `f`), or is it when `hd` becomes fully saturated (in the body of `d`). Both contexts seem reasonable. Does it really matter which one is chosen? At the moment I can't say for sure.
+
+
+
+There are more possibilities, for instance, we treat CAFs as roots of the stack, thus dropping `main` and `d` from the first of the options above:
+
+
+```wiki
+   e -> f -> hd
+```
+
+
+And so on.
 
 
 ## Transformation rules
