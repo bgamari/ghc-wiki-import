@@ -479,7 +479,7 @@ If you apply this transformation to the example above you get:
 ```
 
 
-When you fun this program you get:
+When you run this program you get:
 
 
 ```wiki
