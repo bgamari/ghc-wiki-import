@@ -446,8 +446,8 @@ Alternatives:
 ```
 
 
-In the above rules a variable is function bound, if it is defined in the form "`x = \y1 .. y n -> E`". In other words it
-is a syntactic property of the way the variable is defined, rather than a type property. In contrast, a variable is pattern bound if it is defined in the form "`x = E`", where `E` is *not* a lambda abstraction.
+In the above rules a variable is function bound if it is defined in the form "`x = \y1 .. y n -> E`". In other words it
+is a syntactic property of the way the variable is defined, rather than a type property. In contrast, a variable is pattern bound if it is defined in the form "`x = E`", where `E` is *not* a lambda abstraction. Using a syntactic rule can lead to some potentially confusing results, as we shall see below. Note, however, that tools like Hat and Buddha do use a syntactic rule like this (you can see from the hat example above that eta expanding a definition can change the stack trace). So there is at least some precedent for using a syntactic rule. However, it must be said that the choices made by Hat and buddha are driven by the desire to avoid having to type-check the program first. Inside GHC this is not a concern, and it may be prudent to take advantage of type information.
 
 
 
@@ -532,3 +532,8 @@ Notice that in the first case the stack passed to `head` and `foo` is simply `["
 
    g2 = \x -> foo (bar (goo x)
 ```
+
+
+These are largely the same definition, just written in different style. One might expect them to result in the same stack trace. But the above transformation rule treats them differently, because the `g1` is a pattern binding, whereas `g2` is a function binding.
+
+
