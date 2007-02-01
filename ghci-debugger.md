@@ -467,18 +467,14 @@ This section is easy. There are NO modifications in the renamer, other than remo
 
 
 
-*summarize the code instrumentation stuff*
+Extended to carry the local scope around. Also extended to desugar breakpoint\* to breakpoint\*Jump, and to produce the dyn breakpoints instrumentation under -fdebugging.
 
 
 ## Passing the sitelist of a module around
 
 
 
-*summarize the modifications made to thread the site list of a module from the renamer to the ghc-api*
-
-
-
-TcGblEnv is extended with a dictionary of sites and coordinates (TODO switch the coordinate datatype to the ghc-standard SrcLoc) introduced in the module at the desugarer.
+After  a module has been instrumented with dynamic breakpoints, the list of sites where breakpoints have been injected must be surfaced to the ghc-api. ModGuts has a new field mg\_dbg\_sites, and from there it is stored in ModDetails.md\_dbg\_sites
 
 
 ## The `Opt_Debugging` flag
