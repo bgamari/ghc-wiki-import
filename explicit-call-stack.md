@@ -405,7 +405,7 @@ means transform expression E with k as the current stack value.
 
 
 
-This is probably the simplest transformation style possible. Stack traces are passed to (let bound) functions at their lexical call sites, which correspond to the places where the function is mentioned in the source code. CAF bindings are treated as roots of stacks, so only function bindings receive stack arguments. In this transformation we can get away with simply passing one stack argument for each function, regardless of how many regular arguments it has. In contrast, other transformation styles
+This is probably the simplest transformation style possible. Stack traces are passed to (let bound) functions at their lexical call sites, which correspond to the places where the function is mentioned in the source code. Pattern bindings are treated as roots of stacks, so only function bindings receive stack arguments. In this transformation we can get away with simply passing one stack argument for each function, regardless of how many regular arguments it has. In contrast, other transformation styles
 might pass one stack argument for every regular argument of the function.
 
 
@@ -446,8 +446,8 @@ Alternatives:
 ```
 
 
-In the above rules a variable is function bound, if it is defined in the form `x = \y1 .. y n -> E`. In other words it
-is a syntactic property of the way the variable is defined, rather than a type property.
+In the above rules a variable is function bound, if it is defined in the form "`x = \y1 .. y n -> E`". In other words it
+is a syntactic property of the way the variable is defined, rather than a type property. In contrast, a variable is pattern bound if it is defined in the form "`x = E`", where `E` is *not* a lambda abstraction.
 
 
 
@@ -524,6 +524,11 @@ Here is the output of the two different transformations:
 ```
 
 
-Notice that in the first case the stack passed to `head` and `foo` is simply `["f1"]`, but in the second case it is `"f2":t`. One *might* expect the same stack trace to be generated for each declaration.
+Notice that in the first case the stack passed to `head` and `foo` is simply `["f1"]`, but in the second case it is `"f2":t`. One *might* expect the same stack trace to be generated for each declaration. This might be particularly annoying/confusing in cases where people use a point free style of programming. Consider these two definitions:
 
 
+```wiki
+   g1 = foo . bar . goo
+
+   g2 = \x -> foo (bar (goo x)
+```
