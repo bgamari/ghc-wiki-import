@@ -19,7 +19,7 @@ To see the current status of the builds:
 
 
 
-First you, as a buildbot client, need to agree a buildbot username (`myUser`) and password (`myPass`) with the buildbot admins (just pick a username and password and send it to `igloo@earth.il`).  You'll also need to decide:
+First you, as a buildbot client, need to agree a buildbot username (`myUser`) and password (`myPass`) with the buildbot admins (just pick a username and password and send it to `igloo@earth.li`).  You'll also need to decide:
 
 
 - when the build(s) should happen
