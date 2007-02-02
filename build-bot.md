@@ -45,7 +45,16 @@ It also created `Makefile.sample`; we recommend renaming this to `Makefile`. You
 
 
 
-SSH to `buildbot@darcs.haskell.org` and change to the `master/` directory. Edit `master.cfg`. Search for `slaves` and you should find a list containing an entry for each slave. Add an entry to the list like
+Pull the buildbot master configuration:
+
+
+```wiki
+$ darcs get buildbot@darcs.haskell.org:/home/buildbot/master
+$ cd master
+```
+
+
+Edit `master.cfg`. Search for `slaves` and you should find a list containing an entry for each slave. Add an entry to the list like
 
 
 ```wiki
@@ -63,8 +72,12 @@ Now search for `schedulers` and either add `myUser` to the `builderNames` of an 
 
 
 
-Save the changes and run `make reconfig`.
+Record and push the changes.  Then restart the build master:
 
+
+```wiki
+$ ssh buildbot@darcs.haskell.org "cd master; make reconfig"
+```
 
 
 If there is anything unusual about the machine the build is being run on, e.g. the path to `gcc` is different, then you will need to add a field for the unusual thing to GhcDefaultConfig and alter the build steps to make use of it. Then make a special factory for the build client you are adding with this field changed as appropriate.
