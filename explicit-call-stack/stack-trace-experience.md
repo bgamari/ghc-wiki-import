@@ -14,6 +14,9 @@ The tools we will be testing are:
 - Andy Gill's HpcT tracer
 - The ghci debugger extended with a simple stack passing transformation. We will try both a full transformation and some kind of partial transformation (where only part of the code is transformed).
 
+## Test cases
+
+
 
 The test suite is a selection of programs from the nofig-buggy suite provided by the group at Technical University of Valencia. It is a modified version of the usual nofib benchmark suite. The suite can be obtained like so:
 
@@ -32,6 +35,40 @@ The actual test programs are all from the real category:
 
 - anna: Julien's strictness analyzer. It has been modified to divide by zero.
 - whatever
+
+### Anna
+
+
+
+We test the program on the `big.cor` input file, which causes a divide by zero error.
+
+
+
+This is a rather simple bug:
+
+
+```wiki
+utRandomInts s1 s2
+   = let seed1_ok = 1 <= s1 && s1 <= 2147483562
+         seed2_ok = 1 <= s2 && s2 <= 2147483398
+
+         rands :: Int -> Int -> [Int]
+         rands s1 s2
+            = let k    = s1 `div` 53668
+                  s1'  = 40014 * (s1 - k * 53668) - k * 12211
+                  s1'' = if s1' < 0 then s1' + 2147483563 else s1'
+                -- BUG: The following line contains a bug
+                  k'   = s2 `div` (s1' - s1')
+                -- CORRECT -- k'   = s2 `div` 52774
+```
+
+
+The actual bug is in k', and it is local to that definition (it does not depen on values which flow into k').
+
+
+
+Nonetheless, utRandomInts seems to be called in a deep context.
+
 
 ## Test results
 
@@ -75,6 +112,7 @@ Commands to see stack trace:
 
 
 ```wiki
+   ./Main < big.cor
    hat-stack Main | less
 ```
 
