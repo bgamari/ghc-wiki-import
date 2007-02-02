@@ -351,6 +351,10 @@ They get filled with the pointer to the ids in scope, their values, the site, a 
 
 
 
+This transformation is loosely formalized in [GhciDebugger/BreakpointJump](ghci-debugger/breakpoint-jump)
+
+
+
 The site number is relevant only for 'auto' breakpoints, explained later. For the other two types of breakpoints its value should be 0.
 
 
