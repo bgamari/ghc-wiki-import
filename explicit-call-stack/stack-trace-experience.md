@@ -9,8 +9,8 @@ Before we decide what kind of stack trace we want, it is very useful to see what
 The tools we will be testing are:
 
 
-- Hat, particularly hat-tack and hat-trail (hat stack is just a specialisation of hat-trail).
-- Cost Centre Stacks (CCS) with +RTS -xc -RTS
+- Hat 2.05, particularly hat-tack and hat-trail (hat stack is just a specialisation of hat-trail).
+- Cost Centre Stacks (CCS) with +RTS -xc -RTS, using ghc version 6.6
 - Andy Gill's HpcT tracer
 - The ghci debugger extended with a simple stack passing transformation. We will try both a full transformation and some kind of partial transformation (where only part of the code is transformed).
 
@@ -37,6 +37,29 @@ The actual test programs are all from the real category:
 
 
 ### Test 1, anna, divide by zero error
+
+
+#### hat
+
+
+
+Changes made to code to get it to work:
+
+
+```wiki
+ darcs whatsnew
+{
+hunk ./real/anna/TypeCheck5.hs 14
++default ()
++
+hunk ./real/anna/TypeCheck5.hs 500
+-tcNSdlimit = 2^30
++tcNSdlimit = 2^(30::Int)
+}
+```
+
+
+   
 
 
 
