@@ -9,7 +9,7 @@ Before we decide what kind of stack trace we want, it is very useful to see what
 The tools we will be testing are:
 
 
-- Hat 2.05, particularly hat-tack and hat-trail (hat stack is just a specialisation of hat-trail).
+- Hat 2.05, particularly hat-stack and hat-trail (hat stack is just a specialisation of hat-trail).
 - Cost Centre Stacks (CCS) with +RTS -xc -RTS, using ghc version 6.6
 - Andy Gill's HpcT tracer
 - The ghci debugger extended with a simple stack passing transformation. We will try both a full transformation and some kind of partial transformation (where only part of the code is transformed).
@@ -95,10 +95,6 @@ Virtual stack trace:
 
 <... deleted piles of stuff ...>
 ```
-
-
-}}}
-
 
 
 Here we see the top of the stack just before the error. The stack it produces is very deep, so I have deleted a lot of stuff from below. Nonetheless it is very easy to find the bug from this trace. The important part is:
