@@ -2,29 +2,36 @@
 \[ Up: [Commentary/Compiler](commentary/compiler) \]
 
 
+# General overview
+
+
+
+GHC's approach to strictness analysis is that of "demand analysis", a backwards analysis in which strictness analysis and absence analysis are done in a single pass. In the future, analysis to perform unboxing, as well as other analyses, may be implemented within this framework as well.
+
+
 # IMPORTANT NOTE
 
 
 
-This commentary describes code that is not checked in to the HEAD yet.
+The rest of this commentary describes code that is not checked in to the HEAD yet.
 
 
-# The strictness analyzer
-
-
-
-Most of the strictness analyzer lives in two files:
-
-
-- [compiler/basicTypes/NewDemand.lhs](/trac/ghc/browser/ghc/compiler/basicTypes/NewDemand.lhs) (defines the datatypes used by the strictness analyzer, and some functions on them)
-- [compiler/stranal/DmdAnal.lhs](/trac/ghc/browser/ghc/compiler/stranal/DmdAnal.lhs) (the strictness analyzer itself)
-
-
-The strictness analyzer does demand analysis, absence analysis, and box-demand analysis in a single pass. (ToDo: explain what these are.)
+# The demand analyzer
 
 
 
-In [compiler/stranal/DmdAnal.lhs](/trac/ghc/browser/ghc/compiler/stranal/DmdAnal.lhs), `dmdAnal` is the function that performs strictness analysis on an expression. It has the following type:
+Most of the demand analyzer lives in two files:
+
+
+- [compiler/basicTypes/NewDemand.lhs](/trac/ghc/browser/ghc/compiler/basicTypes/NewDemand.lhs) (defines the datatypes used by the demand analyzer, and some functions on them)
+- [compiler/stranal/DmdAnal.lhs](/trac/ghc/browser/ghc/compiler/stranal/DmdAnal.lhs) (the demand analyzer itself)
+
+
+The demand analyzer does strictness analysis, absence analysis, and box-demand analysis in a single pass. (ToDo: explain what these are.)
+
+
+
+In [compiler/stranal/DmdAnal.lhs](/trac/ghc/browser/ghc/compiler/stranal/DmdAnal.lhs), `dmdAnal` is the function that performs demand analysis on an expression. It has the following type:
 
 
 ```wiki
@@ -32,7 +39,7 @@ dmdAnal :: SigEnv -> Demand-> CoreExpr -> (DmdType, CoreExpr)
 ```
 
 
-The first argument is an environment mapping variables onto demand signatures. (ToDo: explain more.) The second argument is the demand that's being placed on the expression being analyzed, which was determined from the context already. The third argument is the expression being analyzed. `dmdAnal` returns a pair of a new expression (possibly with strictness information added to any [Ids](commentary/compiler/name-type) in it), and a `DmdType`.
+The first argument is an environment mapping variables onto demand signatures. (ToDo: explain more.) The second argument is the demand that's being placed on the expression being analyzed, which was determined from the context already. The third argument is the expression being analyzed. `dmdAnal` returns a pair of a new expression (possibly with demand information added to any [Ids](commentary/compiler/name-type) in it), and a `DmdType`.
 
 
 ## Important datatypes
@@ -134,7 +141,7 @@ dmdTransform :: SigEnv
 ```
 
 
-Strictness analysis is implemented as a backwards analysis, so `dmdTransform` takes the demand on a function's result (which was inferred based on how the function's result is used) and uses that to compute the demand type of this particular occurrence of the function itself.
+Demand analysis is implemented as a backwards analysis, so `dmdTransform` takes the demand on a function's result (which was inferred based on how the function's result is used) and uses that to compute the demand type of this particular occurrence of the function itself.
 
 
 
