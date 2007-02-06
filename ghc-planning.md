@@ -12,9 +12,10 @@ This page is an internal planning document, for Ian L, Simon M, and Simon PJ. It
 Ian's projects
 
 
-- **[BuildBot](build-bot)**: Install on darcs.haskell.org and set up slaves
+- **space-and-time perf sweep of the HEAD** (post 6.6.1)
 
-  - Set up Windows nightly build
+- **[BuildBot](build-bot)**:
+
   - Set up unregisterised nightly build?
 
 - **Building libraries using Cabal**: Tidy up patches, do haddocking, test, then push.
@@ -28,13 +29,9 @@ Ian's projects
 - **Mailing lists**:
 
   - install spam-filtering technology for the lists
-  - reoganise mailing lists: remove cvs-all, resubscribe everyone to the other lists
-    (announce beforehand).
 
 - **Broken tests**
-  Change `fail` to `broken(123)` and try to get the HEAD to a state where all
-  test failures are broken and have a bug annotated. Update building guide
-  to know about this change.
+  Update building guide to know about broken(foo) and reqlib(foo) changes?
 
 - **GHC API**. File/reclassify bugs/tasks from the API users.
 
