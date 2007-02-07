@@ -2,7 +2,7 @@
 
 
 
-GHC includes at least two types of profiling: cost-centre profiling and ticky-ticky profiling. Ticky-ticky profiling is currently *not working* in the HEAD, but hopefully should be working again soon.
+GHC includes at least two types of profiling: cost-centre profiling and ticky-ticky profiling. 
 
 
 
@@ -24,7 +24,7 @@ You can't use cost-centre profiling and ticky-ticky profiling at the same time; 
 
 
 
-The code for this isn't in the HEAD yet. Should be checked in soon.
+Ticky-ticky should now be working in the HEAD, though not in any so-far-released version.
 
 
 
