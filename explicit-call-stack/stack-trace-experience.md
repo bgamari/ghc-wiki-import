@@ -117,7 +117,7 @@ Commands to see stack trace:
 ```
 
 
-Output:
+Output (edited to make it easier to read and compare with other approaches):
 
 
 ```wiki
