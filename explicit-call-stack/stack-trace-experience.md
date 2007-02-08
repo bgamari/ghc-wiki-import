@@ -154,6 +154,37 @@ Here we see the top of the stack just before the error. The stack it produces is
    utRandomInts -> rands 1 2 -> k' -> div 2 0 -> error
 ```
 
+### Cost center stacks
+
+
+
+Program compiled with ghc 6.6 like so:
+
+
+```wiki
+    ghc --make -prof -auto-all Main.hs
+```
+
+
+Program run like so:
+
+
+```wiki
+   ./Main +RTS -xc -RTS
+```
+
+
+Stack trace generated like so:
+
+
+```wiki
+   <GHC.Err.CAF>Main: divide by zero
+```
+
+
+Not very helpful!
+
+
 ### Stack passing transformation
 
 
