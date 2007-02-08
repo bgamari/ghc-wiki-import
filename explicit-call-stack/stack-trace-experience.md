@@ -158,8 +158,8 @@ Here we see the top of the stack just before the error. The stack it produces is
 
 
 ```wiki
-(Utils.hs:108) : k'>
                          (div would be here)
+(Utils.hs:108)           k'
 (Utils.hs:103)           rands
 (Utils.hs:98)            utRandomInts
 (FrontierDATAFN2.hs:241) (final_yy, final_xx, finalMemo)
