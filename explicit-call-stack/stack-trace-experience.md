@@ -150,6 +150,10 @@ Output:
 
 
 
+Following the instructions from [http://www.haskell.org/ghc/docs/latest/html/users\_guide/runtime-control.html\#rts-options-debugging](http://www.haskell.org/ghc/docs/latest/html/users_guide/runtime-control.html#rts-options-debugging)
+
+
+
 Program compiled with ghc 6.6 like so:
 
 
