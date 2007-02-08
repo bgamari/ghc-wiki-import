@@ -411,7 +411,7 @@ might pass one stack argument for every regular argument of the function.
 
 
 ```wiki
-Declarations:
+Declarations (top level):
 
    [[ x :: T ]]                       ==>   x :: Trace -> T     , x is function bound, and transformed for tracing
    
@@ -425,6 +425,12 @@ Declarations:
 
    [[ data f a1 .. an = K1 .. Km ]]   ==>   data f a1 .. an = K1 .. Km
 
+Declarations (local):
+
+   [[ x = E ]]_t                      ==>   x = [[ E ]]_("x":t) 
+
+   (all other local decls are the same as top level rules)
+
 Expressions:
 
    [[ x ]]_t                          ==>   x t    , x is function bound, and transformed for tracing
@@ -435,7 +441,7 @@ Expressions:
 
    [[ E1 E2 ]]_t                      ==>   [[ E1 ]]_t [[ E2 ]]_t
 
-   [[ let D1 .. Dn in E ]]_t          ==>   let [[ D1 ]] .. [[ Dn ]] in  [[ E ]]_t
+   [[ let D1 .. Dn in E ]]_t          ==>   let [[ D1 ]]_t .. [[ Dn ]]_t in  [[ E ]]_t
 
    [[ case E of A1 .. An ]]_t         ==>   case [[ E ]]_t of [[ A1 ]]_t .. [[ An ]]_t
 
