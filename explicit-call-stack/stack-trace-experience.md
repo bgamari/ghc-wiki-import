@@ -190,7 +190,11 @@ http://hackage.haskell.org/trac/ghc/wiki/ExplicitCallStack](http://hackage.haske
 
 
 
-Then I ran the transformed program inside the ghci debugger, and set a breakpoint manually around the call to div. This works because the stack transformation adds new arguments to functions to pass stacks around, and the ghci debugger can view all the arguments to a function when it hits a breakpoint. We can ask the debugger to print out the value of the variable which holds the stack when the breakpoint around div is reached. Obviously this is not exactly how it would work in practice (it would be automated), but it is good enough for the purpose of this experiment.
+Then I ran the transformed program inside the ghci debugger, and set a breakpoint manually around the call to div (that is, the call to div in the transformed version of the program, not the original version). This works because the transformation adds a new arguments to each function to pass stacks around, and the ghci debugger can view all the arguments to a function when it hits a breakpoint. Obviously it would be automated in practice, but this method is good enough for the purpose of this experiment.
+
+
+
+Here is the generated stack (edited to make it easier to read and compare with others):
 
 
 ```wiki
@@ -216,3 +220,8 @@ Then I ran the transformed program inside the ghci debugger, and set a breakpoin
 (Main.hs:101)            maStrictAn
 (Main.hs:158)            main
 ```
+
+
+Notice that it is largely the same thing as the one produced by Hat. The main differences are that the stack passing transformation records entries for local pattern bindings, but it seems that Hat does not.
+
+
