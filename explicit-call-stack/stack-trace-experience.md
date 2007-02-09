@@ -30,11 +30,10 @@ Since we are interested in stack traces we will limit ourselves to programs with
 
 
 
-The actual test programs are all from the real category:
+The actual test programs are:
 
 
 - anna: Julien's strictness analyzer. It has been modified to divide by zero.
-- whatever
 
 ### Anna
 
