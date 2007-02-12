@@ -231,6 +231,14 @@ Main.main
 Main.CAF
 ```
 
+
+This is much better, and it is the same stack as produced by hat and the explicit stack passing transformation described below (minus the references to locally defined entities). 
+
+
+
+It is worth noting that, had we transformed the libraries with the explicit stack passing transformation (below), we would get the same bad behaviour as the original output from cost centre stacks. 
+
+
 ### Stack passing transformation
 
 
