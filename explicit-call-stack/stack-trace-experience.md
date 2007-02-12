@@ -181,23 +181,55 @@ Stack trace generated like so:
 Not very helpful!
 
 
-### Stack passing transformation
 
-
-
-I generated this trace by transforming the program using a heavily modified version of buddha. It implements the transformation as described on [
-http://hackage.haskell.org/trac/ghc/wiki/ExplicitCallStack](http://hackage.haskell.org/trac/ghc/wiki/ExplicitCallStack), under the heading **Transformation option 1**.
-
-
-
-Then I ran the transformed program inside the ghci debugger, and set a breakpoint manually around the call to div (that is, the call to div in the transformed version of the program, not the original version). This works because the transformation adds a new arguments to each function to pass stacks around, and the ghci debugger can view all the arguments to a function when it hits a breakpoint. Obviously it would be automated in practice, but this method is good enough for the purpose of this experiment.
-
-
-
-Here is the generated stack (edited to make it easier to read and compare with others):
+Simon M correctly points out that the problem is that the exception is raised inside a CAF. Here is the way div is defined (for Int32, but the other types are similar):
 
 
 ```wiki
+    div     x@(I32# x#) y@(I32# y#)
+        | y == 0                  = divZeroError
+        | x == minBound && y == (-1) = overflowError
+        | otherwise               = I32# (x# `divInt32#` y#)
+```
+
+
+Note the reference to *divZeroError* in the first guarded equation. This is defined as:
+
+
+```wiki
+divZeroError :: a
+divZeroError = throw (ArithException DivideByZero)
+```
+
+
+Hence it is a CAF. This is exactly the CAF that *GHC.Err.CAF* is refering to in the output from the cost centre stacks above. 
+
+
+
+Now, we get muich better results if we raise the exception inside the user's code. For instance, if we change the definition of the local variable *k\\** like so:
+***
+
+
+```wiki
+k'   = error "bjpop crash"
+```
+
+
+We get the following output from running the program with *-xc*:
+
+
+```wiki
+<Utils.utRandomInts,FrontierDATAFN2.fdFs2,FrontierDATAFN2.fdFind,FrontierGENERIC2.fsMakeFrontierRep,StrictAn6.saNonRecSearch,StrictAn6.saNonRecStartup,StrictAn6.saGroups,StrictAn6.saMain,Main.maStrictAn,Main.main,Main.CAF>Main: bjpop crash
+}}
+
+=== Stack passing transformation ===
+
+I generated this trace by transforming the program using a heavily modified version of buddha. It implements the transformation as described on [http://hackage.haskell.org/trac/ghc/wiki/ExplicitCallStack], under the heading '''Transformation option 1'''.
+
+Then I ran the transformed program inside the ghci debugger, and set a breakpoint manually around the call to div (that is, the call to div in the transformed version of the program, not the original version). This works because the transformation adds a new arguments to each function to pass stacks around, and the ghci debugger can view all the arguments to a function when it hits a breakpoint. Obviously it would be automated in practice, but this method is good enough for the purpose of this experiment.
+
+Here is the generated stack (edited to make it easier to read and compare with others):
+{{{
                          (div would be here)
 (Utils.hs:108)           k'
 (Utils.hs:103)           rands
@@ -219,9 +251,7 @@ Here is the generated stack (edited to make it easier to read and compare with o
 (Main.hs:119)            strictAnResults
 (Main.hs:101)            maStrictAn
 (Main.hs:158)            main
-```
-
+}}}
 
 Notice that it is largely the same thing as the one produced by Hat. The main differences are that the stack passing transformation records entries for local pattern bindings, but it seems that Hat does not. Also there are a couple of spurious looking duplicates in the Hat stack that I don't understand (which may be bugs in Hat?). And Hat seems to make some record of the calls to bind in the do notation. I didn't pass stacks to any standard library functions.
-
-
+```
