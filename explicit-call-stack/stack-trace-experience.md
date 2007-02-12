@@ -193,7 +193,7 @@ Simon M correctly points out that the problem is that the exception is raised in
 ```
 
 
-Note the reference to *divZeroError* in the first guarded equation. This is defined as:
+Note the reference to `divZeroError` in the first guarded equation. This is defined as:
 
 
 ```wiki
@@ -202,12 +202,11 @@ divZeroError = throw (ArithException DivideByZero)
 ```
 
 
-Hence it is a CAF. This is exactly the CAF that *GHC.Err.CAF* is refering to in the output from the cost centre stacks above. 
+Hence it is a CAF. This is exactly the CAF that `GHC.Err.CAF` is refering to in the output from the cost centre stacks above. 
 
 
 
-Now, we get muich better results if we raise the exception inside the user's code. For instance, if we change the definition of the local variable *k\\** like so:
-***
+Now, we get muich better results if we raise the exception inside the user's code. For instance, if we change the definition of the local variable `k'` like so:
 
 
 ```wiki
@@ -215,11 +214,21 @@ k'   = error "bjpop crash"
 ```
 
 
-We get the following output from running the program with *-xc*:
+We get the following output from running the program with `-xc` (edited to make it easier to compare with other traces):
 
 
 ```wiki
-<Utils.utRandomInts,FrontierDATAFN2.fdFs2,FrontierDATAFN2.fdFind,FrontierGENERIC2.fsMakeFrontierRep,StrictAn6.saNonRecSearch,StrictAn6.saNonRecStartup,StrictAn6.saGroups,StrictAn6.saMain,Main.maStrictAn,Main.main,Main.CAF>Main: bjpop crash
+Utils.utRandomInts
+FrontierDATAFN2.fdFs2
+FrontierDATAFN2.fdFind
+FrontierGENERIC2.fsMakeFrontierRep
+StrictAn6.saNonRecSearch
+StrictAn6.saNonRecStartup
+StrictAn6.saGroups
+StrictAn6.saMain
+Main.maStrictAn
+Main.main
+Main.CAF
 ```
 
 ### Stack passing transformation
