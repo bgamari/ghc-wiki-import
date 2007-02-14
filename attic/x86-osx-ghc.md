@@ -38,6 +38,11 @@ As of 2006-10-11, there is an official binary distribution of GHC 6.6 for Mac OS
 http://haskell.org/ghc/download\_ghc\_66.html\#macosxintel](http://haskell.org/ghc/download_ghc_66.html#macosxintel)
 
 
+
+Recently released, which may be of use and excitement for various Haskell and Mac users, is an Xcode plugin available at [
+http://www.hoovy.org/HaskellXcodePlugin/](http://www.hoovy.org/HaskellXcodePlugin/) - works excellent with this build
+
+
 ---
 
 
