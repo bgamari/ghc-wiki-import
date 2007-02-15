@@ -70,15 +70,15 @@ The easiest way to make the client start up automatically is to use `cron`.  Typ
 
 
 ```wiki
-@reboot cd /buildbot/ghc && make start
+@reboot cd <buildbotdir> && make start
 ```
 
 
-Remember to change `/buildbot/ghc` to your buildbot directory.
+Remember to change `<buildbotdir>` to your buildbot directory.
 
 
 
-Cron will run the command in a minimal environment: it won't execute your normal shell startup files, so you won't have your usual `PATH` settings, for example.  To get the right `PATH` and other environment variables, we suggest adding them to the `make start` rule in the `Makefile`.  FOr example, my setup looks something like this:
+Cron will run the command in a minimal environment: it won't execute your normal shell startup files, so you won't have your usual `PATH` settings, for example.  To get the right `PATH` and other environment variables, we suggest adding them to the `make start` rule in `<buildbotdir>/Makefile`.  FOr example, my start rule looks something like this:
 
 
 ```wiki
@@ -93,7 +93,7 @@ It might be a good idea to have the buildbot restarted once a day before your bu
 
 
 ```wiki
-0 17 * * * cd /64playpen/buildbot && (make stop; make start)
+0 17 * * * cd <buildbotdir> && (make stop; make start)
 ```
 
 
