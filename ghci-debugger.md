@@ -427,7 +427,7 @@ The instrumentation is done at the desugarer too, which has been extended accord
 
 
 The instrumentation scheme potentially introduces overhead at two stages: compile-time and run-time. Compile-time overhead is unnoticeable for general programs, although there are no benchmarks available to sustain this claim. Run-time overhead is much more noticeable.
-Run-time overhead has been measured informally to range in between 9x and 25x, depending on the code of the program under consideration. 
+Run-time overhead has been measured informally to range in between 9x and 25x, depending on the code of the program under consideration.  **This is no longer true. ** After extensive benchmarking and tweaking, overhead is down to 166% in average, 560% worst case, measured over the entire nofib suite.
 
 
 
