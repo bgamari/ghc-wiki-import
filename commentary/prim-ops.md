@@ -79,7 +79,7 @@ All other PrimOps are classified as out-of-line, and are implemented by hand-wri
 
 - Out-of-line PrimOps have a special, fixed, [calling convention](commentary/rts/haskell-execution#):
   all arguments
-  are in the [Commentary/Rts/HaskellExecution](commentary/rts/haskell-execution#registers) registers\] R1-R8.  This is to make it easy to write the
+  are in the [registers](commentary/rts/haskell-execution#registers) R1-R8.  This is to make it easy to write the
   C-- code for these PrimOps: we don't have to write code for multiple calling conventions.
 
 ## Adding a new PrimOp
