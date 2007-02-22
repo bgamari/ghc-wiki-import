@@ -526,6 +526,9 @@ Once an 'auto' breakpoint, that is a breakpoint inserted by the renamer, is hit,
 
 
 ```wiki
+
+setBreakpointHandler :: Session -> BkptHandler Module -> IO ()
+
 data BkptHandler a = BkptHandler {
      -- | What to do once an enabled breakpoint is found
      handleBreakpoint  :: forall b. Session 
