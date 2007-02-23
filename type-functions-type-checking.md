@@ -86,7 +86,7 @@ An additional complication is that the associated types of a class need already 
 
 
 
-An important property of associated types is that their index types always coincide with the class instance arguments at those argument positions that used the same type variables in the associated family declaration.   To check that property, each `AlgTyCon` and each `SynTyCon` contains a field `tyConArgPoss :: Maybe [Int]` that has a value of the form `Just poss` for associated family `TyCon`s, where `poss` gives the argument position in the class head for each family argument.  For example,
+An important property of associated types is that their index types always coincide with the class instance arguments at those argument positions that use the same type variables in the associated family declaration.   To check that property, the right hand-sides of `AlgTyConRhs` and `SynTyConRhs` of `AlgTyCon` and `SynTyCon`, respectively, contain a field of type `Maybe [Int]` in the variant indicating an open family declaration (i.e., variant `OpenTyCon` and `OpenSynTyCon`).  This field has a value of the form `Just poss` for associated family `TyCon`s, where `poss` gives the argument position in the class head for each family argument.  For example,
 
 
 ```wiki
