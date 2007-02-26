@@ -42,8 +42,7 @@ side, make both runs on the same unloaded machine.
 
 To get measurements for simulated instruction counts, memory reads/writes, and "cache misses",
 you'll need to get hold of Cachegrind, which is part of 
-[
-Valgrind](http://valgrind.org). You can run nofib under valgrind like this, if running in normal mode:
+[ Valgrind](http://valgrind.org). You can run nofib under valgrind like this:
 
 
 ```wiki
