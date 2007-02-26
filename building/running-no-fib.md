@@ -47,7 +47,7 @@ Valgrind](http://valgrind.org). You can run nofib under valgrind like this, if r
 
 
 ```wiki
-  $ make NORM_OPTS=-cachegrind
+  $ make SRC_RUNTEST_OPTS=-cachegrind
 ```
 
 
