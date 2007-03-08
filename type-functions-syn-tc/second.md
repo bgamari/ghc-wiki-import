@@ -88,7 +88,7 @@ NOTE: Axiom vs axiom impossible cause axiom set is confluent
 
 
 
-Towards establishing a connection between completion and CHR derivation steps 
+Towards establishing a connection between completion and CHR \[What is CHR? -samb\] derivation steps 
 
 
 
