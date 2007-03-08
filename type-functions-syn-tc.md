@@ -2,7 +2,7 @@
 
 
 
-GHC has now FC as its typed intermediate language.
+GHC has now F<sub>C</sub> as its typed intermediate language.
 In a next step, we wish to add type functions to
 GHC's source language.  Type functions in combination
 with type annotations and GADTs allow us to type check
