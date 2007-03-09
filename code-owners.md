@@ -125,6 +125,7 @@ and a short description of what they're doing or have done.
 - John Goerzen
 - Tim Harris (Transactional memory, concurrency)
 - David Himmelstrup (GHC developer)
+- José Iborra (GHCi Debugger)
 - Isaac Jones (Cabal, libraries)
 - Hans W. Loidl
 - Ralf Laemmel
