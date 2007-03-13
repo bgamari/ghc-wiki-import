@@ -11,6 +11,14 @@ Haskell Communities and Activities Report](http://haskell.org/communities/)
 
 - [GHC status October 2006](status/october06)
 
+## Performance
+
+
+
+Here are the [
+results of the nobench suite](http://www.cse.unsw.edu.au/~dons/nobench/i686/results.html), showing how GHC performs relative to various versions of itself, and other Haskell compilers.
+
+
 ## Planning notes
 
 
