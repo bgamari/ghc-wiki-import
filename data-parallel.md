@@ -24,6 +24,7 @@ Detailed information on how to use the current implementation is at the [
 user-level wiki page](http://haskell.org/haskellwiki/GHC/Data_Parallel_Haskell).  Here is information on the implementation status and outstanding work items:
 
 
+- DPH [repositories](data-parallel/repositories)
 - Our [work plan](data-parallel/work-plan)
 - Some [benchmarks](data-parallel/benchmarks)
 
