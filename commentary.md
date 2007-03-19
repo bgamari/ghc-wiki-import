@@ -30,7 +30,7 @@ Please feel free to add material to this commentary: don't worry too much about 
 - Cross-cutting concerns: topics which span both the compiler and the runtime system
 
   - [Profiling](commentary/profiling)
-  - [Primitive Operations (PrimOps)](commentary/prim-ops)
+  - [Primitive Operations (PrimOps)](commentary/prim-ops); see also [Wired-in and known-key things](commentary/compiler/wired-in)
 
 - [The User Manual](commentary/user-manual) (formatting guidelines etc)
 
