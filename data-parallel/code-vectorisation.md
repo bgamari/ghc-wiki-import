@@ -2,7 +2,7 @@
 
 
 
-**TODO** This material needs to be revised and we need to come up with a plan for getting some programs to quickly gtet some programs to compile.
+**TODO** This material needs to be revised and we need to come up with a plan for getting some programs to quickly get some programs to compile.
 
 
 
