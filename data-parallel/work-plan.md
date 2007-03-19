@@ -19,13 +19,32 @@ Optimisations and added functionality to handle larger example programs.
 </td></tr></table>
 
 
-### Work items for vectorisation
+### Current work items
+
+
+
+For vectorisation:
+
+
+- \[Roman by **30 Mar 07**\] Implement plain closure conversion
+
+
+For the library:
+
+
+- \[Gabi\] Implement quicksort and all missing library functions for that.
+
+### Todo list for vectorisation
 
 
 - We need closure conversion to handle the full higher-order case.
-- Can we get some cheap'n'cheesy vectorisation by disallowing any "difficult" form of higher-order functions?  (Eg, higher-order functions without free variables and without partial applications are easier to vectorise.)
+- We need to handle cross calls to un-vectorised code.
 
-### Work items for the library
+### Todo list for vectorisation
 
 
-- ??
+- Lifted functions
+- Add missing functions
+- Fusion for segmented operations
+- Fusion with cost function
+- NUMA support
