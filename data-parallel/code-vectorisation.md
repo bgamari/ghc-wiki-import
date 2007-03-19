@@ -2,7 +2,7 @@
 
 
 
-**TODO** This material needs to be revised and we need to come up with a plan for getting some programs to quickly get some programs to compile.
+**TODO** This material needs to be revised and we need to come up with a plan for getting some programs to quickly get some programs to compile.  Also integrate the [lifted case example](data-parallel/code-vectorisation/lifted-case-example).
 
 
 
