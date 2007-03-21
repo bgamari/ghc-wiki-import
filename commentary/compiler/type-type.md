@@ -5,7 +5,7 @@
 
 
 
-GHC's compiles a typed programming lanuage, and GHC's intermediate language is explicitly typed.  So the data type that GHC uses to represent types is of central importance.
+GHC compiles a typed programming language, and GHC's intermediate language is explicitly typed.  So the data type that GHC uses to represent types is of central importance.
 
 
 
