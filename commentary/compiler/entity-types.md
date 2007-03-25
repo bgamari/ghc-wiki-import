@@ -12,7 +12,7 @@ For each kind of Haskell entity (identifier, type variable, type constructor, da
 
 
 - **Type constructors** are represtented by the `TyCon` type ([compiler/types/TyCon.lhs](/trac/ghc/browser/ghc/compiler/types/TyCon.lhs)).
-- **Clases** are represtented by the `Class` type ([compiler/types/Class.lhs](/trac/ghc/browser/ghc/compiler/types/Class.lhs)).
+- **Classes** are represtented by the `Class` type ([compiler/types/Class.lhs](/trac/ghc/browser/ghc/compiler/types/Class.lhs)).
 - **Data constructors** are represtented by the `DataCon` type ([compiler/basicTypes/DataCon.lhs](/trac/ghc/browser/ghc/compiler/basicTypes/DataCon.lhs)).
 - **Term variables** `Id` and **type variables** `TyVar` are both represented by the `Var` type ([compiler/basicTypes/Var.lhs](/trac/ghc/browser/ghc/compiler/basicTypes/Var.lhs)).
 
