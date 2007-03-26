@@ -9,7 +9,7 @@ To see the current status of the builds:
 
 >
 >
-> [ http://darcs.haskell.org:8010/](http://darcs.haskell.org:8010/)
+> [ http://darcs.haskell.org/buildbot](http://darcs.haskell.org/buildbot)
 >
 >
 
