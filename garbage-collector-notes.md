@@ -2,7 +2,7 @@
 
 
 
-These are my notes of the Glasgow Haskell Compiler’s Garbage Collector made over my period of internship at Microsoft Research in Summer 2006. These notes are in process of constantly being updated as I study the system further. The objective of my work at MSRC is to implement a parallel GC for Haskell – one that will allow multiple threads to simultaneously garbage collect. The GC that is described below is not one that will run in parallel with user code, but one that will stop all the user threads and run multiple GC threads during the garbage collection process. 
+These are my notes of the Glasgow Haskell Compiler's Garbage Collector made over my period of internship at Microsoft Research in Summer 2006. These notes are in process of constantly being updated as I study the system further. The objective of my work at MSRC is to implement a parallel GC for Haskell - one that will allow multiple threads to simultaneously garbage collect. The GC that is described below is not one that will run in parallel with user code, but one that will stop all the user threads and run multiple GC threads during the garbage collection process. 
 
 
 
@@ -31,7 +31,7 @@ Lets dive right into the working of things. GHC has an abstraction called capabi
 
 
 
-The RTS is located in the folder “rts” of the ghc tree. It consists mostly of C code that is compiled into the resulting Haskell executable so that the required runtime services for the executable are packaged in. This is unlike .Net, JVM, Chez Scheme and other systems where the binaries rely heavily on the runtime support provided by their host VMs and thus the binaries cannot be independently deployed onto machines that that don’t have whole or part of the host VM services. Haskell executables are designed to be standalone executable requiring only standard OS services and do not usually require language support binaries. 
+The RTS is located in the folder "rts" of the ghc tree. It consists mostly of C code that is compiled into the resulting Haskell executable so that the required runtime services for the executable are packaged in. This is unlike .Net, JVM, Chez Scheme and other systems where the binaries rely heavily on the runtime support provided by their host VMs and thus the binaries cannot be independently deployed onto machines that that don't have whole or part of the host VM services. Haskell executables are designed to be standalone executable requiring only standard OS services and do not usually require language support binaries. 
 
 
 
@@ -67,7 +67,7 @@ The existing GC in GHC is a single threaded one. When the RTS detects memory pre
 
 
 
-The data structures decribed in this section give a brief introduction to teh layout of the GHC runtime's heap management and the concepts of generations and steps. 
+The data structures decribed in this section give a brief introduction to the layout of the GHC runtime's heap management and the concepts of generations and steps. 
 
 
 ## Allocation
