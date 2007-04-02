@@ -55,7 +55,8 @@ A source tree consists of the GHC repository, with a set of packages in the libr
 ```
 
 
-**NOTE**: You really want `--partial` when grabbing GHC.  There are some 15000 patches in the repository, which take a long time to download without `--partial`.  The `darcs-all` script automatically adds `--partial` for the packages. If you are a developer and you know what you are doing, you can omit `--partial` and use `./darcs-all get --complete` to get a decade of patches.
+**NOTE**: You really want `--partial` when grabbing GHC.  There are some 15000 patches in the repository, which take a long time to download without `--partial`.  The `darcs-all` script automatically adds `--partial` for the packages.  However, if you are a developer and intend to make changes to your GHC source tree, then we recommend *not* using `--partial`, and adding `--complete` to the `darcs-all` command-line which disables its default use of `--partial`.  We avoid `--partial` when developing due to bugs in darcs that affect moving patches between partial repositories.  Getting GHC without `--partial` may take a while, so we occasionally make tarballs of the full GHC repo, which you can look for in [
+here](http://darcs.haskell.org/) (look for files named `ghc-HEAD-<date>.tar.bz2`).
 
 
 
