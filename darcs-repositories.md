@@ -147,7 +147,8 @@ The following branches are active:
 <td>
 Prepend `ghc-6.6` to the name of the repository to get the 6.6 branch.  For example,
 the 6.6 ghc repository is at [
-http://darcs.haskell.org/ghc-6.6/ghc](http://darcs.haskell.org/ghc-6.6/ghc).
+http://darcs.haskell.org/ghc-6.6/ghc](http://darcs.haskell.org/ghc-6.6/ghc). (Some? all? of) these
+are partial repositories, so you may need to use the --partial option to darcs to get them.
 
 Note: only the main repositories and the core libraries were branched for 6.6, the
 extralibs packages are not found under `ghc-6.6`.  The `darcs-all` script knows
