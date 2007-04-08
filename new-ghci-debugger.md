@@ -36,6 +36,8 @@ Conversely, you **cannot** set breakpoints on the following syntactical things, 
 
 1. Literals.
 1. Variables.
+1. Do blocks. XXX check this one
+1. List comprehensions. XXX check this one
 
 
 You can set a breakpoint in three ways:
