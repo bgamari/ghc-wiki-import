@@ -119,6 +119,29 @@ Each breakpoint is given a unique number, which can be used to identify the brea
 Breakpoint 0 is set in the module `Main` on the breakable expression which spans between the source locations (12,4) to (12,8). Similarly for breakpoints 1 and 2.
 
 
+### Deleting breakpoints
+
+
+
+You can delete any active breakpoint with the `:delete` command. Breakpoints are refered to by their unique number which is displayed by the `:show breaks` command (see above). You can refer to more than one breakpoint at a time, for example:
+
+
+```wiki
+   :delete 2 12
+```
+
+
+This will delete the breakpoints numbered 2 and 12. If you specify a breakpoint which does not exist, the debugger will simply ignore it.
+
+
+
+You can also delete all the active breakpoints by giving the asterisk as an argument to `delete`, like so:
+
+
+```wiki
+   :delete *
+```
+
 ### Inspecting values
 
 
