@@ -41,7 +41,7 @@ also the persistent linker state. Both of these are held under IORefs, so we hav
 
 - Fix the slow search of the ticktree for larger modules, perhaps by keeping the ticktree in the module info, rather than re-generating it each time.
 
-- use a primop for inspecting the STACK\_AP, rather than a foreign C call
+- Use a primop for inspecting the STACK\_AP, rather than a foreign C call
 
 ### Done
 
