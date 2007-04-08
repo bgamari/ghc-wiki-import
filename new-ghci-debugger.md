@@ -160,12 +160,12 @@ The string `*Main>` is GHCi's prompt marker. Note that it can change depending o
 
 
 
-All the normal GHCi commands work at the prompt, including the evaluation of arbitrary expressions. In addition to the normal prompt behaviour, the local variables of the breakpoint are also made available. For instance, in the above example the variable `xs` is a list of booleans, and we can calculate its length in the usual way:
+All the normal GHCi commands work at the prompt, including the evaluation of arbitrary expressions. In addition to the normal prompt behaviour, the local variables of the breakpoint are also made available. For instance, in the above example the variable `f` is a function from booleans to booleans, and we can apply it to an argument in the usual way:
 
 
 ```wiki
-   *Main> length xs
-   3
+   *Main> f False
+   True
 ```
 
 
@@ -177,6 +177,49 @@ You can continue execution of the current computation with the `:continue` and `
 
 
 ### Inspecting values
+
+
+
+It is important to note that, due to the non-strict semantics of Haskell (particularly lazy evaluation), the values of local variables at a breakpoint may only be partially evaluated. Therefore printing values may cause them to be further evaluated. This raises some interesting issues for the debugger because evaluating something could raise an exception, or it could cause another breakpoint to be fired, or it could cause non-termination (if the full expansion of the value is unbounded in size, such as an infinite list). For these reasons we want to be able to print values without in a fashion which preserves their current state of evaluation. The debugger provides the `:print` command for this purpose.
+
+
+
+For example, suppose the local variable `xs` is bound to a list of booleans, but the list is completely unevaluated at a breakpoint. We can inspect its value without forcing any more evaluation like so:
+
+
+```wiki
+   *Main> :print xs
+   xs = (_t1::[Bool])
+```
+
+
+The debugger uses fresh variable names (starting with underscores) to display unevaluated expressions (often called *thunks*). Here `_t1` is a thunk, denoting a list of booleans. A side effect of the `:print` command is that these fresh variables are made available to the command line. In our example, we can now use `_t1` in future commands. 
+
+
+
+Sometimes we want to evaluate thunks a little bit further. This is easy to do because they are bound to variable names. For example, we can evaluate the outermost data constructor of `_t1` using `seq` like so:
+
+
+```wiki
+   *Main> seq _t1 ()
+   ()
+```
+
+
+This forces the evaluation of the thunk bound to `_t1` to Weak Head Normal Form (WHNF), and then returns `()`. The purpose of the expression is to force the evaluation of `_t1`, we don't actually care about the answer, so `()` makes a good dummy value.
+
+
+
+If we print `xs` again we can see that it has been evaluated a little bit more:
+
+
+```wiki
+   *Main> :print xs
+   xs = [True | (_t2::[Bool])]
+```
+
+
+Here we discover that the value of `xs` is a list with `True` as its head and a thunk as its tail. The thunk is bound to the fresh variable `_t2`, which can be manipulated at the command line as usual.
 
 
 ### Single stepping
