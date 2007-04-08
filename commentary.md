@@ -52,8 +52,8 @@ Please feel free to add new pages here.  In due course information will migrate 
   - [BackEndNotes](back-end-notes): Some ideas and notes about the back end.
   - [Cmm: Implementing Exception Handling](commentary/cmm-exceptions): Implementing exception handling for primitive operations in Cmm
   - [GhciDebugger](ghci-debugger): Some notes about the implementation of the GHCi debugger. Probably uninteresting unless you want to work on the debugger.
-
-    - [AddingNewPrimitiveOperations](adding-new-primitive-operations): How to add new primitive operations to GHC Haskell.
+  - [NewGhciDebugger](new-ghci-debugger): The new GHCi debugger.
+  - [AddingNewPrimitiveOperations](adding-new-primitive-operations): How to add new primitive operations to GHC Haskell.
   - [Replacing GMP](replacing-gmp-notes): Notes from an effort to replace GMP with another Bignum library.
   - [ExternalCore](external-core): Describes the process of bringing External Core up to speed. Once finished, this will simply describe what External Core is, and how it works. 
   - [HaddockComments](haddock-comments): Some notes about how the Haddock comment support is implemented.
