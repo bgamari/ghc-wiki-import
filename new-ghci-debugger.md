@@ -35,7 +35,7 @@ You **can** set breakpoints on the following things: (XXX) Check this list caref
 1. Bodies of functions, pattern bindings, lambdas, guarded equations.
 
 
-Conversely, you **cannot** set breakpoints on the following syntactical things, except if they occur as the outermost expression in the body of a declaration:
+Conversely, you **cannot** set breakpoints on the following things, except if they occur as the outermost expression in the body of a declaration:
 
 
 1. Literals.
