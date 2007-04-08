@@ -146,7 +146,7 @@ You can also delete all the active breakpoints by giving the asterisk as an argu
 
 
 
-When an executing computation hits an active breakpoint control is returned to the GHCi prompt. The debugger will print out a message indicating where the breakpoint occurred, and the names and types of the local variables which are in scope at that point. Here is an example:
+When an executing computation hits an active breakpoint, control is returned to the GHCi prompt. The debugger will print out a message indicating where the breakpoint occurred, and the names and types of the local variables which are in scope at that point. Here is an example:
 
 
 ```wiki
