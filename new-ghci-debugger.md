@@ -8,6 +8,9 @@
 These notes detail the breakpoint debugger which is being incorportated into GHCi. Note that there was/is a previous prototype debugger, and we share some of its code (specifically the term printer) (see: [GhciDebugger](ghci-debugger)).
 
 
+---
+
+
 ## User's Manual
 
 
@@ -131,6 +134,9 @@ Breakpoint 0 is set in the module `Main` on the breakable expression which spans
 ### Wishlist of features (please add your's here)
 
 
+---
+
+
 ## Todo
 
 
@@ -170,6 +176,9 @@ also the persistent linker state. Both of these are held under IORefs, so we hav
 
 
 ### Tentative
+
+
+---
 
 
 ## Implementation notes
