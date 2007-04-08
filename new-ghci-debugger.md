@@ -15,6 +15,29 @@ These notes detail the breakpoint debugger which is being incorportated into GHC
 
 
 
+The general rule of thumb for breakpoints is that you can set a breakpoint on any thing which is not already a value (though there are some exceptions).
+
+
+
+You **can** set breakpoints on the following syntactical things: (XXX) check this list carefully)
+
+
+1. (nested) Function applications.
+1. Case expressions.
+1. Function declarations (all the equations of a function).
+1. Case alternatives.
+1. Do statements.
+1. Guards.
+1. Bodies of functions, pattern bindings, lambdas, guarded equations.
+
+
+Conversely, you **cannot** set breakpoints on the following syntactical things, except if they occur as the outermost expression in the body of a declaration:
+
+
+1. Literals.
+1. Variables.
+
+
 You can set a breakpoint in three ways:
 
 
@@ -23,7 +46,7 @@ You can set a breakpoint in three ways:
 1. By function name (not implemented yet).
 
 
-In each case you can specify which module to set the breakpoint in, however, if the module name is omitted then the debugger will choose a default module (XXX give a better explanation of what module is chosen by default).
+In each case you can specify which module to set the breakpoint in, however, if the module name is omitted, the debugger will choose a suitable default module (XXX give a better explanation of what module is chosen by default).
 
 
 
@@ -47,7 +70,7 @@ The syntax for setting breakpoints by line and column is:
 ```
 
 
-This will activate the breakpoint which corresponds to the 
+This will activate the breakpoint which corresponds to the smallest (sub)expression which encloses the 
 
 
 ### Inspecting values
