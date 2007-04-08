@@ -19,7 +19,11 @@ The general rule of thumb for breakpoints is that you can set a breakpoint on an
 
 
 
-You **can** set breakpoints on the following syntactical things: (XXX) check this list carefully)
+We call the places where you can set breakpoints as **breakable expressions** (even if some of them aren't strictly expressions).
+
+
+
+You **can** set breakpoints on the following things: (XXX) Check this list carefully!
 
 
 1. Function applications. We allow breakpoints on partial applications, even though they are technically values. Also, if there is an application with more than one argument, we only allow breaks on the whole expression, not on the sub-applications within: e.g. for the expression `map f list`, we allow a break on the whole expression, but not on the sub-application of `map f`.
@@ -38,10 +42,6 @@ Conversely, you **cannot** set breakpoints on the following syntactical things, 
 1. Variables.
 1. Do blocks. XXX check this one
 1. List comprehensions. XXX check this one
-
-
-We call the places where you can set breakpoints as **breakable expressions** (even if some of them aren't strictly expressions).
-
 
 
 You can set a breakpoint in three ways:
