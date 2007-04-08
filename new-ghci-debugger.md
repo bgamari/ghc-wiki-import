@@ -180,7 +180,7 @@ You can continue execution of the current computation with the `:continue` and `
 
 
 
-It is important to note that, due to the non-strict semantics of Haskell (particularly lazy evaluation), the values of local variables at a breakpoint may only be partially evaluated. Therefore printing values may cause them to be further evaluated. This raises some interesting issues for the debugger because evaluating something could raise an exception, or it could cause another breakpoint to be fired, or it could cause non-termination (if the full expansion of the value is unbounded in size, such as an infinite list). For these reasons we want to be able to print values without in a fashion which preserves their current state of evaluation. The debugger provides the `:print` command for this purpose.
+It is important to note that, due to the non-strict semantics of Haskell (particularly lazy evaluation), the values of local variables at a breakpoint may only be partially evaluated. Therefore printing values may cause them to be further evaluated. This raises some interesting issues for the debugger because evaluating something could raise an exception, or it could cause another breakpoint to be fired, or it could cause non-termination (if the full expansion of the value is unbounded in size, such as an infinite list). For these reasons we want to be able to print values in a way which preserves their current state of evaluation. The debugger provides the `:print` command for this purpose.
 
 
 
