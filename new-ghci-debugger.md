@@ -168,6 +168,14 @@ All the normal GHCi commands work at the prompt, including the evaluation of arb
    3
 ```
 
+
+The debugger also provides commands for inspecting the values of local variables without forcing their evaluation any further (see Inspecting values below). 
+
+
+
+You can continue execution of the current computation with the `:continue` and `:step` commands, explained below.
+
+
 ### Inspecting values
 
 
