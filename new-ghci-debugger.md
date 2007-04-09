@@ -351,13 +351,9 @@ The following list describes issues where the debugger does not behave in the id
      bar = do something else
   ```
 
->
-> >
-> >
-> > Suppose we have a breakpoint set somewhere inside the computation done by `foo`, but there are no breakpoints in the computation done by `bar`. When we run this program in GHCi the following things happen:
-> >
-> >
->
+
+Suppose we have a breakpoint set somewhere inside the computation done by `foo`, but there are no breakpoints in the computation done by `bar`. When we run this program in GHCi the following things happen:
+
 
 - `foo` gets forked and `foo` and `bar` begin their work
 - `bar` completes its job and we return to the GHCi prompt (uh oh!)
@@ -366,6 +362,8 @@ The following list describes issues where the debugger does not behave in the id
 
 Now the foo thread is blocked, so we can't witness the breakpoint.
 
+
+- foober
 
 ### Wishlist of features (please add your's here)
 
