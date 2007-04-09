@@ -252,7 +252,7 @@ The `:step` command accepts an optional argument expression. The expression is e
 
 
 ```wiki
-   *Main> :step foo True [1,2,3]
+   :step foo True [1,2,3]
 ```
 
 
@@ -287,26 +287,13 @@ The following list describes issues where the debugger does not behave in the id
   ```
 
   Suppose we have a breakpoint set somewhere inside the computation done by `foo`, but there are no breakpoints in the computation done by `bar`.
+  When we run this program in GHCi the following things happen:
 
->
-> >
-> >
-> > When we run this program in GHCi the following things happen:
-> >
-> >
->
+  1. `foo` gets forked and `foo` and `bar` begin their work
+  1. `bar` completes its job and we return to the GHCi prompt (uh oh!)
+  1. `foo` eventually hits a breakpoint and attempts to return to the command line, but it can't because we are already there (in the previous step).
 
-1. `foo` gets forked and `foo` and `bar` begin their work
-1. `bar` completes its job and we return to the GHCi prompt (uh oh!)
-1. `foo` eventually hits a breakpoint and attempts to return to the command line, but it can't because we are already there (in the previous step).
-
->
-> >
-> >
-> > Now the foo thread is blocked, so we can't witness the breakpoint.
-> >
-> >
->
+  Now the foo thread is blocked, so we can't witness the breakpoint.
 
 ### Wishlist of features (please add your's here)
 
