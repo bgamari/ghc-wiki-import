@@ -593,3 +593,38 @@ We experimented with alternative ways of implementing breakpoints, with the hope
 ### Stopping at a breakpoint at runtime in the byte code interpreter
 
 
+
+Unfortunately this story is somewhat complicated, *c'est la vie*.
+
+
+
+To understand what happens it is necessary to know how GHCi evaluates an expression at the command line. When the user types in an expression (as a string) it is parsed, type checked, and compiled, and then run. In `main/GHC.hs` we have the function:
+
+
+```wiki
+   runStmt :: Session -> String -> IO RunResult
+```
+
+
+The `Session` argument contains the piles of environmental information which is important to the compiler. The `String` is what the user typed in, and `RunResult` is the answer that you get back if the execution terminates.
+
+
+
+Normally what happens is that `runStmt` forks a new thread to handle the evaluation of the expression. It then blocks on an `MVar` and waits for the thread to finish. When the thread finishes it fills in the `MVar`, which wakes up `runStmt`, and it returns a `RunResult`. Ultimately this gets passed back to the GHCi command line. Actually, GHCi is merely a *client* of the API, and other clients could also call `runStmt` if they wanted something evaluated. 
+
+
+
+To make the discussion comprehensible let us distinguish two threads: 
+
+
+1. The thread which runs the GHCi prompt.
+1. The thread which is forked to run an expression.
+
+
+We'll call the first one the *GHCi thread*, and the second the *expression thread*. 
+
+
+
+In the debugger the process of evaluating an expression is made more intricate. The reason is that if the expression thread hits a breakpoint it will want to return *early* to the GHCi thread, so that the user can access the GHCi prompt, issue commands *etcetera*. 
+
+
