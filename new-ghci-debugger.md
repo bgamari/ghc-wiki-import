@@ -14,6 +14,57 @@ These notes detail the breakpoint debugger which is being incorportated into GHC
 ## User's Manual
 
 
+### Command summary
+
+
+
+Parameters to commands are indicated in angular brackets `<...>`, optional parameters are followed by a question mark. Everything else is literal text, as you would type it at the prompt.
+
+
+
+Setting breakpoints:
+
+
+```wiki
+   :break <module>? <line_number>
+   :break <module>? <line_number> <column_number>
+   :break <module>? <function_name>
+```
+
+
+Listing breakpoints:
+
+
+```wiki
+   :show breaks   
+```
+
+
+Deleting breakpoints:
+
+
+```wiki
+   :delete <break_id> ... <break_id>
+   :delete *
+```
+
+
+Single stepping:
+
+
+```wiki
+   :step
+   :step <expression>
+```
+
+
+Continuting execution from a breakpoint:
+
+
+```wiki
+   :continue
+```
+
 ### Starting the debugger
 
 
