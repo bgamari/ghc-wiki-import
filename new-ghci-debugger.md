@@ -311,12 +311,8 @@ The `:step` command accepts an optional argument expression. The expression is e
 
 
 ```wiki
-   :step foo True [1,2,3]
+   :step <expression>
 ```
-
-
-where `foo True [1,2,3]` is the expression that we want to evaluate.
-
 
 ### Continuing execution after a breakpoint
 
