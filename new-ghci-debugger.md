@@ -335,21 +335,22 @@ A computation which has stopped at a breakpoint can be resumed with the `:contin
 ## Known problems in the debugger
 
 
+### Orphaned threads
 
-The following list describes issues where the debugger does not behave in the ideal way:
 
 
-- Computations which fork concurrent threads can use breakpoints, but sometimes a thread gets blocked indefinitely. Consider this program:
+Computations which fork concurrent threads can use breakpoints, but sometimes a thread gets blocked indefinitely. Consider this program:
 
-  ```wiki
-     main = do
-        forkIO foo
-        bar
 
-     foo = do something
+```wiki
+   main = do
+      forkIO foo
+      bar
 
-     bar = do something else
-  ```
+   foo = do something
+
+   bar = do something else
+```
 
 
 Suppose we have a breakpoint set somewhere inside the computation done by `foo`, but there are no breakpoints in the computation done by `bar`. When we run this program in GHCi the following things happen:
@@ -364,8 +365,6 @@ Suppose we have a breakpoint set somewhere inside the computation done by `foo`,
 
 Now the foo thread is blocked, so we can't witness the breakpoint.
 
-
-- foober
 
 ---
 
