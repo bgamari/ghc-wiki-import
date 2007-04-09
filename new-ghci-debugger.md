@@ -14,6 +14,13 @@ These notes detail the breakpoint debugger which is being incorportated into GHC
 ## User's Manual
 
 
+### Starting the debugger
+
+
+
+The debugger is integrated with GHCi, and it is on by default. The debugger slows program execution down by a factor of approximately XXX times. You can turn it off (to avoid the slowdown) using the `-fno-debug` command line argument.
+
+
 ### Setting break points
 
 
