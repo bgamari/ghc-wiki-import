@@ -303,11 +303,15 @@ Another way to force further evaluation of a thunk is to use it inside another e
 
 
 
-When a computation has hit a breakpoint it is sometimes useful to continue execution up until the next breakable expression is evaluated, regardless of whether there is a breakpoint set at that location. This functionality is provided by the `:step` command.
+When a computation has hit a breakpoint it is sometimes useful to continue execution up until the next breakable expression is evaluated, regardless of whether there is a breakpoint set at that location. This functionality is provided by the `:step` command:
 
 
+```wiki
+   :step
+```
 
-The `:step` command accepts an optional argument expression. The expression is evaluated as usual, but the computation will stop at the first breakable expression which is encountered, for example:
+
+The `:step` command accepts an optional argument expression. The expression is evaluated as usual, but the computation will stop at the first breakable expression which is encountered:
 
 
 ```wiki
@@ -318,8 +322,12 @@ The `:step` command accepts an optional argument expression. The expression is e
 
 
 
-A computation which has stopped at a breakpoint can be resumed with the `:continue` command. 
+A computation which has stopped at a breakpoint can be resumed with the `:continue` command:
 
+
+```wiki
+   :continue
+```
 
 ### Known problems in the debugger
 
