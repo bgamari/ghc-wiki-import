@@ -18,7 +18,7 @@ These notes detail the breakpoint debugger which is being incorportated into GHC
 
 
 
-Parameters to commands are indicated in angular brackets `<...>`, optional parameters are followed by a question mark. Ellipses `...` indicate where a sequence of parameters are allowed. Everything else is literal text, as you would type it at the prompt.
+Parameters to commands are indicated in angular brackets `<...>`, optional parameters are followed by a question mark. Ellipses `...` indicate where a sequence of parameters is allowed. Everything else is literal text, as you would type it at the prompt.
 
 
 
