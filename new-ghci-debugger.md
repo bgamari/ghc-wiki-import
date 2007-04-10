@@ -617,7 +617,7 @@ The first three constructors are part of the original code, and the last one, `R
 
 
 
-Normally what happens is that `runStmt` forks a new thread to handle the evaluation of the expression. It then blocks on an `MVar` and waits for the thread to finish. When the thread finishes it fills in the `MVar`, which wakes up `runStmt`, and it returns a `RunResult`. Ultimately this gets passed back to the GHCi command line. Actually, GHCi is merely a *client* of the API, and other clients could also call `runStmt` if they wanted something evaluated. 
+Normally what happens is that `runStmt` forks a new thread to handle the evaluation of the expression. It then blocks on an `MVar` and waits for the thread to finish. This MVar is (now) called `statusMVar`, because it carries the execution status of the computation which is being evaluated. We will discuss its type shortly. When the thread finishes it fills in `statusMVar`, which wakes up `runStmt`, and it returns a `RunResult`. Ultimately this gets passed back to the GHCi command line. Actually, GHCi is merely a *client* of the API, and other clients could also call `runStmt` if they wanted something evaluated. 
 
 
 
@@ -647,8 +647,11 @@ This raises a few questions:
 - What happens if the expression thread forks more threads?
 
 
-To synchronise the GHCi thread and the expression thread when it hits a breakpoint we introduce a second MVar. 
+To arrange the early return of the expression thread when it hits a breakpoint we introduce a second MVar. At this point it is useful to give names to the two MVars:
 
+
+1. `statusMVar`
+1. `breakMVar`
 
 ### Inspecting values
 
