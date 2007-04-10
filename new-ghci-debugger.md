@@ -589,7 +589,7 @@ We experimented with alternative ways of implementing breakpoints, with the hope
 
 
 
-Unfortunately this story is somewhat complicated, *c'est la vie*.
+Unfortunately this part of the story is somewhat complicated, *c'est la vie*.
 
 
 
@@ -601,7 +601,19 @@ To understand what happens it is necessary to know how GHCi evaluates an express
 ```
 
 
-The `Session` argument contains the piles of environmental information which is important to the compiler. The `String` is what the user typed in, and `RunResult` is the answer that you get back if the execution terminates.
+The `Session` argument contains the gobs of environmental information which is important to the compiler. The `String` is what the user typed in, and `RunResult` is the answer that you get back if the execution terminates. `RunResult` is defined like so:
+
+
+```wiki
+   data RunResult
+      = RunOk [Name]                -- names bound by this evaluation
+      | RunFailed                   -- statement failed compilation
+      | RunException Exception      -- statement raised an exception
+      | forall a . RunBreak a ThreadId BreakInfo (IO RunResult)
+```
+
+
+The first three constructors are part of the original code, and the last one, `RunBreak` was added for the debugger. Hopefully the first three are self-explanatory; we will explain `RunBreak` in due course.
 
 
 
