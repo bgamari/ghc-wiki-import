@@ -80,7 +80,7 @@ Continuting execution from a breakpoint:
 The debugger is integrated with GHCi, and it is on by default. The debugger slows program execution down by a factor of approximately XXX times. You can turn it off (to avoid the slowdown) using the `-fno-debug` command line argument, when you start GHCi.
 
 
-### Setting break points
+### Setting breakpoints
 
 
 
@@ -439,12 +439,11 @@ Andy's interactive trace viewer is another way of watching the program exeuction
 
 - Fix the ghci help command. (EASY)
 
-- Save/restore the link environment at break points. At a breakpoint we modify both the hsc\_env of the current Session, and also the persistent linker state. Both of these are held under IORefs, so we have to be careful about what we do here. The "obvious" option is to save both of these states on the resume stack when we enter a break point and then restore them when we continue execution. I have to check with Simon if there are any difficult issues that need to be resolved here, like gracefully handling exceptions etc. (MODERATE)
+- Save/restore the link environment at breakpoints. At a breakpoint we modify both the hsc\_env of the current Session, and also the persistent linker state. Both of these are held under IORefs, so we have to be careful about what we do here. The "obvious" option is to save both of these states on the resume stack when we enter a breakpoint and then restore them when we continue execution. I have to check with Simon if there are any difficult issues that need to be resolved here, like gracefully handling exceptions etc. (MODERATE)
 
 - Remove dependency on -fhpc flag, put debugging on by default and have a flag to turn it off. (EASY)
 
-- Allow break points to be set by function name. Some questions: what about local functions? What about functions inside
-  type class instances, and default methods of classes? (MODERATE)
+- Allow breakpoints to be set by function name. Some questions: what about local functions? What about functions inside type class instances, and default methods of classes? (MODERATE)
 
 - Support Unicode in data constructor names inside info tables. (MODERATE)
 
@@ -621,7 +620,7 @@ We'll call the first one the *GHCi thread*, and the second the *expression threa
 
 
 
-In the debugger the process of evaluating an expression is made more intricate. The reason is that if the expression thread hits a breakpoint it will want to return *early* to the GHCi thread, so that the user can access the GHCi prompt, issue commands *etcetera*. 
+In the debugger, the process of evaluating an expression is made more intricate. The reason is that if the expression thread hits a breakpoint it will want to return *early* to the GHCi thread, so that the user can access the GHCi prompt, issue commands *etcetera*. 
 
 
 
@@ -631,12 +630,12 @@ This raises a few questions:
 - How do we arrange for the expression thread to stop and return early?
 - What information needs to be passed from the expression thread to the GHCi thread, and how do we arrange that flow of information?
 - How do we wake up the GHCi thread and return to the prompt?
-- How do we continue execution of the expression thread after we have hit a break point?
+- How do we continue execution of the expression thread after we have hit a breakpoint?
 - What happens if we are running in the GHCi thread after a breakpoint, and we evaluate some other expression which also hits a breakpoint (i.e. what about nested breakpoints?)
 - What happens if the expression thread forks more threads?
 
 
-Stay tuned for the answer in the next episode (crowd goes boo!).
+To synchronise the GHCi thread and the expression thread when it hits a breakpoint we introduce a second MVar. 
 
 
 ### Inspecting values
