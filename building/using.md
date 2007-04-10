@@ -474,15 +474,11 @@ best to start `make` from the top of the tree.  The top-level
 you say `make`).  Some other targets it supports are:
 
 
+<table><tr><th>`stage1`</th>
+<td>
+Build everything as normal, including the stage 1 compiler.
+</td></tr></table>
 
-`stage1`::
-
-
->
->
-> Build everything as normal, including the stage 1 compiler.
->
->
 
 <table><tr><th>`stage2`</th>
 <td>
@@ -508,19 +504,13 @@ Build stages 1, 2 and 3.
 </td></tr></table>
 
 
->
->
-> `install`:
->
->
-> >
-> >
-> > Install everything, including the compiler built in stage 2.  To
-> > override the stage, say `make install stage=n` where `n` is
-> > the stage to install.
-> >
-> >
->
+<table><tr><th>`install`</th>
+<td>
+Install everything, including the compiler built in stage 2.  To
+override the stage, say `make install stage=n` where `n` is
+the stage to install.
+</td></tr></table>
+
 
 <table><tr><th>`binary-dist`</th>
 <td>
