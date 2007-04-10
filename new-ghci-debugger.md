@@ -424,7 +424,7 @@ When a breakpoint is hit, we almost always want to look at the source code aroun
 Andy's interactive trace viewer is another way of watching the program exeuction, and it would be good to be able to connect the debugger to it. Nonetheless, I think a `:list` command would be useful on its own.
 
 
-### Blocking breakpoints
+### Temporarily disable breakpoints
 
 
 
