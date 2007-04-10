@@ -570,7 +570,7 @@ we translate it into:
 ```
 
 
-(Note: if the ticked expression was already let-bound we do not do this step, since it would be pointless.) The idea is that the let expression will be turned into a BCO. We annotate the BCO with information about the tick, such as its free variables, their offsets in the stack, and the tick number. We also store a pointer in the BCO to a breakpoint array for this particular module, and an offset into that array. The offset corresponds to the tick number. The entries of the array are (currently) boolean flags which, at runtime, determine whether we should stop at the breakpoint or not.
+(Note: if the ticked expression was already let-bound we do not do this step, since it would be pointless.) The idea is that the let expression will be turned into a BCO. We annotate the BCO with information about the tick, such as its free variables, their offsets in the stack, and the tick number. We also store a pointer in the BCO to a breakpoint array for this particular module (which was introduced by the coverage transformation, see above), and an offset into that array. The offset corresponds to the tick number. The entries of the array are (currently) boolean flags which, at runtime, determine whether we should stop at the breakpoint or not. 
 
 
 
