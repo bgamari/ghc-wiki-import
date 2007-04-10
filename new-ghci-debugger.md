@@ -550,7 +550,7 @@ In the coverage tool the ticks are turned into real code which performs a side e
 
 
 
-The byte code generator turns GHC Core into a bunch of Byte Code Objects (BCOs). BCOs are heap objects which correspond to `let` and `case` expressions. Each BCO contains a sequence of byte code instructions (BCIs), which are executed by the byte code interpreter (`rts/Interpreter.c`). Each BCO also contains some local data which is needed in the instructions. 
+The byte code generator turns GHC Core into a bunch of Byte Code Objects (BCOs). BCOs are heap objects which correspond to top-level bindings, and `let` and `case` expressions. Each BCO contains a sequence of byte code instructions (BCIs), which are executed by the byte code interpreter (`rts/Interpreter.c`). Each BCO also contains some local data which is needed in the instructions. 
 
 
 
