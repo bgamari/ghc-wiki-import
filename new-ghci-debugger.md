@@ -235,6 +235,14 @@ All the normal GHCi commands work at the prompt, including the evaluation of arb
 ```
 
 
+If there are no local variables in scope at a breakpoint the debugger will print this message:
+
+
+```wiki
+   No locals in scope.
+```
+
+
 The debugger also provides commands for inspecting the values of local variables without forcing their evaluation any further (see Inspecting values below). 
 
 
@@ -665,11 +673,16 @@ This raises a few questions:
 - What happens if the expression thread forks more threads?
 
 
-To arrange the early return of the expression thread when it hits a breakpoint we introduce a second MVar. At this point it is useful to give names to the two MVars:
+To arrange the early return of the expression thread when it hits a breakpoint we introduce a second MVar:
 
 
-1. `statusMVar`
-1. `breakMVar`
+```wiki
+   breakMVar :: MVar ()
+```
+
+
+As you can see
+
 
 ### Inspecting values
 
