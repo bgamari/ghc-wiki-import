@@ -754,7 +754,41 @@ This is defined in `runStmt` in `main/GHC.hs`. We "pass" the I/O action to the r
 
 
 
-The last tricky part is how we resume execution of a thread after a breakpoint. This 
+The last tricky part is how we resume execution of a thread after a breakpoint. This is the purpose of the fourth argument of `Runbreak`:
+
+
+```wiki
+   resume :: IO RunResult
+```
+
+
+As you can see it is an I/O action that will eventually yield a `RunResult`. This accords with our intuition that, at least for terminating computations, we will get another `RunResult` if we execute this thing. It could be another breakpoint, or it may be a final value. `resume` is defined like so:
+
+
+```wiki
+   do stablePtr <- newStablePtr onBreakAction
+      poke breakPointIOAction stablePtr
+      putMVar breakMVar ()
+      status <- takeMVar statusMVar
+      switchOnStatus ref new_hsc_env names status
+```
+
+
+The first thing it does is set up the `onBreakAction` global variable. Then it writes to the `breakMVar` which wakes up the blocked expression thread. Then it waits for `statusMVar` to be filled in again. Eventually when we get a status value, we call the `switchInStatus` function to decide what to do (either we hit another breakpoint, or we completed). 
+
+
+
+I've been a bit crafty in my implementation, and you will notice that `resume` and `onBreakAction` are mutually recursive. So in `main/GHC.runStmt` you will see them defined like this:
+
+
+```wiki
+   let (resume, onBreakAction)
+          = ( ..., ...)
+```
+
+
+The reason I did it this way is because they need to share their own versions of `breakMVar` and `statusMVar`. This must be understood in the context that we can have nested breakpoints. By writing them in this mutually recursive fashion, we can have multiple (`resume`, `onBreaAction`) pairs, and that they don't get their MVars mixed up. 
+             
 
 
 ### Inspecting values
