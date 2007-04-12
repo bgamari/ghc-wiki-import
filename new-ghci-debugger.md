@@ -792,7 +792,22 @@ The reason I did it this way is because they need to share their own versions of
 
 
 When we hit a breakpoint the GHCi client pushes the `resume` function onto a stack. If the user evaluates a different expression, which hits another breakpoint, its `resume` function will be pushed on top of the old one. Eventually, when the user enters `:step` or `:continue`, the top of the resume stack is popped, and that is the action which is run next.
-             
+            
+
+
+### The view from inside the RTS: `Interpreter.c`
+
+
+
+As mentioned above, we add a new kind of BCI for breakpoints. It is called `bci_BRK_FUN`. It is added as the first instruction to the BCI sequence for top-level and let-bindings, during Byte Code compilation. When the intepreter hits this instruction it does the following things:
+
+
+1. Check to see if we are returning from a breakpoint. If so we don't want to stop again (this time), otherwise we'd get into an infinite loop. We record that we are no longer returning from a breakpoint, and then continue to the next BCI.
+1. If we aren't returning from a breakpoint, then we check to see if the global single-step flag is set, or if the individual breakpoint flag for the current expression is set. If this is true, we prepare to save the stack, and call the `onBreakAction`. If it is not true then we skip to the next BCI.
+1. If we are going to stop at this breakpoint we create a new AP\_STACK and copy the topmost stack frame into it. Then we push the current BCO onto the stack, and set up the `onBreakAction` so that when we come back to this thread the action will be executed. We then record that we are now stopping at a breakpoint, and then yield to the scheduler. When the scheduler returns to this thread the `onBreakAction` will be executed, which will send us back to the GHCi prompt.
+
+
+ 
 
 
 ### Inspecting values
