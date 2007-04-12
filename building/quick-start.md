@@ -22,7 +22,7 @@ If you are starting from a `darcs` checkout, then:
 
 
 ```wiki
-$ autoreconf
+$ sh boot
 ```
 
 
