@@ -303,7 +303,7 @@ the bullets below only tell
 you about Windows-specific wrinkles.
 
 
-- If you used `autoconf` instead of `autoreconf`,
+- If you used `autoconf` instead of `sh boot`,
   you'll get an error when you run `./configure`:
 
   ```wiki
@@ -316,8 +316,8 @@ you about Windows-specific wrinkles.
   ./configure: ./configure: No such file or directory
   configure: error: ./configure failed for ghc
   ```
-- `autoreconf` seems to create the file `configure`
-  read-only.  So if you need to run autoreconf again (which I sometimes do for safety's sake),
+- `autoreconf` (which gets run by `sh boot`) seems to create the file `configure`
+  read-only.  So if you need to run `sh boot` again (which I sometimes do for safety's sake),
   you get
 
   ```wiki
@@ -325,8 +325,8 @@ you about Windows-specific wrinkles.
   ```
 
   Solution: delete `configure` first.
-- After `autoreconf` run `./configure` in
-  `$(GHC&lowbar;TOP)/` thus:
+- After `sh boot` run `./configure` in
+  `$(GHC_TOP)/` thus:
 
   ```wiki
   $ ./configure --host=i386-unknown-mingw32 --with-gcc=c:/mingw/bin/gcc
@@ -451,7 +451,7 @@ choices, but it gives a single path that works.
     ; without, we pick up some cygwin tools at best!
   - cd c:/ghc-build
     ; (if you aren't there already)
-  - autoreconf
+  - sh boot
   - ./configure --host=i386-unknown-mingw32 --with-gcc=C:/Mingw/bin/gcc.exe
     ; we use cygwin, but build for windows
   - cp mk/build.mk.sample mk/build.mk
