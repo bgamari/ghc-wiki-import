@@ -7,7 +7,7 @@ Note that after pulling new changes, the safest way to continue working is to cl
 
 ```wiki
   $ make distclean
-  $ autoreconf
+  $ sh boot
   $ ./configure
   $ make
 ```
