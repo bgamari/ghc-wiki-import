@@ -114,7 +114,7 @@ make: *** [stage1] Error 1
 
 
 **Possible Solution**::
-Be sure you have run `sh darcs-all get` to get all necessary packages. Don't forget to run `autoreconf` again after you pull in new packages.
+Be sure you have run `sh darcs-all get` to get all necessary packages. Don't forget to run `sh boot` again after you pull in new packages.
 
 
 ## xargs: /usr/bin/ar: terminated by signal 11
