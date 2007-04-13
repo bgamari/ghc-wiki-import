@@ -493,6 +493,8 @@ Typically when we reach a breakpoint we want to inspect the values of local vari
 
 - Extend the stack inspection primitive to allow unboxed things to be grabbed. (MODERATE)
 
+- Add a commnad to show the current breakpoint stack (`:show context`?)
+
 ### Partially done
 
 
