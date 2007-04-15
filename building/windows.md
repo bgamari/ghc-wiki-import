@@ -329,7 +329,7 @@ you about Windows-specific wrinkles.
   `$(GHC_TOP)/` thus:
 
   ```wiki
-  $ ./configure --host=i386-unknown-mingw32 --with-gcc=c:/mingw/bin/gcc
+  $ ./configure --host=i386-unknown-mingw32 --with-gcc=c:/mingw/bin/gcc --with-ld=c:/mingw/bin/ld.exe
   ```
 
   This is the point at which you specify that you are building GHC-mingw
@@ -369,7 +369,7 @@ you about Windows-specific wrinkles.
   you'll have to do something more like:
 
   ```wiki
-  $ ./configure --with-gcc=...the Cygwin gcc...
+  $ ./configure --with-gcc=...the Cygwin gcc... --with-gcc=...the Cygwin ld.exe...
   ```
 - If you are paranoid, delete `config.cache` if it exists.
   This file occasionally remembers out-of-date configuration information, which 
@@ -452,7 +452,7 @@ choices, but it gives a single path that works.
   - cd c:/ghc-build
     ; (if you aren't there already)
   - sh boot
-  - ./configure --host=i386-unknown-mingw32 --with-gcc=C:/Mingw/bin/gcc.exe
+  - ./configure --host=i386-unknown-mingw32 -with-gcc=C:/Mingw/bin/gcc.exe --with-ld=C:/Mingw/bin/ld.exe
     ; we use cygwin, but build for windows
   - cp mk/build.mk.sample mk/build.mk
   - in mk/build.mk:
@@ -489,7 +489,7 @@ When you run your configure script, it falls over with
 
 
 ```wiki
-sh-2.04$ ./configure --with-gcc=c:/mingw/bin/gcc --host=i386-unknown-mingw32
+sh-2.04$ ./configure --with-gcc=c:/mingw/bin/gcc --with-ld=c:/mingw/bin/ld.exe --host=i386-unknown-mingw32
 configure: WARNING: If you wanted to set the --build type, don't use --host.
     If a cross compiler is detected then cross compile mode will be used.
 checking for GHC version date... -nThe system cannot find the file specified.
