@@ -1,0 +1,26 @@
+## Representing closure-converted types as indexed types
+
+
+
+The idea is to use a class
+
+
+```wiki
+class CC a where
+  data CConv a        -- closure converted 'a'
+  to :: a -> CConv a
+  fr :: CConv a -> a
+```
+
+
+The most interesting instance is that for functions, which reads
+
+
+```wiki
+data Clo a b = forall e. Clo (c -> a -> b) e
+
+class (CC a, CC b) => CC (a -> b) where
+  data CConv (a -> b) = CCArrow (Clo a b)
+  to f = Clo (\_ -> f) ()
+  fr (Clo f e) = f e
+```
