@@ -1007,8 +1007,7 @@ F\# Active Patterns](http://blogs.msdn.com/dsyme/archive/2006/08/16/ActivePatter
 
 
 
-Simon started this design discussion after talking to Don Syme about F\#'s **active patterns**,
-which serve a very similar purpose.
+Simon started this design discussion after talking to Don Syme about F\#'s **active patterns**, which serve a very similar purpose. These combine both “total” discrimination (views) and “partial” discrimination (implicit maybe) into one mechanism. It does this by embedding the names of discriminators in the names of matching functions, via “values with structured names”.  Sample uses include matching on .NET objects and XML.
 
 
 
@@ -1017,19 +1016,52 @@ a full paper describing the design](http://blogs.msdn.com/dsyme/archive/2007/04/
 
 
 
-F\# 1.1.12 included a preliminary version 
-of extensible pattern matching where values effectively of type 
+The feature is implemented in F\# 1.9. Some code snippets are below.
 
 
 ```wiki
-  val Pattern: int -> int option
+    let (|Rect|) (x:complex) = (x.RealPart, x.ImaginaryPart)
+    let (|Polar|) (x:complex) = (x.Magnitude , x.Phase)
+
+    let mulViaRect c1 c2 = 
+        match c1,c2 with 
+        | Rect(ar,ai), Rect(br,bi) -> Complex.mkRect(ar*br - ai*bi, ai*br + bi*ar)
+
+    let mulViaPolar c1 c2 = 
+        match c1,c2 with 
+        | Polar (r1,th1),Polar (r2,th2) -> Complex.mkPolar(r1*r2, th1+th2)
+
+    let mulViaRect2  (Rect(ar,ai))   (Rect(br,bi))   = Complex.mkRect(ar*br - ai*bi, 
+                                                                      ai*br + bi*ar)
+    let mulViaPolar2 (Polar(r1,th1)) (Polar(r2,th2)) = Complex.mkPolar(r1*r2, th1+th2)
 ```
 
 
-could be used as query functions. Some examples are documented 
-nicely at [
-http://tomasp.net/blog/quotvis-reloaded.aspx : Tomas Petricek's website](http://tomasp.net/blog/quotvis-reloaded.aspx : Tomas Petricek's website).
+And for views:
 
+
+```wiki
+    open System
+    
+    let (|Named|Array|Ptr|Param|) (typ : System.Type) =
+        if typ.IsGenericType        then Named(typ.GetGenericTypeDefinition(), 
+                                               typ.GetGenericArguments())
+        elif not typ.HasElementType then Named(typ, [| |])
+        elif typ.IsArray            then Array(typ.GetElementType(), 
+                                               typ.GetArrayRank())
+        elif typ.IsByRef            then Ptr(true,typ.GetElementType())
+        elif typ.IsPointer          then Ptr(false,typ.GetElementType())
+        elif typ.IsGenericParameter then Param(typ.GenericParameterPosition, 
+                                               typ.GetGenericParameterConstraints())
+        else failwith "MSDN says this can't happen"
+
+    let rec freeVarsAcc typ acc =
+        match typ with
+        | Named (con, args) -> Array.fold_right freeVarsAcc args acc
+        | Array (arg, rank) -> freeVarsAcc arg acc
+        | Ptr (_,arg)       -> freeVarsAcc arg acc
+        | Param(pos,cxs)    -> Array.fold_right freeVarsAcc cxs (typ :: acc) 
+```
 
 ### [
 Emir, Odersky, Williams: Matching objects with patterns](http://lambda-the-ultimate.org/node/1960)
