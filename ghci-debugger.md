@@ -5,8 +5,8 @@
 
 
 
-UPDATE: We have prepared a higher level technical report about this work. A [
-draft](http://darcs.haskell.org/SoC/ghc.debugger.paper/draft.pdf) is available.
+UPDATE: We have prepared a higher level technical report about this work, available [
+here](http://www.dsic.upv.es/mapa/ingles/informesinv.pl?any=2007).
 
 
 
