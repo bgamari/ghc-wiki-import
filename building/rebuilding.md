@@ -2,11 +2,22 @@
 
 
 
-Note that after pulling new changes, the safest way to continue working is to clean the build tree and start from scratch:
+Note that after pulling new changes, the safest way to continue working is to clean the build tree and start from scratch.
+
+
+
+In fact, it's best to clean the tree *before* pulling, because the new code may not know how to clean the old build tree:
 
 
 ```wiki
   $ make distclean
+```
+
+
+Now you can `sh darcs-all pull`, followed by building the tree as normal:
+
+
+```wiki
   $ sh boot
   $ ./configure
   $ make
