@@ -69,7 +69,7 @@ Look at the picture first.  The yellow boxes are compiler passes, while the blue
 
 >
 >
-> It makes a difference whether or not you are using `-O` at this stage.  With `-O` (or rather, with `-fomit-interface-pragmas` which is a consequence of `-O`, the tidied program (produced by `tidyProgram`) has unfoldings for Ids, and RULES.  Without `-O` the unfoldings and RULES are omitted from the tidied program.  And that, in turn, affects the interface file generated subsequently.
+> It makes a difference whether or not you are using `-O` at this stage.  With `-O` (or rather, with `-fomit-interface-pragmas` which is a consequence of `-O`), the tidied program (produced by `tidyProgram`) has unfoldings for Ids, and RULES.  Without `-O` the unfoldings and RULES are omitted from the tidied program.  And that, in turn, affects the interface file generated subsequently.
 >
 >
 
