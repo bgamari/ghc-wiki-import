@@ -11,28 +11,8 @@ http://opus.kobv.de/tuberlin/volltexte/2006/1286/](http://opus.kobv.de/tuberlin/
 
 
 
-After some brainstorming, Roman and I (= Manuel) came to the conclusion that we can save ourselves a lot of bookkeeping if we can represent closure-converted types by indexed types (i.e., keeping track of which original types correspond to which converted types).  The idea is to use a class
+After some brainstorming, Roman and I (= Manuel) came to the conclusion that we can save ourselves a lot of bookkeeping if we can represent closure-converted types by indexed types (i.e., keeping track of which original types correspond to which converted types).  The details are under [indexed closure conversion](data-parallel/closure-conversion/indexed).
 
-
-```wiki
-class CC a where
-  data CConv a        -- closure converted 'a'
-  to :: a -> CConv a
-  fr :: CConv a -> a
-```
-
-
-The most interesting instance is that for functions, which reads
-
-
-```wiki
-data Clo a b = forall e. Clo (c -> a -> b) e
-
-class (CC a, CC b) => CC (a -> b) where
-  data CConv (a -> b) = CCArrow (Clo a b)
-  to f = Clo (\_ -> f) ()
-  fr (Clo f e) = f e
-```
 
 ### From the Skype discussion, 16 Mar 07
 
