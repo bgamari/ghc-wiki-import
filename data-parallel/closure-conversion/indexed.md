@@ -17,12 +17,12 @@ The most interesting instance is that for functions, which reads
 
 
 ```wiki
-data Clo a b = forall e. Clo (c -> a -> b) e
+data Clo a b = forall e. Clo (e -> a -> b) e
 
 class (CC a, CC b) => CC (a -> b) where
   data CConv (a -> b) = CCArrow (Clo (CConv a) (CConv b))
-  to f = Clo (\_ -> f) ()
-  fr (Clo f e) = f e
+  to f = CCArrow (Clo (\_ -> f) ())
+  fr (CCArrow (Clo f e)) = f e
 ```
 
 
