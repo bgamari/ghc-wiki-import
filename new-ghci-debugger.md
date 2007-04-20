@@ -491,6 +491,8 @@ Typically when we reach a breakpoint we want to inspect the values of local vari
 
 - Fix GHCi so that it can work with real tyvars (are those called FlexiTyVars?) (UNKNOWN)
 
+- The :stop command, to exit from a breakpoint (EASY).
+
 ### Partially done
 
 
