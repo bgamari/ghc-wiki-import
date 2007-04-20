@@ -81,6 +81,15 @@ Optionally, you might want to grab the testsuite and benchmark suite too, which 
 ```
 
 
+These can also be fetched with flags to `darcs-all`:
+
+
+```wiki
+  $ ./darcs-all --testsuite get
+  $ ./darcs-all --nofib get
+```
+
+
 The full list of darcs repositories relating to GHC is at [DarcsRepositories](darcs-repositories).
 
 
