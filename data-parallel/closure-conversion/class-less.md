@@ -9,7 +9,25 @@ DataParallel/ClosureConversion Up?
 The following scheme - if Roman doesn't find any problems with it (he is notorious for that) - should be simpler (as in relying on fewer other mechanisms) than what we had in mind so far for mixing converted and unconverted code.  In particular, the scheme gracefully handles any declarations that themselves cannot be converted, but occur in a converted module.
 
 
-### Type declarations
+### Conversion status
+
+
+
+We add to all declaration that are affected by closure conversion a value of type
+
+
+```wiki
+data StatusCC a 
+  = NoCC      -- Declaration has not been converted
+  | AsIsCC    -- Conversion not necessary, use original
+  | ConvCC a  -- Here is the converted version
+```
+
+
+For example, `Id` gets a field of type `StatusCC Id`.
+
+
+### Converting type declarations
 
 
 
@@ -27,14 +45,14 @@ Incidentally, if during conversion we come across a type declaration that we don
 Note that basic types, such as `Int` and friends, would have `tyConCC` set to `Nothing`, which is exactly what we want.
 
 
-### Class declarations
+### Converting class declarations
 
 
 
 If we come across a class declaration for a class `C` during conversion, we convert it generating `C_CC`.  Like with type constructors, `Class.Class` gets a `classCC :: Maybe Class` field that is `Just C_CC` for classes that have a conversion.  We also ensure that the `classTyCon` of `C`, let's call it `T_C`, refers to `T_C_CC` and `fr_T_C` and `to_T_C` in its `tyConCC` field, and that the `classTyCon` of `C_CC` is `T_C_CC`.
 
 
-### Instance declarations
+### Converting instance declarations
 
 
 
@@ -48,7 +66,7 @@ If we encounter an instance declaration for `C tau` during conversion, there are
 In any case, we add a field `is_CC :: Just Instance` to `InstEnv.Instance` that contains the additionally generated instance.  And in both cases, we should be able to derive the required code for the dfun from the definition of `C tau`.  We also make sure that the `dfun`'s `idCC` field (see below) is set to that of the converted dfun.
 
 
-### Type terms
+### Converting type terms
 
 
 
@@ -66,14 +84,14 @@ a^            = a
                 C t1^ => t2^    , otherwise
 ```
 
-### Value bindings
+### Converting value bindings
 
 
 
 When converting a toplevel binding for `f :: t`, we generate `f_CC :: t^`.  The alternatives `GlobalId` and `LocalId` of `Var.Var` get a new field `idCC :: Maybe Id` and the `Id` for `f` contains `Just f_CC` in that field.
 
 
-### Core terms
+### Converting core terms
 
 
 
