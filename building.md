@@ -42,3 +42,4 @@ Please feel free to add pages here.  In due course, information can be incorpora
 
 
 - [ProblemsCompilingGhc](problems-compiling-ghc): Hints about building GHC on Windows platforms  
+- [SonyPS3](sony-p-s3)
