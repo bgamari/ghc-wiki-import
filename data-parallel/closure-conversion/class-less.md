@@ -162,6 +162,10 @@ have vanished, leaving only a coercion.  As `T` is not converted, we need to not
 Generally, we need a story about treating coercions during conversion.
 
 
+
+**PARTIALLY DONE** Did the case of newtypes.  Other coercions may still be a problem, esp from unsafe coercions.
+
+
 #### Function type constructor
 
 
