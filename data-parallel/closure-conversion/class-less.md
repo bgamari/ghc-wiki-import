@@ -119,10 +119,10 @@ When converting a toplevel binding for `f :: t`, we generate `f_CC :: t^`.  The 
 Apart from the standard rules, we need to handle the following special cases:
 
 
-- We come across a value variable `v` where `idCC v == Nothing` whose type is `t`: we generate `convert t v` (see below).
-- We come across a case expression where the scrutinised type `T` has `tyConCC T == Nothing`: we leave the case expression as is (i.e., unconverted), but make sure that the `idCC` field of all variables bound by patterns in the alternatives have their `idCC` field as `Nothing`.  (This implies that the previous case will kick in and convert the (unconverted) values obtained after decomposition.)
-- Whenever we have an FC `cast` from or to a newtype `T`, where `tyConCC T == Nothing`, we need to add a `convert tau` or `trevnoc tau`, respectively.  We can spot these casts by inspecting the kind of every coercion used in a cast.  One side of the equality will have the newtype constructor.
-- We come across a dfun: If its `idCC` field is `Nothing`, we keep the selection as is, but apply `convert t e` from it it, where `t` is the type of the selected method and `e` the selection expression.  If `idCC` is `Just d_CC`, and the dfun's class is converted, `d_CC` is fully converted.  If it's class is not converted, we also keep the selection unconverted, but have a bit less to do in `convert t e`.  **TODO** This needs to be fully worked out.
+- We come across a value variable `v` where `idCC v == NoCC` whose type is `t`: we generate `convert t v` (see below).
+- We come across a case expression where the scrutinised type `T` has `tyConCC T == NoCC`: we leave the case expression as is (i.e., unconverted), but make sure that the `idCC` field of all variables bound by patterns in the alternatives have their `idCC` field as `NoCC`.  (This implies that the previous case will kick in and convert the (unconverted) values obtained after decomposition.)
+- Whenever we have an FC `cast` from or to a newtype `T`, where `tyConCC T == NoCC`, we need to add a `convert tau` or `trevnoc tau`, respectively.  We can spot these casts by inspecting the kind of every coercion used in a cast.  One side of the equality will have the newtype constructor.
+- We come across a dfun: If its `idCC` field is `NoCC`, we keep the selection as is, but apply `convert t e` from it, where `t` is the type of the selected method and `e` the selection expression.  If `idCC` is `ConvCC d_CC`, and the dfun's class is converted, `d_CC` is fully converted.  If it's class is not converted, we also keep the selection unconverted, but have a bit less to do in `convert t e`.  **TODO** This needs to be fully worked out.
 
 ### Generating conversions
 
@@ -132,7 +132,7 @@ Whenever we had `convert t e` above, where `t` is an unconverted type and `e` a 
 
 
 ```wiki
-convert T          = id   , if tyConCC T == Nothing
+convert T          = id   , if tyConCC T == NoCC or AsIsCC
                    = to_T , otherwise
 convert a          = id
 convert (t1 t2)    = convert t1 (convert t2)
@@ -145,7 +145,7 @@ where `trevnoc` is the same as `convert`, but using `from_T` instead of `to_T`.
 
 
 
-The idea is that conversions for parametrised types are parametrised over conversions of their parameter types.  Wherever we call a function using parametrised types, we will know these type parameters (and hence can use `convert`) to compute their conversions.  This fits well, because it is at occurences of `Id`s that have `idCC == Nothing` where we have to perform conversion.
+The idea is that conversions for parametrised types are parametrised over conversions of their parameter types.  Wherever we call a function using parametrised types, we will know these type parameters (and hence can use `convert`) to compute their conversions.  This fits well, because it is at occurences of `Id`s that have `idCC == NoCC` where we have to perform conversion.
 
 
 
