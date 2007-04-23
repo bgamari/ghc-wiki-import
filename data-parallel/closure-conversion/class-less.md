@@ -159,6 +159,10 @@ The only remaining problem is that a type parameter to a function may itself be 
 
 
 
+**This issue has now been addressed.**
+
+
+
 Many type declarations will not be changed by conversion, as they do not contain any arrows.  Hence, it is more economic to avoid generating a `_CC` version of these declarations.  I initially thought that we can ignore this for a moment, because it is only an optimisation.  However, consider
 
 
@@ -172,6 +176,10 @@ As we don't convert `Int`, we cannot convert `T` and `S`, which is a shame as th
 
 
 #### FC Coercions
+
+
+
+**This issue has now been addressed.**
 
 
 
@@ -199,10 +207,6 @@ have vanished, leaving only a coercion.  As `T` is not converted, we need to not
 
 
 Generally, we need a story about treating coercions during conversion.
-
-
-
-**PARTIALLY DONE** Did the case of newtypes.  Other coercions may still be a problem, esp from unsafe coercions, but we probably just don't want to convert any declarations containing them (at least for the moment).
 
 
 #### Function type constructor
