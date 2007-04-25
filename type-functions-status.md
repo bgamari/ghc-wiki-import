@@ -9,7 +9,7 @@ Back to [TypeFunctions](type-functions).
 **Current:**
 
 
-1. For Tom: Construct `TyCon` for type equation in `tcIdxTyInstDecl1`.  This needs to be a synonym tycon, which still needs to be extended to include family information.
+1. For Tom: Construct `TyCon` for type equation in `tcFamInstDecl1`.  This needs to be a synonym tycon, which still needs to be extended to include family information.
 1. Dictionary handling for equational constraints:
 
   - Where do we check the details of the formation of equational constraints?  (In `check_pred_ty`?)
