@@ -183,7 +183,28 @@ We handle newtype instances similar to data instances.  However, newtypes have n
 NB: It is necessary to refine the `TyCon.isNewTyCon` predicate by introducing `TyCon.isClosedNewTyCon` and using it in all places where the predicate is used to determine whether a newtype can be expanded to its right hand side.  In principle, this is also possible for families, but only in dependence on the concrete type arguments (and newtype instances in scope), so it would be much harder to check.  Hence, for now, newtype families are opaque.
 
 
-### Representation of equality axioms
+### Representation of type synonym instances
+
+
+
+The basic structure of the representation of `type instance`s is the same as for data and newtypes.  Every instances is represented by a representation `TyCon.TyCon`, which in the synonym case is of the `SynTyCon` variant.  We extended `SynTyCon` by a new field `synTcParent :: TyConParent` that contains the same sort of parent information as for data types.  In particular, it refers to a coercion that moves between the family instance and the representation tycon.  This coercion is created with `Coercion.mkFamInstCoercion`.  As an example, for
+
+
+```wiki
+type instance T [a] Int = Maybe a
+```
+
+
+we get
+
+
+```wiki
+type R a = Maybe a
+coe co a :: (T [a] Int) ~ (R a)
+```
+
+
+This may appear overly complicated as we could have created a coercion that has `Maybe a` as its right-hand side, avoiding a representation type `R` entirely.  However, inside GHC, the representation tycon conveniently stores all the information about the type instance (including its coercion), which the coercion by itself could not.  Moreover, we also use it to represent the instance in interface files.
 
 
 ---
