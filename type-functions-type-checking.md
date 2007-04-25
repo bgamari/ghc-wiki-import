@@ -62,12 +62,13 @@ Data and newtype families are represented by the `TyCon` variant `AlgTyCon`, as 
 
 
 
-To represent type families (which do not have a fixed right hand side), the type of `synTcRhs` changed from `Type` to `SynTyConRhs` with
+To represent type families (which do not have a fixed right hand side), the type of `synTcRhs` changed from just `Type` to `SynTyConRhs` with
 
 
 ```wiki
-data SynTyConRhs = OpenSynTyCon Kind    -- *result* kind
-                 | SynonymTyCon Type    -- rhs of ordinary synonym
+data SynTyConRhs 
+  = OpenSynTyCon Kind (Maybe [Int]) -- *result* kind & positions
+  | SynonymTyCon Type               -- rhs of ordinary synonym
 ```
 
 
