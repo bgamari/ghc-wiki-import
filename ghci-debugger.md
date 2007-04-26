@@ -195,7 +195,7 @@ map f x = ...
 ```
 
 
-recovering the type of `x` (how? after forcing and using :print, see the next section) 
+recovering the type of `x` (how? after forcing and using :print, see the next section example) 
 will cause the type of `f` to be updated in its first argument too.
 
 
