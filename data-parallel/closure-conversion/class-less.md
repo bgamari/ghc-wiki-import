@@ -38,7 +38,7 @@ Conversion functions come in pairs, which we wrap with the following data type f
 
 
 ```wiki
-data TF a b = TF {to :: a -> b; fr :: b -> a}
+data a :<->: b = (:<->:) {to :: a -> b, fr ::b -> a}
 ```
 
 ### Converting type declarations
@@ -48,13 +48,13 @@ data TF a b = TF {to :: a -> b; fr :: b -> a}
 
 
 
-The alternatives of `TyCon.TyCon` get a new field `tyConCC :: StatusCC (TyCon, Id)`.  This field is `NoCC` for data constructors for which we have no conversion and `ConvCC (T_CC, tf_T)` if we have a conversion, where the converted declaration `T_CC` may coincide with `T`.  The value `tf_T` is a *conversion constructor* for values inhabitating types formed from the original and converted constructor.  The type of these functions is as follows:
+The alternatives of `TyCon.TyCon` get a new field `tyConCC :: StatusCC (TyCon, Id)`.  This field is `NoCC` for data constructors for which we have no conversion and `ConvCC (T_CC, iso_T)` if we have a conversion, where the converted declaration `T_CC` may coincide with `T`.  The value `iso_T` is a *conversion constructor* for values inhabitating types formed from the original and converted constructor.  The type of these functions is as follows:
 
 
 ```wiki
-tfTy (T::k1->..->kn->*) = forall _1 .. _n _1_CC .. _n_CC.
-  tfTy (_1::k1) -> .. -> tfTy (_n::kn) -> 
-  (TF (C _1 .. _n) (C_CC _1_CC .. _n_CC))
+isoTy (T::k1->..->kn->*) = forall _1 .. _n _1_CC .. _n_CC.
+  isoTy (_1::k1) -> .. -> isoTy (_n::kn) -> 
+  (C _1 .. _n :<->: C_CC _1_CC .. _n_CC)
 ```
 
 
@@ -74,11 +74,11 @@ The type of the conversion constructor is as follows (using more meaningful type
 
 
 ```wiki
-tfTy (T::(*->*)->*) =
+isoTy (T::(*->*)->*) =
   forall f f_CC. 
     (forall a a_CC. 
-       (TF a a_CC) -> (TF (f a) (f_CC a_CC))) ->
-    TF (T f) (T_CC f_CC)
+       (a :<->: a_CC) -> (f a :<->: f_CC a_CC)) ->
+    T f :<->: T_CC f_CC
 ```
 
 
@@ -86,7 +86,7 @@ The conversion constructor might be implemented as
 
 
 ```wiki
-tfT tff = TF toT frT
+isoT isof = toT :<->: frT
   where
     toT (T1 x) = T1 (to (tff tfInt ) x)
     toT (T2 y) = T2 (to (tff tfBool) y)
@@ -95,12 +95,22 @@ tfT tff = TF toT frT
 ```
 
 
-where `tfInt` and `tfBool` are the conversion constructors for `Int`s and `Bool`s.
+where `isoInt` and `isoBool` are the conversion constructors for `Int`s and `Bool`s.
 
 
 
-Moreover, we have a type constructor `(-->)` that represents closures and we assume that the field `tyConCC` of `(->)` has the value `ConvCC ((-->), fr_fun, to_fun)`, where `fr_fun` and `to_fun` are appropriate conversion functions.
+Moreover, we represent closures - the converted form of function arrows - as follows:
 
+
+```wiki
+data a :-> b = forall e. !(e -> a -> b) :$ e
+
+isoArr :: a :<->: a_CC -> b :<->: b_CC -> (a -> b) :<->: (a_CC :-> b_CC)
+isoArr (toa :<->: fra) (tob :<->: frb) = toArr :<->: frArr
+  where
+    toArr f        = const (tob . f . fra) :$ ()
+    frArr (f :$ e) = frb . f e . toa
+```
 
 #### Conversion rules
 
