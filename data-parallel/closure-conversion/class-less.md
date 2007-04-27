@@ -58,7 +58,44 @@ tfTy (T::k1->..->kn->*) = forall _1 .. _n _1_CC .. _n_CC.
 ```
 
 
-(The type variables beginning with underscores are bound here and we add one underscore for each level of kinding.)
+(The type variables beginning with underscores are bound here; we add one underscore for each level of kinding.)
+
+
+
+As an example, consider
+
+
+```wiki
+data T (f::*->*) = T1 (f Int) | T2 (f Bool)
+```
+
+
+The type of the conversion constructor is as follows (using more meaningful type variable names):
+
+
+```wiki
+tfTy (T::(*->*)->*) =
+  forall f f_CC. 
+    (forall a a_CC. 
+       (TF a a_CC) -> (TF (f a) (f_CC a_CC))) ->
+    TF (T f) (T_CC f_CC)
+```
+
+
+The conversion constructor might be implemented as
+
+
+```wiki
+tfT tff = TF toT frT
+  where
+    toT (T1 x) = T1 (to (tff tfInt ) x)
+    toT (T2 y) = T2 (to (tff tfBool) y)
+    frT (T1 x) = T1 (fr (tff tfInt ) x)
+    frT (T2 y) = T2 (fr (tff tfBool) y)
+```
+
+
+where `tfInt` and `tfBool` are the conversion constructors for `Int`s and `Bool`s.
 
 
 
