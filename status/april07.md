@@ -41,7 +41,7 @@ the already-fairly-solid GHC 6.6.
 
 
 
-As a result, the HEAD (which will become GHC 6.8) embodies nine months
+The HEAD (which will become GHC 6.8) embodies nine months
 of development work since we forked the tree for GHC 6.6.  We are now
 aiming to get a stable set of features implemented in the HEAD, with
 a view to forking off the GHC 6.8 branch in the early summer.  As
