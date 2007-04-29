@@ -162,17 +162,24 @@ impredicative instantiation as it now stands; it might change!
 
 - Gabriele Keller, Manuel Chakravarty, and Roman Leshchinskiy, at the
   University of New South Wales, are collaborating with us on support
-  for *nested data-parallel computation* in GHC.
-  We presented a paper at the Declarative Aspects of Multicore Programing
-  workshop in January 2007: [
-  http://www.cse.unsw.edu.au/\~chak/papers/CLPKM07.html](http://www.cse.unsw.edu.au/~chak/papers/CLPKM07.html),
-  and made a first release of the
-  library in March [
-  http://www.cse.unsw.edu.au/\~dons/polymer.html](http://www.cse.unsw.edu.au/~dons/polymer.html).
-  It's a pretty ambitious project, and we have quite a way to go.
-  You can peek at the current status on the project home page:
-  [
-  http://haskell.org/haskellwiki/GHC/Data\_Parallel\_Haskell](http://haskell.org/haskellwiki/GHC/Data_Parallel_Haskell).
+
+>
+> >
+> >
+> > for *nested data-parallel computation* in GHC.
+> > We presented a paper at the Declarative Aspects of Multicore Programing
+> > workshop in January 2007: [
+> > http://www.cse.unsw.edu.au/\~chak/papers/CLPKM07.html](http://www.cse.unsw.edu.au/~chak/papers/CLPKM07.html),
+> > and made a first release of the
+> > library in March [
+> > http://www.cse.unsw.edu.au/\~dons/polymer.html](http://www.cse.unsw.edu.au/~dons/polymer.html).
+> > It's a pretty ambitious project, and we have quite a way to go.
+> > You can peek at the current status on the project home page:
+> > [
+> > http://haskell.org/haskellwiki/GHC/Data\_Parallel\_Haskell](http://haskell.org/haskellwiki/GHC/Data_Parallel_Haskell).
+> >
+> >
+>
 
 - Tim Harris added support for *invariants* to GHC's Software
   Transactional Memory (STM) implementation. Paper here:
@@ -259,10 +266,13 @@ environment:
 ## Libraries
 
 
+- The set of "corelibs" has been further streamlined, with `parsec`, `regex-base`,
+  `regex-compat`, `regex-posix` and `stm` moved to extralibs in the HEAD. This disentangles
+  releases of these packages from the GHC release process, and also means that development
+  builds of GHC are quicker as they don't need to build those libraries.
+
 
 **Simon M or Ian pls elaborate**
 
-
-- More packages moved from core to extralibs
 
 - base package breakup (see discussion on libraries list)
