@@ -37,8 +37,7 @@ but we have accidentally omitted.
 
 As a result of this heavy usage, it has taken us nearly six months to
 stabilise GHC 6.6.1, fixing over 100 reported bugs or infelicities in
-the already-fairly-solid GHC 6.6.  GHC 6.6.1 should be released by the
-time you are reading this.
+the already-fairly-solid GHC 6.6.
 
 
 
