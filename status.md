@@ -9,6 +9,7 @@ Here are biannual GHC status reports, published in the [
 Haskell Communities and Activities Report](http://haskell.org/communities/)
 
 
+- [GHC status April 2007](status/april07) (draft)
 - [GHC status October 2006](status/october06)
 
 ## Performance
