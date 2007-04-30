@@ -117,7 +117,7 @@ story on impredicative instantiation (see the paper "Boxy types").
 The feature is implemented, but the implementation is significantly
 more complicated than we expected; and it delivers fewer benefits than
 we hoped.  For example, the system described in the paper does not
-type-check (`runST $ foo`) and everyone complains. So Simon added
+type-check (`runST $ foo`) and everyone complains. So Simon PJ added
 an even more ad-hoc extension that does left-to-right instantiation.
 
 
@@ -131,9 +131,9 @@ impredicative instantiation as it now stands; it might change!
 ## Optimisations
 
 
-- Simon rewrote the Simplifier (again).  It isn't clear whether it was that alone, or
+- Simon PJ rewrote the Simplifier (again).  It isn't clear whether it was that alone, or
   whether something else happened too, but performance has improved quite significantly;
-  on the order of 12%. **Simon is that right?**
+  on the order of 12%.
 
 - Roman Leshchinskiy, Don Stewart, and Duncan Coutts did some beautiful
   work on *fusion*; see their paper [
@@ -144,9 +144,9 @@ impredicative instantiation as it now stands; it might change!
   [
   http://www.cse.unsw.edu.au/\~dons/papers/CLS07.html](http://www.cse.unsw.edu.au/~dons/papers/CLS07.html)).
 
-  Their work highlighted the importance of the [SpecConstr](spec-constr) transformation, which Simon
+  Their work highlighted the importance of the [SpecConstr](spec-constr) transformation, which Simon PJ
   implemented several years ago.  Of course, they suggested many enhancements, many of
-  which Simon duly implemented; see the new paper "Constructor specialisation for Haskell
+  which Simon PJ duly implemented; see the new paper "Constructor specialisation for Haskell
   programs" [
   http://research.microsoft.com/\~simonpj/papers/spec-constr/](http://research.microsoft.com/~simonpj/papers/spec-constr/).
 
