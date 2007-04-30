@@ -355,6 +355,11 @@ Similar to `HasGenerics` and instead of storing `Id` of conversion constructors,
 How to exactly handle the worker and wrapper?  Can we replace arrows by closure types in the worker?  Or do we always have to add a wrapper?
 
 
+
+**Simpler''' Don't try to make a complete cloned data constructor.  By the time of CC, its all just Core and so wrappers are just like any other global function.
+**
+
+
 #### Original functions
 
 
