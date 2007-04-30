@@ -337,6 +337,17 @@ The only remaining problem is that a type parameter to a function may itself be 
 Have an example with two modules one unconverted, where the converted imports the unconverted.
 
 
+
+Also have an example that motivates why we have to vectorise/CC declarations such as `Int`.
+
+
+#### Conversion functions
+
+
+
+Similar to `HasGenerics` and instead of storing `Id` of conversion constructors, we can derive from the name of the `TyCon`.
+
+
 #### Data constructors
 
 
