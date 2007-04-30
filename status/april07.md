@@ -189,7 +189,8 @@ impredicative instantiation as it now stands; it might change!
   GC ([
   http://hackage.haskell.org/trac/ghc/wiki/MotivationForParallelization](http://hackage.haskell.org/trac/ghc/wiki/MotivationForParallelization)).
   It works!  But alas, doing GC with two processors runs no faster than
-  with one!   
+  with one!  (we do plan to investigate this further and find the source of
+  the bottleneck).
 
 
 Peng Li, from the University of Pennsylvania, spent an exciting
