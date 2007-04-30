@@ -330,6 +330,13 @@ The only remaining problem is that a type parameter to a function may itself be 
 ### TODO
 
 
+### Data constructors
+
+
+
+How to exactly handle the worker and wrapper?  Can we replace arrows by closure types in the worker?  Or do we always have to add a wrapper?
+
+
 #### Original functions
 
 
