@@ -96,9 +96,9 @@ Simon Peyton Jones, Simon Marlow, Ian Lynagh
   the key to fixing the interaction between
   GADTs and type classes.  GHC's users have been very polite about
   this collection of bugs, but they are now finally fixed.
-  Implication constraints are described by Martin Sulzmann:
+  Implication constraints are described by Martin Sulzmann in
   [
-  http://www.comp.nus.edu.sg/\~sulzmann/publications/tr-eadt.ps.gz](http://www.comp.nus.edu.sg/~sulzmann/publications/tr-eadt.ps.gz).
+  A framework for Extended Algebraic Data Types](http://www.comp.nus.edu.sg/~sulzmann/publications/tr-eadt.ps.gz).
 
 - Björn Bringert (a GHC Hackathon graduate) implemented
   *standalone deriving*, which allows you to write a `deriving`
