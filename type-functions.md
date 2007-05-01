@@ -53,7 +53,7 @@ We also have notes on [type checking with indexed synonyms.](type-functions-syn-
 
 
 
-**Instance `TyCon`**: the `TyCon` arising from a `data instance` or `newtype instance` declaration.  Sometimes called the **representation `TyCon`**.  The instance `TyCon` is invisible to the programmer; it is only used internally inside GHC.  (NB: a `type instance` declaration does not give rise to a new `TyCon`.)
+**Instance `TyCon`**: the `TyCon` arising from a `data/newtype/type instance` declaration.  Sometimes called the **representation `TyCon`**.  The instance `TyCon` is invisible to the programmer; it is only used internally inside GHC.  
 
 
 
