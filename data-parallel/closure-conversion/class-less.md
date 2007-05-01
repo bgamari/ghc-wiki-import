@@ -50,10 +50,13 @@ data a :-> b = forall e. !(e -> a -> b) :$ e
 ```
 
 
-and define closure application as
+and define closure creation and application as
 
 
 ```wiki
+lam :: (a -> b) -> (a :-> b)
+lam f = const f :$ ()
+
 ($:) :: (a :-> b) -> a -> b
 (f :$ e) $: x = f e x
 ```
@@ -428,6 +431,39 @@ f :: t = fr iso<t> f_CC
 #### Examples
 
 
+
+Given 
+
+
+```wiki
+add :: Num a -> a -> a
+add = \dNum x -> (+) dNum x 1
+```
+
+
+we generate
+
+
+```wiki
+add :: Num a -> a -> a
+add = fr isoFun add_CC
+  where
+    isoFun = isoNum (id :<->: id) `isoArr`
+             (id :<->: id)        `isoArr`
+             (id :<->: id)
+
+add_CC :: Num_CC a :-> a :-> a
+add_CC = lam $ \dNum -> 
+           (\dNum x -> (+_CC) dNum $: x $: 1) :$ dNum
+```
+
+
+Note how we have to be careful not to use `($:)` for field selection from the dictionary.
+
+
+### Converting terms
+
+
 ---
 
 
@@ -436,9 +472,6 @@ chak: revision front
 
 
 ---
-
-
-### Converting core terms
 
 
 
