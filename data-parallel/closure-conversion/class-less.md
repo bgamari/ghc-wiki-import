@@ -327,20 +327,35 @@ Why do we use `(t1 -> t2)^ = t1 -> t2` when either argument type is unboxed, ins
 #### Bindings
 
 
+
+For every binding
+
+
+```wiki
+f :: t = e
+```
+
+
+we generate
+
+
+```wiki
+f_CC :: t^ = e^
+```
+
 #### Toplevel
 
 
 
-When converting a toplevel binding for `f :: t`, we generate `f_CC :: t^`.  
+When converting a toplevel binding for `f :: t`, we generate `f_CC :: t^` and redefine `f` as
 
 
+```wiki
+f :: t = fr iso<t> f_CC
+```
 
-The alternatives `GlobalId` and `LocalId` of `Var.Var` get a new field `idCC :: StatusCC Id` whose values, for a declaration `f`, we determine as follows:
+#### Examples
 
-
-- If `Id`'s declaration uses any features that we cannot (or currently, don't want to) convert, set `idCC` to `NoCC`.
-- If all type constructors involved in `f`'s type are marked `NoCC` or `AsIsCC`, we set `f`'s `idCC` field to `AsIsCC`.
-- Otherwise, convert `f` and set its `ifCC` field to `ConvCC f_CC`.
 
 ---
 
