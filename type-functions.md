@@ -45,7 +45,7 @@ We also have notes on [type checking with indexed synonyms.](type-functions-syn-
 
 
 
-**Parametric type constructors**: Type constructors in vanilla Haskell.
+**Parametric type constructors**: the type constructor of a vanilla Haskell type.
 
 
 
