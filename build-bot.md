@@ -20,8 +20,8 @@ To see the current status of the builds:
 First you, as a buildbot client, need to agree a buildbot username (`myUser`) and password (`myPass`) with the buildbot admins (just pick a username and password and send it to `igloo@earth.li`).  You'll also need to decide:
 
 
-- when the build(s) should happen
-- HEAD or branch builds
+- when the build(s) should happen (time and timezone!)
+- build HEAD, STABLE, or alternate between the two?
 - full build (up to stage 3, with extra-libs, full testsuite, and 5 nofib runs) or a fast build (stage 2, no extra-libs, fast testsuite, no nofib runs), or something in-between
 
 
@@ -29,7 +29,7 @@ Finally, if there is anything special that needs to be done for the client (e.g.
 
 
 
-Then you'll need to install buildbot and its dependencies on the machine that will be doing the nightly         build; see the [
+Then you'll need to install buildbot and its dependencies on the machine that will be doing the nightly build; see the [
 BuildBot website](http://buildbot.sourceforge.net/) for details.  NB. if you're on Windows, you'll need to install [BuildBot](build-bot) under Cygwin using the Cygwin Python; there are various problems getting the GHC build to work via [BuildBot](build-bot) using the native Win32 Python, so we've given up on that route for now.
 
 
