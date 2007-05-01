@@ -34,6 +34,10 @@ For example, `Id` gets a field of type `StatusCC Id`.  A declaration `thisDecl` 
 An example of a feature that prevents conversion are unboxed values.  We cannot make a closure from a function that has an unboxed argument, as we can neither instantiate the parametric polymorphic closure type with unboxed types, nor can we put unboxed values into the existentially quantified environment of a closure.
 
 
+
+**TODO** We won't really store `StatusCC` in `TyCon`s, `DataCon`s, and `Id`s, but instead have three finite maps maintaining the same information.
+
+
 ### Conversion pairs
 
 
@@ -291,11 +295,48 @@ We determine the converted type `t^` of `t` as follows:
 
 ```wiki
 T^            = T_CC , if tyConCC T == ConvCC T_CC
-                T    , otherwise
-a^            = a    
+              = T    , otherwise
+a^            = a
+(t1 -> t2)^   = t1^ -> t2^ , if kindOf t1 == #
+                             or kindOf t2 == #
+              = t1^ :-> t2^, otherwise
 (t1 t2)^      = t1^ t2^
 (forall a.t)^ = forall a.t^
 ```
+
+
+Here some examples,
+
+
+```wiki
+(Int -> Int)^           = Int :-> Int
+(forall a. [a] -> [a])^ = [a] :-> [a]
+([Int -> Int] -> Int)^  = [Int :-> Int] :-> Int
+(Int# -> Int# -> Int#)^ = Int# -> Int# -> Int#
+((Int -> Int) -> Int#)^ = (Int :-> Int) -> Int#
+(Int -> Int -> Int#)^   = Int :-> (Int -> Int#)
+```
+
+### Converting value bindings
+
+
+#### Bindings
+
+
+#### Toplevel
+
+
+
+When converting a toplevel binding for `f :: t`, we generate `f_CC :: t^`.  
+
+
+
+The alternatives `GlobalId` and `LocalId` of `Var.Var` get a new field `idCC :: StatusCC Id` whose values, for a declaration `f`, we determine as follows:
+
+
+- If `Id`'s declaration uses any features that we cannot (or currently, don't want to) convert, set `idCC` to `NoCC`.
+- If all type constructors involved in `f`'s type are marked `NoCC` or `AsIsCC`, we set `f`'s `idCC` field to `AsIsCC`.
+- Otherwise, convert `f` and set its `ifCC` field to `ConvCC f_CC`.
 
 ---
 
@@ -306,17 +347,6 @@ chak: revision front
 
 ---
 
-
-### Converting value bindings
-
-
-
-When converting a toplevel binding for `f :: t`, we generate `f_CC :: t^`.  The alternatives `GlobalId` and `LocalId` of `Var.Var` get a new field `idCC :: StatusCC Id` whose values, for a declaration `f`, we determine as follows:
-
-
-- If `Id`'s declaration uses any features that we cannot (or currently, don't want to) convert, set `idCC` to `NoCC`.
-- If all type constructors involved in `f`'s type are marked `NoCC` or `AsIsCC`, we set `f`'s `idCC` field to `AsIsCC`.
-- Otherwise, convert `f` and set its `ifCC` field to `ConvCC f_CC`.
 
 ### Converting core terms
 
