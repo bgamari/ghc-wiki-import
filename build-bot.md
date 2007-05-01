@@ -21,8 +21,8 @@ First you, as a buildbot client, need to agree a buildbot username (`myUser`) an
 
 
 - when the build(s) should happen (time and timezone!)
-- build HEAD, STABLE, or alternate between the two?
-- full build (up to stage 3, with extra-libs, full testsuite, and 5 nofib runs) or a fast build (stage 2, no extra-libs, fast testsuite, no nofib runs), or something in-between
+- build HEAD, STABLE, or (the default) alternate between the two?
+- full build (up to stage 3, with extra-libs, full testsuite, and 5 nofib runs) or a fast build (stage 2, no extra-libs, fast testsuite, no nofib runs), or (the default) something in-between
 
 
 Finally, if there is anything special that needs to be done for the client (e.g. if gcc is in an unusual place) then you'll need to let the admins know.
