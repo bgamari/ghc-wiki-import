@@ -145,7 +145,7 @@ If a type declaration for constructor `T` occurs in a converted module, we need 
 1. If the declaration of `T` mentions another algebraic type constructor `S` with `tyConCC S == NoCC`, we cannot convert `T` and set its `tyConCC` field to `NoCC` as well.
 1. If **all** algebraic type constructors `S` that are mentioned in `T`'s definiton have `tyConCC S == ConvCC S`, we do not convert `T`, but set its `tyConCC` field to `ConvCC T` and generate a suitable conversion constructor `isoT`.  (NB: The condition implies that `T` does not mention any function arrows.)
 1. If the declaration of `T` uses any features that we cannot (or for the moment, don't want to) convert, we set its `tyConCC` field to `NoCC` - except if Case 2 applies.
-1. Otherwise, we generate a converted type declaration `T_CC` together a conversion constructor  `isoT`, and set `tyConCC` to `ConvCC T_CC`.  Conversion proceeds by converting all data constructors (including their workers and wrappers), and in particular, we need to convert all types in the constructor signatures by replacing all type constructors that have conversions by their converted variant.  Data constructors get a new field `dcCC :: StatusCC DataCon`.
+1. Otherwise, we generate a converted type declaration `T_CC` together a conversion constructor  `isoT`, and set `tyConCC` to `ConvCC T_CC`.  Conversion proceeds by converting all data constructors (see below).
 
 
 Moreover, we handle other forms of type constructors as follows:
@@ -156,6 +156,36 @@ Moreover, we handle other forms of type constructors as follows:
 - `SynTyCon`: Closure conversion operates on `coreView`; hence, we will see no synonyms.  (Well, we may see synonym families, but will treat them as not convertible for the moment.)
 - `PrimTyCon`: We essentially ignore primitive types during conversion.  We assume their converted and unconverted form are identical, which implies that they never inhibit conversion and that they need no conversion constructors.
 - `CoercionTyCon` and `SuperKindTyCon`: They don't categorise values and are ignored during conversion.
+
+#### Converting data constructors
+
+
+
+We also convert data constructors by converting their argument types.  In particular, the signature of the wrapper is converted.  However, in contrast to other functions, we only convert the argument and result types; the arrows tying them together are left intact.  For example, if the original wrapper has the type signature
+
+
+```wiki
+MkT :: (Int -> Int) -> Int
+```
+
+
+the converted wrapper is 
+
+
+```wiki
+MkT_CC :: (Int :-> Int) -> Int
+```
+
+
+As a consequence, whenever we convert a *partial* wrapper application in an expression, we need to introduce a closure on the spot.
+
+
+
+We do not specially handle wrappers of data constructors.  They are converted just like any other toplevel function.
+
+
+#### Examples
+
 
 
 For example, when we convert
