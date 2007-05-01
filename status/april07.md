@@ -104,16 +104,17 @@ Simon Peyton Jones, Simon Marlow, Ian Lynagh
   declaration anywhere, rather than only where the data type is
   declared.  Details of the syntax have not yet quite settled. See
   also [
-  http://www.haskell.org/pipermail/haskell-prime/2006-October/001725.html](http://www.haskell.org/pipermail/haskell-prime/2006-October/001725.html).
+  http://haskell.org/haskellwiki/GHC/StandAloneDeriving](http://haskell.org/haskellwiki/GHC/StandAloneDeriving).
 
 - Lennart Augustsson implemented overloaded string literals.  So now
-  just as a numeric literal has type `∀ a. Num a ⇒ a`,
-  so a string literal has type `∀ a. IsString a ⇒ a`,
+  just as a numeric literal has type `∀a. Num a ⇒ a`,
+  so a string literal has type `∀a. IsString a ⇒ a`,
   The documentation is here: [http://www.haskell.org/ghc/dist/current/docs/users\_guide/other-type-extensions.html\#overloaded-strings](http://www.haskell.org/ghc/dist/current/docs/users_guide/other-type-extensions.html#overloaded-strings).
 
 
 A less successful feature of the last year has been the
-story on impredicative instantiation (see the paper "Boxy types").
+story on impredicative instantiation (see the paper [
+Boxy types](http://research.microsoft.com/~simonpj/papers/boxy)).
 The feature is implemented, but the implementation is significantly
 more complicated than we expected; and it delivers fewer benefits than
 we hoped.  For example, the system described in the paper does not
