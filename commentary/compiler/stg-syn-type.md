@@ -1,3 +1,8 @@
+
+Video: [
+STG language](http://video.google.com/videoplay?docid=-2701204964659708761) (17'21")
+
+
 # The STG syntax data types
 
 
