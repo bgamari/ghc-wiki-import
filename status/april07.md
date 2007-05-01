@@ -114,7 +114,7 @@ Simon Peyton Jones, Simon Marlow, Ian Lynagh
 
 A less successful feature of the last year has been the
 story on impredicative instantiation (see the paper [
-Boxy types](http://research.microsoft.com/~simonpj/papers/boxy)).
+Boxy types: type inference for higher-rank types and impredicativity](http://research.microsoft.com/~simonpj/papers/boxy)).
 The feature is implemented, but the implementation is significantly
 more complicated than we expected; and it delivers fewer benefits than
 we hoped.  For example, the system described in the paper does not
