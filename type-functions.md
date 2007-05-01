@@ -68,6 +68,10 @@ We also have notes on [type checking with indexed synonyms.](type-functions-syn-
 **Definitions vs. declarations**: We sometimes call the kind signature of an indexed constructor its *declaration* and the subsequent population of the type family by type equations or indexed data/newtype declarations the constructor's *definition*.
 
 
+
+Note: we previously used the term "indexed type", but have now switched to using "type family".  Please change any  uses of the former into the latter as you come across them.
+
+
 ## Specification and Restrictions
 
 
