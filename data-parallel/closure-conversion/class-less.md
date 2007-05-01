@@ -301,7 +301,7 @@ a^            = a_CC
                              or kindOf t2 == #
               = t1^ :-> t2^, otherwise
 (t1 t2)^      = t1^ t2^
-(forall a.t)^ = forall a.t^
+(forall a.t)^ = forall a_CC.t^
 ```
 
 
@@ -318,7 +318,7 @@ Here some examples,
 ```
 
 
-Why do we use `(t1 -> t2)^ = t1 -> t2` when either argument type is unboxed?
+Why do we use `(t1 -> t2)^ = t1 -> t2` when either argument type is unboxed?  Because we want to avoid   creating conversion constructors for such types.  Afterall, the conversion constructor `isoArr` for function arrows works only for arrows of kind `*->*->*`.
 
 
 ### Converting value bindings
