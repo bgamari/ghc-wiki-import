@@ -67,9 +67,9 @@ Simon Peyton Jones, Simon Marlow, Ian Lynagh
 - We have completely replaced GHC's intermediate language with
   System FC(X), an extension of System F with explicit equality
   witnesses.  This enables GHC to support GADTs and associated types,
-  with two new simple but powerful mechanisms. The paper is at
+  with two new simple but powerful mechanisms. The paper is 
   [
-  http://research.microsoft.com/\~simonpj/papers/ext-f/](http://research.microsoft.com/~simonpj/papers/ext-f/).
+  System F with Type Equality Coercions](http://research.microsoft.com/~simonpj/papers/ext-f/).
   Much of the conversion work was done by Kevin Donnelly, while he
   was on an internship at Microsoft.
 
@@ -77,11 +77,12 @@ Simon Peyton Jones, Simon Marlow, Ian Lynagh
   a modest generalisation of the *associated data types*
   of our POPL'05 paper
   [
-  http://research.microsoft.com/\~simonpj/papers/assoc-types/](http://research.microsoft.com/~simonpj/papers/assoc-types/).
+  Associated types with class](http://research.microsoft.com/~simonpj/papers/assoc-types/).
 
   This part is done. Now we are working on *type-synonym families*
-  (aka type functions), which are considerably trickier that
-  indexed data types, at least so far as type inference is concerned.
+  (aka type functions or [
+  associated type synonyms (ICFP'05)](http://research.microsoft.com/~simonpj/papers/assoc-types)), which are considerably trickier that
+  data type families, at least so far as type inference is concerned.
   Tom Schrijvers is in Cambridge for three months to help us use ides
   from Constraint Handling Rules to solve the inference problem.
   Type synonym families will almost completely fill the spot occupied
