@@ -29,6 +29,45 @@ We keep track of the current [implementation status](type-functions-status).
 We also have notes on [type checking with indexed synonyms.](type-functions-syn-tc)
 
 
+## Terminology
+
+
+
+**Data-type family**: a data type declared with a `data family`  or `newtype family` declaration.
+
+
+
+**Type-synonym family**, or **type function**: a type synonym declared with a `type family` declaration.
+
+
+
+**Type family**: a data-type family or type-synonym family.
+
+
+
+**Parametric type constructors**: Type constructors in vanilla Haskell.
+
+
+
+**Family type constructor** or **Family `TyCon`**: the type constructor for a type family.
+
+
+
+**Instance `TyCon`**: the `TyCon` arising from a `data instance` or `newtype instance` declaration.  Sometimes called the **representation `TyCon`**.  The instance `TyCon` is invisible to the programmer; it is only used internally inside GHC.  (NB: a `type instance` declaration does not give rise to a new `TyCon`.)
+
+
+
+**Associated type**: A type family that is declared in a type class.
+
+
+
+**Kind signature**: Declaration of the name, kind, and arity of an indexed type constructor.  The *arity* is the number of type indexes - *not* the overall number of parameters - of an indexed type constructor.
+
+
+
+**Definitions vs. declarations**: We sometimes call the kind signature of an indexed constructor its *declaration* and the subsequent population of the type family by type equations or indexed data/newtype declarations the constructor's *definition*.
+
+
 ## Specification and Restrictions
 
 
@@ -70,41 +109,6 @@ Restrictions:
 
 
 - We currently don't allow indexed GADTs. I cannot see any fundamental problem in supporting them, but I want to keep it simple for the moment. (When allowing this, a constructor signature in an associated GADT can of course only refine the instantiation of the type arguments specific to the instance in which the constructor is defined.)
-
-## Terminology
-
-
-
-**Parametric type constructors**: Type constructors in vanilla Haskell.
-
-
-
-**Indexed type constructors**: Type constructors that are defined via one or more type declarations that have non-variable parameters.  We often call them sloppily just *indexed types*.  We informally call constructors that are not indexed *vanilla* constructors.
-
-
-
-**Kind signature**: Declaration of the name, kind, and arity of an indexed type constructor.  The *arity* is the number of type indexes - *not* the overall number of parameters - of an indexed type constructor.
-
-
-
-**Type function**: An indexed type synonym.
-
-
-
-**Indexed data type**: An indexed type constructor declared with `data` or `newtype`.
-
-
-
-**Associated type**: An indexed type that is declared in a type class.
-
-
-
-**Type family**: Indexed types can be regarded as families of types; especially in the case of indexed data types, we call each declaration at a particular type index as *member* or *element* of that family.
-
-
-
-**Definitions vs. declarations**: We sometimes call the kind signature of an indexed constructor its *declaration* and the subsequent population of the type family by type equations or indexed data/newtype declarations the constructor's *definition*.
-
 
 ## How It Works
 
