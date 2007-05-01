@@ -282,6 +282,21 @@ dNumInt_CC = Num_CC
     isoIntToInt      = isoArr isoInt isoInt
 ```
 
+### Converting type terms
+
+
+
+We determine the converted type `t^` of `t` as follows:
+
+
+```wiki
+T^            = T_CC , if tyConCC T == ConvCC T_CC
+                T    , otherwise
+a^            = a    
+(t1 t2)^      = t1^ t2^
+(forall a.t)^ = forall a.t^
+```
+
 ---
 
 
@@ -291,24 +306,6 @@ chak: revision front
 
 ---
 
-
-### Converting type terms
-
-
-
-We determine the converted type `t^` of `t` as follows:
-
-
-```wiki
-T^            = T_CC , if available
-                T    , otherwise
-a^            = a
-(t1 t2)^      = t1^ t2^
-(t1 -> t2)^   = Clo t1 t2
-(forall a.t)^ = forall a.t^
-(C t1 => t2)^ = C_CC t1^ => t2^ , if available
-                C t1^ => t2^    , otherwise
-```
 
 ### Converting value bindings
 
