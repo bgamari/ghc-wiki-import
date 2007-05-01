@@ -175,9 +175,8 @@ impredicative instantiation as it now stands; it might change!
   http://haskell.org/haskellwiki/GHC/Data\_Parallel\_Haskell](http://haskell.org/haskellwiki/GHC/Data_Parallel_Haskell).
 
 - Tim Harris added support for *invariants* to GHC's Software
-  Transactional Memory (STM) implementation. Paper here:
-  [
-  http://research.microsoft.com/\~simonpj/papers/stm/](http://research.microsoft.com/~simonpj/papers/stm/).
+  Transactional Memory (STM) implementation. Paper is [
+  Transactional memory with data invariants](http://research.microsoft.com/~simonpj/papers/stm/).
 
 
     
