@@ -290,11 +290,11 @@ MkT_CC :: (Int :-> Int) -> Int
 ```
 
 
-As a consequence, whenever we convert a *partial* wrapper application in an expression, we need to introduce a closure on the spot.  (Simon pointed out that this is a rare case anyway.)
+As a consequence, whenever we convert a *partial* worker application in an expression, we need to introduce a closure on the spot.  (Simon pointed out that this is a rare case anyway.)
 
 
 
-We do not specially handle wrappers of data constructors.  They are converted just like any other toplevel function.
+We do not specially handle wrappers of data constructors or field selectors.  They are converted just like any other toplevel function.
 
 
 #### Examples
@@ -381,11 +381,10 @@ Then, closure conversion gives us
 
 
 ```wiki
-data Num_CC a =
-  Num_CC {
-    (+_CC)    :: a :-> a :-> a,
-    negate_CC :: a :-> a
-  }
+data Num_CC a = Num_CC (a :-> a :-> a) (a :-> a)
+(+_CC)    :: Num_CC a :-> a :-> a :-> a
+negate_CC :: Num_CC a :-> a :-> a
+
 dNumInt_CC :: Num_CC Int   -- as Int_CC = Int
 dNumInt_CC = Num_CC 
                (to isoIntToIntToInt primAddInt) 
@@ -454,12 +453,8 @@ add = fr isoFun add_CC
 
 add_CC :: Num_CC a :-> a :-> a
 add_CC = lam $ \dNum -> 
-           (\dNum x -> (+_CC) dNum $: x $: 1) :$ dNum
+           (\dNum x -> (+_CC) $: dNum $: x $: 1) :$ dNum
 ```
-
-
-Note how we have to be careful not to use `($:)` for field selection from the dictionary.
-
 
 ### Converting terms
 
