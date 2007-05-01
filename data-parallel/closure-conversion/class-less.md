@@ -161,7 +161,7 @@ Moreover, we handle other forms of type constructors as follows:
 
 
 
-We also convert data constructors by converting their argument types.  In particular, the signature of the wrapper is converted.  However, in contrast to other functions, we only convert the argument and result types; the arrows tying them together are left intact.  For example, if the original wrapper has the type signature
+We convert data constructors by converting their argument types and their representation `DataCon` gets a new filed `dcCC :: StatusCC DataCon`.  In particular, the signature of the worker is converted.  However, in contrast to other functions, we only convert the argument and result types; the arrows tying them together are left intact.  For example, if the original wrapper has the type signature
 
 
 ```wiki
@@ -274,8 +274,7 @@ data Num_CC a =
     negate_CC :: a :-> a
   }
 dNumInt_CC :: Num_CC Int  -- Int \equiv Int_CC
-dNumInt_CC = Num_CC $: fr?? isoInt primAddInt $: fr?? isoInt primNegateInt
-!!!TODO
+dNumInt_CC = Num_CC (to (isoArr isoInt (isoArr isoInt isoInt)) primAddInt) (to (isoArr isoInt isoInt) primNegateInt)
 ```
 
 ---
