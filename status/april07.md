@@ -3,8 +3,8 @@
 
 
 GHC continues to thrive.  One indicator of how widely GHC is used is the
-number of bug reports we get.  Here is the number of Trac tickets milestoned
-for the last few releases of GHC:
+number of bug reports we get.  Here is a graph showing how the number of
+bug reports filed has varied with time:
 
 
 
