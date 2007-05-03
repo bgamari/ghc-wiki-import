@@ -2,7 +2,7 @@
 
 
 
-This is a rough description of some of the coding practices and style that we use for Haskell code inside `compiler`. 
+This is a rough description of some of the coding practices and style that we use for Haskell code inside `compiler`. See the [Style Conventions for RTS C code](commentary/rts/conventions) for code in `rts` and `include`.
 
 
 
