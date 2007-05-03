@@ -2,7 +2,7 @@
 DataParallel/ClosureConversion Up?
 
 
-## Closure conversion without indexed types
+## Closure conversion without classes
 
 
 
