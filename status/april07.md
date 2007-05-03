@@ -8,7 +8,7 @@ for the last few releases of GHC:
 
 
 
-**Simon or Ian: can you add a little table here?**
+[](/trac/ghc/attachment/wiki/Status/April07/bugs_per_day.png)
 
 
 
