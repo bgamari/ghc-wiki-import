@@ -1,4 +1,4 @@
-# The GHC Commentary - Coding Style Guidelines
+# The GHC Commentary - Coding Style Guidelines for the compiler
 
 
 
