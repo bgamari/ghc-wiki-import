@@ -1,3 +1,20 @@
 ## Implementation notes for closure conversion
 
 
+### General
+
+
+
+Almost all of the code concerning closure conversion is in the module `ClosureConv` in the directory `vectorise/`.  This module exports the function `closureConvert`, which is invoked as part of the core-to-core passes right after the desugarer if the option `fclosure-conv` is provided.
+
+
+### Actual conversion
+
+
+
+There is a [separate description](data-parallel/closure-conversion/class-less) of the conversion scheme.  This abstract description uses the convention that the existance of an `Id`, `TyCon`, or `dataCon` name followed by `_CC` indicates whether we have a closure converted variant of the corresponding declaration.  In the concrete implementation this information is maintained in `UniqFM`s.
+
+
+### Cross-module information
+
+
