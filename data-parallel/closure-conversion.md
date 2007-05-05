@@ -11,17 +11,17 @@ http://www.cse.unsw.edu.au/\~chak/papers/LCK06.html](http://www.cse.unsw.edu.au/
 http://opus.kobv.de/tuberlin/volltexte/2006/1286/](http://opus.kobv.de/tuberlin/volltexte/2006/1286/).
 
 
-### Plan
+### Workplan
 
 
 
 Implement in following order:
 
 
-1. Call a single closure-converted module from non-converted code (we know how to do this)
-1. Import cc'd modules in other cc'd modules (we need to decide on how to put the additional CC info into ifaces)
+1. Call a single closure-converted module from non-converted code (we know how to do this) ** DONE **
+1. Use non-cc'd modules in cc'd modules ** DONE **
+1. Import cc'd modules in other cc'd modules (we need to decide on how to put the additional CC info into ifaces) ** IN PROGRESS **
 1. CC data types (see below)
-1. Use non-cc'd modules in cc'd modules
 
 ### Closure-converted types as indexed-types
 
