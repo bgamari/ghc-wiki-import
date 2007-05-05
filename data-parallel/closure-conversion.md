@@ -24,8 +24,7 @@ Implement in following order:
 1. CC data types (see below)
 
 
-We have got some \[[wiki:DataParallel/ClosureConversion/ImplNotes](data-parallel/closure-conversion/impl-notes) notes
-on the implementation\].
+We have got some  [notes on the implementation](data-parallel/closure-conversion/impl-notes).
 
 
 ### Closure conversion without classes
