@@ -23,11 +23,16 @@ Implement in following order:
 1. Import cc'd modules in other cc'd modules (we need to decide on how to put the additional CC info into ifaces) ** IN PROGRESS **
 1. CC data types (see below)
 
+
+We have got some \[[wiki:DataParallel/ClosureConversion/ImplNotes](data-parallel/closure-conversion/impl-notes) notes
+on the implementation\].
+
+
 ### Closure conversion without classes
 
 
 
-We currently implement a [simple scheme](data-parallel/closure-conversion/class-less) that operates entirely on the Core representation and doesn't use comversion classes. 
+We currently implement a [simple scheme](data-parallel/closure-conversion/class-less) that operates entirely on the Core representation and doesn't use conversion classes. 
 
 
 ### Alternative: Closure-converted types as indexed types
