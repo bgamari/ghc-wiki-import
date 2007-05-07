@@ -9,7 +9,7 @@ The `IfaceSyn.IfaceData` variant of `IfaceDecl` contains a new `ifFamInst :: May
 
 
 
-Moreover, much like class instances, family instance heads of a module are collected in the new `mi_fam_insts :: [IfaceFamInst]` field of `HscTypes.ModIface`.  This allows to enter the rough matches into the `ModGuts`, when reading the interface, without having to parse the full tycon that represents the instance yet.  This in turn avoids pulling in everything that hangs of that tycon.
+Moreover, much like class instances, family instance heads of a module are collected in the new `mi_fam_insts :: [IfaceFamInst]` field of `HscTypes.ModIface`.  This allows to enter the rough matches into the `ExternalPackageState` or `ModDetails`, when reading the interface, without having to parse the full tycon that represents the instance yet.  This in turn avoids pulling in everything that hangs of that tycon.
 
 
 ## Module dependencies due to family instances
