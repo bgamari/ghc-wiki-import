@@ -61,11 +61,7 @@ The meta-function "`^`", written postfix, converts from normal code to closure-c
 
 - For each data type `T`, create a closure-converted data type `T_CC`, whose constructors use `(:->)` instead of `(->)`. 
 
-- The value `iso<ty>` is a pair of functions, converting to and fro between `ty` and `ty^`.
-
-
-Like "`^`", the `iso<ty>` thing should be considered as a meta-function that works recursively on `ty`.
-
+- The value `iso<ty>` is a pair of functions, converting to and fro between `ty` and `ty^`.  Like "`^`", the `iso<ty>` thing should be considered as a meta-function that works recursively on `ty`.
 
 
 Invariants:
