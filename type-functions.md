@@ -76,6 +76,11 @@ Note: we previously used the term "indexed type", but have now switched to using
 
 
 
+The user-level definition of the type-family extensions is given here [
+http://haskell.org/haskellwiki/GHC/Indexed\_types](http://haskell.org/haskellwiki/GHC/Indexed_types). Section 4, "Definition of the type system extension" constitues the specification.
+
+
+
 Refinement of the specification in the *Beyond Associated Types* paper.  (I'll actually link this paper here once it is a bit more coherent.)  Some [examples are on an extra page](type-functions-examples).
 
 
