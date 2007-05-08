@@ -23,6 +23,10 @@ Please feel free to add material to this commentary: don't worry too much about 
 
 
 - [The Runtime System](commentary/rts)
+  In addition to the usual runtime support contains information on:
+
+  - [The Haskell Execution Model](commentary/rts/haskell-execution)
+  - [The memory layout of heap and stack objects](commentary/rts/storage)
 
 
  
