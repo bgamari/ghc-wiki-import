@@ -5,6 +5,10 @@
 [compiler/codeGen](/trac/ghc/browser/ghc/compiler/codeGen)
 
 
+
+See [The Storage Manager](commentary/rts/storage) for the [Layout of the stack](commentary/rts/storage/stack).
+
+
 ## Storage manager representations
 
 
