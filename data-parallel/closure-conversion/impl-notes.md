@@ -19,7 +19,7 @@ There is a [separate description](data-parallel/closure-conversion/class-less) o
 
 
 
-The vectorisation information relevant across individual modules is maintained as values of type `HscTypes.VectInfo` and `HscTypes.IfaceVectInfo`.  The former is the representation in `HscTypes.ModGuts` and the `HscTypes.ExternalPackageState`; the latter is used in `HscTypes.ModIface`.
+The vectorisation information relevant across individual modules is maintained as values of type `HscTypes.VectInfo` and `HscTypes.IfaceVectInfo`.  The former is the representation in `HscTypes.ModGuts`, `HscTypes.ModDetails`, and the `HscTypes.ExternalPackageState`; the latter is used in `HscTypes.ModIface`.  The conversion between the two forms is peformed in `MkIface` and `TcIface`, respectively
 
 
 
@@ -27,6 +27,6 @@ In the `ExternalPackageState`, we use the same approach to combine the `VectInfo
 
 
 
-**TODO** `hptVectInfo` and use of that.
+The function `HscTypes.hptVectInfo` computes the combined vectorisation information of a home package table.
 
 
