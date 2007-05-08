@@ -269,7 +269,9 @@ Data constructor closure types:
   `Char`.  The RTS includes some static instances of these types so that instead of allocating a new `Char`
   on the heap, we can use the static RTS instance instead and save some heap space.  See    
   [rts/StgMiscClosures.cmm](/trac/ghc/browser/ghc/rts/StgMiscClosures.cmm).
+  TODO No longer in [includes/ClosureTypes.h](/trac/ghc/browser/ghc/includes/ClosureTypes.h).  Needs explaination why or removal.
 - `CONSTR_STATIC`: a statically allocated constructor.
+- `CONSTR_NOCAF_STATIC`: TODO Needs documentation
 
 
 The entry code for a constructor returns immediately to the topmost stack frame, because the data constructor is already in WHNF.  The return convention may be vectored or non-vectored, depending on the type (see [Commentary/Rts/HaskellExecution](commentary/rts/haskell-execution#return-convention)).
