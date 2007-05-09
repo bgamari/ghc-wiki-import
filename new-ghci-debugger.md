@@ -182,7 +182,7 @@ Each breakpoint is given a unique number, which can be used to identify the brea
 ```
 
 
-Breakpoint 0 is set in the module `Main` on the breakable expression which spans between the source locations (12,4) to (12,8). Similarly for breakpoints 1 and 2.
+Breakpoint 0 is set in the module `Main` on the breakable expression which spans between the source locations (12,4) to (12,8). Similarly for breakpoints 1 and 2. \[GHC counts '\\t' as a single char for row number counts, we should mention this, or normalize the numbers - AJG\]
 
 
 ### Deleting breakpoints
