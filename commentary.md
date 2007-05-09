@@ -36,10 +36,15 @@ Please feel free to add material to this commentary: don't worry too much about 
 
   - [Profiling](commentary/profiling)
   - [Primitive Operations (PrimOps)](commentary/prim-ops); see also [Wired-in and known-key things](commentary/compiler/wired-in)
+  - [Position Independent Code and Dynamic Linking](commentary/position-independent-code)
 
 - [The User Manual](commentary/user-manual) (formatting guidelines etc)
 
 - [The Evil Mangler](commentary/evil-mangler)
+
+- Working on GHC
+
+  - [DebuggingGhcCrashes](debugging-ghc-crashes): how to use gdb to debug a crash in GHC-compiled code.
 
 ## Contributed Documentation
 
@@ -63,7 +68,6 @@ Please feel free to add new pages here.  In due course information will migrate 
   - [ExternalCore](external-core): Describes the process of bringing External Core up to speed. Once finished, this will simply describe what External Core is, and how it works. 
   - [HaddockComments](haddock-comments): Some notes about how the Haddock comment support is implemented.
   - [ExplicitCallStack](explicit-call-stack): Notes about maintaining an explicit call stack, to support error attribution and profiling.
-  - [Position Independent Code and Dynamic Linking](commentary/position-independent-code)
 
 - The Runtime System
 
@@ -79,7 +83,6 @@ Please feel free to add new pages here.  In due course information will migrate 
 - Getting to grips with the code base
 
   - BeginnersNotes: Some notes about getting started hacking GHC and the structure of the compiler (especially types and typecheck)
-  - [DebuggingGhcCrashes](debugging-ghc-crashes): how to use gdb to debug a crash in GHC-compiled code.
 
 - [Hackathon presentations](about-videos) (video)
 
