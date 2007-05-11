@@ -29,6 +29,7 @@ The compiler itself is written entirely in Haskell, and lives in the many sub-di
   - Core-\>CorePrep
   - CorePrep-\>Stg?
   - [The code generator](commentary/compiler/code-gen): Stg-\>Cmm
+  - [CPSer](commentary/compiler/cps): Cmm-\>Cmm (not in HEAD yet)
 
 - [The GHC API](commentary/compiler/api)
 - [Symbol names and the Z-encoding](commentary/compiler/symbol-names)
