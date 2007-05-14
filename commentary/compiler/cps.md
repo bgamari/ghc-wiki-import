@@ -54,7 +54,7 @@ This pass takes Cmm with native proceedure calls and an implicit stack and produ
 
   - Makes calling convention explicit
   - For externally visible functions calling conventions is machine specific, but not backend specific because functions compiled from different backends must be be able to call eachother
-  - Lor local functions calling convention can be left up to the backend because, it can take advantage of register allocation.
+  - For local functions calling convention can be left up to the backend because it can take advantage of register allocation.
 
     - However, the first first draft will specify the standard calling convention for all functions even local ones because:
 
