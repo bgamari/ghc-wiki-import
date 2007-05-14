@@ -111,7 +111,7 @@ Refinement of the specification in the *Beyond Associated Types* paper.  (I'll a
 - In export and import lists, all data constructors of newtype and data families defined in any newtype or data instance is regarded to be a subcomponent of the family type constructor, and hence specified by `F(..)` if `F` is the family type constructor.  Instead of specifying them all with "`..`", they can also be explicitly listed, just as with vanilla data types.
 - Instances of indexed data and new types may not overlap (as such instances correspond to indeterminate type functions).  Type equations may only overlap if the equations coincide at critical pairs.  (Rational: We cannot be more lazy about checking overlap, as we otherwise cannot guarantee that we generate an F<sub>C</sub> program that fulfils the formal consistency criterion.)
 - FFI signatures do not look through indexed newtypes nor through indexed synonyms.  (The main reason for not looking through indexed synonyms is as they may occur in the rhs of a vanilla newtype.)
-- To enable indexed type families, the switch `-findexed-types` needs to be used (which is implied by `-fglasgow-exts`).
+- To enable indexed type families, the switch `-ftype-families` needs to be used (which is implied by `-fglasgow-exts`).
 
 
 Restrictions:
