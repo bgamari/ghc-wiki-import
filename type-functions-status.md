@@ -9,7 +9,6 @@
 **Current:**
 
 
-1. Add type synonym instances to ifaces.  (This is easy, just add the (new) parent information of `SynTyCon`s.)
 1. Dictionary handling for equational constraints:
 
   - Where do we check the details of the formation of equational constraints?  (In `check_pred_ty`?)
@@ -99,10 +98,8 @@ Done:
 
 
 
-Todo (low-level):
+Todo (low-level): None.
 
-
-- The `IfaceSyn` case of `TcIface.tcIfaceDecl` needs to be extended to receive and handle `mb_parent` information.  That should actually be all required to put synonym family instances into ifaces and get them out again.
 
 
 Todo (high-level): None.
