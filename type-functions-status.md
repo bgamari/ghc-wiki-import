@@ -1,8 +1,8 @@
+
+[TypeFunctions](type-functions)/Status
+
+
 # Type Functions: Implementation Status
-
-
-
-Back to [TypeFunctions](type-functions).
 
 
 
