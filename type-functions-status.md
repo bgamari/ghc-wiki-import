@@ -126,4 +126,4 @@ Done:
 Todo:
 
 
-- Compile libraries with CoreLint.
+- Are the tests being compiled with CoreLint?
