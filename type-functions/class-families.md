@@ -105,8 +105,11 @@ As with data families, the class families can be associated with a class by decl
 
 
 
-**OPEN QUESTION:** Do we allow associated types and classes(?!?) in class-family instances?
+**OPEN QUESTIONs:** 
 
+
+- Should an associated class be a (kind of) superclass of its parent.  At least, we may want to add it implicitly to the signature of each method.  Not sure about this, but Roman suggested it, too.
+- Do we allow associated types and classes(?!?) in class-family instances?
 
 ### Type checking
 
