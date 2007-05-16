@@ -72,7 +72,7 @@ The class-family instances have no members in this case, but use existing classe
 
 
 
-SLPJ note: I wonder whether it is ever useful to have a class instance with signatures.  Suppose we only allowed the signature-free form?  That would simplify the explanation in many ways (e.g. no need to say whether class instances can themselves have assoicated types!), and loses no expressive power.  I don't think it loses much convenience either.
+**SLPJ note**: I wonder whether it is ever useful to have a class instance with signatures?  Suppose we only allowed the signature-free form?  That would simplify the explanation in many ways (e.g. no need to say whether class instances can themselves have assoicated types!), and loses no expressive power.  I don't think it loses much convenience either.
 
 
 ### The language extension
@@ -229,3 +229,8 @@ instance Ord a => Collection (OrdSet a) where
 instance Collection [a] where
   type Element [a] = a
 ```
+
+
+**SLPJ note**: I don't understand the question here.
+
+
