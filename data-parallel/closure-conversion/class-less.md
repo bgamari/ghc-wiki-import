@@ -1,7 +1,3 @@
-
-DataParallel/ClosureConversion Up?
-
-
 ## Closure conversion without classes
 
 
