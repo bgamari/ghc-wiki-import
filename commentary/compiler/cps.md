@@ -123,7 +123,9 @@ This pass takes Cmm with native proceedure calls and an implicit stack and produ
   - Garbage collector
   - Proc points
 
-    - (May cause new blocks)
+    - May cause new blocks
+    - May cause new functions
+    - Lives could be passes either on stack or in arguments
   - Proc grouping of blocks
 - Upstream
 
