@@ -134,7 +134,7 @@ This pass takes Cmm with native proceedure calls and an implicit stack and produ
 ## Notes
 
 
-- Changed the parameter to a CmmTop to be CmmFormals instead of \[LocalReg\]
+- Changed the parameter to a `CmmTop` to be `CmmFormals` instead of `[LocalReg]`
 
-  - CmmFormals are \[(CmmReg,MachHint)\]
+  - `CmmFormals` are `[(CmmReg,MachHint)]`
   - This field seems to not have been being used; it only require a type change
