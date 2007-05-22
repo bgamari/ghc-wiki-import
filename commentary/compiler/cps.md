@@ -130,3 +130,11 @@ This pass takes Cmm with native proceedure calls and an implicit stack and produ
 - Upstream
 
   - Have `codeGen` emit C-- with functions.
+
+## Notes
+
+
+- Changed the parameter to a CmmTop to be CmmFormals instead of \[LocalReg\]
+
+  - CmmFormals are \[(CmmReg,MachHint)\]
+  - This field seems to not have been being used; it only require a type change
