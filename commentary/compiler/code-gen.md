@@ -161,10 +161,18 @@ Please help classify these if you know what they are.
 >
 >
 > Bitmap
-> ClosureInfo
-> SMRep
 >
 >
+
+<table><tr><th>ClosureInfo</th>
+<td>Stores info about the memory layouts of closures
+</td></tr>
+<tr><th>SMRep</th>
+<td>
+Storage manager representation of closures.
+Part of ClosureInfo but kept separate to "keep nhc happy."
+</td></tr></table>
+
 
 >
 >
