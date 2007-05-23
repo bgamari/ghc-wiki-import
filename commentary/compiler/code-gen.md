@@ -198,9 +198,18 @@ All the functions are dead stubs except `granYield` and `granFetchAndReschedule`
 Please help classify these if you know what they are.
 
 
+<table><tr><th>CgBindery</th>
+<td>
+Module for `CgBindings` which maps variable names
+to all the volitile or stable locations where they are stored
+(e.g. register, stack slot, computed from other expressions, etc.)
+Provides the `addBindC`, `modifyBindC` and `getCgIdInfo` functions
+for adding, modifying and looking up bindings.
+</td></tr></table>
+
+
 >
 >
-> CgBindery
 > CgHeapery
 > CgStackery
 >
