@@ -151,35 +151,52 @@ entry.
 </td></tr></table>
 
 
+### Misc utilities
+
+
+<table><tr><th>Bitmap</th>
+<td>
+Utility functions for making bitmaps (e.g. `mkBitmap` with type `[Bool] -> Bitmap`)
+</td></tr>
+<tr><th>ClosureInfo</th>
+<td>
+Stores info about the memory layouts of closures
+</td></tr>
+<tr><th>SMRep</th>
+<td>
+Storage manager representation of closures.
+Part of ClosureInfo but kept separate to "keep nhc happy."
+</td></tr>
+<tr><th>CgUtils</th>
+<td>TODO
+</td></tr></table>
+
+
+### Special runtime support
+
+
+<table><tr><th>CgTicky</th>
+<td>Ticky-ticky profiling
+</td></tr>
+<tr><th>CgProf</th>
+<td>Cost-centre profiling
+</td></tr>
+<tr><th>CgHpc</th>
+<td>Support for the Haskell Program Coverage (hpc) toolkit, inside GHC.
+</td></tr>
+<tr><th>CgParallel</th>
+<td>
+Code generation for GranSim (GRAN) and parallel (PAR).
+All the functions are dead stubs except `granYield` and `granFetchAndReschedule`.
+</td></tr></table>
+
+
 ### Not yet classified
 
 
 
 Please help classify these if you know what they are.
 
-
->
->
-> Bitmap
->
->
-
-<table><tr><th>ClosureInfo</th>
-<td>Stores info about the memory layouts of closures
-</td></tr>
-<tr><th>SMRep</th>
-<td>
-Storage manager representation of closures.
-Part of ClosureInfo but kept separate to "keep nhc happy."
-</td></tr></table>
-
-
->
->
-> CgTicky
-> CgUtils
->
->
 
 >
 >
@@ -200,14 +217,6 @@ Part of ClosureInfo but kept separate to "keep nhc happy."
 >
 > CgCase
 > CgLetNoEscape
->
->
-
->
->
-> CgHpc
-> CgParallel
-> CgProf
 >
 >
 
