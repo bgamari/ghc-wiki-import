@@ -206,12 +206,14 @@ Please help classify these if you know what they are.
 >
 >
 
->
->
-> CgClosure
-> CgCon
->
->
+<table><tr><th>Maybe top-level</th>
+<td>It seems that codeGen calls these two which in turn call CgExpr
+
+- CgClosure
+- CgCon
+
+</td></tr></table>
+
 
 >
 >
