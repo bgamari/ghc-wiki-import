@@ -113,6 +113,9 @@ This pass takes Cmm with native proceedure calls and an implicit stack and produ
 - Downstream
 
   - Argument passing convention
+  - Stack check
+
+    - Needs some way to synchronize the branch label with the heap check
 - Midstream
 
   - Support `switch` (needed by rts/Apply.cmm)
