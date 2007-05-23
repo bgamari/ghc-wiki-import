@@ -126,3 +126,95 @@ tell whether a code fragment is a return point or a closure/function
 entry.
 
 
+## Modules
+
+
+<table><tr><th>`CodeGen`</th>
+<td>Top level. Called by the `HscMain` module.
+</td></tr></table>
+
+
+<table><tr><th>`CgMonad`</th>
+<td>The monad that most of codeGen operates inside
+
+- Reader
+- State
+- (could be Writer?)
+- fork
+- flatten
+
+</td></tr></table>
+
+
+<table><tr><th>`CgExpr`</th>
+<td>Seems to be the core function since everything in STG is an expression
+</td></tr></table>
+
+
+### Not yet classified
+
+
+
+Please help classify these if you know what they are.
+
+
+>
+>
+> Bitmap
+> ClosureInfo
+> SMRep
+>
+>
+
+>
+>
+> CgTicky
+> CgUtils
+>
+>
+
+>
+>
+> CgBindery
+> CgHeapery
+> CgStackery
+>
+>
+
+>
+>
+> CgClosure
+> CgCon
+>
+>
+
+>
+>
+> CgCase
+> CgLetNoEscape
+>
+>
+
+>
+>
+> CgHpc
+> CgParallel
+> CgProf
+>
+>
+
+>
+>
+> CgInfoTbls
+> CgCallConv
+>
+>
+
+>
+>
+> CgPrimOp
+> CgTailCall
+> CgForeignCall
+>
+>
+
