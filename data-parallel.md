@@ -14,7 +14,7 @@ Most of the material describing our approach is partitioned into a set of subpag
 - [Data parallelism on shared-memory machines](data-parallel/smp)
 - [High-level design of adding NDP to GHC](data-parallel/design)
 - [Details of the implementation of closure conversion](data-parallel/closure-conversion)
-- Requirements of the vectorisation transformation?
+- [Our plan for implementing vectorisation on top of closure conversion](data-parallel/vectorisation)
 - [Desugaring of array comprehensions](data-parallel/desugaring)
 - [Other nested data parallel work](data-parallel/related)
 
