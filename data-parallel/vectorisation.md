@@ -47,6 +47,60 @@ We have to different array libraries:
 Vectorisation transforms all uses of functions from `GHC.PArr` into uses of package ndp.  It can obviously only do that for computations manipulating values for whose type we have `PA` instances.
 
 
+### Basic data types
+
+
+
+In the generated code, we need closures, array families, array closure, and so forth.  We define closure as:
+
+
+```wiki
+data a :-> b = forall e. !(e -> a -> b) :$ e
+```
+
+
+with basic closure cosntruction and application as
+
+
+```wiki
+lam :: (a -> b) -> (a :-> b)
+lam f = const f :$ ()
+
+($:) :: (a :-> b) -> a -> b
+(f :$ e) $: x = f e x
+```
+
+
+Moreover, we have a type class `PA` determining the types of values that may occur as array elements in flattened arrays.  The array type family `PArr` is associated with `PA`:
+
+
+```wiki
+class PA a where
+  data PArr a
+  replicateP :: Int -> a -> PArr a
+  mapP       :: PA b => (a -> b) -> PArr a -> PArr b
+  ..and so on..
+```
+
+
+A crucial element in the transformation is the representation of arrays of closures as *array closures*:
+
+
+```wiki
+data a :=> b 
+  = forall e. PA e => 
+      !(PArr e -> PArr a -> PArr b) ::$ PArr e
+```
+
+
+We apply array closures as follows:
+
+
+```wiki
+($::) :: (a :=> b) -> PArr a -> PArr b
+(fs ::$ es) $:: as = fs es as
+```
+
 ### Transformations
 
 
