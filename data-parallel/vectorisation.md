@@ -47,3 +47,18 @@ We have to different array libraries:
 Vectorisation transforms all uses of functions from `GHC.PArr` into uses of package ndp.  It can obviously only due that for computations manipulating values for whose type we have `PA` instances.
 
 
+---
+
+
+#### TODO
+
+
+
+Items that need to be addressed on the page:
+
+
+- Mixed use of the CC isomorphism strategy and a `PA` class for arrays.
+- Introduction of `PA` dictionary arguments right after each big lambda in vectorised code.
+- Treatment of unboxed values and functions from `GHC.Prim`.
+- Transformation schemata
+- Examples
