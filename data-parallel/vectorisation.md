@@ -108,9 +108,9 @@ We apply array closures as follows:
 We have a number of transformations that together realise vectorisation:
 
 
-- [Type vectorisation:](data-parallel/vectorisation/type-vectorisation) Similar as in closure-conversion, we have to convert types.  And similar as in closure conversion, the main effect here is the representation of functions.  In addition to the use of closure instead of plain functions, we need towo versions of each function: (1) a scalar version and (2) a version lifted into vector space.
-- [Code vectorisation:](data-parallel/vectorisation/code-vectorisation) This includes closure conversion and the pairing of scalar and lifted code.
-- Code lifting:? This converts operations on types `t` into operations on types `[:t:]`.
+- [Type vectorisation](data-parallel/vectorisation/type-vectorisation) (`t*`): Similar as in closure-conversion, we have to convert types.  And similar as in closure conversion, the main effect here is the representation of functions.  In addition to the use of closure instead of plain functions, we need towo versions of each function: (1) a scalar version and (2) a version lifted into vector space.
+- [Code vectorisation](data-parallel/vectorisation/code-vectorisation) (`e*`): This includes closure conversion and the pairing of scalar and lifted code.
+- Code lifting? (`e^`): This converts operations on types `t` into operations on types `[:t:]`.
 
 ---
 
