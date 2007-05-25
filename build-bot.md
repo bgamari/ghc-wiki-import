@@ -55,6 +55,14 @@ This will print a few lines asking you to fill in `info/admin` and `info/host`. 
 
 
 
+By default it seems that buildbot uses a umask of 077, this probably isn't what you want.  For example, if you intend to upload distributions, they'll have restricted permissions.  You can change it in the `buildbot.tac` file, we set it to 002 for example:
+
+
+```wiki
+umask = 002
+```
+
+
 It also created `Makefile.sample`; we recommend renaming this to `Makefile`. You can now start the buildbot client with `make start` and stop it with `make stop`.
 
 
