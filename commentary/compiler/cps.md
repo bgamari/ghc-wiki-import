@@ -185,3 +185,37 @@ This pass takes Cmm with native proceedure calls and an implicit stack and produ
       }
     }
     ```
+
+- We need the NCG to do aliasing analysis.  At present the CPS pass will generate the following, and will assume that the NCG can figure out when the loads and stores can be eliminated.
+
+  ```wiki
+  foo () {
+    // Parameters in regs
+    a = R1;
+    b = R2;
+    // Parameters on stack
+    c = [Sp-8];
+    d = [Sp-4];
+    // Saved live variables
+    e = [Sp+4];
+    f = [Sp+8];
+
+    /*
+    ...
+    Misc code that might mutate variables
+    or branch or loop or any other evil thing
+    ...
+    */
+
+    // A tail call (there could be multiple blocks that have this)
+    a = R1;
+    b = R2;
+    // Parameters on stack
+    c = [Sp-8];
+    d = [Sp-4];
+    // Saved live variables
+    e = [Sp+4];
+    f = [Sp+8];
+    
+  }
+  ```
