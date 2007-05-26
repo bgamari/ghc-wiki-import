@@ -730,7 +730,7 @@ these steps:
 > >
 > >
 > > ```wiki
-> >     test(tc001, normal, compile, ['-fglasgow-exts'])
+> >     test('tc001', normal, compile, ['-fglasgow-exts'])
 > > ```
 > >
 > >
