@@ -113,6 +113,20 @@ vect :: (a -> b) -> (a ->> b)
 vect f = Fun f (mapP f)
 ```
 
+
+Hmm, thinking about this, a data type will get us into trouble with unboxed types.  Maybe
+
+
+```wiki
+type a ->> b = (a -> b) :*: (a^ -> b^)
+vect :: (a -> b) -> (a ->> b)
+vect f = f :*: mapP f
+```
+
+
+But that doesn't make any sense due to the `a^` and `b^`.  Seems like we have to hardcode this representation into the type translation scheme.
+
+
 ---
 
 
