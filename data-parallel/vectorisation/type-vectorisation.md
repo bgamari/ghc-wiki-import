@@ -21,7 +21,7 @@ Int#^    = UArr Int
 Float#^  = UArr Float
 Double#^ = UArr Double
 <and so on for other unboxed types>
-t^       = PArr t
+t^       = PArr t*
 ```
 
 
@@ -35,25 +35,25 @@ We need to represent functions whose argument and/or result type are unboxed dif
 TODO
 
 
-- Be careful that `t1* ->> t2*` includes `PArr t1` and `PArr t2*`; so, we can only use that if we have `PA` instances for these types.
+- Be careful that `VFun (t1* -> t2*)` and `t1* -> t2*` includes `PArr t1` and `PArr t2*`; so, we can only use them if we have `PA` instances for these types.
 
 
 The type transformation rules achieve two goals: (1) they replace original type constructors and variables by their vectorised variants, where those are available, and (2) they alter the representation of functions:
 
 
 ```wiki
-T*            = T_V  , if T_V exists
-              = T    , otherwise
-a*            = a_v
-(t1 -> t2)*   = (t1* -> t2*) :*:  , if kindOf t1 == #
-                (t1^ -> t2^)        or kindOf t2 == #
-              = t1 ??
-(t1 t2)*      = t1* t2*
-(forall a.t)* = forall a_v.t*
+T*                   = T_V  , if T_V exists
+                     = T    , otherwise
+a*                   = a_v
+(t1 -> t2)*
+ | isUbxFun (t1->t2) = (t1* -> t2*) :|| (t1^ -> t2^)
+ | otherwise         = t1* :-> t2*
+(t1 t2)*             = t1* t2*
+(forall a.t)*        = forall a_v.t*
 ```
 
 
-The transformation of function types includes both the change from `(->)` to `(:->)` as well as 
+We need to distinguish between saturated function space applications involving unboxed types and those that don't, as we need to remain to be compatible with `(->_v) = (:->)`.
 
 
 ```wiki
