@@ -132,7 +132,7 @@ On top of this we define a vectorised function space constructor:
 
 
 ```wiki
-newtype a :-> b = Fun (VFun (a -> b))
+newtype a :-> b = Fun ((a -> b) :|| (PArr a -> PArr b))
 funS (Fun (fS :|| _ )) = fS
 funP (Fun (_  :|| fP)) = fP
 ```
