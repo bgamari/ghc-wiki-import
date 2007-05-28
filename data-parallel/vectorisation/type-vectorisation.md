@@ -57,6 +57,7 @@ We need to distinguish between saturated function space applications involving u
 
 
 ```wiki
+--- OLD
 T*            = T_V , if T_V exists
               = T    , otherwise
 a*            = a_v
