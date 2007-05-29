@@ -60,7 +60,7 @@ When encountering saturated function space applications , we need to distinguish
 
 
 
-The lifting of types into vector space is, for all boxed monotypes, denoted by the array family constructor `PArr`.  However, need to handle the lifting of unboxed types and the extension of signatures with `PA` dictionaries explicitly:
+The lifting of types into vector space is, for all boxed monotypes, denoted by the array family constructor `PArr`.  However, we need to handle the lifting of unboxed types and the extension of signatures with `PA` dictionaries explicitly:
 
 
 ```wiki
@@ -89,3 +89,33 @@ newtype instance PArr (f :|| (arr -> brr))
   = PArrUFun (f :|| (ACls arr brr))
 newtype instance PArr (a :-> b) = PArrFun (a :=> b)
 ```
+
+### Examples
+
+
+```wiki
+(Int  -> Int)* = Int_V :-> Int_V
+(Int# -> Int)* = (Int# -> Int) :|| (UArr Int -> PArr Int)
+
+[:Int  -> Int:]* = PArr (Int_V :-> Int_V)
+[:Int# -> Int:]* = PArr ((Int# -> Int) :|| 
+                         (UArr Int -> PArr Int))
+```
+
+
+So, we have the `PArrUFun` type instance
+
+
+```wiki
+PArrUFun :: ((Int# -> Int) :|| ACls (UArr Int) (PArr Int))
+         -> PArr ((Int# -> Int) :|| (UArr Int -> PArr Int))
+```
+
+
+which constructs parallel arrays containing functions of type `Int# -> Int`.
+
+
+
+**Problem:** Pairing an array closure (that only contains a lifted function) with a scalar function that takes no environment seems useless.  We cannot use that scalar function to extract a single element from the array closure, as it cannot make any use of that single element from the environment array.  On the other hand, we cannot include the scalar function into the closure when the function manipulates unboxed tyes...or can we?!?
+
+
