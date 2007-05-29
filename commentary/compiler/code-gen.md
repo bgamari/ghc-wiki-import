@@ -188,6 +188,25 @@ Also includes code for stack and heap checks and `emitSetDynHdr`.
 </td></tr></table>
 
 
+### Function Calls and Parameter Passing
+
+
+
+(Note: these will largely go away once CPS conversion is fully implemented.)
+
+
+<table><tr><th>`CgPrimOp`, `CgTailCall`, `CgForeignCall`</th>
+<td>
+Handle different types of calls.
+</td></tr>
+<tr><th>`CgCallConv`</th>
+<td>
+Use by the others in this category to determine liveness and
+to select in what registers and stack locations arguments and return
+values get stored.
+</td></tr></table>
+
+
 ### Misc utilities
 
 
@@ -240,7 +259,6 @@ Please help classify these if you know what they are.
 >
 >
 > CgInfoTbls
-> CgCallConv
 >
 >
 
@@ -248,14 +266,6 @@ Please help classify these if you know what they are.
 >
 > CgCase
 > CgLetNoEscape
->
->
-
->
->
-> CgPrimOp
-> CgTailCall
-> CgForeignCall
 >
 >
 
