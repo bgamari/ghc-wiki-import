@@ -97,7 +97,7 @@ xxx_HOST_OS
 
 
 
-GHC must be compilable by every major version of GHC from 5.02 onwards, and itself. It isn't necessary for it to be compilable by every intermediate development version (that includes last week's CVS sources). 
+GHC must be compilable by every major version of GHC from 6.2 onwards, and itself. It isn't necessary for it to be compilable by every intermediate development version (that includes last week's darcs sources). 
 
 
 
