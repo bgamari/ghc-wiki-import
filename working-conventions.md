@@ -70,7 +70,7 @@ We welcome your involvement in making GHC able to do more.  That said, we think 
 
 - A new feature should come with 
 
-  - A **commit message** that (a) explains what the patch does, and (b) sketches how it works.
+  - A **patch name** and **description** that (a) explains what the patch does, and (b) sketches how it works.  See "Patch naming" below for conventions concerning the patch name.
   - A **patch to the user manual** that documents it (part of the main source-code patch)
   - A **(separate) patch to the testsuite repository** that gives a reasonable collection of tests for the new feature.  This has to be a separate patch, because the testsuite is a separate repository.
 
@@ -84,6 +84,30 @@ We welcome your involvement in making GHC able to do more.  That said, we think 
 
 If you are working on a feature that you think you think is a candidate for including in GHC's main repository, you may want to talk to us while you are developing it.  We may well, for example, have advice about how to structure the change in a way that we're happy to incorporate in our code base.
 
+
+## Patch naming
+
+
+
+We have a simple naming convention for certain kinds of patches:
+
+
+- If your patch fixes breakage in the build, then begin the patch name with `"FIX BUILD"`. e.g.
+
+  ```wiki
+    FIX BUILD Use the right find on Windows systems; fixes bindist creation
+  ```
+
+  The point here is that if someone pulls GHC from darcs and experiences a build failure, they can try
+  `darcs pull -a -p "FIX BUILD"` in order to grab patches that fix it, without grabbing anything else
+  that might introduce further breakage.
+
+- If your patch fixes a bug, then begin the patch name with `"FIX #NNNN"`, where `NNNN` is the ticket
+  number. e.g.
+
+  ```wiki
+    FIX #767 (withMVar family have a bug)
+  ```
 
 ## Committing changes
 
