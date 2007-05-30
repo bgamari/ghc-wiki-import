@@ -185,7 +185,7 @@ List imports in the following order:
   ```
 
 
-Import library modules from the core packages only (core packages are listed in [libraries/core-packages](/trac/ghc/browser/ghc/libraries/core-packages). Use `#defines `in `HsVersions.h` when the modules names differ between versions of GHC.  For code inside `#ifdef GHCI`, don't worry about GHC versioning issues, because this code is only ever compiled by the this very version of GHC.
+Import library modules from the core packages only (core packages are listed in [libraries/core-packages](/trac/ghc/browser/ghc/libraries/core-packages)). Use `#defines `in `HsVersions.h` when the modules names differ between versions of GHC.  For code inside `#ifdef GHCI`, don't worry about GHC versioning issues, because this code is only ever compiled by the this very version of GHC.
 
 
 
