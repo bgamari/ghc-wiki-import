@@ -9,6 +9,17 @@ This is a rough description of some of the coding practices and style that we us
 The general rule is to stick to the same coding style as is already used in the file you're editing. If you must make stylistic changes, commit them separately from functional changes, so that someone looking back through the change logs can easily distinguish them. 
 
 
+## General Style
+
+
+
+It's much better to write code that is transparent, than to write code that is short.
+
+
+
+Often it's better to write out the code longhand than to reuse a generic abstraction (not always, of course).  Sometimes it's better to duplicate some similar code than to try to construct an elaborate generalisation with only two instances.  Remember: other people have to be able to quickly understand what you've done, and overuse of abstractions just serves to obscure the *really* tricky stuff, and there's no shortage of that in GHC.
+
+
 ## To literate or not to literate?
 
 
@@ -206,16 +217,5 @@ Import library modules from the core packages only (core packages are listed in 
 
 
 If the module can be compiled multiple ways (eg. GHCI vs. non-GHCI), make sure the imports are properly `#ifdefed` too, so as to avoid spurious unused import warnings. 
-
-
-### General Style
-
-
-
-It's much better to write code that is transparent, than to write code that is short.
-
-
-
-Often it's better to write out the code longhand than to reuse a generic abstraction (not always, of course).  Sometimes it's better to duplicate some similar code than to try to construct an elaborate generalisation with only two instances.  Remember: other people have to be able to quickly understand what you've done, and overuse of abstractions just serves to obscure the *really* tricky stuff, and there's no shortage of that in GHC.
 
 
