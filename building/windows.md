@@ -509,6 +509,22 @@ the number of object files involved.  Link times are also improved.  (Binary siz
 though.)
 
 
+
+Also, you can arrange for the (huge) list of files to be processed iteratively, rather all at once, and that would probably be a principal solution. `xargs` feeds the file names to the appropriate command (e.g. `ar`). In `$(GHC_TOP)/mk/target.mk` find the place where it is called and add this switch
+
+
+```wiki
+xargs -n NNN
+```
+
+
+where NNN is the number of arguments processed at a time. It should be small enough to be less than the limit and large enough for the whole thing not to be too slow.
+
+
+
+Note, that it's not good to edit `target.mk` in general.
+
+
 ## A Windows build log using Cygwin
 
 
