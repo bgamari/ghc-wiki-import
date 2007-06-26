@@ -12,3 +12,7 @@ Entry conventions are very conventional: the first N argumements in registers an
 All returns are now *direct*; that is, a return is made by jumping to the code associated with the [info table](commentary/rts/storage/heap-objects#info-tables) of the topmost [stack frame](commentary/rts/storage/stack).
 
 
+
+GHC used to have a more complex return convention called vectored returns in which some stack frames pointed to vectors of return addresses; this was dropped in GHC 6.8 after measurements that showed it was not (any longer) worthwhile.
+
+
