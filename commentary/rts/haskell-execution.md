@@ -23,3 +23,4 @@ Contents:
 - [Call and Return Conventions](commentary/rts/haskell-execution/calling-convention)
 - [Heap and Stack checks](commentary/rts/haskell-execution/heap-checks)
 - [Updates](commentary/rts/haskell-execution/updates)
+- [Pointer Tagging](commentary/rts/haskell-execution/pointer-tagging)
