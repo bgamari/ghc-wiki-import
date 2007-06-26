@@ -225,7 +225,7 @@ to a `[CmmStatic]`.
       type RawCmm = GenCmmTop CmmStatic [CmmStatic] CmmStmt
       ```
 
-      Same for `CmmTop}} and {{{RawCmmTop`.
+      Same for `CmmTop` and `RawCmmTop`.
   - New type aliases `CmmActuals`, `CmmFormals` and `CmmHintFormals`.
     Respectively these are the actual parameters of a function call,
     the formal parameters of a function, and the
