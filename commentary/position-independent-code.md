@@ -9,6 +9,18 @@ We need to generate position-independent code on most platforms when we want our
 To access things defined in a dynamic library, we might need to do special things, such as look up the address of the imported thing in a table of pointers, depending on what platform we are on.
 
 
+## How to access symbols
+
+
+
+A C compiler is in an unfortunate position when generating PIC code, as it does not have any hints, whether an accessed symbol ends up in the same dynamic library or if it is truely an external symbol (from the dynamic library point of view). It can only generate non-PIC access for symbols generated within the same object file. In Haskell, we can do better as we assume all package code to end up in a single dynamic library. Hence, all intra-package symbol accesses can be generated as code that does direct access. For all inter-package accesses (package haskell98 accessing symbols in package base, e.g.), we have to generate PIC code. For the following we establish the following: 
+
+
+- *object-local symbols*, symbols within the same object file. Always generate direct access. 
+- *package-local symbols*, symbols within the same Haskell package. The NCG can generate direct access code, C compilers can't.
+- *local symbols*, either object-local or package-local.
+- *global symbols*, symbol in different libraries/packages. Always generate PIC.
+
 ## CLabel.labelDynamic
 
 
