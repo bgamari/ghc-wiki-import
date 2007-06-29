@@ -20,7 +20,7 @@ Type checking in the presence of only data and newtype families is much simpler 
 
 
 
-However, this difference in complexity applies only to the type checking of expression whose types involve data and type synonym families, respectively.  Type checking of the declarations themselves is not that different; in fact, data/newtype family declarations require more effort as they introduce data type constructors, which need to be handled as well.  However, a lot of machinery can be re-used from vanilla algebraic data types.
+However, this difference in complexity applies only to the type checking of expression whose types involve data and type synonym families, respectively.  Type checking of the declarations themselves is not that different; in fact, data family declarations require more effort as they introduce data type constructors, which need to be handled as well.  However, a lot of machinery can be re-used from vanilla algebraic data types.
 
 
 ### Type checking family declarations and family instances
@@ -51,10 +51,8 @@ The function `TcTyClsDecls.tcTyClsDecls` produces `TypeRep.TyThing`s from type a
 <table><tr><th>`type family`</th>
 <td>
 Type synonym families are represented by the standard `TyCon` variant for synonyms, namely `SynTyCon`.  They are distinguished from ordinary type synonyms by the value of the field `synTcRhs`, which is now of a new data type `SynTyConRhs`, which has a variant `OpenSynTyCon resKind` to represent families.
-</td></tr>
-<tr><th>`data family` and `newtype family`</th>
-<td>
-Data and newtype families are represented by the `TyCon` variant `AlgTyCon`, as are their non-indexed counter parts, with the difference that the field `algTcRhs` has the one of the newly introduced values `OpenDataTyCon` or `OpenNewTyCon`.
+`data family`\`::
+Data families are represented by the `TyCon` variant `AlgTyCon`, as are their non-indexed counter parts, with the difference that the field `algTcRhs` has the one of the newly introduced values `OpenDataTyCon` or `OpenNewTyCon`.
 </td></tr></table>
 
 
