@@ -34,6 +34,19 @@ BuildBot website](http://buildbot.sourceforge.net/) for details.  NB. if you're 
 
 
 
+In order to actually do the build, you'll also need the following software installed:
+
+
+- darcs (0.7 or later ought to do, I believe)
+- haddock (0.8 works, unsure about older versions)
+- alex (\>= 2.1.0)
+- happy (1.16 works, unsure about older versions)
+- ghc (\>= 6.0)
+- gcc, make, etc
+- perl
+- python
+
+
 Now create and enter the directory you want the buildbot client to work in
 
 
