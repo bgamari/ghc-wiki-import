@@ -99,7 +99,7 @@ Remember to change `<buildbotdir>` to your buildbot directory.
 
 
 
-Cron will run the command in a minimal environment: it won't execute your normal shell startup files, so you won't have your usual `PATH` settings, for example.  To get the right `PATH` and other environment variables, we suggest adding them to the `make start` rule in `<buildbotdir>/Makefile`.  FOr example, my start rule looks something like this:
+Cron will run the command in a minimal environment: it won't execute your normal shell startup files, so you won't have your usual `PATH` settings, for example.  To get the right `PATH` and other environment variables, we suggest adding them to the `make start` rule in `<buildbotdir>/Makefile`.  For example, my start rule looks something like this:
 
 
 ```wiki
