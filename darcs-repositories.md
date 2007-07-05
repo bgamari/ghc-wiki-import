@@ -68,6 +68,9 @@ http://darcs.haskell.org/packages/unix](http://darcs.haskell.org/packages/unix)
 </th></tr>
 <tr><th>[
 http://darcs.haskell.org/packages/Win32](http://darcs.haskell.org/packages/Win32)
+</th></tr>
+<tr><th>[
+http://darcs.haskell.org/packages/hpc](http://darcs.haskell.org/packages/hpc)
 </th></tr></table>
 
 
