@@ -322,7 +322,7 @@ provided they are in your path.
   GHC.
 - Finally, check out a copy of GHC sources from
   the darcs repository, following the instructions at [
-  http://hackage.haskell.org/trac/ghc/wiki/GettingTheSources](http://hackage.haskell.org/trac/ghc/wiki/GettingTheSources).
+  http://hackage.haskell.org/trac/ghc/wiki/Building/GettingTheSources](http://hackage.haskell.org/trac/ghc/wiki/Building/GettingTheSources).
 
 ## Building GHC
 
