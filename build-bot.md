@@ -38,7 +38,7 @@ In order to actually do the build, you'll also need the following software insta
 
 
 - darcs (0.7 or later ought to do, I believe)
-- haddock (0.8 works, unsure about older versions)
+- haddock (\>= 0.8 works)
 - alex (\>= 2.1.0)
 - happy (1.16 works, unsure about older versions)
 - ghc (\>= 6.0)
