@@ -29,7 +29,7 @@ http://darcs.haskell.org/testsuite](http://darcs.haskell.org/testsuite)</th>
 
 
 
-**Warning.**  The `testsuite` repository tickles a case-sensitivity bug in darcs, so on Windows (only) you can't do a full `darcs get` for `testsuite`.  Instead, either start with a tarball of the repository gotten from somewhere else, or do `darcs get --partial`.  (The repository itself can't be fixed to avoid the bug, without messing up its history.)
+**Warning.**  Both the `ghc` and `testsuite` repositories tickle a case-sensitivity bug in darcs, so on Windows (only) you can't do a full `darcs get` for `ghc` or `testsuite`.  Instead, either start with a tarball of the repository gotten from somewhere else, or do `darcs get --partial`.  (The repository itself can't be fixed to avoid the bug, without messing up its history.)
 
 
 
