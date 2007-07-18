@@ -660,7 +660,7 @@ these steps:
 > >
 > > >
 > > >
-> > > compile\_and\_run\_with\_prefix('command')
+> > > compile\_and\_run\_with\_prefix
 > > >
 > > >
 > > > >
@@ -676,7 +676,7 @@ these steps:
 > >
 > > >
 > > >
-> > > multimod\_compile\_and\_run\_with\_prefix('command')
+> > > multimod\_compile\_and\_run\_with\_prefix
 > > >
 > > >
 > > > >
