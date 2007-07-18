@@ -660,6 +660,38 @@ these steps:
 > >
 > > >
 > > >
+> > > compile\_and\_run\_with\_prefix('command')
+> > >
+> > >
+> > > >
+> > > >
+> > > > Same as compile\_and\_run, but with command to use to run the execution of the result binary.
+> > > >
+> > > >
+> > >
+> >
+>
+
+>
+> >
+> > >
+> > >
+> > > multimod\_compile\_and\_run\_with\_prefix('command')
+> > >
+> > >
+> > > >
+> > > >
+> > > > Same as multimod\_compile\_and\_run, but with command to use to run the execution of the result binary.
+> > > >
+> > > >
+> > >
+> >
+>
+
+>
+> >
+> > >
+> > >
 > > > run\_command
 > > >
 > > >
