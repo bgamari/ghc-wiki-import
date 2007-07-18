@@ -78,26 +78,19 @@ that means "apply the expression to whatever we're trying to match against, and 
 - The variables bound by the view pattern are the variables bound by *pat*.
 - Any variables in *expr* are bound occurrences.
 
+  - In function definitions, variables bound by matching earlier curried arguments may be used in view pattern expressions in later arguments.
 
-** In function definitions, variables bound by matching earlier curried arguments may be used in view pattern expressions in later arguments.
-**
+    ```wiki
+       example :: (String -> Integer) -> String -> Bool
+       example f (f -> 4) = True
+    ```
+  - However, pattern variables do not scope over the pattern in which they are bound.
 
-
-```wiki
-   example :: (String -> Integer) -> String -> Bool
-   example f (f -> 4) = True
-```
-
-
-** However, pattern variables do not scope over the pattern in which they are bound.
-**
-
-
-```wiki
-   -- doesn't work
-   example :: (String -> Integer, String) -> Bool
-   example (f, f -> 4) = True
-```
+    ```wiki
+       -- doesn't work
+       example :: (String -> Integer, String) -> Bool
+       example (f, f -> 4) = True
+    ```
 
 
 **Typing**
@@ -184,7 +177,7 @@ For more general sequences, `Data.Sequence` already defines the views from the l
 that now may be used in view patterns.
 
 
-### Partial views
+#### Partial views
 
 
 
