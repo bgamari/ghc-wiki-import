@@ -48,7 +48,7 @@ In response, programmers sometimes eschew type abstraction in favor of revealing
 
 
 
-View patterns permit calling the view function inside the pattern and matching against the result:
+To make programming with such interfaces more convenient, we add a new kind of pattern called a *view pattern*.  View patterns permit calling the view function inside the pattern and matching against the result:
 
 
 ```wiki
@@ -57,7 +57,7 @@ View patterns permit calling the view function inside the pattern and matching a
 ```
 
 
-That is, we add a new form of pattern, written 
+In general, a view pattern is written
 
 
 ```wiki
