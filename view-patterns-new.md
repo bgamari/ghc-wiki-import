@@ -2,11 +2,6 @@
 
 
 
-This page describes a lightweight proposal for adding views to Haskell. **We are about to begin prototyping this extension in GHC, so speak now if you have comments or suggestions'''
-**
-
-
-
 
     
 
@@ -59,6 +54,11 @@ This page describes a lightweight proposal for adding views to Haskell. **We are
 1. 
 
 
+
+
+
+**We are about to begin prototyping this extension in GHC, so speak now if you have comments or suggestions'''
+**
 
 
 ## Basic view patterns
