@@ -391,8 +391,7 @@ data SizeCtxt -- uninhabited
 class instance (Size e) => Context SizeCtxt e
 ```
 
-
-====Restricted Monads====
+#### Restricted Monads
 
 
 
