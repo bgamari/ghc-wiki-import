@@ -1,12 +1,64 @@
-
-
-
 # View patterns: lightweight views for Haskell
 
 
 
 This page describes a lightweight proposal for adding views to Haskell. **We are about to begin prototyping this extension in GHC, so speak now if you have comments or suggestions'''
 **
+
+
+
+
+    
+
+1. 
+1. 
+          [Basic view patterns](#Basicviewpatterns)
+          
+
+  1. 
+  1. 
+                [Semantics](#Semantics)
+              
+  1. 
+  1. 
+                [Examples](#Examples)
+              
+  1. 
+
+
+        
+1. 
+1. 
+          [Further Syntactic Extensions](#FurtherSyntacticExtensions)
+          
+
+  1. 
+  1. 
+                [Implicit Maybe](#ImplicitMaybe)
+              
+  1. 
+  1. 
+                [Implicit View Functions](#ImplicitViewFunctions)
+              
+  1. 
+
+
+        
+1. 
+1. 
+          [Compilation](#Compilation)
+        
+1. 
+1. 
+          [Features views can have](#Featuresviewscanhave)
+        
+1. 
+1. 
+          [Related work](#Relatedwork)
+        
+1. 
+
+
 
 
 ## Basic view patterns
@@ -539,21 +591,21 @@ The downside of these versions is that you can only have one view for a type (wh
 In comparing the different views proposals below, it will be useful to have terminology for some features of views.
 
 
-### Value input feature
+#### Value input feature
 
 
 
 Our proposal has the *value input* feature: the view function can be passed parameters; and those those parameters can mention variables bound by patterns to the left.  For example, this permits a view function itself to be passed as an argument, so patterns, in a sense, become first class.
 
 
-### Implicit `Maybe` feature
+#### Implicit `Maybe` feature
 
 
 
 Our proposal has the *implicit `Maybe`* feature: the syntax *expr* `=>` *pat* permits the programmer to elide the `Just`, for example when using partial views.  
 
 
-### Transparent ordinary Patterns
+#### Transparent ordinary Patterns
 
 
 
@@ -562,14 +614,14 @@ There are pros and cons both ways:
 The advantage of having transparent ordinary patterns is that you can replace a concrete datatype with an abstract type and a view without changing client code.  A disadvantage is that view patterns can do arbitrary computation, perhaps expensive, so it's good to have a syntactic marker that some computation beyond ordinary pattern matching may be going on.  Another disadvantage is that transparent ordinary patterns require a larger language extension than just a new form of pattern, so that certain names may be declared to be view constructors for a type.  We consider our proposal's implicit-view-function syntax `(->` *pat*`)` to be a nice compromise between the two alternatives.  
 
 
-### Nesting
+#### Nesting
 
 
 
 Our proposal has the *nesting* feature: view patterns nest inside other patterns, and other patterns nest inside them. Nesting is perhaps the biggest practical difference between view patterns and pattern guards.
 
 
-### Integration with type classes
+#### Integration with type classes
 
 
 
@@ -579,7 +631,7 @@ Our proposal *integrates with type classes*: an single view function can decompo
 ## Related work
 
 
-### [
+#### [
 Wadler's original paper (POPL 1987)](http://homepages.inf.ed.ac.uk/wadler/papers/view/view.ps)
 
 
@@ -593,7 +645,7 @@ problematic for equational reasoning, and every subsequent proposal restricted
 view constructors to appear in patterns only.
 
 
-### [ Burton et al views (1996)](http://haskell.org/development/views.html)
+#### [ Burton et al views (1996)](http://haskell.org/development/views.html)
 
 
 
@@ -620,7 +672,7 @@ I think this proposal is substantially the same as "Pattern matching and
 abstract data types", Burton and Cameron, JFP 3(2), Apr 1993.
 
 
-### [
+#### [
 Okasaki: views in Standard ML](http://citeseer.ist.psu.edu/okasaki98view.html)
 
 
@@ -629,7 +681,7 @@ Okasaki's design is very similar to Burton et al's, apart from differences due
 to the different host language.  Again, the value input feature is not supported.
 
 
-### [ Erwig: active patterns](http://citeseer.ist.psu.edu/erwig96active.html)
+#### [ Erwig: active patterns](http://citeseer.ist.psu.edu/erwig96active.html)
 
 
 
@@ -659,7 +711,7 @@ follows from the `pat` declaration.
 Still the proposal does support the value input feature.
 
 
-### [
+#### [
 Palao et al: active destructors (ICFP'96)](http://portal.acm.org/citation.cfm?id=232641&coll=portal&dl=ACM)
 
 
@@ -738,7 +790,7 @@ An alternative to duplicating the value is to compose the functions:
 This is a little clumsier: the "`@`" combines functions, with a kind of positional binding; the pattern `(x,ys)` is separated from the combiner so that it's less clear that `headV` binds `x` and `tailV` binds `y`.
 
 
-### [
+#### [
 Erwig/Peyton Jones: transformational patterns](http://citeseer.ist.psu.edu/erwig00pattern.html)
 
 
@@ -756,7 +808,7 @@ to add (indeed that's what we've done). Second, transformational patterns as des
 Erwig do no stripping of the `Maybe` (see "Possible extension 2" above).
 
 
-### [
+#### [
 F\# Active Patterns](http://blogs.msdn.com/dsyme/archive/2006/08/16/ActivePatterns.aspx)
 
 
@@ -817,7 +869,7 @@ And for views:
         | Param(pos,cxs)    -> Array.fold_right freeVarsAcc cxs (typ :: acc) 
 ```
 
-### [
+#### [
 Emir, Odersky, Williams: Matching objects with patterns](http://lambda-the-ultimate.org/node/1960)
 
 
@@ -834,7 +886,7 @@ The paper does a comparative evaluation of various OO paradigms for matching, an
 concludes that case expressions and extractors work pretty well.
 
 
-### Pattern synonyms
+#### Pattern synonyms
 
 
 
@@ -881,7 +933,7 @@ With pattern views, we'd have to write two functions for the "plus" view:
 But perhaps that is not so bad.  Pattern synonyms also require a new form of top level declaration; and are much more limited than view patterns (by design they cannot do computation).
 
 
-### [
+#### [
 Tullsen: First Class Patterns](http://citeseer.ist.psu.edu/tullsen00first.html)
 
 
@@ -919,7 +971,7 @@ The singleton example above would like this:
                      |>> 2  
 ```
 
-### First class abstractions
+#### First class abstractions
 
 
 
@@ -960,7 +1012,7 @@ anything about the patterns themselves, which in turn is all this
 proposal deals with.  Hence orthgonal.
 
 
-### Barry Jay: First class patterns
+#### Barry Jay: First class patterns
 
 
 
@@ -968,7 +1020,7 @@ A yet more ambitious scheme is to treat patterns themselves as first class, even
 home page](http://www-staff.it.uts.edu.au/~cbj) has more info.
 
 
-### Uses of Views
+#### Uses of Views
 
 
 
