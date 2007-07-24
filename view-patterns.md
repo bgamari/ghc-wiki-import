@@ -276,7 +276,7 @@ This style should be discouraged when the view is in fact a total operation, as 
 
 
 
-Here is a small module that allows to decompose sets with repsect to a given element, deleting it hereby.
+Here is a small module that allows to decompose sets with respect to a given element, deleting it hereby.
 
 
 ```wiki
