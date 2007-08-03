@@ -442,7 +442,7 @@ these steps:
 > >
 > > >
 > > >
-> > > **expect\_fail**           this test is an expected failure, i.e. there is a known bug in the compiler, but we don't want to fix it.
+> > > **expect\_broken(bug)** this test is a expected not to work due to the indicated trac bug number
 > > >
 > > >
 > >
@@ -452,7 +452,7 @@ these steps:
 > >
 > > >
 > > >
-> > > **expect\_fail\_for(ways)** expect failure for certain ways 
+> > > **expect\_broken\_for(bug, ways)** as expect\_broken, but only for the indicated ways
 > > >
 > > >
 > >
@@ -462,7 +462,7 @@ these steps:
 > >
 > > >
 > > >
-> > > **expect\_fail\_if\_platform(plat)**      expect failure on a certain platform
+> > > **expect\_broken\_if\_platform(bug, plat)** as expect\_broken, but only for the specific platform given
 > > >
 > > >
 > >
@@ -472,7 +472,7 @@ these steps:
 > >
 > > >
 > > >
-> > > **expect\_fail\_if\_compiler\_type(compiler)**   expect failure from a certain compiler
+> > > **expect\_broken\_if\_compiler\_type(bug, compiler\_type)** as expect\_broken, but only for the given compiler type
 > > >
 > > >
 > >
@@ -520,6 +520,57 @@ these steps:
 
 >
 > >
+> >
+> > These functions should normally not be used; instead, use the `expect_broken*`
+> > functions above so that the problem doesn't get forgotten about, and when we
+> > come back to look at the test later we know whether current behaviour is why
+> > we marked it as expected to fail:
+> >
+> >
+>
+
+>
+> >
+> > >
+> > >
+> > > **expect\_fail**           this test is an expected failure, i.e. there is a known bug in the compiler, but we don't want to fix it.
+> > >
+> > >
+> >
+>
+
+>
+> >
+> > >
+> > >
+> > > **expect\_fail\_for(ways)** expect failure for certain ways 
+> > >
+> > >
+> >
+>
+
+>
+> >
+> > >
+> > >
+> > > **expect\_fail\_if\_platform(plat)**      expect failure on a certain platform
+> > >
+> > >
+> >
+>
+
+>
+> >
+> > >
+> > >
+> > > **expect\_fail\_if\_compiler\_type(compiler)**   expect failure from a certain compiler
+> > >
+> > >
+> >
+>
+
+>
+> >
 > > >
 > > >
 > > > You can compose two of these functions together by
@@ -533,9 +584,14 @@ these steps:
 > > >
 > > >
 > > > as the \<opt-fn\> argument.  Calls to compose() can of
-> > > course be nested.
+> > > course be nested, but it is simpler to use the composes
+> > > function which takes a list of functions to be composed, e.g.:
 > > >
 > > >
+> > > ```wiki
+> > >       composes([omit_ways(['opt']), exit_code(3), expect_broken(123)])
+> > > ```
+> >
 > >
 >
 
