@@ -100,7 +100,7 @@ The type checker adds type information to the syntax tree, otherwise leaving it 
 
 
 
-`HsSyn` makes heavy use of the `Located` type ([compiler/BasicTypes/SrcLoc](/trac/ghc/browser/ghc/compiler/BasicTypes/SrcLoc)):
+`HsSyn` makes heavy use of the `Located` type ([compiler/basicTypes/SrcLoc.lhs](/trac/ghc/browser/ghc/compiler/basicTypes/SrcLoc.lhs)):
 
 
 ```wiki
@@ -115,7 +115,7 @@ A `Located t` is just a pair of a `SrcSpan` (which describes the source location
 - `SrcSpan` specifes a range of source locations: (filename, start line number and character position, end line number and character position)
 
 
-More details in [compiler/BasicTypes/SrcLoc](/trac/ghc/browser/ghc/compiler/BasicTypes/SrcLoc).
+More details in [compiler/basicTypes/SrcLoc.lhs](/trac/ghc/browser/ghc/compiler/basicTypes/SrcLoc.lhs).
 
 
 
