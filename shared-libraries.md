@@ -21,7 +21,7 @@ First of all, we take it as a given that a normal GHC installation will be a goo
 
 
 
-So that we can support having multiple versions of GHC installed, shared libraries will have the GHC version number embedded, e.g. `libHSghc6.6.1-network-1.1.so`.
+So that we can support having multiple versions of GHC installed, shared libraries will have the GHC version number embedded, e.g. `libHSnetwork-1.1-ghc6.6.1.so`.
 
 
 
