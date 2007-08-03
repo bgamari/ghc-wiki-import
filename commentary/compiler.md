@@ -69,7 +69,7 @@ The part called **HscMain** deals with compiling a single module.  On top of thi
 - `-M`, the Makefile dependency generator, is also a client of the GHC API and is implemented in
   [compiler/main/DriverMkDepend.hs](/trac/ghc/browser/ghc/compiler/main/DriverMkDepend.hs). 
 
-- The "one-shot" mode, where GHC compiles each file on the command line separately (eg. `ghc -c Foo.hs`). This mode bypasses teh GHC API, and is implemented
+- The "one-shot" mode, where GHC compiles each file on the command line separately (eg. `ghc -c Foo.hs`). This mode bypasses the GHC API, and is implemented
   directly on top of [HscMain](commentary/compiler/hsc-main), since it compiles only one file at a time. In fact, this is all that   
   GHC consisted of prior to version 5.00 when GHCi and `--make` were introduced.
 
