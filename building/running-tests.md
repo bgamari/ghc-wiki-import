@@ -502,6 +502,16 @@ these steps:
 > >
 > > >
 > > >
+> > > **exit\_code\_if\_platform(n, plat)** as exit\_code, but only for the specific platform given
+> > >
+> > >
+> >
+>
+
+>
+> >
+> > >
+> > >
 > > > **extra\_run\_opts(opts)**  pass some extra opts to the prog
 > > >
 > > >
