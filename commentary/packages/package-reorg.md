@@ -179,6 +179,10 @@ Some other things, such as arrays and concurrency, have nothing else depending o
 Bulat: my ArrayRef library contains portable implementation of arrays. there is only thin ghc/hugs-specific layer which should be provided by ghcbase/hugsbase libs. except for MPTC problem (IArray/MArray classes has multiple parameters), this library should be easily portable to any other haskell compiler
 
 
+
+See also [BaseSplit](base-split).
+
+
 ### Other packages
 
 
