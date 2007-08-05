@@ -16,8 +16,8 @@ Things that we wouldn't really want to change, though we'd want to change the cl
 - lists (\[\] and :)
 - tuples
 - the `IO` and `ST` internals
-- {{Int}}, {{Word}}, etc.
-- {{Float}}, {{Double}}
+- `Int`, `Word`, etc.
+- `Float`, `Double`
 
 
 (However, we might want to change the classes these are instances of...)
@@ -50,4 +50,4 @@ The derivings, as they are, clearly wouldn't work too well for changed classes. 
 
 
 - [\#1580](https://gitlab.staging.haskell.org/ghc/ghc/issues/1580) (our bug)
-- [PackageReorg: the base package](package-reorg#the-base-package).
+- [PackageReorg: the base package](commentary/packages/package-reorg#the-base-package).
