@@ -129,15 +129,11 @@ Unexpected passes:
 
 Unexpected failures:
    Refl2(normal)
-   break003(ghci)
    tc210(normal)
    tc211(normal)
    tcfail046(normal)
-   tcfail071(normal)
    tcfail102(normal)
    tcfail128(normal)
-   tcfail178(normal)
-   tcfail185(normal)
 ```
 
 - Class1: VALID.  (Only marked to fail in head to keep validate happy.)
@@ -150,7 +146,7 @@ Unexpected failures:
 - tc210: INVALID (matching `forall a.a -> Int` against \`Int -\> Int fails).
 - tc211: INVALID (tests impredicative types).
 - tcfail046: VALID: Changed error message, BUT the new error message has one more type synonym unfolding, which should be avoided.
-- tcfail071: ?? Changed error message (has now only one of two parts).  Unsure whether the lack of the second part signals regress.
+- ~~tcfail071~~: ?? Changed error message (has now only one of two parts).  Unsure whether the lack of the second part signals regress.
 - tcfail102: VALID.
 - tcfail128: VALID. Same as tcfail046.
 - ~~tcfail145~~: VALID. Error message got worse.
@@ -161,5 +157,5 @@ Unexpected failures:
 Summary of *critical* problems:
 
 
-1. Panic in case of ambiguous type variables (break001, break006, and print019).
+1. ~~Panic in case of ambiguous type variables (break001, break006, and print019).~~
 1. Problem instantiating rank-2/impredicative types (tc210 & tc211).
