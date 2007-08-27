@@ -6,6 +6,12 @@
 
 
 
+**Debugging of type family patch:**
+
+
+1. The treatment of literal lists, parallel arrays, and tuples in`TcExpr.tcExpr` is fishy.  Shouldn't they at least proceed in the same way?  Is it ok to always create a boxy variable for the list element type in the `ExplicitList` case?
+
+
 **Current:**
 
 
