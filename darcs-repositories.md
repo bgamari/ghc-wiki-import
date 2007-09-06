@@ -33,7 +33,7 @@ http://darcs.haskell.org/testsuite](http://darcs.haskell.org/testsuite)</th>
 
 
 
-The following repositories are the "GHC boot" libraries, i.e. the set of libraries that are necessary to build GHC. They populate the libraries/ directory of a GHC tree:
+The following repositories are the "GHC boot" libraries, i.e. the set of libraries that are necessary to build GHC (i.e. they are used when building the stage 2 compiler). They populate the libraries/ directory of a GHC tree:
 
 
 <table><tr><th>[
