@@ -33,7 +33,7 @@ http://darcs.haskell.org/testsuite](http://darcs.haskell.org/testsuite)</th>
 
 
 
-The following repositories are the "core" packages, that populate the libraries directory of a GHC tree:
+The following repositories are the "GHC boot" libraries, i.e. the set of libraries that are necessary to build GHC. They populate the libraries/ directory of a GHC tree:
 
 
 <table><tr><th>[
@@ -96,7 +96,7 @@ http://darcs.haskell.org/packages/hpc](http://darcs.haskell.org/packages/hpc)
 
 
 
-And the following repositories are the "extra" packages:
+And the following repositories are the "extra" libraries; if in the libraries/ directory of a GHC tree then they will also be built:
 
 
 <table><tr><th>[
