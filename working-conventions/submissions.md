@@ -21,7 +21,7 @@ Library Submissions](http://haskell.org/haskellwiki/Library_submissions).
 Bug fixes always extremely welcome.  GHC is so large, and is used in such diverse ways by so many people, that we really need your help in fixing bugs, especially those that show up in specialised situations.
 
 
-- In the darcs commit message, please say which Trac bug is being fixed, if any
+- Follow our convention for naming patches: [WorkingConventions/Darcs](working-conventions/darcs#).
 
 - Comment your fix in the source code.  It is often helpful to give a small example code fragment that demonstrates the need for your fix.  This isn't always relevant; sometimes you are fixing a plain error, but often it's more subtle than that.
 
