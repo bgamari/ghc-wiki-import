@@ -28,7 +28,7 @@ Although old code in GHC is not warning-clean, we want new code to be, and we ar
 
 
 - Validating your patches
-- [Submit patches back](working-conventions#submitting-patches), using `darcs send` is the recommended way.
+- [Submit patches back](working-conventions/submissions), using `darcs send` is the recommended way.
 
 ## More information
 
