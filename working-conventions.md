@@ -28,7 +28,7 @@ Important! See [TestingPatches](testing-patches).
 Our conventions and some useful tips for using darcs are here: [WorkingConventions/Darcs](working-conventions/darcs).
 
 
-## Submissions
+## Submitting patches
 
 
 
