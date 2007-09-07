@@ -5,7 +5,7 @@
 
 
 
-This is a rough description of some of the coding practices and style that we use for Haskell code inside `compiler`. See the [Coding Style Guidelines for RTS C code](commentary/rts/conventions) for code in `rts` and `include`.
+This is a rough description of some of the coding practices and style that we use for Haskell code inside `compiler`.  (For run-time system code see the [Coding Style Guidelines for RTS C code](commentary/rts/conventions).)
 
 
 
@@ -16,7 +16,7 @@ The general rule is to stick to the same coding style as is already used in the 
 
 
 
-We are aiming to make the GHC code warning-free for all warnings turned on by
+We are aiming to make the GHC code warning-free, for all warnings turned on by
 
 
 ```wiki
@@ -24,7 +24,11 @@ We are aiming to make the GHC code warning-free for all warnings turned on by
 ```
 
 
-and as such the build sets these flags for the stage 2 compiler, and the validate script, which is used to test the build before commiting, additionally sets the `-Werror` flag. As the `-Werror` flag is not set during normal builds, during development warnings will be printed but won't halt the build.
+The build automatically sets these flags for the stage 2 compiler.  
+
+
+
+The [validate script](testing-patches), which is used to test the build before commiting, additionally sets the `-Werror` flag. As the `-Werror` flag is not set during normal builds, during development warnings will be printed but won't halt the build.
 
 
 
