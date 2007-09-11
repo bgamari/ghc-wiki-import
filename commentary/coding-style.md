@@ -127,7 +127,7 @@ xxx_HOST_OS
 > >
 >
 
-## Compiler versions
+## Compiler versions and language extensions
 
 
 
@@ -136,6 +136,10 @@ GHC must be compilable by every major version of GHC from 6.2 onwards, and itsel
 
 
 To maintain compatibility, use [HsVersions.h](commentary/coding-style#) (see below) where possible, and try to avoid using \#ifdef in the source itself. 
+
+
+
+Also, it is necessary to avoid certain language extensions.  In particular, the `ScopedTypeVariables` extension must not be used.
 
 
 ## The source file
