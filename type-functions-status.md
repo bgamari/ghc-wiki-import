@@ -9,6 +9,7 @@
 **Debugging of type families:**
 
 
+1. skolemOccurs for wanteds?
 1. `:t` in ghci doesn't print equalities in contexts properly.
 1. ghci command to print normalised type and add [
   http://article.gmane.org/gmane.comp.lang.haskell.cafe/28799](http://article.gmane.org/gmane.comp.lang.haskell.cafe/28799) as a test to the testsuite.
