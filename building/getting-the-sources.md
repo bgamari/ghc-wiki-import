@@ -87,16 +87,7 @@ This isn't usually necessary: extra packages can be compiled and installed separ
 
 
 
-Optionally, you might want to grab the testsuite and benchmark suite too, which should also be sub-directories of ghc:
-
-
-```wiki
-  $ darcs get --partial http://darcs.haskell.org/testsuite
-  $ darcs get --partial http://darcs.haskell.org/nofib
-```
-
-
-These can also be fetched with flags to `darcs-all`:
+Optionally, you might want to grab the testsuite and benchmark suite too, which also become sub-directories of ghc:
 
 
 ```wiki
@@ -127,15 +118,6 @@ http://darcs.haskell.org/](http://darcs.haskell.org/).  For example, to get the 
 
 and then use `darcs-all` as above to get the rest of the respositories.
 
-
-
-To get testsuite and/or nofib, you'll need to name the branch repositories:
-
-
-```wiki
-  $ darcs get --partial http://darcs.haskell.org/ghc-6.6/testsuite
-  $ darcs get --partial http://darcs.haskell.org/ghc-6.6/nofib
-```
 
 ### Pulling new patches
 
