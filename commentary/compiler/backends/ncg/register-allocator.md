@@ -67,7 +67,7 @@ Decribes the core graph coloring algorithm used.
 
 *Smith, Ramsey, Holloway, 2004*
 
-For a decription of how to deal with overlapping register sets, which aren't fully implemented yet. Explains what the `worst`, `squeese` and `triv` functions are for.
+For a decription of how to deal with overlapping register sets, which aren't fully implemented. Explains what the `worst`, `squeese` and `triv` functions are for.
 
 
 
