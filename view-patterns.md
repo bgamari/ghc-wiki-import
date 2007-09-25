@@ -582,6 +582,26 @@ The downside of these versions is that you can only have one view for a type (wh
 
 
 
+Due to type classes, checking for the "same" view pattern must be type-aware; the same source syntax cannot necessarily be commoned up:
+
+
+```wiki
+class View a b where
+    view :: a -> b
+
+instance View Int Int where
+    view x = x
+
+instance View Int String where
+    view _ = "hi"
+
+-- should not be commoned, even though they're syntactically the same,
+-- because they are different uses of the overloaded function
+f (view -> 1) = 1
+f (view -> "hi") = 2
+```
+
+
 **Exhaustiveness/Redundancy.**  It is hard to check for completeness of pattern matching; and likewise for overlap.  But guards already make both of these hard; and GADTs make completness tricky too. So matters are not much worse than before.
 
 
