@@ -6,6 +6,14 @@
 
 
 
+**Open Trac bugs related to type families**
+
+
+- [\#1715](https://gitlab.staging.haskell.org/ghc/ghc/issues/1715)
+- [\#1729](https://gitlab.staging.haskell.org/ghc/ghc/issues/1729)
+- [\#1730](https://gitlab.staging.haskell.org/ghc/ghc/issues/1730)
+
+
 **Debugging of type families:**
 
 
@@ -15,7 +23,7 @@
 1. `:t` in ghci doesn't print equalities in contexts properly.
 1. ghci command to print normalised type and add [
   http://article.gmane.org/gmane.comp.lang.haskell.cafe/28799](http://article.gmane.org/gmane.comp.lang.haskell.cafe/28799) as a test to the testsuite.
-1. [\#1715](https://gitlab.staging.haskell.org/ghc/ghc/issues/1715)
+
 1. To move GADT type checking from refinements to equalities, proceed as follows (as suggested by SPJ):
 
   - Implemented this as follows in `TcPat.tcConPat:579:`
