@@ -10,6 +10,7 @@ Original source:
 '''Open Trac bugs related to type families'''
 
  * #1715
+ * #1722 (type families & GADTs)
  * #1729 (type synonym families)
  * #1730 (type synonym families)
 
