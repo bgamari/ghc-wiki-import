@@ -11,7 +11,6 @@ Original source:
 
  * #1737 (is this related to the other optimisation-related problems with cast?)
  * #1715
- * #1729 (type synonym families)
  * #1730 (type synonym families)
  * #1738 (GADTs with equalities)
  * #1722 (type families & GADTs) [look at when GADTs are implemented by equalities]
