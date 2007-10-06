@@ -16,6 +16,10 @@ Perhaps the most useful missing feature is the ability to see where the program 
 
 
 
+Another option to consider is reusing the CCS framework in a lightweight way, as sketched in [LightweightCCSCallStack](lightweight-ccs-call-stack).
+
+
+
 It would be especially useful to be able to get backtraces when exceptions are raised.
 
 
