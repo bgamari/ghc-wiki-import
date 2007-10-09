@@ -1,136 +1,93 @@
+CONVERSION ERROR
 
-[
-Video: Getting and Building](http://video.google.com/videoplay?docid=7166458546326012899), layout of the source tree, how to set up build.mk (23'43")
+Original source:
 
-
-# Getting the GHC Sources
-
+```trac
 
 
-There are two ways to get sources to GHC: download a source distribution, or get the sources directly from our repository using [
-darcs](http://darcs.net/).
+[http://video.google.com/videoplay?docid=7166458546326012899  Video: Getting and Building], layout of the source tree, how to set up build.mk (23'43")
 
+= Getting the GHC Sources =
 
-## Source distributions
+There are two ways to get sources to GHC: download a source distribution, or get the sources directly from our repository using [http://darcs.net/ darcs].
 
+== Source distributions ==
 
-
-A source distribution is a file like `ghc-6.6-src.tar.bz2`, which contains a complete snapshot of the source tree for a particular version of GHC.  Source distributions for all versions of GHC are available from the [download page](http://www.haskell.org/ghc/download.html).
-
-
+A source distribution is a file like {{{ghc-6.6-src.tar.bz2}}}, which contains a complete snapshot of the source tree for a particular version of GHC.  Source distributions for all versions of GHC are available from the [http://www.haskell.org/ghc/download.html download page].
 
 Starting with GHC 6.6, we have split the source distribution in two:
 
+ * {{{ghc-<version>-src.tar.bz2}}} contains GHC itself and the minimum libraries needed to bootstrap GHC.
+ * {{{ghc-<version>-extralibs.tar.bz2}}} contains a selection of supplemental libraries that can be built
+   and installed at the same time as GHC.  Just unpack this on top of {{{ghc-<version>-src.tar.bz2}}}, and
+   the extra libraries will be built automatically.
 
-- `ghc-<version>-src.tar.bz2` contains GHC itself and the minimum libraries needed to bootstrap GHC.
-- `ghc-<version>-extralibs.tar.bz2` contains a selection of supplemental libraries that can be built
-  and installed at the same time as GHC.  Just unpack this on top of `ghc-<version>-src.tar.bz2`, and
-  the extra libraries will be built automatically.
+In addition to fixed releases of GHC, source distributions are also made each night from the current source repository, for both the HEAD and STABLE branches.  To download these snapshots, head over to the [http://www.haskell.org/ghc/download.html download page].
 
+Source distributions are easier to build, because we also include the output from running certain external tools like [http://haskell.org/happy Happy], so you don't need to install these tools.  See [wiki:Building/Prerequisites] for details.
 
-In addition to fixed releases of GHC, source distributions are also made each night from the current source repository, for both the HEAD and STABLE branches.  To download these snapshots, head over to the [download page](http://www.haskell.org/ghc/download.html).
+== Getting a GHC source tree using darcs ==
 
+The first thing to do is install [http://darcs.net/ darcs].
 
+A source tree consists of the GHC repository, with a set of packages in the libraries directory.  If you only want to download the latest sources and aren't interested in working on GHC, then you can get ''partial'' repositories:
 
-Source distributions are easier to build, because we also include the output from running certain external tools like [
-Happy](http://haskell.org/happy), so you don't need to install these tools.  See [Building/Prerequisites](building/prerequisites) for details.
-
-
-## Getting a GHC source tree using darcs
-
-
-
-The first thing to do is install [ darcs](http://darcs.net/).
-
-
-
-A source tree consists of the GHC repository, with a set of packages in the libraries directory.  If you only want to download the latest sources and aren't interested in working on GHC, then you can get *partial* repositories:
-
-
-```wiki
+{{{
   $ darcs get --partial http://darcs.haskell.org/ghc
   $ cd ghc
   $ chmod +x darcs-all
   $ ./darcs-all get
-```
-
+}}}
 
 The command `darcs-all` automates the fetching of the repositories for the libraries, and it automatically adds the `--partial` flag.
 
+If you plan to modify GHC, then you really want to get repositories with full history rather than just partial repositories, the reason being that darcs has some bugs that sometimes cause problems when using partial repositories for anything more than just pulling the latest patches.  However, don't just omit the `--partial` flag: GHC has more than 16,000 patches and the get will take forever.  Instead, download a complete bundle of the required repositories first, these are on [http://darcs.haskell.org/] in files of the form `ghc-HEAD-`''date''`-ghc-corelibs-testsuite.tar.bz2`, e.g. `ghc-HEAD-2007-08-29-ghc-corelibs-testsuite.tar.bz2`.  After unpacking the bundle, update your repositories like this:
 
-
-If you plan to modify GHC, then you really want to get repositories with full history rather than just partial repositories, the reason being that darcs has some bugs that sometimes cause problems when using partial repositories for anything more than just pulling the latest patches.  However, don't just omit the `--partial` flag: GHC has more than 16,000 patches and the get will take forever.  Instead, download a complete bundle of the required repositories first, these are on [
-http://darcs.haskell.org/](http://darcs.haskell.org/) in files of the form `ghc-HEAD-`*date*`-ghc-corelibs-testsuite.tar.bz2`, e.g. `ghc-HEAD-2007-08-29-ghc-corelibs-testsuite.tar.bz2`.  After unpacking the bundle, update your repositories like this:
-
-
-```wiki
+{{{
    $ ..untar tarball..
    $ cd ghc
    $ darcs pull -a
-   $ ./darcs-all get
-```
-
-
+   $ ./darcs-all pull -a
+}}}
 If you do `darcs-all`, and that pulls in a patch that modifies the `darcs-all` script itself, then bizarre things can (or at least could in the past) happen.  The safe thing to do is to get your main `ghc` repo up to date (the `darcs pull` line) and then run the script.
-
-
 
 The above will grab the "core" set of packages.  This is the minimal set of packages required to bootstrap GHC.  If you want to get a more comprehensive set of packages and include them in your GHC build, then you can say:
 
-
-```wiki
+{{{
   $ ./darcs-all --extra get
-```
-
+}}}
 
 This isn't usually necessary: extra packages can be compiled and installed separately using Cabal, after you have built and installed GHC itself with its core packages.  The list of "core" and "extra" packages is below.
 
-
-
 Optionally, you might want to grab the testsuite and benchmark suite too, which also become sub-directories of ghc:
 
-
-```wiki
+{{{
   $ ./darcs-all --testsuite get
   $ ./darcs-all --nofib get
-```
+}}}
 
+The full list of darcs repositories relating to GHC is at DarcsRepositories.
 
-The full list of darcs repositories relating to GHC is at [DarcsRepositories](darcs-repositories).
+=== Getting a branch ===
 
+The above instructions will get the HEAD - the main trunk of GHC development.  There are also branches, from which stable releases are made.  The active branches are listed on DarcsRepositories.
 
-### Getting a branch
+To get a branch, add the branch name after http://darcs.haskell.org/.  For example, to get the `ghc-6.6` branch, you would first say 
 
-
-
-The above instructions will get the HEAD - the main trunk of GHC development.  There are also branches, from which stable releases are made.  The active branches are listed on [DarcsRepositories](darcs-repositories).
-
-
-
-To get a branch, add the branch name after [
-http://darcs.haskell.org/](http://darcs.haskell.org/).  For example, to get the `ghc-6.6` branch, you would first say 
-
-
-```wiki
+{{{
   $ darcs get --partial http://darcs.haskell.org/ghc-6.6/ghc
-```
-
+}}}
 
 and then use `darcs-all` as above to get the rest of the respositories.
 
+=== Pulling new patches ===
 
-### Pulling new patches
+To update your tree from the master repositories, the quickest way is to use the {{{darcs-all}}} script:
 
-
-
-To update your tree from the master repositories, the quickest way is to use the `darcs-all` script:
-
-
-```wiki
+{{{
   $ ./darcs-all pull -a
+}}}
+
+See [wiki:Building/Rebuilding] for how to update your build after pulling patches.
+
 ```
-
-
-See [Building/Rebuilding](building/rebuilding) for how to update your build after pulling patches.
-
-
