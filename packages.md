@@ -1,30 +1,28 @@
-# Packages
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Packages =
 
 This page indexes the various package-related material on this wiki:
 
-
-- [Commentary/Compiler/Packages](wiki-start): GHC's implementation of the package system
-
+ * [wiki:Commentary/Compiler/Packages]: GHC's implementation of the package system
 
 Discussion and proposals for managing the module namespace using packages.  None of the following proposals have been implemented at this time (Oct 2007):
 
-
-- GhcPackages (Simon Peyton Jones and others, July 2006)
-- [GhcPackageNamespaces](ghc-package-namespaces) (Malcolm Wallace, July 2006)
-- [PackageImports](package-imports) (Simon Peyton Jones, October 2006)
-- [PackageMounting](package-mounting) (Frederik Eaton, October 2006)
-
+ * GhcPackages (Simon Peyton Jones and others, July 2006)
+ * GhcPackageNamespaces (Malcolm Wallace, July 2006)
+ * PackageImports (Simon Peyton Jones, October 2006)
+ * PackageMounting (Frederik Eaton, October 2006)
 
 Discussion and proposals for how to reorganise the existing packages:
 
-
-- [PackageReorg](package-reorg)
-- [PackageReorg/Rationale](package-reorg/rationale)
-
+ * PackageReorg
+ * PackageReorg/Rationale
 
 Discussion about how best to manage breakage caused by changes to packages:
 
+ * PackageCompatibility
 
-- [PackageCompatibility](package-compatibility)
+```
