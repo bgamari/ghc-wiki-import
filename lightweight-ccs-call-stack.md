@@ -1,67 +1,98 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
 
 We have been talking about this for a long time and never come around to actually implement it. During the Hackathon Freiburg'07 Alexey Rodriguez and me (Pepe Iborra) have been talking about how to do this. 
 
-= The Basic Idea =
+
+# The Basic Idea
+
+
 
 The only known way to obtain a call trace in a lazy language which resembles in some way a strict call trace is by reusing the Cost Center Stack framework. In order to have backtraces one does not need the full CCS machinery. In particular there is no need for keeping track of costs and live objects in heap. 
 But CCS are still too heavyweight because one needs to annotate thunks with the current CCS when they are allocated. Current implementation of CCS stores this, together with cost data, in the info table. Our proposal is that, since all we need is a Word, we can move this to the header for AP and PAP closures. The interpreter will make use of this new field whereas compiled code can safely ignore it. Therefore this proposal does not annotate Thunk closures, only AP and PAP closures.
 
-= The Details =
 
-== Storing the stack of CCS ==
+# The Details
 
-For creating the CCS, we will follow the semantics found in [Samson 97], ignoring all the cost assignment stuff. As ghc currently does, we follow the extensions in Jarvis 93 but ignoring the bits  about collapsing the stack traces.
+
+## Storing the stack of CCS
+
+
+
+For creating the CCS, we will follow the semantics found in \[Samson 97\], ignoring all the cost assignment stuff. As ghc currently does, we follow the extensions in Jarvis 93 but ignoring the bits  about collapsing the stack traces.
+
+
 
 In principle, the current CCS configuration would be stored in a global variable in the C side, living in the interpreter.  However, For reasons that will become clear when we talk about case statements, we are going to need a stack of CCS. Hence the current CCS will be a pointer to the head of this stack, and the stack will consist of pointers to rows in the table. 
 
-A CCS configuration is a list of tuples of (tick #, module). As expected, we keep a table with all the possible CCS configurations; the current CCS conf. is a word pointing at one of these entries. The actual data structure used for this table should be the one described by Jarvis.
+
+
+A CCS configuration is a list of tuples of (tick \#, module). As expected, we keep a table with all the possible CCS configurations; the current CCS conf. is a word pointing at one of these entries. The actual data structure used for this table should be the one described by Jarvis.
+
+
 
 To make all of this clear, we have:
 
- * A table of possible CCS configurations
- * A current CCS register, being a pointer to a row in the table
+
+- A table of possible CCS configurations
+- A current CCS register, being a pointer to a row in the table
+
 
 We define the following primitive operations on these structures:
 
- * PUSH_CENTER Pushes a new cost center in the current CCS. For this it needs to append the cost center to the current configuration, look at the table for this configuration and possibly extend the table if the configuration is not there.
 
-We will take advantage of ticks to guide the insertion of Cost Centers in the current CCS. For this, we will distinguish ticks that are placed at the beginning of top level function declarations (How? Perhaps with a distinguished BCI?) When the evaluator sees one such tick, it will call PUSH_CENTER with the current tick.
+- PUSH\_CENTER Pushes a new cost center in the current CCS. For this it needs to append the cost center to the current configuration, look at the table for this configuration and possibly extend the table if the configuration is not there.
 
-== Annotating thunks ==
+
+We will take advantage of ticks to guide the insertion of Cost Centers in the current CCS. For this, we will distinguish ticks that are placed at the beginning of top level function declarations (How? Perhaps with a distinguished BCI?) When the evaluator sees one such tick, it will call PUSH\_CENTER with the current tick.
+
+
+## Annotating thunks
+
+
 
 There are two closure types that we must consider: APs and PAPs. APs are only created and dealt with by the bytecode interpreter, whereas PAPs interact with the compiled code too. These closures must be annotated with the CCS configuration at the moment of their allocation, so that this CCS can be temporarily installed when the closure is being entered. The proposal is to extend their headers with an extra word to store this.
 
- * Allocation of AP and PAP closures in the bytecode interpreter: look at the current CCS and store it in the closure header.
- * Entering AP closures: Following the semantics of [Samson 97], we must
- 1. Extract the SCC annotated in the closure and push it in the CCS stack
- 1. Deallocate the AP closure and enter it
- 1. When we are done and before leaving, pop the CCS stack.
 
- * Entering PAP closures: propagate the CCS annotation in the closure to the AP being allocated. (I am assuming that PAPs are never entered directly, even if the application is saturated)
+- Allocation of AP and PAP closures in the bytecode interpreter: look at the current CCS and store it in the closure header.
+- Entering AP closures: Following the semantics of \[Samson 97\], we must
 
-== Case statements ==
+1. Extract the SCC annotated in the closure and push it in the CCS stack
+1. Deallocate the AP closure and enter it
+1. When we are done and before leaving, pop the CCS stack.
+
+- Entering PAP closures: propagate the CCS annotation in the closure to the AP being allocated. (I am assuming that PAPs are never entered directly, even if the application is saturated)
+
+## Case statements
+
+
 
 Following the semantics, we must restore the CCS after the scrutinee of a case statement has been entered. -prof compiled code does this by pushing the CCS to the stack and having the case continuation restore it before proceeding to the case alternative. 
+
+
 
 For us it will be more troublesome since we have to deal with non -prof compiled code, which we cannot modify. Case continuations in this code do not know about the CCS.
 Only BCOs can modify the CCS. The scenario we have to deal with is the compiled code entering a BCO with the right number of arguments in the scrutinee of a case statement. Since that call involves a context switch to the bytecode interpreter, maybe there is an opportunity to detect and handle CCS restoring in the next switch (it seems very unlikely though).
 
-== AP/PAP/Thunk updates ==
+
+## AP/PAP/Thunk updates
+
+
 
 When entering a thunk-like closure we load the CCS recorded in the thunk, and when the thunk is updated we must restore the initial CCS. 
 
-''But not all thunk-like closures, right?'' Well, even though we do not ''annotate'' Thunk closures and therefore there is no recorded CCS to load, we still have to restore the CCS after they have been forced. 
+
+
+*But not all thunk-like closures, right?* Well, even though we do not *annotate* Thunk closures and therefore there is no recorded CCS to load, we still have to restore the CCS after they have been forced. 
+
+
 
 We can handle APs easily since we are in the bytecode interpreter, PAPs might prove a bit more difficult but probably manageable, since it looks like the code for handling them is in the RTS. But how to handle Thunks being forced in the compiled code? Even if we could install special update frames, who is going to stack-push a copy of the original CCS before entering the Thunk?
 
+
+
 QUESTION: Do we really need to restore the CCS after an update? The semantics in Samson does not say so, and the restore would anyways be redundant since thunks are forced only by case statements, and those already do a restore. However, currently GHC does the restore after an update:
 
-{{{
+
+```wiki
  HS:
      2	boolfun x y = let {-# NOINLINE z #-}  
      3		              z = show y 
@@ -110,10 +141,13 @@ QUESTION: Do we really need to restore the CCS after an update? The semantics in
     46	       R2 = I32[Sp + 8];
     47	       Sp = Sp + 12;
     48	       jump stg_ap_p_fast; 
-}}}
+```
+
 
 After line 36, the stack looks as follows
-{{{
+
+
+```wiki
 -4 : -> R1 (Thunk z_s12t ?)
 -8 :
 -12: CCCS
@@ -121,54 +155,84 @@ After line 36, the stack looks as follows
 -20: Free Vars
 -24: CCCS
 -28: Cont case
-}}}
+```
+
 
 The example shows that -prof code is doing a CCS restore after the update, which to me indeed seems redundant. What am I missing? If it is not necessary, that means one less problem for us.
 
-= What we expect to obtain =
+
+# What we expect to obtain
+
+
 
 We cannot observe compiled code for two reasons: it has no ticks that can guide cost center introduction, and the thunks it allocates lack CCS annotations. Therefore our backtraces will be restricted to interpreted code; this is not too bad in my opinion(pepe). 
 
+
+
 In principle the overhead incurred should be acceptable, but we are worried that ticks will interact badly with dup'ing/pop'ing around case statements scrutinees, given the huge number of those showing up in the bytecode (as revealed by -ddump-bcos).
 
-= Caveats =
-== The boxing trick ==
+
+# Caveats
+
+
+## The boxing trick
+
+
+
 CCS doesn't do exactly what it is supposed to do. It gives strange results for CAFs and for some higher order code. The latter can be minimised by a helper simple program transformation that boxes higher order arguments in function calls. For example:
-{{{
+
+
+```wiki
 f x = error "f"
 
 id x = x
 
 main = id f 3
-}}}
+```
 
-you'll see the stack <main,id,f>, when it should be <main,f>, because lexically f occurs in the body of main, not in id. By doing the boxing trick the body of main becomes "let f' = f in id f' 3", which recovers the desired stack trace.
 
-{{{
+you'll see the stack \<main,id,f\>, when it should be \<main,f\>, because lexically f occurs in the body of main, not in id. By doing the boxing trick the body of main becomes "let f' = f in id f' 3", which recovers the desired stack trace.
+
+
+```wiki
 double = scc "double" \x. ...
 map    = scc "map"    \f. \xs. ... f x ...
 main   = scc "main"   map double xs
-}}}
+```
+
+
 Here double is called by main, not by map.  So we must "capture" the stack with double when we pass it to map, like this:
-{{{
+
+
+```wiki
  main  = scc "main"  map (box double) xs
      where box x = x
-}}}
+```
+
+
 Or
-{{{
+
+
+```wiki
  main  = scc "main"  let double' = double in map double' xs
-}}}
+```
+
+### Indirections mess with the boxing trick
 
 
-=== Indirections mess with the boxing trick ===
 
-Simon: IIRC, there's a problem when updating a thunk with an indirection to a FUN.  In this case, the CCS that was stored in the thunk is lost, but we really need it when entering the FUN.  So the idea is to overwrite the thunk with a permanent indirection (IND_PERM) containing the CCS.  However, I've just checked and I don't think the current RTS does this, which looks like a bug - it might have got lost in the conversion to eval/apply.  The trouble is, without this the boxing trick won't work (because the box is a thunk that evaluates to a FUN).  I don't know of a good way to fix this right now.
+Simon: IIRC, there's a problem when updating a thunk with an indirection to a FUN.  In this case, the CCS that was stored in the thunk is lost, but we really need it when entering the FUN.  So the idea is to overwrite the thunk with a permanent indirection (IND\_PERM) containing the CCS.  However, I've just checked and I don't think the current RTS does this, which looks like a bug - it might have got lost in the conversion to eval/apply.  The trouble is, without this the boxing trick won't work (because the box is a thunk that evaluates to a FUN).  I don't know of a good way to fix this right now.
 
-== CAFs ==
+
+## CAFs
+
+
 
 Handling of CAFs is a problem for any approach to stack traces in Haskell.
 The problem is as follows. Constant applicative forms(top level expressions with no arguments) are evaluated only the first time they are accessed, as by the dynamic semantics of Haskell. But if they are called more than once, why should the first caller be blamed for the cost? Instead, the costs are assigned to an artificial cost center called CAF("SUB" in Samson). For example:
-{{{
+
+
+```wiki
  g = scc g 
      let j = \x. double x in
      \h. h j;
@@ -176,14 +240,21 @@ The problem is as follows. Constant applicative forms(top level expressions with
  main = 
     let h = \f. f 21 in
     \s. scc main g h;
-}}}
+```
+
 
 here `j` is a function closure, free in the right hand side of `g`. `j` gets its cost centre when `g` is first evaluated, and it'll be `<CAF,g>`.  This is wrong: `g` might be called from a deeper context (e.g. `<TOP,main>`, in the definition of `main`), and we need to record that when the RHS of `j` is executing it is part of this deeper context.
 
+
+
 In our context this still applies, since though we do not have the problem of "sharing" the costs, CAFs cannot be assigned the right stack trace. A non option is changing the dynamic semantics so that CAFs are re-evaluated every time.
 
+
+
 A bigger example (test12):
-{{{
+
+
+```wiki
 constr   = scc constr \x. \f. f x;
 deconstr = \p. let f = \x. x in p f;
 
@@ -196,7 +267,9 @@ main =
   scc main 
    let h = \p. deconstr p c in
    \x. scc main1 g h;
-}}}
+```
+
+
 Now, both p and j are free in the lambda expression in the definition
 of g.  Also, j is free in p.  This gives us a problem: we can't box j
 and p, because that doesn't box the j that is free in p.  By the time
@@ -205,17 +278,27 @@ too late. Note that we cannot box j in the body of p because p is updatable,
 hence the box would capture the context only in the first call to j via p, 
 producing incorrect contexts in all the forthcoming calls to j via p.
 
+
+
 We have to transform p so as to abstract j (test14).
-{{{
+
+
+```wiki
 g = scc g 
    let j = \x. double x in
    let p = \j. constr j in
    \h. scc g1 let j1 = j; p1 = p j1 in h p1;
-}}}
+```
+
+
 this works, but it's bad: we lost sharing.  
 
+
+
 We can simplify a bit, lifting out the lets:
-{{{
+
+
+```wiki
 id       = \x . x; 
 constr   = \x. \f. f x;
 
@@ -226,7 +309,9 @@ main =
   scc main 
    let h = \p. p id c in
    \x. scc main1 h p;
-}}}
+```
+
+
 The problem is that we can't use the boxing trick for the argument j
 in the definition of p, because at the point where the argument is
 passed, we aren't inside a lambda and therefore boxing doesn't have
@@ -235,28 +320,53 @@ parameter, but that might lose sharing.  We may know nothing about the
 function constr, so we can't inline it or know whether it is safe to
 eta-expand.
 
-== Dictionaries ==
+
+## Dictionaries
+
+
+
 Desugaring of type classes to dictionary code brings up new case statements to evaluate the dictionaries. As an example, the expression
 
-{{{boolfun x y = let {-# NOINLINE z #-}
-                     z = show y in 
-                 if x then "2"++z else "3"++z
+
+
+{{{boolfun x y = let {-\# NOINLINE z \#-}
+
+
+>
+>
+> z = show y in 
+>
+>
+
+>
+>
+> if x then "2"++z else "3"++z
+>
+>
+
+
 }}}
+
+
 
 desugars to something like
 
-{{{
+
+```wiki
 boolfun dShow x y = case dShow of 
 	GHC.Show.:DShow showsPrec show showList -> 
 		let z = ... in
 		if ...
-}}}
+```
+
 
 which includes an extra case statement for the Show dictionary.
 Since we are not interested in cost assignment, we should be able
 to ignore case statements related to dictionaries.
 
-= References =
-[Samson 97] P. Samson and S.P.J. - Formally based profiling for Higher-Order languages
-[Jarvis 93] R.G.Morgan and S.A.Jarvis - Profiling large scale lazy functional programs
-```
+
+# References
+
+
+- \[Samson 97\] P. Samson and S.P.J. - Formally based profiling for Higher-Order languages
+- \[Jarvis 93\] R.G.Morgan and S.A.Jarvis - Profiling large scale lazy functional programs
