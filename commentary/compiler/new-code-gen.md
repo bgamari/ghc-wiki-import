@@ -1,32 +1,30 @@
-# Material about the new code generator
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Material about the new code generator =
 
 This page summarises work that Norman Ramsey, Simon M, and Simon PJ are doing on re-architecting GHC's back end.
 
-
-## The new Cmm data type
-
-
+== The new Cmm data type ==
 
 There is a new Cmm data type:
 
+ * '''`ZipCfg`''' contains a generic zipper-based control-flow graph data type.  It is generic in the sense that it's polymorphic in the type of '''middle nodes''' and '''last nodes''' of a block.  (Middle nodes don't do control transfers; last nodes only do control transfers.)  There are extensive notes at the start of the module.[[BR]][[BR]]
+ The key types it defines are:
+   * Block identifiers: `BlockId`, `BlockEnv`, `BlockSet`
+   * Control-flow blocks: `Block`
+   * Control-flow graphs: `Graph`[[BR]][[BR]]
+ * '''`ZipCfgCmm`''' instantiates `ZipCfg` for Cmm, by defining types `Middle` and `Last` and using these to instantiate the polymorphic fields of `ZipCfg`.  It also defines a bunch of smart constructor (`mkJump`, `mkAssign`, mkCmmIfThenElse` etc) which make it easy to build Cmm.
 
-- **`ZipCfg`** contains a generic zipper-based control-flow graph data type.  It is generic in the sense that it's polymorphic in the type of **middle nodes** and **last nodes** of a block.  (Middle nodes don't do control transfers; last nodes only do control transfers.)  There are extensive notes at the start of the module.
+Todo list:
+  * Get rid of `CmmFormals` on `LastJump` and `LastCall` in `ZipCfgCmm`
 
-  The key types it defines are:
+== The pipeline ==
 
-  - Block identifiers: `BlockId`, `BlockEnv`, `BlockSet`
-  - Control-flow blocks: `Block`
-  - Control-flow graphs: `Graph`
+ * Code generator converts STG to Cmm.
 
-- **`ZipCfgCmm`** instantiates `ZipCfg` for Cmm, by defining types `Middle` and `Last` and using these to instantiate the polymorphic fields of `ZipCfg`.  It also defines a bunch of smart constructor (`mkJump`, `mkAssign`, mkCmmIfThenElse\` etc) which make it easy to build Cmm.
-
-## The pipeline
-
-
-- Code generator converts STG to Cmm.
-
-- **Simple control flow optimisation** (implemented in `CmmContFlowOpt`)
-
-  - 
+ * '''Simple control flow optimisation''' (implemented in `CmmContFlowOpt`)
+   * 
+```
