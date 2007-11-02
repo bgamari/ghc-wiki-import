@@ -2,14 +2,21 @@
 
 
 
-[compiler/codeGen](/trac/ghc/browser/ghc/compiler/codeGen)
+The material below describes the old (and still current) code generator.  New stuff is here:
+
+
+- [Michael Adams CPS conversion](commentary/compiler/cps)
+- [New code generator](commentary/compiler/new-code-gen)
+
+
+The code generator lives in [compiler/codeGen](/trac/ghc/browser/ghc/compiler/codeGen)
+
+
+## Storage manager representations
 
 
 
 See [The Storage Manager](commentary/rts/storage) for the [Layout of the stack](commentary/rts/storage/stack).
-
-
-## Storage manager representations
 
 
 
