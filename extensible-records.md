@@ -1,22 +1,19 @@
-# Extensible Records
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Extensible Records =
 
-There seems to be widespread agreement that the current situation wrt records is unacceptable, but the [
-official GHC policy](http://haskell.org/haskellwiki/GHC:FAQ#Does_GHC_implement_any_kind_of_extensible_records.3F) is that there are too many good ideas to choose from - so nothing gets done!
-
-
+There seems to be widespread agreement that the current situation wrt records is unacceptable, but the [http://haskell.org/haskellwiki/GHC:FAQ#Does_GHC_implement_any_kind_of_extensible_records.3F official GHC policy] is that there are too many good ideas to choose from - so nothing gets done!
 
 The purpose of this page is to collect and discuss proposals for adding extensible records to GHC.
 
+= Proposals =
 
-# Proposals
-
-
-- [
-  A proposal for records in Haskell](http://research.microsoft.com/~simonpj/Haskell/records.html) (wherein [
-  TRex](http://cvs.haskell.org/Hugs/pages/hugsman/exts.html#sect7.2) is rejected as having a high implementation cost)
-- [ Scoped Labels](http://www.cs.uu.nl/~daan/download/papers/scopedlabels.pdf)
-- [ Type Families](http://homepage.ntlworld.com/b.hilken/files/Records.hs)
-- [ Heterogeneous Collections](http://homepages.cwi.nl/~ralf/HList/), see also [
-  Keyword Arguments](http://okmij.org/ftp/Haskell/keyword-arguments.lhs)
+ * [http://research.microsoft.com/~simonpj/Haskell/records.html A proposal for records in Haskell] (wherein [http://cvs.haskell.org/Hugs/pages/hugsman/exts.html#sect7.2 TRex] is rejected as having a high implementation cost)
+ * [http://www.cs.uu.nl/~daan/download/papers/scopedlabels.pdf Scoped Labels]
+ * [http://homepage.ntlworld.com/b.hilken/files/Records.hs Type Families]
+ * [http://homepages.cwi.nl/~ralf/HList/ Heterogeneous Collections], see also [http://okmij.org/ftp/Haskell/keyword-arguments.lhs Keyword Arguments]
+ * [http://hackage.haskell.org/trac/haskell-prime/attachment/ticket/92/Data.Record.hs Poor Man's Records]
+```
