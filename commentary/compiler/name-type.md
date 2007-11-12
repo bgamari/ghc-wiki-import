@@ -103,7 +103,7 @@ A `WiredIn` `Name` is a special sort of `External` `Name`, one that is completel
 Here are the sorts of Name an entity can have: 
 
 
-- Class: always has an `External` Names. 
+- Class: always has an `External` Name. 
 
 - TyCon: always has an `External` or `WiredIn` Name. 
 
