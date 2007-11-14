@@ -1,169 +1,103 @@
-# Extensible Records
+CONVERSION ERROR
+
+Original source:
+
+```trac
+= Extensible Records =
+
+There seems to be widespread agreement that the current situation with regards to records is unacceptable, but the [http://haskell.org/haskellwiki/GHC:FAQ#Does_GHC_implement_any_kind_of_extensible_records.3F official GHC policy] is that there are too many good ideas to choose from - so nothing gets done!
+
+The purpose of this page is to collect and discuss proposals for adding extensible records to GHC. Ticketed at #1872.
+
+= Proposals =
+
+ * [http://research.microsoft.com/~simonpj/Haskell/records.html A proposal for records in Haskell] (wherein [http://cvs.haskell.org/Hugs/pages/hugsman/exts.html#sect7.2 TRex] is rejected as having a high implementation cost)
+ * [http://web.cecs.pdx.edu/~mpj/pubs/polyrec.html A Polymorphic Type System for Extensible Records and Variants]
+ * [http://www.cs.uu.nl/~daan/download/papers/scopedlabels.pdf Scoped Labels]
+ * [http://homepage.ntlworld.com/b.hilken/files/Records.hs Type Families]
+ * [http://homepages.cwi.nl/~ralf/HList/ Heterogeneous Collections], see also [http://okmij.org/ftp/Haskell/keyword-arguments.lhs Keyword Arguments]
+ * [http://www.cs.kent.ac.uk/people/staff/cr3/toolbox/haskell/Data.Record.hs Data.Record.hs], expanded and documented version of the old Haskell prime ticket 92 attachment [http://hackage.haskell.org/trac/haskell-prime/attachment/ticket/92/Data.Record.hs Poor Man's Records]
 
 
-
-There seems to be widespread agreement that the current situation with regards to records is unacceptable, but the [
-official GHC policy](http://haskell.org/haskellwiki/GHC:FAQ#Does_GHC_implement_any_kind_of_extensible_records.3F) is that there are too many good ideas to choose from - so nothing gets done!
-
-
-
-The purpose of this page is to collect and discuss proposals for adding extensible records to GHC. Ticketed at [\#1872](https://gitlab.staging.haskell.org/ghc/ghc/issues/1872).
-
-
-# Proposals
-
-
-- [
-  A proposal for records in Haskell](http://research.microsoft.com/~simonpj/Haskell/records.html) (wherein [
-  TRex](http://cvs.haskell.org/Hugs/pages/hugsman/exts.html#sect7.2) is rejected as having a high implementation cost)
-- [
-  A Polymorphic Type System for Extensible Records and Variants](http://web.cecs.pdx.edu/~mpj/pubs/polyrec.html)
-- [ Scoped Labels](http://www.cs.uu.nl/~daan/download/papers/scopedlabels.pdf)
-- [ Type Families](http://homepage.ntlworld.com/b.hilken/files/Records.hs)
-- [ Heterogeneous Collections](http://homepages.cwi.nl/~ralf/HList/), see also [
-  Keyword Arguments](http://okmij.org/ftp/Haskell/keyword-arguments.lhs)
-- [
-  Data.Record.hs](http://www.cs.kent.ac.uk/people/staff/cr3/toolbox/haskell/Data.Record.hs), expanded and documented version of the old Haskell prime ticket 92 attachment [
-  Poor Man's Records](http://hackage.haskell.org/trac/haskell-prime/attachment/ticket/92/Data.Record.hs)
-
-# Syntax
-
-
+= Syntax =
 
 Purely for the sake of argument on this page, I propose the following syntax. Feel free to change or extend this if you can think of something better. Many of these conflict with existing Haskell operators, so can't be used in any concrete proposal.
 
+ * `{L1 = v1, L2 = v2, ...}` the constant record with field labels `L1, L2, ...` and corresponding values `v1, v2, ...`
+ * `{L1 :: t1, L2 :: t2, ...}` the type of the constant record with field labels `L1, L2, ...` and corresponding values of types `t1, t2, ...`
+ * `r . L` the value of the field labelled `L` in record `r`
+ * `t ::. L` the type of the field labelled `L` in record type `t`
+ * `r - L` the record `r` with field `L` deleted
+ * `t ::- L` the record type `t` with field `L` deleted
+ * `r + s` record `r` extended by adding all the fields of `s`. Many systems restrict to the case where `s` has constant shape.
+ * `t ::+ u` record type `t` extended by adding all the fields of type `u`. Many systems restrict to the case where `u` has constant shape.
+ * `r <- s` record `r` updated by replacing the all fields of `s`. Many type systems restrict to the case where `s` has constant shape.
 
-- `{L1 = v1, L2 = v2, ...}` the constant record with field labels `L1, L2, ...` and corresponding values `v1, v2, ...`
-- `{L1 :: t1, L2 :: t2, ...}` the type of the constant record with field labels `L1, L2, ...` and corresponding values of types `t1, t2, ...`
-- `r . L` the value of the field labelled `L` in record `r`
-- `t ::. L` the type of the field labelled `L` in record type `t`
-- `r - L` the record `r` with field `L` deleted
-- `t ::- L` the record type `t` with field `L` deleted
-- `r + s` record `r` extended by adding all the fields of `s`. Many systems restrict to the case where `s` has constant shape.
-- `t ::+ u` record type `t` extended by adding all the fields of type `u`. Many systems restrict to the case where `u` has constant shape.
-- `r <- s` record `r` updated by replacing the all fields of `s`. Many type systems restrict to the case where `s` has constant shape.
+By '''constant shape''' we mean that the field names of a record are given literally, though the values and types of the fields could be variables.
 
-
-By **constant shape** we mean that the field names of a record are given literally, though the values and types of the fields could be variables.
-
-
-# Constant Record Types
-
-
+= Constant Record Types =
 
 An important difference between the various proposals is what constitutes a valid record, and similarly a valid record type. The key points are:
 
+ * Permutativity:: Are `{X :: Int, Y :: Int}` and `{Y :: Int, X :: Int}` the same type? The '''Poor Man's Records''' system distinguishes these two, which makes implementation much simpler, but means that any function which accepts permuted records must be polymorphic.
+ * Repeated Fields:: Is `{X :: Int, X :: Int}` a valid record type? Both '''Poor Man's Records''' and '''Scoped Labels''' allow this type, but other systems consider this an error.
 
-- Permutativity:: Are `{X :: Int, Y :: Int}` and `{Y :: Int, X :: Int}` the same type? The **Poor Man's Records** system distinguishes these two, which makes implementation much simpler, but means that any function which accepts permuted records must be polymorphic.
-- Repeated Fields:: Is `{X :: Int, X :: Int}` a valid record type? Both **Poor Man's Records** and **Scoped Labels** allow this type, but other systems consider this an error.
-
-# Label Namespace
-
-
+= Label Namespace =
 
 The proposals which are implemented as libraries put labels in conid (at the value level) and tycon (at the type level). In other words they must begin with capital letters, not clash with any other constructor or type, and be declared before use. If we want to support labels as first-class objects, this is essential so that we can distinguish them from other objects.
 
-
-
 The other proposals allow labels to be arbitrary strings, and distinguish them from other objects by context.
-
-
 
 This is related to the problem of Label Sharing: if the label `L` is declared in two different modules `M1` and `M2`, both of which are imported, do we have one label `L` or two labels `M1.L` and `M2.L`? Should there be a mechanism for identifying labels on import?
 
+The '''Heterogeneous Collections''' system introduces user defined Label Namespaces. All the labels in a record must live in the same namespace, and within a namespace, labels are defined in a way which forces a linear ordering. This gives a kind of modularity which interacts with the module system in a complex way: is not clear (for example) what happens when two imported modules extend a namespace independently.
 
-
-The **Heterogeneous Collections** system introduces user defined Label Namespaces. All the labels in a record must live in the same namespace, and within a namespace, labels are defined in a way which forces a linear ordering. This gives a kind of modularity which interacts with the module system in a complex way: is not clear (for example) what happens when two imported modules extend a namespace independently.
-
-
-# Type Systems
-
-
+= Type Systems =
 
 The most important difference between the various record proposals seems to be the expressive power of their type systems. Most systems depend on special predicates in the type context to govern the possible forms of record polymorphism. As usual there is a trade-off between power and simplicity.
 
+ No predicates:: You can get away without any predicates if you are prepared to allow records to have multiple fields with the same label. In the '''scoped labels''' system, the syntactic form of the type matches that of the record, so you can type the operators by
+ * `(. L) :: a ::+ {L :: b} -> b`
+ * `(- L) :: a ::+ {L :: b} -> a`
+ * `(+ {L = v}) :: a -> a ::+ {L :: b}`
+ * `(<- {L = v}) :: a ::+ {L :: b} -> a ::+ {L :: b}`
 
-<table><tr><th>No predicates</th>
-<td>You can get away without any predicates if you are prepared to allow records to have multiple fields with the same label. In the **scoped labels** system, the syntactic form of the type matches that of the record, so you can type the operators by
+ Positive predicates:: If you allow only positive information about records in the context, you can only type some of the operators. In '''A proposal for records in Haskell''' the condition `a <: {L1::t1, L2 :: t2, ...}` means that `a` is a record type with at least the fields `L1, L2, ...` of types `t1, t2, ...` respectively. You can type the following operators:
+ * `(. L) :: a <: {L :: b} => a -> b`
+ * `(<- {L = v}) :: a <: {L :: b} => a -> a`
 
-- `(. L) :: a ::+ {L :: b} -> b`
-- `(- L) :: a ::+ {L :: b} -> a`
-- `(+ {L = v}) :: a -> a ::+ {L :: b}`
-- `(<- {L = v}) :: a ::+ {L :: b} -> a ::+ {L :: b}`
+ Lacks predicates:: In order to type the other operators, we need negative information about records. In the Hugs '''Trex''' system the condition `a \ L` means that `a` is a record type without a field `L`. You can type all the operators if you restrict the right-hand sides to constant shape records:
+ * `(. L) :: a \ L => a ::+ {L :: b} -> b`
+ * `(- L) :: a \ L => a ::+ {L :: b} -> a`
+ * `(+ {L = v}) :: a \ L => a -> a ::+ {L :: b}`
+ * `(<- {L = v}) :: a \ L => a ::+ {L :: b} -> a ::+ {L :: b}`
 
-</td></tr></table>
+ General predicates, using type families:: The '''Type Families''' system uses three predicates: {{{ a `Contains` L }}} means that `a` is a record type with a field labelled `L`; {{{ a `Disjoint` b }}} means that `a` and `b` are record types with no fields in common; and {{{ a `Subrecord` b }}} means that `a` and `b` are record types, and every field of `a` also occurs in `b` (with the same type). You can type all the operators:
+ * {{{ (. L) :: a `Contains` L => a -> a ::. L }}}
+ * {{{ (- L) :: a `Contains` L => a -> a ::- L }}}
+ * {{{ (+) :: a `Disjoint` b => a -> b -> a ::+ b }}}
+ * {{{ (<-) :: a `Subrecord` b => b -> a -> b }}}
 
+ General predicates, using functional dependencies:: The '''Heterogeneous Collections''' and '''Poor Man's Records''' systems achieve the same as the '''Type Families''' system, using the relational style of functional dependencies. In '''Poor Man's Records''', `Select L a b` means that `a` is a record type with a field labelled `L`, and `b = a ::. L`; `Remove L a b` means that `a` is a record type with a field labelled `L`, and `b = a ::- L`; and `Concat a b c` means that `a` and `b` are record types with no fields in common, and `c = a ::+ b`. You can type the operators:
+ * {{{ (. L) :: Select L a b => a -> b }}}
+ * {{{ (- L) :: Remove L a b => a -> b }}}
+ * {{{ (+) :: Concat a b c => a -> b -> c }}}
+The `Subrecord` predicate and `<-` operator could easily be added. The difference between '''Heterogeneous Collections''' and '''Poor Man's Records''' is that '''Poor Man's Records''' makes no attempt to sort labels or remove duplicates, so for example `{X = 3, Y = 4}` and `{Y = 4, X = 3}` have different types, so are certainly not equal (the updated version of November 2007 supports record projection and permutation, among most other operations).
 
-<table><tr><th>Positive predicates</th>
-<td>If you allow only positive information about records in the context, you can only type some of the operators. In **A proposal for records in Haskell** the condition `a <: {L1::t1, L2 :: t2, ...}` means that `a` is a record type with at least the fields `L1, L2, ...` of types `t1, t2, ...` respectively. You can type the following operators:
+= Implementation and Language support =
 
-- `(. L) :: a <: {L :: b} => a -> b`
-- `(<- {L = v}) :: a <: {L :: b} => a -> a`
+As it seems possible to implement most of the functionality in a library, there might be no need for a complex '''extensible records''' feature. Nevertheless, there are issues which are common to most proposals and which would best be addressed at the language and implementation level:
+ * type sharing: not specific to records, but crucial for record programming practice. If multiple modules introduce the "same" labels, means are needed to specify the equivalence of these types (cf [http://hackage.haskell.org/trac/haskell-prime/ticket/92 Haskell prime ticket 92]).
+ * partial evaluation of type class programs: to achieve constant time record field access. Again, this feature is not specific to records, but crucial for record programming practice.
+ * portability: it would be nice if extensible records libraries were portable over multiple Haskell implementations. That not only means that these implementations need to support the same features, but that they need to interpret these features in the same way (this is currently not the case for the interaction of functional dependencies and type class overlap resolution in GHC and Hugs).
+ * permutativity: The easiest way to implement permutativity of field labels is to sort them by some total ordering. Although this can be implemented using functional dependencies, it's complex and inefficient. Compiler support for a global order on tycons (based on fully qualified name, perhaps) would be very helpful. I have submitted a feature request #1894. Does this conflict with type sharing?
 
-</td></tr></table>
-
-
-<table><tr><th>Lacks predicates</th>
-<td>In order to type the other operators, we need negative information about records. In the Hugs **Trex** system the condition `a \ L` means that `a` is a record type without a field `L`. You can type all the operators if you restrict the right-hand sides to constant shape records:
-
-- `(. L) :: a \ L => a ::+ {L :: b} -> b`
-- `(- L) :: a \ L => a ::+ {L :: b} -> a`
-- `(+ {L = v}) :: a \ L => a -> a ::+ {L :: b}`
-- `(<- {L = v}) :: a \ L => a ::+ {L :: b} -> a ::+ {L :: b}`
-
-</td></tr></table>
-
-
-<table><tr><th>General predicates, using type families</th>
-<td>The **Type Families** system uses three predicates: ` a `Contains` L ` means that `a` is a record type with a field labelled `L`; ` a `Disjoint` b ` means that `a` and `b` are record types with no fields in common; and ` a `Subrecord` b ` means that `a` and `b` are record types, and every field of `a` also occurs in `b` (with the same type). You can type all the operators:
-
-- ` (. L) :: a `Contains` L => a -> a ::. L `
-- ` (- L) :: a `Contains` L => a -> a ::- L `
-- ` (+) :: a `Disjoint` b => a -> b -> a ::+ b `
-- ` (<-) :: a `Subrecord` b => b -> a -> b `
-
-</td></tr></table>
-
-
-<table><tr><th>General predicates, using functional dependencies</th>
-<td>The **Heterogeneous Collections** and **Poor Man's Records** systems achieve the same as the **Type Families** system, using the relational style of functional dependencies. In **Poor Man's Records**, `Select L a b` means that `a` is a record type with a field labelled `L`, and `b = a ::. L`; `Remove L a b` means that `a` is a record type with a field labelled `L`, and `b = a ::- L`; and `Concat a b c` means that `a` and `b` are record types with no fields in common, and `c = a ::+ b`. You can type the operators:
-
-- ` (. L) :: Select L a b => a -> b `
-- ` (- L) :: Remove L a b => a -> b `
-- ` (+) :: Concat a b c => a -> b -> c `
-
-</td></tr></table>
-
-
-
-The `Subrecord` predicate and `<-` operator could easily be added. The difference between **Heterogeneous Collections** and **Poor Man's Records** is that **Poor Man's Records** makes no attempt to sort labels or remove duplicates, so for example `{X = 3, Y = 4}` and `{Y = 4, X = 3}` have different types, so are certainly not equal (the updated version of November 2007 supports record projection and permutation, among most other operations).
-
-
-# Implementation and Language support
-
-
-
-As it seems possible to implement most of the functionality in a library, there might be no need for a complex **extensible records** feature. Nevertheless, there are issues which are common to most proposals and which would best be addressed at the language and implementation level:
-
-
-- type sharing: not specific to records, but crucial for record programming practice. If multiple modules introduce the "same" labels, means are needed to specify the equivalence of these types (cf [
-  Haskell prime ticket 92](http://hackage.haskell.org/trac/haskell-prime/ticket/92)).
-- partial evaluation of type class programs: to achieve constant time record field access. Again, this feature is not specific to records, but crucial for record programming practice.
-- portability: it would be nice if extensible records libraries were portable over multiple Haskell implementations. That not only means that these implementations need to support the same features, but that they need to interpret these features in the same way (this is currently not the case for the interaction of functional dependencies and type class overlap resolution in GHC and Hugs).
-- permutativity: The easiest way to implement permutativity of field labels is to sort them by some total ordering. Although this can be implemented using functional dependencies, it's complex and inefficient. Compiler support for a global order on typids (based on fully qualified name, perhaps) would be very helpful. Does this conflict with type sharing?
-
-# Examples
-
-
+= Examples =
 
 Please put examples here, if possible using the above notation. The aim is to find out which features of the various systems are important in practice, so uncontrived examples which illustrate differences between the systems are wanted!
 
-
-
 An example to show the need for extra polymorphism in unpermuted records:
-
-
-```wiki
+{{{
 type Point = {X :: Float, Y :: Float}
 
 norm :: Point -> Float
@@ -175,13 +109,13 @@ norm' :: (Select X a Float, Select Y a Float) => a -> Float
 norm' p = sqrt (p.X * p.X + p.Y * p.Y)
 
 norm' {Y = 3.0, X = 4.0}    -- this is OK, because norm' is polymorphic
-```
-
+}}}
 
 The more complex systems support first class labels. Here is an example using the Type Families system:
-
-
-```wiki
+{{{
 labelZip :: ({n :: a} `Disjoint` {m :: b}) => n -> m -> [a] -> [b] -> [{n :: a, m :: b}]
 labelZip n m = zipWith (\x y -> {n = x, m = y})
+}}}
+
+
 ```
