@@ -65,7 +65,7 @@ The proposals which are implemented as libraries put labels in conid (at the val
 
 
 
-The other proposals allow labels to be arbitrary strings, and distinguish them by context.
+The other proposals allow labels to be arbitrary strings, and distinguish them from other objects by context.
 
 
 
@@ -136,7 +136,7 @@ The most important difference between the various record proposals seems to be t
 
 
 
-The `Subrecord` predicate and `<-` operator could easily be added. The difference between **Heterogeneous Collections** and **Poor Man's Records** is that **Poor Man's Records** makes no attempt to sort labels or remove duplicates, so for example `{x = 3, y = 4}` and `{y = 4, x = 3}` have different types, so are certainly not equal (the updated version of November 2007 supports record projection and permutation, among most other operations).
+The `Subrecord` predicate and `<-` operator could easily be added. The difference between **Heterogeneous Collections** and **Poor Man's Records** is that **Poor Man's Records** makes no attempt to sort labels or remove duplicates, so for example `{X = 3, Y = 4}` and `{Y = 4, X = 3}` have different types, so are certainly not equal (the updated version of November 2007 supports record projection and permutation, among most other operations).
 
 
 # Implementation and Language support
