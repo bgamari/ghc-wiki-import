@@ -325,9 +325,9 @@ Definitions:
 
 
 
-**\*1** Sparc NCG bitrotted, but still in the tree
+**\*1** Sparc NCG bitrotten, but still in the tree
 
-**\*2** Win32 DLL support bitrotted
+**\*2** Win32 DLL support bitrotten
 
 **\*3** but see [\#591](https://gitlab.staging.haskell.org/ghc/ghc/issues/591)
 
@@ -395,6 +395,16 @@ Definitions:
 <th> No                 </th>
 <th> No                      </th>
 <th> [ArmLinuxGhc](arm-linux-ghc)    
+</th></tr>
+<tr><th> ARM                </th>
+<th> Debian armel </th>
+<th> arm-linux-gnueabi </th>
+<th> No                </th>
+<th> No         </th>
+<th> No        </th>
+<th> No                 </th>
+<th> No                      </th>
+<th>                
 </th></tr></table>
 
 
