@@ -47,6 +47,12 @@ tracking down problems with superfluous or missing
 recompilations.
 
 
+
+The output of ``make -pq [TARGET]'` command can be helpful
+as well. This command prints the database of rules and variables,
+running nothing.
+
+
 ## A small example
 
 
