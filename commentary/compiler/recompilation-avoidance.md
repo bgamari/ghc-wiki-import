@@ -1,61 +1,72 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
+# Recompilation Avoidance
 
 
-= Recompilation Avoidance =
+## What is recompilation avoidance?
 
-== What is recompilation avoidance? ==
+
 
 When GHC is compiling a module, it tries to determine early on whether
 
- * The object file (or byte-code in the case of GHCi) and [wiki:Commentary/Compiler/IfaceFiles interface file] exist from a previous compilation
- * Recompilation is sure to produce exactly the same results, so it
-   is not necessary.
+
+- The object file (or byte-code in the case of GHCi) and [interface file](commentary/compiler/iface-files) exist from a previous compilation
+- Recompilation is sure to produce exactly the same results, so it
+  is not necessary.
+
 
 If both of these hold, GHC stops compilation early, because the existing object code and interface are still valid.  In GHCi and `--make`, we must generate the `ModDetails` from the `ModIface`, but this is easily done by calling `MkIface.typecheckIface`.
 
-== Example ==
+
+## Example
+
+
 
 Let's use a running example to demonstrate the issues.  We'll have
 four modules with dependencies like this:
 
-{{{
+
+```wiki
       A
      / \
     B   C
      \ /
       D
-}}}
+```
+
 
 `A.hs`:
 
-{{{
+
+```wiki
 module A where
 import B
 import C
 
 a = print (f 2)
-}}}
+```
+
 
 `B.hs`:
 
-{{{
+
+```wiki
 module B (f) where
 import D
-}}}
+```
+
 
 `C.hs`:
 
-{{{
+
+```wiki
 module C where
 import D
-}}}
+```
+
 
 `D.hs`:
-{{{
+
+
+```wiki
 module D (T, f, h) where
 
 data T a b = C1 a | C2 b
@@ -65,23 +76,29 @@ f x = h x
 
 h :: Int -> Int
 h x = x + 3
-}}}
+```
+
+## Why do we need recompilation avoidance?
 
 
-== Why do we need recompilation avoidance? ==
+### GHCi and `--make`
 
-=== GHCi and `--make` ===
+
 
 The simple fact is that when you make a small change to a large program, it is often not necessary to recompile
 every module that depends directly or indirectly on something that changed.  In GHCi and `--make`, GHC considers every module in the program in dependency order, and decides whether it needs to be recompiled, or whether the existing object code and interface will do.
 
-=== `make` ===
+
+### `make`
+
+
 
 `make` works by checking the timestamps on dependencies and
 recompiling things when the dependencies are newer.  Dependency lists
 for `make` look like this:
 
-{{{
+
+```wiki
 # DO NOT DELETE: Beginning of Haskell dependencies
 D.o : D.hs
 B.o : B.hs
@@ -92,47 +109,56 @@ A.o : A.hs
 A.o : C.hi
 A.o : B.hi
 # DO NOT DELETE: End of Haskell dependencies
-}}}
+```
 
-Only the `.hi` files of the ''direct imports'' of a module are listed.
+
+Only the `.hi` files of the *direct imports* of a module are listed.
 For example, `A.o` depends on `C.hi` and `B.hi`, but not `D.hi`.
 Nevertheless, if D is modified, we might need to recompile A.  How
 does this happen?  
 
-  * first, make will recompile D because its source file has changed,
-    generating a new `D.o` and `D.hi`.
 
-  * If after recompiling D, we notice that its interface is the same
-    as before, there is no need to modify the `.hi` file.  If the `.hi`
-    file is not modified by the compilation, then `make` will notice
-    and not recompile `B` or `C`.  This is an important optimisation.
+- first, make will recompile D because its source file has changed,
+  generating a new `D.o` and `D.hi`.
 
-  * Suppose the change to `D` did cause a change in the interface
-    (e.g. the type of `f` changed).  Now, `make` will recompile both
-    `B` and `C`.  Now, suppose that the interfaces to `B` and `C`
-    remain the same: B's interface says only that it re-exports `D.f`,
-    so the fact that `f` has a new type does not affect `B`'s
-    interface.  
+- If after recompiling D, we notice that its interface is the same
+  as before, there is no need to modify the `.hi` file.  If the `.hi`
+  file is not modified by the compilation, then `make` will notice
+  and not recompile `B` or `C`.  This is an important optimisation.
 
-  * Now, `A`'s dependencies are unchanged, so `A` will not be
-    recompiled.  But this is wrong: `A` might depend on something from
-    `D` that was re-exported via `B` or `C`, and therefore need
-    recompiling.
+- Suppose the change to `D` did cause a change in the interface
+  (e.g. the type of `f` changed).  Now, `make` will recompile both
+  `B` and `C`.  Now, suppose that the interfaces to `B` and `C`
+  remain the same: B's interface says only that it re-exports `D.f`,
+  so the fact that `f` has a new type does not affect `B`'s
+  interface.  
+
+- Now, `A`'s dependencies are unchanged, so `A` will not be
+  recompiled.  But this is wrong: `A` might depend on something from
+  `D` that was re-exported via `B` or `C`, and therefore need
+  recompiling.
+
 
 To ensure that `A` is recompiled, we therefore have two options:
 
-  1. arrange that make knows about the dependency of A on D.
 
-  2. arrange to touch `B.hi` and `C.hi` even if they haven't changed.
+1. arrange that make knows about the dependency of A on D.
+
+1. arrange to touch `B.hi` and `C.hi` even if they haven't changed.
+
 
 GHC currently does (2), more about that in a minute.
 
-Why not do (1)?  Well, then ''every'' time `D.hi` changed, GHC would be
+
+
+Why not do (1)?  Well, then *every* time `D.hi` changed, GHC would be
 invoked on `A` again.  But `A` doesn't depend directly on `D`: it
 imports `B`, and it might be therefore be insensitive to changes in `D`.  
 By telling make only about direct dependencies, we gain the ability to
 avoid recompiling modules further up the dependency graph, by not touching
 interface files when they don't change.
+
+
 
 Back to (2).  In addition to correctness (recompile when necessary), we also want to
 avoid unnecessary recompilation as far as possible.
@@ -141,63 +167,81 @@ it doesn't know that changing the type of `D.f` can have no effect on
 `C`, so `C` does not in fact need to be recompiled, because to do so
 would generate exactly the same `.o` and `.hi` files as last time.
 GHC does have enough information to figure this out, so when GHC is
-asked to recompile a module it invokes the ''recompilation checker''
+asked to recompile a module it invokes the *recompilation checker*
 to determine whether recompilation can be avoided in this case.
 
-== How does it work? ==
 
-An [wiki:Commentary/Compiler/IfaceFiles interface file] contains:
+## How does it work?
 
- * The module ''version'' (more about this below)
- * ''exports'': what the module exports
- * ''decls'': what the module defines
- * ''dependencies'' and ''usages'': what the module depends on
- * various other stuff, but the above are the important bits
+
+
+An [interface file](commentary/compiler/iface-files) contains:
+
+
+- The module *version* (more about this below)
+- *exports*: what the module exports
+- *decls*: what the module defines
+- *dependencies* and *usages*: what the module depends on
+- various other stuff, but the above are the important bits
+
 
 The module version starts at 1, and is increased each time the module
-is compiled and either the ''exports'' or ''decls'' changes.
+is compiled and either the *exports* or *decls* changes.
 
-=== Deciding whether to recompile ===
+
+### Deciding whether to recompile
+
+
 
 If we already have an object file and interface file for a module, we
 might not have to recompile it, if we can be sure the results will be
 the same as last time.
 
- * If the source file has changed since the object file was created,
-   we better recompile.
 
- * If anything else has changed in a way that would affect the results
-   of compiling this module, we must recompile.
+- If the source file has changed since the object file was created,
+  we better recompile.
+
+- If anything else has changed in a way that would affect the results
+  of compiling this module, we must recompile.
+
 
 In order to determine the second point, we look at the
-''dependencies'' and ''usages'' fields of the old interface file.  The
+*dependencies* and *usages* fields of the old interface file.  The
 dependencies contains:
 
- * ''dep_mods'': Transitive closure of home-package modules that are
-   imported by this module.  That is, all modules below the current
-   one in the dependency graph.
 
- * ''dep_pkgs'': Transitive closure of packages depended on by this
-   module, or by any module in ''dep_mods''.
+- *dep\_mods*: Transitive closure of home-package modules that are
+  imported by this module.  That is, all modules below the current
+  one in the dependency graph.
 
- * other less important stuff.
+- *dep\_pkgs*: Transitive closure of packages depended on by this
+  module, or by any module in *dep\_mods*.
+
+- other less important stuff.
+
 
 First, the direct imports of the current module are resolved to
 `Module`s using `findModule` (a `Module` contains a module name and a
 package identifier).  If any of those `Module`s are not listed amongst
 the dependencies of the old interface file, then either:
 
- * an exposed package has been upgraded
- * we are compiling with different package flags
- * a home module that was shadowing a package module has been removed
- * a new home module has been added that shadows a package module
+
+- an exposed package has been upgraded
+- we are compiling with different package flags
+- a home module that was shadowing a package module has been removed
+- a new home module has been added that shadows a package module
+
 
 and we must recompile.
 
-Second, the ''usages'' of the module are checked.  The usages in the
-interface file contains a list of every name that was ''used'' during
+
+
+Second, the *usages* of the module are checked.  The usages in the
+interface file contains a list of every name that was *used* during
 typechecking: that is, everything external that is referred to by the
 source code.
+
+
 
 The interface files for everything in the usages are read (they'll
 already be in memory if we're doing `--make`), and the current
@@ -205,44 +249,60 @@ versions for each of these entities checked against the usages from
 the old interface file.  If any of these versions has changed, the
 module must be recompiled.
 
-=== Example ===
+
+### Example
+
+
 
 There are some tricky cases to consider.
 
+
+
 Suppose we change the definition of `D.f` in the example, and make it
-{{{
+
+
+```wiki
 f x = h x + 1
-}}}
+```
+
+
 Now, ultimately we need to recompile `A`, because it might be using
 an inlined copy of the old `D.f`, which it got via `B`.
 
+
+
 It works like this: 
 
- * `D` is recompiled; the version of `D.f` increases
- * `B` is considered; it recorded a usage on the old `D.f`, so
-   gets recompiled, and now its interface records a usage on the new `D.f`
- * `C` is considered; it doesn't need to be recompiled.
- * `A` is considered (if we're using make, this is because `B.hi`
-   changed); it recorded a usage on the old `D.f`, and so gets
-   recompiled.
+
+- `D` is recompiled; the version of `D.f` increases
+- `B` is considered; it recorded a usage on the old `D.f`, so
+  gets recompiled, and now its interface records a usage on the new `D.f`
+- `C` is considered; it doesn't need to be recompiled.
+- `A` is considered (if we're using make, this is because `B.hi`
+  changed); it recorded a usage on the old `D.f`, and so gets
+  recompiled.
+
 
 Now a slightly more tricky case: suppose we add an INLINE pragma to
 `D.f` (this is a trick to prevent GHC from inlining `D.h`, so that we
 can demonstrate dependencies between unfoldings).  The code for D.hs
 is now
 
-{{{
+
+```wiki
 {-# INLINE f #-}
 f :: Int -> Int
 f x = h x + 1
 
 h :: Int -> Int
 h x = x + 3
-}}}
+```
+
 
 Looking at the interface file we can see what happened (snipped slightly):
 
-{{{
+
+```wiki
 $ ghc --show-iface D.hi
 interface main:D 3 6081 where
 export main:D T f h
@@ -263,7 +323,8 @@ data T a b
     = C1 :: forall a b. a -> T a b Stricts: _ |
       C2 :: forall a b. b -> T a b Stricts: _
     FamilyInstance: none
-}}}
+```
+
 
 Note from the first line that this is version 3.  The first change was
 to the definition of `D.f` above, and the second change we made just
@@ -271,11 +332,16 @@ now was to add the INLINE pragma to `D.f`.  The version of `D.f` is
 also 3 (it has changed twice), and the version of `D.h` is still 1
 (the version number is omitted if it is 1).
 
+
+
 Note that the unfolding of `D.f` mentions `D.h`.
+
+
 
 Now, let's modify `D.h`, and look at the interface file again:
 
-{{{
+
+```wiki
 $ ghc -O --show-iface D.hi
 interface main:D 4 6081 where
 export main:D T f h
@@ -296,28 +362,76 @@ data T a b
     = C1 :: forall a b. a -> T a b Stricts: _ |
       C2 :: forall a b. b -> T a b Stricts: _
     FamilyInstance: none
-}}}
+```
+
 
 The version of `D.h` jumped to 4 (things that change get the new
 module version, rather than just increasing by 1).
+
+
 
 However, the version of `D.f` also changed.  This is vital, because
 anything that referred to `D.f` must be recompiled, because it may now
 see the new unfolding for `D.h`.
 
+
+
 In summary:
 
- * The version of an entity is bumped whenever either 
-   * the entity's definition changed, or
-   * the version of anything that the definition refers to changed.
- * This means that when recording usages, we only have to record
-   usages on things that are directly mentioned, not their
-   transitive closure.
 
-== Alternative design choices ==
+- The version of an entity is bumped whenever either 
 
-=== fingerprints instead of versions ===
+  - the entity's definition changed, or
+  - the version of anything that the definition refers to changed.
+- This means that when recording usages, we only have to record
+  usages on things that are directly mentioned, not their
+  transitive closure.
 
-=== module-granularity instead of declaration-granularity ===
+## Alternative design choices
 
-```
+
+### Fingerprints instead of versions
+
+
+
+Version numbers in this context have a couple of problems:
+
+
+- New version numbers are calculated from the old version numbers, so we have to
+  keep the old interface around to generate the new one.  (but we need to keep
+  the old interface around anyway, because we might avoid touching it if it
+  doesn't change).
+
+- Removing an interface file can have disastrous effects, as all its version
+  numbers will be reset when it is next compiled.  To be fair, this doesn't seem
+  to affect many people (that we know of).
+
+- We want to detect changes in package dependencies (see [\#1372](https://gitlab.staging.haskell.org/ghc/ghc/issues/1372)): right now, we only
+  record a dependency on the package.  The right thing to do is to record a dependency
+  on the module that we import, so we can detect when it changes.  But packages are
+  generally compiled from scratch and then installed, so typically all the version
+  numbers will be 1, and our dependency is not telling us when the package has changed.
+
+
+Using fingerprints or hashes instead of version numbers is morally the right thing to do.  A fingerprint can be calculated independently of the previous version of the interface interface, and it solves the package dependency problem.
+
+
+### Module-granularity instead of entity-granularity
+
+
+
+Fingerprints or hashes are larger than version numbers (typically 128 bits instead of 32), so we might not want to put a fingerprint on every entity.
+
+
+
+Also, it's worth thinking about whether tracking changes at a lower level of granularity would result in a system that is simpler to implement, understand, and get right.  The obvious choice is to track modules instead of entities.  Clearly this loses some resolution, and will therefore entail more unnecessary recompilation, but how much?  Let's look at how it would work, and then some examples.
+
+
+
+Every module will have a single version number (or fingerprint), which is increased whenever there is a change to either the exports or the decls (but not the usages) in the interface, or the version of any module referred to by the exports or decls changes.  The usages of the module lists the modules and versions referred to by the source code (as before, except that we only record modules not entities).
+
+
+
+**Examples**.
+
+
