@@ -23,7 +23,7 @@ Starting with GHC 6.6, we have split the source distribution in two:
 
 
 - `ghc-<version>-src.tar.bz2` contains GHC itself and the minimum libraries needed to bootstrap GHC.
-- `ghc-<version>-extralibs.tar.bz2` contains a selection of supplemental libraries that can be built
+- `ghc-<version>-src-extralibs.tar.bz2` contains a selection of supplemental libraries that can be built
   and installed at the same time as GHC.  Just unpack this on top of `ghc-<version>-src.tar.bz2`, and
   the extra libraries will be built automatically.
 
