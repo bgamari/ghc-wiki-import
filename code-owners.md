@@ -22,7 +22,7 @@ For a full description of GHC support for various platforms, see [wiki:Platforms
    * Linux (generic): [mailto:simonmar@microsoft.com Simon Marlow],
      [mailto:simonpj@microsoft.com Simon Peyton Jones]
    * FreeBSD: [mailto:simonmar@microsoft.com Simon Marlow],[mailto:obraun@FreeBSD.org Oliver Braun],[mailto:vs@FreeBSD.org Volker Stolz]
-   * OpenBSD: [mailto:dons@cse.unsw.edu.au Don Stewart]
+   * OpenBSD: [mailto:kili@openbsd.org Matthias Kilian]
    * SuSE Linux/x86 packages: [mailto:sven.panne@aedion.de Sven Panne],[mailto:ralf@informatik.uni-bonn.de Ralf Hinze]
    * Gentoo Linux/x86 packages: [mailto:haskell@gentoo.org Gentoo Haskell team]
    * Debian GNU/Linux/x86 packages: [mailto:igloo@debian.org Ian Lynagh]
@@ -47,7 +47,7 @@ For a full description of GHC support for various platforms, see [wiki:Platforms
    * Linux: [mailto:simonmar@microsoft.com Simon Marlow]
    * Gentoo Linux packages: [mailto:haskell@gentoo.org Gentoo Haskell team]
    * Debian GNU/Linux/amd64 packages: [mailto:igloo@debian.org Ian Lynagh]
-   * OpenBSD: [mailto:dons@cse.unsw.edu.au Don Stewart]
+   * OpenBSD: [mailto:kili@openbsd.org Matthias Kilian]
    * Fedora Extras packages: [mailto:petersen@redhat.com Jens Petersen]
 
  * '''Mips64'''
