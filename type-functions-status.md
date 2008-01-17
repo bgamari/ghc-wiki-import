@@ -9,6 +9,7 @@ Original source:
 
 '''Open Trac bugs related to type families'''
 
+ * #1999
  * #1948
  * #1897 & #1900
  * #1834
