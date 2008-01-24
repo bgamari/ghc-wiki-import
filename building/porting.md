@@ -207,7 +207,7 @@ $ make
 
 
 
-Unpack a source tree (same released version).  Call this directory `<H>`.
+Unpack a source tree (same released version, with the extra libs).  Call this directory `<H>`.
 
 
 ```wiki
