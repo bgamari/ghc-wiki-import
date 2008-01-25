@@ -1,13 +1,11 @@
-CONVERSION ERROR
+# Licensing
 
-Original source:
 
-```trac
-= Licensing =
 
-GHC's codebase is mostly distributed under a 3-clause BSD license, which you can find in the file [[GhcFile(LICENSE)]]:
+GHC's codebase is mostly distributed under a 3-clause BSD license, which you can find in the file [LICENSE](/trac/ghc/browser/ghc/LICENSE):
 
-{{{
+
+```wiki
 The Glasgow Haskell Compiler License
 
 Copyright 2002, The University Court of the University of Glasgow. 
@@ -39,22 +37,30 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
 LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
 DAMAGE.
-}}}
+```
+
 
 Exceptions to this are:
 
- * `gmp/gmp-*.tar.gz`, which is LGPL
 
- * All the libraries, each of which has its own license.  To find out the license for a library, check
-   the `license` field of its `.cabal` file.  Most of the libraries we ship with GHC are also under a
-   3-clause BSD license, the exception being `readline` which is GPL.
+- `gmp/gmp-*.tar.gz`, which is LGPL
 
-== Licensing contributions ==
+- All the libraries, each of which has its own license.  To find out the license for a library, check
+  the `license` field of its `.cabal` file.  Most of the libraries we ship with GHC are also under a
+  3-clause BSD license, the exception being `readline` which is GPL.
 
-Contributions to GHC or the libraries are assumed to be supplied under the same license as the existing code.
+## Licensing contributions
+
+
+
+If you make a contribution to GHC or to the libraries, we will assume that you are supplying your contribution under the same license as the existing code.
+
+
 
 Most source files have a copyright notice at the top.  If you contribute significantly to an existing file, or create a new file, please add your own copyright to the top of the file.  If you copy code from one file to another, please try to maintain the copyright attributions correctly (this may involve digging through the revision history).  
 
+
+
 If you want to copy code from another project, please check that the licenses in question allow this, and make it clear which code has been copied and from where, both in the source file itself and in the patch description.
 
-```
+
