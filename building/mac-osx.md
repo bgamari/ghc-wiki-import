@@ -1,43 +1,33 @@
-# Building on MacOS X
+CONVERSION ERROR
+
+Original source:
+
+```trac
 
 
-## Get the latest development tools
+= Building on MacOS X =
 
-
+== Get the latest development tools ==
 
 Certain versions of Apple's Xcode tools are known to cause problems when building ghc 6.6.
-You should download the latest Xcode from the [
-Apple Developer Connection](http://developer.apple.com/tools/xcode) website.
+You should download the latest Xcode from the [http://developer.apple.com/tools/xcode Apple Developer Connection] website.
 Downloading requires that you sign up for a free membership in the Apple Developer Connection.
-
-
 
 Once upon a time Apple distributed updates to Xcode by using their Software Update service but not anymore.
 You must download the development tools manually.
 
-
-
-Successful builds have been reported using Xcode 2.4 and 2.4.1 on Intel and PowerPC Macs. Xcode 2.2.1 is known *not* to
+Successful builds have been reported using Xcode 3.0, 2.4 and 2.4.1 on Intel and PowerPC Macs. Xcode 2.2.1 is known ''not'' to
 work out of the box on Intel Macs.
 
+== Getting Readline to work ==
 
-## Getting Readline to work
-
-
-
-Thanks to Paul R Brown for the following [
-instructions](http://mult.ifario.us/articles/2006/10/17/ghc-6-6-and-mac-os-x-readline-quick-fix).
-
-
+Thanks to Paul R Brown for the following [http://mult.ifario.us/articles/2006/10/17/ghc-6-6-and-mac-os-x-readline-quick-fix instructions].
 
 Building GHC 6.6 out of the box on MacOS X will leave you with a GHCi binary that has no readline support.  This is because MacOS X comes NetBSD's libedit and Apple has made /usr/lib/libreadline.dylib a symlink to libedit. libedit does not support all of the libreadline API that GHC requires, so the GHC configure script decides not to use it.
 
-
-
 To get readline working, you first need to install GNU readline:
 
-
-```wiki
+{{{
 cd ~/work
 mkdir gnu-readline
 cd !$
@@ -46,13 +36,11 @@ tar xzvf readline-5.2.tar.gz
 cd readline-5.2
 ./configure
 make && sudo make install
-```
-
+}}}
 
 Now you have to tell the GHC build about readline:
 
-
-```wiki
+{{{
 cd ~/work
 mkdir ghc
 cd !$
@@ -64,84 +52,48 @@ cd ghc-6.6
 ./configure --with-readline-includes=/usr/local/include \
             --with-readline-libraries=/usr/local/lib
 make -j && sudo make install
-```
-
+}}}
 
 (`-j` tells make to spawn lots of processes building in parallel, it will probably save some time especially if you have a multi-core machine).
 
-
-## Building the distrbution
-
-
-
+== Building the distrbution ==
 The following instructions are from Audrey Tang
 
-
-
 Install the 6.4.1 bindist, download both source
-tarballs from [
-http://haskell.org/ghc/download\_ghc\_66.html](http://haskell.org/ghc/download_ghc_66.html)
+tarballs from http://haskell.org/ghc/download_ghc_66.html
 and extract both; 
-
-
 
 cd into ghc-6.6; sh configure; make; make install.
 
-
-
 Then create mk/build.mk with one line:
 
-
-
-BIN\_DIST=1
-
-
+BIN_DIST=1
 
 then "make binary-dist", and tar the ghc-6.6/ directory produced.
 
+== Building using !MacPorts ==
 
-## Building using MacPorts
-
-
-
-ghc 6.6 can be built from source using [
-MacPorts](http://macports.org) on Intel and PowerPC Macs.
-Follow the instructions on the MacPorts website for installing the infrastructure and port files,
+ghc 6.6 can be built from source using [http://macports.org MacPorts] on Intel and PowerPC Macs.
+Follow the instructions on the !MacPorts website for installing the infrastructure and port files,
 then type
 
-
-
-` > sudo port install ghc `
-
-
+{{{ > sudo port install ghc }}}
 
 to build and install ghc.  Dependencies will be built and installed automatically. There is
 no need to follow the instructions above for installing readline; this is handled by
-MacPorts dependency mechanism.  If you want to see how the build is progressing, type
+!MacPorts dependency mechanism.  If you want to see how the build is progressing, type
 
-
-
-` > sudo port -dv install ghc `
-
-
+{{{ > sudo port -dv install ghc }}}
 
 The "-dv" flags indicate verbose debugging output.  Using these can also help diagnose build problems.
 
-
-
 If the build is interrupted or fails for some reason you must clean up before trying again. Do
 
-
-
-` > sudo port clean ghc `
-
-
+{{{ > sudo port clean ghc }}}
 
 before restarting.
 
-
-
-A nice feature of MacPorts is that you can put its installation directory tree anywhere.
+A nice feature of !MacPorts is that you can put its installation directory tree anywhere.
 This allows installations without administrator privileges.
 
-
+```
