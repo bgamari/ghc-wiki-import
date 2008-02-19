@@ -9,6 +9,7 @@ Original source:
 
 '''Open Trac bugs related to type families'''
 
+ * #2102 (superclasses)
  * #2040 (GADT)
  * #1999 (GADT)
  * #1948
