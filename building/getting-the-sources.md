@@ -1,192 +1,125 @@
+CONVERSION ERROR
 
-[
-Video: Getting and Building](http://video.google.com/videoplay?docid=7166458546326012899), layout of the source tree, how to set up build.mk (23'43")
+Original source:
 
-
-# Getting the GHC Sources
-
+```trac
 
 
-There are two ways to get sources to GHC: download a source distribution, or get the sources directly from our repository using [
-darcs](http://darcs.net/).
+[http://video.google.com/videoplay?docid=7166458546326012899  Video: Getting and Building], layout of the source tree, how to set up build.mk (23'43")
 
+= Getting the GHC Sources =
 
-## Source distributions
+There are two ways to get sources to GHC: download a source distribution, or get the sources directly from our repository using [http://darcs.net/ darcs].
 
+== Source distributions ==
 
-
-A source distribution is a file like `ghc-6.6-src.tar.bz2`, which contains a complete snapshot of the source tree for a particular version of GHC.  Source distributions for all versions of GHC are available from the [download page](http://www.haskell.org/ghc/download.html).
-
-
+A source distribution is a file like {{{ghc-6.6-src.tar.bz2}}}, which contains a complete snapshot of the source tree for a particular version of GHC.  Source distributions for all versions of GHC are available from the [http://www.haskell.org/ghc/download.html download page].
 
 Starting with GHC 6.6, we have split the source distribution in two:
 
+ * {{{ghc-<version>-src.tar.bz2}}} contains GHC itself and the minimum libraries needed to bootstrap GHC.
+ * {{{ghc-<version>-src-extralibs.tar.bz2}}} contains a selection of supplemental libraries that can be built
+   and installed at the same time as GHC.  Just unpack this on top of {{{ghc-<version>-src.tar.bz2}}}, and
+   the extra libraries will be built automatically.
 
-- `ghc-<version>-src.tar.bz2` contains GHC itself and the minimum libraries needed to bootstrap GHC.
-- `ghc-<version>-src-extralibs.tar.bz2` contains a selection of supplemental libraries that can be built
-  and installed at the same time as GHC.  Just unpack this on top of `ghc-<version>-src.tar.bz2`, and
-  the extra libraries will be built automatically.
+In addition to fixed releases of GHC, source distributions are also made each night from the current source repository, for both the HEAD and STABLE branches.  To download these snapshots, head over to the [http://www.haskell.org/ghc/download.html download page].
 
+Source distributions are easier to build, because we also include the output from running certain external tools like [http://haskell.org/happy Happy], so you don't need to install these tools.  See [wiki:Building/Prerequisites] for details.
 
-In addition to fixed releases of GHC, source distributions are also made each night from the current source repository, for both the HEAD and STABLE branches.  To download these snapshots, head over to the [download page](http://www.haskell.org/ghc/download.html).
+== Getting a GHC source tree using darcs ==
 
-
-
-Source distributions are easier to build, because we also include the output from running certain external tools like [
-Happy](http://haskell.org/happy), so you don't need to install these tools.  See [Building/Prerequisites](building/prerequisites) for details.
-
-
-## Getting a GHC source tree using darcs
-
-
-
-The first thing to do is install [ darcs](http://darcs.net/).
-
-
+The first thing to do is install [http://darcs.net/ darcs].
 
 A source tree consists of the GHC repository, 
 with a set of library packages in the `libraries` directory.  Each of these
-libraries has its own repository: see [DarcsRepositories](darcs-repositories).
+libraries has its own repository: see DarcsRepositories.
 
-
-
-If you plan to modify GHC, then you **must** get repositories with full history rather than just partial repositories.  (Why?  Because darcs has some bugs that sometimes cause problems when using partial repositories for anything more than just pulling the latest patches.)
-However, **you cannot use `darcs get` to get a full GHC repository**, for two reasons:
-
-
-- GHC has more than 16,000 patches and the `darcs get` will take forever. 
-- Darcs has a bug concerning case-sensitivity on Windows, and ([
-  apparently](http://www.haskell.org/pipermail/glasgow-haskell-users/2007-November/013373.html)) MacOS X, which makes Darcs crash on Windows if you do `darcs get` on the full GHC repository.  You get this message
-
-  ```wiki
-  Applying patch 12 of 17349... Unapplicable patch:
-  Thu Jan 11 07:26:13 MST 1996  partain
-    * [project @ 1996-01-11 14:06:51 by partain]
-  ```
-
+If you plan to modify GHC, then you '''must''' get repositories with full history rather than just partial repositories.  (Why?  Because darcs has some bugs that sometimes cause problems when using partial repositories for anything more than just pulling the latest patches.)
+However, '''you cannot use `darcs get` to get a full GHC repository''', for two reasons:
+  * GHC has more than 16,000 patches and the `darcs get` will take forever. 
+  * Darcs has a bug concerning case-sensitivity on Windows, and ([http://www.haskell.org/pipermail/glasgow-haskell-users/2007-November/013373.html apparently]) MacOS X, which makes Darcs crash on Windows if you do `darcs get` on the full GHC repository.  You get this message
+{{{
+Applying patch 12 of 17349... Unapplicable patch:
+Thu Jan 11 07:26:13 MST 1996  partain
+  * [project @ 1996-01-11 14:06:51 by partain]
+}}}
 
 Instead, follow the following steps:
-
-
-1. Download a complete bundle of the required repositories first, using your browser rather than darcs. These bundles are on [
-  http://darcs.haskell.org/](http://darcs.haskell.org/) in files of the form `ghc-HEAD-`*date*`-ghc-corelibs-testsuite.tar.bz2`, e.g. `ghc-HEAD-2007-08-29-ghc-corelibs-testsuite.tar.bz2`.
-
-1. Unpack the bundle, which will create a directory called `ghc`.  You can rename this directory freely.
-
-1. Change into the new directory, and pull patches from the main GHC repository:
-
-  ```wiki
-     $ cd ghc
-     $ darcs pull -a
-  ```
-
-  We've had [
-  reports](http://www.haskell.org/pipermail/glasgow-haskell-users/2007-November/013373.html) of Darcs crashing on Mac OS X in this step.  If this happens, see the section on troubleshooting.
-1. Now use the `darcs-all` script to pull patches from all the library repositories, and the testsuite repository:
-
-  ```wiki
-     $ chmod +x darcs-all
-     $ ./darcs-all pull -a
-  ```
-
-  The command `darcs-all` automates the fetching of the repositories for the libraries.
-
+ 0. Download a complete bundle of the required repositories first, using your browser rather than darcs. These bundles are on [http://darcs.haskell.org/] in files of the form `ghc-HEAD-`''date''`-ghc-corelibs-testsuite.tar.bz2`, e.g. `ghc-HEAD-2007-08-29-ghc-corelibs-testsuite.tar.bz2`.[[BR]][[BR]]
+ 0. Unpack the bundle, which will create a directory called `ghc`.  You can rename this directory freely.[[BR]][[BR]]
+ 0. Change into the new directory, and pull patches from the main GHC repository:
+{{{
+   $ cd ghc
+   $ darcs pull -a
+}}}
+ We've had [http://www.haskell.org/pipermail/glasgow-haskell-users/2007-November/013373.html reports] of Darcs crashing on Mac OS X in this step.  If this happens, see the section on troubleshooting.[[BR]][[BR]]
+ 0. Now use the `darcs-all` script to pull patches from all the library repositories, and the testsuite repository:
+{{{
+   $ chmod +x darcs-all
+   $ ./darcs-all pull -a
+}}}
+   The command `darcs-all` automates the fetching of the repositories for the libraries.
 
 If you omit step (3), then `darcs-all` will pull patches into the GHC repository too. If one of those patches modifies the `darcs-all` script itself, then bizarre things can happen (or at least: in the past, they could happen.) The safe thing to do is to get your main `ghc` repo up to date (step 3) and then run the script.
 
+If you only want to download the latest sources and aren't interested in working on GHC, then you can get ''partial'' repositories:
 
-
-If you only want to download the latest sources and aren't interested in working on GHC, then you can get *partial* repositories:
-
-
-```wiki
+{{{
   $ darcs get --partial http://darcs.haskell.org/ghc
   $ cd ghc
   $ chmod +x darcs-all
   $ ./darcs-all get
-```
-
-
+}}}
 The command `darcs-all` adds the `--partial` flag by default.
 
-
-## Getting more packages
-
-
+== Getting more packages ==
 
 The above will grab the "core" set of packages and the testsuite.  This is the minimal set of packages required to bootstrap GHC.  If you want to get a more comprehensive set of packages and include them in your GHC build, then you can say:
 
-
-```wiki
+{{{
   $ ./darcs-all --extra get
-```
+}}}
 
-
-This isn't usually necessary: extra packages can be compiled and installed separately using Cabal, after you have built and installed GHC itself with its core packages.  The "core" and "extra" packages are listed in [DarcsRepositories](darcs-repositories).
-
-
+This isn't usually necessary: extra packages can be compiled and installed separately using Cabal, after you have built and installed GHC itself with its core packages.  The "core" and "extra" packages are listed in DarcsRepositories.
 
 Optionally, you might want to grab the testsuite (if you have not already got it) and `nofib` benchmark suite too, which also become sub-directories of ghc:
 
-
-```wiki
+{{{
   $ ./darcs-all --testsuite get
   $ ./darcs-all --nofib get
-```
-
-
-The full list of darcs repositories relating to GHC is at [DarcsRepositories](darcs-repositories).
-
-
-### Getting a branch
+}}}
+The full list of darcs repositories relating to GHC is at DarcsRepositories.
 
 
 
-The above instructions will get the HEAD - the main trunk of GHC development.  There are also branches, from which stable releases are made.  The active branches are listed on [DarcsRepositories](darcs-repositories).
+=== Getting a branch ===
 
+The above instructions will get the HEAD - the main trunk of GHC development.  There are also branches, from which stable releases are made.  The active branches are listed on DarcsRepositories.
 
+To get a branch, add the branch name after http://darcs.haskell.org/.  For example, to get the `ghc-6.6` branch, you would first say 
 
-To get a branch, add the branch name after [
-http://darcs.haskell.org/](http://darcs.haskell.org/).  For example, to get the `ghc-6.6` branch, you would first say 
-
-
-```wiki
+{{{
   $ darcs get --partial http://darcs.haskell.org/ghc-6.6/ghc
-```
-
+}}}
 
 and then use `darcs-all` as above to get the rest of the respositories.
 
+=== Pulling new patches ===
 
-### Pulling new patches
+To update your tree from the master repositories, the quickest way is to use the {{{darcs-all}}} script:
 
-
-
-To update your tree from the master repositories, the quickest way is to use the `darcs-all` script:
-
-
-```wiki
+{{{
   $ ./darcs-all pull -a
-```
+}}}
 
+See [wiki:Building/Rebuilding] for how to update your build after pulling patches.
 
-See [Building/Rebuilding](building/rebuilding) for how to update your build after pulling patches.
+== Troubleshooting ==
+=== Mac OS X ===
+==== getCurrentDirectory: resource exhausted (Too many open files) ====
+By default, Mac OS X limits the number of open files to 256.  This may cause problems when applying patches in step 3 of ''Getting a GHC source tree using darcs'' with darcs 1.0.9.
 
-
-## Troubleshooting
-
-
-### Mac OS X
-
-
-#### getCurrentDirectory: resource exhausted (Too many open files)
-
-
-
-By default, Mac OS X limits the number of open files to 256.  This may cause problems when applying patches in step 3 of *Getting a GHC source tree using darcs* with darcs 1.0.9.
-
-
-```wiki
+{{{
 $ darcs pull -a
 Pulling from "http://darcs.haskell.org/ghc"...
 This is the GHC darcs repository (HEAD branch)
@@ -195,18 +128,11 @@ For more information, visit the GHC developer wiki at
   http://hackage.haskell.org/trac/ghc
 **********************
 darcs: getCurrentDirectory: resource exhausted (Too many open files)
+}}}
+
+If this happens, try increasing the number of open files allowed by typing in {{{$ ulimit -n unlimited}}} and try pulling again.  If this fails, close all terminal windows, restart Terminal.app, and try again.
+
+If this still doesn't work, try pulling 100 patches at a time using the {{{darcs pull}}} command (notice the lack of the {{{-a}}} flag).  Hold down 'y' until 100 or so patches are accepted, then hit 'd' to skip the rest; repeat until all patches are applied.  If this fails, try with less than 100 patches at a time (e.g., 50).
+
+This issue has been reported as [http://bugs.darcs.net/issue560 issue 560] in the darcs bug tracking system.
 ```
-
-
-If this happens, try increasing the number of open files allowed by typing in `$ ulimit -n unlimited` and try pulling again.  If this fails, close all terminal windows, restart Terminal.app, and try again.
-
-
-
-If this still doesn't work, try pulling 100 patches at a time using the `darcs pull` command (notice the lack of the `-a` flag).  Hold down 'y' until 100 or so patches are accepted, then hit 'd' to skip the rest; repeat until all patches are applied.  If this fails, try with less than 100 patches at a time (e.g., 50).
-
-
-
-This issue has been reported as [
-issue 560](http://bugs.darcs.net/issue560) in the darcs bug tracking system.
-
-
