@@ -1,9 +1,11 @@
-# GHC Status May 2008
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= GHC Status May 2008 =
 
-TODO
-
-
-- Current status of type families -=chak
-- Current status of Data Parallel Haskell -=chak
+TODO:
+ * Current status of type families and integration of GADTs -=chak
+ * Current status of Data Parallel Haskell -=chak
+```
