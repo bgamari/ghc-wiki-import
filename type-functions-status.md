@@ -9,6 +9,7 @@ Original source:
 
 '''Open Trac bugs related to type families'''
 
+ * #714 (fundeps treated inconsistently in superclasses and type sigs)
  * #2235 (occurs check)
  * #2219
  * #2212
