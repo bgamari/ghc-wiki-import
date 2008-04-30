@@ -8,7 +8,7 @@ internship programme](http://research.microsoft.com/aboutmsr/jobs/internships/).
 
 
 
-The next available slots will be for Summer 2008 or thereabouts.  Deadline for application is end Feb; decisions in March.
+The next available slots will be for January 2009 or thereabouts.  We'll consider applications for January in the summer of 2008.
 
 
 ## What is an internship?
