@@ -27,8 +27,9 @@ user-level wiki page](http://haskell.org/haskellwiki/GHC/Data_Parallel_Haskell).
 
 
 - DPH [repositories](data-parallel/repositories)
+- Current [benchmark status](data-parallel/benchmark-status)
 - Our [work plan](data-parallel/work-plan) (needs to be updated!)
-- Some [benchmarks](data-parallel/benchmarks)
+- Some early [benchmarks](data-parallel/benchmarks) from 2007
 
 ## Old material
 
