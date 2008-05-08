@@ -1,88 +1,115 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
+# GHC Commentary: The C code generator
 
 
-= GHC Commentary: The C code generator =
 
-Source: [[GhcFile(compiler/cmm/PprC.hs)]]
+Source: [compiler/cmm/PprC.hs](/trac/ghc/browser/ghc/compiler/cmm/PprC.hs)
 
-This phase takes [wiki:Commentary/Compiler/CmmType Cmm] and generates plain C code.  The C code generator is very simple these days, in fact it can almost be considered pretty-printing.
+
+
+This phase takes [Cmm](commentary/compiler/cmm-type) and generates plain C code.  The C code generator is very simple these days, in fact it can almost be considered pretty-printing.
+
+
 
 There are some slight subtleties:
 
- * [wiki:Commentary/Rts/HeapObjects#InfoTables info tables], which are expressed in Cmm as being laid out before the entry code for a
-   closure, are compiled into separate top-level structures in the generated C, because C has no support for laying out data
-   next to functions.  The desired layout is reconstructed in the assembly file by the [wiki:Commentary/EvilMangler Evil Mangler],
-   or not if we're compiling unregisterised (see [wiki:Commentary/Rts/HeapObjects#TABLES_NEXT_TO_CODE TABLES_NEXT_TO_CODE]).
+
+- [info tables](commentary/rts/heap-objects#info-tables), which are expressed in Cmm as being laid out before the entry code for a
+  closure, are compiled into separate top-level structures in the generated C, because C has no support for laying out data
+  next to functions.  The desired layout is reconstructed in the assembly file by the [Evil Mangler](commentary/evil-mangler),
+  or not if we're compiling unregisterised (see [TABLES\_NEXT\_TO\_CODE](commentary/rts/heap-objects#)).
+
+## Header files
 
 
-== Header files ==
 
 GHC was changed (from version 6.10) so that the C backend no longer uses header files specified by the user in any way.  The `c-includes` field of a `.cabal` file is ignored, as is the `-#include` flag on the command-line.  There were several reasons for making this change:
 
+
+
 This has several advantages:
   
- * `-fvia-C` is consistent with `-fasm` with respect to FFI declarations:
-   both bind to the ABI, not the API.
+
+
+- `-fvia-C` is consistent with `-fasm` with respect to FFI declarations:
+  both bind to the ABI, not the API.
+
+
   
- * foreign calls can now be inlined freely across module boundaries, since
-   a header file is not required when compiling the call.
+
+
+- foreign calls can now be inlined freely across module boundaries, since
+  a header file is not required when compiling the call.
+
+
   
- * bootstrapping via C will be more reliable, because this difference
-   in behavour between the two backends has been removed.
+
+
+- bootstrapping via C will be more reliable, because this difference
+  in behavour between the two backends has been removed.
+
+
   
 There are some disadvantages:
   
- * we get no checking by the C compiler that the FFI declaration
-   is correct.
 
- * we can't benefit from inline definitions in header files.
+
+- we get no checking by the C compiler that the FFI declaration
+  is correct.
+
+- we can't benefit from inline definitions in header files.
+
+
   
-== Prototypes ==
+
+
+## Prototypes
+
+
 
 When a label is referenced by an expression, the compiler needs to
 know whether to declare the label first, and if so, at what type.
+
+
 
 C only lets us declare an external label at one
 type in any given source file, even if the scopes of the
 declarations don't overlap.  So we either have to scan the whole code to figure out what the type of each label should be, or we opt for declaring all labels at the same type and then casting later.  Currently we do the latter.
 
- * all labels referenced as a result of an FFI declaration
-   are declared as `extern StgWord[]`, including funciton labels.
-   If the label is called, it is first cast to the correct
-   function type.  This is because the same label might be
-   referred to both as a function and an untyped data label in
-   the same module (e.g. Foreign.Marsal.Alloc refers to "free"
-   this way).  
 
- * An exception is made to the above for functions declared with
-   the `stdcall` calling convention on Windows.  These functions must
-   be declared with the `stdcall` attribute and a function type,
-   otherwise the C compiler won't add the `@n` suffix to the symbol.
-   We can't add the `@n` suffix ourselves, because it is illegal
-   syntax in C.  However, we always declare these labels with the
-   type `void (*)(void)`, to avoid conflicts if the same function
-   is called at different types in one module (see `Graphics.Win32.GDI.HDC.SelectObject`).
+- all labels referenced as a result of an FFI declaration
+  are declared as `extern StgWord[]`, including funciton labels.
+  If the label is called, it is first cast to the correct
+  function type.  This is because the same label might be
+  referred to both as a function and an untyped data label in
+  the same module (e.g. Foreign.Marsal.Alloc refers to "free"
+  this way).  
 
- * Another exception is made for functions that are marked `never returns`.  We
-   have to put an `__attribute__((noreturn))` on the declaration for these functions,
-   and it only works if the function is declared with a proper function type and
-   called without casting it to/from a pointer.  So only the correct prototype
-   will do here.
+- An exception is made to the above for functions declared with
+  the `stdcall` calling convention on Windows.  These functions must
+  be declared with the `stdcall` attribute and a function type,
+  otherwise the C compiler won't add the `@n` suffix to the symbol.
+  We can't add the `@n` suffix ourselves, because it is illegal
+  syntax in C.  However, we always declare these labels with the
+  type `void (*)(void)`, to avoid conflicts if the same function
+  is called at different types in one module (see `Graphics.Win32.GDI.HDC.SelectObject`).
 
- * all RTS symbols already have declarations (mostly with the correct
-   type) in [[GhcFile(includes/StgMiscClosures.h)]], so no declarations are generated.
+- Another exception is made for functions that are marked `never returns` in C--.  We
+  have to put an `__attribute__((noreturn))` on the declaration for these functions,
+  and it only works if the function is declared with a proper function type and
+  called without casting it to/from a pointer.  So only the correct prototype
+  will do here.
 
- * certain labels are known to have been defined earlier in the same file,
-   so a declaration can be omitted (e.g. SRT labels)
+- all RTS symbols already have declarations (mostly with the correct
+  type) in [includes/StgMiscClosures.h](/trac/ghc/browser/ghc/includes/StgMiscClosures.h), so no declarations are generated.
 
- * certain math functions (`sin()`, `cos()` etc.) are already declared because
-   we #include math.h, so we don't emit declarations for these.  We need
-   to #include math.h because some of these fuctions have inline
-   definitions, and we get terrible code otherwise.
+- certain labels are known to have been defined earlier in the same file,
+  so a declaration can be omitted (e.g. SRT labels)
+
+- certain math functions (`sin()`, `cos()` etc.) are already declared because
+  we \#include math.h, so we don't emit declarations for these.  We need
+  to \#include math.h because some of these fuctions have inline
+  definitions, and we get terrible code otherwise.
+
 
 When compiling the RTS cmm code, we have almost no information about
 labels referenced in the code.  The only information we have is
@@ -91,10 +118,11 @@ that is declared with an import statement in the .cmm file is assumed
 to be defined in another package (this is for dynamic linking, where
 we need to emit special code to reference these labels).
 
+
+
 For all other labels referenced by RTS .cmm code, we assume they are
-RTS labels, and hence already declared in [[GhcFile(includes/StgMiscClosures.h)]].  This is
+RTS labels, and hence already declared in [includes/StgMiscClosures.h](/trac/ghc/browser/ghc/includes/StgMiscClosures.h).  This is
 the only choice here: since we don't know the type of the label (info,
 entry etc.), we can't generate a correct declaration.
 
 
-```
