@@ -1,60 +1,75 @@
-CONVERSION ERROR
+# GHC API Improvement Status
 
-Original source:
 
-```trac
-= GHC API Improvement Status =
 
 This Wiki page shall serve as a central place to collect all issues and ideas related to the GHC API.  If you feel that something is missing from this page, please put it here.
 
 
-== Trac Tickets Related to the GHC API ==
 
- * #1467 - GHC API: expose separate compilation stages
- * #1886 - GHC API should preserve and provide access to comments
- * #654 - Cabalization of the GHC library.
- * #1631 - Make the External Package Table contain {{{ModDetails}}} not {{{ModIface}}}
+Simon Marlow reported that the last time he tried to work on the GHC API, it turned into a huge refactoring task.  This could mean that it may take a while until bigger changes are visible and it is very likely that programs that currently use the GHC API will break.  Hopefully, though, it will lead to a more usable GHC API and maybe to a more hackable code base in general.  
 
-=== Possibly Related ===
 
- * #2159 - Use a more efficient representation than {{{[DynFlag]}}}
 
-== Related Documents and Discussions ==
+I plan to work with a use case and try to make it as clear and simple as possible by adapting the GHC API. 
 
- * [http://code.google.com/soc/2008/haskell/appinfo.html?csaid=4189AF2C8AE5E25A The GSoC proposal]
- * Related GSoC project [http://code.google.com/soc/2008/haskell/appinfo.html?csaid=69C2ABD1E013EE0C Dynamically Loaded Plugins for the Glasgow Haskell Compiler]
- * Haskell-cafe question: [http://www.haskell.org/pipermail/haskell-cafe/2008-May/042616.html How to get the typechecked AST?]
- * [http://www.cs.kent.ac.uk/pubs/2005/2266/ Porting HaRe to the GHC API] Technical report describing some difficulties with the current API.
- * [http://www.haskell.org/haskellwiki/GHC/As_a_library GHC as a Library], the Haskell Wiki page
- * [http://hackage.haskell.org/trac/ghc/wiki/Commentary/Compiler/API GHC Commentary on the GHC API] (may be outdated)
 
-== Various Ideas, Comments, Questions ==
+## Trac Tickets Related to the GHC API
 
- * '''Interface Stability''' - Is there a way to reduce version-skew for clients of the GHC
-   API (currently, there is no stability guaranteed at all, so if you
-   don't want to live with lots of #ifdefs and breakage, you keep
-   delaying your fantastic GHC API-base projects "until the dust
-   settles") (Claus Reinke)
- * Is it possible to use standalone deriving to get a generic
-   programming framework over the ASTs without blowing
-   up GHC's code for its own use (deriving Data, etc.)? (Claus Reinke)
- * From {{{compiler/main/GHC.hs}}}:
-{{{
--- NOTE:
---   - things that aren't in the output of the typechecker right now:
---     - the export list
---     - the imports
---     - type signatures
---     - type/data/newtype declarations
---     - class declarations
---     - instances
---   - extra things in the typechecker's output:
---     - default methods are turned into top-level decls.
---     - dictionary bindings
-}}}
- * dynamic loading of Haskell code, ala hs-plugins, but without
-   the version/platform issues (GHCi has to be able to do this
-   anyway, but it would be nice to have the ugly bits hidden,
-   such as {{{unsafeCast#}}}, or whatever it was). that might require
-   a standard for typeReps, if I recall correctly.. (Claus Reinke)
-```
+
+- [\#1467](https://gitlab.staging.haskell.org/ghc/ghc/issues/1467) - GHC API: expose separate compilation stages
+- [\#1886](https://gitlab.staging.haskell.org/ghc/ghc/issues/1886) - GHC API should preserve and provide access to comments
+- [\#654](https://gitlab.staging.haskell.org/ghc/ghc/issues/654) - Cabalization of the GHC library.
+- [\#1631](https://gitlab.staging.haskell.org/ghc/ghc/issues/1631) - Make the External Package Table contain `ModDetails` not `ModIface`
+
+### Possibly Related
+
+
+- [\#2159](https://gitlab.staging.haskell.org/ghc/ghc/issues/2159) - Use a more efficient representation than `[DynFlag]`
+
+## Related Documents and Discussions
+
+
+- [
+  The GSoC proposal](http://code.google.com/soc/2008/haskell/appinfo.html?csaid=4189AF2C8AE5E25A)
+- Related GSoC project [
+  Dynamically Loaded Plugins for the Glasgow Haskell Compiler](http://code.google.com/soc/2008/haskell/appinfo.html?csaid=69C2ABD1E013EE0C)
+- Haskell-cafe question: [
+  How to get the typechecked AST?](http://www.haskell.org/pipermail/haskell-cafe/2008-May/042616.html)
+- [
+  Porting HaRe to the GHC API](http://www.cs.kent.ac.uk/pubs/2005/2266/) Technical report describing some difficulties with the current API.
+- [
+  GHC as a Library](http://www.haskell.org/haskellwiki/GHC/As_a_library), the Haskell Wiki page
+- [
+  GHC Commentary on the GHC API](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Compiler/API) (may be outdated)
+
+## Various Ideas, Comments, Questions
+
+
+- **Interface Stability** - Is there a way to reduce version-skew for clients of the GHC
+  API (currently, there is no stability guaranteed at all, so if you
+  don't want to live with lots of \#ifdefs and breakage, you keep
+  delaying your fantastic GHC API-base projects "until the dust
+  settles") (Claus Reinke)
+- Is it possible to use standalone deriving to get a generic
+  programming framework over the ASTs without blowing
+  up GHC's code for its own use (deriving Data, etc.)? (Claus Reinke)
+- From `compiler/main/GHC.hs`:
+
+  ```wiki
+  -- NOTE:
+  --   - things that aren't in the output of the typechecker right now:
+  --     - the export list
+  --     - the imports
+  --     - type signatures
+  --     - type/data/newtype declarations
+  --     - class declarations
+  --     - instances
+  --   - extra things in the typechecker's output:
+  --     - default methods are turned into top-level decls.
+  --     - dictionary bindings
+  ```
+- dynamic loading of Haskell code, ala hs-plugins, but without
+  the version/platform issues (GHCi has to be able to do this
+  anyway, but it would be nice to have the ugly bits hidden,
+  such as `unsafeCast#`, or whatever it was). that might require
+  a standard for typeReps, if I recall correctly.. (Claus Reinke)
