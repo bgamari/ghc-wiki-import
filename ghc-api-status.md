@@ -1,11 +1,22 @@
-# GHC API Improvement Status
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= GHC API Improvement Status =
 
 This Wiki page shall serve as a central place to collect all issues and ideas related to the GHC API.  If you feel that something is missing from this page, please put it here.
 
 
-## Trac Tickets Related to the GHC API
+== Trac Tickets Related to the GHC API ==
 
+ * #1467 - GHC API: expose separate compilation stages
+ * #1886 - GHC API should preserve and provide access to comments
+ * #654 - Cabalization of the GHC library.
+ * #1631 - Make the External Package Table contain {{{ModDetails}}} not {{{ModIface}}}
 
-- [\#1886](https://gitlab.staging.haskell.org/ghc/ghc/issues/1886) - GHC API should preserve and provide access to comments
+=== Possibly Related ===
+
+ * #2159 - Use a more efficient representation than {{{[DynFlag]}}}
+
+```
