@@ -77,7 +77,7 @@ k:  // on entry to k, sp == stack<k+3>
 ```
 
 
-Note that the semantics of the now-unnecessary CopyIn and CopyOut are reified by an assignment to the stack pointer and by a series of copy instructions. If an optimization understands copy instructions, it can improve this code -- without having to worry about the semantics of CopyIn.
+Note that the semantics of the now-unnecessary CopyIn and CopyOut are reified by an assignment to the stack pointer and a series of copy instructions. If an optimization understands copy instructions, it can improve this code -- without having to worry about the semantics of CopyIn.
 
 
 
