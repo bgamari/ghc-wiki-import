@@ -1,20 +1,20 @@
-CONVERSION ERROR
+# GHC Plugin Phase Control
 
-Original source:
 
-```trac
-= GHC Plugin Phase Control =
+## The Problem
 
-== The Problem ==
+
 
 We need to be able to specify compiler phases to:
 
- * Be able to specify where user phases should fit
- * Control when rules fire
 
-== Possible Solution ==
+- Be able to specify where user phases should fit
+- Control when rules fire
 
-{{{
+## Possible Solution
+
+
+```wiki
 
 module Foo where
 
@@ -22,13 +22,17 @@ module Foo where
 
 {-# RULE "map_map" [A] map f (map g xs) = map (f . g) xs #-}
 
-}}}
+```
+
 
 This code has a PHASE declaration which brings a new phase into being. Later rules then use that phase name to control their firing, in contrast to the current system of controlling firing with a limited set of phase numbers.
 
+
+
 Phase names are exported, so:
 
-{{{
+
+```wiki
 
 module Bar where
 
@@ -38,15 +42,21 @@ import Foo
 
 {-# RULE "unComp" [B] (f . g) = (\x -> f (g x)) #-}
 
-}}}
+```
+
 
 Imports the phase A from Foo and creates its own phase, B, that must occur before A. B is in turn used to control a rule activation.
 
+
+
 GHC would gather up the phase ordering constraints from the module it is compiling as well as all imported modules and produce a consistent topological sort. This would be used to order compiler passes and when rules may fire.
+
+
 
 What if you want to have an internal phase name that won't clash with other peoples? Then don't export it!
 
-{{{
+
+```wiki
 
 module Spqr(..., {-# PHASE C #-}, ...) where
 
@@ -54,26 +64,43 @@ module Spqr(..., {-# PHASE C #-}, ...) where
 
 {-# RULE "silly" [~C] id = (\x -> x) #-}
 
-}}}
+```
 
-This module explicitly exports its local phase C, which is defined to occur before the SpecConstr phase. However the programmer is totally free to remove it from the exports list and hence prevent other modules from referring to it.
 
-== Expressing Dependence ==
+This module explicitly exports its local phase C, which is defined to occur before the [SpecConstr](spec-constr) phase. However the programmer is totally free to remove it from the exports list and hence prevent other modules from referring to it.
+
+
+## Expressing Dependence
+
+
 
 Assuming we just have two levels of ordering we want to express:
- * Strict ordering (A MUST appear before/after B)
- * Lenient ordering (A SHOULD appear before/after B)
+
+
+- Strict ordering (A MUST appear before/after B)
+- Lenient ordering (A SHOULD appear before/after B)
+
 
 Then a possible syntax is:
 
+
+```wiki
+
 {-# PHASE A < B, [< C], > D, [> E] #-}
 
+```
+
+
 To express that A:
- * MUST appear before B
- * SHOULD appear before C
- * MUST appear after D
- * SHOULD appear after E
+
+
+- MUST appear before B
+- SHOULD appear before C
+- MUST appear after D
+- SHOULD appear after E
+
 
 The square brackets are meant to be evocative of optionality in Backus-Naur form, but I'm not yet sure if that is too easily confused with Haskell list syntax.
  
-```
+
+
