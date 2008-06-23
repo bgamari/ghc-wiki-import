@@ -1,78 +1,58 @@
----
+CONVERSION ERROR
 
+Original source:
 
-## Stack Layout
-
-
+```trac
+--------------------------------------
+== Stack Layout ==
 
 The stack-layout phase decides where to spill variables. The important goals are to avoid memory traffic and to minimize the size of the stack frame. Both of these goals are accomplished by reusing stack slots.
 
+=== Representing Stack Slots ===
 
-### Representing Stack Slots
-
-
-#### The old approach
+==== The old approach ====
 
 
-
-In the old code generator, we have a phase ordering problem: no compiler phase can name a stack slot until stack layout has been fixed. But stack layout can only be fixed at the end of the pipeline. The consequence of this approach is that most of the pipeline requires special treatment for code that must refer to stack slots (e.g. parameter passing in calling conventions, or spills and reloads). In particular, we defined special instructions for CopyIn and CopyOut of function arguments, which implicitly stand for an adjustment to the stack pointer and some parallel assignments to the function parameters or return results.
-
-
+In the old code generator, we have a phase ordering problem: no compiler phase can name a stack slot until stack layout has been fixed. But stack layout can only be fixed at the end of the pipeline. The consequence of this approach is that most of the pipeline requires special treatment for code that must refer to stack slots (e.g. parameter passing in calling conventions, or spills and reloads). In particular, we defined special instructions for !CopyIn and !CopyOut of function arguments, which implicitly stand for an adjustment to the stack pointer and some parallel assignments to the function parameters or return results.
 
 For example, we compile a function call
 
-
-```wiki
+{{{
 x, y = f(a, b, c);
-```
-
+}}}
 
 into the following C--:
 
-
-```wiki
+{{{
   CopyOut(a, b, c);
   call f returns to k;
 k:
   CopyIn (x, y)
-```
+}}}
 
+Every stage of the back end must cope with the !CopyIn and !CopyOut pseudoinstructions.
 
-Every stage of the back end must cope with the CopyIn and CopyOut pseudoinstructions.
-
-
-#### The new approach
-
-
+==== The new approach ====
 
 A better approach is to introduce a unique name for each stack slot, then treat the name as the addressing expression for the slot. At the end of the pipeline, we choose a stack layout, then replace each stack slot with its offset from the stack pointer. The benefit is that we break the phase-ordering problem: any phase of the compiler can name a stack slot.
 
+For example, if we want to spill a variable {{{x}}}, we use a regular store instruction to a stack slot at address {{{stack<x>}}}:
 
-
-For example, if we want to spill a variable `x`, we use a regular store instruction to a stack slot at address `stack<x>`:
-
-
-```wiki
+{{{
 m[stack<x>] := x;
-```
+}}}
 
-
-where `m[e]` refers to an address `e` in memory.
-
-
+where {{{m[e]}}} refers to an address {{{e}}} in memory.
 
 But what about parameter passing? We use a similar technique, but this time we describe the slot for each location as an offset within the area where the parameters are passed. For example, we lower a function call
 
-
-```wiki
+{{{
 x, y = f(a, b, c);
-```
-
+}}}
 
 into approximately the following C--:
 
-
-```wiki
+{{{
   sp := stack<k + 4>;
   m[stack<k + 1>] := k_info_table;
   m[stack<k + 2>] := a;
@@ -82,21 +62,15 @@ into approximately the following C--:
 k:  // on entry to k, sp == stack<k+3>
   x := m[stack<k + 2>]
   y := m[stack<k + 3>]
-```
+}}}
 
+Note that the semantics of the now-unnecessary !CopyIn and !CopyOut are reified by an assignment to the stack pointer and a series of copy instructions. If an optimization understands copy instructions, it can improve this code -- without having to worry about the semantics of !CopyIn.
 
-Note that the semantics of the now-unnecessary CopyIn and CopyOut are reified by an assignment to the stack pointer and a series of copy instructions. If an optimization understands copy instructions, it can improve this code -- without having to worry about the semantics of CopyIn.
-
-
-
-Furthermore, the job of laying out the stack is now pleasantly simple: decide where to place the slots and parameter-passing areas, then rewrite the references to stack locations. The stack-layout phase is no longer responsible for inserting stack adjustments or lowering CopyIn and CopyOut nodes to data-movement instructions.
-
-
+Furthermore, the job of laying out the stack is now pleasantly simple: decide where to place the slots and parameter-passing areas, then rewrite the references to stack locations. The stack-layout phase is no longer responsible for inserting stack adjustments or lowering !CopyIn and !CopyOut nodes to data-movement instructions.
 
 We use the following types to represent stack slots and parameter-passing areas:
 
-
-```wiki
+{{{
 data Area
   = RegSlot  LocalReg
   | CallArea BlockId Int Int
@@ -107,61 +81,36 @@ data CmmExpr
   ...
   | CmmStackSlot Area Int
   deriving Eq
-```
+}}}
 
+An {{{Area}}} represents space on the stack; it may use either the {{{RegSlot}}} constructor to represent a single stack slot for a register or the {{{CallArea}}} constructor to represent parameters passed to/from a function call/return. In a {{{CallArea}}}, the {{{BlockId}}} is the label of the function call's continuation, and the two integers are the sizes of the outgoing and incoming parameter-passing areas.
 
-An `Area` represents space on the stack; it may use either the `RegSlot` constructor to represent a single stack slot for a register or the `CallArea` constructor to represent parameters passed to/from a function call/return. In a `CallArea`, the `BlockId` is the label of the function call's continuation, and the two integers are the sizes of the outgoing and incoming parameter-passing areas.
-
-
-
-To name a specific location on the stack, we represent its address with a new kind of `CmmExpr`: the `CmmStackSlot`. A `CmmStackSlot` is just an integer offset into an `Area`. If the `Area` is a `RegSlot`, it is a dynamic invariant that the offset must be `0`.
-
-
+To name a specific location on the stack, we represent its address with a new kind of {{{CmmExpr}}}: the {{{CmmStackSlot}}}. A {{{CmmStackSlot}}} is just an integer offset into an {{{Area}}}. If the {{{Area}}} is a {{{RegSlot}}}, it is a dynamic invariant that the offset must be {{{0}}}.
 
 Note: We don't have a virtual frame pointer in this story, but do we really want it? Here's a minor argument against: it requires special treatment by some analyses in Quick C-- (on the other hand, QC-- doesn't have distinguished global registers, so it might not even be an issue in GHC, which has many distinguished global registers).
 
 
-### Laying out the stack
-
-
+=== Laying out the stack ===
 
 A naive approach to laying out the stack would be to give each variable its own stack slot for spilling, and allocate only the ends of the stack frame for parameter-passing areas. But this approach misses two opportunities for optimization:
-
-
-- Stack slots can be reused by variables that are never on the stack at the same time
-- If a function returns a variable on the stack, we might be able to use the return location as the variable's stack slot.
-
+ * Stack slots can be reused by variables that are never on the stack at the same time
+ * If a function returns a variable on the stack, we might be able to use the return location as the variable's stack slot.
 
 As it turns out, it is quite common in GHC that the first definition of a variable comes when its value is returned from a function call. If the value is returned on the stack, then an important optimization is to avoid copying that value to some other location on the stack. How is that achieved? By making sure the location where the value is returned is also its spill slot.
 
-
-### The greedy algorithm
-
-
+=== The greedy algorithm ===
 
 One way to assign stack slots is to traverse the flow graph in a reverse post-order depth-first search, allocating a stack location to each stack slot the first time we encounter the slot. (Note: When we encounter a parameter-passing area for the first time, we allocate stack locations for the whole area.) The allocation is then reused for every reference to the stack slot.
 
-
-
 The algorithm keeps two pieces of information:
+ * A map from each allocated stack slot to its assigned location on the stack: this map is used to make sure that we use only a single stack location for each stack slot.
+ * A map that tracks the contents of the stack: this map allows us to identify empty locations on the stack that can be assigned to stack slots. Also, it should identify the young end of the stack. For now, each stack location is assigned to only one stack slot at a time.
 
-
-- A map from each allocated stack slot to its assigned location on the stack: this map is used to make sure that we use only a single stack location for each stack slot.
-- A map that tracks the contents of the stack: this map allows us to identify empty locations on the stack that can be assigned to stack slots. Also, it should identify the young end of the stack. For now, each stack location is assigned to only one stack slot at a time.
-
-
-Because the second map is just the inverse of the first, my examples will show only the map from stack slots to stack addresses.
-
-
-
-Note: We want to reuse stack slots whenever possible. Therefore, if a stack slot is assigned to a location `l`, we need a variation of liveness analysis to identify final references to `l`. After the final reference to `l`, we can remove it from our maps, freeing up `l` for reallocation to other stack slots.
-
-
+Note: We want to reuse stack slots whenever possible. Therefore, if a stack slot is assigned to a location {{{l}}}, we need a variation of liveness analysis to identify final references to {{{l}}}. After the final reference to {{{l}}}, we can remove it from the second map, freeing up {{{l}}} for reallocation to other stack slots.
 
 Let's walk through an example. The following is a simple program in pseudo-C--:
 
-
-```wiki
+{{{
    if <> then
      x, y = f(a);
      ... <uses y>
@@ -169,13 +118,11 @@ Let's walk through an example. The following is a simple program in pseudo-C--:
      x, z = g(a);
    spill<x> // some source code resulting in x getting spilled
    ... <possibly uses y>
-```
-
+}}}
 
 The program may be lowered to the following C-- code:
 
-
-```wiki
+{{{
    if <> then goto L0; else goto L2;
 L0:
    sp := stack<L1 + 2>;
@@ -199,82 +146,63 @@ L3:  // on entry to L3, sp == stack<L3+3>
 L4:
    m[stack<x>] := x;
    ... <possibly uses y>
-```
-
+}}}
 
 Let's assume we visit the blocks in lexical order, which is what a reverse post-order depth-first search would give us. At each block, we give the initial maps as a pair of bindings, then describe what we do at each instruction.
 
+ * L0: Initial maps: ({}, {}). At the instruction {{{sp := stack<L1 + 2>;}}}, we see the stack area associated with {{{L1}}} for the first time. Checking the maps, we see that {{{<L1 + 2>}}} is not bound, so we have to allocate space for it. Because it is a parameter-passing area, it must be placed at the young end of the stack. The stack is currently empty, so we place {{{L1}}} at location {{{0}}} on the stack, which means that the slot {{{<L1 + 2>}}} is at location {{{2}}} on the stack. We go ahead and fill in the rest of the locations in the stack area for {{{L1}}}, for both the incoming and outgoing parameters, producing the following maps: ({<L1 + 0> -> 0, <L1 + 1> -> 1, <L1 + 2> -> 2, <L1 + 3> -> 3}, {0-> <L1 + 0>, 1 -> <L1 + 1>, 2 -> <L1 + 2>, 3 -> <L1 + 3>}). [[BR]]
+The next instruction stores a label into an allocated stack slot, so nothing changes.
+Then, we store the variable {{{a}}} into an allocated stack slot. It might be tempting
+to set {{{a}}}'s spill slot to be the same as {{{<L1 + 2>}}}, but it might be wrong: the function {{{f}}} might overwrite its value (especially with return arguments). Therefore, we do not try to set a variable's spill slot when it appears on the right-hand side of a store. (NB: This restriction is a consequence of the liveness properties of the stack slot; it would be nice if it just fell out.)
+  * L1: Initial maps: ({<L1 + 0> -> 0, <L1 + 1> -> 1, <L1 + 2> -> 2, <L1 + 3> -> 3}, {0-> <L1 + 0>, 1 -> <L1 + 1>, 2 -> <L1 + 2>, 3 -> <L1 + 3>}).
+Before we consider the first instruction, we can note that the stack slots <L1 + 0> and <L1 + 1> are not referenced in the rest of the procedure, so we can drop them from the second map, leaving those spaces free for other stack slots: ({<L1 + 0> -> 0, <L1 + 1> -> 1, <L1 + 2> -> 2, <L1 + 3> -> 3}, {2 -> <L1 + 2>, 3 -> <L1 + 3>}).
+The first instruction {{{x := m[stack<L1 + 2>]}}} uses a stack slot that has already been allocated. But it also offers an opportunity for optimization: we can allocate {{{stack<x> == stack<L1 + 2>}}}, as long as the two locations do not interfere (i.e. one must not overwrite the value of the other). As a proxy for interference in this greedy approach, we will make this allocation only if the stack location on the right-hand side is not "live out" in the rest of the program (where "live out" says whether the location is referenced, including definitions). In our example, we assume that the stack location is not live out, so we allocate x's spill slot and remove the (now-dead) {{{<L1 + 2>}}} from the second map: ({<L1 + 0> -> 0, <L1 + 1> -> 1, <L1 + 2> -> 2, <L1 + 3> -> 3, stack<x> -> 2}, {2 -> stack<x>, 3 -> <L1 + 3>}). Similarly, after the next instruction, we have the maps ({<L1 + 0> -> 0, <L1 + 1> -> 1, <L1 + 2> -> 2, <L1 + 3> -> 3, stack<x> -> 2, stack<y> -> 3}, {2 -> stack<x>, 3 -> stack<y>).
+ * L2: Initial maps: ({<L1 + 0> -> 0, <L1 + 1> -> 1, <L1 + 2> -> 2, <L1 + 3> -> 3, stack<x> -> 2, stack<y> -> 3}, {2 -> stack<x>, 3 -> stack<y>). Before considering the instructions in L2, we can drop any stack 
 
-- L0: Initial map: {}. At the instruction `sp := stack<L1 + 2>;`, we see the stack area associated with `L1` for the first time. Checking the maps, we see that `<L1 + 2>` is not bound, so we have to allocate space for it. Because it is a parameter-passing area, it must be placed at the young end of the stack. The stack is currently empty, so we place `L1` at location `0` on the stack, which means that the slot `<L1 + 2>` is at location `2` on the stack. We go ahead and fill in the rest of the locations in the stack area for `L1`, for both the incoming and outgoing parameters, producing the following map: {\<L1 + 0\> -\> 0, \<L1 + 1\> -\> 1, \<L1 + 2\> -\> 2, \<L1 + 3\> -\> 3}. 
+UGH... THE INITIAL MAP FOR L2 SHOULD BE DIFFERENT -- THE SECOND MAP SHOULD INCLUDE ANY MAPPINGS LIVE INTO L2. OF COURSE, WE CAN'T DROP THE MAPPINGS ADDED IN L1 B/C THEY MIGHT CONFLICT WITH MAPPINGS WE TRY TO ADD IN L2 (DEPENDING ON THE LIVENESS OF THE STACK SLOTS). SO, I THINK THE 2ND MAP SHOULD JUST BE THE INVERSE OF THE 1ST, WITH EACH ENTRY MAPPING A STACK ADDRESS TO THE LIST OF SLOTS IT CONTAINS OVER TIME.
 
 
-The subsequent instructions in the basic block mention only stack slots that have already been allocated, so the map remains unchanged.
-
-
+Note: Call instructions should indicate not only the registers they use and kill but also the stack slots.
 
 Note: This greedy algorithm makes the copy propagation only if the stack location is not "live"-out. Otherwise, we would have two values sharing the stack slot, with no guarantee that they could safely share the location. If we had an interference graph, we could make a more informed decision, but that's a non-greedy optimization.
 
-
+Problem: I don't think this approach deals nicely with the case where the arguments returned along both branches are bound to the same variables. In particular, when allocating the first returned value, it may be the same on both branches, but you don't know if the second one will be, so you can't commit to using the same stack space.
 
 What about a procedure's incoming and outgoing parameters, which should appear at the young end of the stack, in a predetermined location? The locations of these stack slots are determined by convention. Should we initialize the map with their locations?
 
-
-
 Invariant: A load from a stack slot must be preceded by a spill to that stack slot. And we should visit that spill before the reload. Otherwise, something has gone horribly wrong.
-
-
 
 Note: Obviously, we need to keep track of the actual widths of values to compute stack addresses.
 
-
-## Random Thoughts
-
-
+== Random Thoughts ==
 
 Assignments into parameter-passing areas can't be hoisted past adjustments to the stack pointer until we know the stack layout -- otherwise we might try to write off the young end of the stack. There must be some sort of invariant here, something along the lines of: "a reference to a parameter passing area must (a) succeed the adjustment moving the stack pointer to the bottom of the area and (b) precede any other stack adjustment.
 Restated: a def or use of a stack location is well-defined only if the stack pointer points "past" the location. Therefore, we can move a stack assignment/reference past an assignment to the stack pointer only if we can prove that this property is maintained.
 
-
-
 This all feels related to the coalescing optimization performed by register allocators.
-
-
 
 We're missing another optimization opportunity: there's no reason why different live ranges need to share the same stack slot.
 
+== !ToDo ==
 
-## ToDo
-
-
-- Explain the stack layout algorithm.
-- State the invariants.
-- Say something about aliasing.
-
-## Old Text
+ * Explain the stack layout algorithm.
+ * State the invariants.
+ * Say something about aliasing.
 
 
+== Old Text ==
 
 The current CMM code-generation path leaves stack management completely implicit until the end of the pipeline. The consequence is that a number of things must happen all at once:
-
-
-- The stack is laid out.
-- CopyIn and CopyOut nodes are converted to the appropriate moves, loads and stores, as required by the calling conventions.
-- The stack pointer is adjusted to conventional locations before and after function calls.
-- The return address is pushed on the stack at call sites.
-
-
+ * The stack is laid out.
+ * !CopyIn and !CopyOut nodes are converted to the appropriate moves, loads and stores, as required by the calling conventions.
+ * The stack pointer is adjusted to conventional locations before and after function calls.
+ * The return address is pushed on the stack at call sites.
 And of course, none of the argument-passing or stack-adjusting instructions are available during optimization, before the stack layout is fixed.
-
-
 
 A much better approach is to give symbolic names to locations on the stack, lower all the argument passing and stack adjusting to the actual data-movement instructions, and replace the names later when the final stack layout is fixed.
 
-
-
 For example
-
-
-```wiki
+{{{
 f(x) {
    y = x;
    ...
@@ -284,13 +212,11 @@ f(x) {
  L:
    ...
 }
-```
-
+}}}
 
 should be compiled to
 
-
-```wiki
+{{{
 f:
    x = m[stack(f, 1)]; // copy the argument from stack area `f' to local x
    y = x;
@@ -305,31 +231,23 @@ f:
  L:
    ... 
 }
-```
-
+}}}
 
 The exact syntax will probably be a bit different, but there's the gist of it.
 
-
-
 But how do we map the stack slots to actual hardware locations? As it turns out, it is quite common in GHC that the first definition of a variable comes when its value is returned from a function call. If the value is returned on the stack, then an important optimization is to avoid copying that value to some other ``local`` location on the stack. How is that achieved? By making sure the location where the value is returned is defined as its local location.
-
-
 
 For example,
 
-
-```wiki
+{{{
 f() {
   x = g();
   ...
 }
-```
-
+}}}
 
 If g() returns x on the stack, we would like the return location to be x's stack slot for the rest of the procedure.
 Issues raised by this:
-
-
-- Stack holes where return addresses were stored. Such a hole can be filled with a variable that can't be stored in a convenient return slot.
-- Stack allocation must be based on control flow -- how else would you know if x has already been placed or if it can be stored on the bottom of the stack?
+ * Stack holes where return addresses were stored. Such a hole can be filled with a variable that can't be stored in a convenient return slot.
+ * Stack allocation must be based on control flow -- how else would you know if x has already been placed or if it can be stored on the bottom of the stack?
+```
