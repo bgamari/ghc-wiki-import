@@ -10,6 +10,7 @@
 
 
 - [\#714](https://gitlab.staging.haskell.org/ghc/ghc/issues/714) (fundeps treated inconsistently in superclasses and type sigs)
+- [\#2291](https://gitlab.staging.haskell.org/ghc/ghc/issues/2291) (panic mixing RULES and type families)
 - [\#2235](https://gitlab.staging.haskell.org/ghc/ghc/issues/2235) (occurs check)
 - [\#2219](https://gitlab.staging.haskell.org/ghc/ghc/issues/2219)
 - [\#2212](https://gitlab.staging.haskell.org/ghc/ghc/issues/2212)
