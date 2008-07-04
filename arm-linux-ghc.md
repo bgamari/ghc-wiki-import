@@ -1,189 +1,136 @@
-# Revival
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Revival =
 
 Everything from here to the "Original Page" heading is for the revival in July 2008.
 
-
-## Hackathon?
-
-
+== Hackathon? ==
 
 A Hackathon in the San Diego area for sometime in 2008 was suggested. Thoughts?
 
-
-## The Influence of GHC 6.10
-
-
+== The Influence of GHC 6.10 ==
 
 Any notable pending changes we need to wait for? Do we need to wait for the final 6.10 release?
 
-
-## Owned Devices
-
-
+== Owned Devices ==
 
 All developers, what ARM-based devices do you have available for testing?
 
-
-- shepheb has a Nokia N810.
-
-## First Unregisterised Hack Notes
+ * shepheb has a Nokia N810.
 
 
+== First Unregisterised Hack Notes ==
 
 This documents shepheb's first attempt at a crude, unregisterised build for the Nokia N810 using Maemo 4 Diablo and the Maemo SDK (scratchbox-based)
 
+I'm following the Building/Porting guide's section on porting to a new platform.
 
+=== Target-side Changes ===
 
-I'm following the [Building/Porting](building/porting) guide's section on porting to a new platform.
-
-
-### Target-side Changes
-
-
-#### utils/pwd/pwd is an x86 binary, and there's no GHC to recompile it
-
-
+==== utils/pwd/pwd is an x86 binary, and there's no GHC to recompile it ====
 
 The guide's suggestion to run
 
-
-```wiki
+{{{
 ./configure --enable-hc-boot --enable-hc-boot-unregisterised
-```
-
+}}}
 
 fails because utils/pwd/pwd is a Haskell binary that I can't run, since this is the ARM-based emulated target system and not the x86 it was compiled for. I can't reach the host's GHC to recompile it, so I just replaced it with the hacky
 
-
-```wiki
+{{{
 #!/bin/sh
 echo /home/braden/ghc/ghc-6.9.20080614
-```
-
+}}}
 
 and the above ./configure worked fine.
 
-
-#### libgmp
-
-
+==== libgmp ====
 
 The 
 
-
-```wiki
+{{{
 cd includes
 make
-```
-
+}}}
 
 step in the porting guide fails with an error message implying that libgmp headers were missing. Well clearly, they aren't included in the Maemo SDK. I grabbed the GMP sources inside the SDK scratchbox environment, and did
 
-
-```wiki
+{{{
 ./configure
 make
 make check
 make install
-```
-
+}}}
 
 and all was well. Since make check passed, I have to hope it (cross-)compiled properly and I have a working libgmp now.
-
-
 
 After that the includes/ make worked fine. That completes the target-side part for now.
 
 
-### Host-side Changes
+=== Host-side Changes ===
 
+==== utils/pwd/pwd again ====
 
-#### utils/pwd/pwd again
+utils/pwd/pwd failed again, not sure why this time (I run an i686 Arch Linux and custom kernel, and I'm using 6.8.2. was it built for i386? using 6.9.*?). Anyway, running
 
-
-
-utils/pwd/pwd failed again, not sure why this time (I run an i686 Arch Linux and custom kernel, and I'm using 6.8.2. was it built for i386? using 6.9.\*?). Anyway, running
-
-
-```wiki
+{{{
 cd utils/pwd
 ghc -o pwd pwd.hs
-```
-
+}}}
 
 fixed it, so that's that.
 
+==== Changing build.mk ====
 
-#### Changing build.mk
-
-
-
-As the porting guide says, I had to change the TARGETPLATFORM to arm-unknown-linux. The LeadingUnderscore setting can be left at NO, which is the target-side setting.
+As the porting guide says, I had to change the TARGETPLATFORM to arm-unknown-linux. The !LeadingUnderscore setting can be left at NO, which is the target-side setting.
 
 
-#### Need libffi
-
-
+==== Need libffi ====
 
 GHC 6.9 now uses libffi,  and so I needed to install it too. I Googled libffi, installed the newest version (it was released in April 2008 so I assume it's old enough to be the one used in 6.9), built and installed it on the host machine.
 
-
-
 Its header files are not installed into a system-wide include directory, so I symlinked them into /usr/include. Then the cd compiler && make boot && make step ran fine (though it took long enough running natively on my Core 2 Duo 2.8 GHz that I fear how long the emulated stage 2 will take).
 
-
-#### make in /rts
-
-
+==== make in /rts ====
 
 This fails saying 
 
-
-```wiki
+{{{
 ghc-6.9.20080614: could not execute: /home/braden/src/ghc-6.9.20080614/driver/mangler/ghc-asm
-```
+}}}
 
 
 OLD:
 There is no such file, though there is the script driver/mangler/ghc-asm.lprl. I tried making it executable with no results, but I'm not really sure what to do next. Any pointers are greatly appreciated!
 
-
-
 Of possible note is that I re-ran ./configure a while back while trying to get /compiler to make boot && make in an effort to make it find libffi. I doubt that would matter, but I'll record it anyway.
-
-
 
 UPDATE:
 I fixed this one, just run
 
-
-```wiki
+{{{
 cd driver/mangler
 make
-```
-
+}}}
 
 to build ghc-asm, and then the
 
-
-```wiki
+{{{
 cd rts && make boot && make
-```
-
+}}}
 
 run flawlessly.
 
 
-#### make hc-file-bundle Project=Ghc fails
 
-
+==== make hc-file-bundle Project=Ghc fails ====
 
 Cut down at the last! Here's the last part of the output:
 
-
-```wiki
+{{{
 echo ghc-6.9.20080614/libraries/base/GHC/PrimopWrappers.hs >> hc-files-to-go
 echo ghc-6.9.20080614/compiler/parser/Parser.hs >> hc-files-to-go
 echo ghc-6.9.20080614/compiler/parser/ParserCore.hs >> hc-files-to-go
@@ -197,13 +144,11 @@ tar: ghc-6.9.20080614/rts/AutoApply_thr_p.hc: Cannot stat: No such file or direc
 tar: ghc-6.9.20080614/libraries/base/GHC/PrimopWrappers.hs: Cannot stat: No such file or directory
 tar: Error exit delayed from previous errors
 make: *** [hc-file-bundle] Error 2
-```
+}}}
 
+Those files don't exist, here's an ls -l of rts/Auto* and libraries/base/GHC/
 
-Those files don't exist, here's an ls -l of rts/Auto\* and libraries/base/GHC/
-
-
-```wiki
+{{{
 $ ls -l rts/Auto*
 -rw-r--r-- 1 braden users  77562 2008-07-03 20:26 rts/AutoApply.cmm
 -rw-r--r-- 1 braden users   2634 2008-06-14 13:20 rts/AutoApply.h
@@ -291,228 +236,162 @@ total 6940
 -rw-r--r-- 1 braden users   4895 2008-06-14 13:31 Weak.lhs
 -rw-r--r-- 1 braden users 615579 2008-07-03 20:31 Word.hc
 -rw-r--r-- 1 braden users  32589 2008-06-14 13:31 Word.hs
-```
-
+}}}
 
 The finish line is in sight, but I'm stuck.
 
+UPDATE: I touched all of those files and it built. No idea if it will work in the end though, that one GHC/PrimopWrappers file in particular is worrying.
 
-# Original Page
+=== Back on the Target Machine ===
+
+==== libffi and libgmp again ====
+
+Need to compile these on the target too, and again put the two ffi*.h files in one of the include directories searched by the GHC build process (I used /usr/include).
+
+==== Apparently I need a GHC already running? ====
+
+I unpack the hc-file distribution, and then manually step through the actions of distrib/hc-build. The line to make the libraries fails, ultimately because $(GHC) is empty. Unsurprising, since we don't have a GHC for the target yet. So I built compiler/ first, in defiance of the script. It failed too, late in the process, because it couldn't find -lHSregex-compat. Since this seems to be part of libraries/, I'm at a catch-22.
 
 
-# GHC port for arm-unknown-linux-gnu
+= Original Page =
 
-
+= GHC port for arm-unknown-linux-gnu =
 
 My goal is to create a registerised port of GHC to the nokia 770.
 
-
-## Status
-
-
+== Status ==
 
 There is currently an unregisterised build available for Maemo 1.x. This project is temporarily on hold while two big transitions take place:
 
+ 1. Maemo 2.0 supports the new EABI standard which affects a bunch of things (done) (for more info see http://wiki.debian.org/ArmEabiPort )
+ 2. GHC 6.6 release (soon)
 
-1. Maemo 2.0 supports the new EABI standard which affects a bunch of things (done) (for more info see [
-  http://wiki.debian.org/ArmEabiPort](http://wiki.debian.org/ArmEabiPort) )
-1. GHC 6.6 release (soon)
-
-## Setting up the build environment
-
-
+== Setting up the build environment ==
 
 I have been using the standard maemo cross-development environment. Instructions for setting
 up this environment can be found here:
 
+http://www.maemo.org/platform/docs/tutorials/Maemo_tutorial.html#settingup
 
-
-[
-http://www.maemo.org/platform/docs/tutorials/Maemo\_tutorial.html\#settingup](http://www.maemo.org/platform/docs/tutorials/Maemo_tutorial.html#settingup)
-
-
-## Changes to standard procedure
-
-
+== Changes to standard procedure ==
 
 The updated instructions on this page should now work:
 
-
-
-[http://www.haskell.org/ghc/docs/latest/html/building/sec-porting-ghc.html\#unregisterised-porting](http://www.haskell.org/ghc/docs/latest/html/building/sec-porting-ghc.html#unregisterised-porting)
-
-
+http://www.haskell.org/ghc/docs/latest/html/building/sec-porting-ghc.html#unregisterised-porting
 
 With two small changes:
 
-
-
 (1) I had to add --srcdir=. 
-
-
 
 Anyplace configure is called I get this error:
 
-
-```wiki
+{{{
 This configuration does not support the `--srcdir' option..
-```
-
+}}}
 
 Adding --srcdir=. makes the error go away.
 
-
-
 (2) ghc/Makefile SUBDIRS ordering
-
-
 
 This has been fixed in head, but if you download the 6.4.2 release you will need to
 edit ghc/Makefile and change the ordering of the SUBDIRS so that lib comes before compiler.
 
-
-
 This is the default ordering:
 
-
-```wiki
+{{{
 ifeq "$(BootingFromHc)" "YES"
 SUBDIRS = includes rts docs compiler lib utils driver
 else
-```
-
+}}}
 
 and you want
 
-
-```wiki
+{{{
 ifeq "$(BootingFromHc)" "YES"
 SUBDIRS = includes rts docs lib compiler utils driver
 else
-```
-
+}}}
 
 That should get to the point of having a ghc-inplace built.
-
-
 
 NOTE: if you try to move the directory to a new location or name,
 the inplace compiler will stop working because it has absolute paths
 hard coded to the current location.
 
-
-## Build ghc using ghc-inplace
-
-
+== Build ghc using ghc-inplace ==
 
 (1) unroll the ghc source tarball into a new directory.
 
-
-
 (2) ./configure --srcdir=. --with-ghc=/abs/path/to/ghc-inplace
 
-
-
 (3) create a mk/build.mk with these two lines:
-
-
-```wiki
+{{{
 GhcUnregisterised = YES
 GhcWithNativeCodeGen = NO
-```
-
+}}}
 
 (4) make
 
-
-
 (5) make install
 
-
-
 I think there may have been one other step in there somewhere...
-
-
 
 This should build and install ghc. Unfortunately, the floating point
 code will be broken.
 
-
-## Run the test suite
-
+== Run the test suite ==
 
 
 (1) get the testsuite that corresponds to your release, for example:
 
-
-
-[
-http://haskell.org/ghc/dist/ghc-testsuite-6.4.2.tar.gz](http://haskell.org/ghc/dist/ghc-testsuite-6.4.2.tar.gz)
-
-
+http://haskell.org/ghc/dist/ghc-testsuite-6.4.2.tar.gz
 
 (2) untar it in the ghc-6.4.2 directory.
 
-
-
-(3) edit mk/test.mk and change the -e config.time\_prog line to:
-
-
-```wiki
+(3) edit mk/test.mk and change the -e config.time_prog line to:
+{{{
         -e config.timeout_prog=\"\" \
-```
-
+}}}
 
 I had to do this because the timeout program interacted badly with
 the scratchbox shell causing all the tests to timeout and fail.
 
-
-
 (4) cd to test/ghc-regress
 
-
-
-(5) make TEST\_HC=ghc fast 
-
-
+(5) make TEST_HC=ghc fast 
 
 or
 
+(5) make TEST_HC=ghc # for a longer test
 
+= Step By Step Porting to Maemo 2.0 =
 
-(5) make TEST\_HC=ghc \# for a longer test
-
-
-# Step By Step Porting to Maemo 2.0
-
-
-```wiki
+{{{
 T & H
 
 wget http://www.haskell.org/ghc/dist/6.6/ghc-6.6-src.tar.bz2
 tar -xvjf ghc-6.6-src.tar.bz2
 cd ghc-6.6
-```
+}}}
 
-```wiki
+{{{
 T
 
 $ ./configure --enable-hc-boot --enable-hc-boot-unregisterised --srcdir=.
 $ cd includes
 $ make
-```
+}}}
 
-```wiki
+
+{{{
 H
 
 $ ./configure --srcdir=.
-```
-
+}}}
 
 Create H/mk/build.mk, with the following contents:
 
-
-```wiki
+{{{
 H
 
 GhcUnregisterised = YES
@@ -526,13 +405,11 @@ GhcStage1HcOpts = -O
 GhcStage2HcOpts = -O -fvia-C -keep-hc-files
 SRC_HC_OPTS += -H32m
 GhcBootLibs = YES
-```
+}}}
 
+Change Target* and TARGET* variables in H/mk/config.mk
 
-Change Target\* and TARGET\* variables in H/mk/config.mk
-
-
-```wiki
+{{{
 H
 
 TARGETPLATFORM			= arm-unknown-linux
@@ -542,89 +419,72 @@ TargetArch_CPP			= arm
 
 arm_unknown_linux_TARGET       = 1
 arm_TARGET_ARCH      = 1
-```
-
+}}}
 
 Copy T/ghc/includes/ghcautoconf.h, T/ghc/includes/DerivedConstants.h, and T/ghc/includes/GHCConstants.h to H/ghc/includes. Note that we are building on the host machine, using the target machine's configuration files. This is so that the intermediate C files generated here will be suitable for compiling on the target system.
 
 
-
 Touch the generated configuration files, just to make sure they don't get replaced during the build:
 
-
-```wiki
+{{{
 H
 
 $ cd H/ghc/includes
 $ touch ghcautoconf.h DerivedConstants.h GHCConstants.h mkDerivedConstants.c
 $ touch mkDerivedConstantsHdr mkDerivedConstants.o mkGHCConstants mkGHCConstants.o
-```
-
+}}}
 
 I just followed the guide upto making the hc bundle. I had to comment out this line in H/Makefile:
 
-
-```wiki
+{{{
 #	echo ghc-$(ProjectVersion)/libraries/haskell-src/Language/Haskell/Parser.hs >> hc-files-to-go
-```
-
+}}}
 
 because that file does not seem to exist anymore.
 
-
-## Wrong Stuff
-
-
+== Wrong Stuff ==
 
 Oops, I mis-read the directions, so this next section is junk.
 
-
-
 Build the compiler on the host. There seems to be a circular depends between utils and compat so I had to hack it a bit. First edit H/utils/Makefile and remove ghc-pkg from the SUBDIRS list in the else clause.
 
-
-```wiki
+{{{
 H
 
 else
 SUBDIRS = mkdependC mkdirhier runstdtest hasktags hp2ps hsc2hs \
 	  parallel prof unlit genprimopcode genapply runghc
 endif
-```
-
+}}}
 
 Then run 'make boot' in the utils directory
-
-
-```wiki
+{{{
 H
 
 $ cd H/ghc-6.6/utils
 $ make boot
-```
-
+}}}
 
 Now restore ghc-pkg to the SUBDIRS line:
 
-
-```wiki
+{{{
 H
 
 else
 SUBDIRS = mkdependC mkdirhier runstdtest ghc-pkg hasktags hp2ps hsc2hs \
 	  parallel prof unlit genprimopcode genapply runghc
 endif
-```
-
+}}}
 
 And build H/ghc-6.6/compat and then utils:
 
-
-```wiki
+{{{
 H
 
 $ cd H/ghc-6.6/compat
 $ make boot && make
 $ cd H/ghc-6.6/utils
 $ make boot && make
+}}}
+
 ```
