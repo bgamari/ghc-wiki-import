@@ -9,7 +9,7 @@ Original source:
 
 '''Open Trac bugs related to type families'''
 
-
+ * #2366 (GADT)
  * #714 (fundeps treated inconsistently in superclasses and type sigs)
  * #2291 (panic mixing RULES and type families)
  * #2235 (occurs check)
