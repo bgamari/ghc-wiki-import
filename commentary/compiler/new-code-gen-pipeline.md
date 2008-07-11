@@ -1,61 +1,51 @@
----
+CONVERSION ERROR
+
+Original source:
+
+```trac
+--------------------------------------
+== The pipeline: Make the new code generator work with the existing native codeGen ==
+
+ * '''Code generator''' converts STG to `CmmGraph`.  Implemented in `StgCmm*` modules (in directory `codeGen`). 
+   * Parameter passing and stack adjustments are made explicit using the [wiki:Commentary/Compiler/StackAreas ''Stack Area'' abstraction.]
+   * But we still have `LastCall`, `LastReturn`, `LastBranch` as `Last` nodes.
+   * TODO: Use the proper calling conventions (post Rep Swamp).
+
+ * '''Simple control flow optimisation''', implemented in `CmmContFlowOpt`:
+   * Branch chain elimination.
+   * Remove unreachable blocks.
+   * Block concatenation.  branch to K; and this is the only use of K.  
+   * Common Block Elimination (like CSE). This essentially implements the Adams optimisation, we believe.
+   * Consider (sometime): block duplication.  branch to K; and K is a short block.  Branch chain elimination is just a special case of this.
+
+ * '''Proc-point analysis''' and '''transformation''', implemented in `CmmProcPointZ`.  (Adams version is `CmmProcPoint`.) The transformation part adds a function prologue to the front of each proc-point, following a standard entry convention.
+    * The analysis produces a set of `BlockId` that should become proc-points
+    * The transformation inserts a function prologue at the start of each proc-point, and a function epilogue just before each branch to a proc-point.
+
+ * '''Add spill/reload''', implemented in `CmmSpillReload`, to spill live C-- variables before a call and reload them afterwards.  The middle node of the result is `Middle` (from `ZipCfgCmm` extended with `Spill` and `Reload` constructors.  
+ Invariant: (something like) all variables in a block are gotten from `CopyIn` or `Reload`. 
+
+ * '''Lay out the stack'''
+   * A `SlotId` is the offset of a stack slot from the old end (high address) of the frame.  It doesn't vary as the physical stack pointer moves.
+   * A particular variable has one and only one `SlotId`.  
+   * The stack layout pass produces a mapping of: ''(Area -> slotid)''. For more detail, see [wiki:Commentary/Compiler/StackAreas#Layingoutthestack the description of stack layout.]
+   * Walk over the graph, replacing references to stack areas with offsets from the stack pointer.
+
+ * '''Split into multiple !CmmProcs'''.  At this point we build an info-table for each of the !CmmProcs, including SRTs.  Done on the basis of the live local variables (by now mapped to stack slots) and live CAF statics.
 
 
-##
-The pipeline: Make the new code generator work with the existing native codeGen
-
-
-- **Code generator** converts STG to `CmmGraph`.  Implemented in `StgCmm*` modules (in directory `codeGen`). Parameter passing and stack adjustments are made explicit using the [''Stack Area'' abstraction.](commentary/compiler/stack-areas)
-
-  - TODO Use the proper calling conventions (post Rep Swamp).
-
-- **Simple control flow optimisation**, implemented in `CmmContFlowOpt`:
-
-  - Branch chain elimination.
-  - Remove unreachable blocks.
-  - Block concatenation.  branch to K; and this is the only use of K.  
-  - Common Block Elimination (like CSE). This essentially implements the Adams optimisation, we believe.
-  - Consider (sometime): block duplication.  branch to K; and K is a short block.  Branch chain elimination is just a special case of this.
-
-- **Proc-point analysis** and **transformation**, implemented in `CmmProcPointZ`.  (Adams version is `CmmProcPoint`.) The transformation part adds a function prologue to the front of each proc-point, following a standard entry convention.
-
-  - The analysis produces a set of `BlockId` that should become proc-points
-  - The transformation inserts a function prologue at the start of each proc-point, and a function epilogue just before each branch to a proc-point.
-
-- **Add spill/reload**, implemented in `CmmSpillReload`, to spill live C-- variables before a call and reload them afterwards.  The middle node of the result is `Middle` (from `ZipCfgCmm` extended with `Spill` and `Reload` constructors.  
-  Invariant: (something like) all variables in a block are gotten from `CopyIn` or `Reload`. 
-
-- **Lay out the stack**
-
-  - A `SlotId` is the offset of a stack slot from the old end (high address) of the frame.  It doesn't vary as the physical stack pointer moves.
-  - A particular variable has one and only one `SlotId`.  
-  - The stack layout pass produces a mapping of: *(Area -\> slotid)*. For more detail, see [the description of stack layout.](commentary/compiler/stack-areas#laying-out-the-stack)
-  - Walk over the graph, replacing references to stack areas with offsets from the stack pointer.
-
-- **Split into multiple CmmProcs**.  At this point we build an info-table for each of the CmmProcs, including SRTs.  Done on the basis of the live local variables (by now mapped to stack slots) and live CAF statics.
-
-
-**The Adams optimisation** is done by stuff above.  Given:
-
-
-```wiki
+'''The Adams optimisation''' is done by stuff above.  Given:
+{{{
   call f returns to K
   K: CopyIn retvals; goto L
   L: <code>
+}}}
+ transform to 
+{{{
+  call f returns to L
+  L : CopyIn retvals; <code>
+}}}
+ ''and'' move `CopyOut` into L's other predecessors.  !ToDo: explain why this is a good thing.  In fact Common Block Elimination does this, we think.
+
+
 ```
-
->
->
-> transform to 
->
->
-> ```wiki
->   call f returns to L
->   L : CopyIn retvals; <code>
-> ```
->
->
-> *and* move `CopyOut` into L's other predecessors.  ToDo: explain why this is a good thing.  In fact Common Block Elimination does this, we think.
->
->
-
