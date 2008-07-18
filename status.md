@@ -5,6 +5,10 @@ Original source:
 ```trac
 = GHC Status =
 
+== Releases ==
+
+Here are our plans for [wiki:Status/Releases the next GHC release].
+
 == Biannual status reports ==
 
 Here are biannual GHC status reports, published in the [http://haskell.org/communities/ Haskell Communities and Activities Report]
