@@ -132,7 +132,7 @@ Projects aimed at making GHC into a user-extensible plug-in platform, and less o
 
 
 
-You can apply ANY TIME.  Internships are not just the summer months. Contact one of us (simonpj@…, simonmar@…) in the first instance (or another sponsor if they are more suitable).
+You can apply ANY TIME.  Internships are not just the summer months. Contact one of us (simonpj@…, marlowsd@…) in the first instance (or another sponsor if they are more suitable).
 
 
 
