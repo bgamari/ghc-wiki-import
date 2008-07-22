@@ -1,12 +1,13 @@
-CONVERSION ERROR
+# GHC IRC meetings
 
-Original source:
 
-```trac
-= GHC IRC meetings =
 
-In #ghc on !FreeNode.
+Held in \#ghc on FreeNode, every Wednesday at 4pm UK time.
 
-||[attachment:ghc-2008-07-16.log Log]||First meeting, 2008-07-16, 4pm UK time||The Haskell Platform||
 
-```
+<table><tr><th>[Log](/trac/ghc/attachment/wiki/IRC_Meetings/ghc-2008-07-16.log)[](/trac/ghc/raw-attachment/wiki/IRC_Meetings/ghc-2008-07-16.log)</th>
+<th>First meeting, 2008-07-16, 4pm UK time</th>
+<th>The Haskell Platform
+</th></tr></table>
+
+
