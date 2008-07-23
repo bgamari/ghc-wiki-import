@@ -1,55 +1,73 @@
-CONVERSION ERROR
+# Darcs retrospective, and the future
 
-Original source:
 
-```trac
-= Darcs retrospective, and the future =
 
 GHC has been using darcs for version control since the beginning of 2006.  It has not been all plain sailing, so in this page we will record our experiences with darcs, and attempt to objectively evaluate whether we would be better off with a different version control system.  In the event that we do switch, we need to track exactly what needs to change, so this page will also list those dependencies.
 
-== Problems we currently experience with darcs ==
 
- * Conflicts and merging.  This is the biggest problem we encounter, and is also the #1 priority for
-   Darcs development.  Any non-trivial branch is affected, and essentially the workaround is to discard
-   the history from the branch when merging, and use ordinary diff/patch tools.  Keeping history is
-   possible, but impractical for branches with more than a few patches.
+## Problems we currently experience with darcs
 
- * Speed.  many operations are impractical (annotate, `darcs changes <file>`), and many operations just take "too
-   long" (i.e. long enough that you go and do something else rather than wait for it to finish,
-   which incurs a context-switch cost).  We can't use Trac's darcs integration or darcsweb, for example,
-   because both rely on invoking `darcs changes <file>` (for that matter, that's not completely true for the
-   [http://progetti.arstecnica.it/trac+darcs trac darcs plugin] as it does not execute that command
-   on a per-file basis, but rather it loads and caches into its own database the result of `darcs changes -v` 
-   on the "not-yet-loaded" changesets, visiting every patch in the repository just once. 
-   It caches also the actual content of each file touched by any browsed changeset, to compute the unidiff.).
 
- * bugs: we run into darcs bugs other than the conflict/merging bug on a regular basis.
+- Conflicts and merging.  This is the biggest problem we encounter, and is also the [\#1](https://gitlab.staging.haskell.org/ghc/ghc/issues/1) priority for
+  Darcs development.  Any non-trivial branch is affected, and essentially the workaround is to discard
+  the history from the branch when merging, and use ordinary diff/patch tools.  Keeping history is
+  possible, but impractical for branches with more than a few patches.
 
- * user interface issues: e.g. in a conflict there's no way to tell
-   which two patches are conflicting with each other(!)
+- Speed.  many operations are impractical (annotate, `darcs changes <file>`), and many operations just take "too
+  long" (i.e. long enough that you go and do something else rather than wait for it to finish,
+  which incurs a context-switch cost).  We can't use Trac's darcs integration or darcsweb, for example,
+  because both rely on invoking `darcs changes <file>` (for that matter, that's not completely true for the
+  [
+  trac darcs plugin](http://progetti.arstecnica.it/trac+darcs) as it does not execute that command
+  on a per-file basis, but rather it loads and caches into its own database the result of `darcs changes -v` 
+  on the "not-yet-loaded" changesets, visiting every patch in the repository just once. 
+  It caches also the actual content of each file touched by any browsed changeset, to compute the unidiff.).
 
- * Windows support: is quite flaky still.  (well, it's certainly better than it used to be, and
-   at least some Windows users don't consider it to be bad).
+- bugs: we run into darcs bugs other than the conflict/merging bug on a regular basis.
 
-== Current status ==
+- user interface issues: e.g. in a conflict there's no way to tell
+  which two patches are conflicting with each other(!)
 
-On the 23rd July 2008 an IRC meeting on the #ghc channel decided to make a serious effort to replace Darcs, due to all the problems described above. The logs of that meeting are available in full at [http://hackage.haskell.org/trac/ghc/attachment/wiki/IRC_Meetings/ghc-metting-2008-07-23.log], but the main conclusions were:
+- Windows support: is quite flaky still.  (well, it's certainly better than it used to be, and
+  at least some Windows users don't consider it to be bad).
 
- * The GHC developers have sufficient problems with Darcs that a change would be beneficial
+## Current status
+
+
+
+On the 23rd July 2008 an IRC meeting on the \#ghc channel decided to make a serious effort to replace Darcs, due to all the problems described above. The logs of that meeting are available in full at [
+http://hackage.haskell.org/trac/ghc/attachment/wiki/IRC\_Meetings/ghc-metting-2008-07-23.log](http://hackage.haskell.org/trac/ghc/attachment/wiki/IRC_Meetings/ghc-metting-2008-07-23.log), but the main conclusions were:
+
+
+- The GHC developers have sufficient problems with Darcs that a change would be beneficial
+
+
  
- * We want to stick with distributed version control, and have a widely-used and well-supported system, so Mercurial and Git are the only real
-   contenders
 
- * Mercurial and Git and percived as being mostly feature-and-performance comparable, although git is more popular
 
- * More investigation of the Mercurial option for GHC is needed, especially in light of reported poor support for Windows with Git. This
-   work is ongoing
+- We want to stick with distributed version control, and have a widely-used and well-supported system, so Mercurial and Git are the only real
+  contenders
 
-== Darcs alternatives still in the running ==
+- Mercurial and Git and percived as being mostly feature-and-performance comparable, although git is more popular
 
-!ToDo.  Compare workflows using darcs with the same workflow in other systems.  Igloo suggested one basis for comparison:
+- More investigation of the Mercurial option for GHC is needed, especially in light of reported poor support for Windows with Git. This
+  work is ongoing
 
-{{{
+## Important workflows
+
+
+
+ToDo.  Compare workflows using darcs with the same workflow in other systems.
+
+
+### Cherry-picking patches
+
+
+
+This is how we maintain the stable GHC branch. Particular fixes are pulled from the HEAD. When the desired patches don't depend on undesired patches, darcs takes care of this automatically, as demonstrated below. Otherwise, with darcs, the patch has to be merged by hand.
+
+
+```wiki
     # Make a repo with a single file with lines 1,3,5,7 in
 
     mkdir repo1
@@ -83,121 +101,164 @@ On the 23rd July 2008 an IRC meeting on the #ghc channel decided to make a serio
     y
 
     # repo2's and repo3's file now contains lines 1,3,4,5,7
-}}}
+```
 
-This workflow is going to favour darcs over everything else, because of the cherrypicking.  Before you put too much faith in it, it would be good to ask how often people really cherrypick, and why they don't seem to miss it in other systems.
+## Darcs alternatives still in the running
 
-=== Mercurial ===
+
+### Mercurial
+
+
 
 Advantages:
 
- * Speed comparable to Git
- * Some operations become feasible (bisect, annotate)
- * Many helper tools
- * Good Windows support
- * HTTP and SSH sync possible, but unknown how this compares to Git native protocol sync speed
+
+- Speed comparable to Git
+- Some operations become feasible (bisect, annotate)
+- Many helper tools
+- Good Windows support
+- HTTP and SSH sync possible, but unknown how this compares to Git native protocol sync speed
+
 
 Disadvantages:
 
- * Similar problems with bisect support as Git
- * (Unknown: suitability of command set?)
 
-=== Git ===
+- Similar problems with bisect support as Git
+- (Unknown: suitability of command set?)
+
+### Git
+
+
 
 Advantages:
   
- * Speed
- * Very similar workflow possible: {{{git add --patch}}}, {{{git cherry-pick}}}, and others
- * Some operations become feasible (bisect, annotate)
- * Many helper tools
+
+
+- Speed
+- Very similar workflow possible: `git add --patch`, `git cherry-pick`, and others
+- Some operations become feasible (bisect, annotate)
+- Many helper tools
+
 
 Disadvantages:
 
- * Complex command set?  (Though, it should be possible to find replacements for the darcs commands and be happy.) 
- * Lack of good Windows support?
- * bisect support would require git modules to also pick the correct version of libraries.  Keeping this in sync is not easy, atm.
- * uses its own protocol for network transmission (http works but is slower, however, other hosting services are available, e.g., github)
 
-== Eliminated alternatives ==
+- Complex command set?  (Though, it should be possible to find replacements for the darcs commands and be happy.) 
+- Lack of good Windows support?
+- bisect support would require git modules to also pick the correct version of libraries.  Keeping this in sync is not easy, atm.
+- uses its own protocol for network transmission (http works but is slower, however, other hosting services are available, e.g., github)
 
-=== Bzr ===
+## Eliminated alternatives
+
+
+### Bzr
+
+
 
 Advantages:
 
- * Fairly fast
- * Portable (as portable as python, anyhow)
- * Merging works correctly based on closest-common-ancestor
- * Tracking of renamed files / directories merges correctly
- * Revisions form a DAG (more like a tree with merge-points) rather than patchsets
- * Supports convenient "centralised-style" commit-remote-by-default as well as "distributed-style" commit-local-by-default. Just 'bind' or 'unbind' your branch whenever you want.
- * Simple clear UI
+
+- Fairly fast
+- Portable (as portable as python, anyhow)
+- Merging works correctly based on closest-common-ancestor
+- Tracking of renamed files / directories merges correctly
+- Revisions form a DAG (more like a tree with merge-points) rather than patchsets
+- Supports convenient "centralised-style" commit-remote-by-default as well as "distributed-style" commit-local-by-default. Just 'bind' or 'unbind' your branch whenever you want.
+- Simple clear UI
+
 
 Disadvantages
- * Revisions form a DAG (more like a tree with merge-points) rather than patchsets (this is a subjective point, which is why it's in both lists. Which model do you believe in?)
- * Cherry-picking isn't very "native" to the data model.
- * UI is rather different from darcs (which current contributors are used to).
+
+
+- Revisions form a DAG (more like a tree with merge-points) rather than patchsets (this is a subjective point, which is why it's in both lists. Which model do you believe in?)
+- Cherry-picking isn't very "native" to the data model.
+- UI is rather different from darcs (which current contributors are used to).
+
 
 Reason for elimination: lack of uptake and hence more risk of Bzr becoming unmaintained.
 
-=== Darcs ===
+
+### Darcs
+
+
 
 Advantages to staying with darcs:
   
- * Community consistency: essentially the Haskell community has standardised on darcs, so it would be 
-   an extra barrier for contributors if they had to learn another VC system.
 
- * Merging, when it works, is done right in darcs.
+
+- Community consistency: essentially the Haskell community has standardised on darcs, so it would be 
+  an extra barrier for contributors if they had to learn another VC system.
+
+- Merging, when it works, is done right in darcs.
+
 
 Disadvantages to staying with darcs:
 
- * Uncertain future: no critical mass of hackers/maintainers.  The technical basis is not well enough
-   understood by enough people.
+
+- Uncertain future: no critical mass of hackers/maintainers.  The technical basis is not well enough
+  understood by enough people.
+
 
 Reason for elimination: persistent performance and algorithmic problems, see above.
 
-== Dependencies on darcs ==
+
+## Dependencies on darcs
+
+
 
 The following is intended to be a complete list of the things that would need to change if we were to switch away from darcs, in addition to the conversion of the repository itself, which I am assuming can be automatically converted using available tools.
 
+
+
 The following code/scripts would need to be adapted or replaced:
 
- * The `darcs-all` script
- * The `push-all` script
- * The `aclocal.m4` code that attempts to determine the source tree date
- * `.darcs-boring`
- * The buildbot scripts
- * checkin email script: `/home/darcs/bin/commit-messages-split.sh`
- * Trac integration (the GHC Trac does not currently integrate with darcs, however)
- * darcsweb (use whatever alternative is available)
+
+- The `darcs-all` script
+- The `push-all` script
+- The `aclocal.m4` code that attempts to determine the source tree date
+- `.darcs-boring`
+- The buildbot scripts
+- checkin email script: `/home/darcs/bin/commit-messages-split.sh`
+- Trac integration (the GHC Trac does not currently integrate with darcs, however)
+- darcsweb (use whatever alternative is available)
+
 
 The following documentation would need to change:
 
- * `README`
- * [wiki:Building/GettingTheSources]
- * [wiki:Building/Windows]
- * [wiki:Building/QuickStart]
- * [wiki:Building/Rebuilding]
- * [wiki:Building/RunningNoFib]
- * [wiki:DarcsRepositories] (inc. the sidebar)
- * [wiki:WorkingConventions]
- * [wiki:WorkingConventions/Darcs]
- * [wiki:WorkingConventions/FixingBugs]
- * [wiki:WorkingConventions/AddingFeatures]
- * [wiki:GettingStarted]
- * TestingPatches
- * BuildBot
 
-== External references ==
+- `README`
+- [Building/GettingTheSources](building/getting-the-sources)
+- [Building/Windows](building/windows)
+- [Building/QuickStart](building/quick-start)
+- [Building/Rebuilding](building/rebuilding)
+- [Building/RunningNoFib](building/running-no-fib)
+- [DarcsRepositories](darcs-repositories) (inc. the sidebar)
+- [WorkingConventions](working-conventions)
+- [WorkingConventions/Darcs](working-conventions/darcs)
+- [WorkingConventions/FixingBugs](working-conventions/fixing-bugs)
+- [WorkingConventions/AddingFeatures](working-conventions/adding-features)
+- [GettingStarted](getting-started)
+- [TestingPatches](testing-patches)
+- [BuildBot](build-bot)
+
+## External references
+
+
 
 Posts/blogs:
 
- * [http://hans.fugal.net/blog/articles/2007/11/16/mercurial-and-darcs Hans Fugal: Mercurial and Darcs]
- * [http://hans.fugal.net/blog/articles/2007/11/20/darcs-and-mercurial-redux Hans Fugal: Darcs and Mercurial Redux]
- * [http://blog.red-bean.com/sussman/?p=20 iBanjo: The Risks of Distributed Version Control]
- * [https://lists.ubuntu.com/archives/bazaar/2007q4/033256.html]
- * [http://bazaar-vcs.org/BzrVsGit]
- * [http://community.livejournal.com/evan_tech/236528.html cgit = super-fast]
- * [http://blog.moertel.com/articles/2007/12/10/how-i-stopped-missing-darcs-and-started-loving-git How I stopped missing Darcs and started loving Git]
- * [http://nominolo.blogspot.com/2008/05/thing-that-should-not-be-or-how-to.html Thomas Schilling converts the GHC tree to Git]
 
-```
+- [
+  Hans Fugal: Mercurial and Darcs](http://hans.fugal.net/blog/articles/2007/11/16/mercurial-and-darcs)
+- [
+  Hans Fugal: Darcs and Mercurial Redux](http://hans.fugal.net/blog/articles/2007/11/20/darcs-and-mercurial-redux)
+- [
+  iBanjo: The Risks of Distributed Version Control](http://blog.red-bean.com/sussman/?p=20)
+- [
+  https://lists.ubuntu.com/archives/bazaar/2007q4/033256.html](https://lists.ubuntu.com/archives/bazaar/2007q4/033256.html)
+- [ http://bazaar-vcs.org/BzrVsGit](http://bazaar-vcs.org/BzrVsGit)
+- [ cgit = super-fast](http://community.livejournal.com/evan_tech/236528.html)
+- [
+  How I stopped missing Darcs and started loving Git](http://blog.moertel.com/articles/2007/12/10/how-i-stopped-missing-darcs-and-started-loving-git)
+- [
+  Thomas Schilling converts the GHC tree to Git](http://nominolo.blogspot.com/2008/05/thing-that-should-not-be-or-how-to.html)
