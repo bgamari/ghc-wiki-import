@@ -96,4 +96,9 @@ showData stage n =
 
   - [http://www.haskell.org/pipermail/generics/2008-July/000351.html], combining the advantages of the previous two techniques to define a `Data`-based `fmap`. The remaining uses of `unsafeCoerce` only distinguish the functor parameter type from equivalent types occuring elsewhere in the functor, so seem to be ok?
 
+- '''performance''': Syb traversals are sometimes associated with bad performance. Unfortunately, none of the anecdotes I'm aware of really investigates these performance issues in any detail (if you have useful data to add here, please do!). So I can only say here that
+  - there are various more or less obvious ways in which naive use of Syb traversal schemes can lead to very inefficient traversals
+  - until proven wrong, I'll assume that all of these traps can be avoided by careful tuning of traversal schemes!-)
+  - three example issues are listed in [http://www.haskell.org/pipermail/generics/2008-July/000353.html Data.Generics with GPS (using Maps to avoid getting lost in Data)], which also provides a generalisation of the main Uniplate `PlateData` (Uniplate over Syb) optimisation, in a form that can be used to address one of the performance issues of `everywhere` and `everything` (traversal of irrelevant substructures)
+  - I've been trying to address another of those three issues (too many runtime type checks), but am currently stuck because merely mentioning the necessary auxilary structures seems to disable some GHC optimisation, leading to a drastical loss of performance (as I'm not even using those structures yet, this might be a GHC bug? see #2463)
 ```
