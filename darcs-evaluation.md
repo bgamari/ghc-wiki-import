@@ -48,7 +48,7 @@ http://hackage.haskell.org/trac/ghc/attachment/wiki/IRC\_Meetings/ghc-metting-20
  
 
 
-- We want to stick with distributed version control, and have a widely-used and well-supported system, so Mercurial and Git are the only real
+- We want to stick with distributed version control, and have a widely-used and well-supported system, so Mercurial and Git and bzr are the only real
   contenders
 
 - Mercurial and Git and percived as being mostly feature-and-performance comparable, although git is more popular
