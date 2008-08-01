@@ -1,37 +1,69 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
-= Layout of important files and directories =
-
-Everything starts with the main GHC repository (see [wiki:Building/GettingTheSources]).   The buld system calls that directory `$(TOP)`.  All the paths below are relative to `$(TOP)`.
-
- '''`darcs-all`'''::
-  This script allows you to get or pull all the additional repositories that you need to build GHC.  The command-line interface is documented in the file itself.
-
- '''`packages`'''::
-  Lists the packages that `darcs-all` should get or pull.  `packages` is looked at only by `darcs-all`.
-
- '''`libraries/`'''::
-  Sub-directory for all the packages that GHC needs.
-
- '''`utils/`'''::
-  Sub-directory for support utilities that GHC uses.  Some of these are themselves separate repositories that `darcs-all` pulls; others are part of the main GHC repository.  Typically these utilities are built once and for all when your build tree is initialised.
-
- '''`compiler/`'''::
-  The main GHC compiler.
-
- '''`rts/`'''::
-  The runtime system.
-
- '''`mk/`'''::
-  Makefile support for the build system.
-
- '''`ghc/`'''::
-  This directory appears only in the build tree. It contains the `.hi` and `.o` files obtained by compiling the compiler.
-    * '''`ghc/stage1-inplace/`, `ghc/stage2-inplace/`'''
-      Code for the stage1 and stage2 compiler.
+# Layout of important files and directories
 
 
-```
+
+Everything starts with the main GHC repository (see [Building/GettingTheSources](building/getting-the-sources)).   The buld system calls that directory `$(TOP)`.  All the paths below are relative to `$(TOP)`.
+
+
+## Files in `$(TOP)`
+
+
+<table><tr><th>**`darcs-all`**</th>
+<td>
+This script allows you to get or pull all the additional repositories that you need to build GHC.  The command-line interface is documented in the file itself.
+</td></tr></table>
+
+
+<table><tr><th>**`packages`**</th>
+<td>
+Lists the packages that `darcs-all` should get or pull.  `packages` is looked at only by `darcs-all`.
+</td></tr></table>
+
+
+<table><tr><th>**`ghc.spec`**</th>
+<td>
+What is this?
+</td></tr></table>
+
+
+## `libraries/`
+
+
+
+The `libraries/` directory contains all the packages that GHC needs to build.
+
+
+## `utils/`
+
+
+
+The `utils` directory contains support utilities that GHC uses.  Some of these are themselves separate repositories that `darcs-all` pulls; others are part of the main GHC repository.  Typically these utilities are built once and for all when your build tree is initialised.
+
+
+## `compiler/`, `rts/`, `docs/`, `includes/`
+
+
+
+These directories contain the main GHC compiler, runtime system, and documentation.
+
+
+## `testsuite/`, `nofib/`
+
+
+
+The `testsuite/` and `nofib/` directories contain apparatus for testing GHC.  Each is a separate repository, which can be gotten with `darcs-all`.
+
+
+## Stuff that appears only in a build tree
+
+
+<table><tr><th>**`ghc/`**</th>
+<td>
+This directory appears only in the build tree. It contains the `.hi` and `.o` files obtained by compiling the compiler.
+
+- **`ghc/stage1-inplace/`, `ghc/stage2-inplace/`**
+  Code for the stage1 and stage2 compiler.
+
+</td></tr></table>
+
+
