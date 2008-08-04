@@ -1,104 +1,72 @@
-# Normalising and Solving Type Equalities
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Normalising and Solving Type Equalities =
 
 The following is based on ideas for the new, post-ICFP'08 solving algorithm described in CVS `papers/type-synonym/new-single.tex`.  Most of the code is in the module `TcTyFuns`.
 
 
-## Terminology
+== Terminology ==
+
+ ''Wanted equality''::
+  An equality constraint that we need to derive during type checking.  Failure to derive it leads to rejection of the checked program.
+ ''Local equality'', ''given equality''::
+  An equality constraint that -in a certain scope- may be used to derive wanted equalities.
+ ''Flexible type variable'',  ''unification variable'', ''HM variable'':: 
+  Type variables that may be '''globally''' instantiated by unification.
+ ''Rigid type variable'', ''skolem type variable''::
+  Type variable that cannot be globally instantiated, but it may be '''locally''' refined by a local equality constraint.
 
 
-<table><tr><th>*Wanted equality*</th>
-<td>
-An equality constraint that we need to derive during type checking.  Failure to derive it leads to rejection of the checked program.
-</td></tr>
-<tr><th>*Local equality*, *given equality*</th>
-<td>
-An equality constraint that -in a certain scope- may be used to derive wanted equalities.
-</td></tr>
-<tr><th>*Flexible type variable*,  *unification variable*, *HM variable*</th>
-<td>
-Type variables that may be **globally** instantiated by unification.
-</td></tr>
-<tr><th>*Rigid type variable*, *skolem type variable*</th>
-<td>
-Type variable that cannot be globally instantiated, but it may be **locally** refined by a local equality constraint.
-</td></tr></table>
-
-
-## Overall algorithm
-
-
+== Overall algorithm ==
 
 The overall algorithm is as in `new-single.tex`, namely
+ 1. normalise all constraints (both locals and wanteds),
+ 2. solve the wanteds, and
+ 3. finalise.
 
 
-1. normalise all constraints (both locals and wanteds),
-1. solve the wanteds, and
-1. finalise.
+== Normal equalities ==
 
-## Normal equalities
+Central to the algorithm are '''normal equalities''', which can be regarded as a set of rewrite rules.  Normal equalities are carefully oriented and contain synonym families only as the head symbols of left-hand sides.  They assume one of the following three forms:
 
-
-
-Central to the algorithm are **normal equalities**, which can be regarded as a set of rewrite rules.  Normal equalities are carefully oriented and contain synonym families only as the head symbols of left-hand sides.  They assume one of the following three forms:
-
-
-1. **Family equality:** `co :: F t1..tn ~ t`,
-1. **Flexible variable equality:** `co :: x ~ t`, where `x` is a flexible type variable, or
-1. **Rigid variable equality:** `co :: a ~ t`, where `a` is a rigid type variable (skolem) and `t` is *not* a flexible type variable.
-
+ 1. '''Family equality:''' `co :: F t1..tn ~ t`,
+ 2. '''Flexible variable equality:''' `co :: x ~ t`, where `x` is a flexible type variable, or
+ 3. '''Rigid variable equality:''' `co :: a ~ t`, where `a` is a rigid type variable (skolem) and `t` is ''not'' a flexible type variable.
 
 where
 
-
-- the types `t`, `t1`, ..., `tn` may not contain any occurrences of synonym families and
-- left-hand side of an equality may not occur in the right-hand side.
-
+ * the types `t`, `t1`, ..., `tn` may not contain any occurrences of synonym families and
+ * left-hand side of an equality may not occur in the right-hand side.
 
 The second bullet of the where clause is trivially true for equalities of Form (1) and it implies that the left- and right-hand sides are different.
 
-
-### Observations
-
-
+=== Observations ===
 
 The following is interesting to note:
 
+ * We explicitly permit equalities of the form `x ~ y` and `a ~ b`, where both sides are either flexible or rigid type variables.
+ * Normal equalities are similar to equalities meeting the Orientation Invariant and Flattening Invariant of new-single, but they are not the same.
+ * Normal equalities are '''never''' self-recursive.  They can be mutually recursive.  A mutually recursive group will exclusively contain variable equalities.  '''SLPJ''' why.  What prevents `a ~ [b], b ~ [a]`?  
 
-- We explicitly permit equalities of the form `x ~ y` and `a ~ b`, where both sides are either flexible or rigid type variables.
-- Normal equalities are similar to equalities meeting the Orientation Invariant and Flattening Invariant of new-single, but they are not the same.
-- Normal equalities are **never** self-recursive.  They can be mutually recursive.  A mutually recursive group will exclusively contain variable equalities.  **SLPJ** why.  What prevents `a ~ [b], b ~ [a]`?  
+=== Coercions ===
 
-### Coercions
-
-
-
-Coercions `co` are either wanteds (represented by a flexible type variable) or givens *aka* locals (represented by a type term of kind CO).  In GHC, they are represented by `TcRnTypes.EqInstCo`, which is defined as
-
-
-```wiki
+Coercions `co` are either wanteds (represented by a flexible type variable) or givens ''aka'' locals (represented by a type term of kind CO).  In GHC, they are represented by `TcRnTypes.EqInstCo`, which is defined as
+{{{
 type EqInstCo = Either 
                   TcTyVar    -- case for wanteds (variable to be filled with a witness)
 		  Coercion   -- case for locals
-```
-
-
+}}}
 Moreover, `TcTyFuns.RewriteInst` represents normal equalities, emphasising their role as rewrite rules. 
 
+'''SLPJ''': I propose that we use a proper data type, not `Either` for this.
 
-
-**SLPJ**: I propose that we use a proper data type, not `Either` for this.
-
-
-## Normalisation
-
-
+== Normalisation ==
 
 The following function `norm` turns an arbitrary equality into a set of normal equalities.  (It ignores the coercions for the moment.)
-
-
-```wiki
+{{{
 data EqInst         -- arbitrary equalities
 data FlatEqInst     -- synonym families may only occur outermost on the lhs
 data RewriteInst    -- normal equality
@@ -144,92 +112,55 @@ flatten [[t1 t2]] = (t1' t2', eqs++eqt)
     (t1', eqs) = flatten t1
     (t2', eqt) = flatten t2
 flatten t = (t, [])
-```
+}}}
 
+Notes:
+ * Perform Rule Triv as part of normalisation.
+ * Whenever an equality of Form (2) or (3) would be recursive, the program can be rejected on the basis of a failed occurs check.  (Immediate rejection is always justified, as right-hand sides do not contain synonym familles; hence, any recursive occurrences of a left-hand side imply that the equality is unsatisfiable.)
+ * Use flexible tyvars for flattening of locals, too.  (We have flexibles in locals anyway and don't use (Unify) on locals, so the flexibles shouldn't cause any harm, but the elimination of skolems is much easier for flexibles - we just instantiate them.)
+ * '''TODO:''' Do we need to record a skolem elimination substitution for skolems introduced during flattening for wanteds, too?
+
+
+== Solving ==
+
+'''TODO:'''
+ * Rules applying to family equalities:
+  * IdenticalLHS only applies to family equalities (both local and wanteds) - MAYBE only when at least one of the equalities is a local (see email).
+  * Top only applies to family equalities (both locals and wanteds)
+ We should apply IdenticalLHS first as it cheaper and potentially reduces the number of applications of Top.
+ * Rules applying to variable equalities:
+  * Unify only applies to all wanted flexible variable equalities
+  * Subst (= local for variable equalities) applies to all variable equalities, where local variable equalities are substituted into all equalities, but wanted variable equalities are only substituted into wanted equalities.
+ We should first apply Unify where possible and, only when that is exhausted, apply Subst.  This is as Unify is cheaper and has global impact (instantiates variables in the environment, too).
 
 Notes:
 
+ * (Unify) is an asymmetric rule, and hence, only fires for equalities of the form `x ~ c`, where `c` is free of synonym families.  Moreover, it only applies to wanted equalities.  (Rationale: Local equality constraints don't justify global instantiation of flexible type variables - just as in new-single.)
 
-- Perform Rule Triv as part of normalisation.
-- Whenever an equality of Form (2) or (3) would be recursive, the program can be rejected on the basis of a failed occurs check.  (Immediate rejection is always justified, as right-hand sides do not contain synonym familles; hence, any recursive occurrences of a left-hand side imply that the equality is unsatisfiable.)
-- Use flexible tyvars for flattening of locals, too.  (We have flexibles in locals anyway and don't use (Unify) on locals, so the flexibles shouldn't cause any harm, but the elimination of skolems is much easier for flexibles - we just instantiate them.)
-- **TODO** Do we need to record a skolem elimination substitution for skolems introduced during flattening for wanteds, too?
+ * (Local) only substitutes normal variable equalities - and currently also only local equalities, not wanteds.  (We should call this Rule (Subst) again.) 
 
-## Solving
+ In principle, a rewrite rule could be discarded after an exhaustive application of (Local).  However, while the set of class constraints is kept separate, we may always have some occurrences of the supposedly eliminated variable in a class constraint, and hence, need to keep all local equalities around.
 
+ * (IdenticalLHS) I don't think it is useful to apply that rule when both equalities are wanted, which makes it a variant of (Local).   BUT as SLPJ points out what about `F a ~ x1, F a ~ Int`?  Then we could unify the HM variable `x` with `Int`.
 
+=== Observations ===
+ *  Rule (Local) -substituting variable equalities- is the most expensive rule as it needs to traverse all type terms.
+ * Only (Local) when replacing a variable in the ''left-hand side'' of an equality of Form (1) can  lead to recursion with (Top).
 
-**TODO**
+== Termination ==
 
+=== !SkolemOccurs ===
 
-- Rules applying to family equalities:
-
-  - IdenticalLHS only applies to family equalities (both local and wanteds)
-  - Top only applies to family equalities (both locals and wanteds)
-
->
->
-> We should apply IdenticalLHS first as it cheaper and potentially reduces the number of applications of Top.
->
->
-
-- Rules applying to variable equalities:
-
-  - Unify only applies to all wanted flexible variable equalities
-  - Subst (= local for variable equalities) applies to all variable equalities, where local variable equalities are substituted into all equalities, but wanted variable equalities are only substituted into wanted equalities.
-
->
->
-> We should first apply Unify where possible and, only when that is exhausted, apply Subst.  This is as Unify is cheaper and has global impact (instantiates variables in the environment, too).
->
->
-
-
-Notes:
-
-
-- (Unify) is an asymmetric rule, and hence, only fires for equalities of the form `x ~ c`, where `c` is free of synonym families.  Moreover, it only applies to wanted equalities.  (Rationale: Local equality constraints don't justify global instantiation of flexible type variables - just as in new-single.)
-
-- (Local) only substitutes normal variable equalities - and currently also only local equalities, not wanteds.  (We should call this Rule (Subst) again.) 
-
->
->
-> In principle, a rewrite rule could be discarded after an exhaustive application of (Local).  However, while the set of class constraints is kept separate, we may always have some occurrences of the supposedly eliminated variable in a class constraint, and hence, need to keep all local equalities around.
->
->
-
-- (IdenticalLHS) I don't think it is useful to apply that rule when both equalities are wanted, which makes it a variant of (Local).   BUT as SLPJ points out what about `F a ~ x1, F a ~ Int`?  Then we could unify the HM variable `x` with `Int`.
-
-### Observations
-
-
--  Rule (Local) -substituting variable equalities- is the most expensive rule as it needs to traverse all type terms.
-- Only (Local) when replacing a variable in the *left-hand side* of an equality of Form (1) can  lead to recursion with (Top).
-
-## Termination
-
-
-### SkolemOccurs
-
-
-
-The Note \[skolemOccurs loop\] in the old code explains that equalities of the form `x ~ t` (where `x` is a flexible type variable) may not be used as rewrite rules, but only be solved by applying Rule Unify.  As Unify carefully avoids cycles, this prevents the use of equalities introduced by the Rule SkolemOccurs as rewrite rules.  For this to work, SkolemOccurs also had to apply to equalities of the form `a ~ t[[a]]`.  This was a somewhat intricate set up that we seek to simplify here.  Whether equalities of the form `x ~ t` are used as rewrite rules or solved by Unify doesn't matter anymore.  Instead, we disallow recursive equalities after normalisation completely (both locals and wanteds).  This is possible as right-hand sides are free of synonym families.
-
-
+The Note [skolemOccurs loop] in the old code explains that equalities of the form `x ~ t` (where `x` is a flexible type variable) may not be used as rewrite rules, but only be solved by applying Rule Unify.  As Unify carefully avoids cycles, this prevents the use of equalities introduced by the Rule !SkolemOccurs as rewrite rules.  For this to work, !SkolemOccurs also had to apply to equalities of the form `a ~ t[[a]]`.  This was a somewhat intricate set up that we seek to simplify here.  Whether equalities of the form `x ~ t` are used as rewrite rules or solved by Unify doesn't matter anymore.  Instead, we disallow recursive equalities after normalisation completely (both locals and wanteds).  This is possible as right-hand sides are free of synonym families.
 
 To look at this in more detail, let's consider the following notorious example:
-
-
-```wiki
+{{{
 E_t: forall x. F [x] ~ [F x]
 [F v] ~ v  ||-  [F v] ~ v
-```
+}}}
 
-
-**New-single**: The following derivation shows how the algorithm in new-single fails to terminate for this example.
-
-
-```wiki
+'''New-single''': The following derivation shows how the algorithm in new-single fails to terminate for this example.
+{{{
 [F v] ~ v  ||-  [F v] ~ v
 ==> normalise
 v ~ [a], F v ~ a  ||-  v ~ [x], F v ~ x
@@ -241,13 +172,10 @@ F [a] ~ a  ||-  x ~ a, F[a] ~ x
 ==> 2x (Top) & Unify
 [F a] ~ a  ||-  [F a] ~ a
 ..and so on..
-```
+}}}
 
-
-**New-single using flexible tyvars to flatten locals, but w/o Rule (Local) for flexible type variables**: With (SkolemOccurs) it is crucial to avoid using Rule (Local) with flexible type variables.  We can achieve a similar effect with new-single if we (a) use flexible type variables to flatten local equalities and (b) at the same time do not use Rule (Local) for variable equalities with flexible type variables.  NB: Point (b) was necessary for the ICFP'08 algorithm, too.
-
-
-```wiki
+'''New-single using flexible tyvars to flatten locals, but w/o Rule (Local) for flexible type variables''': With (!SkolemOccurs) it is crucial to avoid using Rule (Local) with flexible type variables.  We can achieve a similar effect with new-single if we (a) use flexible type variables to flatten local equalities and (b) at the same time do not use Rule (Local) for variable equalities with flexible type variables.  NB: Point (b) was necessary for the ICFP'08 algorithm, too.
+{{{
 [F v] ~ v  ||-  [F v] ~ v
 ==> normalise
 v ~ [x2], F v ~ x2  ||-  v ~ [x1], F v ~ x1
@@ -265,17 +193,11 @@ F [x2] ~ x2  ||-  x2 ~ x1, F [x2] ~ x1
 x1 ~ [y2], F x1 ~ y2  ||-  x1 ~ [y1], F x1 ~ y1
 ** x1 := F v, y2 := F x1
 ..we stop here if (Local) doesn't apply to flexible tyvars
-```
+}}}
+A serious disadvantage of this approach is that we '''do''' want to use Rule (Local) with flexible type variables as soon as we have rank-n signatures.  In fact, the lack of doing so is responsible for a few failing tests in the testsuite in the GHC implementation of (!SkolemOccurs).
 
-
-A serious disadvantage of this approach is that we **do** want to use Rule (Local) with flexible type variables as soon as we have rank-n signatures.  In fact, the lack of doing so is responsible for a few failing tests in the testsuite in the GHC implementation of (SkolemOccurs).
-
-
-
-**De-prioritise Rule (Local)**: Instead of outright forbidding the use of Rule (Local) with flexible type variables, we can simply require that Local is only used if no other rule is applicable.  (That has the same effect on satisfiable queries, and in particular, the present example.)
-
-
-```wiki
+'''De-prioritise Rule (Local)''': Instead of outright forbidding the use of Rule (Local) with flexible type variables, we can simply require that Local is only used if no other rule is applicable.  (That has the same effect on satisfiable queries, and in particular, the present example.)
+{{{
 [F v] ~ v  ||-  [F v] ~ v
 ==> normalise
 v ~ [a], F v ~ a  ||-  v ~ [x], F v ~ x
@@ -289,13 +211,10 @@ v ~ [a], F v ~ a  ||-  a ~ a
 ==> normalise
 v ~ [a], F v ~ a ||-
 QED
-```
-
+}}}
 
 In fact, it is sufficient to de-prioritise Rule (Local) for variable equalities (if it is used for other equalities at all):
-
-
-```wiki
+{{{
 [F v] ~ v  ||-  [F v] ~ v
 ==> normalise
 v ~ [a], F v ~ a  ||-  v ~ [x], F v ~ x
@@ -309,13 +228,10 @@ v ~ [a], F [a] ~ a ||- [a] ~ [a]
 ==> normalise
 v ~ [a], F [a] ~ a ||-
 QED
-```
+}}}
 
-
-**One problems remains**: The algorithm still fails to terminate for unsatisfiable queries.
-
-
-```wiki
+'''One problems remains''': The algorithm still fails to terminate for unsatisfiable queries.
+{{{
 [F v] ~ v  ||-  [G v] ~ v
 ==> normalise
 v ~ [a], F v ~ a  ||-  v ~ [x], G v ~ x
@@ -332,9 +248,8 @@ F [a] ~ a  ||-  G [a] ~ a
 a ~ [b], F a ~ b  ||-  G [a] ~ a
 b := F a
 ..and so on..
-```
-
-
+}}}
 My guess is that the algorithm terminates for all satisfiable queries.  If that is correct, the entailment problem that the algorithm solves would be  semi-decidable.
 
 
+```
