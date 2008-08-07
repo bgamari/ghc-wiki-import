@@ -11,6 +11,7 @@ Done:
 - `.darcs-boring` -\> `.gitignore`
 - `darcs-all`, `push-all` -\> `sync-all`
 - `aclocal.m4`
+- [Building/GettingTheSources](building/getting-the-sources) -\> [DarcsConversion/Building/GettingTheSources](darcs-conversion/building/getting-the-sources) (not yet applied)
 
 
 Pending:
@@ -50,7 +51,6 @@ The following documentation would need to change:
 
 
 - `README`
-- [Building/GettingTheSources](building/getting-the-sources)
 - [Building/Windows](building/windows)
 - [Building/QuickStart](building/quick-start)
 - [Building/Rebuilding](building/rebuilding)
