@@ -10,7 +10,7 @@ Just like Darcs, every Git command comes with a {{{--help}}} option.  For exampl
 
 Also see "General Notes" below for features present in Git but not in Darcs.
 
-= General Settings
+= General Settings =
 
 Just like Darcs, Git has global and per-repository configuration options.  To globally set your committer name and email use
 {{{
@@ -18,7 +18,7 @@ git config --global user.name "Haskell Curry"
 git config --global user.email haskell@example.com
 }}}
 
-= Commands
+= Commands =
 
 == darcs init ==
 
