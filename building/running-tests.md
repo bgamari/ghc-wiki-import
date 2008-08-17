@@ -721,26 +721,6 @@ these steps:
 
 >
 > >
-> > >
-> > >
-> > > **expect\_fail\_if\_platform(plat)**      expect failure on a certain platform
-> > >
-> > >
-> >
->
-
->
-> >
-> > >
-> > >
-> > > **expect\_fail\_if\_compiler\_type(compiler)**   expect failure from a certain compiler
-> > >
-> > >
-> >
->
-
->
-> >
 > >
 > > *\<test-fn\>*
 > > is a function which describes how the test should be
