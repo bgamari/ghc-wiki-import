@@ -1,180 +1,109 @@
-# GHC Source Tree Roadmap
+CONVERSION ERROR
+
+Original source:
+
+```trac
 
 
+= GHC Source Tree Roadmap =
 
 The top level of a GHC source tree looks like this:
 
+=== Documentation ===
 
-### Documentation
+ {{{ANNOUNCE}}}::
+ {{{HACKING}}}::
+ {{{LICENSE}}}::
+ {{{README}}}::
 
-
-<table><tr><th>`ANNOUNCE`</th>
-<td>
-</td></tr>
-<tr><th>`HACKING`</th>
-<td>
-</td></tr>
-<tr><th>`LICENSE`</th>
-<td>
-</td></tr>
-<tr><th>`README`</th>
-<td>
-</td></tr></table>
-
-
-### Configuration
-
-
+=== Configuration ===
 
 The GNU autoconf machinery:
 
+ {{{aclocal.m4}}}::
+ {{{config.guess}}}::
+ {{{config.sub}}}::
+ {{{configure.ac}}}::
+ {{{install-sh}}}::
 
-<table><tr><th>`aclocal.m4`</th>
-<td>
-</td></tr>
-<tr><th>`config.guess`</th>
-<td>
-</td></tr>
-<tr><th>`config.sub`</th>
-<td>
-</td></tr>
-<tr><th>`configure.ac`</th>
-<td>
-</td></tr>
-<tr><th>`install-sh`</th>
-<td>
-</td></tr></table>
+=== The Build System ===
 
+See [wiki:Building/BuildSystem].
 
-### The Build System
+ {{{Makefile}}}::
+  Top-level {{{Makefile}}}; {{{make}}} by itself does a full 2-stage
+  bootstrap of GHC, there are also targets for building source and
+  binary distributions.  GHC requires
+  [http://www.gnu.org/software/make/ GNU make].
 
+ {{{mk/}}}::
+  The guts of the build system itself.
 
+=== The Code ===
 
-See Building/BuildSystem?.
+ {{{compat/}}}::
+  A library of compatibility code used when bootstrapping GHC using an
+  older version of GHC.  For example, we compile up the version of
+  Cabal from {{{libraries/Cabal}}} and include it in {{{libcompat}}},
+  this means that the GHC source code can assume the most recent
+  version of Cabal.
 
+ [wiki:Commentary/SourceTree/Compiler compiler/]::
+  [wiki:Commentary/Compiler The Compiler] itself: all Haskell code.
+  This is actually a library; see `ghc/` for the compiler binary.
 
-<table><tr><th>`Makefile`</th>
-<td>
-Top-level `Makefile`; `make` by itself does a full 2-stage
-bootstrap of GHC, there are also targets for building source and
-binary distributions.  GHC requires
-[ GNU make](http://www.gnu.org/software/make/).
-</td></tr></table>
+ {{{driver/}}}::
+  Historically this contained the Perl script known as the GHC
+  "driver"; in GHC 5.00 the driver was rewritten in Haskell and
+  incorporated into GHC itself when we added GHCi and {{{--make}}}.
+  This directory still contains the [wiki:Commentary/EvilMangler mangler]
+  and the [wiki:Commentary/EvilSplitter splitter] Perl scripts, and a couple
+  of wrappers used to invoke GHC on Windows.  Also the package
+  database constructed during a GHC build is stored in here.
 
+ {{{ghc/}}}::
+  The actual compiler binary. This is just a thin wrapper around the library
+  in `compiler/`.
 
-<table><tr><th>`mk/`</th>
-<td>
-The guts of the build system itself.
-</td></tr></table>
+ [wiki:Commentary/SourceTree/Libraries libraries/]::
+   The libraries that are built and distributed with GHC.
 
+ [wiki:Commentary/SourceTree/Includes includes/]::
+   Header files for the Runtime System and for compiling Haskell via C.
 
-### The Code
+ [wiki:Commentary/SourceTree/Docs docs/]::
+   GHC documentation.
 
+ {{{quickcheck/}}}::
+  Some quickcheck tests for the compiler (may go away).
 
-<table><tr><th>`compat/`</th>
-<td>
-A library of compatibility code used when bootstrapping GHC using an
-older version of GHC.  For example, we compile up the version of
-Cabal from `libraries/Cabal` and include it in `libcompat`,
-this means that the GHC source code can assume the most recent
-version of Cabal.
-</td></tr></table>
+ [wiki:Commentary/SourceTree/Rts rts/]::
+  The [wiki:Commentary/Rts Runtime System].
 
-
-<table><tr><th>compiler/?</th>
-<td>
-[The Compiler](commentary/compiler) itself: all Haskell code.
-</td></tr></table>
-
-
-<table><tr><th>`driver/`</th>
-<td>
-Historically this contained the Perl script known as the GHC
-"driver"; in GHC 5.00 the driver was rewritten in Haskell and
-incorporated into GHC itself when we added GHCi and `--make`.
-This directory still contains the [mangler](commentary/evil-mangler)
-and the splitter? Perl scripts, and a couple
-of wrappers used to invoke GHC on Windows.  Also the package
-database constructed during a GHC build is stored in here.
-</td></tr></table>
-
-
-<table><tr><th>libraries/?</th>
-<td>
-The libraries that are built and distributed with GHC.
-</td></tr></table>
-
-
-<table><tr><th>[includes/](commentary/source-tree/includes)</th>
-<td>
-Header files for the Runtime System and for compiling Haskell via C.
-</td></tr></table>
-
-
-<table><tr><th>docs/?</th>
-<td>
-GHC documentation.
-</td></tr></table>
-
-
-<table><tr><th>`quickcheck/`</th>
-<td>
-Some quickcheck tests for the compiler (may go away).
-</td></tr></table>
-
-
-<table><tr><th>[rts/](commentary/source-tree/rts)</th>
-<td>
-The [Runtime System](commentary/rts).
-</td></tr></table>
-
-
-<table><tr><th>utils/?</th>
-<td>
-Various utility programs, either used during the build itself or
-distributed with GHC.
-</td></tr></table>
-
-
+ [wiki:Commentary/SourceTreeUtils utils/]::
+  Various utility programs, either used during the build itself or
+  distributed with GHC.
 
 These two are optional, available as separate darcs repositories:
 
+ [wiki:Commentary/SourceTree/Testsuite testsuite/]::
+  The test suite.
+ [wiki:Commentary/SourceTree/Nofib nofib/]::
+  The NoFib benchmark suite.
 
-<table><tr><th>testsuite/?</th>
-<td>
-The test suite.
-</td></tr>
-<tr><th>nofib/?</th>
-<td>
-The NoFib benchmark suite.
-</td></tr></table>
+=== Distribution ===
 
+ {{{darcs-all}}}::
+  a script for operating on the collection of darcs
+  repositories that makes up the GHC source tree (see Building/GettingTheSources).
 
-### Distribution
+ {{{distrib/}}}::
+  miscellany for building distributions.
 
+ {{{ghc.spec.in}}}::
+  RPM spec file
 
-<table><tr><th>`darcs-all`</th>
-<td>
-a script for operating on the collection of darcs
-repositories that makes up the GHC source tree (see [Building/GettingTheSources](building/getting-the-sources)).
-</td></tr></table>
+ {{{InstallShield}}}, {{{WindowsInstaller}}}::
+  Windows installer bits
 
-
-<table><tr><th>`distrib/`</th>
-<td>
-miscellany for building distributions.
-</td></tr></table>
-
-
-<table><tr><th>`ghc.spec.in`</th>
-<td>
-RPM spec file
-</td></tr></table>
-
-
-<table><tr><th>`InstallShield`, `WindowsInstaller`</th>
-<td>
-Windows installer bits
-</td></tr></table>
-
-
+```
