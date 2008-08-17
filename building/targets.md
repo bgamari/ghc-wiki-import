@@ -1,53 +1,68 @@
-CONVERSION ERROR
 
-Original source:
 
-```trac
 
-[[PageOutline]]
+# Useful workflows and makefile targets
 
-= Useful workflows and makefile targets =
 
-This is intended as a short summary of how to do common tasks.  See also [wiki:Building/Using#StandardTargets], although that may not be fully up to date. 
 
-=== Build or clean everything ===
+This is intended as a short summary of how to do common tasks.  See also [Building/Using](building/using#standard-targets), although that may not be fully up to date. 
+
+
+### Build or clean everything
+
+
 
 Do these things in the `$(TOP)` directory.
 
- * '''Initialisation''': `sh boot; ./configure`, create `build.mk`.  See [wiki:Building/Using#Gettingthebuildyouwant the details], and more about [wiki:Building/Hacking controlling the build].
 
- * '''`make`'''.  This should make everything: the support utilities, stage1 compiler, libraries, and stage2 compiler.
+- **Initialisation**: `sh boot; ./configure`, create `build.mk`.  See [the details](building/using#getting-the-build-you-want), and more about [controlling the build](building/hacking).
 
- The build system does not track cross-package dependencies, so it's possible that you could recompile one library, but another dependent library isn't recompiled, and you get link errors.
+- **`make`**.  This should make everything: the support utilities, stage1 compiler, libraries, and stage2 compiler.
 
- * '''`make clean`''', '''`make distclean`''': various levels of cleanery.
+>
+>
+> The build system does not track cross-package dependencies, so it's possible that you could recompile one library, but another dependent library isn't recompiled, and you get link errors.
+>
+>
+
+- **`make clean`**, **`make distclean`**: various levels of cleanery.
+
+
   
-=== Build just the compiler ===
+
+
+### Clean and rebuild just the compiler
+
+
 
 Do these things in the `$(TOP)/compiler` directory.
 
-  * '''`make rebuild`''', '''`make rebuild stage=2`'''.  This just builds the stage1 or stage2 compiler respectively.
 
-How to clean selectively?  I tried 'make clean stage=2' but I think that deleted my stage1 files too.  
+- `make clean stage=2`, `make boot stage=2`, `make stage=2`. This cleans, boots and builds the stage 2 compiler. You can do the same for the other stages. Note the first command is rarely necessary, and you normally don't need the second one either.
 
-=== Build libraries ===
+### Build libraries
+
+
 
 Do these things in `$(TOP)/libraries` directory.
 
-  * Build all libraries
-  * Build just one library
-  * Clean all libraries
-  * Clean just one library
+
+- Build all libraries
+- Build just one library
+- Clean all libraries
+- Clean just one library
+
 
 Do you do the selective work in `libraries/` or in `libraries/haskell98/` (say)?
 
+
+
 Disabling a library you don't want to build.  (Mess with SUBDIRS?)
 
-=== Testing ===
 
- * Perform [wiki:TestingPatches validation before committing changes]
- * Run the [wiki:Building/RunningTests test suite]
- * Run the [wiki:Building/RunningNoFib nofib suite]
+### Testing
 
 
-```
+- Perform [validation before committing changes](testing-patches)
+- Run the [test suite](building/running-tests)
+- Run the [nofib suite](building/running-no-fib)
