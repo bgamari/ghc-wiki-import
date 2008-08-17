@@ -5,7 +5,7 @@ Original source:
 ```trac
 = Entailment of Type Equalities =
 
-Our aims is to derive the entailment judgement
+Our aim is to derive the entailment judgement
 {{{
   g1, .., gn  |-  w1, .., wm
 }}}
