@@ -3,7 +3,7 @@ CONVERSION ERROR
 Original source:
 
 ```trac
-= Regaining the build system =
+= Re-structuring the GHC build system =
 
 The basic plan is 
 
