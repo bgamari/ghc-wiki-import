@@ -11,7 +11,7 @@ We would like to support dynamically-linked Core-to-Core plug-ins, so that peopl
 
 == Future Work ==
 
-Annotation related: see [wiki:Plugins/Annotatations].
+Annotation related: see [wiki:Plugins/Annotations].
 
 == (OUTDATED) Implementation Speculation ==
 
