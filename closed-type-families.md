@@ -5,6 +5,5 @@ Original source:
 ```trac
 = Closed Type Synonym Families =
 
-See TotalFamilies
-
+see TypeFunctions/TotalFamilies
 ```
