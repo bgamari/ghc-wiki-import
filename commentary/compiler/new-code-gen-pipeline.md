@@ -1,93 +1,134 @@
-CONVERSION ERROR
+# Design of the new code generator
 
-Original source:
 
-```trac
-= Design of the new code generator =
 
 This page contains notes about the design of the new code generator
 
-== The new Cmm data type ==
+
+## The new Cmm data type
+
+
 
 There is a new Cmm data type:
 
- * [[GhcFile(compiler/cmm/ZipCfg.hs)]] contains a generic zipper-based control-flow graph data type.  It is generic in the sense that it's polymorphic in the type of '''middle nodes''' and '''last nodes''' of a block.  (Middle nodes don't do control transfers; last nodes only do control transfers.)  There are extensive notes at the start of the module.[[BR]][[BR]]
- The key types it defines are:
-   * Block identifiers: `BlockId`, `BlockEnv`, `BlockSet`
-   * Control-flow blocks: `Block`
-   * Control-flow graphs: `Graph`[[BR]][[BR]]
- * '''`ZipDataFlow`''' contains a generic framework for solving dataflow problems over `ZipCfg`. It allows you to define a new optimization simply by defining a lattice of dataflow facts (akin to a specialized logic) and then writing the dataflow-transfer functions found in compiler textbooks. Handing these functions to the dataflow engine produces a new optimization that is not only useful on its own, but that can easily be composed with other optimizations to create an integrated "superoptimization" that is strictly more powerful than any sequence of individual optimizations, no matter how many times they are re-run.  The dataflow engine is based on [http://citeseer.ist.psu.edu/old/lerner01composing.html (Lerner, Grove, and Chambers 2002)]; you can find a functional implementation of the dataflow engine presented in [http://www.cs.tufts.edu/~nr/pubs/zipcfg-abstract.html (Ramsey and Dias 2005)].[[BR]][[BR]]
- * '''[[GhcFile(compiler/cmm/ZipCfgCmmRep.hs)]]''' instantiates `ZipCfg` for Cmm, by defining types `Middle` and `Last` and using these to instantiate the polymorphic fields of `ZipCfg`.  It also defines a bunch of smart constructor (`mkJump`, `mkAssign`, `mkCmmIfThenElse` etc) which make it easy to build `CmmGraph`.[[BR]][[BR]]
- * '''`CmmExpr`''' contains the data types for Cmm expressions, registers, and the like.  It does not depend on the dataflow framework at all.
 
-== The the Cmm pipeline ==
+- [compiler/cmm/ZipCfg.hs](/trac/ghc/browser/ghc/compiler/cmm/ZipCfg.hs) contains a generic zipper-based control-flow graph data type.  It is generic in the sense that it's polymorphic in the type of **middle nodes** and **last nodes** of a block.  (Middle nodes don't do control transfers; last nodes only do control transfers.)  There are extensive notes at the start of the module.
+
+  The key types it defines are:
+
+  - Block identifiers: `BlockId`, `BlockEnv`, `BlockSet`
+  - Control-flow blocks: `Block`
+  - Control-flow graphs: `Graph`
+
+- **`ZipDataFlow`** contains a generic framework for solving dataflow problems over `ZipCfg`. It allows you to define a new optimization simply by defining a lattice of dataflow facts (akin to a specialized logic) and then writing the dataflow-transfer functions found in compiler textbooks. Handing these functions to the dataflow engine produces a new optimization that is not only useful on its own, but that can easily be composed with other optimizations to create an integrated "superoptimization" that is strictly more powerful than any sequence of individual optimizations, no matter how many times they are re-run.  The dataflow engine is based on [
+  (Lerner, Grove, and Chambers 2002)](http://citeseer.ist.psu.edu/old/lerner01composing.html); you can find a functional implementation of the dataflow engine presented in [
+  (Ramsey and Dias 2005)](http://www.cs.tufts.edu/~nr/pubs/zipcfg-abstract.html).
+
+- **[compiler/cmm/ZipCfgCmmRep.hs](/trac/ghc/browser/ghc/compiler/cmm/ZipCfgCmmRep.hs)** instantiates `ZipCfg` for Cmm, by defining types `Middle` and `Last` and using these to instantiate the polymorphic fields of `ZipCfg`.  It also defines a bunch of smart constructor (`mkJump`, `mkAssign`, `mkCmmIfThenElse` etc) which make it easy to build `CmmGraph`.
+
+- **`CmmExpr`** contains the data types for Cmm expressions, registers, and the like.  It does not depend on the dataflow framework at all.
+
+## The the Cmm pipeline
+
+
 
 Code generation now has three stages:
-  1. Convert STG to Cmm, with implicit stack implicit, and native Cmm calls.
-  2. Optimise the Cmm, and CPS-convert it to have an explicit stack, and no native calls.
-  3. Feed the CPS-converted Cmm to the existing, unmodified native code generators.
+
+
+1. Convert STG to Cmm, with implicit stack implicit, and native Cmm calls.
+1. Optimise the Cmm, and CPS-convert it to have an explicit stack, and no native calls.
+1. Feed the CPS-converted Cmm to the existing, unmodified native code generators.
+
 
 The first two steps are described in more detail here:
 
- * '''Code generator''' converts STG to `CmmGraph`.  Implemented in `StgCmm*` modules (in directory `codeGen`). 
-   * Parameter passing is made explicit.  Parameters are passed in virtual registers R1, R2 etc. Overflow parameters are passed on the stack using explicit memory stores, to locations described abstractly using the [wiki:Commentary/Compiler/StackAreas ''Stack Area'' abstraction.].   
-   * That includes a store of the return address, which is stored explicitly on the stack in the same way as overflow parameters.
-   * No `CopyIn`, `CopyOut` nodes any more; instead "smart constructors" lower the calling convention to loads/stores/register transfers, using stack area abstraction.
-   * But we still have `LastCall`, `LastReturn`, `LastBranch`, `LastJump` as `Last` nodes.
-   * TODO: Use the proper calling conventions (post Rep Swamp).
 
- * '''Simple control flow optimisation''', implemented in `CmmContFlowOpt`:
-   * Branch chain elimination.
-   * Remove unreachable blocks.
-   * Block concatenation.  branch to K; and this is the only use of K.  
-   * Common Block Elimination (like CSE). This essentially implements the Adams optimisation, we believe.
-   * Consider (sometime): block duplication.  branch to K; and K is a short block.  Branch chain elimination is just a special case of this.
+- **Code generator** converts STG to `CmmGraph`.  Implemented in `StgCmm*` modules (in directory `codeGen`). 
 
- * '''Proc-point analysis''' and '''transformation''', implemented in `CmmProcPointZ`.  (Adams version is `CmmProcPoint`.) The transformation part adds a function prologue to the front of each proc-point, following a standard entry convention.
-    * The analysis produces a set of `BlockId` that should become proc-points
-    * The transformation inserts a function prologue at the start of each proc-point, and a function epilogue just before each branch to a proc-point.
+  - Parameter passing is made explicit.  Parameters are passed in virtual registers R1, R2 etc. Overflow parameters are passed on the stack using explicit memory stores, to locations described abstractly using the [''Stack Area'' abstraction.](commentary/compiler/stack-areas).   
+  - That includes a store of the return address, which is stored explicitly on the stack in the same way as overflow parameters.
+  - No `CopyIn`, `CopyOut` nodes any more; instead "smart constructors" lower the calling convention to loads/stores/register transfers, using stack area abstraction.
+  - But we still have `LastCall`, `LastReturn`, `LastBranch`, `LastJump` as `Last` nodes.
+  - TODO Use the proper calling conventions (post Rep Swamp).
 
- * '''Add spill/reload''', implemented in `CmmSpillReload`, to spill live C-- variables before a call and reload them afterwards.  The spill and reload instructions are simply memory stores and loads respectively, using symbolic stack offsets (see [wiki:Commentary/Compiler/StackAreas#Layingoutthestack stack layout]).  For example, a spill of variable 'x' would look like `Ptr32[SS(x)] = x`.
+- **Simple control flow optimisation**, implemented in `CmmContFlowOpt`:
 
- * '''Figure out the stack layout'''
-   * Each variable 'x', and each proc-point label 'K', has an associated ''Area'', written SS(x) and SS(k) resp, that names a contiguous portion of the stack frame.  
-   * The stack layout pass produces a mapping of: ''(`Area` -> `StackOffset`)''. For more detail, see [wiki:Commentary/Compiler/StackAreas#Layingoutthestack the description of stack layout.]
-   * A `StackOffset` is the byte offset of a stack slot from the old end (high address) of the frame.  It doesn't vary as the physical stack pointer moves.
+  - Branch chain elimination.
+  - Remove unreachable blocks.
+  - Block concatenation.  branch to K; and this is the only use of K.  
+  - Common Block Elimination (like CSE). This essentially implements the Adams optimisation, we believe.
+  - Consider (sometime): block duplication.  branch to K; and K is a short block.  Branch chain elimination is just a special case of this.
 
- * '''Manifest the stack pointer'''.  Once the stack layout mapping has been determined, a second pass walks over the graph, making the stack pointer, `Sp` explicit. Before this pass, there is no `Sp` at all.  After this, `Sp` is completely manifest.
-   * replacing references to `Areas` with offsets from `Sp`.
-   * adding adjustments to `Sp`.
+- **Proc-point analysis** and **transformation**, implemented in `CmmProcPointZ`.  (Adams version is `CmmProcPoint`.) The transformation part adds a function prologue to the front of each proc-point, following a standard entry convention.
+
+  - The analysis produces a set of `BlockId` that should become proc-points
+  - The transformation inserts a function prologue at the start of each proc-point, and a function epilogue just before each branch to a proc-point.
+
+- **Add spill/reload**, implemented in `CmmSpillReload`, to spill live C-- variables before a call and reload them afterwards.  The spill and reload instructions are simply memory stores and loads respectively, using symbolic stack offsets (see [stack layout](commentary/compiler/stack-areas#laying-out-the-stack)).  For example, a spill of variable 'x' would look like `Ptr32[SS(x)] = x`.
+
+- **Figure out the stack layout**
+
+  - Each variable 'x', and each proc-point label 'K', has an associated *Area*, written SS(x) and SS(k) resp, that names a contiguous portion of the stack frame.  
+  - The stack layout pass produces a mapping of: *(`Area` -\> `StackOffset`)*. For more detail, see [the description of stack layout.](commentary/compiler/stack-areas#laying-out-the-stack)
+  - A `StackOffset` is the byte offset of a stack slot from the old end (high address) of the frame.  It doesn't vary as the physical stack pointer moves.
+
+- **Manifest the stack pointer**.  Once the stack layout mapping has been determined, a second pass walks over the graph, making the stack pointer, `Sp` explicit. Before this pass, there is no `Sp` at all.  After this, `Sp` is completely manifest.
+
+  - replacing references to `Areas` with offsets from `Sp`.
+  - adding adjustments to `Sp`.
+
+
  
- * '''Split into multiple !CmmProcs'''.  At this point we build an info-table for each of the !CmmProcs, including SRTs.  Done on the basis of the live local variables (by now mapped to stack slots) and live CAF statics.
-   * `LastCall` and `LastReturn` nodes are replaced by `Jump`s.
 
 
-'''The Adams optimisation''' is done by stuff above.  Given:
-{{{
+- **Split into multiple CmmProcs**.  At this point we build an info-table for each of the CmmProcs, including SRTs.  Done on the basis of the live local variables (by now mapped to stack slots) and live CAF statics.
+
+  - `LastCall` and `LastReturn` nodes are replaced by `Jump`s.
+
+- **Build info tables**.  
+
+  - Find each safe `MidForeignCall` node, "lowers" it into the suspend/call/resume sequence (see `Note [Foreign calls]` in `CmmNode.hs`.), and build an info table for them.
+  - Convert the `CmmInfo` for each `CmmProc` into a `[CmmStatic]`.  
+
+
+**The Adams optimisation** is done by stuff above.  Given:
+
+
+```wiki
   call f returns to K
   K: CopyIn retvals; goto L
   L: <code>
-}}}
- transform to 
-{{{
-  call f returns to L
-  L : CopyIn retvals; <code>
-}}}
- ''and'' move `CopyOut` into L's other predecessors.  !ToDo: explain why this is a good thing.  In fact Common Block Elimination does this, we think.
-
-
-
-== Runtime system ==
-
- * '''Garbage collector entry points''': see `Note [Heap checks]` in `StgCmmHeapery`.
-
- * '''PAPs'''
- 
- * '''Update frames''' and '''exception handling'''.  Also STM frames.
-
- * '''Primitives''' can be rewritten:
-   * Use parameters
-   * In a few cases, use native calls (notably eval)
-
-
 ```
+
+>
+>
+> transform to 
+>
+>
+> ```wiki
+>   call f returns to L
+>   L : CopyIn retvals; <code>
+> ```
+>
+>
+> *and* move `CopyOut` into L's other predecessors.  ToDo: explain why this is a good thing.  In fact Common Block Elimination does this, we think.
+>
+>
+
+## Runtime system
+
+
+- **Garbage collector entry points**: see `Note [Heap checks]` in `StgCmmHeapery`.
+
+- **PAPs**
+
+
+ 
+
+
+- **Update frames** and **exception handling**.  Also STM frames.
+
+- **Primitives** can be rewritten:
+
+  - Use parameters
+  - In a few cases, use native calls (notably eval)
