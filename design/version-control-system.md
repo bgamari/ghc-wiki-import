@@ -2,7 +2,7 @@
 
 
 
-We plan to move from Darcs to Git for GHC itself.  The recent flurry of work on Darcs is very encouraging, but GHC is a particularly high-end client, and taking a direct dependency leads to stress at both ends.  This page describes the plan.  See \[wike:DarcsConversion\] for more details about the conversion process, and [GitForDarcsUsers](git-for-darcs-users) for a quick reference on how to use Git.
+We plan to move from Darcs to Git for GHC itself.  The recent flurry of work on Darcs is very encouraging, but GHC is a particularly high-end client, and taking a direct dependency leads to stress at both ends.  This page describes the plan.  See [DarcsConversion](darcs-conversion) for more details about the conversion process, and [GitForDarcsUsers](git-for-darcs-users) for a quick reference on how to use Git.
 
 
 
