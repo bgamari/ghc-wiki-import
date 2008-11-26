@@ -31,7 +31,6 @@
   - [\#2796](https://gitlab.staging.haskell.org/ghc/ghc/issues/2796)
   - [\#2767](https://gitlab.staging.haskell.org/ghc/ghc/issues/2767)
   - [\#2775](https://gitlab.staging.haskell.org/ghc/ghc/issues/2775)
-  - [\#2787](https://gitlab.staging.haskell.org/ghc/ghc/issues/2787) & [\#2787](https://gitlab.staging.haskell.org/ghc/ghc/issues/2787)
   - [\#2664](https://gitlab.staging.haskell.org/ghc/ghc/issues/2664) (typechecker diverges; actually, it's after Tc9, probably during zonking)
   - [\#2102](https://gitlab.staging.haskell.org/ghc/ghc/issues/2102) & [\#2715](https://gitlab.staging.haskell.org/ghc/ghc/issues/2715) (superclass equalities)
 
