@@ -28,6 +28,7 @@
 
 - Constraint simplification:
 
+  - [\#2828](https://gitlab.staging.haskell.org/ghc/ghc/issues/2828)
   - [\#2796](https://gitlab.staging.haskell.org/ghc/ghc/issues/2796)
   - [\#2767](https://gitlab.staging.haskell.org/ghc/ghc/issues/2767)
   - [\#2775](https://gitlab.staging.haskell.org/ghc/ghc/issues/2775)
