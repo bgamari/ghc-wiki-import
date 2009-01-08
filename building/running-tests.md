@@ -6,8 +6,8 @@ Original source:
 [[PageOutline]]
 = GHC Test framework =
 
-NOTE: you need Python (any version >= 1.5 will probably do) in order
-to use the testsuite.
+NOTE: you need GNU make and Python (any version >= 1.5 will probably do) in order
+to use the testsuite. If you want to run the testsuite in parallel then you need Python 2.5.2 or later.
 
 If you have not checked out the test suite, first run:
 {{{
@@ -52,6 +52,17 @@ To add specific options to the compiler:
 {{{
         make EXTRA_HC_OPTS='+RTS -K32M -RTS' 
 }}}
+
+To save disk space you can have temporary files deleted after each test:
+{{{
+        make CLEANUP=1
+}}}
+
+If you have python 2.5.2 or later then you can run the testsuite in parallel:
+{{{
+        make THREADS=2
+}}}
+
 For more details, see below.
 
 = Running the testsuite with a compiler other than GHC =
