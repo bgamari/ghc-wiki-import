@@ -1,11 +1,6 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
+# Building and Porting GHC
 
 
-= Building and Porting GHC =
 
 This Guide is primarily aimed at those who want to build and/or
 hack on GHC.  It describes how to get started with building GHC on your
@@ -13,48 +8,61 @@ machine, and how to tweak the settings to get the kind of build you
 want.  It also describes the inner workings of the build system, so you
 can extend it, modify it, and use it to build your code.
 
-== Contents ==
+
+## Contents
+
+
 
 Building GHC
 
- * [wiki:Building/GettingTheSources Getting the sources]
- * [wiki:Platforms Platforms that GHC currently supports]
- * [wiki:Building/Prerequisites What tools you need]
- * [wiki:Building/QuickStart Just building and installing GHC]
+
+- [Getting the sources](building/getting-the-sources)
+- [Platforms that GHC currently supports](platforms)
+- [What tools you need](building/prerequisites)
+- [Just building and installing GHC](building/quick-start)
+
 
 Getting started for developers
 
- * [wiki:Building/Hacking Controlling your build]
- * [wiki:Building/Targets Useful workflows and makefile targets] (new)
- * [wiki:Building/Rebuilding How do I re-build after updating or changing GHC?]
- * [wiki:Building/Files Layout of important files and directories] (new)
+
+- [Controlling your build](building/hacking)
+- [Useful workflows and makefile targets](building/targets) (new)
+- [How do I re-build after updating or changing GHC?](building/rebuilding)
+- [Layout of the source tree](commentary/source-tree)
+
 
 More detailed information about the build system
 
- * [wiki:Building/Using Using the build system]
- * [wiki:Building/BuildSystem Architecture of the build system]
- * [wiki:Building/Docs Building the documentation]
- * [wiki:Building/Unregisterised Unregisterised builds]
- * [wiki:Building/Porting Porting GHC]
- * [wiki:Building/RunningTests Running the GHC test framework]
- * [wiki:Building/RunningNoFib The NoFib benchmark suite]
+
+- [Using the build system](building/using)
+- Architecture of the build system?
+- [Building the documentation](building/docs)
+- [Unregisterised builds](building/unregisterised)
+- [Porting GHC](building/porting)
+- [Running the GHC test framework](building/running-tests)
+- [The NoFib benchmark suite](building/running-no-fib)
+
 
 Platform-specific guidance
- * [wiki:Building/PlatformsScriptsFileNames Platforms, scripts, and file names]
- * [wiki:Building/Windows Building under Windows]
- * [wiki:Building/MacOSX Building under MacOS X]
+
+
+- [Platforms, scripts, and file names](building/platforms-scripts-file-names)
+- [Building under Windows](building/windows)
+- [Building under MacOS X](building/mac-osx)
+
 
 FAQ
 
- * [wiki:Building/FAQ General FAQ for building GHC]
+
+- [General FAQ for building GHC](building/faq)
+
+## Contributed documentation
 
 
-== Contributed documentation ==
 
 Please feel free to add pages here.  In due course, information can be incorporated into the main documentation above.
 
- * [wiki:ProblemsCompilingGhc]: Hints about building GHC on Windows platforms (somewhat obsolete)
- * [wiki:SonyPS3] : Hints for building on the Sony PS3
- * [wiki:GhcCoverage Code coverage of our testsuite]
 
-```
+- [ProblemsCompilingGhc](problems-compiling-ghc): Hints about building GHC on Windows platforms (somewhat obsolete)
+- [SonyPS3](sony-p-s3) : Hints for building on the Sony PS3
+- [Code coverage of our testsuite](ghc-coverage)
