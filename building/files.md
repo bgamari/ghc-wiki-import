@@ -1,5 +1,10 @@
+CONVERSION ERROR
 
-**This page redirects to: **[Commentary/SourceTree](/trac/ghc/wiki/Commentary/SourceTree)
+Original source:
+
+```trac
 
 
+Moved to [wiki:Commentary/SourceTree]
 
+```
