@@ -9,8 +9,8 @@ Original source:
 
 === Arity ===
  * #2915: arity too small
+ * #1216: array indexing, inlining/arity bug	
  * #2902: an excellen example of the need for arity analysis
- * #2822: arity expansion not happening right
  * #2823: another arity expansion bug (related to dictionaries)
  * #2440: bad code with type families; I believe this is also arity-related
  * #2762: Arity analysis
@@ -23,7 +23,6 @@ Original source:
  * #2354: NOINLINE pragma ignored
  * #2353: GHC inliner doesn't inline
  * #2078: INLINing improvement; ask Christian.Maeder@dfki.de to see if it improves CASL
- * #1216: array indexing, inlining/arity bug	
  * #2840: top level unlifted string literals
 
 == New code generator ==
