@@ -1,15 +1,15 @@
-## High-level design of nested data parallelism in GHC
+CONVERSION ERROR
 
+Original source:
 
+```trac
 
-The NDP part of the compiler is made up of two components: a parallel array [library](data-parallel/library) and [code vectorisation](data-parallel/code-vectorisation), a transformation which eliminates nested parallelism. The library defines the type of parallel arrays, supporting operations and typeclasses and a loop fusion framework. Crucially, the actual representation of a parallel array is determined by the type of its elements. For instance, `[:Int:]` is just an array of unboxed `Int`s whereas `[:(a,b):]` is, essentially, a pair of arrays `([:a:],[:b:])`. [Associated data types and type synonyms](type-functions) allow us to implement this entirely in the library, without having to modify the compiler. In contrast to this, [code vectorisation](data-parallel/code-vectorisation) is implemented as a Core-to-Core transformation in GHC. In order to be able to deal with higher-order functions in parallel contexts, we also perform [closure conversion](data-parallel/closure-conversion); it is not entirely clear yet whether we want to do it together with [code vectorisation](data-parallel/code-vectorisation) or have two separate passes. 
+== High-level design of nested data parallelism in GHC ==
 
-
+The NDP part of the compiler is made up of two components: a parallel array [wiki:DataParallel/Library library] and [wiki:DataParallel/CodeVectorisation code vectorisation], a transformation which eliminates nested parallelism. The library defines the type of parallel arrays, supporting operations and typeclasses and a loop fusion framework. Crucially, the actual representation of a parallel array is determined by the type of its elements. For instance, `[:Int:]` is just an array of unboxed `Int`s whereas `[:(a,b):]` is, essentially, a pair of arrays `([:a:],[:b:])`. [wiki:TypeFunctions Associated data types and type synonyms] allow us to implement this entirely in the library, without having to modify the compiler. In contrast to this, [wiki:DataParallel/CodeVectorisation code vectorisation] is implemented as a Core-to-Core transformation in GHC. In order to be able to deal with higher-order functions in parallel contexts, we also perform [wiki:DataParallel/ClosureConversion closure conversion] as part of [wiki:DataParallel/CodeVectorisation code vectorisation]. 
 
 This is a rough sketch of how the various components fit into the compiler pipeline:
-
-
-```wiki
+{{{
                     Program                                                    Library
                     =======                                                    =======
 
@@ -72,36 +72,20 @@ This is a rough sketch of how the various components fit into the compiler pipel
                        v
                   Object code
                  RTS with gangs
+}}}
+ '''Haskell with nested parallelism'''::
+  This is vanilla Haskell with the parallel array data type `[:.:]`, array comprehensions, and collective array operations.
+ '''Core with nested parallelism'''::
+  The result of normal desugaring; in particular, array comprehensions are eliminated.
+ '''Core with flat parallelism'''::
+  [wiki:DataParallel/CodeVectorisation code vectorisation] replaces nested parallelism by operations on flat arrays.
+ '''Core with parallel operations on unboxed arrays'''::
+  All operations on `[:.:]` are inlined, leaving only parallel operations on simple unboxed arrays.
+ '''Core with distributed types and sequential unboxed arrays'''::
+  Parallel operations on unboxed arrays, which are implemented in terms of distributed types and sequential array operations, are inlined. Fusion rules are applied to the result.
+ '''Core with gang operations'''::
+  Operations on distributed types and unboxed arrays are inlined, producing code which only makes use of gang operations and the standard libraries. It is optimised as usual.
+
+See the paper [http://www.cse.unsw.edu.au/~chak/papers/CLPKM07.html Data Parallel Haskell: a status report] for an in-depth illustration of this architecture with concrete code of a running example at each transformation stage.
+
 ```
-
-<table><tr><th>**Haskell with nested parallelism**</th>
-<td>
-This is vanilla Haskell with the parallel array data type `[:.:]`, array comprehensions, and collective array operations.
-</td></tr>
-<tr><th>**Core with nested parallelism**</th>
-<td>
-The result of normal desugaring; in particular, array comprehensions are eliminated.
-</td></tr>
-<tr><th>**Core with flat parallelism**</th>
-<td>
-[code vectorisation](data-parallel/code-vectorisation) replaces nested parallelism by operations on flat arrays.
-</td></tr>
-<tr><th>**Core with parallel operations on unboxed arrays**</th>
-<td>
-All operations on `[:.:]` are inlined, leaving only parallel operations on simple unboxed arrays.
-</td></tr>
-<tr><th>**Core with distributed types and sequential unboxed arrays**</th>
-<td>
-Parallel operations on unboxed arrays, which are implemented in terms of distributed types and sequential array operations, are inlined. Fusion rules are applied to the result.
-</td></tr>
-<tr><th>**Core with gang operations**</th>
-<td>
-Operations on distributed types and unboxed arrays are inlined, producing code which only makes use of gang operations and the standard libraries. It is optimised as usual.
-</td></tr></table>
-
-
-
-See the paper [
-Data Parallel Haskell: a status report](http://www.cse.unsw.edu.au/~chak/papers/CLPKM07.html) for an in-depth illustration of this architecture with concrete code of a running example at each transformation stage.
-
-
