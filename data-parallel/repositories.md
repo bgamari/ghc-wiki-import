@@ -1,22 +1,16 @@
-## Source repositories for Data Parallel Haskell
+CONVERSION ERROR
 
+Original source:
 
+```trac
 
-The main repository for the library, *package dph*, is at
+== Source repositories for Data Parallel Haskell ==
 
+The main repository for the library, ''package dph'', is at
 
->
->
-> [
-> http://darcs.haskell.org/packages/dph/](http://darcs.haskell.org/packages/dph/)
->
->
-
+  http://darcs.haskell.org/packages/dph/
 
 This library package slots into GHC's build tree as usual.  (You can get it with `.darcs-all --dph get`.)
 
-
-
 Development of DPH happens in the HEAD repository.
-
-
+```
