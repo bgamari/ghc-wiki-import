@@ -1,10 +1,14 @@
-# GHC Commentary: Runtime aspects of the FFI
+CONVERSION ERROR
+
+Original source:
+
+```trac
 
 
----
+= GHC Commentary: Runtime aspects of the FFI =
+
+----
+CategoryStub
 
 
-
-\[[CategoryStub](category-stub)\]
-
-
+```
