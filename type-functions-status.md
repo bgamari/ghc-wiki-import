@@ -26,6 +26,7 @@
   - [\#2796](https://gitlab.staging.haskell.org/ghc/ghc/issues/2796)
   - [\#2767](https://gitlab.staging.haskell.org/ghc/ghc/issues/2767)
   - [\#2775](https://gitlab.staging.haskell.org/ghc/ghc/issues/2775)
+  - [\#2360](https://gitlab.staging.haskell.org/ghc/ghc/issues/2360): improve error message when unifying `a~T a` where `a` is rigid.
   - [\#2664](https://gitlab.staging.haskell.org/ghc/ghc/issues/2664) (typechecker diverges; actually, it's after Tc9, probably during zonking)
   - [\#2102](https://gitlab.staging.haskell.org/ghc/ghc/issues/2102) & [\#2715](https://gitlab.staging.haskell.org/ghc/ghc/issues/2715) (superclass equalities)
 
