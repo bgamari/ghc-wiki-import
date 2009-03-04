@@ -87,6 +87,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#2859](https://gitlab.staging.haskell.org/ghc/ghc/issues/2859): optimise coercion terms
 - [\#2641](https://gitlab.staging.haskell.org/ghc/ghc/issues/2641): revise what `-XExtendedDefaultRules` does
 - [\#1634](https://gitlab.staging.haskell.org/ghc/ghc/issues/1634): deep skolemisation
+- [\#3018](https://gitlab.staging.haskell.org/ghc/ghc/issues/3018): be lazier about solving class instances
 - [\#2357](https://gitlab.staging.haskell.org/ghc/ghc/issues/2357): **Implement the Haskell Prime proposal for polymorphic pattern bindings**
 
 ### Impredicativity
