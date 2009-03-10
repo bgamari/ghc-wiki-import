@@ -73,7 +73,7 @@ Now set your `PATH`.  We recommend doing this by creating a file `.profile` in y
 
 
 ```wiki
-PATH=/c/mingw/bin:/usr/bin:/bin:/c/ghc/ghc-6.10.1/bin:/c/tools:/c/windows/system32
+PATH=/c/mingw/bin:/c/ghc/ghc-6.10.1/bin:/usr/bin:/bin:/c/tools:/c/windows/system32
 ```
 
 
