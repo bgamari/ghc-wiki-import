@@ -1,83 +1,78 @@
-# Suggestions for projects related to GHC
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Suggestions for projects related to GHC =
 
 Here are some suggestions for projects related to GHC that could be undertaken by an intern or undergraduate project student.  There are also lots of ideas in
+  * GHC's [http://hackage.haskell.org/trac/ghc/report/2 task list]
+  * GHC's [http://hackage.haskell.org/trac/ghc/report/2 feature request list]
 
+-------------
+== Projects that should be within reach of a good undergraduate ==
 
-- GHC's [ task list](http://hackage.haskell.org/trac/ghc/report/2)
-- GHC's [ feature request list](http://hackage.haskell.org/trac/ghc/report/2)
+  * '''Implement overlap and exhaustiveness checking for pattern matching'''.  GHC's current overlap and exhaustiveness checker is old and inadequate.  Furthermore, it takes no account of GADTs and type families. See #595.
 
----
+  * '''Improve parallel profiling tools'''.  Satnam Singh and Simon Marlow have made a start on some tools for visualising the behaviour of parallel programs, but there is much more to do here, and it'll be eagerly adopted by users.
 
+  * '''Implement some low-level C-- optimisations'''.  During 2009 we expect to have the new C-- code generation route in place, and that will open up new opportunities for doing classic compiler-course optimisations on the imperative C-- code.  There is more than routine stuff here, because we can use our [http://research.microsoft.com/~simonpj/papers/c-- generic dataflow framework] to do the heavy lifting.  Here are some [wiki:BackEndNotes particular ideas for optimisations] we'd like to implement.
 
-## Projects that should be within reach of a good undergraduate
+-------------
+== More ambitious or less-well-defined projects (PhD students) ==
 
+=== Programming environment and tools ===
 
-- **Implement overlap and exhaustiveness checking for pattern matching**.  GHC's current overlap and exhaustiveness checker is old and inadequate.  Furthermore, it takes no account of GADTs and type families. See [\#595](https://gitlab.staging.haskell.org/ghc/ghc/issues/595).
+  * Update/improve [http://www.haskell.org/visualhaskell Visual Haskell] to use the (free) [http://msdn2.microsoft.com/en-us/vsx2008/products/bb933751.aspx Visual Studio Shell].
 
-- **Improve parallel profiling tools**.  Satnam Singh and Simon Marlow have made a start on some tools for visualising the behaviour of parallel programs, but there is much more to do here, and it'll be eagerly adopted by users.
+  * Make GHC work with [http://research.sun.com/projects/gcspy/ GCSpy], a generic heap visualiser tool. See #603.
 
-- **Implement some low-level C-- optimisations**.  During 2009 we expect to have the new C-- code generation route in place, and that will open up new opportunities for doing classic compiler-course optimisations on the imperative C-- code.  There is more than routine stuff here, because we can use our [
-  generic dataflow framework](http://research.microsoft.com/~simonpj/papers/c--) to do the heavy lifting.  Here are some [particular ideas for optimisations](back-end-notes) we'd like to implement.
+  * Maintaining an explicit call stack [wiki:ExplicitCallStack]
 
----
-
-
-## More ambitious or less-well-defined projects (PhD students)
-
-
-### Programming environment and tools
-
-
-- Update/improve [
-  Visual Haskell](http://www.haskell.org/visualhaskell) to use the (free) [
-  Visual Studio Shell](http://msdn2.microsoft.com/en-us/vsx2008/products/bb933751.aspx).
-
-- Make GHC work with [
-  GCSpy](http://research.sun.com/projects/gcspy/), a generic heap visualiser tool. See [\#603](https://gitlab.staging.haskell.org/ghc/ghc/issues/603).
-
-- Maintaining an explicit call stack [ExplicitCallStack](explicit-call-stack)
-
-### Turning GHC into a platform
-
-
+=== Turning GHC into a platform ===
 
 Projects aimed at making GHC into a user-extensible plug-in platform, and less of a monolithic compiler.
-
-
-- **Allow much finer and more modular control over the way in which rewrite rules and inlining directives are ordered**.  See this [
-  email thread](http://www.haskell.org/pipermail/haskell-cafe/2008-January/038196.html)
-
-
+  * '''Allow much finer and more modular control over the way in which rewrite rules and inlining directives are ordered'''.  See this [http://www.haskell.org/pipermail/haskell-cafe/2008-January/038196.html email thread]
   
+  * '''Support dynamically-linked Core-to-Core plug-ins''', so that people can add passes simply by writing a Core-to-Core function, and dynamically linking it to GHC.  This would need to be supported by an extensible mechanism like ``attributes`` in mainstream OO languages, so that programmers can add declarative information to the source program that guides the transformation pass.  Likewise the pass might want to construct information that is accessible later.  This mechanism could obviously be used for optimisations, but also for program verifiers, and perhaps also for domain-specific code generation (the pass generates a GPU file, say, replacing the Core code with a foreign call to the GPU program). See [wiki:Plugins] for some early thoughts on this.
 
+    * '''Improve the GHC API''', whereby you can import GHC as a library.  We make improvements now and then, but it would benefit from some sustained attention.  A particular project would be to port the Haskell refactorer [http://www.cs.kent.ac.uk/projects/refactor-fp/hare.html HaRE] to use the GHC API.
 
-- **Support dynamically-linked Core-to-Core plug-ins**, so that people can add passes simply by writing a Core-to-Core function, and dynamically linking it to GHC.  This would need to be supported by an extensible mechanism like ``attributes`` in mainstream OO languages, so that programmers can add declarative information to the source program that guides the transformation pass.  Likewise the pass might want to construct information that is accessible later.  This mechanism could obviously be used for optimisations, but also for program verifiers, and perhaps also for domain-specific code generation (the pass generates a GPU file, say, replacing the Core code with a foreign call to the GPU program). See [Plugins](plugins) for some early thoughts on this.
+=== Types ===
 
-- **Improve the GHC API**, whereby you can import GHC as a library.  We make improvements now and then, but it would benefit from some sustained attention.  A particular project would be to port the Haskell refactorer [
-  HaRE](http://www.cs.kent.ac.uk/projects/refactor-fp/hare.html) to use the GHC API.
+ * '''Allow unboxed tuples as function arguments'''.   Currently unboxed tuples are second class; fixing this would be a nice simplification.
 
-### Types
+ * '''Extend kinds beyond * and k1->k2'''.  With GADTs etc we clearly want to have kinds like `Nat`, so that advanced hackery at the type level can be done in a typed language; currently it's all effectively untyped.  A neat approach would be to re-use any data type declaration as a kind declaration.
 
+ * '''Extensible constraint domains'''.  Andrew Kennedy shows how to incorporate [http://research.microsoft.com/~akenn/units/index.html dimensional analysis] into an ML-like type system.  Maybe we could do an extensible version of this, so that it wasn't restricted to dimensions.  Integer arithmetic is another obvious domain.  
 
-- **Allow unboxed tuples as function arguments**.   Currently unboxed tuples are second class; fixing this would be a nice simplification.
+ * Implement [http://repetae.net/john/recent/out/classalias.html John Meacham's class alias proposal]
 
-- **Extend kinds beyond \* and k1-\>k2**.  With GADTs etc we clearly want to have kinds like `Nat`, so that advanced hackery at the type level can be done in a typed language; currently it's all effectively untyped.  A neat approach would be to re-use any data type declaration as a kind declaration.
+=== Parallel stuff ===
 
-- **Extensible constraint domains**.  Andrew Kennedy shows how to incorporate [
-  dimensional analysis](http://research.microsoft.com/~akenn/units/index.html) into an ML-like type system.  Maybe we could do an extensible version of this, so that it wasn't restricted to dimensions.  Integer arithmetic is another obvious domain.  
+  * Experiment with multiprocessor Haskell and/or STM by building and measuring applications, investigate improvements
+  * Continue work on parallel GC: particularly independent minor-generation collections.
 
-- Implement [
-  John Meacham's class alias proposal](http://repetae.net/john/recent/out/classalias.html)
+-------------
 
-### Parallel stuff
+= Just Hacking =
 
+Projects for people who want a decent-sized hacking project, with less research content.
 
-- Experiment with multiprocessor Haskell and/or STM by building and measuring applications, investigate improvements
-- Continue work on parallel GC: particularly independent minor-generation collections.
+== Compiler ==
 
-### Build system
+ * [[TicketQuery(id=602|0)]]
+ * Whole-program dead-code detection (with {{{--make}}}).
+ * Whole-program overloading elimination (with {{{--make}}}).
+ * Evolve a better ordering for the optimisation passes using [http://www.coyotegulch.com/products/acovea/ Acovea].
 
+== Build system ==
 
-- Build a Windows-native version of GHC (using MS tools instead of gcc).
+ * [[TicketQuery(id=989|0)]]
+ * [[TicketQuery(id=1876|0)]]
+
+== Runtime system ==
+
+ * [[TicketQuery(id=599|0)]]
+
+```
