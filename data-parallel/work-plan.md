@@ -29,7 +29,7 @@ Original source:
 
  ''Simon''::
    '''New dictionary representation and optimisation'''
-   – status: unknown
+   – status: prototype shipped to Roman, seems to work.   I am doing detailed perf comparisons before committing to HEAD. 
 
  ''Gabi''::
    '''Regular multi-dimensional arrays''' & '''Hierarchical matrix representation'''
