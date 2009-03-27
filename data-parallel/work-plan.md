@@ -8,7 +8,7 @@
 
 - **Code blow up:** what do we do about dictionary instances, their inlining, floating, and sharing?
 
-- What the status of using TH for generating library boilerplate?
+- What is the status of using TH for generating library boilerplate?
 
 ### Milestones
 
@@ -24,10 +24,11 @@
 
 <table><tr><th>*Roman*</th>
 <td>
-**Template Haskell** & **Recycling for joinD**
+**Code blow up**, **Generate boilerplate with TH** & **Recycling for joinD**
 – status: partly implemented, but still needs serious work
 
-- However, before any further major changes to the library, Roman needs to first re-arrange things such that the library boilerplate is generated, instead of being hardcode; otherwise, changes require a lot of tiresome code editing.  This is partially done.
+- We still don't have the code blow up under control.
+- Before any further major changes to the library, Roman needs to first re-arrange things such that the library boilerplate is generated, instead of being hardcode; otherwise, changes require a lot of tiresome code editing.  This is partially done.
 
 </td></tr></table>
 
@@ -97,6 +98,12 @@ Category: *Ease of use* (make the system easier or more convenient to use for en
 - **Prelude:** Extend vectorisation to the point, where it can compile the relevant pieces of the standard Prelude, so that we can remove the DPH-specific mini-Prelude.  (Requires: **Unboxed values**)
 
 
+Category:  *Refactoring and similar* (improve compile times):
+
+
+- **Generate boilerplate with TH:** Use Template Haskell to automate boilerplate generation.
+
+
 Category: *Case studies* (benchmarks and example applications):
 
 
@@ -118,11 +125,13 @@ Category: *Infrastructure* (fiddling with GHC's build system and similar infrast
 ### Done
 
 
+- **Template Haskell support for type families and INLINE pragmas** . \[Implemented.\]
+
 - **More expressive rewrite rules:** It seems that with more expressive rewrite rules may enable us to handle many of the problems with replicate an friends using rules.  (At least when the proper inlining happens.)  Much of this is needed to optimise shape computations, which in turn enables subsequent optimisations. \[Further investigation suggested the following approach: We want to handle some functions (until their are inlined) like data constructors during rule matching, so that they also match rule arguments when they are bound to a variable.  This is, for example, important to optimise `repeat` in `smvm`.  (GHC now supports `INLINE CONLIKE` pragmas.)\]
 
 - **Scaling:** Investigate the scaling problems that we are seeing with vectorised code at the moment.  (**Replicate** and **Recycling** play a role here, but it is unclear whether that's all.  Some benchmarks are simply memory-bandwidth limited.)  \[So far, we only found scaling problems due to memory bandwidth of the tested architecture.  Scaling on the Sun T2 is excellent.\]
 
-- **DUE 9 March.** Poster for *Microsoft External Research Symposium*.  \[Submitted to MER.\]†
+- **DUE 9 March.** Poster for *Microsoft External Research Symposium*.  \[Submitted to MER.\]
 
 - **Benchmark status:** Update and complete [DataParallel/BenchmarkStatus](data-parallel/benchmark-status); at the same time clean up the benchmark portion of the repo.  \[Completed a first sweep through this with updated benchmark results for SumSq, DotP, and SMVM, cleaned up code, and a much better idea of what the most important work items from now on are.\]
 
