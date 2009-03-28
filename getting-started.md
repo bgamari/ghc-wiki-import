@@ -2,7 +2,7 @@
 
 
 
-THis page tells you how to get started with hacking on GHC.
+This page tells you how to get started with hacking on GHC.
 
 
 ## Getting GHC to build on your machine
