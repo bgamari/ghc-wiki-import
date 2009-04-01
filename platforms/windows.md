@@ -12,6 +12,6 @@ We no longer support Windows 95, 98, ME or NT. We do support 2000, XP and Vista.
 
 
 
-Build instructions for Windows are incorporated in the [Building Guide](building).  In particular, here is how to [set up your Windows system for building GHC](building/prerequisites#preparing-a-windows-system).
+Build instructions for Windows are incorporated in the [Building Guide](building).  In particular, here is how to [set up your Windows system for building GHC](building/preparation/windows).
 
 
