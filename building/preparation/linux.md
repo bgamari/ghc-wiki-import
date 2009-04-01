@@ -1,77 +1,73 @@
+CONVERSION ERROR
 
+Original source:
 
+```trac
 
-# Setting up a Linux system for building GHC
+[[PageOutline]]
 
-
+= Setting up a Linux system for building GHC =
 
 If you're on a recent Linux system, then you should be able to get a working build environment by installing the following packages using your system's package manager.
 
+== Fedora ==
 
-## Fedora
-
-
-- `glibc-devel`
-- `libedit-devel`
-- `ncurses-devel`
-- `gmp-devel`
-- `autoconf`
-- `automake`
-- `libtool`
-- `gcc`
-- `make`
-- `perl`
-- `python`
-- `ghc`
-- `happy`
-- `alex`
-
+ * `glibc-devel`
+ * `libedit-devel`
+ * `ncurses-devel`
+ * `gmp-devel`
+ * `autoconf`
+ * `automake`
+ * `libtool`
+ * `gcc`
+ * `make`
+ * `perl`
+ * `python`
+ * `ghc`
+ * `happy`
+ * `alex`
+ * `darcs`
 
 For building the documentataion: (User's Guide and Cabal guide):
 
-
-- `docbook-utils`
-- `docbook-utils-pdf`
-- `docbook-style-xsl`
-
+ * `docbook-utils`
+ * `docbook-utils-pdf`
+ * `docbook-style-xsl`
 
 other packages that are useful for development:
 
+ * `strace`
+ * `patch`
+ * `libcurl-devel` and `zlib-devel` (for building darcs)
 
-- `strace`
-- `patch`
-- `libcurl-devel` and `zlib-devel` (for building darcs)
+== Debian-based systems (e.g. Debian, Ubuntu) ==
 
-## Debian-based systems (e.g. Debian, Ubuntu)
-
-
-- `glibc-dev`
-- `libedit-dev`
-- `ncurses-dev`
-- `gmp-dev`
-- `autoconf`
-- `automake`
-- `libtool`
-- `gcc`
-- `make`
-- `perl`
-- `python`
-- `ghc`
-- `happy`
-- `alex`
-
+ * `glibc-dev`
+ * `libedit-dev`
+ * `ncurses-dev`
+ * `gmp-dev`
+ * `autoconf`
+ * `automake`
+ * `libtool`
+ * `gcc`
+ * `make`
+ * `perl`
+ * `python`
+ * `ghc`
+ * `happy`
+ * `alex`
+ * `darcs`
 
 For building the documentataion: (User's Guide and Cabal guide):
 
-
-- `docbook-utils`
-- `docbook-utils-pdf`
-- `docbook-style-xsl`
-
+ * `docbook-utils`
+ * `docbook-utils-pdf`
+ * `docbook-style-xsl`
 
 other packages that are useful for development:
 
+ * `strace`
+ * `patch`
+ * `libcurl-dev` and `zlib-dev` (for building darcs)
 
-- `strace`
-- `patch`
-- `libcurl-dev` and `zlib-dev` (for building darcs)
+```
