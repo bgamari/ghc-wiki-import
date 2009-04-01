@@ -1,0 +1,12 @@
+CONVERSION ERROR
+
+Original source:
+
+```trac
+
+
+= Setting up a MacOS X system for building GHC =
+
+See [wiki:Building/MacOSX].  !ToDo: move the relevant parts of the docs here.
+
+```
