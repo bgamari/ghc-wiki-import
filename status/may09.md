@@ -1,20 +1,13 @@
-CONVERSION ERROR
+- 6.10.3: tiny release, "by the time you read this ..."
 
-Original source:
+- Moving to Haskeline
 
-```trac
+- 6.12:
 
- * 6.10.3: tiny release, "by the time you read this ..."
-
- * Moving to Haskeline
-
- * 6.12:
-   * Release expected shortly after ICFP?
-   * New build system: main bulk done, merged in head
-   * John Dias's backend stuff; done?
-   * Donnie's profiler
-   * unicode IO
-   * shared libraries
-   * DPH development continues
-
-```
+  - Release expected shortly after ICFP?
+  - New build system: main bulk done, merged in head. Details still to be ironed out. Should be more parallel, and more correct (i.e. saying "make" should correctly rebuild things)
+  - John Dias's backend stuff; done?
+  - Donnie's profiler
+  - unicode IO
+  - shared libraries
+  - DPH development continues
