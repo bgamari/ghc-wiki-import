@@ -4,5 +4,15 @@ Original source:
 
 ```trac
 
+ * 6.10.3: tiny release, "by the time you read this ..."
+
+ * Moving to Haskeline
+
+ * 6.12:
+   * New build system: main bulk done, merged in head
+   * John Dias's backend stuff; done?
+   * Donnie's profiler
+   * unicode IO
+   * shared libraries
 
 ```
