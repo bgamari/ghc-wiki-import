@@ -7,7 +7,7 @@ Original source:
  * 6.10.2 released. Bugfixes etc only.
  * 6.10.3: tiny release, "by the time you read this ..."
    * Moving to Haskeline
-   * Fix ^C in ghci.
+   * Fix !^C in ghci.
 
  * 6.12:
    * Release expected shortly after ICFP?
