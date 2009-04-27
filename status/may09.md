@@ -9,6 +9,7 @@ Original source:
  * Moving to Haskeline
 
  * 6.12:
+   * Release expected shortly after ICFP?
    * New build system: main bulk done, merged in head
    * John Dias's backend stuff; done?
    * Donnie's profiler
