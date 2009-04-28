@@ -109,7 +109,7 @@ Harnessing the multicores: nested data parallelism in Haskell](http://research.m
 ### Type system improvements
 
 
-- The whole area of **GADTs, indexed type families, and associated types** remains in a ferment of development.  It's clear that type families jolly useful: many people are using them even though they are only partially supported by GHC 6.10. (You might enjoy a programmers-eye-view tutorial [
+- The whole area of **GADTs, indexed type families, and associated types** remains in a ferment of development.  It's clear that type families are jolly useful: many people are using them even though they are only partially supported by GHC 6.10. (You might enjoy a programmers-eye-view tutorial [
   Fun with type functions](http://research.microsoft.com/~simonpj/papers/assoc-types) that Oleg, Ken, and Simon wrote in April 2009.) 
 
 >
