@@ -82,8 +82,8 @@ Simon Marlow has been working on improving performance for parallel programs, an
   duplicate computation in parallel programs.
 
 
-Our [
-recent ICFP submission](http://ghcmutterings.wordpress.com/2009/03/03/new-paper-runtime-support-for-multicore-haskell/) describes all these in more detail, and gives extensive measurements.
+Our recent ICFP submission[
+Runtime Support for Multicore Haskell](http://ghcmutterings.wordpress.com/2009/03/03/new-paper-runtime-support-for-multicore-haskell/) describes all these in more detail, and gives extensive measurements.
 
 
 
