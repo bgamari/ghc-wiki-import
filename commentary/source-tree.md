@@ -129,7 +129,7 @@ These utils may be built with the bootstrapping compiler, for use during the bui
 The `testsuite/` and `nofib/` directories contain apparatus for testing GHC.  Each is a separate repository, which can be gotten with `darcs-all`.
 
 
-## `mk/`, `rules.mk/`
+## `mk/`, `rules/`
 
 
 
