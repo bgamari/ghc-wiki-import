@@ -40,6 +40,7 @@ tuples - arrays of which correspond to scalar values. So, for example
   Array ()      Double    -- scalar double precision floating point value
   Array (3,2) Double   -- two dimensional array (matrix) of three rows, two columns
 }}}
+'''SLPJ: urk. Is `(2,3)` a type?!  Or did you mean `Array (Int,Int) Double`?'''
 
 Internally, shapes are represented as nested pairs
 {{{
@@ -51,7 +52,7 @@ type instance Shape (Int, Int) = (((),Int), Int)
 
 Elements types are restricted to the element type of flat parallel
 arrays, that it, primitive types like integers, boolean and floating
-point numbers, and tuples.
+point numbers, and tuples. '''SLPJ: so what is in class `Elt`?'''
 
 == Operations ==
 
@@ -65,6 +66,7 @@ and from scalar values:
 {{{
 fromScalar::  U.Elt r => r -> Array DIM0 r
 }}}
+'''SLPJ: whoa!  What are `DIM1`, `DIM0`?'''
 and  bpermuteR, which creates a new array of new shape, using values of the argument array.
 {{{
 bpermuteR:: Array dim e -> Shape dim' -> (Shape dim' -> Shape dim) -> Array dim'
