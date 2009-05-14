@@ -5,7 +5,7 @@ Original source:
 ```trac
 
 
-'''NOTE''': this page relates to the new GHC build system, due to be added to GHC in April 2009. For documentation of the "old" build system, see [wiki:Building/Old/Using] and [wiki:Building/BuildSystem].
+'''NOTE''': this page relates to the new GHC build system, which was added to GHC in April 2009. For documentation of the "old" build system, see [wiki:Building/Old/Using] and [wiki:Building/BuildSystem].
 
 = Modifying the build system =
 
