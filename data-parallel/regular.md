@@ -1,215 +1,156 @@
-# Regular, Multi-dimensional parallel Arrays
+CONVERSION ERROR
 
+Original source:
 
+```trac
 
+= Regular, Multi-dimensional parallel Arrays =
 The nested parallel arrays of DPH could be used to model regular arrays, as we could simply either create segment information using replicate, or define regular arrays in terms of flat parallel arrays and separately stored dimensionality information, and define operations on these arrays in a library in terms of the nested operations. However, there are two main reasons why this is unsatisfactory: convenience and efficiency. 
 
-
-### Convenience
-
-
+=== Convenience ===
 
 Languages like SAC, which provide high-level support for operations on multi-dimensional arrays, offer shape invariant operations. If we want to model this on a library level, we either have to give up type safety to a
 large extend (for example, by encoding the shape as a list of integer values whose length is proportionate to its dimensionality) or use sophisticated language features like GADTs, which may impede the usability of the library for inexperienced users.
 
 
-### Efficiency
-
-
+=== Efficiency ===
 
 When encoding multidimensional arrays using segment descriptors or by storing the dimensions separately. In the first case, this would mean significant memory overhead proportionate to the number of subarrays on each level. But even in the second case, segment descriptors have to be generated to call functions like segmented fold and scan. It is hard to predict the exact overhead for this step, as fusion might prevent the segment descriptor array to be actually built in many cases. More significant in terms of overhead is that, when using segment descriptors, parallel splits become significantly more complicated, as they require communication in the irregular case to determine the distribution, whereas the distributions of a regularly segmented array can be determined locally on each processor.
 
+== Language Support ==
 
-## Language Support
+The remainder of this document is a first design draft for SaC style language support of multidimensional arrays in the context of DPH. The implementation is not completed yet, and there are several open questions.
 
+== The regular array type ==
 
+=== SaC ===
 
-The remainder of this document is a first design draft for SAC style language support of multidimensional arrays in the context of DPH. The implementation is not completed yet, and there are several open questions.
+In SaC, multidimensional arrays are represented by two vectors, the shape and the data vector, where vectors are one dimensional arrays. Scalar values are viewed as 0-dimensional arrays. The function `reshape` takes as first argument a shape vector, as second an array, and creates an array with identical data vector and the given shape vector. For example:
+{{{
+  reshape ([3,2],[1,2,3,4,5,6])
+}}}
+produces a 3 times 2 matrix.
 
+=== DPH === 
+Regular parallel arrays are similar to arrays in SaC, with one major
+difference: SaC employs a mix of static and dynamic type checking, combined with a form of shape inference, whereas we use GHC's type checker to ensure certain domain restrictions are not violated.  
 
-## The regular array type
-
-
-### SaC
-
-
-### DPH
-
-
-
-Regular parallel arrays are similar to arrays in SAC, with one major
-difference: array operations in DPH are fully typed, and consequently, what
-is called 'shape invariant programming' in SAC works differently in DPH. In particular, in DPH the dimensionality of an array (not its size, however) are encoded in its type.
+'''Note:''' currently, we are only able to statically check that restrictions regarding the dimensionality of and array are met, but not with respect to the size. SaC is, to a certain extend, able to do so. I still need to check if there are some cases where the DPH approach would statically find some dimensionality bugs where SaC wouldn't - need to check that. 
 
 
+array operations in DPH are fully typed, and consequently, what
+is called 'shape invariant programming' in SaC works differently in DPH. In particular, in DPH the dimensionality of an array (not its size, however) are encoded in its type.
 
 An multidimensional array is parametrised with its dimensionality and its
 element type:
 
-
-```wiki
+{{{
 (Ix (Shape dim), U.Elt a)  => Array dim a 
 
-```
-
-
+}}}
 where Ix is the standard Haskell index class,  Shape is a type family defined on tuples of integers, including nullary
 tuples - arrays of which correspond to scalar values. So, for example
-
-
-```wiki
+{{{
   Array ()        Double   -- scalar double precision floating point value
   Array (Int,Int) Double   -- two dimensional array (matrix)
-```
-
-
+}}}
 `U.Elt` is the `Elt` type class defined in ` Data.Array.Parallel.Unlifted` and contains all primitive types like `Int`, `Bool`, and tuples thereof.
 
 
-
 Internally, shapes are represented as nested pairs
-
-
-```wiki
+{{{
 type family Shape dim
 type instance Shape () = ()
 type instance Shape (Int) = ((),Int)
 type instance Shape (Int, Int) = (((),Int), Int)
-```
-
+}}}
+The user, however,  doesn't need to be aware of this and can view the shape of an n-dimensional array  a n-tuple.
 
 For readability, we define the following type synonyms:
-
-
-```wiki
+{{{
 type DIM0 = Shape ()
 type DIM1 = Shape Int
 type DIM2 = Shape (Int, Int)
 type DIM3 = Shape (Int, Int, Int)
-```
+}}}
+== Operations ==
 
-## Operations
-
-
-### Array Shapes
-
-
-
+=== Array Shapes ===
 The `shape` function returns the shape of an n-dimensional array as n-tuple:
-
-
-```wiki
+{{{
 shape  :: Array dim e -> Shape dim
-```
-
-
+}}}
 For example
-
-
-```wiki
+{{{
 matrixMult:: (Elt e, Num e) => Array DIM2 -> Array DIM2 e -> Array DIM2 e 
 matrixMult m1 m2| snd (shape m1) == fst (shape m2) = multiply ....
                 | otherwise                                             = error "Incompatible array sizes in matrixMult..."
 
-```
+}}}
 
-```wiki
+{{{
 -- size of both shapes have to be the same, otherwise runtime error
 reshape     ::(Ix (Shape dim), Ix (Shape dim')) =>
                  (Shape dim)                  -- new shape
               -> Array dim' a                 -- array to be reshaped
               -> Array dim a
-```
+}}}
 
-### Creating Arrays
-
-
+=== Creating Arrays ===
 
 A new array can be created from a flat parallel array
-
-
-```wiki
+{{{
 fromNArray:: U.Elt r => U.Array r -> Array DIM1 r
-```
-
-
+}}}
 where `U.Array` is the array type defined in `Data.Array.Parallel.Unlifted` - that is, non-nested parallel arrays.
  
-
-
-```wiki
+{{{
 fromScalar::  U.Elt r => r -> Array DIM0 r
-```
-
-
-*
+}}}
+''
 and  bpermuteR, which creates a new array of new shape, using values of the argument array.
-*
-
-
-```wiki
+{{{
 bpermuteR:: Array dim e -> Shape dim' -> (Shape dim' -> Shape dim) -> Array dim'
-```
-
-
+}}}
 For example, transposition of a two dimensional array can be defined in terms of bpermuteR as follows:
-
-
-```wiki
+{{{
 transpose:: Array DIM2 a -> Array DIM2 a
 transpose arr = bpermuteR arr (m,n) (\(i,j) -> (j,i))
   where (n,m) = shape arr
-```
-
-
+}}}
 Or cutting a 3 x 3 tile starting at indices (0,0) out of a two dimensional matrix:
-
-
-```wiki
+{{{
 tile:: Array DIM2 a -> Array DIM2 a
 tile arr = bpermuteR arr (3,3) id
-```
+}}}
 
+'''SLPJ: Does the `Shape` stuff need to be exposed at this level. Could we not work just in terms of the `(Int,Int)` indices the programmer expects, and hide the shapery?'''
 
-**SLPJ: Does the `Shape` stuff need to be exposed at this level. Could we not work just in terms of the `(Int,Int)` indices the programmer expects, and hide the shapery?**
-
-
-### Manipulating array values
-
-
+=== Manipulating array values ===
 
 All the shape invariant operations available on parallel arrays are also defined on regular arrays:
-
-
-```wiki
+{{{
 map     :: (Elt a, Elt b) => (a -> b) -> Array dim a -> Array dim b
 zipWith :: (Elt a, Elt b, Elt c) => (a -> b -> c) -> Array dim a -> Array dim b -> Array dim c
-```
-
-
+}}}
 Parallel array operations which can change the shape are restricted to one dimensional arrays, to make sure that the 
 result is still a regular array. 
-
-
-```wiki
+{{{
 filter :: Elt a => (a -> Bool) -> Array DIM1 a -> Array DIM1 a
 scan        :: Elt a => ((a, a) -> a)            -- combination function
               -> a                               -- default value
               -> Array (dim, Int) a              -- linear array
               -> (Array dim a, Array (dim, Int) a)
-```
+}}}
+'''SLPJ: didn't understand scan'''.  Manipulating the shape of arrays:
+'''SLPJ: why doesn't `reshape` need the size of the result array, as `bpermuteR` did.'''
+
+=== Changing the dimensionality of an array ===
 
 
-**SLPJ: didn't understand scan**.  Manipulating the shape of arrays:
-**SLPJ: why doesn't `reshape` need the size of the result array, as `bpermuteR` did.**
 
 
-### Changing the dimensionality of an array
-
-
-#### The index type
-
-
+==== The index type ====
 
 Two operations we provide change the dimensionality of an argument
 array, namely the generalised indexing function, which extracts
@@ -217,68 +158,42 @@ subarrays from an multidimensional array, and generalised replicate,
 which expands the array along specified axes. To encode the
 relationship between the argument's dimensionality and the result's dimensionality, 
 we use the Index type:
-
-
-```wiki
+{{{
 (!) :: Elt e => Arr dim e -> Index dim dim' -> Arr dim' e
 
 replicate   :: Index dim' dim                     -- ^specifies new dimensions
               -> Array dim a                      -- ^data to be replicated
               -> Array dim' a
 
-```
-
-
+}}}
 where Index is defined as
-
-
-```wiki
+{{{
 data Index initialDim projectedDim where
   IndexNil   :: Index () ()
   IndexAll   :: Index init proj -> Index (init, Int) (proj, Int)
   IndexFixed :: Int -> Index init proj -> Index (init, Int)  proj
-```
-
+}}}
 
 The index type is similar to generalized  selection in SaC. For example, the selection vector 
-
-
-```wiki
+{{{
   (1,2,3)
-```
-
-
+}}}
 which indexes the fourth element in the third subarray of the second matrix in a three dimensional array would correspond to the index value
-
-
-```wiki
+{{{
  IndexFixed 1 (IndexFixed 2 (IndexFixed 3 IndexNil)) :: Index ((((),Int), Int),,Int) ()
-```
-
-
+}}}
 Where the type tells us that the index value describes a projection from a three dimensional array to a scalar value. More interestingly,  the SaC selection
-
-
-```wiki
+{{{
  (1,.,3)
-```
-
-
+}}}
 specifies a subvector (i.e., all the values in position (1,i,3) for all i's in the arrays range. This corresponds to
-
-
-```wiki
+{{{
 IndexFixed 1 (IndexAll (IndexFixed 3 IndexNil)):: Index ((((),Int), Int),,Int) ((),Int)
-```
-
-#### Examples
-
-
+}}}
+==== Examples ====
 
 To demonstrate the use of the Index type, consider the following replicates expressed in terms of generalised replicate:
-
-
-```wiki
+{{{
 -- 'chunk replicate' - create a two dimensional array by replicating the one dimensional 
 -- argument array n times
 replicateC:: Int -> Array DIM1 a -> Array DIM2 a
@@ -297,16 +212,13 @@ replicateC2 n arr = RArray.replicate       (IndexFixed n (IndexAll (IndexAll Ind
 
 replicateLL:: Int -> Array DIM2 a -> Array DIM3 a
 replicateLL n arr = RArray.replicate (IndexAll (IndexAll (IndexFixed n IndexNil)))  arr
-```
-
+ }}}
 
 In the actual array language (user level) the DPH should provide a general selection-like notation for index expressions.
 
-
-### Comparison with SaC
-
-
+=== Comparison with SaC ===
 
 We started out with the goal to provide support for SaC like array programming. In this section compares SaC's functionality with the approach described in this document.
 
 
+```
