@@ -168,6 +168,7 @@ In the instructions that follow, "`<T>$ cmd`" means that the current directory s
 
 
 ```wiki
+<T>$ cp /bin/pwd utils/ghc-pwd/ghc-pwd
 <T>$ sh boot
 <T>$ ./configure --enable-hc-boot
 ```
