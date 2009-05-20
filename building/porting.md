@@ -166,6 +166,7 @@ GhcStage1HcOpts = -O
 GhcStage2HcOpts = -O -fvia-C -keep-hc-files
 SRC_HC_OPTS += -H32m
 GhcWithSMP = NO
+utils/ghc-pkg_dist-install_v_HC_OPTS += -keep-hc-files
 }}}
 
 Edit {{{<H>/mk/project.mk}}}:
@@ -241,6 +242,7 @@ GhcWithNativeCodeGen = NO
 GhcWithInterpreter = NO
 GhcWithSMP = NO
 ghc_stage2_v_EXTRA_CC_OPTS += -Lgmp -lgmp -lm -lutil -lrt
+utils/ghc-pkg_dist-install_v_EXTRA_CC_OPTS += -Lgmp -lgmp -lm -lutil -lrt
 }}}
 
 {{{
