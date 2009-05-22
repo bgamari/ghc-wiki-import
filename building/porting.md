@@ -1,102 +1,19 @@
 
 
 
-# Porting GHC
-
-
-
-This section describes how to port GHC to a currenly
-unsupported platform.  To avoid confusion, when we say
-"architecture" we are referring to the processor, and
-we use the term "platform" to refer to the combination
-of architecture and operating system.
-
-
-
-There are two distinct porting scenarios:
-
-
-- Your platform is already supported, but you want to compile up GHC
-  using just a C compiler.  This is a straightforward bootstrap from HC
-  files, and is described in the next section.
-
-- Your platform isn't supported by GHC.  You will need to do an
-  *unregisterised bootstrap*, proceed to
-  [Porting GHC to a new platform](#PortingGHCtoanewplatform).
-
-## Booting/porting from C (`.hc`) files
-
-
-
-Bootstrapping GHC on a system without GHC already installed is
-achieved by taking the intermediate C files (known as HC files) from
-another GHC compilation, compiling them using gcc to get a working
-GHC.
-
-
-
-**NOTE**: Versions supported: between 6.0.1 and 6.6.2.  We are working
-on getting bootstrapping working again in the 6.8 series, see [\#1346](https://gitlab.staging.haskell.org/ghc/ghc/issues/1346).
-
-
-
-HC files are platform-dependent, so you have to get a set that were
-generated on *the same platform*.  There may be some supplied on the
-GHC download page, otherwise you'll have to compile some up yourself.
-
-
-
-The following steps should result in a working GHC build with full
-libraries:
-
-
-- Make a set of HC files.  On an identical system with GHC already
-  installed, get a GHC source tree and put the following in
-  `mk/build.mk`:
-
-  ```wiki
-  SRC_HC_OPTS     = -H32m -O -fvia-C -Rghc-timing -keep-hc-files
-  GhcLibHcOpts    = -O
-  GhcLibWays      =
-  SplitObjs       = NO
-  ```
-
-  Build GHC as normal, and then `make hc-file-bundle Project=ghc`
-  to creates the tar file containing the hc files.
-
-- On the target system, unpack the HC files on top of a fresh source
-  tree (make sure the source tree version matches the version of the
-  HC files *exactly*!).  This will place matching `.hc` files
-  next to the corresponding Haskell source (`.hs` or `.lhs`)
-  in the compiler subdirectory `ghc/compiler` and in the
-  libraries (subdirectories of `libraries`).
-
-- The actual build process is fully automated by the [distrib/hc-build](/trac/ghc/browser/ghc/distrib/hc-build)
-  script.  If you eventually
-  want to install GHC into the directory
-  `<dir>`, the following command will execute
-  the whole build process (it won't install yet):
-
-  ```wiki
-  $ distrib/hc-build --prefix=<dir>
-  ```
-
-  By default, the installation directory is `/usr/local`.  If
-  that is what you want, you may omit the argument to `hc-build`.
-  Generally, any option given to `hc-build` is passed through to
-  the configuration script `configure`.  If `hc-build`
-  successfully completes the build process, you can install the
-  resulting system, as normal, with
-
-  ```wiki
-  $ make install
-  ```
-
-## Porting GHC to a new platform
+# Porting GHC to a new platform
 
 
 
 **NOTE**: Versions supported: 6.11+.
+
+
+
+This section describes how to port GHC to a currently
+unsupported platform.  To avoid confusion, when we say
+"architecture" we are referring to the processor, and
+we use the term "platform" to refer to the combination
+of architecture and operating system.
 
 
 
@@ -130,7 +47,7 @@ the [Commentary](commentary), which might be helpful if you run into some
 code which needs tweaking for your system.
 
 
-### Cross-compiling to produce an unregisterised GHC
+## Cross-compiling to produce an unregisterised GHC
 
 
 
@@ -394,7 +311,7 @@ various parts of the system that will need architecture-specific
 tweaks in order to get a registerised build going.
 
 
-### Porting the RTS
+## Porting the RTS
 
 
 
@@ -448,7 +365,7 @@ your OS.
 </td></tr></table>
 
 
-### The mangler
+## The mangler
 
 
 
@@ -466,7 +383,7 @@ other architectures and use these as a starting point for porting it to
 your platform.
 
 
-### The splitter
+## The splitter
 
 
 
@@ -484,7 +401,7 @@ The splitter has some platform-specific stuff; take a look and tweak
 it for your system.
 
 
-### The native code generator
+## The native code generator
 
 
 
@@ -494,7 +411,7 @@ because it can cut compilation times in half.  The native code
 generator is described in detail in [Commentary/Compiler/Backends/NCG](commentary/compiler/backends/ncg).
 
 
-### GHCi
+## GHCi
 
 
 
