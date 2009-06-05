@@ -26,6 +26,7 @@ Getting started for developers
 
  * [wiki:Building/Hacking Getting started with the build system]
  * [wiki:Building/Rebuilding How do I re-build after updating or changing GHC?]
+ * FAQ: [wiki:Building/Troubleshooting Solving common problems with building GHC]. If anything goes wrong, look here first.
 
 More detailed information about using the build system
 
@@ -52,9 +53,7 @@ Platform-specific building instructions:
  * [wiki:Building/MacOSX Building under MacOS X]
  * [wiki:Building/Solaris Building under Solaris]
 
-FAQ
 
- * [wiki:Building/Troubleshooting Solving common problems with building GHC]
 
 
 == Contributed documentation ==
