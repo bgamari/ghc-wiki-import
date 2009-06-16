@@ -805,6 +805,12 @@ configuration.
 </td></tr></table>
 
 
+<table><tr><th>`html`, `pdf`, `ps`</th>
+<td>
+Build documentation below the current directory (if any) in HTML, PDF, or Postscript format respectively.
+</td></tr></table>
+
+
 
 To see how these targets are defined: [Building/Architecture/Idiom/StandardTargets](building/architecture/idiom/standard-targets).
 
