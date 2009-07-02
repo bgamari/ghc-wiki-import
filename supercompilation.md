@@ -31,6 +31,7 @@ The typed intermediate representation has caused some trouble, but nothing funda
 Open questions:
 
  *) Should R contexts include let-statements? 
+
  *) Should matching for renamings be modulo permutation of lets? (Performance vs code size)
 
 ```
