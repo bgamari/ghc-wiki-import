@@ -1,86 +1,53 @@
-## Notes on the implementation of Supercompilation in GHC
+CONVERSION ERROR
 
+Original source:
 
+```trac
+== Notes on the implementation of Supercompilation in GHC ==
 
 This page is very much a draft and may be incorrect in places. Please fix problems that you spot.
 
-
-
-An attempted list at differences between [
-Supero](http://community.haskell.org/~ndm/supero) and [
-positive supercompilation for call-by-value](http://www.csee.ltu.se/~pj/papers/scp/popl09-scp.pdf) (abbreviated to pscp below). 
-
-
+An attempted list at differences between [http://community.haskell.org/~ndm/supero Supero] and [http://www.csee.ltu.se/~pj/papers/scp/popl09-scp.pdf positive supercompilation for call-by-value] (abbreviated to pscp below). 
 
 1) Call-by-value vs Call-by-n{ame,eed}. I am not completely clear on whether Supero preserves sharing. (Pscp does, otherwise the improvement theory is not usable and the proof doesn't go through. Previous discussions between Neil and Peter concluded that this is not sufficient - more expressions need to be inlined so we do not want to preserve all the sharing for performance reasons; Simon later pointed out that we must preserve sharing).
 
-
-
 2) Termination criterion. Both use the homeomorphic embedding, but there are some small differences.
+  a) Pscp checks against fewer previous expressions compared to Supero. (Pscp only looks at expressions on the form R<g es>, where R are evaluation contexts for call-by-name, and g are top/local level definitions. Let-statements, for example, are not bound in our contexts). This could be beneficial for compilation speed, but I don't have any concrete numbers right now. The drawback is that our approach can not perform Distillation; a more powerful transformation that makes the checks even more expensive. This should not be hard to change in an actual implementation though.
 
+  b) Generalisation. Pscp currently uses the msg, and Neil has deducted a better way to split expressions. Switching between them should be a matter of changing a couple of lines of code in an actual implementation.
 
->
->
-> a) Pscp checks against fewer previous expressions compared to Supero. (Pscp only looks at expressions on the form R\<g es\>, where R are evaluation contexts for call-by-name, and g are top/local level definitions. Let-statements, for example, are not bound in our contexts). This could be beneficial for compilation speed, but I don't have any concrete numbers right now. The drawback is that our approach can not perform Distillation; a more powerful transformation that makes the checks even more expensive. This should not be hard to change in an actual implementation though.
->
->
-
->
->
-> b) Generalisation. Pscp currently uses the msg, and Neil has deducted a better way to split expressions. Switching between them should be a matter of changing a couple of lines of code in an actual implementation.
->
->
-
->
->
-> c) simpleTerminate. This roughly corresponds to a mixture between values and what pscp have labeled as "annoying expressions". Neil was spot on in earlier discussions on what annoying expressions are: something where evaluation is stuck (normally because of a free variable in the next position, for example the application "x es"). Simon has an interesting algorithm formulation that avoids annoying expressions altogether and is probably simpler to implement.
->
->
-
+  c) simpleTerminate. This roughly corresponds to a mixture between values and what pscp have labeled as "annoying expressions". Neil was spot on in earlier discussions on what annoying expressions are: something where evaluation is stuck (normally because of a free variable in the next position, for example the application "x es"). Simon has an interesting algorithm formulation that avoids annoying expressions altogether and is probably simpler to implement.
 
 3) Inlining decisions. Neil has a more advanced way of determining when things should be inlined or not. I believe that the solution is some kind of union between the inliner paper, Neil's work and possibly some kind of cost calculus for inlining.
 
-
-
 What is not mentioned in either of our works though is that it is a typed intermediate representation in GHC. System Fc has the casts that might get in the way of transformations (so effectively they are some kind of annoying expressions). Rank-n polymorphism is another potential problem, but I am not sure if that will be a problem with System Fc. These are not fundamental problems that will take two months to solve, but I think that implementing a supercompiler for System Fc is more than just two days of intense hacking, even for someone already familiar with GHC internals.
-
-
 
 Progress report at the end of June:
 
-
-
 A substitution based implementation exists, that transforms append, reverse with accumulating parameters, basic arithmetics and similar things. There are still bugs in the implementation, mainly name capture. It takes 8 seconds to transform the double append example, but there's still plenty of room for improvement with respect to performance.
-
-
 
 The typed intermediate representation has caused some trouble, but nothing fundamental. 
 
-
-
 Fixes that should go into the implementation:
 
+ * Understand how the inscope-set is handled in SpecConstr, and use that. Stop recreating inscope-sets in substNewExpr (top3 on memory profile).
 
-- Understand how the inscope-set is handled in [SpecConstr](spec-constr), and use that. Stop recreating inscope-sets in substNewExpr (top3 on memory profile).
+ * Both msg and split' are broken; namecapture. Must be fixed.
 
-- Both msg and split' are broken; namecapture. Must be fixed.
-
-- Implement Simon's algorithm.
-
+ * Implement Simon's algorithm.
 
 Open questions:
 
+ * Should R contexts include let-statements? 
 
-- Should R contexts include let-statements? 
+ * Should matching for renamings be modulo permutation of lets? (Performance vs code size)
 
-- Should matching for renamings be modulo permutation of lets? (Performance vs code size)
+ * Consider `(\x xs. append x xs)`.  Do we inline append, and create a specialised copy?  (Of course, identical to the original definition.)
+   * '''Yes'''.  At provided we don't create ''multiple'' specialised copies, we are effectively copying library code into the supercompiled program.  Then we can discard all libraries (provided we have all unfoldings).
+   * '''No''': then need to keep the libraries
+   But it's not clear that we can ''always'' inline ''everything''.  For example things with `unsafePerformIO`.
+     * (Given no cycle in imports) Perhaps the things we can not inline should be put at the top level in the same module, and the old module discarded?
 
-- Consider `(\x xs. append x xs)`.  Do we inline append, and create a specialised copy?  (Of course, identical to the original definition.)
+ * Can we improve the homeomorphic embedding so that append xs xs is not embedded in append xs ys?
 
-  - **Yes**.  At provided we don't create *multiple* specialised copies, we are effectively copying library code into the supercompiled program.  Then we can discard all libraries (provided we have all unfoldings).
-  - **No**: then need to keep the libraries
-    But it's not clear that we can *always* inline *everything*.  For example things with `unsafePerformIO`.
-
-    - Perhaps the things we can not inline should be put in the same module?
-
-- Can we improve the homeomorphic embedding so that append xs xs is not embedded in append xs ys?
+```
