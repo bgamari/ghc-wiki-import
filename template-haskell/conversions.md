@@ -1,13 +1,11 @@
-CONVERSION ERROR
+## Template Haskell Conversions
 
-Original source:
 
-```trac
-== Template Haskell Conversions ==
 
 There are various conversions between datatypes involved in the Template Haskell implementation.  The following diagram summarises the operations and how they compose, and proposes a refactoring.
 
-{{{
+
+```wiki
          TcSplice.reify            Convert.convertToHsDecls
 TyThing ----------------> TH.Dec ---------------------------> HsSyn RdrName
    |                    ^   |
@@ -20,18 +18,22 @@ HsSyn Name --------'        |
    |                        |
    | DsMeta.dsBracket       |
    |                        |
-   |                        |
+   V                        |
  Core <---------------------'
-}}}
+```
+
 
 We currently have `TcSplice.reify` for reifying a `TyThing` into TH syntax, and `Convert` for converting TH syntax back into `HsSyn`.  Also, we have `DsMeta` for converting the contents of TH brackets into the `Core` code which generates the TH syntax for those brackets.
 
+
+
 We need A, for Haddock.
+
+
 
 Hence, we could:
  
- * Refactor `TcSplice.reify` into pieces A and B.
- * implement C, and replace `DsMeta.dsBracket` with the composition `C.B`.
 
 
-```
+- Refactor `TcSplice.reify` into pieces A and B.
+- implement C, and replace `DsMeta.dsBracket` with the composition `C.B`.
