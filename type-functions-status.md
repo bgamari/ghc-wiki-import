@@ -5,7 +5,7 @@ Original source:
 ```trac
 [wiki:TypeFunctions]/Status
 
-= Type Functions: Implementation Status =
+= Type Families: Implementation Status =
 
 '''Open bugs related to type families'''
 
