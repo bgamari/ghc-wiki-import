@@ -88,7 +88,6 @@ What next? **Implement the new algorithm.**
 
 - Write drive, msg, split in the R form.  Still with eager substitution
 - Export unfoldings for recursive functions.  Remember to add the "loop-breaker" info to interface files (and read it back in).
-- Lambda lifting
 - Refined whistle-blowing test
 - Neil's msg idea
 - State monad and good logging info
@@ -102,6 +101,12 @@ Later
 - Post-pass to identify deepId
 - Post-pass to undo redundant specialisation??
 - Neil does "evaluation" before specialising, to expose more values to let, and maybe make lets into linear lets.  We don't. Yet.
+
+
+Done 
+
+
+- Lambda lifting
 
 ## Open questions
 
