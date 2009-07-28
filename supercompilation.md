@@ -1,137 +1,240 @@
-CONVERSION ERROR
+# Notes on the implementation of Supercompilation in GHC
 
-Original source:
 
-```trac
-= Notes on the implementation of Supercompilation in GHC =
 
 This page is very much a draft and may be incorrect in places. Please fix problems that you spot.
 
-== Problems ==
 
-* The Simplifier gets confused by the wrong OccInfo on things. So run occurence analysis at the end of supercompilation. The occurence analyser gets confused by having the wrong Unfoldings for id's though. We currently zap things here and there, but this is not the right way to do it.
+## Problems
 
-== Insights ==
 
-* Looking for instances, instead of renamings, has implications with the global store. Do we want to fold append (append xs' ys) zs against append (append xs ys) zs (in rho) or append ys zs (in store).
+- The Simplifier gets confused by the wrong OccInfo on things. So run occurence analysis at the end of supercompilation. The occurence analyser gets confused by having the wrong Unfoldings for id's though. We currently zap things here and there, but this is not the right way to do it.
 
-* Applications are not saturated in Core, there's eta::GHC.Prim.State# GHC.Prim.RealWorld roughly everywhere.
+## Insights
 
-* The whistle blows on several expressions sometimes. We need to sort them. Example: 
 
-case GHC.Num.- @ GHC.Types.Int GHC.Num.$fNumInt (GHC.Num.+ @ GHC.Types.Int GHC.Num.$fNumInt i (Main.check l)) (Main.check r) of _ {
-  GHC.Types.I# y [ALWAYS Once Nothing] -> GHC.Types.I# (GHC.Prim.-# (GHC.Prim.+# x 0) y)
+- Looking for instances, instead of renamings, has implications with the global store. Do we want to fold append (append xs' ys) zs against append (append xs ys) zs (in rho) or append ys zs (in store).
+
+- Applications are not saturated in Core, there's eta::GHC.Prim.State\# GHC.Prim.RealWorld roughly everywhere.
+
+- The whistle blows on several expressions sometimes. We need to sort them. Example: 
+
+
+case GHC.Num.- @ GHC.Types.Int GHC.Num.$fNumInt (GHC.Num.+ @ GHC.Types.Int GHC.Num.$fNumInt i (Main.check l)) (Main.check r) of \_ {
+
+
+>
+>
+> GHC.Types.I\# y \[ALWAYS Once Nothing\] -\> GHC.Types.I\# (GHC.Prim.-\# (GHC.Prim.+\# x 0) y)
+>
+>
+
+
 }
+
+
 
 against both of these:
 
-case Main.check r of _ { 
-  GHC.Types.I# y [ALWAYS Once Nothing] -> GHC.Types.I# (GHC.Prim.-# (GHC.Prim.+# x 0) y)
+
+
+case Main.check r of \_ { 
+
+
+>
+>
+> GHC.Types.I\# y \[ALWAYS Once Nothing\] -\> GHC.Types.I\# (GHC.Prim.-\# (GHC.Prim.+\# x 0) y)
+>
+>
+
+
 }
+
 
 
 GHC.Num.- @ GHC.Types.Int GHC.Num.$fNumInt (GHC.Num.+ @ GHC.Types.Int GHC.Num.$fNumInt i (Main.check l)) (Main.check r))
 
+
+
 The latter is better to generalise against. How do we capture this? Perhaps by sorting on the length of free variables in rho.
 
 
-== Current status ==
+## Current status
 
-What next? '''Implement the new algorithm.'''
 
- * Exposing all unfoldings:
-   * Flag -fexpose-all-unfoldings (a cousin of -fomit-interface-pragmas) (default is off) to switch on the spit-out-all-unfoldings stuff.
-   * Validate with flag off; then push.
- * Add IO monad; add logging (one line per specialisation start, and completion)
- * Write msg, split in the R form.  Still with eager substitution
- * Figure out arity for each top-level (lambda lifted) function, and only inline when it is saturated.  (Write notes in paper, explaining why this might be good.)  NB: linearity becomes simpler, because a variable cannot occur under a lambda.
- * Refined whistle-blowing test
- * Neil's msg idea
+
+What next? **Implement the new algorithm.**
+
+
+- Exposing all unfoldings:
+
+  - Flag -fexpose-all-unfoldings (a cousin of -fomit-interface-pragmas) (default is off) to switch on the spit-out-all-unfoldings stuff.
+  - Validate with flag off; then push.
+- Add IO monad; add logging (one line per specialisation start, and completion)
+- Write msg, split in the R form.  Still with eager substitution
+- Figure out arity for each top-level (lambda lifted) function, and only inline when it is saturated.  (Write notes in paper, explaining why this might be good.)  NB: linearity becomes simpler, because a variable cannot occur under a lambda.
+- Refined whistle-blowing test
+- Neil's msg idea
+
 
 Later
- * Faster representation for memo table; a finite map driven by the head function
- * Using lazy substitutions
- * Case-of-case duplication
- * Post-pass to identify deepId
- * Post-pass to undo redundant specialisation??
- * Neil does "evaluation" before specialising, to expose more values to let, and maybe make lets into linear lets.  We don't. Yet.
+
+
+- Faster representation for memo table; a finite map driven by the head function
+- Using lazy substitutions
+- Case-of-case duplication
+- Post-pass to identify deepId
+- Post-pass to undo redundant specialisation??
+- Neil does "evaluation" before specialising, to expose more values to let, and maybe make lets into linear lets.  We don't. Yet.
+
 
 Done 
- * Use a record for the memo table contents
- * State monad and good logging info; Stole SimplMonad.
- * Lambda lifting
- * Add the "loop-breaker" info to interface files (and read it back in).
- * Export unfoldings for recursive functions; does not validate: 
-    * ds060: Overlapping pattern match?
-    * ds061: Turns pattern-matches non-exhaustive
-    * dsrun015: Foo.x not in scope
-    * driver063: Exposes modules that were invisible earlier. 
-    * print010: changes output from Integer to GHC.Integer.GMP.Internals.Integer 0 to GHC.Integer.GMP.Internals.S# 0.
-    * break026: No show instance
+
+
+- Use a record for the memo table contents
+- State monad and good logging info; Stole SimplMonad.
+- Lambda lifting
+- Add the "loop-breaker" info to interface files (and read it back in).
+- Export unfoldings for recursive functions; does not validate: 
+
+  - ds060: Overlapping pattern match?
+  - ds061: Turns pattern-matches non-exhaustive
+  - dsrun015: Foo.x not in scope
+  - driver063: Exposes modules that were invisible earlier. 
+  - print010: changes output from Integer to GHC.Integer.GMP.Internals.Integer 0 to GHC.Integer.GMP.Internals.S\# 0.
+  - break026: No show instance
 
 
 A substitution-based implementation exists, that transforms append, reverse with accumulating parameters, basic arithmetics and similar things. There are still bugs in the implementation, mainly name capture. It takes 8 seconds to transform the double append example, but there's still plenty of room for improvement with respect to performance.
 
+
+
 The typed intermediate representation has caused some trouble, but nothing fundamental. 
 
+
+
 Shortcomings of the prototype:
- * Use a state monad
- * Uses eager substitution
- * Divide by zero
- * Homeomorphic embedding for types?  Currently all types are regarded as equal (like literals).  Decision: leave it this way for now.
- * Msg does not respect alpha-equivalence.  If we match lambda against lambdas, and the binders differ, we say "different".  Decision: deal with alpha-equiv in msg when we have the new alg working.
- * Inlining `unsafePerformIO`
- * Adding constraint info
-   * case (x>y)of { ....case (x>y) of ... }
-   * Extending this to specialised functions themselves.
 
 
+- Use a state monad
+- Uses eager substitution
+- Divide by zero
+- Homeomorphic embedding for types?  Currently all types are regarded as equal (like literals).  Decision: leave it this way for now.
+- Msg does not respect alpha-equivalence.  If we match lambda against lambdas, and the binders differ, we say "different".  Decision: deal with alpha-equiv in msg when we have the new alg working.
+- Inlining `unsafePerformIO`
+- Adding constraint info
 
-== Open questions ==
+  - case (x\>y)of { ....case (x\>y) of ... }
+  - Extending this to specialised functions themselves.
 
- * Should R contexts include let-statements? Need to worry about name capture even more then.
+## Performance
 
- * Should matching for renamings be modulo permutation of lets? (Performance vs code size)
 
- * Consider `(\x xs. append x xs)`.  Do we inline append, and create a specialised copy?  (Of course, identical to the original definition.)
-   * '''Yes'''.  At provided we don't create ''multiple'' specialised copies, we are effectively copying library code into the supercompiled program.  Then we can discard all libraries (provided we have all unfoldings).
-   * '''No''': then need to keep the libraries
-   But it's not clear that we can ''always'' inline ''everything''.  For example things with `unsafePerformIO`.
-     * (Given no cycle in imports) Perhaps the things we can not inline should be put at the top level in the same module, and the old module discarded?
+```wiki
+COST CENTRE                    MODULE               %time %alloc
 
- * Can we improve the homeomorphic embedding so that append xs xs is not embedded in append xs ys?
+correctNodeUFM                 UniqFM                16.1   23.3
+isHomemb                       Scp2                   9.3   19.7
+peel                           Scp2                   4.1    1.7
+realExprSize                   Scp2                   4.0    6.4
+iBox                           FastTypes              3.7    5.9
+maybeInline                    Scp2                   2.2    1.5
+dive                           Scp2                   2.1    3.4
+thenSmpl                       SimplMonad             2.0    0.1
+mkLeafUFM                      UniqFM                 1.9    2.3
+match_list                     Unify                  1.8    0.5
+mkLLNodeUFM                    UniqFM                 1.8    3.6
+shiftR1                        UniqFM                 1.5    0.0
+cmpName                        Name                   1.3    1.3
+match                          Scp2                   1.2    1.7
+shiftL1                        UniqFM                 1.2    0.0
+map_tree                       UniqFM                 1.2    2.7
+match                          Unify                  1.2    0.0
+mkLitString                    FastString             1.2    1.0
+insert_ele                     UniqFM                 1.1    1.2
+getCommonNodeUFMData           UniqFM                 1.1    0.1
+plug                           Scp2                   0.9    1.3
+renamings                      Scp2                   0.6    1.2
+```
 
- * http://hackage.haskell.org/trac/ghc/ticket/2598
+## Open questions
+
+
+- Should R contexts include let-statements? Need to worry about name capture even more then.
+
+- Should matching for renamings be modulo permutation of lets? (Performance vs code size)
+
+- Consider `(\x xs. append x xs)`.  Do we inline append, and create a specialised copy?  (Of course, identical to the original definition.)
+
+  - **Yes**.  At provided we don't create *multiple* specialised copies, we are effectively copying library code into the supercompiled program.  Then we can discard all libraries (provided we have all unfoldings).
+  - **No**: then need to keep the libraries
+    But it's not clear that we can *always* inline *everything*.  For example things with `unsafePerformIO`.
+
+    - (Given no cycle in imports) Perhaps the things we can not inline should be put at the top level in the same module, and the old module discarded?
+
+- Can we improve the homeomorphic embedding so that append xs xs is not embedded in append xs ys?
+
+- [
+  http://hackage.haskell.org/trac/ghc/ticket/2598](http://hackage.haskell.org/trac/ghc/ticket/2598)
+
 
 Random thoughts about the prettyprinter:
 
- * Let-statements: 
-   * LclId is not really useful for me.
-   * The empty list on the line below it is also wasting space.
-   * The occurence information sometimes pushes the type signature over several lines. 
- * Case-statements:
-   * The occurence information pushes case branches over several lines.
-   * case e of { tp1 tp2 tp3 tp4 -> tp3 } prettyprints over 5 lines.
- * Long types: Is the complete "GHC.Types.Char" necessary?
- * Names: 
-   * Why is it sometimes $dShow{v a1lm} and sometimes $dShow_a1lm? The latter is easier to grep for.
 
-== Diffferences from Supero ==
+- Let-statements: 
 
-An attempted list at differences between [http://community.haskell.org/~ndm/supero Supero] and [http://www.csee.ltu.se/~pj/papers/scp/popl09-scp.pdf positive supercompilation for call-by-value] (abbreviated to pscp below). 
+  - LclId is not really useful for me.
+  - The empty list on the line below it is also wasting space.
+  - The occurence information sometimes pushes the type signature over several lines. 
+- Case-statements:
+
+  - The occurence information pushes case branches over several lines.
+  - case e of { tp1 tp2 tp3 tp4 -\> tp3 } prettyprints over 5 lines.
+- Long types: Is the complete "GHC.Types.Char" necessary?
+- Names: 
+
+  - Why is it sometimes $dShow{v a1lm} and sometimes $dShow\_a1lm? The latter is easier to grep for.
+
+## Diffferences from Supero
+
+
+
+An attempted list at differences between [
+Supero](http://community.haskell.org/~ndm/supero) and [
+positive supercompilation for call-by-value](http://www.csee.ltu.se/~pj/papers/scp/popl09-scp.pdf) (abbreviated to pscp below). 
+
+
 
 1) Call-by-value vs Call-by-n{ame,eed}. I am not completely clear on whether Supero preserves sharing. (Pscp does, otherwise the improvement theory is not usable and the proof doesn't go through. Previous discussions between Neil and Peter concluded that this is not sufficient - more expressions need to be inlined so we do not want to preserve all the sharing for performance reasons; Simon later pointed out that we must preserve sharing).
 
+
+
 2) Termination criterion. Both use the homeomorphic embedding, but there are some small differences.
-  a) Pscp checks against fewer previous expressions compared to Supero. (Pscp only looks at expressions on the form R<g es>, where R are evaluation contexts for call-by-name, and g are top/local level definitions. Let-statements, for example, are not bound in our contexts). This could be beneficial for compilation speed, but I don't have any concrete numbers right now. The drawback is that our approach can not perform Distillation; a more powerful transformation that makes the checks even more expensive. This should not be hard to change in an actual implementation though.
 
-  b) Generalisation. Pscp currently uses the msg, and Neil has deducted a better way to split expressions. Switching between them should be a matter of changing a couple of lines of code in an actual implementation.
 
-  c) simpleTerminate. This roughly corresponds to a mixture between values and what pscp have labeled as "annoying expressions". Neil was spot on in earlier discussions on what annoying expressions are: something where evaluation is stuck (normally because of a free variable in the next position, for example the application "x es"). Simon has an interesting algorithm formulation that avoids annoying expressions altogether and is probably simpler to implement.
+>
+>
+> a) Pscp checks against fewer previous expressions compared to Supero. (Pscp only looks at expressions on the form R\<g es\>, where R are evaluation contexts for call-by-name, and g are top/local level definitions. Let-statements, for example, are not bound in our contexts). This could be beneficial for compilation speed, but I don't have any concrete numbers right now. The drawback is that our approach can not perform Distillation; a more powerful transformation that makes the checks even more expensive. This should not be hard to change in an actual implementation though.
+>
+>
+
+>
+>
+> b) Generalisation. Pscp currently uses the msg, and Neil has deducted a better way to split expressions. Switching between them should be a matter of changing a couple of lines of code in an actual implementation.
+>
+>
+
+>
+>
+> c) simpleTerminate. This roughly corresponds to a mixture between values and what pscp have labeled as "annoying expressions". Neil was spot on in earlier discussions on what annoying expressions are: something where evaluation is stuck (normally because of a free variable in the next position, for example the application "x es"). Simon has an interesting algorithm formulation that avoids annoying expressions altogether and is probably simpler to implement.
+>
+>
+
 
 3) Inlining decisions. Neil has a more advanced way of determining when things should be inlined or not. I believe that the solution is some kind of union between the inliner paper, Neil's work and possibly some kind of cost calculus for inlining.
+
+
 
 What is not mentioned in either of our works though is that it is a typed intermediate representation in GHC. System Fc has the casts that might get in the way of transformations (so effectively they are some kind of annoying expressions). Rank-n polymorphism is another potential problem, but I am not sure if that will be a problem with System Fc. These are not fundamental problems that will take two months to solve, but I think that implementing a supercompiler for System Fc is more than just two days of intense hacking, even for someone already familiar with GHC internals.
 
 
-```
