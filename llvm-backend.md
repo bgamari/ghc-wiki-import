@@ -1,65 +1,109 @@
-CONVERSION ERROR
+# LLVM Back-end Design
 
-Original source:
 
-```trac
-= LLVM Back-end Design =
 
 This document aims to describe the current proposed design for a new back-end for GHC that will generate bitcode. This will then be compiled to actual machine code using the LLVM tools. This description is relevant for GHC developers and attempts to address how the back-end will intergrate with the rest of GHC.
 
-== Who ==
+
+## Who
+
+
+
 This work is being undertaken by myself (David Terei), an undergraduate honours student at The University of New South Wales, under the supervision of Manuel Chakravarty.
 
-== Aim ==
+
+## Aim
+
+
+
 The aim is to contribute a new back-end to GHC which outperforms the existing native code generator (NCG) and C code generator back-ends. The use of LLVM will also hopefully allow for some new optimisations to be implemented that are currently very difficult with the existing back-ends.
+
+
 
 The new back-end will at first be more of a proof-of-concept due to the significant time restraints with my thesis. I hope though to continue working on it as time permits after the thesis is due and as much as I can resist spending the entire summer at the beach surfing.
 
-== Design ==
+
+## Design
+
+
 
 The initial design will try to fit into GHC's current pipeline stages as seamlessly as possible. This should allow for quicker development and focus on the core task of LLVM code generation which is required no matter the overall design.
 
+
+
 The LLVM pipeline will works as follows:
 
-  * New path for LLVM generation, sepperate from C and NCG. (path forks at compiler/main/CodeOutput.lhs, same place where C and NCG fork).
-  * LLVM code generation will output LLVM bitcode.
-  * Following this, instead of an 'As' phase as will C and NCG (which generates object file from assembler), will have an equivalent '!LlvmAs' phase which generates an object file from LLVM bitcode. The LLVM path won't provide an option of running the splitter or mangler.
-  * This should bring the LLVM path back to the other back-ends, the next stage is the Link stage.
+
+- New path for LLVM generation, sepperate from C and NCG. (path forks at compiler/main/CodeOutput.lhs, same place where C and NCG fork).
+- LLVM code generation will output LLVM bitcode.
+- Following this, instead of an 'As' phase as will C and NCG (which generates object file from assembler), will have an equivalent 'LlvmAs' phase which generates an object file from LLVM bitcode. The LLVM path won't provide an option of running the splitter or mangler.
+- This should bring the LLVM path back to the other back-ends, the next stage is the Link stage.
+
 
 Here is a diagram of the pipeline:
 
-{{{
+
+```wiki
 ;
   Cmm -> (codeOutput) --->(ncg) Assembler                -->(mangler, splitter) --> ('As' phase) -----> Object Code --> (link) --> executable
                           \---> LLVM BitCode                                    --> ('LlvmAs' phase) -/
-}}}
+```
+
 
 This should be the easiest and thus quickest to initially implement. Ideally though once this approach is working well I would like to add a new linker phase for LLVM. Instead of each module just being compiled to native object code ASAP, it would be better to keep them in the LLVM bitcode format and link all the modules together using the LLVM linker. This enable all of LLVM's link time optimisations. All the user program LLVM bitcode will then be compiled to a native object file and linked with the runtime using the native system linker.
 
-== Individual Issues ==
 
-=== Register Pinning ===
+## Individual Issues
+
+
+### Register Pinning
+
+
 
 The new back-end will at first only operate in GHC's unregistered mode due to the lack of support in LLVM for 'pinning' virtual registers to actual machine registers. The current approach taken by the C back-end and NCG of having a fixed assignment of STG virtual registers to hardware registers for performance gains is impossible to implement in LLVM. Once the back-end is working for unregistered code, I will attempt to improve on the performance by using a custom calling convention to support something semantically equivalent to register pinning. The custom calling convention will pass the first N variables in specific hardware registers, thus guaranteeing on all function entries that the STG virtual registers can be found in the expected hardware registers. This approach is hoped to provide better performance than the register pinning used by NCG/C back-ends as it keeps the STG virtual registers mostly in hardware registers but allows the register allocator more flexibility and access to all machine registers.
 
-=== Shared Code with NCG ===
 
-It is probable that some of the code needed by the LLVM back-end is already implemented for the NCG back-end. Some examples of this code would be the following two functions in ''compiler/main/AsmCodeGen.lhs'':
+### Shared Code with NCG
 
-  ''fixAssignsTop''::
-    Changes assignments to global registers to instead assign to the !RegTable, used for non-pinned virtual registers.
-  ''cmmToCmm''::
-    Optimises the cmm code, in particular it changes loads from global registers to instead load from the !RegTable.
 
-Until the amount of shared code can be determined and the LLVM back-end approaches a level of maturity that is suitable for inclusion in ''GHC HEAD'', this is probably a mute issue.
 
-=== LLVM IR Representation ===
+It is probable that some of the code needed by the LLVM back-end is already implemented for the NCG back-end. Some examples of this code would be the following two functions in *compiler/main/AsmCodeGen.lhs*:
 
-Still undecided on best way to represent and emit the LLVM IR. There are 3 main options as outlined in the [http://llvm.org/docs/FAQ.html#langirgen LLVM FAQ]:
 
-  * Call into LLVM Libraries using FFI (can probably use [http://hackage.haskell.org/package/llvm Haskell LLVM Bindings])
-  * Emit LLVM Assembly (approach taken by [http://www.cs.uu.nl/wiki/Ehc/WebHome EHC]'s LLVM Back-end, can use the [https://subversion.cs.uu.nl/repos/project.UHC.pub/trunk/EHC/src/ehc/LLVM.cag module] developed by them for this)
-  * Emit LLVM Bitcode (can't see any reason to do this)
+<table><tr><th>*fixAssignsTop*</th>
+<td>
+Changes assignments to global registers to instead assign to the RegTable, used for non-pinned virtual registers.
+</td></tr>
+<tr><th>*cmmToCmm*</th>
+<td>
+Optimises the cmm code, in particular it changes loads from global registers to instead load from the RegTable.
+</td></tr></table>
 
-This is something I am currently investigating. I think at the moment that using both EHC's LLVM module and the LLVM Bindings would be best. My main concern with the LLVM bindings is that I'm not sure how well it could handle representing the LLVM IR during translation from ''!CmmStmts''. This is, I need a representation of the LLVM IR to work with during translation from ''!CmmStmts'' that can be easily built up and changed (an abstract syntax form of LLVM IR). However instead of pretty printing it to LLVM Assembly, it would be ''pretty printed'' to LLVM Bitcode using the LLVM Bindings.
-```
+
+
+Until the amount of shared code can be determined and the LLVM back-end approaches a level of maturity that is suitable for inclusion in *GHC HEAD*, this is probably a mute issue.
+
+
+### LLVM IR Representation
+
+
+
+Still undecided on best way to represent and emit the LLVM IR. There are 3 main options as outlined in the [
+LLVM FAQ](http://llvm.org/docs/FAQ.html#langirgen):
+
+
+- Call into LLVM Libraries using FFI (can probably use [
+  Haskell LLVM Bindings](http://hackage.haskell.org/package/llvm))
+- Emit LLVM Assembly (approach taken by [
+  EHC](http://www.cs.uu.nl/wiki/Ehc/WebHome)'s LLVM Back-end, can use the [
+  module](https://subversion.cs.uu.nl/repos/project.UHC.pub/trunk/EHC/src/ehc/LLVM.cag) developed by them for this)
+- Emit LLVM Bitcode (can't see any reason to do this)
+
+
+This is something I am currently investigating. I think at the moment that using both EHC's LLVM module and the LLVM Bindings would be best. My main concern with the LLVM bindings is that I'm not sure how well it could handle representing the LLVM IR during translation from *CmmStmts*. This is, I need a representation of the LLVM IR to work with during translation from *CmmStmts* that can be easily built up and changed (an abstract syntax form of LLVM IR). However instead of pretty printing it to LLVM Assembly, it would be *pretty printed* to LLVM Bitcode using the LLVM Bindings.
+
+
+
+As I may end up only using a small part of the LLVM Bindings then it will need to be decided eventually if its worth including them with GHC or extracting just the parts needed for inclusion.
+
+
