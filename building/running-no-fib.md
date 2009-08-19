@@ -21,8 +21,8 @@ will put the results in the file `nofib-log`.
 
 
 
-To compare the results of multiple runs, use the program in
-[utils/nofib-analyse](/trac/ghc/browser/ghc/utils/nofib-analyse).  Something like this:
+To compare the results of multiple runs, use the program
+[nofib/nofib-analyse/nofib-analyse](/trac/ghc/browser/ghc/nofib/nofib-analyse/nofib-analyse).  Something like this:
 
 
 ```wiki
@@ -49,8 +49,21 @@ you'll need to get hold of Cachegrind, which is part of
   $ make SRC_RUNTEST_OPTS=-cachegrind
 ```
 
-
-There are some options you might want to tweak; search for nofib in
-`mk/config.mk` ([mk/config.mk.in](/trac/ghc/browser/ghc/mk/config.mk.in)), and override settings in `mk/build.mk` as usual.
+## Tweaking things
 
 
+
+To tweak things, add settings to your `mk/build.mk` (see [Commentary/SourceTree](commentary/source-tree)).
+
+
+- Each benchmark is run in each "way" in `NoFibWays`.  By default `NoFibWays` is initialised to `GhcLibWays`, but you can override that in `mk/build.mk`. Typically, to just use the vanilla way, set `NoFibWays` to empty:
+
+  ```wiki
+  NoFibWays =
+  ```
+
+- By default nofib uses the stage-2 compiler from your build tree.  To tell nofib to use a different compiler, set `WithNofibHc`.  For example:
+
+  ```wiki
+  WithNofibHc = /home/simonpj/builds/HEAD/inplace/bin/ghc-stage1
+  ```
