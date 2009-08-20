@@ -1,61 +1,45 @@
-# Debugging GHC
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Debugging GHC =
 
 This page is about strategies that may help you find a bug in GHC or its runtime system.
 
+== Consistency checking flags ==
 
-## Consistency checking flags
+At compile time (see also the [http://www.haskell.org/ghc/docs/latest/html/users_guide/options-debugging.html relevant User Manual section]):
 
+ * Add `-dcore-lint` the GHC command line when compiling each Haskell module.  This makes GHC type-check the intermediate program after every optimisation pass, which often nails a fault.
 
+ * Add `-ddump-simpl` to see the optimised Core output.  There are a number of other `-ddump-x` flags; see the user manual.
 
-At compile time:
-
-
-- Add `-dcore-lint` the GHC command line when compiling each Haskell module.  This makes GHC type-check the intermediate program after every optimisation pass, which often nails a fault.
-
-- Add `-ddump-simpl` to see the optimised Core output.  There are a number of other `-ddump-x` flags; see the user manual.
-
-- The flag `-dppr-debug` makes the `-ddump-x` flags print much more verbose output.  Use this if you are getting desperate!
-
+ * The flag `-dppr-debug` makes the `-ddump-x` flags print much more verbose output.  Use this if you are getting desperate!
 
 At link time:
 
+ * Add `-debug` to the GHC command line when linking. This links the program against a special version of the runtime system that does lots of extra internal consistency checking.  Overall performance is significantly reduced.  '''Simon: any flags?'''
 
-- Add `-debug` to the GHC command line when linking. This links the program against a special version of the runtime system that does lots of extra internal consistency checking.  Overall performance is significantly reduced.  **Simon: any flags?**
+At run time (see also the [http://www.haskell.org/ghc/docs/latest/html/users_guide/runtime-control.html#rts-options-debugging  relevant User Manual section]):
+  * Use `+RTS -sstderr` or `+RTS -Sstderr` to watch garbage collection activity.
 
-
-At run time
-
-
-- Use `+RTS -sstderr` or `+RTS -Sstderr` to watch garbage collection activity.
-
-## Ticky-ticky profiling
-
-
+== Ticky-ticky profiling ==
 
 Ticky-ticky profiling adds counters to every STG function.  It's very low-level, but it really tells you what is going on:
 
+ * Add the `-ticky` flag when compiling a Haskell module to enable "ticky-ticky" profiling of that module.  This makes GHC emit performance-counting instructions in every STG function.  
 
-- Add the `-ticky` flag when compiling a Haskell module to enable "ticky-ticky" profiling of that module.  This makes GHC emit performance-counting instructions in every STG function.  
+ * Add `-ticky` to the command line when linking, so that you link against a version of the runtime system that allows you to display the results.
 
-- Add `-ticky` to the command line when linking, so that you link against a version of the runtime system that allows you to display the results.
-
-- Add `+RTS -rfoo.ticky` to the run-time command line, to put the ticky-ticky profile in the file `foo.ticky`.
-
+ * Add `+RTS -rfoo.ticky` to the run-time command line, to put the ticky-ticky profile in the file `foo.ticky`.
 
 It's very low level stuff.  You need to use `-ddump-simpl -ddump-prep` when compiling the source files to see the functions that correspond to the performance counter report.
 
-
-
 You can mix modules compiled with `-ticky` and modules compiled without.
 
-
-
 To really see everything you need to compile all the libraries with `-ticky`.  To do that in a standard build tree, here are some flag settings in `build.mk` that work:
-
-
-```wiki
+{{{
 # Build all libraries with -ticky
 GhcLibOpts += -ticky
 
@@ -70,9 +54,7 @@ GhcStage2HcOpts += -ticky
 
 # Ditto Haddock
 utils/haddock_dist_EXTRA_HC_OPTS += -ticky
+}}}
+But see #3439, which would allow you to drop the last two.
+
 ```
-
-
-But see [\#3439](https://gitlab.staging.haskell.org/ghc/ghc/issues/3439), which would allow you to drop the last two.
-
-
