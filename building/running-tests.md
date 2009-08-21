@@ -187,7 +187,7 @@ these steps:
 {{{
       test(<name>, <setup>, <test-fn>, <args>)
 }}}
-The format of these fields is described in the [wiki:Building/RunningTests#Formatofthetestentries next section].
+ The format of these fields is described in the [wiki:Building/RunningTests#Formatofthetestentries next section].
 
  
 
