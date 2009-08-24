@@ -43,7 +43,6 @@
 
 - Misc:
 
-  - [\#3220](https://gitlab.staging.haskell.org/ghc/ghc/issues/3220) (generalisation)
   - [\#3064](https://gitlab.staging.haskell.org/ghc/ghc/issues/3064): exponentially slow compile times
   - [\#3169](https://gitlab.staging.haskell.org/ghc/ghc/issues/3169) & [\#2360](https://gitlab.staging.haskell.org/ghc/ghc/issues/2360) (improve occurs-check error message in two instances)
   - [\#2721](https://gitlab.staging.haskell.org/ghc/ghc/issues/2721) (generalised newtype deriving for classes with associated types)
