@@ -1,83 +1,109 @@
-CONVERSION ERROR
+# GHC Commentary: Libraries
 
-Original source:
 
-```trac
-= GHC Commentary: Libraries =
 
-All GHC build trees contain a set of libraries, called the '''Boot Packages'''.  These are the libraries that GHC's source code imports.  Obviously you need the boot packages to build GHC at all (whether the stage-1 or stage-2 compiler).
+All GHC build trees contain a set of libraries, called the **Boot Packages**.  These are the libraries that GHC's source code imports.  Obviously you need the boot packages to build GHC at all.
+
+
 
 The Boot Packages, along with the other subcomponents of the GHC build system, are in the file `packages` in a GHC tree. To get a list of them, you can run `make show VALUE=PACKAGES` in a configured GHC build tree.  (This variable is set in `$(TOP)/ghc.mk`.)
 
+
+
 You can see exactly which versions of what packages GHC depends on by looking in `$(TOP)/compiler/ghc.cabal.in`.
+
+
 
 Every installation of GHC includes the Boot Packages.
 
-== Zero-boot packages ==
 
-Since GHC's source code imports the boot packages, ''even the bootstrap compiler must have the boot packages available''.  (Or, more precisely, all the types and values that are imported must be available from some package in the bootstrap compiler; the exact set of packages does not need to be identical.)
+## Classifying the boot packages
 
-For the most part we simply assume that the bootstrap compiler already has the boot packages installed.  The '''Zero-boot Packages''' are a set of packages for which this assumption does not hold.  For example, for certain fast-moving boot packages (eg Cabal), we don't want to rely on the user having installed a bang-up-to-date version of the package.  
 
-So we begin the entire build process by installing the zero-boot packages in the bootstrap compiler.  (This installation is purely local to the build tree.)  
-
-As time goes on, a Zero-boot package may become an ordinary boot package, because the bootstrap compiler is expected to have (a sufficiently up to date) version of the package already.
-
-The current Zero-boot packages are:
- * `Cabal`: we frequently update Cabal and GHC in sync
- * `hpc`
- * `extensible-exceptions`
-
-== Classifying the boot packages ==
 
 A second important classification of the boot packages is as follows:
 
- * '''INDEPENDENT''': Independently maintained (e.g. time, haskeline)
- * '''COUPLED''': Tightly coupled to GHC, but used by others (base)
- * '''SPECIFIC''': Totally specific to GHC (e.g. template-haskell, DPH)
+
+- **INDEPENDENT**: Independently maintained (e.g. time, haskeline)
+- **COUPLED**: Tightly coupled to GHC, but used by others (base)
+- **SPECIFIC**: Totally specific to GHC (e.g. template-haskell, DPH)
+
 
 Most boot libraries are INDEPENDENT.  INDEPENDENT libraries have a
 master repository somewhere separate from the GHC repositories.  Whenever we release GHC, we ensure that the INDEPENDENT boot libraries that come with GHC are precisely sync'd with a particular released version of that library.
 
+
+
 The current classification of packages is:
-  * SPECIFIC: `ghc-prim`, `template-haskell`, `DPH`
-  * COUPLED: `base`
-  * INDEPENDENT: all other packages
 
-== Boot packages dependencies ==
 
- * At the root of the hierarchy we have '''`ghc-prim`'''. As the name implies, this package contains the most primitive types and functions. It only contains a handful of modules, including `GHC.Prim` (which contains `Int#`, `+#`, etc) and `GHC.Bool`, containing the `Bool` datatype.
+- SPECIFIC: `ghc-prim`, `template-haskell`, `DPH`
+- COUPLED: `base`
+- INDEPENDENT: all other packages
 
- * Above `ghc-prim` is the '''`integer-impl`''' package, where `impl` is one of `gmp` and `simple`, which provides a definition of the `Integer` type (on top of the C `gmp` library, or in plain Haskell, respectively). Which functionality is provided in `ghc-prim` is mostly driven by what functionality the `integer-impl` packages need. By default `integer-gmp` is used; to use `integer-simple` define `INTEGER_LIBRARY=integer-simple` in `mk/build.mk`.
+## Zero-boot packages
 
- * Next is the '''`base`''' package. This contains a large number of modules, many of which are in one big cyclic import knot, mostly due to the `Exception` type.
 
-  * On top of base are a number of other, more specialised packages, whose purpose is generally clear from their name. If not, you can get more detail from the descriptions in their Cabal files.  Currently these packages are are:
-    * `array`
-    * `bytestring`
-    * `Cabal`
-    * `containers`
-    * `directory`
-    * `extensible-exceptions`
-    * `filepath`
-    * `haskeline`
-    * `haskell98`
-    * `hpc`
-    * `mtl`
-    * `old-locale`
-    * `old-time`
-    * `packedstring`
-    * `pretty`
-    * `process`
-    * `random`
-    * `syb`
-    * `template-haskell`
-    * `terminfo`
-    * `unix`
-    * `utf8-string`
-    * `Win32`
+
+Since GHC's source code imports the boot packages, *even the bootstrap compiler must have the boot packages available*.  (Or, more precisely, all the types and values that are imported must be available from some package in the bootstrap compiler; the exact set of packages does not need to be identical.)
+
+
+
+For the most part we simply assume that the bootstrap compiler already has the boot packages installed.  The **Zero-boot Packages** are a set of packages for which this assumption does not hold.  For example, for certain fast-moving boot packages (eg Cabal), we don't want to rely on the user having installed a bang-up-to-date version of the package.  
+
+
+
+So we begin the entire build process by installing the zero-boot packages in the bootstrap compiler.  (This installation is purely local to the build tree.)  
+
+
+
+As time goes on, a Zero-boot package may become an ordinary boot package, because the bootstrap compiler is expected to have (a sufficiently up to date) version of the package already.
+
+
+
+The current Zero-boot packages are:
+
+
+- `Cabal`: we frequently update Cabal and GHC in sync
+- `hpc`
+- `extensible-exceptions`: this is a shim that provides an API to older versions of GHC that is compatible with what the current `base` package now exports.  So, unusually, `extensible-exceptions` is a zero-boot package, but not a boot package.
+
+## Boot packages dependencies
+
+
+- At the root of the hierarchy we have **`ghc-prim`**. As the name implies, this package contains the most primitive types and functions. It only contains a handful of modules, including `GHC.Prim` (which contains `Int#`, `+#`, etc) and `GHC.Bool`, containing the `Bool` datatype.
+
+- Above `ghc-prim` is the **`integer-impl`** package, where `impl` is one of `gmp` and `simple`, which provides a definition of the `Integer` type (on top of the C `gmp` library, or in plain Haskell, respectively). Which functionality is provided in `ghc-prim` is mostly driven by what functionality the `integer-impl` packages need. By default `integer-gmp` is used; to use `integer-simple` define `INTEGER_LIBRARY=integer-simple` in `mk/build.mk`.
+
+- Next is the **`base`** package. This contains a large number of modules, many of which are in one big cyclic import knot, mostly due to the `Exception` type.
+
+- On top of base are a number of other, more specialised packages, whose purpose is generally clear from their name. If not, you can get more detail from the descriptions in their Cabal files.  Currently these packages are are:
+
+  - `array`
+  - `bytestring`
+  - `Cabal`
+  - `containers`
+  - `directory`
+  - `extensible-exceptions`
+  - `filepath`
+  - `haskeline`
+  - `haskell98`
+  - `hpc`
+  - `mtl`
+  - `old-locale`
+  - `old-time`
+  - `packedstring`
+  - `pretty`
+  - `process`
+  - `random`
+  - `syb`
+  - `template-haskell`
+  - `terminfo`
+  - `unix`
+  - `utf8-string`
+  - `Win32`
+
+
 The `haskell98`, `old-time` and `random` packages are mostly only needed for Haskell 98 support, although `dph` currently uses `random` too.
 
 
-
-```
