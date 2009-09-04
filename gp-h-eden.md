@@ -1,0 +1,10 @@
+CONVERSION ERROR
+
+Original source:
+
+```trac
+= Glasgow Parallel Haskell (GpH) and Eden documentation =
+
+This page will describe the GpH and Eden parallel variants of GHC.  This is work in progress.
+
+```
