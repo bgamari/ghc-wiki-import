@@ -36,6 +36,8 @@ Stack frames therefore have [wiki:Commentary/Rts/HeapObjects#Bitmaplayout bitmap
 
 == Kinds of Stack Frame ==
 
+(defined in [[GhcFile(includes/rts/storage/ClosureTypes.h)]])
+
  * {{{RET_BCO}}}
  * {{{RET_SMALL}}}
  * {{{RET_BIG}}}
