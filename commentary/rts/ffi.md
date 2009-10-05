@@ -7,6 +7,8 @@ Original source:
 
 = GHC Commentary: Runtime aspects of the FFI =
 
+[[GhcFile(rts/Adjustor.c)]]
+
 ----
 CategoryStub
 
