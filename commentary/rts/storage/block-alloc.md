@@ -2,7 +2,7 @@
 
 
 
-Source: [includes/Block.h](/trac/ghc/browser/ghc/includes/Block.h), [rts/BlockAlloc.h](/trac/ghc/browser/ghc/rts/BlockAlloc.h), [rts/BlockAlloc.c](/trac/ghc/browser/ghc/rts/BlockAlloc.c), [rts/MBlock.h](/trac/ghc/browser/ghc/rts/MBlock.h), [rts/MBlock.c](/trac/ghc/browser/ghc/rts/MBlock.c).
+Source: [includes/rts/storage/Block.h](/trac/ghc/browser/ghc/includes/rts/storage/Block.h), [rts/sm/BlockAlloc.h](/trac/ghc/browser/ghc/rts/sm/BlockAlloc.h), [rts/sm/BlockAlloc.c](/trac/ghc/browser/ghc/rts/sm/BlockAlloc.c), [includes/rts/storage/MBlock.h](/trac/ghc/browser/ghc/includes/rts/storage/MBlock.h), [rts/sm/MBlock.c](/trac/ghc/browser/ghc/rts/sm/MBlock.c).
 
 
 
