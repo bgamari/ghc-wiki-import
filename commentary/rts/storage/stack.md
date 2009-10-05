@@ -1,53 +1,73 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
+# Layout of the stack
 
 
-= Layout of the stack =
 
-Every [wiki:Commentary/Rts/HeapObjects#ThreadStateObjects TSO object] contains a stack.  The stack of a TSO grows downwards, with the topmost (most recently pushed) word pointed to by {{{tso->sp}}}, and the bottom of the stack given by {{{tso->stack + tso->stack_size}}}.
+Every [TSO object](commentary/rts/heap-objects#thread-state-objects) contains a stack.  The stack of a TSO grows downwards, with the topmost (most recently pushed) word pointed to by `tso->sp`, and the bottom of the stack given by `tso->stack + tso->stack_size`.
 
-The stack consists of a sequence of ''stack frames'' (also sometimes called ''activation records'') where each frame has the same layout as a heap object:
 
-|| Header || Payload... ||
 
-There are several kinds of [wiki:Commentary/Rts/Stack#KindsofStackFrame stack frame], but the most common types are those pushed when evaluating a {{{case}}} expression:
-{{{
+The stack consists of a sequence of *stack frames* (also sometimes called *activation records*) where each frame has the same layout as a heap object:
+
+
+<table><tr><th> Header </th>
+<th> Payload... 
+</th></tr></table>
+
+
+
+There are several kinds of [stack frame](commentary/rts/stack#kinds-of-stack-frame), but the most common types are those pushed when evaluating a `case` expression:
+
+
+```wiki
   case e0 of p1 -> e1; ...; pn -> en 
-}}}
-The code for evaluating a {{{case}}} pushes a new stack frame representing the alternatives of the case, and continues by evaluating {{{e0}}}.  When {{{e0}}} completes, it returns to the stack frame pushed earlier, which inspects the value and selects the appropriate branch of the case.  The stack frame for a {{{case}}} includes the values of all the free variables in the case alternatives.
+```
 
-== Info tables for stack frames ==
 
-The info table for a stack frame has a couple of extra fields in addition to the [wiki:Commentary/Rts/HeapObjects#InfoTables basic info table layout].  A stack-frame info table is defined by {{{StgRetInfoTable}}} in [[GhcFile(includes/rts/storage/InfoTables.h)]].
+The code for evaluating a `case` pushes a new stack frame representing the alternatives of the case, and continues by evaluating `e0`.  When `e0` completes, it returns to the stack frame pushed earlier, which inspects the value and selects the appropriate branch of the case.  The stack frame for a `case` includes the values of all the free variables in the case alternatives.
 
-[[Image(ret-itbl.png)]]
+
+## Info tables for stack frames
+
+
+
+The info table for a stack frame has a couple of extra fields in addition to the [basic info table layout](commentary/rts/heap-objects#info-tables).  A stack-frame info table is defined by `StgRetInfoTable` in [includes/rts/storage/InfoTables.h](/trac/ghc/browser/ghc/includes/rts/storage/InfoTables.h).
+
+
+
+[](/trac/ghc/attachment/wiki/Commentary/Rts/Storage/Stack/ret-itbl.png)
+
+
 
 (ignore the "return vector" part of the above diagram; return vectors were removed from GHC in version 6.8.1)
-The ''SRT'' field points to the static reference table (SRT) for this stack frame (see [wiki:Commentary/Rts/CAFs] for details of SRTs).
+The *SRT* field points to the static reference table (SRT) for this stack frame (see [Commentary/Rts/CAFs](commentary/rts/ca-fs) for details of SRTs).
 
-== Layout of the payload ==
+
+## Layout of the payload
+
+
 
 Unlike heap objects which mainly have "pointers first" layout, in a stack frame the pointers and non-pointers are intermingled.  This is so that we can support "stack stubbing" whereby a live variable stored on the stack can be later marked as dead simply by pushing a new stack frame that identifies that slot as containing a non-pointer, so the GC will not follow it.
 
-Stack frames therefore have [wiki:Commentary/Rts/HeapObjects#Bitmaplayout bitmap layout].
 
-== Kinds of Stack Frame ==
 
-(defined in [[GhcFile(includes/rts/storage/ClosureTypes.h)]])
+Stack frames therefore have [bitmap layout](commentary/rts/heap-objects#bitmap-layout).
 
- * {{{RET_BCO}}}
- * {{{RET_SMALL}}}
- * {{{RET_BIG}}}
- * {{{RET_DYN}}}
- * {{{RET_FUN}}}
- * {{{UPDATE_FRAME}}}
- * {{{CATCH_FRAME}}}
- * {{{STOP_FRAME}}}
- * {{{ATOMICALLY_FRAME}}}
- * {{{CATCH_RETRY_FRAME}}}
- * {{{CATCH_STM_FRAME}}}
 
-```
+## Kinds of Stack Frame
+
+
+
+The constants for the different types of stack frame are defined in [includes/rts/storage/ClosureTypes.h](/trac/ghc/browser/ghc/includes/rts/storage/ClosureTypes.h).  More details about the layouts are available in [includes/rts/storage/Closures.h](/trac/ghc/browser/ghc/includes/rts/storage/Closures.h)
+
+
+- `RET_BCO`
+- `RET_SMALL`
+- `RET_BIG`
+- `RET_DYN`
+- `RET_FUN`
+- `UPDATE_FRAME`
+- `CATCH_FRAME`
+- `STOP_FRAME`
+- `ATOMICALLY_FRAME`
+- `CATCH_RETRY_FRAME`
+- `CATCH_STM_FRAME`
