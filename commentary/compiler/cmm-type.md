@@ -492,8 +492,8 @@ General `GlobalRegs` numbers are decimal integers, see the `parseInteger` functi
 
 
 - [compiler/codeGen/CgCallConv.hs](/trac/ghc/browser/ghc/compiler/codeGen/CgCallConv.hs) (the section on "Register assignment")
-- [includes/Regs.h](/trac/ghc/browser/ghc/includes/Regs.h) (defining STG registers)
-- [includes/MachRegs.h](/trac/ghc/browser/ghc/includes/MachRegs.h) (target-specific mapping of machine registers for *registerised* builds of GHC)
+- [includes/stg/Regs.h](/trac/ghc/browser/ghc/includes/stg/Regs.h) (defining STG registers)
+- [includes/stg/MachRegs.h](/trac/ghc/browser/ghc/includes/stg/MachRegs.h) (target-specific mapping of machine registers for *registerised* builds of GHC)
 - [rts/PrimOps.cmm](/trac/ghc/browser/ghc/rts/PrimOps.cmm) (examples of `GlobalReg` register usage for out-of-line primops)
 
 
@@ -946,7 +946,7 @@ This is essentially a custom-coded version of the GNU Assembler (`as`) `.machine
 
 
 
-Cmm does not support the `target` directive.  This is partly due GHC generally lacking cross-compiler capabilities.  Should GHC move toward adding cross-compilation capabilities, the `target` might not be a bad thing to add.  Target architecture parameters are currently handled through the Build System?, which partly sets such architectural parameters through [includes/mkDerivedConstants.c](/trac/ghc/browser/ghc/includes/mkDerivedConstants.c) and [includes/ghcconfig.h](/trac/ghc/browser/ghc/includes/ghcconfig.h).
+Cmm does not support the `target` directive.  This is partly due GHC generally lacking cross-compiler capabilities.  Should GHC move toward adding cross-compilation capabilities, the `target` might not be a bad thing to add.  Target architecture parameters are currently handled through the [Build System](attic/building/build-system), which partly sets such architectural parameters through [includes/mkDerivedConstants.c](/trac/ghc/browser/ghc/includes/mkDerivedConstants.c) and [includes/ghcconfig.h](/trac/ghc/browser/ghc/includes/ghcconfig.h).
 
 
 ### Expressions
