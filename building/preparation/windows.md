@@ -1,76 +1,114 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
+# Before You Go Any Further
 
 
-= Before You Go Any Further =
 
-17 October 2009
+17 18 20 October 2009
 
-Regretfully, the instructions provided below contain a serious flaw that will make your life miserable. There is, however, a satisfactory and simple workaround! The problem concerns building GHC 6.10.4 as well as GHC 6.10.1 from source on Windows. It is likely that the problem is one that dates back to the beginning and effects all versions of GHC up to the present which begs the question, How is it possible that there is a current official Windows binary package for GHC? The choice of host as opposed to build on the configure command line provides a clue. Furthermore, if you go to the web pages for the various hackage GHC packages that are available, for example go to [http://hackage.haskell.org/cgi-bin/hackage-scripts/package/hs-dotnet].
 
-hs-dotnet is a Windows specific package, yet under the "Distributions" row it says "Arch: 0.4.0". The 0.4.0 is a hyperlink. There is no mention of Windows. It is a hyperlink to the package page for [http://www.archlinux.org/ Arch Linux]. Ok, there are non-Windows dotnet ports, I knew that, but bare with me. The wikipedia.org page for Arch Linux is [http://en.wikipedia.org/wiki/Arch_Linux]. They write, "The design approach of the development team focuses on simplicity, elegance, code correctness and minimalism." Interestingly enough, Haskell is often described as elegant. It is what has brought me here.
 
-I also came across something else that was interesting. Go to [http://www.mingw.org/wiki/LinuxCrossMinGW]. There is a Linux to Windows cross compiler. What does this mean to you and I? In the event that the Windows approach fails you, there has got to be a way. Try OS virtualization, dual-booting your computer, or perhaps better yet pop in a Linux Live CD and attempt to build GHC that way using the MinGW Linux to Windows cross compiler. A USB drive is useful if you pursue the Live CD approach since whatever changes you make to the Linux operating system such as installation of packages will be lost once you restart the computer. If I had known about how GHC could be built by means of the MinGW cross compiler on the front end it would have saved me a few hours. It is time consuming carrying out experimental trials. There is a defect in ghci that effects me that I believe I managed to track down and fix, but I only just been able to build GHC from source.
+Regretfully, the instructions provided below contain a serious flaw that will make your life miserable. There is, however, a satisfactory and simple workaround! The problem concerns building GHC 6.10.4 as well as GHC 6.10.1 from source on Windows. It is likely that the problem is one that dates back to the beginning and effects all versions of GHC up to the present which begs the question, How is it possible that there is a current official Windows binary package for GHC? The choice of host as opposed to build on the configure command line provides a clue. Furthermore, if you go to the web pages for the various hackage GHC packages that are available, for example go to [
+http://hackage.haskell.org/cgi-bin/hackage-scripts/package/hs-dotnet](http://hackage.haskell.org/cgi-bin/hackage-scripts/package/hs-dotnet).
 
-Now to the symptoms. If you do not apply this fix, all sorts of things will go wrong. I even managed to fix every blessed one of them and was able to successfully build GHC from source, but upon retracing my steps I learned that only one fix was actually needed. Everything else fell into place. The problem is partially described in [http://hackage.haskell.org/trac/GHC/ticket/3201]. It is marked Severity: normal. It is also marked fixed. This is also true for the bug I suspect that I managed to fix. It too was marked fixed in the bug database, but I think I understand why. Apparently, there is a difference with how things are handled on Windows and Linux that many of the developers tend not to appreciate since they are coming from a Linux background.
 
-Getting to back to what I was talking about. I would characterize the problem as severe until you understand how to work around it. I made a tools folder as is suggested below and made that folder the first folder in the path so whatever I place there will take precedence. The Bourne shell script (sh) must not have a file extension. Window programs will frequently add a file extension even if that was your not intention. It is likely that you will need to remove its file extension explicitly. It is likely that the file must be saved using the Unix newline convention (LF instead of CR LF). I saved the file with the following content with a trailing blank line (this is sometimes important):
 
-{{{
+hs-dotnet is a Windows specific package, yet under the "Distributions" row it says "Arch: 0.4.0". The 0.4.0 is a hyperlink. There is no mention of Windows. It is a hyperlink to the package page for [
+Arch Linux](http://www.archlinux.org/). Ok, there are non-Windows dotnet ports, I knew that, but bare with me. The wikipedia.org page for Arch Linux is [
+http://en.wikipedia.org/wiki/Arch\_Linux](http://en.wikipedia.org/wiki/Arch_Linux). They write, "The design approach of the development team focuses on simplicity, elegance, code correctness and minimalism." Interestingly enough, Haskell is often described as elegant. It is what has brought me here.
+
+
+
+I also came across something else that was interesting. Go to [
+http://www.mingw.org/wiki/LinuxCrossMinGW](http://www.mingw.org/wiki/LinuxCrossMinGW). There is a Linux to Windows cross compiler. What does this mean to you and I? In the event that the Windows approach fails you, there has got to be a way. Try OS virtualization, dual-booting your computer, or perhaps better yet pop in a Linux Live CD and attempt to build GHC that way using the MinGW Linux to Windows cross compiler. A USB drive is useful if you pursue the Live CD approach since whatever changes you make to the Linux operating system such as installation of packages will be lost once you restart the computer. If I had known about how GHC could be built by means of the MinGW cross compiler on the front end it would have saved me a few hours. It is time consuming carrying out experimental trials. There is a defect in GHCi that effects me, but I only just been able to build GHC from source. It turns out that in 6.10.4 it was fixed and so in a sense all of this was for nothing.
+
+
+
+I encountered some problems attempting to run the test suite. So it may be best to put that off until another day. I have written enough. I don't feel like saying anything more. Suffice it to say I did manage to run both of the test suites, make fast and make stage=2. I couldn't resist now could I? It will be a problem if Windows Firewall is on. Roughly 1% of the tests with "make fast" will fail and took 42 minutes to complete on my computer. "make stage=2" took roughly 6 hours to complete. I thought that before a patch is submitted that it must pass all the make fast tests, at least that was my impression. All the more reason to believe that Windows is not supported in the sense that Linux is.
+
+
+
+Now to the symptoms. If you do not apply this fix, all sorts of things will go wrong. I even managed to fix every blessed one of them and was able to successfully build GHC from source, but upon retracing my steps I learned that only one fix was actually needed. Everything else fell into place. The problem is partially described in [
+http://hackage.haskell.org/trac/GHC/ticket/3201](http://hackage.haskell.org/trac/GHC/ticket/3201). It is marked Severity: normal. It is also marked fixed. Fixed? It would warrant, a status of fixed, if someone went through the trouble of writing what I have written out here, but not before. It is like opening a locked door. If you have the key, there is no trouble at all opening the door, but if the key is hidden under a rock a hundred feet away from the house, unless you make it clear to your friend, he or she isn't going to find it. Though I suppose if you brought in a gang of soldiers on their hands and knees like some people suspect occurred in Roswell New Mexico, they might find it. Now try doing this to your girlfriend and call her dumb if he didn't figure it out, "The key was underneath the rock." She might tell you to go crawl under a rock.
+
+
+
+I would characterize the problem as severe until you understand how to work around it. I made a tools folder as is suggested below and made that folder the first folder in the path so whatever I place there will take precedence. The Bourne shell script (sh) must not have a file extension. Window programs will frequently add a file extension even if that was your not intention. It is likely that you will need to remove its file extension explicitly. It is likely that the file must be saved using the Unix newline convention (LF instead of CR LF). I saved the file with the following content with a trailing blank line (this is sometimes important):
+
+
+```wiki
 #!/bin/sh
 c:/msys/1.0/bin/xargs.exe -s 16383 $@
 # 16383 is 2^14 - 1
-}}}
+```
 
-to my tools folder. A value of 2 to the power of 15 - 1 was originally described, but gave mixed results so I chose 2 to the power of 14 - 1 to keep the value to one that can be represented in a whole number of bits. The problem is not xargs. It apparently resides in ar which is a [http://www.gnu.org/software/binutils/ GNU Binutils]. The path to ar is hard coded, however. There is no --with-ar configure command line option that I could find to override this behavior. The version of ar that is used is located under the "C:\ghc\ghc-6.10.4\bin" folder and not "C:\MinGW\bin" which took me by surprise.
+
+to my tools folder. A value of 2 to the power of 15 - 1 was originally described, but gave mixed results so I chose 2 to the power of 14 - 1 to keep the value to one that can be represented in a whole number of bits.
+
+
 
 Happy Computing!
 
-= Setting up a Windows system for building GHC =
 
-Installing the following will get you a working build environment with MSYS (alternatively, [wiki:Building/Windows/Cygwin install Cygwin]).  For your convenience we've cached a working set of build tools that you can download.  Note: do not install anything in a directory that contains spaces, because the GHC build system is not capable of handling paths with spaces in.
+# Setting up a Windows system for building GHC
 
- * First install a recent stable version of [http://www.haskell.org/ghc/download.html GHC].
 
- * Install MSYS: 
-   * [http://www.haskell.org/ghc/tools/Win32/MSYS-1.0.10.exe]
-   * [http://www.haskell.org/ghc/tools/Win32/msysDTK-1.0.1.exe]
-   * [http://www.haskell.org/ghc/tools/Win32/msysCORE-1.0.11-20080826.tar.gz] (this is a tar file, which you have to unpack in `c:/msys/1.0`, or wherever you installed MSYS.  Note that you can't do that using an MSYS shell, because you can't overwrite the files in use, so make a copy of `c:/msys/1.0`, unpack it there, and then rename the copy back to `c:/msys/1.0`).
 
- * Install [http://www.python.org/download/releases/ Python] (version 2.6.2 is a good choice.  2.6.1 causes a problem with the test suite, and we don't support 3.x at this time).
+Installing the following will get you a working build environment with MSYS (alternatively, [install Cygwin](building/windows/cygwin)).  For your convenience we've cached a working set of build tools that you can download.  Note: do not install anything in a directory that contains spaces, because the GHC build system is not capable of handling paths with spaces in.
+
+
+- First install a recent stable version of [GHC](http://www.haskell.org/ghc/download.html).
+
+- Install MSYS: 
+
+  - [http://www.haskell.org/ghc/tools/Win32/MSYS-1.0.10.exe](http://www.haskell.org/ghc/tools/Win32/MSYS-1.0.10.exe)
+  - [http://www.haskell.org/ghc/tools/Win32/msysDTK-1.0.1.exe](http://www.haskell.org/ghc/tools/Win32/msysDTK-1.0.1.exe)
+  - [http://www.haskell.org/ghc/tools/Win32/msysCORE-1.0.11-20080826.tar.gz](http://www.haskell.org/ghc/tools/Win32/msysCORE-1.0.11-20080826.tar.gz) (this is a tar file, which you have to unpack in `c:/msys/1.0`, or wherever you installed MSYS.  Note that you can't do that using an MSYS shell, because you can't overwrite the files in use, so make a copy of `c:/msys/1.0`, unpack it there, and then rename the copy back to `c:/msys/1.0`).
+
+- Install [
+  Python](http://www.python.org/download/releases/) (version 2.6.2 is a good choice.  2.6.1 causes a problem with the test suite, and we don't support 3.x at this time).
+
 
 The next three are just zip files, you can unpack them wherever you like, but you need to ensure that the programs can be found on your `PATH`.  I usually put all these in `c:/tools` (NB. don't put them anywhere in `c:/msys`, that's special).
 
- * Install Happy: [http://www.haskell.org/ghc/tools/Win32/happy-1.17.zip]
- * Install Alex: [http://www.haskell.org/ghc/tools/Win32/alex-2.2.zip]
- * Install Haddock: [http://www.haskell.org/ghc/tools/Win32/haddock-0.8-Win32.zip]
- * Install Darcs: [http://www.haskell.org/ghc/tools/Win32/darcs.zip]
+
+- Install Happy: [http://www.haskell.org/ghc/tools/Win32/happy-1.17.zip](http://www.haskell.org/ghc/tools/Win32/happy-1.17.zip)
+- Install Alex: [http://www.haskell.org/ghc/tools/Win32/alex-2.2.zip](http://www.haskell.org/ghc/tools/Win32/alex-2.2.zip)
+- Install Haddock: [http://www.haskell.org/ghc/tools/Win32/haddock-0.8-Win32.zip](http://www.haskell.org/ghc/tools/Win32/haddock-0.8-Win32.zip)
+- Install Darcs: [http://www.haskell.org/ghc/tools/Win32/darcs.zip](http://www.haskell.org/ghc/tools/Win32/darcs.zip)
+
 
 Now set your `PATH`.  We recommend doing this by creating a file `.profile` in your home directory (by default `c:/msys/1.0/home/<username>`).  The contents of your `.profile` should be something like this:
 
-{{{
+
+```wiki
 PATH=/c/mingw/bin:/c/ghc/ghc-6.10.1/bin:/usr/bin:/bin:/c/tools:/c/Python26:/c/windows/system32
-}}}
+```
+
 
 Modify the above according to where you installed things, and change the GHC version appropriately.
 
-=== Building documentation on Windows ===
 
-Documentation is optional, but in order to build it in Windows you must currently use Cygwin (there isn't a working !DocBook toolchain on MSYS as far as we know).
+### Building documentation on Windows
 
-In the Cygwin installer, just install the complete {{{Doc}}} category. You
-may have to help {{{configure}}} a little bit: Set the
-environment variables {{{XmllintCmd}}} and
-{{{XsltprocCmd}}} to the paths of the Cygwin executables
-{{{xmllint}}} and {{{xsltproc}}},
-respectively, and set {{{fp_cv_dir_docbook_xsl}}} to the path
+
+
+Documentation is optional, but in order to build it in Windows you must currently use Cygwin (there isn't a working DocBook toolchain on MSYS as far as we know).
+
+
+
+In the Cygwin installer, just install the complete `Doc` category. You
+may have to help `configure` a little bit: Set the
+environment variables `XmllintCmd` and
+`XsltprocCmd` to the paths of the Cygwin executables
+`xmllint` and `xsltproc`,
+respectively, and set `fp_cv_dir_docbook_xsl` to the path
 of the directory where the XSL stylesheets are installed,
-e.g. {{{c:/cygwin/usr/share/docbook-xsl}}}.    
+e.g. `c:/cygwin/usr/share/docbook-xsl`.    
+
+
 
 If you want to build HTML Help, you have to install the
-[http://msdn.microsoft.com/library/default.asp?url=/library/en-us/htmlhelp/html/hworiHTMLHelpStartPage.asp HTML Help SDK],
-too, and make sure that {{{hhc}}} is in your {{{PATH}}}.
-```
+[
+HTML Help SDK](http://msdn.microsoft.com/library/default.asp?url=/library/en-us/htmlhelp/html/hworiHTMLHelpStartPage.asp),
+too, and make sure that `hhc` is in your `PATH`.
+
+
