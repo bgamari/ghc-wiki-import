@@ -22,7 +22,7 @@ http://www.mingw.org/wiki/LinuxCrossMinGW](http://www.mingw.org/wiki/LinuxCrossM
 
 
 
-I encountered some problems attempting to run the test suite. So it may be best to put that off until another day. I have written enough. I don't feel like saying anything more. Suffice it to say I did manage to run both of the test suites, make fast and make stage=2. I couldn't resist now could I? It will be a problem if Windows Firewall is on. Roughly 1% of the tests with "make fast" will fail and took 42 minutes to complete on my computer. "make stage=2" took roughly 6 hours to complete. I thought that before a patch is submitted that it must pass all the make fast tests, at least that was my impression. All the more reason to believe that Windows is not supported in the sense that Linux is.
+I encountered some problems attempting to run the test suite. So it may be best to put that off until another day. I have written enough. I don't feel like saying anything more. Suffice it to say I did manage to run both of the test suites, make fast and make stage=2. I couldn't resist now could I? It will be a problem if Windows Firewall is on. Roughly 1% of the tests with "make fast" will fail and took 42 minutes to complete on my computer. "make stage=2" took roughly 6 hours to complete. I thought that before a patch is submitted that it must pass all the make fast tests, at least that was my impression. All the more reason to believe that Windows is not supported in the sense that Linux is. My initial attempts to build the documentation failed, but this doesn't mean that if I were to persist in my effort that I would not find a way.
 
 
 
