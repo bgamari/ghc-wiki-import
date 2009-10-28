@@ -1,26 +1,32 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
+# Ticky-ticky profiling
 
 
-= Ticky-ticky profiling =
 
 Ticky-ticky profiling adds counters to every STG function.  It's very low-level, but it really tells you what is going on:
 
- * Add the `-ticky` flag when compiling a Haskell module to enable "ticky-ticky" profiling of that module.  This makes GHC emit performance-counting instructions in every STG function.  
 
- * Add `-debug` to the command line when linking, so that you link against a version of the runtime system that allows you to display the results.  [Adding `-ticky` should work too, but it doesn't yet; see #3439.]
+- Add the `-ticky` flag when compiling a Haskell module to enable "ticky-ticky" profiling of that module.  This makes GHC emit performance-counting instructions in every STG function.  
 
- * Add `+RTS -rfoo.ticky` to the run-time command line, to put the ticky-ticky profile in the file `foo.ticky`.
+- Add `-debug` to the command line when linking, so that you link against a version of the runtime system that allows you to display the results.  \[Adding `-ticky` should work too, but it doesn't yet; see [\#3439](https://gitlab.staging.haskell.org/ghc/ghc/issues/3439).\]
 
-It's very low level stuff.  You need to use `-ddump-simpl -ddump-prep` when compiling the source files to see the functions that correspond to the performance counter report.
+- Add `+RTS -rfoo.ticky` to the run-time command line, to put the ticky-ticky profile in the file `foo.ticky`.
 
-You can mix modules compiled with `-ticky` and modules compiled without.
 
-To really see everything you need to compile all the libraries with `-ticky`.  To do that in a standard build tree, here are some flag settings in `build.mk` that work:
-{{{
+You need to use `-ddump-simpl -ddump-prep` when compiling the source files to see the functions that correspond to the performance counter report.
+
+
+
+It's very low level stuff, but in exchange:
+
+
+- It's guaranteed that adding `-ticky` doesn't affect optimisation or transformation.  It just adds the overhead of performance counters to the final code.
+- You can mix modules compiled with `-ticky` and modules compiled without.
+
+
+To *really* see everything you need to compile all the libraries with `-ticky`.  To do that in a standard build tree, here are some flag settings in `build.mk` that work:
+
+
+```wiki
 # Build all libraries with -ticky
 GhcLibOpts += -ticky
 
@@ -29,6 +35,4 @@ GhcRTSWays += t
 
 # Currently ticky is incompatible with threading
 GhcThreaded = NO
-}}}
-
 ```
