@@ -1,29 +1,26 @@
-# Ticky-ticky profiling
+CONVERSION ERROR
+
+Original source:
+
+```trac
 
 
+= Ticky-ticky profiling =
 
 Ticky-ticky profiling adds counters to every STG function.  It's very low-level, but it really tells you what is going on:
 
+ * Add the `-ticky` flag when compiling a Haskell module to enable "ticky-ticky" profiling of that module.  This makes GHC emit performance-counting instructions in every STG function.  
 
-- Add the `-ticky` flag when compiling a Haskell module to enable "ticky-ticky" profiling of that module.  This makes GHC emit performance-counting instructions in every STG function.  
+ * Add `-debug` to the command line when linking, so that you link against a version of the runtime system that allows you to display the results.  [Adding `-ticky` should work too, but it doesn't yet.]
 
-- Add `-ticky` to the command line when linking, so that you link against a version of the runtime system that allows you to display the results.
-
-- Add `+RTS -rfoo.ticky` to the run-time command line, to put the ticky-ticky profile in the file `foo.ticky`.
-
+ * Add `+RTS -rfoo.ticky` to the run-time command line, to put the ticky-ticky profile in the file `foo.ticky`.
 
 It's very low level stuff.  You need to use `-ddump-simpl -ddump-prep` when compiling the source files to see the functions that correspond to the performance counter report.
 
-
-
 You can mix modules compiled with `-ticky` and modules compiled without.
 
-
-
 To really see everything you need to compile all the libraries with `-ticky`.  To do that in a standard build tree, here are some flag settings in `build.mk` that work:
-
-
-```wiki
+{{{
 # Build all libraries with -ticky
 GhcLibOpts += -ticky
 
@@ -38,9 +35,6 @@ GhcStage2HcOpts += -ticky
 
 # Ditto Haddock
 utils/haddock_dist_EXTRA_HC_OPTS += -ticky
+}}}
+But see #3439, which would allow you to drop the last two.
 ```
-
-
-But see [\#3439](https://gitlab.staging.haskell.org/ghc/ghc/issues/3439), which would allow you to drop the last two.
-
-
