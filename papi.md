@@ -3,5 +3,5 @@ CONVERSION ERROR
 Original source:
 
 ```trac
-[[redirect(wiki:Debugging/LowLevelProfiling/PAPI)
+[[redirect(wiki:Debugging/LowLevelProfiling/PAPI)]]
 ```
