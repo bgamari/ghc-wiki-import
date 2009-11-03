@@ -1,27 +1,25 @@
+CONVERSION ERROR
 
+Original source:
 
+```trac
 
-# Low-level Profiling
+[[PageOutline]]
 
+= Low-level Profiling =
 
-## Event tracing
+ * [wiki:Debugging/LowLevelProfiling/PAPI]
 
+== Event tracing ==
 
-## oprofile
+== oprofile ==
 
+== dtrace ==
 
-## PAPI
+== ftrace ==
 
+== ETW ==
 
-## dtrace
+== Linux Performance Events ==
 
-
-## ftrace
-
-
-## ETW
-
-
-## Linux Performance Events
-
-
+```
