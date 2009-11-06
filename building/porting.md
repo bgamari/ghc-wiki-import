@@ -10,6 +10,8 @@ Original source:
 
 '''NOTE''': Versions supported: 6.11+.
 
+'''NOTE''': there are bugs in this procedure; see #3472
+
 This section describes how to port GHC to a currently
 unsupported platform.  To avoid confusion, when we say
 "architecture" we are referring to the processor, and
