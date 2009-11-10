@@ -75,7 +75,7 @@ Original source:
 
 ------------------------
 == Types and type inference ==
-
+ * [wiki:TypeFunctionsStatus]
  * #3490: superclasses and ambiguity
  * #3638: rules and rigidity for GADTs
  * #3632: better update for records with existentials
