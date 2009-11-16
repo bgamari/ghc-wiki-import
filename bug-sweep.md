@@ -72,7 +72,7 @@ database and start again.
 
 
 
-Remove a few from the top of the list:
+Remove a bug from the top of the list:
 
 
 - [\#17](https://gitlab.staging.haskell.org/ghc/ghc/issues/17)
