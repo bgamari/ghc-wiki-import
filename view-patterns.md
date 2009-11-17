@@ -57,8 +57,12 @@
 
 
 
-This page has been revised to reflect what we've implemented.  For the previous discussion, see [ViewPatternsArchive](view-patterns-archive).
+This page has been revised to reflect what we've implemented.  
 
+
+- For the previous discussion, see [ViewPatternsArchive](view-patterns-archive).
+- For an assessment of view patterns in practice, see [
+  Neil Mitchell's blog entry](http://neilmitchell.blogspot.com/2009/11/reviewing-view-patterns.html)
 
 ## Basic view patterns
 
