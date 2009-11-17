@@ -63,6 +63,7 @@ database and start again.
 
 Remove a ticket from the top of the list:
 
+ * #17
  * #29
  * #68
  * #95
