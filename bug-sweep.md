@@ -122,7 +122,6 @@ Edit this page](http://hackage.haskell.org/trac/ghc/wiki/BugSweep?action=edit) t
 - [\#692](https://gitlab.staging.haskell.org/ghc/ghc/issues/692)
 - [\#693](https://gitlab.staging.haskell.org/ghc/ghc/issues/693)
 - [\#698](https://gitlab.staging.haskell.org/ghc/ghc/issues/698)
-- [\#700](https://gitlab.staging.haskell.org/ghc/ghc/issues/700)
 - [\#701](https://gitlab.staging.haskell.org/ghc/ghc/issues/701)
 - [\#706](https://gitlab.staging.haskell.org/ghc/ghc/issues/706)
 - [\#728](https://gitlab.staging.haskell.org/ghc/ghc/issues/728)
