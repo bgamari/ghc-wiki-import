@@ -8,6 +8,8 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ### Arity
 
 
+- [\#3698](https://gitlab.staging.haskell.org/ghc/ghc/issues/3698): arity analysis again
+- [\#3697](https://gitlab.staging.haskell.org/ghc/ghc/issues/3697): class method selectors
 - [\#3627](https://gitlab.staging.haskell.org/ghc/ghc/issues/3627): profiling and eta expansion
 - [\#2915](https://gitlab.staging.haskell.org/ghc/ghc/issues/2915): arity too small
 - [\#2762](https://gitlab.staging.haskell.org/ghc/ghc/issues/2762): arity analysis would fix a space leak
