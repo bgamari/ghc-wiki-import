@@ -1,16 +1,9 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
-[[PageOutline]]
 
 
-= Porting GHC to a new platform =
 
-'''NOTE''': Versions supported: 6.11+.
+# Porting GHC to a new platform
 
-'''NOTE''': there are bugs in this procedure; see #3472
+
 
 This section describes how to port GHC to a currently
 unsupported platform.  To avoid confusion, when we say
@@ -18,11 +11,15 @@ unsupported platform.  To avoid confusion, when we say
 we use the term "platform" to refer to the combination
 of architecture and operating system.
 
+
+
 The first step in porting to a new platform is to get an
-''unregisterised'' build working.  An unregisterised build is one that
+*unregisterised* build working.  An unregisterised build is one that
 compiles via vanilla C only. This costs about a factor of two in
 performance, but since unregisterised compilation is usually just a step
 on the way to a full registerised port, we don't mind too much.
+
+
 
 You should go through this process even if your architecture is already
 has registerised support in GHC, but your OS currently isn't supported.
@@ -30,20 +27,37 @@ In this case you probably won't need to port any of the
 architecture-specific parts of the code, and you can proceed straight
 from the unregisterised build to build a registerised compiler.
 
+
+
 Notes on GHC portability in general: we've tried to stick
 to writing portable code in most parts of the system, so it
 should compile on any POSIXish system with gcc, but in our
 experience most systems differ from the standards in one way or
 another.  Deal with any problems as they arise - if you get
-stuck, ask the experts on [mailto:glasgow-haskell-users@haskell.org].
+stuck, ask the experts on glasgow-haskell-users@….
+
+
 
 Lots of useful information about the innards of GHC is available in
-the [wiki:Commentary], which might be helpful if you run into some
+the [Commentary](commentary), which might be helpful if you run into some
 code which needs tweaking for your system.
 
-== Cross-compiling to produce an unregisterised GHC ==
 
-NOTE! These instructions apply to GHC 6.11 and (hopefully) later.
+## Cross-compiling to produce an unregisterised GHC
+
+
+
+**NOTE**: Versions supported: 6.11+.
+
+
+
+**NOTE**: for current issues, see 
+
+<table><tr><th>[\#3472](https://gitlab.staging.haskell.org/ghc/ghc/issues/3472)</th>
+<td>Porting through .hc files broken</td></tr></table>
+
+
+
 
 In this section, we explain how to bootstrap GHC on a new platform,
 using unregisterised intermediate C files.  We haven't put a great
@@ -51,78 +65,107 @@ deal of effort into automating this process, for two reasons: it is
 done very rarely, and the process usually requires human intervention
 to cope with minor porting issues anyway.
 
+
+
 The following step-by-step instructions should result in a fully
 working, albeit unregisterised, GHC.  Firstly, you need a machine that
-already has a working GHC (we'll call this the ''host'' machine), in
+already has a working GHC (we'll call this the *host* machine), in
 order to cross-compile the intermediate C files that we will use to
-bootstrap the compiler on the ''target'' machine. We'll assume that you
-are porting to platform ''plat'', e.g. ''plat'' may be
+bootstrap the compiler on the *target* machine. We'll assume that you
+are porting to platform *plat*, e.g. *plat* may be
 `x86_64-unknown-linux`.
 
-'''On the target machine'''
+
+
+**On the target machine**
+
+
 
 Unpack a source tree (preferably a released
 version).  We will call the path to the root of this
 tree `<T>`.  
 
+
+
 In the instructions that follow, "`<T>$ cmd`" means that the current directory should be `<T>` when executing the command "`cmd`".
+
+
 
 If your target platform requires it, then you may need to set CFLAGS appropriately here, e.g.
 
-{{{
+
+```wiki
 $ export CFLAGS=-m64
-}}}
+```
+
 
 Now begin with:
 
-{{{
+
+```wiki
 <T>$ cp /bin/pwd utils/ghc-pwd/ghc-pwd
 <T>$ sh boot
 <T>$ ./configure --enable-hc-boot --build=plat --host=plat --target=plat
-}}}
+```
 
-You might need to update {{{configure.ac}}} to recognise the new
-platform, and re-generate {{{configure}}} with {{{autoreconf}}}.
+
+You might need to update `configure.ac` to recognise the new
+platform, and re-generate `configure` with `autoreconf`.
+
+
 
 If necessary on your platform, you may again need to create a mk/build.mk
 to pass any necessary flags to gcc, e.g.:
 
-{{{
+
+```wiki
 SRC_CC_OPTS += -m64
-}}}
+```
+
 
 As of June 23rd, 2009, GHC HQ has exorcised and split out GMP from the runtime
 system into the separate 'integer-gmp' package. If you are bootstrapping a
-compiler and are going to use integer-gmp for your {{{Integer}}} type, instead of
+compiler and are going to use integer-gmp for your `Integer` type, instead of
 'integer-simple' which is a pure Haskell equivalent, then you will need to
-run {{{configure}}} in {{{libraries/integer-gmp}}} here as well:
+run `configure` in `libraries/integer-gmp` here as well:
 
-{{{
+
+```wiki
 <T>$ cd libraries/integer-gmp
 <T>$ ./configure
 <T>$ cd ../..
-}}}
+```
+
 
 ToDo: explain how to use the 'integer-simple' package.
 
+
+
 Then:
 
-{{{
-<T>$ make bootstrapping-files
-}}}
 
-'''On the host machine'''
+```wiki
+<T>$ make bootstrapping-files
+```
+
+
+**On the host machine**
+
+
 
 Unpack a source tree (exactly the same version as before).  Call this directory `<H>`.
 
-{{{
+
+```wiki
 <H>$ sh boot
 <H>$ ./configure --target=plat
-}}}
+```
 
-Create {{{<H>/mk/build.mk}}}, with the following contents:
 
-{{{
+Create `<H>/mk/build.mk`, with the following contents:
+
+
+```wiki
 GhcUnregisterised = YES
 GhcLibHcOpts = -O -fvia-C -keep-hc-files
 GhcRtsHcOpts = -keep-hc-files
@@ -136,30 +179,39 @@ GhcStage2HcOpts = -O -fvia-C -keep-hc-files
 SRC_HC_OPTS += -H32m
 GhcWithSMP = NO
 utils/ghc-pkg_dist-install_v_HC_OPTS += -keep-hc-files
-}}}
+```
 
-Edit {{{<H>/mk/project.mk}}}:
- * copy {{{LeadingUnderscore}}} setting from target.
 
-Copy {{{<T>/includes/ghcautoconf.h}}},
-{{{<T>/includes/DerivedConstants.h}}}, and
-{{{<T>/includes/GHCConstants.h}}} to {{{<H>/includes}}}.
+Edit `<H>/mk/project.mk`:
+
+
+- copy `LeadingUnderscore` setting from target.
+
+
+Copy `<T>/includes/ghcautoconf.h`,
+`<T>/includes/DerivedConstants.h`, and
+`<T>/includes/GHCConstants.h` to `<H>/includes`.
 Note that we are building on the host machine, using the
 target machine's configuration files.  This
 is so that the intermediate C files generated here will
 be suitable for compiling on the target system.
 
+
+
 Now build the compiler:
 
-{{{
+
+```wiki
 <H>$ make
-}}}
+```
+
 
 You may need to work around problems that occur due to differences
 between the host and target platforms. You may also need to use `make -k`
 in order to ignore unimportant build failures in the RTS.
 
-{{{
+
+```wiki
 <H>$ rm -f list mkfiles boot.tar.gz
 <H>$ find . -name "*.hi" >> list
 <H>$ find . -name "*.hc" >> list
@@ -175,28 +227,35 @@ in order to ignore unimportant build failures in the RTS.
 <H>$ find . -name .depend | sed "s/^/touch /" >> mkfiles
 <H>$ echo mkfiles >> list
 <H>$ tar -zcf boot.tar.gz -T list
-}}}
+```
 
-'''On the target machine'''
 
-{{{
+**On the target machine**
+
+
+```wiki
 <T>$ cp /bin/pwd utils/ghc-pwd/ghc-pwd
-}}}
+```
 
-{{{
+```wiki
 <T>$ sh boot
 <T>$ ./configure --enable-hc-boot --build=plat --host=plat --target=plat
-}}}
+```
 
-Unpack {{{<H>/boot.tar.gz}}} to {{{<T>/}}}.
 
-{{{
+Unpack `<H>/boot.tar.gz` to `<T>/`.
+
+
+```wiki
 <T>$ tar --touch -zxf boot.tar.gz
 <T>$ sh mkfiles
-}}}
+```
+
 
 Put this in `<T>/mk/build.mk`:
-{{{
+
+
+```wiki
 GHC = false
 GHC_PKG_INPLACE =
 GHC_CABAL_INPLACE =
@@ -212,102 +271,138 @@ GhcWithInterpreter = NO
 GhcWithSMP = NO
 ghc_stage2_v_EXTRA_CC_OPTS += -Llibraries/integer-gmp/gmp -lgmp -lm -lutil -lrt
 utils/ghc-pkg_dist-install_v_EXTRA_CC_OPTS += -Llibraries/integer-gmp/gmp -lgmp -lm -lutil -lrt
-}}}
+```
+
 
 You should also consider putting:
 
-{{{
+
+```wiki
 SRC_CC_OPTS += -g -O0
-}}}
+```
+
 
 in `<T>/mk/build.mk`. It'll make the resulting compiler slower, but it'll be a lot easier
 if you get segfaults etc later on.
 
-{{{
+
+```wiki
 <T>$ for c in libraries/*/configure; do ( cd `dirname $c`; sh configure ); done
-}}}
+```
+
+
 Note that if you need some special arguments to configure on you platform (like --with-iconv-includes and --with-iconv-libraries on OpenBSD), you will have to pass them to the configure runs above, too.
 You may also need a set of flags and/or libraries different from -lutil -lrt.
-{{{
+
+
+```wiki
 <T>$ sed -i.bak "s#<H>#<T>#g" inplace/lib/package.conf.d/*.conf */*/package-data.mk */*/*/package-data.mk
 <T>$ touch -r inplace/lib/package.conf.d */*/package-data.mk */*/*/package-data.mk
-}}}
+```
+
 
 Now make bootstrapping files; what we're really doing here is making
 libffi, and libgmp if necessary:
 
-{{{
-<T>$ make bootstrapping-files
-}}}
 
-{{{
+```wiki
+<T>$ make bootstrapping-files
+```
+
+```wiki
 <T>$ make all_ghc_stage2      2>&1 | tee c.log
 <T>$ make inplace/bin/ghc-pkg 2>&1 | tee gp.log
 <T>$ make inplace/lib/unlit
-}}}
+```
 
-Don't bother with running {{{make install}}} in the newly bootstrapped
+
+Don't bother with running `make install` in the newly bootstrapped
 tree; just use the compiler in that tree to build a fresh compiler
 from scratch, this time without booting from C files.  Before doing
 this, you might want to check that the bootstrapped compiler is
 generating working binaries:
 
-{{{
+
+```wiki
 $ cat >hello.hs
 main = putStrLn "Hello World!\n"
 ^D
 $ <T>/inplace/bin/ghc-stage2 hello.hs -o hello
 $ ./hello
 Hello World!
-}}}
+```
+
 
 Once you have the unregisterised compiler up and running, you can use
 it to start a registerised port.  The following sections describe the
 various parts of the system that will need architecture-specific
 tweaks in order to get a registerised build going.
 
-== Porting the RTS ==
+
+## Porting the RTS
+
+
 
 The following files need architecture-specific code for a registerised
 build:
 
- {{{includes/MachRegs.h}}}::
-  Defines the STG-register to machine-register
-  mapping.  You need to know your platform's C calling
-  convention, and which registers are generally available
-  for mapping to global register variables.  There are
-  plenty of useful comments in this file.
 
- {{{includes/TailCalls.h}}}::
-  Macros that cooperate with the mangler (see [[ref(The mangler)]])
-  to make proper tail-calls work.
+<table><tr><th>`includes/MachRegs.h`</th>
+<td>
+Defines the STG-register to machine-register
+mapping.  You need to know your platform's C calling
+convention, and which registers are generally available
+for mapping to global register variables.  There are
+plenty of useful comments in this file.
+</td></tr></table>
 
- {{{rts/Adjustor.c}}}::
-  Support for {{{foreign import "wrapper"}}}.
-  Not essential for getting GHC bootstrapped, so this file
-  can be deferred until later if necessary.
 
- {{{rts/StgCRun.c}}}::
-  The little assembly layer between the C world and
-  the Haskell world.  See the comments and code for the
-  other architectures in this file for pointers.
+<table><tr><th>`includes/TailCalls.h`</th>
+<td>
+Macros that cooperate with the mangler (see [The mangler](#Themangler))
+to make proper tail-calls work.
+</td></tr></table>
 
- {{{rts/sm/MBlock.h}}}, {{{rts/sm/MBlock.c}}}::
-  These files are really OS-specific rather than
-  architecture-specific.  In {{{MBlock.h}}}
-  is specified the absolute location at which the RTS
-  should try to allocate memory on your platform (try to
-  find an area which doesn't conflict with code or dynamic
-  libraries).  In {{{Mblock.c}}} you might
-  need to tweak the call to {{{mmap()}}} for
-  your OS.
 
-== The mangler ==
+<table><tr><th>`rts/Adjustor.c`</th>
+<td>
+Support for `foreign import "wrapper"`.
+Not essential for getting GHC bootstrapped, so this file
+can be deferred until later if necessary.
+</td></tr></table>
+
+
+<table><tr><th>`rts/StgCRun.c`</th>
+<td>
+The little assembly layer between the C world and
+the Haskell world.  See the comments and code for the
+other architectures in this file for pointers.
+</td></tr></table>
+
+
+<table><tr><th>`rts/sm/MBlock.h`, `rts/sm/MBlock.c`</th>
+<td>
+These files are really OS-specific rather than
+architecture-specific.  In `MBlock.h`
+is specified the absolute location at which the RTS
+should try to allocate memory on your platform (try to
+find an area which doesn't conflict with code or dynamic
+libraries).  In `Mblock.c` you might
+need to tweak the call to `mmap()` for
+your OS.
+</td></tr></table>
+
+
+## The mangler
+
+
 
 The mangler is an evil Perl-script
-([[GhcFile(driver/mangler/ghc-asm.lprl)]]) that rearranges the assembly
+([driver/mangler/ghc-asm.lprl](/trac/ghc/browser/ghc/driver/mangler/ghc-asm.lprl)) that rearranges the assembly
 code output from gcc.  To understand what the manger does and how it works, see
-[wiki:Commentary/EvilMangler].
+[Commentary/EvilMangler](commentary/evil-mangler).
+
+
 
 The mangler is abstracted to a certain extent over some
 architecture-specific things such as the particular assembler
@@ -315,30 +410,41 @@ directives used to herald symbols.  Take a look at the definitions for
 other architectures and use these as a starting point for porting it to
 your platform.
 
-== The splitter ==
+
+## The splitter
+
+
 
 The splitter is another evil Perl script
-([[GhcFile(driver/split/ghc-split.lprl)]]).  It cooperates with the
+([driver/split/ghc-split.lprl](/trac/ghc/browser/ghc/driver/split/ghc-split.lprl)).  It cooperates with the
 mangler to support object splitting.  Object splitting is what happens
-when the {{{-split-objs}}} option is passed to GHC: the object file is
+when the `-split-objs` option is passed to GHC: the object file is
 split into many smaller objects.  This feature is used when building
 libraries, so that a program statically linked against the library
 will pull in less of the library.
 
+
+
 The splitter has some platform-specific stuff; take a look and tweak
 it for your system.
 
-== The native code generator ==
+
+## The native code generator
+
+
 
 The native code generator isn't essential to getting a
 registerised build going, but it's a desirable thing to have
 because it can cut compilation times in half.  The native code
-generator is described in detail in [wiki:Commentary/Compiler/Backends/NCG].
+generator is described in detail in [Commentary/Compiler/Backends/NCG](commentary/compiler/backends/ncg).
 
-== GHCi ==
+
+## GHCi
+
+
 
 To support GHCi, you need to port the dynamic linker
-([[GhcFile(rts/Linker.c)]]).  The linker currently supports the
+([rts/Linker.c](/trac/ghc/browser/ghc/rts/Linker.c)).  The linker currently supports the
 ELF and PEi386 object file formats - if your platform uses one of
 these then things will be significantly easier.  The majority of Unix
 platforms use the ELF format these days.  Even so, there are some
@@ -347,7 +453,9 @@ resolving particular relocation types is machine-specific, so some
 porting of this code to your architecture and/or OS will probably be
 necessary.
 
+
+
 If your system uses a different object file format, then
 you have to write a linker -- good luck!
 
-```
+
