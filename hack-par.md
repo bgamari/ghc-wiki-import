@@ -1,61 +1,85 @@
-CONVERSION ERROR
+# Parallel Haskell Hackathon
 
-Original source:
 
-```trac
-= Parallel Haskell Hackathon =
+## Organisation
 
-== Organisation ==
+
 
 Dates : 10-12 December
 
+
+
 Location : St Andrews
 
-== Participants ==
+
+## Participants
+
+
+
 Vladimir Janjic (Host), Hans-Wolfgang Loidl, Kevin Hammond, Mustafa Aswad, Henrique Ferreiro Garcia, Philip W Trinder, Patrick Maier, Abyd Al Zain, Mischa Dieterle, Thomas Horstmeyer, Jost Berthold, Simon Marlow (virtual),
 
-== Source code ==
+
+## Source code
+
+
+
 Important: if you can, please prepare a setup of the latest sources in advance.
-A darcs repository has been set up on the server in Marburg, please read here how to get a working setup: [http://james.mathematik.uni-marburg.de:8080/EdenWiki/DarcsRepoCheatSheet Repository Briefing].
+A darcs repository has been set up on the server in Marburg, please read here how to get a working setup: [
+Repository Briefing](http://james.mathematik.uni-marburg.de:8080/EdenWiki/DarcsRepoCheatSheet).
 
-You should contact Mischa (dieterle@mathematik...) in order to get access, or check out read-only via http (which is of course not what we want later).
-If you have questions or problems, edit the page or mail Jost (berthold@mathematik...)
 
-== Agenda ==
+
+You should contact Mischa (dieterle\@mathematik...) in order to get access, or check out read-only via http (which is of course not what we want later).
+If you have questions or problems, edit the page or mail Jost (berthold\@mathematik...)
+
+
+## Agenda
+
+
 
 Topics to cover in the Hackathon:
 
- * Short overview sessions on implementation internals (KH: these should not all be on the first afternoon!):
-  * GUM (Mustafa)
-  * Eden (Jost)
-  * Globus (Abyd)
-  * Migration/Load Balancing (Vladimir)
-  * ghc HEAD developments (Simon)
-  * GUM/Eden Compilation and Debugging (Vladimir?)
- * GUM-6 port
- * Merging GUM and Eden implementations
-  * Packing code
-  * Scheduler
-  * GC interface
-  * Tagging
- * Usage of new tracing infrastructure
- * Development infrastructure
-  * Unified revision control (darcs)
-  * Debugging infrastructure
-  * Packaging
-  * Setup for automatic tests
- * Parallel nofib-suite
- * Planned extensions and applications
-  * Integration with GHC/SMP
-  * Integrating migration
-  * Globus interface
-  * pre-SCSCP GAP interface
-  * Micro-kernel/substrate approach to the RTS
- * Nominating people in charge of sub-projects
-  * parallel nofib suite
-  * Eden/GUM code maintenance
-  * testing framework
- * Prize for the most awkward bug fixed in the Hackaton. ,,~~Jost: I am non-competitive in this contest, since my task is to introduce them ;)~~,, ,,~~HWL: Clearly you are at an disadvantage: you first have to introduce the bug; we don't have that problem;-)~~,,
+
+- Short overview sessions on implementation internals (KH: these should not all be on the first afternoon!):
+
+  - GUM (Mustafa)
+  - Eden (Jost)
+  - Globus (Abyd)
+  - Migration/Load Balancing (Vladimir)
+  - ghc HEAD developments (Simon)
+  - GUM/Eden Compilation and Debugging (Vladimir?)
+- GUM-6 port
+- Merging GUM and Eden implementations
+
+  - Packing code
+  - Scheduler
+  - GC interface
+  - Tagging
+- Usage of new tracing infrastructure
+- Development infrastructure
+
+  - Unified revision control (darcs)
+  - Debugging infrastructure
+  - Packaging
+  - Setup for automatic tests
+- Parallel nofib-suite
+- Planned extensions and applications
+
+  - Integration with GHC/SMP
+  - Integrating migration
+  - Globus interface
+  - pre-SCSCP GAP interface
+  - Micro-kernel/substrate approach to the RTS
+- Nominating people in charge of sub-projects
+
+  - parallel nofib suite
+  - Eden/GUM code maintenance
+  - testing framework
+- Prize for the most awkward bug fixed in the Hackaton. <sub>~~Jost: I am non-competitive in this contest, since my task is to introduce them ;)~~</sub> <sub>~~HWL: Clearly you are at an disadvantage: you first have to introduce the bug; we don't have that problem;-)~~</sub>
+
+## Expected Outcomes
 
 
-```
+- Unified repository, containing Eden and GUM code
+- Common test platform
+- List of people in charge of sub-projects
