@@ -11,6 +11,7 @@ GC concepts:
 
  * [wiki:Commentary/Rts/Storage/GC/Aging Aging]
  * [wiki:Commentary/Rts/Storage/GC/Pinneed Pinned objects]
+ * [wiki:Commentary/Rts/Storage/GC/Roots Roots]
 
 GC algorithms supported:
 
