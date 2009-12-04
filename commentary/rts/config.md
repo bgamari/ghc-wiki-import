@@ -1,96 +1,67 @@
-# RTS Configurations
+CONVERSION ERROR
+
+Original source:
+
+```trac
 
 
+= RTS Configurations =
 
-The RTS can be built in several different ways, corresponding to global CPP defines.  The flavour of the RTS is chosen by GHC when compiling a Haskell program, in response to certain command-line options: `-prof`, `-threaded`, etc.
-
-
+The RTS can be built in several different ways, corresponding to global CPP defines.  The flavour of the RTS is chosen by GHC when compiling a Haskell program, in response to certain command-line options: {{{-prof}}}, {{{-threaded}}}, etc.
 
 The CPP symbols and their corresponding command-line flags are:
 
+ {{{PROFILING}}}::
+  Enables profiling.[[br]]
+  GHC option: {{{-prof}}}[[br]]
+  RTS suffix: {{{p}}}
 
-<table><tr><th>`PROFILING`</th>
-<td>
-Enables profiling.
+ {{{THREADED_RTS}}}::
+  Enables multithreading in the RTS, bound threads, and SMP execution.[[br]]
+  GHC option: {{{-threaded}}}[[br]]
+  RTS suffix: {{{thr}}}
 
-GHC option: `-prof`
+ {{{DEBUG}}}::
+  Enables extra debugging code, assertions, traces, and the {{{+RTS -D}}} options.[[br]]
+  GHC option: {{{-debug}}}[[br]]
+  RTS suffix: {{{debug}}}
 
-RTS suffix: `p`
-</td></tr></table>
+ {{{TRACING}}}::
+  Enables RTS tracing and event logging, see [[GhcFile(rts/Trace.c)]].  Implied by `DEBUG`.[[br]]
+  GHC option: {{{-eventlog}}}[[br]]
+  RTS suffix: {{{l}}}
 
+ {{{NO_REGS}}}, {{{USE_MINIINTERPRETER}}}::
+  Enables "unregisterised" compilation, i.e. via C with no mangler.[[br]]
+  GHC option: {{{-unreg}}}[[br]]
+  RTS suffix: {{{u}}}
 
-<table><tr><th>`THREADED_RTS`</th>
-<td>
-Enables multithreading in the RTS, bound threads, and SMP execution.
+So for example, {{{libHSRts_thr_debug.a}}} is the version of the runtime compiled with {{{THREADED_RTS}}} and {{{DEBUG}}}, and will be linked in if you use the {{{-threaded}}} and {{{-debug}}} options to GHC.
 
-GHC option: `-threaded`
+The ways that the RTS is built in are controlled by the {{{GhcRTSWays}}} Makefile variable.  
 
-RTS suffix: `thr`
-</td></tr></table>
-
-
-<table><tr><th>`DEBUG`</th>
-<td>
-Enables extra debugging code, assertions, traces, and the `+RTS -D` options.
-
-GHC option: `-debug`
-
-RTS suffix: `debug`
-</td></tr></table>
-
-
-<table><tr><th>`NO_REGS`, `USE_MINIINTERPRETER`</th>
-<td>
-Enables "unregisterised" compilation, i.e. via C with no mangler.
-
-GHC option: `-unreg`
-
-RTS suffix: `u`
-</td></tr></table>
-
-
-
-So for example, `libHSRts_thr_debug.a` is the version of the runtime compiled with `THREADED_RTS` and `DEBUG`, and will be linked in if you use the `-threaded` and `-debug` options to GHC.
-
-
-
-The ways that the RTS is built in are controlled by the `GhcRTSWays` Makefile variable.  
-
-
-## Combinations
-
-
+== Combinations ==
 
 The following combinations are allowed:
 
+ * {{{DEBUG}}} with anything
+ * {{{PROFILING}}} only with {{{NO_REGS}}}, {{{USE_MINIINTERPRETER}}}
 
-- `DEBUG` with anything
-- `PROFILING` only with `NO_REGS`, `USE_MINIINTERPRETER`
-
-## OLD ways
-
-
+== OLD ways ==
 
 The following ways are bitrotted and currently don't work (GHC 6.6):
 
+ {{{PAR}}}, {{{GRANSIM}}}::
+  Parallel Haskell[[br]]
+  GHC option: {{{-par}}}[[br]]
+  RTS suffix: {{{mp, mg}}}
 
-<table><tr><th>`PAR`, `GRANSIM`</th>
-<td>
-Parallel Haskell
-
-GHC option: `-par`
-
-RTS suffix: `mp, mg`
-</td></tr></table>
-
-
-<table><tr><th>`TICKY`</th>
-<td>
-Ticky-ticky profiling used to be a separate "way"; you had to rebuild all the libraries and the RTS for ticky-ticky profiling, 
-just like ordinary time/space profiling.  This isn't the case any more: you can link modules compiled with `-ticky`
-against modules or packages compiled without it.  Since 6.12.1, the `-debug` RTS version also include ticky-ticky
-support, and there is no separate RTS version for ticky.  If you use the `-ticky` flag when linking a program, it implies
-`-debug`.
-</td></tr></table>
+ {{{TICKY}}}::
+  Ticky-ticky profiling used to be a separate "way"; you had to rebuild all the libraries and the RTS for ticky-ticky profiling, 
+  just like ordinary time/space profiling.  This isn't the case any more: you can link modules compiled with `-ticky`
+  against modules or packages compiled without it.  Since 6.12.1, the `-debug` RTS version also include ticky-ticky
+  support, and there is no separate RTS version for ticky.  If you use the `-ticky` flag when linking a program, it implies
+  `-debug`.
 
 
+```
