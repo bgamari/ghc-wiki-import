@@ -1,132 +1,89 @@
-# Reporting bugs in GHC
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Reporting bugs in GHC =
 
 Glasgow Haskell is a changing system so there are sure to be bugs in it.
 
-
-
 To report a bug, either:
 
+ * Preferred:
+     * [/trac/ghc/register register] an account on this Trac
+     * Create a [http://hackage.haskell.org/trac/ghc/newticket?type=bug new bug], and enter your bug report. You can also search the bug database here to make sure your bug hasn't already been reported (if it has, it might still help to add information from your experience to the existing report).
+ * Less preferred:
+     * To submit an anonymous bug: use login "guest", password "guest"
+     * Bug reports can also be emailed to <[mailto:glasgow-haskell-bugs@haskell.org]>. 
 
-- Preferred:
+== How do I tell if I should report my bug? ==
 
-  - [register](/trac/ghc/trac/ghc/register) an account on this Trac
-  - Create a [
-    new bug](http://hackage.haskell.org/trac/ghc/newticket?type=bug), and enter your bug report. You can also search the bug database here to make sure your bug hasn't already been reported (if it has, it might still help to add information from your experience to the existing report).
-- Less preferred:
+Take a look at the [http://haskell.org/haskellwiki/GHC/FAQ FAQ] and [http://www.haskell.org/ghc/docs/latest/html/users_guide/wrong.html Chapter 9, What to do when something goes wrong], which will give you some guidance as to whether the behaviour you're seeing is really a bug or not.
 
-  - To submit an anonymous bug: use login "guest", password "guest"
-  - Bug reports can also be emailed to \<glasgow-haskell-bugs@…\>. 
-
-## How do I tell if I should report my bug?
-
-
-
-Take a look at the [
-FAQ](http://haskell.org/haskellwiki/GHC/FAQ) and [Chapter 9, What to do when something goes wrong](http://www.haskell.org/ghc/docs/latest/html/users_guide/wrong.html), which will give you some guidance as to whether the behaviour you're seeing is really a bug or not.
-
-
-
-If it is a bug, then it might have been reported before: try searching on the [
-bug tracker](http://hackage.haskell.org/trac/ghc), and failing that, try [
-Google](http://www.google.com/).
-
-
+If it is a bug, then it might have been reported before: try searching on the [http://hackage.haskell.org/trac/ghc bug tracker], and failing that, try [http://www.google.com/ Google].
 
 If in doubt, just report it.
 
-
-## If already reported, vote for it!
-
-
+== If already reported, vote for it! ==
 
 If someone else has already reported the bug you've found, then add yourself to the CC list for the bug. We will try to prioritise bugs that affect a lot of people, and the length of the CC list is how we are currently determining this.
 
-
-
 Use a comma or space (but not semicolon) to separate your email address from the next one.
 
-
-## What to put in a bug report
-
-
+== What to put in a bug report ==
 
 The Trac bug report system has various fields. Here's how to fill them in:
 
+ * '''CC'''.  If you are only logged in as ''guest'' then please consider including your email address (using a comma or space as separator, not a semicolon). That way we can ask you questions, and you'll get email from Trac when something happens to your bug.
 
-- **CC**.  If you are only logged in as *guest* then please consider including your email address (using a comma or space as separator, not a semicolon). That way we can ask you questions, and you'll get email from Trac when something happens to your bug.
+ * '''Short summary'''.  This is what appears in one-bug-per line lists, so try to make it as informative as you can.
 
-- **Short summary**.  This is what appears in one-bug-per line lists, so try to make it as informative as you can.
+ * '''Type''' says what kind of Trac ticket this is:
+   * '''bug''': incorrect behaviour by GHC
+   * '''feature request''': something you would like GHC to do
+   * '''proposal''': reserved for use with the [http://www.haskell.org/haskellwiki/Library_submissions Library submissions] process
+   * '''task''' (for use by GHC developers only): something we intend to do sometime
+   * '''merge''' (for use by GHC developers only): job done, but must be merged to stable branch
+ 
+ * '''Severity'''.  How much this bug matters to you.
 
-- **Type** says what kind of Trac ticket this is:
+ * '''Full description'''.  This is where you describe your bug in details.  See "What information to provide" below.  Use the [wiki:TracWikiMisc wiki markup] in your description, especially `{{{` ... `}}}` brackets to mark up literal code.
 
-  - **bug**: incorrect behaviour by GHC
-  - **feature request**: something you would like GHC to do
-  - **proposal**: reserved for use with the [
-    Library submissions](http://www.haskell.org/haskellwiki/Library_submissions) process
-  - **task** (for use by GHC developers only): something we intend to do sometime
-  - **merge** (for use by GHC developers only): job done, but must be merged to stable branch
+ * '''Component''', '''Version''', '''Operating system''', '''Architecture''' all help to describe the setup that failed. Please pay particular attention to '''version''', which is the version of GHC that you are running.
 
+ * '''Priority''' and '''Milestone'''.  Please do  not fill in these fields.   We use them to organise our priorities.  The '''severity''' field lets you say how important the bug is to you.
 
+  * '''Assign to''', '''Difficulty''', '''Test case'''.  For use by GHC developers; please don't fill these in.
+
+See also [wiki:WorkingConventions GHC working conventions].
  
 
-
-- **Severity**.  How much this bug matters to you.
-
-- **Full description**.  This is where you describe your bug in details.  See "What information to provide" below.  Use the [wiki markup](trac-wiki-misc) in your description, especially `{{{` ... `}}}` brackets to mark up literal code.
-
-- **Component**, **Version**, **Operating system**, **Architecture** all help to describe the setup that failed. Please pay particular attention to **version**, which is the version of GHC that you are running.
-
-- **Priority** and **Milestone**.  Please do  not fill in these fields.   We use them to organise our priorities.  The **severity** field lets you say how important the bug is to you.
-
-- **Assign to**, **Difficulty**, **Test case**.  For use by GHC developers; please don't fill these in.
-
-
-See also [GHC working conventions](working-conventions).
- 
-
-
-## Full description: what information to provide in the body of your bug report
-
-
+== Full description: what information to provide in the body of your bug report ==
 
 The name of the bug-reporting game is: facts, facts, facts. Don't omit them because "Oh, they won't be interested…".
 
-
-
-**The absolutely key thing is that we must be able to reproduce the bug**.  Without this, we are virtually helpless; we know there's a problem but we usually can make no progress with fixing it.  The easiest way to help us reproduce the bug is to provide us with a program that elicits it:
-
-
-- The smaller the better.  It costs you real work to "boil down" the bug from a big program to a small one, but the plain truth is that the easier the bug is to reproduce, and the smaller the test program (= smaller debug output), the more likely we are to fix it. 
-- The fewer dependencies the better.  If your program depends on many libraries, it's harder for us to reproduce.  
-
+'''The absolutely key thing is that we must be able to reproduce the bug'''.  Without this, we are virtually helpless; we know there's a problem but we usually can make no progress with fixing it.  The easiest way to help us reproduce the bug is to provide us with a program that elicits it:
+ * The smaller the better.  It costs you real work to "boil down" the bug from a big program to a small one, but the plain truth is that the easier the bug is to reproduce, and the smaller the test program (= smaller debug output), the more likely we are to fix it. Also, as you are familiar with the code, it is generally easier for you to boil it down than for us to.
+ * The fewer dependencies the better.  If your program depends on many libraries, it's harder for us to reproduce.  
 
 One way to cut down programs is to replace library functions with definitions like
-
-
-```wiki
+{{{
   displayWidget :: This -> IO That
   displayWidget = error "urk"
-```
-
-
+}}}
 and thereby avoid the necessity for the supporting library.  
-
-
 
 Here is a check-list of things to cover in your description:
 
-
-1. The source code of the program that shows the bug.  You can give the code inline, or attach a file, or attach a tarball.
-1. What kind of machine are you running on, and exactly what version of the operating system are you using? (on a Unix system, `uname -a` or `cat /etc/motd` will show the desired information.) In the bug tracker, this information can be given in the "Architecture" and "Operating system" fields.
-1. What version of GCC are you using? `gcc -v` will tell you.
-1. Run the sequence of compiles/runs that caused the offending behaviour, cut-and-paste the whole session into the bug report. We'd prefer to see the whole thing.
-1. Add the `-v` flag when running GHC, so we can see exactly what was run, what versions of things you have, etc.
-1. Add the `-dcore-lint` flag when running GHC.  This adds some significant internal consistency-checking, which often nails bugs early.
-1. What is the program behaviour that is wrong, in your opinion?
-
-
-If you are a Hero and track down the problem in the compilation-system sources, please [send us patches](working-conventions/submissions).
+ 1. The source code of the program that shows the bug.  You can give the code inline, or attach a file, or attach a tarball.
+ 1. What kind of machine are you running on, and exactly what version of the operating system are you using? (on a Unix system, `uname -a` or `cat /etc/motd` will show the desired information.) In the bug tracker, this information can be given in the "Architecture" and "Operating system" fields.
+ 1. What version of GCC are you using? `gcc -v` will tell you.
+ 1. Run the sequence of compiles/runs that caused the offending behaviour, cut-and-paste the whole session into the bug report. We'd prefer to see the whole thing.
+ 1. Add the `-v` flag when running GHC, so we can see exactly what was run, what versions of things you have, etc.
+ 1. Add the `-dcore-lint` flag when running GHC.  This adds some significant internal consistency-checking, which often nails bugs early.
+ 1. What is the program behaviour that is wrong, in your opinion?
 
 
+If you are a Hero and track down the problem in the compilation-system sources, please [wiki:WorkingConventions/Submissions send us patches].
+
+```
