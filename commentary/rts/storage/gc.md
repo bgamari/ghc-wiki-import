@@ -15,6 +15,7 @@ GC concepts:
  * [wiki:Commentary/Rts/Storage/GC/EagerPromotion Eager promotion]
  * [wiki:Commentary/Rts/Storage/GC/RememberedSets Remembered sets]
  * [wiki:Commentary/Rts/Storage/GC/Weak Weak pointers and finalizers]
+ * [wiki:Commentary/Rts/Storage/GC/CAFs CAFs]
 
 GC algorithms supported:
 
