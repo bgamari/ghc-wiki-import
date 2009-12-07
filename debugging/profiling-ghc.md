@@ -3,6 +3,8 @@ CONVERSION ERROR
 Original source:
 
 ```trac
+
+
 = Profiling GHC itself =
 
 If GHC itself is running too slowly, you can profile the compiler itself.  The way to do this is to add
