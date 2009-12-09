@@ -10,7 +10,7 @@ Original source:
 GC concepts:
 
  * [wiki:Commentary/Rts/Storage/GC/Aging Aging]
- * [wiki:Commentary/Rts/Storage/GC/Pinneed Pinned objects]
+ * [wiki:Commentary/Rts/Storage/GC/Pinned Pinned objects]
  * [wiki:Commentary/Rts/Storage/GC/Roots Roots]
  * [wiki:Commentary/Rts/Storage/GC/EagerPromotion Eager promotion]
  * [wiki:Commentary/Rts/Storage/GC/RememberedSets Remembered sets]
