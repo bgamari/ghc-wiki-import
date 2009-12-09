@@ -17,4 +17,9 @@ GHC's storage manager is designed to be quite flexible: there are a large number
  * [wiki:Commentary/Rts/Storage/BlockAlloc The Block Allocator]
  * [wiki:Commentary/Rts/Storage/GC The Garbage Collector]
 
+See also:
+
+ * [wiki:Commentary/Rts/HaskellExecution/PointerTagging Pointer tagging]
+
+
 ```
