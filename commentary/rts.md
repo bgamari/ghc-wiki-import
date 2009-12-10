@@ -1,78 +1,65 @@
-# GHC Commentary: The Runtime System
+CONVERSION ERROR
+
+Original source:
+
+```trac
 
 
+= GHC Commentary: The Runtime System =
 
-GHC's runtime system is a slightly scary beast: 50,000 lines of C and C-- code, much of which seems at first glance to be completely obscure.  What on earth does the RTS *do*?  Here are the highlights:
+GHC's runtime system is a slightly scary beast: 50,000 lines of C and C-- code, much of which seems at first glance to be completely obscure.  What on earth does the RTS ''do''?  Here are the highlights:
 
+ * It includes all the bits required to execute Haskell code that aren't compiled into the code itself.
+   For example, the RTS contains the code that knows how to raise an exception when you call {{{error}}},
+   and code to implement the multi-precision {{{Integer}}} operations (via the GMP library).
 
-- It includes all the bits required to execute Haskell code that aren't compiled into the code itself.
-  For example, the RTS contains the code that knows how to raise an exception when you call `error`,
-  and code to implement the multi-precision `Integer` operations (via the GMP library).
+ * It includes a sophisticated storage manager, including a multi-generational garbage collector with copying
+   and compacting strategies.
 
-- It includes a sophisticated storage manager, including a multi-generational garbage collector with copying
-  and compacting strategies.
+ * It includes a user-space scheduler for Haskell threads, together with support for scheduling Haskell threads
+   across multiple CPUs, and allowing Haskell threads to call foreign functions in separate OS threads.
 
-- It includes a user-space scheduler for Haskell threads, together with support for scheduling Haskell threads
-  across multiple CPUs, and allowing Haskell threads to call foreign functions in separate OS threads.
+ * There's a byte-code interpreter for GHCi, and a dynamic linker for loading up object code into a GHCi session.
 
-- There's a byte-code interpreter for GHCi, and a dynamic linker for loading up object code into a GHCi session.
+ * Heap-profiling (of various kinds), time-profiling and code coverage of Haskell code are included.
 
-- Heap-profiling (of various kinds), time-profiling and code coverage of Haskell code are included.
-
-- Support for Software Transactional Memory is now included...
-
+ * Support for Software Transactional Memory is now included...
 
 Next, we try to make sense of how it all fits together.
 
+== Block Diagram ==
 
-## Block Diagram
+[[Image(rts-overview.png)]]
 
+== Find your way around the code ==
 
+ * [wiki:Commentary/Rts/Conventions Coding conventions in the RTS]
+ * [wiki:Commentary/SourceTree/Includes the layout of header files in includes/]
 
-[](/trac/ghc/attachment/wiki/Commentary/Rts/rts-overview.png)
+== Basics you should know about ==
 
+ * [wiki:Commentary/Rts/Config RTS Configurations]
+ * [wiki:Commentary/Rts/Word The Word]
+ * [wiki:Commentary/Rts/Cmm What on earth is a .cmm file?]
 
-## RTS: Contents
+== Major subsystems ==
 
+ * '''[wiki:Commentary/Rts/Storage The Storage Manager]'''
+ * '''[wiki:Commentary/Rts/HaskellExecution The Haskell Execution model]'''
+ * '''[wiki:Commentary/Rts/Scheduler The Scheduler]'''
 
+== Other topics ==
 
-Find your way around the code:
+ * [wiki:Commentary/Rts/Sanity Sanity Checking]
+ * [wiki:Commentary/Rts/FFI So how does foreign import "wrapper" work?]
+ * [wiki:Commentary/Rts/Interpreter GHCi support: the byte-code interpreter and dynamic linker]
+ * [wiki:Commentary/Rts/AsyncExceptions Asynchronous exceptions]
+ * [wiki:Commentary/Rts/STM Software Transactional Memory (STM)]
+ * [wiki:Commentary/Rts/Weak Weak Pointers and Finalizers]
+ * [wiki:Commentary/Rts/Signals How Signals are handled]
+ * [wiki:Commentary/Rts/IOManager The IO Manager thread]
+ * [wiki:Commentary/HeapAlloced The HEAP_ALLOCED macro]
 
+Also check the list of cross-cutting concerns in [wiki:Commentary].
 
-- [Coding conventions in the RTS](commentary/rts/conventions)
-- [the layout of header files in includes/](commentary/source-tree/includes)
-
-
-Basics you should know about:
-
-
-- [RTS Configurations](commentary/rts/config)
-- [The Word](commentary/rts/word)
-- [What on earth is a .cmm file?](commentary/rts/cmm)
-
-
-Major subsystems:
-
-
-- [The Storage Manager](commentary/rts/storage)
-- [The Haskell Execution model](commentary/rts/haskell-execution)
-- [The Scheduler](commentary/rts/scheduler)
-
-
-Other topics:
-
-
-- [Sanity Checking](commentary/rts/sanity)
-- [So how does foreign import "wrapper" work?](commentary/rts/ffi)
-- [GHCi support: the byte-code interpreter and dynamic linker](commentary/rts/interpreter)
-- [Asynchronous exceptions](commentary/rts/async-exceptions)
-- [Software Transactional Memory (STM)](commentary/rts/stm)
-- [Weak Pointers and Finalizers](commentary/rts/weak)
-- [How Signals are handled](commentary/rts/signals)
-- [The IO Manager thread](commentary/rts/io-manager)
-- [The HEAP\_ALLOCED macro](commentary/heap-alloced)
-
-
-Also check the list of cross-cutting concerns in [Commentary](commentary).
-
-
+```
