@@ -1,88 +1,102 @@
-# Parallel Haskell Hackathon
+CONVERSION ERROR
 
+Original source:
 
-## Organisation
+```trac
+= Parallel Haskell Hackathon =
 
-
+== Organisation ==
 
 Dates : 10-12 December
 
-
-
 Location : St Andrews
 
-
-## Participants
-
-
-
+== Participants ==
 Vladimir Janjic (Host), Hans-Wolfgang Loidl, Kevin Hammond, Mustafa Aswad, Henrique Ferreiro, Philip W Trinder, Patrick Maier, Abyd Al Zain, Mischa Dieterle, Thomas Horstmeyer, Jost Berthold, Simon Marlow (virtual),
 
-
-## Source code
-
-
-
+== Source code ==
 Important: if you can, please prepare a setup of the latest sources in advance.
-A darcs repository has been set up on the server in Marburg, please read here how to get a working setup: [
-Repository Briefing](http://james.mathematik.uni-marburg.de:8080/EdenWiki/DarcsRepoCheatSheet).
+A darcs repository has been set up on the server in Marburg, please read here how to get a working setup: [http://james.mathematik.uni-marburg.de:8080/EdenWiki/DarcsRepoCheatSheet Repository Briefing].
+
+You should contact Mischa (dieterle@mathematik...) in order to get access, or check out read-only via http (which is of course not what we want later).
+If you have questions or problems, edit the page or mail Jost (berthold@mathematik...)
+
+== Agenda ==
+
+An [AgendaProposal Agenda Proposal] is now on a separate page.
+
+==== Topics to cover in the Hackathon: ====
+
+ * Short overview sessions on implementation internals (KH: these should not all be on the first afternoon!):
+  * GUM (Mustafa)
+  * Eden (Jost)
+  * Globus (Abyd)
+  * Migration/Load Balancing (Vladimir)
+  * ghc HEAD developments (Simon)
+  * GUM/Eden Compilation and Debugging (Vladimir?)
+ * GUM-6 port
+ * Merging GUM and Eden implementations
+  * Packing code
+  * Scheduler
+  * GC interface
+  * Tagging
+ * Usage of new tracing infrastructure
+ * Development infrastructure
+  * Unified revision control (darcs)
+  * Debugging infrastructure
+  * Packaging
+  * Setup for automatic tests
+ * Parallel nofib-suite
+ * Planned extensions and applications
+  * Integration with GHC/SMP
+  * Integrating migration
+  * Globus interface
+  * pre-SCSCP GAP interface
+  * Micro-kernel/substrate approach to the RTS
+ * Nominating people in charge of sub-projects
+  * parallel nofib suite
+  * Eden/GUM code maintenance
+  * testing framework
+ * Prize for the most awkward bug fixed in the Hackaton. ,,~~Jost: I am non-competitive in this contest, since my task is to introduce them ;)~~,, ,,~~HWL: Clearly you are at an disadvantage: you first have to introduce the bug; we don't have that problem;-)~~,,
+
+== Expected Outcomes ==
+
+Concrete Deliverables
+
+ * Unified repository, containing Eden and GUM code
+ * Common test platform
+ * List of people in charge of sub-projects
+ * Longer Term: Eden&GUM in GHC HEAD
+
+Sub-tasks in Eden/GUM/GHC integration:
+
+ * Merge Eden/GUM repository
+ * Merge GUM into current Eden version
+ * Adapt for per-CPU/Core GC
+ * Integrating Vladimirs work (load balancing, migration)
 
 
+Longer term system issues
 
-You should contact Mischa (dieterle\@mathematik...) in order to get access, or check out read-only via http (which is of course not what we want later).
-If you have questions or problems, edit the page or mail Jost (berthold\@mathematik...)
+ * Manycore
+ * Hierarchies
+ * HPC
+ * Grid
+ * Cloud
+ * GPGPUs
+ * Artcop
 
+Others
 
-## Agenda
-
-
-
-An [Agenda Proposal](agenda-proposal) is now on a separate page.
-
-
-#### Topics to cover in the Hackathon:
-
-
-- Short overview sessions on implementation internals (KH: these should not all be on the first afternoon!):
-
-  - GUM (Mustafa)
-  - Eden (Jost)
-  - Globus (Abyd)
-  - Migration/Load Balancing (Vladimir)
-  - ghc HEAD developments (Simon)
-  - GUM/Eden Compilation and Debugging (Vladimir?)
-- GUM-6 port
-- Merging GUM and Eden implementations
-
-  - Packing code
-  - Scheduler
-  - GC interface
-  - Tagging
-- Usage of new tracing infrastructure
-- Development infrastructure
-
-  - Unified revision control (darcs)
-  - Debugging infrastructure
-  - Packaging
-  - Setup for automatic tests
-- Parallel nofib-suite
-- Planned extensions and applications
-
-  - Integration with GHC/SMP
-  - Integrating migration
-  - Globus interface
-  - pre-SCSCP GAP interface
-  - Micro-kernel/substrate approach to the RTS
-- Nominating people in charge of sub-projects
-
-  - parallel nofib suite
-  - Eden/GUM code maintenance
-  - testing framework
-- Prize for the most awkward bug fixed in the Hackaton. <sub>~~Jost: I am non-competitive in this contest, since my task is to introduce them ;)~~</sub> <sub>~~HWL: Clearly you are at an disadvantage: you first have to introduce the bug; we don't have that problem;-)~~</sub>
-
-## Expected Outcomes
+ * Update plan btw Eden/GUM and GHC-HEAD
+ * Community creation
+ * PhD Topic for Henrique
+ * Benchmarks/Parallel NoFib suite
+ * Launch GpH book
+ * Long Term: Build Franchise
+ * Agree on new Strategies module (rewrite applications)
+ * Visualisation tools (which?)
+ * Revisit design decisions for Eden/GUM
 
 
-- Unified repository, containing Eden and GUM code
-- Common test platform
-- List of people in charge of sub-projects
+```
