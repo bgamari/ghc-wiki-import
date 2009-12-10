@@ -168,5 +168,8 @@ We agreed to hold a discussion on benchmarking on Friday.
 
 This is important in the long-term.  For now we left it open until we had made progress on an integrated system.
 
+We need to consider MPI support.
+
+
 
 ```
