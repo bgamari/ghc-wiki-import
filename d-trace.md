@@ -1,55 +1,40 @@
-# Using DTrace with GHC
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Using DTrace with GHC =
 
-GHC 6.13 includes DTrace probes in the runtime system.  Currently, these probes correspond to the events of the [EventLog](event-log) framework and are only available on Mac OS X (from Leopard onwards).
-
-
+GHC 6.13 includes DTrace probes in the runtime system.  Currently, these probes correspond to the events of the EventLog framework and are only available on Mac OS X (from Leopard onwards).
 
 It is straight forward to extend the current implementation with additional probes, and due to the lightweight nature of DTrace, new probes could inspect the runtime system and running Haskell program in an even more fine-grained manner.
 
-
-## Probe description
-
-
+== Probe description ==
 
 The following probes are available:
+ `create-thread (capability, tid)`::
+  Triggered when a new runtime thread is created.  Reports the capability on which the thread is created and the new thread's thread id.
+ `run-thread (capability, tid)`::
+  Indicates that the given thread starts to run on the specified capability.
+ `stop-thread (capability, tid)`::
+  The identified thread stops execution on the given capability.
+ `thread-runnable (capability, tid)`::
+  The given thread has just been appended to the run queue of the specified capability.
+ `migrate-thread (cap, tid, new_cap)`::
+  The specified thread has just been moved from capability `cap` to `new_cap`, either because `cap` is sharing its run queue with `new_cap` or because the migration was explicitly requested.
+ `run-spark (capability, tid)`::
+  We are about to convert a spark into a new parallel thread.  The capability and thread are those determining the spark and converting it, '''not''' the thread id of the new spark.
+ `steal-spark (cap, tid, victim_cap)`::
+  We are about to convert a spark from a different capability, namely `victim_cap`, into a new parallel thread.  Again, the capability and thread are those determining the spark and converting it, '''not''' the thread id of the new spark.
+ `shutdown (cap)`::
+  The specified capability is about to disappear; its run queue and spare worker lists are already empty.
+ `thread-wakeup (cap, tid, other_cap)`::
+  We just unblocked the specified thread on capability `other_cap`.  (The capability `cap` is the one which performed the unblocking.)
 
-
-<table><tr><th>`create-thread (capability, tid)`</th>
-<td>
-Triggered when a new runtime thread is created.  Reports the capability on which the thread is created and the new thread's thread id.
-</td></tr>
-<tr><th>`run-thread (capability, tid)`</th>
-<td>
-Indicates that the given thread starts to run on the specified capability.
-</td></tr>
-<tr><th>`stop-thread (capability, tid)`</th>
-<td>
-The identified thread stops execution on the given capability.
-</td></tr>
-<tr><th>`thread-runnable (capability, tid)`</th>
-<td>
-The given thread has just been appended to the run queue of the specified capability.
-</td></tr>
-<tr><th>`migrate-thread (cap, tid, new_cap)`</th>
-<td>
-The specified thread has just been moved from capability `cap` to `new_cap`, either because `cap` is sharing its run queue with `new_cap` or because the migration was explicitly requested.
-</td></tr>
-<tr><th>`run-spark (capability, tid)`</th>
-<td>
-We are about to convert a spark into a new parallel thread.  The capability and thread are those determining the spark and converting it, **not** the thread id of the new spark.
-</td></tr></table>
-
-
-## Probe definition
-
-
+== Probe definition ==
 
 The provider is defined as follows:
-
-
-```wiki
+{{{
 provider HaskellEvent {
 
   // scheduler events
@@ -76,27 +61,16 @@ provider HaskellEvent {
   probe gc__done (EventCapNo);
 
 };
-```
-
-
+}}}
 where we have
-
-
-```wiki
+{{{
 typedef uint32_t EventThreadID;
 typedef uint16_t EventCapNo;
 typedef uint16_t EventThreadStatus;
-```
-
-
+}}}
 The two events `EVENT_LOG_MSG` and `EVENT_BLOCK_MARKER` are not supported.  The former doesn't appear to be used and the latter appears to be an artefact of the event log file format.
 
+== Portability ==
 
-## Portability
-
-
-
-User-space DTrace probes are implemented differently on Mac OS X than in the original DTrace implementation; see under the heading *BUILDING CODE CONTAINING USDT PROBES* in the [
-Mac OS X dtrace man page](http://developer.apple.com/mac/library/documentation/Darwin/Reference/ManPages/man1/dtrace.1.html).  Nevertheless, it shouldn't be too hard to enable these probes on other platforms, too.
-
-
+User-space DTrace probes are implemented differently on Mac OS X than in the original DTrace implementation; see under the heading ''BUILDING CODE CONTAINING USDT PROBES'' in the [http://developer.apple.com/mac/library/documentation/Darwin/Reference/ManPages/man1/dtrace.1.html Mac OS X dtrace man page].  Nevertheless, it shouldn't be too hard to enable these probes on other platforms, too.
+```
