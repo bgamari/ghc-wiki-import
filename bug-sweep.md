@@ -66,7 +66,6 @@ database and start again.
 
  * #552
  * #590
- * #594
  * #595
  * #597
  * #599
