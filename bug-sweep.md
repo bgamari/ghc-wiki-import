@@ -1,11 +1,8 @@
-CONVERSION ERROR
+# GHC bug sweep
 
-Original source:
 
-```trac
-= GHC bug sweep =
 
-In the tradition of the [https://wiki.ubuntu.com/5-A-Day Ubuntu 5-a-day], 
+In the tradition of the [ Ubuntu 5-a-day](https://wiki.ubuntu.com/5-A-Day), 
 the GHC Bug Sweep is a scheme in a similar vein.  The
 main aim is simple: we want to make sure that no ticket is
 forgotten.  So, what we plan to do is to look at every ticket in the
@@ -13,41 +10,54 @@ database in sequence, starting from the oldest, and try to make some
 progress on the ticket.  In this way we'll ensure that we keep the
 amount of cruft in the ticket database down to a minimum, keep the database healthy, and keep everything moving.
 
+
+
 The bug sweep is a way that virtually anyone can contribute to GHC, in
 as small or large a way as you like.  Whenever you have a spare minute
 or two, claim a ticket and look at it (see below for how to claim a
 ticket).  You don't necessarily have to fix the bug or implement the
-feature: all you have to do is make ''some'' progress on the ticket.
+feature: all you have to do is make *some* progress on the ticket.
 Here are some things to check:
 
- * '''All tickets''': 
-   * Check for duplicates (Google search with "site:hackage.haskell.org" is usually better than using Trac's search).
-   * Tidy up the description: add markup if necessary, link to related information and/or other tickets
-   * Check that the ticket is categorised correctly, including
-     * the title is a good summary of the bug
-     * platform/OS are correct
-     * component is correct
-     * it is on the correct milestone (developers only)
-     * the "difficulty" is a reasonable estimate (developers only)
-   * If the ticket has a patch 
-     * (developers only) review the patch
-     * if it looks ready to go, add a comment to the ticket to say so.
 
- * '''Bugs''':
-   * Check that the bug hasn't already been fixed.
-   * Set the new "Type of Failure" field
-   * If the bug has some reproduction instructions, try them out with a recent GHC and see if the bug still happens.  If the results are different, update the ticket to include that information.
-   * Add the program to the [wiki:Building/RunningTests#Addinganewtest testsuite]. 
-   * If the bug does not have repro instructions, ask the submitter for more details.
-   * Check that there is still value in having the ticket open.  If we cannot make progress without feedback from the submitter, and a long time has elapsed (e.g. 6 months), then we should close the bug.
+- **All tickets**: 
 
- * '''Feature requests''' and '''tasks''': 
-   * check that it hasn't already been done.
-   * link to related feature requests
+  - Check for duplicates (Google search with "site:hackage.haskell.org" is usually better than using Trac's search).
+  - Tidy up the description: add markup if necessary, link to related information and/or other tickets
+  - Check that the ticket is categorised correctly, including
 
-Here are some [wiki:WorkingConventions#TheBugTracker more details on how we use the bug tracker].
+    - the title is a good summary of the bug
+    - platform/OS are correct
+    - component is correct
+    - it is on the correct milestone (developers only)
+    - the "difficulty" is a reasonable estimate (developers only)
+  - If the ticket has a patch 
 
-Note: you don't have to do ''all'' of the things on the list.  Doing ''any'' of them is good.  The main thing is that every ticket gets at least looked at.
+    - (developers only) review the patch
+    - if it looks ready to go, add a comment to the ticket to say so.
+
+- **Bugs**:
+
+  - Check that the bug hasn't already been fixed.
+  - Set the new "Type of Failure" field
+  - If the bug has some reproduction instructions, try them out with a recent GHC and see if the bug still happens.  If the results are different, update the ticket to include that information.
+  - Add the program to the [testsuite](building/running-tests#adding-a-new-test). 
+  - If the bug does not have repro instructions, ask the submitter for more details.
+  - Check that there is still value in having the ticket open.  If we cannot make progress without feedback from the submitter, and a long time has elapsed (e.g. 6 months), then we should close the bug.
+
+- **Feature requests** and **tasks**: 
+
+  - check that it hasn't already been done.
+  - link to related feature requests
+
+
+Here are some [more details on how we use the bug tracker](working-conventions#the-bug-tracker).
+
+
+
+Note: you don't have to do *all* of the things on the list.  Doing *any* of them is good.  The main thing is that every ticket gets at least looked at.
+
+
 
 For many tickets there may be nothing to do: if so, just proceed to the next ticket.  You might not be
 able to reproduce the bug (because you don't have access to the right
@@ -55,660 +65,665 @@ platform, for instance).  In that case just add a comment to the
 ticket to note that the bug needs to be reproduced with an up to date
 GHC, and hopefully someone else will pick it up.
 
+
+
 How do we track which tickets have been looked at in the sweep yet?
-Below is a list: just [http://hackage.haskell.org/trac/ghc/wiki/BugSweep?action=edit edit this page], remove a bug from the list, and
+Below is a list: just [
+edit this page](http://hackage.haskell.org/trac/ghc/wiki/BugSweep?action=edit), remove a bug from the list, and
 look at it.  When the list is empty, we'll take a new snapshot of the
 database and start again.
 
-== The tickets (bugs, tasks, feature requests, the lot) ==
 
-[http://hackage.haskell.org/trac/ghc/wiki/BugSweep?action=edit Edit this page] to remove a ticket from the following list.  You don't have to take the one at the top, but the top is as good a place to start as any:
+## The tickets (bugs, tasks, feature requests, the lot)
 
- * #552
- * #597
- * #599
- * #602
- * #603
- * #607
- * #609
- * #617
- * #618
- * #619
- * #624
- * #634
- * #635
- * #650
- * #653
- * #666
- * #670
- * #676
- * #680
- * #691
- * #692
- * #693
- * #698
- * #701
- * #731
- * #733
- * #781
- * #783
- * #806
- * #813
- * #835
- * #836
- * #849
- * #855
- * #860
- * #872
- * #876
- * #881
- * #886
- * #888
- * #910
- * #915
- * #916
- * #917
- * #926
- * #932
- * #947
- * #948
- * #949
- * #956
- * #960
- * #964
- * #984
- * #989
- * #999
- * #1007
- * #1009
- * #1012
- * #1016
- * #1026
- * #1036
- * #1050
- * #1057
- * #1058
- * #1060
- * #1064
- * #1070
- * #1087
- * #1099
- * #1102
- * #1105
- * #1107
- * #1120
- * #1123
- * #1133
- * #1147
- * #1158
- * #1161
- * #1167
- * #1168
- * #1171
- * #1176
- * #1182
- * #1184
- * #1192
- * #1201
- * #1216
- * #1221
- * #1230
- * #1231
- * #1241
- * #1243
- * #1245
- * #1246
- * #1257
- * #1262
- * #1273
- * #1290
- * #1298
- * #1307
- * #1308
- * #1311
- * #1316
- * #1318
- * #1330
- * #1333
- * #1338
- * #1341
- * #1344
- * #1349
- * #1363
- * #1365
- * #1371
- * #1377
- * #1379
- * #1380
- * #1381
- * #1383
- * #1388
- * #1399
- * #1400
- * #1404
- * #1405
- * #1407
- * #1409
- * #1414
- * #1420
- * #1434
- * #1444
- * #1447
- * #1451
- * #1466
- * #1473
- * #1475
- * #1476
- * #1477
- * #1480
- * #1487
- * #1496
- * #1498
- * #1499
- * #1500
- * #1508
- * #1509
- * #1518
- * #1520
- * #1521
- * #1522
- * #1524
- * #1526
- * #1530
- * #1531
- * #1532
- * #1534
- * #1541
- * #1544
- * #1547
- * #1555
- * #1572
- * #1574
- * #1576
- * #1578
- * #1579
- * #1593
- * #1594
- * #1595
- * #1597
- * #1598
- * #1600
- * #1605
- * #1607
- * #1612
- * #1614
- * #1628
- * #1631
- * #1634
- * #1657
- * #1666
- * #1687
- * #1692
- * #1693
- * #1696
- * #1702
- * #1721
- * #1727
- * #1741
- * #1747
- * #1752
- * #1768
- * #1769
- * #1777
- * #1786
- * #1789
- * #1791
- * #1799
- * #1800
- * #1803
- * #1820
- * #1826
- * #1830
- * #1831
- * #1835
- * #1841
- * #1845
- * #1849
- * #1853
- * #1870
- * #1872
- * #1874
- * #1877
- * #1880
- * #1883
- * #1884
- * #1885
- * #1894
- * #1896
- * #1897
- * #1904
- * #1908
- * #1921
- * #1928
- * #1930
- * #1954
- * #1969
- * #1974
- * #2012
- * #2021
- * #2028
- * #2031
- * #2034
- * #2035
- * #2041
- * #2057
- * #2064
- * #2075
- * #2076
- * #2078
- * #2090
- * #2101
- * #2102
- * #2104
- * #2110
- * #2119
- * #2123
- * #2127
- * #2132
- * #2135
- * #2140
- * #2147
- * #2149
- * #2159
- * #2161
- * #2168
- * #2180
- * #2182
- * #2184
- * #2185
- * #2189
- * #2193
- * #2200
- * #2204
- * #2207
- * #2208
- * #2215
- * #2216
- * #2222
- * #2224
- * #2233
- * #2236
- * #2239
- * #2244
- * #2245
- * #2247
- * #2249
- * #2253
- * #2255
- * #2256
- * #2258
- * #2260
- * #2269
- * #2271
- * #2273
- * #2280
- * #2281
- * #2282
- * #2283
- * #2284
- * #2289
- * #2296
- * #2301
- * #2316
- * #2325
- * #2333
- * #2338
- * #2340
- * #2344
- * #2345
- * #2346
- * #2353
- * #2354
- * #2356
- * #2357
- * #2360
- * #2362
- * #2365
- * #2370
- * #2374
- * #2380
- * #2387
- * #2396
- * #2399
- * #2403
- * #2416
- * #2422
- * #2425
- * #2427
- * #2428
- * #2430
- * #2431
- * #2435
- * #2436
- * #2437
- * #2439
- * #2440
- * #2442
- * #2443
- * #2444
- * #2450
- * #2451
- * #2455
- * #2456
- * #2459
- * #2460
- * #2464
- * #2465
- * #2466
- * #2467
- * #2476
- * #2489
- * #2496
- * #2507
- * #2510
- * #2514
- * #2519
- * #2522
- * #2526
- * #2530
- * #2531
- * #2532
- * #2534
- * #2539
- * #2544
- * #2548
- * #2550
- * #2551
- * #2552
- * #2555
- * #2558
- * #2559
- * #2578
- * #2583
- * #2588
- * #2598
- * #2599
- * #2600
- * #2607
- * #2609
- * #2614
- * #2625
- * #2628
- * #2630
- * #2640
- * #2641
- * #2642
- * #2646
- * #2648
- * #2659
- * #2660
- * #2664
- * #2671
- * #2683
- * #2684
- * #2695
- * #2697
- * #2705
- * #2708
- * #2710
- * #2715
- * #2717
- * #2721
- * #2725
- * #2731
- * #2736
- * #2737
- * #2742
- * #2762
- * #2776
- * #2786
- * #2790
- * #2791
- * #2797
- * #2798
- * #2803
- * #2805
- * #2823
- * #2831
- * #2836
- * #2839
- * #2840
- * #2841
- * #2842
- * #2846
- * #2859
- * #2867
- * #2879
- * #2892
- * #2893
- * #2895
- * #2896
- * #2897
- * #2900
- * #2902
- * #2911
- * #2915
- * #2917
- * #2924
- * #2926
- * #2929
- * #2933
- * #2940
- * #2945
- * #2946
- * #2947
- * #2950
- * #2965
- * #2968
- * #2972
- * #2979
- * #2986
- * #2988
- * #2991
- * #3000
- * #3003
- * #3005
- * #3008
- * #3011
- * #3016
- * #3018
- * #3021
- * #3023
- * #3024
- * #3032
- * #3034
- * #3036
- * #3048
- * #3050
- * #3052
- * #3055
- * #3058
- * #3059
- * #3061
- * #3064
- * #3065
- * #3070
- * #3072
- * #3073
- * #3080
- * #3081
- * #3085
- * #3090
- * #3103
- * #3104
- * #3107
- * #3108
- * #3121
- * #3122
- * #3123
- * #3132
- * #3134
- * #3138
- * #3140
- * #3149
- * #3160
- * #3169
- * #3174
- * #3178
- * #3181
- * #3184
- * #3191
- * #3192
- * #3195
- * #3202
- * #3205
- * #3208
- * #3210
- * #3215
- * #3217
- * #3222
- * #3224
- * #3231
- * #3232
- * #3238
- * #3251
- * #3252
- * #3260
- * #3266
- * #3268
- * #3276
- * #3278
- * #3282
- * #3283
- * #3292
- * #3294
- * #3297
- * #3298
- * #3304
- * #3307
- * #3308
- * #3309
- * #3314
- * #3321
- * #3324
- * #3326
- * #3330
- * #3333
- * #3336
- * #3339
- * #3345
- * #3351
- * #3352
- * #3353
- * #3354
- * #3355
- * #3356
- * #3360
- * #3362
- * #3364
- * #3372
- * #3373
- * #3376
- * #3379
- * #3380
- * #3384
- * #3388
- * #3389
- * #3390
- * #3394
- * #3397
- * #3399
- * #3404
- * #3427
- * #3436
- * #3440
- * #3441
- * #3445
- * #3446
- * #3447
- * #3449
- * #3452
- * #3455
- * #3456
- * #3457
- * #3458
- * #3460
- * #3462
- * #3464
- * #3470
- * #3472
- * #3474
- * #3480
- * #3483
- * #3484
- * #3488
- * #3489
- * #3490
- * #3496
- * #3497
- * #3498
- * #3499
- * #3500
- * #3507
- * #3508
- * #3509
- * #3511
- * #3515
- * #3516
- * #3517
- * #3524
- * #3526
- * #3527
- * #3533
- * #3537
- * #3541
- * #3543
- * #3545
- * #3547
- * #3549
- * #3550
- * #3552
- * #3553
- * #3554
- * #3556
- * #3557
- * #3558
- * #3559
- * #3563
- * #3569
- * #3571
- * #3575
- * #3577
- * #3583
- * #3584
- * #3587
- * #3588
- * #3589
- * #3592
- * #3594
- * #3601
- * #3605
- * #3606
- * #3608
- * #3613
- * #3615
- * #3618
- * #3619
- * #3620
- * #3625
- * #3627
- * #3628
- * #3629
- * #3630
- * #3632
- * #3634
- * #3636
- * #3637
- * #3638
- * #3642
- * #3645
- * #3646
- * #3647
- * #3649
- * #3651
- * #3654
- * #3656
- * #3658
- * #3663
 
-```
+
+[
+Edit this page](http://hackage.haskell.org/trac/ghc/wiki/BugSweep?action=edit) to remove a ticket from the following list.  You don't have to take the one at the top, but the top is as good a place to start as any:
+
+
+- [\#552](https://gitlab.staging.haskell.org/ghc/ghc/issues/552)
+- [\#597](https://gitlab.staging.haskell.org/ghc/ghc/issues/597)
+- [\#599](https://gitlab.staging.haskell.org/ghc/ghc/issues/599)
+- [\#603](https://gitlab.staging.haskell.org/ghc/ghc/issues/603)
+- [\#607](https://gitlab.staging.haskell.org/ghc/ghc/issues/607)
+- [\#609](https://gitlab.staging.haskell.org/ghc/ghc/issues/609)
+- [\#617](https://gitlab.staging.haskell.org/ghc/ghc/issues/617)
+- [\#618](https://gitlab.staging.haskell.org/ghc/ghc/issues/618)
+- [\#619](https://gitlab.staging.haskell.org/ghc/ghc/issues/619)
+- [\#624](https://gitlab.staging.haskell.org/ghc/ghc/issues/624)
+- [\#634](https://gitlab.staging.haskell.org/ghc/ghc/issues/634)
+- [\#635](https://gitlab.staging.haskell.org/ghc/ghc/issues/635)
+- [\#650](https://gitlab.staging.haskell.org/ghc/ghc/issues/650)
+- [\#653](https://gitlab.staging.haskell.org/ghc/ghc/issues/653)
+- [\#666](https://gitlab.staging.haskell.org/ghc/ghc/issues/666)
+- [\#670](https://gitlab.staging.haskell.org/ghc/ghc/issues/670)
+- [\#676](https://gitlab.staging.haskell.org/ghc/ghc/issues/676)
+- [\#680](https://gitlab.staging.haskell.org/ghc/ghc/issues/680)
+- [\#691](https://gitlab.staging.haskell.org/ghc/ghc/issues/691)
+- [\#692](https://gitlab.staging.haskell.org/ghc/ghc/issues/692)
+- [\#693](https://gitlab.staging.haskell.org/ghc/ghc/issues/693)
+- [\#698](https://gitlab.staging.haskell.org/ghc/ghc/issues/698)
+- [\#701](https://gitlab.staging.haskell.org/ghc/ghc/issues/701)
+- [\#731](https://gitlab.staging.haskell.org/ghc/ghc/issues/731)
+- [\#733](https://gitlab.staging.haskell.org/ghc/ghc/issues/733)
+- [\#781](https://gitlab.staging.haskell.org/ghc/ghc/issues/781)
+- [\#783](https://gitlab.staging.haskell.org/ghc/ghc/issues/783)
+- [\#806](https://gitlab.staging.haskell.org/ghc/ghc/issues/806)
+- [\#813](https://gitlab.staging.haskell.org/ghc/ghc/issues/813)
+- [\#835](https://gitlab.staging.haskell.org/ghc/ghc/issues/835)
+- [\#836](https://gitlab.staging.haskell.org/ghc/ghc/issues/836)
+- [\#849](https://gitlab.staging.haskell.org/ghc/ghc/issues/849)
+- [\#855](https://gitlab.staging.haskell.org/ghc/ghc/issues/855)
+- [\#860](https://gitlab.staging.haskell.org/ghc/ghc/issues/860)
+- [\#872](https://gitlab.staging.haskell.org/ghc/ghc/issues/872)
+- [\#876](https://gitlab.staging.haskell.org/ghc/ghc/issues/876)
+- [\#881](https://gitlab.staging.haskell.org/ghc/ghc/issues/881)
+- [\#886](https://gitlab.staging.haskell.org/ghc/ghc/issues/886)
+- [\#888](https://gitlab.staging.haskell.org/ghc/ghc/issues/888)
+- [\#910](https://gitlab.staging.haskell.org/ghc/ghc/issues/910)
+- [\#915](https://gitlab.staging.haskell.org/ghc/ghc/issues/915)
+- [\#916](https://gitlab.staging.haskell.org/ghc/ghc/issues/916)
+- [\#917](https://gitlab.staging.haskell.org/ghc/ghc/issues/917)
+- [\#926](https://gitlab.staging.haskell.org/ghc/ghc/issues/926)
+- [\#932](https://gitlab.staging.haskell.org/ghc/ghc/issues/932)
+- [\#947](https://gitlab.staging.haskell.org/ghc/ghc/issues/947)
+- [\#948](https://gitlab.staging.haskell.org/ghc/ghc/issues/948)
+- [\#949](https://gitlab.staging.haskell.org/ghc/ghc/issues/949)
+- [\#956](https://gitlab.staging.haskell.org/ghc/ghc/issues/956)
+- [\#960](https://gitlab.staging.haskell.org/ghc/ghc/issues/960)
+- [\#964](https://gitlab.staging.haskell.org/ghc/ghc/issues/964)
+- [\#984](https://gitlab.staging.haskell.org/ghc/ghc/issues/984)
+- [\#989](https://gitlab.staging.haskell.org/ghc/ghc/issues/989)
+- [\#999](https://gitlab.staging.haskell.org/ghc/ghc/issues/999)
+- [\#1007](https://gitlab.staging.haskell.org/ghc/ghc/issues/1007)
+- [\#1009](https://gitlab.staging.haskell.org/ghc/ghc/issues/1009)
+- [\#1012](https://gitlab.staging.haskell.org/ghc/ghc/issues/1012)
+- [\#1016](https://gitlab.staging.haskell.org/ghc/ghc/issues/1016)
+- [\#1026](https://gitlab.staging.haskell.org/ghc/ghc/issues/1026)
+- [\#1036](https://gitlab.staging.haskell.org/ghc/ghc/issues/1036)
+- [\#1050](https://gitlab.staging.haskell.org/ghc/ghc/issues/1050)
+- [\#1057](https://gitlab.staging.haskell.org/ghc/ghc/issues/1057)
+- [\#1058](https://gitlab.staging.haskell.org/ghc/ghc/issues/1058)
+- [\#1060](https://gitlab.staging.haskell.org/ghc/ghc/issues/1060)
+- [\#1064](https://gitlab.staging.haskell.org/ghc/ghc/issues/1064)
+- [\#1070](https://gitlab.staging.haskell.org/ghc/ghc/issues/1070)
+- [\#1087](https://gitlab.staging.haskell.org/ghc/ghc/issues/1087)
+- [\#1099](https://gitlab.staging.haskell.org/ghc/ghc/issues/1099)
+- [\#1102](https://gitlab.staging.haskell.org/ghc/ghc/issues/1102)
+- [\#1105](https://gitlab.staging.haskell.org/ghc/ghc/issues/1105)
+- [\#1107](https://gitlab.staging.haskell.org/ghc/ghc/issues/1107)
+- [\#1120](https://gitlab.staging.haskell.org/ghc/ghc/issues/1120)
+- [\#1123](https://gitlab.staging.haskell.org/ghc/ghc/issues/1123)
+- [\#1133](https://gitlab.staging.haskell.org/ghc/ghc/issues/1133)
+- [\#1147](https://gitlab.staging.haskell.org/ghc/ghc/issues/1147)
+- [\#1158](https://gitlab.staging.haskell.org/ghc/ghc/issues/1158)
+- [\#1161](https://gitlab.staging.haskell.org/ghc/ghc/issues/1161)
+- [\#1167](https://gitlab.staging.haskell.org/ghc/ghc/issues/1167)
+- [\#1168](https://gitlab.staging.haskell.org/ghc/ghc/issues/1168)
+- [\#1171](https://gitlab.staging.haskell.org/ghc/ghc/issues/1171)
+- [\#1176](https://gitlab.staging.haskell.org/ghc/ghc/issues/1176)
+- [\#1182](https://gitlab.staging.haskell.org/ghc/ghc/issues/1182)
+- [\#1184](https://gitlab.staging.haskell.org/ghc/ghc/issues/1184)
+- [\#1192](https://gitlab.staging.haskell.org/ghc/ghc/issues/1192)
+- [\#1201](https://gitlab.staging.haskell.org/ghc/ghc/issues/1201)
+- [\#1216](https://gitlab.staging.haskell.org/ghc/ghc/issues/1216)
+- [\#1221](https://gitlab.staging.haskell.org/ghc/ghc/issues/1221)
+- [\#1230](https://gitlab.staging.haskell.org/ghc/ghc/issues/1230)
+- [\#1231](https://gitlab.staging.haskell.org/ghc/ghc/issues/1231)
+- [\#1241](https://gitlab.staging.haskell.org/ghc/ghc/issues/1241)
+- [\#1243](https://gitlab.staging.haskell.org/ghc/ghc/issues/1243)
+- [\#1245](https://gitlab.staging.haskell.org/ghc/ghc/issues/1245)
+- [\#1246](https://gitlab.staging.haskell.org/ghc/ghc/issues/1246)
+- [\#1257](https://gitlab.staging.haskell.org/ghc/ghc/issues/1257)
+- [\#1262](https://gitlab.staging.haskell.org/ghc/ghc/issues/1262)
+- [\#1273](https://gitlab.staging.haskell.org/ghc/ghc/issues/1273)
+- [\#1290](https://gitlab.staging.haskell.org/ghc/ghc/issues/1290)
+- [\#1298](https://gitlab.staging.haskell.org/ghc/ghc/issues/1298)
+- [\#1307](https://gitlab.staging.haskell.org/ghc/ghc/issues/1307)
+- [\#1308](https://gitlab.staging.haskell.org/ghc/ghc/issues/1308)
+- [\#1311](https://gitlab.staging.haskell.org/ghc/ghc/issues/1311)
+- [\#1316](https://gitlab.staging.haskell.org/ghc/ghc/issues/1316)
+- [\#1318](https://gitlab.staging.haskell.org/ghc/ghc/issues/1318)
+- [\#1330](https://gitlab.staging.haskell.org/ghc/ghc/issues/1330)
+- [\#1333](https://gitlab.staging.haskell.org/ghc/ghc/issues/1333)
+- [\#1338](https://gitlab.staging.haskell.org/ghc/ghc/issues/1338)
+- [\#1341](https://gitlab.staging.haskell.org/ghc/ghc/issues/1341)
+- [\#1344](https://gitlab.staging.haskell.org/ghc/ghc/issues/1344)
+- [\#1349](https://gitlab.staging.haskell.org/ghc/ghc/issues/1349)
+- [\#1363](https://gitlab.staging.haskell.org/ghc/ghc/issues/1363)
+- [\#1365](https://gitlab.staging.haskell.org/ghc/ghc/issues/1365)
+- [\#1371](https://gitlab.staging.haskell.org/ghc/ghc/issues/1371)
+- [\#1377](https://gitlab.staging.haskell.org/ghc/ghc/issues/1377)
+- [\#1379](https://gitlab.staging.haskell.org/ghc/ghc/issues/1379)
+- [\#1380](https://gitlab.staging.haskell.org/ghc/ghc/issues/1380)
+- [\#1381](https://gitlab.staging.haskell.org/ghc/ghc/issues/1381)
+- [\#1383](https://gitlab.staging.haskell.org/ghc/ghc/issues/1383)
+- [\#1388](https://gitlab.staging.haskell.org/ghc/ghc/issues/1388)
+- [\#1399](https://gitlab.staging.haskell.org/ghc/ghc/issues/1399)
+- [\#1400](https://gitlab.staging.haskell.org/ghc/ghc/issues/1400)
+- [\#1404](https://gitlab.staging.haskell.org/ghc/ghc/issues/1404)
+- [\#1405](https://gitlab.staging.haskell.org/ghc/ghc/issues/1405)
+- [\#1407](https://gitlab.staging.haskell.org/ghc/ghc/issues/1407)
+- [\#1409](https://gitlab.staging.haskell.org/ghc/ghc/issues/1409)
+- [\#1414](https://gitlab.staging.haskell.org/ghc/ghc/issues/1414)
+- [\#1420](https://gitlab.staging.haskell.org/ghc/ghc/issues/1420)
+- [\#1434](https://gitlab.staging.haskell.org/ghc/ghc/issues/1434)
+- [\#1444](https://gitlab.staging.haskell.org/ghc/ghc/issues/1444)
+- [\#1447](https://gitlab.staging.haskell.org/ghc/ghc/issues/1447)
+- [\#1451](https://gitlab.staging.haskell.org/ghc/ghc/issues/1451)
+- [\#1466](https://gitlab.staging.haskell.org/ghc/ghc/issues/1466)
+- [\#1473](https://gitlab.staging.haskell.org/ghc/ghc/issues/1473)
+- [\#1475](https://gitlab.staging.haskell.org/ghc/ghc/issues/1475)
+- [\#1476](https://gitlab.staging.haskell.org/ghc/ghc/issues/1476)
+- [\#1477](https://gitlab.staging.haskell.org/ghc/ghc/issues/1477)
+- [\#1480](https://gitlab.staging.haskell.org/ghc/ghc/issues/1480)
+- [\#1487](https://gitlab.staging.haskell.org/ghc/ghc/issues/1487)
+- [\#1496](https://gitlab.staging.haskell.org/ghc/ghc/issues/1496)
+- [\#1498](https://gitlab.staging.haskell.org/ghc/ghc/issues/1498)
+- [\#1499](https://gitlab.staging.haskell.org/ghc/ghc/issues/1499)
+- [\#1500](https://gitlab.staging.haskell.org/ghc/ghc/issues/1500)
+- [\#1508](https://gitlab.staging.haskell.org/ghc/ghc/issues/1508)
+- [\#1509](https://gitlab.staging.haskell.org/ghc/ghc/issues/1509)
+- [\#1518](https://gitlab.staging.haskell.org/ghc/ghc/issues/1518)
+- [\#1520](https://gitlab.staging.haskell.org/ghc/ghc/issues/1520)
+- [\#1521](https://gitlab.staging.haskell.org/ghc/ghc/issues/1521)
+- [\#1522](https://gitlab.staging.haskell.org/ghc/ghc/issues/1522)
+- [\#1524](https://gitlab.staging.haskell.org/ghc/ghc/issues/1524)
+- [\#1526](https://gitlab.staging.haskell.org/ghc/ghc/issues/1526)
+- [\#1530](https://gitlab.staging.haskell.org/ghc/ghc/issues/1530)
+- [\#1531](https://gitlab.staging.haskell.org/ghc/ghc/issues/1531)
+- [\#1532](https://gitlab.staging.haskell.org/ghc/ghc/issues/1532)
+- [\#1534](https://gitlab.staging.haskell.org/ghc/ghc/issues/1534)
+- [\#1541](https://gitlab.staging.haskell.org/ghc/ghc/issues/1541)
+- [\#1544](https://gitlab.staging.haskell.org/ghc/ghc/issues/1544)
+- [\#1547](https://gitlab.staging.haskell.org/ghc/ghc/issues/1547)
+- [\#1555](https://gitlab.staging.haskell.org/ghc/ghc/issues/1555)
+- [\#1572](https://gitlab.staging.haskell.org/ghc/ghc/issues/1572)
+- [\#1574](https://gitlab.staging.haskell.org/ghc/ghc/issues/1574)
+- [\#1576](https://gitlab.staging.haskell.org/ghc/ghc/issues/1576)
+- [\#1578](https://gitlab.staging.haskell.org/ghc/ghc/issues/1578)
+- [\#1579](https://gitlab.staging.haskell.org/ghc/ghc/issues/1579)
+- [\#1593](https://gitlab.staging.haskell.org/ghc/ghc/issues/1593)
+- [\#1594](https://gitlab.staging.haskell.org/ghc/ghc/issues/1594)
+- [\#1595](https://gitlab.staging.haskell.org/ghc/ghc/issues/1595)
+- [\#1597](https://gitlab.staging.haskell.org/ghc/ghc/issues/1597)
+- [\#1598](https://gitlab.staging.haskell.org/ghc/ghc/issues/1598)
+- [\#1600](https://gitlab.staging.haskell.org/ghc/ghc/issues/1600)
+- [\#1605](https://gitlab.staging.haskell.org/ghc/ghc/issues/1605)
+- [\#1607](https://gitlab.staging.haskell.org/ghc/ghc/issues/1607)
+- [\#1612](https://gitlab.staging.haskell.org/ghc/ghc/issues/1612)
+- [\#1614](https://gitlab.staging.haskell.org/ghc/ghc/issues/1614)
+- [\#1628](https://gitlab.staging.haskell.org/ghc/ghc/issues/1628)
+- [\#1631](https://gitlab.staging.haskell.org/ghc/ghc/issues/1631)
+- [\#1634](https://gitlab.staging.haskell.org/ghc/ghc/issues/1634)
+- [\#1657](https://gitlab.staging.haskell.org/ghc/ghc/issues/1657)
+- [\#1666](https://gitlab.staging.haskell.org/ghc/ghc/issues/1666)
+- [\#1687](https://gitlab.staging.haskell.org/ghc/ghc/issues/1687)
+- [\#1692](https://gitlab.staging.haskell.org/ghc/ghc/issues/1692)
+- [\#1693](https://gitlab.staging.haskell.org/ghc/ghc/issues/1693)
+- [\#1696](https://gitlab.staging.haskell.org/ghc/ghc/issues/1696)
+- [\#1702](https://gitlab.staging.haskell.org/ghc/ghc/issues/1702)
+- [\#1721](https://gitlab.staging.haskell.org/ghc/ghc/issues/1721)
+- [\#1727](https://gitlab.staging.haskell.org/ghc/ghc/issues/1727)
+- [\#1741](https://gitlab.staging.haskell.org/ghc/ghc/issues/1741)
+- [\#1747](https://gitlab.staging.haskell.org/ghc/ghc/issues/1747)
+- [\#1752](https://gitlab.staging.haskell.org/ghc/ghc/issues/1752)
+- [\#1768](https://gitlab.staging.haskell.org/ghc/ghc/issues/1768)
+- [\#1769](https://gitlab.staging.haskell.org/ghc/ghc/issues/1769)
+- [\#1777](https://gitlab.staging.haskell.org/ghc/ghc/issues/1777)
+- [\#1786](https://gitlab.staging.haskell.org/ghc/ghc/issues/1786)
+- [\#1789](https://gitlab.staging.haskell.org/ghc/ghc/issues/1789)
+- [\#1791](https://gitlab.staging.haskell.org/ghc/ghc/issues/1791)
+- [\#1799](https://gitlab.staging.haskell.org/ghc/ghc/issues/1799)
+- [\#1800](https://gitlab.staging.haskell.org/ghc/ghc/issues/1800)
+- [\#1803](https://gitlab.staging.haskell.org/ghc/ghc/issues/1803)
+- [\#1820](https://gitlab.staging.haskell.org/ghc/ghc/issues/1820)
+- [\#1826](https://gitlab.staging.haskell.org/ghc/ghc/issues/1826)
+- [\#1830](https://gitlab.staging.haskell.org/ghc/ghc/issues/1830)
+- [\#1831](https://gitlab.staging.haskell.org/ghc/ghc/issues/1831)
+- [\#1835](https://gitlab.staging.haskell.org/ghc/ghc/issues/1835)
+- [\#1841](https://gitlab.staging.haskell.org/ghc/ghc/issues/1841)
+- [\#1845](https://gitlab.staging.haskell.org/ghc/ghc/issues/1845)
+- [\#1849](https://gitlab.staging.haskell.org/ghc/ghc/issues/1849)
+- [\#1853](https://gitlab.staging.haskell.org/ghc/ghc/issues/1853)
+- [\#1870](https://gitlab.staging.haskell.org/ghc/ghc/issues/1870)
+- [\#1872](https://gitlab.staging.haskell.org/ghc/ghc/issues/1872)
+- [\#1874](https://gitlab.staging.haskell.org/ghc/ghc/issues/1874)
+- [\#1877](https://gitlab.staging.haskell.org/ghc/ghc/issues/1877)
+- [\#1880](https://gitlab.staging.haskell.org/ghc/ghc/issues/1880)
+- [\#1883](https://gitlab.staging.haskell.org/ghc/ghc/issues/1883)
+- [\#1884](https://gitlab.staging.haskell.org/ghc/ghc/issues/1884)
+- [\#1885](https://gitlab.staging.haskell.org/ghc/ghc/issues/1885)
+- [\#1894](https://gitlab.staging.haskell.org/ghc/ghc/issues/1894)
+- [\#1896](https://gitlab.staging.haskell.org/ghc/ghc/issues/1896)
+- [\#1897](https://gitlab.staging.haskell.org/ghc/ghc/issues/1897)
+- [\#1904](https://gitlab.staging.haskell.org/ghc/ghc/issues/1904)
+- [\#1908](https://gitlab.staging.haskell.org/ghc/ghc/issues/1908)
+- [\#1921](https://gitlab.staging.haskell.org/ghc/ghc/issues/1921)
+- [\#1928](https://gitlab.staging.haskell.org/ghc/ghc/issues/1928)
+- [\#1930](https://gitlab.staging.haskell.org/ghc/ghc/issues/1930)
+- [\#1954](https://gitlab.staging.haskell.org/ghc/ghc/issues/1954)
+- [\#1969](https://gitlab.staging.haskell.org/ghc/ghc/issues/1969)
+- [\#1974](https://gitlab.staging.haskell.org/ghc/ghc/issues/1974)
+- [\#2012](https://gitlab.staging.haskell.org/ghc/ghc/issues/2012)
+- [\#2021](https://gitlab.staging.haskell.org/ghc/ghc/issues/2021)
+- [\#2028](https://gitlab.staging.haskell.org/ghc/ghc/issues/2028)
+- [\#2031](https://gitlab.staging.haskell.org/ghc/ghc/issues/2031)
+- [\#2034](https://gitlab.staging.haskell.org/ghc/ghc/issues/2034)
+- [\#2035](https://gitlab.staging.haskell.org/ghc/ghc/issues/2035)
+- [\#2041](https://gitlab.staging.haskell.org/ghc/ghc/issues/2041)
+- [\#2057](https://gitlab.staging.haskell.org/ghc/ghc/issues/2057)
+- [\#2064](https://gitlab.staging.haskell.org/ghc/ghc/issues/2064)
+- [\#2075](https://gitlab.staging.haskell.org/ghc/ghc/issues/2075)
+- [\#2076](https://gitlab.staging.haskell.org/ghc/ghc/issues/2076)
+- [\#2078](https://gitlab.staging.haskell.org/ghc/ghc/issues/2078)
+- [\#2090](https://gitlab.staging.haskell.org/ghc/ghc/issues/2090)
+- [\#2101](https://gitlab.staging.haskell.org/ghc/ghc/issues/2101)
+- [\#2102](https://gitlab.staging.haskell.org/ghc/ghc/issues/2102)
+- [\#2104](https://gitlab.staging.haskell.org/ghc/ghc/issues/2104)
+- [\#2110](https://gitlab.staging.haskell.org/ghc/ghc/issues/2110)
+- [\#2119](https://gitlab.staging.haskell.org/ghc/ghc/issues/2119)
+- [\#2123](https://gitlab.staging.haskell.org/ghc/ghc/issues/2123)
+- [\#2127](https://gitlab.staging.haskell.org/ghc/ghc/issues/2127)
+- [\#2132](https://gitlab.staging.haskell.org/ghc/ghc/issues/2132)
+- [\#2135](https://gitlab.staging.haskell.org/ghc/ghc/issues/2135)
+- [\#2140](https://gitlab.staging.haskell.org/ghc/ghc/issues/2140)
+- [\#2147](https://gitlab.staging.haskell.org/ghc/ghc/issues/2147)
+- [\#2149](https://gitlab.staging.haskell.org/ghc/ghc/issues/2149)
+- [\#2159](https://gitlab.staging.haskell.org/ghc/ghc/issues/2159)
+- [\#2161](https://gitlab.staging.haskell.org/ghc/ghc/issues/2161)
+- [\#2168](https://gitlab.staging.haskell.org/ghc/ghc/issues/2168)
+- [\#2180](https://gitlab.staging.haskell.org/ghc/ghc/issues/2180)
+- [\#2182](https://gitlab.staging.haskell.org/ghc/ghc/issues/2182)
+- [\#2184](https://gitlab.staging.haskell.org/ghc/ghc/issues/2184)
+- [\#2185](https://gitlab.staging.haskell.org/ghc/ghc/issues/2185)
+- [\#2189](https://gitlab.staging.haskell.org/ghc/ghc/issues/2189)
+- [\#2193](https://gitlab.staging.haskell.org/ghc/ghc/issues/2193)
+- [\#2200](https://gitlab.staging.haskell.org/ghc/ghc/issues/2200)
+- [\#2204](https://gitlab.staging.haskell.org/ghc/ghc/issues/2204)
+- [\#2207](https://gitlab.staging.haskell.org/ghc/ghc/issues/2207)
+- [\#2208](https://gitlab.staging.haskell.org/ghc/ghc/issues/2208)
+- [\#2215](https://gitlab.staging.haskell.org/ghc/ghc/issues/2215)
+- [\#2216](https://gitlab.staging.haskell.org/ghc/ghc/issues/2216)
+- [\#2222](https://gitlab.staging.haskell.org/ghc/ghc/issues/2222)
+- [\#2224](https://gitlab.staging.haskell.org/ghc/ghc/issues/2224)
+- [\#2233](https://gitlab.staging.haskell.org/ghc/ghc/issues/2233)
+- [\#2236](https://gitlab.staging.haskell.org/ghc/ghc/issues/2236)
+- [\#2239](https://gitlab.staging.haskell.org/ghc/ghc/issues/2239)
+- [\#2244](https://gitlab.staging.haskell.org/ghc/ghc/issues/2244)
+- [\#2245](https://gitlab.staging.haskell.org/ghc/ghc/issues/2245)
+- [\#2247](https://gitlab.staging.haskell.org/ghc/ghc/issues/2247)
+- [\#2249](https://gitlab.staging.haskell.org/ghc/ghc/issues/2249)
+- [\#2253](https://gitlab.staging.haskell.org/ghc/ghc/issues/2253)
+- [\#2255](https://gitlab.staging.haskell.org/ghc/ghc/issues/2255)
+- [\#2256](https://gitlab.staging.haskell.org/ghc/ghc/issues/2256)
+- [\#2258](https://gitlab.staging.haskell.org/ghc/ghc/issues/2258)
+- [\#2260](https://gitlab.staging.haskell.org/ghc/ghc/issues/2260)
+- [\#2269](https://gitlab.staging.haskell.org/ghc/ghc/issues/2269)
+- [\#2271](https://gitlab.staging.haskell.org/ghc/ghc/issues/2271)
+- [\#2273](https://gitlab.staging.haskell.org/ghc/ghc/issues/2273)
+- [\#2280](https://gitlab.staging.haskell.org/ghc/ghc/issues/2280)
+- [\#2281](https://gitlab.staging.haskell.org/ghc/ghc/issues/2281)
+- [\#2282](https://gitlab.staging.haskell.org/ghc/ghc/issues/2282)
+- [\#2283](https://gitlab.staging.haskell.org/ghc/ghc/issues/2283)
+- [\#2284](https://gitlab.staging.haskell.org/ghc/ghc/issues/2284)
+- [\#2289](https://gitlab.staging.haskell.org/ghc/ghc/issues/2289)
+- [\#2296](https://gitlab.staging.haskell.org/ghc/ghc/issues/2296)
+- [\#2301](https://gitlab.staging.haskell.org/ghc/ghc/issues/2301)
+- [\#2316](https://gitlab.staging.haskell.org/ghc/ghc/issues/2316)
+- [\#2325](https://gitlab.staging.haskell.org/ghc/ghc/issues/2325)
+- [\#2333](https://gitlab.staging.haskell.org/ghc/ghc/issues/2333)
+- [\#2338](https://gitlab.staging.haskell.org/ghc/ghc/issues/2338)
+- [\#2340](https://gitlab.staging.haskell.org/ghc/ghc/issues/2340)
+- [\#2344](https://gitlab.staging.haskell.org/ghc/ghc/issues/2344)
+- [\#2345](https://gitlab.staging.haskell.org/ghc/ghc/issues/2345)
+- [\#2346](https://gitlab.staging.haskell.org/ghc/ghc/issues/2346)
+- [\#2353](https://gitlab.staging.haskell.org/ghc/ghc/issues/2353)
+- [\#2354](https://gitlab.staging.haskell.org/ghc/ghc/issues/2354)
+- [\#2356](https://gitlab.staging.haskell.org/ghc/ghc/issues/2356)
+- [\#2357](https://gitlab.staging.haskell.org/ghc/ghc/issues/2357)
+- [\#2360](https://gitlab.staging.haskell.org/ghc/ghc/issues/2360)
+- [\#2362](https://gitlab.staging.haskell.org/ghc/ghc/issues/2362)
+- [\#2365](https://gitlab.staging.haskell.org/ghc/ghc/issues/2365)
+- [\#2370](https://gitlab.staging.haskell.org/ghc/ghc/issues/2370)
+- [\#2374](https://gitlab.staging.haskell.org/ghc/ghc/issues/2374)
+- [\#2380](https://gitlab.staging.haskell.org/ghc/ghc/issues/2380)
+- [\#2387](https://gitlab.staging.haskell.org/ghc/ghc/issues/2387)
+- [\#2396](https://gitlab.staging.haskell.org/ghc/ghc/issues/2396)
+- [\#2399](https://gitlab.staging.haskell.org/ghc/ghc/issues/2399)
+- [\#2403](https://gitlab.staging.haskell.org/ghc/ghc/issues/2403)
+- [\#2416](https://gitlab.staging.haskell.org/ghc/ghc/issues/2416)
+- [\#2422](https://gitlab.staging.haskell.org/ghc/ghc/issues/2422)
+- [\#2425](https://gitlab.staging.haskell.org/ghc/ghc/issues/2425)
+- [\#2427](https://gitlab.staging.haskell.org/ghc/ghc/issues/2427)
+- [\#2428](https://gitlab.staging.haskell.org/ghc/ghc/issues/2428)
+- [\#2430](https://gitlab.staging.haskell.org/ghc/ghc/issues/2430)
+- [\#2431](https://gitlab.staging.haskell.org/ghc/ghc/issues/2431)
+- [\#2435](https://gitlab.staging.haskell.org/ghc/ghc/issues/2435)
+- [\#2436](https://gitlab.staging.haskell.org/ghc/ghc/issues/2436)
+- [\#2437](https://gitlab.staging.haskell.org/ghc/ghc/issues/2437)
+- [\#2439](https://gitlab.staging.haskell.org/ghc/ghc/issues/2439)
+- [\#2440](https://gitlab.staging.haskell.org/ghc/ghc/issues/2440)
+- [\#2442](https://gitlab.staging.haskell.org/ghc/ghc/issues/2442)
+- [\#2443](https://gitlab.staging.haskell.org/ghc/ghc/issues/2443)
+- [\#2444](https://gitlab.staging.haskell.org/ghc/ghc/issues/2444)
+- [\#2450](https://gitlab.staging.haskell.org/ghc/ghc/issues/2450)
+- [\#2451](https://gitlab.staging.haskell.org/ghc/ghc/issues/2451)
+- [\#2455](https://gitlab.staging.haskell.org/ghc/ghc/issues/2455)
+- [\#2456](https://gitlab.staging.haskell.org/ghc/ghc/issues/2456)
+- [\#2459](https://gitlab.staging.haskell.org/ghc/ghc/issues/2459)
+- [\#2460](https://gitlab.staging.haskell.org/ghc/ghc/issues/2460)
+- [\#2464](https://gitlab.staging.haskell.org/ghc/ghc/issues/2464)
+- [\#2465](https://gitlab.staging.haskell.org/ghc/ghc/issues/2465)
+- [\#2466](https://gitlab.staging.haskell.org/ghc/ghc/issues/2466)
+- [\#2467](https://gitlab.staging.haskell.org/ghc/ghc/issues/2467)
+- [\#2476](https://gitlab.staging.haskell.org/ghc/ghc/issues/2476)
+- [\#2489](https://gitlab.staging.haskell.org/ghc/ghc/issues/2489)
+- [\#2496](https://gitlab.staging.haskell.org/ghc/ghc/issues/2496)
+- [\#2507](https://gitlab.staging.haskell.org/ghc/ghc/issues/2507)
+- [\#2510](https://gitlab.staging.haskell.org/ghc/ghc/issues/2510)
+- [\#2514](https://gitlab.staging.haskell.org/ghc/ghc/issues/2514)
+- [\#2519](https://gitlab.staging.haskell.org/ghc/ghc/issues/2519)
+- [\#2522](https://gitlab.staging.haskell.org/ghc/ghc/issues/2522)
+- [\#2526](https://gitlab.staging.haskell.org/ghc/ghc/issues/2526)
+- [\#2530](https://gitlab.staging.haskell.org/ghc/ghc/issues/2530)
+- [\#2531](https://gitlab.staging.haskell.org/ghc/ghc/issues/2531)
+- [\#2532](https://gitlab.staging.haskell.org/ghc/ghc/issues/2532)
+- [\#2534](https://gitlab.staging.haskell.org/ghc/ghc/issues/2534)
+- [\#2539](https://gitlab.staging.haskell.org/ghc/ghc/issues/2539)
+- [\#2544](https://gitlab.staging.haskell.org/ghc/ghc/issues/2544)
+- [\#2548](https://gitlab.staging.haskell.org/ghc/ghc/issues/2548)
+- [\#2550](https://gitlab.staging.haskell.org/ghc/ghc/issues/2550)
+- [\#2551](https://gitlab.staging.haskell.org/ghc/ghc/issues/2551)
+- [\#2552](https://gitlab.staging.haskell.org/ghc/ghc/issues/2552)
+- [\#2555](https://gitlab.staging.haskell.org/ghc/ghc/issues/2555)
+- [\#2558](https://gitlab.staging.haskell.org/ghc/ghc/issues/2558)
+- [\#2559](https://gitlab.staging.haskell.org/ghc/ghc/issues/2559)
+- [\#2578](https://gitlab.staging.haskell.org/ghc/ghc/issues/2578)
+- [\#2583](https://gitlab.staging.haskell.org/ghc/ghc/issues/2583)
+- [\#2588](https://gitlab.staging.haskell.org/ghc/ghc/issues/2588)
+- [\#2598](https://gitlab.staging.haskell.org/ghc/ghc/issues/2598)
+- [\#2599](https://gitlab.staging.haskell.org/ghc/ghc/issues/2599)
+- [\#2600](https://gitlab.staging.haskell.org/ghc/ghc/issues/2600)
+- [\#2607](https://gitlab.staging.haskell.org/ghc/ghc/issues/2607)
+- [\#2609](https://gitlab.staging.haskell.org/ghc/ghc/issues/2609)
+- [\#2614](https://gitlab.staging.haskell.org/ghc/ghc/issues/2614)
+- [\#2625](https://gitlab.staging.haskell.org/ghc/ghc/issues/2625)
+- [\#2628](https://gitlab.staging.haskell.org/ghc/ghc/issues/2628)
+- [\#2630](https://gitlab.staging.haskell.org/ghc/ghc/issues/2630)
+- [\#2640](https://gitlab.staging.haskell.org/ghc/ghc/issues/2640)
+- [\#2641](https://gitlab.staging.haskell.org/ghc/ghc/issues/2641)
+- [\#2642](https://gitlab.staging.haskell.org/ghc/ghc/issues/2642)
+- [\#2646](https://gitlab.staging.haskell.org/ghc/ghc/issues/2646)
+- [\#2648](https://gitlab.staging.haskell.org/ghc/ghc/issues/2648)
+- [\#2659](https://gitlab.staging.haskell.org/ghc/ghc/issues/2659)
+- [\#2660](https://gitlab.staging.haskell.org/ghc/ghc/issues/2660)
+- [\#2664](https://gitlab.staging.haskell.org/ghc/ghc/issues/2664)
+- [\#2671](https://gitlab.staging.haskell.org/ghc/ghc/issues/2671)
+- [\#2683](https://gitlab.staging.haskell.org/ghc/ghc/issues/2683)
+- [\#2684](https://gitlab.staging.haskell.org/ghc/ghc/issues/2684)
+- [\#2695](https://gitlab.staging.haskell.org/ghc/ghc/issues/2695)
+- [\#2697](https://gitlab.staging.haskell.org/ghc/ghc/issues/2697)
+- [\#2705](https://gitlab.staging.haskell.org/ghc/ghc/issues/2705)
+- [\#2708](https://gitlab.staging.haskell.org/ghc/ghc/issues/2708)
+- [\#2710](https://gitlab.staging.haskell.org/ghc/ghc/issues/2710)
+- [\#2715](https://gitlab.staging.haskell.org/ghc/ghc/issues/2715)
+- [\#2717](https://gitlab.staging.haskell.org/ghc/ghc/issues/2717)
+- [\#2721](https://gitlab.staging.haskell.org/ghc/ghc/issues/2721)
+- [\#2725](https://gitlab.staging.haskell.org/ghc/ghc/issues/2725)
+- [\#2731](https://gitlab.staging.haskell.org/ghc/ghc/issues/2731)
+- [\#2736](https://gitlab.staging.haskell.org/ghc/ghc/issues/2736)
+- [\#2737](https://gitlab.staging.haskell.org/ghc/ghc/issues/2737)
+- [\#2742](https://gitlab.staging.haskell.org/ghc/ghc/issues/2742)
+- [\#2762](https://gitlab.staging.haskell.org/ghc/ghc/issues/2762)
+- [\#2776](https://gitlab.staging.haskell.org/ghc/ghc/issues/2776)
+- [\#2786](https://gitlab.staging.haskell.org/ghc/ghc/issues/2786)
+- [\#2790](https://gitlab.staging.haskell.org/ghc/ghc/issues/2790)
+- [\#2791](https://gitlab.staging.haskell.org/ghc/ghc/issues/2791)
+- [\#2797](https://gitlab.staging.haskell.org/ghc/ghc/issues/2797)
+- [\#2798](https://gitlab.staging.haskell.org/ghc/ghc/issues/2798)
+- [\#2803](https://gitlab.staging.haskell.org/ghc/ghc/issues/2803)
+- [\#2805](https://gitlab.staging.haskell.org/ghc/ghc/issues/2805)
+- [\#2823](https://gitlab.staging.haskell.org/ghc/ghc/issues/2823)
+- [\#2831](https://gitlab.staging.haskell.org/ghc/ghc/issues/2831)
+- [\#2836](https://gitlab.staging.haskell.org/ghc/ghc/issues/2836)
+- [\#2839](https://gitlab.staging.haskell.org/ghc/ghc/issues/2839)
+- [\#2840](https://gitlab.staging.haskell.org/ghc/ghc/issues/2840)
+- [\#2841](https://gitlab.staging.haskell.org/ghc/ghc/issues/2841)
+- [\#2842](https://gitlab.staging.haskell.org/ghc/ghc/issues/2842)
+- [\#2846](https://gitlab.staging.haskell.org/ghc/ghc/issues/2846)
+- [\#2859](https://gitlab.staging.haskell.org/ghc/ghc/issues/2859)
+- [\#2867](https://gitlab.staging.haskell.org/ghc/ghc/issues/2867)
+- [\#2879](https://gitlab.staging.haskell.org/ghc/ghc/issues/2879)
+- [\#2892](https://gitlab.staging.haskell.org/ghc/ghc/issues/2892)
+- [\#2893](https://gitlab.staging.haskell.org/ghc/ghc/issues/2893)
+- [\#2895](https://gitlab.staging.haskell.org/ghc/ghc/issues/2895)
+- [\#2896](https://gitlab.staging.haskell.org/ghc/ghc/issues/2896)
+- [\#2897](https://gitlab.staging.haskell.org/ghc/ghc/issues/2897)
+- [\#2900](https://gitlab.staging.haskell.org/ghc/ghc/issues/2900)
+- [\#2902](https://gitlab.staging.haskell.org/ghc/ghc/issues/2902)
+- [\#2911](https://gitlab.staging.haskell.org/ghc/ghc/issues/2911)
+- [\#2915](https://gitlab.staging.haskell.org/ghc/ghc/issues/2915)
+- [\#2917](https://gitlab.staging.haskell.org/ghc/ghc/issues/2917)
+- [\#2924](https://gitlab.staging.haskell.org/ghc/ghc/issues/2924)
+- [\#2926](https://gitlab.staging.haskell.org/ghc/ghc/issues/2926)
+- [\#2929](https://gitlab.staging.haskell.org/ghc/ghc/issues/2929)
+- [\#2933](https://gitlab.staging.haskell.org/ghc/ghc/issues/2933)
+- [\#2940](https://gitlab.staging.haskell.org/ghc/ghc/issues/2940)
+- [\#2945](https://gitlab.staging.haskell.org/ghc/ghc/issues/2945)
+- [\#2946](https://gitlab.staging.haskell.org/ghc/ghc/issues/2946)
+- [\#2947](https://gitlab.staging.haskell.org/ghc/ghc/issues/2947)
+- [\#2950](https://gitlab.staging.haskell.org/ghc/ghc/issues/2950)
+- [\#2965](https://gitlab.staging.haskell.org/ghc/ghc/issues/2965)
+- [\#2968](https://gitlab.staging.haskell.org/ghc/ghc/issues/2968)
+- [\#2972](https://gitlab.staging.haskell.org/ghc/ghc/issues/2972)
+- [\#2979](https://gitlab.staging.haskell.org/ghc/ghc/issues/2979)
+- [\#2986](https://gitlab.staging.haskell.org/ghc/ghc/issues/2986)
+- [\#2988](https://gitlab.staging.haskell.org/ghc/ghc/issues/2988)
+- [\#2991](https://gitlab.staging.haskell.org/ghc/ghc/issues/2991)
+- [\#3000](https://gitlab.staging.haskell.org/ghc/ghc/issues/3000)
+- [\#3003](https://gitlab.staging.haskell.org/ghc/ghc/issues/3003)
+- [\#3005](https://gitlab.staging.haskell.org/ghc/ghc/issues/3005)
+- [\#3008](https://gitlab.staging.haskell.org/ghc/ghc/issues/3008)
+- [\#3011](https://gitlab.staging.haskell.org/ghc/ghc/issues/3011)
+- [\#3016](https://gitlab.staging.haskell.org/ghc/ghc/issues/3016)
+- [\#3018](https://gitlab.staging.haskell.org/ghc/ghc/issues/3018)
+- [\#3021](https://gitlab.staging.haskell.org/ghc/ghc/issues/3021)
+- [\#3023](https://gitlab.staging.haskell.org/ghc/ghc/issues/3023)
+- [\#3024](https://gitlab.staging.haskell.org/ghc/ghc/issues/3024)
+- [\#3032](https://gitlab.staging.haskell.org/ghc/ghc/issues/3032)
+- [\#3034](https://gitlab.staging.haskell.org/ghc/ghc/issues/3034)
+- [\#3036](https://gitlab.staging.haskell.org/ghc/ghc/issues/3036)
+- [\#3048](https://gitlab.staging.haskell.org/ghc/ghc/issues/3048)
+- [\#3050](https://gitlab.staging.haskell.org/ghc/ghc/issues/3050)
+- [\#3052](https://gitlab.staging.haskell.org/ghc/ghc/issues/3052)
+- [\#3055](https://gitlab.staging.haskell.org/ghc/ghc/issues/3055)
+- [\#3058](https://gitlab.staging.haskell.org/ghc/ghc/issues/3058)
+- [\#3059](https://gitlab.staging.haskell.org/ghc/ghc/issues/3059)
+- [\#3061](https://gitlab.staging.haskell.org/ghc/ghc/issues/3061)
+- [\#3064](https://gitlab.staging.haskell.org/ghc/ghc/issues/3064)
+- [\#3065](https://gitlab.staging.haskell.org/ghc/ghc/issues/3065)
+- [\#3070](https://gitlab.staging.haskell.org/ghc/ghc/issues/3070)
+- [\#3072](https://gitlab.staging.haskell.org/ghc/ghc/issues/3072)
+- [\#3073](https://gitlab.staging.haskell.org/ghc/ghc/issues/3073)
+- [\#3080](https://gitlab.staging.haskell.org/ghc/ghc/issues/3080)
+- [\#3081](https://gitlab.staging.haskell.org/ghc/ghc/issues/3081)
+- [\#3085](https://gitlab.staging.haskell.org/ghc/ghc/issues/3085)
+- [\#3090](https://gitlab.staging.haskell.org/ghc/ghc/issues/3090)
+- [\#3103](https://gitlab.staging.haskell.org/ghc/ghc/issues/3103)
+- [\#3104](https://gitlab.staging.haskell.org/ghc/ghc/issues/3104)
+- [\#3107](https://gitlab.staging.haskell.org/ghc/ghc/issues/3107)
+- [\#3108](https://gitlab.staging.haskell.org/ghc/ghc/issues/3108)
+- [\#3121](https://gitlab.staging.haskell.org/ghc/ghc/issues/3121)
+- [\#3122](https://gitlab.staging.haskell.org/ghc/ghc/issues/3122)
+- [\#3123](https://gitlab.staging.haskell.org/ghc/ghc/issues/3123)
+- [\#3132](https://gitlab.staging.haskell.org/ghc/ghc/issues/3132)
+- [\#3134](https://gitlab.staging.haskell.org/ghc/ghc/issues/3134)
+- [\#3138](https://gitlab.staging.haskell.org/ghc/ghc/issues/3138)
+- [\#3140](https://gitlab.staging.haskell.org/ghc/ghc/issues/3140)
+- [\#3149](https://gitlab.staging.haskell.org/ghc/ghc/issues/3149)
+- [\#3160](https://gitlab.staging.haskell.org/ghc/ghc/issues/3160)
+- [\#3169](https://gitlab.staging.haskell.org/ghc/ghc/issues/3169)
+- [\#3174](https://gitlab.staging.haskell.org/ghc/ghc/issues/3174)
+- [\#3178](https://gitlab.staging.haskell.org/ghc/ghc/issues/3178)
+- [\#3181](https://gitlab.staging.haskell.org/ghc/ghc/issues/3181)
+- [\#3184](https://gitlab.staging.haskell.org/ghc/ghc/issues/3184)
+- [\#3191](https://gitlab.staging.haskell.org/ghc/ghc/issues/3191)
+- [\#3192](https://gitlab.staging.haskell.org/ghc/ghc/issues/3192)
+- [\#3195](https://gitlab.staging.haskell.org/ghc/ghc/issues/3195)
+- [\#3202](https://gitlab.staging.haskell.org/ghc/ghc/issues/3202)
+- [\#3205](https://gitlab.staging.haskell.org/ghc/ghc/issues/3205)
+- [\#3208](https://gitlab.staging.haskell.org/ghc/ghc/issues/3208)
+- [\#3210](https://gitlab.staging.haskell.org/ghc/ghc/issues/3210)
+- [\#3215](https://gitlab.staging.haskell.org/ghc/ghc/issues/3215)
+- [\#3217](https://gitlab.staging.haskell.org/ghc/ghc/issues/3217)
+- [\#3222](https://gitlab.staging.haskell.org/ghc/ghc/issues/3222)
+- [\#3224](https://gitlab.staging.haskell.org/ghc/ghc/issues/3224)
+- [\#3231](https://gitlab.staging.haskell.org/ghc/ghc/issues/3231)
+- [\#3232](https://gitlab.staging.haskell.org/ghc/ghc/issues/3232)
+- [\#3238](https://gitlab.staging.haskell.org/ghc/ghc/issues/3238)
+- [\#3251](https://gitlab.staging.haskell.org/ghc/ghc/issues/3251)
+- [\#3252](https://gitlab.staging.haskell.org/ghc/ghc/issues/3252)
+- [\#3260](https://gitlab.staging.haskell.org/ghc/ghc/issues/3260)
+- [\#3266](https://gitlab.staging.haskell.org/ghc/ghc/issues/3266)
+- [\#3268](https://gitlab.staging.haskell.org/ghc/ghc/issues/3268)
+- [\#3276](https://gitlab.staging.haskell.org/ghc/ghc/issues/3276)
+- [\#3278](https://gitlab.staging.haskell.org/ghc/ghc/issues/3278)
+- [\#3282](https://gitlab.staging.haskell.org/ghc/ghc/issues/3282)
+- [\#3283](https://gitlab.staging.haskell.org/ghc/ghc/issues/3283)
+- [\#3292](https://gitlab.staging.haskell.org/ghc/ghc/issues/3292)
+- [\#3294](https://gitlab.staging.haskell.org/ghc/ghc/issues/3294)
+- [\#3297](https://gitlab.staging.haskell.org/ghc/ghc/issues/3297)
+- [\#3298](https://gitlab.staging.haskell.org/ghc/ghc/issues/3298)
+- [\#3304](https://gitlab.staging.haskell.org/ghc/ghc/issues/3304)
+- [\#3307](https://gitlab.staging.haskell.org/ghc/ghc/issues/3307)
+- [\#3308](https://gitlab.staging.haskell.org/ghc/ghc/issues/3308)
+- [\#3309](https://gitlab.staging.haskell.org/ghc/ghc/issues/3309)
+- [\#3314](https://gitlab.staging.haskell.org/ghc/ghc/issues/3314)
+- [\#3321](https://gitlab.staging.haskell.org/ghc/ghc/issues/3321)
+- [\#3324](https://gitlab.staging.haskell.org/ghc/ghc/issues/3324)
+- [\#3326](https://gitlab.staging.haskell.org/ghc/ghc/issues/3326)
+- [\#3330](https://gitlab.staging.haskell.org/ghc/ghc/issues/3330)
+- [\#3333](https://gitlab.staging.haskell.org/ghc/ghc/issues/3333)
+- [\#3336](https://gitlab.staging.haskell.org/ghc/ghc/issues/3336)
+- [\#3339](https://gitlab.staging.haskell.org/ghc/ghc/issues/3339)
+- [\#3345](https://gitlab.staging.haskell.org/ghc/ghc/issues/3345)
+- [\#3351](https://gitlab.staging.haskell.org/ghc/ghc/issues/3351)
+- [\#3352](https://gitlab.staging.haskell.org/ghc/ghc/issues/3352)
+- [\#3353](https://gitlab.staging.haskell.org/ghc/ghc/issues/3353)
+- [\#3354](https://gitlab.staging.haskell.org/ghc/ghc/issues/3354)
+- [\#3355](https://gitlab.staging.haskell.org/ghc/ghc/issues/3355)
+- [\#3356](https://gitlab.staging.haskell.org/ghc/ghc/issues/3356)
+- [\#3360](https://gitlab.staging.haskell.org/ghc/ghc/issues/3360)
+- [\#3362](https://gitlab.staging.haskell.org/ghc/ghc/issues/3362)
+- [\#3364](https://gitlab.staging.haskell.org/ghc/ghc/issues/3364)
+- [\#3372](https://gitlab.staging.haskell.org/ghc/ghc/issues/3372)
+- [\#3373](https://gitlab.staging.haskell.org/ghc/ghc/issues/3373)
+- [\#3376](https://gitlab.staging.haskell.org/ghc/ghc/issues/3376)
+- [\#3379](https://gitlab.staging.haskell.org/ghc/ghc/issues/3379)
+- [\#3380](https://gitlab.staging.haskell.org/ghc/ghc/issues/3380)
+- [\#3384](https://gitlab.staging.haskell.org/ghc/ghc/issues/3384)
+- [\#3388](https://gitlab.staging.haskell.org/ghc/ghc/issues/3388)
+- [\#3389](https://gitlab.staging.haskell.org/ghc/ghc/issues/3389)
+- [\#3390](https://gitlab.staging.haskell.org/ghc/ghc/issues/3390)
+- [\#3394](https://gitlab.staging.haskell.org/ghc/ghc/issues/3394)
+- [\#3397](https://gitlab.staging.haskell.org/ghc/ghc/issues/3397)
+- [\#3399](https://gitlab.staging.haskell.org/ghc/ghc/issues/3399)
+- [\#3404](https://gitlab.staging.haskell.org/ghc/ghc/issues/3404)
+- [\#3427](https://gitlab.staging.haskell.org/ghc/ghc/issues/3427)
+- [\#3436](https://gitlab.staging.haskell.org/ghc/ghc/issues/3436)
+- [\#3440](https://gitlab.staging.haskell.org/ghc/ghc/issues/3440)
+- [\#3441](https://gitlab.staging.haskell.org/ghc/ghc/issues/3441)
+- [\#3445](https://gitlab.staging.haskell.org/ghc/ghc/issues/3445)
+- [\#3446](https://gitlab.staging.haskell.org/ghc/ghc/issues/3446)
+- [\#3447](https://gitlab.staging.haskell.org/ghc/ghc/issues/3447)
+- [\#3449](https://gitlab.staging.haskell.org/ghc/ghc/issues/3449)
+- [\#3452](https://gitlab.staging.haskell.org/ghc/ghc/issues/3452)
+- [\#3455](https://gitlab.staging.haskell.org/ghc/ghc/issues/3455)
+- [\#3456](https://gitlab.staging.haskell.org/ghc/ghc/issues/3456)
+- [\#3457](https://gitlab.staging.haskell.org/ghc/ghc/issues/3457)
+- [\#3458](https://gitlab.staging.haskell.org/ghc/ghc/issues/3458)
+- [\#3460](https://gitlab.staging.haskell.org/ghc/ghc/issues/3460)
+- [\#3462](https://gitlab.staging.haskell.org/ghc/ghc/issues/3462)
+- [\#3464](https://gitlab.staging.haskell.org/ghc/ghc/issues/3464)
+- [\#3470](https://gitlab.staging.haskell.org/ghc/ghc/issues/3470)
+- [\#3472](https://gitlab.staging.haskell.org/ghc/ghc/issues/3472)
+- [\#3474](https://gitlab.staging.haskell.org/ghc/ghc/issues/3474)
+- [\#3480](https://gitlab.staging.haskell.org/ghc/ghc/issues/3480)
+- [\#3483](https://gitlab.staging.haskell.org/ghc/ghc/issues/3483)
+- [\#3484](https://gitlab.staging.haskell.org/ghc/ghc/issues/3484)
+- [\#3488](https://gitlab.staging.haskell.org/ghc/ghc/issues/3488)
+- [\#3489](https://gitlab.staging.haskell.org/ghc/ghc/issues/3489)
+- [\#3490](https://gitlab.staging.haskell.org/ghc/ghc/issues/3490)
+- [\#3496](https://gitlab.staging.haskell.org/ghc/ghc/issues/3496)
+- [\#3497](https://gitlab.staging.haskell.org/ghc/ghc/issues/3497)
+- [\#3498](https://gitlab.staging.haskell.org/ghc/ghc/issues/3498)
+- [\#3499](https://gitlab.staging.haskell.org/ghc/ghc/issues/3499)
+- [\#3500](https://gitlab.staging.haskell.org/ghc/ghc/issues/3500)
+- [\#3507](https://gitlab.staging.haskell.org/ghc/ghc/issues/3507)
+- [\#3508](https://gitlab.staging.haskell.org/ghc/ghc/issues/3508)
+- [\#3509](https://gitlab.staging.haskell.org/ghc/ghc/issues/3509)
+- [\#3511](https://gitlab.staging.haskell.org/ghc/ghc/issues/3511)
+- [\#3515](https://gitlab.staging.haskell.org/ghc/ghc/issues/3515)
+- [\#3516](https://gitlab.staging.haskell.org/ghc/ghc/issues/3516)
+- [\#3517](https://gitlab.staging.haskell.org/ghc/ghc/issues/3517)
+- [\#3524](https://gitlab.staging.haskell.org/ghc/ghc/issues/3524)
+- [\#3526](https://gitlab.staging.haskell.org/ghc/ghc/issues/3526)
+- [\#3527](https://gitlab.staging.haskell.org/ghc/ghc/issues/3527)
+- [\#3533](https://gitlab.staging.haskell.org/ghc/ghc/issues/3533)
+- [\#3537](https://gitlab.staging.haskell.org/ghc/ghc/issues/3537)
+- [\#3541](https://gitlab.staging.haskell.org/ghc/ghc/issues/3541)
+- [\#3543](https://gitlab.staging.haskell.org/ghc/ghc/issues/3543)
+- [\#3545](https://gitlab.staging.haskell.org/ghc/ghc/issues/3545)
+- [\#3547](https://gitlab.staging.haskell.org/ghc/ghc/issues/3547)
+- [\#3549](https://gitlab.staging.haskell.org/ghc/ghc/issues/3549)
+- [\#3550](https://gitlab.staging.haskell.org/ghc/ghc/issues/3550)
+- [\#3552](https://gitlab.staging.haskell.org/ghc/ghc/issues/3552)
+- [\#3553](https://gitlab.staging.haskell.org/ghc/ghc/issues/3553)
+- [\#3554](https://gitlab.staging.haskell.org/ghc/ghc/issues/3554)
+- [\#3556](https://gitlab.staging.haskell.org/ghc/ghc/issues/3556)
+- [\#3557](https://gitlab.staging.haskell.org/ghc/ghc/issues/3557)
+- [\#3558](https://gitlab.staging.haskell.org/ghc/ghc/issues/3558)
+- [\#3559](https://gitlab.staging.haskell.org/ghc/ghc/issues/3559)
+- [\#3563](https://gitlab.staging.haskell.org/ghc/ghc/issues/3563)
+- [\#3569](https://gitlab.staging.haskell.org/ghc/ghc/issues/3569)
+- [\#3571](https://gitlab.staging.haskell.org/ghc/ghc/issues/3571)
+- [\#3575](https://gitlab.staging.haskell.org/ghc/ghc/issues/3575)
+- [\#3577](https://gitlab.staging.haskell.org/ghc/ghc/issues/3577)
+- [\#3583](https://gitlab.staging.haskell.org/ghc/ghc/issues/3583)
+- [\#3584](https://gitlab.staging.haskell.org/ghc/ghc/issues/3584)
+- [\#3587](https://gitlab.staging.haskell.org/ghc/ghc/issues/3587)
+- [\#3588](https://gitlab.staging.haskell.org/ghc/ghc/issues/3588)
+- [\#3589](https://gitlab.staging.haskell.org/ghc/ghc/issues/3589)
+- [\#3592](https://gitlab.staging.haskell.org/ghc/ghc/issues/3592)
+- [\#3594](https://gitlab.staging.haskell.org/ghc/ghc/issues/3594)
+- [\#3601](https://gitlab.staging.haskell.org/ghc/ghc/issues/3601)
+- [\#3605](https://gitlab.staging.haskell.org/ghc/ghc/issues/3605)
+- [\#3606](https://gitlab.staging.haskell.org/ghc/ghc/issues/3606)
+- [\#3608](https://gitlab.staging.haskell.org/ghc/ghc/issues/3608)
+- [\#3613](https://gitlab.staging.haskell.org/ghc/ghc/issues/3613)
+- [\#3615](https://gitlab.staging.haskell.org/ghc/ghc/issues/3615)
+- [\#3618](https://gitlab.staging.haskell.org/ghc/ghc/issues/3618)
+- [\#3619](https://gitlab.staging.haskell.org/ghc/ghc/issues/3619)
+- [\#3620](https://gitlab.staging.haskell.org/ghc/ghc/issues/3620)
+- [\#3625](https://gitlab.staging.haskell.org/ghc/ghc/issues/3625)
+- [\#3627](https://gitlab.staging.haskell.org/ghc/ghc/issues/3627)
+- [\#3628](https://gitlab.staging.haskell.org/ghc/ghc/issues/3628)
+- [\#3629](https://gitlab.staging.haskell.org/ghc/ghc/issues/3629)
+- [\#3630](https://gitlab.staging.haskell.org/ghc/ghc/issues/3630)
+- [\#3632](https://gitlab.staging.haskell.org/ghc/ghc/issues/3632)
+- [\#3634](https://gitlab.staging.haskell.org/ghc/ghc/issues/3634)
+- [\#3636](https://gitlab.staging.haskell.org/ghc/ghc/issues/3636)
+- [\#3637](https://gitlab.staging.haskell.org/ghc/ghc/issues/3637)
+- [\#3638](https://gitlab.staging.haskell.org/ghc/ghc/issues/3638)
+- [\#3642](https://gitlab.staging.haskell.org/ghc/ghc/issues/3642)
+- [\#3645](https://gitlab.staging.haskell.org/ghc/ghc/issues/3645)
+- [\#3646](https://gitlab.staging.haskell.org/ghc/ghc/issues/3646)
+- [\#3647](https://gitlab.staging.haskell.org/ghc/ghc/issues/3647)
+- [\#3649](https://gitlab.staging.haskell.org/ghc/ghc/issues/3649)
+- [\#3651](https://gitlab.staging.haskell.org/ghc/ghc/issues/3651)
+- [\#3654](https://gitlab.staging.haskell.org/ghc/ghc/issues/3654)
+- [\#3656](https://gitlab.staging.haskell.org/ghc/ghc/issues/3656)
+- [\#3658](https://gitlab.staging.haskell.org/ghc/ghc/issues/3658)
+- [\#3663](https://gitlab.staging.haskell.org/ghc/ghc/issues/3663)
