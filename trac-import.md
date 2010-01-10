@@ -1,15 +1,15 @@
-# Importing ticket data
+CONVERSION ERROR
 
+Original source:
 
-## Bugzilla
+```trac
+= Importing ticket data =
 
+== Bugzilla ==
 
+Ticket data can be imported from Bugzilla using the [http://trac.edgewall.org/browser/trunk/contrib/bugzilla2trac.py bugzilla2trac.py] script, available in the contrib/ directory of the Trac distribution.
 
-Ticket data can be imported from Bugzilla using the [
-bugzilla2trac.py](http://projects.edgewall.com/trac/browser/trunk/contrib/bugzilla2trac.py) script, available in the contrib/ directory of the Trac distribution.
-
-
-```wiki
+{{{
 $ bugzilla2trac.py
 bugzilla2trac - Imports a bug database from Bugzilla into Trac.
 
@@ -25,63 +25,45 @@ Available Options:
   --help | help                    - this help info
 
 Additional configuration options can be defined directly in the script.
-```
-
+}}}
 
 Currently, the following data is imported from Bugzilla:
 
-
-- bugs
-- bug activity (field changes)
-- bug attachments
-- user names and passwords (put into a htpasswd file)
-
+  * bugs
+  * bug activity (field changes)
+  * bug attachments
+  * user names and passwords (put into a htpasswd file)
 
 The script provides a number of features to ease the conversion, such as:
 
+  * PRODUCT_KEYWORDS:  Trac doesn't have the concept of products, so the script provides the ability to attach a ticket keyword instead.
 
-- PRODUCT\_KEYWORDS:  Trac doesn't have the concept of products, so the script provides the ability to attach a ticket keyword instead.
+  * IGNORE_COMMENTS:  Don't import Bugzilla comments that match a certain regexp.
 
-- IGNORE\_COMMENTS:  Don't import Bugzilla comments that match a certain regexp.
-
-- STATUS\_KEYWORDS:  Attach ticket keywords for the Bugzilla statuses not available in Trac.  By default, the 'VERIFIED' and 'RELEASED' Bugzilla statuses are translated into Trac keywords.
-
+  * STATUS_KEYWORDS:  Attach ticket keywords for the Bugzilla statuses not available in Trac.  By default, the 'VERIFIED' and 'RELEASED' Bugzilla statuses are translated into Trac keywords.
 
 For more details on the available options, see the configuration section at the top of the script.
 
+== Sourceforge ==
 
-## Sourceforge
+Ticket data can be imported from Sourceforge using the [http://trac.edgewall.org/browser/trunk/contrib/sourceforge2trac.py sourceforge2trac.py] script, available in the contrib/ directory of the Trac distribution.
 
+== Mantis ==
 
-
-Ticket data can be imported from Sourceforge using the [
-sourceforge2trac.py](http://projects.edgewall.com/trac/browser/trunk/contrib/sourceforge2trac.py) script, available in the contrib/ directory of the Trac distribution.
-
-
-## Mantis
-
-
+NB! The mantis2trac script now lives at http://trac-hacks.org/wiki/MantisImportScript . You can always get the latest version from http://trac-hacks.org/changeset/latest/mantisimportscript?old_path=/&filename=mantisimportscript&format=zip
 
 Mantis bugs can be imported using the attached script.
 
-
-
 Currently, the following data is imported from Mantis:
+  * bugs
+  * bug comments
+  * bug activity (field changes)
+  * attachments (as long as the files live in the mantis db, not on the filesystem) 
 
-
-- bugs
-- bug comments
-- bug activity (field changes)
-
-
-Attachments are NOT imported.  If you use the script, please read the NOTES section (at the top of the file) and make sure you adjust the config parameters for your environment.
-
-
+If you use the script, please read the NOTES section (at the top of the file) and make sure you adjust the config parameters for your environment.
 
 mantis2trac.py has the same parameters as the bugzilla2trac.py script:
-
-
-```wiki
+{{{
 mantis2trac - Imports a bug database from Mantis into Trac.
 
 Usage: mantis2trac.py [options] 
@@ -96,13 +78,14 @@ Available Options:
   --help | help                    - This help info
 
 Additional configuration options can be defined directly in the script.
+}}} 
+
+== Other ==
+
+Since trac uses a SQL database to store the data, you can import from other systems by examining the database tables. Just go into [http://www.sqlite.org/sqlite.html sqlite] command line to look at the tables and import into them from your application.
+
+=== Using a comma delimited file - CSV ===
+See [http://trac.edgewall.org/attachment/wiki/TracSynchronize/csv2trac.2.py] for details.  This approach is particularly useful if one needs to enter a large number of tickets by hand. (note that the ticket type type field, (task etc...) is also needed for this script to work with more recent Trac releases)
+
+
 ```
-
-## Other
-
-
-
-Since trac uses a SQL database to store the data, you can import from other systems by examining the database tables. Just go into [
-sqlite](http://www.sqlite.org/sqlite.html) command line to look at the tables and import into them from your application.
-
-
