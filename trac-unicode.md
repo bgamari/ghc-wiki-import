@@ -1,173 +1,123 @@
-# Unicode Support in Trac
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Unicode Support in Trac =
+[[TracGuideToc]]
 
-Trac stores all text using UTF-8 encoding, including text in tickets and wiki pages. 
-
-
+Trac stores all text using UTF-8 encoding, including text in tickets and wiki pages. Internal processing of text uses true Unicode representations.
 
 As such, it supports most (all?) commonly used character encodings.
 
+If your encoding is not UTF-8, you can use [wiki:TracModPython mod_python] to handle it.  For example, if your local encoding is gbk, you can set 
+   default_charset = gbk
+in trac.ini.
 
-## Examples
+You also must make sure that your [trac:DatabaseBackend database backend] stores its data in UTF-8; otherwise strange things will happen.
 
-
-
-Please keep sorted order when you add an entry.
-
-
-### Arabic
-
+To convert your database to UTF-8, the easiest way is to dump the database, convert the dump into UTF-8 and then import the converted dump back into the database.[[BR]]
+You can use [http://www.gnu.org/software/libiconv/documentation/libiconv/iconv.1.html iconv] to convert the dump.
 
 
+== Examples ==
+
+=== Arabic ===
 تراك يقوم بحفظ كل الكلمات باستخدام صيغة UTF-8، بما في ذلك الكلمات المستخدمة في صفحات  التيكت والويكي.
 
-
-### Bulgarian
-
-
-
+=== Bulgarian ===
 Българският език работи ли?
 
-
-### Česky
-
-
-
+=== Česky ===
 Čeština v kódování UTF-8, žádný problém.
 
+=== Chinese ===
+Traditional: 繁體中文, 漢字測試; Simplified: 简体中文，汉字测试
 
-### Chinese
+=== Croatian ===
+Ako podržava srpski i slovenski mora podržavati i Hrvatski - čćžšđ ČĆŽŠĐ 
 
-
-
-Traditional: *繁體中文, 許功蓋會育*; Simplified: *简体中文，许功盖会育*
-
-
-### English
-
-
-
+=== English ===
 Yes indeed, Trac supports English. Fully.
 
+=== Français ===
+Il est possible d'écrire en Français : à, ç, û, ...
 
-### Français
+=== German ===
+Trac-Wiki muß auch deutsche Umlaute richtig anzeigen: ö, ä, ü, Ä, Ö, Ü; und das scharfe ß
 
-
-
-*Il est possible d'écrire en Français : à, ç, û, ...*
-
-
-### German
-
-
-
-Trac-Wiki muß auch deutsche Umlaute richtig anzeigen: ö, ä, ü, ...
-
-
-### Greek
-
-
-
+=== Greek ===
 Τα Ελληνικά υποστηρίζονται επαρκώς επίσης.
 
-
-### Hebrew
-
-
-
+=== Hebrew ===
 אני יכול לאכול זכוכית וזה לא מזיק לי
 
+=== Hindi ===
+अब हिन्दी में।
 
-### Icelandic
+=== Hungarian ===
+Árvíztűrő tükörfúrógép
 
+=== Icelandic ===
+Ævar sagði við ömmu sína: Sjáðu hvað ég er stór!
 
+=== Japanese ===
+漢字 ひらがな カタカナ ﾊﾝｶｸｶﾅ 日本語試験
 
-*Ævar sagði við ömmu sína: Sjáðu hvað ég er stór''
-*
+=== Korean ===
+이번에는 한글로 써보겠습니다. 잘 보이나요? 한글
 
+=== Latvian ===
 
-### Japanese
+Latviešu valoda arī strādā!
 
+=== Lithuanian ===
+Sudalyvaukime ir mes. Ar veikia lietuviškos raidės? ąčęėįšųūž ĄČĘĖĮŠŲŪŽ Žinoma, kad veikia :)
+Kas tie mes?
 
+=== Persian (Farsi) ===
+این یک متن فارسی است ولی امکان نوشتن مستقیم فارسی نیست چون حالت متن از راست به چپ و جود ندارد برای فارسی نوشتن باید از HTML استفاده کنید.
+{{{
+#!html
+<div dir="rtl">
+}}}
+این نمونه یک متن از راست به چپ فارسی است که در HTML نوشته شده تا اعداد 12345 و حروف لاتین ABCDEF در محل خودشان نمایش داده شوند.
+{{{
+#!html
+</div>
+}}}
 
-*漢字 ひらがな カタカナ ﾊﾝｶｸｶﾅ*
+=== Polish ===
+Pchnąć w tę łódź jeża lub osiem skrzyń fig; Nocna gżegżółka zawsze dzienną przekuka.
 
-
-### Korean
-
-
-
-*이번에는 한글로 써보겠습니다. 잘 보이나요?*
-
-
-### Persian (Farsi)
-
-
-
-این یک متن فارسی است ولی از چپ به راست
-
-
-### Polish
-
-
-
-Pchnąć w tę łódź jeża lub ośm skrzyń fig
-
-
-### Portuguese
-
-
-
+=== Portuguese ===
 É possível guardar caracteres especias da língua portuguesa, incluindo o símbolo da moeda européia '€', trema 'ü', crase 'à', agudos 'áéíóú', circunflexos 'âêô', til 'ãõ', cedilha 'ç', ordinais 'ªº', grau '°¹²³'.
 
+=== Russian ===
+Проверка русского языка: кажется работает... И буква "ё" есть...
 
-### Russian
-
-
-
-Проверка русского языка: кажется работает...
-
-
-### Serbian
-
-
-
+=== Serbian ===
 Podržan, uprkos činjenici da se za njegovo pisanje koriste чак два алфабета.
 
-
-### Slovenian
-
-
-
+=== Slovenian ===
 Ta suhi škafec pušča vodo že od nekdaj!
 
+=== Spanish ===
+Esto es un pequeño texto en Español, donde el veloz murciélago hindú comía cardlllo y kiwi
 
-### Spanish
+=== Swedish ===
+Räven raskar över isen med luva på.
 
-
-
-Esto es un pequeño texto en Español, ahora una con acentó
-
-
-### Swedish
-
-
-
-*Räven raskar över isen med luva på.*
-
-
-### Thai
-
-
-
+=== Thai ===
 Trac แสดงภาษาไทยได้อย่างถูกต้อง!
 
-
-### Ukrainian
-
-
-
+=== Ukrainian ===
 Перевірка української мови...
 
+=== Urdu ===
+ٹریک اردو بھی سپورٹ کرتا ہے۔
 
+=== Vietnamese ===
+Viết tiếng Việt cũng được.
+
+```
