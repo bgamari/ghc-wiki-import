@@ -1,4 +1,5 @@
-# Recent Changes
+
+** [Index by Title](title-index) ** \| ** Index by Date **
 
 
 
