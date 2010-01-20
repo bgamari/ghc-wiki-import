@@ -43,6 +43,7 @@ Future work
 Here is a list of hackers involved in the development of GpH/Eden
 
 
+- [ Jost Berthold (JB)](http://www.mathematik.uni-marburg.de/~berthold/)
 - [ Vladimir Janjic (VJ)](http://www.cs.st-andrews.ac.uk/~jv), 
 - [ Hans-Wolfgang Loidl (HWL)](http://www.macs.hw.ac.uk/~hwloidl/)
 - [ Kevin Hammond (KH)](http://www.cs.st-andrews.ac.uk/~kh/) 
@@ -53,19 +54,17 @@ Here is a list of hackers involved in the development of GpH/Eden
 - [ Abyd Al Zain (AAZ)](http://www.macs.hw.ac.uk/~ceeatia/)
 - [ Mischa Dieterle (MD)](http://www.mathematik.uni-marburg.de/~dieterle)
 - Thomas Horstmeyer (TH) 
-- [ Jost Berthold (JB)](http://www.mathematik.uni-marburg.de/~berthold/)
-- Christoph Herrmann
-- [ Simon Marlow](http://www.haskell.org/~simonmar/)
 
 ## Communication
 
 
 
  
-A mailing list for parallel Haskell implementors has been set up at HWU: hackpar
+A mailing list for parallel Haskell implementors has been set up at HWU: 
+[ hackpar](http://www.macs.hw.ac.uk/mailman/listinfo.cgi/hackpar)
 
 
-## On-going Tasks
+## Tasks
 
 
 
