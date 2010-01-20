@@ -572,6 +572,13 @@ In this implementation, `transpose` is necessary to place the elements at the ri
 the same reason as in the previous implementation, to improve locality. 
 
 
+### Performance of Matrix-Matrix Multiplication
+
+
+
+TOOD: benchmarks, description
+
+
 ## Open Questions
 
 
