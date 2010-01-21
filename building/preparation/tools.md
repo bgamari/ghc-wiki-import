@@ -176,3 +176,9 @@ GHC does not use libedit on Windows; instead, it uses the console's default line
 </td></tr></table>
 
 
+<table><tr><th>[ libffi](http://sourceware.org/libffi/)</th>
+<td>
+TODO Document this.  I stumbled on this as a new dependency as a user, but I cannot comment further.
+</td></tr></table>
+
+
