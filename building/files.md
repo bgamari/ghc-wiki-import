@@ -3,8 +3,7 @@ CONVERSION ERROR
 Original source:
 
 ```trac
+[[redirect(wiki:Commentary/SourceTree)]]
 
-
-Moved to [wiki:Commentary/SourceTree]
 
 ```
