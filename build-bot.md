@@ -3,7 +3,7 @@
 
 
 Buildbot is currently down, and we are working on a replacement here: [
-http://code.haskell.org/builder/](http://code.haskell.org/builder/)
+http://darcs.haskell.org/builder/](http://darcs.haskell.org/builder/)
 
 
 # Setting up a nightly build
