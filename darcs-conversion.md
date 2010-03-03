@@ -63,7 +63,6 @@ The following documentation would need to change:
  * [wiki:GettingStarted]
 
  * TestingPatches
- * BuildBot
 
 == Plan for libraries ==
 
