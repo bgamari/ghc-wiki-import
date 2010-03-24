@@ -1,60 +1,88 @@
-CONVERSION ERROR
 
-Original source:
 
-```trac
-[[PageOutline]]
-= Development Notes & Bugs =
+
+# Development Notes & Bugs
+
+
 
 This page contains information which is of interest to those hacking on the LLVM back-end.
 
-= LLVM Bugs =
 
-== !NoReturn ==
+# LLVM Bugs
+
+
+## NoReturn
+
+
 
 Don't use the `NoReturn` function attribute. It causes the LLVM optimiser to produce bad code as it replaces the following sequence of instructions:
 
-{{{
+
+```wiki
 tail call fastcc void (i32,i32,i32,i32)* %nnO( i32 %nnP,i32 %nnQ,i32 %nnR,i32 %nnS )
 ret void
-}}}
+```
+
 
 with:
 
-{{{
+
+```wiki
 tail call fastcc void (i32,i32,i32,i32)* %nnO( i32 %nnP,i32 %nnQ,i32 %nnR,i32 %nnS )
 unreachable
-}}}
+```
+
 
 which stops `llc` producing native code that actually tail calls and thus leads to a runtime segfault.
 
-'''TODO''': Need to investigate this further and submit a bug report to LLVM.
 
-= GHC LLVM Back-end Bugs =
 
-== Foreign Calls on Mac OSX ==
+**TODO**: Need to investigate this further and submit a bug report to LLVM.
+
+
+# GHC LLVM Back-end Bugs
+
+
+## Foreign Calls on Mac OSX
+
+
 
 Foreign calls on Mac OS X don't work. Seems to be because LLVM isn't generating correct code. All system calls must be 16 byte aligned in OS X and llvm isn't respecting this. Not sure if its a bug in LLVM or due to my changes to LLVM.
 
-Update (20/02/10): I fixed this issue using the inline assembler approach (see below). This reduces the test failures on Mac OSX from 22 to 9. So doesn't fix everything. Still other issues.
 
-'''Solutions''':
- * A new function attribute has just landed in SVN which allows stack alignment to be specified when a call is made.
- * Can use inline assembler to fix stack alignment.
- * Fix stack calculation in LLVM (my changes must have broken it).
 
-== Missing Control Flow Statements ==
+Update (20/02/10): I fixed this issue using the inline assembler approach (see below). This reduces the test failures on Mac OSX from 22 to 9. So doesn't fix everything. Still other issues. Also, I tried using the new stalk alignment feature but that interacts badly with the GHC calling convention, clobbering the Base register.
+
+
+
+**Solutions**:
+
+
+- A new function attribute has just landed in SVN which allows stack alignment to be specified when a call is made.
+- Can use inline assembler to fix stack alignment.
+- Fix stack calculation in LLVM (my changes must have broken it).
+
+## Missing Control Flow Statements
+
+
 
 LLVM requires all control flow to be explicit, including 'ret void'. Cmm doesn't, ret void is assumed like in C. For most code this is fine as with CPS all the blocks are ended with tail calls or branhces. However with the handwritten Cmm it can occur although currently all cases are handled correctly. NOTE: This does manifest! Happens on x86-64 for handwritten cmm code! Causes failure when trying to bootstrap GHC.
 
+
+
 e.g rts/Apply.cmm has the code:
-{{{
+
+
+```wiki
 INFO_TABLE(stg_PAP,/*special layout*/0,0,PAP,"PAP","PAP")
 {  foreign "C" barf("PAP object entered!") never returns; }
-}}}
+```
+
 
 This get passed to back-end as on x86-64:
-{{{
+
+
+```wiki
 stg_PAP_entry()
         { has static closure: False update_frame: <none>
           type: 0
@@ -86,17 +114,25 @@ stg_PAP_entry()
         D1 = F64[BaseReg + 96];
         D2 = F64[BaseReg + 104];
 }
-}}}
+```
+
 
 This case is the only one that occurs where a Cmm block doesn't end with a control flow statement and its only really since it does a !'never returns' call before hand with exits the function for good.
 
-'''Solutions''':
 
-1) Have a pass in the LLVM back-end which checks each basic block and adds an assumed {{{return void}}} at the end if it doesn't end with a control flow statement.
 
-2) Modify {{{compiler/codeGen/CgForeignCall.hs}}}, changing the function {{{emitForeignCall'}}} as so:
+**Solutions**:
 
-{{{
+
+
+1) Have a pass in the LLVM back-end which checks each basic block and adds an assumed `return void` at the end if it doesn't end with a control flow statement.
+
+
+
+2) Modify `compiler/codeGen/CgForeignCall.hs`, changing the function `emitForeignCall'` as so:
+
+
+```wiki
 -- alternative entry point, used by CmmParse
 emitForeignCall'
     :: Safety
@@ -116,44 +152,52 @@ emitForeignCall' safety results target args vols _srt ret
    stmtC (CmmCall target results temp_args CmmUnsafe ret)
 -  stmtsC caller_load
 +  stmtsC caller_load'
-}}}
+```
+
 
 This stops caller save registers being restored if the call is never meant to return, which should be fine since the code is dead code anyway.
 
+
+
 For the moment I've handled it in the first way as I felt my patch had a better chance of being merged if it changed existing code in GHC as little as possible. I prefer the second way though as adding in 'return void' to cmm basic blocks feels like a hack and the second approach give Cmm the property that all blocks end in a control flow statement which seems pretty useful to me. 
 
-== Known Function mistaken for Unknown External Label ==
+
+## Known Function mistaken for Unknown External Label
+
+
 
 If a function is initially used as a label (e.g the address of it is taken) then the code generator creates an external reference label for it. Later if that function is called directly as a funciton then as it has previously been defined as a function the code generator gets confused and creates an invalid bitcast. Could either look to redefine the function label when more information is encountered, or just fix up the bitcast.
 
-== Possible Problems (Unconfirmed Bugs) ==
 
- * See GHC trac ticket #1852. Floats are padded to word size (4 extra bytes on a 64 bit machine) by putting an appropriate `CmmLit` before them. On `fasm` this is necessary and forces the NCG to produce correct code. On `fvia-C`, this isn't necessary so it strips this padding out. What approach does LLVM blocks end in a control flow statement which seems pretty useful to me.  need?
-
- * Should I be using `FiniteMap` instead of Data.Map?
-
- * {{{SPARC/CodeGen/Gen32.hs}}} seems to have a few special cases for `CmmMachOp`. Perhaps these should also be handled in LLVM to improve performance?
-
- * tail call only supported on `x86`/`x86-64` and `PowerPC`. What about `SPARC`? How will we use the LLVM back-end on SPARC?
-
- * Using hard-coded names for my implementation of STG virtual registers. I think this is fine but should check what are the rules for the unique name generator to make sure it can't conflict. Or perhaps generate unique names for them at the start of each function.
+## Possible Problems (Unconfirmed Bugs)
 
 
-= TODO Items =
+- See GHC trac ticket [\#1852](https://gitlab.staging.haskell.org/ghc/ghc/issues/1852). Floats are padded to word size (4 extra bytes on a 64 bit machine) by putting an appropriate `CmmLit` before them. On `fasm` this is necessary and forces the NCG to produce correct code. On `fvia-C`, this isn't necessary so it strips this padding out. What approach does LLVM blocks end in a control flow statement which seems pretty useful to me.  need?
 
- * look into lto/gold.
- * Use a new Monad instead of passing `LlvmEnv` around everywhere.
- * Use `OrdList` instead of [].
- * Should be able to put all `CmmProc` and `CmmData` labels in environment at start and after that, can print out LLVM IR as I generate it for each data and proc instead of storing.
- * Look at using LLVM intrinsic functions. There are a few math functions. Also, there is a `smul_overflow` detect function.
- * Improve Type safety of LLVM module (e.g split out pointers to own data type, to limit where they can be used). More type checking in ppr stage.
- * Rearrange some functions and files better.
- * Look at merging some of code with NCG.
- * handling of `LlvmVar` or `LlvmType` for function signature isn't nice. Whole function signature handling could be better really.
- * handling of global registers and custom calling convention ugly. Lots of very similar code, need to change to handle multiple architectures easily.
+- Should I be using `FiniteMap` instead of Data.Map?
 
-DONE: improved a fair amount. Could still see if can be cleaned up more. Could extend the `RealReg` type for example to include name and LLVM type, making the `getRealRegReg` and `getRealRegArg` functions very simple (and removing the `lmBase`... functions).
+- `SPARC/CodeGen/Gen32.hs` seems to have a few special cases for `CmmMachOp`. Perhaps these should also be handled in LLVM to improve performance?
 
- * {{{LlvmCodeGen.CodeGen.genCall}}} code for foreign calls is quite complex, could use a clean-up.
+- tail call only supported on `x86`/`x86-64` and `PowerPC`. What about `SPARC`? How will we use the LLVM back-end on SPARC?
 
-```
+- Using hard-coded names for my implementation of STG virtual registers. I think this is fine but should check what are the rules for the unique name generator to make sure it can't conflict. Or perhaps generate unique names for them at the start of each function.
+
+# TODO Items
+
+
+- look into lto/gold.
+- Use a new Monad instead of passing `LlvmEnv` around everywhere.
+- Use `OrdList` instead of \[\].
+- Should be able to put all `CmmProc` and `CmmData` labels in environment at start and after that, can print out LLVM IR as I generate it for each data and proc instead of storing.
+- Look at using LLVM intrinsic functions. There are a few math functions. Also, there is a `smul_overflow` detect function.
+- Improve Type safety of LLVM module (e.g split out pointers to own data type, to limit where they can be used). More type checking in ppr stage.
+- Rearrange some functions and files better.
+- Look at merging some of code with NCG.
+- handling of `LlvmVar` or `LlvmType` for function signature isn't nice. Whole function signature handling could be better really.
+- handling of global registers and custom calling convention ugly. Lots of very similar code, need to change to handle multiple architectures easily.
+
+
+DONE improved a fair amount. Could still see if can be cleaned up more. Could extend the `RealReg` type for example to include name and LLVM type, making the `getRealRegReg` and `getRealRegArg` functions very simple (and removing the `lmBase`... functions).
+
+
+- `LlvmCodeGen.CodeGen.genCall` code for foreign calls is quite complex, could use a clean-up.
