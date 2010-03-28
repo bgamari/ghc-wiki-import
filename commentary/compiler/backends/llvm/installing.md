@@ -12,8 +12,8 @@ The patch needed can be found at:
   http://www.cse.unsw.edu.au/\~davidt/downloads/ghc-llvmbackend-full.dpatch](http://www.cse.unsw.edu.au/~davidt/downloads/ghc-llvmbackend-full.dpatch)
 
 
-The back-end also lives in a Git repository where the actual development work is done, this can be found at [
-https://cgi.cse.unsw.edu.au/\~davidt/cgit/cgit.cgi/Thesis%20GHC%20Dev/](https://cgi.cse.unsw.edu.au/~davidt/cgit/cgit.cgi/Thesis%20GHC%20Dev/). The Git repository only includes the core back-end, not the changes needed to the rest of GHC.
+The back-end also lives in a Git repository where the actual development work is done, this can be found [
+here](https://cgi.cse.unsw.edu.au/~davidt/cgit/cgit.cgi/Thesis%20GHC%20Dev/). The Git repository only includes the core back-end, not the changes needed to the rest of GHC.
 
 
 
