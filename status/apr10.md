@@ -1,27 +1,45 @@
-CONVERSION ERROR
+# GHC status April 2010
 
-Original source:
 
-```trac
-= GHC status April 2010 =
+## GHC 6.12
 
-== GHC 6.12 ==
 
-''Ian: can you summarise the state of play for the GHC 6.12 release.  Number of bugs fixed between 6.12.1 and 6.12.2; Haskell Platform release.  I anticipate this being only a paragraph or two.''
 
-== Ongoing work ==
+*Ian: can you summarise the state of play for the GHC 6.12 release.  Number of bugs fixed between 6.12.1 and 6.12.2; Haskell Platform release.  I anticipate this being only a paragraph or two.*
 
-'''Ian''' can you record the number of patches in the 6 months 1 Oct 2009 - 31 March 2010?
+
+## Ongoing work
+
+
+
+**Ian** can you record the number of patches in the 6 months 1 Oct 2009 - 31 March 2010?
 Also perhaps any pretty ticket graphs?
 
- * Hoopl and the back end (incl LLVM).  '''Simon PJ'''.
- * Containers: '''Simon PJ and Milan'''.
- * TH quasi-quoting improvements (simpler syntax, types and decls): '''Simon PJ'''
- * Type system generally '''Simon PJ'''
- * Inliner changes (incl CONLIKE) '''Simon PJ'''
- * Data parallel Haskell: '''Manuel'''
- * Runtime system, esp message passing changes.  '''Simon M'''.
- * Parallel GC; removing "steps".  '''Simon M'''.
- * Threadscope? '''Simon M'''
- * Haskell builder.  '''Ian'''
-```
+
+- Hoopl and the back end (incl LLVM).  **Simon PJ**.
+- Containers: **Simon PJ and Milan**.
+- TH quasi-quoting improvements (simpler syntax, types and decls): **Simon PJ**
+- Type system generally **Simon PJ**
+- Inliner changes (incl CONLIKE) **Simon PJ**
+- Data parallel Haskell: **Manuel**
+- Runtime system, esp message passing changes.  **Simon M**.
+- Parallel GC; removing "steps".  **Simon M**.
+- Threadscope? **Simon M**
+
+### Nightly builds
+
+
+
+For some time, it's been clear to us that Buildbot is not the perfect tool for our nightly builds. The main problem is that it is very susceptible to network wibbles, which means that many of our builds fail due to a network issue mid-build. Also, any customisation beyond that anticipated by the configuration options provided requires some messy python coding, poking around inside the buildbot classes. Additionally, we would like to implement a "validate-this" feature, where developers can request that a set of patches is validated on multiple platforms before being pushed. We couldn't see an easy way to do this with buildbot.
+
+
+
+When the darcs.haskell.org hardware was upgraded, rather than installing buildbot on the new machine, we made the decision to implement a system that better matched our needs instead. The core implementation is now complete, and we have several machines using it for nightly builds.
+
+
+
+We're always keen to add more build slaves; please see [
+http://hackage.haskell.org/trac/ghc/wiki/Builder](http://hackage.haskell.org/trac/ghc/wiki/Builder) if you're interested. Likewise, patches for missing features are welcome! The (Haskell) code is available at [
+http://darcs.haskell.org/builder/](http://darcs.haskell.org/builder/)
+
+
