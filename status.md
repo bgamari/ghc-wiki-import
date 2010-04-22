@@ -1,45 +1,63 @@
-CONVERSION ERROR
+# GHC Status
 
-Original source:
 
-```trac
-= GHC Status =
+## Releases
 
-== Releases ==
+
 
 Here are our release plans for 
-  * [wiki:Status/Releases The next GHC release (6.12)]
-  * [wiki:Status/GHC-6.10 GHC 6.10 (outdated)]
 
-Here are details about what [wiki:Platforms platforms GHC supports].
 
-== Biannual status reports ==
+- The next GHC release (6.12)?
+- [GHC 6.10 (outdated)](status/gh-c-6.10)
 
-Here are biannual GHC status reports, published in the [http://haskell.org/communities/ Haskell Communities and Activities Report]
-  * [wiki:Status/Oct09 GHC status October 2009]
-  * [wiki:Status/May09 GHC status May 2009]
-  * [wiki:Status/October08 GHC status October 2008]
-  * [wiki:Status/May08 GHC status May 2008]
-  * [wiki:Status/Nov07 GHC status November 2007]
-  * [wiki:Status/April07 GHC status April 2007]
-  * [wiki:Status/October06 GHC status October 2006]
 
-== Performance ==
+Here are details about what [platforms GHC supports](platforms).
 
-Here are the [http://www.cse.unsw.edu.au/~dons/nobench/i686/results.html results of the nobench suite], showing how GHC performs relative to various versions of itself, and other Haskell compilers.
 
-== Planning notes ==
+## Biannual status reports
 
-Here is our [wiki:GhcPlanning current planning document], intended mainly to help Simon, Simon, and Ian coordinate with each other.
 
-== Design notes ==
+
+Here are biannual GHC status reports, published in the [
+Haskell Communities and Activities Report](http://haskell.org/communities/)
+
+
+- [GHC status October 2009](status/oct09)
+- [GHC status May 2009](status/may09)
+- [GHC status October 2008](status/october08)
+- [GHC status May 2008](status/may08)
+- [GHC status November 2007](status/nov07)
+- [GHC status April 2007](status/april07)
+- [GHC status October 2006](status/october06)
+
+## Performance
+
+
+
+Here are the [
+results of the nobench suite](http://www.cse.unsw.edu.au/~dons/nobench/i686/results.html), showing how GHC performs relative to various versions of itself, and other Haskell compilers.
+
+
+## Planning notes
+
+
+
+Here is our [current planning document](ghc-planning), intended mainly to help Simon, Simon, and Ian coordinate with each other.
+
+
+## Design notes
+
+
 
 Here are notes about aspects of GHC's design that are up for discussion.  (They often relate to Haskell generally, rather than just GHC, but it's a convenient place to keep them.)
-  * [wiki:PackageReorg Haskell library organisation]
-  * [wiki:GhcPackages The design for the package system itself] 
-  * [http://essaywritingservices.org/book-report.php book report help] 
-  * [http://cvresumewriters.com/onlineresume.php certified resume writer]
-  * [wiki:ExplicitCallStack Support for better error reporting]; the "head []" problem.
+
+
+- [Haskell library organisation](package-reorg)
+- The design for the package system itself?
+- [Support for better error reporting](explicit-call-stack); the "head \[\]" problem.
+
+
  
 
-```
+
