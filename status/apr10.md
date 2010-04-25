@@ -1,53 +1,38 @@
-# GHC status April 2010
+CONVERSION ERROR
 
+Original source:
 
-## GHC 6.12
+```trac
+= GHC status April 2010 =
 
+== GHC 6.12 ==
 
+In the past 6 months we have made the first 2 releases from the 6.12 branch. 6.12.1 came out in December, while 6.12.2 was released in April. The 6.12.2 release fixes many bugs relative to 6.12.1, including closing 81 trac tickets. For full release notes, and to download it, see the GHC webpage (http://www.haskell.org/ghc/download_ghc_6_12_2.html). We plan to do one more release from this branch before creating a new 6.14 stable branch.
 
-By the time you read this, GHC 6.12.2 should have been released. This fixes many bugs relative to 6.12.1, including closing 81 trac tickets. For full release notes, and to download it, see the GHC webpage ([http://www.haskell.org/ghc/download\_ghc\_6\_12\_2.html](http://www.haskell.org/ghc/download_ghc_6_12_2.html)).
+GHC 6.12.2 will also be included in the upcoming Haskell Platform release (http://hackage.haskell.org/platform/). The Haskell platform is the recommended way for end users to get a Haskell development environment.
 
-
-
-GHC 6.12.2 will also be included in the upcoming Haskell Platform release ([
-http://hackage.haskell.org/platform/](http://hackage.haskell.org/platform/)). The Haskell platform is the recommended way for end users to get a Haskell development environment.
-
-
-## Ongoing work
-
-
+== Ongoing work ==
 
 Meanwhile, in the HEAD, the last 6 months have seen more than 1000 patches pushed from more than a dozen contributors. As the following graph shows, tickets are still being opened faster than we can close them, with the total open tickets growing from around 700 to almost 800. We will be looking in the near future at improving the effectiveness of the way we use the bug tracker.
 
+[[Image(GHC_trac_tickets.png)]]
 
+ * Hoopl and the back end (incl LLVM).  '''Simon PJ'''.
+ * Containers: '''Simon PJ and Milan'''.
+ * TH quasi-quoting improvements (simpler syntax, types and decls): '''Simon PJ'''
+ * Type system generally '''Simon PJ'''
+ * Inliner changes (incl CONLIKE) '''Simon PJ'''
+ * Data parallel Haskell: '''Manuel'''
+ * Runtime system, esp message passing changes.  '''Simon M'''.
+ * Parallel GC; removing "steps".  '''Simon M'''.
+ * Threadscope? '''Simon M'''
 
-[](/trac/ghc/attachment/wiki/Status/Apr10/GHC_trac_tickets.png)
-
-
-- Hoopl and the back end (incl LLVM).  **Simon PJ**.
-- Containers: **Simon PJ and Milan**.
-- TH quasi-quoting improvements (simpler syntax, types and decls): **Simon PJ**
-- Type system generally **Simon PJ**
-- Inliner changes (incl CONLIKE) **Simon PJ**
-- Data parallel Haskell: **Manuel**
-- Runtime system, esp message passing changes.  **Simon M**.
-- Parallel GC; removing "steps".  **Simon M**.
-- Threadscope? **Simon M**
-
-### Nightly builds
-
-
+=== Nightly builds ===
 
 For some time, it's been clear to us that Buildbot is not the perfect tool for our nightly builds. The main problem is that it is very susceptible to network wibbles, which means that many of our builds fail due to a network issue mid-build. Also, any customisation beyond that anticipated by the configuration options provided requires some messy python coding, poking around inside the buildbot classes. Additionally, we would like to implement a "validate-this" feature, where developers can request that a set of patches is validated on multiple platforms before being pushed. We couldn't see an easy way to do this with buildbot.
 
-
-
 When the darcs.haskell.org hardware was upgraded, rather than installing buildbot on the new machine, we made the decision to implement a system that better matched our needs instead. The core implementation is now complete, and we have several machines using it for nightly builds.
 
+We're always keen to add more build slaves; please see http://hackage.haskell.org/trac/ghc/wiki/Builder if you're interested. Likewise, patches for missing features are welcome! The (Haskell) code is available at http://darcs.haskell.org/builder/
 
-
-We're always keen to add more build slaves; please see [
-http://hackage.haskell.org/trac/ghc/wiki/Builder](http://hackage.haskell.org/trac/ghc/wiki/Builder) if you're interested. Likewise, patches for missing features are welcome! The (Haskell) code is available at [
-http://darcs.haskell.org/builder/](http://darcs.haskell.org/builder/)
-
-
+```
