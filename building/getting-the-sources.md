@@ -15,7 +15,7 @@ darcs](http://darcs.net/).
 
 
 
-A source distribution is a file like `ghc-6.6-src.tar.bz2`, which contains a complete snapshot of the source tree for a particular version of GHC.  Source distributions for all versions of GHC are available from the [download page](http://www.haskell.org/ghc/download.html).
+A source distribution is a file like `ghc-6.12.2-src.tar.bz2`, which contains a complete snapshot of the source tree for a particular version of GHC.  Source distributions for all versions of GHC are available from the [download page](http://www.haskell.org/ghc/download.html).
 
 
 
@@ -27,7 +27,7 @@ Source distributions are easier to build, because we also include the output fro
 Happy](http://haskell.org/happy), so you don't need to install these tools.  See [Building/Preparation](building/preparation) for details.
 
 
-## Getting a GHC source tree using darcs
+## Getting a GHC repository using darcs
 
 
 
