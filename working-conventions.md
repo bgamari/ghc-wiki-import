@@ -1,62 +1,89 @@
-CONVERSION ERROR
 
-Original source:
 
-```trac
-[[PageOutline]]
-= Working conventions for working on GHC =
+
+# Working conventions for working on GHC
+
+
 
 GHC is a BSD-licensed open-source project, and we welcome your help in making it better.
 This page has pointers to information you'll need.
 
-First, make sure you are familiar with GHC's [wiki:Licensing].  Unless you say otherwise, we will assume that if you submit a contribution to GHC, then you intend to supply it to us under the same license as the existing code.
+
+
+First, make sure you are familiar with GHC's [Licensing](licensing).  Unless you say otherwise, we will assume that if you submit a contribution to GHC, then you intend to supply it to us under the same license as the existing code.
+
+
 
 These pages guide you step-by-step through making a contribution:
 
- * [wiki:WorkingConventions/FixingBugs How to fix a bug in GHC]
- * [wiki:WorkingConventions/AddingFeatures How to add a new feature to GHC]
- * [http://haskell.org/haskellwiki/Library_submissions How to propose a change to the libraries]
 
-== Coding conventions ==
+- [How to fix a bug in GHC](working-conventions/fixing-bugs)
+- [How to add a new feature to GHC](working-conventions/adding-features)
+- [
+  How to propose a change to the libraries](http://haskell.org/haskellwiki/Library_submissions)
+
+## Coding conventions
+
+
 
 When you are editing GHC's source code, please follow our coding guidelines:
 
- * [wiki:Commentary/CodingStyle Coding style in the compiler]
- * [wiki:Commentary/Rts/Conventions Coding style in the runtime system]
 
-== Validating patches and the test suite ==
+- [Coding style in the compiler](commentary/coding-style)
+- [Coding style in the runtime system](commentary/rts/conventions)
 
-Before you commit a patch you want to be reasonably sure you haven't broken anything.  So before you commit, you must '''validate''' your changes, using the '''regression test suite''':
- * The policy on validating patches, and how to perform validation, is at: [wiki:TestingPatches].
- * Details about the regression test suite, and how to use it are at: [wiki:Building/RunningTests]
+## Validating patches and the test suite
 
-== Using Darcs ==
 
-Our conventions and some useful tips for using darcs are here: [wiki:WorkingConventions/Darcs].
 
-== The Bug Tracker ==
+Before you commit a patch you want to be reasonably sure you haven't broken anything.  So before you commit, you must **validate** your changes, using the **regression test suite**:
+
+
+- The policy on validating patches, and how to perform validation, is at: [TestingPatches](testing-patches).
+- Details about the regression test suite, and how to use it are at: [Building/RunningTests](building/running-tests)
+
+## Using Darcs
+
+
+
+Our conventions and some useful tips for using darcs are here: [WorkingConventions/Darcs](working-conventions/darcs).
+
+
+## The Bug Tracker
+
+
 
 We organise our work (both bug fixing and feature requests) using the Trac bug tracker.   There are links to the bug tracker in the sidebar under "View tickets" and "Create ticket". 
 
-The following are GHC-specific policies regarding the fields of the Trac bug tracking system. (See also [wiki:ReportABug the bug reporting guidelines].)
 
- * '''Milestone''': this field is for the GHC development team to indicate by when we intend to fix the bug.  We have a milestone for each branch (e.g. "6.12-branch"), and three special milestones:
-   * An empty milestone field means the bug has not been triaged yet.  We don't yet know if the
-     ticket is a real, unique, issue.  Once this has been established, the ticket will be given
-     a milestone.
-   * '''Not GHC''' is for tickets that are not tied to a GHC release.
-   * '''_|_''' is for tickets that have been triaged, but we don't plan to fix them for a particular
-     release.  This might be because the bug is low priority, or is simply too hard to fix right now.
 
- * '''Severity''': this is set by the submitter of the ticket, and indicates how important the issue is to
-   them, i.e. is it preventing them from doing something altogether, or just a minor annoyance.  The
-   severity might be reduced if we discover a workaround.
+The following are GHC-specific policies regarding the fields of the Trac bug tracking system. (See also [the bug reporting guidelines](report-a-bug).)
 
- * '''Priority''': this field is for the GHC development team to help us prioritise what we work on. On a branch milestone, the highest priority tickets are blockers for the next release, and the high priority tickets are those that we plan to fix before releasing. We will also try to fix as many of the normal and lower priority tickets as possible.
 
- * '''Test Case''': fill in this field with the name of the test in the test suite.  Typically every bug
-   closed should have an appropriate test case added to the test suite.
+- **Milestone**: this field is for the GHC development team to indicate by when we intend to fix the bug.  We have a milestone for each branch (e.g. "6.12-branch"), and three special milestones:
+
+  - An empty milestone field means the bug has not been triaged yet.  We don't yet know if the
+    ticket is a real, unique, issue.  Once this has been established, the ticket will be given
+    a milestone.
+  - **Not GHC** is for tickets that are not tied to a GHC release.
+  - **\_\|\_** is for tickets that have been triaged, but we don't plan to fix them for a particular
+    release.  This might be because the bug is low priority, or is simply too hard to fix right now.
+
+- **Severity**: this is set by the submitter of the ticket, and indicates how important the issue is to
+  them, i.e. is it preventing them from doing something altogether, or just a minor annoyance.  The
+  severity might be reduced if we discover a workaround.
+
+- **Priority**: this field is for the GHC development team to help us prioritise what we work on. On a branch milestone, the highest priority tickets are blockers for the next release, and the high priority tickets are those that we plan to fix before releasing. We will also try to fix as many of the normal and lower priority tickets as possible.
+
+- **Test Case**: fill in this field with the name of the test in the test suite.  Typically every bug
+  closed should have an appropriate test case added to the test suite.
+
 
 When stopping work on one branch (e.g. the 6.12 branch), all tickets on that branch's milestone will be moved to the next branch's milestone (e.g. 6.14-branch) unless they are more than 1 release old (e.g. opened on the 6.10 branch), in which case they will be moved to the `_|_` milestone instead. However, tickets with a patch attached for review, or with significant support (in the CC field) will not normally be moved to `_|_`.
 
-```
+
+
+The ticket workflow is illustrated in the following image. Most tickets will start in state "new" and, once fixed, possibly go via state "merge" if they are suitable for merging to the stable branch, before moving to state "closed". They may also go via state "infoneeded" if more information is needed from the submitter, or "patch" if a patch that needs review has been attached to the ticket.
+not handled: Image
+
+
