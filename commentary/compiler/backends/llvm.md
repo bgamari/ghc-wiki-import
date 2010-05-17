@@ -6,7 +6,7 @@ David Terei wrote a new code generator for GHC which targets the LLVM compiler i
 
 
 
-Soem documentation:
+Some documentation:
 
 
 - The thesis paper which offers a detailed performance evaluation, as well as the motivation and design of the back-end can be found at: [
