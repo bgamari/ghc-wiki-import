@@ -1,58 +1,79 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
+# Setting up a Windows system for building GHC
 
 
-= Setting up a Windows system for building GHC =
 
-Installing the following will get you a working build environment with MSYS (alternatively, [wiki:Building/Windows/Cygwin install Cygwin]).  For your convenience we've cached a working set of build tools that you can download.  Note: we recommend not installing anything in a directory that contains spaces.
+Installing the following will get you a working build environment with MSYS (alternatively, [install Cygwin](building/windows/cygwin)).  For your convenience we've cached a working set of build tools that you can download.  Note: we recommend not installing anything in a directory that contains spaces.
 
- * First install a recent stable version of [http://www.haskell.org/ghc/download.html GHC].
 
- * Install MinGW:
-   * [http://www.haskell.org/ghc/tools/Win32/MinGW-5.1.4.exe] (or see http://sourceforge.net/projects/mingw/files/)
+- First install a recent stable version of [GHC](http://www.haskell.org/ghc/download.html).
 
- * Install MSYS: 
-   * [http://www.haskell.org/ghc/tools/Win32/MSYS-1.0.11.exe] (originally from http://sourceforge.net/projects/mingw/files/ under "MSYS Base System")
-   * [http://www.haskell.org/ghc/tools/Win32/msysDTK-1.0.1.exe] (originally from http://sourceforge.net/projects/mingw/files/ under "MSYS Supplementary Tools")
-   * [http://www.haskell.org/ghc/tools/Win32/msysCORE-1.0.11-bin.tar.gz] (originally from http://sourceforge.net/projects/mingw/files/ under "MSYS Base System") (this is a tar file, which you have to unpack in `c:/msys/1.0`, or wherever you installed MSYS.  Note that you can't do that using an MSYS shell, because you can't overwrite the files in use, so make a copy of `c:/msys/1.0`, unpack it there, and then rename the copy back to `c:/msys/1.0`).
+- Install MinGW:
 
- * Install [http://www.python.org/download/releases/ Python] (version 2.6.2 is a good choice.  2.6.1 causes a problem with the test suite, and we don't support 3.x at this time).
+  - [http://www.haskell.org/ghc/tools/Win32/MinGW-5.1.4.exe](http://www.haskell.org/ghc/tools/Win32/MinGW-5.1.4.exe) (or see [
+    http://sourceforge.net/projects/mingw/files/](http://sourceforge.net/projects/mingw/files/))
+
+- Install MSYS: 
+
+  - [http://www.haskell.org/ghc/tools/Win32/MSYS-1.0.11.exe](http://www.haskell.org/ghc/tools/Win32/MSYS-1.0.11.exe) (originally from [
+    http://sourceforge.net/projects/mingw/files/](http://sourceforge.net/projects/mingw/files/) under "MSYS Base System")
+  - [http://www.haskell.org/ghc/tools/Win32/msysDTK-1.0.1.exe](http://www.haskell.org/ghc/tools/Win32/msysDTK-1.0.1.exe) (originally from [
+    http://sourceforge.net/projects/mingw/files/](http://sourceforge.net/projects/mingw/files/) under "MSYS Supplementary Tools")
+  - [http://www.haskell.org/ghc/tools/Win32/msysCORE-1.0.11-bin.tar.gz](http://www.haskell.org/ghc/tools/Win32/msysCORE-1.0.11-bin.tar.gz) (originally from [
+    http://sourceforge.net/projects/mingw/files/](http://sourceforge.net/projects/mingw/files/) under "MSYS Base System") (this is a tar file, which you have to unpack in `c:/msys/1.0`, or wherever you installed MSYS.  Note that you can't do that using an MSYS shell, because you can't overwrite the files in use, so make a copy of `c:/msys/1.0`, unpack it there, and then rename the copy back to `c:/msys/1.0`).
+
+- Install [
+  Python](http://www.python.org/download/releases/) (version 2.6.2 is a good choice.  2.6.1 causes a problem with the test suite, and we don't support 3.x at this time).
+
 
 The next three are just zip files, you can unpack them wherever you like, but you need to ensure that the programs can be found on your `PATH`.  I usually put all these in `c:/tools` (NB. don't put them anywhere in `c:/msys`, that's special).
 
- * Install Happy: [http://www.haskell.org/ghc/tools/Win32/happy-1.17.zip]
- * Install Alex: [http://www.haskell.org/ghc/tools/Win32/alex-2.2.zip]
- * Install Darcs: [http://www.haskell.org/ghc/tools/Win32/darcs.zip] (or you may fare better with a newer release from http://wiki.darcs.net/Binaries)
+
+- Install Happy: [http://www.haskell.org/ghc/tools/Win32/happy-1.17.zip](http://www.haskell.org/ghc/tools/Win32/happy-1.17.zip)
+- Install Alex: [http://www.haskell.org/ghc/tools/Win32/alex-2.2.zip](http://www.haskell.org/ghc/tools/Win32/alex-2.2.zip)
+- Install Darcs: [http://www.haskell.org/ghc/tools/Win32/darcs.zip](http://www.haskell.org/ghc/tools/Win32/darcs.zip) (or you may fare better with a newer release from [
+  http://wiki.darcs.net/Binaries](http://wiki.darcs.net/Binaries))
+
 
 Now set your `PATH`.  We recommend doing this by creating a file `.profile` in your home directory (by default `c:/msys/1.0/home/<username>`).  The contents of your `.profile` should be something like this:
 
-{{{
+
+```wiki
 PATH=/c/mingw/bin:/c/ghc/ghc-6.10.1/bin:/usr/bin:/bin:/c/tools:/c/Python26:/c/windows/system32
-}}}
+```
+
 
 Modify the above according to where you installed things, and change the GHC version appropriately.
 
-=== Disable realtime virus-scanning for your build ===
 
-Realtime virus scanners are prone to causing weird build failures, typically "permission denied" errors that go away when the build is restarted.  The best way to avoid these problems is to exclude the directory containing your GHC build from realtime virus scanning, if your scanner supports excluding particular directories, or else turn off realtime scanning while building GHC.
+### Disable realtime virus-scanning for your build
 
-=== Building documentation on Windows ===
 
-Building GHC's documentation is optional, but in order to build it in Windows you must currently use Cygwin (there isn't a working !DocBook toolchain on MSYS as far as we know).
 
-In the Cygwin installer, just install the complete {{{Doc}}} category. You
-may have to help {{{configure}}} a little bit: Set the
-environment variables {{{XmllintCmd}}} and
-{{{XsltprocCmd}}} to the paths of the Cygwin executables
-{{{xmllint}}} and {{{xsltproc}}},
-respectively, and set {{{fp_cv_dir_docbook_xsl}}} to the path
+Realtime virus scanners are prone to causing weird build failures, typically "permission denied" errors that go away when the build is restarted.  The best way to avoid these problems is to exclude the directory containing your GHC build from realtime virus scanning, if your scanner supports excluding particular directories.  You probably also want to exclude directories in which temporary files are stored, which by default is `C:/Users/<user>/Local Settings/Temp` on Windows Vista and later, `C:/Documents and Settings/<user>/Local Settings/Temp` on Windows XP and older, or `C:/Temp`.
+
+
+### Building documentation on Windows
+
+
+
+Building GHC's documentation is optional, but in order to build it in Windows you must currently use Cygwin (there isn't a working DocBook toolchain on MSYS as far as we know).
+
+
+
+In the Cygwin installer, just install the complete `Doc` category. You
+may have to help `configure` a little bit: Set the
+environment variables `XmllintCmd` and
+`XsltprocCmd` to the paths of the Cygwin executables
+`xmllint` and `xsltproc`,
+respectively, and set `fp_cv_dir_docbook_xsl` to the path
 of the directory where the XSL stylesheets are installed,
-e.g. {{{c:/cygwin/usr/share/docbook-xsl}}}.    
+e.g. `c:/cygwin/usr/share/docbook-xsl`.    
+
+
 
 If you want to build HTML Help, you have to install the
-[http://msdn.microsoft.com/library/default.asp?url=/library/en-us/htmlhelp/html/hworiHTMLHelpStartPage.asp HTML Help SDK],
-too, and make sure that {{{hhc}}} is in your {{{PATH}}}.
-```
+[
+HTML Help SDK](http://msdn.microsoft.com/library/default.asp?url=/library/en-us/htmlhelp/html/hworiHTMLHelpStartPage.asp),
+too, and make sure that `hhc` is in your `PATH`.
+
+
