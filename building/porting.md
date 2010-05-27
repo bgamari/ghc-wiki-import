@@ -115,7 +115,7 @@ Then:
 Unpack a source tree (exactly the same version as before).  Call this directory `<H>`.
 
 {{{
-<H>$ sh boot
+<H>$ perl boot
 <H>$ ./configure --target=plat
 }}}
 
@@ -183,7 +183,7 @@ in order to ignore unimportant build failures in the RTS.
 }}}
 
 {{{
-<T>$ sh boot
+<T>$ perl boot
 <T>$ ./configure --enable-hc-boot --build=plat --host=plat --target=plat
 }}}
 
