@@ -1,3 +1,6 @@
+# Note about this page
+
+
 >
 >
 > *Apparently, this page is out of date and the issue has been settled in favour of the syntax:*
@@ -6,7 +9,13 @@
 > ```wiki
 > import "somepackage" Some.Module
 > ```
-
+>
+>
+> See also:
+> [
+> http://haskell.org/ghc/docs/latest/html/users\_guide/syntax-extns.html\#package-imports](http://haskell.org/ghc/docs/latest/html/users_guide/syntax-extns.html#package-imports)
+>
+>
 
 # Explicit package imports
 
