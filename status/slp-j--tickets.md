@@ -82,6 +82,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Tiresome arithmetic things
 
 
+- [\#4101](https://gitlab.staging.haskell.org/ghc/ghc/issues/4101): constant folding for `(**)`
 - [\#3676](https://gitlab.staging.haskell.org/ghc/ghc/issues/3676): `realToFrac` conversions
 - [\#3744](https://gitlab.staging.haskell.org/ghc/ghc/issues/3744): comparisons against `minBound` and `maxBound` are not optimised away
 - [\#3065](https://gitlab.staging.haskell.org/ghc/ghc/issues/3065): quot is sub-optimal
