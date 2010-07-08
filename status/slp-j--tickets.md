@@ -118,6 +118,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 
 - [\#4178](https://gitlab.staging.haskell.org/ghc/ghc/issues/4178): unnecessary skolem escape check
+- [\#4174](https://gitlab.staging.haskell.org/ghc/ghc/issues/4174): bad error message
 - [\#4093](https://gitlab.staging.haskell.org/ghc/ghc/issues/4093): constraint simplifier loops
 - [\#2296](https://gitlab.staging.haskell.org/ghc/ghc/issues/2296): position info for fundep message
 - [\#2683](https://gitlab.staging.haskell.org/ghc/ghc/issues/2683): muttering about boxy type ASSERT
