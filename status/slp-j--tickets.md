@@ -179,6 +179,7 @@ Original source:
 
 --------------------------
 == Not sure what to do about these ==
+ * #2607: space leak: inlining defeats selector thunk optimisation
  * #2284: the state-hack "optimisation" causes much re-computation
  * #3872: divergence in simplifier
  * #4005: generational GC pathalogical case
