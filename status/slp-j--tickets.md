@@ -96,6 +96,7 @@ Original source:
 
 ------------------------
 == New constraint simplifier ==
+ * #3554: assertion failure
  * #3330: type checker loops
  * #3787: bad program produced
  * #4226: strange implicit-parameter behaviour
