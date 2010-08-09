@@ -96,6 +96,7 @@ Original source:
 
 ------------------------
 == New constraint simplifier ==
+ * #3714: error message if associated family has excess parameters
  * #3554: assertion failure
  * #3330: type checker loops
  * #3787: bad program produced
