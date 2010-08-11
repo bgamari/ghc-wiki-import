@@ -3,6 +3,8 @@ CONVERSION ERROR
 Original source:
 
 ```trac
+= Notes on Porting GHC to Barrelfish =
+
 This page contains a braindump of issues that came up when porting GHC to the [http://barrelfish.org Barrelfish OS].
 
 == Approach ==
