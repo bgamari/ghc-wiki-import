@@ -125,6 +125,7 @@ Original source:
  * #3696: better error message fr missing signature
  * #4175: better GHCi info for type-function instances
  * #4254: fundeps
+ * #4044, #4045: assertion failure when bootstrapping; hard to reproduce
 
 == Types and type inference ==
  * #3490: superclasses and ambiguity
