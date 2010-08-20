@@ -24,6 +24,7 @@ GC algorithms supported:
  * [wiki:Commentary/Rts/Storage/GC/Marking Marking] (for compaction or sweeping)
  * [wiki:Commentary/Rts/Storage/GC/Compaction Compaction]
  * [wiki:Commentary/Rts/Storage/GC/Sweeping Sweeping] (for mark-region GC)
+ * [wiki:Commentary/Rts/Storage/GC/Immix Immix] (not supported yet)
 
 == GC overview ==
 
