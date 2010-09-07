@@ -56,6 +56,14 @@ We discuss the following subtopics on separate pages:
 - [Memory management](objective-c/memory-management) 
 - `Foreign.ObjectiveC`
 
+
+We also have some basic ideas for type-safe usage of Objective-C above the FFI layer:
+
+
+- [Type-safe messaging](objective-c/type-safe-messaging)
+- How to deal with subclassing and existentials in Haskell code
+- On-the-fly class creation
+
 ## Background and related work
 
 
