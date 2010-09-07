@@ -23,7 +23,7 @@ data instance Selector NSObject a where
 ```
 
 
-In practice, the Selector family might be an associated data type of a typeclass of objects, with send as a method that dispatches those selectors down to the appropriate FFI calls.
+In practice, the `Selector` family might be an associated data type of a typeclass of objects, with `send` as a method that dispatches those selectors down to the appropriate FFI calls.
 
 
 
