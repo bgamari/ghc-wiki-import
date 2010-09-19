@@ -1,131 +1,80 @@
-# The GHC Builder
+CONVERSION ERROR
 
+Original source:
 
+```trac
 
-The **GHC builder** is a client/server system that allows us to build and test GHC on lots of different computers scattered around the world (the *clients*, or *build slaves*), and aggregate the test results centrally (the *server*).
+= The GHC Builder =
 
-
+The '''GHC builder''' is a client/server system that allows us to build and test GHC on lots of different computers scattered around the world (the ''clients'', or ''build slaves''), and aggregate the test results centrally (the ''server'').
 
 Each night we build GHC on each slave, in various different ways, run the test suite and performance benchmarks, and mail the results to the `cvs-ghc@haskell.org` mailing list.  
 
+== Seeing build results ==
 
-## Seeing build results
+The build results are uploaded to http://darcs.haskell.org/ghcBuilder/builders/
 
+== Can you offer a build slave? ==
 
-
-The build results are uploaded to [
-http://darcs.haskell.org/ghcBuilder/builders/](http://darcs.haskell.org/ghcBuilder/builders/)
-
-
-## Can you offer a build slave?
+We're always keen to add more build slaves to the setup. If a platform is represented in the nightly builds, it's we can identify and fix problems specific to that platform much more quickly.  If you'd like to join the fun, please let us know at [mailto:cvs-ghc@haskell.org]. 
 
 
-
-We're always keen to add more build slaves to the setup. If a platform is represented in the nightly builds, it's we can identify and fix problems specific to that platform much more quickly.  If you'd like to join the fun, please let us know at cvs-ghc@…. 
-
-
-# How to set up a build slave
-
-
+= How to set up a build slave =
 
 The GHC Builder is written in Haskell as a pair of Cabal packages (one for the clients/slaves, and one for the server).
 
+== Install OpenSSL ==
 
-## Install OpenSSL
+ * On Windows, install OpenSSL from here (not the Light Version): [http://www.openssl.org/related/binaries.html]
+ * On Linux, get OpenSSL from your distro.  E.g. install `openssl-devel` on !RedHat-derived distros (e.g. Fedora), or `openssl-dev` on Debian-derived distros (e.g. Ubuntu)
+ * On FreeBSD, OpenSSL is included in the base system and it is also available as a [http://www.freshports.org/security/openssl port].
+ * On Mac OS X, install openssl from [http://www.macports.org/]: `sudo port install openssl`.
+ * Solaris: someone please fill this in
 
-
-- On Windows, install OpenSSL from here (not the Light Version): [
-  http://www.openssl.org/related/binaries.html](http://www.openssl.org/related/binaries.html)
-- On Linux, get OpenSSL from your distro.  E.g. install `openssl-devel` on RedHat-derived distros (e.g. Fedora), or `openssl-dev` on Debian-derived distros (e.g. Ubuntu)
-- On FreeBSD, OpenSSL is included in the base system and it is also available as a [
-  port](http://www.freshports.org/security/openssl).
-- On Mac OS X, install openssl from [
-  http://www.macports.org/](http://www.macports.org/): `sudo port install openssl`.
-- Solaris: someone please fill this in
-
-## Install HsOpenSSL
-
-
+== Install HsOpenSSL ==
 
 On non-Windows:
 
-
-```wiki
+{{{
 cabal install HsOpenSSL
-```
+}}}
 
+On Windows: You might have to add explicit include and lib directories:
 
-On Windows: You might have to add 'ssl32' after 'eay32' in 'extra-libraries' in HsOpenSSL.cabal.  So
-
-
-```wiki
-cabal unpack HsOpenSSL
-cd HsOpenSSL*
-<edit HsOpenSSL.cabal, add ssl32 to extra-libraries>
+{{{
 cabal install --extra-include-dirs="c:/OpenSSL/include" --extra-lib-dirs="c:/OpenSSL"
-```
+}}}
 
-
-This has been fixed in the Darcs HEAD of HsOpenSSL.
-
-
-## To create a new build slave
-
-
+== To create a new build slave ==
 
 You can get the code for the builder with
-
-
-```wiki
+{{{
 darcs get http://darcs.haskell.org/builder/
-```
-
-
+}}}
 or, if you have an account on darcs.haskell.org,
-
-
-```wiki
+{{{
 darcs get darcs.haskell.org:/srv/darcs/builder/
-```
-
-
+}}}
 and then build the Cabal package in the `client/` subdirectory.
 
-
-
-Once you have built it, pick a username (something fairly unique to you) and password, and send them to igloo@… along with the time (and timezone) you want builds to happen and any extra information (e.g. "GNU make is gmake", or "builds need these lines added to mk/build.mk"). The username is used so we know which machine the build log came from, and the password is used to verify that the client is who it claims it is.
-
-
+Once you have built it, pick a username (something fairly unique to you) and password, and send them to igloo@earth.li along with the time (and timezone) you want builds to happen and any extra information (e.g. "GNU make is gmake", or "builds need these lines added to mk/build.mk"). The username is used so we know which machine the build log came from, and the password is used to verify that the client is who it claims it is.
 
 Then initialise the client by creating a new directory, and running:
-
-
-```wiki
+{{{
 builder-client init username password darcs.haskell.org
-```
-
-
-in it, where `username` and `password` are your username and password. This will create various files and subdirectories that the client will use. Then put a copy of [
-http://darcs.haskell.org/ghcBuilder/cert/root.pem](http://darcs.haskell.org/ghcBuilder/cert/root.pem) in `certs/` so that the client can verify that it is connecting to the right server.
-
-
+}}}
+in it, where `username` and `password` are your username and password. This will create various files and subdirectories that the client will use. Then put a copy of http://darcs.haskell.org/ghcBuilder/cert/root.pem in `certs/` so that the client can verify that it is connecting to the right server.
 
 You can now run the client with:
-
-
-```wiki
+{{{
 builder-client
-```
-
-
+}}}
 or
-
-
-```wiki
+{{{
 builder-client -v
-```
-
-
+}}}
 We recommend running in screen for now, as the client doesn't daemonise itself yet. The client will connect to the server, and the server will tell the client how and when to do builds. The client therefore needs to be left running unless you want to stop builds from happening.
 
 
+
+```
