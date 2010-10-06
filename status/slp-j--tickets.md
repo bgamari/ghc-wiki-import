@@ -176,6 +176,8 @@ Original source:
  * #4222: design of reification for TH
 
 == Features == 
+ * #4372: better quasiquotes
+ * #4359: lambda case
  * #4370: monad comprehensions
  * #4148: improvements to mdo syntax
  * #595: pattern-match overlap checking
