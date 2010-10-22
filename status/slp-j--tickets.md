@@ -66,7 +66,6 @@ Original source:
  * #2092: Possible quadratic-sized Eq instances. Does it really go quadratic, or does the join-point inlining machinery prevent it?  Still to check: delicacy wrt case-of-case
  * #2255, #3767, #2642, #3831: Improve '''`SpecConstr`''' for free variables, and for join points.
  * #2374: SAT and `MutableByteArray`	Max?
- * #3065: better code in quot/rem
 
 === Compiler performance ===
  * #1969: quadratic behaviour in the specialiser
@@ -82,6 +81,7 @@ Original source:
  * #2271: floor, ceiling, round :: Double -> Int are awesomely slow
  * #1434: slow conversion Double to Int
  * #2270: gcd specialisation
+ * #3065: better code in quot/rem
 
 == GHCi ==
  * #4017: unhelpful GHCi message
