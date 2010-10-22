@@ -102,7 +102,7 @@ Original source:
  * #4338: superclass equalities
  * #4310: deferred equalities and forall types (needs Brent's work)
 
- * #816: extreme delicacy in solve order
+ * #816. #3108: extreme delicacy in solve order, involving fundeps
  * #1823: refinement
  * #3714: error message if associated family has excess parameters
  * #3554: assertion failure
@@ -148,7 +148,6 @@ Original source:
  * #2641: revise what `-XExtendedDefaultRules` does
  * #1634: deep skolemisation; also this one #3592
  * #3018: be lazier about solving class instances
- * #3108: interaction of fundeps and type class solving
  * #2357: '''Implement the Haskell Prime proposal for polymorphic pattern bindings'''
 
 === Impredicativity ===
@@ -184,6 +183,7 @@ Original source:
  * #4222: design of reification for TH
 
 == Features == 
+ * #4426: simpler rule for implicit quantification
  * #4372: better quasiquotes
  * #4359: lambda case
  * #4370: monad comprehensions
