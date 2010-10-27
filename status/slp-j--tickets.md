@@ -73,6 +73,7 @@ Original source:
  * Use wildcards for dead variables in interface files.
 
 == Tiresome arithmetic things ==
+ * #2281: properFraction implemented with modf primitive?
  * #4101: constant folding for `(**)`
  * #3676: `realToFrac` conversions
  * #3744: comparisons against `minBound` and `maxBound` are not optimised away
