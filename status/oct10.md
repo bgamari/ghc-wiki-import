@@ -1,105 +1,149 @@
-CONVERSION ERROR
+# GHC Status October 2010
 
-Original source:
 
-```trac
-= GHC Status October 2010 =
 
 GHC is humming along.  We are currently deep into the release cycle for GHC 7.0.  We have finally bumped the major version number, because GHC 7.0 has quite a bit of new stuff
 
- * As long promised, Simon PJ and Dimitrios have spent a good chunk of the summer doing a complete rewrite of the constraint solver in the type inference engine.  Because of GHC's myriad type-system extensions, especially GADTs and type families, the old engine had begun to resemble the final stages of a game of Jenga.  It was a delicately-balanced pile of blocks that lived in constant danger of complete collapse, and had become extremely different to modify (or even to understand).  The new inference engine is much more modular and robust; it is described in detail in our paper [[http://haskell.org/haskellwiki/Simonpj/Talk:OutsideIn OutsideIn]].  A blog post describes some consequential changes to let generalisation [!LetGen].
 
- As a result we have closed dozens of open type inference bugs, especially related to GADTs and type families.
+- As long promised, Simon PJ and Dimitrios have spent a good chunk of the summer doing a complete rewrite of the constraint solver in the type inference engine.  Because of GHC's myriad type-system extensions, especially GADTs and type families, the old engine had begun to resemble the final stages of a game of Jenga.  It was a delicately-balanced pile of blocks that lived in constant danger of complete collapse, and had become extremely different to modify (or even to understand).  The new inference engine is much more modular and robust; it is described in detail in our paper [
+  http://haskell.org/haskellwiki/Simonpj/Talk:OutsideIn OutsideIn](http://haskell.org/haskellwiki/Simonpj/Talk:OutsideIn OutsideIn).  A blog post describes some consequential changes to let generalisation \[LetGen\].
 
- * There is a new, robust implementation of INLINE pragmas, that behaves much more intuitively. GHC now captures the original RHS of an INLINE function, and keeps it more-or-less pristine, ready to inline at call sites.  Separately, the original RHS is optimised in the usual way.  Suppose you say
-{{{
-{-# INLINE f #-}
-f x = ...blah...
+>
+>
+> As a result we have closed dozens of open type inference bugs, especially related to GADTs and type families.
+>
+>
 
-g1 y = f y + 1
-g2 ys = map f ys
-}}}
- Here, `f` will be inlined into `g1` as you'd expect, but obviously not into `g2` (since it's not applied to anything).  However `f`'s right hand side will be optimised (separately from the copy retained for inlining) so that the call from `g2` runs optimised code.
+- There is a new, robust implementation of INLINE pragmas, that behaves much more intuitively. GHC now captures the original RHS of an INLINE function, and keeps it more-or-less pristine, ready to inline at call sites.  Separately, the original RHS is optimised in the usual way.  Suppose you say
 
- * David Terei implemented a new back end for GHC using LLVM. In certain situations using the LLVM backend can give fairly substantial performance improvements to your code, particularly if you're using the Vector libraries, DPH or making heavy use of fusion. In the general case it should give as good performance or slightly better than GHC's native code generator and C backend. You can use it through the '-fllvm' compiler flag. More details of the backend can be found in David's and Manuel Chakravarty's Haskell Symposium paper [Llvm].
+  ```wiki
+  {-# INLINE f #-}
+  f x = ...blah...
 
- * Bryan O’Sullivan and Johan Tibell and implemented a new, highly-concurrent I/O manager. GHC now supports over a hundred thousand open I/O connections. The new I/O manager defines a separate backend per operating system, using the most efficient system calls for that particular operating system (e.g. `epoll` on Linux.) This means that GHC can now be used to implement servers that make use of e.g. HTTP long polling, where the server needs to handle a large number of open idle connections.
+  g1 y = f y + 1
+  g2 ys = map f ys
+  ```
 
- * In joint work with Phil Trinder and his colleagues at Herriot Watt, Simon M designed implemented a new parallel strategies library, described in their 2010 Haskell Symposium paper [Seq].
+  Here, `f` will be inlined into `g1` as you'd expect, but obviously not into `g2` (since it's not applied to anything).  However `f`'s right hand side will be optimised (separately from the copy retained for inlining) so that the call from `g2` runs optimised code.
 
- * Simon M did a lot of work on the runtime system.  In particular he substantially improved the way that thunks are handled in a concurrent programs.  '''Simon: a little more info?'''
+- David Terei implemented a new back end for GHC using LLVM. In certain situations using the LLVM backend can give fairly substantial performance improvements to your code, particularly if you're using the Vector libraries, DPH or making heavy use of fusion. In the general case it should give as good performance or slightly better than GHC's native code generator and C backend. You can use it through the '-fllvm' compiler flag. More details of the backend can be found in David's and Manuel Chakravarty's Haskell Symposium paper \[Llvm\].
 
- * Simon M designed and implemented a new API for asynchronous exceptions.  '''Simon: describe'''
+- Bryan O’Sullivan and Johan Tibell and implemented a new, highly-concurrent I/O manager. GHC now supports over a hundred thousand open I/O connections. The new I/O manager defines a separate backend per operating system, using the most efficient system calls for that particular operating system (e.g. `epoll` on Linux.) This means that GHC can now be used to implement servers that make use of e.g. HTTP long polling, where the server needs to handle a large number of open idle connections.
+
+- In joint work with Phil Trinder and his colleagues at Herriot Watt, Simon M designed implemented a new parallel strategies library, described in their 2010 Haskell Symposium paper \[Seq\].
+
+- Simon M did a lot of work on the runtime system.  In particular he substantially improved the way that thunks are handled in a concurrent programs.  **Simon: a little more info?**
+
+- Simon M designed and implemented a new API for asynchronous exceptions.  **Simon: describe**
+
 
 We are fortunate to have a growing team of people willing to roll up their
 sleeves and help us with GHC.  Amongst those who have got involved recently are:
- * Daniel Fischer, who worked on improving the performance of the numeric libraries
- * Milan Straka, for great work improving the performance of the widely-used containers package [Containers]
- * Greg Wright is leading a strike team to make GHC work better on Macs
- * Evan Laforge who has taken on some of the long-standing issues with the Mac installer
- * Sam Anklesaria implemented rebindable syntax for conditionals
- * ..who else..?
+
+
+- Daniel Fischer, who worked on improving the performance of the numeric libraries
+- Milan Straka, for great work improving the performance of the widely-used containers package \[Containers\]
+- Greg Wright is leading a strike team to make GHC work better on Macs
+- Evan Laforge who has taken on some of the long-standing issues with the Mac installer
+- Sam Anklesaria implemented rebindable syntax for conditionals
+- ..who else..?
+
+
 At GHC HQ we are having way too much fun; if you wait for us to
 do something you have to wait a long time.  So don't wait; join in!  
 
-== Language developments, especially types ==
+
+## Language developments, especially types
+
+
 
 GHC continues to act as an incubator for interesting new language developments.
 Here's a selection that we know about.
 
- * Pedro Magalhaes is implementing the '''derivable type classes''' mechanism described in his 2010 Haskell Symposium paper [Derivable].  I plan for this to replace GHC's current derivable-type-class mechanism, which has a poor power-to-weight ratio and is little used.
 
- * Stephanie Weirich and Steve Zdancewic had a great sabbatical year at Cambridge.  One of the things we worked on, with Brent Yorgey who came as an intern, was to close the embarrassing hole in the type system concerning '''newtype deriving''' (see Trac bug #1496).  I have delayed fixing until I could figure out a Decent Solution, but now we know; see our 2011 POPL paper [Newtype].  Brent is working on some infrastructal changes to GHC's Core language, and then we'll be ready to tackle the main issue.
+- Pedro Magalhaes is implementing the **derivable type classes** mechanism described in his 2010 Haskell Symposium paper \[Derivable\].  I plan for this to replace GHC's current derivable-type-class mechanism, which has a poor power-to-weight ratio and is little used.
 
- * Next after that is a mechanism for '''promoting types to become kinds''', and data constructors to become types, so that you can do ''typed'' functional programming at the type level.  Conor !McBride's SHE prototype is the inspiration here [SHE].  Currently it is, embarrassingly, essentially untyped.  
+- Stephanie Weirich and Steve Zdancewic had a great sabbatical year at Cambridge.  One of the things we worked on, with Brent Yorgey who came as an intern, was to close the embarrassing hole in the type system concerning **newtype deriving** (see Trac bug [\#1496](https://gitlab.staging.haskell.org/ghc/ghc/issues/1496)).  I have delayed fixing until I could figure out a Decent Solution, but now we know; see our 2011 POPL paper \[Newtype\].  Brent is working on some infrastructal changes to GHC's Core language, and then we'll be ready to tackle the main issue.
 
- * '''Template Haskell''' seems to be increasingly widely used.  Simon PJ has written a proposal for a raft of improvements, which we plan to implement in the new year [!TemplateHaskell].
+- Next after that is a mechanism for **promoting types to become kinds**, and data constructors to become types, so that you can do *typed* functional programming at the type level.  Conor McBride's SHE prototype is the inspiration here \[SHE\].  Currently it is, embarrassingly, essentially untyped.  
 
- * Iavor Diatchki plans to add '''numeric types''', so that you can have a type like `Bus 8`, and do simple arithmetic at the type level.  You can encode this stuff, but it's easier to use and more powerful to do it directly.
+- **Template Haskell** seems to be increasingly widely used.  Simon PJ has written a proposal for a raft of improvements, which we plan to implement in the new year \[TemplateHaskell\].
 
- * David Mazieres at Stanford wants to implement '''Safe Haskell''', a flag for GHC that will guarantee that your program does not use `unsafePerformIO`, foreign calls, RULES, and other stuff stuff.  This is part of his project to ... '''David pls fill in'''.
+- Iavor Diatchki plans to add **numeric types**, so that you can have a type like `Bus 8`, and do simple arithmetic at the type level.  You can encode this stuff, but it's easier to use and more powerful to do it directly.
+
+- David Mazieres at Stanford wants to implement **Safe Haskell**, a flag for GHC that will guarantee that your program does not use `unsafePerformIO`, foreign calls, RULES, and other stuff stuff.  This is part of his project to ... **David pls fill in**.
+
 
 7.0 also has support for the Haskell 2010 standard, and the libraries that it specifies.
 
-== Packages and the runtime system ==
 
-'''Simon M'''
+## Packages and the runtime system
 
- * Independent parallel garbage collection [Simon M]
- * Better package management (esp wrt profiling)
- * Glorious new back end -fuse-new-codegen
 
-== The Parallel Haskell Project ==
 
-'''Duncan to write'''
+**Simon M**
 
-== Data Parallel Haskell ==
 
-'''Manuel to fill in'''.  Mention upcoming release.
+- Independent parallel garbage collection \[Simon M\]
+- Better package management (esp wrt profiling)
+- Glorious new back end -fuse-new-codegen
 
-== Installers ==
+## The Parallel Haskell Project
+
+
+
+**Duncan to write**
+
+
+## Data Parallel Haskell
+
+
+
+Since the last report, we have continued to improve support for nested parallel divide-and-conquer algorithms.  We started with [
+http://darcs.haskell.org/packages/dph/dph-examples/spectral/QuickHull/dph/QuickHullVect.hs QuickHull](http://darcs.haskell.org/packages/dph/dph-examples/spectral/QuickHull/dph/QuickHullVect.hs QuickHull) and are now working on an implementation of the [
+http://darcs.haskell.org/packages/dph/dph-examples/real/BarnesHut/Solver/NestedBH/Solver.hs Barnes-Hut](http://darcs.haskell.org/packages/dph/dph-examples/real/BarnesHut/Solver/NestedBH/Solver.hs Barnes-Hut) *n*-body algorithm.  The latter is not only significantly more complex, but also requires the vectorisation of recursive tree data-structures, going well beyond the capabilities of conventional parallel-array languages.  In time for the stable branch of GHC 7.0, we replaced the old, per-core sequential array infrastructure (which was part of the sub-package `dph-prim-seq`) by  the **vector** package — **vector** started its life as a next-generation spin off of `dph-prim-seq`, but now enjoys significant popularity independent of DPH. 
+
+
+
+Mention upcoming release.
+
+
+## Installers
+
+
 
 The GHC installers have also received some attention for this release.
 
+
+
 The Windows installer includes a much more up-to-date copy of the MinGW system, which in particular fixes a couple of issues on Windows 7. Thanks to Claus Reinke, the installer also allows more control over the registry associations etc.
+
+
 
 Meanwhile, the Mac OS X installer has received some attention from Evan Laforge. Most notably, it is now possible to install different versions of GHC side-by-side.
 
-== Bibliography ==
 
- * [Containers] "The performance of the Haskell containers package", Straka, Haskell Symposium 2010, http://research.microsoft.com/~simonpj/papers/containers/containers.pdf
+## Bibliography
 
- * [Derivable] "A generic deriving mechanism for Haskell", Magalhães, Dijkstra, Jeuring and Löh, Haskell Symposium 2010, www.dreixel.net/research/pdf/gdmh_nocolor.pdf.
 
- * [!LetGen] "Let generalisation in GHC 7.0", Peyton Jones, blog post Sept 2010, http://hackage.haskell.org/trac/ghc/blog/LetGeneralisationInGhc7
- * [Newtype] "Generative Type Abstraction and Type-level Computation", Weirich, Zdancewic, Vytiniotis, and Peyton Jones, POPL 2010, http://www.cis.upenn.edu/~sweirich/newtypes.pdf
+- \[Containers\] "The performance of the Haskell containers package", Straka, Haskell Symposium 2010, [
+  http://research.microsoft.com/\~simonpj/papers/containers/containers.pdf](http://research.microsoft.com/~simonpj/papers/containers/containers.pdf)
 
- * [Llvm] "An LLVM Backend for GHC", Terei and Chakravarty, Haskell Symposium 2010, http://www.cse.unsw.edu.au/~davidt/downloads/ghc-llvm-hs10.pdf
+- \[Derivable\] "A generic deriving mechanism for Haskell", Magalhães, Dijkstra, Jeuring and Löh, Haskell Symposium 2010, www.dreixel.net/research/pdf/gdmh\_nocolor.pdf.
 
- * [Seq] "Seq no more", Marlow, Maier, Trinder, Loidl, and Aswad, Haskell Symposium 2010, http://www.haskell.org/~simonmar/papers/strategies.pdf
+- \[LetGen\] "Let generalisation in GHC 7.0", Peyton Jones, blog post Sept 2010, [
+  http://hackage.haskell.org/trac/ghc/blog/LetGeneralisationInGhc7](http://hackage.haskell.org/trac/ghc/blog/LetGeneralisationInGhc7)
+- \[Newtype\] "Generative Type Abstraction and Type-level Computation", Weirich, Zdancewic, Vytiniotis, and Peyton Jones, POPL 2010, [
+  http://www.cis.upenn.edu/\~sweirich/newtypes.pdf](http://www.cis.upenn.edu/~sweirich/newtypes.pdf)
 
- * [SHE] The Strathclyde Haskell Enhancement, Conor McBride, 2010, http://personal.cis.strath.ac.uk/~conor/pub/she/
+- \[Llvm\] "An LLVM Backend for GHC", Terei and Chakravarty, Haskell Symposium 2010, [
+  http://www.cse.unsw.edu.au/\~davidt/downloads/ghc-llvm-hs10.pdf](http://www.cse.unsw.edu.au/~davidt/downloads/ghc-llvm-hs10.pdf)
 
- * [!TemplateHaskell] New directions for Template Haskell, Peyton Jones, blog post October 2010, http://hackage.haskell.org/trac/ghc/blog/Template%20Haskell%20Proposal
+- \[Seq\] "Seq no more", Marlow, Maier, Trinder, Loidl, and Aswad, Haskell Symposium 2010, [
+  http://www.haskell.org/\~simonmar/papers/strategies.pdf](http://www.haskell.org/~simonmar/papers/strategies.pdf)
 
-```
+- \[SHE\] The Strathclyde Haskell Enhancement, Conor McBride, 2010, [
+  http://personal.cis.strath.ac.uk/\~conor/pub/she/](http://personal.cis.strath.ac.uk/~conor/pub/she/)
+
+- \[TemplateHaskell\] New directions for Template Haskell, Peyton Jones, blog post October 2010, [
+  http://hackage.haskell.org/trac/ghc/blog/Template%20Haskell%20Proposal](http://hackage.haskell.org/trac/ghc/blog/Template%20Haskell%20Proposal)
