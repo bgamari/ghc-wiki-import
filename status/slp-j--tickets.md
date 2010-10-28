@@ -20,6 +20,7 @@ Original source:
  * #2440: bad code with type families; I believe this is also arity-related
  * #2762: Arity analysis
  * #2831: error expressions and arities
+ * #1547: profiling and arity
 
 === Inlining ===
  * #4227: SPECIALISE pragmas for functions in other modules
