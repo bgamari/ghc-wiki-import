@@ -1,19 +1,29 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
-= The new Generic Deriving mechanism =
-
-GHC includes a new (in 2010) mechanism to let you write generic functions.  It is described in [http://www.dreixel.net/research/pdf/gdmh_nocolor.pdf A generic deriving mechanism for Haskell], by Magalhães, Dijkstra, Jeuring and Löh.  This page sketches the specifics of the implementation; we assume you have read the paper.
-
-This mechanism replaces the [http://www.haskell.org/ghc/docs/6.12.2/html/users_guide/generic-classes.html previous generic classes implementation].
-
-== Main components ==
-
- * `TcDeriv.tcDeriving` generates an `InstInfo` for each data type that '''fill in'''
-
- * '''Say which library modules, in which packages, contain which data types and classes'''.
+# The new Generic Deriving mechanism
 
 
-```
+
+GHC includes a new (in 2010) mechanism to let you write generic functions.  It is described in [
+A generic deriving mechanism for Haskell](http://www.dreixel.net/research/pdf/gdmh_nocolor.pdf), by Magalhães, Dijkstra, Jeuring and Löh.  This page sketches the specifics of the implementation; we assume you have read the paper.
+
+
+
+This mechanism replaces the [previous generic classes implementation](http://www.haskell.org/ghc/docs/6.12.2/html/users_guide/generic-classes.html).
+
+
+## Main components
+
+
+- `TcDeriv.tcDeriving` generates an `InstInfo` for each data type that fulfills the `isRep0` predicate. This `InstInfo` is the `Representable0` instance for that type, allowing it to be handled generically (by kind-`*` generic functions).
+
+- The representation types and core functionality of the library live on `GHC.Generics` (on the `ghc-prim` package).
+
+- Many names have been added as known in `prelude/PrelNames`
+
+- Most of the code generation is handled by `types/Generics`
+
+## To do
+
+
+- Generate meta-information empty datatypes and instances (`Datatype`, `Constructor`, and `Selector` instances)
+- Generate `Representable1` instances
+- Generic instances
