@@ -141,6 +141,7 @@ Original source:
 
 
 == Types and type inference ==
+ * #4466: explicit type application
  * #3490: superclasses and ambiguity
  * #3638: rules and rigidity for GADTs
  * #3632: better update for records with existentials
