@@ -55,6 +55,7 @@ Original source:
  * #4090: failed `getRegister` in asm codegen
 
 === Other performance ===
+ * #4470: merge identical counters
  * #2439: Strict dictionaries
  * #3138: returning a known constructor (Lennart's cmonad package)
  * #2988: better float-in
