@@ -51,6 +51,8 @@ The following aspects of Haskell can be used to violate the safety goal, and thu
 
 - Likewise, `RULES` and `SPECIALIZE` pragmas can change the behavior of trusted code in unanticipated ways.
 
+- `OPTIONS_GHC` is probably dangerous in unfiltered form, as it could potentially expose packages with trusted but not trustworthy modules.
+
 - The `StandaloneDeriving` extension can be used to violate constructor access control by defining instances of `Read` and `Show` to examine and construct data values with inaccessible constructors.
 
 - Similarly, `GeneralizedNewtypeDeriving` can also violate constructor access control, by allowing untrusted code to manipulate protected data types in ways the data type author did not intend.
@@ -75,7 +77,11 @@ Either `-XSafe` should disallow ` {-# LANGUAGE MagicHash #-} ` pragmas, or the `
 
 
 
-`-XSafe` should disallow the `FFI`, `TemplateHaskell`, `OverlappingInstances`, `StandaloneDeriving`, and `GeneralizedNewtypeDeriving` language extensions, as well as `RULES` and `SPECIALIZE` pragmas.
+`-XSafe` should disallow the `FFI`, `TemplateHaskell`, `OverlappingInstances`, `StandaloneDeriving`, `GeneralizedNewtypeDeriving`, and `CPP` language extensions, as well as `RULES` and `SPECIALIZE` pragmas.
+
+
+
+`OPTIONS_GHC` pragmas will have to be filtered.  Some options, (e.g., -fno-warn-unused-do-bind) are totally fine, but many others are likely problematic (e.g., `-cpp`, which provides access to the local file system at compilation time, or `-F` which allows an arbitrary file to be executed, possibly even one named `/afs/`... and hence entirely under an attacker's control).
 
 
 
