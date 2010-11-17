@@ -55,6 +55,7 @@ Original source:
  * #4090: failed `getRegister` in asm codegen
 
 === Other performance ===
+ * #2607: space leak: inlining defeats selector thunk optimisation
  * #4470: merge identical counters
  * #2439: Strict dictionaries
  * #3138: returning a known constructor (Lennart's cmonad package)
@@ -212,7 +213,6 @@ Original source:
 
 --------------------------
 == Not sure what to do about these ==
- * #2607: space leak: inlining defeats selector thunk optimisation
  * #2284: the state-hack "optimisation" causes much re-computation
  * #3872: divergence in simplifier
  * #4005: generational GC pathalogical case
