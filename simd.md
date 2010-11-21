@@ -1,25 +1,26 @@
-CONVERSION ERROR
+## SIMD
 
-Original source:
 
-```trac
-== SIMD ==
 
 SIMD means "Single Instruction, Multiple Data".
 This is the typical processing model of todays GPUs (graphic processing units).
-The main difference between SIMD and [wiki:VectorComputing Vector computing] is,
+The main difference between SIMD and [Vector computing](vector-computing) is,
 that vector units support permutation of vector elements.
 This is a significant difference that makes vector computing much more powerful than SIMD processing,
 at least if you compare n-element vectors with n-processing units in an SIMD architecture.
 This comparison is not quite fair, since today GPUs can process, say, 32 data elements in parallel (and have multiple cores),
 but the CPUs have only floating point vectors of size 4.
 
+
+
 GHC does not support GPUs (and thus SIMD) so far,
 however support for vectors is planned.
 
-== See also ==
 
-* [http://perilsofparallel.blogspot.com/2008/09/larrabee-vs-nvidia-mimd-vs-simd.html The Perils of parallel: Larrabee vs. Nvidia, MIMD vs. SIMD]
-* [wiki:VectorComputing VectorComputing]  The page for discussion of the Vector unit support in GHC.
+## See also
 
-```
+
+- [
+  The Perils of parallel: Larrabee vs. Nvidia, MIMD vs. SIMD](http://perilsofparallel.blogspot.com/2008/09/larrabee-vs-nvidia-mimd-vs-simd.html)
+
+- [VectorComputing](vector-computing)  The page for discussion of the Vector unit support in GHC.
