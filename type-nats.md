@@ -3,6 +3,8 @@ CONVERSION ERROR
 Original source:
 
 ```trac
+= Type Level Naturals =
+
 This page collects information on how to work with type-level natural numbers, as implemented in the Haskell compiler GHC (ticket #4385).
 
   * [wiki:TypeNats/Basics           Type-Level Naturals Basics]
