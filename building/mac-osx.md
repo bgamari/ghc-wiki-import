@@ -1,63 +1,42 @@
-# Building on MacOS X
+CONVERSION ERROR
+
+Original source:
+
+```trac
 
 
-## Get the latest development tools
+= Building on MacOS X =
 
+== Get the latest development tools ==
 
-
-Certain versions of Apple's Xcode tools are known to cause problems when building some versions of GHC. You should download the latest Xcode (currently 3.1) from the [
-Apple Developer Connection](http://developer.apple.com/tools/xcode) website. Downloading requires that you sign up for a free membership in the Apple Developer Connection.
-
-
+Certain versions of Apple's Xcode tools are known to cause problems when building some versions of GHC. You should download the latest Xcode (currently 3.1) from the [http://developer.apple.com/tools/xcode Apple Developer Connection] website. Downloading requires that you sign up for a free membership in the Apple Developer Connection.
 
 Once upon a time Apple distributed updates to Xcode by using their Software Update service but not anymore. You must download the development tools manually.
 
+Successful builds of older GHC sources have been reported using Xcode 3.0, 2.4 and 2.4.1 on Intel Macs. Xcode 2.2.1 is known ''not'' to work out of the box on Intel Macs, and Xcode 3.0 is known ''not'' to work out of the box on PowerPC Macs (#2887). Versions prior to 3.1 may build GHC successfully, but choke on certain libraries.
 
-
-Successful builds of older GHC sources have been reported using Xcode 3.0, 2.4 and 2.4.1 on Intel Macs. Xcode 2.2.1 is known *not* to work out of the box on Intel Macs, and Xcode 3.0 is known *not* to work out of the box on PowerPC Macs ([\#2887](https://gitlab.staging.haskell.org/ghc/ghc/issues/2887)). Versions prior to 3.1 may build GHC successfully, but choke on certain libraries.
-
-
-## Building installer packages
-
-
+== Building installer packages ==
 
 After running `./configure`, you can create a Mac installer package (.pkg) fully automatically by issuing
-
-
-```wiki
+{{{
 make framework-pkg
-```
-
-
+}}}
 The result will be a file `GHC-<version>-<arch>.pkg`, where `<version>` is the full version string and `<arch>` is `i386` or `ppc`.  The build process uses `xcodebuild` and `packagemaker` and has only been tested with Xcode 3.0.
 
+More details about [wiki:Building/MacOSX/Installer building installer packages] are available, this includes how to specify non-standard library locations (.e.g, for readline) and information about the build process.
 
+== Getting Readline to work ==
 
-More details about [building installer packages](building/mac-osx/installer) are available, this includes how to specify non-standard library locations (.e.g, for readline) and information about the build process.
+'''With recent versions of GHC (6.10 and above) it is no longer necessary to take any
+special steps to get readline features in GHCi -- GHC now uses editline.'''
 
-
-## Getting Readline to work
-
-
-
-**With recent versions of GHC (6.10 and above) it is no longer necessary to take any
-special steps to get readline features in GHCi -- GHC now uses editline.**
-
-
-
-Thanks to Paul R Brown for the following [
-instructions](http://mult.ifario.us/articles/2006/10/17/ghc-6-6-and-mac-os-x-readline-quick-fix).
-
-
+Thanks to Paul R Brown for the following [http://mult.ifario.us/articles/2006/10/17/ghc-6-6-and-mac-os-x-readline-quick-fix instructions].
 
 Building GHC 6.6 out of the box on MacOS X will leave you with a GHCi binary that has no readline support.  This is because MacOS X comes NetBSD's libedit and Apple has made /usr/lib/libreadline.dylib a symlink to libedit. libedit does not support all of the libreadline API that GHC requires, so the GHC configure script decides not to use it.
 
-
-
 To get readline working, you first need to install GNU readline:
 
-
-```wiki
+{{{
 cd ~/work
 mkdir gnu-readline
 cd !$
@@ -66,13 +45,11 @@ tar xzvf readline-5.2.tar.gz
 cd readline-5.2
 ./configure
 make && sudo make install
-```
-
+}}}
 
 Now you have to tell the GHC build about readline:
 
-
-```wiki
+{{{
 cd ~/work
 mkdir ghc
 cd !$
@@ -84,153 +61,96 @@ cd ghc-6.6
 ./configure --with-readline-includes=/usr/local/include \
             --with-readline-libraries=/usr/local/lib
 make -j && sudo make install
-```
-
+}}}
 
 (`-j` tells make to spawn lots of processes building in parallel, it will probably save some time especially if you have a multi-core machine).
 
-
-## Building the distrbution
-
-
-
+== Building the distrbution ==
 The following instructions are from Audrey Tang
 
-
-
 Install the 6.4.1 bindist, download both source
-tarballs from [
-http://haskell.org/ghc/download\_ghc\_66.html](http://haskell.org/ghc/download_ghc_66.html)
+tarballs from http://haskell.org/ghc/download_ghc_66.html
 and extract both; 
-
-
 
 cd into ghc-6.6; sh configure; make; make install.
 
-
-
 Then create mk/build.mk with one line:
 
-
-
-BIN\_DIST=1
-
-
+BIN_DIST=1
 
 then "make binary-dist", and tar the ghc-6.6/ directory produced.
 
+== Building using !MacPorts ==
 
-## Building using MacPorts
-
-
-
-ghc 6.6 can be built from source using [
-MacPorts](http://macports.org) on Intel and PowerPC Macs.
-Follow the instructions on the MacPorts website for installing the infrastructure and port files,
+ghc 6.6 can be built from source using [http://macports.org MacPorts] on Intel and PowerPC Macs.
+Follow the instructions on the !MacPorts website for installing the infrastructure and port files,
 then type
 
-
-
-` > sudo port install ghc `
-
-
+{{{ > sudo port install ghc }}}
 
 to build and install ghc.  Dependencies will be built and installed automatically. There is
 no need to follow the instructions above for installing readline; this is handled by
-MacPorts dependency mechanism.  If you want to see how the build is progressing, type
+!MacPorts dependency mechanism.  If you want to see how the build is progressing, type
 
-
-
-` > sudo port -dv install ghc `
-
-
+{{{ > sudo port -dv install ghc }}}
 
 The "-dv" flags indicate verbose debugging output.  Using these can also help diagnose build problems.
 
-
-
 If the build is interrupted or fails for some reason you must clean up before trying again. Do
 
-
-
-` > sudo port clean ghc `
-
-
+{{{ > sudo port clean ghc }}}
 
 before restarting.
 
-
-
-A nice feature of MacPorts is that you can put its installation directory tree anywhere.
+A nice feature of !MacPorts is that you can put its installation directory tree anywhere.
 This allows installations without administrator privileges.
 
+== Case insensitivity ==
 
-## Case insensitivity
+The default Mac OS X files systems (HFS+) is case-insensitive and darcs is case sensitive.  While this ususally doesn't cause any problems, occassionally a {{{Unapplicable patch}}} error can occur.  It's possible to work around this by using {{{Disk Utility}}} to create a case sensitive file system and apply the patches inside of it.  To do this:
 
+ 1. Open {{{/Applications/Utilities/Disk Utility}}}.
+ 2. Make sure that none of the images/disks on the left are highlighted/selected.  If any are, <Cmd>+Click them to unselect them.
+ 3. Click the "New Image" button.
+ 4. Set the "Volume Format" to "Mac OS X Extended (Case Sensitive)".
+ 5. Set "Encryption" to "None".
 
+ 6. Set "Partitions" to "Single Partition - Apple Partition Map"
+ 7. Set "Image Format" to "sparse disk image".
+ 8. Set "Volume Size" to "Custom..." and select an appropriately large size.  Sparse images only take up as much space is as needed, plus a little overhead, so it's better to overestimate than underestimate.  A 30 GB sparse image with no data in it takes up ~50 MB.
+ 9. Set "Volume Name" to something appropriate (e.g., "GHC").
+ 10. Set "Save As" to something appropriate (e.g., "GHC Disk").
+ 11. Click the "Create" button.
 
-The default Mac OS X files systems (HFS+) is case-insensitive and darcs is case sensitive.  While this ususally doesn't cause any problems, occassionally a `Unapplicable patch` error can occur.  It's possible to work around this by using `Disk Utility` to create a case sensitive file system and apply the patches inside of it.  To do this:
+This creates a file with a {{{.sparseimage}}} extension (e.g., {{{GHC Disk.sparseimage}}}) at the location that was set in step 10 and automatically mounts it.  The partition can be accessed through the {{{/Volumes}}} folder (e.g., {{{/Volumes/GHC}}}).  This partition behaves exactly like any other Apple partition except that it's case sensitive and darcs can apply the patches it couldn't on the case insensitive file system.  After the patches have been applied, the repository can be copied to the normal file system, the partition can be unmounted, and the sparse image can be deleted.
 
+== Building the documentation ==
 
-1. Open `/Applications/Utilities/Disk Utility`.
-1. Make sure that none of the images/disks on the left are highlighted/selected.  If any are, \<Cmd\>+Click them to unselect them.
-1. Click the "New Image" button.
-1. Set the "Volume Format" to "Mac OS X Extended (Case Sensitive)".
-1. Set "Encryption" to "None".
+If you have installed {{{docbook-xsl}}} using macports then the configure script might still tell you that you are unable to build the HTML documentation due to missing stylesheets. This is because it is using the {{{xsltproc}}} supplied with OS X rather than the one MacPorts installs, but you can work around it by adding the following to your {{{.bash_profile}}}:
 
-1. Set "Partitions" to "Single Partition - Apple Partition Map"
-1. Set "Image Format" to "sparse disk image".
-1. Set "Volume Size" to "Custom..." and select an appropriately large size.  Sparse images only take up as much space is as needed, plus a little overhead, so it's better to overestimate than underestimate.  A 30 GB sparse image with no data in it takes up \~50 MB.
-1. Set "Volume Name" to something appropriate (e.g., "GHC").
-1. Set "Save As" to something appropriate (e.g., "GHC Disk").
-1. Click the "Create" button.
-
-
-This creates a file with a `.sparseimage` extension (e.g., `GHC Disk.sparseimage`) at the location that was set in step 10 and automatically mounts it.  The partition can be accessed through the `/Volumes` folder (e.g., `/Volumes/GHC`).  This partition behaves exactly like any other Apple partition except that it's case sensitive and darcs can apply the patches it couldn't on the case insensitive file system.  After the patches have been applied, the repository can be copied to the normal file system, the partition can be unmounted, and the sparse image can be deleted.
-
-
-## Building the documentation
-
-
-
-If you have installed `docbook-xsl` using macports then the configure script might still tell you that you are unable to build the HTML documentation due to missing stylesheets. This is because it is using the `xsltproc` supplied with OS X rather than the one MacPorts installs, but you can work around it by adding the following to your `.bash_profile`:
-
-
-```wiki
+{{{
 export XML_CATALOG_FILES="/opt/local/etc/xml/catalog"
-```
+}}}
 
-
-Further info on building the docs from [\#3768](https://gitlab.staging.haskell.org/ghc/ghc/issues/3768):
-
-
+Further info on building the docs from #3768:
 
 Some packages needed XCode 3.1, which for OS X 10.5 you can currently only get bundled with the iphone SDK as far as I can tell.
 
-
-
 Then, to fix:
 
-
-```wiki
+{{{
 $ "/opt/local/bin/dblatex"  docs/users_guide/users_guide.xml --ps -o docs/users_guide/users_guide.ps
 Traceback (most recent call last):
   File "/opt/local/bin/dblatex", line 16, in <module>
     from dbtexmf.dblatex import dblatex
 ImportError: No module named dbtexmf.dblatex
-```
-
+}}}
 
 do:
 
-
-```wiki
+{{{
 sudo port install python_select
 sudo python_select python26
+}}}
+
 ```
-
-
-[ data recovery mac](http://www.stellarinfo.com/mac-data-recovery.htm) \|
-[ mac recovery](http://mackeeper.zeobit.com/mac-data-recovery)
-
-
