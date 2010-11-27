@@ -3,7 +3,12 @@ CONVERSION ERROR
 Original source:
 
 ```trac
-These are just incomplete notes!
+(NOTE: This is work in progress)
+
+These axioms are used by GHC's solver to construct proofs/evidence for various predicates involving type-level naturals.
+
+The actual algorithm for constructing the evidence is described as set of rules (interactions) which are described separately.
+
 
 
 Notation:
@@ -15,10 +20,10 @@ r,s,t:  arbitrary terms of kind Nat
 
 Comparison:
 {{{
-leqDef:   m <= n    -- if "m <= n"
-leqLeast: 0 <= t
-leqRefl:  t <= t
-leqTrans: (r <= s, s <= t) => r <= t
+leqDef:      m <= n    -- if "m <= n"
+leqLeast:    0 <= t
+leqRefl:     t <= t
+leqTrans:    (r <= s, s <= t) => r <= t
 }}}
 
 Addition:
