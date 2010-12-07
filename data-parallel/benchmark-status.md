@@ -325,7 +325,7 @@ Computes the sum of the squares from 1 to N using `Int`.  N = 100M.
 
 >
 >
-> **Status**: fine
+> **Status**: ok, but need other versions for comparison
 >
 >
 
@@ -393,7 +393,7 @@ Computes the dot product of two vectors of `Double`s. N=10M.
 
 >
 >
-> **Status**: fine
+> **Status**: ok, but need other versions for comparison
 >
 > **Todo**: Check again with LLVM.
 >
@@ -460,7 +460,7 @@ Takes the even valued `Int`s from a vector. N=10M.
 
 >
 >
-> **Status**: fine. 
+> **Status**: ok, but need other versions for comparison.
 >
 >
 
