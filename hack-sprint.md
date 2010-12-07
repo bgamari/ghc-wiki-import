@@ -1,48 +1,46 @@
-# Parallel Haskell [HackSprint](hack-sprint)
+CONVERSION ERROR
 
+Original source:
 
-## Organisation
+```trac
+= Parallel Haskell HackSprint =
 
-
+== Organisation ==
 
 Dates : 12-14 December 2010
 
-
-
 Location : Heriot-Watt
 
-
-## Participants
-
-
-
+== Participants ==
 So far:
-[
-Hans-Wolfgang Loidl](http://www.macs.hw.ac.uk/~hwloidl/) (Host), Mischa Dieterle, Thomas Horstmeyer, [
-Jost Berthold](http://www.mathematik.uni-marburg.de/~berthold/), [
-Henrique Ferreiro](http://www.madsgroup.org/staff/henrique/), David Castro Pérez
-
-
+[http://www.macs.hw.ac.uk/~hwloidl/ Hans-Wolfgang Loidl] (Host), Mischa Dieterle, Thomas Horstmeyer, [http://www.mathematik.uni-marburg.de/~berthold/ Jost Berthold], [http://www.madsgroup.org/staff/henrique/ Henrique Ferreiro], David Castro Pérez
 
 To be confirmed:
-Vladimir Janjic, [
-Kevin Hammond](http://www.cs.st-andrews.ac.uk/~kh/), Chris Brown, Mustafa Aswad, Malak Aljabri, [
-Philip W Trinder](http://www.macs.hw.ac.uk/~trinder/), Patrick Maier, Robert Stewart
+Vladimir Janjic, [http://www.cs.st-andrews.ac.uk/~kh/ Kevin Hammond], Chris Brown, Mustafa Aswad, Malak Aljabri, [http://www.macs.hw.ac.uk/~trinder/ Philip W Trinder], Patrick Maier, Robert Stewart
 
+== Agenda ==
+ * Reports on recent software releases
+ * Updates on work at each of the sites
+ * Tests & benchmarks
+  * Repo
+  * System-tests
+  * Benchmarks
+  * Larger applications
+ * Interfaces to on-going projects (SCIEnce, HPC-GAP)
+  * CASH
+  * SC skeletons
+  * fault-tolerance
+ * Roadmap on integrating branches 
+  * migration, 
+  * tracing, 
+  * data locality
+  * ...
+ * Packaging
+ * Planned extensions and applications
+  * Integration with GHC/SMP
+  * Integrating migration
+  * Globus interface
+  * pre-SCSCP [http://www.gap-system.org/ GAP] interface
+  * Micro-kernel/substrate approach to the RTS
 
-## Agenda
-
-
-- Reports on Recent software releases
-- Updates on work at each of the sites
-- Roadmap on integrating branches (migration, tracing, bounded pars etc)
-- Interfaces to on-going projects (SCIEnce, HPC-GAP)
-- Testsuite & automatic tests
-- Packaging
-- Planned extensions and applications
-
-  - Integration with GHC/SMP
-  - Integrating migration
-  - Globus interface
-  - pre-SCSCP [ GAP](http://www.gap-system.org/) interface
-  - Micro-kernel/substrate approach to the RTS
+```
