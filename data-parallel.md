@@ -1,44 +1,38 @@
-# Data Parallel Haskell
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Data Parallel Haskell =
 
-This page documents the integration of nested data parallelism into GHC at the developer level, including notes about where we are and what needs doing.  See also the [
-user-level wiki page](http://haskell.org/haskellwiki/GHC/Data_Parallel_Haskell), which includes examples and tutorial-style instructions.
-
-
+This page documents the integration of nested data parallelism into GHC at the developer level, including notes about where we are and what needs doing.  See also the [http://haskell.org/haskellwiki/GHC/Data_Parallel_Haskell user-level wiki page], which includes examples and tutorial-style instructions.
 
 Most of the material describing our approach is partitioned into a set of subpages:
 
+ * [wiki:DataParallel/Example Nested data parallelism by example]
+ * [wiki:DataParallel/SMP Data parallelism on shared-memory machines]
+ * [wiki:DataParallel/Design High-level design of adding NDP to GHC]
+ * [wiki:DataParallel/Library Design of the DPH packages]
+ * [wiki:DataParallel/ClosureConversion Details of the implementation of closure conversion]
+ * [wiki:DataParallel/Vectorisation Our plan for implementing vectorisation on top of closure conversion]
+ * [wiki:DataParallel/Desugaring Desugaring of array comprehensions]
+ * [wiki:DataParallel/Regular Our approach to integrating an optimised treatment of multi-dimensional regular arrays]
+ * [wiki:DataParallel/Related Other nested data parallel work]
+ * [wiki:DataParallel/Regular Design work for data parallelism over regular arrays]
 
-- [Nested data parallelism by example](data-parallel/example)
-- [Data parallelism on shared-memory machines](data-parallel/smp)
-- [High-level design of adding NDP to GHC](data-parallel/design)
-- [Design of the DPH packages](data-parallel/library)
-- [Details of the implementation of closure conversion](data-parallel/closure-conversion)
-- [Our plan for implementing vectorisation on top of closure conversion](data-parallel/vectorisation)
-- [Desugaring of array comprehensions](data-parallel/desugaring)
-- [Our approach to integrating an optimised treatment of multi-dimensional regular arrays](data-parallel/regular)
-- [Other nested data parallel work](data-parallel/related)
-- [Design work for data parallelism over regular arrays](data-parallel/regular)
+== Status and work plan ==
 
-## Status and work plan
+Detailed information on how to use the current implementation is at the [http://haskell.org/haskellwiki/GHC/Data_Parallel_Haskell user-level wiki page].  Here is information on the implementation status and outstanding work items:
 
+ * DPH [wiki:DataParallel/Repositories repositories & developer builds]
+ * Current [wiki:DataParallel/BenchmarkStatus benchmark status]
+ * Release plan [wiki:DataParallel/Dec2010Release]
+ * Our [wiki:DataParallel/WorkPlan work plan] [OUT OF DATE]
+ * Some early [wiki:DataParallel/Benchmarks benchmarks] from 2007
 
-
-Detailed information on how to use the current implementation is at the [
-user-level wiki page](http://haskell.org/haskellwiki/GHC/Data_Parallel_Haskell).  Here is information on the implementation status and outstanding work items:
-
-
-- DPH [repositories & developer builds](data-parallel/repositories)
-- Current [benchmark status](data-parallel/benchmark-status)
-- Our [work plan](data-parallel/work-plan)
-- Some early [benchmarks](data-parallel/benchmarks) from 2007
-
-## Old material
-
-
+== Old material ==
 
 Pages that have fallen out of use (and contain out dated information):
 
-
-- [Optimisation, and problems therewith](data-parallel/optimisation)
+ * [wiki:DataParallel/Optimisation Optimisation, and problems therewith]
+```
