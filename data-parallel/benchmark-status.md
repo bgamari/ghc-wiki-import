@@ -480,6 +480,7 @@ Takes the even valued `Int`s from a vector. N=10M.
 >
 >
 > **Status**: ok, but run again with LLVM to see if that fixes the slowdown wrt C.
+> - rl reckons the slowdown is due to GHC compiling modulo of powers of two inefficiently; c.f., [\#3065](https://gitlab.staging.haskell.org/ghc/ghc/issues/3065) (in `packByTags`)
 >
 >
 
