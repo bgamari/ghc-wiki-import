@@ -1,72 +1,110 @@
-CONVERSION ERROR
+## Plan for the December 2010 Release
 
-Original source:
 
-```trac
+### To be released components
 
-== Plan for the December 2010 Release ==
 
-=== To be released components === 
+- GHC 7.0.2
+- DPH packages
+- Repa packages
 
- * GHC 7.0.2
- * DPH packages
- * Repa packages
+
 (No release of vector should be necessary, as 0.7.01 should work fine.)
 
-=== Before the release we must achieve the following ===
+
+### Before the release we must achieve the following
+
+
 
 Documentation:
- * Haddock documentation of Data.Array.Parallel '''[???]'''
- * !HowTo and examples on !HaWiki [http://haskell.org/haskellwiki/GHC/Data_Parallel_Haskell] '''[MANUEL]'''
+
+
+- Haddock documentation of Data.Array.Parallel **[???](data-parallel/dec2010-release?)**
+- HowTo and examples on HaWiki [
+  http://haskell.org/haskellwiki/GHC/Data\_Parallel\_Haskell](http://haskell.org/haskellwiki/GHC/Data_Parallel_Haskell) **\[MANUEL\]**
+
 
 API adaptation: APIs of vector, Repa, and Accelerate should be unified as far as possible
- * Repa's current 'replicate' should be renamed and a new 'replicate' that turns a scalar into an array should be introduced '''[???]'''
- * Check similarity of singleton/unit between all three libraries '''[???]'''
+
+
+- Repa's current 'replicate' should be renamed and a new 'replicate' that turns a scalar into an array should be introduced **[???](data-parallel/dec2010-release?)**
+- Check similarity of singleton/unit between all three libraries **[???](data-parallel/dec2010-release?)**
+
 
 Changes:
- * -fdph-par should be the default '''[MANUEL]'''
- * -fvectorise should imply -Odph (if omitted, we get fatal errors) '''[MANUEL]'''
-   * rl notes, "We shouldn't! -fvectorise -O0 should work, I'll take a look. I should change -Odph to reflect what we currently need, though. Basically, it should be equivalent ot -O2 -fsimplifier-phases=3 -fsimplifier-iterations=20."
- * Move GHC.PArr into  the DPH libs.  (Needed for Haddock.) '''[MANUEL]'''
- * Find out if we still need the `NoSpecConstr` annotation and remove it if not '''[ROMAN]'''
+
+
+- -fdph-par should be the default (and sensible error message if the dph package is not available) **\[MANUEL\]**
+- -fvectorise should imply -Odph (if omitted, we get fatal errors) **\[MANUEL\]**
+
+  - rl notes, "We shouldn't! -fvectorise -O0 should work, I'll take a look. I should change -Odph to reflect what we currently need, though. Basically, it should be equivalent ot -O2 -fsimplifier-phases=3 -fsimplifier-iterations=20."
+- Move GHC.PArr into  the DPH libs.  (Needed for Haddock.) **\[MANUEL\]**
+- Find out if we still need the `NoSpecConstr` annotation and remove it if not **\[ROMAN\]**
+
 
 Bug fixes:
- * Repa edge-detection is deadlocking with more than 2 threads [DONE]
- * Fix the BH seg fault in DPH. Roman has found the problem [DONE]
- * LLVM back end not working with DPH '''[BEN]'''
+
+
+- Repa edge-detection is deadlocking with more than 2 threads \[DONE\]
+- Fix the BH seg fault in DPH. Roman has found the problem \[DONE\]
+- LLVM back end not working with DPH **\[BEN\]**
+
 
 Performance goals:
- * Vector works fast, sequentially, compared to C, Haskell mutable-array version [FINE]
-  * Benchmarks: !NoSlow, vector versions of Repa benchmarks
- * Repa works fast in parallel
-  * MMult [OK, but about 20% slower than in 6.13; try with LLVM and w/o bounds checks] [BEN]
-  * Laplace '''[SLOW & DOESN'T SCALE]''' '''[BEN]'''
-  * Blur [OK]
-  * !EdgeDetect [OK]
-  * FFT [OK]
- * Statically-nested DPH programs should work fast, in parallel
-  * !SumSquares [FINE]
-  * Dot product [FINE]
-  * Evens [OK (but more than 3 times slower than C)]
-    * rl reckons this is due to GHC compiling modulo of powers of two inefficiently; c.f., #3065 (in `packByTags`)
-  * SMVM '''[SLOW (lack of fusion)]''' '''[BEN & ROMAN]'''
- * Dynamically-nested DPH programs without user-defined datatypes should run correctly, but not necessarily fast
-  * Quicksort '''[BROKEN (SpecConstr) & SLOW]''' '''[SIMON & BEN]'''
-  * Quickhull '''[OK, but has  a SpecConstr problem that we want to fix]''' '''[ROMAN]'''
-    * Probably affected by the same optimisation issue with the compilation of modulo operations as Evens
- * Dynamically-nested DPH programs with user-defined datatypes should run correctly, but not necessarily fast
-  * Words '''[BROKEN (SpecConstr)]''' '''[SIMON]'''
-  * !BarnesHut [OK]
+
+
+- Vector works fast, sequentially, compared to C, Haskell mutable-array version \[FINE\]
+
+  - Benchmarks: NoSlow, vector versions of Repa benchmarks
+- Repa works fast in parallel
+
+  - MMult \[OK, but about 20% slower than in 6.13; try with LLVM and w/o bounds checks\] \[BEN\]
+  - Laplace **\[SLOW & DOESN'T SCALE\]** **\[BEN\]**
+  - Blur \[OK\]
+  - EdgeDetect \[OK\]
+  - FFT \[OK\]
+- Statically-nested DPH programs should work fast, in parallel
+
+  - SumSquares \[FINE\]
+  - Dot product \[FINE\]
+  - Evens \[OK (but more than 3 times slower than C)\]
+
+    - rl reckons this is due to GHC compiling modulo of powers of two inefficiently; c.f., [\#3065](https://gitlab.staging.haskell.org/ghc/ghc/issues/3065) (in `packByTags`)
+  - SMVM **\[SLOW (lack of fusion)\]** **\[BEN & ROMAN\]**
+- Dynamically-nested DPH programs without user-defined datatypes should run correctly, but not necessarily fast
+
+  - Quicksort **\[BROKEN ([SpecConstr](spec-constr)) & SLOW\]** **\[SIMON & BEN\]**
+  - Quickhull **\[OK, but has  a [SpecConstr](spec-constr) problem that we want to fix\]** **\[ROMAN\]**
+
+    - Probably affected by the same optimisation issue with the compilation of modulo operations as Evens
+- Dynamically-nested DPH programs with user-defined datatypes should run correctly, but not necessarily fast
+
+  - Words **\[BROKEN ([SpecConstr](spec-constr))\]** **\[SIMON\]**
+  - BarnesHut \[OK\]
+
 
 Legend
-  [FINE]::
-    Works well
-  [OK]::
-   Fine for the release, but could be better
-  [SLOW]::
-   Not usable
-Tags in '''bold''' require attention before the release.
 
-More benchmarks details at [wiki:DataParallel/BenchmarkStatus]
 
-```
+<table><tr><th>\[FINE\]</th>
+<td>
+Works well
+</td></tr>
+<tr><th>\[OK\]</th>
+<td>
+Fine for the release, but could be better
+</td></tr>
+<tr><th>\[SLOW\]</th>
+<td>
+Not usable
+</td></tr></table>
+
+
+
+Tags in **bold** require attention before the release.
+
+
+
+More benchmarks details at [DataParallel/BenchmarkStatus](data-parallel/benchmark-status)
+
+
