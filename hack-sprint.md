@@ -45,4 +45,11 @@ Vladimir Janjic, [http://www.cs.st-andrews.ac.uk/~kh/ Kevin Hammond], Chris Brow
    * pre-SCSCP [http://www.gap-system.org/ GAP] interface
    * Micro-kernel/substrate approach to the RTS
 
+== Eventlog ==
+
+Sunday sessions:
+* Tracing: overview, integration into GUM build
+* Test programs
+* MultiCore Challenge application in GpH and Eden
+
 ```
