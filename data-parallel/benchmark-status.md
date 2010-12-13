@@ -490,7 +490,7 @@ Takes the even valued `Int`s from a vector. N=10M.
 >
 
 <table><tr><th>[
-SMVM](http://darcs.haskell.org/packages/dph/examples/smvm/) **(BROKEN)**</th>
+SMVM](http://darcs.haskell.org/packages/dph/examples/smvm/) **(BROKEN - Fusion)**</th>
 <td>
 Multiplies a dense vector with a sparse matrix represented in the *compressed sparse row format (CSR).* 
 
@@ -530,7 +530,7 @@ The Sieve of Eratosthenes using parallel writes into a sieve structure represent
 
 
 <table><tr><th>[
-QuickSort](http://darcs.haskell.org/libraries/dph/dph-examples/spectral/QuickSort/) **(BROKEN) (SLOWDOWN)**</th>
+QuickSort](http://darcs.haskell.org/libraries/dph/dph-examples/spectral/QuickSort/) **(BROKEN - [SpecConstr](spec-constr)) (SLOWDOWN)**</th>
 <td>
 Sort a vector of doubles by recursively splitting it and sorting the two halves. This is a naive benchmark used for regression testing only. We divide right down to two-point vectors and construct the result using copying append. A production algorithm would switch to an in-place sort once the size of the vector reaches a few thousand elements. N=100k.
 </td></tr></table>
@@ -665,7 +665,7 @@ These programs also use user defined algebraic data types. Vectorization of thes
 
 
 <table><tr><th>[
-Words](http://darcs.haskell.org/libraries/dph/dph-examples/imaginary/Words/) **(BROKEN)**</th>
+Words](http://darcs.haskell.org/libraries/dph/dph-examples/imaginary/Words/) **(BROKEN - [SpecConstr](spec-constr))**</th>
 <td>
 Counts the number of words in a string. This is a naive divide-and-conquer benchmark that divides right down to a single character. A production program would switch to a simple sequential algorithm once the string chunks were small enough. It's a good stress test for the vectoriser though.
 </td></tr></table>
@@ -683,7 +683,7 @@ Counts the number of words in a string. This is a naive divide-and-conquer bench
 
 
 <table><tr><th>[
-BarnesHut](http://darcs.haskell.org/libraries/dph/dph-examples/real/NBody/) **(SLOWLORIS)**</th>
+BarnesHut](http://darcs.haskell.org/libraries/dph/dph-examples/real/NBody/) **(BROKEN - LLVM)** **(SLOWLORIS)**</th>
 <td>
 This benchmark implements the Barnes-Hut algorithm to solve the *n*-body problem in two dimensions. There is a naive O(n<sup>2</sup>) version in the same package.
 </td></tr></table>
@@ -723,7 +723,7 @@ This benchmark implements the Barnes-Hut algorithm to solve the *n*-body problem
 
 >
 >
-> **Status**:  Compiles, but fusion doesn't work so it's very slow. 
+> **Status**:  Compiles, but fusion doesn't work so it's very slow. LLVM version takes 30min to compile. 
 >
 > **ToDo**: Make the vectorised version give the same output as the vector version. The benchmark setup is a bit different. Fixing this won't cause a 50x speed difference though.
 >
