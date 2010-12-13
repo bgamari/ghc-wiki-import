@@ -499,7 +499,7 @@ Multiplies a dense vector with a sparse matrix represented in the *compressed sp
 
 >
 >
-> **Status:** Runs on 1000x1000 matrices with 10% fill ratio, but about 1000x slower than the C program. Dies with OOM for 2000x2000. Segfaults with 10000x10000.
+> **Status:** Fusion doesn't work. Runs on 1000x1000 matrices with 10% fill ratio, but about 1000x slower than the C program. Dies with OOM for 2000x2000. Segfaults with 10000x10000.
 >
 >
 
