@@ -138,7 +138,7 @@ Original source:
  * #3696: better error message fr missing signature
  * #4175: better GHCi info for type-function instances
  * #4254: fundeps
- * #4259: overlapping instances
+ * #4259: overlapping type family instances
 
 
 
