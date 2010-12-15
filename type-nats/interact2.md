@@ -1,0 +1,11 @@
+CONVERSION ERROR
+
+Original source:
+
+```trac
+{{{
+(a + b ~ c, a + b ~ d) <=> c = d
+(a + b ~ d, b + a ~ d) <=> c = d
+... 
+}}}
+```
