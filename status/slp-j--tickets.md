@@ -108,7 +108,7 @@ Original source:
 
  * #816. #3108: extreme delicacy in solve order, involving fundeps
  * #1823: refinement
- * #3714: error message if associated family has excess parameters
+
  * #3554: assertion failure
  * #3330: type checker loops
  * #3500: recursive dictionaries
@@ -138,11 +138,13 @@ Original source:
  * #3696: better error message fr missing signature
  * #4175: better GHCi info for type-function instances
  * #4254: fundeps
- * #4259: overlapping type family instances
+
 
 
 
 == Types and type inference ==
+ * #3714: distinguish type parameters from indices
+ * #4259: overlapping type family instances
  * #4466: explicit type application
  * #3490: superclasses and ambiguity
  * #3638: rules and rigidity for GADTs
