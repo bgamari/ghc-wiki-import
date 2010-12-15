@@ -1,23 +1,23 @@
-# Type Level Naturals
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Type Level Naturals =
 
-This page collects information on how to work with type-level natural numbers, as implemented in the Haskell compiler GHC (ticket [\#4385](https://gitlab.staging.haskell.org/ghc/ghc/issues/4385)).
+This page collects information on how to work with type-level natural numbers, as implemented in the Haskell compiler GHC (ticket #4385).
 
-
-- [Type-Level Naturals Basics](type-nats/basics)
-- [Simple Examples of Using GHC.TypeNats](type-nats/basic-examples)
-- [Implementation of GHC.TypeNats](type-nats/implementation)
-- [Design Notes about Nat vs. TypeNat](type-nats/implicit-explicit)
-- [Axioms for Natural Number Operators](type-nats/axioms)
-- GHC Interaction Rules  
-
-  - [Top-level interactions](type-nats/interact1)
-
+  * [wiki:TypeNats/Basics           Type-Level Naturals Basics]
+  * [wiki:TypeNats/BasicExamples    Simple Examples of Using GHC.TypeNats]
+  * [wiki:TypeNats/Implementation   Implementation of GHC.TypeNats]
+  * [wiki:TypeNats/ImplicitExplicit Design Notes about Nat vs. TypeNat]
+  * [wiki:TypeNats/Axioms           Axioms for Natural Number Operators]
+  * GHC Interaction Rules  
+    * [wiki:TypeNats/Interact1      Top-Level Interactions]
+    * [wiki:TypeNats/Interact2      Simple Inert Interactions]
+    
 
 External links:
-
-
-- [ Source repos](http://code.galois.com/darcs/type-naturals/)  
-- More advanced example: [
-  https://github.com/yav/memory-arrays/tree/master](https://github.com/yav/memory-arrays/tree/master)
+  * [http://code.galois.com/darcs/type-naturals/ Source repos]  
+  * More advanced example: https://github.com/yav/memory-arrays/tree/master
+```
