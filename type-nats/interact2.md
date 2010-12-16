@@ -4,6 +4,11 @@ Original source:
 
 ```trac
 {{{
+a <= b
+  (b <= a) <=> a ~ b
+}}}
+
+{{{
 a + b ~ c
   a + b ~ d <=> c ~ d
   b + a ~ d <=> c ~ d
