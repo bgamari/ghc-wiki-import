@@ -150,16 +150,10 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#3018](https://gitlab.staging.haskell.org/ghc/ghc/issues/3018): be lazier about solving class instances
 - [\#2357](https://gitlab.staging.haskell.org/ghc/ghc/issues/2357): **Implement the Haskell Prime proposal for polymorphic pattern bindings**
 
-### Impredicativity
-
-
-- [\#2846](https://gitlab.staging.haskell.org/ghc/ghc/issues/2846): polymorphism leaking into constraints
-- [\#2193](https://gitlab.staging.haskell.org/ghc/ghc/issues/2193): Bad error message with impredicative types
-- [\#1330](https://gitlab.staging.haskell.org/ghc/ghc/issues/1330): another bad error message (Church2)
-
 ### Better error messages
 
 
+- [\#1330](https://gitlab.staging.haskell.org/ghc/ghc/issues/1330): another bad error message (Church2)
 - [\#3440](https://gitlab.staging.haskell.org/ghc/ghc/issues/3440): type families and GADT error message
 - [\#3169](https://gitlab.staging.haskell.org/ghc/ghc/issues/3169): better occurs-check error message
 - [\#2648](https://gitlab.staging.haskell.org/ghc/ghc/issues/2648): Report out of date interface files robustly        
