@@ -1,22 +1,26 @@
-CONVERSION ERROR
 
-Original source:
+Top-level interactions for `TypeNat`:
 
-```trac
-Top-level interactions for {{{TypeNat}}}:
-{{{
+
+```wiki
 TypeNat m
-}}}
+```
 
-Top-level interactions for <=
-{{{
+
+Top-level interactions for \<=
+
+
+```wiki
 m <= n   <=> {m <= n}
 0 <= a   <=> True
 a <= 0   <=> a ~ 0
-}}}
+```
+
 
 Top-level interactions for +.
-{{{
+
+
+```wiki
 (m + n ~ k) <=> {m + n == k}
 (m + a ~ n) <=> a ~ {n - m}    -- n >= m
 (0 + a ~ b) <=> a ~ b
@@ -25,12 +29,15 @@ Top-level interactions for +.
 (a + b ~ b) <=> (a ~ 0)
 (a + a ~ b) <=> (2 * a ~ b)
 (a + m ~ b) <=> (m + a ~ b)    -- simple normalization cuts down on some rules
-}}}
+```
 
-Top-level interactions for *.
-{{{
+
+Top-level interactions for \*.
+
+
+```wiki
 (m * n ~ k) <=> {m * n == k}
-(m * a ~ n) <=> {m / g} * a ~ {n / g}     -- g = gcd m n, 2 <= g
+(m * a ~ n) <=> a ~ { n / m }  -- m `divides` n, False otherwise
 
 (0 * a ~ b) <=> b ~ 0
 (1 * a ~ b) <=> a ~ b
@@ -40,17 +47,22 @@ Top-level interactions for *.
 (a * a ~ b) <=> a ^ 2 ~ b
 
 (a * m ~ b) <=> (m * a ~ b)      -- simple normalization cuts down on some rules
-}}}
+```
 
-Top-level interactions for {{{^}}}
-{{{
+
+Top-level interactions for `^`
+
+
+```wiki
 (m ^ n ~ k) <=> {m ^ n == k}
+
 (m ^ a ~ n) <=> a ~ {log m n}   -- log (base m) of n exists
+(1 ^ a ~ b) <=> b ~ 1
+(m ^ a ~ a) <=> False           -- m /= 1
+
 (a ^ m ~ n) <=> a ~ {root m n}  -- m-th root of n exists
 (a ^ 0 ~ b) <=> b ~ 1
 (a ^ 1 ~ b) <=> a ~ b
 (a ^ m ~ a) <=> (a <= 1)        -- 2 <= m
-(1 ^ a ~ b) <=> b ~ 1
-(m ^ a ~ a) <=> False           -- m /= 1
-}}}
+
 ```
