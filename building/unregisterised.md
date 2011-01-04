@@ -10,8 +10,8 @@ To do an unregisterised build, add the following to your `mk/build.mk` file:
 
 
 ```wiki
-GhcUnregisterised=YES                                                     
-GhcWithNativeCodeGen=NO                                                   
+GhcUnregisterised=YES
+GhcWithNativeCodeGen=NO
 SplitObjs=NO
 ```
 
