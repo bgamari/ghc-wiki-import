@@ -156,6 +156,7 @@ Original source:
  * #4222: design of reification for TH
 
 == Features == 
+ * #788, #2895: Class aliases    
  * #4823: strength reduction for array indexing
  * #4479: type directed name resolution (TDNR)
  * #4426: simpler rule for implicit quantification
@@ -168,7 +169,6 @@ Original source:
  * #3701: Implicitly declared existentials: a class as a type
  * #3480: '''Fingerprints in `TypeRep`'''
  * #3217: better flag handling for GHCi
- * #788: Class aliases	
  * #2806: Require bang patterns on unlifted let-bindings	
  * #2600, #2110: '''Bind type variables and constraints in RULES'''
  * #1930: Infix type operators:  a+b.	
