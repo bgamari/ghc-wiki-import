@@ -1,14 +1,9 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
-{{{
+```wiki
 a <= b
   (b <= a) <=> a ~ b
-}}}
+```
 
-{{{
+```wiki
 a + b ~ c
   a + b ~ d <=> c ~ d
   b + a ~ d <=> c ~ d
@@ -20,11 +15,10 @@ a + b ~ c
 
 m + b ~ c
   n + d ~ c <=> {m - n} + b ~ d  -- n <= m
-  n + d ~ c <=> {n - m} + d ~ b  -- m >=m
-}}}
+  n + d ~ c <=> {n - m} + d ~ b  -- n >= m
+```
 
-
-{{{
+```wiki
 a * b ~ c
   a * b ~ d <=> c ~ d
   b * a ~ d <=> c ~ d
@@ -36,5 +30,4 @@ m * b ~ c
 
   b + c ~ d <=> {m + 1} * b ~ d
   c + b ~ d <=> {m + 1} * b ~ d
-}}}
 ```
