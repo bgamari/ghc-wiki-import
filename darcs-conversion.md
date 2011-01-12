@@ -125,8 +125,15 @@ Gotchas:
 - have to push to submodules before pushing GHC, otherwise other users will not be able to do `git submodule update`.
 - every submodule commit needs to be accompanied by a GHC commit (not clear if this is really a disadvantage, but it's more work and there will be many more commits).
 
+### Google repo
 
-**Older comments**:
+
+
+Google has a tool called [
+repo](https://sites.google.com/a/android.com/opensource/download/using-repo), which is basically the same as our `darcs-all` script but is much much larger (it probably does a bit more, to be fair).  It is written in Python and the list of git repositories is kept in an XML file.
+
+
+### Older comments
 
 
 
