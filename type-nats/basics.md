@@ -1,46 +1,39 @@
+CONVERSION ERROR
 
+Original source:
+
+```trac
 There is a new kind, `Nat`.  It is completely separate from GHC's hierarchy of sub-kinds, so `Nat` is only a sub-kind of itself.
 
-
-
 The inhabitants of `Nat` are an infinite family of (empty) types, corresponding to the natural numbers:
-
-
-```wiki
+{{{
 0, 1, 2, ... :: Nat
-```
-
+}}}
 
 These types are linked to the value world by a small library with the following API:
-
-
-```wiki
+{{{
 module GHC.TypeNats where
-```
+}}}
 
-## Singleton Types
-
-
+== Singleton Types ==
 
 We relate type-level natural numbers to run-time values via a family of singleton types:
-
-
-```wiki
+{{{
 data Nat (n :: Nat)
 
 nat          :: NatI n => Nat n
 natToInteger :: Nat n -> Integer
-```
+}}}
+The only "interesting" value of type ''Nat n'' is the number ''n''.  Technically, there is also an undefined element.
+The value of a singleton type may be named using ''nat'', which is a bit like a "smart" constructor for ''Nat n''.
+Note that because ''nat'' is polymorphic, we may have to use a type signature to specify which singleton we mean.  For example:
+{{{
+> natToInteger (nat :: Nat 3)
+3
+}}}
 
-
-The only "interesting" value of type *Nat n* is the number *n*.  Technically, there is also an undefined element.
-
-
-
-One may think of the smart constructor *nat* as being a method of a special built-in class:
-
-
-```wiki
+One may think of the smart constructor ''nat'' as being a method of a special built-in class, ''NatI'':
+{{{
 class NatI n where
   nat :: Nat n
 
@@ -48,22 +41,27 @@ instance NatI 0 where nat = "singleton 0 value"
 instance NatI 1 where nat = "singleton 1 value"
 instance NatI 2 where nat = "singleton 2 value"
 etc.
-```
+}}}
 
-## Type-Level Operations
+The name ''NatI'' is a mnemonic for the different uses of the class:
+  * It is the ''introduction'' construct for 'Nat' values,
+  * It is an ''implicit'' parameter of kind 'Nat' (link)
 
 
-```wiki
+
+
+== Type-Level Operations ==
+
+{{{
 type family m ^ n :: Nat
 type family m * n :: Nat
 type family m + n :: Nat
 class m <= n
-```
+}}}
 
-## Natural Numbers
+== Natural Numbers ==
 
-
-```wiki
+{{{
 data Natural = forall n . Natural !(Nat n)
 
 data NaturalInteger
@@ -73,4 +71,5 @@ data NaturalInteger
 toNaturalInteger :: Integer -> NaturalInteger
 
 subNatural :: Natural -> Natural -> NaturalInteger
+}}}
 ```
