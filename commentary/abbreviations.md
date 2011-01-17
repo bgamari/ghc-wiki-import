@@ -19,4 +19,6 @@ See also: [http://www.haskell.org/haskellwiki/GHC/List_of_abbreviations A simila
 * "Lcl" means "Local"
 
 * "Gbl" means "Global"
+
+* "Loc" means "Location", as in SrcLoc
 ```
