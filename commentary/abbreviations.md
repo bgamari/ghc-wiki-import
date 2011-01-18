@@ -1,28 +1,26 @@
+CONVERSION ERROR
 
-Certain abbreviations are used pervasively throughout the GHC source code.  A few, like "Tc", are easy to figure out.  Others, like "Occ", are more challenging (in case you were wondering, none of GHC's code is [
-Occult](http://en.wikipedia.org/wiki/Occult), except perhaps in the Latin sense)
+Original source:
 
+```trac
+Certain abbreviations are used pervasively throughout the GHC source code.  A few, like "Tc", are easy to figure out.  Others, like "Occ", are more challenging (in case you were wondering, none of GHC's code is [http://en.wikipedia.org/wiki/Occult Occult], except perhaps in the Latin sense)
 
+See also: [http://www.haskell.org/haskellwiki/GHC/List_of_abbreviations A similar list on the GHC Users' wiki].
 
-See also: [
-A similar list on the Haskell wiki](http://www.haskell.org/haskellwiki/GHC/List_of_abbreviations).
+* "Occ" means "Occurrence"
+  * However, in the context of [http://hackage.haskell.org/trac/ghc/wiki/Commentary/Compiler/RdrNameType#TheOccNametype OccName], "occurrence" actually means "unqualified"
 
+* "Rn" means "Renamer"
 
-- "Occ" means "Occurrence"
+* "Rdr" means ??? (help, somebody fill this in, I still have no idea what it stands for)
 
-  - However, in the context of [
-    OccName](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Compiler/RdrNameType#TheOccNametype), "occurrence" actually means "unqualified"
+* "Tc" means "TypeCheck{ing,er}"
 
-- "Rn" means "Renamer"
+* "Lcl" means "Local"
 
-- "Rdr" means ??? (help, somebody fill this in, I still have no idea what it stands for)
+* "Gbl" means "Global"
 
-- "Tc" means "TypeCheck{ing,er}"
+* "Loc" means "Location", as in SrcLoc
 
-- "Lcl" means "Local"
-
-- "Gbl" means "Global"
-
-- "Loc" means "Location", as in SrcLoc
-
-- "Hs" means "Haskell Syntax" (generally as opposed to Core -- for example, Expr vs HsExpr)
+* "Hs" means "Haskell Syntax" (generally as opposed to Core -- for example, Expr vs HsExpr)
+```
