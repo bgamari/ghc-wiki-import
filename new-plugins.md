@@ -98,7 +98,7 @@ cseProgram binds = do
 ```
 
 
-More specifically, a `CoreToDo` describes some sort of particular pass over a Core program that can be invoked as many times as you like. For reference, `defaultGentlSimplToDo` is constructed using `CoreDoSimplify`. We use `CoreDoPasses` to just make it easy to run two `CoreToDo`\\'s together (it would be equivalent to just use `cse_pass` and preceed it with `defaultGentleSimplToDo` in the pipeline.) In this case, `cse_pass` is constructed using `CoreDoPluginsPass`, which takes a name and a `PluginPass` which looks like the following:
+More specifically, a `CoreToDo` describes some sort of particular pass over a Core program that can be invoked as many times as you like. For reference, `defaultGentlSimplToDo` is constructed using `CoreDoSimplify`. We use `CoreDoPasses` to just make it easy to run multiple `CoreToDo`'s together (it would be equivalent to just use `cse_pass` and preceed it with `defaultGentleSimplToDo` in the pipeline directly.) In this case, `cse_pass` is constructed using `CoreDoPluginsPass`, which takes a name and a `PluginPass` which looks like the following:
 
 
 ```wiki
@@ -119,8 +119,7 @@ Most people will be using the first case - that is, writing a `BindsToBindsPlugi
 
 
 
-Scala's compiler has a plugin API described by \[1\], with examples at \[2\]. Scala is a bit of a different beast, but the compiler fully supports compilation plugins in the same manner we would like GHC to - more to the point, we want to make sure we have a *good API for specifying when plugins are used and executed**. This is a part of the API that is currently rather simplistic and ad-hoc: we just modify the entire list of compiler passes and return a new one for the optimizer to run. GHC constantly implements new optimizations and tweaks old ones, so we want to make sure that authors of plugins have a good means of conveying when their work should occur. Of course, GHC is changing all the time - authors of plugins should be ready to deal with differences and changes, but by providing a public API for writing plugins, we need to make sure it's sensible and usable for the future to come.
-***
+Scala's compiler has a plugin API described by \[1\], with examples at \[2\]. Scala is a bit of a different beast, but the compiler fully supports compilation plugins in the same manner we would like GHC to - more to the point, we want to make sure we have a **good API for specifying when plugins are used and executed**. This is a part of the API that is currently rather simplistic and ad-hoc: we just modify the entire list of compiler passes and return a new one for the optimizer to run. GHC constantly implements new optimizations and tweaks old ones, so we want to make sure that authors of plugins have a good means of conveying when their work should occur. Of course, GHC is changing all the time - authors of plugins should be ready to deal with differences and changes, but by providing a public API for writing plugins, we need to make sure it's sensible and usable for the future to come.
 
 
 
