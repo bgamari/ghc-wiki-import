@@ -8,7 +8,7 @@ Original source:
 
 === To be released components === 
 
- * GHC ~~7.0.2~~ 7.0.3
+ * GHC ~~7.0.2~~ 7.2
  * DPH packages
  * Repa packages
 (No release of vector should be necessary, as 0.7.0.1 should work fine.)
