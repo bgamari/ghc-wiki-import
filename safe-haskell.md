@@ -298,7 +298,7 @@ The `-XSafe`, `-XTrustworthy`, `-XSafeLanguage` and `-XSafeImport` GHC LANGUAGE 
   
 
 
-- **`-XSafeLanguage`** has the exact same restrictions as `-XSafe`.
+- **`-XSafeLanguage`** has the exact same restrictions as `-XSafe`. `-XSafe` and `-XSafeLanguage` can't be used together though simply as it is most likely a mistake by the module author of client if they do.
 
 ## Safe Language Threats
 
