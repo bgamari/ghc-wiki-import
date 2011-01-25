@@ -16,7 +16,7 @@ Original source:
 === Before the release we must achieve the following ===
 
 Documentation:
- * Haddock documentation of Data.Array.Parallel '''[???]'''
+ * Haddock documentation of Data.Array.Parallel '''[MANUEL]'''
  * Replace `-XPArr` by `-XParallelArrays` in the Users Guide, also add `-fvectorise`
  * !HowTo and examples on !HaWiki [http://haskell.org/haskellwiki/GHC/Data_Parallel_Haskell] [DONE]
 
