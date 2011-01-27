@@ -1,44 +1,33 @@
-## Type-Level Operations
+CONVERSION ERROR
 
+Original source:
 
+```trac
+== Type-Level Operations ==
 
 Currently, we provide the following type-level operations on natural numbers:
 
-
-```wiki
+{{{
 (<=) :: Nat -> Nat -> Prop    -- Comparison
 (+)  :: Nat -> Nat -> Nat     -- Addition
 (*)  :: Nat -> Nat -> Nat     -- Multiplication
 (^)  :: Nat -> Nat -> Nat     -- Exponentiation
-```
-
-
+}}}
 Notes:
-
-
-- `(<=)` is a 2-parameter class (that's what we mean by the "kind" Prop),
-- `(+)`, `(*)`, and `(^)` are type functions.
-- Programmers may not provide custom instances of these classes/type-families.
-
+  * {{{(<=)}}} is a 2-parameter class (that's what we mean by the "kind" Prop),
+  * {{{(+)}}}, {{{(*)}}}, and {{{(^)}}} are type functions.
+  * Programmers may not provide custom instances of these classes/type-families.
 
 The operations correspond to the usual operations on natural numbers.
 
 
-## Inverse Operations
-
-
+== Inverse Operations ==
 
 Our system does not have explicit functions for subtraction, division, logs, or roots.  However, we can get essentially the same functionality by combining the existing type functions with (implicit or explicit) equality constraints.  Consider, for example, the following type:
-
-
-```wiki
+{{{
 bytesToWords :: Array (8 * w) Word8 -> Array w Word64
-```
-
-
+}}}
 In this type we are basically dividing the size of the input array by 8.  Note, however, that we have expressed this by specifying that the array has to be a multiple of 8, which avoids the need for partiality.
 
-
-## Solving Constraints
-
-
+== Solving Constraints ==
+```
