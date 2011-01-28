@@ -24,7 +24,8 @@ Here are some suggestions for projects related to GHC that could be undertaken b
   - [
     Compiling pattern matching to good decision trees](http://pauillac.inria.fr/~maranget/papers/ml05e-maranget.pdf) by Luc Maranget, ML Workshop 2008
 
-- **Improve parallel profiling tools**.  Satnam Singh and Simon Marlow have made a start on some tools for visualising the behaviour of parallel programs, but there is much more to do here, and it'll be eagerly adopted by users.
+- **Improve parallel profiling tools**.  Starting with [
+  ThreadScope](http://research.microsoft.com/en-us/projects/threadscope/), incorporate performance-counter events, visualise more runtime events, include source-code information in the profile.
 
 - **Implement some low-level C-- optimisations**.  During 2009 we expect to have the new C-- code generation route in place, and that will open up new opportunities for doing classic compiler-course optimisations on the imperative C-- code.  There is more than routine stuff here, because we can use our [
   generic dataflow framework](http://research.microsoft.com/~simonpj/papers/c--) to do the heavy lifting.  Here are some [particular ideas for optimisations](back-end-notes) we'd like to implement.
@@ -76,9 +77,6 @@ Projects aimed at making GHC into a user-extensible plug-in platform, and less o
 
 
 - Incremental or concurrent GC, for reducing pause-times.  Perhaps via implementing mark-region GC in the old generation.
-
-- Improvements to [
-  ThreadScope](http://research.microsoft.com/en-us/projects/threadscope/): incorporate performance-counter events, visualise more runtime events, include source-code information in the profile.
 
 ### Packages
 
