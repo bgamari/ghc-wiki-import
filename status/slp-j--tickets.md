@@ -56,6 +56,7 @@ Original source:
  * #4090: failed `getRegister` in asm codegen
 
 === Other performance ===
+ * #605: strict/unboxed enumerations
  * #2607: space leak: inlining defeats selector thunk optimisation
  * #4470: merge identical counters
  * #2439: Strict dictionaries
