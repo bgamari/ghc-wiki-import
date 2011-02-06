@@ -1,9 +1,4 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
-{{{
+```wiki
 {-# LANGUAGE TypeNaturals, GADTs #-}
 
 import GHC.TypeNats
@@ -48,9 +43,5 @@ vecLen _ = nat
 autoSplit :: NatI m => Vec (m + n) a -> (Vec m a, Vec n a)
 autoSplit xs = res
   where res@(as,_) = split len xs
-
-}}}               
-
-
-
+        len = toUNat (vecLen as)
 ```
