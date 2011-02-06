@@ -3,6 +3,8 @@ CONVERSION ERROR
 Original source:
 
 ```trac
+== Type-Naturals and GADTs ==
+
 {{{
 {-# LANGUAGE TypeNaturals, GADTs #-}
 
