@@ -13,6 +13,7 @@ Done:
  * `darcs-all`, `push-all` -> `sync-all`
  * `aclocal.m4`
  * [wiki:Building/GettingTheSources] -> [wiki:DarcsConversion/Building/GettingTheSources] (not yet applied)
+ * [wiki:Building/QuickStart]
 
 Pending:
  * The buildbot scripts
@@ -22,7 +23,6 @@ Pending:
  * Start a git server on darcs.haskell.org?
  * `README`
  * [wiki:Building/Windows]
- * [wiki:Building/QuickStart]
  * [wiki:Building/Rebuilding]
  * [wiki:Building/RunningNoFib]
  * [wiki:DarcsRepositories] (inc. the sidebar)
