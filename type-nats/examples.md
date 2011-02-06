@@ -1,11 +1,7 @@
-CONVERSION ERROR
+## Type-Naturals and GADTs
 
-Original source:
 
-```trac
-== Type-Naturals and GADTs ==
-
-{{{
+```wiki
 {-# LANGUAGE TypeNaturals, GADTs #-}
 
 import GHC.TypeNats
@@ -23,7 +19,6 @@ data UNat :: Nat -> * where
   Succ :: UNat n -> UNat (n + 1)
 
 split :: UNat m -> Vec (m + n) a -> (Vec m a, Vec n a)
-split _ Nil   = (Nil,Nil)
 split Zero xs = (Nil, xs)
 split (Succ n) (Cons x xs)  = case split n xs of
                                 (as,bs) -> (Cons x as, bs)
@@ -31,5 +26,4 @@ split (Succ n) (Cons x xs)  = case split n xs of
 instance Show a => Show (Vec n a) where
   show Nil = "[]"
   show (Cons x xs) = show x ++ " : " ++ show xs
-}}}
 ```
