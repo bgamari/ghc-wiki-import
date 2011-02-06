@@ -10,7 +10,7 @@ import GHC.TypeNats
 import Unsafe.Coerce
 
 --------------------------------------------------------------------------------
--- Extending GHC.TypeNats with these two function allows us to
+-- Extending GHC.TypeNats with these two declarations allows us to
 -- write inductive definitions.
 
 data UNat :: Nat -> * where
