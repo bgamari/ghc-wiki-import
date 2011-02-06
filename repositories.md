@@ -5,7 +5,7 @@ Original source:
 ```trac
 [[PageOutline]]
 
-= GHC Darcs Repositories =
+= GHC Repositories =
 
 This page lists the active repositories relating to GHC.  For instructions on actually getting a GHC source tree, see [wiki:Building/GettingTheSources].
 
