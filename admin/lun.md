@@ -1,20 +1,23 @@
-CONVERSION ERROR
+# lun
 
-Original source:
 
-```trac
-
-= lun =
 
 lun is a vm, running on lambda. It runs the community services.
 
-== VM ==
+
+## VM
+
+
 
 The config is in `lambda:/etc/libvirt/qemu/community.xml`, and the disk image
 `/srv/community/vdisk.img`.
 
+
+
 It's controlled by `virsh`, e.g.:
-{{{
+
+
+```wiki
 lambda$ sudo virsh list --all
  Id Name                 State
 ----------------------------------
@@ -27,46 +30,151 @@ lambda$ sudo virsh list --all
  Id Name                 State
 ----------------------------------
   2 community            running
-}}}
+```
+
 
 To start it with a console, use:
-{{{
+
+
+```wiki
 lambda$ sudo virsh start community --console
-}}}
+```
+
+
 or to connect to the console if it's already running:
-{{{
+
+
+```wiki
 lambda$ sudo virsh console community
-}}}
+```
+
+
 and `Ctrl+]` to exit the console.
+
+
 
 See the `virsh` manpage for more information.
 
-== exim ==
+
+## exim
+
+
 
 The config is in `/etc/exim4/exim4.conf.template` with local changes delimited by:
-{{{
+
+
+```wiki
 # start lun local
 ...
 # end lun local
-}}}
+```
+
 
 After changing, run `/usr/sbin/update-exim4.conf` then `/etc/init.d/exim4 reload`.
 
-== apache ==
+
+## apache
+
+
 
 The various sites are configured in `/etc/apache2/sites-available/*`. Symlinks in
 `/etc/apache2/sites-enabled/` enable them.
 
+
+
 Modules are similarly enabled by symlinks in `/etc/apache2/mods-enabled/`.
+
+
 
 After changing anything, run `/etc/init.d/apache2 reload`.
 
-== data ==
+
+## data
+
+
 
 User data for service `foo` is generally in `/srv/foo`.
 
-== mrtg ==
 
-The mrtg config is in `/etc/mrtg.cfg`, some helpers are in `/srv/local/mrtg/`, and the output goes to `/var/www/mrtg`. The URL for it is http://lun.haskell.org/mrtg/
+## mrtg
 
+
+
+The mrtg config is in `/etc/mrtg.cfg`, some helpers are in `/srv/local/mrtg/`, and the output goes to `/var/www/mrtg`. The URL for it is [
+http://lun.haskell.org/mrtg/](http://lun.haskell.org/mrtg/)
+
+
+## Mailman
+
+
+
+To restart the Mailman daemons:
+
+
+```wiki
+/etc/init.d/mailman restart
 ```
+
+
+The data is stored in `/var/lib/mailman`, and Mailman itself is in `/usr/lib/mailman`.
+
+
+### Web interface
+
+
+
+The top-level list-of-lists is here: [
+http://projects.haskell.org/cgi-bin/mailman/listinfo](http://projects.haskell.org/cgi-bin/mailman/listinfo).
+
+
+
+The web interface is configured via `/etc/apache2/sites-available/projects`, and is currently
+
+
+```wiki
+    Alias /pipermail/ /var/lib/mailman/archives/public/
+    <Directory /var/lib/mailman/archives/public>
+      Options +FollowSymLinks
+    </Directory>
+
+    ScriptAlias /cgi-bin/mailman/ /usr/lib/cgi-bin/mailman/
+    <Directory "/usr/lib/cgi-bin/mailman">
+        AllowOverride None
+        Options ExecCGI -MultiViews +SymLinksIfOwnerMatch
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+    Alias /images/mailman/ /usr/share/images/mailman/
+    <Directory "/usr/share/images/mailman">
+        AllowOverride None
+        Order allow,deny
+        Allow from all
+    </Directory>
+```
+
+
+sample configuration is in `/etc/mailman/apache.conf`.
+
+
+### Adding a new list
+
+
+
+Use the `newlist` command (see `man newlist`).
+
+
+### Email aliases
+
+
+
+Where are these configured for exim?
+
+
+### Archives
+
+
+
+Archives are stored in `/var/lib/mailman/archives`.
+
+
