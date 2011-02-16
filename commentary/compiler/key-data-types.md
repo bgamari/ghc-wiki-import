@@ -1,21 +1,23 @@
-# Key data types
+CONVERSION ERROR
+
+Original source:
+
+```trac
 
 
+= Key data types =
 
 The key to understanding GHC is to understand its key data types.  There are pages describing many of them here (please add new pages!).  The diagram below shows their inter-dependencies.
 
+ * [wiki:Commentary/Compiler/HsSynType The source language: HsSyn] 
+ * [wiki:Commentary/Compiler/RdrNameType RdrNames, Modules, and OccNames]
+ * [wiki:Commentary/Compiler/NameType Names]
+ * [wiki:Commentary/Compiler/EntityTypes Entities]: variables, type constructors, data constructors, and classes.
+ * Types: [wiki:Commentary/Compiler/TypeType Type and Kind], [wiki:Commentary/Compiler/FC equality types and coercions]
+ * [wiki:Commentary/Compiler/CoreSynType The core language]
+ * [wiki:Commentary/Compiler/StgSynType The STG language]
+ * [wiki:Commentary/Compiler/CmmType The Cmm language]
+ * [wiki:Commentary/Compiler/ModuleTypes ModIface, ModDetails, ModGuts]
 
-- [The source language: HsSyn](commentary/compiler/hs-syn-type) 
-- [RdrNames, Modules, and OccNames](commentary/compiler/rdr-name-type)
-- [Names](commentary/compiler/name-type)
-- [Entities](commentary/compiler/entity-types): variables, type constructors, data constructors, and classes.
-- Types: [Type and Kind](commentary/compiler/type-type), [equality types and coercions](commentary/compiler/fc)
-- [The core language](commentary/compiler/core-syn-type)
-- [The STG language](commentary/compiler/stg-syn-type)
-- [The Cmm language](commentary/compiler/cmm-type)
-- ModIface, ModDetails, ModGuts
-
-
-[](/trac/ghc/attachment/wiki/Commentary/Compiler/KeyDataTypes/types.png)
-
-
+[[Image(types.png)]]
+```
