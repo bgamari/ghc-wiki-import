@@ -1,11 +1,12 @@
-# Picture of the main compiler pipeline
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Picture of the main compiler pipeline =
 
-See [compiling one module](commentary/compiler) for the commentary on this diagram.
+See [wiki:Commentary/Compiler compiling one module] for the commentary on this diagram.
 
+[[Image(HscPipe2.png)]]
 
-
-[](/trac/ghc/attachment/wiki/Commentary/Compiler/HscPipe/HscPipe.png)
-
-
+```
