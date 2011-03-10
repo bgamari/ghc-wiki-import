@@ -1,96 +1,68 @@
+CONVERSION ERROR
 
-A matter of much consternation, here is a proposal to allow type class declarations to include default instance declarations for their superclasses. It's based on [
-Jón Fairbairn's proposal](http://www.haskell.org//pipermail/haskell-prime/2006-August/001587.html), but it has a more explicit 'off switch' and the policy on corner-cases is rejection.
+Original source:
 
+```trac
+A matter of much consternation, here is a proposal to allow type class declarations to include default instance declarations for their superclasses. It's based on [http://www.haskell.org//pipermail/haskell-prime/2006-August/001587.html Jón Fairbairn's proposal], but it has a more explicit 'off switch' and the policy on corner-cases is rejection. Credit is due also to the [http://www.haskell.org/haskellwiki/Class_system_extension_proposal class system extension proposal] and its ancestors, in particular, John Meacham's [http://repetae.net/recent/out/classalias.html class alias] proposal.
 
-
-We may distinguish two uses of superclasses (not necessarily exclusive). A class can *widen* its superclass, extending its interface with new functionality (e.g., adding an inverse to a monoid to obtain a group -- inversion seldom provides an implementation of composition). A class can *deepen* its superclass (e.g., an implementation of Traversable f delivers at least enough technology to deliver Foldable f and Functor f). This proposal concerns the latter phenomenon, which is currently such a nuisance that Functor and Applicative are not superclasses of Monad. Nobody wants to be forced to write Functor and Applicative instances, just to access the Monad interface. Moreover, any proposal to refine the library by splitting a type class into depth-layers is (rightly!) greeted with howls of protest as an absence of superclass instances gives rise to breakage of the existing codebase.
-
-
+We may distinguish two uses of superclasses (not necessarily exclusive). A class can ''widen'' its superclass, extending its interface with new functionality (e.g., adding an inverse to a monoid to obtain a group -- inversion seldom provides an implementation of composition). A class can ''deepen'' its superclass (e.g., an implementation of Traversable f delivers at least enough technology to deliver Foldable f and Functor f). This proposal concerns the latter phenomenon, which is currently such a nuisance that Functor and Applicative are not superclasses of Monad. Nobody wants to be forced to write Functor and Applicative instances, just to access the Monad interface. Moreover, any proposal to refine the library by splitting a type class into depth-layers is (rightly!) greeted with howls of protest as an absence of superclass instances gives rise to breakage of the existing codebase.
 
 Concretely, the proposal is to
 
+  * allow class declarations to embed instance declarations for some, none, or all of their given superclass constraints, provided all such instances have distinct classes. We say that superclasses with default implementations are '''intrinsic''' superclasses. Yes to
+{{{
+    class Functor f => Applicative f where
+      return :: x -> f x
+      (<*>) :: f (s -> t) -> f s -> f t
+      (>>) :: f s -> f t -> f t
+      fs >> ft = return (flip const) <*> fs <*> ft
+      instance Functor f where
+        fmap = (<*>) . return
 
-- allow class declarations to embed instance declarations for some, none, or all of their given superclass constraints, provided all such instances have distinct classes. We say that superclasses with default implementations are **intrinsic** superclasses. Yes to
-
-  ```wiki
-      class Functor f => Applicative f where
-        return :: x -> f x
-        (<*>) :: f (s -> t) -> f s -> f t
-        (>>) :: f s -> f t -> f t
-        fs >> ft = return (flip const) <*> fs <*> ft
-        instance Functor f where
-          fmap = (<*>) . return
-
-      class Applicative f => Monad f where
-        (>>=) :: f a -> (a -> f b) -> f b
-        instance Applicative f where
-          ff <*> fs = ff >>= \ f -> fs >>= \ s -> return (f s)
-  ```
-
-
+    class Applicative f => Monad f where
+      (>>=) :: f a -> (a -> f b) -> f b
+      instance Applicative f where
+        ff <*> fs = ff >>= \ f -> fs >>= \ s -> return (f s)
+}}}
 but no to
-
-
-```wiki
+{{{
     class (Tweedle dum, Tweedle dee) => Rum dum dee where
       instance Tweedle dum where ...
       instance Tweedle dee where ...
-```
+}}}
+  * let subclass instance declarations spawn intrinsic superclass instances by default -- if we have
+{{{
+    class Bar t[x] => Foo x where
+      instance Bar t[x] where ...
 
-- let subclass instance declarations spawn intrinsic superclass instances by default -- if we have
-
-  ```wiki
-      class Bar t[x] => Foo x where
-        instance Bar t[x] where ...
-
-      instance C => Foo s where ...
-  ```
-
-
+    instance C => Foo s where ...
+}}}
 we automatically acquire a default superclass instance
-
-
-```wiki
+{{{
     instance C => Bar t[s] where ...
-```
-
-- let subclass instance declarations provide and override the methods of their intrinsic superclasses with no extra delimitation; so we may write
-
-  ```wiki
-      instance Monad Blah where
-        return x = ...
-        ba >>= bf = ...
-  ```
-
-
+}}}
+  * let subclass instance declarations provide and override the methods of their intrinsic superclasses with no extra delimitation; so we may write
+{{{
+    instance Monad Blah where
+      return x = ...
+      ba >>= bf = ...
+}}}
 and acquire the Monad instance, along with fully formed Applicative and Functor instances. By requiring that intrinsic superclasses be class-distinct, we ensure that the distribution of methods to spawned instances is unambiguous. Moreover, local overrides beat the default. If we write
-
-
-```wiki
+{{{
     instance Monad Blah where
       return x = ...
       ba >>= bf = ...
       bs >> bt = ...
-```
-
-
-we override the default (\>\>) but keep the (\<\*\>) in the spawned Applicative instance.
-
-
-- to inhibit default-spawning with the syntax
-
-  ```wiki
-      instance Sub x where
-        ...
-        hiding instance Super
-  ```
-
-
+}}}
+we override the default (>>) but keep the (<*>) in the spawned Applicative instance.
+  * to inhibit default-spawning with the syntax
+{{{
+    instance Sub x where
+      ...
+      hiding instance Super
+}}}
 which acts to prevent the generation of instances for Super and all of Super's intrinsic superclasses in turn. We need this, so that we can write
-
-
-```wiki
+{{{
     instance Monad Blah where
       return x = ...
       ba >>= bf = ...
@@ -98,9 +70,25 @@ which acts to prevent the generation of instances for Super and all of Super's i
 
     instance Traversable Blah where
       traverse f bx = ...  -- inducing a default implementation of Functor
-```
-
-
+}}}
 or indeed to turn off all the defaults and provide a standalone Functor instance.
 
+  * while we're about it, to allow multi-headed instance declarations for class-disjoint conjunctions, with the same semantics for constraint duplication and method distribution as for the defaults, so
+{{{
+    instance S => (C x, C' x) where
+      methodOfC  = ...
+      methodOfC' = ...
+}}}
+is short for
+{{{
+    instance S => C x where
+      methodOfC  = ...
+    instance S => C' x where
+      methodOfC' = ...
+}}}
+This proposal fits handily with the [wiki:KindFact kind Fact proposal], which allows multiple constraints to be abbreviated by ordinary type synonyms.
 
+Default superclass instances are implemented in the [http://personal.cis.strath.ac.uk/~conor/pub/she/superclass.html Strathclyde Haskell Enhancement]. They should enable some tidying of the library, with relatively few tears. Moreover, they should allow us to deepen type class hierarchies as we learn.
+
+
+```
