@@ -1,175 +1,140 @@
-# Default superclass instances
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Default superclass instances =
 
-A matter of much consternation, here is a proposal to allow type class declarations to include default instance declarations for their superclasses. It's based on [
-Jón Fairbairn's proposal](http://www.haskell.org//pipermail/haskell-prime/2006-August/001587.html), but it has a more explicit 'off switch' and the policy on corner-cases is rejection. Credit is due also to the [
-class system extension proposal](http://www.haskell.org/haskellwiki/Class_system_extension_proposal) and its ancestors, in particular, John Meacham's [
-class alias](http://repetae.net/recent/out/classalias.html) proposal.
-
-
+A matter of much consternation, here is a proposal to allow type class declarations to include default instance declarations for their superclasses. It's based on [http://www.haskell.org//pipermail/haskell-prime/2006-August/001587.html Jón Fairbairn's proposal], but it has a more explicit 'off switch' and the policy on corner-cases is rejection. Credit is due also to the [http://www.haskell.org/haskellwiki/Class_system_extension_proposal class system extension proposal] and its ancestors, in particular, John Meacham's [http://repetae.net/recent/out/classalias.html class alias] proposal.
 
 We may distinguish two uses of superclasses (not necessarily exclusive). 
+ * A class can ''widen'' its superclass, extending its interface with new functionality (e.g., adding an inverse to a monoid to obtain a group -- inversion seldom provides an implementation of composition). 
+ * A class can ''deepen'' its superclass (e.g., an implementation of Traversable f delivers at least enough technology to deliver Foldable f and Functor f). 
 
+('''SLPJ''' I don't understand this distinction clearly.) This proposal concerns the latter phenomenon, which is currently such a nuisance that Functor and Applicative are not superclasses of Monad. Nobody wants to be forced to write Functor and Applicative instances, just to access the Monad interface. Moreover, any proposal to refine the library by splitting a type class into depth-layers is (rightly!) greeted with howls of protest as an absence of superclass instances gives rise to breakage of the existing codebase.
 
-- A class can *widen* its superclass, extending its interface with new functionality (e.g., adding an inverse to a monoid to obtain a group -- inversion seldom provides an implementation of composition). 
-- A class can *deepen* its superclass (e.g., an implementation of Traversable f delivers at least enough technology to deliver Foldable f and Functor f). 
+== The proposal ==
 
+Concretely, the proposal is as follows.
 
-(**SLPJ** I don't understand this distinction clearly.) This proposal concerns the latter phenomenon, which is currently such a nuisance that Functor and Applicative are not superclasses of Monad. Nobody wants to be forced to write Functor and Applicative instances, just to access the Monad interface. Moreover, any proposal to refine the library by splitting a type class into depth-layers is (rightly!) greeted with howls of protest as an absence of superclass instances gives rise to breakage of the existing codebase.
+First, we allow a class declaration to include a '''default superclass instance delcaration''' for some, none, or all of its superclass constraints. We say that superclasses with default implementations are '''intrinsic''' superclasses. Example:
+{{{
+    class Functor f => Applicative f where
+      return :: x -> f x
+      (<*>) :: f (s -> t) -> f s -> f t
 
+      (>>) :: f s -> f t -> f t
+      fs >> ft = return (flip const) <*> fs <*> ft
 
-## The proposal
+      instance Functor f where
+        fmap = (<*>) . return
+}}}
+Note the `instance` declaration nested inside the `class` declaration. This is the default superclass instance declaration, and `Functor` thereby becomes an intrisic superclass of `Applicative`.  Moreover, note that the definition of `fmap` uses the `<*>` operation of `Applicative`; that is the whole point!
 
+Here is another example:
+{{{
+    class Applicative f => Monad f where
+      (>>=) :: f a -> (a -> f b) -> f b
+      instance Applicative f where
+        ff <*> fs = ff >>= \ f -> fs >>= \ s -> return (f s)
+}}}
+Here,  and `Applicative` is an intrinsic superclass of `Monad`.
 
+Each default superclass instance declaration in a `class` declaration must be for
+a distinct class.  So one of these is OK and the other is not:
+{{{
+    -- This is ILLEGAL
+    class (Tweedle dum, Tweedle dee) => Rum dum dee where
+      instance Tweedle dum where ...
+      instance Tweedle dee where ...
 
-Concretely, the proposal is to
+    -- But this is OK 
+    class (Tweedle dum, Tweedle dee) => Rum dum dee where
+      instance Tweedle dee where ...
+}}}
 
+  * Let subclass instance declarations spawn intrinsic superclass instances by default -- if we have
+{{{
+    class Bar t[x] => Foo x where
+      instance Bar t[x] where ...
 
-- Allow class declarations to include **default superclass instance delcaration** for some, none, or all of their given superclass constraints, provided all such instances have distinct classes. We say that superclasses with default implementations are **intrinsic** superclasses. "Yes" to
-
-  ```wiki
-      class Functor f => Applicative f where
-        return :: x -> f x
-        (<*>) :: f (s -> t) -> f s -> f t
-        (>>) :: f s -> f t -> f t
-        fs >> ft = return (flip const) <*> fs <*> ft
-        instance Functor f where
-          fmap = (<*>) . return
-
-      class Applicative f => Monad f where
-        (>>=) :: f a -> (a -> f b) -> f b
-        instance Applicative f where
-          ff <*> fs = ff >>= \ f -> fs >>= \ s -> return (f s)
-  ```
-
-  but "no" to
-
-  ```wiki
-      class (Tweedle dum, Tweedle dee) => Rum dum dee where
-        instance Tweedle dum where ...
-        instance Tweedle dee where ...
-  ```
-
-- Let subclass instance declarations spawn intrinsic superclass instances by default -- if we have
-
-  ```wiki
-      class Bar t[x] => Foo x where
-        instance Bar t[x] where ...
-
-      instance C => Foo s where ...
-  ```
-
+    instance C => Foo s where ...
+}}}
   we automatically acquire a default superclass instance
+{{{
+    instance C => Bar t[s] where ...
+}}}
 
-  ```wiki
-      instance C => Bar t[s] where ...
-  ```
-
-- Let subclass instance declarations provide and override the methods of their intrinsic superclasses with no extra delimitation; so we may write
-
-  ```wiki
-      instance Monad Blah where
-        return x = ...
-        ba >>= bf = ...
-  ```
-
+  * Let subclass instance declarations provide and override the methods of their intrinsic superclasses with no extra delimitation; so we may write
+{{{
+    instance Monad Blah where
+      return x = ...
+      ba >>= bf = ...
+}}}
   and acquire the Monad instance, along with fully formed Applicative and Functor instances. By requiring that intrinsic superclasses be class-distinct, we ensure that the distribution of methods to spawned instances is unambiguous. Moreover, local overrides beat the default. If we write
+{{{
+    instance Monad Blah where
+      return x = ...
+      ba >>= bf = ...
+      bs >> bt = ...
+}}}
+  we override the default (>>) but keep the (<*>) in the spawned Applicative instance.
 
-  ```wiki
-      instance Monad Blah where
-        return x = ...
-        ba >>= bf = ...
-        bs >> bt = ...
-  ```
-
-  we override the default (\>\>) but keep the (\<\*\>) in the spawned Applicative instance.
-
-- To inhibit default-spawning with the syntax
-
-  ```wiki
-      instance Sub x where
-        ...
-        hiding instance Super
-  ```
-
+  * To inhibit default-spawning with the syntax
+{{{
+    instance Sub x where
+      ...
+      hiding instance Super
+}}}
   which acts to prevent the generation of instances for Super and all of Super's intrinsic superclasses in turn. We need this, so that we can write
+{{{
+    instance Monad Blah where
+      return x = ...
+      ba >>= bf = ...
+      hiding instance Functor
 
-  ```wiki
-      instance Monad Blah where
-        return x = ...
-        ba >>= bf = ...
-        hiding instance Functor
-
-      instance Traversable Blah where
-        traverse f bx = ...  -- inducing a default implementation of Functor
-  ```
-
+    instance Traversable Blah where
+      traverse f bx = ...  -- inducing a default implementation of Functor
+}}}
   or indeed to turn off all the defaults and provide a standalone Functor instance.
 
-- While we're about it, to allow multi-headed instance declarations for class-disjoint conjunctions, with the same semantics for constraint duplication and method distribution as for the defaults, so
-
-  ```wiki
-      instance S => (C x, C' x) where
-        methodOfC  = ...
-        methodOfC' = ...
-  ```
-
+  * While we're about it, to allow multi-headed instance declarations for class-disjoint conjunctions, with the same semantics for constraint duplication and method distribution as for the defaults, so
+{{{
+    instance S => (C x, C' x) where
+      methodOfC  = ...
+      methodOfC' = ...
+}}}
   is short for
+{{{
+    instance S => C x where
+      methodOfC  = ...
+    instance S => C' x where
+      methodOfC' = ...
+}}}
 
-  ```wiki
-      instance S => C x where
-        methodOfC  = ...
-      instance S => C' x where
-        methodOfC' = ...
-  ```
+This proposal fits handily with the [wiki:KindFact kind Fact proposal], which allows multiple constraints to be abbreviated by ordinary type synonyms.
 
-
-This proposal fits handily with the [kind Fact proposal](kind-fact), which allows multiple constraints to be abbreviated by ordinary type synonyms.
-
-
-
-Default superclass instances are implemented in the [
-Strathclyde Haskell Enhancement](http://personal.cis.strath.ac.uk/~conor/pub/she/superclass.html). They should enable some tidying of the library, with relatively few tears. Moreover, they should allow us to deepen type class hierarchies as we learn. Retaining backward compatibility in relative silence is the motivation for an opt-in default.
-
-
+Default superclass instances are implemented in the [http://personal.cis.strath.ac.uk/~conor/pub/she/superclass.html Strathclyde Haskell Enhancement]. They should enable some tidying of the library, with relatively few tears. Moreover, they should allow us to deepen type class hierarchies as we learn. Retaining backward compatibility in relative silence is the motivation for an opt-in default.
 
 Oleg and others note: just because you can make default instances, they are not always the instances you want. A key example is
-
-
-```wiki
+{{{
     instance Monad m => Monad (ReaderT r m) where ...
-```
-
-
+}}}
 which would give us by default
-
-
-```wiki
+{{{
     instance Monad m => Applicative (ReaderT r m) where ...
-```
-
-
+}}}
 thus preventing us adding the more general
-
-
-```wiki
+{{{
     instance Applicative m => Applicative (ReaderT r m) where ...
-```
-
-
+}}}
 The opt-out is crucial, but relatively cheap.
-
-
 
 Jón's proposal had a more subtle opt-out policy, namely that an intrinsic superclass can be quietly pre-empted by an instance for the superclass from a prior or the present module. Note that to declare an instance of the subclass, one must produce an instance of the superclass by the same module at the latest. This quiet exclusion policy is not enough to handle the case of multiple candidate instances arising from multiple intrinsic superclasses (e.g., Traversable and Monad giving competing Functor instances), so some explicit form is required. The question for us, then, is what should happen if an intrinsic superclass not explicitly hidden were to clash with an explicit instance from the same or a prior module. We could
 
+  1. reject this as a duplicate instance declaration, which indeed it is, or
+  2. allow the explicit to supersede the intrinsic default, but issue a warning suggesting to either remove the explicit instance or add an explicit opt-out, or
+  3. allow the explicit to supersede the intrinsic default silently.
 
-1. reject this as a duplicate instance declaration, which indeed it is, or
-1. allow the explicit to supersede the intrinsic default, but issue a warning suggesting to either remove the explicit instance or add an explicit opt-out, or
-1. allow the explicit to supersede the intrinsic default silently.
-
-
-As it stands, we propose option 1 as somehow the principled thing to do. We acknowledge that it creates an issue with legacy code, precisely because there are plenty of places where we have written the full stack of instances, often just doing the obvious default thing: these should be cleaned up, sooner or later. Option 3 avoids that problem but risks perplexity: if I make use of some cool package which introduces some `Foo :: * -> *`, I might notice that `Foo` is a monad and add a `Monad Foo` instance in my own code, expecting the `Applicative Foo` instance to be generated in concert; to my horror, I find my code has subtle bugs because the package introduced a different, non-monadic, `Applicative Foo` instance which I'm accidentally using instead. Option 2 is certainly worth considering as a pragmatic transitional compromise, although the 'transitional' has a dangerous tendency to be permanent.
-
-
+As it stands, we propose option 1 as somehow the principled thing to do. We acknowledge that it creates an issue with legacy code, precisely because there are plenty of places where we have written the full stack of instances, often just doing the obvious default thing: these should be cleaned up, sooner or later. Option 3 avoids that problem but risks perplexity: if I make use of some cool package which introduces some {{{Foo :: * -> *}}}, I might notice that {{{Foo}}} is a monad and add a {{{Monad Foo}}} instance in my own code, expecting the {{{Applicative Foo}}} instance to be generated in concert; to my horror, I find my code has subtle bugs because the package introduced a different, non-monadic, {{{Applicative Foo}}} instance which I'm accidentally using instead. Option 2 is certainly worth considering as a pragmatic transitional compromise, although the 'transitional' has a dangerous tendency to be permanent.
+```
