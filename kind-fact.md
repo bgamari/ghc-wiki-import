@@ -1,3 +1,6 @@
+# Adding Kind Fact
+
+
 
 Proposal: extend the kind system with a kind **Fact** to cover constraints as well as types, in order to reuse existing abstraction mechanisms, notably **type synonyms**, in the constraint language.
 
@@ -10,15 +13,14 @@ context aliases](http://www.haskell.org/haskellwiki/Context_alias) (in turn base
 class alias](http://repetae.net/recent/out/classalias.html) proposal) makes a similar suggestion, remarking that a new kind would probably help. The claim here is that the new kind obviates the need for other new syntax.
 
 
+## The proposal
 
-Concretely, the proposal is to
 
-
-- add a kind `Fact` for constraints, so that, e.g. `Monad :: (* -> *) -> Fact`;
-- close `Fact` under tuples, so `(F1, .. Fn) :: Fact` iff each `Fi :: Fact`;
-- allow nested tuple constraints, with componentwise unpacking and inference, so if `Stringy x = (Read x, Show x)`, then `(Stringy x, Eq x)` is a valid constraint without flattening it to `(Read x, Show x, Eq x)`;
-- allow (rather, neglect to forbid) the use of `type` to introduce synonyms for Fact(-constructing) things;
-- retain the policy of defaulting to kind `*` in ambiguous inference problems -- notably `()` is the unit type and the trivial constraint -- except where overridden by kind signatures.
+- Add a kind `Fact` for constraints, so that, e.g. `Monad :: (* -> *) -> Fact`;
+- Close `Fact` under tuples, so `(F1, .. Fn) :: Fact` iff each `Fi :: Fact`;
+- Allow nested tuple constraints, with componentwise unpacking and inference, so if `Stringy x = (Read x, Show x)`, then `(Stringy x, Eq x)` is a valid constraint without flattening it to `(Read x, Show x, Eq x)`;
+- Allow (rather, neglect to forbid) the use of `type` to introduce synonyms for Fact(-constructing) things;
+- Retain the policy of defaulting to kind `*` in ambiguous inference problems -- notably `()` is the unit type and the trivial constraint -- except where overridden by kind signatures.
 
 
 Examples:
