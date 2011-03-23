@@ -1,28 +1,23 @@
-# Stupidity in the New Code Generator
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Stupidity in the New Code Generator =
 
-Presently compiling using the new code generator results in a fairly sizable performance hit, because the new code generator produces sub-optimal (and sometimes absolutely terrible code.) There are [
-a lot of ideas for how to make things better](http://darcs.haskell.org/ghc/compiler/cmm/cmm-notes); the idea for this wiki page is to document all of the stupid things the new code generator is doing, to later be correlated with specific refactorings and fixes that will hopefully eliminate classes of these stupid things. The hope here is to develop a sense for what the most endemic problems with the newly generated code is.
+Presently compiling using the new code generator results in a fairly sizable performance hit, because the new code generator produces sub-optimal (and sometimes absolutely terrible code.) There are [http://darcs.haskell.org/ghc/compiler/cmm/cmm-notes a lot of ideas for how to make things better]; the idea for this wiki page is to document all of the stupid things the new code generator is doing, to later be correlated with specific refactorings and fixes that will hopefully eliminate classes of these stupid things. The hope here is to develop a sense for what the most endemic problems with the newly generated code is.
 
+== Lots of temporary variables ==
 
-## Cosmetic issues
+Lots of temporary variables (these can tickle other issues when the temporaries are long-lived, but otherwise would be optimized away). You can at least eliminate some of them by looking at the output of `-ddump-opt-cmm`, which utilizes some basic temporary inlining when used with the native backend `-fasm`, but this doesn't currently apply to the GCC or LLVM backends.
 
+At least one major culprit for this is `allocDynClosure`, described in Note `Return a LocalReg`; this pins down the value of the `CmmExpr` to be something for one particular time, but for a vast majority of use-cases the expression is used immediately afterwards. Actually, this is mostly my patches fault, because the extra rewrite means that the inline pass is broken.
 
-
-The new code generator tends to generate C-- in the following style (which should be optimized away by the backends but can increase "line-noise"):
-
-
-- Lots of temporary variables (these can tickle other issues when the temporaries are long-lived, but otherwise would be optimized away). You can at least eliminate some of them by looking at the output of `-ddump-opt-cmm`, which utilizes some basic temporary inlining when used with the native backend `-fasm`, but this doesn't currently apply to the GCC or LLVM backends.
-
-## Rewriting stacks
-
-
+== Rewriting stacks ==
 
 `3586.hs` emits the following code:
 
-
-```wiki
+{{{
  Main.$wa_entry()
          { [const Main.$wa_slow-Main.$wa_info;, const 3591;, const 0;,
     const 458752;, const 0;, const 15;]
@@ -60,56 +55,42 @@ The new code generator tends to generate C-- in the following style (which shoul
          I32[Sp - 32] = _s16w::I32;
          Sp = Sp - 32;
          jump stg_gc_fun ();
-```
-
+}}}
 
 We see that these temporary variables are being repeatedly rewritten to the stack, even when there are no changes.
 
-
-## Spilling Hp/Sp
-
+== Spilling Hp/Sp ==
 
 
 `3586.hs` emits the following code:
 
-
-```wiki
+{{{
      _c1ao::I32 = Hp - 4;
      I32[Sp - 20] = _c1ao::I32;
      foreign "ccall"
        newCAF((BaseReg, PtrHint), (R1, PtrHint))[_unsafe_call_];
      _c1ao::I32 = I32[Sp - 20];
-```
-
+}}}
 
 We see `Hp - 4` being allocated to a temp, and then consequently being spilled to the stack even though `newCAF` definitely will not change `Hp`, so we could have floated the expression down.
 
-
-## Up and Down
-
-
+== Up and Down ==
 
 A frequent pattern is the stack pointer being bumped up and then back down again, for no particular reason. 
 
-
-```wiki
+{{{
          Sp = Sp + 4;
          Sp = Sp - 4;
          jump block_c7xh_entry ();
-```
-
+}}}
 
 This is mentioned at the very top of `cmm-notes`.
 
-
-## Sp is generally stupid
-
-
+== Sp is generally stupid ==
 
 Here is an optimized C-- sample from `arr016.hs`.
 
-
-```wiki
+{{{
 Main.D:Arbitrary_entry()
         { [const 131084;, const 0;, const 15;]
         }
@@ -139,13 +120,11 @@ Main.D:Arbitrary_entry()
         Sp = Sp - 12;
         jump (I32[BaseReg - 4]) ();
 }
-```
-
+}}}
 
 Compare with the old code:
 
-
-```wiki
+{{{
 Main.D:Arbitrary_entry()
         { [const 131084;, const 0;, const 15;]
         }
@@ -165,13 +144,12 @@ Main.D:Arbitrary_entry()
         I32[BaseReg + 112] = 12;
         goto c4pV;
 }
-```
-
+}}}
 
 There are a lot of things wrong
 
-
-- We do an unnecessary stack check on entry to this function
-- Sp should be bumped before the stack check (but we need this fishy code due to ncg spilling before the check)
-- The `R1` assignment is silly (although that's my fault; I should probably fix up the offending patch)
-- Sp is getting bumped too much, and then being adjusted back down again
+ - We do an unnecessary stack check on entry to this function
+ - Sp should be bumped before the stack check (but we need this fishy code due to ncg spilling before the check)
+ - The `R1` assignment is silly (although that's my fault; I should probably fix up the offending patch)
+ - Sp is getting bumped too much, and then being adjusted back down again
+```
