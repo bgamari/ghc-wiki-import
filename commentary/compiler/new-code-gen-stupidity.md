@@ -13,7 +13,7 @@ a lot of ideas for how to make things better](http://darcs.haskell.org/ghc/compi
 The new code generator tends to generate C-- in the following style (which should be optimized away by the backends but can increase "line-noise"):
 
 
-- Lots of temporary variables (these can tickle other issues when the temporaries are long-lived, but otherwise would be optimized away)
+- Lots of temporary variables (these can tickle other issues when the temporaries are long-lived, but otherwise would be optimized away). You can at least eliminate some of them by looking at the output of `-ddump-opt-cmm`, which utilizes some basic temporary inlining when used with the native backend `-fasm`, but this doesn't currently apply to the GCC or LLVM backends.
 
 ## Rewriting stacks
 
