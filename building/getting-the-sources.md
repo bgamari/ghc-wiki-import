@@ -39,9 +39,8 @@ A source tree consists of more than one repository: at the top level there is th
 
 
 ```wiki
-  $ git clone http://darcs.haskell.org/ghc-git/ghc.git/
+  $ git clone http://darcs.haskell.org/ghc.git/
   $ cd ghc
-  $ chmod +x sync-all
   $ ./sync-all --testsuite get
 ```
 
@@ -68,16 +67,7 @@ The above instructions will get the HEAD - the main trunk of GHC development.  T
 
 
 
-To get a branch, add the branch name after [
-http://darcs.haskell.org/](http://darcs.haskell.org/).  For example, to get the `ghc-7.2` branch, you would first say 
-
-
-```wiki
-  $ git clone http://darcs.haskell.org/ghc-7.2/ghc.git
-```
-
-
-and then use `sync-all` as above to get the rest of the repositories.
+To get a branch, \[TODO!\]
 
 
 ## Pulling new patches
