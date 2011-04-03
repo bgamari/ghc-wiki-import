@@ -468,6 +468,7 @@ This will fail if the tag already exists.  If you want to move an existing tag u
 
 {{{
 git status
+git diff
 }}}
 
 == darcs diff ==
