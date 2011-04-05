@@ -1,48 +1,85 @@
-CONVERSION ERROR
+# The new Generic Deriving mechanism (ongoing work)
 
-Original source:
 
-```trac
-= The new Generic Deriving mechanism (ongoing work) =
 
-GHC includes a new (in 2010) mechanism to let you write generic functions.  It is described in [http://www.dreixel.net/research/pdf/gdmh_nocolor.pdf A generic deriving mechanism for Haskell], by Magalhães, Dijkstra, Jeuring and Löh.  This page sketches the specifics of the implementation; we assume you have read the paper.
+GHC includes a new (in 2010) mechanism to let you write generic functions.  It is described in [
+A generic deriving mechanism for Haskell](http://www.dreixel.net/research/pdf/gdmh_nocolor.pdf), by Magalhães, Dijkstra, Jeuring and Löh.  This page sketches the specifics of the implementation; we assume you have read the paper.
 
-This mechanism replaces the [http://www.haskell.org/ghc/docs/6.12.2/html/users_guide/generic-classes.html previous generic classes implementation]. The code is in a branch of GHC; you can get it with `darcs get http://darcs.haskell.org/ghc-generic-15Feb11/ghc`.
 
-== Main components ==
 
- * `TcDeriv.tcDeriving` generates an `InstInfo` for each data type that fulfills the `isRep0` predicate. This `InstInfo` is the `Representable0` instance for that type, allowing it to be handled generically (by kind-`*` generic functions).
+This mechanism replaces the [previous generic classes implementation](http://www.haskell.org/ghc/docs/6.12.2/html/users_guide/generic-classes.html). The code is in a branch of GHC; you can get it with `darcs get http://darcs.haskell.org/ghc-generic-15Feb11/ghc`.
 
- * The representation types and core functionality of the library live on `GHC.Generics` (on the `ghc-prim` package).
 
- * Many names have been added as known in `prelude/PrelNames`
+## Changes from the paper
 
- * Most of the code generation is handled by `types/Generics`
 
-== What already works ==
 
- * `Representable0` instances are automatically generated when `-XGenerics` is enabled.
+In the paper we describe the implementation in [
+UHC](http://www.cs.uu.nl/wiki/UHC). The implementation in GHC is slightly different:
 
-== To do ==
- * Remove all of the old deriving mechanism stuff
 
- * Properly deal with fixity and isTuple information for constructors
+- We are using type families, so the Representable0 and Representable1 type classes have only one type argument. So, in GHC the classes look like what we describe in "Avoiding extensions" part of Section 2.3 of the paper. This change affects only a generic function writer, and not a generic function user.
 
- * Generate `Representable1` instances
+- Default definitions (Section 3.3) work differently. In GHC we don't use a `DERIVABLE` pragma; instead, a type class can declare a *generic default method*, which is akin to a standard default method, but includes a generic type signature. For example, the `Encode` class of Section 3.1 is now:
 
- * What about base types like `[]`, `Maybe`, etc.?
+  ```wiki
+  class Encode a where
+    encode :: a -> [Bit]
+    generic encode :: (Representable0 a, Encode1 (Rep a)) => a -> [Bit]
+    encode = encode1 . from0
+  ```
 
- * Generic instances
-  * Add `deriving` as a keyword. This replaces the `DERIVABLE` pragma from the UHC implementation, and is attached to a default method on a class declaration.
-  * Change the `Class` definition to allow for generic defaults (in addition to standard defaults).
-  * Generate default instances for representable types which derive generic classes.
+  This removes the need for a separate default definition and a pragma.
 
-== Testing ==
+- To derive generic functionality to a user type, the user no longer uses ``deriving instance`` (Section 4.6.1). Instead, the user gives an instance without defining the method; GHC then uses the generic default. For instance:
 
- * For temporary testing, a file test/Main.hs is available with sample datatypes.
+  ```wiki
+  instance Encode [a] -- works if there is an instance Representable0 [a]
+  ```
 
-== Problems/questions ==
 
- * Currently, in `TcDeriv.genGenericRepBind` we generate instances using `mkLocalInstance`. Is this right, or should we use `mkImportedInstance` instead?  SLPJ: mkLocalInstance: it's as if the instance declaration was in this module, right?
+  
 
-```
+
+## Main components
+
+
+- `TcDeriv.tcDeriving` generates an `InstInfo` for each data type that fulfills the `isRep0` predicate. This `InstInfo` is the `Representable0` instance for that type, allowing it to be handled generically (by kind-`*` generic functions).
+
+- The representation types and core functionality of the library live on `GHC.Generics` (on the `ghc-prim` package).
+
+- Many names have been added as known in `prelude/PrelNames`
+
+- Most of the code generation is handled by `types/Generics`
+
+## What already works
+
+
+- `Representable0` instances are automatically generated when `-XGenerics` is enabled.
+
+## To do
+
+
+- Remove all of the old deriving mechanism stuff
+
+- Properly deal with fixity and isTuple information for constructors
+
+- Generate `Representable1` instances
+
+- What about base types like `[]`, `Maybe`, etc.?
+
+- Generic instances
+
+  - Add `deriving` as a keyword. This replaces the `DERIVABLE` pragma from the UHC implementation, and is attached to a default method on a class declaration.
+  - Change the `Class` definition to allow for generic defaults (in addition to standard defaults).
+  - Generate default instances for representable types which derive generic classes.
+
+## Testing
+
+
+- For temporary testing, a file test/Main.hs is available with sample datatypes.
+
+## Problems/questions
+
+
+- Currently, in `TcDeriv.genGenericRepBind` we generate instances using `mkLocalInstance`. Is this right, or should we use `mkImportedInstance` instead?  SLPJ: mkLocalInstance: it's as if the instance declaration was in this module, right?
