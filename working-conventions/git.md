@@ -76,7 +76,7 @@ Now you have `ghc-working` and `ghc-validate` repos, and additionally the `ghc-v
 
 
 
-To pull from working into the `ghc-valdate` tree:
+To pull from working into the `ghc-validate` tree:
 
 
 ```wiki
