@@ -68,7 +68,7 @@ $ ./sync-all -r <account>@darcs.haskell.org:/home/darcs remote set-url --push or
 ```
 
 
-(where `<account>` is your account on `darcs.haskell.org`; omit this step if you don't have one, you can still submit patches via the mailing list or send a pull request to get your changes in GHC).
+(where `<account>` is your account on `darcs.haskell.org`; omit this step if you don't have one, you can still submit patches via the mailing list (using `git format-patch` will help you with this) or send a pull request to get your changes in GHC).
 
 
 
