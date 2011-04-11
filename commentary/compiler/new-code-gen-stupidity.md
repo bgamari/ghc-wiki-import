@@ -1,34 +1,25 @@
-# Stupidity in the New Code Generator
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Stupidity in the New Code Generator =
 
-Presently compiling using the new code generator results in a fairly sizable performance hit, because the new code generator produces sub-optimal (and sometimes absolutely terrible code.) There are [
-a lot of ideas for how to make things better](http://darcs.haskell.org/ghc/compiler/cmm/cmm-notes); the idea for this wiki page is to document all of the stupid things the new code generator is doing, to later be correlated with specific refactorings and fixes that will hopefully eliminate classes of these stupid things. The hope here is to develop a sense for what the most endemic problems with the newly generated code is.
+Presently compiling using the new code generator results in a fairly sizable performance hit, because the new code generator produces sub-optimal (and sometimes absolutely terrible code.) There are [http://darcs.haskell.org/ghc/compiler/cmm/cmm-notes a lot of ideas for how to make things better]; the idea for this wiki page is to document all of the stupid things the new code generator is doing, to later be correlated with specific refactorings and fixes that will hopefully eliminate classes of these stupid things. The hope here is to develop a sense for what the most endemic problems with the newly generated code is.
 
-
-## Lots of temporary variables
-
-
+== Lots of temporary variables ==
 
 Lots of temporary variables (these can tickle other issues when the temporaries are long-lived, but otherwise would be optimized away). You can at least eliminate some of them by looking at the output of `-ddump-opt-cmm`, which utilizes some basic temporary inlining when used with the native backend `-fasm`, but this doesn't currently apply to the GCC or LLVM backends.
 
-
-
 ~~At least one major culprit for this is `allocDynClosure`, described in Note `Return a LocalReg`; this pins down the value of the `CmmExpr` to be something for one particular time, but for a vast majority of use-cases the expression is used immediately afterwards. Actually, this is mostly my patches fault, because the extra rewrite means that the inline pass is broken.~~ Fixed in latest version of the pass; we don't quite manage to inline enough but there's only one extra temporary.
-
-
 
 Another cause of all of these temporary variables is that the new code generator immediately assigns any variables that were on the stack to temporaries immediately upon entry to a function.
 
-
-## Rewriting stacks
-
-
+== Rewriting stacks ==
 
 `3586.hs` emits the following code:
 
-
-```wiki
+{{{
  Main.$wa_entry()
          { [const Main.$wa_slow-Main.$wa_info;, const 3591;, const 0;,
     const 458752;, const 0;, const 15;]
@@ -66,44 +57,32 @@ Another cause of all of these temporary variables is that the new code generator
          I32[Sp - 32] = _s16w::I32;
          Sp = Sp - 32;
          jump stg_gc_fun ();
-```
-
+}}}
 
 We see that these temporary variables are being repeatedly rewritten to the stack, even when there are no changes.
 
-
-
 Since these areas on the stack are all old call areas, one way to fix this is to inline all of the memory references. However, this has certain undesirable properties for other code, so we need to be a little more clever. The key thing to notice is that these accesses are only used once per control flow path, in which case sinking the loads down and then inlining them should be OK (it will increase code size but not execution time.) However, the other difficulty is that the CmmOpt inliner, as it stands, won't inline things that look like this because although the variable is only used once in different branches, the same name is used, so it can't distinguish between the temporaries with mutually exclusive live ranges. Building a more clever inliner with Hoopl is also a bit tricky, because inlining is a forward analysis/transformation, but usage counting is a backwards analysis.
 
-
-## Spilling Hp/Sp
-
+== Spilling Hp/Sp ==
 
 
 `3586.hs` emits the following code:
 
-
-```wiki
+{{{
      _c1ao::I32 = Hp - 4;
      I32[Sp - 20] = _c1ao::I32;
      foreign "ccall"
        newCAF((BaseReg, PtrHint), (R1, PtrHint))[_unsafe_call_];
      _c1ao::I32 = I32[Sp - 20];
-```
-
+}}}
 
 We see `Hp - 4` being allocated to a temp, and then consequently being spilled to the stack even though `newCAF` definitely will not change `Hp`, so we could have floated the expression down.
 
-
-
 This seems to happen whenever there's a `newCAF` ccall.
-
-
 
 We also seem to reload these values multiple times.
 
-
-```wiki
+{{{
         _c7Yt::I32 = Hp - 4;
         I32[Sp - 28] = _c7Yt::I32;
         foreign "ccall"
@@ -114,37 +93,27 @@ We also seem to reload these values multiple times.
         _c7Yt::I32 = I32[Sp - 28];  <--- totally unnecessary
         I32[Sp - 8] = _c7Yt::I32;
         I32[Sp - 12] = stg_upd_frame_info;
-```
+}}}
 
+~~We need to not spill across certain foreign calls, but for which calls this is OK for is unclear.~~ Variables stay live across all unsafe foreign calls (foreign calls in the middle), except for the obvious cases (the return registers), so no spilling should happen at all. The liveness analysis is too conservative.
 
-We need to not spill across certain foreign calls, but for which calls this is OK for is unclear.
-
-
-## Up and Down
-
-
+== Up and Down ==
 
 A frequent pattern is the stack pointer being bumped up and then back down again, for no particular reason. 
 
-
-```wiki
+{{{
          Sp = Sp + 4;
          Sp = Sp - 4;
          jump block_c7xh_entry ();
-```
-
+}}}
 
 This is mentioned at the very top of `cmm-notes`.
 
-
-## Sp is generally stupid
-
-
+== Sp is generally stupid ==
 
 Here is an optimized C-- sample from `arr016.hs`.
 
-
-```wiki
+{{{
 Main.D:Arbitrary_entry()
         { [const 131084;, const 0;, const 15;]
         }
@@ -173,13 +142,11 @@ Main.D:Arbitrary_entry()
         Sp = Sp - 12;
         jump (I32[BaseReg - 4]) ();
 }
-```
-
+}}}
 
 Compare with the old code:
 
-
-```wiki
+{{{
 Main.D:Arbitrary_entry()
         { [const 131084;, const 0;, const 15;]
         }
@@ -199,17 +166,15 @@ Main.D:Arbitrary_entry()
         I32[BaseReg + 112] = 12;
         goto c4pV;
 }
-```
-
+}}}
 
 There are a lot of things wrong
 
-
-- We do an unnecessary stack check on entry to this function
-- Sp should be bumped before the stack check (but we need this fishy code due to ncg spilling before the check)
-- Sp is getting bumped too much, and then being adjusted back down again
-
+ - We do an unnecessary stack check on entry to this function
+ - Sp should be bumped before the stack check (but we need this fishy code due to ncg spilling before the check)
+ - Sp is getting bumped too much, and then being adjusted back down again
 
 This pattern essentially happens for every function, since we always assign incoming parameters to temporary variables before doing anything.
 
 
+```
