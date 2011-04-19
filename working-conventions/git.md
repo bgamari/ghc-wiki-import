@@ -7,7 +7,7 @@ git](http://git-scm.com/) for revision control.  This page describes various GHC
 
 
 
-For Darcs-related stuff see also [DarcsToGit](darcs-to-git) and [GitForDarcsUsers](git-for-darcs-users).
+Existing darcs users see: [GitForDarcsUsers](git-for-darcs-users).  If you have an existing source tree in darcs and need to convert patches, see [DarcsToGit](darcs-to-git).
 
 
 ## General Guidelines
