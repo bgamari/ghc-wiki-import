@@ -1,65 +1,46 @@
-# GHC Status
+CONVERSION ERROR
 
+Original source:
 
-## Releases
+```trac
+= GHC Status =
 
-
+== Releases ==
 
 Here are our release plans for 
+  * [wiki:Status/Releases The next GHC release (6.12)]
+  * [wiki:Status/GHC-6.10 GHC 6.10 (outdated)]
 
+Here are details about what [wiki:Platforms platforms GHC supports].
 
-- The next GHC release (6.12)?
-- [GHC 6.10 (outdated)](status/gh-c-6.10)
+== Biannual status reports ==
 
+Here are biannual GHC status reports, published in the [http://haskell.org/communities/ Haskell Communities and Activities Report]
+  * [wiki:Status/May11 GHC status May 2011]
+  * [wiki:Status/Oct10 GHC status October 2010]
+  * [wiki:Status/Apr10 GHC status April 2010]
+  * [wiki:Status/Oct09 GHC status October 2009]
+  * [wiki:Status/May09 GHC status May 2009]
+  * [wiki:Status/October08 GHC status October 2008]
+  * [wiki:Status/May08 GHC status May 2008]
+  * [wiki:Status/Nov07 GHC status November 2007]
+  * [wiki:Status/April07 GHC status April 2007]
+  * [wiki:Status/October06 GHC status October 2006]
 
-Here are details about what [platforms GHC supports](platforms).
+== Performance ==
 
+Here are the [http://www.cse.unsw.edu.au/~dons/nobench/i686/results.html results of the nobench suite], showing how GHC performs relative to various versions of itself, and other Haskell compilers.
 
-## Biannual status reports
+== Planning notes ==
 
+Here is our [wiki:GhcPlanning current planning document], intended mainly to help Simon, Simon, and Ian coordinate with each other.
 
-
-Here are biannual GHC status reports, published in the [
-Haskell Communities and Activities Report](http://haskell.org/communities/)
-
-
-- [GHC status October 2010](status/oct10)
-- [GHC status April 2010](status/apr10)
-- [GHC status October 2009](status/oct09)
-- [GHC status May 2009](status/may09)
-- [GHC status October 2008](status/october08)
-- [GHC status May 2008](status/may08)
-- [GHC status November 2007](status/nov07)
-- [GHC status April 2007](status/april07)
-- [GHC status October 2006](status/october06)
-
-## Performance
-
-
-
-Here are the [
-results of the nobench suite](http://www.cse.unsw.edu.au/~dons/nobench/i686/results.html), showing how GHC performs relative to various versions of itself, and other Haskell compilers.
-
-
-## Planning notes
-
-
-
-Here is our [current planning document](ghc-planning), intended mainly to help Simon, Simon, and Ian coordinate with each other.
-
-
-## Design notes
-
-
+== Design notes ==
 
 Here are notes about aspects of GHC's design that are up for discussion.  (They often relate to Haskell generally, rather than just GHC, but it's a convenient place to keep them.)
-
-
-- [Haskell library organisation](commentary/packages/package-reorg)
-- [The design for the package system itself](commentary/packages/ghc-packages-proposal)
-- [Support for better error reporting](explicit-call-stack); the "head \[\]" problem.
-
-
+  * [wiki:Commentary/Packages/PackageReorg Haskell library organisation]
+  * [wiki:Commentary/Packages/GhcPackagesProposal The design for the package system itself]
+  * [wiki:ExplicitCallStack Support for better error reporting]; the "head []" problem.
  
 
-
+```
