@@ -51,7 +51,7 @@ Many bugs require a bit more work.  Here's how to go about helping with a non-tr
 
 1. **Submit your patch**.  If you don't have commit permission for the repository, 
 
-  - Use 'darcs send -o filename' to create a patch bundle
+  - Use 'darcs format-patch' to create a patch bundle
   - Attach the patch bundle to the Trac bug report
   - Add a comment to the Trac bug report to say what you've done
   - In the 'Action' part of the Trac ticket, select "Please review".  This shifts responsibility to the GHC team to review and commit your patch.
