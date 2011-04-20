@@ -156,6 +156,7 @@ Original source:
  * #4222: design of reification for TH
 
 == Features == 
+ * #5144: pattern synonyms
  * #5073: `blockST` and friends
  * #788, #2895: Class aliases 
  * #2595: record updates
