@@ -1,32 +1,25 @@
+CONVERSION ERROR
 
+Original source:
 
+```trac
 
-# The GHC Commentary - Coding Style Guidelines for the compiler
+[[PageOutline]]
 
+ = The GHC Commentary - Coding Style Guidelines for the compiler = 
 
-
-This is a rough description of some of the coding practices and style that we use for Haskell code inside `compiler`.  For run-time system code see the [Coding Style Guidelines for RTS C code](commentary/rts/conventions).  Also see the wiki page on [Working Conventions](working-conventions) for issues related to version control, workflow, testing, bug tracking and other miscellany.
-
-
+This is a rough description of some of the coding practices and style that we use for Haskell code inside {{{compiler}}}.  For run-time system code see the [wiki:Commentary/Rts/Conventions Coding Style Guidelines for RTS C code].  Also see the wiki page on [wiki:WorkingConventions Working Conventions] for issues related to version control, workflow, testing, bug tracking and other miscellany.
 
 The general rule is to stick to the same coding style as is already used in the file you're editing. If you must make stylistic changes, commit them separately from functional changes, so that someone looking back through the change logs can easily distinguish them. 
 
-
-## Comments and commit messages
-
-
+== Comments and commit messages ==
 
 Commenting is good but
-
-
-- long comments *interleaved with the code* can make the code itself incredibly hard to read, and
-- long comments *detached from the code* are easy to miss when you are editing the code itself, and soon become out of date or even misleading.
-
+  * long comments ''interleaved with the code'' can make the code itself incredibly hard to read, and
+  * long comments ''detached from the code'' are easy to miss when you are editing the code itself, and soon become out of date or even misleading.
 
 We have adopted a style that seems to help.  Here's an example:
-
-
-```wiki
+{{{
 prepareRhs :: SimplEnv -> OutExpr -> SimplM (SimplEnv, OutExpr)
 -- Adds new floats to the env iff that allows us to return a good RHS
 prepareRhs env (Cast rhs co)    -- Note [Float coercions]
@@ -49,44 +42,27 @@ like that, so moving the coerion to the usage site may well cancel the coersions
 and lead to further optimisation.  
         ...more stuff about coercion floating...
 -}
-```
-
-
+}}}
 Notice that
-
-
-- **Interleaved with the code** is a short link `Note [Float coercions]`. You can't miss it when you are editing the code, but you can still see the code itself.
-- **Detached from the code** is the linked comment, starting with the same string `Note [Float coercions]`.  It can be long, and often includes examples.
-
+ * '''Interleaved with the code''' is a short link `Note [Float coercions]`. You can't miss it when you are editing the code, but you can still see the code itself.
+ * '''Detached from the code''' is the linked comment, starting with the same string `Note [Float coercions]`.  It can be long, and often includes examples.
 
 The standard format "`Note [Float coercions]`" serves like an URL, to point to an out-of-line comment.  Usually the target is in the same module, but not always.  Sometimes we say
-
-
-```wiki
+{{{
     -- See Note [Float coercions] in SpecConstr.lhs
-```
-
+}}}
 
 Please use this technique.  It's robust, and survives successive changes to the same lines of code.  When you are changing code, it draws attention to non-obvious things you might want to bear in mind.  When you encounter the note itself you can search for the string to find the code that implements the thoughts contained in the comment.
 
-
-
-Please do not put comments like these in commit messages instead, *even if the patch is devoted to a single change*.  The information is harder to find in a commit message, and (much worse) there is no explicit indication in the code that there is carefully-written information available about that particular line of code.  Instead, you can refer to the Note from the commit message.
-
-
+Please do not put comments like these in commit messages instead, ''even if the patch is devoted to a single change''.  The information is harder to find in a commit message, and (much worse) there is no explicit indication in the code that there is carefully-written information available about that particular line of code.  Instead, you can refer to the Note from the commit message.
 
 (Commit messages can nevertheless contain substantial information, but it is usually of a global nature.  E.g. "This patch modifies 20 files to implement a new form of inlining pragma".)
 
-
-## Comments and examples
-
-
+== Comments and examples ==
 
 When writing a comment to explain a subtle point, consider including an example code
 snippet that illustrates the point.  For example, the above `Note [Float coercions]` contines thus:
-
-
-```wiki
+{{{
 There's a chance that e will be a constructor application or function, or something
 like that, so moving the coerion to the usage site may well cancel the coersions
 and lead to further optimisation.  Example:
@@ -101,285 +77,150 @@ and lead to further optimisation.  Example:
           go 0 = 0
           go n = case x of { T m -> go (n-m) }
                 -- This case should optimise
-```
-
-
+}}}
 These kind of code snippets are extremely helpful to illustrate the point in a
 concrete way.  Other ways of making the comment concrete are:
+ * Cite a particular Trac ticket that this bit of code deals with
+ * Cite a test case in the test suite that illustrates it
 
-
-- Cite a particular Trac ticket that this bit of code deals with
-- Cite a test case in the test suite that illustrates it
-
-## Longer comments or architectural commentary
-
-
+== Longer comments or architectural commentary ==
 
 Comments with a broad scope, describing the architecture or workings of more than one module, belong here in the commentary rather than in the code.  Put the URL for the relevant commentary page in a comment in the code itself, and also put URLs for all relevant commentary pages in a comment at the top of each module.
 
-
-## Warnings
-
-
+== Warnings ==
 
 We are aiming to make the GHC code warning-free, for all warnings turned on by
-
-
-```wiki
+{{{
 -Wall -fno-warn-name-shadowing
-```
-
-
+}}}
 The build automatically sets these flags for the stage 2 compiler.  
 
-
-
-The [validate script](testing-patches), which is used to test the build before commiting, additionally sets the `-Werror` flag, so that the code **must** be warning-free to pass validation. The `-Werror` flag is not set during normal builds, so warnings will be printed but won't halt the build.
-
-
+The [wiki:TestingPatches validate script], which is used to test the build before commiting, additionally sets the `-Werror` flag, so that the code '''must''' be warning-free to pass validation. The `-Werror` flag is not set during normal builds, so warnings will be printed but won't halt the build.
 
 Currently we are some way from our goal, so many modules have a
-
-
-```wiki
+{{{
 {-# OPTIONS -w #-}
-```
-
-
+}}}
 pragma; you are encouraged to remove this pragma and fix any warnings when working on a module.
 
+== To literate or not to literate? ==
 
-## To literate or not to literate?
+In GHC we use a mixture of literate ({{{.lhs}}}) and non-literate ({{{.hs}}}) source. I (Simon M.) prefer to use non-literate style, because I think the {{{\begin{code}..\end{code}}}} clutter up the source too much, and I like to use Haddock-style comments (we haven't tried processing the whole of GHC with Haddock yet, though). 
 
-
-
-In GHC we use a mixture of literate (`.lhs`) and non-literate (`.hs`) source. I (Simon M.) prefer to use non-literate style, because I think the `\begin{code}..\end{code`} clutter up the source too much, and I like to use Haddock-style comments (we haven't tried processing the whole of GHC with Haddock yet, though). 
-
-
-## To CPP or not to CPP?
-
-
+== To CPP or not to CPP? ==
 
 Currently we pass all the compiler sources through CPP. The -cpp flag is always added by the build system. 
 However, whenever possible we try to avoid using CPP, as it can hide code from the compiler (which means changes that work on one platform can break the build on another) and code using CPP can be harder to understand.
 
-
-
 The following CPP symbols are used throughout the compiler: 
 
+ '''DEBUG''':: 
+  Used to enables extra checks and debugging output in the compiler. The ASSERT macro (see {{{HsVersions.h}}}) provides assertions which disappear when DEBUG is not defined. 
 
-<table><tr><th>**DEBUG**</th>
-<td>
-Used to enables extra checks and debugging output in the compiler. The ASSERT macro (see `HsVersions.h`) provides assertions which disappear when DEBUG is not defined. 
-</td></tr></table>
+ However, whenever possible, it is better to us `debugIsOn` from the `Util` module, which is defined to be `True` when `DEBUG` is defined and `False` otherwise.  The ideal way to provide debugging output is to use a Haskell expression "`when debugIsOn $ ...`" to arrange that the compiler will be silent when `DEBUG` is off (unless of course something goes wrong or the verbosity level is nonzero). When option `-O` is used, GHC will easily sweep away the unreachable code.
 
+ As a last resort, debugging code can be placed inside `#ifdef DEBUG`, but since this strategy guarantees that only a fraction of the code is seen be the compiler on any one compilation, it is to be avoided when possible.
 
->
->
-> However, whenever possible, it is better to us `debugIsOn` from the `Util` module, which is defined to be `True` when `DEBUG` is defined and `False` otherwise.  The ideal way to provide debugging output is to use a Haskell expression "`when debugIsOn $ ...`" to arrange that the compiler will be silent when `DEBUG` is off (unless of course something goes wrong or the verbosity level is nonzero). When option `-O` is used, GHC will easily sweep away the unreachable code.
->
->
+ Regarding performance, a good rule of thumb is that `DEBUG` shouldn't add more than about 10-20% to the compilation time. This is the case at the moment. If it gets too expensive, we won't use it. For more expensive runtime checks, consider adding a flag - see for example `-dcore-lint`.
 
->
->
-> As a last resort, debugging code can be placed inside `#ifdef DEBUG`, but since this strategy guarantees that only a fraction of the code is seen be the compiler on any one compilation, it is to be avoided when possible.
->
->
+'''Trap, pitfall for using the ASSERT macro''':
 
->
->
-> Regarding performance, a good rule of thumb is that `DEBUG` shouldn't add more than about 10-20% to the compilation time. This is the case at the moment. If it gets too expensive, we won't use it. For more expensive runtime checks, consider adding a flag - see for example `-dcore-lint`.
->
->
-
-
-**Trap, pitfall for using the ASSERT macro**:
-
-
-
-The ASSERT macro uses CPP, and if you are unwise enough to try to write assertions using primed variables (`ASSERT (not $ intersectsBlockEnv b b')`), one possible outcome is that CPP silently fails to expand the ASSERT, and you get this very baffling error message:
-
-
-```wiki
+The ASSERT macro uses CPP, and if you are unwise enough to try to write assertions using primed variables ({{{ASSERT (not $ intersectsBlockEnv b b')}}}), one possible outcome is that CPP silently fails to expand the ASSERT, and you get this very baffling error message:
+{{{
 Not in scope: data constructor `ASSERT'
-```
-
-
+}}}
 Now you can Google for this error message :-)
 
 
-<table><tr><th>**GHCI**</th>
-<td>
-Enables GHCi support, including the byte code generator and interactive user interface. This isn't the default, because the compiler needs to be bootstrapped with itself in order for GHCi to work properly. The reason is that the byte-code compiler and linker are quite closely tied to the runtime system, so it is essential that GHCi is linked with the most up-to-date RTS. Another reason is that the representation of certain datatypes must be consistent between GHCi and its libraries, and if these were inconsistent then disaster could follow. 
-</td></tr></table>
+ '''GHCI''':: 
+  Enables GHCi support, including the byte code generator and interactive user interface. This isn't the default, because the compiler needs to be bootstrapped with itself in order for GHCi to work properly. The reason is that the byte-code compiler and linker are quite closely tied to the runtime system, so it is essential that GHCi is linked with the most up-to-date RTS. Another reason is that the representation of certain datatypes must be consistent between GHCi and its libraries, and if these were inconsistent then disaster could follow. 
 
-
-<table><tr><th>**Platform tests**</th>
-<td>
-There are three platforms of interest to GHC: 
-
-- **The Build platform**: This is the platform on which we are building GHC. 
-- **The Host platform**: This is the platform on which we are going to run this GHC binary, and associated tools. 
-- **The Target platform**: This is the platform for which this GHC binary will generate code. At the moment, there is very limited support for having different values for build, host, and target. In particular:
-
-</td></tr></table>
-
-
->
->
-> The build platform is currently always the same as the host platform. The build process needs to use some of the tools in the source tree, for example ghc-pkg and hsc2hs. 
->
->
-
->
->
-> If the target platform differs from the host platform, then this is generally for the purpose of building .hc files from Haskell source for porting GHC to the target platform. Full cross-compilation isn't supported (yet). 
-> In the compiler's source code, you may make use of the following CPP symbols:
->
->
-
-```wiki
-xxx_TARGET_ARCH 
-xxx_TARGET_VENDOR 
-xxx_TARGET_OS 
-xxx_HOST_ARCH 
-xxx_HOST_VENDOR 
-xxx_HOST_OS 
-```
-
->
->
-> where xxx is the appropriate value: eg. i386\_TARGET\_ARCH. 
->
->
-
-## Compiler versions and language extensions
-
-
+== Compiler versions and language extensions ==
 
 GHC must be compilable by the previous two major releases, and itself. It isn't necessary for it to be compilable by every intermediate development version (that includes last week's darcs sources). 
 
+To maintain compatibility, use [wiki:Commentary/CodingStyle#HsVersions.h HsVersions.h] (see below) where possible, and try to avoid using #ifdef in the source itself. 
 
+Also, it is necessary to avoid certain language extensions.  In particular, the {{{ScopedTypeVariables}}} extension must not be used.
 
-To maintain compatibility, use [HsVersions.h](commentary/coding-style#) (see below) where possible, and try to avoid using \#ifdef in the source itself. 
-
-
-
-Also, it is necessary to avoid certain language extensions.  In particular, the `ScopedTypeVariables` extension must not be used.
-
-
-## The source file
-
-
+== The source file ==
 
 We now describe a typical source file, annotating stylistic choices as we go. 
 
+===  The OPTIONS pragma ===
 
-### The OPTIONS pragma
+An {{{{-# OPTIONS_GHC ... #-}}}} pragma is optional, but if present it should go right at the top of the file. Things you might want to put in OPTIONS include: 
 
-
-
-An `{-# OPTIONS_GHC ... #-`} pragma is optional, but if present it should go right at the top of the file. Things you might want to put in OPTIONS include: 
-
-
-- `#include` options to bring into scope prototypes for FFI declarations 
-- `-fvia-C` if you know that this module won't compile with the native code generator.  (deprecated:
-  everything should compile with the NCG nowadays, but that wasn't always the case).
-
+ * {{{#include}}} options to bring into scope prototypes for FFI declarations 
+ * {{{-fvia-C}}} if you know that this module won't compile with the native code generator.  (deprecated:
+   everything should compile with the NCG nowadays, but that wasn't always the case).
 
 Don't bother putting `-cpp` or `-fglasgow-exts` in the `OPTIONS` pragma; these are already added to the command line by the build system. 
 
+=== Exports ===
 
-### Exports
-
-
-```wiki
+{{{
 module Foo (
    T(..),
    foo,	     -- :: T -> T
  ) where
-```
-
-
+}}}
 We usually (99% of the time) include an export list. The only exceptions are perhaps where the export list would list absolutely everything in the module, and even then sometimes we do it anyway. 
-
-
 
 It's helpful to give type signatures inside comments in the export list, but hard to keep them consistent, so we don't always do that. 
 
-
-### `HsVersions.h`
-
-
-
-`HsVersions.h` is a CPP header file containing a number of macros that help smooth out the differences between compiler versions. It defines, for example, macros for library module names which have moved between versions. Take a look [compiler/HsVersions.h](/trac/ghc/browser/ghc/compiler/HsVersions.h).
-
-
-```wiki
+=== {{{HsVersions.h}}} ===
+{{{HsVersions.h}}} is a CPP header file containing a number of macros that help smooth out the differences between compiler versions. It defines, for example, macros for library module names which have moved between versions. Take a look [[GhcFile(compiler/HsVersions.h)]].
+{{{
 #include "HsVersions.h"
-```
+}}}
 
-### Imports
-
-
-
+=== Imports ===
 List imports in the following order: 
 
+ * Local to this subsystem (or directory) first 
+ * Compiler imports, generally ordered from specific to generic (ie. modules from utils/ and basicTypes/ usually come last) 
+ * Library imports 
+ * Standard Haskell 98 imports last 
+{{{
+-- friends
+import SimplMonad
 
-- Local to this subsystem (or directory) first 
-- Compiler imports, generally ordered from specific to generic (ie. modules from utils/ and basicTypes/ usually come last) 
-- Library imports 
-- Standard Haskell 98 imports last 
+-- GHC
+import CoreSyn
+import Id
+import BasicTypes
 
-  ```wiki
-  -- friends
-  import SimplMonad
+-- libraries
+import Data.IORef
 
-  -- GHC
-  import CoreSyn
-  import Id
-  import BasicTypes
+-- std
+import Data.List
+import Data.Maybe
+}}}
 
-  -- libraries
-  import Data.IORef
+Import library modules from the boot packages only (boot packages are listed in [[GhcFile(libraries/boot-packages)]]). Use `#defines `in `HsVersions.h` when the modules names differ between versions of GHC.  For code inside `#ifdef GHCI`, don't worry about GHC versioning issues, because this code is only ever compiled by the this very version of GHC.
 
-  -- std
-  import Data.List
-  import Data.Maybe
-  ```
+'''Do not use explicit import lists''', except to resolve name clashes.  There are several reasons for this:
 
+ * They slow down development: almost every change is accompanied by an import list change.
 
-Import library modules from the boot packages only (boot packages are listed in [libraries/boot-packages](/trac/ghc/browser/ghc/libraries/boot-packages)). Use `#defines `in `HsVersions.h` when the modules names differ between versions of GHC.  For code inside `#ifdef GHCI`, don't worry about GHC versioning issues, because this code is only ever compiled by the this very version of GHC.
+ * They cause spurious conflicts between developers.
 
+ * They lead to useless warnings about unused imports, and time wasted trying to
+   keep the import declarations "minimal".
 
+ * GHC's warnings are useful for detecting unnecessary imports: see `-fwarn-unused-imports`.
 
-**Do not use explicit import lists**, except to resolve name clashes.  There are several reasons for this:
-
-
-- They slow down development: almost every change is accompanied by an import list change.
-
-- They cause spurious conflicts between developers.
-
-- They lead to useless warnings about unused imports, and time wasted trying to
-  keep the import declarations "minimal".
-
-- GHC's warnings are useful for detecting unnecessary imports: see `-fwarn-unused-imports`.
-
-- TAGS is a good way to find out where an identifier is defined (use `make tags` in `ghc/compiler`,
-  and hit `M-.` in emacs).
-
+ * TAGS is a good way to find out where an identifier is defined (use `make tags` in `ghc/compiler`,
+   and hit `M-.` in emacs).
 
 If the module can be compiled multiple ways (eg. GHCI vs. non-GHCI), make sure the imports are properly `#ifdefed` too, so as to avoid spurious unused import warnings. 
 
-
-### General Style
-
-
+=== General Style ===
 
 It's much better to write code that is transparent than to write code that is short.
 
+Often it's better to write out the code longhand than to reuse a generic abstraction (not always, of course).  Sometimes it's better to duplicate some similar code than to try to construct an elaborate generalisation with only two instances.  Remember: other people have to be able to quickly understand what you've done, and overuse of abstractions just serves to obscure the ''really'' tricky stuff, and there's no shortage of that in GHC.
 
-
-Often it's better to write out the code longhand than to reuse a generic abstraction (not always, of course).  Sometimes it's better to duplicate some similar code than to try to construct an elaborate generalisation with only two instances.  Remember: other people have to be able to quickly understand what you've done, and overuse of abstractions just serves to obscure the *really* tricky stuff, and there's no shortage of that in GHC.
-
-
+```
