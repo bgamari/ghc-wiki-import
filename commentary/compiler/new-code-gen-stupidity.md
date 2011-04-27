@@ -1,34 +1,25 @@
-# Stupidity in the New Code Generator
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Stupidity in the New Code Generator =
 
-Presently compiling using the new code generator results in a fairly sizable performance hit, because the new code generator produces sub-optimal (and sometimes absolutely terrible code.) There are [
-a lot of ideas for how to make things better](http://darcs.haskell.org/ghc/compiler/cmm/cmm-notes); the idea for this wiki page is to document all of the stupid things the new code generator is doing, to later be correlated with specific refactorings and fixes that will hopefully eliminate classes of these stupid things. The hope here is to develop a sense for what the most endemic problems with the newly generated code is.
+Presently compiling using the new code generator results in a fairly sizable performance hit, because the new code generator produces sub-optimal (and sometimes absolutely terrible code.) There are [http://darcs.haskell.org/ghc/compiler/cmm/cmm-notes a lot of ideas for how to make things better]; the idea for this wiki page is to document all of the stupid things the new code generator is doing, to later be correlated with specific refactorings and fixes that will hopefully eliminate classes of these stupid things. The hope here is to develop a sense for what the most endemic problems with the newly generated code is.
 
-
-## Lots of temporary variables
-
-
+== Lots of temporary variables ==
 
 WONTFIX. Lots of temporary variables (these can tickle other issues when the temporaries are long-lived, but otherwise would be optimized away). You can at least eliminate some of them by looking at the output of `-ddump-opt-cmm`, which utilizes some basic temporary inlining when used with the native backend `-fasm`, but this doesn't currently apply to the GCC or LLVM backends.
 
-
-
 ~~At least one major culprit for this is `allocDynClosure`, described in Note `Return a LocalReg`; this pins down the value of the `CmmExpr` to be something for one particular time, but for a vast majority of use-cases the expression is used immediately afterwards. Actually, this is mostly my patches fault, because the extra rewrite means that the inline pass is broken.~~ Fixed in latest version of the pass; we don't quite manage to inline enough but there's only one extra temporary.
-
-
 
 Another cause of all of these temporary variables is that the new code generator immediately assigns any variables that were on the stack to temporaries immediately upon entry to a function. This is on purpose. The idea is we optimize these temporary variables away.
 
-
-## Rewriting stacks
-
-
+== Rewriting stacks ==
 
 FIXED. `3586.hs` emits the following code:
 
-
-```wiki
+{{{
  Main.$wa_entry()
          { [const Main.$wa_slow-Main.$wa_info;, const 3591;, const 0;,
     const 458752;, const 0;, const 15;]
@@ -66,48 +57,33 @@ FIXED. `3586.hs` emits the following code:
          I32[Sp - 32] = _s16w::I32;
          Sp = Sp - 32;
          jump stg_gc_fun ();
-```
-
+}}}
 
 We see that these temporary variables are being repeatedly rewritten to the stack, even when there are no changes.
 
-
-
 Since these areas on the stack are all old call areas, one way to fix this is to inline all of the memory references. However, this has certain undesirable properties for other code, so we need to be a little more clever. The key thing to notice is that these accesses are only used once per control flow path, in which case sinking the loads down and then inlining them should be OK (it will increase code size but not execution time.) However, the other difficulty is that the CmmOpt inliner, as it stands, won't inline things that look like this because although the variable is only used once in different branches, the same name is used, so it can't distinguish between the temporaries with mutually exclusive live ranges. Building a more clever inliner with Hoopl is also a bit tricky, because inlining is a forward analysis/transformation, but usage counting is a backwards analysis.
-
-
 
 This looks fixed with the patch from April 14.
 
-
-## Spilling Hp/Sp
-
-
+== Spilling Hp/Sp ==
 
 FIXED. `3586.hs` emits the following code:
 
-
-```wiki
+{{{
      _c1ao::I32 = Hp - 4;
      I32[Sp - 20] = _c1ao::I32;
      foreign "ccall"
        newCAF((BaseReg, PtrHint), (R1, PtrHint))[_unsafe_call_];
      _c1ao::I32 = I32[Sp - 20];
-```
-
+}}}
 
 We see `Hp - 4` being allocated to a temp, and then consequently being spilled to the stack even though `newCAF` definitely will not change `Hp`, so we could have floated the expression down.
 
-
-
 This seems to happen whenever there's a `newCAF` ccall.
-
-
 
 We also seem to reload these values multiple times.
 
-
-```wiki
+{{{
         _c7Yt::I32 = Hp - 4;
         I32[Sp - 28] = _c7Yt::I32;
         foreign "ccall"
@@ -118,41 +94,29 @@ We also seem to reload these values multiple times.
         _c7Yt::I32 = I32[Sp - 28];  <--- totally unnecessary
         I32[Sp - 8] = _c7Yt::I32;
         I32[Sp - 12] = stg_upd_frame_info;
-```
-
+}}}
 
 ~~We need to not spill across certain foreign calls, but for which calls this is OK for is unclear.~~ Variables stay live across all unsafe foreign calls (foreign calls in the middle), except for the obvious cases (the return registers), so no spilling should happen at all. The liveness analysis is too conservative.
 
-
-
 This is not fixed in the April 14 version of the patch... we still need to fix the liveness analysis? I thought I fixed that... that's because the transform did extra spilling for CmmUnsafeForeignCalls. Removed that code, and now it's fixed.
 
-
-## Up and Down
-
-
+== Up and Down ==
 
 FIXED. A frequent pattern is the stack pointer being bumped up and then back down again, for no particular reason. 
 
-
-```wiki
+{{{
          Sp = Sp + 4;
          Sp = Sp - 4;
          jump block_c7xh_entry ();
-```
-
+}}}
 
 This is mentioned at the very top of `cmm-notes`. This was a bug in the stack layout code that I have fixed.
 
-
-## Sp is generally stupid
-
-
+== Sp is generally stupid ==
 
 FIXED. Here is an optimized C-- sample from `arr016.hs`.
 
-
-```wiki
+{{{
 Main.D:Arbitrary_entry()
         { [const 131084;, const 0;, const 15;]
         }
@@ -181,13 +145,11 @@ Main.D:Arbitrary_entry()
         Sp = Sp - 12;
         jump (I32[BaseReg - 4]) ();
 }
-```
-
+}}}
 
 Compare with the old code:
 
-
-```wiki
+{{{
 Main.D:Arbitrary_entry()
         { [const 131084;, const 0;, const 15;]
         }
@@ -207,43 +169,31 @@ Main.D:Arbitrary_entry()
         I32[BaseReg + 112] = 12;
         goto c4pV;
 }
-```
-
+}}}
 
 You can see the up and down behavior here, but that's been fixed, so ignore it for now. (Update the C--!) The unfixed problem is this (some of the other problems were already addressed): we do an unnecessary stack check on entry to this function. We should eliminate the stack check (and by dead code analysis, the GC call) in such cases.
 
-
-
 This pattern essentially happens for every function, since we always assign incoming parameters to temporary variables before doing anything.
 
-
-## Instruction reordering
-
-
+== Instruction reordering ==
 
 NEW. We should be able to reorder instructions in order to decrease register pressure. Here's an example from 3586.hs
 
-
-```wiki
+{{{
         _cPY::I32 = I32[Sp - 24];
         I32[R1 + 4] = _cPY::I32;
         I32[R1] = stg_IND_STATIC_info;
         I32[Sp - 8] = _cPY::I32;
         I32[Sp - 12] = stg_upd_frame_info;
-```
+}}}
 
+R1 and Sp probably don't clobber each other, so we ought to use _cPY twice in quick succession. Fortunately stg_IND_STATIC_info is a constant so in this case the optimization doesn't help to much, but in other cases it might make sense. TODO Find better example
 
-R1 and Sp probably don't clobber each other, so we ought to use \_cPY twice in quick succession. Fortunately stg\_IND\_STATIC\_info is a constant so in this case the optimization doesn't help to much, but in other cases it might make sense. TODO Find better example
-
-
-## Stack space overuse
-
-
+== Stack space overuse ==
 
 CONFIRMED. `T1969.hs` demonstrates this:
 
-
-```wiki
+{{{
  Simp.c_entry()
          { update_frame: <none>
            has static closure: True type: 0
@@ -276,22 +226,17 @@ CONFIRMED. `T1969.hs` demonstrates this:
          Sp = Sp + 4;
          jump block_cbR_entry ();
  }
-```
-
+}}}
 
 The call area for the jump in cbG is using an extra word on the stack, but in fact Sp + 0 at the entry of the function immediately becomes dead after the assignment, so we ought to be able to save some space in our layout. Simon Marlow suggests we distinguish between the return address and the old call area; need to talk to SPJ about fixing this.
 
-
-## Heap and R1 aliasing
-
-
+== Heap and R1 aliasing ==
 
 CONFIRMED. Values on the heap and values from R1 don't necessarily clobber
 each other.  allocDynClosure seems like a pretty safe bet they
 don't.  But is this true in general?
 
-
-```wiki
+{{{
         _s14Y::F64 = F64[_s1uN::I32 + 8];
         _s152::F64 = F64[_s1uN::I32 + 16];
         _s156::F64 = F64[_s1uN::I32 + 24];
@@ -310,40 +255,83 @@ don't.  But is this true in general?
         F64[Hp - 20] = _s15e::F64;
         F64[Hp - 12] = _s15i::F64;
         F64[Hp - 4] = _s15m::F64;
-```
+}}}
 
-## Double temp-use
-
+== Double temp-use means no inlinining? ==
 
 
 CONFIRMED. Here's a curious piece of code that fails to get inlined (from `cc004`):
 
-
-```wiki
+{{{
         _sG5::I32 = I32[Sp + 48];
         I32[Sp - 4] = _sG5::I32;
-```
-
+}}}
 
 Why is that? Because the temp gets reused later on:
 
-
-```wiki
+{{{
     u1bF:
         Sp = Sp + 56;
         // outOfLine here
         R1 = a13_rAk_closure;
         I32[Sp - 8] = _sG5::I32;
-```
-
+}}}
 
 In this case, we want more aggressive inlining because there are too
 many temps and they're going to have to get spilled to the stack anyway.
 IS THAT TRUE?  For comparison's sake, the old codegen doesn't appear to
 do any rewriting, because it just reuses the call area.
 
-
-
 Actually, I think this is a case of spill/reload silliness.
 
+== Stupid spills ==
 
+If something is already in memory, why do we have to spill it again? Well, it's because the spiller isn't clever enough:
+
+{{{
+  cs3:
+      _smw::I32 = I32[(old + 8)];
+      I32[(slot<_smw::I32> + 4)] = _smw::I32;
+      _smv::I32 = I32[(old + 12)];
+      I32[(slot<_smv::I32> + 4)] = _smv::I32;
+      _smu::I32 = I32[(old + 16)];
+      I32[(slot<_smu::I32> + 4)] = _smu::I32;
+      _smt::I32 = I32[(old + 20)];
+      I32[(slot<_smt::I32> + 4)] = _smt::I32;
+      _sms::I32 = I32[(old + 24)];
+      I32[(slot<_sms::I32> + 4)] = _sms::I32;
+      _smr::I32 = I32[(old + 28)];
+      I32[(slot<_smr::I32> + 4)] = _smr::I32;
+      _smq::I32 = I32[(old + 32)];
+      I32[(slot<_smq::I32> + 4)] = _smq::I32;
+      _smn::I32 = I32[(old + 36)];
+      I32[(slot<_smn::I32> + 4)] = _smn::I32;
+      _smm::I32 = I32[(old + 40)];
+      I32[(slot<_smm::I32> + 4)] = _smm::I32;
+      if (Sp - <highSp> < SpLim) goto cs9; else goto cs5;
+  cs5:
+      // outOfLine should follow:
+      // directEntry else
+      // emitCall: Sequel: Assign
+      I32[(young<crz> + 8)] = _smn::I32;
+      I32[(young<crz> + 12)] = _smm::I32;
+      I32[(young<crz> + 4)] = crz;
+      call Foo.baz_info(...) returns to Just crz (12) (4) with update frame 4;
+  crz:
+      _smm::I32 = I32[(slot<_smm::I32> + 4)];
+      _smn::I32 = I32[(slot<_smn::I32> + 4)];
+      _smq::I32 = I32[(slot<_smq::I32> + 4)];
+      _smr::I32 = I32[(slot<_smr::I32> + 4)];
+      _sms::I32 = I32[(slot<_sms::I32> + 4)];
+      _smt::I32 = I32[(slot<_smt::I32> + 4)];
+      _smu::I32 = I32[(slot<_smu::I32> + 4)];
+      _smv::I32 = I32[(slot<_smv::I32> + 4)];
+      _smw::I32 = I32[(slot<_smw::I32> + 4)];
+      _smx::I32 = R1;
+      I32[(slot<_smx::I32> + 4)] = _smx::I32;
+      _csp::I32 = _smx::I32 & 3;
+      if (_csp::I32 >= 2) goto csk; else goto usu;
+}}}
+
+Ick!
+```
