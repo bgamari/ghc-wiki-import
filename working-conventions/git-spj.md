@@ -1,64 +1,103 @@
-CONVERSION ERROR
+# GIT notes by Simon PJ
 
-Original source:
 
-```trac
-= GIT notes by Simon PJ =
 
 Here are notes about using Git that Simon PJ has found useful.
 
-== Configuration ==
+
+## Configuration
+
+
+### Push only the current branch
+
+
 
 When you say `git push` (with no arguments), push only only patches on
-the ''current branch''.  If you have un-pushed commits on other branches, leave them be.
-{{{
-git config --global remote.origin.push HEAD
-}}}
+the *current branch*.  If you have un-pushed commits on other branches, leave them be.
 
-----------
+
+```wiki
+git config --global remote.origin.push HEAD
+```
+
+### Creating tracking branches
+
+
 
 Suppose you create a new branch on your local machine. Now you want to push
 it up to the global repo.  You almost certainly want your local branch to become
 a tracking option of the remote one, so that `git pull` will merge changes to
 the remote copy into your local copy.
 
-{{{
+
+```wiki
 git config --global branch.autosetupmerge true
-}}}
+```
 
--------------
+---
 
-== Looking at the current state of affairs ==
+
+## Looking at the current state of affairs
+
+
 
 Show a one-line-per-file summary of diffs between working files and the local repo:
-{{{
-git diff --stat
-}}}
 
------------------- 
+
+```wiki
+git diff --stat
+```
+
+---
+
+
+
 Show the commits that are on branch `my-test` but not on the main trunk:
-{{{
+
+
+```wiki
 git log `git merge-base master my-test`..my-test
-}}}
+```
+
+
 The `git merge-base b1 b2` thing returns the name of the commit that is the common ancestor of branches `b1` and `b2`.
 
---------------
-== Doing useful things ==
+
+---
+
+
+## Doing useful things
+
+
 
 You are sitting on a branch (say master), and do some edits. Now you decide it wasn't as simple as you thought so you want to create a branch to keep your edits safe while you do something else. 
-{{{
+
+
+```wiki
 git checkout -b <new-branch-name>
-}}}
-This creates the new branch and switches to it, but '''does not change your working files'''.  Now you can safely commit on the branch. 
+```
 
----------------
 
-== `git gui` on Windows ==
+This creates the new branch and switches to it, but **does not change your working files**.  Now you can safely commit on the branch. [
+Stackoverflow link](http://stackoverflow.com/questions/2569459/git-create-a-branch-from-unstagged-uncommited-changes-on-master)
+
+
+---
+
+
+## `git gui` on Windows
+
+
 
 I’ve been using `git gui` (on Windows at least) as a way to examine and stage changes.  But I suddenly found that it wasn’t displaying the diff in the main pane.  
 
-A google search [http://code.google.com/p/msysgit/issues/detail?id=394] suggested that (bizarrely) it might have something to do with ‘nice’.  
+
+
+A google search [
+http://code.google.com/p/msysgit/issues/detail?id=394](http://code.google.com/p/msysgit/issues/detail?id=394) suggested that (bizarrely) it might have something to do with ‘nice’.  
+
+
 
 So I renamed `c:/cygwin/bin/nice.exe to c:/cygwin/bin/cygin-nice.exe`, and that made `git gui` worked fine.  Wierd.
 
-```
+
