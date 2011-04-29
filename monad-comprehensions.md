@@ -5,6 +5,7 @@ Original source:
 ```trac
 = Monad comprehensions =
 
+Monad comprehensions are currently in development. See ticket #4370.
 == Translation rules ==
 
 {{{
