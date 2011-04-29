@@ -54,7 +54,7 @@ instance Encode [a] -- works if there is an instance Representable0 [a]
 
  * What about base types like `[]`, `Maybe`, tuples, etc.?
 
- * `Show`, etc. instances for `Associativity`, `Fixity`, and `Arity` in `GHC.Generics`
+ * Print also the Rep0 type instance when -ddump-deriving is on
 
 == Testing ==
 
