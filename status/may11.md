@@ -170,51 +170,48 @@ We have pushed back the release of a stable version of the main DPH libraries ag
 ## Bibliography
 
 
-- \[ChunkedStack\] An overhaul of stack management, and some performance improvements, Simon Marlow, blog post, Dec2010, [
+- \[ChunkedStack\] *An overhaul of stack management, and some performance improvements*, Simon Marlow, blog post, Dec2010, [
   http://hackage.haskell.org/trac/ghc/blog/stack-chunks](http://hackage.haskell.org/trac/ghc/blog/stack-chunks) 
 
-- \[Cloud\] "Haskell for the cloud", Epstein, Black, Peyton Jones, submitted to ICFP 2011, [
+- \[Cloud\] *Haskell for the cloud*, Epstein, Black, Peyton Jones, submitted to ICFP 2011, [
   http://research.microsoft.com/\~simonpj/papers/parallel/](http://research.microsoft.com/~simonpj/papers/parallel/)
 
-- \[Derivable\] "A generic deriving mechanism for Haskell", Magalhães, Dijkstra, Jeuring and Löh, Haskell Symposium 2010, [
+- \[Derivable\] *A generic deriving mechanism for Haskell*, Magalhães, Dijkstra, Jeuring and Löh, Haskell Symposium 2010, [
   http://www.dreixel.net/research/pdf/gdmh\_nocolor.pdf](http://www.dreixel.net/research/pdf/gdmh_nocolor.pdf).
 
-- \[DetPar\] "A monad for deterministic parallelism", Marlow, Newton, and Peyton Jones, submitted to ICFP 2011, [
+- \[DetPar\] *A monad for deterministic parallelism*, Marlow, Newton, and Peyton Jones, submitted to ICFP 2011, [
   http://research.microsoft.com/\~simonpj/papers/parallel/](http://research.microsoft.com/~simonpj/papers/parallel/)
 
-- \[FC\] "System F with type equality coercions", Sulzmann, Chakravarty, Peyton Jones, TLDI 2007, [
+- \[EdgeDetect\] *Edge-detection video*, [
+  http://code.ouroborus.net/beholder/video/Edge480.mov](http://code.ouroborus.net/beholder/video/Edge480.mov)
+
+- \[FC\] *System F with type equality coercions*, Sulzmann, Chakravarty, Peyton Jones, TLDI 2007, [
   http://research.microsoft.com/\~simonpj/papers/ext-f/](http://research.microsoft.com/~simonpj/papers/ext-f/)
 
-- \[Hoopl\] "A modular, reusable library for dataflow analysis and transformation", Dias, Ramsey, and Peyton Jones, Haskell Symposium 2010, [
+- \[Hoopl\] *A modular, reusable library for dataflow analysis and transformation*, Dias, Ramsey, and Peyton Jones, Haskell Symposium 2010, [
   http://research.microsoft.com/\~simonpj/papers/c--/](http://research.microsoft.com/~simonpj/papers/c--/)
 
-- \[ImprovingSupercompilation\] "Improving supercompilation: tag-bags, rollback, speculation, normalisation, and generalisation", Bolingbroke and Peyton Jones, submitted to ICFP 2011, [
+- \[ImprovingSupercompilation\] *Improving supercompilation: tag-bags, rollback, speculation, normalisation, and generalisation*, Bolingbroke and Peyton Jones, submitted to ICFP 2011, [
   http://research.microsoft.com/\~simonpj/papers/supercompilation/](http://research.microsoft.com/~simonpj/papers/supercompilation/)
 
-- \[Liquid\] Liquid types, Ranjit Jhala, [
+- \[Liquid\] *Liquid types*, Ranjit Jhala, [
   http://goto.ucsd.edu/\~rjhala/liquid](http://goto.ucsd.edu/~rjhala/liquid) Liquid
 
-- \[NewFC\] "Practical aspects of evidence-based compilation in System FC", Vytiniotis and Peyton Jones, submitted to ICFP 2011, [
+- \[NewFC\] *Practical aspects of evidence-based compilation in System FC*, Vytiniotis and Peyton Jones, submitted to ICFP 2011, [
   http://research.microsoft.com/\~simonpj/papers/ext-f/](http://research.microsoft.com/~simonpj/papers/ext-f/)
 
-- \[OutsideIn\] "Modular type inference iwth local assumptions", Vytiniotis, Peyton Jones, Schrijvers, and Sulzmann, Journal of Functional Programming (to appear), [
+- \[OutsideIn\] *Modular type inference iwth local assumptions*, Vytiniotis, Peyton Jones, Schrijvers, and Sulzmann, Journal of Functional Programming (to appear), [
   http://research.microsoft.com/\~simonpj/papers/constraints/](http://research.microsoft.com/~simonpj/papers/constraints/)
 
-- \[ParallelGhcProject\] "The Parallel GHC Project home page", [
+- \[ParallelGhcProject\] *The Parallel GHC Project home page*, [
   http://www.haskell.org/haskellwiki/Parallel\_GHC\_Project](http://www.haskell.org/haskellwiki/Parallel_GHC_Project)
 
-- \[Repa\] "Regular, shape-polymorphic parallel arrays in Haskell", Keller, Chakravarty, Leshchinskiy, Peyton Jones, and Lippmeier, ICFP 2010.  Paper: [
+- \[Repa\] *Regular, shape-polymorphic parallel arrays in Haskell*, Keller, Chakravarty, Leshchinskiy, Peyton Jones, and Lippmeier, ICFP 2010.  Paper: [
   http://research.microsoft.com/\~simonpj/papers/ndp/](http://research.microsoft.com/~simonpj/papers/ndp/), Hackage package: [
   http://hackage.haskell.org/package/repa](http://hackage.haskell.org/package/repa)
 
-- \[SHE\] The Strathclyde Haskell Enhancement, Conor McBride, 2010, [
+- \[SHE\] *The Strathclyde Haskell Enhancement*, Conor McBride, 2010, [
   http://personal.cis.strath.ac.uk/\~conor/pub/she/](http://personal.cis.strath.ac.uk/~conor/pub/she/)
 
-- \[Stencil\] Efficient Parallel Stencil Convolution in Haskell, Lippmeier et al., [
+- \[Stencil\] *Efficient Parallel Stencil Convolution in Haskell*, Lippmeier et al., [
   http://www.cse.unsw.edu.au/\~benl/papers/stencil/stencil-icfp2011-sub.pdf](http://www.cse.unsw.edu.au/~benl/papers/stencil/stencil-icfp2011-sub.pdf)
-
-- \[EdgeDetect\] [
-  http://code.ouroborus.net/beholder/video/Edge480.mov](http://code.ouroborus.net/beholder/video/Edge480.mov)
-
-- \[StackChunks\] [
-  http://hackage.haskell.org/trac/ghc/blog/stack-chunks](http://hackage.haskell.org/trac/ghc/blog/stack-chunks)
