@@ -76,6 +76,8 @@ UHC](http://www.cs.uu.nl/wiki/UHC). The implementation in GHC is slightly differ
 
 - Give better error messages when we cannot derive Representable0 (currently we say only `Cannot derive Representable`)
 
+- Register the `DeriveRepresentable` extension with Cabal.
+
 ## Testing
 
 
