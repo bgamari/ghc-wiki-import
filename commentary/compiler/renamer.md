@@ -3,8 +3,6 @@ CONVERSION ERROR
 Original source:
 
 ```trac
-[ Up: [wiki:Commentary/Compiler/HscMain] ]
-
 = The renamer =
 
 The renamer's Number One task is to replace [wiki:Commentary/Compiler/RdrNameType RdrNames] with [wiki:Commentary/Compiler/NameType Names].  For example, consider
