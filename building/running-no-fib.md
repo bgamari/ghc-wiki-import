@@ -1,129 +1,100 @@
-# The NoFib Benchmark Suite
+CONVERSION ERROR
+
+Original source:
+
+```trac
 
 
+= The !NoFib Benchmark Suite =
 
-The NoFib benchmark suite is a collection of (mostly old) Haskell programs that we use for benchmarking GHC. 
+The !NoFib benchmark suite is a collection of (mostly old) Haskell programs that we use for benchmarking GHC. 
 
+== Getting nofib ==
+The !NoFib suite is kept in a separate git repository (see [wiki:Repositories]), and it should be checked out at the top level of a GHC source tree, i.e. at the same level as `compiler` and `libraries`. From your GHC tree, run:
 
-## Getting nofib
-
-
-
-The NoFib suite is kept in a separate git repository (see [Repositories](repositories)), and it should be checked out at the top level of a GHC source tree, i.e. at the same level as `compiler` and `libraries`. From your GHC tree, run:
-
-
-```wiki
+{{{
 ./sync-all --nofib get
-```
-
+}}}
 
 It will be pulled into the a "nofib" subdirectory.
 
-
-## Benchmarking
-
-
+== Benchmarking ==
 
 To run the tests:
 
-
-```wiki
+{{{
   $ cd nofib
   $ make clean
   $ make boot
   $ make 2>&1 | tee nofib-log
-```
-
+}}}
 
 will put the results in the file `nofib-log`.
 
-
-
 To compare the results of multiple runs, use the program
-[nofib/nofib-analyse/nofib-analyse](/trac/ghc/browser/ghc/nofib/nofib-analyse/nofib-analyse).  Something like this:
+[http://darcs.haskell.org/nofib/nofib-analyse/ nofib/nofib-analyse].  Something like this:
 
-
-```wiki
+{{{
   $ nofib-analyse nofib-log-6.4.2 nofib-log-6.6
-```
-
+}}}
 
 to generate a comparison of the runs in captured in `nofib-log-6.4.2`
 and `nofib-log-6.6`.  When making comparisons, be careful to ensure
 that the things that changed between the builds are only the things
-that you *wanted* to change.  There are lots of variables: machine,
+that you ''wanted'' to change.  There are lots of variables: machine,
 GHC version, GCC version, C libraries, static vs. dynamic GMP library,
 build options, run options, and probably lots more.  To be on the safe
 side, make both runs on the same unloaded machine.
 
-
-
 To get measurements for simulated instruction counts, memory reads/writes, and "cache misses",
 you'll need to get hold of Cachegrind, which is part of 
-[ Valgrind](http://valgrind.org). You can run nofib under valgrind like this:
-
-
-```wiki
+[http://valgrind.org Valgrind]. You can run nofib under valgrind like this:
+{{{
   $ make SRC_RUNTEST_OPTS=-cachegrind
-```
+}}}
 
-## Complete recipe
+== Complete recipe ==
 
-
-```wiki
+{{{
 cd nofib
 make clean && make boot && make -k >& log1
 make clean && make boot && make -k EXTRA_HC_OPTS=-fenable-cool-optimisation >& log2
 nofib-analyse/nofib-analyse log1 log2
-```
-
+}}}
 
 The output of the nofib-analyse tool is quite readable, with two provisios:
-
-
-- Missing values in the output typically mean that the benchmark crashed and may indicate a problem with your optimisation
-- If a difference between the two modes is displayed as an absolute quantity instead of a percentage, it means that the difference was below the threshold at which the analyser considers it significant
-
+  * Missing values in the output typically mean that the benchmark crashed and may indicate a problem with your optimisation
+  * If a difference between the two modes is displayed as an absolute quantity instead of a percentage, it means that the difference was below the threshold at which the analyser considers it significant
 
 If the comparison identifies any particularly bad benchmark results, you can run them individually by changing into their directory and running something like:
 
-
-```wiki
+{{{
 EXTRA_HC_OPTS="-fenable-cool-optimisation -ddump-simpl" make
-```
-
+}}}
 
 You can add whatever dumping flags you need to see the output and understand what is going wrong.
 
+== Tweaking things ==
 
-## Tweaking things
+To tweak things, add settings to your `mk/build.mk` (see [wiki:Commentary/SourceTree]).
 
+ * Each benchmark is run in each "way" in `NoFibWays`.  By default `NoFibWays` is initialised to `GhcLibWays`, but you can override that in `mk/build.mk`. Typically, to just use the vanilla way, set `NoFibWays` to empty:
+{{{
+NoFibWays =
+}}}
 
+ * By default nofib uses the stage-2 compiler from your build tree.  To tell nofib to use a different compiler, set `WithNofibHc`.  For example:
+{{{
+WithNofibHc = /home/simonpj/builds/HEAD/inplace/bin/ghc-stage1
+}}}
 
-To tweak things, add settings to your `mk/build.mk` (see [Commentary/SourceTree](commentary/source-tree)).
-
-
-- Each benchmark is run in each "way" in `NoFibWays`.  By default `NoFibWays` is initialised to `GhcLibWays`, but you can override that in `mk/build.mk`. Typically, to just use the vanilla way, set `NoFibWays` to empty:
-
-  ```wiki
-  NoFibWays =
-  ```
-
-- By default nofib uses the stage-2 compiler from your build tree.  To tell nofib to use a different compiler, set `WithNofibHc`.  For example:
-
-  ```wiki
-  WithNofibHc = /home/simonpj/builds/HEAD/inplace/bin/ghc-stage1
-  ```
-
-- Many nofib programs have up to three test data sets. The `mode` variable tells the system which to use, thus:
-
-  ```wiki
-  make -k mode=slow
-  make -k mode=norm
-  make -k mode=fast
-  ```
-
-
+ * Many nofib programs have up to three test data sets. The `mode` variable tells the system which to use, thus:
+{{{
+make -k mode=slow
+make -k mode=norm
+make -k mode=fast
+}}}
 See `mk/opts.mk`. The default is `mode=norm`.
 
 
+```
