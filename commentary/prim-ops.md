@@ -1,152 +1,204 @@
-CONVERSION ERROR
 
-Original source:
 
-```trac
 
-[[PageOutline]]
+# Primitive Operations (PrimOps)
 
-= Primitive Operations (!PrimOps) =
 
-!PrimOps are functions that cannot be implemented in Haskell, and are provided natively by GHC.  For example, adding two {{{Int#}}} values is provided as the !PrimOp {{{+#}}}, and allocating a new mutable array is the !PrimOp {{{newArray#}}}.
 
-PrimOps are made available to Haskell code through the virtual module {{{GHC.Prim}}}.  This module has no implementation, and its interface never resides on disk: if {{{GHC.Prim}}} is imported, we use a built-in {{{ModIface}}} value - see {{{ghcPrimIface}}} in [[GhcFile(compiler/iface/LoadIface.lhs)]].
+PrimOps are functions that cannot be implemented in Haskell, and are provided natively by GHC.  For example, adding two `Int#` values is provided as the PrimOp `+#`, and allocating a new mutable array is the PrimOp `newArray#`.
 
-== The primops.txt.pp file ==
 
-The file [[GhcFile(compiler/prelude/primops.txt.pp)]] includes all the information the compiler needs to know about a !PrimOp, bar its actual implementation.  For each !PrimOp, {{{primops.txt.pp}}} lists:
 
- * Its name, as it appears in Haskell code (eg. int2Integer#)
- * Its type
- * The name of its constructor in GHC's {{{PrimOp}}} data type.
- * Various properties, such as whether the operation is commutable, or has side effects.
+PrimOps are made available to Haskell code through the virtual module `GHC.Prim`.  This module has no implementation, and its interface never resides on disk: if `GHC.Prim` is imported, we use a built-in `ModIface` value - see `ghcPrimIface` in [compiler/iface/LoadIface.lhs](/trac/ghc/browser/ghc/compiler/iface/LoadIface.lhs).
 
-For example, here's the integer multiplication !PrimOp:
 
-{{{
+## The primops.txt.pp file
+
+
+
+The file [compiler/prelude/primops.txt.pp](/trac/ghc/browser/ghc/compiler/prelude/primops.txt.pp) includes all the information the compiler needs to know about a PrimOp, bar its actual implementation.  For each PrimOp, `primops.txt.pp` lists:
+
+
+- Its name, as it appears in Haskell code (eg. int2Integer\#)
+- Its type
+- The name of its constructor in GHC's `!PrimOp` data type.
+- Various properties, such as whether the operation is commutable, or has side effects.
+
+
+For example, here's the integer multiplication PrimOp:
+
+
+```wiki
 primop   IntegerMulOp   "timesInteger#" GenPrimOp   
    Int# -> ByteArr# -> Int# -> ByteArr# -> (# Int#, ByteArr# #)
    with commutable = True
         out_of_line = True
-}}}
+```
 
-The {{{primops.txt.pp}}} file is processed first by CPP, and then by the {{{genprimopcode}}} program (see [[GhcFile(utils/genprimopcode)]]).  {{{genprimopcode}}} generates the following bits from {{{primops.txt.pp}}}:
 
- * Various files that are {{{#include}}}d into [[GhcFile(compiler/prelude/PrimOp.lhs)]],
-   containing declarations of data types and functions describing the !PrimOps.  See
-   [[GhcFile(compiler/Makefile)]].
+The `primops.txt.pp` file is processed first by CPP, and then by the `genprimopcode` program (see [utils/genprimopcode](/trac/ghc/browser/ghc/utils/genprimopcode)).  `genprimopcode` generates the following bits from `primops.txt.pp`:
 
- * {{{libraries/base/GHC/PrimopWrappers.hs}}}, a file that contains (curried) wrapper
-   functions for each of the !PrimOps, so that they are accessible from byte-code, and
-   so that the [wiki:Commentary/Rts/Interpreter byte-code interpreter] doesn't need to implement any !PrimOps at all: it
-   just invokes the compiled ones from {{{GHC.PrimopWrappers}}}.
 
- * {{{libraries/base/GHC/Prim.hs}}}, a source file containing dummy declarations for
-   all the !PrimOps, solely so that Haddock can include documentation for {{{GHC.Prim}}}
-   in its documentation for the {{{base}}} package.  The file {{{GHC/Prim.hs}}} is never
-   actually compiled, only processed by Haddock.
+- Various files that are `#include`d into [compiler/prelude/PrimOp.lhs](/trac/ghc/browser/ghc/compiler/prelude/PrimOp.lhs),
+  containing declarations of data types and functions describing the PrimOps.  See
+  [compiler/Makefile](/trac/ghc/browser/ghc/compiler/Makefile).
 
-== Implementation of !PrimOps ==
+- `libraries/base/GHC/PrimopWrappers.hs`, a file that contains (curried) wrapper
+  functions for each of the PrimOps, so that they are accessible from byte-code, and
+  so that the [byte-code interpreter](commentary/rts/interpreter) doesn't need to implement any PrimOps at all: it
+  just invokes the compiled ones from `GHC.PrimopWrappers`.
 
-!PrimOps are divided into two categories for the purposes of implementation: inline and out-of-line.
+- `libraries/base/GHC/Prim.hs`, a source file containing dummy declarations for
+  all the PrimOps, solely so that Haddock can include documentation for `GHC.Prim`
+  in its documentation for the `base` package.  The file `GHC/Prim.hs` is never
+  actually compiled, only processed by Haddock.
 
-=== Inline !PrimOps ===
+## Implementation of PrimOps
 
-Inline !PrimOps are operations that can be compiled into a short sequence of code that never needs to allocate, block, or return to the scheduler for any reason.  An inline !PrimOp is compiled directly into [wiki:Commentary/Compiler/Cmm Cmm] by the [wiki:Commentary/Compiler/CodeGen code generator].  The code for doing this is in [[GhcFile(compiler/codeGen/CgPrimOp.hs)]].
 
-=== Out-of-line !PrimOps ===
 
-All other !PrimOps are classified as out-of-line, and are implemented by hand-written C-- code in the file [[GhcFile(rts/PrimOps.cmm)]].  An out-of-line !PrimOp is like a Haskell function, except that
+PrimOps are divided into two categories for the purposes of implementation: inline and out-of-line.
 
- * !PrimOps cannot be partially applied.  Calls to all !PrimOps are made at the correct arity; this is ensured by 
-   the [wiki:Commentary/Compiler/CorePrep CorePrep] pass.
 
- * Out-of-line !PrimOps have a special, fixed, [wiki:Commentary/Rts/HaskellExecution#CallingConvention calling convention]:
-   all arguments
-   are in the [wiki:Commentary/Rts/HaskellExecution#Registers registers] R1-R8.  This is to make it easy to write the
-   C-- code for these !PrimOps: we don't have to write code for multiple calling conventions.
+### Inline PrimOps
 
-=== Foreign out-of-line !PrimOps ===
 
-A new and somewhat more flexible form of out-of-line !PrimOp is the foreign out-of-line !PrimOp. These are essentially the same but instead of their Cmm code being included in the RTS, they can be defined in Cmm code in any package and instead of knowledge of the !PrimOp being baked into the compiler, they can be imported using special FFI syntax:
 
-{{{
+Inline PrimOps are operations that can be compiled into a short sequence of code that never needs to allocate, block, or return to the scheduler for any reason.  An inline PrimOp is compiled directly into Cmm? by the [code generator](commentary/compiler/code-gen).  The code for doing this is in [compiler/codeGen/CgPrimOp.hs](/trac/ghc/browser/ghc/compiler/codeGen/CgPrimOp.hs).
+
+
+### Out-of-line PrimOps
+
+
+
+All other PrimOps are classified as out-of-line, and are implemented by hand-written C-- code in the file [rts/PrimOps.cmm](/trac/ghc/browser/ghc/rts/PrimOps.cmm).  An out-of-line PrimOp is like a Haskell function, except that
+
+
+- PrimOps cannot be partially applied.  Calls to all PrimOps are made at the correct arity; this is ensured by 
+  the CorePrep? pass.
+
+- Out-of-line PrimOps have a special, fixed, [calling convention](commentary/rts/haskell-execution#calling-convention):
+  all arguments
+  are in the [registers](commentary/rts/haskell-execution#registers) R1-R8.  This is to make it easy to write the
+  C-- code for these PrimOps: we don't have to write code for multiple calling conventions.
+
+### Foreign out-of-line PrimOps
+
+
+
+A new and somewhat more flexible form of out-of-line PrimOp is the foreign out-of-line PrimOp. These are essentially the same but instead of their Cmm code being included in the RTS, they can be defined in Cmm code in any package and instead of knowledge of the PrimOp being baked into the compiler, they can be imported using special FFI syntax:
+
+
+```wiki
 foreign import prim "int2Integerzh"
   int2Integer# :: Int# -> (# Int#, ByteArray# #)
-}}}
+```
 
-The string (e.g. "int2Integerzh") is the linker name of the Cmm function. Using this syntax requires the extensions `ForeignFunctionInterface`, `GHCForeignImportPrim`, `MagicHash`, `UnboxedTuples` and `UnliftedFFITypes`. The current type restriction is that all arguments and results must be unlifted types. Additionally the result type is allowed to be an unboxed tuple. The calling convention is exactly the same as for ordinary out-of-line primops. Currently it is not possible to specify any of the !PrimOp attributes.
+
+The string (e.g. "int2Integerzh") is the linker name of the Cmm function. Using this syntax requires the extensions `ForeignFunctionInterface`, `GHCForeignImportPrim`, `MagicHash`, `UnboxedTuples` and `UnliftedFFITypes`. The current type restriction is that all arguments and results must be unlifted types. Additionally the result type is allowed to be an unboxed tuple. The calling convention is exactly the same as for ordinary out-of-line primops. Currently it is not possible to specify any of the PrimOp attributes.
+
+
 
 The `integer-gmp` package now uses this method for all the primops that deal with GMP big integer values. The advantage of using this technique is that it is a bit more modular. The RTS does not need to include all the primops. For example in the integer case the RTS no longer needs to link against the GMP C library.
 
-The future direction is to extend this syntax to allow !PrimOp attributes to be specified. The calling convention for primops and ordinary compiled Haskell functions may be unified in future and at that time it the restriction on using only unlifted types may be lifted.
 
-It has been suggested that we extend this !PrimOp definition and import method to cover all !PrimOps, even inline ones. This would replace the current `primops.txt.pp` system of builtin !PrimOps. The inline !PrimOps would still be defined in the compiler but they would be imported in any module via `foreign import prim` rather than appearing magically to be exported from the `GHC.Prim` module. Hugs has used a similar system for years (with the syntax `primitive seq :: a -> b -> b`).
 
-== Adding a new !PrimOp ==
+The future direction is to extend this syntax to allow PrimOp attributes to be specified. The calling convention for primops and ordinary compiled Haskell functions may be unified in future and at that time it the restriction on using only unlifted types may be lifted.
+
+
+
+It has been suggested that we extend this PrimOp definition and import method to cover all PrimOps, even inline ones. This would replace the current `primops.txt.pp` system of builtin PrimOps. The inline PrimOps would still be defined in the compiler but they would be imported in any module via `foreign import prim` rather than appearing magically to be exported from the `GHC.Prim` module. Hugs has used a similar system for years (with the syntax `primitive seq :: a -> b -> b`).
+
+
+## Adding a new PrimOp
+
+
 
 To add a new primop, you currently need to update the following files:
 
- * [[GhcFile(compiler/prelude/primops.txt.pp)]], which includes the
-   type of the primop, and various other properties.  Syntax and
-   examples are in the file.
 
- * if the primop is inline, then:
-   [[GhcFile(compiler/codeGen/CgPrimOp.hs)]] defines the translation of
-   the primop into {{{Cmm}}}.
-		
- * for an out-of-line primop:
-   * [[GhcFile(includes/StgMiscClosures.h)]] (just add the declaration),
-   * [[GhcFile(rts/PrimOps.cmm)]] (implement it here)
-   * [[GhcFile(rts/Linker.c)]] (declare the symbol for GHCi)
+- [compiler/prelude/primops.txt.pp](/trac/ghc/browser/ghc/compiler/prelude/primops.txt.pp), which includes the
+  type of the primop, and various other properties.  Syntax and
+  examples are in the file.
 
- * for a foreign out-of-line primop You do not need to modify the rts or compiler at all.
-   * `yourpackage/cbits/primops.cmm`: implement your primops here. You have to arrange for the .cmm file to be compiled and linked into the package. The GHC build system has support for this. Cabal does not yet.
-   * `yourpackage/TheCode.hs`: use `foreign import prim` to import the primops.
-
-See also AddingNewPrimitiveOperations, a blow-by-blow description of the process for adding a new out-of-line primop from someone who went through the process.
+- if the primop is inline, then:
+  [compiler/codeGen/CgPrimOp.hs](/trac/ghc/browser/ghc/compiler/codeGen/CgPrimOp.hs) defines the translation of
+  the primop into `Cmm`.
 
 
-== Explanation of attributes ==
+                
+
+
+- for an out-of-line primop:
+
+  - [includes/StgMiscClosures.h](/trac/ghc/browser/ghc/includes/StgMiscClosures.h) (just add the declaration),
+  - [rts/PrimOps.cmm](/trac/ghc/browser/ghc/rts/PrimOps.cmm) (implement it here)
+  - [rts/Linker.c](/trac/ghc/browser/ghc/rts/Linker.c) (declare the symbol for GHCi)
+
+- for a foreign out-of-line primop You do not need to modify the rts or compiler at all.
+
+  - `yourpackage/cbits/primops.cmm`: implement your primops here. You have to arrange for the .cmm file to be compiled and linked into the package. The GHC build system has support for this. Cabal does not yet.
+  - `yourpackage/TheCode.hs`: use `foreign import prim` to import the primops.
+
+
+See also [AddingNewPrimitiveOperations](adding-new-primitive-operations), a blow-by-blow description of the process for adding a new out-of-line primop from someone who went through the process.
+
+
+## Explanation of attributes
+
 
 
 `TBV` (To be verified)
 
-=== has_side_effects ===
+
+### has\_side\_effects
+
+
 
 default = False
 
-=== out_of_line ===
+
+### out\_of\_line
+
+
 
 default = False
+
+
 
 Set to True if there is a function in PrimOps.cmm. This also changes to code generator to push the continuation
 of any followon code onto the stack.
 
-=== commutable ===
+
+### commutable
+
+
 
 default = False
 
 
-=== needs_wrapper ===
+### needs\_wrapper
+
+
 
 default = False
 
-=== strictness ===
 
-default = [lazyDmd, ... ] TopRes
+### strictness
+
+
+
+default = \[lazyDmd, ... \] TopRes
+
+
 
 This is the strictness of the PrimOp. Unboxed things should be marked as lazyDmd. (Someone explain why?).
 
-=== usage ===
+
+### usage
+
+
 
 default = nomangle other
 
 
-
-
-
-
-
-
-```
