@@ -176,7 +176,7 @@ the initialization function just returns.
 
 
 
-The Ghc.TopHandler and Ghc.Prim modules get special treatment.
+The `Ghc.TopHandler` and `Ghc.Prim` modules get special treatment.
 
 
 
