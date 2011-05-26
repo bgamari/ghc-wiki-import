@@ -131,7 +131,7 @@ This command will read the fingerprint and perform a checkout of the appropriate
 
 
 ```wiki
-$ ./syncall checkout master
+$ ./sync-all checkout master
 ```
 
 
