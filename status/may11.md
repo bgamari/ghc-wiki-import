@@ -3,8 +3,6 @@ CONVERSION ERROR
 Original source:
 
 ```trac
-'''WORK IN PROGRESS'''
-
 = GHC Status May 2011 =
 
 GHC is still busy as ever. The GHC 7.0 branch has come and gone, and now that the branch has been closed we have finally made the long-planned switch from darcs to git. Meanwhile, we are busily working towards the 7.2 branch, and hope to make the 7.2.1 release in June. Some of the forthcoming highlights are:
