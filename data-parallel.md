@@ -16,9 +16,7 @@ Most of the material describing our approach is partitioned into a set of subpag
  * [wiki:DataParallel/ClosureConversion Details of the implementation of closure conversion]
  * [wiki:DataParallel/Vectorisation Our plan for implementing vectorisation on top of closure conversion]
  * [wiki:DataParallel/Desugaring Desugaring of array comprehensions]
- * [wiki:DataParallel/Regular Our approach to integrating an optimised treatment of multi-dimensional regular arrays]
  * [wiki:DataParallel/Related Other nested data parallel work]
- * [wiki:DataParallel/Regular Design work for data parallelism over regular arrays]
 
 == Status and work plan ==
 
@@ -34,5 +32,6 @@ Detailed information on how to use the current implementation is at the [http://
 
 Pages that have fallen out of use (and contain out dated information):
 
+ * [wiki:DataParallel/Regular Our approach to integrating an optimised treatment of multi-dimensional regular arrays]
  * [wiki:DataParallel/Optimisation Optimisation, and problems therewith]
 ```
