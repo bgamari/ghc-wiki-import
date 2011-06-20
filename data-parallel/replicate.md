@@ -1,21 +1,27 @@
-CONVERSION ERROR
+# Preventing space blow-up due to replicate
 
-Original source:
 
-```trac
-= Preventing space blow-up due to replicate =
+## The problem
 
-== The problem ==
+
 
 The vectorisation transformation lifts scalar computations into vector space.  In the course of this lifting, scalar constants are duplicated to fill an array, using the function 'replicateP'.  Array computations are lifted in a similar manner, which leads to array constants being replicated to form arrays of arrays, which are represented as a segmented arrays.  A simple example is our  'smvm' example code:
-{{{
+
+
+```wiki
 smvm :: [:[: (Int, Double) :]:] -> [:Double:] -> [:Double:]
 smvm m v = [: sumP [: x * (v !: i) | (i,x) <- row :] | row <- m :]
-}}}
+```
+
+
 Here the variable 'v' is constant in the array comprehensions and will be replicated while lifting the expression `v !: i`.   In other words, for every single element in a `row`, lifting implies the allocation of a separate copy of of the entire array `v` — and this only to perform a single indexing operation on that copy of `v`.  More precisely, in the lifted code, lifted indexing (which we usually denote by `(!^)` is applied to a nested array consisting of multiple copies of `v`; i.e., it is applied to the result of `replicateP (length row) v`.  
 
+
+
 This is clearly wasted effort and space.  However, the situation is even worse in Ben's pathological example:
-{{{
+
+
+```wiki
 treeLookup :: [:Int:] -> [:Int:] -> [:Int:]
 treeLookup table xx
   | lengthP xx == 1
@@ -26,19 +32,33 @@ treeLookup table xx
         s1      = sliceP 0    half xx
         s2      = sliceP half half  xx           
       in concatP (mapP (treeLookup table) [: s1, s2 :])
-}}}
+```
+
+
 Here `table` is constant in `mapP (treeLookup table) [: s1, s2 :]`; hence, the entire `table` gets duplicated on each level of the recursion, leading to space consumption that is exponential in the depth of the recursion.
 
 
-== What's happening here? ==
+## What's happening here?
+
+
 
 Replication of scalars and arrays is always a waste of time and space.  However, it is particularly problematic if the replicated structure is consumed by an indexing operation as it can change the asymptotic work complexity of the vectorised program.  This holds not only for indexing, but for any operation that consumes only a small part of its input array(s).  In other words, if a replicated structure is consumed in its entirety (for example by a fold), the asymptotic work complexity of replication matches that of consuming the structure.  For operations that only consume a small part of their input, that is not the case.  Hence, lifting, which introduces the replication, does increase asymptotic work.
 
 
-== A plan to fix the problem ==
+## A plan to fix the problem
 
-TODO: 
- * Special representation for replicated arrays
- * Avoiding out of bounds indices
- * Mention need to be careful with length
-```
+
+
+Generally, we don't want to copy replicated data — it's a waste of space!  We definitely don't want to do it for large data structures, and in particular, we don't want to do it for arrays.  After all, that can change the asymptotic work complexity of a program.  So, instead of having `replicateP` allocate and fill a new array with multiple copies of the same data, we use a special array representation that stores the data (once!) together with the replication count.  This is surely the most space efficient representation for a replicated array.
+
+
+
+The downside of a special representation is that we now also need to modify all consumers of replicated arrays to accept this new representation and to handle it specially.  This leads to some code blow up (each array consumer needs to be able to dynamically decide between two input array representations), and we need to be careful not to disturb fusion.
+
+
+
+TODO 
+
+
+- Avoiding out of bounds indices
+- Mention need to be careful with length
