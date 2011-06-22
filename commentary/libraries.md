@@ -1,39 +1,55 @@
-CONVERSION ERROR
+# GHC Commentary: Libraries
 
-Original source:
 
-```trac
-= GHC Commentary: Libraries =
 
-All GHC build trees contain a set of libraries, called the '''Boot Packages'''.  These are the libraries that GHC's source code imports.  Obviously you need the boot packages to build GHC at all.
+All GHC build trees contain a set of libraries, called the **Boot Packages**.  These are the libraries that GHC's source code imports.  Obviously you need the boot packages to build GHC at all.
+
+
 
 The Boot Packages, along with the other subcomponents of the GHC build system, are listed in the file `$(TOP)/packages` in a GHC tree. 
 
-All boot packages have a Git repo in http://darcs.haskell.org/packages:
 
- * Having all the repos in one place makes it easy and uniform for GHC developers to get all the packages.
 
- * In a build tree, these packages each occupy a sub-directory of `$(TOP)/libraries`.
+All boot packages have a Git repo in [
+http://darcs.haskell.org/packages](http://darcs.haskell.org/packages):
 
- * For INDEPENDENT packages (see "Coupling to GHC", below), the Git repo in http://darcs.haskell.org/packages is a '''lagging repo'''. That means
-   * Don't push to it.
-   * Update it from the package's master repo at convenient intervals.
-   In this way GHC developers are not exposed to package upgrades, except when we want.
+
+- Having all the repos in one place makes it easy and uniform for GHC developers to get all the packages.
+
+- In a build tree, these packages each occupy a sub-directory of `$(TOP)/libraries`.
+
+- For INDEPENDENT packages (see "Coupling to GHC", below), the Git repo in [
+  http://darcs.haskell.org/packages](http://darcs.haskell.org/packages) is a **lagging repo**. That means
+
+  - Don't push to it.
+  - Update it from the package's master repo at convenient intervals.
+    In this way GHC developers are not exposed to package upgrades, except when we want.
+
 
 To find out which packages are currently zero-boot packages, do the following in a GHC build:
-{{{
+
+
+```wiki
 $ make show VALUE=PACKAGES
-}}}
+```
 
-(The `PACKAGES` variable is set in `$(TOP)/`[[GhcFile(ghc.mk)]].)
-You can see exactly which versions of what packages GHC depends on by looking in `$(TOP)/`[[GhcFile(compiler/ghc.cabal.in)]].
 
-= Building packages that GHC doesn't depend on =
+(The `PACKAGES` variable is set in `$(TOP)/`[ghc.mk](/trac/ghc/browser/ghc/ghc.mk).)
+You can see exactly which versions of what packages GHC depends on by looking in `$(TOP)/`[compiler/ghc.cabal.in](/trac/ghc/browser/ghc/compiler/ghc.cabal.in).
+
+
+# Building packages that GHC doesn't depend on
+
+
 
 You can make the build system build extra packages, on which GHC doesn't strictly depend, by adding them to the `$(TOP)/packages` file, with an `extra` tag.
 
+
+
 It should be exceptional, but you can make the build system provide per-package compiler flags, by adding some definitions in `$(TOP)/ghc.mk`, just below the comment
-{{{
+
+
+```wiki
 # Per-package compiler flags
 # 
 # If you want to add per-package compiler flags, this 
@@ -41,176 +57,485 @@ It should be exceptional, but you can make the build system provide per-package 
 #   
 #   libraries/<pkg>_dist-boot_HC_OPTS += -Wwarn
 #   libraries/<pkg>_dist-install_HC_OPTS += -Wwarn
-}}}
+```
 
---------------------------
-= Classifying boot packages =
+---
+
+
+# Classifying boot packages
+
+
 
 Boot packages can be classified in three different ways:
-  * Independent/Coupled/Specific
-  * Zero-boot/not zero-boot
-  * Installed/not installed
+
+
+- Independent/Coupled/Specific
+- Zero-boot/not zero-boot
+- Installed/not installed
+
+
 These distinctions are described in the following sub-sections.
 
-== Coupling to GHC ==
+
+## Coupling to GHC
+
+
 
 An important classification of the boot packages is as follows:
 
- * '''SPECIFIC''': Totally specific to GHC.  At the moment these are:
-   * ghc-prim
-   * template-haskell
-   * DPH
 
- * '''COUPLED''': Tightly coupled to GHC.  At the moment there is just one of these:
-   * base
+- **SPECIFIC**: Totally specific to GHC.  At the moment these are:
 
- * '''INDEPENDENT''': Independently maintained.  There are quite a few of these, such as `containers`, `binary`, `haskeline` and so on.  Indeed most boot libraries are INDEPENDENT.  
+  - ghc-prim
+  - template-haskell
+  - DPH
+
+- **COUPLED**: Tightly coupled to GHC.  At the moment there is just one of these:
+
+  - base
+
+- **INDEPENDENT**: Independently maintained.  There are quite a few of these, such as `containers`, `binary`, `haskeline` and so on.  Indeed most boot libraries are INDEPENDENT.  
+
 
 INDEPENDENT libraries have a master repository somewhere separate from the GHC repositories.  Whenever we release GHC, we ensure that the INDEPENDENT boot libraries that come with GHC are precisely sync'd with a particular released version of that library.
 
-== Zero-boot packages ==
 
-Since GHC's source code imports the boot packages, ''even the bootstrap compiler must have the boot packages available''.  (Or, more precisely, all the types and values that are imported must be available from some package in the bootstrap compiler; the exact set of packages does not need to be identical.)
+## Zero-boot packages
 
-For the most part we simply assume that the bootstrap compiler already has the boot packages installed.  The '''Zero-boot Packages''' are a set of packages for which this assumption does not hold.  For example, for certain fast-moving boot packages (eg Cabal), we don't want to rely on the user having installed a bang-up-to-date version of the package.  
+
+
+Since GHC's source code imports the boot packages, *even the bootstrap compiler must have the boot packages available*.  (Or, more precisely, all the types and values that are imported must be available from some package in the bootstrap compiler; the exact set of packages does not need to be identical.)
+
+
+
+For the most part we simply assume that the bootstrap compiler already has the boot packages installed.  The **Zero-boot Packages** are a set of packages for which this assumption does not hold.  For example, for certain fast-moving boot packages (eg Cabal), we don't want to rely on the user having installed a bang-up-to-date version of the package.  
+
+
 
 So we begin the entire build process by installing the zero-boot packages in the bootstrap compiler.  (This installation is purely local to the build tree.)  
 
+
+
 As time goes on, a Zero-boot package may become an ordinary boot package, because the bootstrap compiler is expected to have (a sufficiently up to date) version of the package already.
 
+
+
 To find out which packages are currently zero-boot packages, do the following in a GHC build:
-{{{
+
+
+```wiki
 $ make show VALUE=BOOT_PKGS
-}}}
-
-Some Zero-boot packages are '''maintained by other people'''. In order to avoid GHC being exposed to day-by-day changes in these packages, we maintain a "lagging" Git repository for each that we occasionally sync with the master repository.  We never push patches to lagging repository; rather we push to the master (in discussion with the package maintainer), and pull the patches into the lagging repo.  The current Zero-boot packages of this kind are:
-
- * `Cabal`: we frequently update Cabal and GHC in sync
- * `binary` (renamed to `ghc-binary` in the 6.12 branch): required by `bin-package-db`.
-
-Other Zero-boot packages are '''maintained by us'''.  There is just one Git repo for each, the master.  When we make a GHC release, we simultaneously tag and release each of these packages.  They are:
- * `hpc`
- * `extensible-exceptions`: this is a shim that provides an API to older versions of GHC that is compatible with what the current `base` package now exports.  So, unusually, `extensible-exceptions` is a zero-boot package, but not a boot package.
- * `bin-package-db`: a GHC-specific package that provides binary serialisation of the package database, use by `ghc-pkg` and GHC itself.
+```
 
 
-== Installation ==
+Some Zero-boot packages are **maintained by other people**. In order to avoid GHC being exposed to day-by-day changes in these packages, we maintain a "lagging" Git repository for each that we occasionally sync with the master repository.  We never push patches to lagging repository; rather we push to the master (in discussion with the package maintainer), and pull the patches into the lagging repo.  The current Zero-boot packages of this kind are:
+
+
+- `Cabal`: we frequently update Cabal and GHC in sync
+- `binary` (renamed to `ghc-binary` in the 6.12 branch): required by `bin-package-db`.
+
+
+Other Zero-boot packages are **maintained by us**.  There is just one Git repo for each, the master.  When we make a GHC release, we simultaneously tag and release each of these packages.  They are:
+
+
+- `hpc`
+- `extensible-exceptions`: this is a shim that provides an API to older versions of GHC that is compatible with what the current `base` package now exports.  So, unusually, `extensible-exceptions` is a zero-boot package, but not a boot package.
+- `bin-package-db`: a GHC-specific package that provides binary serialisation of the package database, use by `ghc-pkg` and GHC itself.
+
+## Installation
+
+
 
 When we build a distribution of GHC, it includes at least some libraries, otherwise it would be utterly useless.  Since GHC is part of the Haskell Platform, any library that is installed with GHC is necessarily part of the Haskell Platform, so we have to be a bit careful what we include.  
 
+
+
 Alas, since the `ghc` package (implementing the GHC API) is certainly an installed package, all the packages on which it depends must also be installed, and hence willy-nilly become part of the Haskell Platform.  In practice that means that almost all the Boot Packages are installed.  In some cases that is unfortunate.  For example, we currently have a special version of the `binary` library, which we don't really expect Haskell users to use; in this case, we call it `ghc-binary`, and informally discourage its use.
 
-Currently the Boot Packages that are not installed are `haskelline`, `mtl`, and `terminfo`; these are needed to build the GHC front-end, but not to build the `ghc` ''package''.
 
----------------------------
-= Boot packages dependencies =
 
- * At the root of the hierarchy we have '''`ghc-prim`'''. As the name implies, this package contains the most primitive types and functions. It only contains a handful of modules, including `GHC.Prim` (which contains `Int#`, `+#`, etc) and `GHC.Bool`, containing the `Bool` datatype.
+Currently the Boot Packages that are not installed are `haskelline`, `mtl`, and `terminfo`; these are needed to build the GHC front-end, but not to build the `ghc` *package*.
 
- * Above `ghc-prim` is the '''`integer-impl`''' package, where `impl` is one of `gmp` and `simple`, which provides a definition of the `Integer` type (on top of the C `gmp` library, or in plain Haskell, respectively). Which functionality is provided in `ghc-prim` is mostly driven by what functionality the `integer-impl` packages need. By default `integer-gmp` is used; to use `integer-simple` define `INTEGER_LIBRARY=integer-simple` in `mk/build.mk`.
 
- * Next is the '''`base`''' package. This contains a large number of modules, many of which are in one big cyclic import knot, mostly due to the `Exception` type.
+---
 
-  * On top of base are a number of other, more specialised packages, whose purpose is generally clear from their name. If not, you can get more detail from the descriptions in their Cabal files.  Currently these packages are are:
-    * `array`
-    * `bytestring`
-    * `Cabal`
-    * `containers`
-    * `directory`
-    * `extensible-exceptions`
-    * `filepath`
-    * `haskeline`
-    * `haskell98`
-    * `hpc`
-    * `mtl`
-    * `old-locale`
-    * `old-time`
-    * `packedstring`
-    * `pretty`
-    * `process`
-    * `random`
-    * `syb`
-    * `template-haskell`
-    * `terminfo`
-    * `unix`
-    * `utf8-string`
-    * `Win32`
+
+# Boot packages dependencies
+
+
+- At the root of the hierarchy we have **`ghc-prim`**. As the name implies, this package contains the most primitive types and functions. It only contains a handful of modules, including `GHC.Prim` (which contains `Int#`, `+#`, etc) and `GHC.Bool`, containing the `Bool` datatype.
+
+- Above `ghc-prim` is the **`integer-impl`** package, where `impl` is one of `gmp` and `simple`, which provides a definition of the `Integer` type (on top of the C `gmp` library, or in plain Haskell, respectively). Which functionality is provided in `ghc-prim` is mostly driven by what functionality the `integer-impl` packages need. By default `integer-gmp` is used; to use `integer-simple` define `INTEGER_LIBRARY=integer-simple` in `mk/build.mk`.
+
+- Next is the **`base`** package. This contains a large number of modules, many of which are in one big cyclic import knot, mostly due to the `Exception` type.
+
+- On top of base are a number of other, more specialised packages, whose purpose is generally clear from their name. If not, you can get more detail from the descriptions in their Cabal files.  Currently these packages are are:
+
+  - `array`
+  - `bytestring`
+  - `Cabal`
+  - `containers`
+  - `directory`
+  - `extensible-exceptions`
+  - `filepath`
+  - `haskeline`
+  - `haskell98`
+  - `hpc`
+  - `mtl`
+  - `old-locale`
+  - `old-time`
+  - `packedstring`
+  - `pretty`
+  - `process`
+  - `random`
+  - `syb`
+  - `template-haskell`
+  - `terminfo`
+  - `unix`
+  - `utf8-string`
+  - `Win32`
+
+
 The `haskell98`, `old-time` and `random` packages are mostly only needed for Haskell 98 support, although `dph` currently uses `random` too.
 
-Note that `ghc-prim` and `integer-impl` are below the dependency chain from Exception (in `base`), which means they must not raise generate code to raise an exception (it's not enough that this code will never run). One particularly subtle case of GHC exception-raising code is in the case of (complete!) pattern matches. Consider the unboxed form of Integers, which has the constructor S# or J#.
 
-{{{
+
+Note that `ghc-prim` and `integer-impl` are below the dependency chain from Exception (in `base`), which means they must not raise generate code to raise an exception (it's not enough that this code will never run). One particularly subtle case of GHC exception-raising code is in the case of (complete!) pattern matches. Consider the unboxed form of Integers, which has the constructor S\# or J\#.
+
+
+```wiki
 f (S# _) (S# _) = ...
 f x (S# _) = ...
 f (S# _) y = ...
 f (J# _ _) (J# _ _) = ...
-}}}
+```
+
 
 GHC will incorrectly generate core that pattern matches against the second argument twice, the second match being a partial one with (dead) exception raising code. When compiled with optimizations, the dead code is eliminated. However, this breaks with -O0, so the fix was to explicitly spell out the constructor in the second and third line:
 
-{{{
+
+```wiki
 f (S# _) (S# _) = ...
 f (J# _ _) (S# _) = ...
 f (S# _) (J# _ _) = ...
 f (J# _ _) (J# _ _) = ...
-}}}
+```
 
-= Repository locations =
+# Repository locations
 
-{{{
-#!html
 
-<p>This table shows, for each repository in a GHC tree, where the <span style="color: green;">central repository</span> is, and what mirrors there are. The situation with haddock is currently complex, as the upstream repo tracks the most recent GHC stable branch, not the HEAD.</p>
 
-<table border="2">
-<tr><td colspan="2">darcs</td><td colspan="4">git</td><td></td></tr>
-<tr><td>darcs upstream</td><td>darcs mirror</td><td>git upstream</td><td>git mirror</td><td>ghc (validated) repo</td><td>in-tree</td><td></td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/ghc.git/</td><td></td><td>http://darcs.haskell.org/ghc.git/</td><td>.</td><td rowspan="33">ghc</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/ghc-tarballs.git/</td><td></td><td>http://darcs.haskell.org/ghc-tarballs.git/</td><td>ghc-tarballs</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/utils/hsc2hs.git/</td><td></td><td>http://darcs.haskell.org/utils/hsc2hs.git/</td><td>utils/hsc2hs</td></tr>
-<tr><td style="color: purple;">http://code.haskell.org/haddock/</td><td></td><td style="color: purple;">http://darcs.haskell.org/haddock2.git</td><td></td><td>http://darcs.haskell.org/haddock2.git</td><td>utils/haddock</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/array.git/</td><td></td><td>http://darcs.haskell.org/packages/array.git/</td><td>libraries/array</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/base.git/</td><td></td><td>http://darcs.haskell.org/packages/base.git/</td><td>libraries/base</td></tr>
-<tr><td style="color: green;">http://code.haskell.org/binary/</td><td>http://darcs.haskell.org/darcs-mirrors/binary/</td><td></td><td>http://darcs.haskell.org/git-mirrors/binary/binary.git/</td><td>http://darcs.haskell.org/packages/.git/</td><td>libraries/binary</td></tr>
-<tr><td style="color: green;">http://code.haskell.org/bytestring/</td><td></td><td></td><td>http://darcs.haskell.org/git-mirrors/bytestring/.git/</td><td>http://darcs.haskell.org/packages/bytestring.git/</td><td>libraries/bytestring</td></tr>
-<tr><td style="color: green;">http://code.haskell.org/Cabal/</td><td></td><td></td><td>http://darcs.haskell.org/git-mirrors/Cabal/.git/</td><td>http://darcs.haskell.org/packages/Cabal.git/</td><td>libraries/Cabal</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/containers.git/</td><td></td><td>http://darcs.haskell.org/packages/containers.git/</td><td>libraries/containers</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/directory.git/</td><td></td><td>http://darcs.haskell.org/packages/directory.git/</td><td>libraries/directory</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/extensible-exceptions.git/</td><td></td><td>http://darcs.haskell.org/packages/extensible-exceptions.git/</td><td>libraries/extensible-exceptions</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/filepath.git/</td><td></td><td>http://darcs.haskell.org/packages/filepath.git/</td><td>libraries/filepath</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/ghc-prim.git/</td><td></td><td>http://darcs.haskell.org/packages/ghc-prim.git/</td><td>libraries/ghc-prim</td></tr>
-<tr><td style="color: green;">http://code.haskell.org/haskeline/</td><td>http://darcs.haskell.org/darcs-mirrors/haskeline/</td><td></td><td>http://darcs.haskell.org/git-mirrors/haskeline/.git/</td><td>http://darcs.haskell.org/packages/haskeline.git/</td><td>libraries/haskeline</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/haskell98.git/</td><td></td><td>http://darcs.haskell.org/packages/haskell98.git/</td><td>libraries/haskell98</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/haskell2010.git/</td><td></td><td>http://darcs.haskell.org/packages/haskell2010.git/</td><td>libraries/haskell2010</td></tr>
-<tr><td></td><td></td><td style="color: green;">git://code.eecs.tufts.edu/hoopl/hoopl.git</td><td>http://darcs.haskell.org/git-mirrors/hoopl/</td><td>http://darcs.haskell.org/packages/hoopl.git/</td><td>libraries/hoopl</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/hpc.git/</td><td></td><td>http://darcs.haskell.org/packages/hpc.git/</td><td>libraries/hpc</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/integer-gmp.git/</td><td></td><td>http://darcs.haskell.org/packages/integer-gmp.git/</td><td>libraries/integer-gmp</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/integer-simple.git/</td><td></td><td>http://darcs.haskell.org/packages/integer-simple.git/</td><td>libraries/integer-simple</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/mtl.git/</td><td></td><td>http://darcs.haskell.org/packages/mtl.git/</td><td>libraries/mtl</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/old-locale.git/</td><td></td><td>http://darcs.haskell.org/packages/old-locale.git/</td><td>libraries/old-locale</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/old-time.git/</td><td></td><td>http://darcs.haskell.org/packages/old-time.git/</td><td>libraries/old-time</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/pretty.git/</td><td></td><td>http://darcs.haskell.org/packages/pretty.git/</td><td>libraries/pretty</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/process.git/</td><td></td><td>http://darcs.haskell.org/packages/process.git/</td><td>libraries/process</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/random.git/</td><td></td><td>http://darcs.haskell.org/packages/random.git/</td><td>libraries/random</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/template-haskell.git/</td><td></td><td>http://darcs.haskell.org/packages/template-haskell.git/</td><td>libraries/template-haskell</td></tr>
-<tr><td style="color: green;">http://code.haskell.org/terminfo/</td><td>http://darcs.haskell.org/darcs-mirrors/terminfo/</td><td></td><td>http://darcs.haskell.org/git-mirrors/terminfo/.git/</td><td>http://darcs.haskell.org/packages/terminfo.git/</td><td>libraries/terminfo</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/unix.git/</td><td></td><td>http://darcs.haskell.org/packages/unix.git/</td><td>libraries/unix</td></tr>
-<tr><td></td><td></td><td style="color: green;">https://github.com/glguy/utf8-string.git</td><td></td><td>http://darcs.haskell.org/packages/utf8-string.git/</td><td>libraries/utf8-string</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/Win32.git/</td><td></td><td>http://darcs.haskell.org/packages/Win32.git/</td><td>libraries/Win32</td></tr>
-<tr><td style="color: green;">http://darcs.haskell.org/packages/xhtml/</td><td>http://darcs.haskell.org/darcs-mirrors/xhtml/</td><td></td><td>http://darcs.haskell.org/git-mirrors/xhtml/.git/</td><td>http://darcs.haskell.org/packages/xhtml.git/</td><td>libraries/xhtml</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/testsuite.git/</td><td></td><td>http://darcs.haskell.org/testsuite.git/</td><td>testsuite</td><td>testsuite</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/nofib.git</td><td></td><td>http://darcs.haskell.org/nofib.git</td><td>nofib</td><td>nofib</td></tr>
-<tr><td style="color: green;">http://code.haskell.org/primitive/</td><td>http://darcs.haskell.org/darcs-mirrors/primitive/</td><td></td><td>http://darcs.haskell.org/git-mirrors/primitive/.git/</td><td>http://darcs.haskell.org/packages/primitive.git/</td><td>libraries/primitive</td><td rowspan="3">dph</td></tr>
-<tr><td style="color: green;">http://code.haskell.org/vector/</td><td>http://darcs.haskell.org/darcs-mirrors/vector/</td><td></td><td>http://darcs.haskell.org/git-mirrors/vector/.git/</td><td>http://darcs.haskell.org/packages/vector.git/</td><td>libraries/vector</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/dph.git/</td><td></td><td>http://darcs.haskell.org/packages/dph.git/</td><td>libraries/dph</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/deepseq.git/</td><td></td><td>http://darcs.haskell.org/packages/deepseq.git/</td><td>libraries/deepseq</td><td rowspan="3">extra</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/parallel.git/</td><td></td><td>http://darcs.haskell.org/packages/parallel.git/</td><td>libraries/parallel</td></tr>
-<tr><td></td><td></td><td style="color: green;">http://darcs.haskell.org/packages/stm.git/</td><td></td><td>http://darcs.haskell.org/packages/stm.git/</td><td>libraries/stm</td></tr>
-</table>
-}}}
+This table shows, for each repository in a GHC tree, where the central repository is, and what mirrors there are.
+
+
+<table><tr><th>darcs</th>
+<th>git</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th></tr>
+<tr><th>darcs upstream</th>
+<th>darcs mirror</th>
+<th>git upstream</th>
+<th>git mirror</th>
+<th>ghc (validated) repo</th>
+<th>in-tree</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/ghc.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/ghc.git/</th>
+<th>.</th>
+<th>ghc</th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/ghc-tarballs.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/ghc-tarballs.git/</th>
+<th>ghc-tarballs</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/utils/hsc2hs.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/utils/hsc2hs.git/</th>
+<th>utils/hsc2hs</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/haddock.git</th>
+<th></th>
+<th>http://darcs.haskell.org/haddock.git</th>
+<th>utils/haddock</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/array.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/array.git/</th>
+<th>libraries/array</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/base.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/base.git/</th>
+<th>libraries/base</th>
+<th></th></tr>
+<tr><th>http://code.haskell.org/binary/</th>
+<th>http://darcs.haskell.org/darcs-mirrors/binary/</th>
+<th></th>
+<th>http://darcs.haskell.org/git-mirrors/binary/binary.git/</th>
+<th>http://darcs.haskell.org/packages/.git/</th>
+<th>libraries/binary</th>
+<th></th></tr>
+<tr><th>http://code.haskell.org/bytestring/</th>
+<th></th>
+<th></th>
+<th>http://darcs.haskell.org/git-mirrors/bytestring/.git/</th>
+<th>http://darcs.haskell.org/packages/bytestring.git/</th>
+<th>libraries/bytestring</th>
+<th></th></tr>
+<tr><th>http://code.haskell.org/Cabal/</th>
+<th></th>
+<th></th>
+<th>http://darcs.haskell.org/git-mirrors/Cabal/.git/</th>
+<th>http://darcs.haskell.org/packages/Cabal.git/</th>
+<th>libraries/Cabal</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/containers.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/containers.git/</th>
+<th>libraries/containers</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/directory.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/directory.git/</th>
+<th>libraries/directory</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/extensible-exceptions.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/extensible-exceptions.git/</th>
+<th>libraries/extensible-exceptions</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/filepath.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/filepath.git/</th>
+<th>libraries/filepath</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/ghc-prim.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/ghc-prim.git/</th>
+<th>libraries/ghc-prim</th>
+<th></th></tr>
+<tr><th>http://code.haskell.org/haskeline/</th>
+<th>http://darcs.haskell.org/darcs-mirrors/haskeline/</th>
+<th></th>
+<th>http://darcs.haskell.org/git-mirrors/haskeline/.git/</th>
+<th>http://darcs.haskell.org/packages/haskeline.git/</th>
+<th>libraries/haskeline</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/haskell98.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/haskell98.git/</th>
+<th>libraries/haskell98</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/haskell2010.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/haskell2010.git/</th>
+<th>libraries/haskell2010</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>git://code.eecs.tufts.edu/hoopl/hoopl.git</th>
+<th>http://darcs.haskell.org/git-mirrors/hoopl/</th>
+<th>http://darcs.haskell.org/packages/hoopl.git/</th>
+<th>libraries/hoopl</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/hpc.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/hpc.git/</th>
+<th>libraries/hpc</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/integer-gmp.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/integer-gmp.git/</th>
+<th>libraries/integer-gmp</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/integer-simple.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/integer-simple.git/</th>
+<th>libraries/integer-simple</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/mtl.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/mtl.git/</th>
+<th>libraries/mtl</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/old-locale.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/old-locale.git/</th>
+<th>libraries/old-locale</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/old-time.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/old-time.git/</th>
+<th>libraries/old-time</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/pretty.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/pretty.git/</th>
+<th>libraries/pretty</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/process.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/process.git/</th>
+<th>libraries/process</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/random.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/random.git/</th>
+<th>libraries/random</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/template-haskell.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/template-haskell.git/</th>
+<th>libraries/template-haskell</th>
+<th></th></tr>
+<tr><th>http://code.haskell.org/terminfo/</th>
+<th>http://darcs.haskell.org/darcs-mirrors/terminfo/</th>
+<th></th>
+<th>http://darcs.haskell.org/git-mirrors/terminfo/.git/</th>
+<th>http://darcs.haskell.org/packages/terminfo.git/</th>
+<th>libraries/terminfo</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/unix.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/unix.git/</th>
+<th>libraries/unix</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>https://github.com/glguy/utf8-string.git</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/utf8-string.git/</th>
+<th>libraries/utf8-string</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/Win32.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/Win32.git/</th>
+<th>libraries/Win32</th>
+<th></th></tr>
+<tr><th>http://darcs.haskell.org/packages/xhtml/</th>
+<th>http://darcs.haskell.org/darcs-mirrors/xhtml/</th>
+<th></th>
+<th>http://darcs.haskell.org/git-mirrors/xhtml/.git/</th>
+<th>http://darcs.haskell.org/packages/xhtml.git/</th>
+<th>libraries/xhtml</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/testsuite.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/testsuite.git/</th>
+<th>testsuite</th>
+<th>testsuite</th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/nofib.git</th>
+<th></th>
+<th>http://darcs.haskell.org/nofib.git</th>
+<th>nofib</th>
+<th>nofib</th></tr>
+<tr><th>http://code.haskell.org/primitive/</th>
+<th>http://darcs.haskell.org/darcs-mirrors/primitive/</th>
+<th></th>
+<th>http://darcs.haskell.org/git-mirrors/primitive/.git/</th>
+<th>http://darcs.haskell.org/packages/primitive.git/</th>
+<th>libraries/primitive</th>
+<th>dph</th></tr>
+<tr><th>http://code.haskell.org/vector/</th>
+<th>http://darcs.haskell.org/darcs-mirrors/vector/</th>
+<th></th>
+<th>http://darcs.haskell.org/git-mirrors/vector/.git/</th>
+<th>http://darcs.haskell.org/packages/vector.git/</th>
+<th>libraries/vector</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/dph.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/dph.git/</th>
+<th>libraries/dph</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/deepseq.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/deepseq.git/</th>
+<th>libraries/deepseq</th>
+<th>extra</th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/parallel.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/parallel.git/</th>
+<th>libraries/parallel</th>
+<th></th></tr>
+<tr><th></th>
+<th></th>
+<th>http://darcs.haskell.org/packages/stm.git/</th>
+<th></th>
+<th>http://darcs.haskell.org/packages/stm.git/</th>
+<th>libraries/stm</th>
+<th></th></tr></table>
+
+
 
 This diagram shows how changes migrate from one repo to another:
 
-[[Image(repos.png)]]
 
-```
+
+[](/trac/ghc/attachment/wiki/Commentary/Libraries/repos.png)
+
+
