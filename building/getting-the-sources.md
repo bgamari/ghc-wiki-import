@@ -97,7 +97,7 @@ The full state of a GHC repository includes the current state of the repositorie
 
 
 
-As an alternative to git submodules, the `fingerprint.py` script in `utils/fingerprint` can create a "fingerprint" to uniquely identify a GHC repository state by recording the current commits of the GHC and boot library repositories. This fingerprint can be used later to restore the state of all repositories to the state captured by the fingerprint. 
+As an alternative to git submodules, the `fingerprint.py` script in `utils/fingerprint/` can create a "fingerprint" to uniquely identify a GHC repository state by recording the current commits of the GHC and boot library repositories. This fingerprint can be used later to restore the state of all repositories to the state captured by the fingerprint. 
 
 
 
@@ -109,8 +109,8 @@ To create a new fingerprint, run the `create` command in the top level ghc repo.
 
 
 ```wiki
-$ ./utils/fingerprint.py create
-$ ./utils/fingerprint.py create -l builder.log
+$ ./utils/fingerprint/fingerprint.py create
+$ ./utils/fingerprint/fingerprint.py create -l builder.log
 ```
 
 
@@ -122,8 +122,8 @@ To restore a fingerprint use the `restore` command and pass either a fingerprint
 
 
 ```wiki
-$ ./utils/fingerprint.py restore -f 2011-05-23.fp
-$ ./utils/fingerprint.py restore -l builder.log
+$ ./utils/fingerprint/fingerprint.py restore -f 2011-05-23.fp
+$ ./utils/fingerprint/fingerprint.py restore -l builder.log
 ```
 
 
