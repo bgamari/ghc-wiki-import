@@ -1,19 +1,19 @@
-CONVERSION ERROR
+# Testsuite Details
 
-Original source:
 
-```trac
-= Testsuite Details =
 
 The testsuite is designed largely as follows, where we take the root of the testsuite to be `testsuite/`. Firstly we have the individual test cases to run. Each test case though can be run in multiple ways. These different ways (which are simply called ```ways```) correspond to things like different optimisation levels, using the threaded RTS or not... ect. Some test cases can be run in any way while others are specific to certain ways. The general layout of the testsuite is this:
 
- * `config`: Contains the definition of the different ways supported. The only file of relevance here is `ghc`. No other Haskell compiler is actually supported by the testsuite.
- * `driver`: Contains the python source code that forms the testsuite framework.
- * `mk`: Contains the make source code that forms the testsuite framework. The make part is mostly concerned with invoking the python component, which does the actual work.
- * `tests`: Contains the actual test cases to run.
- * `timeout`: Contains a Haskell program that kills a running test case after a certain amount of time. Used by the testsuite framework.
 
-== Testsuite Implementation details ==
+- `config`: Contains the definition of the different ways supported. The only file of relevance here is `ghc`. No other Haskell compiler is actually supported by the testsuite.
+- `driver`: Contains the python source code that forms the testsuite framework.
+- `mk`: Contains the make source code that forms the testsuite framework. The make part is mostly concerned with invoking the python component, which does the actual work.
+- `tests`: Contains the actual test cases to run.
+- `timeout`: Contains a Haskell program that kills a running test case after a certain amount of time. Used by the testsuite framework.
+
+## Testsuite Implementation details
+
+
 
 The testsuite driver is just a set of Python scripts, as are all of
 the .T files in the testsuite.  The driver (driver/runtests.py) first
@@ -21,46 +21,106 @@ searches for all the .T files it can find, and then proceeds to
 execute each one, keeping a track of the number of tests run, and
 which ones succeeded and failed.
 
+
+
 The script runtests.py takes several options:
 
-  --config <file>
+
+>
+>
+> --config \<file\>
+>
+>
+
+
   
-       <file> is just a file containing Python code which is 
-       executed.   The purpose of this option is so that a file
-       containing settings for the configuration options can
-       be specified on the command line.  Multiple --config options
-       may be given.
 
-  --rootdir <dir>
 
-       <dir> is the directory below which to search for .T files
-       to run.
+>
+> >
+> >
+> > \<file\> is just a file containing Python code which is 
+> > executed.   The purpose of this option is so that a file
+> > containing settings for the configuration options can
+> > be specified on the command line.  Multiple --config options
+> > may be given.
+> >
+> >
+>
 
-  --output-summary <file>
+>
+>
+> --rootdir \<dir\>
+>
+>
 
-       In addition to dumping the test summary to stdout, also
-       put it in <file>.  (stdout also gets a lot of other output
-       when running a series of tests, so redirecting it isn't  
-       always the right thing).
+>
+> >
+> >
+> > \<dir\> is the directory below which to search for .T files
+> > to run.
+> >
+> >
+>
 
-  --only <test>
+>
+>
+> --output-summary \<file\>
+>
+>
 
-       Only run tests named <test> (multiple --only options can
-       be given).  Useful for running a single test from a .T file
-       containing multiple tests.
+>
+> >
+> >
+> > In addition to dumping the test summary to stdout, also
+> > put it in \<file\>.  (stdout also gets a lot of other output
+> > when running a series of tests, so redirecting it isn't  
+> > always the right thing).
+> >
+> >
+>
 
-  -e <stmt>
+>
+>
+> --only \<test\>
+>
+>
 
-       executes the Python statement <stmt> before running any tests.
-       The main purpose of this option is to allow certain
-       configuration options to be tweaked from the command line; for
-       example, the build system adds '-e config.accept=1' to the
-       command line when 'make accept' is invoked.
+>
+> >
+> >
+> > Only run tests named \<test\> (multiple --only options can
+> > be given).  Useful for running a single test from a .T file
+> > containing multiple tests.
+> >
+> >
+>
+
+>
+>
+> -e \<stmt\>
+>
+>
+
+>
+> >
+> >
+> > executes the Python statement \<stmt\> before running any tests.
+> > The main purpose of this option is to allow certain
+> > configuration options to be tweaked from the command line; for
+> > example, the build system adds '-e config.accept=1' to the
+> > command line when 'make accept' is invoked.
+> >
+> >
+>
+
 
 Most of the code for running tests is located in driver/testlib.py.
 Take a look.
 
-There is a single Python class (!TestConfig) containing the global
+
+
+There is a single Python class (TestConfig) containing the global
 configuration for the testsuite.  It contains information such as the
 kind of compiler being used, which flags to give it, which platform
 we're running on, and so on.  The idea is that each platform and
@@ -69,51 +129,70 @@ of the configuration, which are sourced by passing the appropriate
 --config options to the test driver.  For example, the GHC
 configuration is contained in the file config/ghc.
 
+
+
 A .T file can obviously contain arbitrary Python code, but the general
 idea is that it contains a sequence of calls to the function test(),
 which resides in testlib.py.  As described above, test() takes four
 arguments:
 
-      test(<name>, <opt-fn>, <test-fn>, <args>)
 
-The function <opt-fn> is allowed to be any Python callable object,
-which takes a single argument of type !TestOptions.  !TestOptions is a
+>
+>
+> test(\<name\>, \<opt-fn\>, \<test-fn\>, \<args\>)
+>
+>
+
+
+The function \<opt-fn\> is allowed to be any Python callable object,
+which takes a single argument of type TestOptions.  TestOptions is a
 class containing options which affect the way that the current test is
 run: whether to skip it, whether to expect failure, extra options to
 pass to the compiler, etc. (see testlib.py for the definition of the
-!TestOptions class).  The idea is that the <opt-fn> function modifies
-the !TestOptions object that it is passed.  For example, to expect
+TestOptions class).  The idea is that the \<opt-fn\> function modifies
+the TestOptions object that it is passed.  For example, to expect
 failure for a test, we might do this in the .T file:
-{{{
+
+
+```wiki
    def fn(opts):
       opts.expect = 'fail'
 
    test(test001, fn, compile, [''])
-}}}
+```
+
+
 so when fn is called, it sets the instance variable "expect" in the
-instance of !TestOptions passed as an argument, to the value 'fail'.
+instance of TestOptions passed as an argument, to the value 'fail'.
 This indicates to the test driver that the current test is expected to
 fail.
 
+
+
 Some of these functions, such as the one above, are common, so rather
 than forcing every .T file to redefine them, we provide canned
-versions.  For example, the provided function expect_fail does the
+versions.  For example, the provided function expect\_fail does the
 same as fn in the example above.  See testlib.py for all the canned
-functions we provide for <opt-fn>.
+functions we provide for \<opt-fn\>.
 
-The argument <test-fn> is a function which performs the test.  It
+
+
+The argument \<test-fn\> is a function which performs the test.  It
 takes three or more arguments:
 
-{{{
+
+```wiki
       <test-fn>( <name>, <way>, ... )
-}}}
+```
 
-where <name> is the name of the test, <way> is the way in which it is
+
+where \<name\> is the name of the test, \<way\> is the way in which it is
 to be run (eg. opt, optasm, prof, etc.), and the rest of the arguments
-are constructed from the list <args> in the original call to test().
-The following <test-fn>s are provided at the moment:
+are constructed from the list \<args\> in the original call to test().
+The following \<test-fn\>s are provided at the moment:
 
-{{{
+
+```wiki
            compile
            compile_fail
            compile_and_run
@@ -129,10 +208,52 @@ The following <test-fn>s are provided at the moment:
            run_command
            run_command_ignore_output
            ghci_script
-}}}
+```
+
 
 and obviously others can be defined.  The function should return
 either 'pass' or 'fail' indicating that the test passed or failed
 respectively.
 
+
+## The testsuite and version control branches
+
+
+
+It is not clear what to do with the testsuite when branching a compiler; should the testsuite also be branched?
+
+
+
+If it is not branched then we have the problem that, given a set of tests
+
+
+```wiki
+test(tc1, ...)
+test(tc2, ...)
+test(tc3, ...)
+```
+
+
+if we add first one test, and then another to the HEAD
+
+
+```wiki
+test(tc1, ...)
+test(tc2, ...)
+test(tc3, ...)
+test(tc4, ...)
+test(tc5, ...)
+```
+
+
+and we want to merge `tc5` but not `tc4` to the branch then the merge has to be done by hand,
+as the patch for tc5 depends on the patch for tc4, although most of the files in the patches (`tc5.hs` etc) are disjoint.
+
+
+
+On the other hand, if it is not branched then any changes in test output mean we need to add extra logic to the test definitions, e.g.
+
+
+```wiki
+test(tc5, namebase_if_compiler_lt('ghc','6.9', 'tc5-6.8'), ...)
 ```
