@@ -1,84 +1,85 @@
-# GHC Source Code Abbreviations
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= GHC Source Code Abbreviations =
 
 Certain abbreviations are used pervasively throughout the GHC source code. This page gives a partial list of them and their expansion:
 
+* '''ANF''': A-normal form
 
-- **ANF**: A-normal form
+* '''Class''': Type Class
 
-- **Class**: Type Class
+* '''Cmm''': The final IR used in GHC, based on the C-- language
 
-- **Cmm**: The final IR used in GHC, based on the C-- language
+* '''Core''': GHC core language. Based on System FC (variant of System F). Represents a type-checked and desugared program in some (out of several) intermediate compilation step
 
-- **Core**: GHC core language. Based on System FC (variant of System F). Represents a type-checked and desugared program in some (out of several) intermediate compilation step
+* '''!CoreFV''': Free variables in core
 
-- **CoreFV**: Free variables in core
+* '''!CoreLint: Type and sanity-checking of core. (Lint: Jargon for a program analysis that looks for bug-suspicious code.)
 
-- **CoreLint: Type and sanity-checking of core. (Lint: Jargon for a program analysis that looks for bug-suspicious code.)
-  **
+* '''!CoreSubst''': Substitution in core
 
-- **CoreSubst**: Substitution in core
+* '''!CoreSyn''': Core abstract syntax
 
-- **CoreSyn**: Core abstract syntax
+* '''!DataCon''': Data constructor
 
-- **DataCon**: Data constructor
+* '''Ds''': Desugarer
 
-- **Ds**: Desugarer
+* '''Gbl''': Global
 
-- **Gbl**: Global
+* '''Hs''': Haskell Syntax (generally as opposed to Core, for example, Expr vs !HsExpr)
 
-- **Hs**: Haskell Syntax (generally as opposed to Core, for example, Expr vs HsExpr)
+* '''Hsc''': Haskell compiler. Means it Deals with compiling a single module and no more.
 
-- **Hsc**: Haskell compiler. Means it Deals with compiling a single module and no more.
+* '''!HsSyn''': Haskell abstract syntax
 
-- **HsSyn**: Haskell abstract syntax
+* '''Id''': Synonym for Var, but indicating a term variable
 
-- **Id**: Synonym for Var, but indicating a term variable
+* '''Iface''': Interface, as in Haskell interface (.hi) files
 
-- **Iface**: Interface, as in Haskell interface (.hi) files
+* '''!IfaceSyn''': Interface abstract syntax
 
-- **IfaceSyn**: Interface abstract syntax
+* '''LHs''': Located Haskell something
 
-- **LHs**: Located Haskell something
+* '''Loc''': Location, as in !SrcLoc
 
-- **Loc**: Location, as in SrcLoc
+* '''Located''': Something annotated with a SrcSpan
 
-- **Located**: Something annotated with a SrcSpan
+* '''Lcl''': Local
 
-- **Lcl**: Local
+* '''!nativeGen''': Native code generator (generates assembly from Cmm)
 
-- **nativeGen**: Native code generator (generates assembly from Cmm)
+* '''Occ''': Occurrence
+  * However, in the context of [http://hackage.haskell.org/trac/ghc/wiki/Commentary/Compiler/RdrNameType#TheOccNametype OccName], "occurrence" actually means "classified (i.e. as a type name, value name, etc) but not qualified and not yet resolved"
 
-- **Occ**: Occurrence
+* '''PId''': Package ID
 
-  - However, in the context of [
-    OccName](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Compiler/RdrNameType#TheOccNametype), "occurrence" actually means "classified (i.e. as a type name, value name, etc) but not qualified and not yet resolved"
+* '''!PprCore''': Pretty-printing core
 
-- **PId**: Package ID
+* '''Rdr''': Parser (or reader)
 
-- **PprCore**: Pretty-printing core
+* '''Rn''': Rename or Renamer
 
-- **Rdr**: Parser (or reader)
+* '''Rts''': Run Time System
 
-- **Rn**: Rename or Renamer
+* '''!SimplCore''': Simplify core (the so-called simplifier belongs to this, as does the strictness analyser)
 
-- **Rts**: Run Time System
+* '''!SrcLoc''': Source location (filename, line number, character position)
 
-- **SimplCore**: Simplify core (the so-called simplifier belongs to this, as does the strictness analyser)
+* '''!SrcSpan''': Source location span (filename, start line number and character position, end line number and character position)
 
-- **SrcLoc**: Source location (filename, line number, character position)
+* '''Tc''': !TypeCheck{ing,er}
 
-- **SrcSpan**: Source location span (filename, start line number and character position, end line number and character position)
+* '''!TyCon''': Type constructor
 
-- **Tc**: TypeCheck{ing,er}
+* '''!TyThing''': Something that is type-checkable
 
-- **TyCon**: Type constructor
+* '''Ty''': Type
 
-- **TyThing**: Something that is type-checkable
+* '''!TyVar''': Synonym for Var, but indicating a type variable
 
-- **Ty**: Type
+* '''Var''': A variable with some information about its type (or kind)
 
-- **TyVar**: Synonym for Var, but indicating a type variable
-
-- **Var**: A variable with some information about its type (or kind)
+```
