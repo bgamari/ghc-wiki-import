@@ -2,7 +2,8 @@
 
 
 
-This page describes the Haskell Program Coverage implementation inside GHC.
+This page describes the Haskell Program Coverage implementation inside GHC. You can find the original homepage of HPC [
+here](http://projects.unsafeperformio.com/hpc/).
 
 
 
