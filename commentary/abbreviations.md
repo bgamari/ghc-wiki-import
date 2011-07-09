@@ -45,7 +45,7 @@ Certain abbreviations are used pervasively throughout the GHC source code. This 
 
 * '''Loc''': Location, as in !SrcLoc
 
-* '''Located''': Something annotated with a SrcSpan
+* '''Located''': Something annotated with a !SrcSpan
 
 * '''Lcl''': Local
 
