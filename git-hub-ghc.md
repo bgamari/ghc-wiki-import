@@ -1,35 +1,34 @@
+CONVERSION ERROR
 
+Original source:
 
+```trac
+[[PageOutline]]
+== Building GHC from !GitHub Sources ==
+=== Repo Location ===
+https://github.com/ghc/ghc
 
-## Building GHC from GitHub Sources
-
-
-### Repo Location
-
-
-
-[ https://github.com/ghc/ghc](https://github.com/ghc/ghc)
-
-
-### Getting the Sources
-
-
-
+=== Getting the Sources ===
 First, go to the GHC repo and create a fork for your account. Then,
 
-
-```wiki
+{{{
 $ git clone git@github.com:<username>/ghc.git
 $ cd ghc
 $ ./sync-all -r http://darcs.haskell.org/ get
+}}}
+
+=== Building GHC ===
+{{{
 $ ./boot
 $ autoconf
 $ ./configure <flags>
 $ make
 $ make install
-```
-
+}}}
 
 Make sure to read the config log before building to check for warnings. Use `./configure --help` for options.
 
 
+
+
+```
