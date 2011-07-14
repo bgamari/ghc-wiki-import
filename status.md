@@ -1,41 +1,43 @@
-CONVERSION ERROR
+# GHC Status
 
-Original source:
 
-```trac
-= GHC Status =
+## Biannual status reports
 
-== Biannual status reports ==
 
-Here are biannual GHC status reports, published in the [http://haskell.org/communities/ Haskell Communities and Activities Report]
-  * [wiki:Status/May11 GHC status May 2011]
-  * [wiki:Status/Oct10 GHC status October 2010]
-  * [wiki:Status/Apr10 GHC status April 2010]
-  * [wiki:Status/Oct09 GHC status October 2009]
-  * [wiki:Status/May09 GHC status May 2009]
-  * [wiki:Status/October08 GHC status October 2008]
-  * [wiki:Status/May08 GHC status May 2008]
-  * [wiki:Status/Nov07 GHC status November 2007]
-  * [wiki:Status/April07 GHC status April 2007]
-  * [wiki:Status/October06 GHC status October 2006]
 
-== Releases ==
+Here are biannual GHC status reports, published in the [
+Haskell Communities and Activities Report](http://haskell.org/communities/)
+
+
+- [GHC status May 2011](status/may11)
+- [GHC status October 2010](status/oct10)
+- [GHC status April 2010](status/apr10)
+- [GHC status October 2009](status/oct09)
+- [GHC status May 2009](status/may09)
+- [GHC status October 2008](status/october08)
+- [GHC status May 2008](status/may08)
+- [GHC status November 2007](status/nov07)
+- [GHC status April 2007](status/april07)
+- [GHC status October 2006](status/october06)
+
+## Releases
+
+
 
 Here are our release plans for 
-  * [wiki:Status/Releases GHC 6.12 (outdated)]
-  * [wiki:Status/GHC-6.10 GHC 6.10 (outdated)]
 
-Here are details about what [wiki:Platforms platforms GHC supports].
 
-== Planning notes ==
+- GHC 6.12 (outdated)?
+- [GHC 6.10 (outdated)](status/gh-c-6.10)
 
-Here is our [wiki:GhcPlanning current planning document], intended mainly to help Simon, Simon, and Ian coordinate with each other.
 
-== Design notes ==
+Here are details about what [platforms GHC supports](platforms).
 
-Here are notes about aspects of GHC's design that are up for discussion.  (They often relate to Haskell generally, rather than just GHC, but it's a convenient place to keep them.)
-  * [wiki:Commentary/Packages/PackageReorg Haskell library organisation]
-  * [wiki:Commentary/Packages/GhcPackagesProposal The design for the package system itself]
- 
 
-```
+## Planning notes
+
+
+
+Here is our [current planning document](ghc-planning), intended mainly to help Simon, Simon, and Ian coordinate with each other.
+
+
