@@ -20,6 +20,13 @@ When writing Wiki pages you need to know the markup conventions:
 The notes on the rest of this page are the GHC team's observations and/or clarifications.
 
 
+## Pointing to source files
+
+
+
+Use the syntax `source:<file>`, e.g. source:README to point to source files in the GHC repository.  We can't currently point directly to source files in other repositories this way, although when we upgrade Trac to 0.12 the multi-repository support should enable us to do this.
+
+
 ## Formatting list items with multiple paragraphs
 
 
