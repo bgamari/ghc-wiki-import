@@ -1,27 +1,21 @@
-# Preventing space blow-up due to replicate
+CONVERSION ERROR
 
+Original source:
 
-## The problem
+```trac
+= Preventing space blow-up due to replicate =
 
-
+== The problem ==
 
 The vectorisation transformation lifts scalar computations into vector space.  In the course of this lifting, scalar constants are duplicated to fill an array, using the function 'replicateP'.  Array computations are lifted in a similar manner, which leads to array constants being replicated to form arrays of arrays, which are represented as a segmented arrays.  A simple example is our  'smvm' example code:
-
-
-```wiki
+{{{
 smvm :: [:[: (Int, Double) :]:] -> [:Double:] -> [:Double:]
 smvm m v = [: sumP [: x * (v !: i) | (i,x) <- row :] | row <- m :]
-```
-
-
-Here the variable 'v' is constant in the array comprehensions and will be replicated while lifting the expression `v !: i`.   In other words, for every single element in a `row`, lifting implies the allocation of a separate copy of of the entire array `v` — and this only to perform a single indexing operation on that copy of `v`.  More precisely, in the lifted code, lifted indexing (which we usually denote by `(!:^)` is applied to a nested array consisting of multiple copies of `v`; i.e., it is applied to the result of `replicateP (length row) v`.  
-
-
+}}}
+Here the variable 'v' is constant in the array comprehensions and will be replicated while lifting the expression `v !: i`.   In other words, for every single element in a `row`, lifting implies the allocation of a separate copy of of the entire array `v` — and this only to perform a single indexing operation on that copy of `v`.  More precisely, in the lifted code, lifted indexing (which we usually denote by `(!:^)` is applied to a nested array consisting of multiple copies of `v`; i.e., it is applied to the result of `replicatePA (lengthPA row) v`.  
 
 This is clearly wasted effort and space.  However, the situation is even worse in Ben's pathological example:
-
-
-```wiki
+{{{
 treeLookup :: [:Int:] -> [:Int:] -> [:Int:]
 treeLookup table xx
   | lengthP xx == 1
@@ -32,192 +26,118 @@ treeLookup table xx
         s1      = sliceP 0    half xx
         s2      = sliceP half half  xx           
       in concatP (mapP (treeLookup table) [: s1, s2 :])
-```
-
-
+}}}
 Here `table` is constant in `mapP (treeLookup table) [: s1, s2 :]`; hence, the entire `table` gets duplicated on each level of the recursion, leading to space consumption that is exponential in the depth of the recursion.
 
 
-## What's happening here?
-
-
+== What's happening here? ==
 
 Replication of scalars and arrays is always a waste of time and space.  However, it is particularly problematic if the replicated structure is consumed by an indexing operation as it can change the asymptotic work complexity of the vectorised program.  This holds not only for indexing, but for any operation that consumes only a small part of its input array(s).  In other words, if a replicated structure is consumed in its entirety (for example by a fold), the asymptotic work complexity of replication matches that of consuming the structure.  For operations that only consume a small part of their input, that is not the case.  Hence, lifting, which introduces the replication, does increase asymptotic work.
 
-
-## A plan to fix the problem
-
-
+== A plan to fix the problem ==
 
 Generally, we don't want to copy replicated data — it's a waste of space!  We definitely don't want to do it for large data structures, and in particular, we don't want to do it for arrays.  After all, that can change the asymptotic work complexity of a program.  To keep it simple, we are for the moment focusing on avoiding replicating arrays, as this is were our practical problems are coming from at the moment.  (Some cases of replicated scalars are also eliminated by fusion.)
 
-
-### Repeated segments
-
-
+=== Repeated segments ===
 
 A replicated array results is always represented by a segmented array; more precisely, by a segmented array where a contiguous sequence of segments contains the same data.  For example, we have
-
-
-```wiki
+{{{
 replicateP 3 [:1, 2, 3:] = [:[:1, 2, 3:], [:1, 2, 3:], [:1, 2, 3:]:]
   where
     [:[:1, 2, 3:], [:1, 2, 3:], [:1, 2, 3:]:] = ([:3, 3, 3:], [:1, 2, 3, 1, 2, 3, 1, 2, 3:])
-```
-
-
+}}}
 and
-
-
-```wiki
+{{{
 replicateP^ [:2, 3:] [:[:1, 2:], [:3:]:] = [:[:1, 2:], [:1, 2:], [:3:], [:3:], [:3:]:]
   where
     [:[:1, 2:], [:1, 2:], [:3:], [:3:], [:3:]:] = ([:2, 2, 1, 1, 1:], [:1, 2, 1, 2, 3, 3, 3:])
-```
+}}}
 
-### Collapse repeated segments
-
-
+=== Collapse repeated segments ===
 
 In practice, segments descriptors store more information than just the segment length.  They at least additionally store the start position of each segment in the data array.  In the conventional representation, an invariant is that the start positions are such that the segments don't overlap.  To represent arrays with repeated segments more efficiently, we propose to relax that invariant.  Specifically, all start positions of a contiguous sequence of repeated segments are the same; i.e., the segment data is stored only once per sequence of repeated segments.
 
-
-
 Then, we have for `[:[:1, 2, 3:], [:1, 2, 3:], [:1, 2, 3:]:]`,
-
-
-```wiki
+{{{
 start: [:0, 0, 0:]
 len:   [:3, 3, 3:]
 data:  [:1, 2, 3:])
-```
-
-
+}}}
 and for `[:[:1, 2:], [:1, 2:], [:3:], [:3:], [:3:]:]`,
-
-
-```wiki
+{{{
 start: [:0, 0, 2, 2, 2:]
 len:   [:2, 2, 1, 1, 1:]
 data:  [:1, 2, 3:])
-```
-
+}}}
 
 This is merely a change in the array representation that does not affect vectorisation.
 
-
-## Operations on arrays with repeated segments
-
-
+== Operations on arrays with repeated segments ==
 
 As multiple segments overlap in arrays with repeated segments, array consumers need to be adapted to work correctly in this situation.
 
-
-### Lifted indexing
-
-
+=== Lifted indexing ===
 
 In the `smvm` example, a replicated array is consumed by lifted indexing to extract matching elements of the vector for all non-zero elements of the matrix.  Using just an length array as a segment descriptor without overlapping segments, lifted indexing might be implemented as follows:
-
-
-```wiki
-(as_len, as_data) !:^ is = bpermute as_data ((prescan (+) 0 as_len) +^ is)
-```
-
+{{{
+(as_len, as_data) !:^ is = bpermutePA as_data ((prescanPA (+) 0 as_len) +^ is)
+}}}
 
 With overlapping segments, we have
+{{{
+(as_start, as_len, as_data) !:^ is = bpermutePA as_data (as_start +^ is)
+}}}
+In the case of `smvm`, where the first argument is produced by `replicatePA (lengthPA row) v`, we have `as_start = replicatePA (lengthPA row) 0` and `as-data = v`.  In other words, lifted indexing draws from a single copy of `v`, which is what we wanted.
+
+=== Reduction ===
+
+ TODO: rl's exmaple
+
+=== Multiple levels of nesting ===
+
+TODO: What if we have segment descriptors on top of one with repeated segments?
+
+== Related work ==
+
+ * The work-efficient vectorisation paper by Prins et al.  Their approach only works in a first-order language.
+ * Blelloch's work on the space-behaviour of data-parallel programs.
+
+----
+
+= OLD MATERIAL =
 
 
-```wiki
-(as_start, as_len, as_data) !:^ is = bpermute as_data (as_start +^ is)
-```
-
-
-In the case of `smvm`, where the first argument is produced by `replicateP (length row) v`, we have `as_start = replicate (length row) 0` and `as-data = v`.  In other words, lifted indexing draws from a single copy of `v`, which is what we wanted.
-
-
-### Reduction
-
-
->
->
-> TODO rl's exmaple
->
->
-
-### Multiple levels of nesting
-
-
-
-TODO What if we have segment descriptors on top of one with repeated segments?
-
-
-## Related work
-
-
-- The work-efficient vectorisation paper by Prins et al.  Their approach only works in a first-order language.
-- Blelloch's work on the space-behaviour of data-parallel programs.
-
----
-
-
-# OLD MATERIAL
-
-
-## A plan to fix the problem
-
-
+== A plan to fix the problem ==
 
 Generally, we don't want to copy replicated data — it's a waste of space!  We definitely don't want to do it for large data structures, and in particular, we don't want to do it for arrays.  After all, that can change the asymptotic work complexity of a program.  So, instead of having `replicateP` allocate and fill a new array with multiple copies of the same data, we use a special array representation that stores the data (once!) together with the replication count.  This is surely the most space efficient representation for a replicated array.
 
-
-
 The downside of a special representation is that we now also need to modify all consumers of replicated arrays to accept this new representation and to handle it specially.  This leads to some code blow up (each array consumer needs to be able to dynamically decide between two input array representations), and we need to be careful not to disturb fusion.
 
-
-### The trouble with indices
-
-
+=== The trouble with indices ===
 
 Although, a replicated array stores its replicated payload only once, it needs to be handled with care. When indexing into a replicated array, we still use the same indices as if the array data would have been copied multiple times.  That can be a problem in examples, such as `treeLookup` above where the replicated array iteration-space grows exponentially — even 64bit indices will eventually overflow.  However, we can circumvent that problem by taking care in code that consumes replicated arrays.
 
+In the `treeLookup` example, the `table` is replicated and grows exponentially.  But it is a segmented structure (one segment per copy of the original array) and it is accessed in the base case by a lifted index operation.  When you look at the input to that application of lifted indexing, its first argument is huge (the replicated `table`), but the second argument contains the same ''data'' as the original value of `xx`, albeit segmented into an array with one segment per element.  So we have effectively got
 
-
-In the `treeLookup` example, the `table` is replicated and grows exponentially.  But it is a segmented structure (one segment per copy of the original array) and it is accessed in the base case by a lifted index operation.  When you look at the input to that application of lifted indexing, its first argument is huge (the replicated `table`), but the second argument contains the same *data* as the original value of `xx`, albeit segmented into an array with one segment per element.  So we have effectively got
-
-
-```wiki
+{{{
  [:table, table, ...., table:] !^ [:[:xx_1:], [:xx_2:], ..., [:xx_n:]:]
-```
+}}}
 
+Note how the `xx_i` are unchanged.  It is only ''in the implementation of `(!^)`'' that the `xx_i` are blown up to index into the data vector of `[:table, table, ...., table:]` (which is `concatP [:table, table, ...., table:]`).  It is that multiplication of the `xx_i` with the prescaned segment descriptor of `[:table, table, ...., table:]` that will overflow.  Notice how that is internal to the implementation of `(!^)`.  If the first argument of `(!^)` is a replicated structure, there is no need whatsoever to perform that multiplication (and subsequent division) and the indices never overflow!
 
-Note how the `xx_i` are unchanged.  It is only *in the implementation of `(!^)`* that the `xx_i` are blown up to index into the data vector of `[:table, table, ...., table:]` (which is `concatP [:table, table, ...., table:]`).  It is that multiplication of the `xx_i` with the prescaned segment descriptor of `[:table, table, ...., table:]` that will overflow.  Notice how that is internal to the implementation of `(!^)`.  If the first argument of `(!^)` is a replicated structure, there is no need whatsoever to perform that multiplication (and subsequent division) and the indices never overflow!
-
-
-### Never take the length of a replicated array
-
-
+=== Never take the length of a replicated array ===
 
 Unfortunately, not only indices blow out, the length of replicated arrays may also overflow 64bit integers.  Hence, the consuming code must carefully avoid to take the length of such arrays.  This is only the case for `replicateP`s introduced by the vectoriser.  It is the responsibility of the DPH user to ensure that `replicateP`s that are explicit in the user code do not blow out.  (We may want to switch to 64bit indices —at least on 64bit builds— anyway.)
 
 
-## Concrete implementation of replicated arrays
+== Concrete implementation of replicated arrays ==
 
+The DPH library is built on the [http://hackage.haskell.org/package/vector vector] package (that provides high-performance sequential arrays).  This package heavily relies on a cheap representation of sliced arrays — i.e., arrays of which a subarray is extracted.  Such array slices are not copied, but represented by a reference to the original array together with markers for the start and end of the slice.
 
-
-The DPH library is built on the [
-vector](http://hackage.haskell.org/package/vector) package (that provides high-performance sequential arrays).  This package heavily relies on a cheap representation of sliced arrays — i.e., arrays of which a subarray is extracted.  Such array slices are not copied, but represented by a reference to the original array together with markers for the start and end of the slice.
-
-
-### Replicating and slicing
-
-
+=== Replicating and slicing ===
 
 When implementing replicated arrays, we need to take into account that (1) a replicated may be a sliced vector and (b) that the partitioning of a parallel array across multiple threads requires to slice that parallel array.
 
+'''***''' Is this really an issue?  After all, we don't replicated thread-local slices of parallel arrays (which in turn may be sliced vectors), but replicate parallel arrays (which are already distributed over multiple threads).
 
-
-****\******* Is this really an issue?  After all, we don't replicated thread-local slices of parallel arrays (which in turn may be sliced vectors), but replicate parallel arrays (which are already distributed over multiple threads).
-**
-
-
+```
