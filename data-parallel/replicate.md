@@ -52,6 +52,10 @@ Replication of scalars and arrays is always a waste of time and space.  However,
 Generally, we don't want to copy replicated data — it's a waste of space!  We definitely don't want to do it for large data structures, and in particular, we don't want to do it for arrays.  After all, that can change the asymptotic work complexity of a program.  To keep it simple, we are for the moment focusing on avoiding replicating arrays, as this is were our practical problems are coming from at the moment.  (Some cases of replicated scalars are also eliminated by fusion.)
 
 
+
+NB: We will have to revisit replication of scalar structures as such scalar structures may be large trees.
+
+
 ### Repeated segments
 
 
@@ -60,7 +64,7 @@ A replicated array results is always represented by a segmented array; more prec
 
 
 ```wiki
-replicateP 3 [:1, 2, 3:] = [:[:1, 2, 3:], [:1, 2, 3:], [:1, 2, 3:]:]
+replicatePA 3 [:1, 2, 3:] = [:[:1, 2, 3:], [:1, 2, 3:], [:1, 2, 3:]:]
   where
     [:[:1, 2, 3:], [:1, 2, 3:], [:1, 2, 3:]:] = ([:3, 3, 3:], [:1, 2, 3, 1, 2, 3, 1, 2, 3:])
 ```
@@ -70,10 +74,14 @@ and
 
 
 ```wiki
-replicateP^ [:2, 3:] [:[:1, 2:], [:3:]:] = [:[:1, 2:], [:1, 2:], [:3:], [:3:], [:3:]:]
+expandPA [:2, 3:] [:[:1, 2:], [:3:]:] = [:[:1, 2:], [:1, 2:], [:3:], [:3:], [:3:]:]
   where
     [:[:1, 2:], [:1, 2:], [:3:], [:3:], [:3:]:] = ([:2, 2, 1, 1, 1:], [:1, 2, 1, 2, 3, 3, 3:])
 ```
+
+
+NB: `expandPA` is lifted replication; `expandPA` is the name we used in HtM.
+
 
 ### Collapse repeated segments
 
