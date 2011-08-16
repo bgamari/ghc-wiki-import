@@ -1,68 +1,44 @@
-# GHC Kind level
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= GHC Kind level =
 
-This page gives the theory, implementation overview and details about GHC's kind level.  This work is related to [
-Conor's SHE system](http://personal.cis.strath.ac.uk/~conor/pub/she/) and will be related to Iavor's work on [TypeNats](type-nats) to deal with primitive types (promoted `Int` and `Char`).
+This page gives the theory, implementation overview and details about GHC's kind level.  This work is related to [http://personal.cis.strath.ac.uk/~conor/pub/she/ Conor's SHE system] and will be related to Iavor's work on [wiki:TypeNats] to deal with primitive types (promoted {{{Int}}} and {{{Char}}}).
 
+== Theory ==
 
-## Theory
+We use the mechanism of promotion to lift a data type to the kind level.  This gives access at the type level to the data constructors, and at the kind level to the type constructor.  Not all data types can be promoted; for example, GADTs or data types with higher-order kinds cannot be promoted.  We add kind polymorphism to allow promotion of polymorphic data constructors (like {{{Nil}}} or {{{Cons}}}).
 
+More details can be found in [http://gallium.inria.fr/~jcretin/ghc/theory.pdf this theory pdf].
 
+== Examples ==
 
-We use the mechanism of promotion to lift a data type to the kind level.  This gives access at the type level to the data constructors, and at the kind level to the type constructor.  Not all data types can be promoted; for example, GADTs or data types with higher-order kinds cannot be promoted.  We add kind polymorphism to allow promotion of polymorphic data constructors (like `Nil` or `Cons`).
+Examples of reimplementation of existing Haskell librairies can be found in [http://gallium.inria.fr/~jcretin/ghc/examples.pdf this examples pdf].  I use a repository for what works and what does not [https://github.com/ia0/GhcKindsExamples].
 
+== Implementation ==
 
-
-More details can be found in [
-this theory pdf](http://gallium.inria.fr/~jcretin/ghc/theory.pdf).
-
-
-## Examples
-
-
-
-Examples of reimplementation of existing Haskell librairies can be found in [
-this examples pdf](http://gallium.inria.fr/~jcretin/ghc/examples.pdf).  I use a repository for what works and what does not [
-https://github.com/ia0/GhcKindsExamples](https://github.com/ia0/GhcKindsExamples).
-
-
-## Implementation
-
-
-
-The GHC branch is called `ghc-kinds`.  There is also a Haddock branch with the same name.  Hoopl needs a kind annotation available on a branch in [
-http://darcs.haskell.org/git-mirrors/hoopl/](http://darcs.haskell.org/git-mirrors/hoopl/).
-
-
+The GHC branch is called {{{ghc-kinds}}}.  There is also a Haddock branch with the same name.  Hoopl needs a kind annotation available on a branch in [http://darcs.haskell.org/git-mirrors/hoopl/].
 
 The implementation will follow these steps (in bold is the first phase (parser, renamer, type checker, ...) that does not work):
-
-
-1. Promotion of Haskell98 data types of kind star: `*`.
-1. **\[parser\]** Promotion of Haskell98 data types of first order kind: `* -> .. * -> *`. It involves kind polymorphism.
-1. Kind polymorphic data types, type families, and type classes.
-1. Singleton types.
-1. Built-in types.
-
+  1. Promotion of Haskell98 data types of kind star: {{{*}}}.
+  1. Promotion of Haskell98 data types of first order kind: {{{* -> .. * -> *}}}. It involves kind polymorphism.
+  1. '''[*]''' Kind polymorphic data types, type families, and type classes.
+  1. Singleton types.
+  1. Built-in types.
 
 Promotion-related changelog:
-
-
-- Change the kind representation in `HsSyn` from `Kind` to `LHsKind name` adding some `PostTcKind` when necessary.
-
-  - Rename `rnHsType` into `rnHsTyKi` and parametrize with a boolean to know if we are renaming a type or a kind.
-- Allow promoted data and type constructors:
-
-  - Extend the parser to allow optionally ticked names as atoms in types and kinds.
-  - Extend `HsType name` with `HsPromotedConTy name` to represent ticked names.
-  - Extend the renamer to handle implicit promotion.
-  - Extend `TyCon` with `PromotedDataTyCon` and `PromotedTypeTyCon` to represent promoted data and type constructors.
-  - Extend the type checker accordingly.
-- Rename `KindVar` which is used during type checking into `MetaKindVar`, since we will add kind variables later.
-
+  * Change the kind representation in {{{HsSyn}}} from {{{Kind}}} to {{{LHsKind name}}} adding some {{{PostTcKind}}} when necessary.
+    * Rename {{{rnHsType}}} into {{{rnHsTyKi}}} and parametrize with a boolean to know if we are renaming a type or a kind.
+  * Allow promoted data and type constructors:
+    * Extend {{{TyCon}}} with {{{PromotedDataTyCon}}} to have data constructors in type constructors.
+    * Extend the parser, renamer, and type and kind checker accordingly.
+  * Rename {{{KindVar}}} which is used during type checking into {{{MetaKindVar}}}.
 
 Not promotion-related changelog:
+  * Use {{{HsDocContext}}} instead of {{{SDoc}}} to track renaming context.
+  * Kind check and type check by strongly connected components, instead of kind checking the whole module, and then type checking it.  This implies that some modules now need additional kind annotations (since each strongly component gets zonkTcKindToKind before going to the next one).
 
 
-- Use `HsDocContext` instead of `SDoc` to track renaming context.
+```
