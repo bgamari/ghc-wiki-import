@@ -1,77 +1,112 @@
-CONVERSION ERROR
 
-Original source:
 
-```trac
-[[PageOutline]]
-= Guidelines for using git with GHC =
 
-GHC uses [http://git-scm.com/ git] for revision control.  This page describes various GHC-specific conventions for using git, together with some suggestions and tips for using git effectively.  
+# Guidelines for using git with GHC
 
-Existing darcs users see: [wiki:GitForDarcsUsers].  If you have an existing source tree in darcs and need to convert patches, see [wiki:DarcsToGit]. Simon PJ's git notes are [wiki:WorkingConventions/GitSPJ].
 
-== General Guidelines ==
 
- * Try to make small patches (i.e. work in consistent increments).
+GHC uses [
+git](http://git-scm.com/) for revision control.  This page describes various GHC-specific conventions for using git, together with some suggestions and tips for using git effectively.  
 
- * Separate changes that affect functionality from those that just affect
-   code layout, indendation, whitespace, filenames etc.  This means that
-   when looking at patches later, we don't have to wade through loads of
-   non-functional changes to get to the important parts of the patch.   
 
- * If possible, commit often.  This helps to avoid conflicts.
 
- * Only push when your tree passes validation: see TestingPatches.
+Existing darcs users see: [GitForDarcsUsers](git-for-darcs-users).  If you have an existing source tree in darcs and need to convert patches, see [DarcsToGit](darcs-to-git). Simon PJ's git notes are [WorkingConventions/GitSPJ](working-conventions/git-spj).
 
- * Discuss anything you think might be controversial before pushing it.
 
-== Commit messages ==
+## General Guidelines
+
+
+- Try to make small patches (i.e. work in consistent increments).
+
+- Separate changes that affect functionality from those that just affect
+  code layout, indendation, whitespace, filenames etc.  This means that
+  when looking at patches later, we don't have to wade through loads of
+  non-functional changes to get to the important parts of the patch.   
+
+- If possible, commit often.  This helps to avoid conflicts.
+
+- Only push when your tree passes validation: see [TestingPatches](testing-patches).
+
+- Discuss anything you think might be controversial before pushing it.
+
+## Commit messages
+
+
 
 We have a simple convention for commit log messages:
 
-   * If your patch fixes breakage in the build, then begin the patch name with `"FIX BUILD"`. e.g.
-{{{
-  FIX BUILD Use the right find on Windows systems; fixes bindist creation
-}}}
-   * If your patch fixes a bug, then include the ticket number in the form `#NNNN` in the patch name, e.g.
-{{{
-  withMVar family have a bug (fixes #767)
-}}}
-     '''Trac will then create a link from the commit to the ticket''', making navigation easier.
 
-== Line endings ==
+- If your patch fixes breakage in the build, then begin the patch name with `"FIX BUILD"`. e.g.
+
+  ```wiki
+    FIX BUILD Use the right find on Windows systems; fixes bindist creation
+  ```
+- If your patch fixes a bug, then include the ticket number in the form `#NNNN` in the patch name, e.g.
+
+  ```wiki
+    withMVar family have a bug (fixes #767)
+  ```
+
+  **Trac will then create a link from the commit to the ticket**, making navigation easier.
+
+## Line endings
+
+
 
 Files in GHC repos should use Unix conventions for line endings.
 If you are on Windows, ensure that git handles line-endings sanely by running:
-{{{
+
+
+```wiki
 git config --global core.autocrlf false
-}}}
+```
+
+
 To find out what files in your tree have windows (CRLF) line endings,  use
-{{{
+
+
+```wiki
 find . -name '*hs' | xargs file | grep CRLF
-}}}
+```
+
+
 Do this before you commit them!
 
-== Workflow with validate ==
 
-All changes to GHC and the libraries need to be [wiki:TestingPatches validated] before they can be pushed to the main repositories.  Validation can take a while - 30 minutes on a 4-core machine is typical - so ideally you want to be validating changes while you are working in a separate tree.  Furthermore, validation uses build settings that are different to the ones you would normally use while developing: it adds more libraries (DPH) and builds extra ways (dynamic libraries), so you don't want to use the same build for validation and ordinary development.
+## Workflow with validate
+
+
+
+All changes to GHC and the libraries need to be [validated](testing-patches) before they can be pushed to the main repositories.  Validation can take a while - 30 minutes on a 4-core machine is typical - so ideally you want to be validating changes while you are working in a separate tree.  Furthermore, validation uses build settings that are different to the ones you would normally use while developing: it adds more libraries (DPH) and builds extra ways (dynamic libraries), so you don't want to use the same build for validation and ordinary development.
+
+
 
 So for this we normally use two entirely separate trees, one for developing and one for validating.  The development tree uses build settings optimised for development: `-O0 -DDEBUG` for the compiler, minimal libraries and ways so that rebuilding is fast.  The validate tree is for validating only.
 
+
+
 The typical workflow is to work in the development tree, pull into the validate tree, validate, and then push from the validate tree.  But what if validate fails?  There are two options:
 
- 1. discard the patch in the validate tree (using some instance of `git reset`) and go back to the working tree to fix it
- 2. or, add a new patch in the validate tree to fix the problem and re-validate
+
+1. discard the patch in the validate tree (using some instance of `git reset`) and go back to the working tree to fix it
+1. or, add a new patch in the validate tree to fix the problem and re-validate
+
 
 (1) is more for "back to the drawing board" kinds of failure, whereas (2) is for cases where you just need to fix a warning or some other minor error exposed by validate.
 
-== Setting up the trees ==
+
+### Setting up the trees
+
+
 
 Let's call the two trees `ghc-working` and `ghc-validate`.
 
+
+
 Set up your repos like this:
 
-{{{
+
+```wiki
 $ git clone http://darcs.haskell.org/ghc.git ghc-working
 $ cd ghc-working
 $ ./sync-all --testsuite --no-dph get
@@ -82,49 +117,67 @@ $ ./sync-all --testsuite get
 $ ./sync-all -r http://darcs.haskell.org/ remote set-url origin
 $ ./sync-all -r `pwd`/../ghc-working remote add working
 $ ./sync-all -r <account>@darcs.haskell.org:/home/darcs remote set-url --push origin
-}}}
+```
+
 
 (where `<account>` is your account on `darcs.haskell.org`; omit this step if you don't have one, you can still submit patches via the mailing list (using `git format-patch` will help you with this) or send a pull request to get your changes in GHC).
 
+
+
 Now you have `ghc-working` and `ghc-validate` repos, and additionally the `ghc-validate` repo tree is set up with a remote `working` pointing to the `ghc-working` tree, and pushing from `ghc-validate` will push changes via SSH to `darcs.haskell.org`.
 
-== The rebase workflow ==
+
+### The rebase workflow
+
+
 
 How do we move patches from `ghc-working` and `ghc-validate`?  There are several options here.  One is to just use `sync-all pull working` and do merging as usual.  This works fine, but results in extra "merge commits" that aren't particularly helpful and clutter the commit logs and the mailing list.  A better approach is to rebase patches before committing.  This is done as follows:
 
-  1. fetch patches from `ghc-working` into `ghc-validate`: `./sync-all fetch working`
-  2. merge from working: `./sync-all merge working`
-  3. rebase onto master: `./sync-all pull --rebase`
-  4. validate, push
+
+1. fetch patches from `ghc-working` into `ghc-validate`: `./sync-all fetch working`
+1. merge from working: `./sync-all merge working`
+1. rebase onto master: `./sync-all pull --rebase`
+1. validate, push
+
 
 Now, the patches pushed this way are different (have different hashes) from the patches that you originally committed in `ghc-working`, and if you try to pull these patches in `ghc-working` again, confusion and conflicts will ensue.  Fortunately there's an easy solution: just rebase again in `ghc-working`, and git will notice that your patches are already upstream and will discard the old versions.  It's as simple as
 
-{{{
+
+```wiki
  $ cd ghc-working
  $ ./sync-all pull --rebase
-}}}
+```
+
 
 If rebase encounters a conflict at any point, it will tell you what to do.  After fixing the conflict and completing the rebase manually, you can then resume the pull with `./sync-all --resume pull --rebase`.
 
 
-== Contributing patches ==
+## Contributing patches
 
-!ToDo: extend the following.
 
-{{{
+
+ToDo: extend the following.
+
+
+```wiki
 git send-email --to=cvs-ghc@haskell.org <hash-id> -1
-}}}
+```
+
 
 where `<hash-id>` is the hash of the commit to send.
 
-== Applying patches from email ==
 
-{{{
+## Applying patches from email
+
+
+```wiki
 git am -3 <email>
-}}}
+```
 
-== The stable branch ==
+## The stable branch
+
+
 
 (ToDo)
 
-```
+
