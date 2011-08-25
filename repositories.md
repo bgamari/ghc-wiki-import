@@ -60,6 +60,10 @@ This means that when making changes needed in GHC to one of these libraries, we 
   http://darcs.haskell.org/packages/Cabal.git/](http://darcs.haskell.org/packages/Cabal.git/)
 
 
+Note that a git hook prevents you from pushing patches to the ghc repos until they are already in the git mirror repos, so that we cannot forget to send changes upstream.
+
+
+
 This table shows, for each repository in a GHC tree, where the central repository is, and what mirrors there are.
 
 
