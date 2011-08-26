@@ -147,4 +147,6 @@ The following subpages provide details on implementing this functionality.  **(T
 - [
   N1370: Apple’s Extensions to C](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1370.pdf)
 - [
+  Some background on the implementation of blocks](http://cocoawithlove.com/2009/10/how-blocks-are-implemented-and.html)
+- [
   Dynamic generation of method implementations with blocks](http://www.friday.com/bbum/2011/03/17/ios-4-3-imp_implementationwithblock/)
