@@ -1,64 +1,43 @@
-# The DPH packages
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= The DPH packages =
 
 This page describes the packages (aka libraries) that form part of DPH, enumerates all the wyas in which they differ from "normal" GHC packages, and says what stuff lives where.
 
-
-## What packages there are
-
-
+== What packages there are ==
 
 DPH is split into the following packages:
 
+  * `dph-base`[[br]] Contains shared debugging and tracing functions. Particularly, the flags for enabling extended sanity checking are hard-coded in the `Config.hs` module.
 
-- `dph-base`
-   Contains shared debugging and tracing functions. Particularly, options for enabling extended sanity checking are hard-codede in the `Config.hs` module.
+  * `dph-prim-seq`[[br]] Flat arrays, and sequential operators on them. Most sequential operators that we used are supplied by `Data.Vector`, but `dph-prim-seq` adds segmented operators that are only useful in the context of nested data parallelism. This package also defines the segment descriptor types, that are also used to implement nested arrays. Flat arrays are also referred to as "unlifted arrays", so this library is also called the "unlifted primitive library".
 
-- `dph-prim-seq`
-   Flat arrays, and sequential operators on them. Most sequential operators that we used are supplied by `Data.Vector`, but `dph-prim-seq` adds segmented operators that are only useful in the context of nested data parallelism. This package also defines the segment descriptor types, that are also used to implement nested arrays. Flat arrays are also referred to as "unlifted arrays", so this library is also called the "unlifted primitive library".
+  * `dph-prim-par`[[br]] Flat arrays, and parallel operators on them. This package exports exactly the same types and functions as `dph-prim-seq`, except that they run in parallel. 
 
-- `dph-prim-par`
-   Flat arrays, and parallel operators on them. This package exports exactly the same types and functions as `dph-prim-seq`, except that they run in parallel. 
+  * `dph-prim-interface`[[br]] Defines the common interface exposed by `dph-prim-seq` and `dph-prim-par`. The interface is defined by the `DPH_Header.h` and `DPH_Interface.h` header files, which provide the module signature and type sigs respectively. These header files are `#include`d into `dph-prim-seq` and `dph-prim-par` to ensure they really do have the same interface.
 
-- `dph-prim-interface`
-   Defines the common interface exposed by `dph-prim-seq` and `dph-prim-par`. The interface is defined by the `DPH_Header.h` and `DPH_Interface.h` header files, which provide the module signature and type sigs respectively. These header files are `#include`d into `dph-prim-seq` and `dph-prim-par` to ensure they really do have the same interface.
+  * `dph-common`[[br]]  Nested parallel arrays. This module defines the `PArray` type, and the functions used by vectorised code. The code in this package uses the interface defined by `dph-prim-interface`. This means it can be compiled against either the `dph-prim-seq` or `dph-prim-par` packages. Doing this results in the `dph-seq` and `dph-par` packages.
 
-- `dph-common`
-    Nested parallel arrays. This module defines the `PArray` type, and the functions used by vectorised code. The code in this package uses the interface defined by `dph-prim-interface`. This means it can be compiled against either the `dph-prim-seq` or `dph-prim-par` packages. Doing this results in the `dph-seq` and `dph-par` packages.
+ * `dph-seq` and `dph-par`[[br]] These packages are produced by compiling `dph-common` against either the `dph-prim-seq` or `dph-prim-par` packages.
 
-- `dph-seq` and `dph-par`
-   These packages are produced by compiling `dph-common` against either the `dph-prim-seq` or `dph-prim-par` packages.
+ * `dph-common-vseg`[[br]] Nested parallel arrays with virtual segment descriptors. This is a new version of `dph-common` currently under development. It extends the old library with a new form of segment descriptor. The new segment descriptor allows us to avoid physically replicating data in vectorised code.
 
-- `dph-common-vseg`
-   Nested parallel arrays with virtual segment descriptors. This is a new version of `dph-common` currently under development. It extends the old library with a new form of segment descriptor. The new segment descriptor allows us to avoid physically replicating data in vectorised code.
+ * `dph-test`[[br]] Quick check properties for the other dph packages.
 
-- `dph-test`
-   Quick check properties for the other dph packages.
-
-- `dph-examples`
-   Example programs using Data Parallel Haskell.
-
+ * `dph-examples`[[br]] Example programs using Data Parallel Haskell.
 
 The DPH libraries use Template Haskell, so they can only be compiled with a stage2 compiler.
 
-
-## How the DPH packages are coupled to GHC
-
-
+== How the DPH packages are coupled to GHC ==
 
 GHC knows about DPH as follows.
 
+  * The flags `-fdph-seq` and `-fdph-par` add `-package dph-seq` and `-package dph-par`. These packages contain the types and functions that vectorised code uses. They are produced by compiling `dph-common` against either the `dph-prim-seq` or `dph-prim-par` packages respectively. They also contain the array functions visible to used code via `import Data.Array.Parallel`.
 
-- The flags `-fdph-seq` and `-fdph-par` add `-package dph-seq` and `-package-dph-par`, respectively, so that the user can `import Data.Array.Parallel` and friends.  And so that the right package gets linked in the link step.
-
-- The flag `-fvectorise` runs a special pass called the **vectoriser**. 
-
-  - The vectoriser generates code that mentions (by Original Name) various functions defined in `dph-prim-seq` or `dph-prim-par` (depending on the compiler flag used).  So if you change where a function is defined in `dph-prim-*`, or the name of the function, you have to make a corresponding change in GHC.
-  - The vectoriser knows quite a lot about the internal working of the library. For instance, it knows about the array representation.
-  - Parts of the library are vectorised and since these are low-level parts, they rely on being vectorised in particular ways. This means that a particular version of the library will only work correctly with a particular version of the vectoriser and vice versa.  **SLPJ: can you be more precise here?  Which packages are vectorised?  What do you meean by "particular ways"?**
+  * The vectoriser only generates names exported by dph-common (via either dph-par or dph-seq). It does not use the `dph-prim-interface` API directly.
 
 
-**SLPJ: is it correct that GHC only generates Names in dph-prim?  If not, could it be made true?**
-
-
+```
