@@ -20,7 +20,7 @@ This page focues exclusively on the first, narrow issue of dismbiguating record 
 
 
 
-On this page I'd like to summarise the problem, and specify alternative designs.  So far it is mostly a skeleton: please fill it out.  Simon PJ.
+On this page I'd like to summarise the problem, and specify alternative designs.  So far it is mostly a skeleton: please fill it out.  The idea is to hold a discussion by email (ghc-users?) but to collect results (alternative designs, trade-offs, pros and cons) here, because email threads quickly get lost.  Simon PJ.
 
 
 ## The problem: record name spacing
