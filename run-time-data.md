@@ -1,16 +1,14 @@
+CONVERSION ERROR
 
+Original source:
+
+```trac
 Sometimes a data file will be presented to an application and the application lacks the appropriate renderer to insert the de-serialised file contents into the currently running code.
-
-
 
 One example of this is a web browser that can not handle all mime-types.  If the data file carries information on how to render it, then both the data file and renderer can be loaded dynamically and safely injected into type-safe code.
 
-
-
 Here is an example:
-
-
-```wiki
+{{{
 module Runtime where
 
 import Data.Binary
@@ -72,13 +70,13 @@ instance Binary a => Binary (Image2 a) where
 
 instance Show a => Renderable (Image1 a) where
     render (Image1 zs) (R r) = do
-                               putStrLn $ show zs
+                               print zs
                                let (e,_) = r (RS 0)
                                return e
 
 instance Show a => Renderable (Image2 a) where
     render (Image2 xs ys) (R r) = do
-                                  putStrLn $ show $ zip xs ys
+                                  print $ zip xs ys
                                   let (e,_) = r (RS 0)
                                   return e
     
@@ -111,8 +109,6 @@ loadFileAndRender fn r = do
 main = do
        a <- getArgs
        e <- loadFileAndRender (head a) (R (\s -> (0,s)))
-       when (e /= 0) $ do
-                       exitWith $ ExitFailure e
-                       return ()
-       return ()
+       when (e /= 0) $ exitWith $ ExitFailure e
+}}}
 ```
