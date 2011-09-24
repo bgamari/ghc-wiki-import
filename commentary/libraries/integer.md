@@ -1,0 +1,24 @@
+CONVERSION ERROR
+
+Original source:
+
+```trac
+[[PageOutline]]
+
+= GHC Commentary: Libraries/Integer =
+
+TODO
+
+== Selecting an Integer implementation  ==
+
+TODO
+
+== The Integer interface  ==
+
+TODO
+
+== How Integer is handled inside GHC  ==
+
+TODO
+
+```
