@@ -1,117 +1,208 @@
-CONVERSION ERROR
+# Building on MacOS X
 
-Original source:
 
-```trac
-= Building on MacOS X =
 
 These instructions were last updated for GHC 7.2.
 
-== Get the latest development tools ==
 
-Get the most recent version of Apple's Xcode tools that you can. Your OS X CD has a version on. You may be able to download a newer version from the [http://developer.apple.com/tools/xcode Apple Developer Connection] website. You may need to sign up for a free membership in the Apple Developer Connection, and downloading may still cost a little money.
+## Get the latest development tools
 
-Once upon a time Apple distributed updates to Xcode by using their Software Update service but not anymore. You must download the development tools manually.
 
-Successful builds of older GHC sources have been reported using Xcode 3.0, 2.4 and 2.4.1 on Intel Macs. Xcode 2.2.1 is known ''not'' to work out of the box on Intel Macs, and Xcode 3.0 is known ''not'' to work out of the box on PowerPC Macs (#2887). Versions prior to 3.1 may build GHC successfully, but choke on certain libraries.
 
-== Building the distribution ==
+Get the most recent version of Apple's Xcode tools that you can. Your OS X CD has a version on it. You may be able to download a newer version from the [
+Apple Developer Connection](http://developer.apple.com/tools/xcode) website. You may need to sign up for a free membership in the Apple Developer Connection, and downloading may still cost a little money.  In later versions of OS X (10.6 / 10.7), Apple added the "App Store".  Xcode is available within the App Store for "Free".
+
+
+
+Once upon a time Apple distributed updates to Xcode by using their Software Update service but not anymore. You must download the development tools manually.  When using the App Store, it should correctly identify when you need an update for Xcode (if you downloaded Xcode from the App Store originally).
+
+
+
+Successful builds of older GHC sources have been reported using Xcode 3.0, 2.4 and 2.4.1 on Intel Macs. Xcode 2.2.1 is known *not* to work out of the box on Intel Macs, and Xcode 3.0 is known *not* to work out of the box on PowerPC Macs ([\#2887](https://gitlab.staging.haskell.org/ghc/ghc/issues/2887)). Versions prior to 3.1 may build GHC successfully, but choke on certain libraries.
+
+
+## Building the distribution
+
+
 
 Install a binary GHC distribution: either from a bindist (.tar.bz2) or from an installer (.pkg).
 
-Download the source tarball from http://haskell.org/ghc/download.html
+
+
+Download the source tarball from [
+http://haskell.org/ghc/download.html](http://haskell.org/ghc/download.html)
+
+
 
 Untar it and change into the directory it unpacks into. Then run
-{{{
+
+
+```wiki
 ./configure
 make
-}}}
+```
+
+
 to build it.
 
-You can then either install it, with
-{{{
-make install
-}}}
-or make a binary distribution with
-{{{
-make binary-dist
-}}}
 
-== Building installer packages ==
+
+You can then either install it, with
+
+
+```wiki
+make install
+```
+
+
+or make a binary distribution with
+
+
+```wiki
+make binary-dist
+```
+
+## Building installer packages
+
+
 
 After making the binary-dist, you can create a Mac installer package (.pkg) by running
-{{{
+
+
+```wiki
 cd distrib/MacOS
 sh mkinstaller ../../ghc*.tar.bz2
-}}}
+```
+
+
 The result will be a file `GHC-<version>-<arch>.pkg`, where `<version>` is the full version string and `<arch>` is `x86_64`, `i386` or `ppc`. The build process uses `xcodebuild` and `packagemaker`.
 
-More details about [wiki:Building/MacOSX/Installer building installer packages] are available.
 
-== Building using !MacPorts ==
 
-ghc 6.6 can be built from source using [http://macports.org MacPorts] on Intel and PowerPC Macs.
-Follow the instructions on the !MacPorts website for installing the infrastructure and port files,
+More details about [building installer packages](building/mac-osx/installer) are available.
+
+
+## Building using MacPorts
+
+
+
+ghc 6.6 can be built from source using [
+MacPorts](http://macports.org) on Intel and PowerPC Macs.
+Follow the instructions on the MacPorts website for installing the infrastructure and port files,
 then type
 
-{{{ > sudo port install ghc }}}
+
+
+` > sudo port install ghc `
+
+
 
 to build and install ghc.  Dependencies will be built and installed automatically. There is
 no need to follow the instructions above for installing readline; this is handled by
-!MacPorts dependency mechanism.  If you want to see how the build is progressing, type
+MacPorts dependency mechanism.  If you want to see how the build is progressing, type
 
-{{{ > sudo port -dv install ghc }}}
+
+
+` > sudo port -dv install ghc `
+
+
 
 The "-dv" flags indicate verbose debugging output.  Using these can also help diagnose build problems.
 
+
+
 If the build is interrupted or fails for some reason you must clean up before trying again. Do
 
-{{{ > sudo port clean ghc }}}
+
+
+` > sudo port clean ghc `
+
+
 
 before restarting.
 
-A nice feature of !MacPorts is that you can put its installation directory tree anywhere.
+
+
+A nice feature of MacPorts is that you can put its installation directory tree anywhere.
 This allows installations without administrator privileges.
 
-== Case insensitivity ==
 
-The default Mac OS X files systems (HFS+) is case-insensitive and Git is case sensitive (although this is configurable).  While this ususally doesn't cause any problems, occassionally a {{{Unapplicable patch}}} error can occur.  It's possible to work around this by using {{{Disk Utility}}} to create a case sensitive file system and apply the patches inside of it.  To do this:
+## Case insensitivity
 
- 1. Open {{{/Applications/Utilities/Disk Utility}}}.
- 2. Make sure that none of the images/disks on the left are highlighted/selected.  If any are, <Cmd>+Click them to unselect them.
- 3. Click the "New Image" button.
- 4. Set the "Volume Format" to "Mac OS X Extended (Case Sensitive)".
- 5. Set "Encryption" to "None".
 
- 6. Set "Partitions" to "Single Partition - Apple Partition Map"
- 7. Set "Image Format" to "sparse disk image".
- 8. Set "Volume Size" to "Custom..." and select an appropriately large size.  Sparse images only take up as much space is as needed, plus a little overhead, so it's better to overestimate than underestimate.  A 30 GB sparse image with no data in it takes up ~50 MB.
- 9. Set "Volume Name" to something appropriate (e.g., "GHC").
- 10. Set "Save As" to something appropriate (e.g., "GHC Disk").
- 11. Click the "Create" button.
 
-This creates a file with a {{{.sparseimage}}} extension (e.g., {{{GHC Disk.sparseimage}}}) at the location that was set in step 10 and automatically mounts it.  The partition can be accessed through the {{{/Volumes}}} folder (e.g., {{{/Volumes/GHC}}}).  This partition behaves exactly like any other Apple partition except that it's case sensitive and git can apply the patches it couldn't on the case insensitive file system.  After the patches have been applied, the repository can be copied to the normal file system, the partition can be unmounted, and the sparse image can be deleted.
+The default Mac OS X files systems (HFS+) is case-insensitive and Git is case sensitive (although this is configurable).  While this ususally doesn't cause any problems, occassionally a `Unapplicable patch` error can occur.  It's possible to work around this by using `Disk Utility` to create a case sensitive file system and apply the patches inside of it.  To do this:
 
-== Building the documentation ==
+
+1. Open `/Applications/Utilities/Disk Utility`.
+1. Make sure that none of the images/disks on the left are highlighted/selected.  If any are, \<Cmd\>+Click them to unselect them.
+1. Click the "New Image" button.
+1. Set the "Volume Format" to "Mac OS X Extended (Case Sensitive)".
+1. Set "Encryption" to "None".
+
+1. Set "Partitions" to "Single Partition - Apple Partition Map"
+1. Set "Image Format" to "sparse disk image".
+1. Set "Volume Size" to "Custom..." and select an appropriately large size.  Sparse images only take up as much space is as needed, plus a little overhead, so it's better to overestimate than underestimate.  A 30 GB sparse image with no data in it takes up \~50 MB.
+1. Set "Volume Name" to something appropriate (e.g., "GHC").
+1. Set "Save As" to something appropriate (e.g., "GHC Disk").
+1. Click the "Create" button.
+
+
+This creates a file with a `.sparseimage` extension (e.g., `GHC Disk.sparseimage`) at the location that was set in step 10 and automatically mounts it.  The partition can be accessed through the `/Volumes` folder (e.g., `/Volumes/GHC`).  This partition behaves exactly like any other Apple partition except that it's case sensitive and git can apply the patches it couldn't on the case insensitive file system.  After the patches have been applied, the repository can be copied to the normal file system, the partition can be unmounted, and the sparse image can be deleted.
+
+
+## Building the documentation
+
+
 
 For some reason, convincing dblatex ti build the docs can be tricky. This worked for me:
 
-From http://www.tug.org/mactex/ downloaded and installed
-    http://mirror.ctan.org/systems/mac/mactex/MacTeX.mpkg.zip
 
-From http://dblatex.sourceforge.net/ downloaded and built
-    http://prdownloads.sourceforge.net/dblatex/dblatex-0.3.tar.bz2?download
 
-Now building users_guide.pdf will fail, as we generate things like:
-{{{
+From [
+http://www.tug.org/mactex/](http://www.tug.org/mactex/) downloaded and installed
+
+
+>
+>
+> [
+> http://mirror.ctan.org/systems/mac/mactex/MacTeX.mpkg.zip](http://mirror.ctan.org/systems/mac/mactex/MacTeX.mpkg.zip)
+>
+>
+
+
+From [
+http://dblatex.sourceforge.net/](http://dblatex.sourceforge.net/) downloaded and built
+
+
+>
+>
+> [
+> http://prdownloads.sourceforge.net/dblatex/dblatex-0.3.tar.bz2?download](http://prdownloads.sourceforge.net/dblatex/dblatex-0.3.tar.bz2?download)
+>
+>
+
+
+Now building users\_guide.pdf will fail, as we generate things like:
+
+
+```wiki
 ?t\nolinkurl{?uC:\Documents?u}\texttt{\ }\nolin[...]
-}}}
+```
+
+
 rather than:
-{{{
+
+
+```wiki
 ?t\nolinkurl{?uC:\\Documents?u}\texttt{\ }\nolin[...]
-}}}
+```
+
+
 (note number of backslashes). To fix this, patch param.xsl:
-{{{
+
+
+```wiki
 --- param.xsl   2011-03-18 18:10:23.000000000 +0000
 +++ /usr/share/dblatex/xsl/param.xsl    2010-10-27 08:56:16.000000000 +0100
 @@ -16,7 +16,7 @@
@@ -120,34 +211,55 @@ rather than:
  <xsl:param name="latex.unicode.use">0</xsl:param>
 -<xsl:param name="texlive.version">2010</xsl:param>
 +<xsl:param name="texlive.version">2009</xsl:param>
-}}}
+```
+
+
 This is a little odd. The Debian package has this patch applied, and on
 Debian:
-{{{
+
+
+```wiki
 $ latex --version
 pdfTeX 3.1415926-1.40.10-2.2 (TeX Live 2009/Debian)
 [...]
-}}}
+```
+
+
 but on OS X:
-{{{
+
+
+```wiki
 $ latex --version
 pdfTeX 3.1415926-1.40.11-2.2 (TeX Live 2010)
 [...]
-}}}
+```
+
+
 so it doesn't seem like it should be needed. But anyway...
 
+
+
 Now the PDF will fail to build with:
-{{{
+
+
+```wiki
 makeindex: Not writing to /private/tmp/tmpw4xTzV/users_guide.ind (openout_any = p).
 Can't create output index file /private/tmp/tmpw4xTzV/users_guide.ind.
-}}}
+```
+
+
 So we put
-{{{
+
+
+```wiki
 openout_any = r
-}}}
+```
+
+
 in `/usr/local/texlive/2010/texmf.cnf`
+
+
 
 And the docs will finally build!
 
 
-```
