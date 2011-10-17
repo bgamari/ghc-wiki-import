@@ -3,7 +3,6 @@ CONVERSION ERROR
 Original source:
 
 ```trac
-
 == Source Tree Layout ==
 
 An overview of the source tree may be found [wiki:Commentary/SourceTree here].
