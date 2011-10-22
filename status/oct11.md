@@ -51,7 +51,45 @@ We continue to receive some fantastic help from a number of members from the Has
 As ever, there is a lot still to do, and if you wait for us to do something then you may have to wait a long time. So don't wait; join in!
 
 
+## Other developments
 
-**"Other things" we mentioned last time: Cloud Haskell, supercompilation, liquid types, parallel project, DPH**
+
+
+Work continues on improving GHC in various directions. Active projects we know about include:
+
+
+### Cloud Haskell
+
+
+
+**TODO**
+
+
+### Supercompilation
+
+
+
+**TODO**
+
+
+### Liquid types
+
+
+
+**TODO**
+
+
+### Parallel project
+
+
+
+**TODO**
+
+
+### DPH
+
+
+
+**TODO**
 
 
