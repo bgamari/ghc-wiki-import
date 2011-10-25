@@ -1,18 +1,19 @@
-CONVERSION ERROR
 
-Original source:
+It is useful to see the vector instructions "in action" in LLVM human readable form (a ".ll" file) prior to implementing the Cmm -\> LLVM backend (within the ./compiler/llvmGen section of the code).  LLVM code is somewhere between Java byte code authoring and direct assembly language authoring.  Here is the process:
 
-```trac
-It is useful to see the vector instructions "in action" in LLVM human readable form (a ".ll" file) prior to implementing the Cmm -> LLVM backend (within the ./compiler/llvmGen section of the code).  LLVM code is somewhere between Java byte code authoring and direct assembly language authoring.  Here is the process:
 
- - Generate or Create a human readable file (a ".ll" file), for example, create "add_floats.ll"
- - Compile this file to byte code using the LLVM compiler:  llvm-as add_floats.ll.  This generates a ".bc" file, in this case, add_floats.bc.  The byte code is unreadable.
- - Now there are a few options once byte code is available
-   - Generate native machine code:  llc add_floats.bc will create a native assembler instruction set in a ".s" file (add_floats.s)
-   - Run the byte codes on the JIT compiler:  lli add_floats.bc should run the instructions and produce the result
+- Generate or Create a human readable file (a ".ll" file), for example, create "add\_floats.ll"
+- Compile this file to byte code using the LLVM compiler:  llvm-as add\_floats.ll.  This generates a ".bc" file, in this case, add\_floats.bc.  The byte code is unreadable.
+- Now there are a few options once byte code is available
+
+  - Generate native machine code:  llc add\_floats.bc will create a native assembler instruction set in a ".s" file (add\_floats.s)
+  - Run the byte codes on the JIT compiler:  lli add\_floats.bc should run the instructions and produce the result
+
 
 To demonstrate the vector instructions, we can start with a basic C program (just to illustrate ... remember, LLVM is not functional so starting in an imperative language makes a lot of sense):
-{{{
+
+
+```wiki
 #include <stdio.h>
 
 int main()
@@ -33,12 +34,18 @@ int main()
    z[3] = x[3] + y[3];
    printf("%f %f %f %f\n", z[0], z[1], z[2], z[3]);
 }
-}}}
+```
+
 
 Compiling and running this in C is easy and left to the user.
 
-This converts easily to LLVM human readable format (use the [http://llvm.org/demo/index.cgi online generator] if you'd like):
-{{{
+
+
+This converts easily to LLVM human readable format (use the [
+online generator](http://llvm.org/demo/index.cgi) if you'd like):
+
+
+```wiki
 ; ModuleID = '/tmp/webcompile/_21191_0.bc'
 target datalayout = "e-p:64:64:64-i1:8:8-i8:8:8-i16:16:16-i32:32:32-i64:64:64-f32:32:32-f64:64:64-v64:64:64-v128:128:128-a0:0:64-s0:64:64-f80:128:128-n8:16:32:64"
 target triple = "x86_64-unknown-linux-gnu"
@@ -113,17 +120,86 @@ define i32 @main() nounwind {
 }
 
 declare i32 @printf(i8*, ...)
-}}}
+```
 
-This is easy enough to run using the JIT compiler:  lli add_floats.ll
+
+This is easy enough to run using the JIT compiler:  lli add\_floats.ll
+
+
 
 The core of the instructions can be replaced with vectorization (obviously, optimizing this program will result in very little code and vectorization is not necessary, but this is an exercise.
 
+
+
 Here is the .ll code rewritten with vectorization:
-{{{
 
 
-}}}
+```wiki
+; ModuleID = '/tmp/webcompile/_21191_0.bc'
+target datalayout = "e-p:64:64:64-i1:8:8-i8:8:8-i16:16:16-i32:32:32-i64:64:64-f32:32:32-f64:64:64-v64:64:64-v128:128:128-a0:0:64-s0:64:64-f80:128:128-n8:16:32:64"
+target triple = "x86_64-unknown-linux-gnu"
 
+@.str = private unnamed_addr constant [13 x i8] c"%f %f %f %f\0A\00"
 
+define i32 @main() nounwind {
+  %1 = alloca i32, align 4
+
+  ; allocate three vectors
+  %x = alloca <4 x float>, align 16
+  %y = alloca <4 x float>, align 16
+  %z = alloca <4 x float>, align 16
+
+  store i32 0, i32* %1
+
+  ; store initial values to the x and y vectors
+  %2 = getelementptr inbounds <4 x float>* %x, i32 0, i64 0
+  store float 1.000000e+00, float* %2
+  %3 = getelementptr inbounds <4 x float>* %x, i32 0, i64 1
+  store float 2.000000e+00, float* %3
+  %4 = getelementptr inbounds <4 x float>* %x, i32 0, i64 2
+  store float 3.000000e+00, float* %4
+  %5 = getelementptr inbounds <4 x float>* %x, i32 0, i64 3
+  store float 4.000000e+00, float* %5
+  %6 = getelementptr inbounds <4 x float>* %y, i32 0, i64 0
+  store float 1.000000e+01, float* %6
+  %7 = getelementptr inbounds <4 x float>* %y, i32 0, i64 1
+  store float 2.000000e+01, float* %7
+  %8 = getelementptr inbounds <4 x float>* %y, i32 0, i64 2
+  store float 3.000000e+01, float* %8
+  %9 = getelementptr inbounds <4 x float>* %y, i32 0, i64 3
+  store float 4.000000e+01, float* %9
+
+  ; load the vectors
+  %xs = load <4 x float>* %x
+  %ys = load <4 x float>* %y
+
+  ; add the vectors
+  %zs = fadd <4 x float> %xs, %ys
+
+  ; store the result vector back to z
+  store <4 x float> %zs, <4 x float>* %z
+
+  ; get the elements out of the vector for printing
+  %10 = getelementptr inbounds <4 x float>* %z, i32 0, i64 0
+  %11 = load float* %10
+  %12 = fpext float %11 to double
+  %13 = getelementptr inbounds <4 x float>* %z, i32 0, i64 1
+  %14 = load float* %13
+  %15 = fpext float %14 to double
+  %16 = getelementptr inbounds <4 x float>* %z, i32 0, i64 2
+  %17 = load float* %16
+  %18 = fpext float %17 to double
+  %19 = getelementptr inbounds <4 x float>* %z, i32 0, i64 3
+  %20 = load float* %19
+  %21 = fpext float %20 to double
+
+  ; print the components of z that were extracted above
+  %22 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([13 x i8]* @.str, i32 0, i32 0), double %12, double %15, double %18, double %21)
+
+  ; return
+  %23 = load i32* %1
+  ret i32 %23
+}
+
+declare i32 @printf(i8*, ...)
 ```
