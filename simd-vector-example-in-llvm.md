@@ -1,19 +1,18 @@
+CONVERSION ERROR
 
-It is useful to see the vector instructions "in action" in LLVM human readable form (a ".ll" file) prior to implementing the Cmm -\> LLVM backend (within the ./compiler/llvmGen section of the code).  LLVM code is somewhere between Java byte code authoring and direct assembly language authoring.  Here is the process:
+Original source:
 
+```trac
+It is useful to see the vector instructions "in action" in LLVM human readable form (a ".ll" file) prior to implementing the Cmm -> LLVM backend (within the ./compiler/llvmGen section of the code).  LLVM code is somewhere between Java byte code authoring and direct assembly language authoring.  Here is the process:
 
-- Generate or Create a human readable file (a ".ll" file), for example, create "add\_floats.ll"
-- Compile this file to byte code using the LLVM compiler:  llvm-as add\_floats.ll.  This generates a ".bc" file, in this case, add\_floats.bc.  The byte code is unreadable.
-- Now there are a few options once byte code is available
-
-  - Generate native machine code:  llc add\_floats.bc will create a native assembler instruction set in a ".s" file (add\_floats.s)
-  - Run the byte codes on the JIT compiler:  lli add\_floats.bc should run the instructions and produce the result
-
+ - Generate or Create a human readable file (a ".ll" file), for example, create "add_floats.ll"
+ - Compile this file to byte code using the LLVM compiler:  llvm-as add_floats.ll.  This generates a ".bc" file, in this case, add_floats.bc.  The byte code is unreadable.
+ - Now there are a few options once byte code is available
+   - Generate native machine code:  llc add_floats.bc will create a native assembler instruction set in a ".s" file (add_floats.s)
+   - Run the byte codes on the JIT compiler:  lli add_floats.bc should run the instructions and produce the result
 
 To demonstrate the vector instructions, we can start with a basic C program (just to illustrate ... remember, LLVM is not functional so starting in an imperative language makes a lot of sense):
-
-
-```wiki
+{{{
 #include <stdio.h>
 
 int main()
@@ -34,18 +33,12 @@ int main()
    z[3] = x[3] + y[3];
    printf("%f %f %f %f\n", z[0], z[1], z[2], z[3]);
 }
-```
-
+}}}
 
 Compiling and running this in C is easy and left to the user.
 
-
-
-This converts easily to LLVM human readable format (use the [
-online generator](http://llvm.org/demo/index.cgi) if you'd like):
-
-
-```wiki
+This converts easily to LLVM human readable format (use the [http://llvm.org/demo/index.cgi online generator] if you'd like):
+{{{
 ; ModuleID = '/tmp/webcompile/_21191_0.bc'
 target datalayout = "e-p:64:64:64-i1:8:8-i8:8:8-i16:16:16-i32:32:32-i64:64:64-f32:32:32-f64:64:64-v64:64:64-v128:128:128-a0:0:64-s0:64:64-f80:128:128-n8:16:32:64"
 target triple = "x86_64-unknown-linux-gnu"
@@ -120,27 +113,19 @@ define i32 @main() nounwind {
 }
 
 declare i32 @printf(i8*, ...)
-```
+}}}
 
-
-This is easy enough to run using the JIT compiler:  lli add\_floats.ll
-
-
-```wiki
+This is easy enough to run using the JIT compiler:  lli add_floats.ll
+{{{
 [root@pg155-n19 pgms]# lli add_floats.ll 
 11.000000 22.000000 33.000000 44.000000
 [root@pg155-n19 pgms]# 
-```
-
+}}}
 
 The core of the instructions can be replaced with vectorization (obviously, optimizing this program will result in very little code and vectorization is not necessary, but this is an exercise.
 
-
-
 Here is the .ll code rewritten with vectorization:
-
-
-```wiki
+{{{
 ; ModuleID = '/tmp/webcompile/_21191_0.bc'
 target datalayout = "e-p:64:64:64-i1:8:8-i8:8:8-i16:16:16-i32:32:32-i64:64:64-f32:32:32-f64:64:64-v64:64:64-v128:128:128-a0:0:64-s0:64:64-f80:128:128-n8:16:32:64"
 target triple = "x86_64-unknown-linux-gnu"
@@ -208,22 +193,17 @@ define i32 @main() nounwind {
 }
 
 declare i32 @printf(i8*, ...)
-```
-
+}}}
 
 Rerunning the program above yields the same results as the original, non-vectorized LLVM program.
 
-
-```wiki
+{{{
 [root@pg155-n19 pgms]# lli add_floats_vec.ll 
 11.000000 22.000000 33.000000 44.000000
-```
-
+}}}
 
 Let's take a look at a program with a substantially larger array of floats to add.  Again, optimizing this would yield very little code and, certainly, lazy evaluation would turn this program into basically a no-op.  Nonetheless, this should speed up by almost a factor of 4 when vectorized.  Here is the C code that helps guide the imperative implementation:
-
-
-```wiki
+{{{
 #include <stdio.h>
 
 int main()
@@ -245,17 +225,12 @@ int main()
 
    printf("%f %f %f %f\n", z[0], z[1], z[2], z[3]);
 }
-```
-
+}}}
 
 In this case, the LLVM code is more compact and easier to work with if we use the optimized version of it.  You will note in the LLVM code that this optimizer does not automatically vectorize and, instead, still has 4 "fadd" instructions at the heart of the addition loop.
 
-
-
 The resulting optimized LLVM code is as follows:
-
-
-```wiki
+{{{
 ; ModuleID = '/tmp/webcompile/_2358_0.bc'
 target datalayout = "e-p:64:64:64-i1:8:8-i8:8:8-i16:16:16-i32:32:32-i64:64:64-f32:32:32-f64:64:64-v64:64:64-v128:128:128-a0:0:64-s0:64:64-f80:128:128-n8:16:32:64"
 target triple = "x86_64-unknown-linux-gnu"
@@ -347,17 +322,21 @@ declare i32 @printf(i8* nocapture, ...) nounwind
 !0 = metadata !{metadata !"float", metadata !1}
 !1 = metadata !{metadata !"omnipotent char", metadata !2}
 !2 = metadata !{metadata !"Simple C/C++ TBAA", null}
-```
-
+}}}
 
 Instead of hand-optimizing the entire sequence, the exercise will merely convert the types to vectors and then alter the loop starting with "label 44" to use vector addition rather then the sequence of adds that is currently being used.  The resulting program is as follows:
 
+{{{
 
-```wiki
+}}}
+
+Timing the execution of the optimized vs. non-optimized bytecodes yields:
+
+Finally, a note on converting from arrays to vectors and subsequently optimizing to use vector adds.  The simplest way to do this was to:
+- convert the code to multiply 4 of the array values at a time
+ - convert the array types to vector ([4000 x float] becomes <4000 x float>), the program will work AS-IS with this simple conversion
+ - work through the loop again to move to a load of the proper location in the vector to a packed vector, then do the fadd of the vectors
+
+
 
 ```
-
-
-Timing the execution of the bytecodes yields:
-
-
