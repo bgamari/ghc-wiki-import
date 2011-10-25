@@ -12,8 +12,11 @@ The SIMD vector extension to GHC proposed here maps to LLVM's vector type in a s
 
 
 
-(There is also also the outdated [VectorComputing](vector-computing).)
+Related pages
 
+
+- [Implementation plan](simd-plan)
+- There is also also the outdated [VectorComputing](vector-computing).
 
 ## Variations in the most widely used SIMD extensions
 
