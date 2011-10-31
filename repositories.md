@@ -7,7 +7,7 @@ Original source:
 
 = GHC Repositories =
 
-This page lists the active repositories relating to GHC. For instructions on actually getting a GHC source tree, see [wiki:Building/GettingTheSources].
+This page lists the active repositories relating to GHC. For instructions on actually getting a GHC source tree, see [wiki:Building/GettingTheSources Getting The Sources].
 
 For read-only browsing, you can use the:
  * [http://hackage.haskell.org/trac/ghc/browser Trac source browser]
