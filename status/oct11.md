@@ -157,7 +157,17 @@ http://research.microsoft.com/en-us/um/people/simonpj/papers/parallel/remote.pdf
 
 
 
-**Ranjit**
+We are working on adding liquid types: a form of (dependent) refinement types that use SMT solvers to carry out
+type inference. A prototype has been built that works for a subset of the language (without typeclasses).
+Some examples include tracking invariants of 
+a lambda-calculus evaluator [
+http://goto.ucsd.edu/\~rjhala/HsAnnot/mapreduce.hs.html](http://goto.ucsd.edu/~rjhala/HsAnnot/mapreduce.hs.html), 
+a toy "map-reduce" [
+http://goto.ucsd.edu/\~rjhala/HsAnnot/mapreduce.hs.html](http://goto.ucsd.edu/~rjhala/HsAnnot/mapreduce.hs.html) and 
+the obligatory list-length examples [
+http://goto.ucsd.edu/\~rjhala/HsAnnot/meas5.hs.html](http://goto.ucsd.edu/~rjhala/HsAnnot/meas5.hs.html)
+Currently, we are working on restricted ways of handling at the basic typeclasses (Ord, Num etc.),
+and also building a web-interface to the tool.
 
 
 ### Parallel project
