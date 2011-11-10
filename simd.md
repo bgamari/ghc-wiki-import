@@ -3,6 +3,8 @@ CONVERSION ERROR
 Original source:
 
 ```trac
+[[PageOutline]]
+
 = Using SIMD instructions in GHC =
 
 '''Goal''': improve program running times by taking advantage of CPU's SIMD vector instructions.
@@ -10,8 +12,6 @@ Original source:
 '''How''': by extending GHC to generate code using SIMD vector instructions and by modifying libraries as necessary.
 
 This page describes the issues involved and a design for implementing SIMD vector support in GHC.
-
-[[PageOutline]]
 
 == Introduction ==
 
