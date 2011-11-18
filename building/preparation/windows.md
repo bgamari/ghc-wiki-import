@@ -1,63 +1,51 @@
-# Setting up a Windows system for building GHC
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Setting up a Windows system for building GHC =
 
-Installing the following will get you a working build environment with MSYS. The instructions are current for GHC 7.2. An alternatively method for windows is to build GHC, [using Cygwin](building/windows/cygwin)).  Using MSYS is the preferred approach though.
+Installing the following will get you a working build environment with MSYS. The instructions are current for GHC 7.2. An alternatively method for windows is to build GHC, [wiki:Building/Windows/Cygwin using Cygwin]).  Using MSYS is the preferred approach though.
 
+0. If you don't know what MinGW, MSYS and Cygwin are, then please read some background info on the [wiki:Building/Platforms/Windows here].
 
 1. We don't recommend installing anything into a directory path that contains spaces.
 
-1. You will need to install the following tools:
+2. You will need to install the following tools:
 
-- [ Haskell Platform](http://hackage.haskell.org/platform/)
-- [ Git](http://git-scm.com/)
-- [
-  Python](http://python.org/) (Version 2.7 is a good choice, we don't support version 3.x at this time)
+ * [http://hackage.haskell.org/platform/ Haskell Platform]
+ * [http://git-scm.com/ Git]
+ * [http://python.org/ Python] (Version 2.7 is a good choice, we don't support version 3.x at this time)
 
-1. You will need to install the MinGW and MSYS tools:
+3. You will need to install the MinGW and MSYS tools:
 
-- [ MinGW with MSYS](http://www.mingw.org/)
+ * [http://www.mingw.org/ MinGW with MSYS]
 
+MinGW provides a windows version of GCC while MSYS provides a minimal UNIX environment (e.g bash, make... ect). The website for MinGW is a little confusing, go to the [http://www.mingw.org/wiki/Getting_Started getting started] page and follow the download instructions for the 'mingw-get-inst' installer. This is an easy to use single executable for installing both MinGW and MSYS, make sure when you run it that you select to install g++, MSYS and the MSYS Dev Kit.
 
-MinGW provides a windows version of GCC while MSYS provides a minimal UNIX environment (e.g bash, make... ect). The website for MinGW is a little confusing, go to the [
-getting started](http://www.mingw.org/wiki/Getting_Started) page and follow the download instructions for the 'mingw-get-inst' installer. This is an easy to use single executable for installing both MinGW and MSYS, make sure when you run it that you select to install g++, MSYS and the MSYS Dev Kit.
+4. Launch the shell by starting the 'MinGW Shell' which should be in your start menu.
 
+5. Set your `PATH`.  We recommend doing this by creating a file `.profile` in your home directory (by default `c:/MinGW/msys/1.0/home/<username>`).  The contents of your `.profile` should be something like this:
 
-1. Launch the shell by starting the 'MinGW Shell' which should be in your start menu.
-
-1. Set your `PATH`.  We recommend doing this by creating a file `.profile` in your home directory (by default `c:/MinGW/msys/1.0/home/<username>`).  The contents of your `.profile` should be something like this:
-
-```wiki
+{{{
 # Add Git and Python to path
 export PATH=${PATH}:/c/Git/bin:/c/Python27
-```
-
+}}}
 
 Modify the above according to where you installed Git and Python. The Haskell platform installer should have already done the work needed to make GHC available on the path.
 
+6. You should now have a working environment for getting the source for GHC and building it!
 
-1. You should now have a working environment for getting the source for GHC and building it!
-
-## Disable realtime virus-scanning for your build
-
-
+== Disable realtime virus-scanning for your build ==
 
 Realtime virus scanners are prone to causing weird build failures, typically "permission denied" errors that go away when the build is restarted.  The best way to avoid these problems is to exclude the directory containing your GHC build from realtime virus scanning, if your scanner supports excluding particular directories.  You probably also want to exclude directories in which temporary files are stored, which by default is `C:/Users/<user>/Local Settings/Temp` on Windows Vista and later, `C:/Documents and Settings/<user>/Local Settings/Temp` on Windows XP and older, or `C:/Temp`.
 
+== Building documentation on Windows ==
 
-## Building documentation on Windows
+Building GHC's documentation is optional, but in order to build it in Windows you must currently use Cygwin (there isn't a working !DocBook toolchain on MSYS as far as we know).
 
+In the Cygwin installer, just install the complete {{{Doc}}} category. You may have to help {{{configure}}} a little bit: Set the environment variables {{{XmllintCmd}}} and {{{XsltprocCmd}}} to the paths of the Cygwin executables {{{xmllint}}} and {{{xsltproc}}}, respectively, and set {{{fp_cv_dir_docbook_xsl}}} to the path of the directory where the XSL stylesheets are installed, e.g. {{{c:/cygwin/usr/share/docbook-xsl}}}.    
 
+If you want to build HTML Help, you have to install the [http://msdn.microsoft.com/library/default.asp?url=/library/en-us/htmlhelp/html/hworiHTMLHelpStartPage.asp HTML Help SDK], tool, and make sure that {{{hhc}}} is in your {{{PATH}}}.
 
-Building GHC's documentation is optional, but in order to build it in Windows you must currently use Cygwin (there isn't a working DocBook toolchain on MSYS as far as we know).
-
-
-
-In the Cygwin installer, just install the complete `Doc` category. You may have to help `configure` a little bit: Set the environment variables `XmllintCmd` and `XsltprocCmd` to the paths of the Cygwin executables `xmllint` and `xsltproc`, respectively, and set `fp_cv_dir_docbook_xsl` to the path of the directory where the XSL stylesheets are installed, e.g. `c:/cygwin/usr/share/docbook-xsl`.    
-
-
-
-If you want to build HTML Help, you have to install the [
-HTML Help SDK](http://msdn.microsoft.com/library/default.asp?url=/library/en-us/htmlhelp/html/hworiHTMLHelpStartPage.asp), tool, and make sure that `hhc` is in your `PATH`.
-
-
+```
