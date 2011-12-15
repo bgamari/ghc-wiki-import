@@ -3,8 +3,8 @@
 
 
 As a replacement for lexically-scoped type variables (and pattern signatures),
-we want to have explicit type (and kind) application, like in the following
-example:
+we want to have syntax for explicit type (and kind) application. We propose
+to use the syntax `@ tyvar` for this, like in the following example:
 
 
 ```wiki
