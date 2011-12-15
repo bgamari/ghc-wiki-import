@@ -20,6 +20,21 @@ Haskell wiki page](http://haskell.org/haskellwiki/GHC/Kinds). What still doesn't
 # Kind synonyms (from type synonym promotion)
 
 
+
+At the moment we are not promoting type synonyms, i.e. the following is invalid:
+
+
+```wiki
+data Nat = Ze | Su Nat
+type Nat2 = Nat
+
+type family Add (m :: Nat2) (n :: Nat2) :: Nat2
+```
+
+
+**Future work:** promote type synonyms to kind synonyms.
+
+
 # Generalized Algebraic Data Kinds (GADKs)
 
 
