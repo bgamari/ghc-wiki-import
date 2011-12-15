@@ -1,40 +1,76 @@
-# Kind polymorphism and datatype promotion
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Kind polymorphism and datatype promotion =
 
-This page gives additional implementation details for the `-XPolyKinds` flag. The grand design is described in the paper [
-Giving Haskell a Promotion](http://dreixel.net/research/pdf/ghp.pdf). Most of the work has been done and merged into GHC 7.4.1. The relevant user documentation is in \[the user's guide (add link when it's up)\] and on the [
-Haskell wiki page](http://haskell.org/haskellwiki/GHC/Kinds). What still doesn't work, or doesn't work correctly, is described here.
+This page gives additional implementation details for the `-XPolyKinds` flag. The grand design is described in the paper [http://dreixel.net/research/pdf/ghp.pdf Giving Haskell a Promotion]. Most of the work has been done and merged into GHC 7.4.1. The relevant user documentation is in [the user's guide (add link when it's up)] and on the [http://haskell.org/haskellwiki/GHC/Kinds Haskell wiki page]. What still doesn't work, or doesn't work correctly, is described here.
 
+= Explicit kind variables =
 
-# Explicit kind variables
+= Kind defaulting in type families =
 
+= [http://hackage.haskell.org/trac/ghc/ticket/5682 #5682] (proper handling of infix promoted constructors) =
 
-# Kind defaulting in type families
-
-
-# [
-\#5682](http://hackage.haskell.org/trac/ghc/ticket/5682) (proper handling of infix promoted constructors)
-
-
-# Kind synonyms (from type synonym promotion)
-
-
+= Kind synonyms (from type synonym promotion) =
 
 At the moment we are not promoting type synonyms, i.e. the following is invalid:
-
-
-```wiki
+{{{
 data Nat = Ze | Su Nat
 type Nat2 = Nat
 
 type family Add (m :: Nat2) (n :: Nat2) :: Nat2
+}}}
+
+'''Future work:''' promote type synonyms to kind synonyms.
+
+= Generalized Algebraic Data Kinds (GADKs) =
+
+This section deals with a proposal to collapse kinds and sorts into a single system
+so as to allow Generalised Algebraic DataKinds (GADKs). The sort `BOX` should
+become a kind, whose ''kind'' is again `BOX`. Kinds would no longer be classified by sorts;
+they would be classified by kinds.
+
+(As an aside, sets containing themselves result in an inconsistent system; see, for instance,
+[http://www.cs.nott.ac.uk/~txa/g53cfr/l20.agda this example]. This is not of practical
+concern for Haskell.)
+
+Collapsing kinds and sorts would allow some form of indexing on kinds. Consider the
+following two types, currently not promotable in FC-pro:
+{{{
+data Proxy a = Proxy
+
+data Ind (n :: Nat) :: * where ...
+}}}
+In `Proxy`, `a` has kind `forall k. k`. This type is not promotable because
+`a` does not have kind `*`. This is unfortunate, since a new feature (kind
+polymorphism) is getting on the way of another new feature (promoting
+datatypes). As for `Ind`, it takes an argument of kind (promoted) `Nat`,
+which renders it non-promotable. Why is this? Well, promoted `Proxy` and `Ind`
+would have sorts:
+{{{
+Proxy  :: forall s. s -> BOX
+
+Ind    :: 'Nat -> BOX
+}}}
+But `s` is a sort variable, and `'Nat` is the sort arising from promoting
+the kind `Nat` (which itself arose from promoting a datatype). FC-pro has
+neither sort variables nor promoted sorts. However, if there are no sorts, and
+`BOX` is the '''kind''' of all kinds, the "sorts" ("kinds", now) of promoted `Proxy`
+and `Ind` become:
+{{{
+Proxy  :: forall k. k  -> BOX
+
+Ind    :: Nat          -> BOX
+}}}
+Now instead of sort variables we have kind variables, and we do not need to promote
+`Nat` again.
+
+Kind indexing alone should not require kind equality constraints; we always
+require type/kind signatures for kind polymorphic stuff, so then
+[http://research.microsoft.com/en-us/um/people/simonpj/papers/gadt/gadt-rigid-contexts.pdf wobbly types]
+can be used to type check generalised algebraic kinds, avoiding the need for
+coercions. While this would still require some implementation effort, it
+should be "doable".
 ```
-
-
-**Future work:** promote type synonyms to kind synonyms.
-
-
-# Generalized Algebraic Data Kinds (GADKs)
-
-
