@@ -260,3 +260,15 @@ coercions. While this would still require some implementation effort, it
 should be "doable".
 
 
+# Better support for kinds in Template Haskell
+
+
+
+Currently there is no support for promoted datatypes, or the kind `Constraint`, in Template Haskell.
+
+
+
+**Future work:** address [
+\#5612](http://hackage.haskell.org/trac/ghc/ticket/5612), designing and implementing a way for Template Haskell to reify the new kinds.
+
+
