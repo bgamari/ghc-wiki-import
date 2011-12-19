@@ -10,6 +10,24 @@ Haskell wiki page](http://haskell.org/haskellwiki/GHC/Kinds). What still doesn't
 # Explicit kind variables
 
 
+
+Currently we do not handle kind variables in the source language. So the following is invalid, for instance:
+
+
+```wiki
+type family Apply (f :: k1 -> k2) (a :: k1)
+```
+
+
+Naturally we want to allow this. The syntax we propose is the one above, as described in the paper.
+(At least until [ExplicitTypeApplication](explicit-type-application) gets implemented.)
+
+
+
+**Future work:** allow kind variable annotation.
+Since the core language has all the support for kind variables, this shouldn't be too hard.
+
+
 # Kind defaulting in type families
 
 
