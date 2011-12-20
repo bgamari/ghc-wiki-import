@@ -1,90 +1,57 @@
-# Support for generic programming
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Support for generic programming =
+[[PageOutline]]
 
+GHC includes a new (in 2010) mechanism to let you write generic functions.  It is described in paper [http://www.dreixel.net/research/pdf/gdmh_nocolor.pdf A generic deriving mechanism for Haskell]. This page sketches the specifics of the implementation; we assume you have read the paper. The [http://www.haskell.org/haskellwiki/Generics HaskellWiki page] gives a more general overview.
 
+This mechanism replaces the [http://www.haskell.org/ghc/docs/6.12.2/html/users_guide/generic-classes.html previous generic classes implementation]. What we describe until the "Kind polymorphic overhaul" section is implemented and released in GHC 7.0.1.
 
+== Main components ==
 
-GHC includes a new (in 2010) mechanism to let you write generic functions.  It is described in paper [
-A generic deriving mechanism for Haskell](http://www.dreixel.net/research/pdf/gdmh_nocolor.pdf). This page sketches the specifics of the implementation; we assume you have read the paper. The [
-HaskellWiki page](http://www.haskell.org/haskellwiki/Generics) gives a more general overview.
+ * `TcDeriv.tcDeriving` now allows deriving `Generic` instances.
 
+ * The representation types and core functionality of the library live on `GHC.Generics` (on the `ghc-prim` package).
 
+ * Many names have been added as known in `prelude/PrelNames`
 
-This mechanism replaces the [previous generic classes implementation](http://www.haskell.org/ghc/docs/6.12.2/html/users_guide/generic-classes.html). What we describe until the "Kind polymorphic overhaul" section is implemented and released in GHC 7.0.1.
+ * Most of the code generation is handled by `types/Generics`
 
+== Things that have been removed ==
 
-## Main components
+ * All of the [http://www.haskell.org/ghc/docs/6.12.2/html/users_guide/generic-classes.html generic classes stuff]. In particular, the following have been removed:
+   * `hasGenerics` field from `TyCon`;
+   * `HsNumTy` constructor from `HsType`;
+   * `TypePat` constructor from `Pat`.
 
+ * The `-XGenerics` flag is now deprecated.
 
-- `TcDeriv.tcDeriving` now allows deriving `Generic` instances.
+== What already works ==
 
-- The representation types and core functionality of the library live on `GHC.Generics` (on the `ghc-prim` package).
+ * `Generic` instances can be derived when `-XDeriveGeneric` is enabled.
 
-- Many names have been added as known in `prelude/PrelNames`
+ * The `default` keyword can used for generic default method signatures when `-XDefaultSignatures` is enabled.
 
-- Most of the code generation is handled by `types/Generics`
+ * Generic defaults are properly instantiated when giving an instance without defining the generic default method.
 
-## Things that have been removed
+ * Base types like `[]`, `Maybe`, tuples, come with Generic instances.
 
+== To be done ==
 
-- All of the [generic classes stuff](http://www.haskell.org/ghc/docs/6.12.2/html/users_guide/generic-classes.html). In particular, the following have been removed:
+ * Derive `Generic1` instances
 
-  - `hasGenerics` field from `TyCon`;
-  - `HsNumTy` constructor from `HsType`;
-  - `TypePat` constructor from `Pat`.
+== Testing ==
 
-- The `-XGenerics` flag is now deprecated.
+ * Tests are available under the `generics` directory of the testsuite.
 
-## What already works
+= Kind polymorphic overhaul =
 
+With the new `-XPolyKinds` functionality we can make the support for generic programming better typed. The basic idea is to define the universe codes (`M1`, `:+:`, etc.) as constructors of a datatype. Promotion then lifts these constructors to types, which we can use as before, only that now we have them all classified under a new kind. The overhaul of the main module is explained below; for easier comparison with the current approach, names are kept the same whenever possible.
 
-- `Generic` instances can be derived when `-XDeriveGeneric` is enabled.
-
-- The `default` keyword can used for generic default method signatures when `-XDefaultSignatures` is enabled.
-
-- Generic defaults are properly instantiated when giving an instance without defining the generic default method.
-
-- Base types like `[]`, `Maybe`, tuples, come with Generic instances.
-
-## To be done
-
-
-- Derive `Generic1` instances
-
-## Testing
-
-
-- Tests are available under the `generics` directory of the testsuite.
-
-# Kind polymorphic overhaul
-
-
-
-With the new `-XPolyKinds` functionality we can make the support for generic programming better typed. The basic idea is to define the universe codes (`M1`, `:+:`, etc.) as constructors of a datatype. Promotion then lifts these constructors to types, which we can use as before, only that now we have them all classified under a new kind:
-
-
-```wiki
-{-# LANGUAGE TypeOperators              #-}
-{-# LANGUAGE GADTs                      #-}
-{-# LANGUAGE TypeFamilies               #-}
-{-# LANGUAGE ScopedTypeVariables        #-}
-{-# LANGUAGE FlexibleContexts           #-}
-{-# LANGUAGE FlexibleInstances          #-}
-{-# LANGUAGE PolyKinds                  #-}
-{-# LANGUAGE DefaultSignatures          #-}
-{-# LANGUAGE NoImplicitPrelude          #-}
-
-module GHC.NewGenerics where
-
-import Prelude hiding (Functor(..), Show(..)) -- we'll redefine them
-import qualified Prelude as P (Show(..))
-```
-
-## Generic representation universe
-
-
-
+== Generic representation universe ==
 `m` is the only real parameter here. `f` and `x` are there because we
 can't write kinds directly, since `Universe` is also a datatype (even if
 we're only interested in its promoted version). So we pass `f` and `x`
@@ -92,9 +59,7 @@ only to set them to `* -> *` and `*`, respectively, in `Interprt`.
 `m` is different: it stands for the kind of metadata representation types,
 and we really want to be polymorphic over that, since each user datatype
 will introduce a new metadata kind.
-
-
-```wiki
+{{{
 data Universe f x m = 
     -- Void (used for datatypes without constructors)
     VV
@@ -138,18 +103,14 @@ data MetaDataV (m :: MetaData) where
   C :: MetaDataV CC
   D :: MetaDataV DD
   S :: MetaDataV SS
-```
+}}}
 
-## Universe interpretation
-
-
+== Universe interpretation ==
 
 As promised, we set `f` to `* -> *` and `x` to `*`.
-Unfortunately we don't have [explicit kind variable annotations](ghc-kinds#explicit-kind-variables)
+Unfortunately we don't have [GhcKinds#Explicitkindvariables explicit kind variable annotations]
 yet, so we cannot leave `m` polymorphic! So this code doesn't compile:
-
-
-```wiki
+{{{
 data Interprt :: Universe (* -> *) * m -> * -> * where
 
   -- No interpretation for VV, as it shouldn't map to any value
@@ -181,11 +142,9 @@ data Interprt :: Universe (* -> *) * m -> * -> * where
   R1     :: Interprt b r -> Interprt (a :++: b) r
   (:*:)  :: Interprt a r -> Interprt b r -> Interprt (a :**: b) r
   Comp1  :: f (Interprt g r) -> Interprt (f :..: g) r
-```
+}}}
 
-### Names
-
-
+=== Names ===
 
 As an aside, note that we have to come up with names like `UU` and `KK` for the `Universe`
 even though we really just wanted to use `U1` and `K1`, like before. Then we would have
@@ -198,26 +157,23 @@ This is a slight annoyance of automatic promotion: when you define a "singleton 
 (like our GADT `Interprt` for `Universe`) you cannot reuse the constructor names.
 
 
-## Metadata representation
-
-
-```wiki
+== Metadata representation ==
+{{{
 data Proxy d = Proxy -- kind polymorphic
 
 -- Meta data classes
-class Datatype d where
+class Datatype d where -- kind polymorphic
   -- The name of the datatype, fully qualified
   datatypeName :: Proxy d -> String
-```
-
-
+}}}
 There's more of these, but they don't add any new concerns.
 
 
-## Conversion between user datatypes and generic representation
+== Conversion between user datatypes and generic representation ==
 
+We now get a more precise kind for `Rep`:
 
-```wiki
+{{{
 -- Representable types of kind *
 class Generic a where
   type Rep a :: Universe (* -> *) * m
@@ -229,31 +185,20 @@ class Generic1 (f :: * -> *) where
   type Rep1 f :: Universe (* -> *) * m
   from1  :: f a -> Interprt (Rep1 f) a
   to1    :: Interprt (Rep1 f) a -> f a
-```
-
-
+}}}
   
-
-
-## Example generic function: `fmap` (kind `* -> *`)
-
-
+== Example generic function: `fmap` (kind `* -> *`) ==
 
 User-visible class, exported:
-
-
-```wiki
+{{{
 class Functor (f :: * -> *) where
   fmap :: (a -> b) -> f a -> f b
   default fmap :: (Generic1 f, GFunctor (Rep1 f)) => (a -> b) -> f a -> f b
   fmap f = to1 . gfmap f . from1  
-```
-
+}}}
 
 Defined by the generic programmer, not exported:
-
-
-```wiki
+{{{
 class GFunctor (f :: Universe (* -> *) * m) where
   gfmap :: (a -> b) -> Interprt f a -> Interprt f b
   
@@ -281,32 +226,23 @@ instance (GFunctor f, GFunctor g) => GFunctor (f :**: g) where
 
 instance (Functor f, GFunctor g) => GFunctor (f :..: g) where
   gfmap f (Comp1 x) = Comp1 (fmap (gfmap f) x)
-```
+}}}
 
-
+Note that previously `Functor` and `GFunctor` had exactly the same types.
+Now we can make clear what the difference between them is.
   
-
-
-## Example generic function: `show` (kind `*`, uses metadata)
-
-
+== Example generic function: `show` (kind `*`, uses metadata) ==
 
 User-visible class, exported:
-
-
-```wiki
+{{{
 class Show (a :: *) where
   show :: a -> String
   default show :: (Generic a, GShow (Rep a)) => a -> String
   show = gshow . from
-```
-
-
+}}}
   
 Defined by the generic programmer, not exported:
-
-
-```wiki
+{{{
 class GShow (f :: Universe (* -> *) * m) where
   gshow :: Interprt f x -> String
   
@@ -318,18 +254,13 @@ instance (P.Show c) => GShow (KK i c) where
   
 instance (Datatype c, GShow f) => GShow (MM DD c f) where
   gshow (M1 x) = datatypeName (Proxy :: Proxy c) ++ " " ++ gshow x
-```
-
+}}}
 
 The other cases do not add any further complexity.
   
   
-
-
-## Example datatype encoding: lists (derived by the compiler)
-
-
-```wiki
+== Example datatype encoding: lists (derived by the compiler) ==
+{{{  
 instance Generic [a] where
   type Rep [a] = MM DD DList 
                    (MM CC DList_Nil UU :++: 
@@ -342,8 +273,7 @@ instance Generic [a] where
   
 -- Metadata
 data List_Meta = DList | DList_Nil | DList_Cons
-```
-
+}}}
 
 Note that we use only one datatype; more correct would be to use 3, one for
 `DList`, another for the constructors, and yet another for the selectors
@@ -352,40 +282,23 @@ But we don't do that because `Universe` is polymorphic only over `m`, so
 a single metadata representation type. If we want a more fine-grained
 distinction then we would need more parameters in `Universe`, and also to
 split the `MM` case.
-
-
-```wiki
+{{{
 instance Datatype DList where datatypeName _ = "[]"
-```
-
-
+}}}
   
-
-
-### Digression
-
-
-
+=== Digression ===
 Even better would be to index the metadata representation types over
 the type they refer to. Something like:
-
-
-```wiki
+{{{
   data family MetaTypes a -- kind polymorphic
   data instance MetaTypes [] = DList | DList_Nil | DList_Cons
-```
-
-
+}}}
 But now we are basically asking for promotion of data families, since we want
 to use promoted `DList`. Also, the case for `MM` in `Universe` would then
 be something like:
-
-
-```wiki
+{{{
   | MM MetaData (MetaTypes m) (Universe f x m)
-```
-
-
+}}}
 But I'm not entirely sure about this.
 
-
+```
