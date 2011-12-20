@@ -342,8 +342,13 @@ instance Datatype DList where datatypeName _ = "[]"
 
 
   
-  
-Note: even better would be to index the metadata representation types over
+
+
+### Digression
+
+
+
+Even better would be to index the metadata representation types over
 the type they refer to. Something like:
 
 
