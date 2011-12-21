@@ -1,48 +1,39 @@
-# Deferring compilation type errors to runtime
+CONVERSION ERROR
 
+Original source:
 
+```trac
+
+= Deferring compilation type errors to runtime =
 
 This page describes the `-fwarn-type-errors` flag, currently implemented in the ghc branch `ghc-defer`.
+Ticket #5624 tracks this feature request.
 
-
-## Overview
-
-
-
+== Overview ==
 While developing, sometimes it is desirable to allow compilation to succeed even
 if there are type errors in the code. Consider the following case:
-
-
-```wiki
+{{{
 module Main where
 
 a :: Int
 a = 'a'
 
 main = print "b"
-```
-
-
+}}}
 Even though `a` is ill-typed, it is not used in the end, so if all that we're
 interested in is `main` it is handy to be able to ignore the problems in `a`.
-
-
 
 Since we treat type equalities as evidence, this is relatively simple. Whenever
 we run into a type mismatch in TcUnify, we would normally just emit an error. But it
 is always safe to defer the mismatch to the main constraint solver. If we do
 that, `a` will get transformed into
-
-
-```wiki
+{{{
 $co :: Int ~# Char
 $co = ...
 
 a :: Int
 a = 'a' `cast` $co
-```
-
-
+}}}
 The constraint solver would realize that `co` is an insoluble constraint, and
 emit an error. But we can also replace the right-hand side
 of `co` with a runtime error call. This allows the program
@@ -50,16 +41,11 @@ to compile, and it will run fine unless we evaluate `a`. Since coercions are
 unboxed they will be eagerly evaluated if used, so laziness will not "get on
 the way".
 
-
-## Implementation details
-
-
+== Implementation details ==
 
 The first step is to make sure that `TcUnify` does not ever fail with a type
 error; instead, we call `uType_defer` to defer the unification to the constraint
 solver.
-
-
 
 In the constraint solver, we call `reportUnsolved` with any remaining unsolved
 constraints. At this stage, if we are not deferring errors, we simply make the
@@ -72,18 +58,14 @@ because when we are not deferring errors we group certain errors, or we don't
 report all the errors. But when we are deferring we really want to have
 (at least) one error for every coercion.
 
-
-### Error messages
-
-
+=== Error messages ===
 
 For simplicity, we defer errors from `TcUnify` to the constraint solver even
 if `-fwarn-type-errors` is not on; in that case, we will simply fail in the
 constraint solver, rather than directly in the unifier.
 
-
-
 This means that some type error messages change, even without `-fwarn-type-errors`.
 In particular, many tests from the testsuite need to have their output adapted.
 
 
+```
