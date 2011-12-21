@@ -1,0 +1,7 @@
+CONVERSION ERROR
+
+Original source:
+
+```trac
+This page describes the `-fwarn-type-errors` flag, currently implemented in the ghc branch `ghc-defer`.
+```
