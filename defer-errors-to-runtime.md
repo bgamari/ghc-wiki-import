@@ -3,7 +3,7 @@ CONVERSION ERROR
 Original source:
 
 ```trac
-
+[[PageOutline]]
 = Deferring compilation type errors to runtime =
 
 This page describes the `-fwarn-type-errors` flag, currently implemented in the ghc branch `ghc-defer`.
