@@ -113,6 +113,12 @@ So one solution for record field names is to specify more precisely which one yo
 >
 >
 
+>
+>
+> Frege has a detailed explanation of the semantics of its record implementation, and the language is \*very\* similar to Haskell. Lets just start by using Frege's document as the proposal. We can start a new wiki page as discussions are needed.
+>
+>
+
 - **Use the module name space mechanism**; after all that's what it's for.  But putting each record definition in its own module is a bit heavyweight. So maybe we need local modules (just for name space control) and local import declarations.  Details are unclear. (This was proposed in 2008 in [
   this discussion](http://www.haskell.org/pipermail/haskell-cafe/2008-August/046494.html) on the Haskell cafe mailing list and in [\#2551](https://gitlab.staging.haskell.org/ghc/ghc/issues/2551). - Yitz).
 
@@ -123,7 +129,7 @@ So one solution for record field names is to specify more precisely which one yo
 >
 
 
-**Anyone who likes these designs, please fill out a detailed design, either here or on another page**.
+**Anyone who likes these designs, please help fill out a more detailed design discussion, either here or on another page**.
 
 
 ---
