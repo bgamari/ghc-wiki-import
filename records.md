@@ -118,7 +118,7 @@ So one solution for record field names is to specify more precisely which one yo
 
 >
 >
-> Rather than strictly re-use modules it would make more sense to have a name-spacing construct that is shared between both records and modules - hopefully this would make implementation easier.
+> Rather than strictly re-use modules it would make more sense to have a name-spacing construct that is shared between both records and modules - hopefully this would make implementation easier. Overall this seems to be more of an implementation detail that may have a side effect of making local modules easier to implement than a concrete design proposal relating to records - GregWeber.
 >
 >
 
