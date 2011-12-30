@@ -124,7 +124,7 @@ So one solution for record field names is to specify more precisely which one yo
 
 >
 >
-> Rather than strictly re-use modules it would make more sense to have a name-spacing construct that is shared between both records and modules - hopefully this would make implementation easier. Overall this seems to be more of an implementation detail that may have a side effect of making local modules easier to implement than a concrete design proposal relating to records - GregWeber.
+> Rather than strictly re-use modules it would make more sense to have a name-spacing construct that is shared between both records and modules - hopefully this would make implementation easier. Overall this seems to be more of an implementation detail that may have a side effect of making local modules easier to implement than a concrete design proposal relating to records. -- Greg Weber.
 >
 >
 
@@ -148,6 +148,6 @@ Type Directed Name Resolution](http://hackage.haskell.org/trac/haskell-prime/wik
 
 
 
-I believe the community rejected TDNR because they wanted extensible records. I think it is a shame that the desire for \*extensible\* records is holding us back from getting anything done now, but I do think that the current TDNR proposal seems a little weak for some reasons pointed out in the proposal itself, but also because it proposes not to solve name-spacing record updates. Note that the Frege proposal incorporates the TDNR concept purely as sugar, and it has a solution for record updates (that hopefully somehow is easier than the original thoughts of TDNR update being difficult to implement). -- GregWeber
+I believe the community rejected TDNR because they wanted extensible records. I think it is a shame that the desire for \*extensible\* records is holding us back from getting anything done now, but I do think that the current TDNR proposal seems a little weak for some reasons pointed out in the proposal itself, but also because it proposes not to solve name-spacing record updates. Note that the Frege proposal incorporates the TDNR concept purely as sugar, and it has a solution for record updates (that hopefully somehow is easier than the original thoughts of TDNR update being difficult to implement). -- Greg Weber
 
 
