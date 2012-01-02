@@ -1,146 +1,272 @@
-CONVERSION ERROR
+# Cross Compiling GHC
 
-Original source:
 
-```trac
-= Cross Compiling GHC =
 
-As of this moment (GHC 7.0) GHC does not support cross-compilation. This page is to gather information and plans it.  See also [wiki:Building/Porting].
+As of this moment (GHC 7.0) GHC does not support cross-compilation. This page is to gather information and plans it.  See also [Building/Porting](building/porting).
 
-== General Problem ==
+
+## General Problem
+
+
+
 The most general case is a developer on build platform (B), wishing to build a GHC that runs on host platform (H) which produces code that runs on target platform (T). But, we need not handle such a general case: There are two common cases:
 
- * Building a '''cross-compiler''': Create a compiler that runs on one platform, but targets another. Examples are building a GHC that:
-   * runs on Mac OS X, but targets iOS
-   * runs on x86_64 linux, but targets i386
-   * runs on some existing GHC supported platform, but targets a smaller embedded platform
- * '''Cross-building''' a normal compiler: Build on one platform a compiler that runs on, and targets another.  Examples:
-   * [http://takeoffgw.sourceforge.net/ TakeoffGW] is a distribution of Unix tools for Windows, built by cross-compiling on a Linux machine.  They would like to be able to build and distribute GHC this way.  It might be useful for us to be able to cross-compile a Windows GHC from Linux too.
-   * build a 64-bit GHC on OS X, by cross-compiling using the 32-bit version.
-   * We could port to Win64 (#1884) by cross-compiling using a 32-bit Windows GHC.
-   * Other porting tasks might be easier, given a suitable cross-compilation toolchain.
+
+- Building a **cross-compiler**: Create a compiler that runs on one platform, but targets another. Examples are building a GHC that:
+
+  - runs on Mac OS X, but targets iOS
+  - runs on x86\_64 linux, but targets i386
+  - runs on some existing GHC supported platform, but targets a smaller embedded platform
+- **Cross-building** a normal compiler: Build on one platform a compiler that runs on, and targets another.  Examples:
+
+  - [
+    TakeoffGW](http://takeoffgw.sourceforge.net/) is a distribution of Unix tools for Windows, built by cross-compiling on a Linux machine.  They would like to be able to build and distribute GHC this way.  It might be useful for us to be able to cross-compile a Windows GHC from Linux too.
+  - build a 64-bit GHC on OS X, by cross-compiling using the 32-bit version.
+  - We could port to Win64 ([\#1884](https://gitlab.staging.haskell.org/ghc/ghc/issues/1884)) by cross-compiling using a 32-bit Windows GHC.
+  - Other porting tasks might be easier, given a suitable cross-compilation toolchain.
+
 
 From the developer's perspective, these can be categorized as:
- * '''Cross-compiler''': B = H, and H ≠ T.
- * '''Cross-building''': B ≠ H, and H = T.
+
+
+- **Cross-compiler**: B = H, and H ≠ T.
+- **Cross-building**: B ≠ H, and H = T.
+
 
 It seems reasonable to limit ourselves to these two cases.
 
 
-== Meshing with GHC's 2-Stage Build ==
+## Meshing with GHC's 2-Stage Build
+
+
 
 The GHC build, in general, is a two stage process, involving three GHC compilers and two sets of build libraries:
 
- * '''Stage 0''': the GHC that is already on the build system (the one you specify using `--with-ghc` when configuring the build), comes with a set of built libs, could be older than the version of GHC being built
- * '''libs boot''': libs that the current version of GHC being built relies on that are either absent or too old in older versions of GHC that might be being used as Stage 0. These libs are built with Stage 0 GHC, and linked into the Stage 1 GHC being built.
- * '''Stage 1''': the first GHC built, compiled by the Stage 0 GHC, and linked with both libs from that GHC installation, and the boot libs.
- * '''libs install''': libs that will accompany the final compiler, built by the Stage 1 GHC
- * '''Stage 2''': the final GHC built, compiled by the Stage 1 GHC, and linked with only the install libs
+
+- **Stage 0**: the GHC that is already on the build system (the one you specify using `--with-ghc` when configuring the build), comes with a set of built libs, could be older than the version of GHC being built
+- **libs boot**: libs that the current version of GHC being built relies on that are either absent or too old in older versions of GHC that might be being used as Stage 0. These libs are built with Stage 0 GHC, and linked into the Stage 1 GHC being built.
+- **Stage 1**: the first GHC built, compiled by the Stage 0 GHC, and linked with both libs from that GHC installation, and the boot libs.
+- **libs install**: libs that will accompany the final compiler, built by the Stage 1 GHC
+- **Stage 2**: the final GHC built, compiled by the Stage 1 GHC, and linked with only the install libs
+
 
 In summary:
 
-||               ||'''Stage 0''' || '''libs boot''' || '''Stage 1''' || '''libs install''' || '''Stage 2''' ||
-||'''built on''' || ---          || ''build''       || ''build''     || ''build''          || ''build''     ||
-||'''runs on'''  ||''build''     || ''build''       || ''build''     || ''host''           || ''host''      ||
-||'''targets'''  ||''build''     || ---             || ''host''      || ---                || ''target''    ||
+
+<table><tr><th>               </th>
+<th>**Stage 0** </th>
+<th> **libs boot** </th>
+<th> **Stage 1** </th>
+<th> **libs install** </th>
+<th> **Stage 2** 
+</th></tr>
+<tr><th>**built on** </th>
+<th> ---          </th>
+<th> *build*       </th>
+<th> *build*     </th>
+<th> *build*          </th>
+<th> *build*     
+</th></tr>
+<tr><th>**runs on**  </th>
+<th>*build*     </th>
+<th> *build*       </th>
+<th> *build*     </th>
+<th> *host*           </th>
+<th> *host*      
+</th></tr>
+<tr><th>**targets**  </th>
+<th>*build*     </th>
+<th> ---             </th>
+<th> *host*      </th>
+<th> ---                </th>
+<th> *target*    
+</th></tr></table>
+
+
 
 Because of the way the compiler is configured (same configuration for Stage 1 and Stage 2), and the way the install libraries are built (built with Stage 1, but shipped with Stage 2), you can see that both Stage 1 and Stage 2 compilers must target the same architecture. Furthermore, the build only allows for probing for the properties (word size, library function availability, etc...) of one platform. This means that the build isn't as general as one might expect, and what we really have is:
 
-||               ||'''Stage 0''' || '''libs boot''' || '''Stage 1''' || '''libs install''' || '''Stage 2''' ||
-||'''built on''' || ---          || ''build''       || ''build''     || ''build''          || ''build''     ||
-||'''runs on'''  ||''build''     || ''build''       || ''build''     || ''target''         || ''target''    ||
-||'''targets'''  ||''build''     || ---             || ''target''    || ---                || ''target''    ||
+
+<table><tr><th>               </th>
+<th>**Stage 0** </th>
+<th> **libs boot** </th>
+<th> **Stage 1** </th>
+<th> **libs install** </th>
+<th> **Stage 2** 
+</th></tr>
+<tr><th>**built on** </th>
+<th> ---          </th>
+<th> *build*       </th>
+<th> *build*     </th>
+<th> *build*          </th>
+<th> *build*     
+</th></tr>
+<tr><th>**runs on**  </th>
+<th>*build*     </th>
+<th> *build*       </th>
+<th> *build*     </th>
+<th> *target*         </th>
+<th> *target*    
+</th></tr>
+<tr><th>**targets**  </th>
+<th>*build*     </th>
+<th> ---             </th>
+<th> *target*    </th>
+<th> ---                </th>
+<th> *target*    
+</th></tr></table>
+
+
 
 But this works out just fine for the two use cases we've identified:
 
- * '''Cross-compiler''': a Stage 1 compiler & libs install
- * '''Cross-building''': a Stage 2 compiler & libs install
+
+- **Cross-compiler**: a Stage 1 compiler & libs install
+- **Cross-building**: a Stage 2 compiler & libs install
+
 
 The build plan becomes:
 
- * '''Cross-compiler'''
-   * Developer configures with B = H, and H ≠ T:[[BR]]`$ ./configure --target=`''other-platform''
-   * Build though Stage 1 and libs install
-   * Package Stage 1 GHC and libs install as the desired cross-compiler
- * '''Cross-build'''
-   * Developer configures with B ≠ H, and H = T:[[BR]]`$ ./configure --host=`''other-platform''` --target=`''other-platform''
-   * Internally, set H to B, so that we have B = H, and H ≠ T as required
-   * Build through libs install and Stage 2
-   * Package Stage 2 GHC and libs install as the desired cross-compiler
+
+- **Cross-compiler**
+
+  - Developer configures with B = H, and H ≠ T:
+    `$ ./configure --target=`*other-platform*
+  - Build though Stage 1 and libs install
+  - Package Stage 1 GHC and libs install as the desired cross-compiler
+- **Cross-build**
+
+  - Developer configures with B ≠ H, and H = T:
+    `$ ./configure --host=`*other-platform*` --target=`*other-platform*
+  - Internally, set H to B, so that we have B = H, and H ≠ T as required
+  - Build through libs install and Stage 2
+  - Package Stage 2 GHC and libs install as the desired cross-compiler
+
 
 Thus, as far as the mechanics of the build are concerned, the two use cases are actually handled the same once the B/H/T variables are normalized. The only real difference is when to stop (before or after Stage 2), and which compiler gets bundled as the installed compiler (Stage 1 or Stage 2).
 
+
+
 From here on out, this page assumes that the B/H/T variables have been normalized. That is B = H, and H ≠ T.
 
-== Tool-chains ==
+
+## Tool-chains
+
+
 
 These kinds of builds need two tool-chains: One that runs on B/H, and compiles for B/H, the "host-tool-chain" or HT, and one that runs on B/H, but compiles for T, the "cross-tool-chain" or XT. The tool-chains include many programs needed: gcc, ld, nm, ar, as, ranlib, strip, and even ghc! The stage0 GHC is effectively part of the HT, and the stage1 we are building is going to become part of the XT. The tool-chain also includes a raft of information about the tools: does ar need ranlib, which extra ld flags need to be passed, etc.
 
+
+
 Even in a non-cross build, the current build system takes some care to achieve a limited form of tool-chain separation. In particular, when using the stage0 GHC, the build should be using the tool chain that that compiler is designed to work with -- which may not be the tool chain specified on the ./configure command line. This is only partially fulfilled. For example, while the build uses the stage0 GHC to compile C sources, so that the stage0 compatible gcc will be used, the build also uses other various tools ferreted out by ./configure (ar and ranlib for example).
 
-== Autoconf ==
+
+## Autoconf
+
+
 
 Autoconf offers only limited support for cross compiling. While it professes to know about three platforms, base, host, and target; it knows only about one tool-chain. It uses that tool-chain to determine two classes of information: Information about how to use the tool-chain itself, and information about the target of that tool-chain. Hence, in the cross-compilation case, it makes sense for ./configure to be told about XT.
 
-Autoconf's concept and variable $cross_compiling only gets set if B ≠ H. This is correct from the standpoint of compiling a simple program (for which T is irrelevant). In our normalized version of B/H/T, B = H, so the logic of autoconf needs to be amended.
+
+
+Autoconf's concept and variable $cross\_compiling only gets set if B ≠ H. This is correct from the standpoint of compiling a simple program (for which T is irrelevant). In our normalized version of B/H/T, B = H, so the logic of autoconf needs to be amended.
+
+
 
 This leaves us with the issue of how to tell it about parts of HT it can't infer from the stage0 compiler. We need a new set of variables that are how to compile, link and run things on the host, which if cross compiling need to be different. There needs to be some way to pass those on the configure line. Perhaps something like:
 
-{{{
+
+```wiki
 --with-host-cc=...
 --with-host-as=...
 --with-host-ld=...
 --with-host-ar=...
 --with-host-strip=...
-}}}
+```
+
 
 A tricky aspect is that some properities of the tool chain are probed by Autoconf ("is cc gcc?", "does ar need ranlib?"). These probes technically should be performed for each tool-chain.
 
 
-Both ./configure, cabal configure, and hsc2hs desire to run things built for T. If the XT contains an emulator, than this is possible. Two approaches need to be supported here:
- 1. Autoconf can now descern many values without running code and configure.ac / aclocal.m4 scripts can be changed to avoid running in many cases. (For example in libraries/base I rewrote things to use AC_COMPUTE_INT rather than AC_RUN_IFELSE to find the sizes of htypes.)
- 2. Plumb the need to call the emulator to run in the right places. An alternative is to use an alternate linker command that inserts the emulator into those build executables (but this is tricky as you don't want to use that link when building for the real target...)
 
-== Make Files ==
+Both ./configure, cabal configure, and hsc2hs desire to run things built for T. If the XT contains an emulator, than this is possible. Two approaches need to be supported here:
+
+
+1. Autoconf can now descern many values without running code and configure.ac / aclocal.m4 scripts can be changed to avoid running in many cases. (For example in libraries/base I rewrote things to use AC\_COMPUTE\_INT rather than AC\_RUN\_IFELSE to find the sizes of htypes.)
+1. Plumb the need to call the emulator to run in the right places. An alternative is to use an alternate linker command that inserts the emulator into those build executables (but this is tricky as you don't want to use that link when building for the real target...)
+
+## Make Files
+
+
 
 The overall build sequencing needs to recognize the cross compilation configuration, and adjust build targets and final packaging to match.
 
+
+
 There are few other places where the make system needs to get fixed up to use the correct tool-chain at the right time.
+
+
 
 There are a set of CPP symbols that are defined when compiling both Haskell and C code:
 
- * ''xxx''`_BUILD_ARCH`, ''xxx''`_BUILD_OS`: the build platform
- * ''xxx''`_HOST_ARCH`, ''xxx''`_HOST_OS`: the host platform
- * ''xxx''`_TARGET_ARCH`, ''xxx''`_TARGET_OS`: the target platform
+
+- *xxx*`_BUILD_ARCH`, *xxx*`_BUILD_OS`: the build platform
+- *xxx*`_HOST_ARCH`, *xxx*`_HOST_OS`: the host platform
+- *xxx*`_TARGET_ARCH`, *xxx*`_TARGET_OS`: the target platform
+
 
 There are also similar Make variables. These need to be normalized into something more rational:  At present there the usage is somewhat sloppy, since in most builds all three are the same.
 
 
-== Things that probably need fixing ==
-
- * We can't build anything with stage2 when cross-compiling, e.g. Haddock and DPH must be disabled.
+## Things that probably need fixing
 
 
------
-== Status ==
+- We can't build anything with stage2 when cross-compiling, e.g. Haddock and DPH must be disabled.
 
-===  March 2011: Mark Lentczner ===
-I actually have much of the above working. At this point I can build and link and run a stage1 cross-compiler. I have plumbed two tool-chains through the top level ./configure and make, and have gotten through configuring several libraries with the in-place cabal. I have patches almost ready to go for items above marked ''pending'', and will submit them soon, if this whole approach agrees with everyone.
+---
+
+
+## Status
+
+
+### March 2011: Mark Lentczner
+
+
+
+I actually have much of the above working. At this point I can build and link and run a stage1 cross-compiler. I have plumbed two tool-chains through the top level ./configure and make, and have gotten through configuring several libraries with the in-place cabal. I have patches almost ready to go for items above marked *pending*, and will submit them soon, if this whole approach agrees with everyone.
+
+
 
 In general, the problems have all been in plumbing the concepts of XT vs. HT around the build system. While I've been able to fudge it for most of the components though there are places where my work around is forced.
 
-===  Jan 2012: Gabor Greif ===
-Looks like Marks has submitted patches and
-[http://www.haskell.org/pipermail/cvs-ghc/2011-April/061685.html they have been integrated by Ian]
-into the main repository. This means GHC v7.4.1 *should* be ready for the procedures outlined above.
+
+### Jan 2012: Gabor Greif
+
+
+
+Looks like Mark has submitted patches and
+[
+they have been integrated by Ian](http://www.haskell.org/pipermail/cvs-ghc/2011-April/061685.html)
+into the main repository. This means GHC v7.4.1 \*should\* be ready for the procedures outlined above.
+
+
 
 I am about to test whether the theory matches practice and report back here.
 
------
-== Questions ==
 
-===  Jan 2012: Gabor Greif ===
- * The [wiki:Building/Architecture/Idiom/Stages build stages] page says that Template Haskell is disabled in stage1 compilers. This would mean that a cross-compiler is devoid of an important feature. Any tweak possible to fix this?
+---
+
+
+## Questions
+
+
+### Jan 2012: Gabor Greif
+
+
+- The [build stages](building/architecture/idiom/stages) page says that Template Haskell is disabled in stage1 compilers. This would mean that a cross-compiler is devoid of an important feature. Any tweak possible to fix this?
+- It is unclear from the above how we specify a target C compiler. `--with-gcc` does not seem to cut it.
+
 
  
-```
+
+
