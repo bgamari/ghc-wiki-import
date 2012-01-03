@@ -29,7 +29,11 @@ LLVM as of version 2.9 includes Type Based Alias Analysis. This mean using metad
 
 
 
-**ToDo**: Document the alias properties of Cmm code given to LLVM backend.
+**Question** (David Terei): What alias properties does the codegen obey? Sp and Hp never alias? R\<n\> registers never alias? ....
+
+
+
+**Answer** (Simon Marlow): Sp\[\] and Hp\[\] never alias, R\[\] never aliases with Sp\[\], and that's about it.
 
 
 ## Progress
