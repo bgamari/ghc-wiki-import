@@ -29,7 +29,7 @@ LLVM as of version 2.9 includes Type Based Alias Analysis. This mean using metad
 
 
 
-\_ToDo\_: Document the alias properties of Cmm code given to LLVM backend.
+**ToDo**: Document the alias properties of Cmm code given to LLVM backend.
 
 
 ## Progress
