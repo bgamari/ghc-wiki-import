@@ -34,7 +34,7 @@ These examples usually have a "dead" type variable which is used exclusively for
 
 
 
-The proposed keyword for the beginning of a monoid layout is `be`.
+The proposed keyword for the beginning of a monoid layout is `be` (as in "don't `do` anything").
 
 
 
