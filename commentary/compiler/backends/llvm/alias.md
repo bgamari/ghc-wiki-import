@@ -62,6 +62,7 @@ The above aliasing information can be encoded as follows:
 !0 = metadata !{ metadata !"top" }
 !1 = metadata !{ metadata !"heap", metadata !0 }
 !2 = metadata !{ metadata !"stack", metadata !0 }
+!3 = metadata !{ metadata !"rx", metadata !2 }
 ```
 
 
@@ -69,7 +70,7 @@ The fact that `R[]` never aliases with `Sp[]` is never used as the one way relat
 
 
 
-Stores/loads needs to be annotated with `!tbaa` and one of the above three types e.g.
+Stores/loads needs to be annotated with `!tbaa` and one of the above four types e.g.
 
 
 ```wiki
