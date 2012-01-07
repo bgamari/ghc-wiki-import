@@ -58,35 +58,46 @@ The verbose name-spacing required is an in-your-face, glaring weakness telling y
 
 
 
-As part of improving records, we may need or want to improve name-spacing, possibly giving each record (or any data declaration) its own name-space. See below for more discussion.
+So we have decided to avoid the extensible record debate, but how can we have multiple record field selectors in scope and correctly resolve the type of the record?
+
+
+1. Overloading: polymorphic selection & update; see [Records/OverloadedRecordFields](records/overloaded-record-fields)
+1. Namespacing: simple name-spacing & type resolution; see below
+
+
+**Are there any other approaches?**
 
 
 
-The main question is: how can we have multiple record field selectors in scope and correctly resolve the type of the record?
+The discussion has many similarities with the original Type directed name resolution proposal: the question seems to be largely about nailing down a concrete implementation; see below and [
+TDNR](http://hackage.haskell.org/trac/haskell-prime/wiki/TypeDirectedNameResolution). The original TDNR proposal had Overloading in mind, but Namespacing ends up having similarities.
 
 
-1. Nonextensible records with polymorphic selection & update; see [Records/OverloadedRecordFields](records/overloaded-record-fields)
-1. Nonextensible records with simple type resolution; see below
+
+The benefit of Overloading over Namespacing is being able to write code that works against any Record with a given field. So I can have a function:
 
 
-The discussion here has many similarities with the original Type directed name resolution proposal: the question seems to be largely about nailing down a concrete implementation; see below and [
-TDNR](http://hackage.haskell.org/trac/haskell-prime/wiki/TypeDirectedNameResolution)
+```wiki
+getA = r.a
+```
+
+
+and that can work for both Record and RecordClash because they both have a field a.
+With Namespacing this will fail to type check unless the compiler can determine the type of r. The advantage of Namespacing is that the implementation is clear, straightforward, and has already been done (whereas there are still questions as to the feasibility of Overloading). Namespacing also has other benefits related to namespacing that are not as directly related to solving the records issue.
+In the words of the Frege author, who abandoned Overloading:
+
+
+- only very inefficient code could be generated, if you have to access or update a field of some unknown record. In the end, every record type was basically a map.
+- it turned out that errors stemming from mistyping a field name often could not be diagnosed at the point where they were committed, but led to inferred types with crazy signatures and an incomprehensible type error at the use side of the function that contained the error.
+- the extra constraints complicated the type checker and did not play well with higher kinded type variables (at least in the code I had then, I do not claim that this is nessecarily so).
+
+### Better name spacing & simple type resolution
 
 
 
 Note that the name-spacing and simple type resolution approach is an attempt to port the records solution in [
 Frege](http://code.google.com/p/frege/), a haskell-like language on the JVM. See Sections 3.2 (primary expressions) and 4.2.1 (Algebraic Data type Declaration - Constructors with labeled fields) of the [
 Frege user manual](http://code.google.com/p/frege/downloads/detail?name=Language-202.pdf)
-
-
-
-**Are there any other approaches?**
-
-
----
-
-
-### Better name spacing
 
 
 
@@ -123,7 +134,7 @@ So one solution for record field names is to specify more precisely which one yo
 
 >
 >
-> Rather than strictly re-use modules it would make more sense to have a name-spacing construct that is shared between both records and modules - hopefully this would make implementation easier. Overall this seems to be more of an implementation detail that may have a side effect of making local modules easier to implement than a concrete design proposal relating to records. -- Greg Weber.
+> Rather than strictly re-use modules it may make more sense to have a name-spacing implementation construct that is shared between both records and modules - hopefully this would make implementation easier and unify behavior. In the Frege approach, each data declaration is its own namespace - if we were to go this far (instead of stopping purely at records) there may be much less need for local namespaces. Overall this seems to be more of an implementation detail that may have a side effect of making local modules easier to implement than a concrete design proposal relating to records. -- Greg Weber.
 >
 >
 
