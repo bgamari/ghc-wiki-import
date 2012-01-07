@@ -87,7 +87,7 @@ With Namespacing this will fail to type check unless the compiler can determine 
 
 
 The discussion has many similarities with the original Type directed name resolution proposal: the question seems to be largely about nailing down a concrete implementation; see below and [
-TDNR](http://hackage.haskell.org/trac/haskell-prime/wiki/TypeDirectedNameResolution). The original TDNR proposal had Overloading in mind, but Namespacing ends up having similarities. -- GregWeber
+TDNR](http://hackage.haskell.org/trac/haskell-prime/wiki/TypeDirectedNameResolution). The original TDNR proposal had Overloading in mind, but Namespacing ends up having similarities. -- Greg Weber
 
 
 
