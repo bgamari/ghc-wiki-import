@@ -58,13 +58,26 @@ The verbose name-spacing required is an in-your-face, glaring weakness telling y
 
 
 
-I know of three sorts of solutions:
+As part of improving records, we may need or want to improve name-spacing, possibly giving each record (or any data declaration) its own name-space. See below for more discussion.
 
 
-1. Better name spacing; see below
-1. Nonextensible records with polymorphic selection & update; see below and [Records/OverloadedRecordFields](records/overloaded-record-fields)
-1. Type directed name resolution; see [
-  TDNR](http://hackage.haskell.org/trac/haskell-prime/wiki/TypeDirectedNameResolution)
+
+The main question is: how can we have multiple record field selectors in scope and correctly resolve the type of the record?
+
+
+1. Nonextensible records with polymorphic selection & update; see [Records/OverloadedRecordFields](records/overloaded-record-fields)
+1. Nonextensible records with simple type resolution; see below
+
+
+The discussion here has many similarities with the original Type directed name resolution proposal: the question seems to be largely about nailing down a concrete implementation; see below and [
+TDNR](http://hackage.haskell.org/trac/haskell-prime/wiki/TypeDirectedNameResolution)
+
+
+
+Note that the name-spacing and simple type resolution approach is an attempt to port the records solution in [
+Frege](http://code.google.com/p/frege/), a haskell-like language on the JVM. See Sections 3.2 (primary expressions) and 4.2.1 (Algebraic Data type Declaration - Constructors with labeled fields) of the [
+Frege user manual](http://code.google.com/p/frege/downloads/detail?name=Language-202.pdf)
+
 
 
 **Are there any other approaches?**
@@ -95,27 +108,13 @@ So one solution for record field names is to specify more precisely which one yo
 
 >
 >
-> [
-> Frege](http://code.google.com/p/frege/) takes this approach; see Sections 3.2 (primary expressions) and 4.2.1 (Algebraic Data type Declaration - Constructors with labeled fields) of the [
-> Frege user manual](http://code.google.com/p/frege/downloads/detail?name=Language-202.pdf).
+> The module/record ambiguity is dealt with in Frege by preferring modules and requiring a module prefix for the record if there is ambiguity. So if your record named Record was inside a module named Record you would need `Record.Record.a`. Programmers will avoid this by doing what they do now: structuring their programs to avoid this situation. We can try and give the greater assistance in this regard by providing simpler ways for them to alter the names of import types.
 >
 >
 
 >
 >
-> The module/record ambiguity is dealt with in Frege by preferring modules and requiring a module prefix for the record if there is ambiguity. So if your record named Record was inside a module named Record you would need `Record.Record.a`. I think for the most part programmers will structure their programs to avoid this situation.
->
->
-
->
->
-> Verbosity is solved in Frege by using the TDNR concept. In `data Record = Record {a::String};r = Record "A"; r.a` The final `r.a` resolves to `Record.a r`.
->
->
-
->
->
-> Frege has a detailed explanation of the semantics of its record implementation, and the language is \*very\* similar to Haskell. Lets just start by using Frege's document as the proposal. We can start a new wiki page as discussions are needed.
+> Verbosity is solved in Frege by using the TDNR concept. In `data Record = Record {a::String};r = Record "A"; r.a` The final `r.a` resolves to `Record.a r`. See the simple type resolution discussion below.
 >
 >
 
@@ -128,12 +127,14 @@ So one solution for record field names is to specify more precisely which one yo
 >
 >
 
+### Simple type resolution
 
-**Anyone who likes these designs, please help fill out a more detailed design discussion, either here or on another page**.
 
-
----
-
+>
+>
+> Frege has a detailed explanation of the semantics of its record implementation, and the language is \*very\* similar to Haskell. After reading the Frege manual sections, one is still left wondering: how does Frege implement type resolution for its TDNR syntax. The answer is fairly simple: overloaded record fields are not allowed (you can't write code that works against multiple record types). Frege uses fairly normal type resolution, and it won't always be able to resolve the type (currently 1/3 or sparsely annotated code will need more type annotations, but we should be able to improve this). I will put down some more details here...
+>
+>
 
 ### Type directed name resolution
 
@@ -144,10 +145,10 @@ All of the name-space mechanisms require some level of user-supplied disambiguat
 
 
 One particular way of integrating this idea into Haskell is called [
-Type Directed Name Resolution](http://hackage.haskell.org/trac/haskell-prime/wiki/TypeDirectedNameResolution) (TDNR).  Proposed a couple of years ago, the Haskell community didn't like it much.  (But I still do; SLPJ.)
+Type Directed Name Resolution](http://hackage.haskell.org/trac/haskell-prime/wiki/TypeDirectedNameResolution) (TDNR). Proposed a couple of years ago, the Haskell community didn't like it much.  (But I still do; SLPJ.)
 
 
 
-I believe the community rejected TDNR because they wanted extensible records. I think it is a shame that the desire for \*extensible\* records is holding us back from getting anything done now, but I do think that the current TDNR proposal seems a little weak for some reasons pointed out in the proposal itself, but also because it proposes not to solve name-spacing record updates. Note that the Frege proposal incorporates the TDNR concept purely as sugar, and it has a solution for record updates (that hopefully somehow is easier than the original thoughts of TDNR update being difficult to implement). -- Greg Weber
+I believe the community rejected TDNR because they wanted extensible records. I think it is a shame that the desire for \*extensible\* records is holding us back from getting anything done now, but I do think that the current TDNR proposal seems a little weak for some reasons pointed out in the proposal itself, but also because it proposes not to solve name-spacing record updates. Note that the Frege proposal incorporates the TDNR syntax, and it tackles record updates. -- Greg Weber
 
 
