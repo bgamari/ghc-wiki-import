@@ -62,7 +62,7 @@ So we have decided to avoid the extensible record debate, but how can we have mu
 
 
 1. Overloading: polymorphic selection & update; see [Records/OverloadedRecordFields](records/overloaded-record-fields)
-1. Namespacing: simple name-spacing & type resolution; see below
+1. Namespacing: simple name-spacing & type resolution; see [Records/NameSpacing](records/name-spacing)
 
 
 **Are there any other approaches?**
@@ -83,7 +83,7 @@ getA = r.a
 
 
 and that can work for both Record and `RecordClash` because they both have a field `a`.
-With Namespacing this will fail to type check unless the compiler can determine the type of r. The advantage of Namespacing is that the implementation is clear, straightforward, and has already been done (whereas there are still questions as to the feasibility of Overloading). Overloading has seen downsides in practice. In the words of the Frege author, who abandoned Overloading:
+With Namespacing this will fail to type check unless the compiler can determine the type of r. The advantage of Namespacing is that the implementation is clear, straightforward, and has already been done (in the Frege language, whereas there are still questions as to the feasibility of Overloading). Overloading has seen other downsides in practice. In the words of the Frege author, who abandoned Overloading:
 
 
 - only very inefficient code could be generated, if you have to access or update a field of some unknown record. In the end, every record type was basically a map.
