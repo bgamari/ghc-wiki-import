@@ -1,5 +1,5 @@
 
-See \[wiki Records\] for the bigger picture. This is a proposal to solve the records name-spacing issue with simple name-spacing and simple type resolution. 
+See [Records](records) for the bigger picture. This is a proposal to solve the records name-spacing issue with simple name-spacing and simple type resolution. 
 
 
 
