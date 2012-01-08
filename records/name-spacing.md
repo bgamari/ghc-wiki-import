@@ -92,7 +92,7 @@ Function bar has no difficulties, after desugaring of the record patterns it's j
 
 
 
-Function foo is also ok, because through the application of r to bar the type checker knows already that r must be an R when it arrives at r.f
+Function foo is also ok, because through the application of `r` to bar the type checker knows already that r must be an R when it arrives at `r.f`
 
 
 
@@ -100,7 +100,7 @@ Function baz is ok as long as the type checker does not have a left to right bia
 
 
 
-The last function foobaz gives a type error too, as there is no way to find out the type of r.
+The last function foobaz gives a type error too, as there is no way to find out the type of `r`.
 
 
 
@@ -121,6 +121,6 @@ To be sure, the where clause is the crucial point here. It puts f in the name sp
 The record namespace is searched only in 3 cases:
 
 
-- when some name is explicitly qualifed with R:   R.f
-- when the type checker sees x.f and knows that x::R
-- In code that lives itself in the namespace R, here even an unqualified f will resolve to R.f (unless, of course, if there is a local binding for f)
+- when some name is explicitly qualifed with `R`:   `R.f`
+- when the type checker sees `x.f` and knows that `x::R`
+- In code that lives itself in the namespace `R`, here even an unqualified `f` will resolve to `R.f` (unless, of course, if there is a local binding for `f`)
