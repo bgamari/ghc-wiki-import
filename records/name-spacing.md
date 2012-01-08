@@ -5,7 +5,7 @@ See [Records](records) for the bigger picture. This is a proposal to solve the r
 
 This approach is an attempt to port the records solution in [
 Frege](http://code.google.com/p/frege/), a haskell-like language on the JVM. Please read Sections 3.2 (primary expressions) and 4.2.1 (Algebraic Data type Declaration - Constructors with labeled fields) of the [
-Frege user manual](http://code.google.com/p/frege/downloads/detail?name=Language-202.pdf)
+Frege user manual](http://code.google.com/p/frege/downloads/detail?name=Language-411.pdf)
 
 
 
