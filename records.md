@@ -99,6 +99,6 @@ Type Directed Name Resolution](http://hackage.haskell.org/trac/haskell-prime/wik
 
 
 
-I believe the community rejected TDNR because they wanted extensible records. I think it is a shame that the desire for \*extensible\* records is holding us back from getting anything done now, but I do think that the current TDNR proposal seems a little weak for some reasons pointed out in the proposal itself, but also because it proposes not to solve name-spacing record updates. Note that the Frege proposal incorporates the TDNR syntax, and it tackles record updates. -- Greg Weber
+I believe the community rejected TDNR because they wanted extensible records. I think it is a shame that the debate over \*extensible\* records has resulted in holding back any form of progress , but I do think that the TDNR proposal seems a little weak for some reasons pointed out in the proposal itself, but also because it proposes not to solve name-spacing record updates. Note that the Frege proposal incorporates the TDNR syntax, and it tackles record updates. -- Greg Weber
 
 
