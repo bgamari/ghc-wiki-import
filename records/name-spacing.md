@@ -87,7 +87,9 @@ See below for how we resolve the type of this code.
 
 
 
-This proposal requires the current Haskell function composition dot operator to have spaces on both sides. No spaces around the dot are reserved for name-spacing: this use and the current module namespace use. No space to the right would be partial application (see [TDNR](/trac/ghc/wiki/TypeDirectedNameResolution). The dot operator should bind as tightly as possible.
+This proposal requires the current Haskell function composition dot operator to have spaces on both sides. No spaces around the dot are reserved for name-spacing: this use and the current module namespace use. No space to the right would be partial application (see 
+[
+TDNR](http://hackage.haskell.org/trac/haskell-prime/wiki/TypeDirectedNameResolution). The dot operator should bind as tightly as possible.
 
 
 
@@ -285,7 +287,8 @@ There is a chance for deeper though on this issue.
 
 
 
-see [TDNR](/trac/ghc/wiki/TypeDirectedNameResolution) syntax discusion.
+see [
+TDNR](http://hackage.haskell.org/trac/haskell-prime/wiki/TypeDirectedNameResolution) syntax discusion.
 `.a r == r.a`
 
 
