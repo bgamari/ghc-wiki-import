@@ -87,7 +87,7 @@ See below for how we resolve the type of this code.
 
 
 
-This proposal requires the current Haskell function composition dot operator to have spaces on both sides. No spaces around the dot are reserved for name-spacing: this use and the current module namespace use. No space to the right would be partial application (see TDNR?. The dot operator should bind as tightly as possible.
+This proposal requires the current Haskell function composition dot operator to have spaces on both sides. No spaces around the dot are reserved for name-spacing: this use and the current module namespace use. No space to the right would be partial application (see TypeDirectedNameResolution?(TDNR). The dot operator should bind as tightly as possible.
 
 
 
@@ -285,7 +285,7 @@ There is a chance for deeper though on this issue.
 
 
 
-see TDNR? syntax discusion.
+see [TDNR](/trac/ghc/wiki/TypeDirectedNameResolution) syntax discusion.
 `.a r == r.a`
 
 
@@ -332,7 +332,7 @@ echo delta . .charlie . .beta . .alpha
 
 
 Is there are more convenient syntax for this? `b <.a`
-Note that a move to a different operator for function composition would make things much clearer: `b <~ .a`, where the unicode dot might be even nicer
+Note that a move to a different operator for function composition (see brief discussion of the dot operator above) would make things much clearer: `b <~ .a`, where the unicode dot might be even nicer
 
 
 ## Extending data name-spacing and dot syntax
