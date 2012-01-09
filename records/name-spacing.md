@@ -10,7 +10,7 @@ Many thanks to the Frege author, Ingo Wechsung for explaining his implementation
 
 
 
-The DDC language (again, very much like Haskell, but focused on better and more predictable performance) puts forth a similar solution. See the [
+The DDC language (again, very much like Haskell, but focused on effect tracking and an overall different conceptual approach to purity) puts forth a similar solution. See the [
 thesis](http://www.cse.unsw.edu.au/~benl/papers/thesis/lippmeier-impure-world.pdf) section 2.7 - 2.7.4 pages 115 - 119
 
 
@@ -191,8 +191,30 @@ I estimate that in 2/3 of all cases one does not need to write `T.e x` in sparse
 
 
 The function update syntax is a new addition to Haskell that we do not need to immediately implement.
-Any thoughts on the Frege field update syntax vs. the current Haskell syntax?
 
+
+### Alternative approach: using tuple selectors
+
+
+```wiki
+let { r.x = x'; r.y = y'; r.z = z'; } in r
+```
+
+
+If we allow tuples of selectors:
+
+
+```wiki
+r.(x, y, z) = (r.x, r.y, r.z)
+```
+
+
+then one can simply write
+
+
+```wiki
+let r.(x, y, z) = (x', y', z') in r   
+```
 
 ## Interaction with Typeclasses
 
@@ -272,7 +294,10 @@ let r = Record "a" in b r.a
 ```
 
 
-It bothers some that the code does not look like the previous `b a r` - chiefly that the record is now in the middle. Is it possible we can have an equivalent of the dot that changes the ordering? `b a.@r` is possible, but requires an operator that binds to the right. Perhaps a new operator like: `b <. a $ r`
+It bothers some that the code does not look like the previous `b a r` - chiefly that the record is now in the middle. Is it possible we can have an equivalent of the dot that changes the ordering? `b a.@r` is possible, but requires an operator that binds to the right.
+
+
+### Partial Application
 
 
 
@@ -280,6 +305,7 @@ Partial application provides a potential solution: `b . .a $ r`
 
 
 
-So if we have a function `f r = b r.a` then one can write it points-free: `b . .a`                                                                                                                                                                      
+So if we have a function `f r = b r.a` then one can write it points-free: `b . .a`
+                                                                                                                 
 
 
