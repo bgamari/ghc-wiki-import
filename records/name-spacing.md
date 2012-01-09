@@ -303,7 +303,7 @@ let r = Record "a" in b r.a
 ```
 
 
-It bothers some that the code does not look like the previous `b a r` - chiefly that the record is now in the middle. Chaining can make this perception even worse: `e d r.a.b.c`
+It bothers some that the code does not look like the previous `b a r` - chiefly that the record is now in the middle. Chaining can make this perception even worse: `(e . d) r.a.b.c`
 
 
 
@@ -322,7 +322,7 @@ So if we have a function `f r = b r.a` then one can write it points-free: `b . .
 
 
 
-Our longer example from above: `e d . .c . .b . .a`
+Our longer example from above: `e . d . .c . .b . .a`
 
 
 
@@ -330,7 +330,7 @@ At first glance it may look odd, but it is starting to grow on me. Also let us c
 
 
 ```wiki
-echo delta . .charlie . .beta . .alpha
+echo . delta . .charlie . .beta . .alpha
 ```
 
 
