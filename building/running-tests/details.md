@@ -257,3 +257,8 @@ On the other hand, if it is not branched then any changes in test output mean we
 ```wiki
 test(tc5, namebase_if_compiler_lt('ghc','6.9', 'tc5-6.8'), ...)
 ```
+
+
+**Currently we have decided to branch the testsuite for ghc releases**
+
+
