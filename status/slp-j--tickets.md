@@ -164,7 +164,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#4426](https://gitlab.staging.haskell.org/ghc/ghc/issues/4426): simpler rule for implicit quantification
 - [\#4359](https://gitlab.staging.haskell.org/ghc/ghc/issues/4359): lambda case
 - [\#4148](https://gitlab.staging.haskell.org/ghc/ghc/issues/4148): improvements to mdo syntax
-- [\#595](https://gitlab.staging.haskell.org/ghc/ghc/issues/595), [\#5728](https://gitlab.staging.haskell.org/ghc/ghc/issues/5728), [\#3927](https://gitlab.staging.haskell.org/ghc/ghc/issues/3927), [\#5274](https://gitlab.staging.haskell.org/ghc/ghc/issues/5274): **pattern-match overlap checking**, including with GADTs
+- [\#595](https://gitlab.staging.haskell.org/ghc/ghc/issues/595), [\#5728](https://gitlab.staging.haskell.org/ghc/ghc/issues/5728), [\#3927](https://gitlab.staging.haskell.org/ghc/ghc/issues/3927), [\#5274](https://gitlab.staging.haskell.org/ghc/ghc/issues/5274), [\#5762](https://gitlab.staging.haskell.org/ghc/ghc/issues/5762): **pattern-match overlap checking**, including with GADTs
 - [\#3701](https://gitlab.staging.haskell.org/ghc/ghc/issues/3701): Implicitly declared existentials: a class as a type
 - [\#3217](https://gitlab.staging.haskell.org/ghc/ghc/issues/3217): better flag handling for GHCi
 - [\#2600](https://gitlab.staging.haskell.org/ghc/ghc/issues/2600), [\#2110](https://gitlab.staging.haskell.org/ghc/ghc/issues/2110): **Bind type variables and constraints in RULES**
