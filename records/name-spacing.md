@@ -164,7 +164,7 @@ The record namespace is searched only in 3 cases:
 
 
 
-This is the only real downside of \*this\* proposal (most downsides discussed here are inherent to any records proposal). The Frege author says:
+This is the only real downside of this proposal - most downsides discussed here are inherent to any records proposal. The Frege author says:
 
 
 
@@ -241,7 +241,7 @@ For the initial records implementaion we definitely want to maintain `f` and `g`
 
 
 
-The new record system is enabled with `-XNAMESPACEDATA`.
+The new record system could be enabled with `-XNAMESPACEDATA`.
 
 
 - Should new modules be infectious? That is, if I turn the extension on for my module and export a record, does a user that wants to import the record also have to use the extension?
