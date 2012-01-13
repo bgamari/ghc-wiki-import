@@ -87,6 +87,6 @@ Stores/loads needs to be annotated with `!tbaa` and one of the above four types 
 
 
 
-David and Johan plan to have a crack at this at the start of 2012.
+Some patches have been pushed that implement TBAA and significantly improve the Alias Analysis story. See ticket [\#5567](https://gitlab.staging.haskell.org/ghc/ghc/issues/5567) for more information.
 
 
