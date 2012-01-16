@@ -5,7 +5,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## New typechecker things to fix (with Dimitrios)
 
 
-- [\#5716](https://gitlab.staging.haskell.org/ghc/ghc/issues/5716), [\#5612](https://gitlab.staging.haskell.org/ghc/ghc/issues/5612), [\#5682](https://gitlab.staging.haskell.org/ghc/ghc/issues/5682), [\#5717](https://gitlab.staging.haskell.org/ghc/ghc/issues/5717), [\#5768](https://gitlab.staging.haskell.org/ghc/ghc/issues/5768), [\#5769](https://gitlab.staging.haskell.org/ghc/ghc/issues/5769), [\#5770](https://gitlab.staging.haskell.org/ghc/ghc/issues/5770), [\#5771](https://gitlab.staging.haskell.org/ghc/ghc/issues/5771), 
+- [\#5716](https://gitlab.staging.haskell.org/ghc/ghc/issues/5716), [\#5612](https://gitlab.staging.haskell.org/ghc/ghc/issues/5612), [\#5682](https://gitlab.staging.haskell.org/ghc/ghc/issues/5682), [\#5717](https://gitlab.staging.haskell.org/ghc/ghc/issues/5717), [\#5768](https://gitlab.staging.haskell.org/ghc/ghc/issues/5768), [\#5769](https://gitlab.staging.haskell.org/ghc/ghc/issues/5769), [\#5770](https://gitlab.staging.haskell.org/ghc/ghc/issues/5770), [\#5771](https://gitlab.staging.haskell.org/ghc/ghc/issues/5771): PolyKinds
 - [\#5321](https://gitlab.staging.haskell.org/ghc/ghc/issues/5321): slow constraint solving
 - [\#4347](https://gitlab.staging.haskell.org/ghc/ghc/issues/4347), [\#4295](https://gitlab.staging.haskell.org/ghc/ghc/issues/4295): impredicativity
 - [\#5320](https://gitlab.staging.haskell.org/ghc/ghc/issues/5320): overlap delicacy
