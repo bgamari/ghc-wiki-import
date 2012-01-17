@@ -1,21 +1,20 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
+# GHC Commentary: Backends
 
 
-= GHC Commentary: Backends =
 
-After [wiki:Commentary/Compiler/CmmType Cmm] has been generated, we have a choice of targets to compile to:
+After [Cmm](commentary/compiler/cmm-type) has been generated, we have a choice of targets to compile to:
 
- * [wiki:Commentary/Compiler/Backends/PprC The C code generator]
- * [wiki:Commentary/Compiler/Backends/NCG  The native code generator]
- * [wiki:Commentary/Compiler/Backends/LLVM The LLVM code generator]
- * [wiki:Commentary/Compiler/Backends/GHCi The GHCi code generator]
 
-These backends are completely interchangeable.  Our preferred route is the native code generator, because the C code generator relies on some serious hackery, namely the [wiki:Commentary/EvilMangler Evil Mangler], to get fast tail-calls and other performance tricks.  The Evil Mangler is slated for removal as soon as possible, which would leave us with just the native code generator for optimised compilation, and the C code generator for portable, non-optimised, or unregisterised compilation.
+- [The C code generator](commentary/compiler/backends/ppr-c)
+- [The native code generator](commentary/compiler/backends/ncg)
+- [The LLVM code generator](commentary/compiler/backends/llvm)
+- [The GHCi code generator](commentary/compiler/backends/gh-ci)
+
+
+These backends are completely interchangeable.  Our preferred route is the native code generator.  The C code generator is used for portable, non-optimised, or unregisterised compilation.
+
+
 
 It is likely that only the native code generator will be able to generate position independent code (PIC) which is necessary for dynamic libraries, so once we're doing this the C code generator will be even more deprecated.
 
-```
+
