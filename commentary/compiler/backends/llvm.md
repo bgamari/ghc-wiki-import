@@ -13,16 +13,21 @@ Documentation:
 - [Design & Implementation](commentary/compiler/backends/llvm/design)
 - [Bugs & Other Problems](commentary/compiler/backends/llvm/development-notes)
 - [Porting GHC/LLVM to another platform](commentary/compiler/backends/llvm/gh-c_-llvm-porting)
+
+
+Work in Progress:
+
+
 - [SIMD instructions and LLVM](simd-llvm) see also [VectorComputing](vector-computing)
+- [Improving Alias Analysis](commentary/compiler/backends/llvm/alias)
 
 
-Improvement Ideas:
+Future Ideas:
 
 
 - [ToDo List of Sorts](commentary/compiler/backends/llvm/wip)
 - [
   David Terei blog post of LLVM-related projects](http://dterei.blogspot.com/2011/09/ghc-project-for-all.html)
-- [Improving Alias Analysis](commentary/compiler/backends/llvm/alias)
 
 
 Other information:
