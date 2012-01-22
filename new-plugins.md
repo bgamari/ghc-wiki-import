@@ -2,7 +2,7 @@
 
 
 
-Plugins are a new feature in GHC 7.2.1 that will allow users to write compiler passes (for things like optimizations) over GHC's internal intermediate language, [Core](commentary/compiler/core-syn-type).
+Plugins are a new feature in GHC 7.2.1 that allows users to write compiler passes (for things like optimizations) over GHC's internal intermediate language, [Core](commentary/compiler/core-syn-type).
 
 
 
