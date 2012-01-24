@@ -219,6 +219,10 @@ As a quick experiment, I hacked LLVM to accept "safe" annotations on loads and t
 
 
 
+See bug [\#1498](https://gitlab.staging.haskell.org/ghc/ghc/issues/1498)
+
+
+
 **Following is from Roman Leshchinskiy**
 
 
