@@ -254,6 +254,13 @@ into the main repository. This means GHC v7.4.1 \*should\* be ready for the proc
 I am about to test whether the theory matches practice and report back here.
 
 
+### Jan 2012: Stephen Blackheath
+
+
+
+I've submitted patches that make cross compiling work. I will also write some build instructions in the Building Guide.
+
+
 ---
 
 
@@ -267,6 +274,7 @@ I am about to test whether the theory matches practice and report back here.
 - It is unclear from the above how we specify a target C compiler. `--with-gcc` does not seem to cut it.
 
 
+Stephen Blackheath: I intend to get TH working on cross compilers, so I'm working on this.
  
 
 
