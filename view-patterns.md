@@ -478,7 +478,7 @@ This syntax works very nicely with partial views:
 
 
 
-A further syntactic extension would be to have implcit Maybes with implicit tupling: multiple patterns after the `=>` are implicitly tupled.  Then you could write:
+A further syntactic extension would be to have implicit Maybes with implicit tupling: multiple patterns after the `=>` are implicitly tupled.  Then you could write:
 
 
 ```wiki
