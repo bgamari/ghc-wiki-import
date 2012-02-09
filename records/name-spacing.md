@@ -33,8 +33,8 @@ record field polymorphism](http://www.pllab.riec.tohoku.ac.jp/smlsharp/?FeatureR
 
 
 
-\[Roy\]([
-http://roy.brianmckenna.org/](http://roy.brianmckenna.org/)), a functional language that targets javascript, does have record field polymorphism (which makes a lot of sense in that context).
+[
+Roy](http://roy.brianmckenna.org/), a functional language that targets javascript, does have record field polymorphism (which makes a lot of sense in that context).
 
 
 ## Better name spacing
