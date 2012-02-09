@@ -32,6 +32,11 @@ I couldn't find great specific information on record implementation ML variants.
 record field polymorphism](http://www.pllab.riec.tohoku.ac.jp/smlsharp/?FeatureRecordPolymorphism) as per the overloaded records implementation.
 
 
+
+\[Roy\]([
+http://roy.brianmckenna.org/](http://roy.brianmckenna.org/)), a functional language that targets javascript, does have record field polymorphism (which makes a lot of sense in that context).
+
+
 ## Better name spacing
 
 
