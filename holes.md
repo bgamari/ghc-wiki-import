@@ -45,7 +45,7 @@ As can be seen here, goals are numbered, and the typechecker returns the inferre
 These goals can make it a lot easier to write code. They allow typechecking to continue although certain parts of code are missing and they work as a TODO list.
 
 
-# How this can be used in GHC now
+# How we can almost do this in GHC now
 
 
 
