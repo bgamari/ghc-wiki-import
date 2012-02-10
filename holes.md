@@ -1,9 +1,9 @@
-# Holes
+# Goals in Agda
 
 
 
 One of the features of the Emacs mode for [
-Agda](http://wiki.portal.chalmers.se/agda/pmwiki.php) is the ability to add goals, as a placeholder for code that is yet to be written. By inserting a `?` in an expression, the compiler will introduce a hole. After loading the file (which typechecks it), Agda gives an overview of the holes in the file and their types.
+Agda](http://wiki.portal.chalmers.se/agda/pmwiki.php) is the ability to add goals, as a placeholder for code that is yet to be written. By inserting a `?` in an expression, the compiler will introduce a goal. After loading the file (which typechecks it), Agda gives an overview of the goals in the file and their types.
 
 
 
@@ -34,14 +34,14 @@ With extra output:
 ```
 
 
-As can be seen here, holes are numbered, and the typechecker returns the inferred type for each of these holes.
+As can be seen here, goals are numbered, and the typechecker returns the inferred type for each of these goals.
 
 
 
 These goals can make it a lot easier to write code. They allow typechecking to continue although certain parts of code are missing and they work as a TODO list.
 
 
-## In GHC
+# How this can be used in GHC now
 
 
 
@@ -70,6 +70,32 @@ test = undefined : (undefined ++ [])
 
 
 Will not help finding the types of the `undefined`s at all. One advantage is that the code can successfully run, except if one of the `undefined`s is actually evaluated.
+
+
+
+To find the type of the `undefined`, one can give it a type that is certainly wrong, and then check what the compiler says the right type is:
+
+
+```wiki
+test :: [Bool]
+test = undefined : ((undefined :: ()) ++ [])
+```
+
+
+Gives:
+
+
+```wiki
+test.hs:2:22:
+    Couldn't match expected type `[Bool]' with actual type `()'
+    In the first argument of `(++)', namely `(undefined :: ())'
+    In the second argument of `(:)', namely `((undefined :: ()) ++ [])'
+    In the expression: undefined : ((undefined :: ()) ++ [])
+Failed, modules loaded: none.
+```
+
+
+However, using multiple of these holes can cause the compiler to assume the error is in a different place than the hole. It also fails the compilation, causing other errors that might occur to not show up, and doesn't allow the rest of the code to still run. 
 
 
 ### Implicit Parameters
@@ -139,11 +165,11 @@ This makes it very impractical to use them as holes, as all type signatures have
 Another thing to keep in mind with implicit parameters is that implicit parameters with the same name in different functions are not assumed to be the same (i.e., required to be unifiable), *except* if some function has both implicit parameters in its constraints. Lastly, it's impossible to run code with unbound implicit parameters, even if the parameters are never actually used.
 
 
----
+# How this could be implemented in GHC
 
 
 
-Now for ways holes could be added to GHC(i).
+These two approaches are not ideal, they either don't give enough information, or they hinder using the code.
 
 
 ### Agda-style
