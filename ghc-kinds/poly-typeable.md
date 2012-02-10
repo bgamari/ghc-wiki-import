@@ -2,7 +2,15 @@
 
 
 
-The page describes an improved implementation of the `Typeable` class.  Technically it is straightforward, but it represents a non-backward-compatible change to a widely used library, so we need to make a plan for the transition.
+The page describes an improved implementation of the `Typeable` class, using polymorphic kinds.  Technically it is straightforward, but it represents a non-backward-compatible change to a widely used library, so we need to make a plan for the transition.
+
+
+
+Relevant tickets we could thereby fix: [\#5391](https://gitlab.staging.haskell.org/ghc/ghc/issues/5391), [\#5863](https://gitlab.staging.haskell.org/ghc/ghc/issues/5863).
+
+
+
+Open question: what are the corresponding changes to `Data.Data`?  See [\#4896](https://gitlab.staging.haskell.org/ghc/ghc/issues/4896), 
 
 
 ## The current `Typeable` class
