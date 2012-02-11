@@ -344,7 +344,7 @@ The record namespace is searched only in 3 cases:
 
 
 
-This is the only real downside of this proposal - most downsides discussed here are inherent to any records proposal. The Frege author says:
+Note that the Frege type system is less complex: to the extent that records are being used in code with simpler types this may hold. The Frege author says:
 
 
 
