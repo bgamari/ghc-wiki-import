@@ -10,6 +10,10 @@ a lot of ideas for how to make things better](http://darcs.haskell.org/ghc/compi
 
 
 
+FIXED in newcg branch, 15/2/2012
+
+
+
 In `cgrun065` we have
 
 
