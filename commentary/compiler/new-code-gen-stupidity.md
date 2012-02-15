@@ -69,6 +69,10 @@ We're actually converting to a `Bool` and then doing an algebraic case!  This is
 
 
 
+FIXED in newcg branch, but in an ad-hoc way (the stack allocator does it).  We probably want to do this as part of a more general optimisation pass.
+
+
+
 See in `cgrun065`
 
 
