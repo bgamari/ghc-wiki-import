@@ -94,7 +94,7 @@ I'll leave it to the implementors to determine which works best.
 
 
 
-`get` is a method of the \`Has' class:
+`get` is a method of the `Has` class:
 
 
 ```wiki
