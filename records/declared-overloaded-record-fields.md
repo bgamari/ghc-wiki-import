@@ -1,17 +1,17 @@
-
-** Declared Overloaded Record Fields (DORF) **
+# Declared Overloaded Record Fields (DORF)
 
 
 
 Explained in 5 wiki pages (these proposals are linked but somewhat orthogonal):
-No Mono Record Fields
-DORF -- Application Programmer's view
-DORF -- Implementor's view
-DORF -- Comparison to SORF
-Dot as Postfix Funcion Apply
 
 
----
+- No Mono Record Fields   (precursor to DORF)
+- DORF -- Application Programmer's view
+- DORF -- Implementor's view
+- DORF -- Comparison to SORF
+- Dot as Postfix Funcion Apply   (optional syntactic sugar)
+
+## No Mono Record Fields
 
 
 
@@ -57,18 +57,18 @@ module M( T( x ) )       where
 ```
 
 
-then the existence of field \`y' is hidden;
-type T and field label `x' are exported, but not data constructor MkT, so `x' is unusable.
+then the existence of field `y` is hidden;
+type `T` and field label `x` are exported, but not data constructor `MkT`, so `x` is unusable.
 
 
 
-(Without the ‑XNoMonoRecordFields flag, field selector function x would be exported.)
+(Without the ‑XNoMonoRecordFields flag, field selector function `x` would be exported.)
 
 
----
+## Declared Overloaded Record Fields (DORF)
 
 
----
+## Application Programmer's view
 
 
 
@@ -96,23 +96,19 @@ I'm not saying anything about field selection via pattern matching or record con
 Currently in Haskell two records in the same module can't share a field name. This is because declaring a field name within a data decl creates a monomorphic selector function; and if it's monomorphic, we can only have one. I think the wiki is characterising the problem incorrectly:
 
 
-- it's \_not\_ that the field name appearing in different record decls
-  is ambiguous between the two record types and we need some
-  (syntactical) way of choosing between the different definitions;
+- it's not that the field name appearing in different record decls is ambiguous between the two record types
+  so we need some (syntactical) way of choosing between the different definitions;
 
-- rather, we have one field name, and we lack the syntax/semantics for
-  sharing it between different records.
+- rather, we have one field name, and we lack the syntax/semantics for sharing it between different records.
 
 
 An example: let's say I have a database application with a field (meaning type) customer\_id. Then it appears in records for name and address, pricing, order entry, etc. This is not a name 'clash', it's 'intended sharing'. (It really galls me to even put it that way for explanatory purposes. Really it's the **same** customer\_id.)
 In data model design you'd typically go about identifying all the fields (types aka attributes) and putting them in a data dictionary. Then you'd construct your records from them. You might (possibly) put the data dictionary in a distinct module, for easy maintenance. But you'd certainly want all the customer-related records in the same module. So a data decl:
 
 
->
->
-> data Customer\_NameAddress = Cust\_NA { customer\_id :: Int, ... } 
->
->
+```wiki
+    data Customer_NameAddress = Cust_NA { customer_id :: Int, ... } 
+```
 
 
 is \_not\_ declaring customer\_id, it's \_using\_ (or instancing) an already-declared field for customer\_id.
@@ -123,10 +119,9 @@ Similarly, if I have a family of objects, all with a `reset' method, that's not 
 What's more, the Haskell 98 field selector (auto-created from the data decl) is half-way to what we want. It's a function:
 
 
-<table><tr><th>customer\_id</th>
-<td>Customer\_NameAddress -\> Int
-</td></tr></table>
-
+```wiki
+    customer_id :: Customer_NameAddress -> Int
+```
 
 
 The DORF proposal generalises that signature: if you want to share a field across different records, its selector function needs to be overloaded to this type:
@@ -138,7 +133,7 @@ The DORF proposal generalises that signature: if you want to share a field acros
 
 
 
-The r{ ... } is syntactic sugar for the constraint meaning "record r has field customer\_id at type Int".
+The 'r{ ... }' is syntactic sugar for the constraint meaning "record r has field customer\_id at type Int".
 
 
 
