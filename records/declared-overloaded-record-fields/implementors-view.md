@@ -18,7 +18,7 @@ The fact that DORF has been 'faked' in existing GHC is good evidence that it's a
 
 
 
-DORF is to be enabled by a compiler flag ‑XDeclaredOverloadedRecordFields, which implies flag ‑XNoMonoRecordFields, which in turn implies ‑XDisambiguateRecordFields and -XNamedFieldPuns with ‑XRecordWildCards.
+DORF is to be enabled by a compiler flag **‑XDeclaredOverloadedRecordFields**, which implies flag **‑XNoMonoRecordFields**, which in turn implies ‑XDisambiguateRecordFields and -XNamedFieldPuns with ‑XRecordWildCards.
 
 
 
