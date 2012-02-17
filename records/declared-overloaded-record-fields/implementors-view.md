@@ -22,19 +22,18 @@ DORF is to be enabled by a compiler flag **‑XDeclaredOverloadedRecordFields**,
 
 
 
-Note we do \_not\_ assume flag ‑XDotPostfixFuncApply; dot notation is not needed by DORF, it's purely syntactic sugar to suit the taste of the programmer.
+Note we do not assume flag ‑XDotPostfixFuncApply; dot notation is not needed by DORF, it's purely syntactic sugar to suit the taste of the programmer.
 
 
 
-DORF is implemented through a class `Has' with methods `get' and `set'. (Very similar in principle to SORF.) There's an instance of `Has' for each record/field combination, with the instance generated from the record declaration.
+DORF is implemented through a class `Has` with methods `get` and `set`. (Very similar in principle to SORF.) There's an instance of `Has` for each record/field combination, with the instance generated from the record declaration.
 
 
 
-Within each instance, get/set are defined in terms of the record's data constructors, using ‑XDisambiguateRecordFields and friends.
+Within each instance, `get/set` are defined in terms of the record's data constructors, using ‑XDisambiguateRecordFields and friends.
 
 
-
-fieldLabel declaration (data dictionary)
+### fieldLabel declaration (data dictionary)
 
 
 
@@ -52,7 +51,7 @@ There is to be a new declaration type, examples:
 
 
 
-The `fieldLabel` declaration desugars to:
+`fieldLabel` is not some new ontology in Haskell, it's only sugar. The `fieldLabel` declaration desugars to:
 
 
 ```wiki
