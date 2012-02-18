@@ -343,6 +343,6 @@ Some discussion threads have argued that Haskell's current record update syntax 
 
 
 
-POsted 18-Feb-2012, Anthony Clayden. \[Apologies for my wiki formatting and cross-linking -- in haste! and a novice to trac.\]
+Posted 18-Feb-2012, Anthony Clayden. \[Apologies for my wiki formatting and cross-linking -- in haste! and a novice to trac.\] 
 
 
