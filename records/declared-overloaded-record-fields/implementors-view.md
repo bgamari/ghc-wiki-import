@@ -171,14 +171,8 @@ Haskell's existing update syntax is desugarred to a call to `set`:
 ```
 
 
-(That is, with a name or expression preceeding the `{ ... }`. A data constructor prefix continues to use
+(That is, with a name or expression preceeding the `{ ... }`. A data constructor prefix continues to use  -XDisambiguateRecordFields.)
 
-
->
->
-> -XDisambiguateRecordFields.)
->
->
 
 
 It is crucial to this proposal that we can implement a polymorphic field update function (`set`). There's a number of tricky requirements considered below.
@@ -211,8 +205,7 @@ The prototype for this proposal has explored updating with a type instance pairi
 
 ```wiki
     instance (t ~ (String, String)) =>
-        Has Customer_NameAddress
-              (Proxy_firstName, Proxy_lastName) t     where ...
+        Has Customer_NameAddress (Proxy_firstName, Proxy_lastName) t     where ...
 ```
 
 
@@ -259,7 +252,7 @@ For monomorphic (non-changing) fields, `GetResult` returns `t` and `SetResult` r
 
 
 
-These are type families, not associated types, because in many cases, the result from `get` depends only on `fld`, and the result from `set` depends only on the record type `r`. In a few cases, the type function must be sensitive to the combination of field type and record type.
+These are type families, not associated types, because in many cases, the result from `get` depends only on `fld` (not `r`), and the result from `set` depends only on the record type `r` (not `t`). In a few cases, the type function must be sensitive to the combination of field type and record type.
 
 
 
@@ -268,7 +261,7 @@ The extra `Has` constraint on `set`'s result is to 'improve' `t` by gathering co
 
 
 Note that the field value's type `t` is the type to-be in the result, not the type as-was in the record being updated.
-So the result from set has that type \`inserted'.
+So the result from set has that type 'inserted'.
 
 
 
@@ -295,7 +288,7 @@ Example, based on field `unit_Price`:
 
 
 
-The extra complexity to support changing type could be somewhat reduced using a separate `Set` class with four type parameters, including both as-was and resulting record types, and equality constraints to improve them -- rather than type family `SetResult`.
+The extra complexity to support changing type could be somewhat reduced using a separate `Set` class with four type parameters, including both as-was and resulting record types, and equality constraints to improve them (and to improve the result from `get`) -- rather than type family `SetResult` and `GetResult`.
 
 
 
@@ -324,10 +317,11 @@ To support higher-ranked fields, this proposal follows SORF's approach (with thr
                    -- field's type is whatever's there (it's opaque)
                    -- improved by the instance constraint
     type instance SetResult HR Proxy_rev t = HR
-                   -- the H-R type is hidded inside HR
+                   -- the higer-ranked type is hidded inside HR
     instance (t ~ ([a_] -> [a_])) =>              -- same as SORF
         Has HR Proxy_rev t    where
             get HR{rev} _ = rev
+            -- set _ fn HR{..} = HR{rev = fn, ..}  -- compile fails: can't match fn's type to rev's
 ```
 
 ### Updating polymorphic/higher-ranked fields
@@ -361,7 +355,7 @@ See the discussion under \<Application Programmer's view\> and [
 http://hackage.haskell.org/trac/ghc/wiki/Records/DeclaredOverloadedRecordFields/NoMonoRecordFields](http://hackage.haskell.org/trac/ghc/wiki/Records/DeclaredOverloadedRecordFields/NoMonoRecordFields). When import/exporting do we need to also export the Proxy\_type? If not exported, update syntax cannot be desuggarred to use it.)
 
 
-### Should application programmers declare instances for \`Has'/set?
+### Should application programmers declare instances for `Has/set`?
 
 
 
