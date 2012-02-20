@@ -109,13 +109,13 @@ I'll leave it to the implementors to determine which works best.
 ```
 
 
-Does \_not\_ create a field selector function `customer_id`. Instead it creates a `Has` instance:
+Does not create a field selector function `customer_id`. Instead it creates a `Has` instance:
 
 
 ```wiki
     instance (t ~ Int) 
        => Has Customer_NameAddress Proxy_customer_id t where
-               get Cust_NA{customer_id} = customer_id
+               get Cust_NA{customer_id} _ = customer_id
 ```
 
 
@@ -151,7 +151,7 @@ Update uses method `set` from the `Has` class:
 ```
 
 
-`set`s instances are defined using explicit data constructor:
+`set`'s instances are defined using explicit data constructor:
 
 
 ```wiki
