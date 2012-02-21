@@ -123,21 +123,25 @@ Note the bare `t` with type equality constraint. This is unashamedly stolen from
 The definition of `get` uses ‑XDisambiguateRecordFields style (with ‑XNamedFieldPuns).
 
 
+>
+>
+> \[It's a wart that in the record declaration, we've had to repeat the type of `customer_id` when the `fieldLabel` decl has already stipulated `Int`. It is legal syntax to omit the type in the record decl, but that currently has a different effect:
+>
+>
+> ```wiki
+>         data ... = Cust_NA { customer_id, custName :: String, ... }
+> ```
+>
+>
+> currently means `customer_id` is to be same type as `custName`.
+>
+>
 
-\[It's a wart that in the record declaration, we've had to repeat the type of `customer_id` when the `fieldLabel` decl has already stipulated `Int`. It is legal syntax to omit the type in the record decl, but that currently has a different effect:
-
-
-```wiki
-    data ... = Cust_NA { customer_id, custName :: String, ... }
-```
-
-
-currently means `customer_id` is to be same type as `custName`.
-
-
-
-Opportunity for improvement! \]
-
+>
+>
+> Opportunity for improvement! \]
+>
+>
 
 ### Record/field update
 
