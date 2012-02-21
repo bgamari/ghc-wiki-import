@@ -123,6 +123,12 @@ Did that just re-open the back door to the abstraction?
 >
 >
 
+>
+>
+> Also, without the signature for `customer_id`, I don't know its result type. So I can't efficitently generate type instances for `GetResult`. (That is, I'd generate a type instance for each record type it appears in, with every one returning result `Int`.)
+>
+>
+
 ### Should `get` have a Proxy argument? (and should `set` ?)
 
 
