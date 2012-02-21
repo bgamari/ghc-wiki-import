@@ -109,7 +109,7 @@ Did that just re-open the back door to the abstraction?
 
 
 ```wiki
-       e { x = True } ===> set (undefined ::: "x") True e       -- desugarred
+       e{ x = True } ===> set (undefined ::: "x") True e       -- desugarred
 ```
 
 >
@@ -126,7 +126,7 @@ Did that just re-open the back door to the abstraction?
 
 >
 >
-> Also, without the signature for `customer_id`, I don't know its result type. So I can't efficitently generate type instances for `GetResult`. (That is, I'd generate a type instance for each record type it appears in, with every one returning result `Int`.)
+> Also, without the signature for `customer_id`, I don't know its result type. So I can't cleanly generate type instances for `GetResult`. (That is, I'd generate a type instance for each record type it appears in, with every one returning result `Int`.)
 >
 >
 
