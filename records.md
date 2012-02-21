@@ -51,6 +51,20 @@ In the Persistent data store library, Yesod works around the issue by having the
 
 
 
+Never mind experimental/advanced features, it gets in the way of doing utterly dull things like:
+
+
+- look up an entity by name (such as a customer or dictionary entry)
+- get its identifier xxx\_id
+- link that same field name xxx\_id in other record types to create/read/update/delete,
+- without having to copy the darn value to xyz\_id, pqr\_id, ...
+
+
+And inhibits doing relatively low-level generic/polymorphic stuff like standard print-formatting for any records with lastName and firstName fields.
+-- added by AntC 21-Feb-2012
+
+
+
 The verbose name-spacing required is an in-your-face, glaring weakness telling you there is something wrong with Haskell. This issue has been solved in almost every modern programming languages, and there are plenty of possible solutions available to Haskell.
 
 
@@ -116,7 +130,11 @@ The discussion has many similarities with the original Type directed name resolu
 
 
 
-All of the name-space mechanisms require some level of user-supplied disambiguation: if there are two fields `a` in scope, you must use a qualified name to disambiguate them.  What is tantalising about this is that the *type* of the argument immediately specifies which one you mean. There is really no ambiguity at all, so it is frustrating to have to type qualified names to redundantly specify that information.  Object-oriented languages take for granted this form of type-directed disambiguation.
+~~All~~ Most of the name-space mechanisms require some level of user-supplied disambiguation: if there are two fields `a` in scope, you must use a qualified name to disambiguate them.  What is tantalising about this is that the *type* of the argument immediately specifies which one you mean. There is really no ambiguity at all, so it is frustrating to have to type qualified names to redundantly specify that information.  Object-oriented languages take for granted this form of type-directed disambiguation.
+
+
+
+Haskell already has a (tried and tested) mechanism to disambiguate where "the *type* of the argument immediately specifies which one you mean" -- namely class/method/instance resolution. The DORF proposal uses this mechanism (and this mechanism alone: no funny-hand-shake syntax) -- AntC 21-Feb-2012
 
 
 
