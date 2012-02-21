@@ -165,7 +165,7 @@ uses familiar type instance resolution to figure out from record type `r` how to
 >
 
 
-See \<Dot as Postfix Func Apply\> for that dot notation, but note that nothing in this proposal assumes dot notation will be needed.\]
+See [Dot as Postfix Function Apply](records/declared-overloaded-record-fields/dot-postfix) for that dot notation, but note that nothing in this proposal assumes dot notation will be needed.\]
 
 
 
