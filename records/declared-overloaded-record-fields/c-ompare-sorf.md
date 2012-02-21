@@ -120,9 +120,16 @@ Did that just re-open the back door to the abstraction?
 
 >
 >
-> So I can break the abstraction by updating a record/field I can't even `get` ??
+> So I can break the abstraction by updating a record/field I can't even `get` ?? Perhaps the desugarring should be:
 >
 >
+> ```wiki
+>                 ===> set (undefined ::: "x") (True `asTypeOf` x (set (undefined ::: "x") True e)) e
+>                                                    --         ^^^ make sure the selector function is in scope
+>                                                    --         (and with the right types inferencable)
+>                                                    --         yeuch!! with bells on 
+> ```
+
 
 >
 >
