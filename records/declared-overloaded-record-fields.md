@@ -305,7 +305,7 @@ You can (continue to) use pattern matching and data constructor tagging for reco
 
 ```wiki
     case r of {
-      Cust_Price {unit_Price, ..}    -> Cust_Price {unit_Price = unit_Price * 1.05, .. }
+      Cust_Price{ unit_Price, .. }    -> Cust_Price{ unit_Price = unit_Price * 1.05, .. }
       }                                          -- increases Price by 5%
 ```
 
@@ -326,7 +326,7 @@ Returns a record with same fields as `myPrice`, except a different `unit_Price`.
 
 
 
-Note that upon first encountering that expression, we don't know the record types (because `unit_Price` is overloaded). So the types initially inferred are:
+Upon first encountering that expression, we don't know the record types (because `unit_Price` is overloaded). So the types initially inferred are:
 
 
 ```wiki
@@ -339,7 +339,7 @@ That is, the update might be changing the record type as well as the field type 
 
 
 
-Behind the scenes, the update syntax with an expression prefix to the `{ ... }` is syntactic sugar for a call to the polymorphic record update method `set`:
+Behind the scenes, the update syntax with an expression prefix `e{ ... }` (as opposed to a data constructor `MkT{ .. }`) is syntactic sugar for a call to the polymorphic record update method `set`:
 
 
 ```wiki
@@ -359,7 +359,7 @@ You can update multiple fields at the same time:
 
 
 ```wiki
-    myCustNA { firstName = "Fred", lastName = "Dagg" }
+    myCustNA{ firstName = "Fred", lastName = "Dagg" }
 ```
 
 >
