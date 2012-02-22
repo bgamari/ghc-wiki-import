@@ -59,7 +59,7 @@ Perhaps then we could avoid the need for the new `fieldLabel`, instead this decl
 
 >
 >
-> makes customer\_id available as a field label. (That is, the record constraint is not added by the compiler, you must put it explicitly.)
+> makes `customer_id` available as a field label. (That is, the record constraint is not added by the compiler, you must put it explicitly.)
 >
 >
 
@@ -109,7 +109,7 @@ Did that just re-open the back door to the abstraction?
 
 
 ```wiki
-       e{ x = True } ===> set (undefined ::: "x") True e       -- desugarred
+       e{ x = True } ===> set (undefined ::: "x") True e       -- desugarred to use a String Kind
 ```
 
 >
