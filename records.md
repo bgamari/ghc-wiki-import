@@ -190,8 +190,8 @@ Roy](http://roy.brianmckenna.org/), a functional language that targets only java
 
 
 
-Ur/Web has a [
-very advanced records system](http://www.impredicative.com/ur/tutorial/tlc.html). If someone could explain how it works that would be very helpful!
+\[Ur/Web has a http://www.impredicative.com/ur/tutorial/tlc.html very advanced records system\]. If someone could look at [
+the UR implementation paper](http://adam.chlipala.net/papers/UrPLDI10/UrPLDI10.pdf) and attempt to distill a records explanation to a Haskell point of view that would be very helpful!
 
 
 
