@@ -110,7 +110,11 @@ Syntax directed name resolution doesn't use dots at all, the dot remains functio
 
 
 
-The benefit of abstracting over field names in Overloading is being able to write code that works against any Record with a given field. So I can have a function:
+The DORF proposal is a variant of SORF with similar goals. However, it only solves the narrow name-spacing issue within a module. If a record is imported into another module, it will still clash.
+
+
+
+DORF and SORF abstract over fields. The benefit of abstracting over field names is being able to write code that works against any Record with a given field. So I can have a function:
 
 
 ```wiki
@@ -131,7 +135,11 @@ The advantage of Namespacing is that the implementation is clear, straightforwar
 - the extra constraints complicated the type checker and did not play well with higher kinded type variables (at least in the code I had then, I do not claim that this is nessecarily so).
 
 
-Overloading without abstraction over fields may be able to avoid some of these potential downsides, and a judicious (no virtual fields, etc) implementation of either could look very similar to the programmer.
+SORF without abstraction over fields may be able to avoid some of these potential downsides, and a judicious (no virtual fields, etc) implementation of either could look very similar to the programmer.
+
+
+
+SORF has also been recognized as an approach to internal type resolution, whereas namespacing would require an internal SORF-like step or some other approach to avoid the need for lots of annotations.
 
 
 ### Type directed name resolution
@@ -191,7 +199,7 @@ Other FP languages where I looked for a record implementation but it appeared th
 
 
 
-I couldn't find great specific information on record implementation ML variants. Best I can tell, SML does not allow records in the same module with the same field. Records from other modules require name-spacing or must be opened up similar to Agda. 
+I couldn't find great specific information on record implementation ML variants other than SML\#. Best I can tell, SML does not allow records in the same module with the same field. Records from other modules require name-spacing or must be opened up similar to Agda. 
 
 
 ### Problems with using the current module namespace mechanism
