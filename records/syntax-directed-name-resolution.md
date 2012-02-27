@@ -249,6 +249,11 @@ the platform at least.  Can the new "generalized deriving" feature replace
 ugly TH splices with a nice deriving clause or would that need to be built in?  At the least I think it would need an extension to suppress record declaration's automatic creation of get functions.
 
 
+
+An example of an advantage of using lens libraries: fclabels has a notion of "partial lenses" that can return Nothing.  People who like that feature can have the lens deriver generate a partial lenses for `x` but a total lens for `y` in
+`data R = R1 { x, y :: Int } | R2 { y :: Int }` which would solve the problem in a nice typesafe way rather than generating a `x` function that fails at runtime.  If we have built in lenses, or a record system with a built-in way of generating record accessors (morally equivalent), then we are stuck with whatever choice was baked into ghc.  Hopefully it's Maybe rather than runtime errors, but at least using an external lens library lets you retroactively fix things like that.
+
+
 ## pros
 
 
