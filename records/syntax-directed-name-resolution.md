@@ -99,6 +99,7 @@ Unfortunately, it doesn't work with a lens get:
 ```wiki
 get :: Lens record field -> record -> field
 val = get #a record
+-- Due to type of 'get' and known type of 'record':
 #a :: Lens M.Record field
 -- Oops, can't apply # reduction, because its first argument type is 'Lens ...'
 -- not 'M.Record ...'.
@@ -134,8 +135,9 @@ import qualified M
 get :: Lens record field -> record -> field
 val = get #a record
 
+-- Due to type of 'get' and known type of 'record':
 #a :: Lens M.Record field
--- # resolution on Lens:
+-- # resolution on Lens M.Record:
 M.a :: Lens M.Record Int
 -- val is
 val = get M.a record
@@ -189,7 +191,7 @@ val = set (#b!#a) 42
 (#b!#a) :: Lens Outer.Outer field
 -- Due to the definition of (!) and its return type being known:
 #a :: Lens Outer.Outer b
--- # resolution on Lens:
+-- # resolution on Lens Outer.Outer:
 Outer.a :: Lens Outer.Outer Inner.Inner
 -- Due to the second argument of (!) being known:
 #b :: Lens Inner.Inner c
