@@ -110,7 +110,7 @@ Syntax directed name resolution doesn't use dots at all, the dot remains functio
 
 
 
-The DORF proposal is a variant of SORF with similar goals. However, it only solves the narrow name-spacing issue within a module. If a record is imported into another module, it will still clash.
+The DORF proposal is a variant of SORF with similar goals. ~~\~However, it only solves the narrow name-spacing issue within a module. If a record is imported into another module, it will still clash.~~\~ It is perfectly possible to import Declared Overloaded Record Fields into other modules, and 'share' them in records declared in the importing module (and use the selector function for both the declared records and records imported). Alternatively, if the names are an 'accidental' clash, use qualified naming. (The type system prevents using the 'wrong' selector for a record type.). This is no worse than existing H98 modules/qualified naming. -- corrected by AntC, author of DORF.
 
 
 
