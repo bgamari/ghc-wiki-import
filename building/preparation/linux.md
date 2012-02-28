@@ -77,8 +77,7 @@ For building the documentation: (User's Guide and Cabal guide):
 
 
 - `docbook-utils`
-- `docbook-utils-pdf`
-- `docbook-style-xsl`
+- `dblatex`
 
 
 other packages that are useful for development:
