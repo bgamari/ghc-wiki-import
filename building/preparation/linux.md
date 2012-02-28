@@ -64,10 +64,6 @@ But this might install some packages you do not use in your system (e.g. lintian
 - `libtool`
 - `make`
 
-- `automake`
-- `perl`
-- `python`
-
 
 For building the documentation: (User's Guide and Cabal guide):
 
@@ -80,6 +76,4 @@ For building the documentation: (User's Guide and Cabal guide):
 other packages that are useful for development:
 
 
-- `strace`
-- `patch`
 - `linux-tools-<version>` (includes `perf`, see [Debugging/LowLevelProfiling/Perf](debugging/low-level-profiling/perf))
