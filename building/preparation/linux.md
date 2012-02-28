@@ -61,7 +61,7 @@ But this might install some packages you do not use in your system (e.g. lintian
 
 
 ```wiki
-   sudo apt-get install haskell-platform git autoconf libtool make
+   sudo apt-get install haskell-platform git autoconf libtool make libncurses5-dev
 ```
 
 
