@@ -8,7 +8,11 @@ It requires the type of its argument to be monomorphic.  An application
 on the concrete type of `M.a`.  All it does is strip the module part off off
 the argument type, and look for the symbol `a` in that module.  The module
 must be imported qualified for the resolution to happen, so compiling a
-certain module only needs to look at its direct dependents.
+certain module only needs to look at its direct dependents.  As a degenerate case,
+if the argument type is defined in the current module then typing `#a` will resolve to just
+`a`.  This is nice because if you define a bunch of code in the same module as
+the record you can then copy-paste it into a new module without having to update
+every single reference, as long as you used `#` consistently.
 
 
 
@@ -98,7 +102,7 @@ Unfortunately, it doesn't work with a lens get:
 
 ```wiki
 get :: Lens record field -> record -> field
-val = get #a record
+val = get #a (M.Record 42)
 -- Due to type of 'get' and known type of 'record':
 #a :: Lens M.Record field
 -- Oops, can't apply # reduction, because its first argument type is 'Lens ...'
@@ -133,7 +137,7 @@ data M.Record = Record { a :: Int } deriving (Lens)
 import qualified M
 
 get :: Lens record field -> record -> field
-val = get #a record
+val = get #a (M.Record 42)
 
 -- Due to type of 'get' and known type of 'record':
 #a :: Lens M.Record field
@@ -181,13 +185,10 @@ Main.hs:
 -- partially apply as well:
 set :: Lens record field -> field -> record -> record
 
-record :: Outer.Outer
-record = Outer.Outer (Inner.Inner 42)
+setB :: Outer.Outer -> Outer.Outer
+setB = set (#b!#a) 42
 
-val :: Outer.Outer -> Outer.Outer
-val = set (#b!#a) 42
-
--- Due to the type of 'set' and the type of 'record' already being known:
+-- Due to the type of 'set' and the type 'Outer.Outer' being declared in 'setB':
 (#b!#a) :: Lens Outer.Outer field
 -- Due to the definition of (!) and its return type being known:
 #a :: Lens Outer.Outer b
@@ -198,7 +199,7 @@ Outer.a :: Lens Outer.Outer Inner.Inner
 -- # resolution on Lens
 Inner.b :: Lens Inner.Inner Int
 -- result is
-val = set (Inner.b ! Outer.a) 42 record
+setB = set (Inner.b ! Outer.a) 42
 ```
 
 
@@ -214,7 +215,7 @@ b = lens b_ (\rec b -> rec { b_ = b })
 ```
 
 
-This is the same as TH macros for existing lens libraries.
+This is the same as TH macros for existing lens libraries.  And, of course, the old record update syntax is still down there, since the lens is built on top of it.  We can just stop using it so much.  Since it's backward compatible, we can gradually convert existing programs, there is no need for a giant patch of doom that has to simultaneously update an important record to the new records and to update all its call sites.
 
 
 
