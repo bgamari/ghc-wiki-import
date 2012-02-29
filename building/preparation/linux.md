@@ -61,11 +61,11 @@ But this might install some packages you do not use in your system (e.g. lintian
 
 
 ```wiki
-   sudo apt-get install haskell-platform git autoconf libtool make libncurses5-dev g++
+   sudo apt-get install haskell-platform git autoconf libtool make ncurses-dev g++
 ```
 
 
-(`libncurses5-dev` is needed by the `terminfo` package, and `g++` is needed by a couple of tests, `ghcilink003` and `ghcilink006`).
+(`ncurses-dev` is needed by the `terminfo` package, and `g++` is needed by a couple of tests, `ghcilink003` and `ghcilink006`).
 
 
 
