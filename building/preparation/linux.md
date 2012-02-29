@@ -41,7 +41,7 @@ other packages that are useful for development:
 - `strace`
 - `patch`
 
-## Debian-based systems (e.g. Debian, Ubuntu)
+## Debian, Ubuntu, and other Debian-based systems
 
 
 
