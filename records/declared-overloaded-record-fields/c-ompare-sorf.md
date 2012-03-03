@@ -29,7 +29,7 @@ The module namespacing in DORF is deliberate, and for exactly the same reason as
 
 
 
-In contrast: "The \[SORF\] proposal ... doesn't allow label names to be scoped: if one module internally uses "field" as a label name then another module can break the abstraction by using the same string "field"." SPJ goes on to discuss a work-round which he sees as "ugly", and concludes "we need scoped instances". DORF does not need any innovations around instances or type inference.
+In contrast: "The \[SORF\] proposal ... doesn't allow label names to be scoped: if one module internally uses "field" as a label name then another module can break the abstraction by using the same string "field".". DORF does not need any innovations around instances or type inference.
 
 
 
