@@ -143,7 +143,7 @@ Support 'flagging' in the record declaration whether field names are intended to
 >
 
 
-The field selectors result type `-> Int` means the field's domain (type) is `Int` -- it's just a type.
+The field selector's result type `-> Int` means the field's domain (type) is `Int` -- it's just a type.
 We might also want to constrain the record -- for example to be sure it is savable to persistent storage:
 
 
