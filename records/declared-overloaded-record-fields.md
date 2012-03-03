@@ -255,13 +255,13 @@ The field selector function is separately declared vs. the records and their fie
 
 ```wiki
 {-# OPTIONS_GHC -XDeclaredOverloadedRecordFields             #-}
-module M( x )       where
+module M( x, T )       where
     fieldLabel x,y :: r -> Int
     data T = MkT { x, y :: Int }
 ```
 
 
-Here only the field selector function `x` is exported. The representation is abstract, the client can't construct or dismantle a record type `T`;
+Here only the field selector function `x` and type `T` are exported. The representation is abstract, the client can't construct or dismantle a record type `T`;
 
 
 >
@@ -287,7 +287,7 @@ then you are exporting the `x` field within record type `T`, but not the field s
 
 
 
-Type `T` and field label `x` are exported, but not data constructor `MkT`, so `x` is (almost) unusable. (It can be used to update an existing record (without changing its record constructor) using syntax: `r{ x = 57 }`.)
+Type `T` and field label `x` are exported, but not data constructor `MkT`, so `x` is unusable. (It can't even be used to update an existing record using syntax: `r{ x = 57 }`, because that syntax now has a different semantics.)
 
 
 >
