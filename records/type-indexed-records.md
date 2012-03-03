@@ -1,5 +1,5 @@
 
-Proposal for new Haskell record system. Record selection is simple operator. Keys are arbitrary types.
+Proposal for new Haskell record system. Record selection is simple operator. Keys are arbitrary types. Scope is controlled as scope of key types.
 
 
 # Basics
@@ -18,7 +18,7 @@ which means that r has member of type v with key type k, and for types with muta
 
 
 ```wiki
-class (Has k u r, Has k v s) => Quasifunctor r s k u v where qfmap :: k -> (u -> v) -> r -> s;
+class (Has k u r, Has k v s) => Quasifunctor k u v r s where qfmap :: k -> (u -> v) -> r -> s;
 ```
 
 
@@ -26,6 +26,60 @@ which means that r and s have members of types u and v, in turn, both with selec
 
 
 
-More to follow.
+A record type is of the form
+
+
+```wiki
+type R a b c ... = { X ::. a, Y ::. b, Z ::. c, ... };
+```
+
+
+which automatically generates
+
+
+```wiki
+instance Has X a (R a b c ...);
+instance Has Y b (R a b c ...);
+instance Has Z c (R a b c ...);
+...
+instance Quasifunctor X a a' (R a b c ...) (R a' b c ...);
+instance Quasifunctor Y b b' (R a b c ...) (R a b' c ...);
+instance Quasifunctor Z c c' (R a b c ...) (R a b c' ...);
+...
+```
+
+## Record selection and mutation
+
+
+
+Let
+
+
+```wiki
+type R a b c = { X ::. a, Y ::. b, Z ::. c, ... };
+
+-- keys
+data X = X;
+data Y = Y;
+data Z = Z;
+```
+
+
+Then `r.X :: a` is the member of `r` at `X`, and `qfmap X f r` is `r` mutated by `f` at `X`; thus also for other keys `Y`, `Z`, ....
+We might define some sugar for `qfmap`.
+
+
+
+We can define
+
+
+```wiki
+x = X;
+y = Y;
+z = Z;
+```
+
+
+to allow `r.x`, `r.y`, `r.z`, ....
 
 
