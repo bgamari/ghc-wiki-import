@@ -99,6 +99,38 @@ That is: the `r{ ... }` constraint is added by the desugarer (and will be furthe
 >
 >
 
+### Option Three: Mixed In-situ and Declared ORF
+
+
+>
+>
+> (See discussion at [
+> http://www.haskell.org/pipermail/glasgow-haskell-users/2012-March/022061.html](http://www.haskell.org/pipermail/glasgow-haskell-users/2012-March/022061.html) "My main complaint against DORF is that having to write fieldLabel declarations for every field you want to use is onerous.")
+>
+>
+
+
+There may be some (perhaps most) of the field names in a record type that appear only in that record type. Then this:
+
+
+```wiki
+data Cust_AdHoc = CustAH{ customer_id :: Int, x, y :: String } sharing (customer_id) deriving (...)
+```
+
+
+For the non-shared x and y, saves the burden of a `fieldLabel`, by declaring it for you:
+
+
+```wiki
+        data Proxy_x
+        x :: Cust_AdHoc{ x :: String } => Cust_AdHoc -> String    -- Note: monomorphic record type
+        x r = get r (undefined :: Proxy_x)
+```
+
+
+So field selector function x has the same type (in effect) as would have the H98 field selector.
+
+
 ### Syntactic sugar for `Has`
 
 
