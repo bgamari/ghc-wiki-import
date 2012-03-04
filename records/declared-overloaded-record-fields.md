@@ -149,12 +149,14 @@ That is:
 
 - for `share` fields, this is declaring them as sharable.
 
+
+** [Option Four: Type Punning on the \`fieldLabel\`](records/declared-overloaded-record-fields/option-four-type-punning) ** q.v.
+
+
 >
-> >
-> >
-> > \[End of 3-March addition.\]
-> >
-> >
+>
+> \[End of 3-March addition.\]
+>
 >
 
 
