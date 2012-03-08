@@ -1,7 +1,7 @@
 # Declared Overloaded Record Fields (DORF)
 
 
-## Thumbnal Sketch
+## Thumbnail Sketch
 
 
 
@@ -126,7 +126,7 @@ I'm avoiding giving implementation details here -- see:
 
 >
 >
-> The Implementor's view; and Comparison to SORF   (links above)
+> The Implementer's view; and Comparison to SORF   (links above)
 >
 >
 
