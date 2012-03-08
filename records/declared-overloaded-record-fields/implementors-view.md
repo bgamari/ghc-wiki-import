@@ -1,4 +1,4 @@
-# DORF -- Implementor's view
+# DORF -- Implementer's view
 
 
 
