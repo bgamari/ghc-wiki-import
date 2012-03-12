@@ -48,11 +48,26 @@ TPDORF approaches h-r fields in a different way, which supports both setting and
 
 
 
-**The main insight** is that to manage large-scale data models (in which namespacing becomes onerous
+**The main insight** is that to manage large-scale data models (in which namespacing becomes onerous, and name sharing would be most beneficial), there are typically strong naming conventions and representation hiding for critical fields. For example:
+
+
+```wiki
+    newtype Customer_id = Customer_id Int                               -- data dictionary, could be a data decl
+                                                                        -- constructor named same as type
+    data Customer = Customer {                                          -- likewise
+         customer_id :: Customer_id                                     -- field name puns on the type
+       , firstName   :: String                                          -- not a critical/shared field
+       , lastName    :: String
+       , ...   
+       }       sharing (customer_id, ...)  deriving (...)               -- new sharing syntax
+```
+
+
+TPDORF makes a virtue of this punning. (So extend's H98's and NamedFieldPuns punning on the field name.) This allows for some syntactic shortcuts, but still supporting H98-style declaring field names within the record decl for backwards compatibility.
 
 
 
-, there is a third argument for the field's resulting type. This is set at the instance level using equality constraints in a functional-dependencies style. Here is the `Has` class (`r` is the record, `fld` is the proxy type for the field, `t` is the field's type), with an example record declaration, its `Has` instance, and examples of use:
+Here is the `Has` class with instances for the above Customer record, and examples of use:
 
 
 ```wiki
