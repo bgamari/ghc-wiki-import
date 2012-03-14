@@ -99,7 +99,7 @@ foreign import prim "int2Integerzh"
 ```
 
 
-The string (e.g. "int2Integerzh") is the linker name of the Cmm function. Using this syntax requires the extensions `ForeignFunctionInterface`, `GHCForeignImportPrim`, `MagicHash`, `UnboxedTuples` and `UnliftedFFITypes`. The current type restriction is that all arguments and results must be unlifted types. Additionally the result type is allowed to be an unboxed tuple. The calling convention is exactly the same as for ordinary out-of-line primops. Currently it is not possible to specify any of the PrimOp attributes.
+The string (e.g. "int2Integerzh") is the linker name of the Cmm function. Using this syntax requires the extensions `ForeignFunctionInterface`, `GHCForeignImportPrim`, `MagicHash`, `UnboxedTuples` and `UnliftedFFITypes`. The current type restriction is that all arguments and results must be unlifted types, with two additional possibilities: An argument may (since GHC 7.5) be of type !Any (in which case the called function will receive a pointer to the heap), and the result type is allowed to be an unboxed tuple. The calling convention is exactly the same as for ordinary out-of-line primops. Currently it is not possible to specify any of the PrimOp attributes.
 
 
 
