@@ -153,6 +153,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Features
 
 
+- [\#5927](https://gitlab.staging.haskell.org/ghc/ghc/issues/5927): Constraints with universal quantification
 - [\#5630](https://gitlab.staging.haskell.org/ghc/ghc/issues/5630): External core needs love
 - [\#5429](https://gitlab.staging.haskell.org/ghc/ghc/issues/5429): docase and joinads
 - [\#5391](https://gitlab.staging.haskell.org/ghc/ghc/issues/5391): better deriving Typeable
