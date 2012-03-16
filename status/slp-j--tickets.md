@@ -9,7 +9,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#5321](https://gitlab.staging.haskell.org/ghc/ghc/issues/5321): slow constraint solving
 - [\#4347](https://gitlab.staging.haskell.org/ghc/ghc/issues/4347), [\#4295](https://gitlab.staging.haskell.org/ghc/ghc/issues/4295): impredicativity
 - [\#5320](https://gitlab.staging.haskell.org/ghc/ghc/issues/5320): overlap delicacy
-- [\#5939](https://gitlab.staging.haskell.org/ghc/ghc/issues/5939): Pedro's generics
+- [\#5939](https://gitlab.staging.haskell.org/ghc/ghc/issues/5939), [\#5936](https://gitlab.staging.haskell.org/ghc/ghc/issues/5936): Pedro's generics
 
 ### Arity
 
