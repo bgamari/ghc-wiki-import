@@ -29,7 +29,7 @@ The final `Kind` constructor does not need any special binder construct because 
 
 
 
-TH will also need to support promoted constructors other than lists and tuples, but this is in fact already supported through the use of `ConT`. The namespace of defined types and of promoted types is already kept distinct. For example, if we have the definition `data Foo = Foo`, the results of ` [t| Foo |] ` and ` [t| 'Foo |] ` are distinct (as in, `==` returns `False`). However, applying `show` to these two results produces the same string.
+TH will also need to support promoted constructors other than lists and tuples, but this is in fact already supported through the use of `ConT`. The namespace of defined types and of promoted types is also already kept distinct. For example, if we have the definition `data Foo = Foo`, the results of ` [t| Foo |] ` and ` [t| 'Foo |] ` are distinct (as in, `==` returns `False`). However, applying `show` to these two results produces the same string.
 
 
 
