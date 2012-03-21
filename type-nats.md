@@ -29,18 +29,16 @@ This page collects information on how to work with type-level natural numbers, a
 - [
   Axioms for type-level type operators](http://github.com/yav/tc-solver/blob/master/docs/axioms.md)
 
-## External links
+## Source Code
 
 
-- Where to find relevant source code:
-
-  - [
-    type-nats branch of GHC](http://darcs.haskell.org/cgi-bin/gitweb.cgi?p=ghc.git;a=shortlog;h=refs/heads/type-nats)
-  - [
-    type-nats branch of the base library](http://darcs.haskell.org/cgi-bin/gitweb.cgi?p=packages/base.git;a=shortlog;h=refs/heads/type-nats)
-  - [
-    type nats branch of template-haskell](http://darcs.haskell.org/cgi-bin/gitweb.cgi?p=packages/template-haskell.git;a=shortlog;h=refs/heads/type-nats)
-  - Also, there is a type-nats branch for 'haddock'.
+- [
+  type-nats branch of GHC](http://darcs.haskell.org/cgi-bin/gitweb.cgi?p=ghc.git;a=shortlog;h=refs/heads/type-nats)
+- [
+  type-nats branch of the base library](http://darcs.haskell.org/cgi-bin/gitweb.cgi?p=packages/base.git;a=shortlog;h=refs/heads/type-nats)
+- [
+  type nats branch of template-haskell](http://darcs.haskell.org/cgi-bin/gitweb.cgi?p=packages/template-haskell.git;a=shortlog;h=refs/heads/type-nats)
+- Also, there is a type-nats branch for 'haddock'.
 
 
   
