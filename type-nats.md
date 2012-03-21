@@ -29,15 +29,8 @@ This page collects information on how to work with type-level natural numbers, a
 
 
 - [Implementation of GHC.TypeNats](type-nats/implementation)
-- [Axioms for Natural Number Operators](type-nats/axioms)
-- GHC Interaction Rules ([Notational Conventions](type-nats/rule-notation))
-
-  - [Top-Level Interactions](type-nats/interact1)
-  - [Simple Inert Interactions](type-nats/interact2)
-  - [Solving (\<=) Predicates](type-nats/leq)
-  - XXX: Write the new rules
-- Translation to FC
-- Precedences for infix predicates such as \~ and \<=
+- [
+  Axioms for type-level type operators](http://github.com/yav/tc-solver/blob/master/docs/axioms.md)
 
 ## External links
 
