@@ -138,14 +138,15 @@ One approach is to use an explicit parameter of type `TNat n`.  For example:
 
 ```wiki
 memset :: Storable a => ArrPtr n a -> a -> TNat n -> IO ()
-memset = ...
+memset (ArrPtr p) a n = mapM_ (\i -> pokeElemOff p i a)
+                                   [ 0 .. fromIntegral (tNatInteger n - 1) ]
 ```
 
 
 This style is, basically, a more typed version of what is found in many standard C libraries.
 Callers of this function have to pass the size of the array explicitly, and the type system checks that the
-size matches that of the array. When defining `memset` we can just use `tNatInteger`\` on the `TNat n`
-parameter to get the actual value of the array size.
+size matches that of the array.  Note that in the implementation of `memset` we used `tNatInteger`
+to get the concrete integer associated with the singleton type.
 
 
 
@@ -154,7 +155,7 @@ Another approach is to let the system infer the parameter by using the class `Na
 
 ```wiki
 memsetAuto :: (Storable a, NatI n) => ArrPtr n a -> a -> IO ()
-memsetAuto = ...
+memsetAuto ptr a = withTNat (memset arr a)
 ```
 
 
