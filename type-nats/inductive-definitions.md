@@ -7,7 +7,7 @@ which make it possible to define inductive functions using `TNat` values.
 
 
 
-The first view provides the same functionality as usual
+The first view provides the same functionality as the usual
 Peano arithmetic definition of the natural numbers.  It
 is useful when using `TNat` to count something.
 
