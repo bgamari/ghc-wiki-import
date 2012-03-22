@@ -1,36 +1,43 @@
-CONVERSION ERROR
+# Multi-instance packages
 
-Original source:
 
-```trac
-= Multi-instance packages =
 
 This page is about how to change the package system to allow multiple instances of a package to be installed at the same time.  There are two reasons we want to be able to do this:
 
- * To be able to track the different "ways" in which a package is available: e.g. profiling, dynamic.  At the moment, the package database doesn't track this information, with the result that the user has to reinstall packages with `--enable-profiling` on a trial-and-error basis in order to get profiling support for packages they have already installed.
 
- * To make installing new packages more robust.  When installing a new package, we sometimes need to upgrade packages that are already installed to new versions, which may require recompiling other packages against the new version.  For example, if we have P1 installed, Q1 depends on P (any version), and we need to install R that depends on both P2 and Q1.  We need to build P2, rebuild Q1 against P2, and finally build R against P2 and the new Q1.  We would like to do this without removing P1 or the old Q1 from the package database, because other packages may be depending on the old Q1, and we don't want to break those packages (which is what currently happens with GHC 7.0).
+- To be able to track the different "ways" in which a package is available: e.g. profiling, dynamic.  At the moment, the package database doesn't track this information, with the result that the user has to reinstall packages with `--enable-profiling` on a trial-and-error basis in order to get profiling support for packages they have already installed.
 
-== !ToDo list ==
+- To make installing new packages more robust.  When installing a new package, we sometimes need to upgrade packages that are already installed to new versions, which may require recompiling other packages against the new version.  For example, if we have P1 installed, Q1 depends on P (any version), and we need to install R that depends on both P2 and Q1.  We need to build P2, rebuild Q1 against P2, and finally build R against P2 and the new Q1.  We would like to do this without removing P1 or the old Q1 from the package database, because other packages may be depending on the old Q1, and we don't want to break those packages (which is what currently happens with GHC 7.0).
 
- * ghc-pkg: do not overwrite previous instances in the package DB
+## ToDo list
 
- * GHC: discard conflicting instances during its shadowing phase
 
- * GHC: allow specifying a package instance in the -package flags
+- ghc-pkg: do not overwrite previous instances in the package DB
 
- * instances of packages must install in a different location
-   * install directory includes hash?
+- GHC: discard conflicting instances during its shadowing phase
+  ** SDM: GHC will currently do \*something\* here, but it might end up with a result that the user didn't want/expect.  One way to improve things is to prioritise packages that were installed more recently.
+  ** Andres suggests that GHC should be much cleverer, and look at the actual dependencies of the modules being compiled before deciding which packages to enable.  This would almost certainly result in more things working and possibly less surprising behaviour sometimes, but Simon thinks that (a) it is too hard, (b) if users need this, they should use Cabal and its dependency resolver, which will do a good job, (c) you can often resolve problems by adding `-package X`, and (d) eventually we will want a system where users manage separate sessions, so they can set up an environment in which the packages they want are available.  This has a lot in common with `cabal-dev` and sandboxes, so the mechanisms (and concepts) should be shared.
 
- * ghc-pkg cleanup: remove old/unused instances of packages
-   * how can we tell when something is unnecessary?
+- GHC: allow specifying a package instance in the -package flags
+  ** SDM: already done
+  **
 
- * Add the "way" to InstalledPackageInfo, include the way in the hash
+- instances of packages must install in a different location
 
- * GHC: slice the package DB during startup according to the correct way
+  - install directory includes hash?
+  - SDM: not done yet.  One problem is that we don't know the hash until the package is built, but we need to know the install locations earlier because we bake them into `Paths_foo.hs`.
 
- * Cabal: fix up the dep resolver
+- ghc-pkg cleanup: remove old/unused instances of packages
 
- * Cabal: ways?
+  - how can we tell when something is unnecessary?
 
-```
+## Next step: dealing with ways
+
+
+- Add the "way" to InstalledPackageInfo, include the way in the hash
+
+- GHC: slice the package DB during startup according to the correct way
+
+- Cabal: fix up the dep resolver
+
+- Cabal: ways?
