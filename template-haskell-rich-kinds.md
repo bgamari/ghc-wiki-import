@@ -22,7 +22,6 @@ A proposed change will add the following constructors to TH's `Type` datatype...
 ```wiki
 | ConK Name               -- for kinds of the form Bool
 | VarK Name               -- k
-| ForallK [Name] Kind     -- forall k. ...
 | AppK Kind Kind          -- k1 k2
 | ListK                   -- []
 | TupleK Int              -- (), (,), ...
@@ -30,7 +29,7 @@ A proposed change will add the following constructors to TH's `Type` datatype...
 ```
 
 
-The final `Kind` constructor does not need any special binder construct because all kinds are of sort `BOX`.
+Note that there is no `ForallK` constructor because the internal GHC representation for kinds with variables does not use this. Kinds are automatically generalized over an entire type expression.
 
 
 
