@@ -10,7 +10,7 @@ There is to be a compiler flag **-XNoMonoRecordFields**. (Default value **‑XMo
 
 
 
--XNoMonoRecordFields suppresses creating the field selector function from the field name in a record-style data declaration.
+`-XNoMonoRecordFields` suppresses creating the field selector function from the field name in a record-style data declaration.
 
 
 
@@ -18,11 +18,17 @@ Suppressing the function frees up the namespace, to be able to experiment with v
 
 
 
--XNoMonoRecordFields implies -XDisambiguateRecordFields -- otherwise the only way to access record fields is positionally. It also implies ‑XNamedFieldPuns and ‑XRecordWildCards to support field access and update. (IMHO, suppressing the field selector function should always have been part of -XDisambiguateRecordFields. I'm by no means the first to make that observation.) 
+`-XNoMonoRecordFields` implies `-XDisambiguateRecordFields` -- otherwise the only way to access record fields is positionally. It also implies `‑XNamedFieldPuns` and `‑XRecordWildCards` to support field access and update. (IMHO, suppressing the field selector function should always have been part of `-XDisambiguateRecordFields`. I'm by no means the first to make that observation.) 
 
 
 
-Note that the field name is still valid within the scope of a pattern match, or record update inside the {...} constructor syntax.
+Note that the field name is still valid within the scope of a pattern match, or record update inside the `{...}` constructor syntax.
+
+
+
+Example use case: [
+http://www.haskell.org/pipermail/haskell-cafe/2009-May/061879.html](http://www.haskell.org/pipermail/haskell-cafe/2009-May/061879.html) (referred from an old Wiki discussion on TDNR [
+http://www.haskell.org/haskellwiki/TypeDirectedNameResolution](http://www.haskell.org/haskellwiki/TypeDirectedNameResolution) .)
 
 
 ### Import/Export and Representation hiding
@@ -48,6 +54,6 @@ type `T` and field label `x` are exported, but not data constructor `MkT`, so `x
 
 
 
-(Without the ‑XNoMonoRecordFields flag, field selector function `x` would be exported.)
+(Without the `‑XNoMonoRecordFields` flag, field selector function `x` would be exported.)
 
 
