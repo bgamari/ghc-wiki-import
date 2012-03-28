@@ -53,6 +53,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ### Optimiser
 
 
+- [\#5964](https://gitlab.staging.haskell.org/ghc/ghc/issues/5964): casts and RULES interaction
 - [\#5262](https://gitlab.staging.haskell.org/ghc/ghc/issues/5262): seq magic
 - [\#605](https://gitlab.staging.haskell.org/ghc/ghc/issues/605): strict/unboxed enumerations
 - [\#2607](https://gitlab.staging.haskell.org/ghc/ghc/issues/2607): space leak: inlining defeats selector thunk optimisation
