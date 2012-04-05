@@ -103,6 +103,24 @@ instance Typable T where typeRep _ = ....
 i.e. an instance of `T` itself, not applied to anything.
 
 
+### Aside
+
+
+
+Iavor suggested:
+
+
+```wiki
+class Typeable (a :: k) where
+  typeRep :: TTypeRep a
+
+newtype TTypeRep a = TR TypeRep
+```
+
+
+Is this perhaps better?
+
+
 ## A change-over plan
 
 
