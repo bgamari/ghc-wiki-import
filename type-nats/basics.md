@@ -21,7 +21,7 @@ used as parameters to other type constructors, which makes them useful.
 
 
 
-We use this idea to link the type-level literals to specific run-time values *singleton types*.
+We use this idea to link the type-level literals to specific run-time values via *singleton types*.
 The singleton types and some useful functions for working with them are defined in module `GHC.TypeLits`:
 
 
@@ -30,7 +30,7 @@ module GHC.TypeLits where
 ```
 
 
-A *singleton type* is simply a type that has only one interesting inhabitant.  We define a whole family
+A singleton type is simply a type that has only one interesting inhabitant.  We define a whole family
 of singleton types, parameterized by type-level literals:
 
 
@@ -40,7 +40,7 @@ newtype Sing :: a -> *
 
 
 So, for example, `Sing 0`, `Sing 127`, `Sing "hello"`, `Sing "this also`}, are all
-singleton types.  The idea is that the only inhabitant of `Sing n` is the value `n`.  Notice
+singleton types.  The intuition is that the only inhabitant of `Sing n` is the value `n`.  Notice
 that `Sing` has a *polymorphic kind* because sometimes we apply it to numbers (which are of
 kind `Nat`) and sometimes we apply it to symbols (which are of kind `Symbol`).
 
@@ -60,9 +60,9 @@ type instance SingRep (n :: Symbol) = String
 
 
 The function `fromSing` has an interesting type: it maps singletons to ordinary values,
-but the type of the result depends on the *kind* of the index of the singleton.
-So, if we apply it to a value of type `Sing 3` we would get the *number* `3`, but,
-if we apply to a value of type `Sing "hello"` we would get the *string* "hello".
+but the type of the result depends on the *kind* of the singleton parameter.
+So, if we apply it to a value of type `Sing 3` we get the *number* `3`, but,
+if we apply it to a value of type `Sing "hello"` we would get the *string* `"hello"`.
 
 
 
@@ -85,12 +85,6 @@ The only "interesting" value of type `TNat n` is the number `n`.  Technically, t
 The value of a singleton type may be named using `tNat`, which is a bit like a "smart" constructor for `TNat n`.
 Note that because `tNat` is polymorphic, we may have to use a type signature to specify which singleton we mean.  For example:
 
-
-```wiki
-> :set -XDataKinds
-> tNatInteger (tNat :: TNat 3)
-3
-```
 
 
 One may think of the smart constructor `tNat` as being a method of a special built-in class, `NatI`:
