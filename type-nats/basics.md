@@ -8,7 +8,7 @@ symbol literals are types that belong to the kind `Symbol`:
 
 
 ```wiki
-0, 1, 2, ... :: Nat
+0, 1, 2, ...                            :: Nat
 "hello", "world", "some string literal" :: Symbol
 ```
 
@@ -59,10 +59,10 @@ type instance SingRep (n :: Symbol) = String
 ```
 
 
-While the type of `fromSing` looks a bit complex at first it is actually quite simple:
-given a singleton type, it will return either an integer or a string, depending on the *kind* of
-its index.  So, if we apply it to a value of type `Sing 3` we would get the number `3`, but,
-if we apply to a value of type `Sing "hello"` we would get the string "hello".
+The function `fromSing` has an interesting type: it maps singletons to ordinary values,
+but the type of the result depends on the *kind* of the index of the singleton.
+So, if we apply it to a value of type `Sing 3` we would get the *number* `3`, but,
+if we apply to a value of type `Sing "hello"` we would get the *string* "hello".
 
 
 
