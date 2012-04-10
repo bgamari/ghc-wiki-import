@@ -148,6 +148,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 - Blog post: [
   http://hackage.haskell.org/trac/ghc/blog/Template%20Haskell%20Proposal](http://hackage.haskell.org/trac/ghc/blog/Template%20Haskell%20Proposal)
+- [\#5959](https://gitlab.staging.haskell.org/ghc/ghc/issues/5959): top level splices and renaming
 - [\#5416](https://gitlab.staging.haskell.org/ghc/ghc/issues/5416): local modules
 - [\#4364](https://gitlab.staging.haskell.org/ghc/ghc/issues/4364): type synonym loop
 - [\#4372](https://gitlab.staging.haskell.org/ghc/ghc/issues/4372): better quasiquotation support
