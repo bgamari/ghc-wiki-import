@@ -1,5 +1,5 @@
 
-Simple record system with selectors overloaded in explicitly-user-declared type classes.
+Simple record system with selectors overloaded in explicitly-user-declared type classes. Thus one can control the scope as of any other type class.
 
 
 
