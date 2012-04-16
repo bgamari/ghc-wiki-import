@@ -1,6 +1,10 @@
 
 
 
+
+**This page is obsolete**. Please see the [top-level SIMD project page](simd) for further details.
+
+
 # Using SIMD Instructions via the LLVM Backend
 
 
@@ -13,13 +17,6 @@ vector operations](http://llvm.org/docs/LangRef.html#vectorops), LLVM's operatio
 
 The SIMD vector extension to GHC proposed here maps to LLVM's vector type in a straight forward manner, which in turn enables us to target a wide range of hardware capabilities. However, GHC's native code generator will simply map SIMD vector operations to ordinary scalar code (in order to avoid having to deal with the complexities of SSE, AVX, NEON, etc).
 
-
-
-Related pages
-
-
-- [Implementation plan](simd-plan)
-- There is also also the outdated [VectorComputing](vector-computing).
 
 ## Variations in the most widely used SIMD extensions
 
@@ -181,12 +178,5 @@ We could define them more verbosely using a plain `VECTORISE` pragma, but might 
 
 
 **NB:** The use of SIMD instructions interferes with vectorisation avoidance for scalar subcomputations. Code that avoids vectorisation also avoids the use of SIMD instructions. We would like to use SIMD instructions, but still avoid full-scale vectorisation. This should be possible, but it is not immediately clear how to realise it (elegantly).
-
-
-## Implementation Details and Plan
-
-
-
-For implementation details and a plan, refer to the [SIMD Implementation Details and Plan](simd-plan) Page
 
 
