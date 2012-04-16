@@ -1,8 +1,12 @@
+
+Please see the [top-level SIMD project page](simd) for further details.
+
+
 ## Introduction
 
 
 
-This text documents the implementation stages / components for adding SIMD support to GHC.  The overriding requirements and architecture for the project are located back at the [SIMD](simd) Page.
+This text documents the implementation stages / components for adding SIMD support to GHC.
 
 
 
