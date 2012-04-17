@@ -67,7 +67,7 @@ there is no danger of accidentally passing the
 incorrect size for an array.
 
 
-## Hiding the Arrays Size with an Existential
+## Hiding the Array Size with an Existential
 
 
 
