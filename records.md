@@ -193,8 +193,9 @@ Roy](http://roy.brianmckenna.org/), a functional language that targets only java
 
 
 
-\[Ur/Web has a http://www.impredicative.com/ur/tutorial/tlc.html very advanced records system\]. If someone could look at [
-the UR implementation paper](http://adam.chlipala.net/papers/UrPLDI10/UrPLDI10.pdf) and attempt to distill a records explanation to a Haskell point of view that would be very helpful!
+\[Ur/Web has a http://www.impredicative.com/ur/tutorial/tlc.html very advanced records system\]. It is exaplained in  [
+the UR implementation paper](http://adam.chlipala.net/papers/UrPLDI10/UrPLDI10.pdf). Edward Zhang attempts to explain it to Haskellers: [
+http://blog.ezyang.com/2012/04/how-urweb-records-work-and-what-it-might-mean-for-haskell/comment-page-1/\#comment-3669](http://blog.ezyang.com/2012/04/how-urweb-records-work-and-what-it-might-mean-for-haskell/comment-page-1/#comment-3669)
 
 
 
@@ -236,7 +237,7 @@ I tried putting all 112 types in separate modules, and around the 20 type mark a
 I also have 21 Enum types which often conflict. I end up having to include the name of the type in the constructor, or rewording it awkwardly.
 
 
-### counterpoint to the above
+#### counterpoint to the above
 
 
 
