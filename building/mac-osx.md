@@ -39,6 +39,10 @@ Secondly, if you want to build the development version of GHC from the Git repos
   Homebrew](http://mxcl.github.com/homebrew/) (as per instructions on that webpage)
 - To install the auto tools execute the following: `brew install autoconf automake`
 
+
+Thirdly, if you like to use GHC's LLVM backend, also execute: `brew install llvm`
+
+
 ### Previous versions of OS X and Xcode
 
 
