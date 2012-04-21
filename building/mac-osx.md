@@ -37,7 +37,7 @@ Secondly, if you want to build the development version of GHC from the Git repos
 
 - Install [
   Homebrew](http://mxcl.github.com/homebrew/) (as per instructions on that webpage)
-- Install the auto tools with `brew install autoconf automake`
+- To install the auto tools execute the following: `brew install autoconf automake`
 
 ### Previous versions
 
