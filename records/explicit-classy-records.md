@@ -47,3 +47,27 @@ are these:
 **else** type error.
 
 
+
+The semantics of the record mutation
+
+
+```wiki
+(r :: R) { x = x' }
+```
+
+
+are these:
+
+**If** `x` is in scope, part of some class `C ... x ... a`, and of type `C ... x ... a => a -> x`,
+**and** an instance `C ... x ... R` is in scope, **and** types of `x` and `x'` can be unified, i.e. `x=x'` would be valid in instance declaration of `C ... x ... a`;
+**then** its value is `s` such that
+
+
+```wiki
+x s = x', y s = y r
+```
+
+
+where `y` is any other selector.
+
+
