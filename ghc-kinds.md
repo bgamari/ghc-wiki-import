@@ -10,6 +10,13 @@ Giving Haskell a Promotion](http://dreixel.net/research/pdf/ghp.pdf). Most of th
 Haskell wiki page](http://haskell.org/haskellwiki/GHC/Kinds). What still doesn't work, or doesn't work correctly, is described here.
 
 
+
+Sub-pages
+
+
+- [GhcKinds/KindPolymorphism](ghc-kinds/kind-polymorphism)
+- [GhcKinds/PolyTypeable](ghc-kinds/poly-typeable) A kind-polymorphic version of the `Typeable` class.
+
 # Explicit kind variables
 
 
