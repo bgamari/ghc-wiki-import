@@ -14,11 +14,18 @@ The analogy of a hole in the ground can be transferred to a hole in a program. I
 
 
 
-These are the primary aspects of the problem that holes solve:
+These are the requirements of the problem that holes solve:
 
 
 1. Extract information about subterms in a program.
 1. Do not interrupt compilation.
+
+
+The extracted information from a hole can include, among other things:
+
+
+- The expected type of the hole
+- The local bindings (and their types) in the scope of the hole
 
 
 We first describe related work, including concepts that are similar in other languages as well as other approaches to solving the problem proposed. Then, we discuss the proposal in detail.
@@ -68,6 +75,17 @@ As can be seen here, goals are numbered, and the typechecker returns the inferre
 
 
 Goals can make it a lot easier to write code. They allow typechecking to continue although certain parts of code are missing. They also work as a to-do list for incomplete programs.
+
+
+## Deferring type errors to runtime
+
+
+
+The proposal [DeferErrorsToRuntime](defer-errors-to-runtime) implements a flag that turns every type error into a warning with an associated bit of code that is run when the offending ill-typed term is encountered at runtime. At the time of writing, this is implemented in GHC as `-fdefer-type-errors`.
+
+
+
+Deferring type errors alone is not a solution that fits the problem description; however, it can be used in conjunction with other things to solve the problem.
 
 
 # A proposed concrete design for Haskell
