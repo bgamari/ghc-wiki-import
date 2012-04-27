@@ -173,64 +173,32 @@ Implicit parameters must be bound, either in a term, e.g. `let ?x = ... in ...`,
 Implicit parameters do not serve very well for debugging. Due to the binding requirement, they are not suitable for typing things with unknown types. Either you must change type signatures or you must deal with the unbound implicit parameter type errors (or warnings in case the errors are deferred). Lastly, since implicit parameters are meant for usage in programs, it does not seem like they should be used for extracting additional information about the parameter's location. (This is not a technical argument, of course.)
 
 
-# A proposed concrete design for Haskell
+# Proposal
 
 
 
-Here is a specification of the proposed user-level view of the design.
+In this section, we discuss the proposed extension to GHC.
+
+
+## Language extension
 
 
 
-A hole in a term is written `_?thing`.  Example:
+Since we are changing the syntax and semantics of Haskell, we feel that this should become a language extension (rather than another kind of compiler flag). For now, we proposed the name `Holes` (as in `-XHoles`), though this could change after discussion.
 
 
-```wiki
-test : List Bool
-test = Cons _?x (Cons _?x Nil)
-```
-
-
-If `-XHoles` is set, we want the following:
-
-
-1. The program should be type-checked as if every hole `_?h` is replaced by `undefined`, except:
-
-  - If type-checking would fail due to unsolved constraints that could be solved by giving a type to a hole.
-1. If the program is well-typed (as above), then:
-
-  - The types of all holes should be reported.
-  - Reporting the hole types should not cause type-checking (or compiling in general) to stop (in error).
-1. (optional) If the program is ill-typed, then:
-
-  - The types of all holes should be reported.
-
-
-The above should hold true with and without the monomorphism restriction. In particular, if an `undefined` somewhere in a program type-checked with the monomorphism restriction would cause type-checking to fail, then a hole in that same position should also cause type-checking to fail.
+## Variations
 
 
 
-The type of a hole should be the resolved type with minimum constraints. That is, the type of a hole should only have constraints that have not be solved but are either inferred from the context (e.g. `show _?h`) or given in a type annotation/signature (e.g. `_?h :: Show a => a`.
+We view a hole as a piece of syntax that is inserted in code as a placeholder until the programmer fills that location with something else. Numerous views on the syntax and semantics of holes have been discussed. Here are a few:
 
 
----
-
-
-
-**Stuff below here might be out of date; please edit**
-
-
-# How this could be implemented in GHC
+### Term wildcards
 
 
 
-These two approaches are not ideal, they either don't give enough information, or they hinder using the code.
-
-
-### Agda-style
-
-
-
-The simplest way would be to implement them in the same way as Agda: add a new syntax (we shall use two underscores as an example here, `__`) to denote a hole, and after typechecking, show the user a list of all the types of all the holes in their source files. In what cases "after typechecking" we do this is still subject of discussion. We expect at the very least to show it after (re)loading a module into GHCi or typechecking an expression in GHCi directly (`:t`).
+This approach mirrors Agda goals. The actual syntax is debatable, but we think `_` is quite nice, since it appears to be illegal as an expression.
 
 
 
@@ -239,65 +207,50 @@ Example:
 
 ```wiki
 test :: [Bool]
-test = __ : (__ ++ [])
+test = _ : (_ ++ [])
 ```
 
 
-Theoretical output:
+Comments:
 
 
-```wiki
-> :l test.hs
-[1 of 1] Compiling Main             ( test.hs, interpreted )
-Found a hole at test.hs:2:6-7: Bool
-Found a hole at test.hs:2:12-13: [Bool]
-> 
-```
+- Reports the source location of each hole
+- Does not allow two holes to have the same type
+- Requires evaluation semantics for hole
 
-### Named holes
+### Named term variables
 
 
 
-Implicit parameters have some good features too: they can be named, and so used in multiple places. In the Agda-style, this would require let-binding a hole, which is a lot of effort for something that should be a temporary placeholder. So one idea is to allow giving holes a name, just like implicit parameters.
+This approach mirrors implicit parameters. Each hole is given a name. Within a module (or even a program/library?), each every hole with the same name has the same type. Again, the actual syntax is debatable, but for now, we use `_?x` for a hole with the (possibly shared) name `x`.
 
 
 
-For example:
+Example:
 
 
 ```wiki
 test :: [Bool]
-test = _a : (_b ++ [])
-
-test2 = _c ++ _b
+test = _?x : (_?y ++ [])
 ```
 
 
-Theoretical output:
+Comments:
 
 
-```wiki
-> :l test.hs
-[1 of 1] Compiling Main             ( test.hs, interpreted )
-Found a hole _a: Bool
-Found a hole _b: [Bool]
-Found a hole _c: [Bool]
-> 
-```
+- Reports the name and source location of each hole
+- Requires a fresh name to distinguish one hole from others
+- Requires evaluation semantics for hole
 
-
-These could either be made shared within all functions in module, or not shared between functions at all (so not the confusing situation with implicit parameters, which are only shared when required).
-
-
-### Not holes, ranges
+### Term brackets (ranges)
 
 
 
-Holes can be useful for finding the type of something that still needs to be written, but a more general way of looking at it is this: it is currently quite easy to typecheck a complete expression, for example with `:t`, in GHCi. However, finding the type of a part of an expression within a module is hard. In a large, complicated function it could be useful to ask the compiler for the types of certain subexpressions. `:t` does not help here, as the function's parameters and where/let/lambda-bound terms are not in scope. It would be useful if it were possible to annotate code to ask the compiler to give you the type found for the annotated expression.
+Instead of an actual term, we can use a special form of bracketing to indicate a hole. As above, syntax is debatable, but for now, we use `{_` and `_`} for the brackets of the hole.
 
 
 
-Simple example (let `{_ _`} denote a request for the type here):
+Example:
 
 
 ```wiki
@@ -306,41 +259,91 @@ test = {_ undefined _} : ({_ undefined ++ [] _})
 ```
 
 
-Could result in:
+Comments:
+
+
+- Reports the source location of each hole
+- Requires opening and closing brackets
+- Allows wildcard term to be treated as syntactic sugar, e.g. `_` desugars into `{_ undefined _`} 
+- Does not require evaluation semantics for the brackets
+
+
+Note that we can extend this with names for each pair of brackets.
+
+
+### Type wildcards
+
+
+
+Instead of term holes, we can use a special type to indicate an unknown type. The type hole would be reported. We use `_` for the syntax here.
+
+
+
+Example:
 
 
 ```wiki
-> :l test.hs
-[1 of 1] Compiling Main             ( test.hs, interpreted )
-Found type of undefined (test.hs:2:11-19): Bool
-Found type of undefined ++ [] (test.hs:2:30-38): [Bool]
+test :: [_]
+test = (undefined::_) : (undefined ++ [] ::_)
 ```
 
 
-The same effect of holes can then be achieved by using ` {_ undefined _} `. To return to the conciseness of holes, `__` could be syntactic sugar for `{_ undefined _`}. (Note that defining `__ = {_ undefined _`} in Haskell would not do this. The type would be `forall a. a`.)
+Comments:
 
 
-## Not ranges, but types
+- Reports the source location of each hole
+- Does not allow two holes to be equal
+- Does not require evaluation semantics for the holes
+- Can be used in type annotations for both variables and large expressions (as in the term brackets)
+- Allows partial types to be specified
+- (?)May not support reporting local bindings
 
 
-
-A variation of the previous proposal that is a bit more powerful and less syntactically intrusive is to implement this in the type language. So giving an expression (or even a pattern) a type of `__` would leave this type arbitrary and make GHC print the type. This subsumes the previous proposals, e.g. 
-
-
-```wiki
-test :: [Bool]
-test = (undefined::__) : (undefined ++ [] ::__)
-```
+Note that we can extend this with names for each type hole.
 
 
-and again a `__` on the term level could be syntactic sugar for `(undefined::__)`.
+## User's view
 
 
 
-The benefit from this variant is that `__` could occur as parts of types as well, e.g. 
+For this specification, we use the named term variables variant (though it may also apply to other variants).
 
 
-```wiki
-test :: [__]
-test = (undefined::__) : (undefined ++ [True] ::__)
-```
+
+When using holes (i.e. `-XHoles` is set), we expect the following:
+
+
+1. The program should type-check as if every hole `_?h` is replaced with `undefined`. This is one exception: see [Ambiguous types](holes#ambiguous-types) below.
+1. If the program is well-typed (as above), then:
+
+  - The types of all holes should be reported.
+  - Reporting the hole types should not cause type-checking (or compiling in general) to stop (in error).
+1. (optional) If the program is ill-typed, then:
+
+  - The types of all holes should be reported.
+
+### Ambiguous types
+
+
+
+If type-checking would fail due to unsolved constraints that could be solved by giving a type to a hole, then the program should still be considered well-typed. This mainly occurs when types are ambiguous, with class constraints and no concrete types. If you replace the hole in the expression `show _?h` with `undefined`, then `show undefined` has an unsolved `Show` constraint and is ill-typed. But with the hole, we would prefer `show _?h` to be well-typed with a reported hole type `_?h :: Show a => a`.
+
+
+### Monomorphism restriction
+
+
+
+The above expectations should hold with and without the monomorphism restriction. In particular, if an `undefined` somewhere in a program type-checked with the monomorphism restriction would cause type-checking to fail, then a hole in that same position should also cause type-checking to fail.
+
+
+
+**NOTE**: Give example.
+
+
+### Type of a hole
+
+
+
+The type of a hole should be the resolved type with minimum constraints. That is, the type of a hole should only have constraints that have not been solved but are either inferred from the context (e.g. `show _?h`) or given in a type annotation/signature (e.g. `_?h :: Show a => a`.
+
+
