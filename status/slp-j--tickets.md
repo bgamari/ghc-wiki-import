@@ -7,7 +7,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 - [\#5934](https://gitlab.staging.haskell.org/ghc/ghc/issues/5934): Bad substitution for flatten skolem
 - [\#5913](https://gitlab.staging.haskell.org/ghc/ghc/issues/5913), [\#5751](https://gitlab.staging.haskell.org/ghc/ghc/issues/5751): type-class dictionary loops
-- [\#5321](https://gitlab.staging.haskell.org/ghc/ghc/issues/5321), [\#5837](https://gitlab.staging.haskell.org/ghc/ghc/issues/5837), [\#5853](https://gitlab.staging.haskell.org/ghc/ghc/issues/5853) (loop), [\#5970](https://gitlab.staging.haskell.org/ghc/ghc/issues/5970), [\#3064](https://gitlab.staging.haskell.org/ghc/ghc/issues/3064), [\#3108](https://gitlab.staging.haskell.org/ghc/ghc/issues/3108): slow constraint solving
+- [\#5642](https://gitlab.staging.haskell.org/ghc/ghc/issues/5642), [\#5321](https://gitlab.staging.haskell.org/ghc/ghc/issues/5321), [\#5837](https://gitlab.staging.haskell.org/ghc/ghc/issues/5837), [\#5853](https://gitlab.staging.haskell.org/ghc/ghc/issues/5853) (loop), [\#5970](https://gitlab.staging.haskell.org/ghc/ghc/issues/5970), [\#3064](https://gitlab.staging.haskell.org/ghc/ghc/issues/3064), [\#3108](https://gitlab.staging.haskell.org/ghc/ghc/issues/3108): slow constraint solving
 - [\#5612](https://gitlab.staging.haskell.org/ghc/ghc/issues/5612), [\#5682](https://gitlab.staging.haskell.org/ghc/ghc/issues/5682): PolyKinds
 - [\#4347](https://gitlab.staging.haskell.org/ghc/ghc/issues/4347), [\#4295](https://gitlab.staging.haskell.org/ghc/ghc/issues/4295): impredicativity
 - [\#5320](https://gitlab.staging.haskell.org/ghc/ghc/issues/5320): overlap delicacy
