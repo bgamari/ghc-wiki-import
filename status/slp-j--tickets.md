@@ -27,7 +27,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 
 - [\#5623](https://gitlab.staging.haskell.org/ghc/ghc/issues/5623), [\#5954](https://gitlab.staging.haskell.org/ghc/ghc/issues/5954): performance regression. Duplication of primops?
-- [\#6070](https://gitlab.staging.haskell.org/ghc/ghc/issues/6070), [\#5949](https://gitlab.staging.haskell.org/ghc/ghc/issues/5949): Demand analysis
+- [\#6070](https://gitlab.staging.haskell.org/ghc/ghc/issues/6070), [\#5949](https://gitlab.staging.haskell.org/ghc/ghc/issues/5949), [\#5775](https://gitlab.staging.haskell.org/ghc/ghc/issues/5775): Demand analysis
 - [\#5996](https://gitlab.staging.haskell.org/ghc/ghc/issues/5996): CSE (patch offered)
 - [\#6047](https://gitlab.staging.haskell.org/ghc/ghc/issues/6047): GHC retains unnecessary binding
 - [\#5916](https://gitlab.staging.haskell.org/ghc/ghc/issues/5916): `runST` isn't free
