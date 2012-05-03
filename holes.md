@@ -1,5 +1,5 @@
 
-*This page discusses the design and potential implementation of "holes" in GHC.*
+*This page discusses the design and potential implementation of "holes" in GHC. The progress is being tracked in [\#5910](https://gitlab.staging.haskell.org/ghc/ghc/issues/5910).* 
 
 
 # Introduction
