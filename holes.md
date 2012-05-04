@@ -248,7 +248,7 @@ Comments:
 - Requires evaluation semantics for hole
 
 
-**SLPJ**.  I'm really not sure what you mean by "must have the same type.  For example
+**SLPJ question**.  I'm really not sure what you mean by "must have the same type.  For example
 
 
 ```wiki
@@ -270,7 +270,7 @@ If we generalise `f` then NOTHING can have the same type as the hole.  But it wo
 
 
 
-It seems much simpler to me either to have anonymous holes, or to let the user give them names, but to pay no attention to the name except to display them in error messages, so that user can say "oh, that hole" rather than having to look at the exact source location. **End of SLPJ**
+It seems much simpler to me either to have anonymous holes, or to let the user give them names, but to pay no attention to the name except to display them in error messages, so that user can say "oh, that hole" rather than having to look at the exact source location. **End of SLPJ question**
 
 
 ### Term brackets (ranges)
