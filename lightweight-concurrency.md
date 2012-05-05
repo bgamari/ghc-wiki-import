@@ -18,7 +18,11 @@ But, why would we be interested in modifying GHC's concurrency environment? Ther
 
 
 
-While we want to provide flexibility to the Haskell programmer, this should not come at a cost of added complexity and decreased performance. This idea reflects in the synchronization abstractions exposed to the programmer ([PTM](lightweight-concurrency#)), and our decision to keep certain pieces of the concurrency puzzle in the RTS ([Safe FFI](lightweight-concurrency#),[Blackholes](lightweight-concurrency#)).
+While we want to provide flexibility to the Haskell programmer, this should not come at a cost of added complexity and decreased performance. This idea reflects in the synchronization abstractions exposed to the programmer ([PTM](lightweight-concurrency#)), and our decision to keep certain pieces of the concurrency puzzle in the RTS ([Safe FFI](lightweight-concurrency#),[Blackholes](lightweight-concurrency#)). The figure below captures the key design principles of the proposed system.
+
+
+
+[](/trac/ghc/attachment/wiki/LightweightConcurrency/GHC_LWC_Key.jpg)
 
 
 ## Related Work
@@ -29,3 +33,5 @@ While we want to provide flexibility to the Haskell programmer, this should not 
   Lightweight Concurrent Primitives for GHC](http://community.haskell.org/~simonmar/papers/conc-substrate.pdf)
 - [
   Tackling the awkward squad](http://research.microsoft.com/en-us/um/people/simonpj/papers/marktoberdorf/)
+- [
+  Runtime Support for Multicore Haskell](http://community.haskell.org/~simonmar/papers/multicore-ghc.pdf)
