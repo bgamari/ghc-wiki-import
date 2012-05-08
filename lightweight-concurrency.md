@@ -37,14 +37,17 @@ For the high-level design principle for the current scheduler, see [
 Scheduler](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Rts/Scheduler).
 
 
-## Concurrency Substrate
+## Design
+
+
+### Concurrency Substrate
 
 
 
-The idea of the concurrency substrate is to provide a minimal set of primitives over which a variety of user-level concurrency libraries can be implemented. As such, the concurrency substrate must provide a way to create threads, a way to schedule them, and a synchronization mechanism in a multiprocessor context. 
+The idea of the concurrency substrate is to provide a minimal set of primitives over which a variety of user-level concurrency libraries can be implemented. As such, the concurrency substrate must provide a way to create threads, a way to schedule them, and a synchronization mechanism in a multiprocessor context. Creation and maintenance of schedulers and concurrent data structures is the task of the concurrency library.
 
 
-## Controlling Parallelism
+### Controlling Parallelism
 
 
 
