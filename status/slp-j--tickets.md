@@ -23,6 +23,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#5612](https://gitlab.staging.haskell.org/ghc/ghc/issues/5612): support for kinds (patch available)
 - [\#1475](https://gitlab.staging.haskell.org/ghc/ghc/issues/1475): allow splicing of import declarations
 - [\#5854](https://gitlab.staging.haskell.org/ghc/ghc/issues/5854): INLINABLE pragmas (patch offered)
+- \#4634: cycle in type declarations
 
 ## Optimisation
 
