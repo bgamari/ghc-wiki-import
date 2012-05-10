@@ -110,15 +110,20 @@ http://parfunk.blogspot.com.au/2012/05/how-to-write-hybrid-cpugpu-programs.html]
 https://github.com/AccelerateHS/accelerate](https://github.com/AccelerateHS/accelerate) 
 
 \[15\] [
-http://community.haskell.org/\~simonmar/papers/conc-substrate.pdf](http://community.haskell.org/~simonmar/papers/conc-substrate.pdf)
+http://community.haskell.org/\~simonmar/papers/conc-substrate.pdf](http://community.haskell.org/~simonmar/papers/conc-substrate.pdf) 
+
 \[16\] Deferring type errors to runtime [
-http://hackage.haskell.org/trac/ghc/wiki/DeferErrorsToRuntime](http://hackage.haskell.org/trac/ghc/wiki/DeferErrorsToRuntime)
+http://hackage.haskell.org/trac/ghc/wiki/DeferErrorsToRuntime](http://hackage.haskell.org/trac/ghc/wiki/DeferErrorsToRuntime) 
+
 \[17\] Equality proofs and deferred type errors [
-http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/](http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/)
+http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/](http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/) 
+
 \[18\] Holes in GHC: [
-http://hackage.haskell.org/trac/ghc/wiki/Holes](http://hackage.haskell.org/trac/ghc/wiki/Holes)
+http://hackage.haskell.org/trac/ghc/wiki/Holes](http://hackage.haskell.org/trac/ghc/wiki/Holes) 
+
 \[19\] Modular type inference with local assumptions: OutsideIn(X) [
-http://www.haskell.org/haskellwiki/Simonpj/Talk:OutsideIn](http://www.haskell.org/haskellwiki/Simonpj/Talk:OutsideIn)
+http://www.haskell.org/haskellwiki/Simonpj/Talk:OutsideIn](http://www.haskell.org/haskellwiki/Simonpj/Talk:OutsideIn) 
+
 \[20\] Type level literals.  [
 http://hackage.haskell.org/trac/ghc/wiki/TypeNats/Basics](http://hackage.haskell.org/trac/ghc/wiki/TypeNats/Basics)
 
