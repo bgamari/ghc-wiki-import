@@ -73,6 +73,12 @@ Here are the projects we're currently working on:
 >
 
 
+ 
+
+
+- **Full support for GHCi on ARM** (Ben Gamari).  Thanks to Ben, we now have support for ARM in the GHCi linker \[21\].  This will be shipped in 7.4.2 (it wasn't in 7.4.1).
+
+
 \[1\] [
 http://hackage.haskell.org/trac/ghc/query?status=closed&order=priority&col=id&col=summary&col=status&col=owner&col=type&col=priority&col=component&milestone=7.4.2&resolution=fixed](http://hackage.haskell.org/trac/ghc/query?status=closed&order=priority&col=id&col=summary&col=status&col=owner&col=type&col=priority&col=component&milestone=7.4.2&resolution=fixed) 
 
@@ -125,6 +131,9 @@ http://hackage.haskell.org/trac/ghc/wiki/Holes](http://hackage.haskell.org/trac/
 http://www.haskell.org/haskellwiki/Simonpj/Talk:OutsideIn](http://www.haskell.org/haskellwiki/Simonpj/Talk:OutsideIn) 
 
 \[20\] Type level literals.  [
-http://hackage.haskell.org/trac/ghc/wiki/TypeNats/Basics](http://hackage.haskell.org/trac/ghc/wiki/TypeNats/Basics)
+http://hackage.haskell.org/trac/ghc/wiki/TypeNats/Basics](http://hackage.haskell.org/trac/ghc/wiki/TypeNats/Basics) 
+
+\[21\] ARM linker support. [
+http://hackage.haskell.org/trac/ghc/changeset/27302c9094909e04eb73f200d52d5e9370c34a8a](http://hackage.haskell.org/trac/ghc/changeset/27302c9094909e04eb73f200d52d5e9370c34a8a)
 
 
