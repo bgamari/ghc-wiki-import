@@ -203,6 +203,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Features
 
 
+- [\#5462](https://gitlab.staging.haskell.org/ghc/ghc/issues/5462): deriving for arbitrary classes
 - [\#6032](https://gitlab.staging.haskell.org/ghc/ghc/issues/6032): discussion about when foralls can be to the right of an arrow.
 - [\#6024](https://gitlab.staging.haskell.org/ghc/ghc/issues/6024): allow defining a *kind* without also getting the corresponding *type*
 - [\#5927](https://gitlab.staging.haskell.org/ghc/ghc/issues/5927): Constraints with universal quantification
