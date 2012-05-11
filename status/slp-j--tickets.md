@@ -38,6 +38,11 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#5916](https://gitlab.staging.haskell.org/ghc/ghc/issues/5916): `runST` isn't free
 - [\#5522](https://gitlab.staging.haskell.org/ghc/ghc/issues/5522): liberate-case runs out of memory
 
+## GHCi
+
+
+- [\#5527](https://gitlab.staging.haskell.org/ghc/ghc/issues/5527): `mkTopLevEnv: interpreeted`.  (Paolo)
+
 ## Features
 
 
