@@ -48,6 +48,11 @@ Note that `Nat` and `Symbol` above are **kinds**.
 
 
 
+**Question: ** do we need to use `'Nat` instead of `Nat` above for the renamer
+to know we want the kind and not the type `Nat`?
+
+
+
 Explicit kind arguments can also be used in type classes, and function type
 signatures:
 
