@@ -400,7 +400,7 @@ We think holes can be extremely useful with ambiguous types. We prefer that a pr
 
 
 
-**SLPJ do you want programs with these ambiguity errors to run too?  Or what?  Can you give a complete little example module, with the error messages you expect, whether you expect it to run, and if so what should happen?**
+A hole with an ambiguous type should be treated as a hole runtime error (and not a deferred type error with `-fdefer-type-errors`). See [Runtime error](holes#runtime-error) for an example.
 
 
 #### Monomorphism restriction
@@ -445,7 +445,7 @@ Given the following module:
 
 
 ```wiki
-main = _?x
+main = _?x >>= return
 ```
 
 
@@ -453,8 +453,8 @@ we expect (something like) the runtime error:
 
 
 ```wiki
-blah: blah.hs:2:1:
+blah: blah.hs:2:8:
     Found the hole `_?x' with type `IO t'
-    In the expression: _?x
-    In the definition of `main': main = _?x
+    In the expression: _?x >>= return
+    In the definition of `main': main = _?x >>= return
 ```
