@@ -139,7 +139,7 @@ Any attempt to switch to an SCont with status other than `SContSwitched Yielded`
 
 
 
-Before a switch operation, we expect the programmer to indicate the reason for switching through setScontSwitchReason. Exception is raised by the switch primitives if switch reason has not been provided. When a switched SCont resumes execution, its status is automatically updated to `SContRunning`. 
+Before a switch operation, we expect the programmer to indicate the reason for switching through setScontSwitchReason. Exception is raised by the switch primitives if a switch reason has not been provided. When a switched SCont resumes execution, its status is automatically updated to `SContRunning`. 
 
 
 ## Capabilities and Tasks
