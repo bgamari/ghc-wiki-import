@@ -265,7 +265,7 @@ Inferred type: MonadPlus m => m b
 ```
 
 
-Again, note that the type variables are universally quantified over all reports, not each report separately.  **SLPJ** I have no idea what this sentence means.  **End of SLPJ**.
+Again, note that the type variables are universally quantified over all reports, not each report separately.  **SLPJ** I have no idea what this sentence means.  **End of SLPJ**. **SPL** It means that the `m` in the first report is the same `m` as in the second. Likewise for the `b`. **End of SPL**
 
 
 
@@ -298,6 +298,29 @@ for two reasons:
 
 
 **End of SLPJ**
+
+
+
+**SPL** I don't understand the problem.
+
+
+1. When I try the following, it works fine:
+
+  ```wiki
+  import Control.Monad
+
+  f x = do
+    y <- undefined x
+    y `mplus` boo
+
+  boo :: MonadPlus m => m b
+  boo = undefined
+  ```
+1. Perhaps it's not technically correct to call `MonadPlus m => m b` the "inferred type," but it is the type with the minimum set of constraints that type needs to fulfill to be accepted. Or maybe I'm missing something.
+1. How would you report the type of the holes? The above wording is merely a suggestion, but I think all that information should be there.
+
+
+**End of SPL**
 
 
 ### Comparison
@@ -472,6 +495,12 @@ then I **want** an ambiguity error.  And that is supposed to be what holes are e
 
 The idea is that if we have a hole of type `a`, then an unsolved `(Show a)` or `(C [a])` or `F a ~ Int` or anything mentioning `a` are automatically deferred and perhaps not even reported as warnings (unsure on this point). If you run the program you might trip over one of them, of course.
 **End of SLPJ**
+
+
+
+**SPL**
+This is the approach that we have been going with. However, the result seems unintuitive when you consider the `Foo` example below, because the deferred type error would pop up at the `show` applied to `(Foo ...)` and not at the hole itself. When I write such code, I would expect an error at the hole `_?h` and not a different error at some (potentially distant?) other point due to a unexpectedly deferred ambiguity type error. 
+**End of SPL**
 
 
 
