@@ -97,8 +97,18 @@ Performing the body of switch atomically in a transaction avoids the nasty race 
 
 
 
-Primitive `getCurrentSCont` returns a reference to the current SCont under PTM. Primitive `switchTo` commits the current PTM transaction and switches to the given SCont. As we will see, these two primitives are necessary for [abstracting the scheduler](lightweight-concurrency#).
+Primitive `getCurrentSCont` returns a reference to the current SCont under PTM. Primitive `switchTo` commits the current PTM transaction and switches to the given SCont. As we will see, these two primitives are necessary for [abstracting the scheduler](lightweight-concurrency#). Since switchTo eagerly commits the transaction, the code that follows switchTo is not evaluated. This is a problem if the transaction that contains switchTo has a type different than PTM (). Consider the following code:
 
+
+```wiki
+s :: String <- atomically $ do {
+  sc <- getCurrentSCont;
+  -- save the current SCont somewhere
+  switchTo someSCont;
+  return "This is not executed!"
+}
+print s
+```
 
 
 Of course, care must be taken to ensure that the control does not switch to an SCont that is either running or completed.
