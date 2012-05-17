@@ -41,17 +41,14 @@ For the high-level design principle for the current scheduler, see [
 Scheduler](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Rts/Scheduler).
 
 
-## Design
-
-
-### Concurrency Substrate
+## Concurrency Substrate
 
 
 
 The idea of the concurrency substrate is to provide a minimal set of primitives over which a variety of user-level concurrency libraries can be implemented. As such, the concurrency substrate must provide a way to create threads, a way to schedule them, and a synchronization mechanism in a multiprocessor context. Whereas, the Creation and maintenance of schedulers and concurrent data structures is the task of the concurrency library. Concurrency substrate resides at libraries/base/LwConc/Substrate.hs.
 
 
-#### PTM
+### PTM
 
 
 
@@ -73,7 +70,7 @@ atomically :: PTM a -> IO a
 A PTM transaction may allocate, read and write transactional variables of type `PVar a`. It is important to notice that PTM does not provide a blocking `retry` mechanism. Such a blocking action needs to interact with the scheduler, to block the current thread and resume another thread. We will see [later](lightweight-concurrency#) how to allow such interactions while not imposing any restriction on the structure of the schedulers.
 
 
-#### One-shot continuations
+### One-shot continuations
 
 
 
@@ -96,7 +93,7 @@ Given an I/O-performing computation `newSCont` returns a reference to an SCont w
 Performing the body of switch atomically in a transaction avoids the nasty race conditions usually seen in multicore runtimes where one-shot continuations are used for modelling schedulers. In such systems, there are often cases where before the switch primitive has had a chance to return, another processor picks up the current continuation (appended to the scheduler) and tries to switch to it. It becomes necessary to go for complicated solutions such as releasing the scheduler locks after the target thread resumes execution to prevent races. In our case, PTM eliminates the need for such a mechanism - the other processor would not be able to access the current SCont, unless the transaction has committed and control has switched to the target SCont. Primitive `getCurrentSCont` returns a reference to the current SCont under PTM. Primitive `switchTo` commits the current PTM transaction and switches to the given SCont. As we will see, these two primitives are necessary for [abstracting the scheduler](lightweight-concurrency#). 
 
 
-##### Return value of a switching transaction
+#### Return value of a switching transaction
 
 
 
@@ -117,7 +114,7 @@ print s
 The type of the transaction that contains switchTo is PTM string, and atomically performing the transaction is expected to return a String value. But the value returned when the current SCont resumes execution (after switchTo) is a (). Our solution is to make switchTo return a `error "Attempting to use return value of a switched transaction"`, and any attempt to use the return value throws a runtime error.
 
 
-#### SCont Status
+### SCont Status
 
 
 
@@ -145,7 +142,7 @@ Any attempt to switch to an SCont with status other than `SContSwitched Yielded`
 Before a switch operation, we expect the programmer to indicate the reason for switching through setScontSwitchReason. Exception is raised by the switch primitives if switch reason has not been provided. When a switched SCont resumes execution, its status is automatically updated to `SContRunning`. 
 
 
-### Capabilities and Tasks
+## Capabilities and Tasks
 
 
 
