@@ -97,6 +97,10 @@ Performing the body of switch atomically in a transaction avoids the nasty race 
 
 
 
+Primitive `getCurrentSCont` returns a reference to the current SCont under PTM. Primitive `switchTo` commits the current PTM transaction and switches to the given SCont. As we will see, these two primitives are necessary for [abstracting the scheduler](lightweight-concurrency#).
+
+
+
 Of course, care must be taken to ensure that the control does not switch to an SCont that is either running or completed.
 
 
