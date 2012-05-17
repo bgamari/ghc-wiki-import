@@ -93,11 +93,11 @@ Given an I/O-performing computation `newSCont` returns a reference to an SCont w
 
 
 
-Performing the body of switch atomically in a transaction avoids the nasty race conditions usually seen in multicore runtimes where one-shot continuations are used for modelling schedulers. In such systems, there are often cases where before the switch primitive has had a chance to return, another processor picks up the current continuation (appended to the scheduler) and tries to switch to it. It becomes necessary to go for complicated solutions such as releasing the scheduler locks after the target thread resumes execution to prevent races. In our case, PTM eliminates the need for such a mechanism - the other processor would not be able to access the current SCont, unless the transaction has committed and control has switched to the target SCont.
+Performing the body of switch atomically in a transaction avoids the nasty race conditions usually seen in multicore runtimes where one-shot continuations are used for modelling schedulers. In such systems, there are often cases where before the switch primitive has had a chance to return, another processor picks up the current continuation (appended to the scheduler) and tries to switch to it. It becomes necessary to go for complicated solutions such as releasing the scheduler locks after the target thread resumes execution to prevent races. In our case, PTM eliminates the need for such a mechanism - the other processor would not be able to access the current SCont, unless the transaction has committed and control has switched to the target SCont. Primitive `getCurrentSCont` returns a reference to the current SCont under PTM. Primitive `switchTo` commits the current PTM transaction and switches to the given SCont. As we will see, these two primitives are necessary for [abstracting the scheduler](lightweight-concurrency#). 
 
 
 
-Primitive `getCurrentSCont` returns a reference to the current SCont under PTM. Primitive `switchTo` commits the current PTM transaction and switches to the given SCont. As we will see, these two primitives are necessary for [abstracting the scheduler](lightweight-concurrency#). Since switchTo eagerly commits the transaction, the code that follows switchTo is not evaluated. This is a problem if the transaction that contains switchTo has a type different than PTM (). Consider the following code:
+Since switchTo eagerly commits the transaction, the code that follows switchTo is not evaluated. This is a problem if the transaction that contains switchTo has a type different than PTM (). Consider the following code:
 
 
 ```wiki
@@ -109,6 +109,10 @@ s :: String <- atomically $ do {
 }
 print s
 ```
+
+
+The type of the transaction that contains switchTo is PTM string, but the value returned when the current SCont resumes execution (after switchTo) is a (). Our solution is to make switchTo return a `error "Attempting to use return value of a switched transaction"`, and any attempt to use the return value throws a runtime error.
+
 
 
 Of course, care must be taken to ensure that the control does not switch to an SCont that is either running or completed.
