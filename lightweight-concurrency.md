@@ -314,7 +314,7 @@ Notice that just like yield and forkIO, takeMVar is scheduler agnostic; the MVar
 
 
 
-As an aside, the race condition in [swapMVar](http://www.haskell.org/ghc/docs/6.12.2/html/libraries/base-4.2.0.1/Control-Concurrent-MVar.html#v%3AswapMVar) can easily be eliminated with the help of PTM abstraction.
+As an aside, the race condition in [swapMVar](http://www.haskell.org/ghc/docs/6.12.2/html/libraries/base-4.2.0.1/Control-Concurrent-MVar.html#v%3AswapMVar) can be eliminated with the help of PTM abstraction. Thus, PTM abstraction makes it easy to construct correct concurrent data-structures. 
 
 
 ## Capabilities and Tasks
