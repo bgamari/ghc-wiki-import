@@ -90,7 +90,7 @@ Given an I/O-performing computation `newSCont` returns a reference to an SCont w
 
 
 
-Performing the body of switch atomically in a transaction avoids the nasty race conditions usually seen in multicore runtimes where one-shot continuations are used for modelling schedulers. In such systems, there are often cases where before the switch primitive has had a chance to return, another processor picks up the current continuation (appended to the scheduler) and tries to switch to it. It becomes necessary to go for complicated solutions such as releasing the scheduler locks after the target thread resumes execution to prevent races. In our case, PTM eliminates the need for such a mechanism - the other processor would not be able to access the current SCont, unless the transaction has committed and control has switched to the target SCont. Primitive `getCurrentSCont` returns a reference to the current SCont under PTM. Primitive `switchTo` commits the current PTM transaction and switches to the given SCont. As we will see, these two primitives are necessary for [abstracting the scheduler](lightweight-concurrency#). 
+Performing the body of switch atomically in a transaction avoids the nasty race conditions usually seen in multicore runtimes where one-shot continuations are used for modelling schedulers. In such systems, there are often cases where before the switch primitive has had a chance to return, another processor picks up the current continuation (appended to the scheduler) and tries to switch to it. It becomes necessary to go for complicated solutions such as releasing the scheduler locks after the target thread resumes execution to prevent races. In our case, PTM eliminates the need for such a mechanism - the other processor would not be able to access the current SCont, unless the transaction has committed and control has switched to the target SCont. Primitive `getCurrentSCont` returns a reference to the current SCont under PTM. Primitive `switchTo` commits the current PTM transaction and switches to the given SCont. As we will see, these two primitives are necessary for [abstracting the scheduler](lightweight-concurrency#abstracting-the-scheduler). 
 
 
 #### Return value of a switching transaction
@@ -140,6 +140,13 @@ Any attempt to switch to an SCont with status other than `SContSwitched Yielded`
 
 
 Before a switch operation, we expect the programmer to indicate the reason for switching through setScontSwitchReason. Exception is raised by the switch primitives if a switch reason has not been provided. When a switched SCont resumes execution, its status is automatically updated to `SContRunning`. 
+
+
+## Abstracting the Scheduler
+
+
+
+Concurrency substrate does not impose any structure on the user-level schedulers. The programmer might choose to implement a single scheduler for the entire system or a scheduler per capability. The schedulers might also be hierarchical, with pluggable load-balancing policies. However, we need a uniform interface such that STM, asynchronous exceptions, safe-foreign calls, blackholes and other such mechanisms can interact with the user-level scheduler.
 
 
 ## Capabilities and Tasks
