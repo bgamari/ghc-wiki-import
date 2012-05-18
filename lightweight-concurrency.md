@@ -150,13 +150,19 @@ Concurrency substrate does not impose any structure on the user-level schedulers
 
 
 ```wiki
------- Schedule SCont Action ------
+------ Schedule SCont Action :: SCont -> PTM () ------
 
------- Yield Control Action  ------
+getScheduleSContAction :: SCont -> PTM (SCont -> PTM ())
+setScheduleSContAction :: SCont -> (SCont -> PTM ()) -> PTM ()
+
+----------- Yield Control Action :: PTM () -----------
+
+getYieldControlAction :: SCont -> PTM (PTM ())
+setYieldControlAction :: SCont -> PTM () -> PTM ()
 ```
 
 
-We expect every SCont to belong to a particular scheduler. However, SConts are free to be migrated between schedulers. 
+We expect every SCont to belong to a scheduler. 
 
 
 ## Capabilities and Tasks
