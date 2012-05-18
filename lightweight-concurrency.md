@@ -198,15 +198,21 @@ Now that we have defined an abstract interface, lets look at how to construct co
 
 
 ```wiki
+
+getSSA = getScheduleSContAction
+setSSA = setScheduleSContAction
+getYCA = getYieldControlAction
+setYCA = setYieldControlAction
+
 yield :: IO ()
 yield = atomically $ do
   s <- getCurrentSCont
   -- Append current SCont to scheduler
-  ssa <- getScheduleSContAction s
+  ssa <- getSSA s
   enque :: PTM () <- ssa a
   enque
   -- Switch to next SCont from scheduler
-  switchToNext :: PTM () <- getYieldControlAction s
+  switchToNext :: PTM () <- getYCA s
   switchToNext
 
 forkIO :: IO () -> IO SCont
@@ -215,10 +221,10 @@ forkIO f = do
   atomically $ do {
     s <- getCurrentSCont;
     -- Initialize scheduler actions
-    ssa <- getScheduleSContAction s;
-    setScheduleSContAction ns ssa;
-    yca <- getYieldControlAction s;
-    setYieldControlAction ns yca;
+    ssa <- getSSA s;
+    setSSA ns ssa;
+    yca <- getYCA s;
+    setYCA ns yca;
     -- Append the new SCont to current SCont's scheduler
     appendAct <- ssa ns;
     appendAct
