@@ -346,15 +346,18 @@ As an aside, the race condition in [swapMVar](http://www.haskell.org/ghc/docs/6.
 
 
 
-Whatever be the concurrency model, we would like to retain the non-programmatic control over parallelism (using +RTS -N). Just like in the current system, this runtime parameter controls the maximum number of capabilities. Cores are system resources and hence, the control over their allocation to different processes should be a property of the context under which the programs are run. The concurrency substrate exposes the primitive
+Whatever be the concurrency model, we would like to retain the non-programmatic control over parallelism (using +RTS -N). Just like in the current system, this runtime parameter controls the maximum number of capabilities. Cores are system resources and hence, the control over their allocation to different processes should be a property of the context under which the programs are run. The concurrency substrate exposes the following primitives
 
 
 ```wiki
+getNumCapabilities   :: IO Int
+getCurrentCapability :: PTM Int
+
 newCapability :: SCont -> IO ()
 ```
 
 
-which runs the given SCont on a free capability. If there are no free capabilities, a runtime error is raised. A typical, initial task spawned on another core would pull work from the scheduler and switch to it. For example,
+Primitive `newCapability` runs the given SCont on a free capability. If there are no free capabilities, a runtime error is raised. A typical, initial task spawned on another core would pull work from the scheduler and switch to it. For example,
 
 
 ```wiki
@@ -365,6 +368,10 @@ initialTask = atomically $ do
   setSContSwitchReason s Completed
   yca
 ```
+
+
+When a program boots up with `N` capabilities, it can choose to create `N-1` additional capabilities using the primitive `newCapability` which run `initialTask`. 
+
 
 ### Task Model
 
@@ -381,9 +388,8 @@ Every SCont is bound to a particular capability and only that capability is capa
 
 
 ```wiki
-getNumCapabilities :: 
-setSContCapability :: SCont -> Int -> IO ()
-getSContCapability :: SCont -> PTM Int
+setSContCapability   :: SCont -> Int -> IO ()
+getSContCapability   :: SCont -> PTM Int
 ```
 
 
