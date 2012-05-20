@@ -264,7 +264,7 @@ forkIO f = do
   -- Switch to next thread after completion
   let epilogue = atomically $ do {
     sc <- getCurrentSCont;
-    setSContSwitchReason Completed;
+    setSContSwitchReason sc Completed;
     switchToNext <- getYCA sc;
     switchToNext
   }
@@ -346,11 +346,24 @@ As an aside, the race condition in [swapMVar](http://www.haskell.org/ghc/docs/6.
 
 
 
-Whatever be the concurrency model, we would like to retain the non-programmatic control over parallelism (using +RTS -N). Just like in the current system, this runtime parameter controls the maximum number of capabilities. Cores are system resources and hence, the control over their allocation to different processes should be a property of the context under which the programs are run. The concurrency substrate provides 
+Whatever be the concurrency model, we would like to retain the non-programmatic control over parallelism (using +RTS -N). Just like in the current system, this runtime parameter controls the maximum number of capabilities. Cores are system resources and hence, the control over their allocation to different processes should be a property of the context under which the programs are run. The concurrency substrate exposes the primitive
 
 
 ```wiki
 newCapability :: SCont -> IO ()
+```
+
+
+which runs the given SCont on a free capability. If there are no free capabilities, a runtime error is raised. A typical, initial task spawned on another core would pull work from the scheduler and switch to it. For example,
+
+
+```wiki
+initialTask :: IO ()
+initialTask = atomically $ do
+  s <- getCurrentSCont
+  yca <- getYCA s
+  setSContSwitchReason s Completed
+  yca
 ```
 
 ### Task Model
@@ -368,6 +381,7 @@ Every SCont is bound to a particular capability and only that capability is capa
 
 
 ```wiki
+getNumCapabilities :: 
 setSContCapability :: SCont -> Int -> IO ()
 getSContCapability :: SCont -> PTM Int
 ```
