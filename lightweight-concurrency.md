@@ -449,7 +449,7 @@ We retain certain components of GHC's concurrency support that interact with the
 
 
 
-We observe that for all of these issues
+We observe that our [scheduler actions](lightweight-concurrency#abstracting-the-scheduler) are sufficient to capture the interaction of user-level scheduler and RTS. However from the perspective of the 
 
 
 ## Related Work
