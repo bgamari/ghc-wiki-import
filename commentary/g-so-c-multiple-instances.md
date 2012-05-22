@@ -1,3 +1,6 @@
+## General Plan
+
+
 ## Released and Unreleased packages
 
 
@@ -5,7 +8,7 @@
 If we cabal install a package that is released on hackage we call this a clean install. Those should not be used to satisfy dependencies but rather to bring a package into scope in ghci to play with it. If we cabal install an unreleased package we call this a dirty install.
 
 
-## General Plan
+## The cabal hash
 
 
 
@@ -15,7 +18,8 @@ The new installation directory for each instance is $libdir/$pkgid/$installedpac
 The hash is computed during installation in installLib as well as during registration in generateRegistrationInfo.
 
 
-## Information used to compute the hash
+
+The hash contains the following information:
 
 
 
