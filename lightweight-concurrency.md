@@ -39,7 +39,7 @@ Lightweight concurrency implementation resides in the `ghc-lwc` branch in the gi
 
     - [Unreachable Concurrent Datastructure](lightweight-concurrency#unreachable-concurrent-datastructure)
     - [Unreachable Scheduler](lightweight-concurrency#unreachable-scheduler)
-- [Safe-foreign Calls](lightweight-concurrency#)
+- [SafeForeign Calls](lightweight-concurrency#safe-foreign-calls)
 - [Related Work](lightweight-concurrency#related-work)
 
 ## Introduction
@@ -496,7 +496,7 @@ setFinalizer :: SCont -> IO () -> IO()
 If an SCont is blocked with status `SContSwitched Yielded` has become unreachable, we run the SCont's finalizer, if installed.
 
 
-## Safe-foreign Calls
+## Safe Foreign Calls
 
 
 
