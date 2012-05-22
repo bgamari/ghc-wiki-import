@@ -495,6 +495,15 @@ setFinalizer :: SCont -> IO () -> IO()
 If an SCont is blocked with status `SContSwitched Yielded` has become unreachable, we run the SCont's finalizer, if installed.
 
 
+## Safe-foreign Calls
+
+
+## PTM retry
+
+
+## Black-hole Handling
+
+
 ## Related Work
 
 
