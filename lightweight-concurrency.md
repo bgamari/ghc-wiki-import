@@ -532,6 +532,10 @@ The fast path in the LWC implementation is the same as vanilla implementation. H
 ### PTM retry
 
 
+
+GHC's STM module provides a 
+
+
 ### Black-hole Handling
 
 
