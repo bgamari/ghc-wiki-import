@@ -66,11 +66,11 @@ What is ComponentLocalBuildInfo for?
 
 
 
-The ABI hash becomes a field of InstalledPackageInfo.
+The ABI hash becomes a field of InstalledPackageInfo. \[You mean this is a change in behaviour? What about packages that don't have one?\]
 
 
 
-For inplace package registration any packages with the same location must be unregistered. For that you must ask for all installed packages, find the one that is installed to that location and unregister it.
+For inplace package registration any packages with the same location must be unregistered. For that you must ask for all installed packages, find the one that is installed to that location and unregister it. \[I don't understand this.\]
 
 
 
