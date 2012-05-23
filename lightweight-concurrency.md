@@ -538,7 +538,7 @@ GHC's STM module provides a `retry` primitive, which blocks the thread invoking 
 
 
 
-In the LWC implementation, while waiting on a PVar is still an RTS mechanism, interaction with the scheduler is implemented using the scheduler actions. After blocking the thread on the PTM, RTS executes the thread's yieldControlAction to resume the scheduler. When the thread is eventually unblocked, its scheduleSContAction is executed to put the thread back into its user-level scheduler data structure.
+For `retry` under PTM, while waiting on a PVar is still an RTS mechanism, interaction with the scheduler is implemented using the scheduler actions. After blocking the thread on the PTM, RTS executes the blocking thread's yieldControlAction to resume the scheduler. When the thread is eventually unblocked, its scheduleSContAction is executed to put the thread back into its user-level scheduler data structure.
 
 
 ### Black-hole Handling
