@@ -516,7 +516,7 @@ Any thunk evaluation may encounter a blackhole - a thunk under evaluation. When 
 
 
 
-Since thunks (usually) represent pure computation, can we not duplicate thunk evaluation when we detect a deadlocked scheduler? Unfortunately, this is not so straightforward. The closure that represented the thunk is lost when it was black-holed. Moreover, the thread evaluating the blackholed thunk (blackhole owner) might be running on the same or a different capability than the thread entering the blackhole. Correspondingly, the blackhole owner thread might either not be schedulable or running. This complicates the problem of potentially forcing a blackholed thunk's evaluation on a thread other than the blackhole owner. In addition to all of these concerns, we would like the common case - a thunk finishing evaluation without being blackholed - to be fast.
+Since thunks (usually) represent pure computation, can we not duplicate thunk evaluation when we detect a deadlocked scheduler? Unfortunately, this is not so straightforward. The closure that represents a thunk is lost when the thunk is black-holed. Moreover, the thread evaluating the blackholed thunk (blackhole owner) might be running on the same or a different capability than the thread entering the blackhole. Correspondingly, the blackhole owner thread might either not be schedulable or running. This complicates the problem of potentially forcing a blackholed thunk's evaluation on a thread other than the blackhole owner. In addition to all of these concerns, we would like the common case - a thunk finishing evaluation without being blackholed - to be fast.
 
 
 
