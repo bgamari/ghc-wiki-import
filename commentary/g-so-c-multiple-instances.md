@@ -6,7 +6,11 @@ It is a problem that cabal does not support multiple instances of the same packa
 
 
 
-Relating this to how Nix works. Cabal stores potentially every instance of every package possible. Lets call this the cabal store. There might at least be a global and a local one but they dont overlap and if they do shadowing doesnt matter. The dependency resolver comes up with an install plan. In this install plan all packages have completely fixed dependencies based on the dependencies specified in the cabal file. They are a subset of those possible package instances. This corresponds to a profile in Nix as well as a sandbox. We call this an environment.
+Relating this to how Nix works. Cabal stores potentially every instance of every package possible. Lets call this the cabal store. There might at least be a global and a local one. Shadowing doesn't matter because if two packages have the same hash they should be interchangeble.
+
+
+
+The dependency resolver comes up with an install plan. In this install plan all packages have completely fixed dependencies based on the dependencies specified in the cabal file. Same of them are already present in the cabal store and some aren't. They are a subset of all possible package instances. This corresponds to a profile in Nix as well as a sandbox. We call this an environment.
 
 
 ## Dependency resolution
