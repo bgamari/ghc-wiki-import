@@ -144,7 +144,23 @@ Any attempt to switch to an SCont with status other than `SContSwitched Yielded`
 
 
 
-Before a switch operation, we expect the programmer to indicate the reason for switching through setScontSwitchReason. Exception is raised by the switch primitives if a switch reason has not been provided. When a switched SCont resumes execution, its status is automatically updated to `SContRunning`. 
+Before a switch operation, we expect the programmer to indicate the reason for switching through setScontSwitchReason. Exception is raised by the switch primitives if a switch reason has not been provided. When a switched SCont resumes execution, its status is automatically updated to `SContRunning`.
+
+
+### SCont-Local Storage
+
+
+
+SCont-local storage (SLS) provides a solution for associating arbitrary state with an SCont. Each SCont has a single slot with type [Dynamic](http://www.haskell.org/ghc/docs/latest/html/libraries/base/Data-Dynamic.html). SLS interface is give below:
+
+
+```wiki
+setSLS :: SCont -> Dynamic -> IO ()
+getSLS :: SCont -> PTM Dynamic
+```
+
+
+`Data.Dynamic` provides a way for safely casting between any arbitrary data type and `Dynamic` type. This allows SLS to be generic as well as type-safe.
 
 
 ## Abstracting the Scheduler
