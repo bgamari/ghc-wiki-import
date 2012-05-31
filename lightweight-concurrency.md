@@ -290,6 +290,10 @@ forkIO f = do
 Here, the thread that invokes forkIO initializes the new SCont (`ns`) with its own scheduler actions, and appends it to the scheduler. After the newly created SCont finishes execution, the control must switch to another thread in the scheduler. This is captured by the `epilogue`.
 
 
+
+A full implementation of a round-robin scheduler can be found here. This scheduler has one queue per capability. Work is shared among the capabilities by spawning threads in a round-robin fashion on the capabilities.
+
+
 ### MVars
 
 
@@ -339,7 +343,7 @@ If the MVar is full with a pending writer, we first fill the hole with the value
 
 
 
-Notice that just like yield and forkIO, takeMVar is scheduler agnostic; the MVar implementation is cleanly separated from the scheduler implementation. Moreover, the same MVar might be shared between threads from different schedulers since they utilize the uniform scheduler interface. Since the scheduler actions are PTM actions, actions from different schedulers can be composed together elegantly and simplifies reasoning about synchronization. 
+Notice that just like yield and forkIO, takeMVar is scheduler agnostic; the MVar implementation is cleanly separated from the scheduler implementation. Moreover, the same MVar might be shared between threads from different schedulers since they utilize the uniform scheduler interface. Since the scheduler actions are PTM actions, actions from different schedulers can be composed together elegantly and simplifies reasoning about synchronization. An implementation of a MVar can be found here.
 
 
 
