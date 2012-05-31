@@ -320,6 +320,7 @@ takeMVar (MVar ref) = do
         writePVar ref $ v
           where v = Empty $ ts++[(hole, wakeup)] 
         switchToNext <- getYCA
+        setSContSwitchReason s $ BlockedInHaskell ...
         switchToNext
       Full x ((x', wakeup):ts) -> do 
         writePVar hole x 
@@ -330,7 +331,7 @@ takeMVar (MVar ref) = do
 ```
 
 
-Primitive `takeMVar` first creates a hole, which will contain the result. If the MVar happens to be empty, we fetch the scheduleSContAction for the current thread, and append append it along with the hole to the end of the queue. This enqueued PTM action, when executed, will append the current thread to its scheduler. Finally, the control switches to the next runnable thread using the yieldControlAction. All of these actions occur atomically within the same transaction.
+Primitive `takeMVar` first creates a hole, which will contain the result. If the MVar happens to be empty, we fetch the scheduleSContAction for the current thread, and append append it along with the hole to the end of the queue. This enqueued PTM action, when executed, will append the current thread to its scheduler. We indicate the reason for switching to be `BlockedInHaskell`. Finally, the control switches to the next runnable thread using the yieldControlAction. All of these actions occur atomically within the same transaction.
 
 
 
