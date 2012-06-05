@@ -158,6 +158,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Types and type inference
 
 
+- [\#6065](https://gitlab.staging.haskell.org/ghc/ghc/issues/6065): GHC suggests a type signature that it then rejects
 - [\#5320](https://gitlab.staging.haskell.org/ghc/ghc/issues/5320): overlap delicacy
 - [\#4347](https://gitlab.staging.haskell.org/ghc/ghc/issues/4347), [\#4295](https://gitlab.staging.haskell.org/ghc/ghc/issues/4295): impredicativity
 - [\#5267](https://gitlab.staging.haskell.org/ghc/ghc/issues/5267), [\#5609](https://gitlab.staging.haskell.org/ghc/ghc/issues/5609), [\#5777](https://gitlab.staging.haskell.org/ghc/ghc/issues/5777), [\#344](https://gitlab.staging.haskell.org/ghc/ghc/issues/344): bugs in arrows; awaiting refactoring by Dan
