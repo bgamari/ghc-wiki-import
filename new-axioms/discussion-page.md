@@ -71,6 +71,10 @@ g :: G Int Int               -- what happens now?
 > >
 >
 
+
+SCW: For these last two, it would be consistent with current treatment (and with multiple groups) to allow 'stuck' type families. Perhaps GHC could flag a few more bugs if the user could specify when a type family was expected to be fully covered, but I don't think that failing to do this check will jeopardize type soundness.  
+
+
 ## Suggestions
 
 
