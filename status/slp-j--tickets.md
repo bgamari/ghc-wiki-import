@@ -37,6 +37,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#2289](https://gitlab.staging.haskell.org/ghc/ghc/issues/2289), [\#2387](https://gitlab.staging.haskell.org/ghc/ghc/issues/2387), [\#1600](https://gitlab.staging.haskell.org/ghc/ghc/issues/1600): nested CPR analysis        
 - [\#5996](https://gitlab.staging.haskell.org/ghc/ghc/issues/5996), [\#149](https://gitlab.staging.haskell.org/ghc/ghc/issues/149), [\#2940](https://gitlab.staging.haskell.org/ghc/ghc/issues/2940): CSE (patch offered)
 - [\#6047](https://gitlab.staging.haskell.org/ghc/ghc/issues/6047): GHC retains unnecessary binding
+- [\#6135](https://gitlab.staging.haskell.org/ghc/ghc/issues/6135): unboxed booleans
 - [\#5916](https://gitlab.staging.haskell.org/ghc/ghc/issues/5916): `runST` isn't free
 - [\#5522](https://gitlab.staging.haskell.org/ghc/ghc/issues/5522), [\#6092](https://gitlab.staging.haskell.org/ghc/ghc/issues/6092): liberate-case runs out of memory
 - [\#5366](https://gitlab.staging.haskell.org/ghc/ghc/issues/5366), [\#3990](https://gitlab.staging.haskell.org/ghc/ghc/issues/3990): UNPACK for data families, and with phantom types, needs data con wrapper refactoring
