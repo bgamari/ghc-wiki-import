@@ -7,7 +7,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 - [\#5591](https://gitlab.staging.haskell.org/ghc/ghc/issues/5591): add left/right back to coercions
 - [\#5682](https://gitlab.staging.haskell.org/ghc/ghc/issues/5682): Parsing of pomoted kinds
-- [\#6049](https://gitlab.staging.haskell.org/ghc/ghc/issues/6049), [\#6093](https://gitlab.staging.haskell.org/ghc/ghc/issues/6093): GADTs and polykinds
+- [\#6049](https://gitlab.staging.haskell.org/ghc/ghc/issues/6049), [\#6093](https://gitlab.staging.haskell.org/ghc/ghc/issues/6093), [\#6137](https://gitlab.staging.haskell.org/ghc/ghc/issues/6137): GADTs and polykinds
 - [\#6022](https://gitlab.staging.haskell.org/ghc/ghc/issues/6022): over-general types are inferred
 - [\#6065](https://gitlab.staging.haskell.org/ghc/ghc/issues/6065): suggested type sig is then rejected
 - [\#5913](https://gitlab.staging.haskell.org/ghc/ghc/issues/5913), [\#5751](https://gitlab.staging.haskell.org/ghc/ghc/issues/5751), [\#6117](https://gitlab.staging.haskell.org/ghc/ghc/issues/6117): type-class dictionary loops
