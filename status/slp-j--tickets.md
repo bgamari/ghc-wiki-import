@@ -16,6 +16,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#6018](https://gitlab.staging.haskell.org/ghc/ghc/issues/6018): Injective type families (patch offered)
 - [\#5939](https://gitlab.staging.haskell.org/ghc/ghc/issues/5939), [\#5936](https://gitlab.staging.haskell.org/ghc/ghc/issues/5936): Pedro's generics
 - [\#5863](https://gitlab.staging.haskell.org/ghc/ghc/issues/5863): deriving `Typeable` for data families
+- [NewAxioms](new-axioms) Pattern matching axioms
 
 ## Template Haskell
 
