@@ -19,10 +19,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Template Haskell
 
 
-- [\#6064](https://gitlab.staging.haskell.org/ghc/ghc/issues/6064): binders in `InstanceD`
-- [\#5612](https://gitlab.staging.haskell.org/ghc/ghc/issues/5612): support for kinds (patch available)
 - [\#1475](https://gitlab.staging.haskell.org/ghc/ghc/issues/1475): allow splicing of import declarations
-- [\#5854](https://gitlab.staging.haskell.org/ghc/ghc/issues/5854): INLINABLE pragmas (patch offered)
 - [\#4364](https://gitlab.staging.haskell.org/ghc/ghc/issues/4364): cycle in type declarations
 - [\#5469](https://gitlab.staging.haskell.org/ghc/ghc/issues/5469), [\#4429](https://gitlab.staging.haskell.org/ghc/ghc/issues/4429): `reinerp` work on `newName` and export reorganisation
 - [\#5375](https://gitlab.staging.haskell.org/ghc/ghc/issues/5375): semantics of `newName`
@@ -40,11 +37,6 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#5916](https://gitlab.staging.haskell.org/ghc/ghc/issues/5916): `runST` isn't free
 - [\#5522](https://gitlab.staging.haskell.org/ghc/ghc/issues/5522), [\#6092](https://gitlab.staging.haskell.org/ghc/ghc/issues/6092): liberate-case runs out of memory
 - [\#5366](https://gitlab.staging.haskell.org/ghc/ghc/issues/5366), [\#3990](https://gitlab.staging.haskell.org/ghc/ghc/issues/3990): UNPACK for data families, and with phantom types, needs data con wrapper refactoring
-
-## GHCi
-
-
-- [\#5527](https://gitlab.staging.haskell.org/ghc/ghc/issues/5527): `mkTopLevEnv: interpreeted`.  (Paolo)
 
 ## Features
 
