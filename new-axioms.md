@@ -2,7 +2,7 @@
 
 
 
-Thhis page describes an extension to type families that supports overlap.
+This page describes an extension to type families that supports overlap.
 
 
 - See [
@@ -95,7 +95,7 @@ So the deficiency is in System FC, and it seems fundamental.  We've been working
 -  A `type instance` declaration can define multiple equations, not just one:
 
   ```wiki
-  type instance Eq where
+  type instance Equal where
     Equal a a = True
     Equal a b = False
   ```
@@ -131,6 +131,6 @@ So the deficiency is in System FC, and it seems fundamental.  We've been working
   Here the second equation can never match.
 
 
-  
+ 
 
 
