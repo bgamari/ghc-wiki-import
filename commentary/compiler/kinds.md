@@ -71,7 +71,7 @@ classify coercion evidence).  The coercion kind, `T1 :=: T2`, is
 represented by `PredTy (EqPred T1 T2)`.
 
 
-### Kind subtyping
+## Kind subtyping
 
 
 
