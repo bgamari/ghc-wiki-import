@@ -13,8 +13,7 @@ The single data type `Type` is used to represent
 
 
 - Types (possibly of higher kind); e.g. `[Int]`, `Maybe`
-- Coercions; e.g. `trans (sym g) h`
-- Kinds (which classify types and coercions); e.g. `(* -> *)`, `T :=: [Int]`
+- Kinds (which classify types and coercions); e.g. `(* -> *)`, `T :=: [Int]`.  See Commentary/Kinds?
 - Sorts (which classify types); e.g. `TY`, `CO`
 
 
