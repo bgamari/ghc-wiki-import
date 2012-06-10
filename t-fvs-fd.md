@@ -423,3 +423,5 @@ Examples:
   http://www.haskell.org/pipermail/haskell-prime/2011-June/003423.html](http://www.haskell.org/pipermail/haskell-prime/2011-June/003423.html)
 - [
   http://code.atnnn.com/projects/type-prelude/wiki](http://code.atnnn.com/projects/type-prelude/wiki)
+- [
+  http://www.haskell.org/haskellwiki/Functional\_dependencies\_vs.\_type\_families](http://www.haskell.org/haskellwiki/Functional_dependencies_vs._type_families)
