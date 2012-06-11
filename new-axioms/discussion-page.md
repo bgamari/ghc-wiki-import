@@ -280,6 +280,8 @@ Oleg Kiselyov 2004 (part of the HList work, Section 9 of the paper)
 
 - [
   http://hackage.haskell.org/trac/ghc/wiki/TFvsFD\#SeeAlso2](http://hackage.haskell.org/trac/ghc/wiki/TFvsFD#SeeAlso2)
+- [
+  http://www.haskell.org/haskellwiki/Functional\_dependencies\_vs.\_type\_families](http://www.haskell.org/haskellwiki/Functional_dependencies_vs._type_families)
 
 
 \[More to do ...\]
@@ -301,6 +303,11 @@ Link to GHC flags on OverlappingInstances, IncoherentInstances, (and possibly Un
 
 See Haskell-cafe and Haskell-prime mailing lists anon.
 
+
+- [
+  http://www.haskell.org/pipermail/haskell-prime/2011-July/003491.html](http://www.haskell.org/pipermail/haskell-prime/2011-July/003491.html) -- and discussions this points to
+- [
+  http://www.haskell.org/pipermail/haskell-prime/2012-May/003687.html](http://www.haskell.org/pipermail/haskell-prime/2012-May/003687.html)
 
 ## Requests for Clarification
 
