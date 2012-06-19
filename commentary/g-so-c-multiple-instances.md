@@ -9,6 +9,7 @@ http://hackage.haskell.org/trac/ghc/wiki/Commentary/Packages/MultiInstances](htt
 - Cabal should install packages to a location that does not just depend on name and version,
 - ghc-pkg should always add instances to the PackageDB and never overwrite them,
 - ghc --make, ghci, and the configure phase of Cabal should select suitable instances according to some rule of thumb (similar to the current resolution technique),
+- we want to be able to make more fine-grained distinctions between package instances than currently possible, for example by distinguishing different build flavours or "ways" (profiling, etc.)
 - cabal-install should still find an InstallPlan, and still avoid unnecessarily rebuilding packages whenever it makes sense
 - some form of garbage collection should be offered to have a chance to reduce the amount of installed packages
 
@@ -97,40 +98,18 @@ Currently if GHC is invoked by the user it does some adhoc form of dependency re
 Picking a random version is a last resort. A combination of installation time and priorities seems rather feasible. It makes conflicts unlikely, and allows to persistently change the priorities of installed packages. Using the order in the package DB is difficult if directories are being used as DBs. Looking at the transitive closure of dependencies makes it hard to define a total ordering of package instances. Adding a complex solver is unattractive unless we find a way to reuse cabal-install's functionality within GHC, but probably we do not want to tie the two projects together in this way.
 
 
-## Dependency resolution in cabal-install
+## Build flavours
 
 
 
-"so I see two general options for communicating knowledge about build flavors to the solver:
+Once we distinguish several package instances with the same version, we have a design decision how precise we want that distinction to be.
 
 
 
-(1) "the direct way": 
-i.e., all info is available to ghc-pkg and can be communicated back to Cabal and therefore the solver
-the solver can therefore figure out if a particular package is suitable to use or not, in advance
+The minimal approach would be to just take the transitive dependencies into account. However, we might also want to include additional information about builds such as Cabal flag settings, compiler options, profiling, documentation, build tool versions, external (OS) dependencies, and more.
 
 
-
-(2) "the agnostic way"
-this is based on the idea that the solver at first doesn't consider installed packages at all. it'll just do resolution on the source packages available.
-taking all build parameters into account, Cabal hashes will be computed.
-these can then be compared to hashes of installed packages.
-reusing installed packages instead of rebuilding them is then an optimization of the install plan.
-this doesn't require that ghc-pkg is actually directly aware of all the build parameters, as long as the hash computation is robust." -- kosmikus
-
-
-
-The options are to support either both by putting all info into InstalledPackageInfo or to support only (2) by just putting a hash into InstalledPackageInfo. The disadvantage of supporting both is that InstalledPackageInfo would have to change more often. This could be fixed by making InstalledPackageInfo extensible. The advantages are that the additional info might be useful for other tools and that more complex rules for compatibility are possible for example non-profiling libs can depend on profiling libs. It would also be better for showing the user how two instances differ. The disadvantage of going for only (2) is that it is a big change and might cause problems with other Haskell implementations. Also if a package only exists installed and not in source form it is completely ignored. 
-
-
-## Garbage Collection
-
-
-
-It should be possible to have a garbage collection remove unneeded packages. It has to be interactive because there might be dependencies not known to Cabal and ghc-pkg. Sandboxes are useful for the user to keep track of what should be removable without causing too much damage.
-
-
-## The Cabal hash
+### The Cabal hash
 
 
 
@@ -157,11 +136,44 @@ The source code. This is necessary because if the source code changes the result
 OS dependencies are not taken into account because i think it would be very hard.
 
 
-## Released and Unreleased packages
+### Released and Unreleased packages
 
 
 
 If we cabal install a package that is released on hackage we call this a clean install. If we cabal install an unreleased package we call this a dirty install. Clean installs are mainly used to bring a package into scope for ghci and to install applications. While they can be used to satisfy dependencies this is discouraged. For released packages the set of source files needed for compilation is known. For unreleased packages this is currently not the case.
+
+
+## Dependency resolution in cabal-install
+
+
+
+There are two general options for communicating knowledge about build flavors to the solver:
+
+
+
+(1) "the direct way": 
+i.e., all info is available to ghc-pkg and can be communicated back to Cabal and therefore the solver
+the solver can therefore figure out if a particular package is suitable to use or not, in advance
+
+
+
+(2) "the agnostic way"
+this is based on the idea that the solver at first doesn't consider installed packages at all. it'll just do resolution on the source packages available.
+taking all build parameters into account, Cabal hashes will be computed.
+these can then be compared to hashes of installed packages.
+reusing installed packages instead of rebuilding them is then an optimization of the install plan.
+this doesn't require that ghc-pkg is actually directly aware of all the build parameters, as long as the hash computation is robust." -- kosmikus
+
+
+
+The options are to support either both by putting all info into InstalledPackageInfo or to support only (2) by just putting a hash into InstalledPackageInfo. The disadvantage of supporting both is that InstalledPackageInfo would have to change more often. This could be fixed by making InstalledPackageInfo extensible. The advantages are that the additional info might be useful for other tools and that more complex rules for compatibility are possible for example non-profiling libs can depend on profiling libs. It would also be better for showing the user how two instances differ. The disadvantage of going for only (2) is that it is a big change and might cause problems with other Haskell implementations. Also if a package only exists installed and not in source form it is completely ignored. 
+
+
+## Garbage Collection
+
+
+
+It should be possible to have a garbage collection remove unneeded packages. It has to be interactive because there might be dependencies not known to Cabal and ghc-pkg. Sandboxes are useful for the user to keep track of what should be removable without causing too much damage.
 
 
 ## Separating storage and selection of packages
