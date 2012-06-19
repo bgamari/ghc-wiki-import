@@ -7,10 +7,10 @@ http://hackage.haskell.org/trac/ghc/wiki/Commentary/Packages/MultiInstances](htt
 
 
 - Cabal should install packages to a location that does not just depend on name and version,
-- `ghc-pkg` should always add instances to the PackageDB and never overwrite them,
+- `ghc-pkg` should always add instances to the `PackageDB` and never overwrite them,
 - `ghc --make`, `ghci`, and the configure phase of Cabal should select suitable instances according to some rule of thumb (similar to the current resolution technique),
 - we want to be able to make more fine-grained distinctions between package instances than currently possible, for example by distinguishing different build flavours or "ways" (profiling, etc.)
-- `cabal-install` should still find an InstallPlan, and still avoid unnecessarily rebuilding packages whenever it makes sense
+- `cabal-install` should still find an `InstallPlan`, and still avoid unnecessarily rebuilding packages whenever it makes sense
 - some form of garbage collection should be offered to have a chance to reduce the amount of installed packages
 
 ## Install location of installed Cabal packages
@@ -268,3 +268,62 @@ Other Compilers, backwards compatibility?
 What is ComponentLocalBuildInfo for?
 
 
+## Currently open design decisions
+
+
+### `InstalledPackageId` and install path
+
+
+
+Options for uniquely identifying `InstalledPackageId`:
+
+
+- Cabal hash only
+- Cabal + ABI hash (truly unique)
+- random number
+
+
+Options for identifying install path:
+
+
+- Cabal hash
+- random number
+
+
+ABI hash cannot be in install path because it's only available after build.
+
+
+### Build flavours
+
+
+
+To what degree should we distinguish package instances?
+
+
+- Only package versions transitively
+- Ways and Cabal flags
+- Everything Haskell-specific info that we can query
+- Even non-Haskell-specific inputs such as OS dependencies
+
+### `InstalledPackageInfo` and solver algorithm
+
+
+
+Options for `InstalledPackageInfo`:
+
+
+- Only add Cabal hash.
+- Add (nearly) all information, but in an extensible format.
+- Add all information in a way that `ghc-pkg` itself can use it.
+
+
+\[These aren't necessarily mutually exclusive.\]
+
+
+
+Options for the solver:
+
+
+- Direct (see above): requires a certain amount of info in the `InstalledPackageInfo`.
+
+- Agnostic (except for builtin packages): could be done with only the Cabal hash in `InstalledPackageInfo`.
