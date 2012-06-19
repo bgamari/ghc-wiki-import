@@ -4,6 +4,8 @@ Pedro will write this. Notes:
 
 - `data kind K ...`
 
+- Allow `*` on `data kind`s? Or maybe `Type`, or `Star`.
+
 
  
 
