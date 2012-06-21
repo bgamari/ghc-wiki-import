@@ -2,7 +2,7 @@
 
 
 
-This proposal is a precursor to overloaded record fields. It's also a modest step towards freeing up the namespace, without in any way pre-judging how the 'narrow namespace issue' might get addressed.
+This proposal is a precursor to overloaded record fields. It's also a modest step towards freeing up the namespace, without in any way pre-judging how the 'narrow namespace issue' might get addressed. Ticket [\#5972](https://gitlab.staging.haskell.org/ghc/ghc/issues/5972).
 
 
 
