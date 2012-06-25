@@ -126,15 +126,15 @@ A field *Way* of type `[String]`. It tracks the way in which the package was com
 
 
 
-A timestamp of the time when the package was installed (or built?). It is used by GHC and Cabal to put a preference on the latest package of a certain version.
+A `timestamp` of the time when the package was installed (or built?). It is used by GHC and Cabal to put a preference on the latest package of a certain version.
 
 
 
-A currently empty but extensible set of fields starting with "x-cabal-...". ghc-pkg ignores them when parsing. During the resolution phase cabal-install might use them to decide compatibility between packages.
+A currently empty but extensible set of fields starting with "x-cabal-...". `ghc-pkg` ignores them when parsing. During the resolution phase `cabal-install` might use them to decide compatibility between packages.
 
 
 
-A field abi-hash that contains the ABI hash because it is now longer stored implicitly as part of the `InstalledPackageId`.
+A field abi-hash that contains the ABI hash because it is no longer stored implicitly as part of the `InstalledPackageId`.
 
 
 ## Simplistic dependency resolution
