@@ -57,7 +57,7 @@ synonym of `*`.
 
 
 
-This request is also in [\#6024](https://gitlab.staging.haskell.org/ghc/ghc/issues/6024).
+This ticket to track this request is [\#6024](https://gitlab.staging.haskell.org/ghc/ghc/issues/6024).
 
 
 # Defining datatypes without an associated kind
