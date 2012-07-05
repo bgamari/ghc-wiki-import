@@ -29,6 +29,20 @@ or even
 However, when this situation nests (e.g. monadic bind) and variables have the same type, naming becomes painful and often degrades to not-so-meaningful ```meaningfulName1```, ```meaningfulName2```, ...
 
 
+
+A similar problem exists with `proc` expressions from arrow notation, which can be regarded as generalized lambda expressions. We sometimes have expressions of the following structure:
+
+
+```wiki
+proc meaningfulName -> case meaningfulName of
+    Pat1 -> ...
+    Pat2 -> ...
+```
+
+
+Here, the dots stand for arrow expressions, not ordinary expressions.
+
+
 ## The proposals
 
 
@@ -62,6 +76,7 @@ desugars to
 
   - Looks weird (no hint of being a lambda abstraction)
   - Single-argument solution (see the note)
+  - Cannot be generalized to cover also `proc` expressions
 
 ### LambdaCase: ```\case```
 
@@ -93,6 +108,7 @@ desugars to
 - Pros
 
   - No conflicts with the current syntax (the sequence ```\ case``` is illegal)
+  - An analog syntax for `proc` expressions can be gained by replacing `\` with `proc`
 - Cons
 
   - Single-argument solution (see the note). One way to extend it to support multiple arguments is
@@ -125,6 +141,7 @@ Extend the current syntax with alternative clauses:
 - Pros
 
   - Multi-argument solution (see the note)
+  - An analog syntax for `proc` expressions can be gained by replacing `\` with `proc`
 - Cons
 
   - Breaks current idioms. For example,
@@ -163,6 +180,7 @@ Addresses the layout problem of MultiClauseLambdas. Requires multi-clause abstra
 
   - No conflicts with the current syntax
   - Multi-argument solution (see the note)
+  - An analog syntax for `proc` expressions can be gained by replacing `\` with `proc`
 - Cons
 
   - Deciding on the keyword may take years
