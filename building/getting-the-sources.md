@@ -117,6 +117,16 @@ http://darcs.haskell.org](http://darcs.haskell.org). This is easy since sync-all
 ```
 
 
+If you want a full clone of every package from GitHub instead, sync-all can handle that as well.
+
+
+```wiki
+  $ git clone <your preferred github.com GHC fork URL> ghc
+  $ cd ghc
+  $ ./sync-all -r git://github.com/ghc get
+```
+
+
 The official mirror for GHC on github is located at [
 https://github.com/ghc/ghc](https://github.com/ghc/ghc).
 
