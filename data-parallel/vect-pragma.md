@@ -130,7 +130,7 @@ For a type constructor `T`, the pragma
 ```
 
 
-indicates that the type `T` is scalar; i.e., it cannot have any embedded arrays. Hence, the `T` represents itself in vectorised code. (No special vectorised version needs to be generated.)
+indicates that the type `T` is scalar; i.e., it cannot have any embedded arrays. Hence, the type `T` represents itself in vectorised code. (No special vectorised version needs to be generated.)
 
 
 
