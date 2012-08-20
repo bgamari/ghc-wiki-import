@@ -59,7 +59,7 @@ This pragma can only be used for bindings in the current module (exactly like an
 
 
 
-Currently, not used. (Might be used to ensure that specific functions are used scalar vectorised.)
+Removed.
 
 
 ## The basic VECTORISE pragma for type constructors
