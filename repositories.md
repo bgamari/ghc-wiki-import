@@ -422,6 +422,10 @@ Currently, all our repositories are being mirrored to GitHub by GitHub themselve
 
 
 
+For how we manage release branches, see [WorkingConventions/Releases](working-conventions/releases).
+
+
+
 The following branches are active:
 
 
