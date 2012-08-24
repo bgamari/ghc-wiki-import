@@ -35,11 +35,11 @@ There is a **stable branch** corresponding to each major release, named after th
 
 
 
-Releases are only made from the stable branch.  The stable branch for a major release is created by the release manager shortly before the release candidate (a couple of weeks or so).  When the release is made, the stable branch (of all repositories) is tagged with the release name, e.g. `ghc-7.4.1`.
+**Releases are only made from the stable branch.**  The stable branch for a major release is created by the release manager shortly before the release candidate (a couple of weeks or so).  When the release is made, the stable branch (of all repositories) is tagged with the release name, e.g. `ghc-7.4.1`.
 
 
 
-Our convention is that only the release manager modifies the stable branch.  Other developers request that changes are merged to the branch in one of the following ways:
+**Only the release manager modifies the stable branch.**  Other developers request that changes are merged to the branch in one of the following ways:
 
 
 - By moving a ticket into the "merge" state once it is fixed.  Please do this if you fix a bug and the fix is suitable for the branch.  Check that the milestone field of the ticket identifies the correct release target. This helps later on when we need to know whether a bug was fixed in a particular release, and also helps us to collect a list of all bugs that were fixed in a given release.
