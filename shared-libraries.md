@@ -91,7 +91,7 @@ PE format introduction:
 
 
 - [ Part 1](http://msdn.microsoft.com/en-us/magazine/cc301805.aspx)
-- [ Part 2](http://msdn.microsoft.com/en-us/magazine/cc301805.aspx)
+- [ Part 2](http://msdn.microsoft.com/en-us/magazine/cc301808.aspx)
 
 
 In particular these describe how dll import and export works.
