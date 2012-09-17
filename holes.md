@@ -472,7 +472,7 @@ It seems intuitive how named holes work in expressions. How would they work in t
 
 
 
-As we mentioned in \#Comparison, the expression wildcard does not allow finding out the type of an existing expression. A special pair of brackets could be used to do this.
+As we mentioned in [Comparison](holes#comparison), the expression wildcard does not allow finding out the type of an existing expression. A special pair of brackets could be used to do this.
 
 
 
