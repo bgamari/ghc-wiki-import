@@ -78,8 +78,8 @@ getField :: Selector n -> Ptr (Struct fields) -> Ptr (Get n fields)
 ```
 
 
-(This is just an example---to make this work for real we'd probably
-have to use a type class, so that we can determine the sizes of struct fields.)
+(This is just an example---to make this work for real, we'd probably
+have to use a type class so that we can determine the sizes of the struct fields.)
 
 
 
