@@ -44,7 +44,7 @@ The same sort of thing happens if we try to use numbers of kind `Nat` as the par
 to a type function---we often can't define the instances that we need.
 
 
-# The Solution
+# A Solution
 
 
 
