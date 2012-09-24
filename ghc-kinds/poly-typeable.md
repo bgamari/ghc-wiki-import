@@ -125,7 +125,7 @@ Is this perhaps better?
 
 
 
-**In GHC 7.6:**
+**In GHC 7.8:**
 
 
 - Rename `Data.Typeable` to `Data.OldTypeable` and deprecate the whole module.
@@ -152,7 +152,7 @@ Is this perhaps better?
 - You used `deriving( Typeable )` to write instances.
 
 
-**In GHC  7.8:**
+**In GHC  7.10:**
 
 
 - Remove `Data.OldTypeable`
