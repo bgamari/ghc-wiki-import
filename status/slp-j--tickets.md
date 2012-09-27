@@ -90,7 +90,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 - [\#6040](https://gitlab.staging.haskell.org/ghc/ghc/issues/6040), [\#5945](https://gitlab.staging.haskell.org/ghc/ghc/issues/5945), [\#3458](https://gitlab.staging.haskell.org/ghc/ghc/issues/3458), [\#1216](https://gitlab.staging.haskell.org/ghc/ghc/issues/1216): lambda-lift functions with a few args, just before code gen
 - [\#5059](https://gitlab.staging.haskell.org/ghc/ghc/issues/5059): specialise on value arguments
-- [\#5974](https://gitlab.staging.haskell.org/ghc/ghc/issues/5974): casts and RULES interaction
+- [\#5974](https://gitlab.staging.haskell.org/ghc/ghc/issues/5974): casts, RULES, and parametricity
 - [\#5262](https://gitlab.staging.haskell.org/ghc/ghc/issues/5262): seq magic
 - [\#605](https://gitlab.staging.haskell.org/ghc/ghc/issues/605): strict/unboxed enumerations
 - [\#2607](https://gitlab.staging.haskell.org/ghc/ghc/issues/2607): space leak: inlining defeats selector thunk optimisation
