@@ -28,6 +28,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Optimisation
 
 
+- [\#6040](https://gitlab.staging.haskell.org/ghc/ghc/issues/6040), [\#5945](https://gitlab.staging.haskell.org/ghc/ghc/issues/5945), [\#3458](https://gitlab.staging.haskell.org/ghc/ghc/issues/3458), [\#1216](https://gitlab.staging.haskell.org/ghc/ghc/issues/1216): lambda-lift functions with a few args, just before code gen
 - [\#3872](https://gitlab.staging.haskell.org/ghc/ghc/issues/3872), [\#5400](https://gitlab.staging.haskell.org/ghc/ghc/issues/5400), [\#5448](https://gitlab.staging.haskell.org/ghc/ghc/issues/5448), [\#5722](https://gitlab.staging.haskell.org/ghc/ghc/issues/5722), [\#7057](https://gitlab.staging.haskell.org/ghc/ghc/issues/7057): contravariant data type loop in simplifier inliner
 - [\#5623](https://gitlab.staging.haskell.org/ghc/ghc/issues/5623), [\#5954](https://gitlab.staging.haskell.org/ghc/ghc/issues/5954): performance regression. Duplication of primops?
 - [\#6070](https://gitlab.staging.haskell.org/ghc/ghc/issues/6070), [\#5949](https://gitlab.staging.haskell.org/ghc/ghc/issues/5949), [\#5775](https://gitlab.staging.haskell.org/ghc/ghc/issues/5775), [\#4267](https://gitlab.staging.haskell.org/ghc/ghc/issues/4267), [\#5302](https://gitlab.staging.haskell.org/ghc/ghc/issues/5302), [\#6087](https://gitlab.staging.haskell.org/ghc/ghc/issues/6087): Demand analysis
@@ -88,7 +89,6 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ### Optimiser
 
 
-- [\#6040](https://gitlab.staging.haskell.org/ghc/ghc/issues/6040), [\#5945](https://gitlab.staging.haskell.org/ghc/ghc/issues/5945), [\#3458](https://gitlab.staging.haskell.org/ghc/ghc/issues/3458), [\#1216](https://gitlab.staging.haskell.org/ghc/ghc/issues/1216): lambda-lift functions with a few args, just before code gen
 - [\#5059](https://gitlab.staging.haskell.org/ghc/ghc/issues/5059): specialise on value arguments
 - [\#5974](https://gitlab.staging.haskell.org/ghc/ghc/issues/5974): casts, RULES, and parametricity
 - [\#5262](https://gitlab.staging.haskell.org/ghc/ghc/issues/5262): seq magic
