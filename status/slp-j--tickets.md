@@ -155,7 +155,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 - [\#6065](https://gitlab.staging.haskell.org/ghc/ghc/issues/6065): GHC suggests a type signature that it then rejects
 - [\#5320](https://gitlab.staging.haskell.org/ghc/ghc/issues/5320), [\#7296](https://gitlab.staging.haskell.org/ghc/ghc/issues/7296): overlap delicacy
-- [\#4347](https://gitlab.staging.haskell.org/ghc/ghc/issues/4347), [\#4295](https://gitlab.staging.haskell.org/ghc/ghc/issues/4295): impredicativity
+- [\#4347](https://gitlab.staging.haskell.org/ghc/ghc/issues/4347), [\#4295](https://gitlab.staging.haskell.org/ghc/ghc/issues/4295), [\#7264](https://gitlab.staging.haskell.org/ghc/ghc/issues/7264): impredicativity
 - [\#1965](https://gitlab.staging.haskell.org/ghc/ghc/issues/1965): make existentials have a really cheap implementation
 - [\#5224](https://gitlab.staging.haskell.org/ghc/ghc/issues/5224): make it cheaper to check for inconsistent type family instances
 - [\#4466](https://gitlab.staging.haskell.org/ghc/ghc/issues/4466), [\#5296](https://gitlab.staging.haskell.org/ghc/ghc/issues/5296): explicit type application
