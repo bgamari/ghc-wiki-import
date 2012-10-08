@@ -30,6 +30,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Optimisation
 
 
+- [\#7206](https://gitlab.staging.haskell.org/ghc/ghc/issues/7206), [\#7309](https://gitlab.staging.haskell.org/ghc/ghc/issues/7309): avoid excessive sharing of enumerations
 - [\#6040](https://gitlab.staging.haskell.org/ghc/ghc/issues/6040), [\#5945](https://gitlab.staging.haskell.org/ghc/ghc/issues/5945), [\#3458](https://gitlab.staging.haskell.org/ghc/ghc/issues/3458), [\#1216](https://gitlab.staging.haskell.org/ghc/ghc/issues/1216): lambda-lift functions with a few args, just before code gen
 - [\#3872](https://gitlab.staging.haskell.org/ghc/ghc/issues/3872), [\#5400](https://gitlab.staging.haskell.org/ghc/ghc/issues/5400), [\#5448](https://gitlab.staging.haskell.org/ghc/ghc/issues/5448), [\#5722](https://gitlab.staging.haskell.org/ghc/ghc/issues/5722), [\#7057](https://gitlab.staging.haskell.org/ghc/ghc/issues/7057): contravariant data type loop in simplifier inliner
 - [\#5623](https://gitlab.staging.haskell.org/ghc/ghc/issues/5623), [\#5954](https://gitlab.staging.haskell.org/ghc/ghc/issues/5954): performance regression. Duplication of primops?
