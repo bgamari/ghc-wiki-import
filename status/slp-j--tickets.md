@@ -22,6 +22,10 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Template Haskell
 
 
+
+See also [TemplateHaskell](template-haskell)
+
+
 - [\#1475](https://gitlab.staging.haskell.org/ghc/ghc/issues/1475): allow splicing of import declarations (5 in cc list)
 - [\#4364](https://gitlab.staging.haskell.org/ghc/ghc/issues/4364): cycle in type declarations
 - [\#5469](https://gitlab.staging.haskell.org/ghc/ghc/issues/5469), [\#4429](https://gitlab.staging.haskell.org/ghc/ghc/issues/4429): `reinerp` work on `newName` and export reorganisation
