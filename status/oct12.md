@@ -28,3 +28,5 @@
 - type holes, deferred type errors
 
 - Multi-way if, and `\case`
+
+- new codegen by default
