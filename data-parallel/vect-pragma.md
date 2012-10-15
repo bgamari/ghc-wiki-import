@@ -13,7 +13,11 @@ Given a function `f`, the vectoriser generates a vectorised version `f_v`, which
 
 
 
-However, if a variable `f` is accompanied by a pragma of the form
+We have got two exceptions to this rule. Firstly, if the body of a function `f` is scalar —i.e., it does not involve any parallel array computations— then we leave it as is and omit the generation of `f_v`. Whether a function is scalar is determined by the rules described in the **Vectorisation Avoidance** paper.
+
+
+
+Secondly, if a variable `f` is accompanied by a pragma of the form
 
 
 ```wiki
