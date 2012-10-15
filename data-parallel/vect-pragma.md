@@ -56,7 +56,7 @@ This pragma can only be used for bindings in the current module (exactly like an
 
 
 
-**Caveat:** If `f`'s definition contains bindings that are being floated to the toplevel, those bindings will still be vectorised.
+**Caveat:** If `f`'s definition contains bindings that are being floated to the toplevel, those bindings may still be vectorised. (**TODO** We might want to ensure that we never float anything out of (at least, those) bindings before the vectoriser is invoked.)
 
 
 ## The VECTORISE SCALAR pragma for functions
