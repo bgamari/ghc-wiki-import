@@ -104,6 +104,10 @@ fromSing :: SingE (KindOf a) => Sing a -> Demote a
 ```
 
 
+TODO Explain this more fully.
+
+
+
 Notice that GHCi could display values of type `Sing`, so they have a `Show` instance.  As another example, here
 is the definition of the `Show` instance:
 
