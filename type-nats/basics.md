@@ -35,7 +35,7 @@ of singleton types, parameterized by type-level literals:
 
 
 ```wiki
-newtype Sing :: a -> *
+data Sing :: a -> *
 ```
 
 
@@ -51,8 +51,9 @@ We can do this with the function `fromSing`:
 
 
 ```wiki
-fromSing :: Sing a -> SingRep a
+fromSing :: SingE a => Sing a -> Demote a
 
+-- XXX: NOT YET UPDATED
 type family SingRep a
 type instance SingRep (n :: Nat)    = Integer
 type instance SingRep (n :: Symbol) = String
