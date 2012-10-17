@@ -121,7 +121,7 @@ If you want a full clone of every package from GitHub instead, sync-all can hand
 
 
 ```wiki
-  $ git clone <your preferred github.com GHC fork URL> ghc
+  $ git clone git://github.com/ghc/ghc
   $ cd ghc
   $ ./sync-all -r git://github.com/ghc get
 ```
