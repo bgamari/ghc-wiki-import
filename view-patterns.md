@@ -415,8 +415,8 @@ View patterns permit programming in an iterator style, where you name the result
 
 
 ```wiki
-   length [] = []
-   length (_ : length -> xs) = 1 + xs
+   length [] = 0
+   length (_ : length -> n) = 1 + n
    
    map f [] = []
    map f (x : map f -> xs) = f x : xs
