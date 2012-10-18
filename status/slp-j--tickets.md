@@ -109,6 +109,7 @@ See also [TemplateHaskell](template-haskell)
 - [\#2255](https://gitlab.staging.haskell.org/ghc/ghc/issues/2255), [\#3767](https://gitlab.staging.haskell.org/ghc/ghc/issues/3767), [\#2642](https://gitlab.staging.haskell.org/ghc/ghc/issues/2642), [\#3831](https://gitlab.staging.haskell.org/ghc/ghc/issues/3831), [\#4941](https://gitlab.staging.haskell.org/ghc/ghc/issues/4941): Improve **`SpecConstr`** for free variables, and for join points.
 - [\#2374](https://gitlab.staging.haskell.org/ghc/ghc/issues/2374): SAT and `MutableByteArray`        Max?
 - [\#7080](https://gitlab.staging.haskell.org/ghc/ghc/issues/7080): inconsistent treatment of RULES and SPECIALISE
+- [\#876](https://gitlab.staging.haskell.org/ghc/ghc/issues/876): make `length` into a good consumer. Perhaps using `foldl`?
 
 ### Compiler performance
 
