@@ -14,6 +14,10 @@
 
 - polymorphis kinds, datakinds
 
+- deferred type errors
+
+- Multi-way if, and `\case`
+
 ## The next 6 months
 
 
@@ -25,8 +29,10 @@
 
 - dynlibs-by-default
 
-- type holes, deferred type errors
+- type holes
 
-- Multi-way if, and `\case`
+
+ 
+
 
 - new codegen by default
