@@ -6,12 +6,11 @@ Normally GHC will try to do a so-called registerised build, where it uses variou
 
 
 
-To do an unregisterised build, remove the comment from the following line in your `mk/build.mk` file:
+To do an unregisterised build, add the following to your `mk/build.mk` file:
 
 
 ```wiki
-# An unregisterised, optimised build of ghc, for porting:
-#BuildFlavour = unreg
+GhcUnregisterised=YES
 ```
 
 
