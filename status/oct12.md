@@ -45,6 +45,8 @@ Here is what we have been up to in the last six months:
 >
 >
 
+- **Overlapping type family instances.** Richard Eisenberg is close to finishing an implementation of overlapping type family instances. The overlap mechanism is distinct from overlapping type class instances, as the programmer has to give an explicit ordering to the overlapping instances. More information can be found on the wiki page \[11\].
+
 - dynlibs-by-default
 
 - new codegen by default
@@ -73,10 +75,13 @@ http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/](http://rese
 \[8\] The Right Kind of Generic Programming, José Pedro Magalhães, WGP'12 [
 http://dreixel.net/research/pdf/trkgp.pdf](http://dreixel.net/research/pdf/trkgp.pdf) 
 
-\[9\] Dependently typed programming with singletons, Richard Eisenberge et al, HS'12 [
+\[9\] Dependently typed programming with singletons, Richard Eisenberg et al, HS'12 [
 http://www.cis.upenn.edu/\~eir/pubs.html](http://www.cis.upenn.edu/~eir/pubs.html)  
 
 \[10\] Holes in GHC:  [
-http://hackage.haskell.org/trac/ghc/wiki/Holes](http://hackage.haskell.org/trac/ghc/wiki/Holes)
+http://hackage.haskell.org/trac/ghc/wiki/Holes](http://hackage.haskell.org/trac/ghc/wiki/Holes) 
+
+\[11\] Overlapping type family instances: [
+http://hackage.haskell.org/trac/ghc/wiki/NewAxioms](http://hackage.haskell.org/trac/ghc/wiki/NewAxioms)
 
 
