@@ -131,6 +131,7 @@ git config --global diff.ignoreSubmodules dirty
 
 or each time you run `git status` or `git diff`, git will check for
 changes not only in the GHC repository, but also in all the submodules.
+(you must have `git >= 1.7.3` for this to work).
 
 
 
