@@ -1,5 +1,8 @@
+# Overloaded list notation
 
-The primary purpose of this wiki page is to documenting the design and
+
+
+This wiki page documens the design and
 implementation of the GHC extension for overloading Haskell's list notation.
 
 
