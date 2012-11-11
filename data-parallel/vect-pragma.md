@@ -52,7 +52,7 @@ then it is ignored by the vectoriser — i.e., no function `f_v` is generated an
 
 
 
-This pragma can only be used for bindings in the current module (exactly like an `INLINE` pragma).
+This pragma can only be used for bindings in the current module (exactly like an `INLINE` pragma). The pragma must be used on all bindings forming a recursive group if it is used on any of the bindings in a group.
 
 
 
