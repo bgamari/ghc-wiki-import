@@ -470,7 +470,7 @@ them.
 
 
 
-For years, I have been pretending that Monads are not Functors. When applicative functors showed up, I could accept them as functors, but my internal contradictions prevented me to accept them as monads. I am tired of living a lie. Please Simon, HELP ME!
+For years, I have been pretending that Monads are not Functors. When applicative functors showed up, I could accept them as functors, but my internal contradictions prevented me to accept them as monads. This is a cry for help! 
 
 
 >
