@@ -18,6 +18,10 @@ $ ghc -fplugin=Some.Plugin.Module -fplugin-opt=Some.Plugin.Module:no-fizzbuzz a.
 ```
 
 
+Warning: this can fail with non obvious error messages if in the same directory as the Some.Plugin.Module source; seems GHC tries to use the source instead of the installed package.
+
+
+
 `Some.Plugin.Module` should export a symbol named 'plugin' - see the following repositories for examples that do Common Subexpression Elimination, turn Haskell into a strict language, and implement a loop unroller:
 
 
