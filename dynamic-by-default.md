@@ -4,6 +4,10 @@
 ## Bugs
 
 
+
+As well as the [ticket for implementing dynamic-by-default (\#3658)](https://gitlab.staging.haskell.org/ghc/ghc/issues/3658), the table below lists the related tickets and the platforms that they affect. Most, if not all, of these would be immediately fixed by switching to dynamic-by-default.
+
+
 <table><tr><th>Ticket</th>
 <th>Affects OS X x86\_64?</th>
 <th>Affects OS X x86?</th>
