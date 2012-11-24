@@ -1,3 +1,35 @@
+## OS X 64bit
+
+
+
+[
+http://lambda.haskell.org/\~igloo/dynamic-by-default/nofib-osx-x86\_64.html](http://lambda.haskell.org/~igloo/dynamic-by-default/nofib-osx-x86_64.html)
+
+
+## OS X 32bit
+
+
+
+[
+http://lambda.haskell.org/\~igloo/dynamic-by-default/nofib-osx-x86.html](http://lambda.haskell.org/~igloo/dynamic-by-default/nofib-osx-x86.html)
+
+
+## Linux 64bit
+
+
+
+[
+http://lambda.haskell.org/\~igloo/dynamic-by-default/nofib-linux-x86\_64.html](http://lambda.haskell.org/~igloo/dynamic-by-default/nofib-linux-x86_64.html)
+
+
+## Linux 32bit
+
+
+
+[
+http://lambda.haskell.org/\~igloo/dynamic-by-default/nofib-linux-x86.html](http://lambda.haskell.org/~igloo/dynamic-by-default/nofib-linux-x86.html)
+
+
 ## OS X 32bit vs 64bit
 
 
