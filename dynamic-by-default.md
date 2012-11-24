@@ -852,7 +852,7 @@ For 2 and 4, there would be a considerable performance impact, but there is agai
 
 
 
-For 5 and 6, we will first have to get it working. Windows already uses different code paths quite a lot, so even if we end up deciding not to go dynamic-by-default on Windows, a lot of the ugly, buggy code will be removed. However, there are some known bugs in it on Windows, so we are hopeful that we will be able to do dynamic-by-default here too.
+For 5 and 6, we will first have to get it working. Windows already uses different code paths quite a lot, so even if we end up deciding not to go dynamic-by-default on Windows, a lot of the ugly, buggy code will be removed. However, there are some known bugs on Windows, and we would be able to remove more code if we switched all platforms, so we are hopeful that we will be able to do dynamic-by-default here too.
 
 
 
