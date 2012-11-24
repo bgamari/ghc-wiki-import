@@ -145,14 +145,14 @@ on Linux 32bit</th>
 <th></th></tr>
 <tr><th>-1 s.d.</th>
 <th>-6.9%</th>
-<td>\<+10.3%/td\></td>
+<th>+10.3%/td\></th>
 <th>-2.5%</th>
 <th>+16.6%</th>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td></tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th></tr>
 <tr><th>+1 s.d.</th>
 <th>-0.3%</th>
 <th>+20.4%</th>
