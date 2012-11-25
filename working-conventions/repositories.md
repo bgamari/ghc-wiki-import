@@ -1,9 +1,3 @@
-
-This is a proposal for a new policy for how we handle
-repositories in a GHC tree. It is still in the discussion
-phase, and has not been implemented yet.
-
-
 # GHC libraries and other packages
 
 
@@ -184,6 +178,13 @@ cd ../..
 git commit -a
 ./sync-all push
 ```
+
+
+**Important:** If you make a change to a submodule, then make sure you
+commit in both that repository and the ghc repository before using
+`./sync-all get` or `./sync-all pull`. Those commands run
+`git submodule update`, which may cause you to lose unrecorded changes.
+
 
 ### From the upstream maintainer's point of view
 
