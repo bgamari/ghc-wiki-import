@@ -6,7 +6,7 @@ Currently, GHCi doesn't use the system linker to load libraries, but instead use
 
 
 
-Even removing it only on particular OSes, arches, or OS/arch pairs would be useful, as much of the code is used only for a particular platform. However, the best outcome would be to remove it on all platforms, as that would allow us to simplify a lot more code.
+There is some benefit (in terms of both bugs fixed and code removed) to removing it for a particular platform (e.g. Linux(elf)/x86), more benefit to removing it for a particular OS (e.g. Linux(elf)), but the most benefit is gained by removing it entirely.
 
 
 
