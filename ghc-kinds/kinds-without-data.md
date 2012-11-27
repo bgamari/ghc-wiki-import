@@ -60,6 +60,10 @@ synonym of `*`.
 This ticket to track this request is [\#6024](https://gitlab.staging.haskell.org/ghc/ghc/issues/6024).
 
 
+
+One potential problem is that is we ever get `* :: *` then this will no longer be possible...
+
+
 # Defining datatypes without an associated kind
 
 
