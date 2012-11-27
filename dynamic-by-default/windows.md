@@ -42,7 +42,7 @@ An improvement on the C stub options is to use windres to embed the DLL into the
 
 
 Windows doesn't support that, but there is code to do so [
-here](http://www.joachim-bauch.de/tutorials/loading-a-dll-from-memory/). Downsides are that it is MPLed (to check: is that a problem?), it involves replicating some of the system linker (but not as bad as the current GHCi linker). It is also untested, so we are not 100% sure that it will work.
+here](http://www.joachim-bauch.de/tutorials/loading-a-dll-from-memory/). Downsides are that it is MPLed (to check: is that a problem?), and it involves replicating some of the system linker (but not as bad as the current GHCi linker). It is also untested, so we are not 100% sure that it will work.
 
 
 ## Delay loading
