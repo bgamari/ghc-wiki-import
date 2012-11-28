@@ -21,6 +21,10 @@ Windows does actually have a similar concept to RPATHs: side-by-side assemblies.
 http://msdn.microsoft.com/en-us/library/aa374182.aspx](http://msdn.microsoft.com/en-us/library/aa374182.aspx)). It's therefore not possible to use assemblies to say that we use `c:/ghc/base/base.dll`. This therefore doesn't generally allow us to solve the problem.
 
 
+
+With administrator privileges DLLs can be installed as shared assemblies into the standard Windows "side-by-side" folder, but when developing without as a normal user they would need to be copied into the same directory as the compiled executable, which might be a rather surprising thing for ghc -o or ghc --make to do.
+
+
 ## C stub
 
 
