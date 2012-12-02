@@ -79,6 +79,7 @@ In the case of
 - libraries/haskeline
 - libraries/pretty
 - libraries/terminfo
+- libraries/time
 - libraries/transformers
 - libraries/xhtml
 - libraries/Win32
