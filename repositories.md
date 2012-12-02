@@ -297,6 +297,13 @@ For the common case where the central repository held on `darcs.haskell.org` and
 <th>http://darcs.haskell.org/packages/terminfo.git/</th>
 <th>libraries/terminfo</th>
 <th></th></tr>
+<tr><th>http://code.haskell.org/time/</th>
+<th>http://darcs.haskell.org/darcs-mirrors/time/</th>
+<th></th>
+<th>http://darcs.haskell.org/git-mirrors/time/.git/</th>
+<th>http://darcs.haskell.org/packages/time.git/</th>
+<th>libraries/time</th>
+<th></th></tr>
 <tr><th>http://code.haskell.org/\~ross/transformers</th>
 <th>http://darcs.haskell.org/darcs-mirrors/transformers/</th>
 <th></th>
