@@ -254,7 +254,7 @@ indicates that the class `C` should be automatically vectorised, even if it is i
 
 
 
-The class `C` must be in scope, but it may be imported.  'PData' and 'PRepr' instances are generally not used for type classes and their dictionary representations.
+The class `C` must be in scope, but it may be imported.  'PData' and 'PRepr' instances are generally not used for type classes and their dictionary representations. This pragma is only needed for classes that are declared in non-vectorised modules and if we want to declare class instances in vectorised code.
 
 
 
@@ -262,10 +262,14 @@ An example is the handling of `Eq`.
 
 
 
+*Parallelism:* The class tycon of `C` is marked as parallel if the class methods include any type constructors marked as parallel.
+
+
+
 **TODO**
 
 
-- We want something like `{-# VECTORISE class C = C' #-}` (but what about the instances?)
+- We want something like `{-# VECTORISE class C = C' #-}` (but what about the instances?) Do we still have a need for that???
 
 ## The VECTORISE SCALAR pragma for class instances
 
