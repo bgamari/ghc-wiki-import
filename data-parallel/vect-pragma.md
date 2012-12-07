@@ -144,8 +144,7 @@ An example is the vectorisation of parallel arrays, where `[::]` is replaced by 
 
 
 
-'Parallelism:* **???**
-*
+*Parallelism:* The type constructor `T` is marked as parallel.
 
 
 ## The VECTORISE SCALAR pragma for type constructors
