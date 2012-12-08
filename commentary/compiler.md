@@ -40,7 +40,6 @@ The compiler itself is written entirely in Haskell, and lives in the many sub-di
  
 
 
-- [The solve for type-level naturals](commentary/compiler/type-nat-solver)
 - [Data types](commentary/compiler/data-types)
 - [The GHC API](commentary/compiler/api)
 - [Symbol names and the Z-encoding](commentary/compiler/symbol-names)
