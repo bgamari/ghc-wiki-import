@@ -29,7 +29,7 @@ This page collects information on how to work with type-level literals, as imple
 
 
 - [Implementation of GHC.TypeLits](type-nats/implementation)
-- [The solve for type-level naturals](commentary/compiler/type-nat-solver)
+- [The solver for type-level naturals](commentary/compiler/type-nat-solver)
 
 ## Source Code
 
