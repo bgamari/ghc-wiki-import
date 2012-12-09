@@ -292,7 +292,7 @@ Note, however, that it does not guarantee that there is a unique way
 to prove a goal.
 
 
-#### Using Extended Assumptions ===
+#### Using Extended Assumptions
 
 
 
