@@ -49,7 +49,7 @@ This pragma can also be used for imported functions `f`.  In this case, `f_v` an
 
 
 
-*Parallelism:* A vectorised value is marked as parallel if its code includes a parallel value or if it includes any parallel types. The detailed rules are in the **Vectorisation Avoidance** paper.
+*Parallelism:* `f` is marked as parallel if it is **not** imported.
 
 
 
