@@ -38,6 +38,10 @@ have someone who claims responsibility for it.
   - Everything, RTS, Cmm CodeGen, x86\_64 port, SMP support
   - **Phasing out as changing jobs**
 
+- **Bryan O'Sullivan**
+
+  - Performance Tsar
+
 - **Simon Peyton Jones**
 
   - **GHC Tsar**
@@ -46,10 +50,12 @@ have someone who claims responsibility for it.
 
 - **David Terei**
 
+  - Performance Tsar
   - LLVM, Safe Haskell
 
 - **Johan Tibell**
 
+  - Performance Tsar
   - IO Manager
 
 ## Directory to Maintainer Mapping
