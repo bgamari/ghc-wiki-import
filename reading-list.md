@@ -8,6 +8,11 @@ Suppose you want to start contributing to GHC.  What should you read by way of b
 ## General background
 
 
+- The [GHC Commentary](commentary) is a Wiki that describes GHC's implementation.  It is a Wiki.  That means that you can, and should, fix errors and write new chapters.
+
+- Simon PJ's [ home page](http://research.microsoft.com/~simonpj) and [
+  publications page](http://research.microsoft.com/en-us/um/people/simonpj/papers/papers.html) have lots of relevant papers.  Some key ones appear below but not all.
+
 - Simon PJ's books:
 
   - [
@@ -15,11 +20,6 @@ Suppose you want to start contributing to GHC.  What should you read by way of b
   - [
     Implementing Functional Languages: a tutorial](http://research.microsoft.com/en-us/um/people/simonpj/papers/pj-lester-book/)
     give useful general background. They are not GHC-specific at all, but they have lots of information about functional-language compilers.
-
-- The [GHC Commentary](commentary) is a Wiki that describes GHC's implementation.  It is a Wiki.  That means that you can, and should, fix errors and write new chapters.
-
-- Simon PJ's [ home page](http://research.microsoft.com/~simonpj) and [
-  publications page](http://research.microsoft.com/en-us/um/people/simonpj/papers/papers.html) have lots of relevant papers.  Some key ones appear below but not all.
 
 ## Types and type inference
 
