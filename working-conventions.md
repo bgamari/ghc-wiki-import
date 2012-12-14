@@ -1,4 +1,4 @@
-# Working conventions for working on GHC
+# Working on GHC
 
 
 
@@ -16,15 +16,19 @@ cvs-ghc mailing list](http://www.haskell.org/mailman/listinfo/cvs-ghc).  This li
 
 
 
+Talk to other [GHC contributors](contributors).
+
+
+
 These pages guide you step-by-step through making a contribution:
 
 
-- [How to fix a bug in GHC](working-conventions/fixing-bugs)
-- [How to add a new feature to GHC](working-conventions/adding-features)
+- [Fix a bug in GHC](working-conventions/fixing-bugs).
+- [Add a new feature to GHC](working-conventions/adding-features)
 - [
-  How to propose a change to the libraries](http://haskell.org/haskellwiki/Library_submissions)
+  Propose a change to the libraries](http://haskell.org/haskellwiki/Library_submissions)
 
-## Conventions
+## Working conventions
 
 
 - **Using Git**: Our conventions and some useful tips for using git are here: [Using Git](working-conventions/git).
