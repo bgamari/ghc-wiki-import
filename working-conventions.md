@@ -20,6 +20,10 @@ Talk to other [GHC contributors](contributors).
 
 
 
+Read the [GHC reading list](reading-list).
+
+
+
 These pages guide you step-by-step through making a contribution:
 
 
