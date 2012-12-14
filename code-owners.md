@@ -2,139 +2,145 @@
 
 
 
-This page outlines contributors to GHC. The success of GHC has a lot
-to do with the large group of highly talented people who contribute to
-it.
+GHC has an enormous "surface area", and has grown way beyond the
+capacity of any individual, or even research group, to maintain and
+develop.  Its continued success is built on the active contributions
+of a large group of highly talented people, who take responsiblity 
+for significant parts of the system.  This page summarises who does
+what.
+
+
+## What it means to "own" part of GHC
 
 
 
-The page also document who is currently responsible for what in the
-GHC code base. The idea being that ideally all parts of GHC should
-have someone who claims responsibility for it.
+What does it mean to be the "ownwer" of a chunk of GHC, say X?
 
 
-## Current Owners / Maintainers
+- Being the owner of a chunk of GHC is a public service.  Everyone else gives the owner lots of kudos for looking after X on our behalf.
+- The owner is the first port of call for guidance about how X works.
+- If you want to work on X, it makes sense to talk to the owner first, to see what he or she is planning, and to debate the design.
+- The owner feels a sense of ownership. That means taking responsibility for keeping it clean and beautiful, and refactoring when necessary.
+- The owner can't be expected to fix every buglet, but feels a sense of responsbility to make sure that serious bugs are fixed.
 
 
-- **Manuel Chakravarty**
+Ownership has the flavour of "first among equals" rather than "exclusive control":
 
-  - DPH vectoriser
-  - Type families
-  - OS X support
 
-- **Ben Lippmeier**
+- It does not mean that everyone else can relax and say "oh Fred is dealing with X".  Fred needs help!
+- It does not mean that no changes can happen to X without the owner's say-so, most especially if the owner becomes hard to contact.
 
-  - native code generator, register allocation
-  - DPH libraries
 
-- **Ian Lynagh**
+ 
 
-  - GHC support engineer
-  - build system, release process
 
-- **Simon Marlow**
-
-  - **GHC Tsar**
-  - Everything, RTS, Cmm CodeGen, x86\_64 port, SMP support
-  - **Phasing out as changing jobs**
-
-- **Bryan O'Sullivan**
-
-  - Performance Tsar
-
-- **Simon Peyton Jones**
-
-  - **GHC Tsar**
-  - Everything, Type system, Simplifier, Cmm CodeGen
-  - **Note:** Principle job is research, so more an advisor in the sense that can't spend time on pure engineering efforts.
-
-- **David Terei**
-
-  - Performance Tsar
-  - LLVM, Safe Haskell
-
-- **Johan Tibell**
-
-  - Performance Tsar
-  - IO Manager
-
-## Directory to Maintainer Mapping
+## Current Owners
 
 
 
-**Compiler (i.e., GHC proper)**
+This section lists the current owners of various parts of GHC.  If
+you'd like to take responsibility for something, tell us (on the
+`ghc-devs` list). Ideally all parts of GHC should have someone who
+claims responsibility for it.  Although some of these parts are
+cross-cutting concerns, we also list the directories in the GHC source
+tree that are most directly implicated.
 
 
-- basicTypes/ -- All
-- cmm/        -- None yet
-- codeGen/    -- Simon Marlow (phasing out)
-- coreSyn/    -- All
-- deSugar/    -- Simon Peyton Jones
-- ghci/       -- None yet
-- hsSyn/      -- Simon Peyton Jones
-- iface/      -- All
-- llvmGen/    -- David Terei
-- main/       -- Ian Lynagh
-- nativeGen/  -- Ben Lippmeier
-- parser/     -- Simon Peyton Jones
-- prelude/    -- None yet
-- profiling/  -- None yet
-- rename/     -- Simon Peyton Jones
-- simplCore/  -- None yet
-- simplStg/   -- None yet
-- specialise/ -- None yet
-- stgSyn/     -- None yet
-- stranal/    -- None yet
-- typecheck/  -- Simon Peyton Jones
-- types/      -- Simon Peyton Jones
-- utils/      -- All
-- vectorise/  -- Manuel Chakravarty
+- Overall guidance and advice (the GHC Tsars)
+
+  - **Simon Peyton Jones**, **Simon Marlow**
+
+- Build system, release process.
+
+  - **Ian Lynagh**
+  - Directories: `mk/`, `distrib/, `ghc-tarballs/, `rules/`, `utils/`, `compiler/main`
 
 
-**Documentation**
+ 
 
 
-- doc/ -- All
+- Foreign function interface (FFI)
+
+  - **Ian Lynagh**
+  - Directories: `libffi/`
+
+- The main `HsSyn` data type
+
+  - **Simon Peyton Jones**
+  - Directories: `compiler/hsSyn`
+
+- Renamer
+
+  - **Simon Peyton Jones**
+  - Directories: `compiler/rename`
+
+- Type inference and interface files
+
+  - **Simon Peyton Jones**
+  - Directories: `compiler/types`, `compiler/typecheck`, `compiler/iface`
 
 
-**Executables / Drivers**
+   
 
 
-- driver/
-- ghc/
+- Core, System FC, Simplifier and other optimisations on Core
+
+  - **Simon Peyton Jones**
+  - Directories: `compiler/coreSyn`, `compiler/deSugar`, `compiler/simplCore`, `compiler/specialise`, `compiler/stranal`
+
+- Native code generator, register allocation
+
+  - **Ben Lippmeier**, **Simon Marlow**
+  - Directories: `compiler/nativeGen`
+
+- LLVM code generation
+
+  - **David Terei**
+  - Directories: `compiler/llvmGen`
+
+- Runtime system, SMP support
+
+  - **Simon Marlow**
+  - Directories: `rts/`, `includes/`
+
+- GHCi, and debugger
+
+  - Needs love
+  - Directories: `compiler/ghci`, `ghc/`, `driver/`.
+
+- Template Haskell
+
+  - **Simon Peyton Jones**
+  - Directories: `libraries/template-haskell`, plus bits scattered over `compiler/`
+
+- Data Parallel Haskell
+
+  - **Manuel Chakravarty**, **Ben Lippmeier**
+  - Directories: `compiler/vectorise`
+
+- Safe Haskell
+
+  - **David Terei**
+
+- Performance Tsars
+
+  - **Johan Tibell**, **David Terei**, **Bryan O'Sullivan**
+  - Directories: `nofib/`
 
 
-**Run-time System**
+Cross-cutting compiler directories: `parser/`, `prelude/`, `profiling/`, `utils/`.
 
 
-- includes/
-- rts/
+### Libraries
 
 
-**Testing & Benchmarking**
+- IO Manager
 
+  - **Johan Tibell**
 
-- nofib/ -- All
-- testsuite/ -- All
+- OS X support
 
-
-**Dependencies (Ian Lynagh)**
-
-
-- libffi/
-- libraries/
-
-
-**Build System (Ian Lynagh)**
-
-
-- distrib/
-- ghc-tarballs/
-- mk/
-- rules/
-- utils/
-
-## Porters/Packagers (no particular order)
+### Platforms
 
 
 
@@ -231,69 +237,72 @@ These people have contributed to GHC and its core libraries in the past, in vari
 wonderful ways:
 
 
-- Krasimir Angelov
-- Lennart Augustsson (including work on many core libraries, originally for hbc)
-- Jean-Philippe Bernardy (Maintenance of Data.\*Map/\*Set libraries)
-- [
-  Jost Berthold](http://www.mathematik.uni-marburg.de/~berthold) (Parallel Haskell: Eden)
-- Bjorn Bringert
-- Sebastien Carlier
-- Andrew Cheadle
-- [
-  Tim Chevalier](http://catamorphism.org/) (External Core, strictness analysis, ticky-ticky profiling)
-- Duncan Coutts (parallel profiling, package system)
-- [ Iavor S Diatchki](http://www.csee.ogi.edu/~diatchki) ('monadLib' library)
-- Sigbjorn Finne
-- Andy Gill (Haskell Program Coverage)
-- Kevin Glynn
-- John Goerzen
-- Cordy Hall
-- Kevin Hammond
-- Tim Harris (Transactional memory, concurrency)
-- David Himmelstrup (GHC developer)
-- José Iborra (GHCi Debugger)
-- Isaac Jones (Cabal, libraries)
-- Ralf Laemmel
-- Roman Leshchinskiy
-- Andres Loeh
-- Hans Wolfgang Loidl
-- John Launchbury
-- Ryan Lortie (PowerPC Linux port, packages)
-- Jim Mattson
-- John Meacham
-- Darren Moffat
-- Nick Nethercote
-- Thomas Nordin
-- Sven Panne
-- Sungwoo Park
-- Will Partain
-- Ross Paterson
-- Juan Quintela
-- [
-  Norman Ramsey](http://www.eecs.harvard.edu/nr) (a little refactoring in the back end)
-- Alastair Reid
-- Ben Rudiak-Gould
-- Patrick Sansom
-- André Santos
-- Sean Seefried (Plug-in optimisations (in pluggable-branch))
-- Julian Seward
-- Dominic Steinitz (Cryptographic library)
-- Don Stewart (OpenBSD support)
-- Volker Stolz
-- Josef Svenningsson
-- Audrey Tang (Perl-related tools (ghc-asm, ghc-split), AIX port)
-- Dinko Tenev
-- Wolfgang Thaller (Darwin/Mac OS X ports, position-independent code generation)
-- Mike Thomas
-- Reuben Thomas
-- Christopher D. Thompson-Walsh
-- Dylan Thurston
-- Phil Trinder
-- Mark Tullsen
-- David N Turner
-- Philip Wadler
-- David Waern (Haddock comment support)
-- Malcolm Wallace
-- Michael Weber
-- Ashley Yakeley (Time library)
-- N. Xu
+
+Krasimir Angelov,
+Lennart Augustsson (including work on many core libraries, originally for hbc),
+Jean-Philippe Bernardy (Maintenance of Data.\*Map/\*Set libraries),
+[
+Jost Berthold](http://www.mathematik.uni-marburg.de/~berthold) (Parallel Haskell: Eden),
+Bjorn Bringert,
+Sebastien Carlier,
+Andrew Cheadle,
+[
+Tim Chevalier](http://catamorphism.org/) (External Core, strictness analysis, ticky-ticky profiling),
+Duncan Coutts (parallel profiling, package system),
+[ Iavor S Diatchki](http://www.csee.ogi.edu/~diatchki) ('monadLib' library),
+Sigbjorn Finne,
+Andy Gill (Haskell Program Coverage),
+Kevin Glynn,
+John Goerzen,
+Cordy Hall,
+Kevin Hammond,
+Tim Harris (Transactional memory, concurrency),
+David Himmelstrup (GHC developer),
+José Iborra (GHCi Debugger),
+Isaac Jones (Cabal, libraries),
+Ralf Laemmel,
+Roman Leshchinskiy,
+Andres Loeh,
+Hans Wolfgang Loidl,
+John Launchbury,
+Ryan Lortie (PowerPC Linux port, packages),
+Jim Mattson,
+John Meacham,
+Darren Moffat,
+Nick Nethercote,
+Thomas Nordin,
+Sven Panne,
+Sungwoo Park,
+Will Partain,
+Ross Paterson,
+Juan Quintela,
+[
+Norman Ramsey](http://www.eecs.harvard.edu/nr) (a little refactoring in the back end),
+Alastair Reid,
+Ben Rudiak-Gould,
+Patrick Sansom,
+André Santos,
+Sean Seefried (Plug-in optimisations (in pluggable-branch)),
+Julian Seward,
+Dominic Steinitz (Cryptographic library),
+Don Stewart (OpenBSD support),
+Volker Stolz,
+Josef Svenningsson,
+Audrey Tang (Perl-related tools (ghc-asm, ghc-split), AIX port),
+Dinko Tenev,
+Wolfgang Thaller (Darwin/Mac OS X ports, position-independent code generation),
+Mike Thomas,
+Reuben Thomas,
+Christopher D. Thompson-Walsh,
+Dylan Thurston,
+Phil Trinder,
+Mark Tullsen,
+David N Turner,
+Philip Wadler,
+David Waern (Haddock comment support),
+Malcolm Wallace,
+Michael Weber,
+Ashley Yakeley (Time library),
+N. Xu.
+
+
