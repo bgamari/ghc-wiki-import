@@ -24,7 +24,7 @@ What does it mean to be the "ownwer" of a chunk of GHC, say X?
 - The owner can't be expected to fix every buglet, but feels a sense of responsbility to make sure that serious bugs are fixed.
 
 
-Ownership has the flavour of "first among equals" rather than "exclusive control":
+Ownership means being the "first among equals" rather than "having exclusive control":
 
 
 - It does not mean that everyone else can relax and say "oh Fred is dealing with X".  Fred needs help!
