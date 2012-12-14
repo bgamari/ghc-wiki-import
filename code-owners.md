@@ -18,7 +18,7 @@ See also the [working on GHC](working-conventions) page.
 
 
 
-What does it mean to be the "ownwer" of a chunk of GHC, say X?
+What does it mean to be the "owner" of a chunk of GHC, say X?
 
 
 - Being the owner of a chunk of GHC is a public service.  Everyone else gives the owner lots of kudos for looking after X on our behalf.
