@@ -6,7 +6,7 @@ Suppose you want to start contributing to GHC: what should you read by way of ba
 
 
 
-You can ask questions on `ghc-devs@haskell.org`. People are friendly.
+You can ask questions on `ghc-devs@haskell.org`. People are friendly.  See also [working on GHC](working-conventions) and GHC contributors?.
 
 
 ## General background
