@@ -132,6 +132,7 @@ tree that are most directly implicated.
 
   - Tim Watson
   - Code at: `http://haskell-distributed.github.com/distributed-process-platform`
+  - Jeff Epstein
 
 - Performance Tsars
 
