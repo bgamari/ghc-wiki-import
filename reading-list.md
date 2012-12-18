@@ -65,19 +65,6 @@ Please add: System FC, GADTs, kind polymorphism etc
 - [
   Playing by the rules: rewriting as a practical optimisation technique in GHC](http://research.microsoft.com/en-us/um/people/simonpj/papers/rules.htm), Simon Peyton Jones, Andrew Tolmach and Tony Hoare, Haskell Workshop 2001.  Describes how RULES work, which are heavily used in GHC.
 
-## Back end issues
-
-
-- [
-  How to make a fast curry: push/enter vs eval/apply](http://research.microsoft.com/en-us/um/people/simonpj/papers/eval-apply/index.htm), Simon Marlow and Simon Peyton Jones, International Conference on Functional Programming, Snowbird, Sept 2004, pp4-15.
-
-- [
-  Implementing lazy functional languages on stock hardware: the Spineless Tagless G-machine](http://research.microsoft.com/~simonpj/papers/spineless-tagless-gmachine.ps.gz), SL Peyton Jones, Journal of Functional Programming 2(2), Apr 1992, pp127-202.  The original STG paper but still highly relevant.
-
-
-Please add: Hoopl, C--.
-
-
 ## Data Parallel Haskell
 
 
@@ -92,3 +79,31 @@ Please add: Hoopl, C--.
 
 - [
   Work Efficient Higher-Order Vectorisation](http://www.cse.unsw.edu.au/~chak/papers/replicate.pdf), Ben Lippmeier, Manuel M. T. Chakravarty, Gabriele Keller, Roman Leshchinskiy, and Simon Peyton Jones, The 17th ACM SIGPLAN International Conference on Functional Programming, ACM Press, 2012 
+
+## Code generation and virtual machine
+
+
+- [
+  How to make a fast curry: push/enter vs eval/apply](http://research.microsoft.com/en-us/um/people/simonpj/papers/eval-apply/index.htm), Simon Marlow and Simon Peyton Jones, International Conference on Functional Programming, Snowbird, Sept 2004, pp4-15.
+
+- [
+  Faster laziness using dynamic pointer tagging](http://community.haskell.org/~simonmar/papers/ptr-tagging.pdf) (Simon Marlow, Alexey Rodriguez Yakushev, Simon Peyton Jones) In ICFP '07: Proceedings of the ACM SIGPLAN international conference on Functional programming, Freiburg, Germany, ACM Press, October 2007
+
+- [
+  Implementing lazy functional languages on stock hardware: the Spineless Tagless G-machine](http://research.microsoft.com/~simonpj/papers/spineless-tagless-gmachine.ps.gz), SL Peyton Jones, Journal of Functional Programming 2(2), Apr 1992, pp127-202.  The original STG paper but still highly relevant.
+
+
+Please add: Hoopl, C--.
+
+
+## The run-time system and garbage collector
+
+
+- [
+  Runtime Support for Multicore Haskell](http://community.haskell.org/~simonmar/papers/multicore-ghc.pdf) (Simon Marlow, Simon Peyton Jones, Satnam Singh) In ICFP '09: Proceeding of the 14th ACM SIGPLAN International Conference on Functional Programming, Edinburgh, Scotland, August 2009
+
+- [
+  Parallel Generational-Copying Garbage Collection with a Block-Structured Heap](http://community.haskell.org/~simonmar/papers/parallel-gc.pdf) (Simon Marlow, Tim Harris, Roshan P. James, Simon Peyton Jones) In ISMM '08: Proceedings of the 7th international symposium on Memory management, Tucson, Arizona, ACM, June 2008
+
+- [
+  Haskell on a Shared-Memory Multiprocessor](http://community.haskell.org/~simonmar/papers/multiproc.pdf) (Tim Harris, Simon Marlow, Simon Peyton Jones) In Haskell '05: Proceedings of the 2005 ACM SIGPLAN workshop on Haskell, pages 49--61, Tallinn, Estonia, ACM Press, September 2005
