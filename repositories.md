@@ -461,7 +461,7 @@ See the [Commentary/Libraries](commentary/libraries) page for more information a
 
 
 
-For libraries for which there no upstream repo, you can modify the GHC repo above directly.
+For libraries for which there is no upstream repo, you can modify the GHC repo above directly.
 
 
 
