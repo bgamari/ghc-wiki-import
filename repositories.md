@@ -28,21 +28,7 @@ A GHC source tree is made of a collection of repositories. The script [sync-all]
 
 
 
-The root of the source tree is the GHC repository itself, the other repositories live in various subdirectories. The master list of repositories is in the file [packages](/trac/ghc/browser/ghc/packages), and this is where the `sync-all` script finds out about which repositories make up the complete tree.
-
-
-
-The "`tag`" in the master table in packages has the following significance:
-
-
-- **"`-`"**: [boot libraries](commentary/libraries), necessary to build GHC
-- **"`testsuite`"**: GHC's [regression tests](building/running-tests), not necessary for a build, but is necessary if you're working on GHC
-- **"`nofib`"**: GHC's [nofib benchmark suite](building/running-no-fib)
-- **"`dph`"**: packages for [Data Parallel Haskell](data-parallel), which is not shipped with GHC but we test all changes to GHC against these repositories so they are usually included in a checked-out source tree.
-- **"`extra`"**: extra packages you might want to include in a build (the `parallel` package, for example), but aren't necessary to get a working GHC.
-
-
-See the [Commentary/Libraries](commentary/libraries) page for more information about GHC's libraries.
+The root of the source tree is the GHC repository itself, the other repositories live in various subdirectories. 
 
 
 ## The repositories
@@ -455,6 +441,27 @@ Here is a list of the repositories that GHC uses.  The columns have the followin
 <th> no  </th>
 <td> </td>
 <th>packages/stm.git/</th></tr></table>
+
+
+## The 'packages' file
+
+
+
+The master list of repositories is in the file [packages](/trac/ghc/browser/ghc/packages), and this is where the `sync-all` script finds out about which repositories make up the complete tree.  It duplicates the information in the above table; indeed, it is really the authoritative version (so complain if the table and file differ!).
+
+
+
+The "`tag`" in the master table in [packages](/trac/ghc/browser/ghc/packages) has the following significance:
+
+
+- **"`-`"**: [boot libraries](commentary/libraries), necessary to build GHC
+- **"`testsuite`"**: GHC's [regression tests](building/running-tests), not necessary for a build, but is necessary if you're working on GHC
+- **"`nofib`"**: GHC's [nofib benchmark suite](building/running-no-fib)
+- **"`dph`"**: packages for [Data Parallel Haskell](data-parallel), which is not shipped with GHC but we test all changes to GHC against these repositories so they are usually included in a checked-out source tree.
+- **"`extra`"**: extra packages you might want to include in a build (the `parallel` package, for example), but aren't necessary to get a working GHC.
+
+
+See the [Commentary/Libraries](commentary/libraries) page for more information about GHC's libraries.
 
 
 ## Modifying local packages
