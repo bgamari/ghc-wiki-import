@@ -28,13 +28,6 @@ A GHC source tree is made of a collection of repositories. The script [sync-all]
 
 
 
-The root of the source tree is the GHC repository itself, the other repositories live in various subdirectories. 
-
-
-## The repositories
-
-
-
 Here is a list of the repositories that GHC uses.  The columns have the following meaning
 
 
