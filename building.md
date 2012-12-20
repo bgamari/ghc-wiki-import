@@ -13,7 +13,7 @@ can extend it, modify it, and use it to build your code.
 
 
 
-Building GHC:
+**Building GHC**
 
 
 - [Setting up your system for building GHC](building/preparation)
@@ -23,7 +23,7 @@ Building GHC:
 - [The GHC Builder, which coordinates distributed nightly builds](builder)
 
 
-Getting started for developers:
+**Getting started for developers**
 
 
 - [Getting started with the build system](building/hacking)
@@ -31,7 +31,7 @@ Getting started for developers:
 - [Working Conventions (Git workflows, bug tracker, coding style etc.) ](working-conventions)
 
 
-More detailed information about using the build system:
+**More detailed information about using the build system**
 
 
 - [Using the build system](building/using)
@@ -42,14 +42,14 @@ More detailed information about using the build system:
 - [Unregisterised builds](building/unregisterised)
 
 
-Platform-specific building notes (see also [Setting up your system for building GHC](building/preparation))
+**Platform-specific building notes (see also** [Setting up your system for building GHC](building/preparation)**)**
 
 
 - [Building under MacOS X](building/mac-osx)
 - [Building under Solaris](building/solaris)
 
 
-How to test and benchmark changes to GHC:
+**How to test and benchmark changes to GHC**
 
 
 - [Validating changes](testing-patches)
@@ -60,7 +60,7 @@ How to test and benchmark changes to GHC:
 - [Installing extra packages for your in-place GHC](debugging/installing-packages-inplace)
 
 
-More detailed information about how the build system works:
+**More detailed information about how the build system works**
 
 
 - [Overview of files and directories](commentary/source-tree)
@@ -69,14 +69,14 @@ More detailed information about how the build system works:
 - [The libraries on which GHC depends](commentary/libraries)
 
 
-Porting GHC
+**Porting GHC**
 
 
 - [Cross-compilation (the NEW way to port GHC)](cross-compilation)
 - [Porting GHC to a new platform (the OLD way to port GHC)](building/porting)
 
 
-Troubleshooting:
+**Troubleshooting**
 
 
 - [FAQ: Solving common problems with building GHC](building/troubleshooting)
