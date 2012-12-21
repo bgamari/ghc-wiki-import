@@ -34,6 +34,7 @@ See also [TemplateHaskell](template-haskell)
 ## Optimisation
 
 
+- [\#7520](https://gitlab.staging.haskell.org/ghc/ghc/issues/7520): Cardinality analysis
 - [\#7360](https://gitlab.staging.haskell.org/ghc/ghc/issues/7360): case of identical alts fails abjectly (see also [\#7378](https://gitlab.staging.haskell.org/ghc/ghc/issues/7378)); connected to occ-anal cleverness and hence [\#7258](https://gitlab.staging.haskell.org/ghc/ghc/issues/7258)
 - [\#7507](https://gitlab.staging.haskell.org/ghc/ghc/issues/7507): `sum` and `product` should be `INLINABLE`.
 - [\#7511](https://gitlab.staging.haskell.org/ghc/ghc/issues/7511): inlining can make programs allocate MORE!!
