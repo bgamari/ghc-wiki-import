@@ -2,7 +2,7 @@
 
 
 
-The material below describes the old (and still current) code generator.  New stuff is here:
+The material below describes the old code generator, which was retired in 2012.  New stuff is here:
 
 
 - [Michael Adams CPS conversion](commentary/compiler/cps)
