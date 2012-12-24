@@ -12,6 +12,10 @@ The material below describes the old code generator, which was retired in 2012. 
 The code generator lives in [compiler/codeGen](/trac/ghc/browser/ghc/compiler/codeGen)
 
 
+
+The stuff below is probably out of date, although there were some similarities between the old and new code-generator.
+
+
 ## Storage manager representations
 
 
