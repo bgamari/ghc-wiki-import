@@ -30,6 +30,7 @@ See also [TemplateHaskell](template-haskell)
 - [\#4364](https://gitlab.staging.haskell.org/ghc/ghc/issues/4364): cycle in type declarations
 - [\#4429](https://gitlab.staging.haskell.org/ghc/ghc/issues/4429): `reinerp` work on `newName` and export reorganisation
 - [\#7021](https://gitlab.staging.haskell.org/ghc/ghc/issues/7021): make TH catch up with constraint kinds
+- [\#7484](https://gitlab.staging.haskell.org/ghc/ghc/issues/7484): TH allows you to build invalid names
 
 ## Optimisation
 
