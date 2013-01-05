@@ -1,8 +1,4 @@
-
-Consistency of Functional Dependencies
-
-
----
+# Consistency of Functional Dependencies
 
 
 
@@ -10,20 +6,17 @@ The functional dependencies on a class restrict the instances that may
 be declared for a given class.  The instances of a class:
 
 
-<table><tr><th>class C a b c \| b -\> c where f</th>
-<td>...
-</td></tr></table>
-
+```wiki
+    class C a b c | b -> c where f :: ...
+```
 
 
 are consistent with its functional dependency if the following invariant holds:
 
 
->
->
-> byFD(C,1): forall a1 a2 b c1 c2. (C a1 b c1, C a2 b c2) =\> (c1 \~ c2)
->
->
+```wiki
+    byFD(C,1): forall a1 a2 b c1 c2. (C a1 b c1, C a2 b c2) => (c1 ~ c2)
+```
 
 
 Please note that the question of FD-consistency is orthogonal to
@@ -43,27 +36,20 @@ or accept programs that would be rejected without the invariant.
 For example, if we have an instance:
 
 
->
->
-> I: instance F Int Int Char
->
->
+```wiki
+  I: instance F Int Int Char
+```
 
 
 and we have a constraint `C: F Int Int a`, then we can use the
 FD-invariant to prove that `a` must be `Char`:
 
 
-<table><tr><th>byFD(C,1) (C,I)</th>
-<td>a \~ Char
-</td></tr></table>
+```wiki
+    byFD(C,1) (C,I) :: a ~ Char
+```
 
-
-
-Checking FD-Consistency
-
-
----
+## Checking FD-Consistency
 
 
 
@@ -74,11 +60,9 @@ imported instances.  Consider adding a new instance to an FD-consistent
 set of instances:
 
 
->
->
-> I: instance P(as,bs) =\> C t1(as,bs) t2(as) t3(as,bs)
->
->
+```wiki
+    I: instance P(as,bs) => C t1(as,bs) t2(as) t3(as,bs)
+```
 
 
 The notation `t(as)` states the variables in `t` are a subset of `as`.
@@ -88,70 +72,31 @@ The notation `t(as)` states the variables in `t` are a subset of `as`.
   instantiations of `I` to violate FD-consistency).  Self consistency
   follows if we can prove the following theorem:
 
->
-> >
-> >
-> > forall as bs cs. (P, P\[cs/bs\]) =\> t3\[cs/bs\] \~ t3\[cs/bs\]
-> >
-> >
->
-
+  ```wiki
+           forall as bs cs. (P, P[cs/bs]) => t3[cs/bs] ~ t3[cs/bs]
+  ```
 1. Check that `I` is FD-consistent with all existing instances of the class.
   So, for each existing instance, `J`:
 
->
-> >
-> >
-> > J: instance Q(xs) =\> C s1(xs) s2(xs) s3(xs)
-> >
-> >
->
+  ```wiki
+           J: instance Q(xs) => C s1(xs) s2(xs) s3(xs)
+  ```
 
->
-> >
-> >
-> > we need to show that:
-> >
-> >
->
+  we need to show that:
 
->
-> >
-> > >
-> > >
-> > > forall as bs xs. (P,Q,s2 \~ t2) =\> (s3 \~ t3)
-> > >
-> > >
-> >
->
+  ```wiki
+           forall as bs xs. (P,Q,s2 ~ t2) => (s3 ~ t3)
+  ```
 
->
-> >
-> >
-> > Assuming no type-functions in instance heads, the equality
-> > assumption is equivalent to stating that `s2` and `t2` may be
-> > unified, so another way to state our goal is:
-> >
-> >
->
+  Assuming no type-functions in instance heads, the equality
+  assumption is equivalent to stating that `s2` and `t2` may be
+  unified, so another way to state our goal is:
 
->
-> >
-> > >
-> > >
-> > > forall as bs xs. (P\[su\], Q\[su\]) =\> (s3\[su\] \~ t3\[su\])
-> > >
-> > >
-> >
->
+  ```wiki
+           forall as bs xs. (P[su], Q[su]) => (s3[su] ~ t3[su])
+  ```
 
->
-> >
-> >
-> > where `su` is the most general unifier of `s2` and `t2`.
-> >
-> >
->
+  where `su` is the most general unifier of `s2` and `t2`.
 
 
 Proving these two goals before accepting an instance is similar to
@@ -162,11 +107,7 @@ that the two instances can never be used at the same time, so
 the FD-consistency follows trivially.
 
 
-
-Examples
-
-
----
+## Examples
 
 
 - FD-consistency is orthogonal to instance coherence.
@@ -177,36 +118,20 @@ Examples
 > > FD-consistent but not coherent:
 > >
 > >
->
-
->
-> >
-> > >
-> > >
-> > > instance C Int Int Int where f = definition\_1
-> > > instance C Int Int Int where f = definition\_2
-> > >
-> > >
-> >
->
-
->
+> > ```wiki
+> >          instance C Int Int Int where f = definition_1
+> >          instance C Int Int Int where f = definition_2
+> > ```
 > >
 > >
 > > Coherent but not FD-consistent:
 > >
 > >
+> > ```wiki
+> >          instance C Int  Int Char where ...
+> >          instance C Char Int Bool where ...
+> > ```
 >
-
->
-> >
-> > >
-> > >
-> > > instance C Int  Int Char where ...
-> > > instance C Char Int Bool where ...
-> > >
-> > >
-> >
 >
 
 - FD-consistency is orthogonal to termination of instances.
@@ -218,41 +143,19 @@ Examples
 > > > FD-consistent but "non-terminating":
 > > >
 > > >
-> >
->
-
->
-> >
-> > >
-> > > >
-> > > >
-> > > > instance C a b c =\> C a b c
-> > > >
-> > > >
-> > >
-> >
->
-
->
-> >
+> > > ```wiki
+> > >          instance C a b c => C a b c
+> > > ```
 > > >
 > > >
 > > > Terminating but not FD-consistent:
 > > >
 > > >
+> > > ```wiki
+> > >          instance C Int  Int Char where ...
+> > >          instance C Char Int Bool where ...
+> > > ```
 > >
->
-
->
-> >
-> > >
-> > > >
-> > > >
-> > > > instance C Int  Int Char where ...
-> > > > instance C Char Int Bool where ...
-> > > >
-> > > >
-> > >
 > >
 >
 
