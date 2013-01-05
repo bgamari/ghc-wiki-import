@@ -168,7 +168,7 @@ More formally, we only match a type against an equation in an instance group whe
 
 
 
-The implementation described above does not address all desired use cases. In particular, it does not work with associated types at all. (Using something like `type where` in a class definition is a parse error.) There's no set reason the approach couldn't be expanded to work with associated types, but it is not done yet. In particular, the FC extension will handle intra-module overlapping associated types without a change.
+The implementation described above does not address all desired use cases. In particular, it does not work with associated types at all. (Using something like `type where` in a class definition is a parse error.) There's no set reason the approach couldn't be expanded to work with associated types, but it is not done yet. In particular, the FC extension will handle intra-module overlapping associated types without a change. The biggest reason not to add associated types into the mix is that it will be a confusing feature. Overlap among class instances is directed by specificity; overlap among family instances is ordered by the programmer. Users would likely expect the two to coincide, but they don't and can't, as it would not be type safe:
 
 
 
