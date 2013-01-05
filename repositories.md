@@ -267,15 +267,6 @@ Here is a list of the repositories that GHC uses.  The columns have the followin
 <th>     </th>
 <td> </td>
 <th>packages/integer-simple.git/</th></tr>
-<tr><th>libraries/mtl</th>
-<td>                     </td>
-<th> yes </th>
-<td> </td>
-<th> no  </th>
-<td> </td>
-<th> no  </th>
-<td> </td>
-<th>packages/mtl.git/</th></tr>
 <tr><th>libraries/old-locale</th>
 <td>              </td>
 <th>     </th>
@@ -390,7 +381,7 @@ Here is a list of the repositories that GHC uses.  The columns have the followin
 <td> </td>
 <th>     </th>
 <td> </td>
-<th>     </th>
+<th> no  </th>
 <td> </td>
 <th>packages/xhtml.git/</th></tr>
 <tr><th>libraries/primitive</th>
