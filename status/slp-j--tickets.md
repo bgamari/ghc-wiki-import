@@ -8,16 +8,11 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#5682](https://gitlab.staging.haskell.org/ghc/ghc/issues/5682): Parsing of pomoted kinds
 - [\#6022](https://gitlab.staging.haskell.org/ghc/ghc/issues/6022): over-general types are inferred
 - [\#5642](https://gitlab.staging.haskell.org/ghc/ghc/issues/5642): slow constraint solving
-
-- [\#7436](https://gitlab.staging.haskell.org/ghc/ghc/issues/7436): avoid leak when deriving `Traversable` etc.
-- [\#7503](https://gitlab.staging.haskell.org/ghc/ghc/issues/7503): Kind polymorphism and mutual recursion
-- [\#6018](https://gitlab.staging.haskell.org/ghc/ghc/issues/6018): Injective type families (patch offered)
-- [\#7259](https://gitlab.staging.haskell.org/ghc/ghc/issues/7259): Eta-expansion of products in System FC
 - [\#7346](https://gitlab.staging.haskell.org/ghc/ghc/issues/7346): Pedro's generics and deriving
 - [\#5863](https://gitlab.staging.haskell.org/ghc/ghc/issues/5863): deriving `Typeable` for data families
-- [NewAxioms](new-axioms) Pattern matching axioms
 - [\#5267](https://gitlab.staging.haskell.org/ghc/ghc/issues/5267), [\#5609](https://gitlab.staging.haskell.org/ghc/ghc/issues/5609), [\#5777](https://gitlab.staging.haskell.org/ghc/ghc/issues/5777), [\#344](https://gitlab.staging.haskell.org/ghc/ghc/issues/344): bugs in arrows
 - [\#7204](https://gitlab.staging.haskell.org/ghc/ghc/issues/7204): a class to controll FFI marshalling; and newtype deriving for classes with ATs
+- [\#4175](https://gitlab.staging.haskell.org/ghc/ghc/issues/4175): better GHCi info for type-function instances
 
 ## Template Haskell
 
@@ -53,6 +48,7 @@ See also [TemplateHaskell](template-haskell)
 - [\#5916](https://gitlab.staging.haskell.org/ghc/ghc/issues/5916): `runST` isn't free
 - [\#5522](https://gitlab.staging.haskell.org/ghc/ghc/issues/5522), [\#6092](https://gitlab.staging.haskell.org/ghc/ghc/issues/6092): liberate-case runs out of memory
 - [\#5366](https://gitlab.staging.haskell.org/ghc/ghc/issues/5366), [\#3990](https://gitlab.staging.haskell.org/ghc/ghc/issues/3990): UNPACK for data families, and with phantom types, needs data con wrapper refactoring
+- [\#5928](https://gitlab.staging.haskell.org/ghc/ghc/issues/5928): running Specialise more than once
 
 ## Compile time
 
@@ -155,13 +151,14 @@ See also [TemplateHaskell](template-haskell)
 ---
 
 
-## New constraint simplifier
+## Type inference (longer term)
 
 
 - [TypeFunctionsStatus](type-functions-status)
-- [\#4296](https://gitlab.staging.haskell.org/ghc/ghc/issues/4296): SkolemOccurs
+- [\#7503](https://gitlab.staging.haskell.org/ghc/ghc/issues/7503): Kind polymorphism and mutual recursion
+- [\#6018](https://gitlab.staging.haskell.org/ghc/ghc/issues/6018): Injective type families (patch offered)
+- [\#7259](https://gitlab.staging.haskell.org/ghc/ghc/issues/7259): Eta-expansion of products in System FC \* [\#4296](https://gitlab.staging.haskell.org/ghc/ghc/issues/4296): SkolemOccurs
 - [\#816](https://gitlab.staging.haskell.org/ghc/ghc/issues/816). [\#3108](https://gitlab.staging.haskell.org/ghc/ghc/issues/3108): extreme delicacy in solve order, involving fundeps
-- [\#4175](https://gitlab.staging.haskell.org/ghc/ghc/issues/4175): better GHCi info for type-function instances
 
 ## Types and type inference
 
