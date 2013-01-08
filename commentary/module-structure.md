@@ -67,7 +67,7 @@ This section of the commentary documents the subtlest part of the module depende
 
 
 - TcType
-- TcEvidence( TcTupe )
+- TcEvidence( TcType )
 - TcMType( TcEvidence )
 - TcUnify( TcMType )
 - TcSMonad( TcMType )
