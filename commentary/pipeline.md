@@ -1,16 +1,18 @@
-CONVERSION ERROR
+# Overview
 
-Original source:
 
-```trac
-= Overview =
 
 GHC is structured into two parts:
- * The `ghc` package (in subdirectory `compiler`), which implements almost all GHC's functionality. It is an ordinary Haskell library, and can be imported into a Haskell program by saying `import GHC`.
- * The `ghc` binary (in subdirectory `ghc`) which implements imports the `ghc` package, and implements the I/O for the `ghci` interactive loop.
+
+
+- The `ghc` package (in subdirectory `compiler`), which implements almost all GHC's functionality. It is an ordinary Haskell library, and can be imported into a Haskell program by saying `import GHC`.
+- The `ghc` binary (in subdirectory `ghc`) which imports the `ghc` package, and implements the I/O for the `ghci` interactive loop.
+
 
 Here's an overview of the module structure of the top levels of GHC library.   (Note: more precisly, this is the plan. Currently the module `Make` below is glommed into the giant module `GHC`.)
-{{{
+
+
+```wiki
           |---------------------------------|
           |              GHC                |
           | The root module for the GHC API |
@@ -51,37 +53,50 @@ Here's an overview of the module structure of the top levels of GHC library.   (
          |----------------------------------------------|
               |      |       |         |       |
             Parse Rename Typecheck Optimise CodeGen
-}}}
+```
 
-= The compilation pipeline =
+# The compilation pipeline
+
+
 
 When GHC compiles a module, it calls other programs, and generates a series of intermediate files.  Here's a summary of the process.
-(source reference: [[GhcFile(compiler/main/DriverPipeline.hs)]])
+(source reference: [compiler/main/DriverPipeline.hs](/trac/ghc/browser/ghc/compiler/main/DriverPipeline.hs))
 
-We start with {{{Foo.hs}}} or {{{Foo.lhs}}}, the "l" specifing whether literate style is being used.
 
- * Run the '''unlit pre-processor''', {{{unlit}}}, to remove the literate markup, generating {{{Foo.lpp}}}.  The {{{unlit}}} processor is a C program kept in [[GhcFile(utils/unlit)]].
 
- * Run the '''C preprocessor''', `cpp`, (if {{{-cpp}}} is specified), generating {{{Foo.hspp}}}.
+We start with `Foo.hs` or `Foo.lhs`, the "l" specifing whether literate style is being used.
 
- * Run '''the compiler itself'''. This does not start a separate process; it's just a call to a Haskell function.  This step always generates an [wiki:Commentary/Compiler/IfaceFiles '''interface file'''] {{{Foo.hi}}}, and depending on what flags you give, it also generates a compiled file. As GHC supports three backend code generators currently (a native code generator, a c code generator and an llvm code generator) the possible range of outputs depends on the backend used. All three support assembly output:
-   * Object code: no flags required, file {{{Foo.o}}} (supported by all three backends)
-   * Assembly code: flag {{{-S}}}, file {{{Foo.s}}} (supported by all three backends)
-   * C code: flags {{{-C}}}, file {{{Foo.hc}}} (only supported by C backend)
 
-  * In the {{{-fvia-C}}} case:
-    * Run the '''C compiler''' on `Foo.hc`, to generate `Foo.s`.
+- Run the **unlit pre-processor**, `unlit`, to remove the literate markup, generating `Foo.lpp`.  The `unlit` processor is a C program kept in [utils/unlit](/trac/ghc/browser/ghc/utils/unlit).
 
-  * If `-split-objs` is in force, run the '''splitter''' on `Foo.s`.  This splits `Foo.s` into lots of small files.  The idea is that the static linker will thereby avoid linking dead code.
+- Run the **C preprocessor**, `cpp`, (if `-cpp` is specified), generating `Foo.hspp`.
 
-  * Run the assembler on `Foo.s`, or if `-split-objs` is in force, on each individual assembly file.
+- Run **the compiler itself**. This does not start a separate process; it's just a call to a Haskell function.  This step always generates an ['interface file'](commentary/compiler/iface-files) `Foo.hi`, and depending on what flags you give, it also generates a compiled file. As GHC supports three backend code generators currently (a native code generator, a c code generator and an llvm code generator) the possible range of outputs depends on the backend used. All three support assembly output:
 
-= The compiler pipeline =
+  - Object code: no flags required, file `Foo.o` (supported by all three backends)
+  - Assembly code: flag `-S`, file `Foo.s` (supported by all three backends)
+  - C code: flags `-C`, file `Foo.hc` (only supported by C backend)
 
-The '''compiler itself''', independent of the external tools, is also structured as a pipeline.  For details (and a diagram), see [wiki:Commentary/Compiler/HscMain]
+- In the `-fvia-C` case:
 
-= Video =
+  - Run the **C compiler** on `Foo.hc`, to generate `Foo.s`.
 
-Video of compilation pipeline explanation from 2006: [http://video.google.com/videoplay?docid=-4326420154219711812 Compilation Pipeline] and interface files (17'30")
+- If `-split-objs` is in force, run the **splitter** on `Foo.s`.  This splits `Foo.s` into lots of small files.  The idea is that the static linker will thereby avoid linking dead code.
 
-```
+- Run the assembler on `Foo.s`, or if `-split-objs` is in force, on each individual assembly file.
+
+# The compiler pipeline
+
+
+
+The **compiler itself**, independent of the external tools, is also structured as a pipeline.  For details (and a diagram), see [Commentary/Compiler/HscMain](commentary/compiler/hsc-main)
+
+
+# Video
+
+
+
+Video of compilation pipeline explanation from 2006: [
+Compilation Pipeline](http://video.google.com/videoplay?docid=-4326420154219711812) and interface files (17'30")
+
+
