@@ -387,6 +387,10 @@ There are many pre-defined functions which can be used in this field:
 
 - **c\_src**                 look for a `.c` file
 
+- **objc\_src**              look for a `.m` file
+
+- **objcpp\_src**            look for a `.mm` file
+
 - **cmd\_prefix(string)**    prefix this string to the command when run
 
 - **normalise\_slashes**     convert backslashes to forward slashes before comparing the output
