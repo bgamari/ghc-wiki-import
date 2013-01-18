@@ -2,7 +2,11 @@
 
 
 
-As of this moment (GHC 7.0) GHC does not support cross-compilation. This page is to gather information and plans it.  See also [Building/Porting](building/porting).
+This page contains the design notes for cross compilation.  For instructions on how to actually do it, see [Building/CrossCompiling](building/cross-compiling).
+
+
+
+Support for cross-compilation works reasonably well in 7.8.1.  Previous versions had various issues which are usually work-aroundable.
 
 
 ## General Problem
@@ -26,13 +30,6 @@ The most general case is a developer on build platform (B), wishing to build a G
   - Other porting tasks might be easier, given a suitable cross-compilation toolchain.
 
 
-From the developer's perspective, these can be categorized as:
-
-
-- **Cross-compiler**: B = H, and H ≠ T.
-- **Cross-building**: B ≠ H, and H = T.
-
-
 It seems reasonable to limit ourselves to these two cases.
 
 
@@ -50,7 +47,7 @@ The GHC build, in general, is a two stage process, involving three GHC compilers
 - **Stage 2**: the final GHC built, compiled by the Stage 1 GHC, and linked with only the install libs
 
 
-In summary:
+One way we could have done this is:
 
 
 <table><tr><th>               </th>
@@ -84,7 +81,11 @@ In summary:
 
 
 
-Because of the way the compiler is configured (same configuration for Stage 1 and Stage 2), and the way the install libraries are built (built with Stage 1, but shipped with Stage 2), you can see that both Stage 1 and Stage 2 compilers must target the same architecture. Furthermore, the build only allows for probing for the properties (word size, library function availability, etc...) of one platform. This means that the build isn't as general as one might expect, and what we really have is:
+But that isn't terribly useful, because if *host* /= *target*, then libs-install can't be used with the stage 2 compiler.  Furthermore, the build only allows for probing for the properties (word size, library function availability, etc...) of one platform.  So this setup would not support *host* /= *target*.  To cross-compile you would set *host* to something different from *build*.
+
+
+
+An alternative way to set it up is:
 
 
 <table><tr><th>               </th>
@@ -104,7 +105,7 @@ Because of the way the compiler is configured (same configuration for Stage 1 an
 <tr><th>**runs on**  </th>
 <th>*build*     </th>
 <th> *build*       </th>
-<th> *build*     </th>
+<th> *host*      </th>
 <th> *target*         </th>
 <th> *target*    
 </th></tr>
@@ -118,36 +119,18 @@ Because of the way the compiler is configured (same configuration for Stage 1 an
 
 
 
-But this works out just fine for the two use cases we've identified:
+Which is actually equivalent, but it makes *target* the platform you set (which is more natural, we expect to set *target* when configuring a cross-compiler).  In this setup, *build* must equal *host*, because we must be able to run the stage 1 compiler to compile libs-install.
+
+
+
+This works out just fine for the two use cases we've identified:
 
 
 - **Cross-compiler**: a Stage 1 compiler & libs install
 - **Cross-building**: a Stage 2 compiler & libs install
 
 
-The build plan becomes:
-
-
-- **Cross-compiler**
-
-  - Developer configures with B = H, and H ≠ T:
-    `$ ./configure --target=`*other-platform*
-  - Build though Stage 1 and libs install
-  - Package Stage 1 GHC and libs install as the desired cross-compiler
-- **Cross-build**
-
-  - Developer configures with B ≠ H, and H = T:
-    `$ ./configure --host=`*other-platform*` --target=`*other-platform*
-  - Internally, set H to B, so that we have B = H, and H ≠ T as required
-  - Build through libs install and Stage 2
-  - Package Stage 2 GHC and libs install as the desired cross-compiler
-
-
-Thus, as far as the mechanics of the build are concerned, the two use cases are actually handled the same once the B/H/T variables are normalized. The only real difference is when to stop (before or after Stage 2), and which compiler gets bundled as the installed compiler (Stage 1 or Stage 2).
-
-
-
-From here on out, this page assumes that the B/H/T variables have been normalized. That is B = H, and H ≠ T.
+And both setups start by configuring with *target* set to the target platform.
 
 
 ## Tool-chains
@@ -162,6 +145,10 @@ Even in a non-cross build, the current build system takes some care to achieve a
 
 
 ## Autoconf
+
+
+
+(this is slightly out of date now --SDM 18 Jan 2013)
 
 
 
@@ -218,14 +205,6 @@ There are a set of CPP symbols that are defined when compiling both Haskell and 
 There are also similar Make variables. These need to be normalized into something more rational:  At present there the usage is somewhat sloppy, since in most builds all three are the same.
 
 
-## Things that probably need fixing
-
-
-- We can't build anything with stage2 when cross-compiling, e.g. Haddock and DPH must be disabled.
-
----
-
-
 ## Status
 
 
@@ -266,6 +245,17 @@ I've submitted patches that make cross compiling work. I will also write some bu
 
 
 Cross-compiling is almost working in HEAD for 7.7.  Check the mailing list for patches that make it work (at least for some platforms).
+
+
+### Jan 2013: Simon Marlow
+
+
+
+I've done some cleanup of the build system, fixed some problems, and created the user instructions [Building/CrossCompiling](building/cross-compiling).
+
+
+
+Cross-compiling is working smoothly in at least one setup (Linux/x86\_64 to Linux/armv6 unregisterised (Raspberry Pi))
 
 
 ---
