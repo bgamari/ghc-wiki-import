@@ -25,6 +25,10 @@ This page describes how to do cross-compilation with GHC.  That is:
 
 
 
+(For more background and design docs see [CrossCompilation](cross-compilation).)
+
+
+
 Traditional cross-compilation terminology defines three platforms:
 
 
