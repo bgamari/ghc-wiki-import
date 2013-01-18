@@ -67,7 +67,7 @@ We'll see why that is if we consider which platforms the various parts of the bu
 
 
 
-(this is not the only way we could have done it, for more rationale see [CrossCompiling](building/cross-compiling))
+(this is not the only way we could have done it, for more rationale see [CrossCompilation](cross-compilation))
 
 
 
