@@ -134,7 +134,19 @@ Also install the other tools needed to build GHC on your platform: see [Building
 
 
 
-To configure the build:
+The C cross-compiler and tools are usually installed with the platform name as a prefix, e.g. if the target platform is `arm-linux-gnueabihf` then the gcc cross-compiler is named `arm-linux-gnueabihf-gcc`.  If your cross-compiling toolset is set up like this, then add the directory containing the tools to your `PATH`, and just say:
+
+
+```wiki
+./configure --target=<target>
+```
+
+
+and `configure` will find all the tools, using `<target>` as the prefix.
+
+
+
+If you need to specify the tools explicitly, then you can say
 
 
 ```wiki
@@ -142,7 +154,7 @@ To configure the build:
 ```
 
 
-Note: if you are cross-compiling for a platform that doesn't have a native code generator or registerised LLVM support, then you should add
+Note: if you are cross-compiling for a platform that doesn't have a native code generator or registerised LLVM support, then you should also add
 
 
 ```wiki
@@ -184,6 +196,10 @@ You can do this even without installing your cross-compiler, just use `$TOP/inpl
 
 
 
-(the `--with-ld` option shouldn't really be required, hopefully this will get fixed at some point).
+NB. you should ensure that the cross-compiled packages won't conflict with your native packages; one way to do this is to modify your `$HOME/.cabal/config` to include the platform in the installation directory for packages:
 
 
+```wiki
+install-dirs user
+  libsubdir: $arch-$os/$pkgid/$compiler
+```
