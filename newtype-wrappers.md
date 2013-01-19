@@ -182,7 +182,7 @@ and two built-in instances for each newtype:
 ```
 
 
-So to solve a `NTC` constraint you unwwap all those newtypes (being careful about abstraction; see next section).  
+So to solve a `NTC` constraint you unwrap all those newtypes (being careful about abstraction; see next section).  
 
 
 
