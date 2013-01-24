@@ -32,6 +32,7 @@ See also [TemplateHaskell](template-haskell)
 
 
 - [\#7520](https://gitlab.staging.haskell.org/ghc/ghc/issues/7520): Cardinality analysis
+- [\#7619](https://gitlab.staging.haskell.org/ghc/ghc/issues/7619): make demand and CPR analysis cope with data families
 - [\#6070](https://gitlab.staging.haskell.org/ghc/ghc/issues/6070), [\#5949](https://gitlab.staging.haskell.org/ghc/ghc/issues/5949), [\#5775](https://gitlab.staging.haskell.org/ghc/ghc/issues/5775), [\#4267](https://gitlab.staging.haskell.org/ghc/ghc/issues/4267), [\#5302](https://gitlab.staging.haskell.org/ghc/ghc/issues/5302), [\#6087](https://gitlab.staging.haskell.org/ghc/ghc/issues/6087): Demand analysis
 - [\#5075](https://gitlab.staging.haskell.org/ghc/ghc/issues/5075), [\#3138](https://gitlab.staging.haskell.org/ghc/ghc/issues/3138): CPR for sum types (mostly done, needs finishing)
 - [\#2289](https://gitlab.staging.haskell.org/ghc/ghc/issues/2289), [\#2387](https://gitlab.staging.haskell.org/ghc/ghc/issues/2387), [\#1600](https://gitlab.staging.haskell.org/ghc/ghc/issues/1600): nested CPR analysis
