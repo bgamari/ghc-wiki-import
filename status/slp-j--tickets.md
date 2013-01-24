@@ -138,6 +138,7 @@ See also [TemplateHaskell](template-haskell)
 ## GHCi
 
 
+- [\#7586](https://gitlab.staging.haskell.org/ghc/ghc/issues/7586): `:kind` on a name should perhaps behave like `:info`
 - [\#4017](https://gitlab.staging.haskell.org/ghc/ghc/issues/4017): unhelpful GHCi message
 
 
