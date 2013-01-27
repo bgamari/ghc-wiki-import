@@ -47,7 +47,7 @@ If on Linux:
 
 
 ```wiki
-echo "BeConservative=YES" >> mk/build.mk
+$ echo "BeConservative=YES" >> mk/build.mk
 ```
 
 
