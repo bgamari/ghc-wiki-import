@@ -204,7 +204,6 @@ Edit this page](http://hackage.haskell.org/trac/ghc/wiki/BugSweep?action=edit) t
 - [\#2991](https://gitlab.staging.haskell.org/ghc/ghc/issues/2991)
 - [\#3000](https://gitlab.staging.haskell.org/ghc/ghc/issues/3000)
 - [\#3003](https://gitlab.staging.haskell.org/ghc/ghc/issues/3003)
-- [\#3005](https://gitlab.staging.haskell.org/ghc/ghc/issues/3005)
 - [\#3021](https://gitlab.staging.haskell.org/ghc/ghc/issues/3021)
 - [\#3024](https://gitlab.staging.haskell.org/ghc/ghc/issues/3024)
 - [\#3032](https://gitlab.staging.haskell.org/ghc/ghc/issues/3032)
