@@ -82,7 +82,7 @@ A mutable list per generation is maintained by each capability. When GC starts, 
 
 
 
-Certain object like MUT\_ARR\_PTRS\_CLEAN and TSO are always on the mut list. In the case of some objects, walking the mut list does not let us take the objects off the mut list. Such objects are added back to the mut list (done by recordMutableGen). 
+Certain object like MUT\_ARR\_PTRS\_CLEAN are always on the mut list. In the case of some objects, walking the mut list does not let us take the objects off the mut list. Such objects are added back to the mut list (done by recordMutableGen). 
 
 
 
