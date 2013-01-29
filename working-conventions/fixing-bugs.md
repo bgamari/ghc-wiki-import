@@ -17,7 +17,7 @@ Some bugs are easy to fix: improvements to documentation, misleading comments, p
 
 
 - Fix the code
-- Use `git send-email`, or just mail a patch to cvs-ghc@….  Make sure you include in the patch description a summary of what the problem is, and the nature of your fix.
+- Use `git send-email`, or just mail a patch to ghc-devs@….  Make sure you include in the patch description a summary of what the problem is, and the nature of your fix.
 
 
 This route is easy for you, but more work for us; we have to [test your fix](testing-patches).  But it's a low-overhead route for easy fixes.
@@ -41,7 +41,7 @@ Many bugs require a bit more work.  Here's how to go about helping with a non-tr
 
 1. **Fix the bug**!
 
-  - If your proposed fix has non-local consequences, please consult us (on cvs-ghc@…) before investing too much of your time.
+  - If your proposed fix has non-local consequences, please consult us (on ghc-devs@…) before investing too much of your time.
   - Please follow our [coding conventions](working-conventions#)
   - Comment your fix in the source code, and include a reference to the bug ticket number, e.g. "`#1466`" (this helps when grepping for the fix later).  It is often helpful to give a small example code fragment that demonstrates the need for your fix.  This isn't always relevant; sometimes you are fixing a plain error, but often it's more subtle than that.
 
