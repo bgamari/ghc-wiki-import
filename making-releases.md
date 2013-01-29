@@ -159,3 +159,14 @@ haskell.org$ ~/mk-latest-links | sh
 Mail `ANNOUNCE` to `glasgow-haskell-users@haskell.org, haskell@haskell.org`, subject `ANNOUNCE: GHC version <<VERSION>>`.
 
 
+## Tagging repositories
+
+
+```wiki
+./sync-all tag ghc-7.6.2-release
+```
+
+
+Also `git tag` [libraries that we maintain](repositories).
+
+
