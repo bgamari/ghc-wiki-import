@@ -92,7 +92,7 @@ $ ./configure
 $ make
 ```
 
-## Prepare the library documentation
+## Create and upload the library documentation
 
 
 ```wiki
