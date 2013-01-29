@@ -21,6 +21,6 @@ email](http://haskell.org/pipermail/haskell/2008-July/020551.html).
 
 
 If you want to follow the progress we will be using the [
-ghc development mailing list](http://www.haskell.org/mailman/listinfo/cvs-ghc) and this wiki.
+ghc development mailing list](http://www.haskell.org/mailman/listinfo/ghc-devs) and this wiki.
 
 
