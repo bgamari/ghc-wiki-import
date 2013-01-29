@@ -201,7 +201,7 @@ To make the best use of fingerprinting, you need to collect fingerprints for the
 
 
 To restore the repository state as of a particular date, you can grab a fingerprint emitted by one of the nightly builds.  The nightly build emails are sent to [
-the cvs-ghc mailing list](http://www.haskell.org/pipermail/cvs-ghc/), and have subjects like "\[nightly\] 06-Oct-2012 build of HEAD on x86\_64-unknown-linux (cam-04-unx)".  Copy and paste the fingerprint section, which looks something like this:
+the ghc-builds mailing list](http://www.haskell.org/pipermail/ghc-builds/), and have subjects like "\[nightly\] 06-Oct-2012 build of HEAD on x86\_64-unknown-linux (cam-04-unx)".  Copy and paste the fingerprint section, which looks something like this:
 
 
 ```wiki
