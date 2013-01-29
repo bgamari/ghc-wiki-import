@@ -189,7 +189,7 @@ Please write your patch and then rebase to the latest version of GHC HEAD before
 
 
 ```wiki
-git send-email --to=cvs-ghc@haskell.org <hash-id> -1
+git send-email --to=ghc-devs@haskell.org <hash-id> -1
 ```
 
 
