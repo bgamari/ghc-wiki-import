@@ -182,7 +182,7 @@ Also `git tag <<LIBRARY>>-<<VERSION>>-release` [libraries that we maintain](repo
 
 
 
-If any library that we maintain (other than bin-package-db and ghc-prim, which don't get uploadad) has been changed, then the new version should be uploaded to hackage.
+If any library [that we maintain](repositories) (other than bin-package-db and ghc-prim, which don't get uploaded) has been changed, then the new version should be uploaded to hackage.
 
 
 
