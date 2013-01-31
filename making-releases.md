@@ -177,3 +177,19 @@ Also `git tag <<LIBRARY>>-<<VERSION>>-release` [libraries that we maintain](repo
 ```wiki
 ./sync-all push --tags
 ```
+
+## Uploading libraries
+
+
+
+If any library that we maintain has been changed, then the new version should be uploaded to hackage.
+
+
+
+For example, for `base`, in a built tree:
+
+
+```wiki
+make sdist_base
+cabal upload libraries/base/dist-install/*.tar.gz
+```
