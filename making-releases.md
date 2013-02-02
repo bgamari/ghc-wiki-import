@@ -143,6 +143,10 @@ Sanity check that the download links work.
 
 
 
+Add the release to "Versions" in the trac admin section, and make it the default version.
+
+
+
 Update "Current Stable Release" in `download.shtml`, and move the previous release down to "Older Releases".
 
 
