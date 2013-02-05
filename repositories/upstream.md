@@ -187,7 +187,7 @@ changes not only in the GHC repository, but also in all the submodules.
 
 If you need to modify one of these libraries, then ordinarily you should
 first send the modifications upstream. Ideally upstream will apply the
-patches and make a release (the easiest way to acomplish objective 1 is
+patches and make a release (the easiest way to accomplish objective 1 is
 for changes to be applied upstream *first*, so that they can't be
 forgotten about after being applied to GHC's repo). You can then update
 GHC's submodule by running
@@ -224,10 +224,15 @@ In order to make the change in this case, you
 ```wiki
 cd libraries/foo
 git commit -a
+git push -f origin HEAD:refs/heads/ghc-head
 cd ../..
 git commit -a
 ./sync-all push
 ```
+
+
+(use e.g. `ghc-7.6` rather than `ghc-head` if this patch is for a branch only).
+
 
 
 **Important:** If you make a change to a submodule, then make sure you
