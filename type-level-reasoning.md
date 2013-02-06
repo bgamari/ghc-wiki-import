@@ -3,6 +3,10 @@ This page collects ideas about definitions to support type-level (propositional)
 
 
 
+See also [TypeNats](type-nats).
+
+
+
 Gabor Greif's proposal:
 
 
