@@ -1,4 +1,7 @@
 
+
+
+
 This pages serves as a public log what I did for my GHC internship from 21 Jan 2013 to 12 April 2013.
 
 
