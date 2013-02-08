@@ -28,7 +28,15 @@ It will be pulled into the a "nofib" subdirectory.
 
 
 
-To run the tests:
+Firstly, the `nofib-analyse` program requires the `html` cabal package be installed:
+
+
+```wiki
+  $ cabal install html
+```
+
+
+Then, to run the tests execute:
 
 
 ```wiki
