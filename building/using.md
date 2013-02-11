@@ -51,6 +51,11 @@ can skip the rest of this section.
 
 
 
+**Mac OS X 10.8 users**: Apple no longer includes X11 with Xcode (which provided `lndir`). Install [
+XQuartz](http://xquartz.macosforge.org/landing/) 2.7.2 or above or build it directly in `utils/lndir` (as below).
+
+
+
 A *build tree* is just an exact copy of the source tree, except that
 every file in it is a symbolic link to the appropriate file in the
 source tree.  There are "standard" Unix utilities that make such
