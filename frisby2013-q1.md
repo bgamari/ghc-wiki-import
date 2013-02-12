@@ -381,8 +381,24 @@ With protection, `d` isn't allocated unless `x` is entered, which might not alwa
 
 
 
-A potential detriment of protection is that `x` is not exposed as a let-bound constructor. Simon conjectures that's not actually harmful because ... I CANNOT REMEMBER.
+A potential detriment of protection is that `x` is not exposed as a let-bound constructor. Simon conjectures that's not actually harmful. The reasoning is as follows.
 
+
+
+These void arguments arise in two ways.
+
+
+- when join points are created
+
+- the strictness pass on constant functions
+
+
+In both cases, it is unlikely that revealing the binding's RHS as a HNF will lead to any beneficial optimizations.
+
+
+- Join points are unlikely to be case-scrutinized. It's unlikely that further simplification will render them scrutinized.
+
+- Removing the value arg from constant functions would create sharing, which SPJ says is always a "dodgy" thing to do. If the programmer defines and uses a constant function, they may be trying to avoid retention of large data structures. I was concerned that such constant functions might arise upstream (eg from use of generics), but he regards that unlikely/not worth it (because the optimization is not always a good thing).
 
 ##### Continuation
 
