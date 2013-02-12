@@ -18,6 +18,7 @@ Compared to [351a8c6bbd53ce07d687b5a96afff77c4c9910cc](/trac/ghc/changeset/351a8
 - Max's [page about code generation](commentary/compiler/generated-code): really good!
 - document ticky profiling
 - Core -\> STG -\> CMM and \_what you can learn by looking at each one\_
+- let-no-escape (LNE)
 
 ## Late Lambda Float
 
@@ -117,7 +118,7 @@ These are the various negative consequences that we discovered on the way. We di
 - Unapplied occurrences of f in BODY results in the creation of PAPs, which increases allocation. For example: `map f xs` becomes `map (poly_f a b c) xs`. Max had identified this issue earlier.
 - Abstracting over a known function might change a fast entry call in RHS to a slow entry call. For example, if CTX binds `a` to a lambda, that information is lost in the right-hand side of poly\_f. This can increase runtime.
 - Replacing a floated binder's occurrence (ie `f` becomes `poly_f a b c`) can add free variables to a thunk's closure, which increases allocation.
-- Floating a binding in which a let-no-escape binder occurs abstracts over the let-no-escape binder, rendering it a normal let!
+- Abstracting over a let-no-escape binder renders it a normal let, which increases allocation.
 
 #### Mitigating PAP Creation
 
@@ -186,7 +187,7 @@ Using -flate-float-in-thunk-limit=10, -fprotect-last-arg, and -O1, I tested the 
 Roughly, we expect that more floating means (barely) less allocation but worse runtime (by how much?) because some known calls become unknown calls.
 
 
-#### Abstracting over let-no-escapes
+#### Mitigating LNE Abstraction
 
 
 
@@ -194,7 +195,7 @@ We had actually already seen this for a non-lambda join point in knights, but we
 
 
 
-TODO Mitigate it. First step: only make fast preservation apply to free variables that are known functions... duh!
+NB I think this will be mitigated "for free", since I'm predicting that we will never abstract over saturated and oversaturated functions, which is all LNEs. If that's not the case, we may want to consider mitigating this separately.
 
 
 
@@ -247,7 +248,7 @@ This contributes to sphere's 1 megabyte of extra allocation for two reasons:
 
 
 
-In hpg, it's principally due to GHC`.IO.Encoding.UTF8` again, with a second place contributor of `GHC.IO.FD`, where the function `$wa17` is again like the `outer` example above, but with fewer free variables and thus less effect.
+In hpg, it's principally due to `GHC.IO.Encoding.UTF8` again, with a second place contributor of `GHC.IO.FD`, where the function `$wa17` is again like the `outer` example above, but with fewer free variables and thus less effect.
 
 
 ### Discovered Benefits of LLF
