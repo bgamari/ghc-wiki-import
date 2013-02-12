@@ -195,7 +195,7 @@ We had actually already seen this for a non-lambda join point in knights, but we
 
 
 
-NB I think this will be mitigated "for free", since I'm predicting that we will never abstract over saturated and oversaturated functions, which is all LNEs. If that's not the case, we may want to consider mitigating this separately.
+NB I think this will be mitigated "for free", since I'm predicting that we will never abstract variables that occur exactly saturated and an LNE binder can only be exactly saturated. If we do end up abstracting over saturated functions, we may want to consider mitigating this separately.
 
 
 
