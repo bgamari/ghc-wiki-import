@@ -10,7 +10,7 @@ thread on glasglow-haskell-users](http://www.haskell.org/pipermail/glasgow-haske
 The following is a list of all modules in Base, with a suggested re-grouping. Whether this makes sense WRT interdependencies has not yet been verified:
 
 
-### pure-base
+### base-pure
 
 
 
@@ -25,6 +25,12 @@ Question: Do we want this to include Int and Integer? It is required for, e.g. l
 Question: Any reason to keep Char and String separate? Maybe the requirement on the unicode data? Presumably there are interesting targets that do not need String (embedded devices), but what about functions like `error`?
 
 
+- [
+  Control.Applicative](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Control-Applicative.html)
+- [
+  Control.Arrow](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Control-Arrow.html)
+- [
+  Control.Category](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Control-Category.html)
 - [
   Data.Bool](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Bool.html)
 - [
@@ -52,15 +58,91 @@ Question: Any reason to keep Char and String separate? Maybe the requirement on 
 - [
   Data.Ratio](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Ratio.html)
 
+### base-io
+
+
+
+Everything related to IO as we know it.
+
+
+- [
+  Data.IORef](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-IORef.html)
+- [
+  System.Console.GetOpt](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-Console.GetOpt.html)
+- [
+  System.CPUTime](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-CPUTime.html)
+- [
+  System.Environment](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-Environment.html)
+- [
+  System.Exit](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-Exit.html)
+- [
+  System.Info](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-Info.html)
+- [
+  System.IO](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-IO.html)
+- [
+  System.IO.Error](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-IO.Error.html)
+- [
+  System.IO.Unsafe](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-IO.Unsafe.html)
+- [
+  System.Posix.Internals](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-Posix.Internals.html)
+- [
+  System.Posix.Types](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-Posix.Types.html)
+- [
+  System.Timeout](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-Timeout.html)
+
+### base-ffi
+
+
+
+Lots of packages surely do not need anything from the FFI, so put that in a package of its own.
+
+
+- [
+  Foreign](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign.html)
+- [
+  Foreign.C](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-C.html)
+- [
+  Foreign.C.Error](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-C.Error.html)
+- [
+  Foreign.Concurrent](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Concurrent.html)
+- [
+  Foreign.C.String](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-C.String.html)
+- [
+  Foreign.C.Types](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-C.Types.html)
+- [
+  Foreign.ForeignPtr](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-ForeignPtr.html)
+- [
+  Foreign.ForeignPtr.Safe](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-ForeignPtr.Safe.html)
+- [
+  Foreign.ForeignPtr.Unsafe](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-ForeignPtr.Unsafe.html)
+- [
+  Foreign.Marshal](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Marshal.html)
+- [
+  Foreign.Marshal.Alloc](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Marshal.Alloc.html)
+- [
+  Foreign.Marshal.Array](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Marshal.Array.html)
+- [
+  Foreign.Marshal.Error](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Marshal.Error.html)
+- [
+  Foreign.Marshal.Pool](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Marshal.Pool.html)
+- [
+  Foreign.Marshal.Safe](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Marshal.Safe.html)
+- [
+  Foreign.Marshal.Unsafe](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Marshal.Unsafe.html)
+- [
+  Foreign.Marshal.Utils](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Marshal.Utils.html)
+- [
+  Foreign.Ptr](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Ptr.html)
+- [
+  Foreign.Safe](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Safe.html)
+- [
+  Foreign.StablePtr](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-StablePtr.html)
+- [
+  Foreign.Storable](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Storable.html)
+
 ### Unsorted
 
 
-- [
-  Control.Applicative](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Control-Applicative.html)
-- [
-  Control.Arrow](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Control-Arrow.html)
-- [
-  Control.Category](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Control-Category.html)
 - [
   Control.Concurrent](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Control-Concurrent.html)
 - [
@@ -116,8 +198,6 @@ Question: Any reason to keep Char and String separate? Maybe the requirement on 
 - [
   Data.Int](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Int.html)
 - [
-  Data.IORef](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-IORef.html)
-- [
   Data.Ix](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Ix.html)
 - [
   Data.STRef](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-STRef.html)
@@ -139,48 +219,6 @@ Question: Any reason to keep Char and String separate? Maybe the requirement on 
   Data.Word](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Word.html)
 - [
   Debug.Trace](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Debug-Trace.html)
-- [
-  Foreign](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign.html)
-- [
-  Foreign.C](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-C.html)
-- [
-  Foreign.C.Error](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-C.Error.html)
-- [
-  Foreign.Concurrent](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Concurrent.html)
-- [
-  Foreign.C.String](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-C.String.html)
-- [
-  Foreign.C.Types](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-C.Types.html)
-- [
-  Foreign.ForeignPtr](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-ForeignPtr.html)
-- [
-  Foreign.ForeignPtr.Safe](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-ForeignPtr.Safe.html)
-- [
-  Foreign.ForeignPtr.Unsafe](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-ForeignPtr.Unsafe.html)
-- [
-  Foreign.Marshal](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Marshal.html)
-- [
-  Foreign.Marshal.Alloc](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Marshal.Alloc.html)
-- [
-  Foreign.Marshal.Array](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Marshal.Array.html)
-- [
-  Foreign.Marshal.Error](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Marshal.Error.html)
-- [
-  Foreign.Marshal.Pool](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Marshal.Pool.html)
-- [
-  Foreign.Marshal.Safe](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Marshal.Safe.html)
-- [
-  Foreign.Marshal.Unsafe](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Marshal.Unsafe.html)
-- [
-  Foreign.Marshal.Utils](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Marshal.Utils.html)
-- [
-  Foreign.Ptr](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Ptr.html)
-- [
-  Foreign.Safe](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Safe.html)
-- [
-  Foreign.StablePtr](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-StablePtr.html)
-- [
-  Foreign.Storable](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Foreign-Storable.html)
 - [
   GHC.Arr](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/GHC-Arr.html)
 - [
@@ -330,33 +368,11 @@ Question: Any reason to keep Char and String separate? Maybe the requirement on 
 - [
   Prelude](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Prelude.html)
 - [
-  System.Console.GetOpt](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-Console.GetOpt.html)
-- [
-  System.CPUTime](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-CPUTime.html)
-- [
-  System.Environment](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-Environment.html)
-- [
-  System.Exit](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-Exit.html)
-- [
-  System.Info](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-Info.html)
-- [
-  System.IO](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-IO.html)
-- [
-  System.IO.Error](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-IO.Error.html)
-- [
-  System.IO.Unsafe](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-IO.Unsafe.html)
-- [
   System.Mem](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-Mem.html)
 - [
   System.Mem.StableName](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-Mem.StableName.html)
 - [
   System.Mem.Weak](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-Mem.Weak.html)
-- [
-  System.Posix.Internals](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-Posix.Internals.html)
-- [
-  System.Posix.Types](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-Posix.Types.html)
-- [
-  System.Timeout](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/System-Timeout.html)
 - [
   Text.ParserCombinators.ReadP](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Text-ParserCombinators.ReadP.html)
 - [
