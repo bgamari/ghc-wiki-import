@@ -23,7 +23,14 @@ Question: Do we want this to include Int and Integer? It is required for, e.g. l
 
 
 Question: Any reason to keep Char and String separate? Maybe the requirement on the unicode data? Presumably there are interesting targets that do not need String (embedded devices), but what about functions like `error`?
+
+
+
 Answer: Probably not possible: The monad class needs String for `fail`, and also error for the default instance. Also there are classes (Exception) with Show class constraints.
+
+
+
+But: GHC.Unicode uses the FFI...
 
 
 
