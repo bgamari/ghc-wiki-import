@@ -366,7 +366,7 @@ There are many pre-defined functions which can be used in this field:
 
 - **ignore\_output**         don't try to compare output
 
-- **alone**                 don't run this test in parallel with anything else
+- **high\_memory\_usage**     this test uses a lot of memory (allows the testsuite driver to be intelligent about what it runs in parallel)
 
 - **literate**              look for a `.lhs` file instead of a `.hs` file
 
@@ -374,9 +374,10 @@ There are many pre-defined functions which can be used in this field:
 - **objc\_src**              look for a `.m` file
 - **objcpp\_src**            look for a `.mm` file
 
-- **pre\_cmd(string)**       run this command before running the test
+- **pre\_cmd(string)**       run this command before running the test (this is preferred over the following 3 where it is possible to use it)
 - **compiler\_cmd\_prefix(string)** prefix this string to the compilation command when run
 - **cmd\_prefix(string)**    prefix this string to the execution command when run
+- **cmd\_wrapper(f)**        applies `f` to the execution command and runs the result instead
 
 - **normalise\_slashes**     convert backslashes to forward slashes before comparing the output
 
