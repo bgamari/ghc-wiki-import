@@ -39,6 +39,7 @@ See also [TemplateHaskell](template-haskell)
 - [\#2289](https://gitlab.staging.haskell.org/ghc/ghc/issues/2289), [\#2387](https://gitlab.staging.haskell.org/ghc/ghc/issues/2387), [\#1600](https://gitlab.staging.haskell.org/ghc/ghc/issues/1600), [\#1855](https://gitlab.staging.haskell.org/ghc/ghc/issues/1855): nested CPR analysis
 - [\#7596](https://gitlab.staging.haskell.org/ghc/ghc/issues/7596), [\#5996](https://gitlab.staging.haskell.org/ghc/ghc/issues/5996), [\#149](https://gitlab.staging.haskell.org/ghc/ghc/issues/149), [\#2940](https://gitlab.staging.haskell.org/ghc/ghc/issues/2940), [\#947](https://gitlab.staging.haskell.org/ghc/ghc/issues/947), [\#701](https://gitlab.staging.haskell.org/ghc/ghc/issues/701), [\#5344](https://gitlab.staging.haskell.org/ghc/ghc/issues/5344): CSE opportunities        
 - [\#6040](https://gitlab.staging.haskell.org/ghc/ghc/issues/6040), [\#5945](https://gitlab.staging.haskell.org/ghc/ghc/issues/5945), [\#3458](https://gitlab.staging.haskell.org/ghc/ghc/issues/3458), [\#1216](https://gitlab.staging.haskell.org/ghc/ghc/issues/1216): lambda-lift functions with a few args, just before code gen
+- [\#1171](https://gitlab.staging.haskell.org/ghc/ghc/issues/1171): strictness and exceptions (long, open ticket)
 
 ## Optimisation
 
