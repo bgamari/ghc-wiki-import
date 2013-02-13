@@ -10,6 +10,48 @@ thread on glasglow-haskell-users](http://www.haskell.org/pipermail/glasgow-haske
 The following is a list of all modules in Base, with a suggested re-grouping. Whether this makes sense WRT interdependencies has not yet been verified:
 
 
+### pure-base
+
+
+
+One package for all standard ADTs (Bool, \[\], Maybe...) and other pure definitions that are expected to work even with strange targets.
+
+
+
+Question: Do we want this to include Int and Integer? It is required for, e.g. length, but already includes assumptions about the target. But probably they’d need to go in here as well.
+
+
+
+Question: Any reason to keep Char and String separate? Maybe the requirement on the unicode data? Presumably there are interesting targets that do not need String (embedded devices), but what about functions like `error`?
+
+
+- [
+  Data.Bool](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Bool.html)
+- [
+  Data.Either](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Either.html)
+- [
+  Data.Eq](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Eq.html)
+- [
+  Data.Foldable](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Foldable.html)
+- [
+  Data.Function](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Function.html)
+- [
+  Data.Functor](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Functor.html)
+- [
+  Data.Traversable](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Traversable.html)
+- [
+  Data.Tuple](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Tuple.html)
+- [
+  Data.List](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-List.html)
+- [
+  Data.Maybe](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Maybe.html)
+- [
+  Data.Monoid](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Monoid.html)
+- [
+  Data.Ord](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Ord.html)
+- [
+  Data.Ratio](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Ratio.html)
+
 ### Unsorted
 
 
@@ -60,8 +102,6 @@ The following is a list of all modules in Base, with a suggested re-grouping. Wh
 - [
   Data.Bits](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Bits.html)
 - [
-  Data.Bool](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Bool.html)
-- [
   Data.Char](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Char.html)
 - [
   Data.Complex](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Complex.html)
@@ -70,17 +110,7 @@ The following is a list of all modules in Base, with a suggested re-grouping. Wh
 - [
   Data.Dynamic](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Dynamic.html)
 - [
-  Data.Either](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Either.html)
-- [
-  Data.Eq](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Eq.html)
-- [
   Data.Fixed](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Fixed.html)
-- [
-  Data.Foldable](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Foldable.html)
-- [
-  Data.Function](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Function.html)
-- [
-  Data.Functor](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Functor.html)
 - [
   Data.HashTable](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-HashTable.html)
 - [
@@ -90,16 +120,6 @@ The following is a list of all modules in Base, with a suggested re-grouping. Wh
 - [
   Data.Ix](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Ix.html)
 - [
-  Data.List](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-List.html)
-- [
-  Data.Maybe](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Maybe.html)
-- [
-  Data.Monoid](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Monoid.html)
-- [
-  Data.Ord](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Ord.html)
-- [
-  Data.Ratio](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Ratio.html)
-- [
   Data.STRef](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-STRef.html)
 - [
   Data.STRef.Lazy](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-STRef.Lazy.html)
@@ -107,10 +127,6 @@ The following is a list of all modules in Base, with a suggested re-grouping. Wh
   Data.STRef.Strict](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-STRef.Strict.html)
 - [
   Data.String](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-String.html)
-- [
-  Data.Traversable](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Traversable.html)
-- [
-  Data.Tuple](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Tuple.html)
 - [
   Data.Typeable](http://hackage.haskell.org/packages/archive/base/4.6.0.1/doc/html/Data-Typeable.html)
 - [
