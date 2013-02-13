@@ -336,35 +336,20 @@ There are many pre-defined functions which can be used in this field:
 
 
 - **normal**                don't change any options from the defaults
-- **skip**                  skip this test
-- **skip\_if\_no\_ghci**       skip unless GHCi is available
 
-- **skip\_if\_fast**          skip if "fast" is enabled
+- **skip**                  skip this test
 
 - **omit\_ways(ways)**       skip this test for certain ways
-
 - **only\_ways(ways)**       do this test certain ways only
-
 - **extra\_ways(ways)**      add some ways which would normally be disabled
 
 - **omit\_compiler\_types(compilers)**                           skip this test for certain compilers
-
 - **only\_compiler\_types(compilers)**       do this test for certain compilers only
 
 - **expect\_broken(bug)** this test is a expected not to work due to the indicated trac bug number
-
 - **expect\_broken\_for(bug, ways)** as expect\_broken, but only for the indicated ways
 
-- **if\_compiler\_type(compiler\_type, f)** Do `f`, but only for the given compiler type
-
-- **if\_platform(plat, f)**  Do `f`, but only if we are on the specific platform given
-
-- **if\_tag(tag, f)**        do `f` if the compiler has a given tag
-
-- **unless\_tag(tag, f)**    do `f` unless the compiler has a given tag
-
 - **set\_stdin(file)**       use a different file for stdin
-
 - **no\_stdin**              use no stdin at all (otherwise use `/dev/null`)
 
 - **exit\_code(n)**          expect an exit code of 'n' from the prog
@@ -386,24 +371,40 @@ There are many pre-defined functions which can be used in this field:
 - **literate**              look for a `.lhs` file instead of a `.hs` file
 
 - **c\_src**                 look for a `.c` file
-
 - **objc\_src**              look for a `.m` file
-
 - **objcpp\_src**            look for a `.mm` file
 
-- **cmd\_prefix(string)**    prefix this string to the command when run
+- **pre\_cmd(string)**       run this command before running the test
+- **compiler\_cmd\_prefix(string)** prefix this string to the compilation command when run
+- **cmd\_prefix(string)**    prefix this string to the execution command when run
 
 - **normalise\_slashes**     convert backslashes to forward slashes before comparing the output
 
+- **when(predicate, f)**    Do `f`, but only if `predicate` is `True`
+- **unless(predicate, f)**  Do `f`, but only if `predicate` is `False`
 
-The following should normally not be used; instead, use the `expect_broken*`
+
+There are a number of predicates which can be used:
+
+
+- **doing\_ghci**            GHCi is available
+
+- **fast**                  the testsuite is running in "fast" mode
+
+- **compiler\_type(ct)**     a compiler of type `ct` (which could be `'ghc'`, `'hug'`, etc) is being tested
+
+- **platform(plat)**        the testsuite is running on platform `plat` (which could be `'x86_64-unknown-mingw32'` etc)
+
+- **tag(t)**                the compiler has tag `t`
+
+
+The following helpers should normally not be used; instead, use the `expect_broken*`
 functions above so that the problem doesn't get forgotten about, and when we
 come back to look at the test later we know whether current behaviour is why
 we marked it as expected to fail:
 
 
 - **expect\_fail**           this test is an expected failure, i.e. there is a known bug in the compiler, but we don't want to fix it.
-
 - **expect\_fail\_for(ways)** expect failure for certain ways 
 
 
