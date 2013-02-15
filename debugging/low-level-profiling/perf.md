@@ -114,11 +114,11 @@ The output looks something like this:
 which is great for pointing to the hotspots.  You can also annotate the source code (of the RTS) or the assembly, using `perf annotate`.
 
 
-## With NoFib
+## Perf with NoFib
 
 
 
-There is a slight subtlety to using perf on an individual nofib test.
+There is a caveat to using perf on an executable built by the nofib Makefiles.
 
 
 
@@ -133,6 +133,6 @@ $ perf report
 ```
 
 
-One workaround is to find the ghc options used in the log file and invoke `ghc <options from log> --make Main.hs -o test` directly. The useful symbol names will then show up in the `perf report` output. NB The symbols **are** in the .o files that nofib's make generates; only the linking must be done without make.
+One workaround is to find the ghc options used in the log file and invoke `ghc <options from log> --make Main.hs -o test` directly. The useful symbol names will then show up in the `perf report` output. NB The symbols **are** in the .o files that nofib's make generates; only the linking must be done without using the Makefiles.
 
 
