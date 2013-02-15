@@ -11,6 +11,7 @@ Documentation:
 
 - [Installing & Using](commentary/compiler/backends/llvm/installing)
 - [Design & Implementation](commentary/compiler/backends/llvm/design)
+- [LLVM Mangler](commentary/compiler/backends/llvm/mangler)
 - [Bugs & Other Problems](commentary/compiler/backends/llvm/development-notes)
 - [Porting GHC/LLVM to another platform](commentary/compiler/backends/llvm/gh-c_-llvm-porting)
 
