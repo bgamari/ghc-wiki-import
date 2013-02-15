@@ -1,40 +1,52 @@
-CONVERSION ERROR
+# Linux perf tool
 
-Original source:
 
-```trac
-= Linux perf tool =
 
-Since Linux 2.6.31, linux has had a new [https://perf.wiki.kernel.org/index.php/Main_Page performance counter subsystem] (initially called "perf counters" and later renamed to "perf events").  The facilities provided by perf events, and the associated tool "perf", are generally a superset of what you can do with [wiki:Debugging/LowLevelProfiling/oprofile oprofile] and [wiki:Debugging/LowLevelProfiling qprof], so it's a good idea to use perf if you can.  It does support fewer processors than the other systems, although more are being added over time.
+Since Linux 2.6.31, linux has had a new [
+performance counter subsystem](https://perf.wiki.kernel.org/index.php/Main_Page) (initially called "perf counters" and later renamed to "perf events").  The facilities provided by perf events, and the associated tool "perf", are generally a superset of what you can do with [oprofile](debugging/low-level-profiling/oprofile) and [qprof](debugging/low-level-profiling), so it's a good idea to use perf if you can.  It does support fewer processors than the other systems, although more are being added over time.
+
+
 
 The perf events subsystem is compiled in by default in the kernel shipped with most distros (e.g. Ubuntu) which means there's no fiddling around compiling your own kernel or modules.
 
-== Installation ==
 
-== Debian/Ubuntu ==
+## Installation
+
+
+## Debian/Ubuntu
+
+
 
 On Debian and Ubuntu you can install "perf" by installing the `linux-tools-<your kernel version>` package:
 
-{{{
-$ sudo apt-get install linux-tools-<your kernel version>
-}}}
 
-== From source ==
+```wiki
+$ sudo apt-get install linux-tools-<your kernel version>
+```
+
+## From source
+
+
 
 If your distro doesn't include "perf" as a package you can build it manually like so:
 
- * `apt-get install binutils-dev libdwarf-dev libelf-dev` (or equivalent on your distro)
- * download a kernel source tree, matching your kernel version, from [http://kernel.org]
- * unpack it
- * `cd tools/perf`
- * `make`
- * if you want, `make install`, or just copy the binary somewhere appropriate
 
-== Usage ==
+- `apt-get install binutils-dev libdwarf-dev libelf-dev` (or equivalent on your distro)
+- download a kernel source tree, matching your kernel version, from [
+  http://kernel.org](http://kernel.org)
+- unpack it
+- `cd tools/perf`
+- `make`
+- if you want, `make install`, or just copy the binary somewhere appropriate
+
+## Usage
+
+
 
 Check that it works:
 
-{{{
+
+```wiki
 $ perf stat true
 
  Performance counter stats for 'true':
@@ -51,20 +63,26 @@ $ perf stat true
   <not counted>  cache-misses            
 
     0.008976351  seconds time elapsed
-}}}
+```
+
 
 if you see some zeroes here it probably means your processor isn't fully supported by the kernel's perf events subsystem.
 
+
+
 Now to profile a GHC-compiled executable:
 
-{{{
+
+```wiki
 $ perf record ./queens
 $ perf report
-}}}
+```
+
 
 The output looks something like this:
 
-{{{
+
+```wiki
 # Samples: 9161149923
 #
 # Overhead  Command      Shared Object  Symbol
@@ -90,8 +108,31 @@ The output looks something like this:
      0.23%   queens  queens             [.] evacuate
      0.18%  swapper  [kernel]           [k] read_hpet
      0.12%   queens  queens             [.] scavenge_block
-}}}
+```
+
 
 which is great for pointing to the hotspots.  You can also annotate the source code (of the RTS) or the assembly, using `perf annotate`.
 
+
+## With NoFib
+
+
+
+There is a slight subtlety to using perf on an individual nofib test.
+
+
+
+To more accurately measure changes in binary sizes, nofib strips the symbols out of the final executable. Therefore, the useful names like "stg\_ap\_p\_info" and "s1ql\_info" will not show up in the perf report output. IE The following commands will yield information that is difficult to use.
+
+
+```wiki
+$ cd nofib/your/favorite/test
+$ make clean; make boot; make NoFibRuns=0 >& log
+$ perf record ./test <test inputs>
+$ perf report
 ```
+
+
+One workaround is to find the ghc options used in the log file and invoke `ghc <options from log> --make Main.hs -o test` directly. The useful symbol names will then show up in the `perf report` output. NB The symbols **are** in the .o files that nofib's make generates; only the linking must be done without make.
+
+
