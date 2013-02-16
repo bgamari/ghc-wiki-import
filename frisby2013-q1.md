@@ -31,6 +31,8 @@ TODO
 - KNOWN\_CALL\_TOO\_FEW\_ARGS\_ctr - "PAP": creates a Partial APplication closure
 - KNOWN\_CALL\_EXTRA\_ARGS\_ctr   - like a fast call, but first push a continuation onto the stack that effectively uses stg\_ap\_\<PAT\>\_fast for the extra args
 
+- ALLOC\_HEAP\_tot is in words, and so are the allocation numbers for each id
+
 ### Core -\> STG -\> CMM
 
 
