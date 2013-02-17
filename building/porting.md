@@ -5,7 +5,7 @@
 
 
 
-(See also [CrossCompilation](cross-compilation))
+(**This is no longer supported. See [CrossCompilation](cross-compilation) instead**)
 
 
 
