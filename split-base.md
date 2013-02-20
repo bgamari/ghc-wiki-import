@@ -7,7 +7,8 @@ thread on glasglow-haskell-users](http://www.haskell.org/pipermail/glasgow-haske
 
 
 
-The following is a list of all modules in Base, with a suggested re-grouping. Whether this makes sense WRT interdependencies has not yet been verified:
+This has been discussed before, e.g. in \[2008 [
+http://www.haskell.org/pipermail/libraries/2008-August/010543.html](http://www.haskell.org/pipermail/libraries/2008-August/010543.html)\].
 
 
 ### Non-Obvious interdependencies
@@ -22,7 +23,8 @@ This is a list of interdependencies between seemingly unrelated parts that need 
 - Exceptions pull in `Typeable`
 - `Typeable` pulls in `GHC.Fingerprint`
 - GHC.Fingerprint pulls in `Foreign` and `IO` (but could be replaced by a pure implementation)
-- The Monad instance of `IO` calls `failIO`, which creates an `IOException`, which has fields for handles and devices, and hence pulls in some `Foreign` stuff and some file-related `IO`, preventing the creation of a clean base-io package.
+- The Monad instance of `IO` calls `failIO`, which creates an `IOException`, which has fields for handles and devices, and hence pulls in some `Foreign` stuff and some file-related `IO`, preventing the creation of a clean base-io package. With [
+  some bad tricks](http://www.haskell.org/pipermail/glasgow-haskell-users/2013-February/023795.html) this can be distangled, but would change or prevent a `Show` and `Eq` instances for `IOException` in base-io.
 
 ### Other issues
 
