@@ -49,7 +49,7 @@ Compared to [351a8c6bbd53ce07d687b5a96afff77c4c9910cc](/trac/ghc/changeset/351a8
     - this sed is handy also for diffing .ticky files
 - other diffs
 
-  - diff -y
+  - diff -y --width=180
   - diff -y --suppress-common-lines
 
 - a strictly demanded let and a thunk with an unlifted type both become cases in the STG.
@@ -136,7 +136,7 @@ Running the full nofib suite with one set of flags and then again with another i
 
 
 
-Moreover, I usually include the baseline variant twice. For example, I'll compare "baseline" "idea [\#1](https://gitlab.staging.haskell.org/ghc/ghc/issues/1)" "baseline again" "idea [\#2](https://gitlab.staging.haskell.org/ghc/ghc/issues/2)"; this has two benefits.
+Moreover, I usually include the baseline variant twice. For example, I'll compare "baseline" "idea 1" "baseline again" "idea 2"; this has two benefits.
 
 
 - if the two baseline runtimes are significantly difference, then there's too much noise
