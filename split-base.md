@@ -37,7 +37,7 @@ A library that does not use the IO monad could communicate that just by not depe
 
 
 
-A Haskell-to-Javascript compiler will not support File IO, or maybe not even IO at all. It would be desirable such an implementation has a chance to at least provide a complete and API compatible base-pure package, and that one can hence reasonably assume that packages and libraries depending only on `base-pure` will indeed work without modification.
+A Haskell-to-Javascript compiler will not support File IO, or maybe not even IO at all. It would be desirable such an implementation has a chance to at least provide a complete and API compatible base-pure package, and that one can hence reasonably assume that packages and libraries depending only on `base-pure` will indeed work without modification. This might be subsumed by fulfilling the previous goal.
 
 
 ####
