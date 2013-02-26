@@ -47,7 +47,7 @@ A Haskell-to-Javascript compiler will not support File IO, or maybe not even IO 
 Johan would like to have text Handles use the Text type and binary Handles use the ByteString type. Right now we have this somewhat awkward setup where the I/O APIs are spread out and bundled with pure types. Splitting base would let us fix this and write a better I/O layer.
 
 
-##### Avoid code copies ====
+#### Avoid code copies
 
 
 
