@@ -17,7 +17,8 @@ Lightweight concurrency implementation resides in the `ghc-lwc2` branch in the g
 
 
 
-GHC has a rich support for concurrency (forkIO, MVars, STM, Asynchronous exceptions, bound threads, safe FFI, transparent scaling on multicores, etc.) and a fast and robust runtime system. However, the concurrency support is implemented in C and baked into the RTS. The concurrency primitives non-trivially interact among each other, and along with the lightweight thread scheduler, through a cascade of locks and condition variables. Often times, the invariants on which RTS fields can be accessed when are expressed as comments, and enforced through assertions (See [here](/trac/ghc/browser/rts/Task.h?rev=085c7fe5d4ea6e7b59f944d46ecfeba3755a315b#L37)[](/trac/ghc/export/085c7fe5d4ea6e7b59f944d46ecfeba3755a315b/ghc/rts/Task.h#L37) for one such fascinating example). This policy of enforcing through assertions keeps the overheads low, but makes the task of modifying and extending the runtime cumbersome.
+GHC has a rich support for concurrency (forkIO, MVars, STM, Asynchronous exceptions, bound threads, safe FFI, transparent scaling on multicores, etc.) and a fast and robust runtime system. However, the concurrency support is implemented in C and baked into the RTS. The concurrency primitives non-trivially interact among each other, and along with the lightweight thread scheduler, through a cascade of locks and condition variables. Often times, the invariants on which RTS fields can be accessed when are expressed as comments, and enforced through assertions (See [
+here](http://trac.edgewall.org/intertrac/source%3Arts/Task.h%40085c7fe5d4ea6e7b59f944d46ecfeba3755a315b%23L37) for one such fascinating example). This policy of enforcing through assertions keeps the overheads low, but makes the task of modifying and extending the runtime cumbersome.
 
 
 
