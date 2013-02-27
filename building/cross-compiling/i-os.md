@@ -1,4 +1,4 @@
-# Cross-compiling GHC to iOS
+# Building a GHC cross-compiler to target iOS
 
 
 
@@ -132,7 +132,7 @@ sudo make install
 
 
 
-Open a terminal and add /usr/local/ghc-ios/bin to your PATH environment variable.
+Open a terminal and add `/usr/local/ghc-ios/bin` to your `PATH` environment variable.
 
 
 
