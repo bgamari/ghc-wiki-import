@@ -3,7 +3,7 @@
 
 
 Status of cross-compilation to iOS is in ticket [\#7724](https://gitlab.staging.haskell.org/ghc/ghc/issues/7724). It also requires a pull request for Cabal, which is at [
-https://github.com/haskell/cabal/pull/1210](https://github.com/haskell/cabal/pull/1210)
+https://github.com/haskell/cabal/pull/1214](https://github.com/haskell/cabal/pull/1214)
 
 
 
@@ -203,7 +203,7 @@ Create a new skeleton Xcode project using the wizard, and make sure it runs on y
 
 
 
-Run the project again as usual, and your program should now run on your iOS device.
+Run the project again as usual, and Xcode will pick up the haskell.a file and your Haskell code should now run on your iOS device. Anything printed with putStrLn will appear in the Xcode runtime console.
 
 
 
