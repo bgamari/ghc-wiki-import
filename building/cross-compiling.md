@@ -258,3 +258,10 @@ https://github.com/haskell/cabal/issues/1184](https://github.com/haskell/cabal/i
 Only llvm versions == 3.0 and \>= 3.2 support GHC for ARM targets. There was a regression in llvm version 3.1, the result of which is bad generated code that crashes.
 
 
+### iOS
+
+
+
+See the [Cross Compiling to iOS](building/cross-compiling/i-os) page, but also take note of the ARM-specific notes above.
+
+
