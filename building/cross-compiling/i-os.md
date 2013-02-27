@@ -128,7 +128,14 @@ sudo mkdir -p /usr/local/ghc-ios/
 sudo make install
 ```
 
-### 6. Compile your Haskell code
+### 6. Create an Xcode project
+
+
+
+Create a new skeleton Xcode project using the wizard, and make sure it runs on your device.
+
+
+### 7. Compile your Haskell code
 
 
 
@@ -186,11 +193,11 @@ Ignore the copious warnings about "truncation and blank padding" and "has no sym
 This will create (in this example) **haskell.a**.
 
 
-### 7. Set up Xcode
+### 8. Set up your Xcode project for Haskell
 
 
 
-Create a new skeleton Xcode project using the wizard, and make sure it runs on your device. Now configure it as follows:
+Now configure it as follows:
 
 
 - Click on the top node in the project tree, then go to the **Build Settings** tab. Set **Dead Code Stripping** to **No**. This is needed because GHC generates "tables next to code", and without this setting, Xcode thinks the tables are dead code and strips them, causing a crash.
@@ -199,7 +206,7 @@ Create a new skeleton Xcode project using the wizard, and make sure it runs on y
 
 - When you've compiled your Haskell code to a .a (e.g. **haskell.a**) file, add it to the project anywhere in the hierarchy with **Add files to (project)** in the right-mouse button menu.
 
-### 8. Build and run
+### 9. Build and run
 
 
 
