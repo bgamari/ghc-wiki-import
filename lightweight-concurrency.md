@@ -10,7 +10,8 @@ http://community.haskell.org/\~simonmar/papers/conc-substrate.pdf](http://commun
 
 
 
-Lightweight concurrency implementation resides in the `ghc-lwc2` branch in the git repo.
+Lightweight concurrency implementation resides in the [
+ghc-lwc2](https://github.com/ghc/ghc/commits/ghc-lwc2) branch in the git repo.
 
 
 ## Introduction
