@@ -50,7 +50,8 @@ Scheduler](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Rts/Scheduler).
 
 
 
-The idea of the concurrency substrate is to provide a minimal set of primitives over which a variety of user-level concurrency libraries can be implemented. As such, the concurrency substrate must provide a way to create threads, a way to schedule them, and a synchronization mechanism in a multiprocessor context. Whereas, the Creation and maintenance of schedulers and concurrent data structures is the task of the concurrency library. Concurrency substrate resides at libraries/base/LwConc/Substrate.hs.
+The idea of the concurrency substrate is to provide a minimal set of primitives over which a variety of user-level concurrency libraries can be implemented. As such, the concurrency substrate must provide a way to create threads, a way to schedule them, and a synchronization mechanism in a multiprocessor context. Whereas, the Creation and maintenance of schedulers and concurrent data structures is the task of the concurrency library. Concurrency substrate resides at [
+libraries/base/LwConc/Substrate.hs](https://github.com/ghc/ghc/blob/ghc-lwc2/libraries/base/LwConc/Substrate.hs).
 
 
 ### PTM
