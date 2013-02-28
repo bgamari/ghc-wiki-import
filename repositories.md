@@ -131,7 +131,7 @@ Here is a list of the repositories that GHC uses.  The columns have the followin
 <td> </td>
 <th>     </th>
 <td> </td>
-<th>packages/.git/</th></tr>
+<th>packages/binary.git/</th></tr>
 <tr><th>libraries/bytestring</th>
 <td>              </td>
 <th> yes </th>
