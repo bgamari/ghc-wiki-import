@@ -46,7 +46,7 @@ They generally do not add or remove any features, or include new major versions 
 
 
 
-We may, from time to time, recommend a particular snapshot of HEAD, for example for people interested in testing a new feature. Snapshots will have a version number `x.y.z`, where `y` is odd.
+We may, from time to time, recommend a particular snapshot of HEAD, for example for people interested in testing a new feature or who want to check that there have been no performance regressions. Snapshots will have a version number `x.y.z`, where `y` is odd.
 
 
 
