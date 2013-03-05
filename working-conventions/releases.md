@@ -74,6 +74,10 @@ This last point means that if you want to use libraries from Hackage with the sn
 ## Release Checklist
 
 
+
+See [MakingReleases](making-releases).
+
+
 ## Branches
 
 
