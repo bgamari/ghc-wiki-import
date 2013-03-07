@@ -7,8 +7,8 @@ thread on glasglow-haskell-users](http://www.haskell.org/pipermail/glasgow-haske
 
 
 
-This has been discussed before, e.g. in \[2008 [
-http://www.haskell.org/pipermail/libraries/2008-August/010543.html](http://www.haskell.org/pipermail/libraries/2008-August/010543.html)\].
+This has been discussed before, e.g. in [
+2008](http://www.haskell.org/pipermail/libraries/2008-August/010543.html).
 
 
 ### Goals
@@ -72,6 +72,35 @@ Split base into as FEW packages as possible, consistent with meeting the other g
 
 In contrast to the non-goal of splitting base as much as possible. Johan points out, a split now could paint us into a corner later, so we should not gratuitously split things up.
 
+
+### Approaches
+
+
+#### Large base, re-exporting API packages
+
+
+
+Advantages:
+
+
+- No to little changes to the actual code in base
+- Easier to define the APIs as desired, i.e. focused and stable, without worrying about implementation-imposed cycles
+- No need to include internal modules in the API packages
+- Alternative compilers/targets can provide these APIs with totally independent implementations
+
+#### Actual base split
+
+
+
+Advantages:
+
+
+- Forces disentanglement of the implementation (i.e. `IOError`-less `error`)
+- Hence further development may be easier ([
+  according to Ian](http://www.haskell.org/pipermail/glasgow-haskell-users/2013-February/023818.html))
+- Some base-foo package can use other libraries like containers (IntMap issue)
+- Alternative compilers/targets may only have to reimplement some of the base-\* packages.
+- Possibly fewer modules in “magic” packages that cannot be installed via cabal.
 
 ### Non-Obvious interdependencies
 
