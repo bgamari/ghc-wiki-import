@@ -32,6 +32,6 @@ The `StgWord` type is also useful for storing the *size* of a memory object, sin
 
 
 
-C-- only understands units of bytes, so we have various macros in [source:includes/Cmm.h](/trac/ghc/browser/includes/Cmm.h)[](/trac/ghc/export/HEAD/ghc/includes/Cmm.h) to make manipulating things in units of words easier in `.cmm` files.
+C-- only understands units of bytes, so we have various macros in [includes/Cmm.h](/trac/ghc/browser/ghc/includes/Cmm.h) to make manipulating things in units of words easier in `.cmm` files.
 
 
