@@ -184,7 +184,7 @@ See also [TemplateHaskell](template-haskell)
 - [\#4259](https://gitlab.staging.haskell.org/ghc/ghc/issues/4259): overlapping type family instances
 - [\#3490](https://gitlab.staging.haskell.org/ghc/ghc/issues/3490): superclasses and ambiguity
 - [\#3632](https://gitlab.staging.haskell.org/ghc/ghc/issues/3632): better update for records with existentials
-- [\#1496](https://gitlab.staging.haskell.org/ghc/ghc/issues/1496), [\#4846](https://gitlab.staging.haskell.org/ghc/ghc/issues/4846), [\#7148](https://gitlab.staging.haskell.org/ghc/ghc/issues/7148): Newtype deriving and type families type soundness problem
+- [\#1496](https://gitlab.staging.haskell.org/ghc/ghc/issues/1496), [\#4846](https://gitlab.staging.haskell.org/ghc/ghc/issues/4846), [\#7148](https://gitlab.staging.haskell.org/ghc/ghc/issues/7148), [\#7269](https://gitlab.staging.haskell.org/ghc/ghc/issues/7269): Newtype deriving and type families type soundness problem
 - [\#2641](https://gitlab.staging.haskell.org/ghc/ghc/issues/2641): revise what `-XExtendedDefaultRules` does
 
 ### Better error messages
