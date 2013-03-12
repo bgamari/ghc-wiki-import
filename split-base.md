@@ -44,11 +44,22 @@ A Haskell-to-Javascript compiler will not support File IO, or maybe not even IO 
 
 
 
-Johan would like to have text Handles use the Text type and binary Handles use the ByteString type. Right now we have this somewhat awkward setup where the I/O APIs are spread out and bundled with pure types. Splitting base would let us fix this and write a better I/O layer.
+We would like to be able to use the Text and ByteString types in the I/O layer. For example, we'd like to have:
+
+
+```wiki
+module System.IO where
+
+read :: Handle -> Int -> IO ByteString
+write :: Handle -> ByteString -> IO ()
+```
+
+
+but since `System.IO` is defined in base it cannot depend on e.g. bytestring and thus we cannot write these functions. At the moment we have to use `String` for all I/O which is both slow, due to its cache-inefficient nature, and incorrect, as `String` is not a representation of a sequence of bytes (but rather a sequence of Unicode code points).
 
 
 
-**SPJ**: I don't understand either the problem or the solution.
+Splitting base would let us fix this and write a better I/O layer.
 
 
 #### (G5) Avoid code copies
