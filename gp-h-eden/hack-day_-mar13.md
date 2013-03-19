@@ -66,10 +66,10 @@ So far: Hans-Wolfgang Loidl (HWL), Jost Berthold (JB), Vladimir Janjic (VJ), Vla
 
 
 
-\<a href="[
-http://james.mathematik.uni-marburg.de:8080/gitweb/](http://james.mathematik.uni-marburg.de:8080/gitweb/)"\>Eden gitweb\</a\>
-\<a href="[
-http://www.macs.hw.ac.uk/\~hwloidl/hackspace/IDX](http://www.macs.hw.ac.uk/~hwloidl/hackspace/IDX)"\>IDX file \</a\>
+[
+http://james.mathematik.uni-marburg.de:8080/gitweb/ Eden gitweb](http://james.mathematik.uni-marburg.de:8080/gitweb/ Eden gitweb)
+[
+http://www.macs.hw.ac.uk/\~hwloidl/hackspace/IDX IDX file](http://www.macs.hw.ac.uk/~hwloidl/hackspace/IDX IDX file)
 
 
 ## Potential Topics
