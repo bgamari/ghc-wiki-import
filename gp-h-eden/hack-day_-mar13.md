@@ -68,7 +68,6 @@ So far: Hans-Wolfgang Loidl (HWL), Jost Berthold (JB), Vladimir Janjic (VJ), Vla
 
 [
 http://james.mathematik.uni-marburg.de:8080/gitweb/ Eden gitweb](http://james.mathematik.uni-marburg.de:8080/gitweb/ Eden gitweb)
-(ghc-lwc2 branch)
 [
 http://www.macs.hw.ac.uk/\~hwloidl/hackspace/IDX IDX file](http://www.macs.hw.ac.uk/~hwloidl/hackspace/IDX IDX file)
 
@@ -103,8 +102,8 @@ http://www.macs.hw.ac.uk/\~hwloidl/hackspace/IDX IDX file](http://www.macs.hw.ac
     - sharks
 - Light-weight concurrency
 
-  - [
-    http://hackage.haskell.org/trac/ghc/wiki/LightweightConcurrency Wiki](http://hackage.haskell.org/trac/ghc/wiki/LightweightConcurrency Wiki)
+  - See [
+    http://hackage.haskell.org/trac/ghc/wiki/LightweightConcurrency this Wiki page](http://hackage.haskell.org/trac/ghc/wiki/LightweightConcurrency this Wiki page) and checkout the ghc-lwc2 branch in the main GHC repo
 - Eden/GpH programming (nbody, paraffins, sp mat mult etc) (PT,RS,EB,HWL,JB)
 
   - nbody using Eden and GpH skeletons
