@@ -153,7 +153,7 @@ Some [libraries](commentary/libraries) are very closely coupled to GHC, come wit
 
 - IO Manager
 
-  - Johan Tibell
+  - Johan Tibell, Andreas Voellmy
 
 ### Platforms
 
