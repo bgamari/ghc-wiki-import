@@ -69,7 +69,7 @@ can extend it, modify it, and use it to build your code.
 - [The libraries on which GHC depends](commentary/libraries)
 
 
-**Porting GHC**
+**Porting GHC and building cross compilers**
 
 
 - [Cross-compilation](building/cross-compiling)
