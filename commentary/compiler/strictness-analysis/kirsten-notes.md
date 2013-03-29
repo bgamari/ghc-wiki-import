@@ -46,6 +46,10 @@ let baz = lazyF p in
 
 
 
+(NB out-of-date, but maybe historically useful; cf [Debugging/TickyTicky](debugging/ticky-ticky))
+
+
+
 The following code inserts extra fields into closures when ticky is enabled (and so had to be commented out):
 
 
