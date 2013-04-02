@@ -137,8 +137,8 @@ Any GHC executable linked with `-rtsopts` will generate a ticky-ticky profiling 
 
 
 ```wiki
-ghc -ticky -rtsopts Main.hs -o main
-./main +RTS -rmain.ticky
+$ ghc -ticky -rtsopts Main.hs -o main
+$ ./main +RTS -rmain.ticky
 ```
 
 
