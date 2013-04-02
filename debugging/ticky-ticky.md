@@ -133,7 +133,16 @@ Two flags enable LNE and dynamically allocated thunks to be tracked by name-spec
 
 
 
-Any GHC executable linked with `-rtsopts` will generate a ticky-ticky profiling report if provided the `-r` RTS option. This report includes all global counters as well as the name-specific counters for those names with at least one interesting counter value. If a named thing was never allocated and (hence) never entered, its counters will not be in the ticky report.
+Any GHC executable linked with `-rtsopts` will generate a ticky-ticky profiling report if provided the `-r` RTS option.  Thus
+
+
+```wiki
+ghc -ticky -rtsopts Main.hs -o main
+./main +RTS -rmain.ticky
+```
+
+
+This report includes all global counters as well as the name-specific counters for those names with at least one interesting counter value. If a named thing was never allocated and (hence) never entered, its counters will not be in the ticky report.
 
 
 
