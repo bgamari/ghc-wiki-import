@@ -13,7 +13,7 @@ Nick Frisby. See [\#7782](https://gitlab.staging.haskell.org/ghc/ghc/issues/7782
 
 
 
-Nick Frisby. We lift some lambdas before CorePrep. I'm still determining when to 'not' lift a lambda.
+Nick Frisby. We lift some lambdas before CorePrep. I'm still determining when to 'not' lift a lambda. My terse notes [here](late-lam-lift).
 
 
 ### `dicts-strict` Strict Dictionaries
