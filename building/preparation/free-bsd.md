@@ -13,7 +13,7 @@ i386 stable](http://darcs.haskell.org/ghcBuilder/builders/pgj-freebsd-i386-stabl
 
 
 
-*Note that this section is intended for developers and early adopters primarily.  If you are just want to install GHC on your system, simply use the [
+**Note that this section is primarily intended for developers and early adopters.**  *If you are just want to install GHC on your system, simply use the [
 devel/hs-haskell-platform](http://www.freshports.org/devel/hs-haskell-platform) port instead.  This port does all the things described below for you.  It is usually kept updated to match the latest Haskell Platform specifications.*
 
 
