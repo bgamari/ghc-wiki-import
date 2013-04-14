@@ -124,7 +124,7 @@ Here is a random list of thoughts about things that are good to know when workin
 
 
 - The FreeBSD base system contains GCC and the GNU toolchain (at least for the time being) but they are not or only slowly updated.  GCC is technically stuck at version 4.2.1 which may not be optimal for building GHC these days.  Hence it is highly recommended to use the toolchain ([
-  devel/binutil](http://www.freshports.org/devel/binutils)) and GCC ([
+  devel/binutils](http://www.freshports.org/devel/binutils)) and GCC ([
   lang/gcc](http://www.freshports.org/lang/gcc)) from the Ports Collection instead.
 
 - The FreeBSD base system is shipped with a version of `ncurses` but this may not be the latest.  Unfortunately, when [
