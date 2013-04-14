@@ -1,7 +1,7 @@
 
 
 
-# Setting Up a FreeBSD system for Building GHC
+# Setting Up a FreeBSD System for Building GHC
 
 
 
