@@ -95,25 +95,25 @@ Criteria for Tier 1 platforms:
 </th></tr>
 <tr><th> x86          </th>
 <th> FreeBSD         </th>
-<th> i386-unknown-freebsd    </th>
+<th> i386-portbld-freebsd    </th>
 <th> Yes          </th>
 <th> Yes  </th>
 <th> Yes    </th>
 <th> Yes          </th>
-<th> No                </th>
-<th> Gabor PALI </th>
-<th> 
+<th> Yes                </th>
+<th> Gabor Pali </th>
+<th> [FreeBSDGhc](free-bsd-ghc) 
 </th></tr>
 <tr><th> x86-64       </th>
 <th> FreeBSD         </th>
-<th> amd64-unknown-freebsd   </th>
+<th> amd64-portbld-freebsd   </th>
 <th> Yes          </th>
 <th> Yes  </th>
 <th> Yes    </th>
 <th> Yes          </th>
-<th> No                </th>
-<th> Gabor PALI </th>
-<th> 
+<th> Yes                </th>
+<th> Gabor Pali </th>
+<th> [FreeBSDGhc](free-bsd-ghc) 
 </th></tr></table>
 
 
