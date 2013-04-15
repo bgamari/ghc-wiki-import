@@ -27,7 +27,7 @@ We plan to put out a new major release 7.8.1 in November 2013. This will include
 
 - overlapping type families \[**Richard Eisenberg**\]
 
-- **The new code generator.** \[entry copied from Oct 2012 status report\] Several years since this project was started, the new code generator is finally working  \[14\], and is now switched on by default in `master`.  It will be in GHC 7.8.1.  From a user's perspective there should be very little difference, though some programs will be faster.
+- **The new code generator.** \[entry copied from Oct 2012 status report\] Several years since this project was started, the new code generator is finally working  \[1\], and is now switched on by default in `master`.  It will be in GHC 7.8.1.  From a user's perspective there should be very little difference, though some programs will be faster.
 
 >
 >
@@ -57,5 +57,10 @@ We plan to put out a new major release 7.8.1 in November 2013. This will include
 
 
 There remains more to do than we will ever have time for, so please do come and join in the fun!
+
+
+
+\[1\] The new codegen is nearly ready to go live [
+http://hackage.haskell.org/trac/ghc/blog/newcg-update](http://hackage.haskell.org/trac/ghc/blog/newcg-update) 
 
 
