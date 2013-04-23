@@ -5,8 +5,8 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Type inference
 
 
-- (no ticket yet): make the fingerprint in a `TypeRep` be a proper fingerprint, including the type definition all the way down (see \[Recompilation avoidance [
-  http://hackage.haskell.org/trac/ghc/wiki/DependencyTracking](http://hackage.haskell.org/trac/ghc/wiki/DependencyTracking)\])
+- (no ticket yet): make the fingerprint in a `TypeRep` be a proper fingerprint, including the type definition all the way down (see [
+  Recompilation avoidance](http://hackage.haskell.org/trac/ghc/wiki/DependencyTracking))
 - [\#7558](https://gitlab.staging.haskell.org/ghc/ghc/issues/7558): Terrible error message in inaccessible code
 - [\#5682](https://gitlab.staging.haskell.org/ghc/ghc/issues/5682): Parsing of pomoted kinds
 - [\#6022](https://gitlab.staging.haskell.org/ghc/ghc/issues/6022): over-general types are inferred
