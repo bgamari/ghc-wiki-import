@@ -69,7 +69,18 @@ Meanwhile others have been adding new features.
 
 - type level natural numbers \[**Iavor S. Diatchki**\]
 
-- overlapping type families \[**Richard Eisenberg**\]
+- **Ordered overlapping type family instances.** Richard Eisenberg has implemented support for ordered overlapping type family instances, called *branched* instances. This allows type-level functions to use patterns in a similar way to term-level functions. For example:
+
+```wiki
+type family Equals (x :: *) (y :: *) :: Bool
+type instance where
+  Equals x x = True
+  Equals x y = False
+```
+
+
+Details can be found in the wiki page \[2\].
+
 
 ## Back end and code generation
 
@@ -114,7 +125,9 @@ Meanwhile others have been adding new features.
 - cross-compilation \[**Stephen Blackheath**\]
 
 
-\[1\] The new codegen is nearly ready to go live [
+\[1\] Overlapping type family instances:  [
+http://hackage.haskell.org/trac/ghc/wiki/NewAxioms](http://hackage.haskell.org/trac/ghc/wiki/NewAxioms) 
+\[2\] The new codegen is nearly ready to go live [
 http://hackage.haskell.org/trac/ghc/blog/newcg-update](http://hackage.haskell.org/trac/ghc/blog/newcg-update) 
 
 
