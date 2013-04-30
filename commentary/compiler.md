@@ -41,7 +41,7 @@ The compiler itself is written entirely in Haskell, and lives in the many sub-di
  
 
 
-- [Data types](commentary/compiler/data-types)
+- [How data type declarations are compiled](commentary/compiler/data-types)
 - [The GHC API](commentary/compiler/api)
 - [Symbol names and the Z-encoding](commentary/compiler/symbol-names)
 - Template Haskell?
