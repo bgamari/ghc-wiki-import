@@ -79,13 +79,13 @@ type instance where
 ```
 
 
-Details can be found in the wiki page \[2\].
+Details can be found in the wiki page \[1\].
 
 
 ## Back end and code generation
 
 
-- **The new code generator.** \[entry copied from Oct 2012 status report\] Several years since this project was started, the new code generator is finally working  \[1\], and is now switched on by default in `master`.  It will be in GHC 7.8.1.  From a user's perspective there should be very little difference, though some programs will be faster.
+- **The new code generator.** \[entry copied from Oct 2012 status report\] Several years since this project was started, the new code generator is finally working  \[2\], and is now switched on by default in `master`.  It will be in GHC 7.8.1.  From a user's perspective there should be very little difference, though some programs will be faster.
 
 >
 >
@@ -128,6 +128,7 @@ Details can be found in the wiki page \[2\].
 
 \[1\] Overlapping type family instances:  [
 http://hackage.haskell.org/trac/ghc/wiki/NewAxioms](http://hackage.haskell.org/trac/ghc/wiki/NewAxioms) 
+
 \[2\] The new codegen is nearly ready to go live [
 http://hackage.haskell.org/trac/ghc/blog/newcg-update](http://hackage.haskell.org/trac/ghc/blog/newcg-update) 
 
