@@ -109,7 +109,7 @@ Details can be found in the wiki page \[1\].
 >
 >
 
-- **Support for vector (SSE/AVX) instructions.** \[**Geoffrey Mainland**\] Support for SSE vector instructions, which permit 128-bit vectors, is now in HEAD. AVX support will be added soon pending a refactoring of the code that implements vector primops.
+- **Support for vector (SSE/AVX) instructions.** \[**Geoffrey Mainland**\] Support for SSE vector instructions, which permit 128-bit vectors, is now in HEAD. As part of this work, up to 6 arguments of type Double, Float, or vector can be passed in registers. Previously only 4 Float and 2 Double arguments could be passed in registers. AVX support will be added soon pending a refactoring of the code that implements vector primops.
 
 ## Data Parallel Haskell
 
