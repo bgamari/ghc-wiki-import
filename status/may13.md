@@ -109,7 +109,7 @@ Details can be found in the wiki page \[1\].
 >
 >
 
-- support for vector (SSE/AVX) instructions \[**Geoffrey Mainland**\]
+- **Support for vector (SSE/AVX) instructions.** \[**Geoffrey Mainland**\] Support for SSE vector instructions, which permit 128-bit vectors, is now in HEAD. AVX support will be added soon pending a refactoring of the code that implements vector primops.
 
 ## Data Parallel Haskell
 
