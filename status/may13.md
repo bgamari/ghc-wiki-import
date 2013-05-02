@@ -146,7 +146,7 @@ Details can be found in the wiki page \[1\].
 
 >
 >
-> Kazu Yamamoto contributed greatly to the project by implementing the redesign for BSD-based systems using kqueue and by improving the code in order to bring it up to GHC's standards. In addition, Bryan O'Sullivan and Johan Tibbel provided critical guidance and reviews.
+> Kazu Yamamoto contributed greatly to the project by implementing the redesign for BSD-based systems using kqueue and by improving the code in order to bring it up to GHC's standards. In addition, Bryan O'Sullivan and Johan Tibell provided critical guidance and reviews.
 >
 >
 
