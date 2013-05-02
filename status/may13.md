@@ -84,11 +84,9 @@ type instance where
 ```
 
 >
-> >
-> >
-> > Details can be found in the wiki page \[1\].
-> >
-> >
+>
+> Details can be found in the wiki page \[1\].
+>
 >
 
 ## Back end and code generation
