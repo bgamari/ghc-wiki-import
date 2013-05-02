@@ -32,18 +32,13 @@ Meanwhile others have been adding new features.
   The `Typeable` class is now kind-polymorphic, meaning we can finally drop the boilerplate `TypeableN` classes.
   The new definition of `Typeable` is as follows:
 
->
->
-> `class Typeable (a :: k) where typeRep :: proxy a -> TypeRep`
->
->
+  ```wiki
+  class Typeable (a :: k) where typeRep :: proxy a -> TypeRep
+  ```
 
 >
 >
-> With this change comes the ability to derive `Typeable` instances for every user datatype, and even for
-> type classes. This means user defined instances of `Typeable` are unnecessary. Furthermore, since ill-defined
-> user instances can lead to runtime errors, they are now forbidden; the only way to get `Typeable` instances
-> is by using the deriving mechanism. User-defined instances will be ignored, with a warning.
+> With this change comes the ability to derive `Typeable` instances for every user datatype, and even for type classes. This means user defined instances of `Typeable` are unnecessary. Furthermore, since ill-defined user instances can lead to runtime errors, they are now forbidden; the only way to get `Typeable` instances is by using the deriving mechanism. User-defined instances will be ignored, with a warning.
 >
 >
 
@@ -65,7 +60,7 @@ Meanwhile others have been adding new features.
 
 - **Type holes.** A GHC extension called "type holes" \[TYH\] was added by Thijs Alkemade, under supervision of Sean Leather and with help from Simon Peyton Jones. When GHC encounters a hole in an expression, written as "`_`", it will generate an error message describing the type that is needed in place of that hole. It gives some helpful additional information, such as the origins of the type variables in the hole's type and the local bindings that can be used. Together with `-fdefer-type-errors` this should make it easier to write code step-by-step, using hints from the compiler about the unfinished parts.
 
-- **Rebindable list syntax.** A GHC extension called [overloaded lists](overloaded-lists) was added by Achim Krause, George Giorgidze, and colleagues. When this is turned on, the way GHC desugars explicit lists and lists in arithmetic sequence notation is changed. Instead of directly desugaring to built-in lists, a polymorphic witness function is used, similar to the desugaring of numeric literals. This allows for a more flexible use of list notations, supporting many different list-like types. In addition, the functions used in this desugaring process are completely rebindable.
+- **Rebindable list syntax.** A GHC extension called "overloaded lists" \[OL\] was added by Achim Krause, George Giorgidze, and colleagues. When this is turned on, the way GHC desugars explicit lists and lists in arithmetic sequence notation is changed. Instead of directly desugaring to built-in lists, a polymorphic witness function is used, similar to the desugaring of numeric literals. This allows for a more flexible use of list notations, supporting many different list-like types. In addition, the functions used in this desugaring process are completely rebindable.
 
 - **Type level natural numbers**.  Iavor S. Diatchki has been working on a solver for equations involving type-level natural numbers.  This allows simplifying and reasoning about type-level terms involving
   arithmetic. Currently, the solver can evaluate equations and inequalities mentioning the type functions `(+)`, `(*)`, `(^)`, and `(<=)`.  The solver works pretty well when it can use evaluation to prove equalities (e.g., examples like `2 + 5 = x`, `2 + x = 5`).  There is also some support for taking advantage of the commutativity and associativity of `(+)`, `(*)`.   More experimental features include:  support for `(-)`, which, currently is implemented by desugaring to `(+)`;  the type-level function `FromNat1`, which has special support for working with natural number literals, and thus can be used to expose some of their inductive structure.  This work is currently on the `type-nats` branch, and the plan is to merge it into HEAD into the next few months.
@@ -173,11 +168,12 @@ Thanks to Ian Lynagh for making it easy for us with integration, makefile refact
 
 
 
-\[KD\] Kinds without data [
-http://hackage.haskell.org/trac/ghc/wiki/GhcKinds/KindsWithoutData](http://hackage.haskell.org/trac/ghc/wiki/GhcKinds/KindsWithoutData) 
-
 \[TYH\] Type holes [
 Type Holes](http://www.haskell.org/haskellwiki/GHC/TypeHoles) 
+
+\[OL\] Overloaded lists [overloaded lists](overloaded-lists)
+\[KD\] Kinds without data [
+http://hackage.haskell.org/trac/ghc/wiki/GhcKinds/KindsWithoutData](http://hackage.haskell.org/trac/ghc/wiki/GhcKinds/KindsWithoutData) 
 
 \[OTF\] Overlapping type family instances [
 http://hackage.haskell.org/trac/ghc/wiki/NewAxioms](http://hackage.haskell.org/trac/ghc/wiki/NewAxioms) 
@@ -186,7 +182,7 @@ http://hackage.haskell.org/trac/ghc/wiki/NewAxioms](http://hackage.haskell.org/t
 http://hackage.haskell.org/trac/ghc/blog/newcg-update](http://hackage.haskell.org/trac/ghc/blog/newcg-update) 
 
 \[PIO\] The results are amazing [
-https://twitter.com/bos31337/status/284701554458640384](https://twitter.com/bos31337/status/284701554458640384)\]
+https://twitter.com/bos31337/status/284701554458640384](https://twitter.com/bos31337/status/284701554458640384)\] 
 
 \[IOS\] Building for Apple iOS targets [
 http://hackage.haskell.org/trac/ghc/wiki/Building/CrossCompiling/iOS](http://hackage.haskell.org/trac/ghc/wiki/Building/CrossCompiling/iOS)
