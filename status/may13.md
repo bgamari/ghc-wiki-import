@@ -6,7 +6,7 @@ The big event in late 2012 was the news of Simon Marlow's move to Facebook.  Sim
 
 
 
-Simon isn't going to disappear, of couuse, but he'll have less time to work on GHC than before. That means that everyone else, including  you, gentle reader, has new opportunities to contribute to the huge shared community endeavour that we call GHC. 
+Simon isn't going to disappear, of course, but he'll have less time to work on GHC than before. That means that everyone else, including  you, gentle reader, has new opportunities to contribute to the huge shared community endeavour that we call GHC. 
 
 
 
