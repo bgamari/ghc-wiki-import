@@ -11,7 +11,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#5682](https://gitlab.staging.haskell.org/ghc/ghc/issues/5682): Parsing of pomoted kinds
 - [\#6022](https://gitlab.staging.haskell.org/ghc/ghc/issues/6022): over-general types are inferred
 - [\#5642](https://gitlab.staging.haskell.org/ghc/ghc/issues/5642): slow constraint solving
-- [\#7346](https://gitlab.staging.haskell.org/ghc/ghc/issues/7346): Pedro's generics and deriving
+- [\#7346](https://gitlab.staging.haskell.org/ghc/ghc/issues/7346), [\#7878](https://gitlab.staging.haskell.org/ghc/ghc/issues/7878): Pedro's generics and deriving
 - [\#5863](https://gitlab.staging.haskell.org/ghc/ghc/issues/5863): deriving `Typeable` for data families
 - [\#7828](https://gitlab.staging.haskell.org/ghc/ghc/issues/7828), [\#5267](https://gitlab.staging.haskell.org/ghc/ghc/issues/5267), [\#5777](https://gitlab.staging.haskell.org/ghc/ghc/issues/5777), [\#5333](https://gitlab.staging.haskell.org/ghc/ghc/issues/5333), [\#344](https://gitlab.staging.haskell.org/ghc/ghc/issues/344): bugs in arrows
 - [\#7204](https://gitlab.staging.haskell.org/ghc/ghc/issues/7204): a class to controll FFI marshalling; and newtype deriving for classes with ATs
