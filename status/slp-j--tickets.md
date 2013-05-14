@@ -168,6 +168,7 @@ See also [TemplateHaskell](template-haskell)
 
 
 - [TypeFunctionsStatus](type-functions-status)
+- [\#7908](https://gitlab.staging.haskell.org/ghc/ghc/issues/7908): Kind polymorphism notation
 - [\#7503](https://gitlab.staging.haskell.org/ghc/ghc/issues/7503): Kind polymorphism and mutual recursion
 - [\#6018](https://gitlab.staging.haskell.org/ghc/ghc/issues/6018), [\#4259](https://gitlab.staging.haskell.org/ghc/ghc/issues/4259): Injective type families and type family overlap
 - [\#7259](https://gitlab.staging.haskell.org/ghc/ghc/issues/7259): Eta-expansion of products in System FC
