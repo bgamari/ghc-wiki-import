@@ -25,7 +25,7 @@ Template Haskell page](http://www.haskell.org/haskellwiki/Template_Haskell).  It
 
 
 
-Here's the implementation page? the describes how we are going to implement this stuff.
+Here's the [implementation page](template-haskell/typed) the describes how we are going to implement this stuff.
 
 
 # Some brief background
