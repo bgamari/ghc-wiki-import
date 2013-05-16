@@ -84,10 +84,3 @@ Points to note here:
 
 
 - The `--inplace` flag to register tells Cabal not to copy the compiled package, but rather to leave it right where it is, and register this location in the package database in your GHC build tree.
-
-
-[ aksesoris mobil](http://www.detikauto.com/) -  [
-baby pink](http://www.grosir-kosmetik.com/6-baby-pink-cream-pemutih-kulit) -  [
-rumah dijual](http://www.propertykita.com/rumah.html)
-
-
