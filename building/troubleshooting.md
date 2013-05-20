@@ -48,7 +48,7 @@ This can also happen (although we don't know precisely why) if you modify someth
 
 
 
-It can also happen if you are building the sources on FreeBSD in a really fast environment, e.g. on a multi-core Xeon with multiple parallel threads (`make -j`) or a memory-backed file system (`mfs`, `tmpfs`) (see [\#7592](https://gitlab.staging.haskell.org/ghc/ghc/issues/7592)). It is because precision of file timestamps is not fine-grained enough by default (due to the common VFS layer).  You can change this granularity by adjusting the value of the `vfs.timestamp_precision` sysctl(3) variable (`sudo -w vfs.timestamp_precision=1`).
+It can also happen if you are building the sources on FreeBSD in a really fast environment, e.g. on a multi-core Xeon with multiple parallel threads (`make -j`) or a memory-backed file system (`mfs`, `tmpfs`) (see [\#7592](https://gitlab.staging.haskell.org/ghc/ghc/issues/7592)). It is because precision of file timestamps is not fine-grained enough by default (due to the common VFS layer).  You can change this granularity by adjusting the value of the `vfs.timestamp_precision` sysctl(3) variable (`sudo sysctl -w vfs.timestamp_precision=1`).
 
 
 
