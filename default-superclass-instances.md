@@ -127,7 +127,7 @@ Example 3: once you say `instance Traversable T` you can derive `Foldable` and `
 
 
 
-Obvious question: if something is both `Foldable` and `Applicative`, which `Functor` instance do you get?
+Obvious question: if something is both `Foldable` and `Applicative`, which `Functor` instance do you get?  Answer: the programmer must be able to control this (see "the opt-out mechanism" below).
 
 
 ---
