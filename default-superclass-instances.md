@@ -504,6 +504,21 @@ several with the method definitions distributed appropriately among
 them.
 
 
+## Feature interactions
+
+
+
+What about interaction with other features?
+
+
+- `deriving`.  If you say `deriving(Ord)` do you get the `Eq` by default?  What if you want to specify a manual instance for `Eq`?  Ditto standalone deriving.
+- Generic default methods.
+- Associated types, and default type synonyms.  Presumably they obey the same rules as for default methods.
+
+
+ 
+
+
 ---
 
 
