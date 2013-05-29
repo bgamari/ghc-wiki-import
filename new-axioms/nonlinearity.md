@@ -45,13 +45,13 @@ We need to consider the two instances of `F` to be overlapping and inadmissible.
 
 
 
-This can break existing code. But, a medium-intensity search did not find *any* uses of non-linear (i.e. with a repeated variable) family instances in existing code, so I think we should be OK. However, a change needs to be made -- the current system is subtly broken and has been so for years.
+This can break existing code. But, a medium-intensity search did not find *any* uses of nonlinear (i.e. with a repeated variable) family instances in existing code, so I think we should be OK. However, a change needs to be made -- the current system is subtly broken and has been so for years.
 
 
 
 (Interestingly, proofs of the soundness of the existing system have been published. For example, see [
 here](http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/fc-tldi.pdf) and [
-here](http://www.cis.upenn.edu/~stevez/papers/WVPJZ11.pdf). These proofs are not necessarily incorrect, but they implicitly don't allow non-linear family instances.)
+here](http://www.cis.upenn.edu/~stevez/papers/WVPJZ11.pdf). These proofs are not necessarily incorrect, but they implicitly don't allow nonlinear family instances.)
 
 
 ## Branched instances
@@ -109,7 +109,7 @@ The declared type space will be checked for overlap with other instances using t
 
 
 
-One way we (Simon, Dimitrios, and Richard) considered proceeding was to prohibit non-linear unbranched instances entirely. Unfortunately, that doesn't work. Consider this:
+One way we (Simon, Dimitrios, and Richard) considered proceeding was to prohibit nonlinear unbranched instances entirely. Unfortunately, that doesn't work. Consider this:
 
 
 ```wiki
@@ -118,6 +118,6 @@ type instance H '[] = Bool
 ```
 
 
-Innocent enough, it seems. However, that instance expands to `type instance H k ('[] k) = Bool` internally. And that expansion contains a repeated variable! Yuck. We Thought Hard about this and came up with various proposals to fix it, but we weren't convinced that any of them were any good. So, we concluded to allow non-linear unbranched instances, but we linearize them when checking overlap. This may surprise some users, but we will put in a helpful error message in this case.
+Innocent enough, it seems. However, that instance expands to `type instance H k ('[] k) = Bool` internally. And that expansion contains a repeated variable! Yuck. We Thought Hard about this and came up with various proposals to fix it, but we weren't convinced that any of them were any good. So, we concluded to allow nonlinear unbranched instances, but we linearize them when checking overlap. This may surprise some users, but we will put in a helpful error message in this case.
 
 
