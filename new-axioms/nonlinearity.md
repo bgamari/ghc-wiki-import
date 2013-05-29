@@ -41,7 +41,13 @@ It's worth noting that `-XUndecidableInstances` is necessary to exploit this pro
 
 
 
-We need to consider the two instances of `F` to be overlapping and inadmissible. There are a handful of ways to do this, but the best seems to be this: when performing the overlap check, check a version of the instance where all variables are distinct. Using such a check, the two instances for `F` above indeed conflict.
+We need to consider the two instances of `F` to be overlapping and inadmissible. There are a handful of ways to do this, but the best seems to be this: 
+
+
+- **when performing the overlap check between two instances, check a version of the instances where all variables are distinct**
+
+
+Using such a check, the two instances for `F` above indeed conflict, because we would compare `(F a b)` against `(F [c] d)`, where a,b,c,d are the fresh distinct variables.
 
 
 
