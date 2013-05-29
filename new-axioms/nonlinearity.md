@@ -61,10 +61,6 @@ here](http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/fc-tldi
 here](http://www.cis.upenn.edu/~stevez/papers/WVPJZ11.pdf). These proofs are not necessarily incorrect, but they implicitly don't allow nonlinear family instances.)
 
 
-
-This new overlap check only looks at the *left hand side* of the instance. The alert reader will know that GHC currently also looks at the *right hand side*, which we return to in "coincident overlap" below.
-
-
 ## Coincident overlap
 
 
@@ -82,7 +78,7 @@ These instances surely overlap, but in the case when they do, the right-hand sid
 
 
 
-However, the above proposal of linearising the LHS before checking overlap makes a nonsense of exploiting coincident overlap, because when we freshen the LHS we no longer bind the variables in the RHS. So the proposal abandons support for coincident overlap between standalone type instances.  However, we can recover coincident overlap with in a branched instance: see [here](new-axioms/coincident-overlap). 
+However, the above proposal of linearising the LHS before checking overlap makes a nonsense of exploiting coincident overlap, because when we freshen the LHS we no longer bind the variables in the RHS. **So the proposal abandons support for coincident overlap between standalone type instances**.  However, we can recover coincident overlap with in a branched instance: see [here](new-axioms/coincident-overlap). 
 
 
 ## Branched instances
