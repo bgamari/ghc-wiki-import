@@ -37,7 +37,7 @@ I (Richard/goldfire) have tried to use this inconsistency to cause a seg fault, 
 It's worth noting that `-XUndecidableInstances` is necessary to exploit this problem. However, we still want `-XUndecidableInstances` programs to be type-safe (as long as GHC terminates).
 
 
-## The Solution
+## General idea for the solution
 
 
 
@@ -61,7 +61,7 @@ here](http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/fc-tldi
 here](http://www.cis.upenn.edu/~stevez/papers/WVPJZ11.pdf). These proofs are not necessarily incorrect, but they implicitly don't allow nonlinear family instances.)
 
 
-## Coincident overlap
+## Problem: coincident overlap
 
 
 
@@ -85,11 +85,27 @@ However, the above proposal of linearising the LHS before checking overlap makes
 However, we can recover coincident overlap with in a branched instance: see [here](new-axioms/coincident-overlap). 
 
 
-## Branched instances
+## Problem: branched instances
 
 
 
-But, how does this interact with branched instances (those new instance forms that allow for ordered overlapping)? We still need nonlinear branched instances, as the canonical example of a nonlinear instance is an equality test. The solution is to declare a *type space* that all branches fit within.
+But, how does this interact with branched instances (those new instance forms that allow for ordered overlapping)? We still need nonlinear branched instances, as the canonical example of a nonlinear instance is an equality test:
+
+
+```wiki
+type family Equals a b :: Bool
+
+type instance where
+  Equals x x = True
+  Equals x y = False
+```
+
+
+...
+
+
+
+The solution is to declare a *type space* that all branches fit within.
 
 
 
