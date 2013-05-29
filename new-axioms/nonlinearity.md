@@ -65,7 +65,7 @@ here](http://www.cis.upenn.edu/~stevez/papers/WVPJZ11.pdf). These proofs are not
 
 
 
-In the official release of GHC, it is permitted to write something like this:
+In the official release of GHC, it is permitted to write something like this (see [manual](http://www.haskell.org/ghc/docs/latest/html/users_guide/type-families.html#type-family-overlap)):
 
 
 ```wiki
