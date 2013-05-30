@@ -61,6 +61,12 @@ here](http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/fc-tldi
 here](http://www.cis.upenn.edu/~stevez/papers/WVPJZ11.pdf). These proofs are not necessarily incorrect, but they implicitly don't allow nonlinear family instances.)
 
 
+
+Conor's alternative general idea:
+
+
+- **when performing the overlap check, during unification succeed (instead of failing) if the occurs check happens**
+
 ## Problem: coincident overlap
 
 
