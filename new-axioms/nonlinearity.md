@@ -68,12 +68,12 @@ Conor's alternative general idea:
 - (B) **when performing the overlap check, during unification succeed (instead of failing) if the occurs check happens**
 
 
-This is a bit more permissive than (A).  For example
+Remember "unification succeeds" means "overlap detected", so (B) is a bit more permissive than (A).  For example
 
 
 ```wiki
-  type instance F x   x    = blah
-  type instance F Int Bool = boo
+  type instance Good x   x    = blah
+  type instance Good Int Bool = boo
 ```
 
 
