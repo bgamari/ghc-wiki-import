@@ -222,10 +222,6 @@ f {Int} {Bool} {Char} ...          {- Agda; potential record conflict -}
 #f Int Bool Char ...
 ```
 
-
-For more information on explicit type application, see [\#4466](https://gitlab.staging.haskell.org/ghc/ghc/issues/4466).
-
-
 ### Syntax for promoted datatypes
 
 
@@ -275,3 +271,8 @@ kind-specific classes by writing, for example:
 ```wiki
 type Typeable1 = Typeable @(* -> *)
 ```
+
+
+For more information on explicit type application, see [\#4466](https://gitlab.staging.haskell.org/ghc/ghc/issues/4466).
+
+
