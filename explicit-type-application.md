@@ -272,6 +272,9 @@ kind-specific classes by writing, for example:
 type Typeable1 = Typeable @(* -> *)
 ```
 
+### Further Information
+
+
 
 For more information on explicit type application, see [\#4466](https://gitlab.staging.haskell.org/ghc/ghc/issues/4466).
 
