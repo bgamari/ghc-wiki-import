@@ -2,6 +2,10 @@
 
 
 
+**Note:** As of June 2013, this page is rather out of date. There are lots of interesting ideas here, but various pieces of this page have already been implemented, and parts have been subsumed by other work.
+
+
+
 Currently thinking about adding a more expressive **Kind System** to GHC.  This page is currently a WIP ...
 
 
