@@ -168,7 +168,7 @@ Currently, all primitive types are unlifted, but that's not necessarily the case
 
 >
 >
-> Some primitive types are unboxed, such as Int\#, whereas some are boxed but unlifted (such as ByteArray\#).  The only primitive types that we classify as algebraic are the unboxed tuples.
+> Some primitive types are unboxed, such as Int\#, whereas some are boxed but unlifted (such as `ByteArray#`).  The only primitive types that we classify as algebraic are the unboxed tuples.
 >
 >
 
