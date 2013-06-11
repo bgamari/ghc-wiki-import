@@ -42,9 +42,8 @@ The design of Safe Haskell involves the following aspects:
 
 
 [ vertical blind](http://www.tiraimodern.com/product/vertical-blind) \| [
-roller blind](http://www.tiraimodern.com/product/roller-blind) \| \[
-[
-http://www.morinfoods.com/selai-kacang.html](http://www.morinfoods.com/selai-kacang.html) selai kacang\] \|  [
+roller blind](http://www.tiraimodern.com/product/roller-blind) \| [
+selai kacang](http://www.morinfoods.com/selai-kacang.html) \|  [
 atap fiberglass](http://www.goldenfibreglass.com/product-atap-fiberglass.php)
 
 
