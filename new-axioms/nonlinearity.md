@@ -124,11 +124,7 @@ However, the above proposal of linearizing the LHS before checking overlap (plan
 
 
 
-Plan (B) above has a better relationship with coincident overlap, but not quite a rosy one: in the event that an infinite type is needed to show the overlap, we don't have a well-defined substitution to apply to the RHS. It is conceivable to allow coincident overlap only when the unification algorithm produces a bona fide substitution. But, there may be no need for this.
-
-
-
-However, we can recover coincident overlap with in a branched instance: see [here](new-axioms/coincident-overlap). 
+Plan (B) above has a better relationship with coincident overlap, but not quite a rosy one: in the event that an infinite type is needed to show the overlap, we don't have a well-defined substitution to apply to the RHS. It is conceivable to allow coincident overlap only when the unification algorithm produces a bona fide substitution.
 
 
 ## Concrete Proposal
@@ -136,9 +132,9 @@ However, we can recover coincident overlap with in a branched instance: see [her
 
 - Use plan (B) to check for overlap. Thus, our two problematic instances of `F`, at the top, will conflict.
 
-- The current coincidence check (see [here](new-axioms/coincident-overlap) for more information) is no longer straightforward and will be removed. (Don't yell yet. Keep reading.)
+- Continue to allow coincident overlap in standalone instances.
 
-- Allow coincident overlap within branched instances. This recovers the lost coincident overlap check on unbranched instances. See [here](new-axioms/coincident-overlap) for more information.
+- Allow coincident overlap within branched instances. See [here](new-axioms/coincident-overlap) for more information.
 
 - Optional: Change the syntax for branched family instances, as described [here](new-axioms/closed-type-families).
 
