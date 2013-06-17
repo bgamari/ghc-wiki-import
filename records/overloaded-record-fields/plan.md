@@ -3,11 +3,14 @@ This is a plan to implement overloaded record fields, along the lines of SPJ's [
 original GSoC proposal](http://www.google-melange.com/gsoc/proposal/review/google/gsoc2013/adamgundry/1), for reference.) The page on [Records](records) gives the motivation and many options.  In particular, the proposal for [Declared Overloaded Record Fields](records/declared-overloaded-record-fields) is closely related but makes some different design decisions.
 
 
-## Introduction
+## Design
 
 
 
-Motivating example:
+**SLPJ** this section should be a careful design specfication.
+
+
+### Motivating example
 
 
 ```wiki
@@ -25,6 +28,32 @@ If the flag `-XOverloadedRecordFields` is enabled, a new form of 'record field' 
 
 
 
+**SLPJ note**.  I think it's more helpful to introduce it as a type-class constraint that happens to have convenient concrete syntax:
+
+
+```wiki
+class Has (r::*) (s::Symbol) (t::*) where
+  getFld :: r -> t
+
+-- data T a = MkT { x :: [a] }
+instance (b ~ [a]) => Has (T a) "r" b where
+  getFld (MkT { x = x }) = x
+```
+
+
+The `(b ~ [a])` in the instance is important, so that we get an instance match from the first two fields only.
+
+
+
+Then we have convenient syntax for `(Has r "x" t)`, namely `r { x::t }`.  Moreover, we get convenient syntax for conjunctions: `(Has r "x" tx, Has r "y" ty)` has shorthand `r { x::tx, y:: ty }`.
+
+
+
+Don't forget that the `r` might be an arbitrary type not just a type variable or type constructor.  For example, `(Has (T (Maybe b)) "x" [Maybe v])` is a perfectly fine (and soluble) constraint.  I suppose that its shorthand looks like `T (Maybe v) { x :: [Maybe v] }`
+**End of SLPJ**
+
+
+
 Record field constraints are introduced by projections, which are written using a new left-associative infix operator `(.>)`.  That is, if `e :: r` then `e.>x :: r { x :: t } => t`.  This operator must always be applied to (at least) its second argument, so `(.>)` is invalid but `(.>x) :: forall a b . a { x :: b } => a -> b`. 
 
 
@@ -33,15 +62,18 @@ A constraint `R { x :: t }` is solved if `R` is a datatype that has a field `x` 
 
 
 
+If multiple constructors for a single datatype use the same field name, all occurrences must have exactly the same type, as at present.
+
+
+### Record selectors
+
+
+
 Optionally, we could [add a flag \`-XNoMonoRecordFields\`](records/declared-overloaded-record-fields/no-mono-record-fields) to disable the generation of the usual monomorphic record field selector functions.  This is not essential, but would free up the namespace for other record systems (e.g. **data-lens**). Note that `-XOverloadedRecordFields` will generate monomorphic selectors by default for backwards compatibility reasons, but they will not be usable if multiple selectors with the same name are in scope.
 
 
 
 When either flag is enabled, the same field label may be declared repeatedly in a single module (or a label may be declared when a function of that name is already in scope).
-
-
-
-If multiple constructors for a single datatype use the same field name, all occurrences must have exactly the same type, as at present.
 
 
 ### Representation hiding
