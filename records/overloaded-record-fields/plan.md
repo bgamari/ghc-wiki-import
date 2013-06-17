@@ -23,6 +23,9 @@ getPersonId :: r { personId :: Int } => r -> Int
 getPersonId x = x.>personId
 ```
 
+### Record field constraints
+
+
 
 If the flag `-XOverloadedRecordFields` is enabled, a new form of 'record field' constraints `r { x :: t } :: Constraint` are available where `r` and `t` are types, while `x` is a literal string.  These are not typeclass constraints and do not have instances as such (though see the discussion below about virtual record fields). They can appear in contexts in the usual way (that is, they are a new primitive, like equality constraints or implicit parameter constraints). Multiple fields may be written comma-separated in a single constraint as in `r { x :: t, y :: u }`.
 
@@ -51,6 +54,9 @@ Then we have convenient syntax for `(Has r "x" t)`, namely `r { x::t }`.  Moreov
 
 Don't forget that the `r` might be an arbitrary type not just a type variable or type constructor.  For example, `(Has (T (Maybe b)) "x" [Maybe v])` is a perfectly fine (and soluble) constraint.  I suppose that its shorthand looks like `T (Maybe v) { x :: [Maybe v] }`
 **End of SLPJ**
+
+
+### Record field projections
 
 
 
