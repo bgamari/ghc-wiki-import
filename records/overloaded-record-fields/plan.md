@@ -241,6 +241,10 @@ However, evidence is supplied by the constraint solver, taking into account the 
 
 
 
+**SLPJ** Making the first example rely on the monomorphism restriction is not a good plan!
+
+
+
 Consider the example
 
 
