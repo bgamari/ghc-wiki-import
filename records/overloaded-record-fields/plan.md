@@ -1,6 +1,9 @@
+# Overloaded record fields: a plan for implementation
+
+
 
 This is a plan to implement overloaded record fields, along the lines of SPJ's [Simple Overloaded Record Fields](records/overloaded-record-fields) proposal, as a Google Summer of Code project. (See the [
-original GSoC proposal](http://www.google-melange.com/gsoc/proposal/review/google/gsoc2013/adamgundry/1), for reference.) The page on [Records](records) gives the motivation and many options.  In particular, the proposal for [Declared Overloaded Record Fields](records/declared-overloaded-record-fields) is closely related but makes some different design decisions.
+GSoC project details](http://www.google-melange.com/gsoc/project/google/gsoc2013/adamgundry/23001), for reference.) The page on [Records](records) gives the motivation and many options.  In particular, the proposal for [Declared Overloaded Record Fields](records/declared-overloaded-record-fields) is closely related but makes some different design decisions.
 
 
 ## Design
@@ -10,20 +13,36 @@ original GSoC proposal](http://www.google-melange.com/gsoc/proposal/review/googl
 **SLPJ** this section should be a careful design specfication.
 
 
-### Motivating example
+### Motivation
+
+
+
+A serious limitation of the Haskell record system is the inability to overload field names in record types: for example, if the data types
 
 
 ```wiki
-{-# LANGUAGE OverloadedRecordFields #-}
-
 data Person  = Person  { personId :: Int, name :: String }
 data Address = Address { personId :: Int, address :: String }
+```
 
+
+are declared in the same module, there is no way to determine which type an occurrence of the personId record selector refers to. A common workaround is to use a unique prefix for each record type, but this leads to less clear code and obfuscates relationships between fields of different records. Qualified names can be used to distinguish record selectors from different modules, but using one module per record is often impractical.
+
+
+
+Instead, we want to be able to write postfix polymorphic record projections, so that `e.personId` resolves the ambiguity using the type of `e`. In general, this requires a new form of constraint `r { x :: t }` stating that type `r` has a field `x` of type `t`. For example, the following declaration should be accepted:
+
+
+```wiki
 getPersonId :: r { personId :: Int } => r -> Int
-getPersonId x = x.>personId
+getPersonId e = e.personId
 ```
 
 ### Record field constraints
+
+
+
+**AMG** the following needs updating.
 
 
 
