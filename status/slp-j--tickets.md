@@ -6,7 +6,6 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 
 - [\#7259](https://gitlab.staging.haskell.org/ghc/ghc/issues/7259): Eta-expansion of products in System FC
-- [\#7558](https://gitlab.staging.haskell.org/ghc/ghc/issues/7558): Terrible error message in inaccessible code
 - [\#5682](https://gitlab.staging.haskell.org/ghc/ghc/issues/5682): Parsing of pomoted kinds
 - [\#6022](https://gitlab.staging.haskell.org/ghc/ghc/issues/6022): over-general types are inferred
 - [\#5642](https://gitlab.staging.haskell.org/ghc/ghc/issues/5642): slow constraint solving
@@ -45,6 +44,7 @@ See also [TemplateHaskell](template-haskell)
 ## Optimisation
 
 
+- [\#1498](https://gitlab.staging.haskell.org/ghc/ghc/issues/1498): heap checks in recursive functions
 - [\#7561](https://gitlab.staging.haskell.org/ghc/ghc/issues/7561): profiled program runs faster than un-profiled one
 - [\#7378](https://gitlab.staging.haskell.org/ghc/ghc/issues/7378): (a) identical-alts when the RHSs are bigger; (b) nested comparisions (cf [\#2132](https://gitlab.staging.haskell.org/ghc/ghc/issues/2132))
 - [\#7511](https://gitlab.staging.haskell.org/ghc/ghc/issues/7511): inlining can make programs allocate MORE!!
