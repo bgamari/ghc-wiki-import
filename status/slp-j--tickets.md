@@ -14,6 +14,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#7204](https://gitlab.staging.haskell.org/ghc/ghc/issues/7204): a class to controll FFI marshalling; and newtype deriving for classes with ATs
 - [\#7862](https://gitlab.staging.haskell.org/ghc/ghc/issues/7862): overlap beween givens and instances
 - [\#7643](https://gitlab.staging.haskell.org/ghc/ghc/issues/7643): dark corner of sub-kinding and `unsafeCoerce#`
+- [\#7842](https://gitlab.staging.haskell.org/ghc/ghc/issues/7842): polymorphism in recursive do-blocks
 
 ## Template Haskell
 
