@@ -2,6 +2,10 @@
 
 
 
+**Note**: This page is here for historical reasons. The implemented features are discussed on the [NewAxioms](new-axioms) page.
+
+
+
 This page discusses problems and solutions that come up when thinking about type family instances with repeated variables on the left-hand side.
 
 
