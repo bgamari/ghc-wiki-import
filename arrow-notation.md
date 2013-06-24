@@ -6,7 +6,8 @@ This page describes a couple of proposed changes to the notation enabled with -X
 ([current documentation](http://www.haskell.org/ghc/docs/latest/html/users_guide/arrow-notation.html))
 
 
-## Changing the types of arrow operators
+##
+Changing the types of arrow operators (implemented in March 2013, for GHC 7.8)
 
 
 
