@@ -36,7 +36,7 @@ The `AvailTC` constructor of `Avail.AvailInfo` represents a type and its pieces 
 
 
 
-Similarly, the `RdrName.Parent` type has an extra constructor `FldParent` which stores the field name and possibly the selector and dictionary function names. Thus it is easy to tell whether a `RdrName.GlobalRdrElt` (`GRE`) is a field. 
+Similarly, the `RdrName.Parent` type has an extra constructor `FldParent` which stores the field name (and possibly the dfunid). Thus it is easy to tell whether a `RdrName.GlobalRdrElt` (`GRE`) is a field. In this case, the name of the `GRE` is the selector function.
 
 
 
