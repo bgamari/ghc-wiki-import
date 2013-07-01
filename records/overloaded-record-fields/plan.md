@@ -29,12 +29,12 @@ are declared in the same module, there is no way to determine which type an occu
 
 
 
-Instead, we want to be able to write postfix polymorphic record projections, so that `e.personId` resolves the ambiguity using the type of `e`. In general, this requires a new form of constraint `r { x :: t }` stating that type `r` has a field `x` of type `t`. For example, the following declaration should be accepted:
+Instead, we want to be able to write polymorphic record projections, so that the ambiguous identifier `personId` is resolved using the type of `e`. In general, this requires a new form of constraint `r { x :: t }` stating that type `r` has a field `x` of type `t`. For example, the following declaration should be accepted:
 
 
 ```wiki
 getPersonId :: r { personId :: Int } => r -> Int
-getPersonId e = e.personId
+getPersonId e = personId e
 ```
 
 
@@ -45,7 +45,16 @@ A constraint `R { x :: t }` is solved if `R` is a datatype that has a field `x` 
 
 
 
-In the sequel, we will describe the `-XOverloadedRecordFields` extension, which permits multiple field declarations with the same label, introduces new record field constraints and a new syntax for record projection.
+In the sequel, we will describe the `-XOverloadedRecordFields` extension, which permits multiple field declarations with the same label and introduces new record field constraints.
+
+
+
+Previous versions of this proposal suggested changing the lexical syntax so that record projections could be written postfix, immediately following a dot. For example, `e.personId` would be roughly equivalent to `personId e`. This would be a breaking change (when the extension was enabled) as composition would need spaces around the dot operator. However, it would mean that the field name would not have to be in scope, allowing better library separation. For example, `e.personId` would be valid even if no `personId` fields were in scope.
+
+
+
+In the light of feedback, we propose **no changes to dot syntax** for the time being. In the future, we could add a separate extension to treat [dot as postfix function application](records/declared-overloaded-record-fields/dot-postfix). Note that the [
+lens](http://hackage.haskell.org/package/lens) library encourages the use of dot with no spaces, as composition is used to chain lenses.
 
 
 ### Record field constraints
@@ -89,11 +98,7 @@ The `(b ~ [a])` in the instance is important, so that we get an instance match f
 
 
 
-Record field constraints are introduced by projections, which are written using the dot operator with no space following it.  That is, if `e :: r` then `e.x :: r { x :: t } => t`.  The right section `(.x) :: a { x :: b } => a -> b` is available but the left section `(e.)` is not (what would its type be?).
-
-
-
-The composition operator must be written with spaces on both sides, for consistency. This will break old code, but only when the `-XOverloadedRecordFields` extension is enabled. There is no ambiguity, and dot notation is already space-aware: `M.x` is a qualified name whereas `M . x` is the composition of a data constructor `M` with a function `x`.  Similarly `e.x` can mean record projection, distinct from `e . x`. Note that dot (for qualified names or record projection) binds more tightly than function application, so `f e.x` means the same as `f (e.x)`. Parentheses can be used to write `(f e).x`.
+Record field constraints are introduced by projections. If there are two or more fields `x` in scope, then an occurrence of `x` has type `a { x :: b } => a -> b` instead of generating an ambiguity error. If there is a single field `x` in scope, then it refers to the usual monomorphic record selector (ensuring backwards compatibility). If there are any normal identifiers `x` in scope (as well as fields) then a use of `x` leads to an ambiguity error.
 
 
 ### Representation hiding
@@ -185,12 +190,12 @@ because the type of `v` is only determined later, by constraint solving.
 
 
 
-Annoyingly, nested updates will require some annotations. In the following example, the outer update need not be annotated (since `v` is a variable that is explicitly given a type by the context) but the inner update must be (since `v.x` is not a variable):
+Annoyingly, nested updates will require some annotations. In the following example, the outer update need not be annotated (since `v` is a variable that is explicitly given a type by the context) but the inner update must be (since `x v` is not a variable):
 
 
 ```wiki
   f :: T Int -> T Int
-  f v = v { x = v.x { y = 6 } }
+  f v = v { x = (x v){ y = 6 } }
 ```
 
 ### Virtual record fields
@@ -235,7 +240,7 @@ We could also add a flag `-XPolyRecordFields` to generate polymorphic selector f
 
 ```wiki
 x :: Has r "x" t => r -> t
-x e = e.x
+x = getFld
 ```
 
 
@@ -250,7 +255,7 @@ The monomorphism restriction may cause annoyance, since
 
 
 ```wiki
-foo = \ e -> e.x
+foo = \ e -> x e
 ```
 
 
@@ -267,7 +272,7 @@ data S = MkS { y :: Bool }
 ```
 
 
-Inferring the type of `foo = \ e -> e.x` results in `alpha -> beta` subject to the constraint `alpha { x :: beta }`. However, the monomorphism restriction prevents this constraint from being generalised. There is only one `x` field in scope, so defaulting specialises the type to `T -> Int`. If the `y` field was used, it would instead give rise to an ambiguity error.
+Inferring the type of `foo = \ e -> x e` results in `alpha -> beta` subject to the constraint `alpha { x :: beta }`. However, the monomorphism restriction prevents this constraint from being generalised. There is only one `x` field in scope, so defaulting specialises the type to `T -> Int`. If the `y` field was used, it would instead give rise to an ambiguity error.
 
 
 ### Higher-rank fields
@@ -306,7 +311,7 @@ instance (c ~ ((forall a . a -> a) -> b)) => Has (T b) "x" c
 ```
 
 
-but this is currently forbidden by GHC, even with `-XImpredicativeTypes` enabled. Indeed, it would not be much use if it were possible, because bidirectional type inference relies on being able to immediately infer the type of neutral terms like `e.x`, but overloaded record fields prevent this. Traditional monomorphic selector functions are likely to be needed in this case.
+but this is currently forbidden by GHC, even with `-XImpredicativeTypes` enabled. Indeed, it would not be much use if it were possible, because bidirectional type inference relies on being able to immediately infer the type of neutral terms like `x e`, but overloaded record fields prevent this. Traditional monomorphic selector functions are likely to be needed in this case.
 
 
 ### Multiple modules and implicit instance generation
@@ -353,7 +358,7 @@ module M ( R(R, x), S(S, y), T(T, x) ) where
 module N where
   import M
 
-  foo e = e.x
+  foo e = x e
  
   bar :: Bool
   bar = foo T
