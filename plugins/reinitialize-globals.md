@@ -38,7 +38,7 @@ If the ghc executable itself dynamically links against libHSghc, then the entire
 
 
 
-As of commit b7126674 (\~mid-March 2013), the ghc executable dynamically loads libHSghc by default. This snippet from `mk/config.mk` shows the default behavior as of [163de25813d12764aa5ded1666af7c06fee0d67e](/trac/ghc/changeset/163de25813d12764aa5ded1666af7c06fee0d67e/ghc).
+As of commit b7126674 (\~mid-March 2013), the ghc executable dynamically loads libHSghc by default. This snippet from `mk/config.mk` shows the default behavior as of [163de25813d12764aa5ded1666af7c06fee0d67e](/trac/ghc/changeset/163de25813d12764aa5ded1666af7c06fee0d67e/ghc) (\~July 2013).
 
 
 ```wiki
@@ -60,7 +60,7 @@ endif
 ```
 
 
-NB also that the `*-llvm` presents in `build.mk` set `DYNAMIC_GHC_PROGRAMS = NO` as of [163de25813d12764aa5ded1666af7c06fee0d67e](/trac/ghc/changeset/163de25813d12764aa5ded1666af7c06fee0d67e/ghc) (\~July 2013).
+NB also that the `*-llvm` presets in `build.mk` set `DYNAMIC_GHC_PROGRAMS = NO` as of [163de25813d12764aa5ded1666af7c06fee0d67e](/trac/ghc/changeset/163de25813d12764aa5ded1666af7c06fee0d67e/ghc).
 
 
 ### `FastString.string_table`
