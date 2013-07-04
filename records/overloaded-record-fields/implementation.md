@@ -40,7 +40,7 @@ Similarly, the `RdrName.Parent` type has an extra constructor `FldParent` which 
 
 
 
-The `HsExpr.HsExpr` type has an extra constructor `HsOverloadedRecFld FastString`. When `-XOverloadedRecordFields` is enabled, and the renamer encounters `HsVar "x"` where `x` refers to multiple `GRE`s that are all record fields, it replaces it with `HsOverloadedRecFld "x"`. (Is there any reason to treat single record fields differently to other ids?)
+The `HsExpr.HsExpr` type has an extra constructor `HsOverloadedRecFld FastString`. When `-XOverloadedRecordFields` is enabled, and the renamer encounters `HsVar "x"` where `x` refers to multiple `GRE`s that are all record fields, it replaces it with `HsOverloadedRecFld "x"`. There needs to be a similar constructor for non-overloaded projections, so that we can pretty-print the field name but store the selector name.
 
 
 
