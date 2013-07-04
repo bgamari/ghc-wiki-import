@@ -287,6 +287,54 @@ More work is needed to identify the right way to formulate the `Set` class: type
 multiple update](https://github.com/ekmett/lens/issues/197). Higher-rank fields remain problematic.
 
 
+### Trouble in paradise
+
+
+
+[
+Edward Kmett points out](http://www.haskell.org/pipermail/glasgow-haskell-users/2013-July/024064.html) that the current story falls short in one important respect: composition of polymorphic record fields leads to ambiguity errors, as the intermediate type cannot be determined. For example, suppose
+
+
+```wiki
+foo :: Has b "foo" c => b -> c
+bar :: Has a "bar" b => a -> b
+```
+
+
+then
+
+
+```wiki
+foo . bar :: (Has a "bar" b, Has b "foo" c) => a -> c
+```
+
+
+and `b` is an ambiguous type variable.
+
+
+
+We could work around this by adding a functional dependency
+
+
+```wiki
+class Has r (f :: Symbol) t | r f -> t where
+  getFld :: r -> t
+```
+
+
+or using a type family
+
+
+```wiki
+class Has r (f :: Symbol) where
+  type GetResult r f :: *
+  getFld :: r -> GetResult r f
+```
+
+
+but either of these options prevents the integration with lenses discussed above, and we lose support for universally quantified fields (though they are dubious anyway). Pick your poison.
+
+
 ### User-defined `Has` instances
 
 
