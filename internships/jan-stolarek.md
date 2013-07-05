@@ -189,6 +189,7 @@ Unboxed Booleans ([\#6135](https://gitlab.staging.haskell.org/ghc/ghc/issues/613
 
 
 
-Loopification work is in main GHC repo on branch `js-loopification`.
+Loopification work is in main GHC repo on branch [
+js-loopification](https://github.com/jstolarek/ghc/tree/js-loopification).
 
 
