@@ -1,0 +1,3 @@
+# Jan Stolarek's internship notes
+
+
