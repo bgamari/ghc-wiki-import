@@ -53,7 +53,7 @@ Some points made by Austin Seipp:
 
 
 
-When generating Cmm from STG there is some SRT information being generated (only for CAFS?). It is not used and has to be rebuilt anyway after converting to CPS Cmm. Below are some random notes and pieces of code that might related to this:
+When generating Cmm from STG there is some SRT information being generated (only for CAFs?). It is not used and has to be rebuilt anyway after converting to CPS Cmm. Below are some random notes and pieces of code that might related to this:
   
 
 
