@@ -267,6 +267,6 @@ Instead of allocating `FastString`s' uniques linearly, let's use a `UniqSupply`.
 
 
 
-I whipped up a quick implementation (using `{-# SOURCE #-}` and minimal boot files for `Unique` and `UniqueSupply`). Testing on a library that takes \~8.9 seconds to build and allocates 6.334 gigs, I got a \~0.3% increase in allocation and a \~0.1 second increase in time. I should probably try measuring the affect on compilation times in nofib.
+I whipped up a quick implementation (using `{-# SOURCE #-}` and minimal boot files for `Unique` and `UniqueSupply`). Testing on a library that takes \~8.9 seconds to build and allocates 6.334 gigs, I got a \~0.3% increase in allocation and a \~0.1 second increase in time. The next step is try measuring the effect on compilation times in nofib, and looking for a cheap way to avoid those boot files.
 
 
