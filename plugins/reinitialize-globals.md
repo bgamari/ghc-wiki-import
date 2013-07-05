@@ -259,7 +259,7 @@ Performance: I'm hoping pointer tagging, unpacking (will this sum type be unpack
 This Option does not have any laziness issues. Thunks that end up adding `FastString`s to the table, when forced, always begin by reading the `string_table` `IORef`.  Thus, they will see the `Just_FST` if they're forced after `reinitializeGlobals`, regardless of when those thunks were created.  In other words, thunks only cache the `IORef`, not its contents. Since each image's `IORef`'s contents now includes a reference to the other image's `IORef`, the thunks will mutate both tables in synch.
 
 
-### Option 6: Have the `FastString` module use `UniqSupply`
+### Option 6: Use `UniqSupply` in `FastString`
 
 
 
