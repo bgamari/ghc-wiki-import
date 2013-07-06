@@ -28,10 +28,11 @@ The header shows an overview of the whole changeset.
 Here you will find information such as:
 
 
-- Timestamp -- When the changeset was commited
-- Author -- Who commited the changeset
-- Message -- A brief description from the author (the commit log message)
-- Files -- A list of files affected by this changeset
+- Timestamp — When the changeset was commited
+- Author — Who commited the changeset
+- Message — A brief description from the author (the commit log message)
+- Location — Parent directory of all files affected by this changeset
+- Files — A list of files affected by this changeset
 
 
 If more than one revision is involved in the set of changes being
@@ -45,11 +46,11 @@ indicates how the file is affected by the changeset.
  
 
 
-- Green: Added
-- Red: Removed
-- Yellow: Modified
-- Blue: Copied
-- Gray: Moved
+- ` ` Green: Added
+- ` ` Red: Removed
+- ` ` Yellow: Modified
+- ` ` Blue: Copied
+- ` ` Gray: Moved
 
 
 The color legend is located below the header as a reminder.
