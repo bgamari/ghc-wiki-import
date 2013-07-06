@@ -10,11 +10,125 @@ mod\_python](http://www.modpython.org/), which speeds up Trac's response times c
 
 
 
+** A Word of Warning **
+
+
+
+As of 16<sup>th</sup> June 2010, the mod\_python project is officially dead.  If you are considering using mod\_python for a new installation, **please don't**!  There are known issues which will not be fixed and there are now better alternatives.  Check out the main [TracInstall](trac-install) pages for your target version for more information.
+
+
+
 These instructions are for Apache 2; if you are still using Apache 1.3, you may have some luck with [
-TracModPython2.7](http://trac.edgewall.org/intertrac/wiki%3ATracModPython2.7).
+TracModPython2.7](http://trac.edgewall.org/intertrac/wiki%3ATracModPython2.7), but you'll be totally on your own.
 
 
-## Simple configuration
+
+#### Overview
+
+
+    
+
+1. 
+1. 
+          [Simple configuration: single project](#Simpleconfiguration)
+          
+
+  1. 
+  1. 
+                [Python Egg Cache](#PythonEggCache)
+              
+  1. 
+  1. 
+                [Configuring Authentication](#ConfiguringAuthentication)
+              
+  1. 
+
+
+        
+1. 
+1. 
+          [Advanced Configuration](#AdvancedConfiguration)
+          
+
+  1. 
+  1. 
+                [Setting the Python Egg Cache](#SettingthePythonEggCache)
+              
+  1. 
+  1. 
+                [Setting the PythonPath](#SettingthePythonPath)
+              
+  1. 
+  1. 
+                [Setting up multiple projects](#Settingupmultipleprojects)
+              
+  1. 
+  1. 
+                [Virtual Host Configuration](#VirtualHostConfiguration)
+              
+  1. 
+
+
+        
+1. 
+1. 
+          [Troubleshooting](#Troubleshooting)
+          
+
+  1. 
+  1. 
+                [Expat-related segmentation faults](#expat)
+              
+  1. 
+  1. 
+                [Form submission problems](#Formsubmissionproblems)
+              
+  1. 
+  1. 
+                [Problem with virtual host configuration](#Problemwithvirtualhostconfiguration)
+              
+  1. 
+  1. 
+                [Problem with zipped egg](#Problemwithzippedegg)
+              
+  1. 
+  1. 
+                [Using .htaccess](#Using.htaccess)
+              
+  1. 
+  1. 
+                [Additional .htaccess help](#Additional.htaccesshelp)
+              
+  1. 
+  1. 
+                [Platform specific issues](#Platformspecificissues)
+              
+  1. 
+  1. 
+                [Subversion issues](#Subversionissues)
+              
+  1. 
+  1. 
+                [Page layout issues](#Pagelayoutissues)
+              
+  1. 
+  1. 
+                [HTTPS issues](#HTTPSissues)
+              
+  1. 
+  1. 
+                [Segmentation fault with php5-mhash or other php5 modules](#Segmentationfaultwithphp5-mhashorotherphp5modules)
+              
+  1. 
+
+
+        
+1. 
+
+
+
+
+## Simple configuration: single project
 
 
 
@@ -42,7 +156,7 @@ apt-get install libapache2-mod-python libapache2-mod-python-doc
 
 
 ```wiki
-a2enmod mod_python
+a2enmod python
 ```
 
 
@@ -62,6 +176,8 @@ You can test your mod\_python installation by adding the following to your httpd
    SetHandler mod_python
    PythonInterpreter main_interpreter
    PythonHandler mod_python.testhandler
+   Order allow,deny
+   Allow from all
 </Location>
 ```
 
@@ -76,6 +192,8 @@ A simple setup of Trac on mod\_python looks like this:
    PythonHandler trac.web.modpython_frontend 
    PythonOption TracEnv /var/trac/myproject
    PythonOption TracUriRoot /projects/myproject
+   Order allow,deny
+   Allow from all
 </Location>
 ```
 
@@ -90,14 +208,19 @@ The options available are
 ```wiki
     # For a single project
     PythonOption TracEnv /var/trac/myproject
+
     # For multiple projects
     PythonOption TracEnvParentDir /var/trac/myprojects
+
     # For the index of multiple projects
     PythonOption TracEnvIndexTemplate /srv/www/htdocs/trac/project_list_template.html
+
     # A space delimitted list, with a "," between key and value pairs.
     PythonOption TracTemplateVars key1,val1 key2,val2
+
     # Useful to get the date in the wanted order
     PythonOption TracLocale en_GB.UTF8
+
     # See description above        
     PythonOption TracUriRoot /projects/myproject
 ```
@@ -121,86 +244,10 @@ or you can uncompress the Genshi egg to resolve problems extracting from it.
 
 
 
-Creating password files and configuring authentication works similar to the process for [CGI](trac-cgi#adding-authentication):
+See corresponding section in the [TracModWSGI](trac-mod-wsgi#configuring-authentication) page.
 
 
-```
-<Location /projects/myproject/login>
-  AuthType Basic
-  AuthName "myproject"
-  AuthUserFile /var/trac/myproject/.htpasswd
-  Require valid-user
-</Location>
-```
-
-
-Configuration for mod\_ldap authentication in Apache is a bit tricky (httpd 2.2.x and OpenLDAP: slapd 2.3.19)
-
-
-1. You need to load the following modules in Apache httpd.conf
-
-  ```wiki
-  LoadModule ldap_module modules/mod_ldap.so
-  LoadModule authnz_ldap_module modules/mod_authnz_ldap.so
-  ```
-
-1. Your httpd.conf also needs to look something like:
-
-```
-<Location /trac/>
-  SetHandler mod_python
-  PythonInterpreter main_interpreter
-  PythonHandler trac.web.modpython_frontend
-  PythonOption TracEnv /home/trac/
-  PythonOption TracUriRoot /trac/
-  Order deny,allow
-  Deny from all
-  Allow from 192.168.11.0/24
-  AuthType Basic
-  AuthName "Trac"
-  AuthBasicProvider "ldap"
-  AuthLDAPURL "ldap://127.0.0.1/dc=example,dc=co,dc=ke?uid?sub?(objectClass=inetOrgPerson)"
-  authzldapauthoritative Off
-  require valid-user
-</Location>
-```
-
-
-Or the LDAP interface to a Microsoft Active Directory:
-
-
-```
-<Location /trac/>
-  SetHandler mod_python
-  PythonInterpreter main_interpreter
-  PythonHandler trac.web.modpython_frontend
-  PythonOption TracEnv /home/trac/
-  PythonOption TracUriRoot /trac/
-  Order deny,allow
-  Deny from all
-  Allow from 192.168.11.0/24
-  AuthType Basic
-  AuthName "Trac"
-  AuthBasicProvider "ldap"
-  AuthLDAPURL "ldap://adserver.company.com:3268/DC=company,DC=com?sAMAccountName?sub?(objectClass=user)"
-  AuthLDAPBindDN       ldap-auth-user@company.com
-  AuthLDAPBindPassword "the_password"
-  authzldapauthoritative Off
-  # require valid-user
-  require ldap-group CN=Trac Users,CN=Users,DC=company,DC=com
-</Location>
-```
-
-
-Note 1: This is the case where the LDAP search will get around the multiple OUs, conecting to Global Catalog Server portion of AD (Notice the port is 3268, not the normal LDAP 389). The GCS is basically a "flattened" tree which allows searching for a user without knowing to which OU they belong.
-
-
-
-Note 2: Active Directory requires an authenticating user/password to access records (AuthLDAPBindDN and AuthLDAPBindPassword).
-
-
-
-Note 3: The directive "require ldap-group ..."  specifies an AD group whose members are allowed access.
+## Advanced Configuration
 
 
 ### Setting the Python Egg Cache
@@ -237,7 +284,7 @@ If the Trac installation isn't installed in your Python path, you'll have to tel
 Be careful about using the PythonPath directive, and *not* `SetEnv PYTHONPATH`, as the latter won't work.
 
 
-## Setting up multiple projects
+### Setting up multiple projects
 
 
 
@@ -283,7 +330,7 @@ You can also use the same authentication realm for all of the projects using a `
 </LocationMatch>
 ```
 
-## Virtual Host Configuration
+### Virtual Host Configuration
 
 
 
@@ -345,6 +392,40 @@ In general, if you get server error pages, you can either check the Apache error
 For multiple projects, try restarting the server as well.
 
 
+
+===Login Not Working===
+If you've used \<Location /\> directive, it will override any other directives, as well as \<Location /Login\>.
+The workaround is to use negation expression as follows (for multi project setups):
+
+
+```
+#this one for other pages
+<Location ~ "/*(?!login)">
+   SetHandler mod_python
+   PythonHandler trac.web.modpython_frontend
+   PythonOption TracEnvParentDir /projects
+   PythonOption TracUriRoot /
+
+</Location>
+#this one for login page
+<Location ~ "/[^/]+/login">
+   SetHandler mod_python
+   PythonHandler trac.web.modpython_frontend
+   PythonOption TracEnvParentDir /projects
+   PythonOption TracUriRoot /
+
+   #remove these if you don't want to force SSL
+   RewriteEngine On 
+   RewriteCond %{HTTPS} off
+   RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
+   AuthType Basic
+   AuthName "Trac"
+   AuthUserFile /projects/.htpasswd
+   Require valid-user
+</Location>
+```
+
 ### Expat-related segmentation faults
 
 
@@ -379,6 +460,17 @@ If the \<Location /\> directive is used, setting the `DocumentRoot` may result i
 Using \<Location /\> together with `SetHandler` resulted in having everything handled by mod\_python, which leads to not being able download any CSS or images/icons. I used \<Location /trac\> `SetHandler None` \</Location\> to circumvent the problem, though I do not know if this is the most elegant solution.
 
 
+### Problem with zipped egg
+
+
+
+It's possible that your version of mod\_python will not import modules from zipped eggs. If you encounter an `ImportError: No module named trac` in your Apache logs but you think everything is where it should be, this might be your problem. Look in your site-packages directory; if the Trac module appears as a *file* rather than a *directory*, then this might be your problem. To rectify, try installing Trac using the `--always-unzip` option, like this:
+
+
+```wiki
+easy_install --always-unzip Trac-0.12b1.zip
+```
+
 ### Using .htaccess
 
 
@@ -394,7 +486,7 @@ It may be possible to work around this with mod\_rewrite, but I failed to get th
 A success story: For me it worked out-of-box, with following trivial config:
 
 
-```wiki
+```
 SetHandler mod_python
 PythonInterpreter main_interpreter
 PythonHandler trac.web.modpython_frontend 
@@ -424,14 +516,17 @@ If you are using the .htaccess method you may have additional problems if your t
 </IfModule>
 ```
 
-### Win32 Issues
+### Platform specific issues
+
+
+#### Win32 Issues
 
 
 
 If you run trac with mod\_python \< 3.2 on Windows, uploading attachments will **not** work. This problem is resolved in mod\_python 3.1.4 or later, so please upgrade mod\_python to fix this.
 
 
-### OS X issues
+#### OS X issues
 
 
 
@@ -439,7 +534,7 @@ When using mod\_python on OS X you will not be able to restart Apache using `apa
 here](http://www.dscpl.com.au/projects/vampire/patches.html).
 
 
-### SELinux issues
+#### SELinux issues
 
 
 
@@ -456,7 +551,7 @@ See also [
 http://subversion.tigris.org/faq.html\#reposperms](http://subversion.tigris.org/faq.html#reposperms)
 
 
-### FreeBSD issues
+#### FreeBSD issues
 
 
 
@@ -472,6 +567,13 @@ seems to be](http://modpython.org/pipermail/mod_python/2006-September/021983.htm
 ```wiki
 export LD_PRELOAD=/usr/lib/libc_r.so
 ```
+
+#### Fedora 7 Issues
+
+
+
+Make sure you install the 'python-sqlite2' package as it seems to be required for [TracModPython](trac-mod-python) but not for tracd
+
 
 ### Subversion issues
 
@@ -518,6 +620,10 @@ Alias /myproject/css "/usr/share/trac/htdocs/css"
 Note: For the above configuration to have any effect it must be put after the configuration of your project root location, i.e. `<Location /myproject />`.
 
 
+
+Also, setting `PythonOptimize On` seems to mess up the page headers and footers, in addition to hiding the documentation for macros and plugins (see \#Trac8956). Considering how little effect the option has, it is probably a good idea to leave it `Off`.
+
+
 ### HTTPS issues
 
 
@@ -533,13 +639,6 @@ If you want to run Trac fully under https you might find that it tries to redire
     ....
 </VirtualHost>
 ```
-
-### Fedora 7 Issues
-
-
-
-Make sure you install the 'python-sqlite2' package as it seems to be required for [TracModPython](trac-mod-python) but not for tracd
-
 
 ### Segmentation fault with php5-mhash or other php5 modules
 
@@ -558,7 +657,7 @@ http://www.djangoproject.com/documentation/modpython/\#if-you-get-a-segmentation
 
 
 
-See also:  [TracGuide](trac-guide), [TracInstall](trac-install), [ModWSGI](trac-mod-wsgi), [FastCGI](trac-fast-cgi), [ModPython](trac-mod-python), [
+See also:  [TracGuide](trac-guide), [TracInstall](trac-install), [ModWSGI](trac-mod-wsgi), [FastCGI](trac-fast-cgi),  [
 TracNginxRecipe](http://trac.edgewall.org/intertrac/TracNginxRecipe)
 
 
