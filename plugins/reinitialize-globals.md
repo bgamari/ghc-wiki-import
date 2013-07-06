@@ -12,7 +12,7 @@ I've pushed Option 2 to HEAD. Since then, I've realized the troubles with lazine
 
 - Option 6 sounds best after that, but it was a late idea and I'm not sure how robust the underlying mechanism is.
 
-- Option 5 avoids the laziness issues, but we'll have to ensure it doesn't adversely affect performance too much — `FastString` has some hot spots.
+- Option 5 avoids the laziness issues, but we'll have to ensure it doesn't adversely affect performance too much — `FastString` has some hot spots. (Also, *could be bogus* — see below.)
 
 ## Background
 
@@ -230,7 +230,7 @@ So the rule would be: *if your plugin might allocate new `FastString`s, be warne
 
 
 
-This is idea is predicated on the fact that there are at most two libHSghc images in memory.
+This is idea is predicated on the fact that there are at most two libHSghc images in memory. **Which I just realized is the most likely scenario, but I don't think there's anything preventing a plugin from having its own statically linked copy of libHSghc…**
 
 
 
