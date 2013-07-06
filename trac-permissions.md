@@ -37,8 +37,12 @@ To access this tab, a user must have `TRAC_ADMIN privileges`. This can be perfor
 ```
 
 
-Then, the user `bob` will be able to see the Admin tab, and can then access the permissions menu. This menu will allow you to perform all the following actions, but from the browser without requiring root access to the server (just the correct permissions for your user account).
+Then, the user `bob` will be able to see the Admin tab, and can then access the permissions menu. This menu will allow you to perform all the following actions, but from the browser without requiring root access to the server (just the correct permissions for your user account).   **Use at least one lowercase character in user names, as all-uppercase names are reserved for permissions.**
 
+
+1. [](/trac/ghc/chrome/site/../common/guide/admin.png)
+1. [](/trac/ghc/chrome/site/../common/guide/admin-permissions.png)
+1. [](/trac/ghc/chrome/site/../common/guide/admin-permissions-TICKET_ADMIN.png)
 
 
 An easy way to quickly secure a new Trac install is to run the above command on the anonymous user, install the [
@@ -96,6 +100,9 @@ Otherwise, individual privileges can be assigned to users for the various differ
 </th></tr>
 <tr><th> `TICKET_EDIT_DESCRIPTION` </th>
 <th> Modify description field 
+</th></tr>
+<tr><th> `TICKET_EDIT_COMMENT` </th>
+<th> Modify comments 
 </th></tr>
 <tr><th> `TICKET_ADMIN` </th>
 <th> All `TICKET_*` permissions, plus the deletion of ticket attachments and modification of the reporter and description fields. It also allows managing ticket properties in the WebAdmin panel. 
@@ -169,6 +176,9 @@ Attention: the "view tickets" button appears with the `REPORT_VIEW` permission.
 <tr><th> `WIKI_MODIFY` </th>
 <th> Change [wiki](trac-wiki) pages 
 </th></tr>
+<tr><th> `WIKI_RENAME` </th>
+<th> Rename [wiki](trac-wiki) pages 
+</th></tr>
 <tr><th> `WIKI_DELETE` </th>
 <th> Delete [wiki](trac-wiki) pages and attachments 
 </th></tr>
@@ -207,6 +217,14 @@ Attention: the "view tickets" button appears with the `REPORT_VIEW` permission.
 <th> Shows email addresses even if [
 trac show\_email\_addresses configuration option is false](http://trac.edgewall.org/intertrac/wiki%3A0.11/TracIni) 
 </th></tr></table>
+
+
+## Creating New Privileges
+
+
+
+To create custom permissions, for example to be used in a custom workflow, enable the optional [
+tracopt.perm.config\_perm\_provider.ExtraPermissionsProvider](http://trac.edgewall.org/intertrac/ExtraPermissionsProvider) component in the "Plugins" admin panel, and add the desired permissions to the `[extra-permissions]` section in your [trac.ini](trac-ini#). For more information, please refer to the documentation of the component in the admin panel.
 
 
 ## Granting Privileges
@@ -249,14 +267,11 @@ Or add all privileges:
 
 
 There are two built-in groups, "authenticated" and "anonymous".
-
 Any user who has not logged in is automatically in the "anonymous" group.
-
 Any user who has logged in is also in the "authenticated" group.
-
 The "authenticated" group inherits permissions from the "anonymous" group.
-
-eg. if the "anonymous" group has permission WIKI\_MODIFY, it's not necessary to add the WIKI\_MODIFY permisison to the "authenticated" group as well.
+For example, if the "anonymous" group has permission WIKI\_MODIFY, 
+it is not necessary to add the WIKI\_MODIFY permission to the "authenticated" group as well.
 
 
 
@@ -276,7 +291,7 @@ Permissions can be grouped together to form roles such as *developer*, *admin*, 
 ```
 
 
-Group membership can be checked by doing a `permission list` with no further arguments; the resulting output will include group memberships. **Use lowercase for group names, as uppercase is reserved for permissions**.
+Group membership can be checked by doing a `permission list` with no further arguments; the resulting output will include group memberships. **Use at least one lowercase character in group names, as all-uppercase names are reserved for permissions**.
 
 
 ## Adding a New Group and Permissions
