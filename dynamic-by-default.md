@@ -14,6 +14,10 @@ Our solution is to switch GHCi from using the "static way", to using the "dynami
 
 
 
+(See [\#3658](https://gitlab.staging.haskell.org/ghc/ghc/issues/3658) for related design decisions etc.)
+
+
+
 For this to work, there is technically no need to change anything else: ghc could continue to compile for the static way by default. However, there are 2 problems that arise:
 
 
