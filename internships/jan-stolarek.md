@@ -190,6 +190,8 @@ Some LLVM notes that may be useful:
 - [
   David Terei's LLVM blog post](http://blog.davidterei.com/2011/09/ghc-project-for-all.html)
 - [ Max Bolingbroke's LLVM blog entry](http://blog.omega-prime.co.uk/?p=135)
+- [
+  Implementation of various LLVM optimisations using Hoopl](https://github.com/mlite/HsLlvm) - **this seems very relevant**
 
 # Github repos
 
