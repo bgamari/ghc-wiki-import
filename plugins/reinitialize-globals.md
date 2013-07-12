@@ -216,7 +216,8 @@ The rule would be: if you want to use a plugin (that uses any of the compiler's 
 
 
 
-I'm concerned that requiring the buiding/installing/use of a dynamically-linked GHC in order to use a particular plugin might be a prohibitively inconvenient for some users.
+I'm concerned that requiring the buiding/installing/use of a dynamically-linked GHC in order to use a particular plugin might be a prohibitively inconvenient for some users. [
+http://www.haskell.org/pipermail/ghc-devs/2013-July/001651.html](http://www.haskell.org/pipermail/ghc-devs/2013-July/001651.html)
 
 
 
