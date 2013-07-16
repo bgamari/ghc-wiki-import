@@ -32,6 +32,12 @@ Simon Marlow:
 # Back-end notes
 
 
+## Notes to self
+
+
+- Does it make sense to create a separate flag for every Cmm optimisation I add? After all they are designed to work together
+- I need to remember to cerfully choose at which optimization levels my Cmm passes are enabled
+
 ## Some interesting tickets
 
 
