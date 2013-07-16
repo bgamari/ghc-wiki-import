@@ -31,6 +31,7 @@ Haskell Communities and Activities Report](http://haskell.org/communities/)
 Here are our release plans for 
 
 
+- [GHC 7.8](status/gh-c-7.8)
 - [GHC 6.12 (outdated)](status/gh-c-6.12)
 - [GHC 6.10 (outdated)](status/gh-c-6.10)
 
