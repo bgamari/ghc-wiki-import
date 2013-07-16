@@ -1,0 +1,3 @@
+# Release plans for GHC 7.8
+
+
