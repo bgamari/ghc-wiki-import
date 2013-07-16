@@ -5,6 +5,10 @@
 
 
 
+I pushed Solution 1 as commit [193e0ee9aa8705dcc0020eaaf6bfb6714db6f9ca](/trac/ghc/changeset/193e0ee9aa8705dcc0020eaaf6bfb6714db6f9ca/ghc) on 16 July 2013.
+
+
+
 I'm deciding between
 
 
