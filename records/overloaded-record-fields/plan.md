@@ -9,7 +9,8 @@ GSoC project details](http://www.google-melange.com/gsoc/project/google/gsoc2013
 
 This page describes the design. Separate [notes on the implementation](records/overloaded-record-fields/implementation) are available, but not necessarily comprehensible. Development of the extension is taking place on forks of the [
 ghc](https://github.com/adamgundry/ghc) and [
-packages-base](https://github.com/adamgundry/packages-base) repositories (on branch 'overloaded-record-fields').
+packages-base](https://github.com/adamgundry/packages-base) repositories (on branch 'overloaded-record-fields'). A [
+prototype implementation](https://github.com/adamgundry/records-prototype/blob/master/RecordsPrototype.hs) is also available.
 
 
 ### Motivation
