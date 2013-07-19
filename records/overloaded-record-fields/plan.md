@@ -104,7 +104,7 @@ instance (b ~ [a]) => Get (T a) "x" b where
 ```
 
 
-The `(b ~ [a])` in the instance is important, so that we get an instance match from the first two parameters only. For example, if the constraint `Get (T c) "x" d` is encountered during type inference, the instance will match and generate the constraints `(a ~ c, b ~ d, b ~ [a])`. Moreover, the `GetResult` type family ensures that the third parameter is functionally dependent on the first two, which is needed to [avoid ambiguity errors when composing overloaded fields](records/overloaded-record-fields/plan#trouble-in-paradise).
+The bare type variable `b` in the instance head is important, so that we get an instance match from the first two parameters only, then the equality constraint `(b ~ [a])` improves `b`. For example, if the constraint `Get (T c) "x" d` is encountered during type inference, the instance will match and generate the constraints `(a ~ c, b ~ d, b ~ [a])`. Moreover, the `GetResult` type family ensures that the third parameter is functionally dependent on the first two, which is needed to [avoid ambiguity errors when composing overloaded fields](records/overloaded-record-fields/plan#trouble-in-paradise).
 
 
 
