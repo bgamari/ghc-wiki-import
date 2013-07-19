@@ -196,6 +196,7 @@ Tickets that I could potentially look into:
 - [\#5615](https://gitlab.staging.haskell.org/ghc/ghc/issues/5615) - ghc produces poor code for `div` with constant powers of 2.
 - [\#7116](https://gitlab.staging.haskell.org/ghc/ghc/issues/7116) - Missing optimisation: strength reduction of floating-point multiplication
 - [\#7858](https://gitlab.staging.haskell.org/ghc/ghc/issues/7858) - Fix definitions of abs/signum for Floats/Doubles.
+- [\#8072](https://gitlab.staging.haskell.org/ghc/ghc/issues/8072) - Optimizations change result of div for Word
 
 
 Other things to do:
