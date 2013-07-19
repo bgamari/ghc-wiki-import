@@ -39,7 +39,7 @@ The following new features are planned for 7.8. They are at varying degrees of c
  
 
 
-- Pedro and Richard were working on tidying up the poly-kinded Typable story. I'm not sure what, if anything, remains to be done.
+- Pedro and Richard were working on tidying up the poly-kinded Typable, and propositional equality (`gcast` and friends) story. 
 
 - Geoff Mainland is working on a better Template Haskell implementation ([
   http://ghc.haskell.org/trac/ghc/wiki/TemplateHaskell/BlogPostChanges](http://ghc.haskell.org/trac/ghc/wiki/TemplateHaskell/BlogPostChanges), [
