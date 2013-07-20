@@ -1,3 +1,7 @@
+
+**We no longer plan to take this approach. See [DynamicGhcPrograms](dynamic-ghc-programs) instead.**
+
+
 # Dynamic by default
 
 
