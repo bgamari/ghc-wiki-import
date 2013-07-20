@@ -241,13 +241,6 @@ As well as the [ticket for implementing dynamic GHCi (\#3658)](https://gitlab.st
 </th></tr></table>
 
 
-## Performance
-
-
-
-There are some performance questions to consider before making a decision.
-
-
 ## Other issues
 
 
@@ -255,7 +248,7 @@ There are some performance questions to consider before making a decision.
 
 
 
-Currently released versions of Cabal/cabal-install don't handle dynamic-by-default GHCs well, as they don't pass the `-static` flag when building for static ways (as they assume that it is enabled by default). We should get fixed versions out as soon as possible ([\#7439](https://gitlab.staging.haskell.org/ghc/ghc/issues/7439)).
+Currently released versions of Cabal/cabal-install don't handle dynamic GHCi well. In particular, if a library uses Template Haskell, then Cabal will build the ways in the wrong order, so compilation will fail. Cabal in HEAD handles it properly.
 
 
 ### Other approaches
