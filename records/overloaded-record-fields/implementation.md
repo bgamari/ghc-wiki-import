@@ -102,6 +102,13 @@ Not in scope: ‛GHC.TopHandler.runIOFastExit’
 I'm not sure if this is my fault.
 
 
+
+Tests in need of attention:
+
+
+- rename/should\_compile/T5334, should\_fail/T5372, T5533, T5892a, T7943
+- gadt/records-fail1 (bad error message)
+
 ## To do
 
 
