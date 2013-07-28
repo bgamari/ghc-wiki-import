@@ -126,7 +126,7 @@ Alas, not easily, and certainly not without overhead.
 
 
 
-In summary: The programmer expects zero-cost conversions between a newtypes *N* and the type *T* it is based on. We want to allow the programmer to have zero-cost conversions between *C N* and *C T*. Requirements:
+In summary: The programmer expects zero-cost conversions between a newtype *N* and the type *T* it is based on. We want to allow the programmer to have zero-cost conversions between *C N* and *C T*. Requirements:
 
 
 - It should be sound, i.e. have an implementation in Core with existing coercions, without new coercions or `unsafeCoerce`.
