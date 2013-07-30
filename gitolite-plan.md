@@ -32,6 +32,10 @@ Gitolite is a piece of software that can alleviate most of these pains and also 
 https://github.com/sitaramc/gitolite/wiki](https://github.com/sitaramc/gitolite/wiki)
 
 
+
+TODO FIXME elaborate on why Gitolite is awesome.
+
+
 # Proposed plan
 
 
