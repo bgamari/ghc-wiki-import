@@ -21,11 +21,11 @@ This unfortunately has some downsides:
 
 - Every user needs a full shell account. 
 
-- While we probably \*won't\* be forkbombed by someone, few people actually \*need\* a full shell account, and the \*principle of least privilege\* applies here. Really, everybody is just pushing to Git.
+- While we probably *won't* be forkbombed by someone, few people actually *need* a full shell account, and the *principle of least privilege* applies here. Really, everybody is just pushing to Git.
 
 - Because of the previous point, group and access permissions on the repositories regularly get screwed up, causing situations where people don't have access (and can't push,) or we have to have `post-receive` hooks that modify the permissions. Both of these suck (this doesn't affect e.g. the Linux kernel developers, who have pull-based development models, because they can afford to.)
 
-- Due to the current permission scheme, all users in the `darcs` group are effectively at the level of Trac admins, which can manipulate the `trac.db` database (this is needed by the Git hooks to update the Trac tickets). Again, the \*principle of least privilege\* should apply here.
+- Due to the current permission scheme, all users in the `darcs` group are effectively at the level of Trac admins, which can manipulate the `trac.db` database (this is needed by the Git hooks to update the Trac tickets). Again, the *principle of least privilege* should apply here.
 
 - Moreover, people invariably fix this but it's always slightly patchy, and so the repositories that need 'fixing' for things like permissions are inconsistent, and it's hard to keep track of what needs to be maintained.
 
@@ -35,7 +35,7 @@ This unfortunately has some downsides:
 
 
 The proposed remedy is to use the Git-access wrapper [
-\*\*Gitolite\*\*](https://github.com/sitaramc/gitolite/wiki) which provides an authorization layer on top of Git, and is executed as a separate system user (thus accessing the git repositories with only one Unix UID).  Users accessing git repositories via ssh are discriminated by their ssh public key.
+''Gitolite''](https://github.com/sitaramc/gitolite/wiki) which provides an authorization layer on top of Git, and is executed as a separate system user (thus accessing the git repositories with only one Unix UID).  Users accessing git repositories via ssh are discriminated by their ssh public key.
 
 
 
@@ -103,7 +103,7 @@ The server currently isn't setup, but Austin can easily make it so.
 - We can leave `darcs.haskell.org` as-is for legacy reasons, while creating new VHOST on `http://git.haskell.org/` which would expose only the Gitolite-owned git repositories (and maybe also a Cgit front-page as e.g. on [
   http://git.kernel.org](http://git.kernel.org))
 
-- Who's actively committing, and does anybody beyond that actually \*need\* a shell account? It's unclear who uses `ghc.haskell.org` for what at the moment, beyond push access.
+- Who's actively committing, and does anybody beyond that actually *need* a shell account? It's unclear who uses `ghc.haskell.org` for what at the moment, beyond push access.
 
 - Tangential: The current directory setup is a total mess on `darcs.haskell.org`, especially since the old darcs repos hang around there. Maybe we should clean it up if we're going to use it for a browseable directory.
 
