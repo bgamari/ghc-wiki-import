@@ -74,7 +74,7 @@ The server currently isn't setup, but Austin can easily make it so.
 
 - Tangential: The current directory setup is a total mess on `darcs.haskell.org`.
 
-## Contact points =
+## Contact points
 
 
 
