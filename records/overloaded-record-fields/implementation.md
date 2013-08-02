@@ -210,9 +210,9 @@ Some of the tests fail for the ghci way because the `System.IO` and `GHC.TopHand
 Tests in need of attention:
 
 
-- rename/should\_fail/T2901 (mysterious change of location)
-- rename/should\_fail/T5372 (mysterious change of location)
 - rename/should\_fail/T5892a (accept changed output)
+- ghci/scripts/ghci042 (accept changed output)
+- ghci/prog002 prog003 scripts/ghci029 ghci036 ghci037 (scope issues in GHCi)
 
 ## To do
 
