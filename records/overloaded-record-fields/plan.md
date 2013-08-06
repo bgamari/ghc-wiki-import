@@ -146,7 +146,7 @@ Note that `Has` instances are generated on a per-module basis, using the fields 
 
 
 
-Suppose module `M` imports module `N`, `N` imports module `O`, and only `N` has the extension enabled. Now `N` can project any field in scope (including those defined in `O`), but `M` cannot access any `Get` instances. 
+Suppose module `M` imports module `N`, `N` imports module `O`, and only `N` has the extension enabled. Now `N` can project any field in scope (including those defined in `O`), but `M` cannot access any `Has` instances. 
 
 
 
@@ -365,7 +365,7 @@ Annoyingly, nested updates will require some annotations. In the following examp
 
 
 
-Optionally, we could [add a flag \`-XNoRecordSelectorFunctions\`](records/declared-overloaded-record-fields/no-mono-record-fields) to suppress the record selectors. Just as `-XOverloadedRecordFields` applies to a client module, and generates `Get` instances for that module, so `-XNoRecordSelectorFunctions` in a client module would hide all the record selectors that should otherwise be in scope. The idea is that another record system could use Template Haskell to generate functions in place of selectors, and these would not clash.
+Optionally, we could [add a flag \`-XNoRecordSelectorFunctions\`](records/declared-overloaded-record-fields/no-mono-record-fields) to suppress the record selectors. Just as `-XOverloadedRecordFields` applies to a client module, and generates `Has` instances for that module, so `-XNoRecordSelectorFunctions` in a client module would hide all the record selectors that should otherwise be in scope. The idea is that another record system could use Template Haskell to generate functions in place of selectors, and these would not clash.
 
 
 
@@ -407,7 +407,7 @@ Should we have a special syntax for `Upd` constraints, just as `r { x :: t }` su
 
 
 [
-Edward Kmett points out](http://www.haskell.org/pipermail/glasgow-haskell-users/2013-July/022584.html) that a previous version of this proposal, where the third parameter of `Get` was not functionally dependent on the first two, fell short in an important respect: composition of polymorphic record fields would lead to ambiguity errors, as the intermediate type cannot be determined. For example, suppose
+Edward Kmett points out](http://www.haskell.org/pipermail/glasgow-haskell-users/2013-July/022584.html) that a previous version of this proposal, where the third parameter of `Has` was not functionally dependent on the first two, fell short in an important respect: composition of polymorphic record fields would lead to ambiguity errors, as the intermediate type cannot be determined. For example, suppose
 
 
 ```wiki
