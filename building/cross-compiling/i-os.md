@@ -104,13 +104,15 @@ GHC requires you to write a **mk/build.mk** file, and the following one works. `
 
 
 ```wiki
-HADDOCK_DOCS       = NO
-BUILD_DOCBOOK_HTML = NO
-BUILD_DOCBOOK_PS   = NO
-BUILD_DOCBOOK_PDF  = NO
-SPLIT_OBJS         = NO
-INTEGER_LIBRARY    = integer-simple
-Stage1Only 	   = YES
+HADDOCK_DOCS         = NO
+BUILD_DOCBOOK_HTML   = NO
+BUILD_DOCBOOK_PS     = NO
+BUILD_DOCBOOK_PDF    = NO
+SPLIT_OBJS           = NO
+INTEGER_LIBRARY      = integer-simple
+Stage1Only 	     = YES
+DYNAMIC_GHC_PROGRAMS = NO
+GhcLibWays           = v
 ```
 
 ### 5. Configure & build
