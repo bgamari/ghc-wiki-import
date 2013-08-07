@@ -161,15 +161,15 @@ This means that
 
 
 
-Higher-rank fields, such as
+Higher-rank fields, such as in the declaration
 
 
 ```wiki
-data T = MkT { x :: forall a . a -> a }
+data U = MkU { x :: forall a . a -> a }
 ```
 
 
-cannot be overloaded. If such a field is declared in a module with `-XOverloadedRecordFields` enabled, a warning will be emitted and no selector produced. The user can always declare the selector function manually.
+cannot be overloaded. If such a field is in scope for a module with `-XOverloadedRecordFields` enabled, no Has or Upd instances will be produced. The user can always declare the selector function manually. This is similar to the current situation for existentially quantified variables in fields, which do not give rise to selector functions at all.
 
 
 
@@ -235,10 +235,12 @@ class Has r f (GetResult r f) =>
 ```
 
 
-For example, the datatype `T` above would give rise to these instances:
+For example, the datatype `T` would give rise to these instances:
 
 
 ```wiki
+data T a = MkT { x :: [a] }
+
 type instance SetResult (T a) "x" [c] = T c
 
 instance (b ~ [c]) => Upd (T a) "x" b where
@@ -246,11 +248,11 @@ instance (b ~ [c]) => Upd (T a) "x" b where
 ```
 
 
-If a type variable is shared by multiple fields, it cannot be changed using `setField`. Moreover, the use of the `SetResult` type family means that phantom type variables cannot be changed. For example,
+If a type variable is shared by multiple fields, it cannot be changed using `setField`. Moreover, the use of the `SetResult` type family means that phantom type variables cannot be changed. For example, in
 
 
 ```wiki
-data U a b c = MkU { foo :: (a, b), bar :: a }
+data V a b c = MkV { foo :: (a, b), bar :: a }
 ```
 
 
@@ -259,9 +261,9 @@ type of `bar`, and `c` does not occur in the type of `foo`, but the update may c
 
 
 ```wiki
-type instance SetResult (T a b c) "foo" (a, b') = T a b' c
+type instance SetResult (V a b c) "foo" (a, b') = V a b' c
 
-instance t ~ (a, b') => Upd (T a b c) "foo" t where
+instance t ~ (a, b') => Upd (V a b c) "foo" t where
   setField _ r e = r { foo = e }
 ```
 
