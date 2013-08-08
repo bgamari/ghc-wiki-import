@@ -269,6 +269,21 @@ Some of the tests fail for the ghci way because the `System.IO` and `GHC.TopHand
 
 
 
+The following triggers a panic when tracing the constraint solver. Again, I need to check if this bug exists in HEAD.
+
+
+```wiki
+{-# LANGUAGE MultiParamTypeClasses, TypeFamilies #-}
+{-# OPTIONS_GHC -ddump-tc-trace #-}
+
+type family F (x :: *) :: *
+
+class (y ~ F x) => C x y
+
+x = () :: C x y => ()
+```
+
+
 Tests in need of attention:
 
 
