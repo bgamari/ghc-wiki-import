@@ -2,6 +2,16 @@
 
 
 
+
+
+
+**In case of TLDR, go straight to [\#Developerchanges](gitolite-plan#developer-changes).**
+
+
+## Motivation
+
+
+
 Currently, the developer setup on `ghc.haskell.org` is a bit complicated and unfortunate. Most importantly, it hosts all of the Git repositories we use. When a developer for GHC is inducted, we:
 
 
@@ -39,21 +49,21 @@ The proposed remedy is to use the Git-access wrapper [
 Gitolite also greatly simplifies user management, as a user management is little more than adding/removing a file containing the user's public key, and pushing that the administrative "`gitolite-admin`" git repository (Gitolite is administrated via git itself!). Similarly, adding a new git repository comes down to adding a few lines to the central Gitolite repository config file and pushing that file to the "`gitolite-admin`" Git repository.
 
 
-# Proposed plan
+## Proposed plan
 
 
 
 Below are some notes about how we (Austin & Herbert) would like to go about doing this.
 
 
-## The switch
+### The switch
 
 
 
 Ideally, most of the new setup can occur concurrently with the normal one undisturbed. Presumably 'the big switch' can happen in an hour or so downtime, in which we take the old URIs offline, bring Gitolite online and tell people this is the time to fix your push URLs.
 
 
-## Developer changes
+### Developer changes
 
 
 
@@ -99,7 +109,7 @@ Last but not least, the `sync-all` script needs to be adapted.
 
 - Optionally later-on: users can manage their pubkeys via "sskm" (self-service key management)
 
-## Setup (to be done by the Admins)
+### Setup (to be done by the Admins)
 
 
 - Install Gitolite
@@ -124,14 +134,14 @@ Last but not least, the `sync-all` script needs to be adapted.
   - Cgit could be used as front-page on '/', c.f. [
     http://www.kernel.org/](http://www.kernel.org/)
 
-# Current status
+## Current status
 
 
 
 The server currently isn't setup, but Austin can easily make it so.
 
 
-## Questions
+### Questions
 
 
 - Tangential: should we deprecate the darcs.haskell.org URL? Who uses it? The name was known to be a funny misnomer from the Git switchover times, but As Far As Austin Knows, only GHC developers really use it these days. Perhaps we could just retire it.
@@ -144,7 +154,7 @@ The server currently isn't setup, but Austin can easily make it so.
 
 - Tangential: The current directory setup is a total mess on `darcs.haskell.org`, especially since the old darcs repos hang around there (having both `testsuite` and `testsuite.git` is confusing.) Maybe we should clean it up if we're going to use it for a browseable directory.
 
-## Contact points
+### Contact points
 
 
 
