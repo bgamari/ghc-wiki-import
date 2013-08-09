@@ -138,7 +138,7 @@ Last but not least, the `sync-all` script needs to be adapted.
 
 
 
-The server currently isn't setup, but Austin can easily make it so.
+See [\#8121](https://gitlab.staging.haskell.org/ghc/ghc/issues/8121)
 
 
 ### Questions
@@ -158,6 +158,6 @@ The server currently isn't setup, but Austin can easily make it so.
 
 
 
-Austin Seipp (thoughtpolice) and Herbert Valerio Riedel (hvr) can be contacted about details or specifics.
+Austin Seipp (thoughtpolice) and Herbert Valerio Riedel (hvr) can be contacted about details or specifics. If you encounter any issues, you can also comment on [\#8121](https://gitlab.staging.haskell.org/ghc/ghc/issues/8121).
 
 
