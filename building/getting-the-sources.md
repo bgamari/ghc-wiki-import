@@ -41,7 +41,7 @@ Then, if you are on Windows, ensure that git handles line-endings sanely by runn
 
 
 ```wiki
-git config --global core.autocrlf false
+$ git config --global core.autocrlf false
 ```
 
 
@@ -49,18 +49,26 @@ A source tree consists of more than one repository: at the top level there is th
 
 
 ```wiki
-  $ git clone http://darcs.haskell.org/ghc.git/
+  $ git clone git://darcs.haskell.org/ghc.git
   $ cd ghc
-  $ ./sync-all --testsuite get
+  $ ./sync-all -r git://darcs.haskell.org --testsuite get
 ```
+
+
+Note: If you're behind a **firewall blocking port 9418** (or `git clone git://...` fails for some other reason), replace `git://` by `http://` in the instructions above.
+
 
 
 If you have commit access then you will need to also set the push URL:
 
 
 ```wiki
-  $ ./sync-all -r darcs.haskell.org:/srv/darcs/ remote set-url --push origin
+  $ ./sync-all -r ssh://git@darcs.haskell.org remote set-url --push origin
 ```
+
+
+This uses the `ssh://` protocol (which has much higher latency due to the SSH handshake occurring for each connect) only for `git push` operations, and the very fast unauthenticated `git://` protocol for everything else.
+
 
 
 You will probably also want to run
@@ -90,7 +98,7 @@ where `~/ghc` is the repository you want to branch and `~/ghc-branch` is where y
 
 
 ```wiki
-  $ ./sync-all -r http://darcs.haskell.org/ remote set-url origin
+  $ ./sync-all -r git://darcs.haskell.org remote set-url origin
 ```
 
 ## Getting a branch
@@ -109,7 +117,7 @@ To get one, run
 
 
 ```wiki
-  $ git clone -b branch-name http://darcs.haskell.org/ghc.git/
+  $ git clone -b branch-name http://darcs.haskell.org/ghc.git
   $ cd ghc
   $ ./sync-all --testsuite get -b branch-name
 ```
@@ -127,10 +135,10 @@ To check out a specific version of GHC, run
 
 ```wiki
   $ export VERSION=7.6.1
-  $ git clone http://darcs.haskell.org/ghc.git/
+  $ git clone http://darcs.haskell.org/ghc.git
   $ cd ghc
   $ git checkout -b ghc-${VERSION} ghc-${VERSION}-release
-  $ ./sync-all --no-dph get
+  $ ./sync-all -r http://darcs.haskell.org/ghc.git --no-dph get
   $ ./sync-all checkout -b ghc-${VERSION} ghc-${VERSION}-release
 ```
 
@@ -146,7 +154,7 @@ http://darcs.haskell.org](http://darcs.haskell.org). This is easy since sync-all
 ```wiki
   $ git clone <your preferred github.com GHC fork URL> ghc
   $ cd ghc
-  $ ./sync-all -r http://darcs.haskell.org/ get
+  $ ./sync-all -r git://darcs.haskell.org get
 ```
 
 
