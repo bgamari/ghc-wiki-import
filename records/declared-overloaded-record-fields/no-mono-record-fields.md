@@ -1,4 +1,4 @@
-## No Mono Record Fields
+## No Record Selector Functions
 
 
 
@@ -6,11 +6,11 @@ This proposal is a precursor to overloaded record fields. It's also a modest ste
 
 
 
-There is to be a compiler flag **-XNoMonoRecordFields**. (Default value **‑XMonoRecordFields**, to give H98 behaviour.)
+There is to be a compiler flag **-XNoRecordSelectorFunctions**. (Default value **‑XRecordSelectorFunctions**, to give H98 behaviour.)
 
 
 
-`-XNoMonoRecordFields` suppresses creating the field selector function from the field name in a record-style data declaration.
+`-XNoRecordSelectorFunctions` suppresses creating the field selector function from the field name in a record-style data declaration.
 
 
 
@@ -22,7 +22,7 @@ In particular, this means we can declare more than one record type within a modu
 
 
 
-`-XNoMonoRecordFields` implies `-XDisambiguateRecordFields` -- otherwise the only way to access record fields would be positionally. It also implies `‑XNamedFieldPuns` and `‑XRecordWildCards` to support field access and update. (IMHO, suppressing the field selector function should always have been part of `-XDisambiguateRecordFields`. I'm by no means the first to make that observation.) 
+`-XNoRecordSelectorFunctions` implies `-XDisambiguateRecordFields` -- otherwise the only way to access record fields would be positionally. It also implies `‑XNamedFieldPuns` and `‑XRecordWildCards` to support field access and update. (IMHO, suppressing the field selector function should always have been part of `-XDisambiguateRecordFields`. I'm by no means the first to make that observation.) 
 
 
 - Note that the field name is still valid within the scope of a pattern match, or record update inside the `MkT{...}` explicit constructor syntax.
@@ -52,7 +52,7 @@ If you say:
 
 
 ```wiki
-{-# OPTIONS_GHC -XNoMonoRecordFields                      #-}
+{-# OPTIONS_GHC -XNoRecordSelectorFunctions              #-}
 module M( T( x ) )       where
     data T = MkT { x, y :: Int }
 ```
@@ -63,11 +63,11 @@ type `T` and field label `x` are exported, but not data constructor `MkT`, so `x
 
 
 
-(Without the `‑XNoMonoRecordFields` flag, field selector function `x` would be exported.)
+(Without the `‑XNoRecordSelectorFunctions` flag, field selector function `x` would be exported.)
 
 
 
-There's an effect on **importing** modules even if they don't set `-XNoMono...`, so that they are generating selector functions for record types they declare:
+There's an effect on **importing** modules even if they don't set `-XNoRecord...`, so that they are generating selector functions for record types they declare:
 
 
 - The record types imported do not have field selector functions, so compilation must not generate code to (try to) use them.
