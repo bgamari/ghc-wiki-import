@@ -121,7 +121,7 @@ To generate the correct declarations, there is to be a new `fieldLabel` sugar:
 Explained in 5 wiki pages (these proposals are linked but somewhat orthogonal):
 
 
-- ** [No Mono Record Fields](records/declared-overloaded-record-fields/no-mono-record-fields) **   (precursor to DORF)
+- ** [No Record Selector Functions](records/declared-overloaded-record-fields/no-mono-record-fields) **   (precursor to DORF)
 - ** DORF -- Application Programmer's view **     (this page)
 - ** [DORF -- Implementer's view](records/declared-overloaded-record-fields/implementors-view) **
 - ** [DORF -- Comparison to SORF (and TDNR)](records/declared-overloaded-record-fields/c-ompare-sorf) **
@@ -151,7 +151,7 @@ I'm not saying anything about field selection via pattern matching or record con
 
 
 
-Currently in Haskell two records in the same module can't share a field name. This is because declaring a field name within a data decl creates a monomorphic selector function; and if it's monomorphic, we can only have one. I think the wiki is characterising the problem incorrectly:
+Currently in Haskell two records in the same module can't share a field name. This is because declaring a field name within a data decl creates a selector function bound to that record type; and if it's single-record, we can only have one. I think the wiki is characterising the problem incorrectly:
 
 
 - it's not that the field name appearing in different record decls is ambiguous between the two record types
@@ -248,7 +248,7 @@ Provide a way of 'flagging' in the record declaration whether field names are in
 
 - Fields listed as `sharing` must have the `fieldLabel` declared separately (per Option One or Two).
 - Fields not `sharing` will get a fieldLabel declared for them,
-   and it will be monomorphic (bound to a single record type).
+   and it will be bound to a single record type.
 
 
 Or perhaps:
@@ -401,7 +401,7 @@ No! This is regular business-as-usual familiar name clash, and it's what the mod
 
 
 
-\[See [No Mono Record Fields](records/declared-overloaded-record-fields/no-mono-record-fields), which is implied by DORF.\]
+\[See [No Record Selector Functions](records/declared-overloaded-record-fields/no-mono-record-fields), which is implied by DORF.\]
 
 
 
@@ -439,7 +439,7 @@ If you say:
 
 ```wiki
 {-# OPTIONS_GHC -XDeclaredOverloadedRecordFields
-                -XNoMonoRecordFields                   #-}
+                -XNoRecordSelectorFunctions              #-}
 module M( T( x ) )       where
     fieldLabel x,y :: r -> Int
     data T = MkT { x, y :: Int }
