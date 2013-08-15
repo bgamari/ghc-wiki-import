@@ -160,7 +160,46 @@ Some [libraries](commentary/libraries) are very closely coupled to GHC, come wit
 
   - Johan Tibell, Andreas Voellmy
 
-### Platforms
+## Current Committers
+
+
+
+The following is a list of all the people who are authorized to commit to GHC. (We've also had many wonderful people in the past who are listed at the bottom of this page.)
+
+
+- Andreas Voellmy
+- Austin Seipp
+- Ben Lippmeier
+- Iavor Diatchki
+- David Terei
+- David Waern
+- Dimitrios Vytiniotis
+- Duncan Coutts
+- Edsko de Vries
+- Erik de Castro Lopo
+- Edward Yang
+- Geoffrey Mainland
+- Gabor Greif
+- Herbert Valerio Riedel
+- Ian Lynagh
+- Ilya Sergey
+- Johan Tibell
+- José Pedro Magalhães
+- Jan Stolarek
+- Manuel Chakravarty
+- Max Bolingbroke
+- Nicholas Frisby
+- Páli Gábor János
+- Paolo Capriotti
+- Richard Eisenberg
+- Roman Leshchinskiy
+- Ross Patterson
+- Simon Hengel
+- Simon Marlow
+- Simon Peyton Jones
+- Thomas Schilling
+
+## Platform maintainers
 
 
 
