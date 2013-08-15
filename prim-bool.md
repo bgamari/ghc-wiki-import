@@ -402,6 +402,6 @@ Benchmarking shows that `filterN` function is about 55-65% faster than the `filt
 
 
 
-[](http://ics.p.lodz.pl/~stolarek/ghc/prim-bool-criterion.png)
+[](http://ghc.haskell.org/trac/ghc/attachment/wiki/PrimBool/prim-bool-criterion.png)
 
 
