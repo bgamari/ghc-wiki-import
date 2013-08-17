@@ -198,6 +198,7 @@ For more details, see Committers?.
 - Richard Eisenberg
 - Roman Leshchinskiy
 - Ross Patterson
+- Ryan Newton
 - Simon Hengel
 - Simon Marlow
 - Simon Peyton Jones
