@@ -192,7 +192,7 @@ For more details, see Committers?.
 - Jan Stolarek
 - Manuel Chakravarty
 - Max Bolingbroke
-- Nicholas Frisby
+- Nicolas Frisby
 - Páli Gábor János
 - Paolo Capriotti
 - Richard Eisenberg
