@@ -1,4 +1,4 @@
-## GHC Committers
+# GHC Committers
 
 
 
@@ -9,7 +9,7 @@ The following page lists the current people who are allowed to commit to GHC, al
 (**NB**: GHC's development *as a whole* is not lead by any particular group, company, or individual. Affiliations below are listed for identification purposes only, and optional; contributions do not necessarily represent the interests of employers or academic institutions.)
 
 
-### Current list
+## Current list
 
 
 - Andreas Voellmy
@@ -229,7 +229,7 @@ The following page lists the current people who are allowed to commit to GHC, al
   - **Committer since**: August, 2013.
   - **Main areas of interest**: GHC API
 
-## Becoming a committer
+# Becoming a committer
 
 
 
@@ -244,7 +244,7 @@ Generally, to be granted access, you should have worked with the developers, and
 (In some cases, you may also be approached by an existing committer who's willing to represent you, which is great! You'll be contacted appropriately, then.)
 
 
-## Prior committers
+# Prior committers
 
 
 
