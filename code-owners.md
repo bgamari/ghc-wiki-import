@@ -167,6 +167,6 @@ Aside from general code owners, there is a fairly large group of people who comm
 
 
 
-For more details including the full list of people involved, see Committers?.
+For more details including the full list of people involved, see [TeamGHC](team-ghc).
 
 
