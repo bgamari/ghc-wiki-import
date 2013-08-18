@@ -1,273 +1,230 @@
-# GHC Committers
-
-
-
-The following page lists the current people who are allowed to commit to GHC, along with some details about the role they play and how to contact them. If you need guidance or help for your patches, this list may help you find out who you should contact, both on the mailing lists and here. It also gives some indication of 'where' people are, which is convenient when you need to cross time-zone barriers, etc.
-
-
-
-(**NB**: GHC's development *as a whole* is not lead by any particular group, company, or individual. Affiliations below are listed for identification purposes only, and are optional; contributions do not necessarily represent the interests of employers or academic institutions.)
-
-
-## Current list
-
-
-- Andreas Voellmy
-
-  - Yale University - New Haven, CT
-  - **Trac**: AndreasVoellmy; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: IO manager
-
-- Austin Seipp
-
-  - N/A - Austin, TX
-  - **Trac**: thoughtpolice; **email**: aseipp@…
-  - **Committer since**: Janurary 2013.
-  - **Main areas of interest**: ARM support, OS X support, cross compilation, optimiser, build system, release management, git management, ghc.haskell.org server maintenance
-
-- Ben Lippmeier
-
-  - University of New South Wales - Sydney, Australia
-  - **Trac**: benl; **email**:
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: DPH, vector, code generators
-
-- David Terei
-
-  - MemCachier; Stanford University - San Francisco, CA
-  - **Trac**: dterei; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: llvm backend, safe haskell
-
-- David Waern
-
-  - N/A - ???
-  - **Trac**: waern; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: haddock
-
-- Dimitrios Vytiniotis
-
-  - Microsoft Research - Cambridge, UK
-  - **Trac**: dimitris; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: ...
-
-- Duncan Coutts
-
-  - Well-Typed LLP - Oxford, UK
-  - **Trac**: duncan; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: bytestring support, cabal integration, etc
-
-- Edsko de Vries
-
-  - Well-Typed LLP - Dublin, Ireland
-  - **Trac**: edsko; **email**: 
-  - **Committer since**: July, 2013.
-  - **Main areas of interest**: ...
-
-- Erik de Castro Lopo
-
-  - Independent, Sydney, Australia
-  - **Trac**: erikd; **email**: 
-  - **Committer since**: August, 2012.
-  - **Main areas of interest**: PPC support
-
-- Edward Yang
-
-  - Stanford University - Stanford, CA
-  - **Trac**: ezyang; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: runtime system, codegen, gc
-
-- Geoffrey Mainland
-
-  - Drexel University - Philadelphia, PA
-  - **Trac**: gmainland; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: ...
-
-- Gabor Greif
-
-  - N/A - ???
-  - **Trac**: heisenbug; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: ...
-
-- Herbert Valerio Riedel
-
-  - Vienna University of Technology - Vienna, Austria
-  - **Trac**: hvr; **email**: hvr@…
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: git management, trac integration, ghci
-
-- Ian Lynagh
-
-  - Semmle - Oxford, UK
-  - **Trac**: Igloo; **email**: 
-  - **Committer since**: \~2006.
-  - **Main areas of interest**: ...
-
-- Iavor Diatchki
-
-  - Galois Inc - Portland, OR
-  - **Trac**: diatchki; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: 'type literals' support, type checking
-
-- Ilya Sergey
-
-  - IMDEA Software Institute - Madrid, Spain
-  - **Trac**: ilya; **email**: 
-  - **Committer since**: 2012
-  - **Main areas of interest**: optimiser
-
-- Johan Tibell
-
-  - Google Inc - San Francisco, CA
-  - **Trac**: tibbe; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: IO manager, codegen
-
-- José Pedro Magalhães
-
-  - University of Oxford - Oxford, UK
-  - **Trac**: dreixel; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: generics support, type checker
-
-- Jan Stolarek
-
-  - Microsoft Research; Technical University of Łódź - Cambridge, UK
-  - **Trac**: jstolarek; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: codegen, optimiser
-
-- Manuel Chakravarty
-
-  - University of New South Wales - Sydney, Australia
-  - **Trac**: chak; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: DPH
-
-- Max Bolingbroke
-
-  - N/A
-  - **Trac**: batterseapower; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: optimiser, type checker
-
-- Nicolas Frisby
-
-  - N/A
-  - **Trac**: nfrisby; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: optimiser
-
-- Páli Gábor János
-
-  - Eötvös Lóránd University - Budapest, Hungary
-  - **Trac**: pgj; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: FreeBSD support
-
-- Paolo Capriotti
-
-  - University of Nottingham - Nottingham, UK
-  - **Trac**: pcapriotti; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: ...
-
-- Richard Eisenberg
-
-  - University of Pennsylvania - Philadelphia, PA
-  - **Trac**: goldfire; **email**: `eir@...`
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: type checker, core, Template Haskell
-
-- Roman Leshchinskiy
-
-  - Standard Chartered - London, UK
-  - **Trac**: rl; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: vector library
-
-- Ross Patterson
-
-  - City University - London, UK
-  - **Trac**: ross; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: arrow support
-
-- Ryan Newton
-
-  - Intel Corporation; Indiana University - Bloomington, IN
-  - **Trac**: rrnewton; **email**
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: runtime system, smp support (atomic memory op support)
-
-- Simon Hengel
-
-  - N/A - Berlin, Germany
-  - **Trac**: SimonHengel; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: haddock
-
-- Simon Marlow
-
-  - Facebook Inc - Cambridge, UK
-  - **Trac**: simonmar; **email**: marlowsd@…
-  - **Committer since**: always.
-  - **Main areas of interest**: runtime system, codegen, gc, smp scalability, etc
-
-- Simon Peyton Jones
-
-  - Microsoft Research - Cambridge, UK
-  - **Trac**: simonpj; **email**: simonpj@…
-  - **Committer since**: always.
-  - **Main areas of interest**: renamer, type checker, optimiser.
-
-- Thomas Schilling
-
-  - Erudify AG - Zürich, Switzerland
-  - **Trac**: nominolo; **email**: 
-  - **Committer since**: August, 2013.
-  - **Main areas of interest**: GHC API
-
-# Becoming a committer
-
-
-
-At a certain point after you've made enough contributions, the question of commit access inevitably arises. To be granted access, please contact **Austin Seipp** above. As it currently stands, SPJ will make the final call, and Austin will add your information once verified.
-
-
+CONVERSION ERROR
+
+Original source:
+
+```trac
+= GHC Committers =
+
+The following page lists the current people who are allowed to commit to GHC, along with some details about the role they play and how to contact them. If you need guidance or help for your patches, this list may help you find out who you should contact, both on the mailing lists and here. It also gives some indication of ''where'' people are, which is convenient when you need to cross time-zone barriers, etc.
+
+('''NB''': GHC's development ''as a whole'' is not lead by any particular group, company, or individual. Affiliations below are listed for identification purposes only, and are optional; contributions do not necessarily represent the interests of employers or academic institutions.)
+
+== Current list ==
+
+ * Andreas Voellmy
+  * Yale University - New Haven, CT
+  * '''Trac''': !AndreasVoellmy; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': IO manager
+
+ * Austin Seipp
+  * N/A - Austin, TX
+  * '''Trac''': thoughtpolice; '''email''': aseipp@pobox.com
+  * '''Committer since''': Janurary 2013.
+  * '''Main areas of interest''': ARM support, OS X support, cross compilation, optimiser, build system, release management, git management, ghc.haskell.org server maintenance
+
+ * Ben Lippmeier
+  * University of New South Wales - Sydney, Australia
+  * '''Trac''': benl; '''email''':
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': DPH, vector, code generators
+
+ * David Terei
+  * !MemCachier; Stanford University - San Francisco, CA
+  * '''Trac''': dterei; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': llvm backend, safe haskell
+
+ * David Waern
+  * N/A - ???
+  * '''Trac''': waern; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': haddock
+
+ * Dimitrios Vytiniotis
+  * Microsoft Research - Cambridge, UK
+  * '''Trac''': dimitris; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': ...
+
+ * Duncan Coutts
+  * Well-Typed LLP - Oxford, UK
+  * '''Trac''': duncan; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': bytestring support, cabal integration, etc
+
+ * Edsko de Vries
+  * Well-Typed LLP - Dublin, Ireland
+  * '''Trac''': edsko; '''email''': 
+  * '''Committer since''': July, 2013.
+  * '''Main areas of interest''': ...
+
+ * Erik de Castro Lopo
+  * Independent - Sydney, Australia
+  * '''Trac''': erikd; '''email''': 
+  * '''Committer since''': August, 2012.
+  * '''Main areas of interest''': PPC support
+
+ * Edward Yang
+  * Stanford University - Stanford, CA
+  * '''Trac''': ezyang; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': runtime system, codegen, gc
+
+ * Geoffrey Mainland
+  * Drexel University - Philadelphia, PA
+  * '''Trac''': gmainland; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': ...
+
+ * Gabor Greif
+  * N/A - ???
+  * '''Trac''': heisenbug; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': ...
+
+ * Herbert Valerio Riedel
+  * Vienna University of Technology - Vienna, Austria
+  * '''Trac''': hvr; '''email''': hvr@gnu.org
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': git management, trac integration, ghci
+
+ * Ian Lynagh
+  * Semmle - Oxford, UK
+  * '''Trac''': Igloo; '''email''': 
+  * '''Committer since''': ~2006.
+  * '''Main areas of interest''': ...
+
+ * Iavor Diatchki
+  * Galois Inc - Portland, OR
+  * '''Trac''': diatchki; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': 'type literals' support, type checking
+
+ * Ilya Sergey
+  * IMDEA Software Institute - Madrid, Spain
+  * '''Trac''': ilya; '''email''': 
+  * '''Committer since''': 2012
+  * '''Main areas of interest''': optimiser
+
+ * Johan Tibell
+  * Google Inc - San Francisco, CA
+  * '''Trac''': tibbe; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': IO manager, codegen
+
+ * José Pedro Magalhães
+  * University of Oxford - Oxford, UK
+  * '''Trac''': dreixel; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': generics support, type checker
+
+ * Jan Stolarek
+  * Microsoft Research; Technical University of Łódź - Cambridge, UK
+  * '''Trac''': jstolarek; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': codegen, optimiser
+
+ * Manuel Chakravarty
+  * University of New South Wales - Sydney, Australia
+  * '''Trac''': chak; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': DPH
+
+ * Max Bolingbroke
+  * N/A - ???
+  * '''Trac''': batterseapower; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': optimiser, type checker
+
+ * Nicolas Frisby
+  * N/A - ???
+  * '''Trac''': nfrisby; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': optimiser
+
+ * Páli Gábor János
+  * Eötvös Lóránd University - Budapest, Hungary
+  * '''Trac''': pgj; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': FreeBSD support
+
+ * Paolo Capriotti
+  * University of Nottingham - Nottingham, UK
+  * '''Trac''': pcapriotti; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': ...
+
+ * Richard Eisenberg
+  * University of Pennsylvania - Philadelphia, PA
+  * '''Trac''': goldfire; '''email''': `eir@...`
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': type checker, core, Template Haskell
+
+ * Roman Leshchinskiy
+  * Standard Chartered - London, UK
+  * '''Trac''': rl; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': vector library
+
+ * Ross Patterson
+  * City University - London, UK
+  * '''Trac''': ross; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': arrow support
+
+ * Ryan Newton
+  * Intel Corporation; Indiana University - Bloomington, IN
+  * '''Trac''': rrnewton; '''email'''
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': runtime system, smp support (atomic memory op support)
+
+ * Simon Hengel
+  * N/A - Berlin, Germany
+  * '''Trac''': !SimonHengel; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': haddock
+
+ * Simon Marlow
+  * Facebook Inc - Cambridge, UK
+  * '''Trac''': simonmar; '''email''': marlowsd@gmail.com
+  * '''Committer since''': always.
+  * '''Main areas of interest''': runtime system, codegen, gc, smp scalability, etc
+
+ * Simon Peyton Jones
+  * Microsoft Research - Cambridge, UK
+  * '''Trac''': simonpj; '''email''': simonpj@microsoft.com
+  * '''Committer since''': always.
+  * '''Main areas of interest''': renamer, type checker, optimiser.
+
+ * Thomas Schilling
+  * Erudify AG - Zürich, Switzerland
+  * '''Trac''': nominolo; '''email''': 
+  * '''Committer since''': August, 2013.
+  * '''Main areas of interest''': GHC API
+
+= Becoming a committer =
+
+At a certain point after you've made enough contributions, the question of commit access inevitably arises. To be granted access, please contact '''Austin Seipp''' above. As it currently stands, SPJ will make the final call, and Austin will add your information once verified.
 
 Generally, to be granted access, you should have worked with the developers, and contributed a reasonable amount to the project. 'Reasonable' varies from person to person - from big/small features, to bug fixes, to helping others, there is no end of things to do in the land of GHC. Simply use your good judgement to decide if you think you meet the criteria, propose, and we'll talk about it.
 
-
-
 (In some cases, you may also be approached by an existing committer who's willing to represent you, which is great! You'll be contacted appropriately, then.)
 
+= Prior committers =
 
-# Prior committers
+This list people who have contributed wonderful things to GHC in the past, but are no longer actively working with us. After 1 year of no commits, '''we revoke peoples access and add them from the list above to this one'''. If you're one of these people, contact Austin and we can give access back to you.
 
+ * Don Stewart
+  * Standard Chartered - London, UK
+  * '''Trac''': dons; '''email''': 
+  * '''Committer until''': August, 2013.
+  * '''Main areas of interest''': bytestring, code generation, optimisers
 
+ * Lennart Augustsson
+  * Standard Chartered - London, UK
+  * '''Trac''': Lennart; '''email''': 
+  * '''Committer until''': August, 2013.
+  * '''Main areas of interest''': ...
 
-This list people who have contributed wonderful things to GHC in the past, but are no longer actively working with us. After 1 year of no commits, **we revoke peoples access and add them from the list above to this one**. If you're one of these people, contact Austin and we can give access back to you.
-
-
-- Don Stewart
-
-  - Standard Chartered - London, UK
-  - **Trac**: dons; **email**: 
-  - **Committer until**: August, 2013.
-  - **Main areas of interest**: bytestring, code generation, optimisers
-
-- Lennart Augustsson
-
-  - Standard Chartered - London, UK
-  - **Trac**: Lennart; **email**: 
-  - **Committer until**: August, 2013.
-  - **Main areas of interest**: ...
+```
