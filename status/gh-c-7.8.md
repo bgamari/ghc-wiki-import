@@ -1,56 +1,74 @@
-CONVERSION ERROR
+# Release plans for GHC 7.8
 
-Original source:
 
-```trac
-= Release plans for GHC 7.8 =
+## Timeline
 
-== Timeline ==
+
 
 The planned timeline for 7.8 is to have a feature freeze on the 14 Sept 2013, followed by a period of frantic bug fixing (interrupted by ICFP), aiming for a release during November 2013.
 
-== Tickets ==
 
-We would like to fix all of the [http://ghc.haskell.org/trac/ghc/query?priority=highest&priority=high&status=infoneeded&status=merge&status=new&status=patch&milestone=7.8.1&col=id&col=summary&col=status&col=type&col=priority&col=milestone&col=component&order=priority high and highest priority tickets in the 7.8.1 milestone], but there are currently a lot of them so this seems optimistic. Please feel free to take a ticket and help us!
+## Tickets
 
-== Completed new features ==
+
+
+We would like to fix all of the [
+high and highest priority tickets in the 7.8.1 milestone](http://ghc.haskell.org/trac/ghc/query?priority=highest&priority=high&status=infoneeded&status=merge&status=new&status=patch&milestone=7.8.1&col=id&col=summary&col=status&col=type&col=priority&col=milestone&col=component&order=priority), but there are currently a lot of them so this seems optimistic. Please feel free to take a ticket and help us!
+
+
+## Completed new features
+
+
 
 The features already completed are documented in the release notes:
-[[GhcFile(docs/users_guide/7.8.1-notes.xml)]]
+[docs/users\_guide/7.8.1-notes.xml](/trac/ghc/browser/ghc/docs/users_guide/7.8.1-notes.xml)
 
-== Pending new features ==
+
+## Pending new features
+
+
 
 The following new features are planned for 7.8. They are at varying degrees of completeness, and may not all make it in.
 
- * Richard Eisenberg is working on closed type families (a new feature).  See [wiki:NewAxioms]
 
- * Richard Eisenberg is also working on using "roles" to finally fix #1496.
+- Richard Eisenberg is working on closed type families (a new feature).  See [NewAxioms](new-axioms)
 
- * Nicolas Frisby is adding a few Core-to-Core optimisations. They usually slightly improve performance, but can sometimes make a big difference, both good and bad. They are off by default.
-    * `-flate-dmd` will run demand analysis near the end of the pipeline. cf #7782
-    * `-fdicts-strict` will make all dictionary arguments strict if they are certainly not part of a knot.
-    * `-ffun-to-thunk` reverts a new behavior that prevents GHC from creating sharing (cf af12cf66d1a416a135cb98b86717aba2cd247e1a)
+- Richard Eisenberg is also working on using "roles" to finally fix [\#1496](https://gitlab.staging.haskell.org/ghc/ghc/issues/1496).
+
+- Nicolas Frisby is adding a few Core-to-Core optimisations. They usually slightly improve performance, but can sometimes make a big difference, both good and bad. They are off by default.
+
+  - `-flate-dmd` will run demand analysis near the end of the pipeline. cf [\#7782](https://gitlab.staging.haskell.org/ghc/ghc/issues/7782)
+  - `-fdicts-strict` will make all dictionary arguments strict if they are certainly not part of a knot.
+  - `-ffun-to-thunk` reverts a new behavior that prevents GHC from creating sharing (cf [af12cf66d1a416a135cb98b86717aba2cd247e1a](/trac/ghc/changeset/af12cf66d1a416a135cb98b86717aba2cd247e1a/ghc))
+
+
  
- * Pedro and Richard were working on tidying up the poly-kinded Typable, and propositional equality (`gcast` and friends) story. 
 
- * Geoff Mainland is working on a better Template Haskell implementation (http://ghc.haskell.org/trac/ghc/wiki/TemplateHaskell/BlogPostChanges, http://gmainland.blogspot.co.uk/2013/05/type-safe-runtime-code-generation-with.html), in the `th-new` branch of various repos.
 
- * Geoff Mainland is working generalising the support for SSE-like instructions.
+- Pedro and Richard were working on tidying up the poly-kinded Typable, and propositional equality (`gcast` and friends) story. 
 
- * Iavor Diatchki is working on type-level nats (#4385, http://ghc.haskell.org/trac/ghc/wiki/TypeNats).
+- Geoff Mainland is working on a better Template Haskell implementation ([
+  http://ghc.haskell.org/trac/ghc/wiki/TemplateHaskell/BlogPostChanges](http://ghc.haskell.org/trac/ghc/wiki/TemplateHaskell/BlogPostChanges), [
+  http://gmainland.blogspot.co.uk/2013/05/type-safe-runtime-code-generation-with.html](http://gmainland.blogspot.co.uk/2013/05/type-safe-runtime-code-generation-with.html)), in the `th-new` branch of various repos.
 
- * Unboxed Booleans. '''Patches merged.''' See #6135.
+- Geoff Mainland is working generalising the support for SSE-like instructions.
 
- * Austin Seipp would like to do some official ARMv7 binary releases with a working stage2 compiler and GHCi, but there are probably some bugs waiting here.
+- Iavor Diatchki is working on type-level nats ([\#4385](https://gitlab.staging.haskell.org/ghc/ghc/issues/4385), [
+  http://ghc.haskell.org/trac/ghc/wiki/TypeNats](http://ghc.haskell.org/trac/ghc/wiki/TypeNats)).
 
- * Edsko de Vries would like to have "Source plugins" in GHC, which would allow API clients and external users to run code over the type-checked AST. Thomas Schilling and others are also interested. Edsko has proposed a patch, but it has yet to be integrated. See http://www.haskell.org/pipermail/ghc-devs/2013-June/001358.html and http://www.haskell.org/pipermail/ghc-devs/2013-July/001624.html
+- Unboxed Booleans. **Patches merged.**. Author: Jan Stolarek. See [\#6135](https://gitlab.staging.haskell.org/ghc/ghc/issues/6135).
 
- * Dynamic GHCi (#3658). This is working in HEAD, and enabled if `DYNAMIC_GHC_PROGRAMS=YES`. Currently it's enabled by default if dynamic libraries are supported, except for FreeBSD and Windows.
-   On FreeBSD the reason it's disabled is due to a bug in FreeBSD's rtld. This has been fixed, but we're waiting for the fix to make it into releases. This might be in time for 7.8, but certainly will be for 7.10. See #7819.
-   On Windows, there are a couple of build time annoyances: `-dynamic-too` doesn't work on Windows, and linking takes a very long time when dynamic linking is used. There's no technical reason why it couldn't be enabled, though.
-   The plan is/was to use dynamic GHCi on as many platforms as possible in 7.8, and to remove support for non-dynamic-ghci in HEAD soon after. See discussion in #8039, however.
+- Austin Seipp would like to do some official ARMv7 binary releases with a working stage2 compiler and GHCi, but there are probably some bugs waiting here.
 
- * [wiki:Records/OverloadedRecordFields/Plan Overloaded record fields], by Adam Gundry (GSOC).  Not sure if this will be done.
+- Edsko de Vries would like to have "Source plugins" in GHC, which would allow API clients and external users to run code over the type-checked AST. Thomas Schilling and others are also interested. Edsko has proposed a patch, but it has yet to be integrated. See [
+  http://www.haskell.org/pipermail/ghc-devs/2013-June/001358.html](http://www.haskell.org/pipermail/ghc-devs/2013-June/001358.html) and [
+  http://www.haskell.org/pipermail/ghc-devs/2013-July/001624.html](http://www.haskell.org/pipermail/ghc-devs/2013-July/001624.html)
 
- * [wiki:NewtypeWrappers Newtype wrappers], by Joachim Breitner.  This probably won't be ready for 7.8.
-```
+- Dynamic GHCi ([\#3658](https://gitlab.staging.haskell.org/ghc/ghc/issues/3658)). This is working in HEAD, and enabled if `DYNAMIC_GHC_PROGRAMS=YES`. Currently it's enabled by default if dynamic libraries are supported, except for FreeBSD and Windows.
+  On FreeBSD the reason it's disabled is due to a bug in FreeBSD's rtld. This has been fixed, but we're waiting for the fix to make it into releases. This might be in time for 7.8, but certainly will be for 7.10. See [\#7819](https://gitlab.staging.haskell.org/ghc/ghc/issues/7819).
+  On Windows, there are a couple of build time annoyances: `-dynamic-too` doesn't work on Windows, and linking takes a very long time when dynamic linking is used. There's no technical reason why it couldn't be enabled, though.
+  The plan is/was to use dynamic GHCi on as many platforms as possible in 7.8, and to remove support for non-dynamic-ghci in HEAD soon after. See discussion in [\#8039](https://gitlab.staging.haskell.org/ghc/ghc/issues/8039), however.
+
+- [Overloaded record fields](records/overloaded-record-fields/plan), by Adam Gundry (GSOC).  Not sure if this will be done.
+
+- [Newtype wrappers](newtype-wrappers), by Joachim Breitner.  This probably won't be ready for 7.8.
