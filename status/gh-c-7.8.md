@@ -35,6 +35,8 @@ The following new features are planned for 7.8. They are at varying degrees of c
 
 - Richard Eisenberg is also working on using "roles" to finally fix [\#1496](https://gitlab.staging.haskell.org/ghc/ghc/issues/1496).
 
+- Nicolas Frisby had a bunch of Core-to-Core optimisations he worked on as an intern.  Not sure of the exact list, or status.
+
 
  
 
