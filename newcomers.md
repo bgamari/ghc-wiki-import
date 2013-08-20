@@ -1,81 +1,107 @@
-CONVERSION ERROR
+# Resources for newcomers to GHC
 
-Original source:
 
-```trac
-= Resources for newcomers to GHC =
 
-This page is intended to serve as the first stop for those people who say, "I want to contribute to GHC, but I don't know quite where to begin." Begin here. While [wiki:WorkingConventions the working conventions page] has great information that can come in handy while you're working on your first, or first several patches, this page is intended to have the details you will need to get rolling.
+This page is intended to serve as the first stop for those people who say, "I want to contribute to GHC, but I don't know quite where to begin." Begin here. While [the working conventions page](working-conventions) has great information that can come in handy while you're working on your first, or first several patches, this page is intended to have the details you will need to get rolling.
 
-== First steps ==
 
-* To orient yourself to the general architecture of GHC, [http://www.aosabook.org/en/ghc.html this article], written by two of the chief architects of GHC, Simon Marlow and Simon Peyton-Jones, is excellent and current (2012).
+## First steps
 
-* While you're reading that article, download and build the sources. [wiki:Building/Preparation Prepare] your machine, [wiki:Building/GettingTheSources download] the source, and [wiki:Building/QuickStart build]. For the short, short version, which may or may not work for your machine, you can try this (note that three commands are not meant to be taken literally!):
-{{{
-#!sh
-# clone GHC's main Git repository (creates './ghc' folder in CWD)
-git clone git://git.haskell.org/ghc.git   # see note below if this fails
-cd ghc/
-./sync-all --testsuite get
 
-# configure build
-cd mk
-cp build.mk.sample build.mk
-## edit build.mk to remove the comment marker # on the line "BuildFlavour = quick"
-cd ..
-perl boot
-./configure
+- To orient yourself to the general architecture of GHC, [
+  this article](http://www.aosabook.org/en/ghc.html), written by two of the chief architects of GHC, Simon Marlow and Simon Peyton-Jones, is excellent and current (2012).
 
-# build GHC
-make -j8 # parallelize to at most 8 parallel jobs; adapt to actual number of cpu cores
-}}}
+- While you're reading that article, download and build the sources. [Prepare](building/preparation) your machine, [download](building/getting-the-sources) the source, and [build](building/quick-start). For the short, short version, which may or may not work for your machine, you can try this (note that three commands are not meant to be taken literally!):
 
-  Note: replace `git://` by `http://` in the instructions above if you're behind a firewall blocking port 9418
+  ```
+  # clone GHC's main Git repository (creates './ghc' folder in CWD)
+  git clone git://git.haskell.org/ghc.git   # see note below if this fails
+  cd ghc/
+  ./sync-all --testsuite get
 
-  If your machine has all the prerequisites, this might just work. Expect it all to take roughly an hour.
+  # configure build
+  cd mk
+  cp build.mk.sample build.mk
+  ## edit build.mk to remove the comment marker # on the line "BuildFlavour = quick"
+  cd ..
+  perl boot
+  ./configure
 
-* The first line of the above sequence creates a `ghc` folder. This is the root of your GHC source tree. After a successful build, you should have your brand new compiler in `ghc/inplace/bin/ghc-stage2`. (GHCi is launched with `ghc/inplace/bin/ghc-stage2 --interactive`). Try it out.
+  # build GHC
+  make -j8 # parallelize to at most 8 parallel jobs; adapt to actual number of cpu cores
+  ```
 
-* A good first sanity check is to twiddle some error message in the code, just to see that changed error message pop up when you compile a file. Write some Haskell code with an error in it, and look at the error message. Search through the ghc code for that error message (almost all the relevant code is in the `compiler/` subdirectory of `ghc`). Change the message, and then rebuild (run `make 2` in the `ghc` subdirectory of `ghc` -- that is, `ghc/ghc`). If you see the changed message, you're good to go.
+>
+>
+> Note: replace `git://` by `http://` in the instructions above if you're behind a firewall blocking port 9418
+>
+>
 
-* If you've made it this far, you're well on your way to becoming a GHC developer. You should subscribe to the [http://www.haskell.org/mailman/listinfo/ghc-devs ghc-devs] mailing list.
+>
+>
+> If your machine has all the prerequisites, this might just work. Expect it all to take roughly an hour.
+>
+>
 
-== Fixing a bug ==
+- The first line of the above sequence creates a `ghc` folder. This is the root of your GHC source tree. After a successful build, you should have your brand new compiler in `ghc/inplace/bin/ghc-stage2`. (GHCi is launched with `ghc/inplace/bin/ghc-stage2 --interactive`). Try it out.
+
+- A good first sanity check is to twiddle some error message in the code, just to see that changed error message pop up when you compile a file. Write some Haskell code with an error in it, and look at the error message. Search through the ghc code for that error message (almost all the relevant code is in the `compiler/` subdirectory of `ghc`). Change the message, and then rebuild (run `make 2` in the `ghc` subdirectory of `ghc` -- that is, `ghc/ghc`). If you see the changed message, you're good to go.
+
+- If you've made it this far, you're well on your way to becoming a GHC developer. You should subscribe to the [
+  ghc-devs](http://www.haskell.org/mailman/listinfo/ghc-devs) mailing list.
+
+## Fixing a bug
+
+
 
 Below is a list of bugs that appear to be "low-hanging fruit" -- things that might be reasonable for a newcomer to GHC hacking. Of course, we can't ever be sure of how hard a task is before doing it, so apologies if one of these is too hard. This list was last updated on 20 August 2013.
 
-* #2184
-* #2450 - Data.Complex.magnitude squares using ^(2 :: Int), which is slow
-* #7021
-* #7401
-* #8100
+
+- [\#2184](https://gitlab.staging.haskell.org/ghc/ghc/issues/2184) - if findExecutable finds a file that matchs the argument, check if it is an executable
+- [\#2450](https://gitlab.staging.haskell.org/ghc/ghc/issues/2450) - Data.Complex.magnitude squares using \^ (2 :: Int), which is slow
+- [\#7021](https://gitlab.staging.haskell.org/ghc/ghc/issues/7021) - Tuple (and other exotic predicates) not yet handled in Template Haskell
+- [\#7401](https://gitlab.staging.haskell.org/ghc/ghc/issues/7401) - Can't derive instance for Eq when datatype has no constructor, while it is trivial do do so.
+- [\#8100](https://gitlab.staging.haskell.org/ghc/ghc/issues/8100) - Standalone deriving using template haskell
+
 
 Once you fix the bug, make sure to write a test-case proving that you've done what you said. Then, use git to prepare patches and post these to the bug report. If the patch looks good, one of the committers will put it into the GHC codebase. Then, tackle another bug!
 
-== Practical advice ==
 
-* After a small change, you just want to build the stage-2 compiler (see [wiki:Building/Architecture/Idiom/Stages here] about stages). Go into the `ghc` subdirectory of `ghc` and say `make 2`. It's much faster than just using `make`.
+## Practical advice
 
-* If, for some reason, you're working on the stage-1 compiler, you can use `make 1`, but '''you must be in the `compiler` subdirectory''', not the `ghc` subdirectory.
 
-* I (Richard E) use emacs to edit the code, and I have a hotkey dedicated to searching the ghc codebase, and another one dedicated to compiling ghc. This makes work on ghc much more interactive.
+- After a small change, you just want to build the stage-2 compiler (see [here](building/architecture/idiom/stages) about stages). Go into the `ghc` subdirectory of `ghc` and say `make 2`. It's much faster than just using `make`.
 
-== Less practical advice ==
+- If, for some reason, you're working on the stage-1 compiler, you can use `make 1`, but **you must be in the `compiler` subdirectory**, not the `ghc` subdirectory.
 
-* Learn about [http://git-scm.com/ git] and the [wiki:Repositories ghc repos].
+- I (Richard E) use emacs to edit the code, and I have a hotkey dedicated to searching the ghc codebase, and another one dedicated to compiling ghc. This makes work on ghc much more interactive.
 
-* Don't get scared. GHC is a big codebase, but it makes sense when you stare at it long enough!
+## Less practical advice
 
-* Be forewarned that many pages on the GHC wiki are somewhat out-of-date. Always check the last modification date. Email if you're not sure.
 
-== More information ==
-  * [http://ghc.haskell.org/trac/ghc/wiki/WorkingConventions/FixingBugs This page] describes in more detail workflow for fixing bugs. When you decide to submit your first patch it will certainly be worthwile to take a look.
-  * [http://ghc.haskell.org/trac/ghc/wiki/WorkingConventions/Git This page] gives more deatail about our git working conventions. It will tell you how to set up your working trees in a bit more sophisticated way and how to prepare patches. These are information you'll need to know when you get more serious about GHC development, but as long as you're just hacking you may skip this page.
+- Learn about [ git](http://git-scm.com/) and the [ghc repos](repositories).
 
-== Need help? ==
+- Don't get scared. GHC is a big codebase, but it makes sense when you stare at it long enough!
 
-You can email the [http://www.haskell.org/mailman/listinfo/ghc-devs ghc-devs] list, or Richard Eisenberg (`eir at cis . upenn . edu`), a newish GHC developer himself who would be happy to foster more participation and answer your emails.
+- Be forewarned that many pages on the GHC wiki are somewhat out-of-date. Always check the last modification date. Email if you're not sure.
+
+## More information
+
+
+- [
+  This page](http://ghc.haskell.org/trac/ghc/wiki/WorkingConventions/FixingBugs) describes in more detail workflow for fixing bugs. When you decide to submit your first patch it will certainly be worthwile to take a look.
+- [
+  This page](http://ghc.haskell.org/trac/ghc/wiki/WorkingConventions/Git) gives more deatail about our git working conventions. It will tell you how to set up your working trees in a bit more sophisticated way and how to prepare patches. These are information you'll need to know when you get more serious about GHC development, but as long as you're just hacking you may skip this page.
+
+## Need help?
+
+
+
+You can email the [
+ghc-devs](http://www.haskell.org/mailman/listinfo/ghc-devs) list, or Richard Eisenberg (`eir at cis . upenn . edu`), a newish GHC developer himself who would be happy to foster more participation and answer your emails.
+
+
 
 Happy hacking!
-```
+
+
