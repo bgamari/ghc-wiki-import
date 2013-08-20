@@ -1,480 +1,109 @@
+CONVERSION ERROR
 
+Original source:
 
+```trac
+[[PageOutline]]
 
-# GHC Repositories
+= GHC Repositories =
 
-
-
-This page lists the active repositories relating to GHC. For instructions on actually getting a GHC source tree, see [Getting The Sources](building/getting-the-sources).
-
-
+This page lists the active repositories relating to GHC. For instructions on actually getting a GHC source tree, see [wiki:Building/GettingTheSources Getting The Sources].
 
 For read-only browsing, you can use the:
-
-
-- [ Trac source browser](http://hackage.haskell.org/trac/ghc/browser)
-- [ GitHub GHC mirror](http://github.com/ghc/ghc)
-
+ * [source: Trac source browser]
+ * [http://git.haskell.org/ Gitweb browser @ git.haskell.org]
+ * [http://github.com/ghc/ghc GitHub GHC mirror]
 
 For info on the active branches of the main GHC repo, see
+ * [wiki:ActiveBranches]
 
+GHC's repos use git; see [wiki:WorkingConventions/Git Git Working Conventions]. For darcs-related stuff see [wiki:DarcsToGit Darcs To Git] and [wiki:GitForDarcsUsers Git For Darcs Users].
 
-- [ActiveBranches](active-branches)
+== Overview ==
 
-
-GHC's repos use git; see [Git Working Conventions](working-conventions/git). For darcs-related stuff see [Darcs To Git](darcs-to-git) and [Git For Darcs Users](git-for-darcs-users).
-
-
-## Overview
-
-
-
-A GHC source tree is made of a collection of repositories. The script [sync-all](building/sync-all) knows how to apply git commands to the whole collection of repositories at once, for example to pull changes from the upstream repositories.
-
-
+A GHC source tree is made of a collection of repositories. The script [wiki:Building/SyncAll sync-all] knows how to apply git commands to the whole collection of repositories at once, for example to pull changes from the upstream repositories.
 
 Here is a list of the repositories that GHC uses.  The columns have the following meaning
 
+ * '''Location in tree''': where in the source tree this repository sits.
 
-- **Location in tree**: where in the source tree this repository sits.
+ * '''Upstream repo?''': if "yes", this library is maintained by someone else, 
+   and its master repo is somewhere else.  See [wiki:Repositories/Upstream].
 
-- **Upstream repo?**: if "yes", this library is maintained by someone else, 
-  and its master repo is somewhere else.  See [Repositories/Upstream](repositories/upstream).
+ * '''Reqd to build?''': is "no" if this library is not required to build GHC. We have a few of these because we use them for tests and suchlike.
 
-- **Reqd to build?**: is "no" if this library is not required to build GHC. We have a few of these because we use them for tests and suchlike.
+ * '''Installed?''': is "no" if the library is not installed in a GHC installation, and "extra" if it is only installed if `InstallExtraPackages` is `YES`. All others are installed with GHC. See the [wiki:Commentary/Libraries libraries page] for more info.
 
-- **Installed?**: is "no" if the library is not installed in a GHC installation, and "extra" if it is only installed if `InstallExtraPackages` is `YES`. All others are installed with GHC. See the [libraries page](commentary/libraries) for more info.
+ * '''GHC repo''': in every case there is a repo on `http://git.haskell.org/`, which contains the bits we use for building GHC every night. For libraries with upstream repos, this is just a lagging mirror of the master (see [wiki:Repositories/Upstream]).  The read-only HTTP URL for the repo is `http://git.haskell.org/<table-entry>`.  To get a read/write URL, replace HTTP prefix `http://git.haskell.org` with the SSH prefix `ssh://git@git.haskell.org`. 
 
-- **GHC repo**: in every case there is a repo on `http://darcs.haskell.org/`, which contains the bits we use for building GHC every night. For libraries with upstream repos, this is just a lagging mirror of the master (see [Repositories/Upstream](repositories/upstream)).  The read-only HTTP URL for the repo is `http://darcs.haskell.org/<table-entry>`.  To get a read/write URL, replace HTTP prefix `http://darcs.haskell.org` with the SSH prefix `darcs.haskell.org:/srv/darcs`. 
+'''Note''': `http://darcs.haskell.org/libraries` is actually a [WikiPedia:Symbolic_link symlink] to `http://darcs.haskell.org/packages`, therefore they are just synonyms. (For historical reasons.). Moreover, the  Git repositories hosted on http://git.haskell.org have an 301-redirect installed on their old http://darcs.haskell.org locations.
 
+{{{
+#!html
+<table border="1">
+<tr><td><strong>Location in tree</strong></td>   <td> <strong>Upstream repo?</strong></td> <td><strong>Reqd to build?</strong></td>   <td><strong>Installed?</strong></td> <td><strong>GHC repo http://git.haskell.org/...</strong></td></tr>
+<tr><td>. (ghc itself)</td>                    <td>     </td> <td>     </td> <td>     </td> <td>ghc.git</td></tr>
+<tr><td>ghc-tarballs</td>                      <td>     </td> <td>     </td> <td> N/A </td> <td>ghc-tarballs.git</td></tr>
+<tr><td>utils/hsc2hs</td>                      <td>     </td> <td>     </td> <td>     </td> <td>hsc2hs.git</td></tr>
+<tr><td>utils/haddock</td>                     <td>     </td> <td>     </td> <td>     </td> <td>haddock.git</td></tr>
+<tr><td>testsuite</td>              	       <td>     </td> <td>     </td> <td> N/A </td> <td>testsuite.git</td></tr>
+<tr><td>nofib</td>                  	       <td>     </td> <td>     </td> <td> N/A </td> <td>nofib.git</td></tr>
+<tr><td>libraries/array</td>                   <td>     </td> <td>     </td> <td>     </td> <td>packages/array.git</td></tr>
+<tr><td>libraries/base</td>                    <td>     </td> <td>     </td> <td>     </td> <td>packages/base.git</td></tr>
+<tr><td>libraries/binary</td>                  <td> yes </td> <td>     </td> <td>     </td> <td>packages/binary.git</td></tr>
+<tr><td>libraries/bytestring</td>              <td> yes </td> <td>     </td> <td>     </td> <td>packages/bytestring.git</td></tr>
+<tr><td>libraries/Cabal</td>                   <td> yes </td> <td>     </td> <td>     </td> <td>packages/Cabal.git</td></tr>
+<tr><td>libraries/containers</td>              <td> yes </td> <td>     </td> <td>     </td> <td>packages/containers.git</td></tr>
+<tr><td>libraries/deepseq</td>      	       <td>     </td> <td>     </td> <td>     </td> <td>packages/deepseq.git</td></tr>
+<tr><td>libraries/directory</td>               <td>     </td> <td>     </td> <td>     </td> <td>packages/directory.git</td></tr>
+<tr><td>libraries/extensible-exceptions</td>   <td>     </td> <td>     </td> <td>     </td> <td>packages/extensible-exceptions.git</td></tr>
+<tr><td>libraries/filepath</td>                <td>     </td> <td>     </td> <td>     </td> <td>packages/filepath.git</td></tr>
+<tr><td>libraries/ghc-prim</td>                <td>     </td> <td>     </td> <td>     </td> <td>packages/ghc-prim.git</td></tr>
+<tr><td>libraries/haskeline</td>               <td> yes </td> <td>     </td> <td> no  </td> <td>packages/haskeline.git</td></tr>
+<tr><td>libraries/haskell98</td>               <td>     </td> <td>     </td> <td>     </td> <td>packages/haskell98.git</td></tr>
+<tr><td>libraries/haskell2010</td>             <td>     </td> <td>     </td> <td>     </td> <td>packages/haskell2010.git</td></tr>
+<tr><td>libraries/hoopl</td>                   <td>     </td> <td>     </td> <td>     </td> <td>packages/hoopl.git</td></tr>
+<tr><td>libraries/hpc</td>                     <td>     </td> <td>     </td> <td>     </td> <td>packages/hpc.git</td></tr>
+<tr><td>libraries/integer-gmp</td>             <td>     </td> <td>     </td> <td>     </td> <td>packages/integer-gmp.git</td></tr>
+<tr><td>libraries/integer-simple</td>          <td>     </td> <td>     </td> <td>     </td> <td>packages/integer-simple.git</td></tr>
+<tr><td>libraries/old-locale</td>              <td>     </td> <td>     </td> <td>     </td> <td>packages/old-locale.git</td></tr>
+<tr><td>libraries/old-time</td>                <td>     </td> <td>     </td> <td>     </td> <td>packages/old-time.git</td></tr>
+<tr><td>libraries/pretty</td>                  <td> yes </td> <td>     </td> <td>     </td> <td>packages/pretty.git</td></tr>
+<tr><td>libraries/process</td>                 <td>     </td> <td>     </td> <td>     </td> <td>packages/process.git</td></tr>
+<tr><td>libraries/template-haskell</td>        <td>     </td> <td>     </td> <td>     </td> <td>packages/template-haskell.git</td></tr>
+<tr><td>libraries/terminfo</td>     	       <td> yes </td> <td>     </td> <td> no  </td> <td>packages/terminfo.git</td></tr>
+<tr><td>libraries/time</td>         	       <td> yes </td> <td>     </td> <td>     </td> <td>packages/time.git</td></tr>
+<tr><td>libraries/transformers</td> 	       <td> yes </td> <td>     </td> <td>     </td> <td>packages/transformers.git</td></tr>
+<tr><td>libraries/unix</td>         	       <td>     </td> <td>     </td> <td>     </td> <td>packages/unix.git</td></tr>
+<tr><td>libraries/utf8-string</td>  	       <td> yes </td> <td>     </td> <td>     </td> <td>packages/utf8-string.git</td></tr>
+<tr><td>libraries/Win32</td>	    	       <td> yes </td> <td>     </td> <td>     </td> <td>packages/Win32.git</td></tr>
+<tr><td>libraries/xhtml</td>	    	       <td> yes </td> <td>     </td> <td> no  </td> <td>packages/xhtml.git</td></tr>
+<tr><td>libraries/random</td>                  <td> yes </td> <td>     </td> <td>extra</td> <td>packages/random.git</td></tr>
+<tr><td>libraries/primitive</td>       	       <td> yes </td> <td>     </td> <td>extra</td> <td>packages/primitive.git</td></tr>
+<tr><td>libraries/vector</td>       	       <td> yes </td> <td>     </td> <td>extra</td> <td>packages/vector.git</td></tr>
+<tr><td>libraries/dph</td>          	       <td>     </td> <td>     </td> <td>extra</td> <td>packages/dph.git</td></tr>
+<tr><td>libraries/parallel</td>     	       <td>     </td> <td> no  </td> <td>extra</td> <td>packages/parallel.git</td></tr>
+<tr><td>libraries/stm</td>          	       <td>     </td> <td> no  </td> <td>extra</td> <td>packages/stm.git</td></tr>
+</table>
+}}}
 
-**Note**: the URLs 
+== The 'packages' file ==
 
+The master list of repositories is in the file [[GhcFile(packages)]], and this is where the `sync-all` script finds out about which repositories make up the complete tree.  It duplicates the information in the above table; indeed, it is really the authoritative version (so complain if the table and file differ!).
 
-- `http://darcs.haskell.org/libraries` and 
-- `http://darcs.haskell.org/packages` 
+The "`tag`" in the master table in [[GhcFile(packages)]] has the following significance:
 
+ * '''"`-`"''': [wiki:Commentary/Libraries boot libraries], necessary to build GHC
+ * '''"`testsuite`"''': GHC's [wiki:Building/RunningTests regression tests], not necessary for a build, but is necessary if you're working on GHC
+ * '''"`nofib`"''': GHC's [wiki:Building/RunningNoFib nofib benchmark suite]
+ * '''"`dph`"''': packages for [wiki:DataParallel Data Parallel Haskell], which is not shipped with GHC but we test all changes to GHC against these repositories so they are usually included in a checked-out source tree.
+ * '''"`extra`"''': extra packages you might want to include in a build (the `parallel` package, for example), but aren't necessary to get a working GHC.
 
-are sym-linked together, they are just synonyms.  (For historical reasons.)
+See the [wiki:Commentary/Libraries] page for more information about GHC's libraries.
 
-
-<table><tr><th>**Location in tree**</th>
-<td>   </td>
-<th> **Upstream repo?**</th>
-<td> </td>
-<th>**Reqd to build?**</th>
-<td>   </td>
-<th>**Installed?**</th>
-<td> </td>
-<th>**GHC repo http://darcs.haskell.org/...**</th></tr>
-<tr><th>. (ghc itself)</th>
-<td>                    </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>ghc.git/</th></tr>
-<tr><th>ghc-tarballs</th>
-<td>                      </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th> N/A </th>
-<td> </td>
-<th>ghc-tarballs.git/</th></tr>
-<tr><th>utils/hsc2hs</th>
-<td>                      </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>utils/hsc2hs.git/</th></tr>
-<tr><th>utils/haddock</th>
-<td>                     </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>haddock.git</th></tr>
-<tr><th>testsuite</th>
-<td>              	       </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th> N/A </th>
-<td> </td>
-<th>testsuite.git</th></tr>
-<tr><th>nofib</th>
-<td>                  	       </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th> N/A </th>
-<td> </td>
-<th>nofib.git</th></tr>
-<tr><th>libraries/array</th>
-<td>                   </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/array.git/</th></tr>
-<tr><th>libraries/base</th>
-<td>                    </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/base.git/</th></tr>
-<tr><th>libraries/binary</th>
-<td>                  </td>
-<th> yes </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/binary.git/</th></tr>
-<tr><th>libraries/bytestring</th>
-<td>              </td>
-<th> yes </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/bytestring.git/</th></tr>
-<tr><th>libraries/Cabal</th>
-<td>                   </td>
-<th> yes </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/Cabal.git/</th></tr>
-<tr><th>libraries/containers</th>
-<td>              </td>
-<th> yes </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/containers.git/</th></tr>
-<tr><th>libraries/deepseq</th>
-<td>      	       </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/deepseq.git/</th></tr>
-<tr><th>libraries/directory</th>
-<td>               </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/directory.git/</th></tr>
-<tr><th>libraries/extensible-exceptions</th>
-<td>   </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/extensible-exceptions.git/</th></tr>
-<tr><th>libraries/filepath</th>
-<td>                </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/filepath.git/</th></tr>
-<tr><th>libraries/ghc-prim</th>
-<td>                </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/ghc-prim.git/</th></tr>
-<tr><th>libraries/haskeline</th>
-<td>               </td>
-<th> yes </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th> no  </th>
-<td> </td>
-<th>packages/haskeline.git/</th></tr>
-<tr><th>libraries/haskell98</th>
-<td>               </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/haskell98.git/</th></tr>
-<tr><th>libraries/haskell2010</th>
-<td>             </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/haskell2010.git/</th></tr>
-<tr><th>libraries/hoopl</th>
-<td>                   </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/hoopl.git/</th></tr>
-<tr><th>libraries/hpc</th>
-<td>                     </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/hpc.git/</th></tr>
-<tr><th>libraries/integer-gmp</th>
-<td>             </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/integer-gmp.git/</th></tr>
-<tr><th>libraries/integer-simple</th>
-<td>          </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/integer-simple.git/</th></tr>
-<tr><th>libraries/old-locale</th>
-<td>              </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/old-locale.git/</th></tr>
-<tr><th>libraries/old-time</th>
-<td>                </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/old-time.git/</th></tr>
-<tr><th>libraries/pretty</th>
-<td>                  </td>
-<th> yes </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/pretty.git/</th></tr>
-<tr><th>libraries/process</th>
-<td>                 </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/process.git/</th></tr>
-<tr><th>libraries/template-haskell</th>
-<td>        </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/template-haskell.git/</th></tr>
-<tr><th>libraries/terminfo</th>
-<td>     	       </td>
-<th> yes </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th> no  </th>
-<td> </td>
-<th>packages/terminfo.git/</th></tr>
-<tr><th>libraries/time</th>
-<td>         	       </td>
-<th> yes </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/time.git/</th></tr>
-<tr><th>libraries/transformers</th>
-<td> 	       </td>
-<th> yes </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/transformers.git/</th></tr>
-<tr><th>libraries/unix</th>
-<td>         	       </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/unix.git/</th></tr>
-<tr><th>libraries/utf8-string</th>
-<td>  	       </td>
-<th> yes </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/utf8-string.git/</th></tr>
-<tr><th>libraries/Win32</th>
-<td>	    	       </td>
-<th> yes </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/Win32.git/</th></tr>
-<tr><th>libraries/xhtml</th>
-<td>	    	       </td>
-<th> yes </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th> no  </th>
-<td> </td>
-<th>packages/xhtml.git/</th></tr>
-<tr><th>libraries/random</th>
-<td>                  </td>
-<th> yes </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>extra</th>
-<td> </td>
-<th>packages/random.git/</th></tr>
-<tr><th>libraries/primitive</th>
-<td>       	       </td>
-<th> yes </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>extra</th>
-<td> </td>
-<th>packages/primitive.git/</th></tr>
-<tr><th>libraries/vector</th>
-<td>       	       </td>
-<th> yes </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>extra</th>
-<td> </td>
-<th>packages/vector.git/</th></tr>
-<tr><th>libraries/dph</th>
-<td>          	       </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>extra</th>
-<td> </td>
-<th>packages/dph.git/</th></tr>
-<tr><th>libraries/parallel</th>
-<td>     	       </td>
-<th>     </th>
-<td> </td>
-<th> no  </th>
-<td> </td>
-<th>extra</th>
-<td> </td>
-<th>packages/parallel.git/</th></tr>
-<tr><th>libraries/stm</th>
-<td>          	       </td>
-<th>     </th>
-<td> </td>
-<th> no  </th>
-<td> </td>
-<th>extra</th>
-<td> </td>
-<th>packages/stm.git/</th></tr></table>
-
-
-## The 'packages' file
-
-
-
-The master list of repositories is in the file [packages](/trac/ghc/browser/ghc/packages), and this is where the `sync-all` script finds out about which repositories make up the complete tree.  It duplicates the information in the above table; indeed, it is really the authoritative version (so complain if the table and file differ!).
-
-
-
-The "`tag`" in the master table in [packages](/trac/ghc/browser/ghc/packages) has the following significance:
-
-
-- **"`-`"**: [boot libraries](commentary/libraries), necessary to build GHC
-- **"`testsuite`"**: GHC's [regression tests](building/running-tests), not necessary for a build, but is necessary if you're working on GHC
-- **"`nofib`"**: GHC's [nofib benchmark suite](building/running-no-fib)
-- **"`dph`"**: packages for [Data Parallel Haskell](data-parallel), which is not shipped with GHC but we test all changes to GHC against these repositories so they are usually included in a checked-out source tree.
-- **"`extra`"**: extra packages you might want to include in a build (the `parallel` package, for example), but aren't necessary to get a working GHC.
-
-
-See the [Commentary/Libraries](commentary/libraries) page for more information about GHC's libraries.
-
-
-## Modifying local packages
-
-
+== Modifying local packages ==
 
 For libraries for which there is no upstream repo, you can modify the GHC repo above directly.
-
-
 
 When making a change to a library, you must also update the version
 number if appropriate. Version number in the repositories should be
@@ -482,44 +111,29 @@ maintained such that, if the library were to be release as-is, then
 they would have the correct version number. For example, if the last
 release of a library was 1.2.0.3 and you remove a function from it
 then, as per the
-[
-Package versioning policy](http://www.haskell.org/haskellwiki/Package_versioning_policy),
+[http://www.haskell.org/haskellwiki/Package_versioning_policy Package versioning policy],
 the version number should be bumped to 1.3.0.0. If it is already
 1.3.0.0 or higher then no further change is necessary. In order to
 make this easier, the version line in the `.cabal` file should be
 followed by a comment such as
-
-
-```wiki
+{{{
 -- GHC 7.6.1 released with 1.2.0.3
-```
+}}}
 
-## Mirroring new packages to GitHub
+== Mirroring new packages to !GitHub ==
 
+Currently, all our repositories are being mirrored to !GitHub by !GitHub themselves. If you wish to add/remove a repository you need to email !GitHub support at support@github.com and ask them to do it. Currently there is no way to administer this ourselves.
 
+== Branches ==
 
-Currently, all our repositories are being mirrored to GitHub by GitHub themselves. If you wish to add/remove a repository you need to email GitHub support at support@… and ask them to do it. Currently there is no way to administer this ourselves.
-
-
-## Branches
-
-
-
-For how we manage release branches, see [WorkingConventions/Releases](working-conventions/releases).
-
-
+For how we manage release branches, see [wiki:WorkingConventions/Releases].
 
 The following branches are active:
 
+ '''7.4 Branch'''::
+ To switch to this branch run:
+ {{{ 
+ $ ./sync-all checkout ghc-7.4
+ }}}
 
-<table><tr><th>**7.4 Branch**</th>
-<td>
-To switch to this branch run:
-
-```wiki
-$ ./sync-all checkout ghc-7.4
 ```
-
-</td></tr></table>
-
-
