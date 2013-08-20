@@ -98,12 +98,8 @@ exec cabal --with-ghc=arm-apple-darwin10-ghc --with-ghc-pkg=arm-apple-darwin10-g
 ```
 
 
-Edit these scripts to ensure:
+Edit these scripts to ensure the platform version matches what you are compiling to in Xcode
 
-
-1. The -march option is correct for your device
-
-1. The platform version matches what you are compiling to in Xcode
 
 ### 3. Check out GHC
 
