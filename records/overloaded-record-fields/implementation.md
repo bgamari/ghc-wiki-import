@@ -1,34 +1,25 @@
-# Overloaded record fields: implementation notes
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Overloaded record fields: implementation notes =
 
-Here be dragons. This page describes implementation details and progress on the implementation of [the overloaded record fields plan](records/overloaded-record-fields/plan). Development of the extension is taking place on forks of the [
-ghc](https://github.com/adamgundry/ghc) and [
-packages-base](https://github.com/adamgundry/packages-base) repositories (on branch 'overloaded-record-fields'). A [
-prototype implementation](https://github.com/adamgundry/records-prototype/blob/master/RecordsPrototype.hs) is also available.
+Here be dragons. This page describes implementation details and progress on the implementation of [wiki:Records/OverloadedRecordFields/Plan the overloaded record fields plan]. Development of the extension is taking place on forks of the [https://github.com/adamgundry/ghc ghc] and [https://github.com/adamgundry/packages-base packages-base] repositories (on branch 'overloaded-record-fields'). A [https://github.com/adamgundry/records-prototype/blob/master/RecordsPrototype.hs prototype implementation] is also available.
 
+== The basic idea ==
 
-## The basic idea
-
-
-
-The `Has` and `Upd` classes, and `GetResult` and `SetResult` type families, are defined in the module [
-GHC.Records](https://github.com/adamgundry/packages-base/blob/overloaded-record-fields/GHC/Records.hs) in the `base` package.
-
-
+The `Has` and `Upd` classes, and `GetResult` and `SetResult` type families, are defined in the module [https://github.com/adamgundry/packages-base/blob/overloaded-record-fields/GHC/Records.hs GHC.Records] in the `base` package.
 
 Typechecking a record datatype still generates record selectors, but their names have a `$sel` prefix and end with the name of their type. Moreover, instances for the classes and type families are generated. For example,
 
-
-```wiki
+{{{
 data T = MkT { x :: Int }
-```
-
+}}}
 
 generates
 
-
-```wiki
+{{{
 $sel_x_T :: T -> Int -- record selector (used to be called `x`)
 $sel_x_T (MkT x) = x
 
@@ -40,16 +31,13 @@ $dfUpdTx = Upd { setField _ s e = s { x = e } }
 
 axiom TFCo:R:GetResultTx : GetResult T "x" = Int   -- corresponds to the GetResult type family instance
 axiom TFCo:R:SetResultTx : SetResult T "x" Int = T -- corresponds to the SetResult type family instance
-```
+}}}
 
-## The naming of cats
-
-
+== The naming of cats ==
 
 A field is represented by the following datatype, parameterised by the representation of names:
 
-
-```wiki
+{{{
 data FieldLbl a = FieldLabel {
       flOccName   :: OccName,           -- ^ Label of the field
       flSelector  :: a,                 -- ^ Record selector function
@@ -62,116 +50,83 @@ data FldInsts a = FldInsts { fldInstsHas :: a
                            , fldInstsUpd :: a
                            , fldInstsGetResult :: a
                            , fldInstsSetResult :: a }
-```
-
+}}}
 
 Every field has a label (`OccName`) and selector. If it is defined in a module with `-XOverloadedRecordFields` enabled, it also has names for the instances. 
 
-
-
 The `AvailTC Name [Name] [FieldLabel]` constructor of `AvailInfo` represents a type and its pieces that are in scope. Record fields are now stored in a separate list (the third argument). The `IEThingWith name [name] [OccName]` constructor of `IE`, which represents a thing that can be imported or exported, stores only the `OccName`s.
-
-
 
 The `Parent` type has an extra constructor `FldParent Name OccName (Maybe (FldInsts Name))` that stores the parent `Name`, the field `OccName`, and the names of the instances if they are defined. The `GlobalRdrElt` (`GRE`) for a field stores the selector name directly, and uses the `FldParent` constructor to store the field. Thus a field `x` of type `T` gives rise this entry in the `GlobalRdrEnv`:
 
-
-```wiki
+{{{
 x |->  GRE $sel_x_T (FldParent T x (Just (FldInsts $dfHasTx $dfUpdTx TFCo:R:GetResultTx TFCo:R:SetResultTx))) LocalDef
-```
-
+}}}
 
 Note that the `OccName` used when adding a GRE to the environment (`greOccName`) now depends on the parent field: for `FldParent` it is the field label rather than the selector name.
-
-
 
 The `dcFields` field of `DataCon` stores a list of `FieldLabel`, whereas the `ifConFields` field of `IfaceConDecl` stores a list of `FieldLbl OccName`.
 
 
-## Source expressions
-
-
+== Source expressions ==
 
 The `HsExpr` type has extra constructors `HsOverloadedRecFld OccName` and `HsSingleRecFld OccName id`. When `-XOverloadedRecordFields` is enabled, and `rnExpr` encounters `HsVar "x"` where `x` refers to multiple `GRE`s that are all record fields, it replaces it with `HsOverloadedRecFld "x"`. When the typechecker sees `HsOverloadedRecFld x` it emits a wanted constraint `Has alpha x beta` and returns type `alpha -> beta` where `alpha` and `beta` are fresh unification variables.
 
-
-
 When the flag is not enabled, `rnExpr` turns an unambiguous record field `foo` into `HsSingleRecFld foo $sel_foo_T`. The point of this constructor is so we can pretty-print the field name but store the selector name for typechecking.
-
-
 
 Where an AST representation type (e.g. `HsRecField` or `ConDeclField`) contained an argument of type `Located id` for a field, it now stores a `Located RdrName` for the label, and some representation of the selector. The parser uses an error thunk for the selector; it is filled in by the renamer  (by `rnHsRecFields1` in `RnPat`, and `rnField` in `RnTypes`). The new definition of `ConDeclField` (used in types) is:
 
-
-```wiki
+{{{
 data ConDeclField name
   = ConDeclField { cd_fld_lbl  :: Located RdrName,
                    cd_fld_sel  :: name,
                    cd_fld_type :: LBangType name, 
                    cd_fld_doc  :: Maybe LHsDocString }
-```
-
+}}}
 
 The new definition of `HsRecField` is:
 
-
-```wiki
+{{{
 data HsRecField id arg = HsRecField {
         hsRecFieldLbl :: Located RdrName,
         hsRecFieldSel :: Either id [(id, id)],
         hsRecFieldArg :: arg,
         hsRecPun      :: Bool }
-```
-
+}}}
 
 The renamer (`rnHsRecFields1`) supplies `Left sel_name` for the selector if it is unambiguous, or `Right xs` if it is ambiguous (because it is for a record update, and there are multiple fields with the correct label in scope). In the latter case, the possibilities `xs` are represented as a list of (parent name, selector name) pairs. The typechecker (`tcExpr`) tries three ways to disambiguate the update:
 
-
 1. Perhaps only one type has all the fields that are being updated.
 
-1. Use the type being pushed in, if it is already a `TyConApp`. 
+2. Use the type being pushed in, if it is already a `TyConApp`. 
 
-1. Use the type signature of the record expression, if it exists and is a `TyConApp`.
-
-## Automatic instance generation
+3. Use the type signature of the record expression, if it exists and is a `TyConApp`.
 
 
+== Automatic instance generation ==
 
 Typeclass and family instances are generated, provided the extension is enabled, by `makeLocalRecFldInsts` and `makeImportedRecFldInsts` in `TcInstDecls`. These functions correspond to the two places in which instances are generated:
 
+* `tcInstDecls1` generates instances for fields from datatypes in the current group (at the same time as derived instances, from '''deriving''' clauses, are generated)
 
-- `tcInstDecls1` generates instances for fields from datatypes in the current group (at the same time as derived instances, from **deriving** clauses, are generated)
-
-- `tcRnImports` in `TcRnDriver` generates instances for overladed record fields *that are in scope**. (This is different from the usual visible-everywhere story for instances.) We know which overloaded fields are in scope by looking at the `GlobalRdrEnv`
-  ***
-
+* `tcRnImports` in `TcRnDriver` generates instances for overladed record fields ''that are in scope''. (This is different from the usual visible-everywhere story for instances.) We know which overloaded fields are in scope by looking at the `GlobalRdrEnv`
 
 The typeclass instances must be subsequently typechecked (by `tcInstDecls2`). Such instances are "private" in that they are available when typechecking the current module (in `tcg_inst_env`) but not exported to other modules (via `tcg_insts`). On the other hand, the underlying dfun ids, axioms and family instances are exported from the module as usual.
 
-
-
-**AMG** This means that typeclass instances are not visible in GHCi, because it tracks only `tcg_insts` (via the `InteractiveContext`). What to do here? Perhaps a new field in `TcGblEnv` could record the private instances?
-
-
+'''AMG''' This means that typeclass instances are not visible in GHCi, because it tracks only `tcg_insts` (via the `InteractiveContext`). What to do here? Perhaps a new field in `TcGblEnv` could record the private instances?
 
 For each imported field, there are two possible cases:
 
-
 1. If the module containing the field was compiled with `-XOverloadedRecordFields`, it will have the necessary dfuns already, so we can just look them up and add appropriate class instances to `tcg_inst_env`. Moreover, the family instances will have been imported.
-1. Otherwise, all the instances must be generated, as if the field were locally defined.
+2. Otherwise, all the instances must be generated, as if the field were locally defined.
+
+'''AMG''' Modules in `base` that are compiled before `GHC.Records` cannot have the instances created. This is the motivation for restricting dfun and family instance generation to modules with the extension enabled. It occurs to me that we could have a separate extension for generating the instances (`-XOverloadedRecordFieldInstances`, perhaps) that could be enabled by default (except for `base`). This would reduce the number of fields for which `-XOverloadedRecordFields` modules would have to generate instances on the fly. On the other hand, it would increase the amount of stuff in interface files.
 
 
-**AMG** Modules in `base` that are compiled before `GHC.Records` cannot have the instances created. This is the motivation for restricting dfun and family instance generation to modules with the extension enabled. It occurs to me that we could have a separate extension for generating the instances (`-XOverloadedRecordFieldInstances`, perhaps) that could be enabled by default (except for `base`). This would reduce the number of fields for which `-XOverloadedRecordFields` modules would have to generate instances on the fly. On the other hand, it would increase the amount of stuff in interface files.
-
-
-## Unused imports
-
-
+== Unused imports ==
 
 Unused imports and generation of the minimal import list (`RnNames.warnUnusedImportDecls`) use a map from selector names to labels, in order to print fields correctly. However, fields may currently be reported as unused even if the corresponding Has instance is used. Consider the following:
 
-
-```wiki
+{{{
 module A where
   data T = MkT { x,y:Int }
 
@@ -184,24 +139,18 @@ module C where
 
   foo :: T -> Int
   foo r = r.x + 2
-```
-
+}}}
 
 Now, do we expect to report the 'x' in S(x) import as unused?  Actually the entire 'import B' is unused.  Only the typechecker will eventually know that.  But I think the type checker does actually record which instances are used, so perhaps we can make use of that info to give accurate unused-import info.
 
+'''AMG''' I thought this would be the `tcg_ev_binds` field of the `TcGblEnv`, but this seems to be empty by the end of `tcRnModule`. We could also look at the `inert_solved_dicts` field of `InertSet`, but I'm not sure how to propagate the required information out of the `TcS` monad to the `TcM` monad where unused names are reported.
 
 
-**AMG** I thought this would be the `tcg_ev_binds` field of the `TcGblEnv`, but this seems to be empty by the end of `tcRnModule`. We could also look at the `inert_solved_dicts` field of `InertSet`, but I'm not sure how to propagate the required information out of the `TcS` monad to the `TcM` monad where unused names are reported.
-
-
-## Deprecated field names
-
-
+== Deprecated field names ==
 
 Consider the following:
 
-
-```wiki
+{{{
 module M where
   {-# DEPRECATED foo "Don't use foo" #-}
 
@@ -216,114 +165,84 @@ module N where
   goo = foo (MkT 42) 
   bar = foo (MkU 42)
   baz x = foo x
-```
+}}}
+
+The `DEPRECATED` pragma applies to all fields `foo` exported by the module `M`, since it is based on the `OccName`. The renamer will issue a deprecation warning for every use of `foo` in `N`, regardless of whether it will later resolve to one of the fields from `M` (as in `goo`), a field definitely not in `M` (as in `bar`), or a polymorphic field (as in `baz`). It might be possible to delay the warnings to type-checking time and report deprecations more precisely, as for [#Unusedimports unused imports].
 
 
-The `DEPRECATED` pragma applies to all fields `foo` exported by the module `M`, since it is based on the `OccName`. The renamer will issue a deprecation warning for every use of `foo` in `N`, regardless of whether it will later resolve to one of the fields from `M` (as in `goo`), a field definitely not in `M` (as in `bar`), or a polymorphic field (as in `baz`). It might be possible to delay the warnings to type-checking time and report deprecations more precisely, as for [unused imports](records/overloaded-record-fields/implementation#unused-imports).
-
-
-## GADT record updates
-
-
+== GADT record updates ==
 
 Consider the example
 
-
-```wiki
+{{{
 data W a where
     MkW :: a ~ b => { x :: a, y :: b } -> W (a, b)
-```
-
+}}}
 
 It would be nice to generate
 
-
-```wiki
+{{{
 -- setField :: proxy "x" -> W (a, b) -> a -> W (a, b)
 setField _ s e = s { x = e }
-```
+}}}
 
+but this record update is rejected by the typechecker, even though it is perfectly sensible, because of #2595. The currently implemented workaround is instead to generate the explicit update
 
-but this record update is rejected by the typechecker, even though it is perfectly sensible, because of [\#2595](https://gitlab.staging.haskell.org/ghc/ghc/issues/2595). The currently implemented workaround is instead to generate the explicit update
-
-
-```wiki
+{{{
 setField _ (MkW _ y) x = MkW x y
-```
-
+}}}
 
 which is fine, but rather long-winded if there are many constructors or fields. Essentially this is doing the job of the desugarer for record updates.
-
-
 
 Note that `W` does not admit type-changing single update for either field, because of the `a ~ b` constraint. Without it, though, type-changing update should be allowed.
 
 
-## Type-changing update: phantom arguments
-
-
+== Type-changing update: phantom arguments ==
 
 Consider the datatype
 
-
-```wiki
+{{{
 data T a = MkT { foo :: Int }
-```
-
+}}}
 
 where `a` is a phantom type argument (it does not occur in the type of `foo`). The traditional update syntax can change the phantom argument, for example if `r :: T Int` then `r { foo = 3 } :: T Bool` typechecks. However, `setField` cannot do so, because this is illegal:
 
-
-```wiki
+{{{
 type instance SetResult (T a) "foo" Int = T b
-```
-
+}}}
 
 Note that the result of the type family involves an unbound variable `b`. 
-
-
 
 In general, a use of `setField` can only change type variables that occur in the field type being updated, and do not occur in any of the other fields' types.
 
 
-## Data families
-
-
+== Data families ==
 
 Consider the following:
 
-
-```wiki
+{{{
 data family F (a :: *) :: *
 data instance F Int  = MkF1 { foo :: Int }
 data instance F Bool = MkF2 { foo :: Bool }
-```
+}}}
 
+This is perfectly sensible, and should give rise to two *different* record selectors `foo`, and corresponding `Has` instances:
 
-This is perfectly sensible, and should give rise to two \*different\* record selectors `foo`, and corresponding `Has` instances:
-
-
-```wiki
+{{{
 instance t ~ Int => Has (F Int) "foo" t
 instance t ~ Bool => Has (F Bool) "foo" t
-```
-
+}}}
 
 However, what can we call the record selectors? They can't both be `$sel_foo_F`! Ideally we would use the name of the representation tycon, rather than the family tycon, but that isn't introduced until the typechecker (`tcDataFamInstDecl` in `TcInstDcls`), and we need to create the selector in the renamer (`getLocalNonValBinders` in `RnNames`). We can't just pick an arbitrary unique name, because we need to look up the selector to associate it with its data constructor (`extendRecordFieldEnv` in `RnSource`).
-
-
 
 For the moment, I've simply disallowed duplicate fields for a single data family in a single module. It's fine to duplicate fields between different data families or across different modules, however.
 
 
-## Qualified names
-
-
+== Qualified names ==
 
 Consider the following:
 
-
-```wiki
+{{{
 module M where
   data S = MkS { foo :: Int }
 
@@ -338,35 +257,30 @@ module O where
   f x = M.foo x
   g x = N.foo x
   h x = foo x
-```
-
+}}}
 
 Should there be a difference between `f`, `g` and `h`? It would seem odd if `f` could turn out to use the `foo` from `T` or `U` even though it explicitly says `M.foo`. I can see three sensible options:
 
-
-- Treat qualified and unqualified fields identically, but issue a warning for qualified fields
-- Forbid referring to overloaded fields with qualified names (so `M.foo` and `N.foo` yield errors)
-- Treat a qualified name as a non-overloaded field, generating an ambiguity error if necessary (so `M.foo` is okay but `N.foo` is ambiguous)
-
+* Treat qualified and unqualified fields identically, but issue a warning for qualified fields
+* Forbid referring to overloaded fields with qualified names (so `M.foo` and `N.foo` yield errors)
+* Treat a qualified name as a non-overloaded field, generating an ambiguity error if necessary (so `M.foo` is okay but `N.foo` is ambiguous)
 
 Of course, it is fine to use a qualified name in a record update.
-
-
 
 I've implemented the first option, adding a new warning `-fwarn-qualified-overloaded-record-fields` which is on by default.
 
 
-## Outstanding bugs
+== Outstanding bugs ==
+
+* typechecker/should_fail/tcfail102 (changed error message) 
 
 
-- typechecker/should\_fail/tcfail102 (changed error message) 
+== To do ==
 
-## To do
-
-
-- Improve unsolved `Accessor p f` error message where `p` is something silly?
-- Consider defaulting `Accessor p` to `p = (->)`, and defaulting `Has r "f" t` constraints where there is only one datatype with a field `f` in scope.
-- Sort out reporting of unused imports.
-- Review propagation of dfunids/axioms and instances; consider `-XOverloadedRecordFieldInstances` as a separate extension.
-- How should instances be made available to GHCi?
-- Document the extension, including new warnings.
+* Improve unsolved `Accessor p f` error message where `p` is something silly?
+* Consider defaulting `Accessor p` to `p = (->)`, and defaulting `Has r "f" t` constraints where there is only one datatype with a field `f` in scope.
+* Sort out reporting of unused imports.
+* Review propagation of dfunids/axioms and instances; consider `-XOverloadedRecordFieldInstances` as a separate extension.
+* How should instances be made available to GHCi?
+* Document the extension, including new warnings.
+```
