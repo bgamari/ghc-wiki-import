@@ -6,7 +6,7 @@
 
 
 GHC uses [
-git](http://git-scm.com/) for revision control. This page describes various GHC-specific conventions for using git, together with some suggestions and tips for using git effectively.  
+Git](http://git-scm.com/) (version 1.7.3.4 or newer recommended) for revision control. This page describes various GHC-specific conventions for using git, together with some suggestions and tips for using git effectively.  
 
 
 
