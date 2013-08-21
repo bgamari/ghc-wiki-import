@@ -52,8 +52,6 @@ The following new features are planned for 7.8. They are at varying degrees of c
 - Iavor Diatchki is working on type-level nats ([\#4385](https://gitlab.staging.haskell.org/ghc/ghc/issues/4385), [
   http://ghc.haskell.org/trac/ghc/wiki/TypeNats](http://ghc.haskell.org/trac/ghc/wiki/TypeNats)).
 
-- Unboxed Booleans. **Patches merged.**. Author: Jan Stolarek. See [\#6135](https://gitlab.staging.haskell.org/ghc/ghc/issues/6135).
-
 - Austin Seipp would like to do some official ARMv7 binary releases with a working stage2 compiler and GHCi, but there are probably some bugs waiting here.
 
 - Edsko de Vries would like to have "Source plugins" in GHC, which would allow API clients and external users to run code over the type-checked AST. Thomas Schilling and others are also interested. Edsko has proposed a patch, but it has yet to be integrated. See [
@@ -70,6 +68,8 @@ The following new features are planned for 7.8. They are at varying degrees of c
 - [PatternSynonyms](pattern-synonyms), by Gergo Erdi. Progress tracked at [\#5144](https://gitlab.staging.haskell.org/ghc/ghc/issues/5144).
 
 - Ryan Newton has added a larger set of atomic memory primops than were previously available.  The code can be found on the `atomics` branch).  The set of PrimOps may continue to expand slightly, but will definitely be ready for 7.8.  In future work, Carter Schonwald will provide optimized (inline) versions of these PrimOps, at least for the LLVM backend.
+
+- Bryan O'Sullivan has some additional optimizations for the new I/O manager, on top of Andreas/Kazu's recent efforts.
 
 ## Features that will definitely not make it
 
