@@ -67,6 +67,8 @@ The following new features are planned for 7.8. They are at varying degrees of c
 
 - [Overloaded record fields](records/overloaded-record-fields/plan), by Adam Gundry (GSOC).  Not sure if this will be done.
 
+- [PatternSynonyms](pattern-synonyms), by Gergo Erdi. Progress tracked at [\#5144](https://gitlab.staging.haskell.org/ghc/ghc/issues/5144).
+
 ## Features that will definitely not make it
 
 
