@@ -150,7 +150,8 @@ analyzeAndRewriteBwd
 ```
 
 
-The differences are not great. But the types say more precisely what is
+The differences are not great. But the types are still nicely symmetrical; and they
+say more precisely what is
 actually necessary and useful.
 
 
