@@ -11,6 +11,6 @@ In GHC 7.8 we modified primops that returned a `Bool`. This includes comparisons
 
 
 That's all you need to do. If your interested in technical details behind this change, see [
-this page](http://ghc.haskell.org/trac/ghc/wiki/PrimBool). Note also that you can use new primops to write branchless algorithms.
+this page](http://ghc.haskell.org/trac/ghc/wiki/PrimBool).
 
 
