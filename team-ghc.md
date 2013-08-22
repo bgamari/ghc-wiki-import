@@ -258,7 +258,7 @@ At a certain point after you've made enough contributions, the question of commi
 
 
 
-Generally, to be granted access, you should have worked with the developers, and contributed a reasonable amount to the project. 'Reasonable' varies from person to person - from big/small features, to bug fixes, to helping others, there is no end of things to do in the land of GHC. Simply use your good judgement to decide if you think you meet the criteria, propose, and we'll talk about it.
+Generally, to be granted access, you should have worked with the developers, and contributed a reasonable amount of effort to the project in terms of patches and help. 'Reasonable' varies from person to person - from big/small features, to bug fixes, to helping others with their work, there is no end of things to do in the land of GHC. Simply use your good judgement to decide if you think you meet the criteria, propose, and we'll talk about it.
 
 
 
