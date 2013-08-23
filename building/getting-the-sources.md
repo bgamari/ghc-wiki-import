@@ -134,11 +134,11 @@ To check out a specific version of GHC, run
 
 
 ```wiki
-  $ export VERSION=7.6.1
+  $ VERSION=7.4.2
   $ git clone http://git.haskell.org/ghc.git
   $ cd ghc
   $ git checkout -b ghc-${VERSION} ghc-${VERSION}-release
-  $ ./sync-all -r http://git.haskell.org/ghc.git --no-dph get
+  $ ./sync-all --no-dph get
   $ ./sync-all checkout -b ghc-${VERSION} ghc-${VERSION}-release
 ```
 
