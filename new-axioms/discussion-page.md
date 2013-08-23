@@ -1,3 +1,7 @@
+
+**Note: This page is out of date.** The final implementation is described [here](new-axioms). This page is kept for historical reasons.
+
+
 # Discussion: Pattern-matching axioms
 
 
