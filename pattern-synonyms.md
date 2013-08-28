@@ -187,7 +187,7 @@ The first part as is before and describes the expansion of the synonym in patter
    fac (Plus1 n) = Plus1 n * fac n 
 ```
 
-## Associated Patterns Synonyms
+## Associated pattern synonyms
 
 
 
@@ -221,7 +221,7 @@ Example:
 One could go one step further and leave out the `pattern` keyword to obtain *associated constructors*, which are required to be bidirectional. The capitalized identifier would indicate that a pattern synonym is being defined. For complicated cases one could resort to the `where` syntax (shown above).
 
 
-## Typed Patterns Synonyms
+## Typed pattern synonyms
 
 
 
