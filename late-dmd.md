@@ -11,7 +11,7 @@ The numbers quoted on this wiki page were using [ef017944600cf4e153aad686a6a78bf
 
 
 
-The corresponding testsuite commit is a7920ef6eefa5578c89b7cda0d6be207ee38c502
+The corresponding testsuite commit is [\[a7920ef6eefa5578c89b7cda0d6be207ee38c502/testsuite\]](/trac/ghc/changeset/a7920ef6eefa5578c89b7cda0d6be207ee38c502/testsuite)
 
 
 ## Commit notes
