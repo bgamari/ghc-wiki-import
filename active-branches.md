@@ -51,8 +51,6 @@ The actual status of these branches, including whether they have been merged and
 
 - `tc-arrows`: **Rearrange the typechecking of arrows, especially arrow "forms"**. Simon PJ & Ross Patterson.
 
-- `srcloc` and `real-src-loc-span`: **Amendments to spannings and SrcLocs**. Ian Lynagh.
-
 - `ghc-spj`: **???**. Simon PJ.
 
 # Dead/merged branches
@@ -105,3 +103,5 @@ This is a list of inactive branches which have been merged into the tree.
 
 
 - `patch-7704`: **Fix for [\#7704](https://gitlab.staging.haskell.org/ghc/ghc/issues/7704)**. José Pedro Magalhães. Will be part of 7.8.
+
+- `srcloc` and `real-src-loc-span`: **Amendments to spannings and SrcLocs**. Ian Lynagh.
