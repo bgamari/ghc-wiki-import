@@ -2,11 +2,7 @@
 
 
 
-Take a look at [\#7724](https://gitlab.staging.haskell.org/ghc/ghc/issues/7724) for the status of iOS cross compiling. Any any time, you should be able to take GHC HEAD and apply any patches for bugs that are open (not crossed out) in "Blocked by".
-
-
-
-Note: If you use ghc-7.6.3 on Mac OS/X as your bootstrap compiler and you are using Xcode version 5 or higher, there are problems. The problem is that 1. GHC tries to run a C pre-processor over Haskell code, and 2. Xcode versions \>= 5 use clang instead of gcc, and 3. clang doesn't like Haskell code.
+Note: If you use ghc-7.6.3 on OS X as your bootstrap compiler and you are using Xcode version 5 or higher, there are problems. The problem is that 1. GHC tries to run a C pre-processor over Haskell code, and 2. Xcode versions \>= 5 use clang instead of gcc, and 3. clang doesn't like Haskell code.
 
 
 
