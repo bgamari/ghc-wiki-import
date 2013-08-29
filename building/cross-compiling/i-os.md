@@ -92,8 +92,21 @@ sudo make install
 
 
 
-We had to patch Cabal again. Use this version for now: [
-https://github.com/the-real-blackh/cabal](https://github.com/the-real-blackh/cabal)
+You need a recent change,...
+
+
+```wiki
+commit 9f374ab45e62924506b992db9157c970c7259a03
+Author: Stephen Blackheath <stephen.blackheath@ipwnstudios.com>
+Date:   Thu Aug 29 13:09:18 2013 +1200
+
+    Give the xxx_HOST_OS and xxx_HOST_ARCH options that were probed from ghc's target
+    platform, rather than assuming HOST == BUILD. This fixes things for cross compiling.
+```
+
+
+...so the best thing would be to check out the latest from [
+https://github.com/haskell/cabal/](https://github.com/haskell/cabal/), and build both Cabal and cabal-install.
 
 
 
