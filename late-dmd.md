@@ -6,15 +6,7 @@ Notes about running demand analysis a second time, late in the pipeline.
 
 
 
-Commit [c080f727ba5f83921b842fcff71e9066adbdc250](/trac/ghc/changeset/c080f727ba5f83921b842fcff71e9066adbdc250/ghc)
-
-
-
-The numbers quoted on this wiki page were using [ef017944600cf4e153aad686a6a78bfb48dea67a](/trac/ghc/changeset/ef017944600cf4e153aad686a6a78bfb48dea67a/ghc) as the base commit — after measuring, I rebased my patch to apply it to [33c880b43ed72d77f6b1d95d5ccefbd376c78c78](/trac/ghc/changeset/33c880b43ed72d77f6b1d95d5ccefbd376c78c78/ghc)
-
-
-
-The corresponding testsuite commit is [\[a7920ef6eefa5578c89b7cda0d6be207ee38c502/testsuite\]](/trac/ghc/changeset/a7920ef6eefa5578c89b7cda0d6be207ee38c502/testsuite)
+Commits [c080f727ba5f83921b842fcff71e9066adbdc250](/trac/ghc/changeset/c080f727ba5f83921b842fcff71e9066adbdc250/ghc) [\[a7920ef6eefa5578c89b7cda0d6be207ee38c502/testsuite\]](/trac/ghc/changeset/a7920ef6eefa5578c89b7cda0d6be207ee38c502/testsuite)
 
 
 ## Commit notes
@@ -64,6 +56,10 @@ Simplifying the .hi scheme was the easiest way to enable `-flate-dmd-anal` and m
 
 
 ### Effect on .hi file size
+
+
+
+The comparison in this section page uses [ef017944600cf4e153aad686a6a78bfb48dea67a](/trac/ghc/changeset/ef017944600cf4e153aad686a6a78bfb48dea67a/ghc) as the base commit — after measuring, I rebased my patch to apply it to [33c880b43ed72d77f6b1d95d5ccefbd376c78c78](/trac/ghc/changeset/33c880b43ed72d77f6b1d95d5ccefbd376c78c78/ghc)
 
 
 
@@ -134,6 +130,10 @@ If demand analysis removes all the value arguments from a function f in A.hs and
 
 
 ### Effect on .hi file size and .a file size
+
+
+
+The comparison in this section page uses [ef017944600cf4e153aad686a6a78bfb48dea67a](/trac/ghc/changeset/ef017944600cf4e153aad686a6a78bfb48dea67a/ghc) as the base commit — after measuring, I rebased my patch to apply it to [33c880b43ed72d77f6b1d95d5ccefbd376c78c78](/trac/ghc/changeset/33c880b43ed72d77f6b1d95d5ccefbd376c78c78/ghc)
 
 
 
@@ -249,7 +249,7 @@ These are the big .a changes over 10K.
 
 
 
-I'm using commit
+These numbers in this section come from [c080f727ba5f83921b842fcff71e9066adbdc250](/trac/ghc/changeset/c080f727ba5f83921b842fcff71e9066adbdc250/ghc), building the libraries/nofib tests with various combinations of -fno-late-dmd-anal and -flate-dmd-anal.
 
 
 
