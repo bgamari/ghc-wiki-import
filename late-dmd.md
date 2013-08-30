@@ -104,7 +104,7 @@ Here's the files with a growth \>10%.
 (0.21422422135168143,"ghc-prim/dist-install/build/GHC/Classes.hi")
 ```
 
-### Accommodation of -flate-dmd-anal and -ffun-to-thunk --
+### Main Benefit of Removal
 
 
 
