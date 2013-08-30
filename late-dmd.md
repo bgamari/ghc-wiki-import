@@ -137,6 +137,7 @@ The issue here is that the second demand analysis in GHC.Real refines the strict
 
 ```wiki
 first Str=DmdType <S(SLLLLLLLL),U(U,A,A,U,A,A,A,A,A)>
+
                   <L,U>
 
 second Str=DmdType <S(S(LS(SLLLLLLL)L)LLLLLLLL),
@@ -148,7 +149,7 @@ second Str=DmdType <S(S(LS(SLLLLLLL)L)LLLLLLLL),
                     1*C1(C1(U)),
                     A,A,A,A,A)>
 
-                   <L,U>,
+                   <L,U>
 ```
 
 
@@ -156,7 +157,7 @@ Since there are three leaf Us in the first signature, the worker's type takes **
 
 
 
-Similar to -flate-dmd-anal, abandoning the clever .hi scheme lets us safely import code compiled with/without -ffun-to-thunk from a module compiled without/with -ffun-to-thunk. I can explain this one.
+Similar to -flate-dmd-anal, abandoning the clever .hi scheme lets us safely import code compiled with/without -ffun-to-thunk from a module compiled without/with -ffun-to-thunk.
 
 
 - Compile A.hs with -ffun-to-thunk
