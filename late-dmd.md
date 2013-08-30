@@ -27,6 +27,8 @@ The bulk of this patch merely simplifies the treatment of wrappers in interface 
 
 - Ask the performance czars and community for help in determining if we should make -O2 imply -flate-dmd-anal.
 
+- That might involve investigating the more-reliable-looking slowdowns in the New performance numbers section. No slow down was apparent on both platforms (so far), but a couple looked reliable on a given platform. eg typecheck showed the same slowdown regardless of -flate-dmd-anal on the nofib tests (ie same in 10 and 11) and also regardless of mode=norm or mode=slow. Thus it smells like some change in a library function that the main loop of typecheck uses consistently is getting a slowdown. But it's very hard to tell from the numbers and it's take a lot of time to investigate that sort of thing.
+
 ## Relation to other tickets
 
 
@@ -303,7 +305,7 @@ Binary Sizes
 ```wiki
 Allocations
 
--- NB nucliec2 and cryptarithm2 are explained in the "Old performance numbers" section below.
+-- NB nucleic2 and cryptarithm2 are explained in the "Old performance numbers" section below.
 
 -------------------------------------------------------------------------------
         Program                   00              10              11
@@ -375,7 +377,7 @@ reverse-complem                 0.27          +13.5%          +12.8%
 ```wiki
 Allocations
 
--- NB nucliec2 and cryptarithm2 are explained in the "Old performance numbers" section below.
+-- NB nucleic2 and cryptarithm2 are explained in the "Old performance numbers" section below.
 
 -------------------------------------------------------------------------------
         Program                   00              10              11
