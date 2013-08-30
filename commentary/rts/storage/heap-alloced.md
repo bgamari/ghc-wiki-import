@@ -2,7 +2,7 @@
 
 
 
-This page is about the `HEAP_ALLOCED()` macro/function in the runtime system.  
+This page is about the `HEAP_ALLOCED()` macro/function in the runtime system.  See [\#8199](https://gitlab.staging.haskell.org/ghc/ghc/issues/8199) which is about getting rid of `HEAP_ALLOCED`.
 
 
 ```wiki
