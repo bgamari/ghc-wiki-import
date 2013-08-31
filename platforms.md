@@ -286,7 +286,7 @@ Tier 2 platforms as possible to Tier 1, as soon as they meet the Tier 1 criteria
 <th> 
 </th></tr>
 <tr><th> mips         </th>
-<th> Linux           </th>
+<th> Linux             </th>
 <th> mips-unknown-linux      </th>
 <th> No           </th>
 <th> No   </th>
@@ -296,7 +296,7 @@ Tier 2 platforms as possible to Tier 1, as soon as they meet the Tier 1 criteria
 <th> 
 </th></tr>
 <tr><th> mipsel       </th>
-<th> Linux           </th>
+<th> Linux             </th>
 <th> mipsel-unknown-linux    </th>
 <th> No           </th>
 <th> No   </th>
@@ -306,7 +306,7 @@ Tier 2 platforms as possible to Tier 1, as soon as they meet the Tier 1 criteria
 <th> 
 </th></tr>
 <tr><th> ARM          </th>
-<th> Linux           </th>
+<th> Linux             </th>
 <th> arm-unknown-linux       </th>
 <th> No           </th>
 <th> No   </th>
@@ -316,7 +316,7 @@ Tier 2 platforms as possible to Tier 1, as soon as they meet the Tier 1 criteria
 <th> 
 </th></tr>
 <tr><th> ARM          </th>
-<th> Debian armel    </th>
+<th> Debian armel </th>
 <th> arm-linux-gnueabi       </th>
 <th> Yes          </th>
 <th> No   </th>
@@ -324,6 +324,16 @@ Tier 2 platforms as possible to Tier 1, as soon as they meet the Tier 1 criteria
 <th> No           </th>
 <th> No                      </th>
 <th> [Building/ARMLinuxGnuEABI](building/arm-linux-gnu-eabi) 
+</th></tr>
+<tr><th> ARM          </th>
+<th> iOS                </th>
+<th> arm-apple-darwin10       </th>
+<th> Yes          </th>
+<th> No   </th>
+<th> Yes     </th>
+<th> No           </th>
+<th> No                      </th>
+<th> [Building/CrossCompiling/iOS](building/cross-compiling/i-os) 
 </th></tr></table>
 
 
