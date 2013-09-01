@@ -60,6 +60,14 @@ DYNAMIC_GHC_PROGRAMS = NO
 GhcLibWays           = v
 ```
 
+
+The iOS simulator build also requires:
+
+
+```wiki
+GhcStage1HcOpts    = -O -fllvm
+```
+
 ### 5. Configure & build
 
 
