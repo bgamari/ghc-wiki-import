@@ -43,6 +43,10 @@ Changes to:
          I64[Hp + 0] = I64[R1 + 32];
 ```
 
+
+I.e. no change from un-profiled.
+
+
 ### CAF Allocation
 
 
@@ -218,6 +222,7 @@ Changes to:
          // (blackhole)
          I64[Sp - 32] = stg_upd_frame_info;
          I64[Sp - 8] = R1;
+         // XXX or maybe omit this
          I64[Sp - 24] = _crc; // so we can restore it on return, NOT the same as current nursery
          // (load free variables)
          ...
@@ -294,11 +299,15 @@ Changes to:
          R1 = _c17l::I64;
 ```
 
+
+No change from unprofiled
+
+
 ## Case split
 
 
 
-Check if old resource container is still valid, and if not do a nursery swap.
+Do a nursery swap.
 
 
 
