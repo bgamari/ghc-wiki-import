@@ -120,7 +120,7 @@ The ghc-ios-scripts directory you checked out earlier contains two wrappers call
 
 
 ```wiki
-arm-apple-darwin10-cabal install network
+arm-apple-darwin10-cabal install text
 ```
 
 ### 7. Make sure hsc2hs is new enough
