@@ -47,9 +47,9 @@ The following new features are planned for 7.8. They are at varying degrees of c
 
 - Geoff Mainland is working on a better Template Haskell implementation ([
   http://ghc.haskell.org/trac/ghc/wiki/TemplateHaskell/BlogPostChanges](http://ghc.haskell.org/trac/ghc/wiki/TemplateHaskell/BlogPostChanges), [
-  http://gmainland.blogspot.co.uk/2013/05/type-safe-runtime-code-generation-with.html](http://gmainland.blogspot.co.uk/2013/05/type-safe-runtime-code-generation-with.html)), in the `th-new` branch of various repos.
+  http://gmainland.blogspot.co.uk/2013/05/type-safe-runtime-code-generation-with.html](http://gmainland.blogspot.co.uk/2013/05/type-safe-runtime-code-generation-with.html)), in the `th-new` branch of various repos. ETA: September 13.
 
-- Geoff Mainland is working generalising the support for SSE-like instructions.
+- Geoff Mainland is working generalising the support for SSE-like instructions. ETA: September 13.
 
 - Iavor Diatchki is working on type-level nats ([\#4385](https://gitlab.staging.haskell.org/ghc/ghc/issues/4385), [
   http://ghc.haskell.org/trac/ghc/wiki/TypeNats](http://ghc.haskell.org/trac/ghc/wiki/TypeNats)).  The plan is to support simple type-level arithmetic in GHC 7.8. The branch `type-nats-simple` has the code.
