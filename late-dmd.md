@@ -1,8 +1,14 @@
 
 
 
+# Late Demand analysis
+
+
 
 Notes about running demand analysis a second time, late in the pipeline.
+
+
+## Status
 
 
 
@@ -14,18 +20,19 @@ Commits
 - [e4a1d2d0a71bf335a04eaf93deb440b709f9430e](/trac/ghc/changeset/e4a1d2d0a71bf335a04eaf93deb440b709f9430e/ghc) - SPJ finished what c080f727 started by further simplifying things I hadn't recognized as possible
 - [34728de0f059d8e076981448392203f2501aa120](/trac/ghc/changeset/34728de0f059d8e076981448392203f2501aa120/ghc) - I updated the documentation and a source Note for -flate-dmd-anal and -ffun-to-thunk
 
-## Commit notes
+
+The -flate-dmd-anal flag runs the demand analysis a second time just before CorePrep, with a subsequent run of the Simplifier.  Cf [\#7782](https://gitlab.staging.haskell.org/ghc/ghc/issues/7782).
 
 
 
-The -flate-dmd-anal flag runs the demand analysis a second time just before CorePrep. It's not on by default yet, but we hope -O2 will eventually imply it, perhaps even for the GHC 7.8 release.
+It's not on by default yet, but we hope -O2 will eventually imply it, perhaps even for the GHC 7.8 release.
 
 
 
-The bulk of this patch merely simplifies the treatment of wrappers in interface files.
+The bulk of this patch merely simplifies the treatment of wrappers in interface files; see "Removing the clever .hi files scheme" below.
 
 
-## TODO
+### TODO
 
 
 - Ask the performance czars and community for help in determining if we should make -O2 imply -flate-dmd-anal.
@@ -34,11 +41,14 @@ The bulk of this patch merely simplifies the treatment of wrappers in interface 
 
   - To proceed: perhaps measure mode=slow on the MacBook Pro. Also build the libraries with ticky on the big server to search for the hypothetical library function that is slowing down typecheck.
 
-## Relation to other tickets
+### Relation to other tickets
 
 
 
 There are some tickets documenting runtime bugs that can be cleaned up by running the demand analyzer (followed by a simplifier run) a second time at the end of the pipeline: [\#4941](https://gitlab.staging.haskell.org/ghc/ghc/issues/4941), [\#5302](https://gitlab.staging.haskell.org/ghc/ghc/issues/5302), [\#6087](https://gitlab.staging.haskell.org/ghc/ghc/issues/6087). [\#6070](https://gitlab.staging.haskell.org/ghc/ghc/issues/6070) ? Others?
+
+
+---
 
 
 ## Removing the clever .hi files scheme
@@ -170,14 +180,10 @@ Similar to -flate-dmd-anal, abandoning the clever .hi scheme lets us safely impo
 If demand analysis removes all the value arguments from a function f in A.hs and B.hs uses that function, compilation of B.hs will crash. The problem is that the regeneration of the body of f in B will attempt to apply f to a `realWorld#` argument because there is no -ffun-to-thunk flag. However, f no longer accepts any arguments, since it was compiled with -ffun-to-thunk. Boom.
 
 
-## -flate-dmd-anal
+---
 
 
-
--flate-dmd-anal adds a second demand analysis with a subsequent invocation of the simplifier just before CorePrep. Cf [\#7782](https://gitlab.staging.haskell.org/ghc/ghc/issues/7782)
-
-
-### Effect on .hi file size and .a file size
+## Effect on .hi file size and .a file size
 
 
 
@@ -293,11 +299,14 @@ These are the big .a changes over 10K.
 </th></tr></table>
 
 
-### New performance numbers
+---
+
+
+## Performance numbers
 
 
 
-These numbers in this section come from [c080f727ba5f83921b842fcff71e9066adbdc250](/trac/ghc/changeset/c080f727ba5f83921b842fcff71e9066adbdc250/ghc), building the libraries/nofib tests with various combinations of -fno-late-dmd-anal and -flate-dmd-anal.
+These numbers in this section come from [c080f727ba5f83921b842fcff71e9066adbdc250](/trac/ghc/changeset/c080f727ba5f83921b842fcff71e9066adbdc250/ghc), building the libraries/nofib tests with various combinations of `-fno-late-dmd-anal` and `-flate-dmd-anal`.
 
 
 
@@ -342,14 +351,15 @@ Binary Sizes
         Average                -----           +0.6%           +0.6%
 ```
 
-#### 2.7Ghz Core i7 MacBook Pro, 16GB memory, 64-bit
+### 64-bit MacBook Pro
 
 
 
+2.7Ghz Core i7 MacBook Pro, 16GB memory, 64-bit.
 One processor with two cores; each core has 25 KB L2 cache, with a (shared) 4MB L3 cache.
 
 
-##### mode=norm NoFibRuns=30
+#### mode=norm NoFibRuns=30
 
 
 ```wiki
@@ -418,15 +428,15 @@ reverse-complem                 0.27          +13.5%          +12.8%
         Average                -----           -0.9%           -0.8%
 ```
 
-#### two processors, each 2.40GHz Xeon E5620, 12MB cache, 48GB memory, 64-bit
+### Dual 64-bit Xeon
 
 
 
-cf [
+Two processors, each 2.40GHz Xeon E5620, 12MB cache, 48GB memory, 64-bit.  cf [
 http://ark.intel.com/products/47925](http://ark.intel.com/products/47925), both processors have four cores (so eight "threads" via Hyper-Threading).
 
 
-##### mode=norm NoFibRuns=30
+#### mode=norm NoFibRuns=30
 
 
 ```wiki
@@ -505,7 +515,7 @@ Elapsed Time
         Average                -----           +0.7%           +0.3%
 ```
 
-##### mode=slow NoFibRuns=30
+#### mode=slow NoFibRuns=30
 
 
 ```wiki
@@ -586,7 +596,10 @@ reverse-complem                 1.39           -5.9%           -5.8%
         Average                -----           +0.1%           -0.3%
 ```
 
-### Old performance numbers
+---
+
+
+## Old performance numbers
 
 
 
