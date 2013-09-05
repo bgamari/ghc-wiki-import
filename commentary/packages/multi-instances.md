@@ -14,6 +14,7 @@ This page is about how to change the package system to allow multiple instances 
 See also
 
 
+- [Commentary pages about packages](commentary/packages)
 - [GSoC project wiki page](commentary/g-so-c-multiple-instances) and [
   video](https://www.youtube.com/watch?v=h4QmkyN28Qs).
 - [
