@@ -106,7 +106,7 @@ It is very important to put the msys/mingw stuff on your path *before* `c:/windo
 
 
 
-**Cause**: `libtool` invokes the following command line (in the function `func_convert_coer_msys_to_w32`:
+**Cause**: `libtool` invokes the following command line (in the function `func_convert_coer_msys_to_w32`):
 
 
 ```wiki
