@@ -5,7 +5,7 @@
 
 
 - Firefox: Add a new bookmark.
-- Google Chrome: Right-click on the address bar and select `Edit Search Engines`, then you can scroll down and add a new search engine entry.
+- Google Chrome: Right-click on the address bar and select `Edit Search Engines`, then you can scroll all the way down and add a new search engine entry.
 
 ## Finding tickets by number
 
