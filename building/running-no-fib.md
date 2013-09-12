@@ -157,7 +157,7 @@ To tweak things, add settings to your `mk/build.mk` (see [Commentary/SourceTree]
 See `mk/opts.mk`. The default is `mode=norm`.
 
 
-## Some tips on measuring performance
+## Other tips on measuring performance
 
 
 
