@@ -1,3 +1,7 @@
+
+*For type applications within function application expressions (e.g. f \@Int x), see [TypeApplication](type-application)*
+
+
 # Syntax for explicit kinds, new story
 
 
