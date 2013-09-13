@@ -150,7 +150,7 @@ Core already had provided all the necessary feature; the question was just how t
 
 
 
-The implementation fulfills the first goal, the second partly (`C N -> C T` is allowed even without `C`'s data constructors in scope; if `C` should be abstract the role of its argument needs to be `Nominal`. Due to the ad-hoc nature of the `Coercible` instances, the second and third goal are not achieve. No work towards the fifths goal has been done.
+The implementation fulfills the first goal, the second partly (`C N -> C T` is allowed even without `C`'s data constructors in scope; if `C` should be abstract the role of its argument needs to be `Nominal`). Due to the ad-hoc nature of the `Coercible` instances, the second and third goal are not achieve. No work towards the fifths goal has been done.
 
 
 ## Discussion of alternatives
