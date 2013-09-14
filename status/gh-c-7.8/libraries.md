@@ -5,7 +5,7 @@
 
 
 
-Note: Libraries with a "<sup>1</sup>" marker are used internally (e.g. by `ghci`) and not exposed in the (boot-)package database (yet).
+Note: Libraries with a "<sup>1</sup>" marker are used internally (e.g. by `ghci` or `haddock`) and not exposed in the (boot-)package database. Libraries marked "<sup>2</sup>" are used by DPH (and only installed when `InstallExtraPackages=YES`)
 
 
 ### Cabal
@@ -61,7 +61,7 @@ Note: Libraries with a "<sup>1</sup>" marker are used internally (e.g. by `ghci`
   http://github.com/haskell/pretty.git](http://github.com/haskell/pretty.git)
 - **TODO**
 
-### primitive<sup>1</sup>
+### primitive<sup>2</sup>
 
 
 - upstream: [
@@ -89,10 +89,11 @@ Note: Libraries with a "<sup>1</sup>" marker are used internally (e.g. by `ghci`
 
 - upstream: [
   http://git.haskell.org/darcs-mirrors/transformers.git](http://git.haskell.org/darcs-mirrors/transformers.git)
+- Newly added in GHC 7.8
 - still at 0.3.0.0 since GHC 7.6.3
 - asked upstream; shall remain at 0.3.0.0 for GHC 7.8.1
 
-### vector<sup>1</sup>
+### vector<sup>2</sup>
 
 
 - upstream: [
