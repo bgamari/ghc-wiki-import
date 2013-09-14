@@ -77,7 +77,7 @@ For iOS:
 
 
 ```wiki
-./configure --target=arm-apple-darwin10 --prefix=/usr/local/ghc-ios/
+./configure --target=arm-apple-darwin10  --with-gcc=arm-apple-darwin10-gcc --prefix=/usr/local/ghc-ios/
 make
 sudo mkdir -p /usr/local/ghc-ios/
 sudo make install
@@ -88,7 +88,7 @@ For the iOS simulator:
 
 
 ```wiki
-./configure --target=i386-apple-darwin11 --prefix=/usr/local/ghc-ios-sim/
+./configure --target=i386-apple-darwin11 --with-gcc=i386-apple-darwin11-gcc --prefix=/usr/local/ghc-ios-sim/
 make
 sudo mkdir -p /usr/local/ghc-ios-sim/
 sudo make install
