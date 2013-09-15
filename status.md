@@ -32,8 +32,6 @@ Here are our release plans for
 
 
 - [GHC 7.8](status/gh-c-7.8)
-- [GHC 6.12 (outdated)](status/gh-c-6.12)
-- [GHC 6.10 (outdated)](status/gh-c-6.10)
 
 ## Planning notes
 
@@ -46,7 +44,7 @@ Here is our [current planning document](ghc-planning), intended mainly to help S
 
 
 
-a curation of interesting tickets by SPJ, not discoverable otherwise on the wiki [
+A curation of interesting tickets by SPJ, not discoverable otherwise on the wiki [
 here ](http://hackage.haskell.org/trac/ghc/wiki/Status/SLPJ-Tickets)
 
 
