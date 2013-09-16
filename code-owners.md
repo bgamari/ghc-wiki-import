@@ -81,6 +81,11 @@ tree that are most directly implicated.
   - Austin Seipp
   - Directories: `libffi/`
 
+- Documentation
+
+  - Austin Seipp
+  - Directories: `docs/`
+
 - The main `HsSyn` data type
 
   - Simon Peyton Jones
