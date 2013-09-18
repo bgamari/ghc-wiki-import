@@ -54,7 +54,7 @@ This page is intended to serve as the first stop for those people who say, "I wa
 
 
 
-Below is a list of bugs that appear to be "low-hanging fruit" -- things that might be reasonable for a newcomer to GHC hacking. Of course, we can't ever be sure of how hard a task is before doing it, so apologies if one of these is too hard. This list was last updated on 16 September 2013.
+Below is a list of bugs that appear to be "low-hanging fruit" -- things that might be reasonable for a newcomer to GHC hacking. Of course, we can't ever be sure of how hard a task is before doing it, so apologies if one of these is too hard. This list was last updated on 18 September 2013.
 
 
 - [\#2507](https://gitlab.staging.haskell.org/ghc/ghc/issues/2507) - Unicode quotes in error messages
@@ -62,7 +62,6 @@ Below is a list of bugs that appear to be "low-hanging fruit" -- things that mig
 - [\#2450](https://gitlab.staging.haskell.org/ghc/ghc/issues/2450) - Data.Complex.magnitude squares using \^ (2 :: Int), which is slow
 - [\#7021](https://gitlab.staging.haskell.org/ghc/ghc/issues/7021) - Tuple (and other exotic predicates) not yet handled in Template Haskell
 - [\#7401](https://gitlab.staging.haskell.org/ghc/ghc/issues/7401) - Can't derive instance for Eq when datatype has no constructor, while it is trivial do do so.
-- [\#7633](https://gitlab.staging.haskell.org/ghc/ghc/issues/7633) - Checkable "minimal complete definition" for class instances (longer project, but should be accessible)
 - [\#7962](https://gitlab.staging.haskell.org/ghc/ghc/issues/7962) - Fixing return value from a run of `ghci`
 - [\#8100](https://gitlab.staging.haskell.org/ghc/ghc/issues/8100) - Standalone deriving using template haskell
 - [\#8308](https://gitlab.staging.haskell.org/ghc/ghc/issues/8308) - Resurrect ticky code for counting constructor arity
