@@ -81,7 +81,8 @@ An `Area` represents space on the stack; it may use either the `RegSlot` constru
 
 
 
-**Each `Area` grows down, with offset 0 pointing to the old end of the `Area`.**
+**Each `Area` grows down (towards lower addresses), with offset 0 pointing to the old end of the `Area`.**
+So offset 0 actually addresses the byte one beyond the high end of the `Area`. To address a 4-byte object at the old end of the `Area`, we use the offset 4.
 
 
 >
@@ -93,8 +94,6 @@ An `Area` represents space on the stack; it may use either the `RegSlot` constru
 
 To name a specific location on the stack, we represent its address with a new kind of `CmmExpr`: the `CmmStackSlot`.
 A `CmmStackSlot` is just an integer offset into an `Area`. 
-
-To address a 4-byte object at the old end of the `Area`, we use the offset 4.
 
 
 
