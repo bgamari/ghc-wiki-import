@@ -251,7 +251,12 @@ Each time you modify your Haskell code you'll need to re-compile from the comman
 
 
 Take a look at [
-https://github.com/ghc-ios/](https://github.com/ghc-ios/) for patched versions of Hackage packages and other useful things. Ask us if you want to join the ghc-ios project on GitHub.
+https://github.com/ghc-ios/](https://github.com/ghc-ios/) for patched versions of Hackage packages and other useful things. Ask us if you want to join the ghc-ios project on GitHub, and feel free to raise bugs there.
+
+
+
+The Haskell-iPhone mailing list is at [
+http://www.haskell.org/mailman/listinfo/iphone](http://www.haskell.org/mailman/listinfo/iphone)
 
 
 ## Loose ends
