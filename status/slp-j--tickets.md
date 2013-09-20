@@ -54,6 +54,7 @@ See also [TemplateHaskell](template-haskell)
 ## Optimisation
 
 
+- [\#8275](https://gitlab.staging.haskell.org/ghc/ghc/issues/8275): loopification and profiling
 - [\#8335](https://gitlab.staging.haskell.org/ghc/ghc/issues/8335): more gc entry points
 - [\#8336](https://gitlab.staging.haskell.org/ghc/ghc/issues/8336): sinking pass does not sink
 - [\#8327](https://gitlab.staging.haskell.org/ghc/ghc/issues/8327): dead code (in heap checks) not eliminated by C--
