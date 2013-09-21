@@ -8,7 +8,7 @@ various platforms.  To find out who is responsible for each platform, see [Contr
 
 
 For information about what distributions GHC is part of, see the [
-distribution packages](http://haskell.org/ghc/distribution_packages.html) page.
+distribution packages](http://haskell.org/ghc/distribution_packages) page.
 
 
 
@@ -345,7 +345,7 @@ reports](http://www.haskell.org/pipermail/glasgow-haskell-users/2009-November/01
 
 
 
-In most cases, binaries for the tier 2 platforms can be downloaded from the [Distribution Packages](http://www.haskell.org/ghc/distribution_packages.html) page, e.g. you can get binaries for most of the Linux platforms from Debian. In some cases, for example the Solaris platforms, you'll need to go to the [download page](http://www.haskell.org/ghc/download.html) of a particular release to get a bindist.
+In most cases, binaries for the tier 2 platforms can be downloaded from the [Distribution Packages](http://www.haskell.org/ghc/distribution_packages) page, e.g. you can get binaries for most of the Linux platforms from Debian. In some cases, for example the Solaris platforms, you'll need to go to the [download page](http://www.haskell.org/ghc/download) of a particular release to get a bindist.
 
 
 ## Tier 3 platforms
