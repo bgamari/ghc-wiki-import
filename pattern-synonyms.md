@@ -1,3 +1,6 @@
+---
+
+
 # Pattern Synonyms
 
 
@@ -113,16 +116,28 @@ The simplest form of pattern synonyms is the one from the examples above.  The g
 
 
 
-`pattern` *conid* *varid<sub>1</sub>* ... *varid<sub>n</sub>* `=` *pat*
+`pattern` *conid* *varid<sub>1</sub>* ... *varid<sub>n</sub>* `->` *pat*
 
 
 
-`pattern` *varid<sub>1</sub>* *consym* *varid<sub>2</sub>* `=` *pat*
+`pattern` *varid<sub>1</sub>* *consym* *varid<sub>2</sub>* `->` *pat*
 
 
 - Each of the variables on the left hand side must occur exactly once on the right hand side 
 - Pattern synonyms are not allowed to be recursive.  Cf. type synonyms.
-- The semantics is simply expansion of the synonym.
+
+<table><tr><th>**TODO**
+</th></tr>
+<tr><th>
+There have been several proposals for the syntax of defining pattern-only synonyms:
+
+
+- `pattern` *conid* *varid<sub>1</sub>* ... *varid<sub>n</sub>* `~` *pat*
+- `pattern` *conid* *varid<sub>1</sub>* ... *varid<sub>n</sub>* `:=` *pat*
+- `pattern` *conid* *varid<sub>1</sub>* ... *varid<sub>n</sub>* `->` *pat*
+
+</th></tr></table>
+
 
 
 Pattern synonyms can be exported and imported by prefixing the *conid* with the keyword `pattern`:
@@ -155,7 +170,7 @@ E.g.
 
 ```wiki
    pattern Arrow :: Type -> Type -> Type
-   pattern Arrow t1 t2 = App "->" [t1, t2]
+   pattern Arrow t1 t2 -> App "->" [t1, t2]
 ```
 
 
@@ -165,20 +180,28 @@ Together with [ViewPatterns](view-patterns) we can now create patterns that look
 ```wiki
 import qualified Data.Sequence as Seq
 
-pattern Empty = (Seq.viewl -> Seq.EmptyL)
-pattern x :< xs = (Seq.viewl -> x Seq.:< xs)
-pattern xs :> x = (Seq.viewr -> xs Seq.:> x)
+pattern Empty -> (Seq.viewl -> Seq.EmptyL)
+pattern x :< xs -> (Seq.viewl -> x Seq.:< xs)
+pattern xs :> x -> (Seq.viewr -> xs Seq.:> x)
 ```
 
-## Implicitly-bidirectional pattern synonyms
+## Simply-bidirectional pattern synonyms
 
 
 
-In cases where *pat* is in the intersection of the grammars for patterns and expressions (i.e. is valid both as an expression and a pattern), the pattern synonym is said to be bidirectional, and can be used in expression contexts as well.
+In cases where *pat* is in the intersection of the grammars for patterns and expressions (i.e. is valid both as an expression and a pattern), the pattern synonym can be made bidirectional, and can be used in expression contexts as well. Bidirectional pattern synonyms have the following syntax:
 
 
 
-For example, the following two are not bidirectional:
+`pattern` *conid* *varid<sub>1</sub>* ... *varid<sub>n</sub>* `=` *pat*
+
+
+
+`pattern` *varid<sub>1</sub>* *consym* *varid<sub>2</sub>* `=` *pat*
+
+
+
+For example, the following two pattern synonym definitions are rejected, because they are not bidirectional (but they would be valid as pattern-only synonyms)
 
 
 ```wiki
@@ -203,14 +226,21 @@ In contrast, the pattern synonyms for *Arrow* and *Int* above are bidirectional,
 
 
 
-What if you want to use `Plus1` from the earlier example in an expression?
+What if you want to use `Succ` in an expression:
+
+
+```wiki
+    pattern Succ n -> n1 | let n = n1 -1, n >= 0
+```
+
+
 It's clearly impossible since its expansion is a pattern that has no meaning as an expression.
 Nevertheless, if we want to make what looks like a constructor for a type we will often want to use it in both patterns and expressions.
 This is the rationale for the most complicated synonyms, the bidirectional ones.  They provide two expansions, one for patterns and one for expressions.
 
 
 
-`pattern` *conid* *varid<sub>1</sub>* ... *varid<sub>n</sub>* `=` *pat* `where` *cfunlhs* *rhs*
+`pattern` *conid* *varid<sub>1</sub>* ... *varid<sub>n</sub>* `->` *pat* `where` *cfunlhs* *rhs*
 
 
 
@@ -222,9 +252,13 @@ Example:
 
 
 ```wiki
-   pattern Plus1 n = n1 | let n = n1-1, n >= 0 where
-      Plus1 n = n + 1
+   pattern Succ n -> n1 | let n = n1-1, n >= 0 where
+      Succ n = n + 1
 ```
+
+
+**TODO**: Rewrite this example to not use [ViewPatternsAlternative](view-patterns-alternative)
+
 
 
 The first part as is before and describes the expansion of the synonym in patterns. The second part describes the expansion in expressions.
@@ -232,7 +266,7 @@ The first part as is before and describes the expansion of the synonym in patter
 
 ```wiki
    fac 0 = 0
-   fac (Plus1 n) = Plus1 n * fac n 
+   fac (Succ n) = Succ n * fac n 
 ```
 
 ## Associated pattern synonyms
