@@ -45,10 +45,6 @@ other packages that are useful for development:
 
 
 
-If you are building GHC \>7.6 on Debian 7.0 (wheezy) you will need to install an updated version of happy (\>=1.19) which is available in sid and has not migrated to jessie as of  2013-09-25.
-
-
-
 You can make sure you have all dependencies by
 
 
