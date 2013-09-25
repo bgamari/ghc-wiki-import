@@ -45,7 +45,7 @@ other packages that are useful for development:
 
 
 
-(tested on Ubuntu 11.10)
+If you are building GHC \>7.6 on Debian 7.0 (wheezy) you will need to install an updated version of happy (\>=1.19) which is available in sid and has not migrated to jessie as of  2013-09-25.
 
 
 
@@ -57,7 +57,7 @@ You can make sure you have all dependencies by
 ```
 
 
-But this might install some packages you do not use in your system (e.g. lintian).  Alternatively install the following:
+But this might install some packages you do not use in your system (e.g. java, docbook, xsltproc).  Alternatively install the following:
 
 
 ```wiki
