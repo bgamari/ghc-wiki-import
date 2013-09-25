@@ -53,7 +53,7 @@ You can make sure you have all dependencies by
 
 
 ```wiki
-   sudo apt-get build-dep ghc6
+   sudo apt-get build-dep ghc
 ```
 
 
