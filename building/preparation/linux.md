@@ -57,7 +57,7 @@ But this might install some packages you do not use in your system (e.g. java, d
 
 
 ```wiki
-   sudo apt-get install haskell-platform git autoconf libtool make ncurses-dev g++
+   sudo apt-get install haskell-platform git autoconf libtool make ncurses-dev g++ llvm
 ```
 
 
