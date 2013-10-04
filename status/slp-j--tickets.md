@@ -22,6 +22,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#7862](https://gitlab.staging.haskell.org/ghc/ghc/issues/7862): overlap beween givens and instances
 - [\#7643](https://gitlab.staging.haskell.org/ghc/ghc/issues/7643): dark corner of sub-kinding and `unsafeCoerce#`
 - [\#7842](https://gitlab.staging.haskell.org/ghc/ghc/issues/7842): polymorphism in recursive do-blocks
+- [\#7730](https://gitlab.staging.haskell.org/ghc/ghc/issues/7730): better display in GHCi, via `IfaceSyn`.
 
 ## Template Haskell
 
