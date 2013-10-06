@@ -234,10 +234,10 @@ An environment directory will usually consist of the following files and directo
   0.10](http://trac.edgewall.org/intertrac/milestone%3A0.10))
 - `templates` - Custom Genshi environment-specific templates. *(since 0.11)*
 
-  - `site.html` - method to customize header, footer, and style, described in [TracInterfaceCustomization\#SiteAppearance](trac-interface-customization#)
+  - `site.html` - method to customize header, footer, and style, described in [TracInterfaceCustomization\#SiteAppearance](trac-interface-customization#site-appearance)
 
-
-**Caveat:** *don't confuse a Trac environment directory with the source code repository directory.* 
+###
+Caveat: don't confuse a *Trac environment directory* with the *source code repository directory*
 
 
 
