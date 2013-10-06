@@ -21,7 +21,7 @@ universal edit button](http://universaleditbutton.org/Universal_Edit_Button) of 
 
 
 The wiki itself does not enforce any structure, but rather resembles a stack of empty sheets of paper, where you can organize information and documentation as you see fit, and later reorganize if necessary. 
-As contributing to a wiki is essentially building an hypertext, 
+As contributing to a wiki is essentially building hypertext, 
 general advice regarding HTML authoring apply here as well.
 For example, the *[
 Style Guide for online hypertext](http://www.w3.org/Provider/Style)* explains how to think about the
