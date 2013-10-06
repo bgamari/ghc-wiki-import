@@ -77,6 +77,10 @@ TracModPython2.7](http://trac.edgewall.org/intertrac/wiki%3ATracModPython2.7), b
 
   1. 
   1. 
+                [Login Not Working](#LoginNotWorking)
+              
+  1. 
+  1. 
                 [Expat-related segmentation faults](#expat)
               
   1. 
@@ -392,9 +396,11 @@ In general, if you get server error pages, you can either check the Apache error
 For multiple projects, try restarting the server as well.
 
 
+### Login Not Working
 
-===Login Not Working===
-If you've used \<Location /\> directive, it will override any other directives, as well as \<Location /Login\>.
+
+
+If you've used `<Location />` directive, it will override any other directives, as well as `<Location /login>`.
 The workaround is to use negation expression as follows (for multi project setups):
 
 
