@@ -23,9 +23,7 @@ The workflow configured in this case is the original workflow, so that ticket ac
 Graphically, that looks like this:
 
 
-
-[](/trac/ghc/chrome/site/../common/guide/original-workflow.png)
-
+Enable JavaScript to display the workflow graph.
 
 
 There are some significant "warts" in this; such as accepting a ticket sets it to 'assigned' state, and assigning a ticket sets it to 'new' state.  Perfectly obvious, right?
@@ -44,9 +42,7 @@ When a new environment is created, a default workflow is configured in your trac
 Graphically, it looks like this:
 
 
-
-[](/trac/ghc/chrome/site/../common/guide/basic-workflow.png)
-
+Enable JavaScript to display the workflow graph.
 
 ## Additional Ticket Workflows
 
@@ -98,11 +94,9 @@ The available operations are:
 - del\_resolution -- Clears the resolution field
 - set\_resolution -- Sets the resolution to the selected value.
 
-  - *actionname*`.set_resolution` may optionally be set to a comma delimited list or a single value.
+  - *actionname*`.set_resolution` may optionally be set to a comma delimited list or a single value. Example:
 
     ```wiki
-    Example:
-
     resolve_new = new -> closed
     resolve_new.name = resolve
     resolve_new.operations = set_resolution
@@ -146,7 +140,7 @@ There are a couple of hard-coded constraints to the workflow.  In particular, ti
 
 
 
-While creating or modifying a ticket workfow, `contrib/workflow/workflow_parser.py` may be useful.  It can create `.dot` files that [
+While creating or modifying a ticket workflow, `contrib/workflow/workflow_parser.py` may be useful.  It can create `.dot` files that [
 GraphViz](http://www.graphviz.org) understands to provide a visual description of the workflow.
 
 
@@ -197,7 +191,8 @@ pass.set_resolution = fixed
 
 
 
-The tracopt.ticket.commit\_updater is the optional component that [replaces the old trac-post-commit-hook](trac-repository-admin#), in Trac 0.12.
+The [
+tracopt.ticket.commit\_updater](http://trac.edgewall.org/intertrac/source%3Atrunk/tracopt/ticket/commit_updater.py) is the optional component that [replaces the old trac-post-commit-hook](trac-repository-admin#), in Trac 0.12.
 
 
 
@@ -209,7 +204,8 @@ If you have a more complex workflow, like the testing stage described above and 
 
 
 
-Have a look at the Trac 0.11 recipe? for the `trac-post-commit-hook`, this will give you some ideas about how to modify the component.
+Have a look at the [
+Trac 0.11 recipe](http://trac.edgewall.org/intertrac/wiki%3A0.11/TracWorkflow%23How-ToCombineSVNtrac-post-commit-hookWithTestWorkflow) for the `trac-post-commit-hook`, this will give you some ideas about how to modify the component.
 
 
 ## Example: Add simple optional generic review state
@@ -262,7 +258,7 @@ accept.permissions = TICKET_MODIFY
 leave = * -> *
 leave.default = 1
 leave.operations = leave_status
-reassign = new,assigned,reopened -> new
+reassign = new,assigned,accepted,reopened -> assigned
 reassign.operations = set_owner
 reassign.permissions = TICKET_MODIFY
 reopen = closed -> reopened
@@ -322,7 +318,8 @@ If you add additional states to your workflow, you may want to customize your mi
 
 
 
-New enhancement ideas for the workflow system should be filed as enhancement tickets against the `ticket system` component.  If desired, add a single-line link to that ticket here.  Also look at the \[th:wiki:AdvancedTicketWorkflowPlugin\] as it provides experimental operations.
+New enhancement ideas for the workflow system should be filed as enhancement tickets against the `ticket system` component.  If desired, add a single-line link to that ticket here.  Also look at the [
+AdvancedTicketWorkflowPlugin](http://trac-hacks.org/wiki/AdvancedTicketWorkflowPlugin) as it provides experimental operations.
 
 
 
@@ -357,6 +354,19 @@ If you have a response to the comments below, create an enhancement ticket, and 
 - Actions should be selectable based on the ticket type (different Workflows for different tickets)
 
 
-*Look into the \[th:wiki:AdvancedTicketWorkflowPlugin\]'s `triage` operation.*
+*Look into the [
+AdvancedTicketWorkflowPlugin](http://trac-hacks.org/wiki/AdvancedTicketWorkflowPlugin)'s `triage` operation.*
 
 
+- I'd wish to have an option to perform automatic status changes. In my case, I do not want to start with "new", but with "assigned". So tickets in state "new" should automatically go into state "assigned". Or is there already a way to do this and I just missed it?
+
+
+*Have a look at [
+TicketCreationStatusPlugin](http://trac-hacks.org/wiki/TicketCreationStatusPlugin) and [
+TicketConditionalCreationStatusPlugin](http://trac-hacks.org/wiki/TicketConditionalCreationStatusPlugin)*
+
+
+- I added a 'testing' state. A tester can close the ticket or reject it. I'd like the transition from testing to rejected to set the owner to the person that put the ticket in 'testing'. The [
+  AdvancedTicketWorkflowPlugin](http://trac-hacks.org/wiki/AdvancedTicketWorkflowPlugin) is close with set\_owner\_to\_field, but we need something like set\_field\_to\_owner.
+
+- I'd like to track the time a ticket is in each state, adding up 'disjoints' intervals in the same state.
