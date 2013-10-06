@@ -1,52 +1,75 @@
-CONVERSION ERROR
+# Custom Ticket Fields
 
-Original source:
 
-```trac
-= Custom Ticket Fields =
+
 Trac supports adding custom, user-defined fields to the ticket module. Using custom fields, you can add typed, site-specific properties to tickets.
 
-== Configuration ==
-Configuring custom ticket fields is done in the [wiki:TracIni trac.ini] file. All field definitions should be under a section named `[ticket-custom]`.
+
+## Configuration
+
+
+
+Configuring custom ticket fields is done in the [trac.ini](trac-ini) file. All field definitions should be under a section named `[ticket-custom]`.
+
+
 
 The syntax of each field definition is:
-{{{
+
+
+```wiki
  FIELD_NAME = TYPE
  (FIELD_NAME.OPTION = VALUE)
  ...
-}}}
+```
+
+
 The example below should help to explain the syntax.
 
-=== Available Field Types and Options ===
- * '''text''': A simple (one line) text field.
-   * label: Descriptive label.
-   * value: Default value.
-   * order: Sort order placement. (Determines relative placement in forms with respect to other custom fields.)
-   * format: Either `plain` for plain text or `wiki` to interpret the content as WikiFormatting. (''since 0.11.3'')
- * '''checkbox''': A boolean value check box.
-   * label: Descriptive label.
-   * value: Default value (0 or 1).
-   * order: Sort order placement.
- * '''select''': Drop-down select box. Uses a list of values.
-   * label: Descriptive label.
-   * options: List of values, separated by '''|''' (vertical pipe).
-   * value: Default value (one of the values from options).
-   * order: Sort order placement.
- * '''radio''': Radio buttons. Essentially the same as '''select'''.
-   * label: Descriptive label.
-   * options: List of values, separated by '''|''' (vertical pipe).
-   * value: Default value (one of the values from options).
-   * order: Sort order placement.
- * '''textarea''': Multi-line text area.
-   * label: Descriptive label.
-   * value: Default text.
-   * cols: Width in columns.
-   * rows: Height in lines.
-   * order: Sort order placement.
-   * format: Either `plain` for plain text or `wiki` to interpret the content as WikiFormatting. (''since 0.11.3'')
 
-=== Sample Config ===
-{{{
+### Available Field Types and Options
+
+
+- **text**: A simple (one line) text field.
+
+  - label: Descriptive label.
+  - value: Default value.
+  - order: Sort order placement. (Determines relative placement in forms with respect to other custom fields.)
+  - format: One of: 
+
+    - `plain` for plain text 
+    - `wiki` to interpret the content as [WikiFormatting](wiki-formatting) (*since 0.11.3*) 
+    - `reference` to treat the content as a queryable value (*since 1.0*) 
+    - `list` to interpret the content as a list of queryable values, separated by whitespace (*since 1.0*)
+- **checkbox**: A boolean value check box.
+
+  - label: Descriptive label.
+  - value: Default value (0 or 1).
+  - order: Sort order placement.
+- **select**: Drop-down select box. Uses a list of values.
+
+  - label: Descriptive label.
+  - options: List of values, separated by **\|** (vertical pipe).
+  - value: Default value (one of the values from options).
+  - order: Sort order placement.
+- **radio**: Radio buttons. Essentially the same as **select**.
+
+  - label: Descriptive label.
+  - options: List of values, separated by **\|** (vertical pipe).
+  - value: Default value (one of the values from options).
+  - order: Sort order placement.
+- **textarea**: Multi-line text area.
+
+  - label: Descriptive label.
+  - value: Default text.
+  - cols: Width in columns.
+  - rows: Height in lines.
+  - order: Sort order placement.
+  - format: Either `plain` for plain text or `wiki` to interpret the content as [WikiFormatting](wiki-formatting). (*since 0.11.3*)
+
+### Sample Config
+
+
+```wiki
 [ticket-custom]
 
 test_one = text
@@ -76,28 +99,37 @@ test_six.label = This is a large textarea
 test_six.value = Default text
 test_six.cols = 60
 test_six.rows = 30
-}}}
+```
 
-''Note: To make entering an option for a `select` type field optional, specify a leading `|` in the `fieldname.options` option.''
 
-=== Reports Involving Custom Fields ===
+*Note: To make entering an option for a `select` type field optional, specify a leading `|` in the `fieldname.options` option.*
+
+
+### Reports Involving Custom Fields
+
+
 
 Custom ticket fields are stored in the `ticket_custom` table, not in the `ticket` table. So to display the values from custom fields in a report, you will need a join on the 2 tables. Let's use an example with a custom ticket field called `progress`.
 
-{{{
-#!sql
+
+```
 SELECT p.value AS __color__,
    id AS ticket, summary, owner, c.value AS progress
   FROM ticket t, enum p, ticket_custom c
   WHERE status IN ('assigned') AND t.id = c.ticket AND c.name = 'progress'
 AND p.name = t.priority AND p.type = 'priority'
   ORDER BY p.value
-}}}
-'''Note''' that this will only show tickets that have progress set in them, which is '''not the same as showing all tickets'''. If you created this custom ticket field ''after'' you have already created some tickets, they will not have that field defined, and thus they will never show up on this ticket query. If you go back and modify those tickets, the field will be defined, and they will appear in the query. If that's all you want, you're set.
+```
+
+
+**Note** that this will only show tickets that have progress set in them, which is **not the same as showing all tickets**. If you created this custom ticket field *after* you have already created some tickets, they will not have that field defined, and thus they will never show up on this ticket query. If you go back and modify those tickets, the field will be defined, and they will appear in the query. If that's all you want, you're set.
+
+
 
 However, if you want to show all ticket entries (with progress defined and without), you need to use a `JOIN` for every custom field that is in the query.
-{{{
-#!sql
+
+
+```
 SELECT p.value AS __color__,
    id AS ticket, summary, component, version, milestone, severity,
    (CASE status WHEN 'assigned' THEN owner||' *' ELSE owner END) AS owner,
@@ -110,16 +142,20 @@ SELECT p.value AS __color__,
      JOIN enum p ON p.name = t.priority AND p.type='priority'
   WHERE status IN ('new', 'assigned', 'reopened')
   ORDER BY p.value, milestone, severity, time
-}}}
+```
+
 
 Note in particular the `LEFT OUTER JOIN` statement here.
 
-=== Updating the database ===
 
-As noted above, any tickets created before a custom field has been defined will not have a value for that field. Here's a bit of SQL (tested with SQLite) that you can run directly on the Trac database to set an initial value for custom ticket fields. Inserts the default value of 'None' into a custom field called 'request_source' for all tickets that have no existing value:
+### Updating the database
 
-{{{
-#!sql
+
+
+As noted above, any tickets created before a custom field has been defined will not have a value for that field. Here's a bit of SQL (tested with SQLite) that you can run directly on the Trac database to set an initial value for custom ticket fields. Inserts the default value of 'None' into a custom field called 'request\_source' for all tickets that have no existing value:
+
+
+```
 INSERT INTO ticket_custom
    (ticket, name, value)
    SELECT 
@@ -130,12 +166,13 @@ INSERT INTO ticket_custom
    WHERE id NOT IN (
       SELECT ticket FROM ticket_custom
    );
-}}}
+```
 
-If you added multiple custom fields at different points in time, you should be more specific in the subquery on table {{{ticket}}} by adding the exact custom field name to the query:
 
-{{{
-#!sql
+If you added multiple custom fields at different points in time, you should be more specific in the subquery on table `ticket` by adding the exact custom field name to the query:
+
+
+```
 INSERT INTO ticket_custom
    (ticket, name, value)
    SELECT 
@@ -146,8 +183,12 @@ INSERT INTO ticket_custom
    WHERE id NOT IN (
       SELECT ticket FROM ticket_custom WHERE name = 'request_source'
    );
-}}}
-
-----
-See also: TracTickets, TracIni
 ```
+
+---
+
+
+
+See also: [TracTickets](trac-tickets), [TracIni](trac-ini)
+
+
