@@ -1,3 +1,6 @@
+
+
+
 # Emacs tips and tricks
 
 
@@ -74,6 +77,10 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 ```
 
+
+*TODO describe how to enable this setting only if the file was already free of trailing-whitespaces at load-time*
+
+
 ## Highlight trailing whitespaces
 
 
@@ -90,10 +97,6 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 (setq-default show-trailing-whitespace t)
 (setq-default indicate-empty-lines t)
 ```
-
-
-*TODO describe how to enable this setting only if the file was already free of trailing-whitespaces at load-time*
-
 
 ## C-k kills whole line and newline if at beginning of line
 
