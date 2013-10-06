@@ -52,7 +52,7 @@ The prefix is case insensitive.
 
 
 
-If the [InterTrac](inter-trac) link is enclosed in square brackets (like `[th:WikiGoodiesPlugin]`), the [InterTrac](inter-trac) prefix is removed in the displayed link, like a normal link resolver would be (i.e. the above would be displayed as `WikiGoodiesPlugin`).
+If the [InterTrac](inter-trac) link is enclosed in square brackets (like `[th:WikiExtrasPlugin]`), the [InterTrac](inter-trac) prefix is removed in the displayed link, like a normal link resolver would be (i.e. the above would be displayed as `WikiExtrasPlugin`).
 
 
 
