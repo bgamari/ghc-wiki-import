@@ -138,6 +138,10 @@ All reports support syndication using XML/RSS 2.0. To subscribe to an RSS feed, 
 
 
 
+**Note that you need to set up [permissions](trac-permissions#reports) in order to see the buttons for adding or editing reports.**
+
+
+
 A report is basically a single named SQL query, executed and presented by
 Trac.  Reports can be viewed and created from a custom SQL expression directly
 in the web interface.
@@ -188,10 +192,6 @@ SELECT id AS ticket, status, severity, priority, owner,
   ORDER BY priority, time
 ```
 
-
----
-
-
 ## Advanced Reports: Dynamic Variables
 
 
@@ -239,6 +239,10 @@ Example:
  http://trac.edgewall.org/reports/14?PRIORITY=high&SEVERITY=critical
 ```
 
+
+Dynamic variables can also be used in the report title and description (since 1.1.1).
+
+
 ### Special/Constant Variables
 
 
@@ -256,9 +260,6 @@ Example (*List all tickets assigned to me*):
 SELECT id AS ticket,summary FROM ticket WHERE owner=$USER
 ```
 
----
-
-
 ## Advanced Reports: Custom Formatting
 
 
@@ -268,7 +269,7 @@ result grouping and user-defined CSS styles. To create such reports, we'll use
 specialized SQL statements to control the output of the Trac report engine.
 
 
-## Special Columns
+### Special Columns
 
 
 
@@ -324,7 +325,8 @@ assumed to be *formatting hints*, affecting the appearance of the row.
   Color 5
 
 
-- **`__style__`** — A custom CSS style expression to use for the current row. 
+- **`__style__`** — A custom CSS style expression to use on the `<tr>` element of the current row.
+- **`__class__`** — Zero or more space-separated CSS class names to be set on the `<tr>` element of the current row. These classes are added to the class name derived from `__color__` and the odd / even indicator.
 
 
 **Example:** *List active tickets, grouped by milestone, group header linked to milestone page, colored by priority*
@@ -396,9 +398,91 @@ If you have tickets in the database *before* you declare the extra fields in tra
 TracIniReportCustomFieldSample](http://trac.edgewall.org/intertrac/TracIniReportCustomFieldSample) for some examples.
 
 
+### A note about SQL rewriting
 
-**Note that you need to set up permissions in order to see the buttons for adding or editing reports.**
 
+
+Beyond the relatively trivial replacement of dynamic variables, the SQL query is also altered in order to support two features of the reports:
+
+
+1. [changing the sort order](trac-reports#)
+1. pagination support (limitation of the number of result rows displayed on each page)
+
+
+In order to support the first feature, the sort column is inserted in the `ORDER BY` clause in the first position or in the second position if a `__group__` column is specified (an `ORDER BY` clause is created if needed). In order to support pagination, a `LIMIT ... OFFSET ...` clause is appended.
+The query might be too complex for the automatic rewrite to work correctly, resulting in an erroneous query. In this case you still have the possibility to control exactly how the rewrite is done by manually inserting the following tokens:
+
+
+- `@SORT_COLUMN@`, the place where the name of the selected sort column will be inserted,
+- `@LIMIT_OFFSET@`, the place where the pagination support clause will be added
+
+
+Note that if you write them after an SQL comment, `--`, you'll effectively disable rewriting if this is what you want!
+
+
+
+Let's take an example, consider the following SQL query:
+
+
+```wiki
+-- ## 4: Assigned, Active Tickets by Owner ## --
+
+-- 
+-- List assigned tickets, group by ticket owner, sorted by priority.
+-- 
+
+SELECT p.value AS __color__,
+   owner AS __group__,
+   id AS ticket, summary, component, milestone, t.type AS type, severity, time AS created,
+   changetime AS _changetime, description AS _description,
+   reporter AS _reporter
+  FROM ticket t,enum p
+  WHERE status = 'assigned'
+AND p.name=t.priority AND p.type='priority'
+  ORDER BY __group__, p.value, severity, time
+```
+
+
+The automatic rewrite will be the following (4 rows per page, page 2, sorted by `component`):
+
+
+```wiki
+SELECT p.value AS __color__,
+   owner AS __group__,
+   id AS ticket, summary, component, milestone, t.type AS type, severity, time AS created,
+   changetime AS _changetime, description AS _description,
+   reporter AS _reporter
+  FROM ticket t,enum p
+  WHERE status = 'assigned'
+AND p.name=t.priority AND p.type='priority'
+  ORDER BY __group__ ASC, `component` ASC,  __group__, p.value, severity, time
+ LIMIT 4 OFFSET 4
+```
+
+
+The equivalent SQL query with the rewrite tokens would have been:
+
+
+```wiki
+SELECT p.value AS __color__,
+   owner AS __group__,
+   id AS ticket, summary, component, milestone, t.type AS type, severity, time AS created,
+   changetime AS _changetime, description AS _description,
+   reporter AS _reporter
+  FROM ticket t,enum p
+  WHERE status = 'assigned'
+AND p.name=t.priority AND p.type='priority'
+  ORDER BY __group__, @SORT_COLUMN@, p.value, severity, time
+@LIMIT_OFFSET@
+```
+
+
+If you want to always sort first by priority and only then by the user selected sort column, simply use the following `ORDER BY` clause:
+
+
+```wiki
+  ORDER BY __group__, p.value, @SORT_COLUMN@, severity, time
+```
 
 ---
 
