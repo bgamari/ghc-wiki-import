@@ -10,14 +10,12 @@ The keyboard shortcuts must be enabled for a session through the [Keyboard Short
 
 
 
-Trac supports accessibility keys for the most common operations. On Windows and Linux platforms, press any of the keys listed below in combination with the `<Alt>` key; on a Mac, use the `<ctrl>` key instead.
+Trac supports accessibility keys for the most common operations.
 
 
-
-*Note that when using Internet Explorer on Windows, you need to hit `<Enter>` after having used the access key.*
-
-*Note that when using Firefox 2.0 on Windows, you need to hit `<Shift> + <Alt> + <Key>`.*
-
+- on Linux platforms, press any of the keys listed below in combination with the `<Alt>` key 
+- on a Mac, use the `<ctrl>` key instead
+- on Windows, you need to hit `<Shift> + <Alt> + <Key>`. This works for most browsers (Firefox, Chrome, Safari and Internet Explorer)
 
 ## Global Access Keys
 
