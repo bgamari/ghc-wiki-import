@@ -60,6 +60,7 @@ These are the available options for the `[notification]` section in trac.ini.
 - **`smtp_enabled`**: Enable email notification.
 - **`smtp_from`**: Email address to use for *Sender*-headers in notification emails.
 - **`smtp_from_name`**: Sender name to use for *Sender*-headers in notification emails.
+- **`smtp_from_author`**: (*since 1.0*) Use the author of a change (the reporter of a new ticket, or the author of a comment) as the `From:` header value in notification e-mails (default: false). If the author hasn't set an e-mail address, `smtp_from` and `smtp_from_name` are used instead.
 - **`smtp_replyto`**: Email address to use for *Reply-To*-headers in notification emails.
 - **`smtp_default_domain`**: (*since 0.10*) Append the specified domain to addresses that do not contain one. Fully qualified addresses are not modified. The default domain is appended to all username/login for which an email address cannot be found from the user settings.
 - **`smtp_always_cc`**: List of email addresses to always send notifications to. *Typically used to post ticket changes to a dedicated mailing list.*
@@ -81,7 +82,7 @@ These are the available options for the `[notification]` section in trac.ini.
 - **`email_sender`**: (*since 0.12*) Name of the component implementing `IEmailSender`. This component is used by the notification system to send emails. Trac currently provides the following components:
 
   - `SmtpEmailSender`: connects to an SMTP server (default).
-  - `SendmailEmailSender`: runs a `sendmail`-compatible executable.   
+  - `SendmailEmailSender`: runs a `sendmail`-compatible executable.
 
 
 Either **`smtp_from`** or **`smtp_replyto`** (or both) *must* be set, otherwise Trac refuses to send notification mails.
@@ -156,7 +157,7 @@ The following variables are available in the template:
 
 
 
-The notification e-mail content is generated based on `ticket_notify_email.txt` in `trac/ticket/templates`.  You can add your own version of this template by adding a `ticket_notify_email.txt` to the templates directory of your environment. The default looks like this:
+The notification e-mail content is generated based on `ticket_notify_email.txt` in `trac/templates`.  You can add your own version of this template by adding a `ticket_notify_email.txt` to the templates directory of your environment. The default looks like this:
 
 
 ```wiki
@@ -238,7 +239,7 @@ $ticket_props
 ```
 
 
-with this instead:
+with this instead (*requires Python 2.6 or later*):
 
 
 ```wiki
@@ -314,7 +315,15 @@ Ticket URL: \<http://example.com/trac/ticket/42\>
 My Project \<http://myproj.example.com/\>
 
 
-However, it's not as perfect as an HTML formatted e-mail would be, but presented ticket properties are at least readable...
+**Important**: Only those ticket fields that are listed in `sel` are part of the HTML mail. If you have defined custom ticket fields which shall be part of the mail they have to be added to `sel`, example:
+
+
+```wiki
+   sel = ['Reporter', ..., 'Keywords', 'Custom1', 'Custom2']
+```
+
+
+However, it's not as perfect as an automatically HTML-formatted e-mail would be, but presented ticket properties are at least readable by default in MS Outlook...
 
 
 ## Using GMail as the SMTP relay host
