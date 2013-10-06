@@ -164,7 +164,12 @@ manual](http://haskell.github.io/haskell-mode/manual/latest/).
 
 
 
-*I'm not using this one. Can someone (Kazu?) complete this section?*
+**Description**: *I'm not using this one. Can someone (Kazu?) complete this section?*
+
+
+
+**How to enable**: See installation instructions [
+here](http://www.mew.org/~kazu/proj/ghc-mod/en/)
 
 
 ## Hask-tags
