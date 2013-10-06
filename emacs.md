@@ -63,8 +63,18 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 
 
 
-*TODO*
+**Description**: See [
+(emacs)Useless Whitespace](http://www.gnu.org/software/emacs/manual/html_node/emacs/Useless-Whitespace.html) section for more details.
 
+
+
+**How to enable**:
+
+
+```
+(setq-default show-trailing-whitespace t)
+(setq-default indicate-empty-lines t)
+```
 
 ## Automatically removes trailing whitespaces when file is saved
 
@@ -80,6 +90,10 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 ```
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 ```
+
+
+*TODO describe how to enable this setting only if the file was already free of trailing-whitespaces at load-time*
+
 
 ## C-k kills whole line and newline if at beginning of line
 
