@@ -1,3 +1,6 @@
+
+
+
 # Fine grained permissions
 
 
@@ -57,7 +60,7 @@ sample-plugins/permissions](http://trac.edgewall.org/intertrac/source%3Abranches
 
 - Install [
   ConfigObj](http://www.voidspace.org.uk/python/configobj.html) (still needed for 0.12).
-- Copy authz\_policy.py into your plugins directory.
+- Copy authz\_policy.py into your plugins directory (only for Trac 0.11).
 - Put a [
   authzpolicy.conf](http://swapoff.org/files/authzpolicy.conf) file somewhere, preferably on a secured location on the server, not readable for others than the webuser. If the  file contains non-ASCII characters, the UTF-8 encoding should be used.
 - Update your `trac.ini`:
@@ -75,7 +78,7 @@ sample-plugins/permissions](http://trac.edgewall.org/intertrac/source%3Abranches
     [authz_policy]
     authz_file = /some/trac/env/conf/authzpolicy.conf
     ```
-  1. enable the single file plugin
+  1. enable the plugin through [WebAdmin](/trac/ghc/admin/general/plugin) or by editing the `[components]` section
 
     ```wiki
     [components]
@@ -165,9 +168,10 @@ jack = WIKI_VIEW
     denied rather than granted.
 
 >
->
-> The username will match any of 'anonymous',
-> 'authenticated', \<username\> or '\*', using normal Trac permission rules.
+> <table><tr><td>The username will match any of 'anonymous', 'authenticated', \<username\> or '\*', using normal Trac permission rules. </td>
+> <th> **Note:** Other groups which are created by user (e.g. by 'adding subjects to groups' on web interface page *Admin / Permissions*) cannot be used. See [
+> \#5648](http://trac.edgewall.org/intertrac/ticket%3A5648) for details about this missing feature 
+> </th></tr></table>
 >
 >
 
@@ -273,6 +277,42 @@ john = BROWSER_VIEW, FILE_VIEW
 
 Note: In order for Timeline to work/visible for John, we must add CHANGESET\_VIEW to the above permission list.
 
+
+#### Missing Features
+
+
+
+Although possible with the DefaultPermissionPolicy handling (see Admin panel), fine-grained permissions still miss those grouping features (see [
+\#9573](http://trac.edgewall.org/intertrac/ticket%3A9573), [
+\#5648](http://trac.edgewall.org/intertrac/ticket%3A5648)). Patches are partially available, see forgotten authz\_policy.2.patch  part of [
+\#6680](http://trac.edgewall.org/intertrac/ticket%3A6680)).
+
+
+
+You cannot do the following:
+
+
+```wiki
+[groups]
+team1 = a, b, c
+team2 = d, e, f
+team3 = g, h, i
+departmentA = team1, team2
+```
+
+
+Permission groups are not supported either. You cannot do the following:
+
+
+```wiki
+[groups]
+permission_level_1 = WIKI_VIEW, TICKET_VIEW
+permission_level_2  = permission_level_1, WIKI_MODIFY, TICKET_MODIFY
+[*]
+@team1 = permission_level_1
+@team2 = permission_level_2
+@team3 = permission_level_2, TICKET_CREATE
+```
 
 ### AuthzSourcePolicy  (mod\_authz\_svn-like permission policy)
 
