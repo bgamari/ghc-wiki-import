@@ -19,7 +19,7 @@ Most of us use Emacs for GHC development. This page lists various Emacs configur
 **How to enable**:
 
 
-```wiki
+```
 (require 'whitespace)
 (setq whitespace-style '(face lines-tail))
 (setq whitespace-line-column 80)
@@ -37,7 +37,7 @@ Most of us use Emacs for GHC development. This page lists various Emacs configur
 **How to enable**:
 
 
-```wiki
+```
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 ```
 
