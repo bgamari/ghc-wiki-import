@@ -137,6 +137,13 @@ You need to install package `window-number` and add this to your configuration:
 (window-number-meta-mode)
 ```
 
+## Cycle buffer
+
+
+
+*Will add this later*
+
+
 # Haskell-specific
 
 
@@ -160,18 +167,13 @@ manual](http://haskell.github.io/haskell-mode/manual/latest/).
 *I'm not using this one. Can someone (Kazu?) complete this section?*
 
 
+## Hask-tags
+
+
 # GHC-specific
 
 
 
-==
-
-
-
-**Description**: 
-
-
-
-**How to enable**:
+*Richard mentioned some interesting config on Newcomers page*
 
 
