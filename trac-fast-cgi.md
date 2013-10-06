@@ -268,7 +268,7 @@ using `bin-environment` (as in the section above on Apache configuration).
 
 
 Note that lighttpd has a bug related to 'SCRIPT\_NAME' and 'PATH\_INFO' when the uri of fastcgi.server is '/' instead of '/trac' in this example (see [
-\#2418](http://trac.edgewall.org/intertrac/%232418)). This should be fixed since lighttpd 1.4.23, and you may need to add `"fix-root-scriptname" => "enable"` as parameter of fastcgi.server.
+\#2418](http://trac.edgewall.org/intertrac/%232418)). This is fixed in lighttpd 1.5, and under lighttpd 1.4.23 or later the workaround is to add `"fix-root-scriptname" => "enable"` as a parameter of fastcgi.server.
 
 
 
