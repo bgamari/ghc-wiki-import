@@ -20,7 +20,7 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 **How to enable**:
 
 
-```wiki
+```
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
@@ -37,7 +37,7 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 **How to enable**:
 
 
-```wiki
+```
 (setq-default indent-tabs-mode nil)
 ```
 
@@ -52,7 +52,7 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 **How to enable**:
 
 
-```wiki
+```
 (require 'whitespace)
 (setq whitespace-style '(face lines-tail))
 (setq whitespace-line-column 80)
@@ -70,7 +70,7 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 **How to enable**:
 
 
-```wiki
+```
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 ```
 
@@ -85,7 +85,7 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 **How to enable**:
 
 
-```wiki
+```
 (setq kill-whole-line t)
 ```
 
@@ -100,7 +100,7 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 **How to enable**:
 
 
-```wiki
+```
 (global-set-key (kbd "<f11>") 'global-linum-mode)
 ```
 
@@ -115,7 +115,7 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 **How to enable**:
 
 
-```wiki
+```
 (column-number-mode 1)
 ```
 
