@@ -12,7 +12,7 @@ Most of us use Emacs for GHC development. This page lists various Emacs configur
 
 
 
-**Description**: IDO stands for Interactively Do Things and it greatly improves file opening and switching between buffers. When opening a file it shows the list of files and directories in a current directory, allows to navigate the directory tree in an easy manner, provides intuitive filtering capabilities and allows to select a file easily by selecting its name using arrow keys. Similar behaviour is provided when switching between opened buffers. A nice introductory tutorial to IDO can be found [
+**Description**: IDO stands for Interactively Do Things and it greatly improves file opening and switching between buffers. When opening a file it shows the list of files and directories in a current directory, allows to navigate the directory tree in an easy manner, provides intuitive filtering capabilities and allows to select a file by selecting its name using arrow keys. Similar behaviour is provided when switching between opened buffers. A nice introductory tutorial to IDO can be found [
 here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode/).
 
 
@@ -30,7 +30,7 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 
 
 
-**Description**: We used to use tabs for indentation, but now aim to have no tabs in the source code. There is a hook that will prevent you from pushing tabs into repository (unless file already contained tabs). This setting will prevent you from introducing tabs in the source code.
+**Description**: We used to use tabs for indentation, but now we aim to have no tabs in the source code. There is a hook that will prevent you from pushing tabs into repository (unless file already contained tabs). This setting will prevent you from introducing tabs in the source code.
 
 
 
@@ -59,6 +59,21 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 (global-whitespace-mode t)
 ```
 
+## Automatically removes trailing whitespaces when file is saved
+
+
+
+**Description**: Currently source code of GHC contains lots of trailing whitespaces, which means that **this setting is dangerous**. It will remove ALL trailing whitespaces in every file that you edit, which means you might have one or two lines changed by you and a hundred lines automatically changed by removing trailing whitespaces. This will require you to separate whitespaces into a separate commit by using `git add -i`. This is tedious, so be warned.
+
+
+
+**How to enable**:
+
+
+```
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+```
+
 ## Highlight trailing whitespaces
 
 
@@ -74,21 +89,6 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 ```
 (setq-default show-trailing-whitespace t)
 (setq-default indicate-empty-lines t)
-```
-
-## Automatically removes trailing whitespaces when file is saved
-
-
-
-**Description**: Currently source code of GHC contains lots of trailing whitespaces, which means that **this setting is dangerous**. It will remove ALL trailing whitespaces in every file that you edit, which means you might have one or two lines changed by you and a hundred lines automatically changed by removing trailing whitespaces. This will require you to separate whitespaces into a separate commit by using `git add -i`. This is tedious, so be warned.
-
-
-
-**How to enable**:
-
-
-```
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
 ```
 
 
