@@ -59,6 +59,13 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 (global-whitespace-mode t)
 ```
 
+## Highlight trailing whitespaces
+
+
+
+*TODO*
+
+
 ## Automatically removes trailing whitespaces when file is saved
 
 
