@@ -246,7 +246,7 @@ For [mod\_wsgi](trac-mod-wsgi):
 
 
 ```wiki
-os.environ['TRAC_ENV_INDEX_TEMPLATE'] = '/path/to/template'
+os.environ['TRAC_ENV_INDEX_TEMPLATE'] = '/path/to/template.html'
 ```
 
 
