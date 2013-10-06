@@ -15,7 +15,8 @@ Below, follows a collection of some of those.
 ## TicketImportPlugin
 
 
-<table><tr><th>th:TicketImportPlugin</th>
+<table><tr><th>[
+TicketImportPlugin](http://trac-hacks.org/wiki/TicketImportPlugin)</th>
 <td>mainly, but not only, this plug-in lets you import or up-date into Trac a series of tickets from a **CSV file** or (if the [
 xlrd library](http://pypi.python.org/pypi/xlrd) is installed) from an **Excel file**. 
 </td></tr></table>
@@ -24,7 +25,8 @@ xlrd library](http://pypi.python.org/pypi/xlrd) is installed) from an **Excel fi
 ## ExportImportXlsPlugin
 
 
-<table><tr><th>th:ExportImportXlsPlugin</th>
+<table><tr><th>[
+ExportImportXlsPlugin](http://trac-hacks.org/wiki/ExportImportXlsPlugin)</th>
 <td>this plug-in add an admin panel for export and import tickets via **XLS file**.
 
 - It depends on the python packages xlwt/rxld.
@@ -35,7 +37,8 @@ xlrd library](http://pypi.python.org/pypi/xlrd) is installed) from an **Excel fi
 ## Bugzilla
 
 
-<table><tr><th>th:BugzillaIssueTrackingPlugin</th>
+<table><tr><th>[
+BugzillaIssueTrackingPlugin](http://trac-hacks.org/wiki/BugzillaIssueTrackingPlugin)</th>
 <td>integrates Bugzilla into Trac keeping [TracLinks](trac-links)
 </td></tr></table>
 
@@ -89,7 +92,8 @@ For more details on the available options, see the configuration section at the 
 ## Jira
 
 
-<table><tr><th>th:JiraToTracIntegration</th>
+<table><tr><th>[
+JiraToTracIntegration](http://trac-hacks.org/wiki/JiraToTracIntegration)</th>
 <td>provides tools to import Atlassian Jira backup files into Trac. The plug-in consists of a Python 3.1 commandline tool that:
 
 - Parses the Jira backup XML file
@@ -103,7 +107,8 @@ For more details on the available options, see the configuration section at the 
 ## Mantis
 
 
-<table><tr><th>th:MantisImportScript</th>
+<table><tr><th>[
+MantisImportScript](http://trac-hacks.org/wiki/MantisImportScript)</th>
 <td>script to import from Mantis into Trac the following data:
 
 - bugs
@@ -117,7 +122,8 @@ For more details on the available options, see the configuration section at the 
 ## PlanetForge
 
 
-<table><tr><th>th:PlanetForgeImportExportPlugin</th>
+<table><tr><th>[
+PlanetForgeImportExportPlugin](http://trac-hacks.org/wiki/PlanetForgeImportExportPlugin)</th>
 <td>this plugin exports Trac data (wiki, tickets, compoments, permissions, repositories, etc.) using the open format designed by the COCLICO project. It extends the webadmin panel and the 'trac admin ...' command. Still has no 'import' feature. 
 </td></tr></table>
 
@@ -125,7 +131,8 @@ For more details on the available options, see the configuration section at the 
 ## Scarab
 
 
-<table><tr><th>th:ScarabToTracScript</th>
+<table><tr><th>[
+ScarabToTracScript](http://trac-hacks.org/wiki/ScarabToTracScript)</th>
 <td>script that migrates Scarab issues to Trac tickets
 
 - Requires [ XmlRpcPlugin](http://trac-hacks.org/wiki/XmlRpcPlugin)
@@ -136,7 +143,8 @@ For more details on the available options, see the configuration section at the 
 ## Sourceforge
 
 
-<table><tr><th>th:SfnToTracScript</th>
+<table><tr><th>[
+SfnToTracScript](http://trac-hacks.org/wiki/SfnToTracScript)</th>
 <td>importer of SourceForge's new backup file (originated from \#Trac3521)
 </td></tr></table>
 
@@ -159,7 +167,7 @@ sqlite](http://www.sqlite.org/sqlite.html) command line to look at the tables an
 
 
 See [
-http://trac.edgewall.org/attachment/wiki/TracSynchronize/csv2trac.2.py](http://trac.edgewall.org/attachment/wiki/TracSynchronize/csv2trac.2.py) for details.  This approach is particularly useful if one needs to enter a large number of tickets by hand. (note that the ticket type type field, (task etc...) is also needed for this script to work with more recent Trac releases)
+csv2trac.2.py](http://trac.edgewall.org/attachment/wiki/TracSynchronize/csv2trac.2.py) for details.  This approach is particularly useful if one needs to enter a large number of tickets by hand. (note that the ticket type type field, (task etc...) is also needed for this script to work with more recent Trac releases)
 Comments on script: The script has an error on line 168, ('Ticket' needs to be 'ticket').  Also, the listed values for severity and priority are swapped. 
 
 
