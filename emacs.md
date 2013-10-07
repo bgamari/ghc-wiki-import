@@ -85,10 +85,6 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 ```
 
-
-*TODO describe how to enable this setting only if the file was already free of trailing-whitespaces at load-time*
-
-
 ## Highlight trailing whitespaces
 
 
@@ -233,7 +229,27 @@ here](http://www.mew.org/~kazu/proj/ghc-mod/en/).
 
 
 
-*TODO I will fill in this one - JS*
+**Description**: *TODO I will fill in this one - JS*
+
+
+
+**How to enable**: Begin by installing `hasktags` package from Hackage:
+
+
+```wiki
+cabal install hasktags
+```
+
+
+Now go to the directory for which you want to generate tags and run:
+
+
+```wiki
+hasktags --ignore-close-implementation .
+```
+
+
+In Emacs type `M-x visit-tags-table` and point to the `TAGS` file generated for a directory on which you want to work on.
 
 
 # GHC-specific
