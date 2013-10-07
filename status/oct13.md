@@ -7,7 +7,7 @@ According to some statistics](https://github.com/ghc/ghc/graphs/contributors) fo
 
 
 
-While Ian has not completely disappeared, GHC and Haskell are not his day-job anymore. As a result, this means everyone - including those friends reading this - have a huge opportunity to help continue making GHC even better. Luckily, all the evidence of the past few months points towards a tremendous surge in community involvement. GHC is a community project, and the community is what keeps us afloat. **A great thanks goes to all those who have helped us come so far**!
+While Ian has not completely disappeared, GHC and Haskell are not his day-job anymore. As a result, this means everyone - including you, our friend and reader - have a huge opportunity to help continue making GHC even better. Luckily, the past few months of activity points towards a tremendous surge in community involvement. GHC is a community project, and the community is what keeps us afloat. **A great thanks goes to all those who have helped us come so far**!
 
 
 
@@ -105,7 +105,7 @@ But we're not sure what else might happen. It's a great time to step up to the p
 
 
 
-In the past several months, GHC has seen a surge of community involvement, and a great deal of new contributors. We now have [37 committers](team-ghc), with **14 added in 2013 alone** - it's an exciting time to work GHC!
+In the past several months, GHC has seen a surge of community involvement, and a great deal of new contributors. We now have [37 committers](team-ghc), with **14 added in 2013 alone** - it's an exciting time to help out!
 
 
 
