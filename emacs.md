@@ -5,7 +5,7 @@
 
 
 
-Most of us use Emacs for GHC development. This page lists various Emacs configuration tips and tricks used by GHC developers. It is meant to be self-contained, so that you can grab relevant piece of configuration, put it into your config file and benefit from it instantly. The only exception are two larger extensions for Emacs (haskell-mode and ghc-mod), where we direct you to external installation instructions and tutorials.
+Most of us use Emacs for GHC development. This page lists various Emacs configuration tips and tricks used by GHC developers. It is meant to be self-contained so that you can grab relevant piece of configuration, put it into your config file and benefit from it instantly. The only exception are two larger extensions for Emacs (haskell-mode and ghc-mod), where we direct you to external installation instructions and tutorials.
 
 
 
@@ -13,7 +13,7 @@ Each entry includes a short description and instruction how to enable given sett
 
 
 
-It is assumed that you know how to install packages in Emacs (e.g. with ELPA). *TODO Let's not assume it. Can we create a saction "Installing extensions with ELPA" and give a short introduction on using it? I admit I don't remember how to use ELPA and would have to google it - JS.*
+It is assumed that you know how to install packages in Emacs (e.g. with ELPA). *TODO Let's not assume it. Can we create a section "Installing extensions with ELPA" and give a short introduction on using it? I admit I don't remember how to use ELPA and would have to google it - JS.*
 
 
 # General
@@ -233,7 +233,7 @@ here](http://www.mew.org/~kazu/proj/ghc-mod/en/).
 
 
 
-*TODO*
+*TODO I will fill in this one - JS*
 
 
 # GHC-specific
