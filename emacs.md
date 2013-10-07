@@ -160,7 +160,8 @@ Useless Whitespace](http://www.gnu.org/software/emacs/manual/html_node/emacs/Use
 
 
 **How to enable**:
-You need to install package `window-number` and add this to your configuration:
+You need to install [
+window-number](http://www.emacswiki.org/emacs/window-number.el) extension and add this to your configuration:
 
 
 ```
@@ -179,7 +180,7 @@ You need to install package `window-number` and add this to your configuration:
 
 **How to enable**:
 You need to install [
-Cycle Buffer](http://www.emacswiki.org/emacs/cycle-buffer.el) extension:
+cycle-buffer](http://www.emacswiki.org/emacs/cycle-buffer.el) extension and add this to your configuration:
 
 
 ```
