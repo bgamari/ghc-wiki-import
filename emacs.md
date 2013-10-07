@@ -93,8 +93,8 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 
 
 
-**Description**: See [
-(emacs)Useless Whitespace](http://www.gnu.org/software/emacs/manual/html_node/emacs/Useless-Whitespace.html) section for more details.
+**Description**: Automatic removal of trailing whitespaces described above can be a bit inconvenient to use. One of the alternative approaches to problem of trailing whitespaces is making them visible, so that you notice when you accidentally introduce them into a file. You will also see already existing trailing whitespaces. For more details see [
+Useless Whitespace](http://www.gnu.org/software/emacs/manual/html_node/emacs/Useless-Whitespace.html) section of Emacs documentation.
 
 
 
