@@ -225,11 +225,11 @@ here](http://www.mew.org/~kazu/proj/ghc-mod/en/emacs.html) for a complete list.
 here](http://www.mew.org/~kazu/proj/ghc-mod/en/).
 
 
-## Hask-tags
+## Using tags to quickly locate definitions in a project
 
 
 
-**Description**: *TODO I will fill in this one - JS*
+**Description**: Emacs can use a special index file, called "tags file", that stores locations of various definitions (functions, modules, data types) in a given directory. Once you've generated tags file (see installation instructions below) you can type `M-.` and enter name of identifier definition to jump to. Emacs by default jumps to identifier currently under the cursor. 
 
 
 
@@ -249,7 +249,15 @@ hasktags --ignore-close-implementation .
 ```
 
 
-In Emacs type `M-x visit-tags-table` and point to the `TAGS` file generated for a directory on which you want to work on.
+In Emacs type `M-x visit-tags-table` and point to the generated `TAGS`.
+
+
+
+**Note on hasktags**: `hasktags` program used to generate tags file has problems with correctly recognizing declarations of value constructors in a data type. It often mistakes pattern matching of the form `(DataConstructor {})` as a data declaration and jumps to that pattern match instead of declaration.
+
+
+
+**Note on using tags for GHC sources**: 
 
 
 # GHC-specific
