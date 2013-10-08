@@ -5,6 +5,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Type inference
 
 
+- [\#7730](https://gitlab.staging.haskell.org/ghc/ghc/issues/7730): display `TyCons` in tidied form in `pprTyThing`
 - [\#5610](https://gitlab.staging.haskell.org/ghc/ghc/issues/5610), [\#7243](https://gitlab.staging.haskell.org/ghc/ghc/issues/7243): Better error messages for `foreign` declarations
 - [\#8264](https://gitlab.staging.haskell.org/ghc/ghc/issues/8264): `checkValidInstance` for `Typeable`, `Coercible` etc.
 - [\#8240](https://gitlab.staging.haskell.org/ghc/ghc/issues/8240): better error messages for type-function equalities
