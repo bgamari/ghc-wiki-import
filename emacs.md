@@ -13,7 +13,8 @@ Each entry includes a short description and instruction how to enable given sett
 
 
 
-It is assumed that you know how to install packages in Emacs (e.g. with ELPA). *TODO Let's not assume it. Can we create a section "Installing extensions with ELPA" and give a short introduction on using it? I admit I don't remember how to use ELPA and would have to google it - JS.*
+Most of the packages used below are bundled with Emacs. If a package is not part of your Emacs installation you need to install it by yourself. You can do it manually by downloading relevant `*.el` file and putting it in your configuration directory or you can use ELPA -  Emacs package management system. A five minute introduction to ELPA can be found [
+here](http://ergoemacs.org/emacs/emacs_package_system.html).
 
 
 # General
@@ -229,7 +230,7 @@ here](http://www.mew.org/~kazu/proj/ghc-mod/en/).
 
 
 
-**Description**: Emacs can use a special index file, called "tags file", that stores locations of various definitions (functions, modules, data types) in a given directory. Once you've generated tags file (see installation instructions below) you can type `M-.` and enter name of identifier definition to jump to. Emacs by default jumps to identifier currently under the cursor. 
+**Description**: Emacs can use a special index file, the `TAGS` file, that stores locations of various definitions (functions, modules, data types) in a given directory. Once you've generated `TAGS` file (see installation instructions below) you can type `M-.` and enter name of identifier definition to jump to. Emacs by default jumps to identifier currently under the cursor.
 
 
 
@@ -253,7 +254,7 @@ In Emacs type `M-x visit-tags-table` and point to the generated `TAGS`.
 
 
 
-**Note on hasktags**: `hasktags` program used to generate tags file has problems with correctly recognizing declarations of value constructors in a data type. It often mistakes pattern matching of the form `(DataConstructor {})` as a data declaration and jumps to that pattern match instead of declaration.
+**Note on hasktags**: `hasktags` program used to generate `TAGS` file has problems with correctly recognizing declarations of value constructors in a data type. It often mistakes pattern matching of the form `(DataConstructor {})` as a data declaration and jumps to that pattern match instead of declaration.
 
 
 
@@ -264,6 +265,28 @@ In Emacs type `M-x visit-tags-table` and point to the generated `TAGS`.
 
 
 
-*Richard mentioned some interesting config on Newcomers page*
+*TODO Richard, can you please fill in this section?*
+
+
+## Searching the GHC source tree with a hotkey
+
+
+
+**Description**:
+
+
+
+**How to enable**: 
+
+
+## Building GHC with a hotkey
+
+
+
+**Description**:
+
+
+
+**How to enable**: 
 
 
