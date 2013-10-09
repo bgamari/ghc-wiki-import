@@ -11,7 +11,7 @@ While Ian has not completely disappeared, GHC and Haskell are not his day-job an
 
 
 
-In light of this, Well-Typed has added two new hires to GHC HQ to keep things moving, and help the development process going forward: **Edsko de Vries** and **Austin Seipp**.
+In light of this, Well-Typed has added two people to GHC HQ to keep things moving, and help the development process going forward: **Edsko de Vries** and **Austin Seipp**.
 
 
 
