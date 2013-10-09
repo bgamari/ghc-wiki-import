@@ -121,7 +121,7 @@ Haskell98 and Haskell prime says that all the instances should be visible that a
 
 
 
-Template haskell is a corner-case, where this orphan logic is not clever enough and therefore reify doesn't see some of the instances that are under the current module in the dependency tree.  Even more so, if the class instance is in a separate package (and not marked orphan), then it's not seen either in one-shot nor in batch mode.  Therefore HFlags can't gather all the flags in `$initHFlags`.  I propose to fix this by loading all the imported interfaces transitively when reifying classes or type families.  **If you have any comments or questions regarding this, please comment on [\#8426](https://gitlab.staging.haskell.org/ghc/ghc/issues/8426).**
+Template haskell is a corner-case, where this orphan logic is not clever enough and therefore reify doesn't see some of the instances that are under the current module in the dependency tree.  Even more so, if the class instance is in a separate package (and not marked orphan, as is the case in HFlags), then it's not seen either in one-shot or in batch mode.  Therefore HFlags can't gather all the flags in `$initHFlags`.  I propose to fix this by loading all the imported interfaces transitively when reifying classes or type families.  **If you have any comments or questions regarding this, please comment on [\#8426](https://gitlab.staging.haskell.org/ghc/ghc/issues/8426).**
 
 
 
@@ -135,7 +135,7 @@ An alternative approach would be to mark all the modules that define command lin
 
 
 
-The already merged [\#3725](https://gitlab.staging.haskell.org/ghc/ghc/issues/3725) and [\#8340](https://gitlab.staging.haskell.org/ghc/ghc/issues/8340) makes it possible to generate Annotations from TH.  We support all three kind of annotations: annotations on types, values and whole modules.
+The already merged [\#3725](https://gitlab.staging.haskell.org/ghc/ghc/issues/3725) and [\#8340](https://gitlab.staging.haskell.org/ghc/ghc/issues/8340) makes it possible to generate annotations from TH.  We support all three kind of annotations: annotations on types, values and whole modules.
 
 
 ## In the works, but seems easy: annotation reification
@@ -150,7 +150,7 @@ Controversial: [\#8398](https://gitlab.staging.haskell.org/ghc/ghc/issues/8398),
 
 
 
-[\#8397](https://gitlab.staging.haskell.org/ghc/ghc/issues/8397) alone is very useful, but unfortunately not enough.  Because it only makes it possible to get annotations for modules, values or types when you already know your target.  But in the case of `$initHFlags` we want to get all the flags that has been defined somewhere below us in our import tree.  To do this, [\#8398](https://gitlab.staging.haskell.org/ghc/ghc/issues/8398) implements module listing.  Once we get back the module list, we can use the returned names to get the module annotations for all the modules and extract the flag data.
+The [\#8397](https://gitlab.staging.haskell.org/ghc/ghc/issues/8397) from the previous paragraph is already useful on its own. Unfortunately, for HFlags purposes it's not enough: it only make it possible to get annotations for modules, values or types when you already know your target.  But in the case of `$initHFlags` we want to get all the flags that were defined somewhere below us in our import tree.  To do this, [\#8398](https://gitlab.staging.haskell.org/ghc/ghc/issues/8398) implements module listing.  Once we get back the module list, we can use the returned names to get the module annotations for all the modules and extract the flag data.
 
 
 
@@ -159,7 +159,7 @@ http://ghc.haskell.org/trac/ghc/ticket/7867\#comment:12](http://ghc.haskell.org/
 
 
 
-I propose to change this patch to properly construct the list of dependent modules and return that.  We would return (pkgid, moduleid) pairs for every module that is imported by us or imported by our imports transitively.
+I propose to change this patch to properly construct the list of dependent modules and return that.  We would return `(pkgid, moduleid)` pairs for every module that is imported by us or imported by our imports transitively.
 
 
 
