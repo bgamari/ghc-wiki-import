@@ -23,5 +23,5 @@ See also
   
 
 
-- [Emacs tips and tricks](emacs)
+- [Emacs lore](emacs)
 - [Git lore](working-conventions/git)
