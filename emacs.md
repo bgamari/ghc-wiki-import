@@ -38,6 +38,30 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 (ido-mode 1)
 ```
 
+## Make the quotes in GHC error messages display nicely
+
+
+
+If you run a shell within emacs, you'll see weird escape sequences when GHC displays error message involving Unicode forward or back quotes, eg
+
+
+```wiki
+    The type signature for \342\200\233foo\342\200\231 lacks an accompanying binding
+      (The type signature must be given where \342\200\233foo\342\200\231 is declared)
+```
+
+
+To make emacs display this Unicode nicely, use this (see [\#2507](https://gitlab.staging.haskell.org/ghc/ghc/issues/2507))
+
+
+```wiki
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8-unix)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+```
+
 ## Disable tabs for indentation
 
 
