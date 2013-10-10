@@ -240,6 +240,25 @@ cycle-buffer](http://www.emacswiki.org/emacs/cycle-buffer.el) extension and add 
 (global-set-key [(shift f10)] 'cycle-buffer-permissive)
 ```
 
+## Untabifying a buffer.
+
+
+
+**Description**: Slowly, GHC is moving away from tabs. After modifying a file and committing the changes, we tend to detab the file completely, and set `-fwarn-tabs` to make sure they don't slip in again. Normally it's convenient to immediately detab the file and commit that afterwords, while the buffer is open
+
+
+
+**How to enable**:
+Add this to your configuration, and afterwords you can run `M-x untabify-buffer` to nuke all the tabs:
+
+
+```
+(defun untabify-buffer ()
+  "Untabify current buffer."
+  (interactive)
+  (save-excursion (untabify (point-min) (point-max))))
+```
+
 # Haskell-specific
 
 
