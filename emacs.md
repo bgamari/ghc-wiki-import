@@ -240,7 +240,7 @@ cycle-buffer](http://www.emacswiki.org/emacs/cycle-buffer.el) extension and add 
 (global-set-key [(shift f10)] 'cycle-buffer-permissive)
 ```
 
-## Untabifying a buffer.
+## Untabifying a buffer
 
 
 
