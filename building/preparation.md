@@ -17,3 +17,10 @@ Alternatively:
 
 
 - [List of tools needed to build GHC](building/preparation/tools)
+
+
+See also
+  
+
+
+- [Emacs tips and tricks](emacs)
