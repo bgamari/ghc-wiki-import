@@ -38,30 +38,6 @@ here](http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode
 (ido-mode 1)
 ```
 
-## Make the quotes in GHC error messages display nicely
-
-
-
-If you run a shell within emacs, you'll see weird escape sequences when GHC displays error message involving Unicode forward or back quotes, eg
-
-
-```wiki
-    The type signature for \342\200\233foo\342\200\231 lacks an accompanying binding
-      (The type signature must be given where \342\200\233foo\342\200\231 is declared)
-```
-
-
-To make emacs display this Unicode nicely, use this (see [\#2507](https://gitlab.staging.haskell.org/ghc/ghc/issues/2507))
-
-
-```wiki
-(setq locale-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8-unix)
-(set-keyboard-coding-system 'utf-8)
-(set-selection-coding-system 'utf-8)
-(prefer-coding-system 'utf-8)
-```
-
 ## Disable tabs for indentation
 
 
@@ -390,3 +366,27 @@ A few things to note here:
 
 - The above code binds C-q (perhaps a bad combination, as I've accidentally quit Emacs from my Mac with the wrong modifier key!) to compiling GHC from *any* Haskell file, even those unrelated to GHC. But, when I'm working outside of GHC, I tend to use C-c C-l to load into GHCi, so this works out OK.
 - By default, as said above, this will compile the stage 2 compiler for the GHC at `ghc-location`. If you set `ghc-compile` with, say, M-: `(setq ghc-compile "cd compiler; make 1")` \<Enter\>, then this will build the stage 1 compiler.
+
+## Make the quotes in GHC error messages display nicely
+
+
+
+**Description**: If you run a shell within emacs, you'll see weird escape sequences when GHC displays error message involving Unicode forward or back quotes, eg
+
+
+```wiki
+    The type signature for \342\200\233foo\342\200\231 lacks an accompanying binding
+      (The type signature must be given where \342\200\233foo\342\200\231 is declared)
+```
+
+
+**How to enable**: To make emacs display this Unicode nicely, use this (see [\#2507](https://gitlab.staging.haskell.org/ghc/ghc/issues/2507))
+
+
+```wiki
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8-unix)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+```
