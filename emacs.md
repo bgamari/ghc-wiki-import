@@ -225,6 +225,13 @@ cycle-buffer](http://www.emacswiki.org/emacs/cycle-buffer.el) extension and add 
 
 
 **How to enable**:
+
+
+
+This is equivalent to `mark-whole-buffer` which is bound to `C-x h` by default, followed by `M-x untabify` which operates in the current region.
+
+
+
 Add this to your configuration, and afterwords you can run `M-x untabify-buffer` to nuke all the tabs:
 
 
