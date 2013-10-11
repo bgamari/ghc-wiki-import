@@ -145,3 +145,10 @@ These are in no particular order, but they are numbered for easy reference.
 >
 >
 
+1. I propose the following, further addition to `Data.Type.Equality`:
+
+  ```wiki
+  type family a == b where
+    a == a = True
+    a == b = False
+  ```
