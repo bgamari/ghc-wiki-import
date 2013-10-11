@@ -16,7 +16,8 @@ Common tasks:
 ### [ array](http://hackage.haskell.org/package/array)
 
 
-- TODO perform deprecation-removals & major version bump
+- performed deprecation-removals & major version bump
+- TODO make release
 
 ### [ base](http://hackage.haskell.org/package/base)
 
@@ -25,6 +26,9 @@ Common tasks:
 
 ### [ deepseq](http://hackage.haskell.org/package/deepseq)
 
+
+- cleaned up
+- TODO make release
 
 ### [ directory](http://hackage.haskell.org/package/directory)
 
