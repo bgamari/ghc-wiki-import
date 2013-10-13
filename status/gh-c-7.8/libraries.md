@@ -55,6 +55,75 @@ Common tasks:
 ### [ directory](http://hackage.haskell.org/package/directory)
 
 
+
+
+  
+  
+  
+  
+  
+    
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: !closed, component: libraries%2Fdirectory,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, desc: 1, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: !closed, component: libraries%2Fdirectory,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: !closed,
+component: libraries%2Fdirectory, max: 0, col: id, col: type, col: summary,
+col: priority, col: owner, col: reporter, order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: !closed,
+component: libraries%2Fdirectory, max: 0, col: id, col: type, col: summary,
+col: priority, col: owner, col: reporter, order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: !closed, component: libraries%2Fdirectory,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: owner)
+      </th>
+<th>
+        
+        Reporter (Ticket query: status: !closed,
+component: libraries%2Fdirectory, max: 0, col: id, col: type, col: summary,
+col: priority, col: owner, col: reporter, order: reporter)
+      </th>
+<td>
+    </td></tr>
+<tr><td>
+          </td>
+<th>
+            No tickets found
+          </th>
+<td>
+        </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr></table>
+
+
+  
+
+
+
 - cleaned up; almost ready for release
 - TODO get \[cdc415a1fb/directory\] code-reviewed
 
@@ -110,6 +179,75 @@ Common tasks:
 ### [ process](http://hackage.haskell.org/package/process)
 
 
+
+
+  
+  
+  
+  
+  
+    
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: !closed, component: libraries%2Fprocess,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, desc: 1, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: !closed, component: libraries%2Fprocess,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: !closed, component: libraries%2Fprocess,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: !closed, component: libraries%2Fprocess,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: !closed, component: libraries%2Fprocess,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: owner)
+      </th>
+<th>
+        
+        Reporter (Ticket query: status: !closed, component: libraries%2Fprocess,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: reporter)
+      </th>
+<td>
+    </td></tr>
+<tr><td>
+          </td>
+<th>
+            No tickets found
+          </th>
+<td>
+        </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr></table>
+
+
+  
+
+
+
 ### [ stm](http://hackage.haskell.org/package/stm)
 
 
@@ -117,6 +255,163 @@ Common tasks:
 
 
 ### [ unix](http://hackage.haskell.org/package/unix)
+
+
+
+
+  
+  
+  
+  
+  
+    
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: !closed, component: libraries%2Funix,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, desc: 1, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: !closed, component: libraries%2Funix,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: !closed, component: libraries%2Funix,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: !closed, component: libraries%2Funix,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: !closed, component: libraries%2Funix,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: owner)
+      </th>
+<th>
+        
+        Reporter (Ticket query: status: !closed, component: libraries%2Funix,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: reporter)
+      </th>
+<td>
+    </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#16099](https://gitlab.staging.haskell.org/ghc/ghc/issues/16099)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      feature request
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [expose st\_blksize field from fstat syscall](https://gitlab.staging.haskell.org/ghc/ghc/issues/16099)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      low
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      flip101
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr></table>
+
+
+  
+
 
 
 - cleaned up; almost ready for a 2.7.0.0 release
