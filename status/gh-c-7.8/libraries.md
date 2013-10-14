@@ -156,6 +156,8 @@ col: priority, col: owner, col: reporter, order: reporter)
 ### [ parallel](http://hackage.haskell.org/package/parallel)
 
 
+- Note: **extra** library (i.e. not part of normal distribution)
+
 - TODO contains many `DEPRECATED` functions in `Control.Parallel.Strategies` since at least 2010:
 
   ```
