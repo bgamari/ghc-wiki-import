@@ -73,7 +73,7 @@ GHC requires you to write a **mk/build.mk** file, and the following one works. `
 
 
 ```wiki
-GhcStage1HcOpts    = -O -fllvm
+GhcStage1HcOpts      = -O -fllvm
 HADDOCK_DOCS         = NO
 BUILD_DOCBOOK_HTML   = NO
 BUILD_DOCBOOK_PS     = NO
