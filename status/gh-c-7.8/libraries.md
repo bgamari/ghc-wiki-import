@@ -134,6 +134,10 @@ col: priority, col: owner, col: reporter, order: reporter)
 ### [ filepath](http://hackage.haskell.org/package/filepath)
 
 
+
+[](https://travis-ci.org/ghc/packages-filepath)
+
+
 ### [ ghc-prim](http://hackage.haskell.org/package/ghc-prim)
 
 
