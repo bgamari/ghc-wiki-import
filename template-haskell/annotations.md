@@ -155,7 +155,7 @@ This patch doesn't need to get merged urgently, it's just nice to have.
 
 
 ##
-In the works, the last patch that needs to get reviewed: module reification, [\#1480](https://gitlab.staging.haskell.org/ghc/ghc/issues/1480)
+Waiting for review, hopefully to still go into 7.8.1: module reification, [\#1480](https://gitlab.staging.haskell.org/ghc/ghc/issues/1480)
 
 
 
