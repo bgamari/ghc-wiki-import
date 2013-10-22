@@ -141,7 +141,7 @@ The proposal is to make it possible to generate annotations from template haskel
 Specifically, we propose to add the following new function to the `Quasi` class:
 
 
-```wiki
+```
 class Quasi where 
   qReifyAnnotations :: Data a => AnnLookup -> m [a]
   qReifyModule      :: Module -> m ModuleInfo
@@ -163,7 +163,7 @@ data Module = Module PkgName ModName -- package qualified module name
 We also propose to add the new `AnnP` data constructor to `data Pragma`:
 
 
-```wiki
+```
 data Pragma = InlineP         Name Inline RuleMatch Phases
             | SpecialiseP     Name Type (Maybe Inline) Phases
             | SpecialiseInstP Type
@@ -336,4 +336,4 @@ The only feature that is still not in GHC and needed for HFlags is a way to walk
 # Other related tickets
 
 
-- [\#8398](https://gitlab.staging.haskell.org/ghc/ghc/issues/8398)
+- [\#8398](https://gitlab.staging.haskell.org/ghc/ghc/issues/8398): currently on hold, as maybe this can be done as a helper function in `Lib.hs` after [\#1480](https://gitlab.staging.haskell.org/ghc/ghc/issues/1480) is merged, without touching the inside of GHC.
