@@ -465,3 +465,7 @@
 </th></tr></table>
 
 
+
+Note: A `*` after the version number denotes the package being hidden by default.
+
+
