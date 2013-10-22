@@ -124,8 +124,7 @@ Template haskell is a corner-case, where this orphan logic is not clever enough 
 
 
 
-An easier way is to implement [\#1480](https://gitlab.staging.haskell.org/ghc/ghc/issues/1480), module reification.  If we can get the import list of every module, then HFlags can walk the tree of imports itself and gather all the flags.  The nice in this is that the compiler only needs very basic and simple support, and then the logic of traversal can be implemented in HFlags, not in the compiler.solutions, or object to both.**
-**
+An easier way is to implement [\#1480](https://gitlab.staging.haskell.org/ghc/ghc/issues/1480), module reification.  If we can get the import list of every module, then HFlags can walk the tree of imports itself and gather all the flags.  The nice in this is that the compiler only needs very basic and simple support, and then the logic of traversal can be implemented in HFlags, not in the compiler.
 
 
 ---
@@ -159,11 +158,109 @@ These functions behave as follows:
 
 
 
-Here is (a sketch of) how we can use these new facilities to implement `defineFlag` and `$initHFlags` in the above example.
+Here is a minimalistic implementation showing how we can use these new facilities to implement `defineFlag` and `$initHFlags` in the above example.
 
 
+- `HFlags.hs`:
 
-...fill in...
+  ```
+  {-# LANGUAGE TemplateHaskell #-}
+  {-# LANGUAGE DeriveDataTypeable #-}
+
+  module HFlags where
+
+  import Control.Applicative
+  import Data.Data
+  import qualified Data.Set as Set
+  import Language.Haskell.TH
+  import Language.Haskell.TH.Syntax
+
+  -- in the real world, this is more complex, of course
+  data FlagData = FlagData String deriving (Show, Data, Typeable)
+  instance Lift FlagData where
+    lift (FlagData s) = [| FlagData s |]
+
+  defineFlag :: FlagData -> DecsQ
+  defineFlag str = do
+    (:[]) <$> pragAnnD ModuleAnnotation (lift str)
+
+  traverseAnnotations :: Q [FlagData]
+  traverseAnnotations = do
+    ModuleInfo children <- reifyModule =<< thisModule
+    go children Set.empty []
+    where
+      go []     _visited acc = return acc
+      go (x:xs) visited  acc | x `Set.member` visited = go xs visited acc
+                             | otherwise = do
+                               ModuleInfo newMods <- reifyModule x
+                               newAnns <- reifyAnnotations $ AnnLookupModule x
+                               go (newMods ++ xs) (x `Set.insert` visited) (newAnns ++ acc)
+
+  initHFlags :: ExpQ
+  initHFlags = do
+    anns <- traverseAnnotations
+    [| print anns |] -- in the real world do something here, like generating --help
+  ```
+- `A.hs`:
+
+  ```
+  {-# LANGUAGE TemplateHaskell #-}
+
+  module A where
+
+  import HFlags
+
+  defineFlag (FlagData "A module is here!")
+  ```
+- `B.hs`:
+
+  ```
+  {-# LANGUAGE TemplateHaskell #-}
+
+  module B where
+
+  import A
+  import HFlags
+
+  defineFlag (FlagData "B module is here!")
+  ```
+- `Main.hs`:
+
+  ```
+  {-# LANGUAGE TemplateHaskell #-}
+
+  import B
+  import HFlags
+
+  main = do
+    $initHFlags
+  ```
+- `build.sh`:
+
+  ```wiki
+  #!/bin/sh
+
+  set -e
+
+  rm -f *.o *.hi Main
+
+  GHC="/home/errge/tmp/ghc/inplace/bin/ghc-stage2 -v0 "
+
+  $GHC -c HFlags.hs
+  $GHC -c A.hs
+  $GHC -c B.hs
+  $GHC -c Main.hs
+  $GHC --make Main
+  ```
+- result:
+
+  ```wiki
+  errge@curry:~/tmp/sketch $ ./build.sh && ./Main
+  [FlagData "A module is here!",FlagData "B module is here!"]
+  ```
+
+
+In spite of only importing B from Main, we see the annotations from A, this was our goal.
 
 
 ---
