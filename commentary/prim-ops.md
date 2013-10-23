@@ -90,7 +90,7 @@ All other PrimOps are classified as out-of-line, and are implemented by hand-wri
   are in the [registers](commentary/rts/haskell-execution#registers) R1-R8.  This is to make it easy to write the
   C-- code for these PrimOps: we don't have to write code for multiple calling conventions.
 
-### Foreign out-of-line PrimOps
+### Foreign out-of-line PrimOps and `foreign import prim`
 
 
 
