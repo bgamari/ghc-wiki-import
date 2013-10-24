@@ -25,7 +25,7 @@ Common tasks:
 
 
 - performed deprecation-removals & major version bump
-- TODO make release
+- ready for release
 
 ### [ base](http://hackage.haskell.org/package/base)
 
@@ -54,7 +54,7 @@ Common tasks:
 
 
 - cleaned up
-- TODO make release
+- ready for release
 
 ### [ directory](http://hackage.haskell.org/package/directory)
 
@@ -141,14 +141,35 @@ col: priority, col: owner, col: reporter, order: reporter)
 ### [ ghc-prim](http://hackage.haskell.org/package/ghc-prim)
 
 
+
+TODO
+
+
 ### [ haskell2010](http://hackage.haskell.org/package/haskell2010)
 
+
+- TODO find out why it doesn't compile outside GHC-build
 
 ### [ haskell98](http://hackage.haskell.org/package/haskell98)
 
 
+- TODO find out why it doesn't compile outside GHC-build
+
 ### [ hoopl](http://hackage.haskell.org/package/hoopl)
 
+
+
+TODO
+
+
+### [ hpc](http://hackage.haskell.org/package/hpc)
+
+
+
+[](https://travis-ci.org/ghc/packages-hpc)
+
+
+- ready for release 
 
 ### [ integer-gmp](http://hackage.haskell.org/package/integer-gmp)
 
@@ -158,8 +179,16 @@ col: priority, col: owner, col: reporter, order: reporter)
 ### [ old-locale](http://hackage.haskell.org/package/old-locale)
 
 
+
+[](https://travis-ci.org/ghc/packages-old-locale)
+
+
+- ready for release
+
 ### [ old-time](http://hackage.haskell.org/package/old-time)
 
+
+- ready for release
 
 ### [ parallel](http://hackage.haskell.org/package/parallel)
 
@@ -268,6 +297,8 @@ col: reporter, order: reporter)
 
 ### [ template-haskell](http://hackage.haskell.org/package/template-haskell)
 
+
+- cleaned up and ready for release
 
 ### [ unix](http://hackage.haskell.org/package/unix)
 
@@ -465,7 +496,7 @@ Note: Libraries with a "<sup>1</sup>" marker are used internally (e.g. by `ghci`
 
 - upstream: [
   http://github.com/haskell/win32.git](http://github.com/haskell/win32.git)
-- TODO
+- TODO version bump needed!
 
 ### binary
 
