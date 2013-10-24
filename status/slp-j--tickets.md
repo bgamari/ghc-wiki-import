@@ -5,6 +5,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Type inference
 
 
+- [\#8281](https://gitlab.staging.haskell.org/ghc/ghc/issues/8281): `UnliftedFFITypes` etc
 - [\#8441](https://gitlab.staging.haskell.org/ghc/ghc/issues/8441): family instances in hs-boot files
 - [\#8427](https://gitlab.staging.haskell.org/ghc/ghc/issues/8427): stop EPS cache poisoning
 - [\#8450](https://gitlab.staging.haskell.org/ghc/ghc/issues/8450): rewriting wanteds with wanteds gives confusing error messages
