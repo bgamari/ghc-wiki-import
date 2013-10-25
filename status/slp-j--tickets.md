@@ -59,6 +59,7 @@ See also [TemplateHaskell](template-haskell)
 ## Optimisation
 
 
+- [\#8472](https://gitlab.staging.haskell.org/ghc/ghc/issues/8472): top level unlifted string literals
 - [\#8351](https://gitlab.staging.haskell.org/ghc/ghc/issues/8351): inline allocation for small arrays
 - [\#8275](https://gitlab.staging.haskell.org/ghc/ghc/issues/8275): loopification and profiling
 - [\#8335](https://gitlab.staging.haskell.org/ghc/ghc/issues/8335): more gc entry points
@@ -121,7 +122,6 @@ See also [TemplateHaskell](template-haskell)
 - [\#3781](https://gitlab.staging.haskell.org/ghc/ghc/issues/3781), [\#3755](https://gitlab.staging.haskell.org/ghc/ghc/issues/3755): inlining for local functions: discount for scrutinising free vars
 - [\#3765](https://gitlab.staging.haskell.org/ghc/ghc/issues/3765): CONLIKE things and case expressions (need two unfoldings)
 - [\#3073](https://gitlab.staging.haskell.org/ghc/ghc/issues/3073) and [Commentary/Compiler/DesugaringInstances](commentary/compiler/desugaring-instances): better desugaring for instances
-- [\#2840](https://gitlab.staging.haskell.org/ghc/ghc/issues/2840): top level unlifted string literals
 - [\#3123](https://gitlab.staging.haskell.org/ghc/ghc/issues/3123): feature request: recursive inlining and peeling
 - [\#4960](https://gitlab.staging.haskell.org/ghc/ghc/issues/4960): better inlining tests
 
