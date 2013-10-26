@@ -20,6 +20,83 @@ Common tasks:
 
 
 - TODO clean-up `.cabal` files
+- TODO add changelogs
+
+
+
+  
+  
+  
+  
+  
+    
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: !closed, component: libraries%2Fother,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, col: keywords, desc: 1, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: !closed, component: libraries%2Fother,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, col: keywords, order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: !closed, component: libraries%2Fother,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, col: keywords, order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: !closed, component: libraries%2Fother,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, col: keywords, order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: !closed, component: libraries%2Fother,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, col: keywords, order: owner)
+      </th>
+<th>
+        
+        Reporter (Ticket query: status: !closed, component: libraries%2Fother,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, col: keywords, order: reporter)
+      </th>
+<th>
+        
+        Keywords (Ticket query: status: !closed, component: libraries%2Fother,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, col: keywords, order: keywords)
+      </th>
+<td>
+    </td></tr>
+<tr><td>
+          </td>
+<th>
+            No tickets found
+          </th>
+<td>
+        </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr></table>
+
+
+  
+
+
 
 ### [ array](http://hackage.haskell.org/package/array)
 
@@ -28,6 +105,1141 @@ Common tasks:
 - ready for release
 
 ### [ base](http://hackage.haskell.org/package/base)
+
+
+
+
+  
+
+##
+    Results (1 - 10 of 70)
+  
+
+
+  
+
+
+
+    
+    
+      
+        1
+      
+      
+    
+      
+      
+        2 (Ticket query: status: !closed, component: libraries%2Fbase, max: 10,
+page: 2, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: id)
+      
+    
+      
+      
+        3 (Ticket query: status: !closed, component: libraries%2Fbase, max: 10,
+page: 3, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: id)
+      
+    
+      
+      
+        4 (Ticket query: status: !closed, component: libraries%2Fbase, max: 10,
+page: 4, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: id)
+      
+    
+      
+      
+        5 (Ticket query: status: !closed, component: libraries%2Fbase, max: 10,
+page: 5, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: id)
+      
+    
+      
+      
+        6 (Ticket query: status: !closed, component: libraries%2Fbase, max: 10,
+page: 6, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: id)
+      
+    
+      
+      
+        7 (Ticket query: status: !closed, component: libraries%2Fbase, max: 10,
+page: 7, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: id)
+      
+    
+    
+      → (Ticket query: status: !closed, component: libraries%2Fbase, max: 10,
+page: 2, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: id)
+    
+
+
+  
+  
+  
+    
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: !closed, component: libraries%2Fbase,
+max: 10, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, desc: 1, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: !closed, component: libraries%2Fbase,
+max: 10, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: !closed, component: libraries%2Fbase,
+max: 10, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: !closed, component: libraries%2Fbase,
+max: 10, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: !closed, component: libraries%2Fbase,
+max: 10, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: owner)
+      </th>
+<th>
+        
+        Reporter (Ticket query: status: !closed, component: libraries%2Fbase,
+max: 10, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: reporter)
+      </th>
+<td>
+    </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#913](https://gitlab.staging.haskell.org/ghc/ghc/issues/913)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      feature request
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [instance Ord (StableName a)](https://gitlab.staging.haskell.org/ghc/ghc/issues/913)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      ekarttun
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#3399](https://gitlab.staging.haskell.org/ghc/ghc/issues/3399)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      proposal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Generalize the type of Data.List.{deleteBy, deleteFirstsBy}](https://gitlab.staging.haskell.org/ghc/ghc/issues/3399)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      iago
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#9795](https://gitlab.staging.haskell.org/ghc/ghc/issues/9795)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      feature request
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Debug.Trace.trace is too strict](https://gitlab.staging.haskell.org/ghc/ghc/issues/9795)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      jcpetruzza
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#9936](https://gitlab.staging.haskell.org/ghc/ghc/issues/9936)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Data.Fixed truncates 5.17 to 5.16](https://gitlab.staging.haskell.org/ghc/ghc/issues/9936)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      singpolyma
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#10055](https://gitlab.staging.haskell.org/ghc/ghc/issues/10055)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      feature request
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Offer PolyKinded instances for Data.Fixed.HasResolution](https://gitlab.staging.haskell.org/ghc/ghc/issues/10055)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      low
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      redneb
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#10084](https://gitlab.staging.haskell.org/ghc/ghc/issues/10084)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      feature request
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Data.List should have a takeLastN function](https://gitlab.staging.haskell.org/ghc/ghc/issues/10084)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      leonbaum2
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#10169](https://gitlab.staging.haskell.org/ghc/ghc/issues/10169)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [bracket not running the final action on termination through SIGTERM](https://gitlab.staging.haskell.org/ghc/ghc/issues/10169)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      Kritzefitz
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#10266](https://gitlab.staging.haskell.org/ghc/ghc/issues/10266)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      task
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Split base for Backpack](https://gitlab.staging.haskell.org/ghc/ghc/issues/10266)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      low
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      ezyang
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      ezyang
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#10484](https://gitlab.staging.haskell.org/ghc/ghc/issues/10484)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [hPutBuf crashes when trying to write a large string to stdout (resource exhausted)](https://gitlab.staging.haskell.org/ghc/ghc/issues/10484)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      bayloff
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#11009](https://gitlab.staging.haskell.org/ghc/ghc/issues/11009)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Errors reading stdin on Windows](https://gitlab.staging.haskell.org/ghc/ghc/issues/11009)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      ncreep
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr></table>
+
+
+  
+
+
+
+    
+    
+      
+        1
+      
+      
+    
+      
+      
+        2 (Ticket query: status: !closed, component: libraries%2Fbase, max: 10,
+page: 2, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: id)
+      
+    
+      
+      
+        3 (Ticket query: status: !closed, component: libraries%2Fbase, max: 10,
+page: 3, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: id)
+      
+    
+      
+      
+        4 (Ticket query: status: !closed, component: libraries%2Fbase, max: 10,
+page: 4, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: id)
+      
+    
+      
+      
+        5 (Ticket query: status: !closed, component: libraries%2Fbase, max: 10,
+page: 5, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: id)
+      
+    
+      
+      
+        6 (Ticket query: status: !closed, component: libraries%2Fbase, max: 10,
+page: 6, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: id)
+      
+    
+      
+      
+        7 (Ticket query: status: !closed, component: libraries%2Fbase, max: 10,
+page: 7, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: id)
+      
+    
+    
+      → (Ticket query: status: !closed, component: libraries%2Fbase, max: 10,
+page: 2, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: id)
+    
+
+
 
 
 - TODO make sure all recent additions are `/Since:/`-annotated
@@ -148,21 +1360,1553 @@ TODO
 ### [ haskell2010](http://hackage.haskell.org/package/haskell2010)
 
 
-- TODO find out why it doesn't compile outside GHC-build
+
+
+  
+  
+  
+  
+  
+    
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: !closed,
+component: libraries%2Fhaskell2010, max: 0, col: id, col: type, col: summary,
+col: priority, col: owner, col: reporter, desc: 1, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: !closed, component: libraries%2Fhaskell2010,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: !closed,
+component: libraries%2Fhaskell2010, max: 0, col: id, col: type, col: summary,
+col: priority, col: owner, col: reporter, order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: !closed,
+component: libraries%2Fhaskell2010, max: 0, col: id, col: type, col: summary,
+col: priority, col: owner, col: reporter, order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: !closed,
+component: libraries%2Fhaskell2010, max: 0, col: id, col: type, col: summary,
+col: priority, col: owner, col: reporter, order: owner)
+      </th>
+<th>
+        
+        Reporter (Ticket query: status: !closed,
+component: libraries%2Fhaskell2010, max: 0, col: id, col: type, col: summary,
+col: priority, col: owner, col: reporter, order: reporter)
+      </th>
+<td>
+    </td></tr>
+<tr><td>
+          </td>
+<th>
+            No tickets found
+          </th>
+<td>
+        </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr></table>
+
+
+  
+
+
+
+- ready for release
 
 ### [ haskell98](http://hackage.haskell.org/package/haskell98)
 
 
-- TODO find out why it doesn't compile outside GHC-build
+
+
+  
+  
+  
+  
+  
+    
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: !closed, component: libraries%2Fhaskell98,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, desc: 1, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: !closed, component: libraries%2Fhaskell98,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: !closed,
+component: libraries%2Fhaskell98, max: 0, col: id, col: type, col: summary,
+col: priority, col: owner, col: reporter, order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: !closed,
+component: libraries%2Fhaskell98, max: 0, col: id, col: type, col: summary,
+col: priority, col: owner, col: reporter, order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: !closed, component: libraries%2Fhaskell98,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: owner)
+      </th>
+<th>
+        
+        Reporter (Ticket query: status: !closed,
+component: libraries%2Fhaskell98, max: 0, col: id, col: type, col: summary,
+col: priority, col: owner, col: reporter, order: reporter)
+      </th>
+<td>
+    </td></tr>
+<tr><td>
+          </td>
+<th>
+            No tickets found
+          </th>
+<td>
+        </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr></table>
+
+
+  
+
+
+
+- ready for release
 
 ### [ hoopl](http://hackage.haskell.org/package/hoopl)
 
 
 
-TODO
+[](https://travis-ci.org/ghc/packages-hoopl)
 
+
+- TODO changelog entry for 3.10.0.0
 
 ### [ hpc](http://hackage.haskell.org/package/hpc)
+
+
+
+
+  
+  
+  
+  
+  
+    
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: !closed, component: Code+Coverage, max: 0,
+col: id, col: type, col: summary, col: priority, col: owner, col: reporter,
+desc: 1, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: !closed, component: Code+Coverage, max: 0,
+col: id, col: type, col: summary, col: priority, col: owner, col: reporter,
+order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: !closed, component: Code+Coverage,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: !closed, component: Code+Coverage,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: !closed, component: Code+Coverage, max: 0,
+col: id, col: type, col: summary, col: priority, col: owner, col: reporter,
+order: owner)
+      </th>
+<th>
+        
+        Reporter (Ticket query: status: !closed, component: Code+Coverage,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: reporter)
+      </th>
+<td>
+    </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#1853](https://gitlab.staging.haskell.org/ghc/ghc/issues/1853)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [hpc mix files for Main modules overwrite each other](https://gitlab.staging.haskell.org/ghc/ghc/issues/1853)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      lowest
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      guest
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#2075](https://gitlab.staging.haskell.org/ghc/ghc/issues/2075)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      feature request
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [hpc should render information about the run in its html markup](https://gitlab.staging.haskell.org/ghc/ghc/issues/2075)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      lowest
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      andy@…
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      dons
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#2224](https://gitlab.staging.haskell.org/ghc/ghc/issues/2224)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [-fhpc inteferes/prevents rewrite rules from firing](https://gitlab.staging.haskell.org/ghc/ghc/issues/2224)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      lowest
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      andy@…
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      dons
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#10367](https://gitlab.staging.haskell.org/ghc/ghc/issues/10367)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      ["ghc: panic! (the 'impossible' happened)"](https://gitlab.staging.haskell.org/ghc/ghc/issues/10367)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      bgwines
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#10504](https://gitlab.staging.haskell.org/ghc/ghc/issues/10504)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [GHC panics with dsImpSpecs on SPECIALISE pragma with -fhpc enabled](https://gitlab.staging.haskell.org/ghc/ghc/issues/10504)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      nh2
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#10951](https://gitlab.staging.haskell.org/ghc/ghc/issues/10951)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [HPC program has poor error reporting / strange CLI in general](https://gitlab.staging.haskell.org/ghc/ghc/issues/10951)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      low
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      mgsloan
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#10952](https://gitlab.staging.haskell.org/ghc/ghc/issues/10952)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Use IPids instead of package keys in HPC tix files](https://gitlab.staging.haskell.org/ghc/ghc/issues/10952)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      low
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      mgsloan
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#12631](https://gitlab.staging.haskell.org/ghc/ghc/issues/12631)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [\`hpc report\` silently ignore non-existent modules](https://gitlab.staging.haskell.org/ghc/ghc/issues/12631)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      quabla
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#13448](https://gitlab.staging.haskell.org/ghc/ghc/issues/13448)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      task
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Make HPC use an RTS option to select the tix file](https://gitlab.staging.haskell.org/ghc/ghc/issues/13448)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      dfeuer
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      dfeuer
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#13452](https://gitlab.staging.haskell.org/ghc/ghc/issues/13452)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Lock .tix file](https://gitlab.staging.haskell.org/ghc/ghc/issues/13452)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      dfeuer
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#14711](https://gitlab.staging.haskell.org/ghc/ghc/issues/14711)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      feature request
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Machine readable output of coverage](https://gitlab.staging.haskell.org/ghc/ghc/issues/14711)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      jproyo
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      Koterpillar
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#15498](https://gitlab.staging.haskell.org/ghc/ghc/issues/15498)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [HPC: do notation marks () as non-covered](https://gitlab.staging.haskell.org/ghc/ghc/issues/15498)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      tom-bop
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#15776](https://gitlab.staging.haskell.org/ghc/ghc/issues/15776)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Untested modules excluded from hpc coverage report](https://gitlab.staging.haskell.org/ghc/ghc/issues/15776)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      ramirez7
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#15932](https://gitlab.staging.haskell.org/ghc/ghc/issues/15932)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [DeriveFunctor and GeneralizedNewtypeDeriving instances never reporting as covered](https://gitlab.staging.haskell.org/ghc/ghc/issues/15932)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      low
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      davean
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr></table>
+
+
+  
+
 
 
 
@@ -186,6 +2930,75 @@ TODO
 - ready for release
 
 ### [ old-time](http://hackage.haskell.org/package/old-time)
+
+
+
+
+  
+  
+  
+  
+  
+    
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: !closed, component: libraries%2Fold-time,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, desc: 1, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: !closed, component: libraries%2Fold-time,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: !closed, component: libraries%2Fold-time,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: !closed,
+component: libraries%2Fold-time, max: 0, col: id, col: type, col: summary,
+col: priority, col: owner, col: reporter, order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: !closed, component: libraries%2Fold-time,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: owner)
+      </th>
+<th>
+        
+        Reporter (Ticket query: status: !closed,
+component: libraries%2Fold-time, max: 0, col: id, col: type, col: summary,
+col: priority, col: owner, col: reporter, order: reporter)
+      </th>
+<td>
+    </td></tr>
+<tr><td>
+          </td>
+<th>
+            No tickets found
+          </th>
+<td>
+        </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr></table>
+
+
+  
+
 
 
 - ready for release
@@ -536,11 +3349,80 @@ Note: Libraries with a "<sup>1</sup>" marker are used internally (e.g. by `ghci`
 ### pretty
 
 
+
+
+  
+  
+  
+  
+  
+    
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: !closed, component: libraries%2Fpretty,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, desc: 1, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: !closed, component: libraries%2Fpretty,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: !closed, component: libraries%2Fpretty,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: !closed, component: libraries%2Fpretty,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: !closed, component: libraries%2Fpretty,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: owner)
+      </th>
+<th>
+        
+        Reporter (Ticket query: status: !closed, component: libraries%2Fpretty,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+col: reporter, order: reporter)
+      </th>
+<td>
+    </td></tr>
+<tr><td>
+          </td>
+<th>
+            No tickets found
+          </th>
+<td>
+        </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr></table>
+
+
+  
+
+
+
 - upstream: [
   http://github.com/haskell/pretty.git](http://github.com/haskell/pretty.git)
 - not pointing to proper release version
 - no significant delta to upstream HEAD state
-- TODO
+- TODO .cabal file points to Trac for bug-reports even though upstream on GitHub
 
 ### primitive<sup>2</sup>
 
