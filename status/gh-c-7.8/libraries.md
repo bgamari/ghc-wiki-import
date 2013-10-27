@@ -3358,6 +3358,11 @@ col: reporter, order: reporter)
 - synced up to `v0.5.1.0` + patches [\[5e2f145a37/ghc\]](/trac/ghc/changeset/5e2f145a37/ghc)
 - TODO proper `0.5.1.1` release pending
 
+### random<sup>2</sup>
+
+
+- TODO GHC's repo is slightly **ahead** of upstream
+
 ### terminfo<sup>1</sup>
 
 
