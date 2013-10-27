@@ -3344,9 +3344,8 @@ col: reporter, order: reporter)
 
 - upstream: [
   http://github.com/haskell/pretty.git](http://github.com/haskell/pretty.git)
-- not pointing to proper release version
-- no significant delta to upstream HEAD state
-- TODO .cabal file points to Trac for bug-reports even though upstream on GitHub
+- synced up to [
+  pretty-1.1.1.1](http://hackage.haskell.org/package/pretty-1.1.1.1) [\[f275522e/ghc\]](/trac/ghc/changeset/f275522e/ghc)
 
 ### primitive<sup>2</sup>
 
