@@ -43,7 +43,7 @@ class CoercionT f where
   coercionT :: f a -> f b -> Maybe (Coercion a b)
 ```
 
-## Module Data.Proxy
+## Module `Data.Proxy`
 
 
 ```wiki
