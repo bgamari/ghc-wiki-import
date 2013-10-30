@@ -340,6 +340,10 @@ The only feature that is still not in GHC and needed for HFlags is a way to walk
 **If you have any opinion about this minimal module reification, please comment on and review [\#1480](https://gitlab.staging.haskell.org/ghc/ghc/issues/1480).**
 
 
+
+Tidy-up ticket: [\#8489](https://gitlab.staging.haskell.org/ghc/ghc/issues/8489)
+
+
 # Other related tickets
 
 
