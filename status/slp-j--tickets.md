@@ -35,6 +35,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 See also [TemplateHaskell](template-haskell)
 
 
+- [TemplateHaskell/Annotations](template-haskell/annotations) Gergely's work on annotations in TH
 - [\#1475](https://gitlab.staging.haskell.org/ghc/ghc/issues/1475): allow splicing of import declarations (5 in cc list)
 - [\#8100](https://gitlab.staging.haskell.org/ghc/ghc/issues/8100): support standalone deriving
 - [\#4364](https://gitlab.staging.haskell.org/ghc/ghc/issues/4364): cycle in type declarations
