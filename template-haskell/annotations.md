@@ -310,6 +310,13 @@ The already merged [\#3725](https://gitlab.staging.haskell.org/ghc/ghc/issues/37
 Annotation reification is implemented and merged in [\#8397](https://gitlab.staging.haskell.org/ghc/ghc/issues/8397).
 
 
+## Proposed simplification of annotation data types
+
+
+
+See [\#8388](https://gitlab.staging.haskell.org/ghc/ghc/issues/8388). Easy to do.
+
+
 ## Patch ready, nice to have: typed annotation reification
 
 
