@@ -3371,7 +3371,8 @@ col: reporter, order: reporter)
 
 - upstream: [
   http://git.haskell.org/darcs-mirrors/terminfo.git](http://git.haskell.org/darcs-mirrors/terminfo.git)
-- TODO
+- synced up to [
+  terminfo-0.3.2.6](http://hackage.haskell.org/package/terminfo-0.3.2.6) [\[9642716f30/ghc\]](/trac/ghc/changeset/9642716f30/ghc)
 
 ### time
 
@@ -3387,7 +3388,8 @@ col: reporter, order: reporter)
 - upstream: [
   http://git.haskell.org/darcs-mirrors/transformers.git](http://git.haskell.org/darcs-mirrors/transformers.git)
 - Newly added in GHC 7.8
-- still at 0.3.0.0 since GHC 7.6.3
+- still at [
+  transformers-0.3.0.0](http://hackage.haskell.org/package/transformers-0.3.0.0) since GHC 7.6.3
 - asked upstream; shall remain at [
   transformers-0.3.0.0](http://hackage.haskell.org/package/transformers-0.3.0.0) for GHC 7.8.1
 
