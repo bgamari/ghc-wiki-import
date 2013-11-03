@@ -38,7 +38,7 @@ The info table for a stack frame has a couple of extra fields in addition to the
 
 
 
-The *SRT* field points to the static reference table (SRT) for this stack frame (see [Commentary/Rts/CAFs](commentary/rts/ca-fs) for details of SRTs).
+The *SRT* field points to the static reference table (SRT) for this stack frame (see [Commentary/Rts/Storage/GC/CAFs](commentary/rts/storage/gc/ca-fs) for details of SRTs).
 
 
 ## Layout of the payload
