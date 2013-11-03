@@ -25,6 +25,10 @@ Common tasks:
 ### [ array](http://hackage.haskell.org/package/array)
 
 
+
+[](https://travis-ci.org/ghc/packages-array)
+
+
 - performed deprecation-removals & major version bump
 - ready for release
 
@@ -1189,10 +1193,18 @@ col: reporter, order: id)
 ### [ deepseq](http://hackage.haskell.org/package/deepseq)
 
 
+
+[](https://travis-ci.org/ghc/packages-deepseq)
+
+
 - cleaned up
 - ready for release
 
 ### [ directory](http://hackage.haskell.org/package/directory)
+
+
+
+[](https://travis-ci.org/ghc/packages-directory)
 
 
 
@@ -3040,6 +3052,10 @@ col: reporter, order: reporter)
 ### [ stm](http://hackage.haskell.org/package/stm)
 
 
+
+[](https://travis-ci.org/ghc/packages-stm)
+
+
 - Note: this is an **extra** library (i.e. not part of binary distribution); not critical for release; [
   stm-2.4.2](http://hackage.haskell.org/package/stm-2.4.2) still builds fine with GHC HEAD.
 - cleaned up; repo contains unreleased 2.4.2.1 state
@@ -3051,6 +3067,10 @@ col: reporter, order: reporter)
 - cleaned up and ready for release
 
 ### [ unix](http://hackage.haskell.org/package/unix)
+
+
+
+[](https://travis-ci.org/ghc/packages-unix)
 
 
 
