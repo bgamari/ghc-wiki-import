@@ -2930,9 +2930,15 @@ col: priority, col: owner, col: reporter, order: reporter)
 ### [ parallel](http://hackage.haskell.org/package/parallel)
 
 
+
+[](https://travis-ci.org/ghc/packages-parallel)
+
+
 - Note: **extra** library (i.e. not part of normal distribution)
 
-- TODO contains many `DEPRECATED` functions in `Control.Parallel.Strategies` since at least 2010:
+- ready for release
+
+- For next major version: contains many `DEPRECATED` functions in `Control.Parallel.Strategies` since at least 2010:
 
   ```
   {-# DEPRECATED Done "The Strategy type is now a -> Eval a, not a -> Done" #-}
@@ -2953,6 +2959,10 @@ col: priority, col: owner, col: reporter, order: reporter)
   ```
 
 ### [ process](http://hackage.haskell.org/package/process)
+
+
+
+[](https://travis-ci.org/ghc/packages-process)
 
 
 
@@ -3023,6 +3033,9 @@ col: reporter, order: reporter)
   
 
 
+
+- why was there a major version bump?
+- ready for release
 
 ### [ stm](http://hackage.haskell.org/package/stm)
 
