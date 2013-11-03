@@ -53,9 +53,6 @@ typedef struct {
 #ifdef PROFILING
     StgProfHeader         prof;
 #endif
-#ifdef GRAN
-    StgGranHeader         gran;
-#endif
 } StgHeader;
 ```
 
