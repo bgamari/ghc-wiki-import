@@ -15,7 +15,7 @@ The stack consists of a sequence of *stack frames* (also sometimes called *activ
 
 
 
-There are several kinds of [stack frame](commentary/rts/stack#kinds-of-stack-frame), but the most common types are those pushed when evaluating a `case` expression:
+There are several kinds of [stack frame](commentary/rts/storage/stack#kinds-of-stack-frame), but the most common types are those pushed when evaluating a `case` expression:
 
 
 ```wiki
