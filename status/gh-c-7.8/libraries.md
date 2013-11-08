@@ -30,7 +30,8 @@ Common tasks:
 
 
 - performed deprecation-removals & major version bump
-- ready for release
+- released as [
+  array-0.5.0.0](http://hackage.haskell.org/package/array-0.5.0.0)!
 
 ### [ base](http://hackage.haskell.org/package/base)
 
@@ -3049,7 +3050,8 @@ col: reporter, order: reporter)
 
 
 - why was there a major version bump?
-- ready for release
+- (almost) ready for release
+- find out what's up with [\#7229](https://gitlab.staging.haskell.org/ghc/ghc/issues/7229)
 
 ### [ stm](http://hackage.haskell.org/package/stm)
 
@@ -3067,6 +3069,7 @@ col: reporter, order: reporter)
 
 
 - cleaned up and ready for release
+- wait till RC at least for Hackage upload
 
 ### [ unix](http://hackage.haskell.org/package/unix)
 
