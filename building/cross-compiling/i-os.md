@@ -54,9 +54,10 @@ https://github.com/ghc-ios/ghc-ios-scripts](https://github.com/ghc-ios/ghc-ios-s
 
 
 Check out as described at [Building and Porting GHC](building), except:
-\*use the following for your sync-all to omit dph packages, because Template Haskell doesn't work yet, and dph depends on it
-\*replace libffi with a newer version that fixes some bugs
 
+
+- use the following for your sync-all to omit dph packages, because Template Haskell doesn't work yet, and dph depends on it
+- replace libffi with a newer version that fixes some bugs
 
 ```wiki
 ./sync-all --no-dph get
