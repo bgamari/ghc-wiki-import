@@ -747,6 +747,10 @@ to make the stage 1 and stage 3 compilers respectively.  These targets work in b
 
 
 
+In addition, the `re1`, `re2`, and `re3` rules quickly rebuilds the stage 1, 2, and 3 compiler executables (e.g. `re2` is equivalent to `rm $PATH_TO_STAGE2_EXECUTABLE; make 2`). This is useful for relinking the compiler after a change like `GhcDebugged=YES`.
+
+
+
 Note that if you’ve never built stage3 before, you will need to create dependencies for it using `make stage=3`. This is because a normal build will skip building the stage3 compiler. You will then be able to run `make 3` as usual.
 
 
