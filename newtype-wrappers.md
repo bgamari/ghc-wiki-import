@@ -146,7 +146,8 @@ To clarify these requirements, here some benchmarks; feel free to expand if you 
 
 
 
-Core already had provided all the necessary feature; the question was just how to offer it on the Haskell level. The implementation comes in form of a `coerce :: Coercible a b -> a -> b` and a type class `Coercible` that relates two types if they have the same representation, i.e. can be related by a coercion of role Representational (see [Roles](roles)). See the haddock documentation for `coercible` for user-level documentation and Note \[Coercible Instances\] for information on the implementation.
+Core already had provided all the necessary feature; the question was just how to offer it on the Haskell level. The implementation comes in form of a `coerce :: Coercible a b -> a -> b` and a type class `Coercible` that relates two types if they have the same representation, i.e. can be related by a coercion of role Representational (see [Roles](roles)). See the haddock documentation for `coercible` for user-level documentation and [
+Note \[Coercible Instances](https://ghc.haskell.org/trac/ghc/browser/ghc/compiler/typecheck/TcInteract.lhs#L2013)\] for information on the implementation.
 
 
 
