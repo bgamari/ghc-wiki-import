@@ -6,7 +6,7 @@ This tree of wiki pages is a "commentary" on the GHC source code.  It contains a
 
 
 
-For the beginners there is a quick introduction guide [here](newcomers).
+For the beginners there is [a short getting started guide](newcomers).
 
 
 
