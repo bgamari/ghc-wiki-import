@@ -6,6 +6,10 @@ This tree of wiki pages is a "commentary" on the GHC source code.  It contains a
 
 
 
+For the beginners there is a quick introduction guide [here](newcomers).
+
+
+
 For the dedicated, there are [videos of Simon and Simon giving an overview of GHC](about-videos), at the 2006 [GHC Hackathon](hackathon).
 
 
