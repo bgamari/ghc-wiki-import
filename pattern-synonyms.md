@@ -117,11 +117,11 @@ The simplest form of pattern synonyms is the one from the examples above.  The g
 
 
 
-`pattern` *conid* *varid<sub>1</sub>* ... *varid<sub>n</sub>* `->` *pat*
+`pattern` *conid* *varid<sub>1</sub>* ... *varid<sub>n</sub>* `<-` *pat*
 
 
 
-`pattern` *varid<sub>1</sub>* *consym* *varid<sub>2</sub>* `->` *pat*
+`pattern` *varid<sub>1</sub>* *consym* *varid<sub>2</sub>* `<-` *pat*
 
 
 - Each of the variables on the left hand side must occur exactly once on the right hand side 
@@ -172,7 +172,7 @@ E.g.
 
 ```wiki
    pattern Arrow :: Type -> Type -> Type
-   pattern Arrow t1 t2 -> App "->" [t1, t2]
+   pattern Arrow t1 t2 <- App "->" [t1, t2]
 ```
 
 
@@ -182,9 +182,9 @@ Together with [ViewPatterns](view-patterns) we can now create patterns that look
 ```wiki
 import qualified Data.Sequence as Seq
 
-pattern Empty -> (Seq.viewl -> Seq.EmptyL)
-pattern x :< xs -> (Seq.viewl -> x Seq.:< xs)
-pattern xs :> x -> (Seq.viewr -> xs Seq.:> x)
+pattern Empty <- (Seq.viewl -> Seq.EmptyL)
+pattern x :< xs <- (Seq.viewl -> x Seq.:< xs)
+pattern xs :> x <- (Seq.viewr -> xs Seq.:> x)
 ```
 
 ## Simply-bidirectional pattern synonyms
@@ -232,7 +232,7 @@ What if you want to use `Succ` in an expression:
 
 
 ```wiki
-    pattern Succ n -> n1 | let n = n1 -1, n >= 0
+    pattern Succ n <- n1 | let n = n1 -1, n >= 0
 ```
 
 
@@ -242,7 +242,7 @@ This is the rationale for the most complicated synonyms, the bidirectional ones.
 
 
 
-`pattern` *conid* *varid<sub>1</sub>* ... *varid<sub>n</sub>* `->` *pat* `where` *cfunlhs* *rhs*
+`pattern` *conid* *varid<sub>1</sub>* ... *varid<sub>n</sub>* `<-` *pat* `where` *cfunlhs* *rhs*
 
 
 
@@ -254,7 +254,7 @@ Example:
 
 
 ```wiki
-   pattern Succ n -> n1 | let n = n1-1, n >= 0 where
+   pattern Succ n <- n1 | let n = n1-1, n >= 0 where
       Succ n = n + 1
 ```
 
