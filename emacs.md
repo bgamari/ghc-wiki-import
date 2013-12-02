@@ -107,7 +107,7 @@ Useless Whitespace](http://www.gnu.org/software/emacs/manual/html_node/emacs/Use
 
 
 
-**Description**: IF you place cursor at the beginning of line, the default behaviour of C-k is to fill all text until newline, but not the newline itself. You need to type C-k again to remove that newline. This setting allows to avoid typing `C-k` twice by killing all text until the newline and newline itself (but only when cursor is placed at the beginning of a line).
+**Description**: IF you place cursor at the beginning of line, the default behaviour of C-k is to kill all text until newline, but not the newline itself. You need to type C-k again to remove that newline. This setting allows to avoid typing `C-k` twice by killing all text until the newline and newline itself (but only when cursor is placed at the beginning of a line).
 
 
 
