@@ -12,6 +12,10 @@ are part of the static data of the program.  Sometimes, a CAF may refer to many 
 again, and so we can deallocate the values that it refers to.
 
 
+
+See Note \[CAF management\] in [rts/sm/Storage.c](/trac/ghc/browser/ghc/rts/sm/Storage.c) for more information.
+
+
 ## Static Reference Tables
 
 
