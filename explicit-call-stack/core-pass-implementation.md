@@ -17,7 +17,7 @@ addressing.
 - [
   Paper describing the work submitted to Haskell Symposium 2009](http://pubs.doc.ic.ac.uk/finding-the-needle/)
 - [
-  https://github.com/sol/rewrite-with-location](https://github.com/sol/rewrite-with-location) Simon Hengel's "rewrite with location" proposal
+  Simon Hengel's "rewrite with location" proposal](https://github.com/sol/rewrite-with-location)
 
 ## Examples
 
