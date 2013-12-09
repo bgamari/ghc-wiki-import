@@ -4,6 +4,10 @@ msys2](http://sourceforge.net/projects/msys2/files/Alpha-versions/), which is a 
 
 
 
+It should get you running in \~5 minutes, modulo download speeds.
+
+
+
 *NB*: You can extract `.tar.xz` files with 7Zip: [
 http://www.7-zip.org/](http://www.7-zip.org/)
 
@@ -96,12 +100,16 @@ The msys2 package uses `pacman` (the venerable ArchLinux package manager) to man
 
 ```wiki
 $ pacman -Syu
-$ pacman -S git wget tar gzip binutils gcc autoconf make libtool automake xz
+$ pacman -S git wget tar gzip binutils autoconf make libtool automake xz
 ```
 
 
-**Do not install python!
+**Do not install python, python2 or gcc!
 **
+
+
+
+We'll use the natively-built python and our own specific version of GCC on windows.
 
 
 
@@ -137,31 +145,7 @@ $ make -j5
 *
 
 
-## Running the testsuite
 
-
-
-To run the testsuite, a gross hack is currently needed in order to set the proper `gcc` for building an executable.
-
-
-
-First, with a built tree, go to the root of the tree. Then say:
-
-
-```wiki
-$ export PATH=/path/to/ghc/source/inplace/mingw/bin:$PATH
-```
-
-
-This puts the inplace-mingw in your `$PATH` ahead of the msys2 tools. Now you can just say:
-
-
-```wiki
-$ cd testsuite
-$ make
-```
-
-
-to run the tests.
+Or just `CPUS=4 sh ./validate` works too. The testsuite works as you expect.
 
 
