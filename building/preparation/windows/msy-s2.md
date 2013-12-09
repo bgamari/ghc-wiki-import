@@ -112,6 +112,11 @@ $ make -j5
 ```
 
 
+**Yes! Parallel make works\*\*
+**
+
+
+
 But be sure to read on for more!
 
 
