@@ -51,7 +51,7 @@ Launch the shell with **C:\\msys64\\mingw64\_shell.bat**
 
 
 Go to [
-https://python.org/download](https://python.org/download) and download *Python 2.6* for your system and install it. Due to a bug in the python2 shipped with msys, ctypes doesn't work.
+https://python.org/download](https://python.org/download) and download *Python 2.7* for your system and install it. Due to a bug in the python2 shipped with msys, ctypes doesn't work.
 
 
 ## Setting up your PATH
