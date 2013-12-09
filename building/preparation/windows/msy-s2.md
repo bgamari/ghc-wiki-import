@@ -112,7 +112,7 @@ $ make -j5
 ```
 
 
-**Yes! Parallel make works\*\*
+**Yes! Parallel make works!
 **
 
 
