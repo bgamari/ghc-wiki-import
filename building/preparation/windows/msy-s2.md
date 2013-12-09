@@ -80,7 +80,7 @@ The msys2 package uses `pacman` (the venerable ArchLinux package manager) to man
 
 ```wiki
 $ pacman -Syu
-$ pacman -S python2 git wget tar gzip binutils gcc autoconf make libtool automake
+$ pacman -S python2 git wget tar gzip binutils gcc autoconf make libtool automake xz
 ```
 
 
