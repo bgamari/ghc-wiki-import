@@ -72,7 +72,7 @@ We'll also go ahead and add the default `cabal.exe` binary installation path:
 
 
 ```wiki
-$ echo 'export PATH=/c/Users/YourUserNameHere/AppData/Roaming/cabal/bin:$PATH' >> ~/.bashrc
+$ echo 'export PATH=/c/Users/$USER/AppData/Roaming/cabal/bin:$PATH' >> ~/.bashrc
 ```
 
 
