@@ -32,8 +32,21 @@ Tickets with stuff that would make nested CPR better:
 - Why is `cacheprof` not deterministic? (→ [\#8611](https://gitlab.staging.haskell.org/ghc/ghc/issues/8611))
 - Use ticky-profiling to learn more about the effects of nested CPR.
 - Look at DmdAnal-related \[SLPJ-Tickets\] and see which ones are affected by nested-cpr.
-- Idea about join points: [
-  http://www.haskell.org/pipermail/ghc-devs/2013-December/003481.html](http://www.haskell.org/pipermail/ghc-devs/2013-December/003481.html)
+- Idea about join points: 
+
+#### join points
+
+
+
+CPR can kill join points. Idea to fix this, and possibly more general benefits:
+[
+http://www.haskell.org/pipermail/ghc-devs/2013-December/003481.html](http://www.haskell.org/pipermail/ghc-devs/2013-December/003481.html); prototype in branch `wip/common-context`.
+
+
+- On its own, improvements are present but very small: [
+  http://www.haskell.org/pipermail/ghc-devs/2013-December/003500.html](http://www.haskell.org/pipermail/ghc-devs/2013-December/003500.html)
+- Enabling CPR for sum types in non-top-level-bindings (which is currently disabled due to worries abut lost join points) yields mixed results (min -3.8%, mean -0.0%, max 3.4%).
+- Enabling nested CPR in inside sum types also yields mixed, not very promising results (-6.9% / +0.0% / +11.3%).
 
 #### better-ho-cardinality
 
@@ -100,7 +113,7 @@ it is important that both `paren` and `parens` are used more than once; if there
 
 
 
-I think I’ll leave it at this point, this is hopefully enough information for someone (likely SPJ) to know whats going on.
+Further investigation and aggresive patch-splitting shows that the arity change is causing the regression. Pushed everything but that patch to master, that patch now lives in `wip/exprArity`.
 
 
 ### Side tracks
