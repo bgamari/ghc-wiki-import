@@ -113,6 +113,18 @@ https://github.com/haskell/cabal/](https://github.com/haskell/cabal/), and build
 
 
 
+You must remove an option that the latest version of Cabal will add to your `~/.cabal/config` file:
+
+
+```wiki
+jobs: $ncpus
+```
+
+
+which triggers an "external" build method that doesn't yet work with cross-compilation (you might see strange errors like "No cabal file found" or other mysterious failures). Commenting it out should fix it.
+
+
+
 The ghc-ios-scripts directory you checked out earlier contains two wrappers called `arm-apple-darwin10-cabal` and `i386-apple-darwin11-cabal`. These will pass the right arguments to cabal, so you can do, for example:
 
 
@@ -136,18 +148,6 @@ in your `~/.cabal/config` file, or by passing the `--disable-library-profiling` 
 ```wiki
 i386-apple-darwin11-cabal install text --disable-library-profiling
 ```
-
-
-If you get errors like "No cabal file found", you've probably got the option
-
-
-```wiki
-jobs: $ncpus
-```
-
-
-(currently placed by default by newer cabals), which triggers an "external" build method that doesn't yet work with cross-compilation. Commenting it out should fix it.
-
 
 ### 7. Make sure hsc2hs is new enough
 
