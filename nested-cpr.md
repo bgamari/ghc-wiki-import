@@ -29,10 +29,9 @@ Tickets with stuff that would make nested CPR better:
 - Paper-Writeup of CPR
 - Shouldn’t nested CPR help a lot with Complex-heavy code? Is there something in nofib?
 - Try passing CPR information from the scrunitee to the pattern variables. For that: Reverse flow of analysis for complex scrunitees (for simple, we want the demand coming from the body, for complex, this is not so important.)
-- Why is `cacheprof` not deterministic? (→ [\#8611](https://gitlab.staging.haskell.org/ghc/ghc/issues/8611))
 - Use ticky-profiling to learn more about the effects of nested CPR.
 - Look at DmdAnal-related \[SLPJ-Tickets\] and see which ones are affected by nested-cpr.
-- Idea about join points: 
+- Do not destroy join points (see below).
 
 #### join points
 
@@ -47,6 +46,10 @@ http://www.haskell.org/pipermail/ghc-devs/2013-December/003481.html](http://www.
   http://www.haskell.org/pipermail/ghc-devs/2013-December/003500.html](http://www.haskell.org/pipermail/ghc-devs/2013-December/003500.html)
 - Enabling CPR for sum types in non-top-level-bindings (which is currently disabled due to worries abut lost join points) yields mixed results (min -3.8%, mean -0.0%, max 3.4%).
 - Enabling nested CPR in inside sum types also yields mixed, not very promising results (-6.9% / +0.0% / +11.3%).
+
+
+Alternative: Detect join points during `dmdAnal` and make sure that their CPR info is not greater than that of the expression they are a join-point for.
+
 
 #### better-ho-cardinality
 
@@ -68,7 +71,7 @@ Baseline: 49832, `better-ho-cardinality`: 49968. Unfortunately, the changes to, 
 
 
 
-Trying to minimize and isolate the problem. After some agressive code deleting, this is where I ended up:
+Trying to minimize and isolate the problem. After some aggressive code deleting, this is where I ended up:
 
 
 ```
@@ -120,3 +123,5 @@ Further investigation and aggresive patch-splitting shows that the arity change 
 
 
 - Should `runSTRep` be inlined (see [ticket:1600\#comment:34](https://gitlab.staging.haskell.org/ghc/ghc/issues/1600))?
+- Can we use `Terminates` CPR information to eagerly evaluate thunks? Possibly, but still trying to construct an example.
+- Why is `cacheprof` not deterministic? (→ [\#8611](https://gitlab.staging.haskell.org/ghc/ghc/issues/8611))
