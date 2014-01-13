@@ -45,7 +45,6 @@ Here is our [current planning document](ghc-planning), intended mainly to help S
 
 
 
-A curation of interesting tickets by SPJ, not discoverable otherwise on the wiki [
-here ](http://hackage.haskell.org/trac/ghc/wiki/Status/SLPJ-Tickets)
+A curation of interesting tickets by SPJ, not discoverable otherwise on the wiki: [Status/SLPJ-Tickets](status/slp-j--tickets)
 
 
