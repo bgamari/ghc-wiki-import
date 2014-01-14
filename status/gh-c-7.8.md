@@ -8,7 +8,7 @@
 *Note that anything not listed here is off Austin's radar.*
 
 
-## Pending tickets
+## Pending RC tickets
 
 
 - [\#7602](https://gitlab.staging.haskell.org/ghc/ghc/issues/7602) - OS X 10.8 seemed OK, but OS X 10.9 needs investigation
@@ -20,6 +20,7 @@
 Things tested:
 
 
+- Builds cleanly
 - `validate` runs OK
 - The compiler can bootstrap itself and `validate` from a binary distribution
 
@@ -31,6 +32,15 @@ Things tested:
 <th>OS X 10.9 (x86\_64)</th>
 <th>Windows i386</th>
 <th>Windows x86\_64
+</th></tr>
+<tr><th>Builds clean</th>
+<th>**OK**</th>
+<th>**OK**</th>
+<th>**OK**</th>
+<th>Probably **OK**</th>
+<th>**OK**</th>
+<th>**OK**</th>
+<th>**OK**
 </th></tr>
 <tr><th>`validate`</th>
 <th>In progress\[1\]</th>
@@ -47,8 +57,8 @@ Things tested:
 <th>**OK**</th>
 <th>Probably **OK**</th>
 <th>In progress\[2\]</th>
-<th>**OK**\[1\]</th>
-<th>**OK**\[1\]
+<th>In progress</th>
+<th>In progress
 </th></tr></table>
 
 
@@ -65,42 +75,42 @@ The dynamic story is complex. Here's the breakdown:
 <table><tr><th>              </th>
 <th>Linux (i386)</th>
 <th>Linux (x86\_64)</th>
+<th>FreeBSD</th>
 <th>OS X 10.7 (x86\_64)</th>
 <th>OS X 10.8 (x86\_64)</th>
 <th>OS X 10.9 (x86\_64)</th>
 <th>Windows i386</th>
-<th>Windows x86\_64</th>
-<th>FreeBSD
+<th>Windows x86\_64
 </th></tr>
 <tr><th>Dynamic GHCi  </th>
 <th>**OK**</th>
 <th>**OK**</th>
+<th>**NO**\[1\]</th>
 <th>**OK**</th>
 <th>Probably **OK**</th>
 <th>In progress</th>
 <th>**NO**</th>
-<th>**NO**</th>
-<th>**NO**\[1\]
+<th>**NO**
 </th></tr>
 <tr><th>`-dynamic-too`</th>
 <th>**OK**</th>
 <th>**OK**</th>
 <th>**OK**</th>
+<th>**OK**</th>
 <th>Probably **OK**</th>
 <th>In progress</th>
 <th>**NO**</th>
-<th>**NO**</th>
-<th>**OK**
+<th>**NO**
 </th></tr>
 <tr><th>`-dynamic`    </th>
 <th>**OK**</th>
 <th>**OK**</th>
 <th>**OK**</th>
+<th>**OK**</th>
 <th>Probably **OK**</th>
 <th>In progress</th>
 <th>**NO**</th>
-<th>**NO**</th>
-<th>**OK**
+<th>**NO**
 </th></tr></table>
 
 
