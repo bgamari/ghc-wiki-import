@@ -406,7 +406,7 @@ is a selector thunk.  A selector thunk is laid out like this:
 
 
 
-The layout word contains the byte offset of the desired word in the
+The `layout` word contains the byte offset of the desired word in the
 selectee.  Note that this is different from all other thunks.
 
 
