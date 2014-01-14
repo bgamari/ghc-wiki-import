@@ -47,7 +47,7 @@ Things tested:
 <th>**OK**</th>
 <th>**OK**</th>
 <th>Probably **OK**</th>
-<th>In progress\[2\]</th>
+<th>**OK**\[2\]</th>
 <th>**OK**\[1\]</th>
 <th>**OK**\[1\]
 </th></tr>
