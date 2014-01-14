@@ -88,7 +88,7 @@ The dynamic story is complex. Here's the breakdown:
 <th>**NO**\[1\]</th>
 <th>**OK**</th>
 <th>Probably **OK**</th>
-<th>In progress</th>
+<th>**OK**</th>
 <th>**NO**</th>
 <th>**NO**
 </th></tr>
@@ -98,7 +98,7 @@ The dynamic story is complex. Here's the breakdown:
 <th>**OK**</th>
 <th>**OK**</th>
 <th>Probably **OK**</th>
-<th>In progress</th>
+<th>**OK**</th>
 <th>**NO**</th>
 <th>**NO**
 </th></tr>
@@ -108,7 +108,7 @@ The dynamic story is complex. Here's the breakdown:
 <th>**OK**</th>
 <th>**OK**</th>
 <th>Probably **OK**</th>
-<th>In progress</th>
+<th>**OK**</th>
 <th>**NO**</th>
 <th>**NO**
 </th></tr></table>
