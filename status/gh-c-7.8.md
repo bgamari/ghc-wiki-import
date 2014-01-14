@@ -39,7 +39,7 @@ Things tested:
 <th>**OK**</th>
 <th>Probably **OK**</th>
 <th>**OK**</th>
-<th>**OK**</th>
+<th>**OK**\[2\]</th>
 <th>**OK**
 </th></tr>
 <tr><th>`validate`</th>
@@ -47,7 +47,7 @@ Things tested:
 <th>**OK**</th>
 <th>**OK**</th>
 <th>Probably **OK**</th>
-<th>**OK**\[2\]</th>
+<th>**NOT OK**</th>
 <th>**OK**\[1\]</th>
 <th>**OK**\[1\]
 </th></tr>
@@ -57,13 +57,13 @@ Things tested:
 <th>**OK**</th>
 <th>Probably **OK**</th>
 <th>In progress</th>
-<th>In progress</th>
+<th>**OK**</th>
 <th>In progress
 </th></tr></table>
 
 
 - \[1\] The testsuite performance numbers need to be updated for 32 bit platforms.
-- \[2\] Mavericks was tested using **Clang**, and there are some failures (mostly minor driver related things, but not critical.)
+- \[2\] Mavericks was tested using **Clang**, and there are some `make fast` failures (mostly minor driver related things, but not critical.)
 
 ## The Dynamic Story
 
@@ -83,32 +83,32 @@ The dynamic story is complex. Here's the breakdown:
 <th>Windows x86\_64
 </th></tr>
 <tr><th>Dynamic GHCi  </th>
-<th>**OK**</th>
-<th>**OK**</th>
+<th>**YES**</th>
+<th>**YES**</th>
 <th>**NO**\[1\]</th>
-<th>**OK**</th>
-<th>Probably **OK**</th>
-<th>**OK**</th>
+<th>**YES**</th>
+<th>Probably **YES**</th>
+<th>**YES**</th>
 <th>**NO**</th>
 <th>**NO**
 </th></tr>
 <tr><th>`-dynamic-too`</th>
-<th>**OK**</th>
-<th>**OK**</th>
-<th>**OK**</th>
-<th>**OK**</th>
-<th>Probably **OK**</th>
-<th>**OK**</th>
+<th>**YES**</th>
+<th>**YES**</th>
+<th>**YES**</th>
+<th>**YES**</th>
+<th>Probably **YES**</th>
+<th>**YES**</th>
 <th>**NO**</th>
 <th>**NO**
 </th></tr>
 <tr><th>`-dynamic`    </th>
-<th>**OK**</th>
-<th>**OK**</th>
-<th>**OK**</th>
-<th>**OK**</th>
-<th>Probably **OK**</th>
-<th>**OK**</th>
+<th>**YES**</th>
+<th>**YES**</th>
+<th>**YES**</th>
+<th>**YES**</th>
+<th>Probably **YES**</th>
+<th>**YES**</th>
 <th>**NO**</th>
 <th>**NO**
 </th></tr></table>
