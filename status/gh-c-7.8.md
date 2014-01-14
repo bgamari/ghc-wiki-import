@@ -49,7 +49,7 @@ Things tested:
 <th>Probably **OK**</th>
 <th>**NOT OK**\[2\]\[4\]</th>
 <th>**OK**\[1\]</th>
-<th>**OK**\[1\]
+<th>**OK**\[5\]
 </th></tr>
 <tr><th>bootstrap </th>
 <th>In progress</th>
@@ -58,7 +58,7 @@ Things tested:
 <th>Probably **OK**</th>
 <th>In progress</th>
 <th>**OK**</th>
-<th>In progress
+<th>In progress\[5\]
 </th></tr></table>
 
 
@@ -66,6 +66,7 @@ Things tested:
 - \[2\] Mavericks was tested using **Clang**, and there are some `make fast` failures (mostly minor driver related things, but not critical.)
 - \[3\] Austin has not directly tested 10.8 yet, but he speculates it is OK based on the 10.7 and preliminary 10.9 results.
 - \[4\] Austin is hitting a `validation` error while building `xhtml`, which might be due to some interaction with the new Haddock. Otherwise, the compiler builds fine and the testsuite works.
+- \[5\] Some of Herbert's latest patches to `integer-gmp` seem to have broke the 64bit build and need to be re-investigated.
 
 ## The Dynamic Story
 
