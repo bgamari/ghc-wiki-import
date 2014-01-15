@@ -340,11 +340,11 @@ The pattern synonym `P` is assigned a *pattern type * of the form
 
 
 ```wiki
-P :: ty requires CReq provides CProv
+pattern CProv => P t1 t2 ... tN :: CReq => t 
 ```
 
 
-where `ty` is a simple type with no context, and `CReq` and `CProv` are type contexts.
+where `t` is a simple type with no context, and `CReq` and `CProv` are type contexts.
 
 
 
@@ -376,7 +376,7 @@ the pattern type of `P` is
 
 
 ```wiki
-P :: b -> T a requires (Show a) provides (Eq b)
+pattern (Eq b) => P b :: (Show a) => T a
 ```
 
 
