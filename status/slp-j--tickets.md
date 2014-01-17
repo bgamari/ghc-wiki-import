@@ -5,6 +5,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Type inference
 
 
+- [\#8673](https://gitlab.staging.haskell.org/ghc/ghc/issues/8673): more generous GADT record selectors
 - [\#8566](https://gitlab.staging.haskell.org/ghc/ghc/issues/8566): Given kind equalities are discarded
 - [\#8550](https://gitlab.staging.haskell.org/ghc/ghc/issues/8550): Don't build recursive type-function dictionaries
 - [\#8486](https://gitlab.staging.haskell.org/ghc/ghc/issues/8486), [\#5682](https://gitlab.staging.haskell.org/ghc/ghc/issues/5682): Parsing of pomoted kinds, and `Typeable` instances involving them
