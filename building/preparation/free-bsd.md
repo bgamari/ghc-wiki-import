@@ -5,11 +5,9 @@
 
 
 
-Building GHC on FreeBSD is currently supported on 8.1-RELEASE or later, on `i386` (x86) and `amd64` (x86\_64) architectures.  One might be able to build GHC on different architectures and earlier versions but they are not maintained actively.  Note that 8.1-RELEASE is used for the FreeBSD nightly builds ([
-amd64 head](http://darcs.haskell.org/ghcBuilder/builders/pgj/), [
-i386 head](http://darcs.haskell.org/ghcBuilder/builders/pgj2/), [
-amd64 stable](http://darcs.haskell.org/ghcBuilder/builders/pgj-freebsd-amd64-stable/), [
-i386 stable](http://darcs.haskell.org/ghcBuilder/builders/pgj-freebsd-i386-stable/)).
+Building GHC on FreeBSD is currently supported on `8.4-RELEASE` or later, on `i386` (x86) and `amd64` (x86\_64) architectures.  One might be able to build GHC on different architectures and earlier versions but they are not maintained actively.  Note that `8.4-RELEASE` is used for the FreeBSD nightly builds ([
+amd64 head](http://haskell.inf.elte.hu/builders/freebsd-amd64-head/), [
+i386 head](http://haskell.inf.elte.hu/builders/freebsd-i386-head/)).
 
 
 
@@ -36,13 +34,13 @@ In order to be able to build GHC from source, the following ports have to be ins
 - [ ftp/curl](http://www.freshports.org/ftp/curl) (HTTP support for git)
 - [
   lang/ghc](http://www.freshports.org/lang/ghc) (bootstrap compiler, usually tracking Haskell Platform specifications)
-- [ lang/perl5.14](http://www.freshports.org/lang/perl5.14) (Perl)
+- [ lang/perl5.16](http://www.freshports.org/lang/perl5.16) (Perl)
 - [
   lang/python27](http://www.freshports.org/lang/python27) (Python, for the test suite)
 - [ math/gmp](http://www.freshports.org/math/gmp) (GNU GMP)
 
 
-Probably it is possible to use a [vanilla binary distribution](http://www.haskell.org/ghc/download_ghc_7_6_2#freebsd) to bootstrap the build, but one must note that it is built on 8.1-RELEASE, hence it will require installing [
+Probably it is possible to use a [vanilla binary distribution](http://www.haskell.org/ghc/download_ghc_7_6_3#freebsd) to bootstrap the build, but one must note that it is built on `8.4-RELEASE`, hence it will require installing [
 misc/compat8x](http://www.freshports.org/misc/compat8x) in order to make it work on 9.x and later systems.
 
 
@@ -95,9 +93,12 @@ To use a more recent GCC (this is `gcc46` here) and GNU toolchain from the Ports
 
 ```wiki
   --with-gcc=$LOCALBASE/bin/gcc46 --with-gcc-4.2=$LOCALBASE/bin/gcc46 \
-  --with-ld=$LOCALBASE/bin/ld --with-ar=$LOCALBASE/bin/ar \
-  --with-ranlib=$LOCALBASE/bin/ranlib
+  --with-ld=$LOCALBASE/bin/ld
 ```
+
+
+Note that one may also want to set the `CC` environment variable to `gcc46` before running `configure`.
+
 
 
 To use `libffi` from the Ports Collection:
@@ -116,7 +117,7 @@ After `configure` ran successfully, invoke GNU make as usual.  Note that GNU mak
 
 
 ```wiki
-$ gmake
+$ gmake -j `sysctl -n hw.ncpu`
 ```
 
 ## Notes
@@ -126,9 +127,14 @@ $ gmake
 Here is a random list of thoughts about things that are good to know when working on FreeBSD.
 
 
-- The FreeBSD base system contains GCC and the GNU toolchain (at least for the time being) but they are not or only slowly updated.  GCC is technically stuck at version 4.2.1 which may not be optimal for building GHC these days.  Hence it is highly recommended to use the toolchain ([
+- The Alex and Happy ports may not be up-to-date enough for building GHC (as they are tracking the versions specified in the Haskell Platform).  Install `cabal-install` and install those tools using `cabal` instead.
+
+- The FreeBSD base system contains GCC and the GNU toolchain in older (pre-10.0) versions.  GCC is technically stuck at version 4.2.1 which may not be optimal for building GHC these days.  Hence it is highly recommended to use the GNU toolchain ([
   devel/binutils](http://www.freshports.org/devel/binutils)) and GCC ([
   lang/gcc](http://www.freshports.org/lang/gcc)) from the Ports Collection instead.
+
+- Clang is the default base system compiler for FreeBSD 10.0 or later.  So one may try to build GHC using Clang on such systems (however, Clang can also be installed on earlier versions from the [
+  lang/clang33](http://www.freshports.org/lang/clang33) port).  It should work, but have not yet been extensively tested.
 
 - The FreeBSD base system is shipped with a version of `ncurses` but this may not be the latest.  Unfortunately, when [
   devel/ncurses](http://www.freshports.org/devel/ncurses) is installed one should add some extra lines to `mk/build.mk` to tell GNU make we want to use `ncurses` from `$LOCALBASE` (see above) instead, otherwise `terminfo` (which uses `ncurses`) becomes linked to `ncurses` in the base:
