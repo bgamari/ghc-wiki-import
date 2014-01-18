@@ -23,7 +23,7 @@ In order to be able to build GHC from source, the following ports have to be ins
 
 
 - [
-  converters/libiconv](http://www.freshports.org/converters/libiconv/) (GNU libiconv)
+  converters/libiconv](http://www.freshports.org/converters/libiconv/) (GNU libiconv, versions before 10.0 only)
 - [ devel/autoconf](http://www.freshports.org/devel/autoconf) (GNU Autoconf)
 - [ devel/automake](http://www.freshports.org/devel/automake) (GNU Automake)
 - [
@@ -83,8 +83,15 @@ FreeBSD stores locally installed third-party software (i.e. the ports mentioned 
 
 ```wiki
 $ ./configure \
-  --with-iconv-includes=$LOCALBASE/include --with-iconv-libraries=$LOCALBASE/lib \
   --with-gmp-includes=$LOCALBASE/include   --with-gmp-libraries=$LOCALBASE/lib
+```
+
+
+On systems earlier than `10.0-RELEASE`, one has to configure `iconv(3)` as well.  For `10.0-RELEASE` and later, `iconv(3)` functions are part of the base system libraries, so these flags is not needed any more.
+
+
+```wiki
+  --with-iconv-includes=$LOCALBASE/include --with-iconv-libraries=$LOCALBASE/lib \
 ```
 
 
