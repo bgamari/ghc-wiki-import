@@ -44,7 +44,7 @@ Things tested:
 <th>**OK**
 </th></tr>
 <tr><th>`validate`</th>
-<th>In progress\[1\]</th>
+<th>**OK**\[1\]</th>
 <th>**OK**</th>
 <th>**OK**</th>
 <th>**OK**</th>
@@ -53,7 +53,7 @@ Things tested:
 <th>**OK**\[4\]
 </th></tr>
 <tr><th>bootstrap </th>
-<th>In progress</th>
+<th>**OK**</th>
 <th>**OK**</th>
 <th>**OK**</th>
 <th>**OK**</th>
