@@ -11,6 +11,13 @@ See the [implementation](pattern-synonyms/implementation) page for implementatio
 
 
 
+Relevant closed tickets:
+
+
+- [\#5144](https://gitlab.staging.haskell.org/ghc/ghc/issues/5144) (Pattern synonyms [
+  merged into master](https://github.com/ghc/ghc/commit/4f8369bf47d27b11415db251e816ef1a2e1eb3d8) on 20 January 2014)
+
+
 Relevant open tickets:
 
 
