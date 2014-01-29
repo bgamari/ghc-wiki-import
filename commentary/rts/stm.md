@@ -65,7 +65,7 @@ Read set
 
 >
 >
-> The set of `TVar`s that are read, but not written to durring a transaction.
+> The set of `TVar`s that are read, but not written to during a transaction.
 >
 >
 
@@ -75,7 +75,7 @@ Write set
 
 >
 >
-> The set of `TVar`s that are written to durring a transaction. In the code each written `TVar` is called an "update entry" in the transactional record.
+> The set of `TVar`s that are written to during a transaction. In the code each written `TVar` is called an "update entry" in the transactional record.
 >
 >
 
@@ -85,7 +85,7 @@ Access set
 
 >
 >
-> All `TVar`s accessed durring the transaction.
+> All `TVar`s accessed during the transaction.
 >
 >
 
