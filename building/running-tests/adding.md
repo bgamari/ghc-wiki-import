@@ -366,6 +366,8 @@ There are many pre-defined functions which can be used in this field:
 
 - **ignore\_output**         don't try to compare output
 
+- **timeout\_multiplier(n)** modify the default timeout (usually 300s, displayed at the beginning of the testsuite) by a given factor
+
 - **high\_memory\_usage**     this test uses a lot of memory (allows the testsuite driver to be intelligent about what it runs in parallel)
 
 - **literate**              look for a `.lhs` file instead of a `.hs` file
