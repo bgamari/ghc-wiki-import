@@ -296,6 +296,918 @@ col: type, col: summary, col: priority, col: owner, order: owner)
 
 
 
+**Merges**
+
+
+
+
+  
+  
+  
+  
+  
+    
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: merge, max: 0, col: id, col: type,
+col: summary, col: priority, col: owner, desc: 1, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: merge, max: 0, col: id, col: type,
+col: summary, col: priority, col: owner, order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: merge, max: 0, col: id, col: type,
+col: summary, col: priority, col: owner, order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: merge, max: 0, col: id, col: type,
+col: summary, col: priority, col: owner, order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: merge, max: 0, col: id, col: type,
+col: summary, col: priority, col: owner, order: owner)
+      </th>
+<td>
+    </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#15508](https://gitlab.staging.haskell.org/ghc/ghc/issues/15508)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [concprog001 fails with various errors](https://gitlab.staging.haskell.org/ghc/ghc/issues/15508)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      highest
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      osa1
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#15552](https://gitlab.staging.haskell.org/ghc/ghc/issues/15552)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Infinite loop/panic with an existential type.](https://gitlab.staging.haskell.org/ghc/ghc/issues/15552)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#15578](https://gitlab.staging.haskell.org/ghc/ghc/issues/15578)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Honour INLINE pragmas on 0-arity bindings](https://gitlab.staging.haskell.org/ghc/ghc/issues/15578)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#15694](https://gitlab.staging.haskell.org/ghc/ghc/issues/15694)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [GHC panic from pattern synonym, "Type-correct unfilled coercion hole"](https://gitlab.staging.haskell.org/ghc/ghc/issues/15694)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#15733](https://gitlab.staging.haskell.org/ghc/ghc/issues/15733)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      task
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Several links in GHC.Exts.Heap documentation are broken](https://gitlab.staging.haskell.org/ghc/ghc/issues/15733)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#15897](https://gitlab.staging.haskell.org/ghc/ghc/issues/15897)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Negative MUT time in +RTS -s -RTS when heap profiling is enabled](https://gitlab.staging.haskell.org/ghc/ghc/issues/15897)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#16094](https://gitlab.staging.haskell.org/ghc/ghc/issues/16094)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [panic! (the 'impossible' happened): for powerpc-unknown-linux getRegister(ppc): I64\[I32\[BaseReg + 812\] + 64\]](https://gitlab.staging.haskell.org/ghc/ghc/issues/16094)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      trommler
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#16141](https://gitlab.staging.haskell.org/ghc/ghc/issues/16141)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [StrictData and TypeFamilies regression](https://gitlab.staging.haskell.org/ghc/ghc/issues/16141)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      highest
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#16150](https://gitlab.staging.haskell.org/ghc/ghc/issues/16150)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Data races in itimer\_thread\_func reported by ThreadSanitizer](https://gitlab.staging.haskell.org/ghc/ghc/issues/16150)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#16166](https://gitlab.staging.haskell.org/ghc/ghc/issues/16166)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Compiling with profiling on Windows can cause linker errors](https://gitlab.staging.haskell.org/ghc/ghc/issues/16166)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#16183](https://gitlab.staging.haskell.org/ghc/ghc/issues/16183)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [GHC HEAD regression: -ddump-splices incorrectly parenthesizes HsKindSig applications](https://gitlab.staging.haskell.org/ghc/ghc/issues/16183)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr></table>
+
+
+  
+
+
+
+
 **Closed**
 
 
@@ -5054,918 +5966,6 @@ col: id, col: type, col: summary, col: priority, col: owner, order: owner)
                     </td>
 <th>
                       [genSym uses atomic\_inc but doesn't link arm\_atomic\_spin\_lock](https://gitlab.staging.haskell.org/ghc/ghc/issues/8951)
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      normal
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-              </td></tr></table>
-
-
-  
-
-
-
-
-**Merges**
-
-
-
-
-  
-  
-  
-  
-  
-    
-  
-  
-
-<table><tr><td>
-      </td>
-<th>
-        
-        Ticket (Ticket query: status: merge, max: 0, col: id, col: type,
-col: summary, col: priority, col: owner, desc: 1, order: id)
-      </th>
-<th>
-        
-        Type (Ticket query: status: merge, max: 0, col: id, col: type,
-col: summary, col: priority, col: owner, order: type)
-      </th>
-<th>
-        
-        Summary (Ticket query: status: merge, max: 0, col: id, col: type,
-col: summary, col: priority, col: owner, order: summary)
-      </th>
-<th>
-        
-        Priority (Ticket query: status: merge, max: 0, col: id, col: type,
-col: summary, col: priority, col: owner, order: priority)
-      </th>
-<th>
-        
-        Owner (Ticket query: status: merge, max: 0, col: id, col: type,
-col: summary, col: priority, col: owner, order: owner)
-      </th>
-<td>
-    </td>
-<td></td>
-<td></td>
-<td></td>
-<td></td></tr>
-<tr><td>
-                
-                  
-                    </td>
-<th>[\#15508](https://gitlab.staging.haskell.org/ghc/ghc/issues/15508)</th>
-<td>
-                    
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      bug
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      [concprog001 fails with various errors](https://gitlab.staging.haskell.org/ghc/ghc/issues/15508)
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      highest
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      osa1
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-              </td></tr>
-<tr><td>
-                
-                  
-                    </td>
-<th>[\#15552](https://gitlab.staging.haskell.org/ghc/ghc/issues/15552)</th>
-<td>
-                    
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      bug
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      [Infinite loop/panic with an existential type.](https://gitlab.staging.haskell.org/ghc/ghc/issues/15552)
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      normal
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-              </td></tr>
-<tr><td>
-                
-                  
-                    </td>
-<th>[\#15578](https://gitlab.staging.haskell.org/ghc/ghc/issues/15578)</th>
-<td>
-                    
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      bug
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      [Honour INLINE pragmas on 0-arity bindings](https://gitlab.staging.haskell.org/ghc/ghc/issues/15578)
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      normal
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-              </td></tr>
-<tr><td>
-                
-                  
-                    </td>
-<th>[\#15694](https://gitlab.staging.haskell.org/ghc/ghc/issues/15694)</th>
-<td>
-                    
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      bug
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      [GHC panic from pattern synonym, "Type-correct unfilled coercion hole"](https://gitlab.staging.haskell.org/ghc/ghc/issues/15694)
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      normal
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-              </td></tr>
-<tr><td>
-                
-                  
-                    </td>
-<th>[\#15733](https://gitlab.staging.haskell.org/ghc/ghc/issues/15733)</th>
-<td>
-                    
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      task
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      [Several links in GHC.Exts.Heap documentation are broken](https://gitlab.staging.haskell.org/ghc/ghc/issues/15733)
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      normal
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-              </td></tr>
-<tr><td>
-                
-                  
-                    </td>
-<th>[\#15897](https://gitlab.staging.haskell.org/ghc/ghc/issues/15897)</th>
-<td>
-                    
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      bug
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      [Negative MUT time in +RTS -s -RTS when heap profiling is enabled](https://gitlab.staging.haskell.org/ghc/ghc/issues/15897)
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      normal
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-              </td></tr>
-<tr><td>
-                
-                  
-                    </td>
-<th>[\#16094](https://gitlab.staging.haskell.org/ghc/ghc/issues/16094)</th>
-<td>
-                    
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      bug
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      [panic! (the 'impossible' happened): for powerpc-unknown-linux getRegister(ppc): I64\[I32\[BaseReg + 812\] + 64\]](https://gitlab.staging.haskell.org/ghc/ghc/issues/16094)
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      normal
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      trommler
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-              </td></tr>
-<tr><td>
-                
-                  
-                    </td>
-<th>[\#16141](https://gitlab.staging.haskell.org/ghc/ghc/issues/16141)</th>
-<td>
-                    
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      bug
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      [StrictData and TypeFamilies regression](https://gitlab.staging.haskell.org/ghc/ghc/issues/16141)
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      highest
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-              </td></tr>
-<tr><td>
-                
-                  
-                    </td>
-<th>[\#16150](https://gitlab.staging.haskell.org/ghc/ghc/issues/16150)</th>
-<td>
-                    
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      bug
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      [Data races in itimer\_thread\_func reported by ThreadSanitizer](https://gitlab.staging.haskell.org/ghc/ghc/issues/16150)
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      normal
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-              </td></tr>
-<tr><td>
-                
-                  
-                    </td>
-<th>[\#16166](https://gitlab.staging.haskell.org/ghc/ghc/issues/16166)</th>
-<td>
-                    
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      bug
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      [Compiling with profiling on Windows can cause linker errors](https://gitlab.staging.haskell.org/ghc/ghc/issues/16166)
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      normal
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-              </td></tr>
-<tr><td>
-                
-                  
-                    </td>
-<th>[\#16183](https://gitlab.staging.haskell.org/ghc/ghc/issues/16183)</th>
-<td>
-                    
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      bug
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      [GHC HEAD regression: -ddump-splices incorrectly parenthesizes HsKindSig applications](https://gitlab.staging.haskell.org/ghc/ghc/issues/16183)
                       
                       
                       
