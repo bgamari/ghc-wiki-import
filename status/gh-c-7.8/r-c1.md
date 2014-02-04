@@ -8,7 +8,7 @@
 - RC1's version number is 7.8.20130130 when it should be 7.8.**1**.20130130. RC2 will use 7.8.1.\<date\>.
 
 
-** Tickets failed against RC1 **
+** Tickets filed against RC1 **
 
 
 
