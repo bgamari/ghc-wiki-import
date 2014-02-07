@@ -52,8 +52,9 @@ Look at the picture first.  The yellow boxes are compiler passes, while the blue
   - The **float-out** and **float-in** transformations, which move let-bindings outwards and inwards respectively.  See [
     Let-floating: moving bindings to give faster programs (ICFP '96)](http://research.microsoft.com/%7Esimonpj/papers/float.ps.gz).
 
-  - The **strictness analyser**.  This actually comprises two passes: the **analyser** itself and the **worker/wrapper** transformation that uses the results of the analysis to transform the program. (Further described in [Demand analysis](commentary/compiler/strictness-analysis).) The same analyser also does [
-    Constructed Product Result analysis](http://research.microsoft.com/%7Esimonpj/Papers/cpr/index.htm). (`-ddump-stranal`)
+  - The **strictness analyser**.  This actually comprises two passes: the **analyser** itself and the **worker/wrapper** transformation that uses the results of the analysis to transform the program. (Further described in [Demand analysis](commentary/compiler/demand).) The same analyser also does [
+    Constructed Product Result analysis](http://research.microsoft.com/%7Esimonpj/Papers/cpr/index.htm) and [
+    Cardinality analysis](http://research.microsoft.com/en-us/um/people/simonpj/papers/usage-types/cardinality-extended.pdf). (`-ddump-stranal`)
 
   - The **liberate-case** transformation.
 
