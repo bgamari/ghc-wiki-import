@@ -12,6 +12,17 @@
   Cabal 1.18 branch](https://github.com/haskell/cabal/tree/1.18) until [
   hackage:cabal-install-1.18.0.3](http://hackage.haskell.org/package/cabal-install-1.18.0.3) is released.
 
+## Tickets scheduled for 7.8.1
+
+
+
+See [milestone:7.8.1](/trac/ghc/milestone/7.8.1)
+
+
+
+Note however, that not all tickets with a 7.8.1 milestone will be addressed for the final 7.8.1 release.
+
+
 ## Tickets filed against RC1
 
 
