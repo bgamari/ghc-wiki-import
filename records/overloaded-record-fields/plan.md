@@ -9,9 +9,8 @@ GSoC project details](http://www.google-melange.com/gsoc/project/google/gsoc2013
 
 This page describes the design. Separate [notes on the implementation](records/overloaded-record-fields/implementation) are available, but not necessarily comprehensible. Development of the extension is taking place on forks of the [
 ghc](https://github.com/adamgundry/ghc), [
-packages-base](https://github.com/adamgundry/packages-base), [
-haddock](https://github.com/adamgundry/haddock) and [
-testsuite](https://github.com/adamgundry/testsuite) repositories (on branch 'overloaded-record-fields'). A [
+packages-base](https://github.com/adamgundry/packages-base) and [
+haddock](https://github.com/adamgundry/haddock) repositories (on branch 'overloaded-record-fields'). A [
 prototype implementation](https://github.com/adamgundry/records-prototype) is also available.
 
 
@@ -68,14 +67,14 @@ A record field constraint is introduced when a field is used in an expression. I
 
 
 
-A record field constraint `r { x :: t }` is syntactic sugar for the pair of constraints `(Has r "x", FldTy r "x" ~ t)`, where
+A record field constraint `r { x :: t }` is syntactic sugar for the constraint `Has r "x" t`, where
 
 
 ```wiki
 type family FldTy (r :: *) (n :: Symbol) :: *
 
-class Has r (n :: Symbol) where
-  getField :: Proxy# n -> r -> FldTy r n
+class t ~ FldTy r n => Has r (n :: Symbol) t where
+  getField :: Proxy# n -> r -> t
 ```
 
 
@@ -83,7 +82,7 @@ Recall that `Symbol` is the kind of type-level strings. Roughly speaking, an occ
 
 
 
-The syntactic sugar extends to conjunctions:  `r {x :: tx, y :: ty}` means `(Has r "x", FldTy r "x" ~ tx, Has r "y", FldTy r "y" ~ ty)`. Note also that `r` and `t` might be arbitrary types, not just type variables or type constructors.  For example, `T (Maybe v) { x :: [Maybe v] }` means `(Has (T (Maybe b)) "x", FldTy (T (Maybe b)) "x" ~ [Maybe v])`.
+The syntactic sugar extends to conjunctions:  `r {x :: tx, y :: ty}` means `(Has r "x" tx, Has r "y" ty)`. Note also that `r` and `t` might be arbitrary types, not just type variables or type constructors.  For example, `T (Maybe v) { x :: [Maybe v] }` means `Has (T (Maybe b)) "x" [Maybe v]`.  To make these desugarings accepted, `-XOverloadedRecordFields` implies `-XFlexibleContexts` and `-XConstraintKinds`.
 
 
 
@@ -101,12 +100,25 @@ has the corresponding instances
 ```wiki
 type instance FldTy (T a) "x" = [a]
 
-instance Has (T a) "x" where 
+instance b ~ [a] => Has (T a) "x" b where 
   getField _ (MkT x) = x
 ```
 
 
-We have considered using a three-parameter version of the `Has` class, with the third parameter (the field type) being functionally dependent on the first two, but this version seems more straightforward (at the cost of exposing the encoding underlying the syntactic sugar more often).
+The bare type variable `b` in the instance head is important, so that we get an instance match from the first two parameters only, then the equality constraint `(b ~ [a])` improves `b`. For example, if the constraint `Has (T c) "x" d` is encountered during type inference, the instance will match and generate the constraints `(a ~ c, b ~ d, b ~ [a])`. Moreover, the `FldTy` type family ensures that the third parameter is functionally dependent on the first two, which is needed to [avoid ambiguity errors when composing overloaded fields](records/overloaded-record-fields/plan#trouble-in-paradise). 
+
+
+
+The reason for using a three-parameter class, rather than just two parameters and a type family, is to support the syntactic sugar and improve type inference error messags. With a two-parameter class we could easily end up inferring types like the following, and it would be hard to reapply the sugar: 
+
+
+```wiki
+f :: (Has r "x", Has r "y", FldTy r "x" ~ Int, FldTy r "y" ~ Int) => r -> Int 
+f r = x r + y r :: Int 
+```
+
+
+Moreover, error messages would tend to be reported in terms of unification failures for `FldTy` rather than unsolved `Has` class constraints.
 
 
 ### Representation hiding
@@ -128,7 +140,7 @@ data S = S { x :: Bool }
 ```
 
 
-Any module that imports `M` will have access to the `x` field from `R` but not from `S`, because the instance `Has R "x"` will be available but the instance `Has S "x"` will not be. Thus `R { x :: Int }` will be solved but `S { x :: Bool }` will not.
+Any module that imports `M` will have access to the `x` field from `R` but not from `S`, because the instance `Has R "x" Int` will be available but the instance `Has S "x" Bool` will not be. Thus `R { x :: Int }` will be solved but `S { x :: Bool }` will not.
 
 
 ### Multiple modules and automatic instance generation
@@ -250,9 +262,9 @@ As noted above, supporting a polymorphic version of the existing record update s
 ```wiki
 type family UpdTy (r :: *) (n:: Symbol) (a :: *) :: *
 
-class (Has r n, r ~ UpdTy r n (FldTy r n)) =>
-          Upd (r :: *) (n :: Symbol) (a :: *) where
-  setField :: Proxy# n -> r -> a -> UpdTy r n a
+class (Has r n (FldTy r n), r ~ UpdTy r n (FldTy r n)) =>
+          Upd (r :: *) (n :: Symbol) (t :: *) where
+  setField :: Proxy# n -> r -> t -> UpdTy r n t
 ```
 
 
@@ -296,33 +308,35 @@ instance t ~ (a, b') => Upd (V a b c) "foo" t where
 
 
 
-It was implied above that a field like `foo` translates into `getField (proxy# :: Proxy# "foo") :: Has r "foo" => r -> FldTy r "foo"`, but this is not quite the whole story. We would like fields to be usable as lenses (e.g. using the [
-lens](http://hackage.haskell.org/package/lens) package). This requires a slightly more general translation, using
+It was implied above that a field like `foo` translates into `getField (proxy# :: Proxy# "foo") :: Has r "foo" t => r -> t`, but this is not quite the whole story. We would like fields to be usable as lenses (e.g. using packages such as [
+lens](http://hackage.haskell.org/package/lens), [
+data-accessor](http://hackage.haskell.org/package/data-accessor) or [
+data-lens](http://hackage.haskell.org/package/data-lens)). This requires a slightly more general translation, using
 
 
 ```wiki
-field :: Accessor p r n => Proxy# n -> p r (FldTy r n)
+field :: Accessor p r n t => Proxy# n -> p r t
 field z = accessField z (getField z) (setField z)
 ```
 
 
-to translate `foo` to `field (proxy# :: Proxy# "foo") :: Accessor p r "foo" => p r (FldTy r "foo")`. The `Accessor` class is defined thus:
+to translate `foo` to `field (proxy# :: Proxy# "foo") :: Accessor p r "foo" t => p r t`. The `Accessor` class is defined thus:
 
 
 ```wiki
-class Accessor (p :: * -> * -> *) (r :: *) (n :: Symbol) where
+class Accessor (p :: * -> * -> *) (r :: *) (n :: Symbol) (t :: *) where
   accessField :: Proxy# n ->
-                 (Has r n => r -> FldTy r n) ->
+                 (Has r n t => r -> t) ->
                  (forall a . Upd r n a => r -> a -> UpdTy r n a) ->
-                 p r (FldTy r n)
+                 p r t
 ```
 
 
-An instance of `Accessor p r n` means that `p` may contain a getter and setter for the field `n` in record type `r`. In particular, we can give an instance for functions that ignores `r`, `n` and the setter completely:
+An instance of `Accessor p r n t` means that `p` may contain a getter and setter for the field `n` of type `t` in record type `r`. In particular, we can give an instance for functions that ignores the setter completely:
 
 
 ```wiki
-instance Has r n => Accessor (->) r n where
+instance Has r n t => Accessor (->) r n t where
   accessor _ getter setter = getter
 ```
 
@@ -336,12 +350,12 @@ However, `p` does not have to be the function arrow. Suppose the `lens` library 
 
 ```wiki
 newtype WrapLens n r a
-  = MkWrapLens (forall b . Upd r n b => Lens r (SetResult r n b) a b)
+  = MkWrapLens (forall b . Upd r n b => Lens r (UpdTy r n b) a b)
 
 instance m ~ n => Accessor (WrapLens m) r n where
   accessor _ getter setter = MkWrapLens (\ w s -> setter s <$> w (getter s))
 
-fieldLens :: Upd r n b => WrapLens n r a -> Lens r (SetResult r n b) a b
+fieldLens :: Upd r n b => WrapLens n r a -> Lens r (UpdTy r n b) a b
 fieldLens (MkWrapLens l) = l
 ```
 
@@ -358,7 +372,7 @@ data DataLens r a = DataLens
    { getDL :: r -> a
    , setDL :: r -> a -> r }
 
-instance Upd r n (FldTy r n) => Accessor DataLens r n where
+instance Upd r n t => Accessor DataLens r n t where
   accessField _ g s = DataLens g s
 ```
 
@@ -589,7 +603,7 @@ Since the selectors are hidden by clients (on import) rather than on export, fie
 
 
 
-Should we have a special syntax for `Upd` constraints, just as `r { x :: t }` sugars `(Has r "x", FldTy r "x" ~ t)`? What should it look like? Perhaps something like `r { x ::= t }`?
+Should we have a special syntax for `Upd` constraints, just as `r { x :: t }` sugars `Has r "x" t`? What should it look like? Perhaps something like `r { x ::= t }`?
 
 
 ## Remarks
@@ -600,7 +614,7 @@ Should we have a special syntax for `Upd` constraints, just as `r { x :: t }` su
 
 
 [
-Edward Kmett points out](http://www.haskell.org/pipermail/glasgow-haskell-users/2013-July/022584.html) that a previous version of this proposal, where the `Has` class took three parameters and the third was not functionally dependent on the first two, fell short in an important respect: composition of polymorphic record fields would lead to ambiguity errors, as the intermediate type cannot be determined. For example, suppose
+Edward Kmett points out](http://www.haskell.org/pipermail/glasgow-haskell-users/2013-July/022584.html) that a previous version of this proposal, where the third parameter of the `Has` class was not functionally dependent on the first two, fell short in an important respect: composition of polymorphic record fields would lead to ambiguity errors, as the intermediate type cannot be determined. For example, suppose
 
 
 ```wiki
@@ -631,7 +645,7 @@ We could imagine supporting virtual record fields by allowing the user to declar
 data Person = MkPerson { firstName :: String, lastName :: String }
 
 type instance FldTy Person "fullName" = String
-instance Has Person "fullName" where
+instance t ~ String => Has Person "fullName" t where
   getField _ p = firstName p ++ " " ++ lastName p
 ```
 
