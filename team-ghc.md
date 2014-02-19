@@ -112,6 +112,13 @@ In order to see emails below, **you must login**.
   - **Committer since**: January, 2012.
   - **Main areas of interest**: cross-compilation, type systems
 
+- [ Geoffrey Mainland](http://www.cs.drexel.edu/~mainland)
+
+  - Drexel University - Philadelphia, PA
+  - **Trac**: gmainland; **email**: mainland@…
+  - **Committer since**: August, 2011.
+  - **Main areas of interest**: Code generator (SIMD support, LLVM back-end), quasiquotation, Template Haskell.
+
 - [ Gergő Érdi](http://gergo.erdi.hu/)
 
   - Standard Chartered - London, UK
@@ -119,13 +126,6 @@ In order to see emails below, **you must login**.
     https://github.com/gergoerdi](https://github.com/gergoerdi)
   - **Committer since**: January, 2014.
   - **Main areasa of interest**: frontend, type systems
-
-- [ Geoffrey Mainland](http://www.cs.drexel.edu/~mainland)
-
-  - Drexel University - Philadelphia, PA
-  - **Trac**: gmainland; **email**: mainland@…
-  - **Committer since**: August, 2011.
-  - **Main areas of interest**: Code generator (SIMD support, LLVM back-end), quasiquotation, Template Haskell.
 
 - Herbert Valerio Riedel
 
