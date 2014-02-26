@@ -81,16 +81,13 @@ HSCOLOUR_SRCS=YES
 BUILD_DOCBOOK_HTML=YES
 BUILD_DOCBOOK_PDF=YES
 BUILD_DOCBOOK_PS=YES
+BeConservative=YES
 EOF
 ```
 
 
-If on Linux:
+(Note that `BeConservative` is only relevant on Linux, as it controls usage of `clock_gettime` in the RTS.)
 
-
-```wiki
-$ echo "BeConservative=YES" >> mk/build.mk
-```
 
 
 Then:
