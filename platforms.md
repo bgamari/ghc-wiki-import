@@ -172,7 +172,7 @@ Tier 2 platforms as possible to Tier 1, as soon as they meet the Tier 1 criteria
 <th> Yes  </th>
 <th> Yes    </th>
 <th> Yes          </th>
-<th> No                </th>
+<th> Yes (\*S4)         </th>
 <th> 
 </th></tr>
 <tr><th> x86-64       </th>
@@ -344,6 +344,7 @@ reports](http://www.haskell.org/pipermail/glasgow-haskell-users/2009-November/01
 **\*S2** but see [\#591](https://gitlab.staging.haskell.org/ghc/ghc/issues/591)
 
 **\*S3** registerised in the past up to GHC 7.0.4 release, then unregisterised due to removal of registerised -fvia-C way (mangler)
+**\*S4** shared libraries are supported on Solaris 11 version 11/11 and higher
 
 
 
