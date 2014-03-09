@@ -13,7 +13,7 @@ The primitives are implemented as three [Cmm language](commentary/compiler/cmm-t
 
 
 
-The reason the primitives are unrolled in the backends, instead of in the code generator, is to allow us to make use of LLVM's `memcpy`/`memmove`/`memset` intrinsics, which LLVM  optimizes well. In the x86/x86-64 backend we unroll the primitives ourselves. The different native code generator backends can also generate more efficient code then a generic case higher up. Currently only the X86 backend unrolls these primitives though, SPARC and !PowerPC both just call the corresponding C functions.
+The reason the primitives are unrolled in the backends, instead of in the code generator, is to allow us to make use of LLVM's `memcpy`/`memmove`/`memset` intrinsics, which LLVM  optimizes well. In the x86/x86-64 backend we unroll the primitives ourselves. The different native code generator backends can also generate more efficient code than a generic case higher up. Currently only the X86 backend unrolls these primitives though, SPARC and !PowerPC both just call the corresponding C functions.
 
 
 ## Unrolling heuristics
