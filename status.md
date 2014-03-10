@@ -33,6 +33,7 @@ Here are our release plans for
 
 
 - [GHC 7.8](status/gh-c-7.8)
+- [RC2/final status](status/gh-c-7.8/r-c2)
 
 ## Planning notes
 
