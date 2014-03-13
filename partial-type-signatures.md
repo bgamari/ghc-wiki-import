@@ -556,7 +556,7 @@ express constraints on unknown types, e.g.
 ```wiki
 somethingShowable :: Show _x => _x -> _
 somethingShowable x = show x
--- Inferred type: Show a => x -> String
+-- Inferred type: Show x => x -> String
 
 somethingShowable' :: Show _x => _x -> _
 somethingShowable' x = show (not x)
