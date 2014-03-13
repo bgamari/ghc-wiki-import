@@ -268,6 +268,7 @@ maybools = Just [True]
 
 
 **SLPJ** What is a "concrete type"?  I think you mean this: a type wildcard can be instantiated to any monotype.  **End SLPJ**
+**thomasw** Exactly. **End thomasw**
 
 
 
@@ -308,6 +309,12 @@ Also you should make clear that
 
 
 **End SLPJ**.
+
+
+
+**thomasw** "when they are not constrained to a particular type" = they are not instantiated to a monotype.
+Both examples work exactly as you would hope. Indeed, (unnamed) wildcards are instantiated independently, unlike named wildcards. Yes, type wildcards can be generalised over and can result in extra `forall` quantified type variables. As type variables are implicitly universally quantified in Haskell, we chose not to make this `forall` 'wildcard' explicit.
+**End thomasw**
 
 
 
@@ -370,6 +377,10 @@ by the partial type signature.
 
 
 
+**thomasw** Correct. **End thomasw**
+
+
+
 **SLPJ** Can wildcards appear under higher rank foralls?
 
 
@@ -397,6 +408,11 @@ f :: (forall a. _ => a -> a) -> b -> b
 **End SLPJ**
 
 
+
+**thomasw** We agree, this is exactly what we discuss [here](partial-type-signatures#) and [here](partial-type-signatures#).
+**End thomasw**
+
+
 ### Constraint Wildcards
 
 
@@ -405,6 +421,10 @@ f :: (forall a. _ => a -> a) -> b -> b
 power to weight ratio seems poor.
 I'd drop constraint wildcards, and implement only "extra constraint" wildcards.
 **End SLPJ**
+
+
+
+**thomasw** Seems [reasonable](partial-type-signatures#) to us. This certainly makes things easier. **End thomasw**
 
 
 
@@ -441,6 +461,10 @@ constraint solver is faced with is "deduce Eq x from Eq \_, figuring out what th
 even less constrained.  The constraint solver is absolutely not set up to
 figure out how to fill in existential variables in the "givens".
 **End SLPJ**
+
+
+
+**thomasw** A much clearer explanation indeed. **End thomasw**
 
 
 
@@ -763,7 +787,7 @@ local binds and one for top-level binds.
 ## Questions and issues
 
 
-- **Constraint wildcards**: Wildcards in constraints sometimes
+-  **Constraint wildcards**: Wildcards in constraints sometimes
   behave in a confusing way. As explained above, the reason is that
   GHC's type constraint solver doesn't unify constraints with each
   other. E.g. `Eq _` or `_ a` will never be unified with `Eq a`. So
@@ -886,7 +910,7 @@ local binds and one for top-level binds.
   InstanceSigs (not yet
   implemented).
 
-- **Extra-constraints wildcard position**: We only allow one
+-  **Extra-constraints wildcard position**: We only allow one
   extra-constraints wildcard in a signature: at the outer
   quantification of the signature. Consider for example the function
   `multiCs`:
@@ -912,7 +936,7 @@ local binds and one for top-level binds.
   multiCs :: (Show a, _) => a -> (Enum a, _) => String
   ```
 
-- **Higher-rank types**: Consider the following partial type
+-  **Higher-rank types**: Consider the following partial type
   signature:
 
   ```wiki
