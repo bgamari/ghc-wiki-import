@@ -132,6 +132,7 @@ See also [TemplateHaskell](template-haskell)
 ## Cmm and code generation
 
 
+- [\#8903](https://gitlab.staging.haskell.org/ghc/ghc/issues/8903): dead stores
 - [\#8887](https://gitlab.staging.haskell.org/ghc/ghc/issues/8887): double assignment
 - [\#8871](https://gitlab.staging.haskell.org/ghc/ghc/issues/8871): Cmm optimisation opportunity
 - [\#8585](https://gitlab.staging.haskell.org/ghc/ghc/issues/8585): loopification
