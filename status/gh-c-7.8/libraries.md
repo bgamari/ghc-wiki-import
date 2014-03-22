@@ -1198,7 +1198,7 @@ col: reporter, order: id)
 
 
 - cleaned up
-- relased as [
+- released as [
   deepseq-1.3.0.2](http://hackage.haskell.org/package/deepseq-1.3.0.2)!
 
 ### [ directory](http://hackage.haskell.org/package/directory)
@@ -1287,6 +1287,9 @@ col: priority, col: owner, col: reporter, order: reporter)
 [](https://travis-ci.org/ghc/packages-filepath)
 
 
+- released as [
+  filepath-1.3.0.2](http://hackage.haskell.org/package/filepath-1.3.0.2)
+
 ### [ ghc-prim](http://hackage.haskell.org/package/ghc-prim)
 
 
@@ -1365,7 +1368,8 @@ col: priority, col: owner, col: reporter, order: reporter)
 
 
 - ready for release
-- TODO upload a non-candidate to hackage at latest when GHC 7.8.1 is released
+- released as [
+  haskell2010-1.1.2.0](http://hackage.haskell.org/package/haskell2010-1.1.2.0)
 
 ### [ haskell98](http://hackage.haskell.org/package/haskell98)
 
@@ -1440,7 +1444,8 @@ col: priority, col: owner, col: reporter, order: reporter)
 
 
 - ready for release
-- TODO upload a non-candidate to hackage at latest when GHC 7.8.1 is released
+- released as [
+  haskell98-2.0.0.3](http://hackage.haskell.org/package/haskell98-2.0.0.3)
 
 ### [ hoopl](http://hackage.haskell.org/package/hoopl)
 
@@ -1449,7 +1454,8 @@ col: priority, col: owner, col: reporter, order: reporter)
 [](https://travis-ci.org/ghc/packages-hoopl)
 
 
-- TODO changelog entry for 3.10.0.0
+- released as [
+  hoopl-3.10.0.0](http://hackage.haskell.org/package/hoopl-3.10.0.0)
 
 ### [ hpc](http://hackage.haskell.org/package/hpc)
 
@@ -2850,8 +2856,7 @@ col: reporter, order: reporter)
 [](https://travis-ci.org/ghc/packages-hpc)
 
 
-- ready for release 
-- TODO upload a non-candidate to hackage at latest when GHC 7.8.1 is released
+- released as [ hpc-0.6.0.1](http://hackage.haskell.org/package/hpc-0.6.0.1)
 
 ### [ integer-gmp](http://hackage.haskell.org/package/integer-gmp)
 
@@ -2867,8 +2872,8 @@ col: reporter, order: reporter)
 [](https://travis-ci.org/ghc/packages-old-locale)
 
 
-- ready for release
-- TODO upload a non-candidate to hackage at latest when GHC 7.8.1 is released
+- released as [
+  old-locale-1.0.0.6](http://hackage.haskell.org/package/old-locale-1.0.0.6)
 
 ### [ old-time](http://hackage.haskell.org/package/old-time)
 
@@ -2942,8 +2947,8 @@ col: priority, col: owner, col: reporter, order: reporter)
 
 
 
-- ready for release
-- TODO upload a non-candidate to hackage at latest when GHC 7.8.1 is released
+- released as [
+  old-time-1.1.0.2](http://hackage.haskell.org/package/old-time-1.1.0.2)
 
 ### [ parallel](http://hackage.haskell.org/package/parallel)
 
