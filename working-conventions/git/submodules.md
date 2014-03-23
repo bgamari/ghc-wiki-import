@@ -1,9 +1,6 @@
 
 
 
-# Workflows for Handling GHC's Git Submodules
-
-
 
 This page and as well as the [GitRepoReorganization](git-repo-reorganization) is still work in progress;
 
@@ -11,6 +8,17 @@ This page and as well as the [GitRepoReorganization](git-repo-reorganization) is
 
 See [\#8545](https://gitlab.staging.haskell.org/ghc/ghc/issues/8545) for the current state of affairs
 
+
+# Workflows for Handling GHC's Git Submodules
+
+
+
+General information about Git's submodule support:
+
+
+- [ "git submodule" manual page](http://git-scm.com/docs/git-submodule)
+- [
+  Pro Git "6.6 Git Tools - Submodules" chapter](http://git-scm.com/book/en/Git-Tools-Submodules)
 
 ## Cloning a fresh GHC source tree
 
