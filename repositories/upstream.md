@@ -1,3 +1,7 @@
+
+The information on this page is slightly out of date; see [GitRepoReorganization](git-repo-reorganization) and [\#8545](https://gitlab.staging.haskell.org/ghc/ghc/issues/8545) for latest news
+
+
 # Upstream repositories
 
 
