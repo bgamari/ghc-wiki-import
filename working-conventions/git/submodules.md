@@ -59,7 +59,7 @@ Moreover, when cloning from the [
 GitHub GHC Mirror](http://github.com/ghc/ghc.git), the submodule url paths need to be rewritten, e.g. `../packages/deepseq.git` to `../packages-deepseq.git`, so you can't simply use `--recursive`.
 
 
-### Overriding `push-url`s
+### Overriding `remote.origin.pushurl`
 
 
 
@@ -67,11 +67,11 @@ This subsection is only relevant for developers with `git push`-permissions.
 
 
 
-Unless the GHC source tree was cloned from `ssh://git@git.haskell.org/ghc.git`, the resulting pushurls will not point to a writable location.
+Unless the GHC source tree was cloned from `ssh://git@git.haskell.org/ghc.git`, the resulting `pushurl`s will not point to a writable location.
 
 
 
-The following commands will configure appropriate push-urls for `ghc.git` and all its submodules:
+The following commands will configure appropriate push-URLs for `ghc.git` and all its (initialized) submodules:
 
 
 ```
@@ -79,6 +79,16 @@ git remote set-url --push origin ssh://git@git.haskell.org/ghc.git
 
 git submodule foreach 'git remote set-url --push origin \
   ssh://git@git.haskell.org/$(git config -f $toplevel/.gitmodules --path "submodule.$name.url" | sed 's,^\.\./,,')'
+```
+
+
+You can display the currently used Git URLs for `git push` in submodules by:
+
+
+```
+# if unset, remote.origin.pushurl defaults to remote.origin.url
+git submodule foreach \
+  'git config remote.origin.pushurl || git config remote.origin.url'
 ```
 
 ## Updating an existing GHC source tree clone
