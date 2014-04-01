@@ -213,8 +213,7 @@ When the darcs.haskell.org hardware was upgraded, rather than installing buildbo
 
 
 
-We're always keen to add more build slaves; please see [
-http://hackage.haskell.org/trac/ghc/wiki/Builder Builder](http://hackage.haskell.org/trac/ghc/wiki/Builder Builder) if you're interested. Likewise, patches for missing features are welcome! The (Haskell) code is available at [
+We're always keen to add more build slaves; please see [Builder](builder) if you're interested. Likewise, patches for missing features are welcome! The (Haskell) code is available at [
 http://darcs.haskell.org/builder/](http://darcs.haskell.org/builder/)
 
 
