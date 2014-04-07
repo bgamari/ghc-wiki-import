@@ -85,6 +85,10 @@ $ echo 'export PATH=/c/Users/$USER/AppData/Roaming/cabal/bin:$PATH' >> ~/.bashrc
 ```
 
 
+(On my system the path to "c" is /cygdrive/c.)
+
+
+
 And make sure `python` is on your `$PATH`:
 
 
