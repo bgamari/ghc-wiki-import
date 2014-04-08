@@ -14,14 +14,14 @@ Each night we build GHC on each slave, in various different ways, run the test s
 
 
 The build results are uploaded to [
-http://darcs.haskell.org/ghcBuilder/builders/](http://darcs.haskell.org/ghcBuilder/builders/)
+http://haskell.inf.elte.hu/builders/](http://haskell.inf.elte.hu/builders/)
 
 
 ## Can you offer a build slave?
 
 
 
-We're always keen to add more build slaves to the setup. If a platform is represented in the nightly builds, it's we can identify and fix problems specific to that platform much more quickly.  If you'd like to join the fun, please let us know at ghc-devs@…. 
+We're always keen to add more build slaves to the setup. If a platform is represented in the nightly builds, it's we can identify and fix problems specific to that platform much more quickly.  If you'd like to join the fun, please let Gábor (us) know at `pali.gabor(at)gmail.com`. 
 
 
 # How to set up a build slave
@@ -70,15 +70,7 @@ You can get the code for the builder with
 
 
 ```wiki
-darcs get http://darcs.haskell.org/builder/
-```
-
-
-or, if you have an account on darcs.haskell.org,
-
-
-```wiki
-darcs get darcs.haskell.org:/srv/darcs/builder/
+git clone https://github.com/cartazio/ghc-builder
 ```
 
 
@@ -86,7 +78,7 @@ and then build the Cabal package in the `client/` subdirectory.
 
 
 
-Once you have built it, pick a username (something fairly unique to you) and password, and send them to ghc@… along with the time (and timezone) you want builds to happen and any extra information (e.g. "GNU make is gmake", or "builds need these lines added to mk/build.mk"). The username is used so we know which machine the build log came from, and the password is used to verify that the client is who it claims it is.
+Once you have built it, mail Gábor Páli (`pali.gabor(at)gmail.com`) along any extra information (e.g. "GNU make is gmake", or "builds need these lines added to mk/build.mk").  You will then get a username and a password.  The username is used so we know which machine the build log came from, and the password is used to verify that the client is who it claims it is.
 
 
 
@@ -94,12 +86,12 @@ Then initialise the client by creating a new directory, and running:
 
 
 ```wiki
-builder-client init username password darcs.haskell.org
+builder-client init username password haskell.inf.elte.hu
 ```
 
 
 in it, where `username` and `password` are your username and password. This will create various files and subdirectories that the client will use. Then put a copy of [
-http://darcs.haskell.org/ghcBuilder/cert/root.pem](http://darcs.haskell.org/ghcBuilder/cert/root.pem) in `certs/` so that the client can verify that it is connecting to the right server.
+http://haskell.inf.elte.hu/ghcBuilder/cert/root.pem](http://haskell.inf.elte.hu/ghcBuilder/cert/root.pem) in `certs/` so that the client can verify that it is connecting to the right server.
 
 
 
@@ -119,6 +111,6 @@ builder-client -v
 ```
 
 
-We recommend running in screen for now, as the client doesn't daemonise itself yet. The client will connect to the server, and the server will tell the client how and when to do builds. The client therefore needs to be left running unless you want to stop builds from happening.
+We recommend running in screen for now, as the client does not daemonise itself yet. The client will connect to the server, and the server will tell the client how and when to do builds. The client therefore needs to be left running unless you want to stop builds from happening.
 
 
