@@ -74,7 +74,7 @@ git clone https://github.com/cartazio/ghc-builder
 ```
 
 
-and then build the Cabal package in the `client/` subdirectory.
+and then build the Cabal package in the `client/` subdirectory.  If you experience problems feel free to fix them up -- and do not forget to submit a pull request with your patches! :-)
 
 
 
