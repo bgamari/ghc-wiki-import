@@ -70,7 +70,7 @@ You can get the code for the builder with
 
 
 ```wiki
-$ git clone https://github.com/cartazio/ghc-builder
+$ git clone https://github.com/haskell/ghc-builder
 ```
 
 
