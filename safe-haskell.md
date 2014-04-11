@@ -41,10 +41,8 @@ The design of Safe Haskell involves the following aspects:
 - A definition of "trust" and how it operates, as well as ways of defining and changing the trust of modules and packages.
 
 
-[ vertical blind](http://www.tiraimodern.com/product/vertical-blind) \| [
-roller blind](http://www.tiraimodern.com/product/roller-blind) \| [
-selai kacang](http://www.morinfoods.com/selai-kacang.html) \|  [
-atap fiberglass](http://www.goldenfibreglass.com/product-atap-fiberglass.php)
+[ mcafee coupon](http://techpromocodes.com/mcafee-promo-code/) - [
+norton 360 discount](http://techpromocodes.com/norton-coupon-code/) 
 
 
 ## Safe Language Overview
