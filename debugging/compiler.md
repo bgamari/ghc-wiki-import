@@ -1,33 +1,42 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
+# Debugging the compiler
 
 
-= Debugging the compiler =
+## Basic strategies
 
-== Basic strategies ==
+
 
 When compiling GHC:
 
- * add `-DDEBUG` to your `GhcStage1HcOpts` and/or `GhcStage2HcOpts` in `mk/build.mk`.  This enables assertions and extra debug code.
 
-When compiling the program (see also the [http://www.haskell.org/ghc/docs/latest/html/users_guide/options-debugging.html relevant User Manual section]):
+- add `-DDEBUG` to your `GhcStage1HcOpts` and/or `GhcStage2HcOpts` in `mk/build.mk`.  This enables assertions and extra debug code.
 
- * Use `-v3` or `-v4` to get an idea about what GHC is doing when the problem occurs.
 
- * Add `-dcore-lint` the GHC command line when compiling each Haskell module.  This makes GHC type-check the intermediate program after every optimisation pass, which often nails a fault.
+When compiling the program (see also the [relevant User Manual section](http://www.haskell.org/ghc/docs/latest/html/users_guide/options-debugging.html)):
 
- * Add `-ddump-simpl` to see the optimised Core output.  There are a number of other `-ddump-x` flags; see the user manual.
 
- * The flag `-dppr-debug` makes the `-ddump-x` flags print much more verbose output.  Use this if you are getting desperate!
+- Use `-v3` or `-v4` to get an idea about what GHC is doing when the problem occurs.
 
-== Adding debugging code to the compiler ==
+- Add `-dcore-lint` the GHC command line when compiling each Haskell module.  This makes GHC type-check the intermediate program after every optimisation pass, which often nails a fault.
 
- * `Outputable.pprTrace` is a nice way to print trace messages from the compiler
+- Add `-ddump-simpl` to see the optimised Core output.  There are a number of other `-ddump-x` flags; see the user manual.
 
- * `ASSERT(p)`, `ASSERT2(p,msg)`, `WARN(p,msg)` are assertions and warning enabled only when the compiler is compiled with `-DDEBUG`.  There are also variants of these that work better in a monad setting; see [[GhcFile(compiler/HsVersions.h)]].
+- The flag `-dppr-debug` makes the `-ddump-x` flags print much more verbose output.  Use this if you are getting desperate!
 
- 
-```
+## Adding debugging code to the compiler
+
+
+- `Outputable.pprTrace` is a nice way to print trace messages from the compiler
+
+- `ASSERT(p)`, `ASSERT2(p,msg)`, `WARN(p,msg)` are assertions and warning enabled only when the compiler is compiled with `-DDEBUG`.  There are also variants of these that work better in a monad setting; see [compiler/HsVersions.h](/trac/ghc/browser/ghc/compiler/HsVersions.h).
+
+## Debugging segfaults
+
+
+
+If you are doing in-place builds, you can rebuild the stage 2 compiler by deleting `ghc/stage2/build/tmp/ghc-stage2` and then running `make 2 EXTRA_HC_OPTS=-debug` in the `ghc` directory to rebuild the compiler with the debugging RTS. (Substitute 2 with 1 if debugging the stage 1 compiler, although that one really shouldn't be segfaulting!)
+
+
+
+It's not possible to directly run GHC using `gdb inplace/bin/ghc-stage2` on Linux, because this file is not actually an executable: it's a shell script. You can convert it to run gdb by editing the last line to read `exec gdb --args "$executablename" -B"$topdir" ${1+"$@"}`; alternately, you can manually import the environment variables set by this script and then run GDB by hand on the result. (XXX: Someone should put instructions for how to run gdb on GHC, while feeding it information from stdin, on Windows.)
+
+
