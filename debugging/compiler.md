@@ -33,7 +33,7 @@ When compiling the program (see also the [relevant User Manual section](http://w
 
 
 
-If you are doing in-place builds, you can rebuild the stage 2 compiler by deleting `ghc/stage2/build/tmp/ghc-stage2` and then running `make 2 EXTRA_HC_OPTS=-debug` in the `ghc` directory to rebuild the compiler with the debugging RTS. (Substitute 2 with 1 if debugging the stage 1 compiler, although that one really shouldn't be segfaulting!)
+GHC is a nice, complicated piece of Haskell code, so if you make a bug in the compiler, you are likely to cause `ghc-stage2` to segfault. Before you try debugging directly, see if you can build a simpler program using `ghc-stage1 -debug` which segfaults, and debug that instead. Of course, for subtle compiler bugs, GHC may be the easiest piece of code to induce the failure with. If you are doing in-place builds, you can rebuild the stage 2 compiler by deleting `ghc/stage2/build/tmp/ghc-stage2` and then running `make 2 EXTRA_HC_OPTS=-debug` in the `ghc` directory to rebuild the compiler with the debugging RTS. (Substitute 2 with 1 if debugging the stage 1 compiler, although that one really shouldn't be segfaulting!)
 
 
 
