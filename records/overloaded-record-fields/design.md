@@ -104,7 +104,7 @@ The bare type variable `b` in the instance head is important, so that we get an 
 
 
 
-The reason for using a three-parameter class, rather than just two parameters and a type family, is to support the syntactic sugar and improve type inference error messags. With a two-parameter class we could easily end up inferring types like the following, and it would be hard to reapply the sugar: 
+The reasons for using a three-parameter class, rather than just two parameters and a type family, are (a) to support the syntactic sugar and (b) improve type inference error messages. With a two-parameter class we could easily end up inferring types like the following, and it would be hard to reapply the sugar: 
 
 
 ```wiki
@@ -120,7 +120,27 @@ Moreover, error messages would tend to be reported in terms of unification failu
 
 
 
-At present, a datatype in one module can declare a field, but if the selector function is not exported, then the field is hidden from clients of the module. It is important to support this. Typeclasses in general have no controls over their scope, but for implicitly generated `Has` instances, the instance is available for a module if `-XOverloadedRecordFields` is enabled for that module and the record field selector function is in scope. Instances are not exported from the module that defines the datatype, but are created implicitly when needed by the typechecker.
+At present, a datatype in one module can declare a field, but if the selector function is not exported, then the field is hidden from clients of the module. It is important to support this. Typeclasses in general have no controls over their scope, but we treat the implicitly-generated `Has` instances differently.  
+ 
+
+
+- Instances are not exported from the module that defines the datatype, but instead are created implicitly when needed by the typechecker. 
+
+- An implicitly-generated `Has` instance for a field `x` of data type `T` is available in a module `M` if
+
+  - `-XOverloadedRecordFields` is enabled for module `M` and 
+  - The record field selector function `x` is in scope. 
+
+
+Notice that
+
+
+- The data type `T` might be defined locally in `M`, or imported.
+- If `T` is imported it does not matter whether `-XOverloadedRecordFields` is enabled in the module where `T` was defined.
+
+
+All this is very like the special treatment of `Coercible` instances (see [
+Safe Coercions](http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/)).
 
 
 
@@ -128,7 +148,7 @@ This enables representation hiding: just like at present, exporting the field se
 
 
 ```wiki
-module M ( R(x) ) where
+module M ( R(x), S ) where
 
 data R = R { x :: Int }
 data S = S { x :: Bool }
@@ -136,13 +156,6 @@ data S = S { x :: Bool }
 
 
 Any module that imports `M` will have access to the `x` field from `R` but not from `S`, because the instance `Has R "x" Int` will be available but the instance `Has S "x" Bool` will not be. Thus `R { x :: Int }` will be solved but `S { x :: Bool }` will not.
-
-
-### Multiple modules and automatic instance generation
-
-
-
-Note that `Has` instances are generated on a per-module basis, using the fields that are in scope for that module, and automatically generated instances are never exported. Thus it doesn't matter whether `-XOverloadedRecordFields` was on in the module that defined the datatype. The availability of the instances in a particular module depends only on whether the flag is enabled for that module.
 
 
 
@@ -153,9 +166,9 @@ Suppose module `M` imports module `N`, `N` imports module `O`, and only `N` has 
 This means that
 
 
-- the extension is required whenever a `Has` constraint must be solved;
-- no new mechanism for hiding instances is required; and
+- the extension `-XOverloadedRecordFields` is required whenever a `Has` constraint must be solved;
 - records defined in existing modules (or other packages) without the extension can still be overloaded.
+- no new mechanism for hiding instances is required; and
 
 ### Higher-rank fields
 
