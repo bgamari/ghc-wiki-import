@@ -449,7 +449,7 @@ So, if the source program contains `foo r` (meaning "select field `foo` from rec
 
 
 ```wiki
-                     foo r
+                foo r
 
 desugaring      ==> field (proxy# :: Proxy# "foo") r
 
