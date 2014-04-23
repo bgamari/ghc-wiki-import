@@ -7,7 +7,7 @@ here](http://ghc.haskell.org/trac/ghc/wiki/PrimBool#Implementationdetails) (seco
 
 
 
-If your interested in technical details behind this change, see [
+If you're interested in technical details behind this change, see [
 this page](http://ghc.haskell.org/trac/ghc/wiki/PrimBool).
 
 
