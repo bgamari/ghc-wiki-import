@@ -7,7 +7,6 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 - [\#8984](https://gitlab.staging.haskell.org/ghc/ghc/issues/8984): better error message for `Coercible`
 - [\#8673](https://gitlab.staging.haskell.org/ghc/ghc/issues/8673): more generous GADT record selectors
-- [\#8566](https://gitlab.staging.haskell.org/ghc/ghc/issues/8566): Given kind equalities are discarded
 - [\#8550](https://gitlab.staging.haskell.org/ghc/ghc/issues/8550): Don't build recursive type-function dictionaries
 - [\#8486](https://gitlab.staging.haskell.org/ghc/ghc/issues/8486), [\#5682](https://gitlab.staging.haskell.org/ghc/ghc/issues/5682): Parsing of pomoted kinds, and `Typeable` instances involving them
 - [\#8281](https://gitlab.staging.haskell.org/ghc/ghc/issues/8281): `UnliftedFFITypes` etc
@@ -15,7 +14,6 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#8427](https://gitlab.staging.haskell.org/ghc/ghc/issues/8427): stop EPS cache poisoning
 - [\#7730](https://gitlab.staging.haskell.org/ghc/ghc/issues/7730): display `TyCons` in tidied form in `pprTyThing`
 - [\#5610](https://gitlab.staging.haskell.org/ghc/ghc/issues/5610), [\#7243](https://gitlab.staging.haskell.org/ghc/ghc/issues/7243): Better error messages for `foreign` declarations
-- [\#8264](https://gitlab.staging.haskell.org/ghc/ghc/issues/8264): `checkValidInstance` for `Typeable`, `Coercible` etc.
 - [\#8240](https://gitlab.staging.haskell.org/ghc/ghc/issues/8240): better error messages for type-function equalities
 - [\#8095](https://gitlab.staging.haskell.org/ghc/ghc/issues/8095): very slow constraint solving
 - [\#8171](https://gitlab.staging.haskell.org/ghc/ghc/issues/8171): extended default rules
@@ -24,7 +22,6 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#7259](https://gitlab.staging.haskell.org/ghc/ghc/issues/7259): Eta-expansion of products in System FC
 - [\#6022](https://gitlab.staging.haskell.org/ghc/ghc/issues/6022): over-general types are inferred
 - [\#5642](https://gitlab.staging.haskell.org/ghc/ghc/issues/5642): slow constraint solving
-- [\#7346](https://gitlab.staging.haskell.org/ghc/ghc/issues/7346), [\#7878](https://gitlab.staging.haskell.org/ghc/ghc/issues/7878): Pedro's generics and deriving
 - [\#7828](https://gitlab.staging.haskell.org/ghc/ghc/issues/7828), [\#5267](https://gitlab.staging.haskell.org/ghc/ghc/issues/5267), [\#5777](https://gitlab.staging.haskell.org/ghc/ghc/issues/5777), [\#5333](https://gitlab.staging.haskell.org/ghc/ghc/issues/5333), [\#344](https://gitlab.staging.haskell.org/ghc/ghc/issues/344): bugs in arrows
 - [\#7204](https://gitlab.staging.haskell.org/ghc/ghc/issues/7204): a class to controll FFI marshalling; and newtype deriving for classes with ATs
 - [\#7862](https://gitlab.staging.haskell.org/ghc/ghc/issues/7862): overlap beween givens and instances
@@ -41,9 +38,7 @@ See also [TemplateHaskell](template-haskell)
 - [TemplateHaskell/Annotations](template-haskell/annotations) Gergely's work on annotations in TH
 - [\#1475](https://gitlab.staging.haskell.org/ghc/ghc/issues/1475): allow splicing of import declarations (5 in cc list)
 - [\#8100](https://gitlab.staging.haskell.org/ghc/ghc/issues/8100): support standalone deriving
-- [\#4364](https://gitlab.staging.haskell.org/ghc/ghc/issues/4364): cycle in type declarations
 - [\#4429](https://gitlab.staging.haskell.org/ghc/ghc/issues/4429): `reinerp` work on `newName` and export reorganisation
-- [\#7021](https://gitlab.staging.haskell.org/ghc/ghc/issues/7021): make TH catch up with constraint kinds
 - [\#7484](https://gitlab.staging.haskell.org/ghc/ghc/issues/7484): TH allows you to build invalid names
 
 ## Demand analysis and CSE
