@@ -44,7 +44,8 @@ Meanwhile, HEAD steams onward, with some preliminary work for the 7.10 milestone
 >
 >
 
-- **Continuous integration improvements** - Work on new CI systems for GHC has been slow, but thanks to the work of **Gabor Pali** and **Joachim Brietner**
+- **Continuous integration improvements** - Work on new CI systems for GHC has been slow, but thanks to the work of **Gabor Pali** and **Joachim Brietner**, GHC is now built on [
+  http://travis-ci.org](http://travis-ci.org) \[!TravisCI\] as well as nightly builders of a variety of flavors and machines. We're also hoping to investigate using a Continuous Integration system to help build against a stable set of selected Hackage packages, to help find issues with the releases more easily.
 
 - **Debian builds of GHC** - Thanks to **Joachim Brietner** and **Herbert Valerio Riedel**, GHC now has greatly improved support for Debian packaging - there is now an official Ubuntu PPA for GHC\[PPA\], as well as a dedicated Debian repository for GHC nightly builds\[DEB\]
 
@@ -65,5 +66,7 @@ https://scan.coverity.com](https://scan.coverity.com)
 \[PPA\] [
 https://launchpad.net/\~hvr/+archive/ghc/](https://launchpad.net/~hvr/+archive/ghc/)
 \[DEB\] [ http://deb.haskell.org](http://deb.haskell.org)
+\[!TravisCI\] [
+https://github.com/nomeata/ghc-complete](https://github.com/nomeata/ghc-complete)
 
 
