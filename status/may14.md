@@ -73,9 +73,9 @@ https://github.com/quchen/articles/blob/master/applicative\_monad.md](https://gi
 http://ghc.haskell.org/trac/ghc/wiki/GhcKinds/KindsWithoutData](http://ghc.haskell.org/trac/ghc/wiki/GhcKinds/KindsWithoutData)  
  
 \[TA\] Explicit type application - [
-http://ghc.haskell.org/trac/ghc](http://ghc.haskell.org/trac/ghc) 
- /wiki/ExplicitTypeApplication \[CoverityScan\] [
-https://scan.coverity.com](https://scan.coverity.com) 
+http://ghc.haskell.org/trac/ghc/wiki/ExplicitTypeApplication](http://ghc.haskell.org/trac/ghc/wiki/ExplicitTypeApplication) 
+
+\[CoverityScan\] [ https://scan.coverity.com](https://scan.coverity.com) 
  
 \[PPA\] [
 https://launchpad.net/\~hvr/+archive/ghc/](https://launchpad.net/~hvr/+archive/ghc/) 
