@@ -26,6 +26,8 @@ Meanwhile, HEAD steams onward, with some preliminary work for the 7.10 milestone
 
 - **Explicit type application** - Stephanie Weirich, Richard Eisenberg and Hamidhasan Ahmed have been working on adding explicit type applications to GHC. This allows the programmer to specify the types that should be instantiated for arguments to a function application, where normally they would be inferred. While this capability already exists in GHC's internal language, System FC -- indeed, every FC-pro program has function application with explicitly applied types -- it has not been available in Haskell itself. While a lot of the syntax and design is not quite final, there are some details about the design available on the wiki \[TA\].
 
+- **Kind equality and kind coercions** - TODO Richard
+
 ## Back-end and runtime system
 
 
