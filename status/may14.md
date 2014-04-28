@@ -57,7 +57,11 @@ https://ghc.haskell.org/trac/ghc/ticket/8978](https://ghc.haskell.org/trac/ghc/t
 
 \[AMP\] [
 https://github.com/quchen/articles/blob/master/applicative\_monad.md](https://github.com/quchen/articles/blob/master/applicative_monad.md)
-\[CoverityScan\] [ https://scan.coverity.com](https://scan.coverity.com)
+\[KD\] Kinds without Data - [
+http://ghc.haskell.org/trac/ghc/wiki/GhcKinds/KindsWithoutData](http://ghc.haskell.org/trac/ghc/wiki/GhcKinds/KindsWithoutData) 
+\[TA\] Explicit type application - [
+http://ghc.haskell.org/trac/ghc/wiki/ExplicitTypeApplication](http://ghc.haskell.org/trac/ghc/wiki/ExplicitTypeApplication) \[CoverityScan\] [
+https://scan.coverity.com](https://scan.coverity.com)
 \[PPA\] [
 https://launchpad.net/\~hvr/+archive/ghc/](https://launchpad.net/~hvr/+archive/ghc/)
 \[DEB\] [ http://deb.haskell.org](http://deb.haskell.org)
