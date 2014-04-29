@@ -17,7 +17,7 @@ Meanwhile, HEAD steams onward, with some preliminary work for the 7.10 milestone
 
 
 
-Early April, GHC 7.8 was finally released after nearly 1.5 years of development. This was one of the longest development periods in recent memory, and there was a lot of grumbling near the end. Ultimately, the result of this was scope creep - we kept getting bugs dripping in here and there, and fixing them, and putting things in.
+Early April, GHC 7.8 was finally released after nearly 1.5 years of development. This was one of the longest development periods in recent memory, and there was a lot of grumbling near the end. Ultimately, the reason for this was scope creep - we kept getting bugs dripping in here and there, and fixing them, and putting things in.
 
 
 
