@@ -52,8 +52,8 @@ Meanwhile, HEAD steams onward, with some preliminary work for the 7.10 milestone
 >
 >
 
-- **Continuous integration improvements** - Work on new CI systems for GHC has been slow, but thanks to the work of **Gábor Páli** and **Joachim Breitner**, GHC is now built on [
-  http://travis-ci.org](http://travis-ci.org) \[!TravisCI\] as well as nightly builders of a variety of flavors and machines. We're also hoping to investigate using a Continuous Integration system to help build against a stable set of selected Hackage packages, to help find issues with the releases more easily.
+- **Continuous integration improvements** - Work on new CI systems for GHC has been slow, but thanks to the work of **Joachim Breitner** and **Gábor Páli**, GHC is now built on [
+  http://travis-ci.org](http://travis-ci.org) \[!TravisCI\] as well as nightly builders of a variety of flavors and machines \[Builders\]. We're also hoping to investigate using a Continuous Integration system to help build against a stable set of selected Hackage packages, to help find issues with the releases more easily.
 
 - **Debian builds of GHC** - Thanks to **Joachim Breitner** and **Herbert Valerio Riedel**, GHC now has greatly improved support for Debian packaging - there is now an official Ubuntu PPA for GHC\[PPA\], as well as a dedicated Debian repository for GHC nightly builds\[DEB\]
 
@@ -91,6 +91,9 @@ https://launchpad.net/\~hvr/+archive/ghc/](https://launchpad.net/~hvr/+archive/g
 \[!TravisCI\] [
 https://github.com/nomeata/ghc-complete](https://github.com/nomeata/ghc-complete) 
  
+\[Builders\] [
+https://ghc.haskell.org/trac/ghc/wiki/Builder](https://ghc.haskell.org/trac/ghc/wiki/Builder) 
+
 \[HEAPALLOCED\] [
 https://ghc.haskell.org/trac/ghc/ticket/8199](https://ghc.haskell.org/trac/ghc/ticket/8199) 
  
