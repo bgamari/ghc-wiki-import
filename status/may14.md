@@ -6,7 +6,7 @@ GHC development has been steadily moving forward. While we originally planned to
 
 
 
-However, 7.8.1 was released in early April this year. It turned out we had a disastrous bug slip in between the release candidates however, which required an immediate fix and the release of 7.8.2\[GHC8978\]. Other than shuffling back our version numbers, this luckily didn't change much. We plan to release 7.8.3 later in the year.
+However, 7.8.1 was released in early April this year. It turned out we had a disastrous bug slip in between the release candidates however, which required an immediate fix and the release of 7.8.2 \[GHC8978\]. Other than shuffling back our version numbers, this luckily didn't change much. We plan to release 7.8.3 later in the year.
 
 
 
