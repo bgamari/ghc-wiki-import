@@ -90,6 +90,7 @@ See also [TemplateHaskell](template-haskell)
 ## Features
 
 
+- [\#9049](https://gitlab.staging.haskell.org/ghc/ghc/issues/9049): explicit call stack
 - [\#5972](https://gitlab.staging.haskell.org/ghc/ghc/issues/5972): option to suppress record selectors
 
 ---
