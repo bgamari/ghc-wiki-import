@@ -85,7 +85,7 @@ https://ghc.haskell.org/trac/ghc/wiki/Records/OverloadedRecordFields](https://gh
 \[TA\] Explicit type application - [
 http://ghc.haskell.org/trac/ghc/wiki/ExplicitTypeApplication](http://ghc.haskell.org/trac/ghc/wiki/ExplicitTypeApplication) 
 
-\[FC\] "System FC with Explicit Kind Equality" - [
+\[FC\] System FC with Explicit Kind Equality - [
 http://www.seas.upenn.edu/\~eir/papers/2013/fckinds/fckinds-extended.pdf](http://www.seas.upenn.edu/~eir/papers/2013/fckinds/fckinds-extended.pdf) 
 
 \[PTS\] [
