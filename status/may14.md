@@ -152,9 +152,6 @@ http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/](http://rese
 \[THBlog\] Major revision of Template Haskell [
 https://ghc.haskell.org/trac/ghc/wiki/TemplateHaskell/BlogPostChanges](https://ghc.haskell.org/trac/ghc/wiki/TemplateHaskell/BlogPostChanges) 
 
-\[GHC8978\] [
-https://ghc.haskell.org/trac/ghc/ticket/8978](https://ghc.haskell.org/trac/ghc/ticket/8978) 
-
 \[AMP\] [
 https://github.com/quchen/articles/blob/master/applicative\_monad.md](https://github.com/quchen/articles/blob/master/applicative_monad.md) 
  
