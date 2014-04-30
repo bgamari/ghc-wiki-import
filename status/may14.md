@@ -173,7 +173,7 @@ http://www.seas.upenn.edu/\~eir/papers/2013/fckinds/fckinds-extended.pdf](http:/
 \[PTS\] [
 https://ghc.haskell.org/trac/ghc/wiki/PartialTypeSignatures](https://ghc.haskell.org/trac/ghc/wiki/PartialTypeSignatures) 
 
-\[!Coverity\] [ https://scan.coverity.com](https://scan.coverity.com) 
+\[Coverity\] [ https://scan.coverity.com](https://scan.coverity.com) 
  
 \[PPA\] [
 https://launchpad.net/\~hvr/+archive/ghc/](https://launchpad.net/~hvr/+archive/ghc/) 
