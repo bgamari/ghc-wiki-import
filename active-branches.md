@@ -36,6 +36,12 @@ These branches are not merged, but they are also not totally dead ended, and the
 - `local-gc`: **Capability-local garbage collection**. Simon Marlow & Simon PJ. As described in "Multicore Garbage Collection with Local Heaps": [
   http://community.haskell.org/\~simonmar/papers/local-gc.pdf](http://community.haskell.org/~simonmar/papers/local-gc.pdf)
 
+- `wip/nested-cpr`: **Nested CPR**. Works, but results where underwhelming. See [NestedCPR](nested-cpr). Joachim Breitner.
+
+- `wip/cbv-conv-thunk`: **Opportunistic evaluation of thunks**. This is a side-line of `wip/nested-cpr`: Nested CPR requires a convergence analysis, and it might be worth evaluating them ([\#7596](https://gitlab.staging.haskell.org/ghc/ghc/issues/7596)). Seems to be not as useful as hoped. Joachim Breitner.
+
+- `wip/common-context`: **Common context transformation** which can reduce code size and possibly produce more join points. See [NestedCPR](nested-cpr#common-context). Joachim Breitner.
+
 # Uncertain
 
 
@@ -44,6 +50,8 @@ The actual status of these branches, including whether they have been merged and
 
 
 - `ghc-spj`: **???**. Simon PJ.
+
+- `wip/exprArity`: Contains one patch left over when Joachim merged SPJ’s `better-ho-cardinality` branch.
 
 # Dead/merged branches
 
@@ -111,3 +119,5 @@ This is a list of inactive branches which have been merged into the tree.
 - `srcloc` and `real-src-loc-span`: **Amendments to spannings and SrcLocs**. Ian Lynagh.
 
 - `type-nats-simple`: Derived from `type-nats`, intended for eventually being merged into `master`, slated for 7.8.
+
+- `better-ho-cardinality`: Authored by Simon PJ, merged by Joachim while working on the demand analyser with the exception of the patch in `wip/exprArity`.
