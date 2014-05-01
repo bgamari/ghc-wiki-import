@@ -131,6 +131,12 @@ There's still a lot planned for GHC 7.10, however. While we haven't quite decide
 >
 >
 
+>
+>
+> Moreover, the remaining packages officially maintained by the core library committee that are currently managed via GHC's Trac will be relocated to the Haskell GitHub organization in order to have GHC Trac focus on developing GHC proper as well as reduce the overhead for casual contributors to file issues and submit simple fixes for those packages.
+>
+>
+
 - **Continuous integration improvements** - Work on new CI systems for GHC has been slow, but thanks to the work of **Joachim Breitner** and **Gábor Páli**, GHC is now built on [
   http://travis-ci.org](http://travis-ci.org) \[TravisCI\] as well as nightly builders of a variety of flavors and machines \[Builders\]. We're also hoping to investigate using a Continuous Integration system to help build against a stable set of selected Hackage packages, to help find issues with the releases more easily.
 
