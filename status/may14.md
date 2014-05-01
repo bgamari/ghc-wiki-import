@@ -198,6 +198,6 @@ https://ghc.haskell.org/trac/ghc/ticket/8199](https://ghc.haskell.org/trac/ghc/t
  
 \[RLIMITS\] [ http://ezyang.com/rlimits.html](http://ezyang.com/rlimits.html) 
 
-\[ReleaseNotes\] [http://www.haskell.org/ghc/docs/7.8.1/html/users\_guide/release-7-8-1.html](http://www.haskell.org/ghc/docs/7.8.1/html/users_guide/release-7-8-1.html) \[\[BR\]
+\[ReleaseNotes\] [http://www.haskell.org/ghc/docs/7.8.1/html/users\_guide/release-7-8-1.html](http://www.haskell.org/ghc/docs/7.8.1/html/users_guide/release-7-8-1.html) 
 
 
