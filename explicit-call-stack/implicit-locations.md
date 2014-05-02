@@ -2,7 +2,7 @@
 
 
 
-This is a lightweight proposal to help with error-finding; see the ExpliciCallsStack? summary page.
+This is a lightweight proposal to help with error-finding; see the [ExplicitCallStack](explicit-call-stack) summary page.
 
 
 
