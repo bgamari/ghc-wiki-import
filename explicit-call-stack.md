@@ -61,7 +61,7 @@ Here are the approaches we have under consideration
 
 >
 >
-> This is the subject of Peter Wortman's PhD.  He has a paper [
+> Addressing these challenges is the subject of Peter Wortman's PhD.  He has a paper [
 > Causality of Optimized Haskell: What is burning our cycles?](http://eprints.whiterose.ac.uk/77401/), and an implementation is well advanced (not quite yet in HEAD, May 2014).
 >
 >
