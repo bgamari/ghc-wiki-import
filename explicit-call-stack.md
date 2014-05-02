@@ -34,8 +34,8 @@ Here are the approaches we have under consideration
 
 >
 >
-> then any crash (call to `error`) will yield an informative backtrace.  The backtrace gives you a stack of calls that looks very like what you'd get in a call-by-value language.  (Lots of papers about profiling in a lazy language, dating right back to \[[
-> http://research.microsoft.com/\~simonpj/papers/1997\_profiling\_TOPLAS.ps.gz](http://research.microsoft.com/~simonpj/papers/1997_profiling_TOPLAS.ps.gz) Formally based profiling for higher order functional languages) give the background.
+> then any crash (call to `error`) will yield an informative backtrace.  The backtrace gives you a stack of calls that looks very like what you'd get in a call-by-value language.  (Lots of papers about profiling in a lazy language, dating right back to [
+> Formally based profiling for higher order functional languages](http://research.microsoft.com/~simonpj/papers/1997_profiling_TOPLAS.ps.gz) give the background.)
 >
 >
 
