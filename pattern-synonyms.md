@@ -463,7 +463,8 @@ So far patterns only had *syntactic* meaning. In comparison [
 
 
 
-\_N.B. this is a speculative suggestion!\_
+*N.B. this is a speculative suggestion!
+*
 
 
 
@@ -476,11 +477,11 @@ type UNat = Maybe Nat -- Nothing meaning unbounded
 ```
 
 
-Conceptually `Nothing` means 'infinite', so it makes sense to interpret it as a \_successor\_. We wish it to have a predecessor just like `Just (S Z)`!
+Conceptually `Nothing` means *infinite*, so it makes sense to interpret it as a *successor* of something. We wish it to have a predecessor just like `Just (Succ Zero)`!
 
 
 
-I suggest branching patterns for this purpose:
+I suggest *branching patterns* for this purpose:
 
 
 ```wiki
@@ -497,3 +498,8 @@ greetTimes :: UNat -> String -> IO ()
 greetTimes Z _ = return ()
 greetTimes (S rest) message = putStrLn message >> greetTimes rest message
 ```
+
+
+As a nice collateral win this proposal handles `pattern Name n <- Person name workplace | Dog name vet` too.
+
+
