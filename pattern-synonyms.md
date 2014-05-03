@@ -481,7 +481,7 @@ Conceptually `Nothing` means *infinite*, so it makes sense to interpret it as a 
 
 
 
-I suggest *branching patterns* for this purpose:
+I suggest *branching pattern synonyms* for this purpose:
 
 
 ```wiki
