@@ -13,7 +13,7 @@ We use the C preprocessor on `.cmm` files, making extensive use of macros to mak
 
 
 
-Reading material for learning Cmm is somewhat scattered, so I (Arash) have created a list of useful links. Since the Cmm language is changing as GHC changes, I have prioritized. (*Feel free to add/remove/modify this this list! :)*)
+Reading material for learning Cmm is somewhat scattered, so I (Arash) have created a list of useful links. Since the Cmm language is changing as GHC changes, I have prioritized. (*Feel free to add/remove/modify this list! :)*)
 
 
 - An overview of Cmm is given in [
