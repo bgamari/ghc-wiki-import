@@ -74,6 +74,9 @@ Certain abbreviations are used pervasively throughout the GHC source code. This 
 
 - **Tc**: TypeCheck{ing,er}
 
+- **TSO**: [
+  Thread State Object](https://ghc.haskell.org/trac/ghc/wiki/Commentary/Rts/Storage/HeapObjects#ThreadStateObjects)
+
 - **TyCon**: Type constructor
 
 - **TyThing**: Something that is type-checkable
