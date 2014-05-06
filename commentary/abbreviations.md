@@ -72,6 +72,8 @@ Certain abbreviations are used pervasively throughout the GHC source code. This 
 
 - **SrcSpan**: Source location span (filename, start line number and character position, end line number and character position)
 
+- **STG**: [Spineless Tagless G-machine](commentary/compiler/stg-syn-type)
+
 - **Tc**: TypeCheck{ing,er}
 
 - **TSO**: [
