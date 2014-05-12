@@ -30,7 +30,10 @@ For info on the active branches of the main GHC repo, see
 GHC's repos use git; see [Git Working Conventions](working-conventions/git). For darcs-related stuff see [Darcs To Git](darcs-to-git) and [Git For Darcs Users](git-for-darcs-users).
 
 
-## Overview
+## Repository workflows
+
+
+## Full repository breakdown
 
 
 
@@ -97,15 +100,6 @@ Here is a list of the repositories that GHC uses.  The columns have the followin
 <th>     </th>
 <td> </td>
 <th>haddock.git</th></tr>
-<tr><th>testsuite</th>
-<td>              	       </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th> N/A </th>
-<td> </td>
-<th>testsuite.git</th></tr>
 <tr><th>nofib</th>
 <td>                  	       </td>
 <th>     </th>
@@ -124,15 +118,6 @@ Here is a list of the repositories that GHC uses.  The columns have the followin
 <th>     </th>
 <td> </td>
 <th>packages/array.git</th></tr>
-<tr><th>libraries/base</th>
-<td>                    </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/base.git</th></tr>
 <tr><th>libraries/binary</th>
 <td>                  </td>
 <th> yes </th>
@@ -205,15 +190,6 @@ Here is a list of the repositories that GHC uses.  The columns have the followin
 <th>     </th>
 <td> </td>
 <th>packages/filepath.git</th></tr>
-<tr><th>libraries/ghc-prim</th>
-<td>                </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/ghc-prim.git</th></tr>
 <tr><th>libraries/haskeline</th>
 <td>               </td>
 <th> yes </th>
@@ -259,24 +235,6 @@ Here is a list of the repositories that GHC uses.  The columns have the followin
 <th>     </th>
 <td> </td>
 <th>packages/hpc.git</th></tr>
-<tr><th>libraries/integer-gmp</th>
-<td>             </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/integer-gmp.git</th></tr>
-<tr><th>libraries/integer-simple</th>
-<td>          </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/integer-simple.git</th></tr>
 <tr><th>libraries/old-locale</th>
 <td>              </td>
 <th>     </th>
@@ -313,15 +271,6 @@ Here is a list of the repositories that GHC uses.  The columns have the followin
 <th>     </th>
 <td> </td>
 <th>packages/process.git</th></tr>
-<tr><th>libraries/template-haskell</th>
-<td>        </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/template-haskell.git</th></tr>
 <tr><th>libraries/terminfo</th>
 <td>     	       </td>
 <th> yes </th>
@@ -441,7 +390,7 @@ Here is a list of the repositories that GHC uses.  The columns have the followin
 <th>packages/stm.git</th></tr></table>
 
 
-## The 'packages' file
+### The 'packages' file
 
 
 
