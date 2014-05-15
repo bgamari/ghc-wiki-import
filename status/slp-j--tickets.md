@@ -5,6 +5,8 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Type inference
 
 
+- [\#9117](https://gitlab.staging.haskell.org/ghc/ghc/issues/9117): `Coercible (f a)`
+- [\#9118](https://gitlab.staging.haskell.org/ghc/ghc/issues/9118): Eta reduction for `Coercible` (not expressible in Core, yet)
 - [\#9023](https://gitlab.staging.haskell.org/ghc/ghc/issues/9023): pattern synonyms
 - [\#8984](https://gitlab.staging.haskell.org/ghc/ghc/issues/8984): better error message for `Coercible`
 - [\#8673](https://gitlab.staging.haskell.org/ghc/ghc/issues/8673): more generous GADT record selectors
@@ -34,7 +36,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
  
 
 
-- [\#6078](https://gitlab.staging.haskell.org/ghc/ghc/issues/6078): injective type families
+- [\#6018](https://gitlab.staging.haskell.org/ghc/ghc/issues/6018): injective type families
 - [\#8161](https://gitlab.staging.haskell.org/ghc/ghc/issues/8161): associated type more specific than class decl
 - [\#8177](https://gitlab.staging.haskell.org/ghc/ghc/issues/8177): role signature for type families
 
