@@ -382,7 +382,7 @@ But pattern-matching on a type family (like `Goo`) doesn't work, because type fa
 
 
 ```wiki
-type instance UpdTy (T a) "foo" x = T b
+type instance UpdTy (T a) "foo" x = T a
 ```
 
 
