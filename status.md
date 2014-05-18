@@ -30,11 +30,10 @@ Haskell Communities and Activities Report](http://haskell.org/communities/)
 
 
 
-Here are our release plans for 
+Here are our release plans for
 
 
-- [GHC 7.8](status/gh-c-7.8)
-- [RC2/final status](status/gh-c-7.8/r-c2)
+- [GHC 7.8.3](status/gh-c-7.8.3)
 
 ## Planning notes
 
