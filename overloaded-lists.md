@@ -14,7 +14,7 @@ Let us briefly recap the notation for constructing lists. In Haskell, the list
 notation can be be used in the following seven ways:
 
 
-```wiki
+```
 []          -- Empty list
 [x]         -- x : []
 [x,y,z]     -- x : y : z : []
@@ -29,7 +29,7 @@ When the `OverloadedLists` extension is turned on, the aforementioned seven
 notations are desugared as follows:
 
 
-```wiki
+```
 []          -- fromListN 0 []
 [x]         -- fromListN 1 (x : [])
 [x,y,z]     -- fromListN 3 (x : y : z : [])
@@ -45,7 +45,7 @@ structures like: `Set`, `Map`, `IntMap`, `Vector`, `Text`
 and `Array`. The following code listing gives a few examples:
 
 
-```wiki
+```
 ['0' .. '9']             :: Set Char
 [1 .. 10]                :: Vector Int
 [("default",0), (k1,v1)] :: Map String Int
@@ -57,7 +57,7 @@ List patterns are also overloaded. When the `OverloadedLists` extension is turne
 definitions
 
 
-```wiki
+```
 f [] = ...
 g [x,y,z] = ...
 ```
@@ -66,7 +66,7 @@ g [x,y,z] = ...
 will be treated as
 
 
-```wiki
+```
 f (toList -> []) = ...
 g (toList -> [x,y,z]) = ...
 ```
@@ -83,7 +83,7 @@ be used to overload `fromListN` and `fromListN` for different
 structures. The type class is defined as follows:
 
 
-```wiki
+```
 class IsList l where
   type Item l
   fromList  :: [Item l] -> l
@@ -110,7 +110,7 @@ The instances of the `IsList` class should satisfy the following
 property:
 
 
-```wiki
+```
 fromList . toList = id
 ```
 
@@ -119,7 +119,7 @@ In the following, we give several example instances of the `IsList` type
 class:
 
 
-```wiki
+```
 instance IsList [a] where
   type Item [a] = a
   fromList = id
@@ -196,7 +196,7 @@ http://www.mail-archive.com/haskell-cafe@haskell.org/msg101412.html
 The `OverloadedLists` extension as, implemented above, would not be able to be used on heterogeneous lists, for example, as implemented below:
 
 
-```wiki
+```
 data HList :: [*] -> * where
     HNil :: HList '[]
     HCons :: a -> HList xs -> HList (a ': xs)
@@ -204,5 +204,25 @@ data HList :: [*] -> * where
 
 
 This is a bit disappointing. However, I'm not really sure how you could make this extension support this use case, even if you added some hacks to the `IsList` class.
+
+
+## Length-{indexed,observed} Vectors
+
+
+
+The current extension can't be used to represent list literals for length-indexed vectors as e.g.
+
+
+```
+-- (alternatively, GHC.TypeLits.Nat)
+data Nat = Ze | Su Nat
+
+data Vec :: * -> Nat -> * where
+  Nil  :: Vec a Ze
+  Cons :: a -> Vec a n -> Vec a (Su n)
+```
+
+
+as the length-information is not provided in a suitable way.
 
 
