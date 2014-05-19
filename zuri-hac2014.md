@@ -21,31 +21,33 @@ ZuriHac 2014](http://www.haskell.org/haskellwiki/ZuriHac2014/Projects). Here he 
       </td>
 <th>
         
-        Ticket (Ticket query: id: 9095%2C9122, max: 0, desc: 1, order: id)
+        Ticket (Ticket query: id: 9095%2C9122%2C9127, max: 0, desc: 1,
+order: id)
       </th>
 <th>
         
-        Summary (Ticket query: id: 9095%2C9122, max: 0, order: summary)
+        Summary (Ticket query: id: 9095%2C9122%2C9127, max: 0, order: summary)
       </th>
 <th>
         
-        Owner (Ticket query: id: 9095%2C9122, max: 0, order: owner)
+        Owner (Ticket query: id: 9095%2C9122%2C9127, max: 0, order: owner)
       </th>
 <th>
         
-        Type (Ticket query: id: 9095%2C9122, max: 0, order: type)
+        Type (Ticket query: id: 9095%2C9122%2C9127, max: 0, order: type)
       </th>
 <th>
         
-        Status (Ticket query: id: 9095%2C9122, max: 0, order: status)
+        Status (Ticket query: id: 9095%2C9122%2C9127, max: 0, order: status)
       </th>
 <th>
         
-        Priority (Ticket query: id: 9095%2C9122, max: 0, order: priority)
+        Priority (Ticket query: id: 9095%2C9122%2C9127, max: 0, order: priority)
       </th>
 <th>
         
-        Milestone (Ticket query: id: 9095%2C9122, max: 0, order: milestone)
+        Milestone (Ticket query: id: 9095%2C9122%2C9127, max: 0,
+order: milestone)
       </th>
 <td>
     </td>
@@ -271,6 +273,118 @@ ZuriHac 2014](http://www.haskell.org/haskellwiki/ZuriHac2014/Projects). Here he 
                       
                       
                       [8.0.1](/trac/ghc/milestone/8.0.1)
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#9127](https://gitlab.staging.haskell.org/ghc/ghc/issues/9127)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Don't warn about pattern-bindings of the form \`let !\_ = rhs\`](https://gitlab.staging.haskell.org/ghc/ghc/issues/9127)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      closed
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
                       
                       
                       
