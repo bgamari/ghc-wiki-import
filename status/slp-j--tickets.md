@@ -36,6 +36,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
  
 
 
+- [\#9123](https://gitlab.staging.haskell.org/ghc/ghc/issues/9123): higher order roles
 - [\#6018](https://gitlab.staging.haskell.org/ghc/ghc/issues/6018): injective type families
 - [\#8161](https://gitlab.staging.haskell.org/ghc/ghc/issues/8161): associated type more specific than class decl
 - [\#8177](https://gitlab.staging.haskell.org/ghc/ghc/issues/8177): role signature for type families
