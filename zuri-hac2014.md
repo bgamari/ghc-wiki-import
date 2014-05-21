@@ -21,32 +21,36 @@ ZuriHac 2014](http://www.haskell.org/haskellwiki/ZuriHac2014/Projects). Here he 
       </td>
 <th>
         
-        Ticket (Ticket query: id: 9095%2C9122%2C9127, max: 0, desc: 1,
+        Ticket (Ticket query: id: 9095%2C9122%2C9127%2C9132, max: 0, desc: 1,
 order: id)
       </th>
 <th>
         
-        Summary (Ticket query: id: 9095%2C9122%2C9127, max: 0, order: summary)
+        Summary (Ticket query: id: 9095%2C9122%2C9127%2C9132, max: 0,
+order: summary)
       </th>
 <th>
         
-        Owner (Ticket query: id: 9095%2C9122%2C9127, max: 0, order: owner)
+        Owner (Ticket query: id: 9095%2C9122%2C9127%2C9132, max: 0,
+order: owner)
       </th>
 <th>
         
-        Type (Ticket query: id: 9095%2C9122%2C9127, max: 0, order: type)
+        Type (Ticket query: id: 9095%2C9122%2C9127%2C9132, max: 0, order: type)
       </th>
 <th>
         
-        Status (Ticket query: id: 9095%2C9122%2C9127, max: 0, order: status)
+        Status (Ticket query: id: 9095%2C9122%2C9127%2C9132, max: 0,
+order: status)
       </th>
 <th>
         
-        Priority (Ticket query: id: 9095%2C9122%2C9127, max: 0, order: priority)
+        Priority (Ticket query: id: 9095%2C9122%2C9127%2C9132, max: 0,
+order: priority)
       </th>
 <th>
         
-        Milestone (Ticket query: id: 9095%2C9122%2C9127, max: 0,
+        Milestone (Ticket query: id: 9095%2C9122%2C9127%2C9132, max: 0,
 order: milestone)
       </th>
 <td>
@@ -385,6 +389,118 @@ order: milestone)
                       
                       
                       
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#9132](https://gitlab.staging.haskell.org/ghc/ghc/issues/9132)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [takeWhile&C. still not fusible](https://gitlab.staging.haskell.org/ghc/ghc/issues/9132)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      skeuchel
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      closed
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      [7.10.1](/trac/ghc/milestone/7.10.1)
                       
                       
                       
