@@ -67,6 +67,7 @@ See also [TemplateHaskell](template-haskell)
 ## Optimisation
 
 
+- [\#9136](https://gitlab.staging.haskell.org/ghc/ghc/issues/9136): better constant folding
 - [\#9041](https://gitlab.staging.haskell.org/ghc/ghc/issues/9041): bad code from native code generator (NCG)
 - [\#6056](https://gitlab.staging.haskell.org/ghc/ghc/issues/6056): conflict between the w/w unfolding and the one from INLINEABLE
 - [\#8472](https://gitlab.staging.haskell.org/ghc/ghc/issues/8472): top level unlifted string literals
