@@ -6,7 +6,7 @@ It has become (somewhat) clear that the Roles mechanism as implemented in GHC 7.
 
 
 
-See also the [main roles wiki page](roles).
+See also the [main roles wiki page](roles) and these related tickets: [\#9117](https://gitlab.staging.haskell.org/ghc/ghc/issues/9117), [\#9118](https://gitlab.staging.haskell.org/ghc/ghc/issues/9118), [\#9123](https://gitlab.staging.haskell.org/ghc/ghc/issues/9123), and [\#9131](https://gitlab.staging.haskell.org/ghc/ghc/issues/9131).
 
 
 ## Problem examples
