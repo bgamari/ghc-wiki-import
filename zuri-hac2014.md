@@ -21,37 +21,40 @@ ZuriHac 2014](http://www.haskell.org/haskellwiki/ZuriHac2014/Projects). Here he 
       </td>
 <th>
         
-        Ticket (Ticket query: id: 9095%2C9122%2C9127%2C9132%2C9136, max: 0,
-desc: 1, order: id)
+        Ticket (Ticket query:
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959, max: 0, desc: 1,
+order: id)
       </th>
 <th>
         
-        Summary (Ticket query: id: 9095%2C9122%2C9127%2C9132%2C9136, max: 0,
-order: summary)
+        Summary (Ticket query:
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959, max: 0, order: summary)
       </th>
 <th>
         
-        Owner (Ticket query: id: 9095%2C9122%2C9127%2C9132%2C9136, max: 0,
-order: owner)
+        Owner (Ticket query:
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959, max: 0, order: owner)
       </th>
 <th>
         
-        Type (Ticket query: id: 9095%2C9122%2C9127%2C9132%2C9136, max: 0,
-order: type)
+        Type (Ticket query:
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959, max: 0, order: type)
       </th>
 <th>
         
-        Status (Ticket query: id: 9095%2C9122%2C9127%2C9132%2C9136, max: 0,
-order: status)
+        Status (Ticket query:
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959, max: 0, order: status)
       </th>
 <th>
         
-        Priority (Ticket query: id: 9095%2C9122%2C9127%2C9132%2C9136, max: 0,
+        Priority (Ticket query:
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959, max: 0,
 order: priority)
       </th>
 <th>
         
-        Milestone (Ticket query: id: 9095%2C9122%2C9127%2C9132%2C9136, max: 0,
+        Milestone (Ticket query:
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959, max: 0,
 order: milestone)
       </th>
 <td>
@@ -62,6 +65,342 @@ order: milestone)
 <td></td>
 <td></td>
 <td></td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#95](https://gitlab.staging.haskell.org/ghc/ghc/issues/95)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [GHCi :edit command should jump to the the last error](https://gitlab.staging.haskell.org/ghc/ghc/issues/95)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      lortabac
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      feature request
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      closed
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      [⊥](/trac/ghc/milestone/%E2%8A%A5)
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#1388](https://gitlab.staging.haskell.org/ghc/ghc/issues/1388)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Newbie help features](https://gitlab.staging.haskell.org/ghc/ghc/issues/1388)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      feature request
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      closed
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      low
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      [⊥](/trac/ghc/milestone/%E2%8A%A5)
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#8959](https://gitlab.staging.haskell.org/ghc/ghc/issues/8959)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [GHCi should honour UnicodeSyntax](https://gitlab.staging.haskell.org/ghc/ghc/issues/8959)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      closed
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      low
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      [8.0.1](/trac/ghc/milestone/8.0.1)
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
 <tr><td>
                 
                   
