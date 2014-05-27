@@ -126,7 +126,7 @@ Note that the current quantifiers remain and with their original meanings. This 
 
 
 
-The new `pi` quantifiers allow for quantifiees that are both dependent and relevant. This means that the quantifiee is named in the type and can be used within its scope in the type, and also that the quantifiee can be inspected in the term. 
+The new `pi` quantifiers allow for quantifiees that are both dependent and relevant. This means that the quantifiee is named in the type and can be used within its scope in the type, and also that the quantifiee can be inspected in the term. A `pi`-bound argument is a proper dependent type. Since a `pi`-quantifiee can appear in both terms and types, its instantiations must come from a restricted subset of Haskell that makes sense at both the type and term level. This issue is addressed in [Adam Gundry's thesis](dependent-haskell#). For now, we propose that this subset include only data constructors (perhaps applied) and other `pi`-quantifiees. The subset can be expanded later. For some tantalizing ideas of how far it can go, see [this paper](dependent-haskell#), discussing promotion of Haskell terms to types.
 
 
 ## Open design questions
@@ -161,6 +161,21 @@ f n @a = ....
 >
 >
 
+### Overriding visibility defaults
+
+
+
+The `.`/`->` distinction in quantifiers allows programmers to specify the visibility of arguments at use sites. But, sometimes callers will want to override the defaults.
+
+
+- If a visible, dependent argument is to be elided, we could allow `_` to indicate that GHC should use unification to fill in the argument. (This is similar to the approach in Coq, for example, among other languages.) Does this conflict in any way with typed holes? Perhaps a programmer wants to get an informative error message, not for GHC to plug in a value.
+
+- Visible, non-dependent arguments cannot be inferred via unification, so `_` would not be applicable here, and would retain its current meaning of a typed hole.
+
+- How to override an invisible, dependent type argument? This might be critical if a function call would be otherwise ambiguous. (Today's Haskell would benefit from this override occasionally, too. See [TypeApplication](type-application).) One proposal is that `@` would serve double-duty: it would override invisibility and also indicate a type argument. If this is the case, the `forall (...) ->` form would be essentially useless, as it would still require users to use `@` to indicate parsing. Thus, `forall (...) ->` seems strictly worse than `forall (...) .`.
+
+- How to override an invisible, dependent term argument (that is, `pi (...) .`)? Using `@` would not work, because the parser wouldn't be able to deal with it. Alternatively, `pi`-bound arguments could use type-level syntax, and then `@` would work. However, this seems suboptimal, as we would more often want to use, say, a data constructor in a `pi`-bound argument, not a type constructor. Braces could possibly work, at least in expressions. These would not conflict with record-update syntax because record-updates require an `=`, but `pi`-bound arguments would not. Patterns might be problematic with braces, because record puns do not require `=`. There are no other proposals here, for the moment.
+
 # Related work
 
 
@@ -185,3 +200,5 @@ There are also many works addressing the use of dependent types in Haskell. Here
   Dependently typed programming with singletons](http://www.cis.upenn.edu/~eir/papers/2012/singletons/paper.pdf). Richard A. Eisenberg and Stephanie Weirich. Haskell Symposium 2012.
 - [
   Hasochism: The Pleasure and Pain of Dependently Typed Haskell](https://personal.cis.strath.ac.uk/conor.mcbride/pub/hasochism.pdf). Sam Lindley and Conor McBride. Haskell Symposium 2013.
+- [
+  Promoting Functions to Type Families in Haskell](http://www.cis.upenn.edu/~eir/papers/2014/promotion/promotion.pdf). Richard A. Eisenberg and Jan Stolarek. Draft, 2014.
