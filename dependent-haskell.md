@@ -68,7 +68,7 @@ Haskell currently has three quantifiers: `forall`, `->`, and `=>`, as classified
 </td></tr>
 <tr><th>Visible</th>
 <td>
-*Visibility* refers to whether or not the argument must appear at call sites in the program text. If something is not visible, the table lists how GHC is to fill in the missing bit at call sites. If something is visible, we must specify how it is parsed, noting that the term- and type-level parsers are different.
+*Visibility* refers to whether or not the argument must appear at call sites in the program text. If something is not visible, the table lists how GHC is to fill in the missing bit at call sites. If something is visible, we must specify how it is parsed, noting that the term- and type-level parsers are different.  For example, if `f :: forall a. Ord a => a -> Int`, then a call must look like `f "foo"`, omitting the type argument and the `Ord String` argument.
 </td></tr>
 <tr><th>Required</th>
 <td>
