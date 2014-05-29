@@ -55,8 +55,8 @@ Older tags/branches which were not fully converted into a submodule-configuratio
 
 
 
-Moreover, when cloning from the [
-GitHub GHC Mirror](http://github.com/ghc/ghc.git), the submodule url paths need to be rewritten, e.g. `../packages/deepseq.git` to `../packages-deepseq.git`, so you can't simply use `--recursive`.
+To clone from the [
+GitHub GHC Mirror](http://github.com/ghc/ghc.git) configure Git URL rewriting as described in the next section, as the submodule url paths need to be rewritten (e.g. `../packages/deepseq.git` to `../packages-deepseq.git`) and then proceed as if cloning from `git.haskell.org` as described above (the actual network operations will be redirected to GitHub due to URL rewriting)
 
 
 ### Using the GitHub GHC Mirror
