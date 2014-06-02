@@ -137,6 +137,7 @@ See also [TemplateHaskell](template-haskell)
 ## Cmm and code generation
 
 
+- [\#9159](https://gitlab.staging.haskell.org/ghc/ghc/issues/9159): jump tables for dense cases
 - [\#9157](https://gitlab.staging.haskell.org/ghc/ghc/issues/9157): common block elimination
 - [\#8905](https://gitlab.staging.haskell.org/ghc/ghc/issues/8905): spilling around an eval
 - [\#8903](https://gitlab.staging.haskell.org/ghc/ghc/issues/8903): dead stores
