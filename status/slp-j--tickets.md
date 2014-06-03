@@ -6,6 +6,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 
 - [\#9023](https://gitlab.staging.haskell.org/ghc/ghc/issues/9023): pattern synonyms: length mismatch in `Type.zip_ty_env`.
+- [\#9161](https://gitlab.staging.haskell.org/ghc/ghc/issues/9161): pattern synonyms and `DataKinds`
 - [\#8673](https://gitlab.staging.haskell.org/ghc/ghc/issues/8673): more generous GADT record selectors
 - [\#8550](https://gitlab.staging.haskell.org/ghc/ghc/issues/8550): Don't build recursive type-function dictionaries
 - [\#8281](https://gitlab.staging.haskell.org/ghc/ghc/issues/8281): `UnliftedFFITypes` etc
