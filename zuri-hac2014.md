@@ -1465,10 +1465,11 @@ max: 0, order: milestone)
 
 
 
-## TODO (by Joachim)
+## Summary
 
 
-- Make sure I have my validate machine up and running efficiently.
+- *n* people particitpated: nomeata, *please add yourself*
+- *n* Tickets worked on: [\#9177](https://gitlab.staging.haskell.org/ghc/ghc/issues/9177)
 
 
  
