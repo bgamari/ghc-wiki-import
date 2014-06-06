@@ -1693,7 +1693,7 @@ max: 0, order: milestone)
 
 
 - *n* people particitpated: nomeata, *please add yourself*
-- *n* Tickets worked on: [\#9177](https://gitlab.staging.haskell.org/ghc/ghc/issues/9177)
+- *n* Tickets worked on: [\#9177](https://gitlab.staging.haskell.org/ghc/ghc/issues/9177), [\#8959](https://gitlab.staging.haskell.org/ghc/ghc/issues/8959)
 
 
  
