@@ -67,44 +67,44 @@ This is a list of tickets that might be suitable for a hacking sprint, but feel 
 <th>
         
         Ticket (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17, max: 0,
-desc: 1, order: id)
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177,
+max: 0, desc: 1, order: id)
       </th>
 <th>
         
         Summary (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17, max: 0,
-order: summary)
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177,
+max: 0, order: summary)
       </th>
 <th>
         
         Owner (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17, max: 0,
-order: owner)
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177,
+max: 0, order: owner)
       </th>
 <th>
         
         Type (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17, max: 0,
-order: type)
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177,
+max: 0, order: type)
       </th>
 <th>
         
         Status (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17, max: 0,
-order: status)
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177,
+max: 0, order: status)
       </th>
 <th>
         
         Priority (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17, max: 0,
-order: priority)
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177,
+max: 0, order: priority)
       </th>
 <th>
         
         Milestone (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17, max: 0,
-order: milestone)
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177,
+max: 0, order: milestone)
       </th>
 <td>
     </td>
@@ -1226,6 +1226,118 @@ order: milestone)
                       
                       
                       
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#9177](https://gitlab.staging.haskell.org/ghc/ghc/issues/9177)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Suggest Int when user uses int](https://gitlab.staging.haskell.org/ghc/ghc/issues/9177)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      nomeata
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      feature request
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      closed
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      [7.10.1](/trac/ghc/milestone/7.10.1)
                       
                       
                       
