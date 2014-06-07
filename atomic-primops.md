@@ -47,7 +47,7 @@ A `CallishMachOp` already acts as a memory barrier; the Cmm optimizer will not f
 
 
 
-The `CallishMachOp` will be translated to the correct instructions in the backends (e.g. `lock; add` on x86).
+The `CallishMachOp` will be translated to the correct instructions in the backends (e.g. `lock; xadd` on x86).
 
 
 
