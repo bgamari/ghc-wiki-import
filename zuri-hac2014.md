@@ -68,43 +68,43 @@ This is a list of tickets that might be suitable for a hacking sprint, but feel 
 <th>
         
         Ticket (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613,
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393,
 max: 0, desc: 1, order: id)
       </th>
 <th>
         
         Summary (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613,
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393,
 max: 0, order: summary)
       </th>
 <th>
         
         Owner (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613,
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393,
 max: 0, order: owner)
       </th>
 <th>
         
         Type (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613,
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393,
 max: 0, order: type)
       </th>
 <th>
         
         Status (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613,
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393,
 max: 0, order: status)
       </th>
 <th>
         
         Priority (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613,
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393,
 max: 0, order: priority)
       </th>
 <th>
         
         Milestone (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613,
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393,
 max: 0, order: milestone)
       </th>
 <td>
@@ -300,6 +300,118 @@ max: 0, order: milestone)
                       
                       
                       closed
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      [⊥](/trac/ghc/milestone/%E2%8A%A5)
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#393](https://gitlab.staging.haskell.org/ghc/ghc/issues/393)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [functions without implementations](https://gitlab.staging.haskell.org/ghc/ghc/issues/393)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      Iceland\_jack
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      feature request
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      new
                     </th>
 <td>
                   
