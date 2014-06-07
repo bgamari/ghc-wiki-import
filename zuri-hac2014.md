@@ -68,43 +68,43 @@ This is a list of tickets that might be suitable for a hacking sprint, but feel 
 <th>
         
         Ticket (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393,
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393%2C1262%2C3314%2C9086,
 max: 0, desc: 1, order: id)
       </th>
 <th>
         
         Summary (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393,
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393%2C1262%2C3314%2C9086,
 max: 0, order: summary)
       </th>
 <th>
         
         Owner (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393,
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393%2C1262%2C3314%2C9086,
 max: 0, order: owner)
       </th>
 <th>
         
         Type (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393,
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393%2C1262%2C3314%2C9086,
 max: 0, order: type)
       </th>
 <th>
         
         Status (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393,
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393%2C1262%2C3314%2C9086,
 max: 0, order: status)
       </th>
 <th>
         
         Priority (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393,
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393%2C1262%2C3314%2C9086,
 max: 0, order: priority)
       </th>
 <th>
         
         Milestone (Ticket query:
-id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393,
+id: 9095%2C9122%2C9127%2C9132%2C9136%2C95%2C1388%2C8959%2C9156%2C17%2C9177%2C8429%2C9178%2C4836%2C9127%2C8613%2C393%2C1262%2C3314%2C9086,
 max: 0, order: milestone)
       </th>
 <td>
@@ -455,6 +455,118 @@ max: 0, order: milestone)
                 
                   
                     </td>
+<th>[\#1262](https://gitlab.staging.haskell.org/ghc/ghc/issues/1262)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [RecursiveDo in Template Haskell](https://gitlab.staging.haskell.org/ghc/ghc/issues/1262)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      mgsloan
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      feature request
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      closed
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      [⊥](/trac/ghc/milestone/%E2%8A%A5)
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
 <th>[\#1388](https://gitlab.staging.haskell.org/ghc/ghc/issues/1388)</th>
 <td>
                     
@@ -555,6 +667,118 @@ max: 0, order: milestone)
                       
                       
                       [⊥](/trac/ghc/milestone/%E2%8A%A5)
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#3314](https://gitlab.staging.haskell.org/ghc/ghc/issues/3314)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Add compilation date to +RTS --info](https://gitlab.staging.haskell.org/ghc/ghc/issues/3314)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      ak3n
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      feature request
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      closed
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      lowest
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
                       
                       
                       
@@ -1003,6 +1227,118 @@ max: 0, order: milestone)
                       
                       
                       [8.0.1](/trac/ghc/milestone/8.0.1)
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#9086](https://gitlab.staging.haskell.org/ghc/ghc/issues/9086)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [main :: IO Int does different things with runghc and when compiled](https://gitlab.staging.haskell.org/ghc/ghc/issues/9086)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      gintas
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      closed
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      highest
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      [7.10.1](/trac/ghc/milestone/7.10.1)
                       
                       
                       
