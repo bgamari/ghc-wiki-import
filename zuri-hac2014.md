@@ -2252,10 +2252,5 @@ max: 0, order: milestone)
 ## Summary
 
 
-- *n* people particitpated: nomeata, *please add yourself*
-- *n* Tickets worked on: [\#9177](https://gitlab.staging.haskell.org/ghc/ghc/issues/9177), [\#8959](https://gitlab.staging.haskell.org/ghc/ghc/issues/8959), [\#9127](https://gitlab.staging.haskell.org/ghc/ghc/issues/9127), [\#9178](https://gitlab.staging.haskell.org/ghc/ghc/issues/9178)
-
-
- 
-
-
+- *4* people particitpated: nomeata, gintas, skeuchel, Lorenzo *please add yourself*
+- *9* Tickets worked on: [\#9177](https://gitlab.staging.haskell.org/ghc/ghc/issues/9177), [\#8959](https://gitlab.staging.haskell.org/ghc/ghc/issues/8959), [\#9127](https://gitlab.staging.haskell.org/ghc/ghc/issues/9127), [\#9178](https://gitlab.staging.haskell.org/ghc/ghc/issues/9178), [\#9132](https://gitlab.staging.haskell.org/ghc/ghc/issues/9132), [\#393](https://gitlab.staging.haskell.org/ghc/ghc/issues/393), [\#95](https://gitlab.staging.haskell.org/ghc/ghc/issues/95), [\#9181](https://gitlab.staging.haskell.org/ghc/ghc/issues/9181), [\#9181](https://gitlab.staging.haskell.org/ghc/ghc/issues/9181)
