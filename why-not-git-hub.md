@@ -2,6 +2,9 @@
 
 
 
+
+
+
 A common suggestion that is brought up from time is to host GHC development at [
 GitHub](https://github.com/) instead of maintaining our own infrastructure for Git repository hosting, code-review, developer documentation/wiki, and issue tracking. This page serves as reminder for what's holding back a migration to GitHub currently.
 
@@ -47,3 +50,11 @@ However, there are also quite a few reasons/benefits for keeping our own Trac-ce
 - Trac's wiki syntax (which is available in ticket comments as well) is extensible and allows for dynamic content generation via [WikiMacros](wiki-macros), such as dynamically generated tables of tickets.
 
 - TODO write more
+
+## Related mailing-list discussion threads
+
+
+- [
+  "Any interest in moving GHC issues / wiki to github?" (Jul 2013 @ ghc-devs)](http://thread.gmane.org/gmane.comp.lang.haskell.ghc.devel/1444)
+- [
+  "Phabricator for patches and code review" (Jun 2014 @ ghc-devs)](http://thread.gmane.org/gmane.comp.lang.haskell.ghc.devel/4829/focus=4861)
