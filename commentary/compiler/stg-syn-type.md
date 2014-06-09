@@ -1,6 +1,6 @@
 
 Video: [
-STG language](http://video.google.com/videoplay?docid=-2701204964659708761) (17'21")
+STG language](http://www.youtube.com/watch?v=v0J1iZ7F7W8&list=PLBkRCigjPwyeCSD_DFxpd246YIF7_RDDI) (17'21")
 
 
 # The STG syntax data types
