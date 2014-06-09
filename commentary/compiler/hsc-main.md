@@ -8,7 +8,7 @@ There is a picture that goes with this description, which appears at the bottom 
 
 
 You can also watch a **video** of Simon Peyton-Jones explaining the compilation pipeline here: [
-Compiler Pipeline II](http://video.google.com/videoplay?docid=5254545394467397086) (10'16")
+Compiler Pipeline II](http://www.youtube.com/watch?v=Upm_kYMgI_c&list=PLBkRCigjPwyeCSD_DFxpd246YIF7_RDDI) (10'16")
 
 
 
