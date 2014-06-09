@@ -44,13 +44,6 @@ Here are our release plans for
 - [GHC 7.8.3](status/gh-c-7.8.3)
 - [GHC 7.8.4](status/gh-c-7.8.4)
 
-## Planning notes
-
-
-
-Here is our [current planning document](ghc-planning), intended mainly to help Simon, Simon, and Ian coordinate with each other.
-
-
 ## SPJ Tickets
 
 
