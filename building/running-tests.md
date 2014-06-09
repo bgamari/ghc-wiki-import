@@ -10,14 +10,6 @@ The testsuite relies primarily on **GNU Make** and **Python**. Any version \>= 2
 
 
 
-If you have not checked out the testsuite, first run:
-
-
-```wiki
-$ ./sync-all --testsuite get
-```
-
-
 If you just want to run the whole testsuite, then in the root of the GHC tree, typing:
 
 
