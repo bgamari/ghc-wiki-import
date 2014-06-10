@@ -68,7 +68,7 @@ On Windows, we spawn a new thread that repeatedly sleeps for the timer interval 
 
 
 
-The interrupt signal is `SIGINT` on POSIX systems or `CTRL_C_EVENT/CTRL_BREAK_EVENT`on Windows, and is normally sent to the process when the user hits Control-C.   By default, interrupts are handled by the runtime.  They can be caught and handled by Haskell code instead, using `System.Posix.Signals` on POSIX systems or `GHC.ConsoleHandler` on Windows systems.  For example, [GHCi](commentary/gh-ci) hooks the interrupt signal so that it can abort the current interpreted computation and return to the prompt, rather than terminating the whole GHCi process.
+The interrupt signal is `SIGINT` on POSIX systems or `CTRL_C_EVENT/CTRL_BREAK_EVENT`on Windows, and is normally sent to the process when the user hits Control-C.   By default, interrupts are handled by the runtime.  They can be caught and handled by Haskell code instead, using `System.Posix.Signals` on POSIX systems or `GHC.ConsoleHandler` on Windows systems.  For example, [GHCi](commentary/compiler/backends/gh-ci) hooks the interrupt signal so that it can abort the current interpreted computation and return to the prompt, rather than terminating the whole GHCi process.
 
 
 
