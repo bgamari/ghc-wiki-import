@@ -83,7 +83,7 @@ All other PrimOps are classified as out-of-line, and are implemented by hand-wri
 
 
 - PrimOps cannot be partially applied.  Calls to all PrimOps are made at the correct arity; this is ensured by 
-  the CorePrep? pass.
+  the [CorePrep](commentary/compiler/hsc-main) pass.
 
 - Out-of-line PrimOps have a special, fixed, [calling convention](commentary/rts/haskell-execution#calling-convention):
   all arguments
