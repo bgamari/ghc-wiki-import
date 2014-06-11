@@ -126,7 +126,7 @@ Code that executes when a Haskell thread begins and ends.
 <table><tr><th>[
 StgStdThunks.cmm](http://darcs.haskell.org/ghc/rts/StgStdThunks.cmm)</th>
 <td>
-Some built-in thunks: Commentary/Rts/SelectorThunks? and "apply" thunks.
+Some built-in thunks: [selector thunks](commentary/rts/storage/heap-objects#selector-thunks) and "apply" thunks.
 </td></tr></table>
 
 
