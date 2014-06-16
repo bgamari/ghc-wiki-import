@@ -266,6 +266,10 @@ The difference from (PARTIAL) is that before type-checking `b` we generalise `t`
 - There are obviously examples that are accepted by (PARGEN) but not (BASELINE).
 
 
+So moving from (BASELINE) to (PARGEN) would be a breaking change, but only in rather obscure circumstances.  I am intensely relaxed about that particular backward-compatibility problem!
+
+
+
 **Richard:** I can't figure out how (PARGEN) would look different from (BASELINE) in this presentation. **End Richard**
 **Simon**: does the above answer you?
 
@@ -274,7 +278,8 @@ The difference from (PARTIAL) is that before type-checking `b` we generalise `t`
 
 
 
-Combine (BASELINE), for the CUSK stuff, with (PARGEN) for type with partial kind signatures.
+Combine (BASELINE), for the CUSK stuff, with (PARGEN) for type with partial kind signatures.  This would type the
+most programs, but is the most complicated.
 
 
 ## Type signatures
