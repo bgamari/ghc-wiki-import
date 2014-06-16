@@ -124,7 +124,7 @@ This is a tricky point.
 
 
 
-**Richard:** I don't understand this last point. Are you saying that the described algorithm *does not* do this unification and thus would reject `Foo`? Or, are you saying that the proposed strategy *should not* do this unification, as a point of design that might be friendlier to users?
+**Richard:** I don't understand this last point. Are you saying that the described algorithm *does not* do this unification and thus would reject `Foo`? Or, are you saying that the proposed strategy *should not* do this unification, as a point of design that might be friendlier to users? **End Richard**
 
 
 ## Generalised partial kind signature strategy (PARGEN)
@@ -135,6 +135,10 @@ The (PARGEN) strategy is exactly like (PARTIAL) except that step 4 is different:
 
 
 1. Generalise over any unconstrained meta kind variable (that is not free in the environment), rather than defaulting to `*`.
+
+
+**Richard:** What meta variables can be free in the environment at this point? We're operating at the top level. **End Richard**
+
 
 
 So we use the partial kind signatures to express any polymorphism necessary for recursion *inside* the SCC,
@@ -160,6 +164,10 @@ Combine (BASELINE), for the CUSK stuff, with (PARGEN) for type with partial kind
 
 
 ## Type signatures
+
+
+
+**Richard:** I'm not sure what the upshot of this section is. In type signatures, it feels like we're using an algorithm other than (BASELINE), because polymorphic recursion on kinds works just fine without *any* mention of kind variables. I suppose this is because the body of a function is considered outside of its type signature's SCC and is not considered when doing kind inference. Given that recursion *in a type signature* is not possible (we can't mention terms in types), I can't quite figure out what differentiates the strategies in type signatures. **End Richard**
 
 
 
