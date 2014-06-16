@@ -185,13 +185,13 @@ And f's RHS had better *be* that polymorphic.
 
 
 
-Under (RICHARD) it would be consistent to say this:
+Under (PARTIAL) it would be consistent to say this:
 
 
 ```wiki
 This user-written signature 
   f :: m a -> m a 
-means this (RICHARD)
+means this (PARTIAL)
   f :: forall (a:*) (m:k->*). m a -> m a
 ```
 
@@ -202,7 +202,7 @@ If you want the kind-polymorphic one, you'd have to write thus
 ```wiki
 This user-written signature 
   f :: forall k (a:k) (m:k->*). m a -> m a
-means this (RICHARD)
+means this (PARTIAL)
   f :: forall k (a:k) (m:k->*). m a -> m a
 ```
 
@@ -210,7 +210,7 @@ means this (RICHARD)
 
 
 
-I think that (PARITAL) has a nice declarative typing rule.
+I think that (PARTIAL) has a nice declarative typing rule.
 
 
 
@@ -244,7 +244,7 @@ where 'gen' is generalising.
 
 
 
-The (PARITAL) rule might look like this:
+The (PARTIAL) rule might look like this:
 
 
 ```wiki
@@ -273,7 +273,7 @@ the 'vs', or 'a' in this example), and off you go.
 
 
 
-I think we could reasonably switch to (PARITAL) throughout.
+I think we could reasonably switch to (PARTIAL) throughout.
 
 
 
@@ -334,7 +334,7 @@ which today, using (BASELINE), we infer to have kind
 
 
 But I'd be perfectly happy if PT got a *monomorphic* inferred kind,
-which is what (PARITAL) would do:
+which is what (PARTIAL) would do:
 
 
 ```wiki
@@ -353,7 +353,7 @@ If you want the poly-kinded PT, use a signature:
 ```
 
 
-One oddity is that we'd do (BASELINE) for terms and (PARITAL) for types.  But perhaps that's ok.  They are different.
+One oddity is that we'd do (BASELINE) for terms and (PARTIAL) for types.  But perhaps that's ok.  They are different.
 
 
 - Terms ought to be as polymorphic as possible but arguably not types. Examples above.  Also, since kind polymorphism is still in its infancy, maybe it's no bad thing if all kind polymorphism is explicitly signalled every time a kind-polymorphic binder is introduced.
@@ -361,7 +361,7 @@ One oddity is that we'd do (BASELINE) for terms and (PARITAL) for types.  But pe
 - Terms have well-established separate type signatures, but we don't have a syntax for separate kind signatures of types and classes.
 
 
-If we moved from (BASELINE) to (PARITAL), some programs that work now would fail:
+If we moved from (BASELINE) to (PARTIAL), some programs that work now would fail:
 
 
 - the original S/T example above
