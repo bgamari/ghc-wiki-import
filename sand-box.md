@@ -10,6 +10,7 @@ Go ahead, edit it freely.
 
 
 
-WorkFlow()?
+Enable JavaScript to display the workflow graph.
+
 
 
