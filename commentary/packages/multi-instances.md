@@ -16,8 +16,8 @@ See also
 
 - [Commentary pages about packages](commentary/packages)
 - Philipp Schuster's GSoC project [
-  proposal](http://www.google-melange.com/gsoc/proposal/review/google/gsoc2012/phischu/1), [
-  GSoC project page](http://www.google-melange.com/gsoc/project/google/gsoc2012/phischu/19001),  [Trac wiki page](commentary/g-so-c-multiple-instances), [
+  proposal (DEAD)](http://www.google-melange.com/gsoc/proposal/review/google/gsoc2012/phischu/1), [
+  GSoC project page (DEAD)](http://www.google-melange.com/gsoc/project/google/gsoc2012/phischu/19001),  [Trac wiki page](commentary/g-so-c-multiple-instances), [
   git repo](https://github.com/phischu/cabal), and [
   video](https://www.youtube.com/watch?v=h4QmkyN28Qs).
 - [
