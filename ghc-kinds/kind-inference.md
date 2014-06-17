@@ -205,10 +205,6 @@ because here `kappa1` must be unified with `k->*`, which isn't allowed by (T-PAR
 Maybe that is acceptable; you can always decorate both of `Foo`'s arguments.
 
 
-
-**Richard:** I don't understand this last point. Are you saying that the described algorithm *does not* do this unification and thus would reject `Foo`? Or, are you saying that the proposed strategy *should not* do this unification, as a point of design that might be friendlier to users? **End Richard**  **Simon**: clearer now?
-
-
 ## Generalised partial kind signature strategy (PARGEN)
 
 
@@ -269,11 +265,6 @@ The difference from (PARTIAL) is that before type-checking `b` we generalise `t`
 So moving from (BASELINE) to (PARGEN) would be a breaking change, but only in rather obscure circumstances.  I am intensely relaxed about that particular backward-compatibility problem!
 
 
-
-**Richard:** I can't figure out how (PARGEN) would look different from (BASELINE) in this presentation. **End Richard**
-**Simon**: does the above answer you?
-
-
 ## All of the above (ALL)
 
 
@@ -283,11 +274,6 @@ most programs, but is the most complicated.
 
 
 ## Type signatures
-
-
-
-**Richard:** I'm not sure what the upshot of this section is. In type signatures, it feels like we're using an algorithm other than (BASELINE), because polymorphic recursion on kinds works just fine without *any* mention of kind variables. I suppose this is because the body of a function is considered outside of its type signature's SCC and is not considered when doing kind inference. Given that recursion *in a type signature* is not possible (we can't mention terms in types), I can't quite figure out what differentiates the strategies in type signatures. **End Richard**   **Simon**: true; but if we used (PARTIAL), which does no kind-generalisation, it would be consistent not to kind-generalise in type signatures either. I've tried to clarify  *End Simon**
-***
 
 
 
@@ -451,7 +437,7 @@ I can't figure out a way that (BASELINE) and (PARGEN) are different in type sign
 
 
 
-(Because open type families do not have a body, they *would* still need their own kind inference story, where unconstrained meta-variables default to `*`.)
+(Because open type families do not have a body, they *would* still be considered to have a CUSK, where un-annotated type variables default to have kind `*`.)
 
 
 
