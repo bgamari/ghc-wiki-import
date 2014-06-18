@@ -5,6 +5,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Front end
 
 
+- [\#9198](https://gitlab.staging.haskell.org/ghc/ghc/issues/9198): slow typechecker (big types!)
 - [\#9210](https://gitlab.staging.haskell.org/ghc/ghc/issues/9210): functional dependencies and overlapping instances
 - [\#9156](https://gitlab.staging.haskell.org/ghc/ghc/issues/9156): duplicate record fields
 - [\#9161](https://gitlab.staging.haskell.org/ghc/ghc/issues/9161): pattern synonyms and `DataKinds`
@@ -13,7 +14,6 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#8281](https://gitlab.staging.haskell.org/ghc/ghc/issues/8281): `UnliftedFFITypes` etc
 - [\#8441](https://gitlab.staging.haskell.org/ghc/ghc/issues/8441): family instances in hs-boot files
 - [\#8427](https://gitlab.staging.haskell.org/ghc/ghc/issues/8427): stop EPS cache poisoning
-- [\#7730](https://gitlab.staging.haskell.org/ghc/ghc/issues/7730): display `TyCons` in tidied form in `pprTyThing`
 - [\#5610](https://gitlab.staging.haskell.org/ghc/ghc/issues/5610), [\#7243](https://gitlab.staging.haskell.org/ghc/ghc/issues/7243): Better error messages for `foreign` declarations
 - [\#8240](https://gitlab.staging.haskell.org/ghc/ghc/issues/8240): better error messages for type-function equalities
 - [\#8095](https://gitlab.staging.haskell.org/ghc/ghc/issues/8095): very slow constraint solving
