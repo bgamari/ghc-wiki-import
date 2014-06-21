@@ -63,8 +63,3 @@ The following pages guide you step-by-step through making a contribution:
 
 - If you have lots of Haskell installations, you may find Edsko's blog post [
   Comprehensive Haskell Sandboxes](http://www.edsko.net/2013/02/10/comprehensive-haskell-sandboxes/) useful.
-
-## Old stuff
-
-
-- **Using Darcs**: Our conventions and some useful tips for using darcs are here: [Using Darcs](working-conventions/darcs).
