@@ -5,6 +5,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Front end
 
 
+- [\#9223](https://gitlab.staging.haskell.org/ghc/ghc/issues/9223): error message mentioning untouchables
 - [\#9198](https://gitlab.staging.haskell.org/ghc/ghc/issues/9198): slow typechecker (big types!)
 - [\#9210](https://gitlab.staging.haskell.org/ghc/ghc/issues/9210): functional dependencies and overlapping instances
 - [\#9156](https://gitlab.staging.haskell.org/ghc/ghc/issues/9156): duplicate record fields
