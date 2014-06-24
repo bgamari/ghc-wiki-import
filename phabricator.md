@@ -303,7 +303,7 @@ On any page, hit the `?` key on your keyboard to bring up all the **keyboard sho
 
 
 
-Be sure to read about Phabricators markup language, [
+Be sure to read about Phabricator's markup language, [
 Remarkup](https://secure.phabricator.com/book/phabricator/article/remarkup/). Most importantly, make sure you know how to use those image macros.
 
 
@@ -323,7 +323,7 @@ Arcanist has a few useful commands - in particular, you'll probably like `arc pa
 
 
 
-`arc paste` will allow you to instantly upload things to Phabs [
+`arc paste` will allow you to instantly upload things to Phab's [
 PasteBin application](https://phabricator.haskell.org/paste/). 
 
 
@@ -341,7 +341,7 @@ $ arc list
 
 
 
-First off, note that **you can reply to an email from Phabricator** to comment on a review, inbound mail handling works fine. In the email you have handler actions, which you can use to control what action to post to a review - for example, replying to an email with `!reject` and some content will comment on the review, and reject it and ask for revisions.
+First off, note that **you can reply to an email from Phabricator** to comment on a review; inbound mail handling works fine. In the email you have handler actions, which you can use to control what action to post to a review - for example, replying to an email with `!reject` and some content will comment on the review, and reject it and ask for revisions.
 
 
 
