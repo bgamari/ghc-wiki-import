@@ -92,3 +92,11 @@ other packages that are useful for development:
 (includes `perf`, see [Debugging/LowLevelProfiling/Perf](debugging/low-level-profiling/perf))
 
 
+## Arch
+
+
+
+The list of dependencies is the same as for [
+ghc-git](https://aur.archlinux.org/packages/ghc-git/) package on AUR.
+
+
