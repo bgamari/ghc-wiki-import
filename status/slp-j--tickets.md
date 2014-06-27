@@ -5,6 +5,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Front end
 
 
+- [\#9242](https://gitlab.staging.haskell.org/ghc/ghc/issues/9242): per-instance pragmas for overlapping/incoherent
 - [\#9200](https://gitlab.staging.haskell.org/ghc/ghc/issues/9200): kind inference for mutually recursive types
 - [\#8968](https://gitlab.staging.haskell.org/ghc/ghc/issues/8968), [\#9226](https://gitlab.staging.haskell.org/ghc/ghc/issues/9226): pattern synonyms and GADTs
 - [\#9161](https://gitlab.staging.haskell.org/ghc/ghc/issues/9161): pattern synonyms and `DataKinds`
