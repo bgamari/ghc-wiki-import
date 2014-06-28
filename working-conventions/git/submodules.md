@@ -39,15 +39,15 @@ http://git.haskell.org/ghc.git](http://git.haskell.org/ghc.git))
 
 
 
-Cloning a specific branch, e.g. `ghc-7.8`; or a specific tag, e.g. `ghc-7.8.1-release`:
+Cloning a specific branch, e.g. `ghc-7.10`; or a specific tag, e.g. `ghc-7.10.1-release`:
 
 
 ```
-git clone -b ghc-7.8 --recursive git://git.haskell.org/ghc.git ghc-7.8.x
+git clone -b ghc-7.10 --recursive git://git.haskell.org/ghc.git ghc-7.10.x
 ```
 
 ```
-git clone -b ghc-7.8.1-release --recursive git://git.haskell.org/ghc.git ghc-7.8.1
+git clone -b ghc-7.10.1-release --recursive git://git.haskell.org/ghc.git ghc-7.10.1
 ```
 
 
