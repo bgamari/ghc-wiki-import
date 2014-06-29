@@ -114,7 +114,7 @@ ViewPatterns](https://ghc.haskell.org/trac/ghc/wiki/ViewPatterns#Semantics).
 ## Motivating examples
 
 
-### Types
+### Sets
 
 
 
