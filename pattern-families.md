@@ -18,7 +18,7 @@ here `xs` is a normal variable as in [PatternSynonyms](pattern-synonyms) but `n`
 
 
 
-`Take 0`, `Take 1`, `Take 2` in the previous example can be thought of as the following pattern definitions:
+`Take 0`, `Take 1`, `Take 2` would be equivalent to the following pattern definitions:
 
 
 ```wiki
@@ -131,15 +131,6 @@ Example from [ViewPatterns](view-patterns):
 
    size (view -> Unit) = 1
    size (view -> Arrow t1 t2) = size t1 + size t2
-```
-
-
-If we want to match all types of size *n* we can write:
-
-
-```wiki
-    
-    pattern HasSize n ty <- (hasSize n -> Just ty)
 ```
 
 ### Type checking
