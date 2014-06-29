@@ -169,6 +169,10 @@ Compare that to the the [ViewPatternsAlternative](view-patterns-alternative) pro
 ```
 
 
+Where the user has to worry about matching on `Just`s. 
+
+
+
 Using operators `:∈ = Has` and `:∈ = HasNot` one could write:
 
 
