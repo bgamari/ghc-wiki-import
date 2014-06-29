@@ -6,7 +6,7 @@ This is a proposal for allowing **families of patterns** indexed by expressions.
 
 
 
-The syntax from [PatternSynonyms](pattern-synonyms) could be reused for simplicity:
+The syntax from [PatternSynonyms](pattern-synonyms) can be reused for simplicity:
 
 
 ```wiki
