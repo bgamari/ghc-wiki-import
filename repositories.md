@@ -155,7 +155,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>hsc2hs.git</th></tr>
 <tr><th>utils/haddock</th>
 <td>                     </td>
-<th>     </th>
+<th> yes </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -173,7 +173,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>nofib.git</th></tr>
 <tr><th>libraries/array</th>
 <td>                   </td>
-<th>     </th>
+<th> yes </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -218,7 +218,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/containers.git</th></tr>
 <tr><th>libraries/deepseq</th>
 <td>      	       </td>
-<th>     </th>
+<th> yes </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -227,7 +227,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/deepseq.git</th></tr>
 <tr><th>libraries/directory</th>
 <td>               </td>
-<th>     </th>
+<th> yes </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -245,7 +245,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/extensible-exceptions.git</th></tr>
 <tr><th>libraries/filepath</th>
 <td>                </td>
-<th>     </th>
+<th> yes </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -263,7 +263,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/haskeline.git</th></tr>
 <tr><th>libraries/haskell98</th>
 <td>               </td>
-<th>     </th>
+<th> yes </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -272,7 +272,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/haskell98.git</th></tr>
 <tr><th>libraries/haskell2010</th>
 <td>             </td>
-<th>     </th>
+<th> yes </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -281,7 +281,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/haskell2010.git</th></tr>
 <tr><th>libraries/hoopl</th>
 <td>                   </td>
-<th>     </th>
+<th> yes </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -290,7 +290,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/hoopl.git</th></tr>
 <tr><th>libraries/hpc</th>
 <td>                     </td>
-<th>     </th>
+<th> yes </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -299,7 +299,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/hpc.git</th></tr>
 <tr><th>libraries/old-locale</th>
 <td>              </td>
-<th>     </th>
+<th> yes </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -308,7 +308,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/old-locale.git</th></tr>
 <tr><th>libraries/old-time</th>
 <td>                </td>
-<th>     </th>
+<th> yes </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -326,7 +326,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/pretty.git</th></tr>
 <tr><th>libraries/process</th>
 <td>                 </td>
-<th>     </th>
+<th> yes </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -362,7 +362,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/transformers.git</th></tr>
 <tr><th>libraries/unix</th>
 <td>         	       </td>
-<th>     </th>
+<th> yes </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -400,54 +400,54 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <td>                  </td>
 <th> yes </th>
 <td> </td>
-<th>     </th>
+<th> no  </th>
 <td> </td>
-<th>extra</th>
+<th> no  </th>
 <td> </td>
 <th>packages/random.git</th></tr>
 <tr><th>libraries/primitive</th>
 <td>       	       </td>
 <th> yes </th>
 <td> </td>
-<th>     </th>
+<th> no  </th>
 <td> </td>
-<th>extra</th>
+<th> no  </th>
 <td> </td>
 <th>packages/primitive.git</th></tr>
 <tr><th>libraries/vector</th>
 <td>       	       </td>
 <th> yes </th>
 <td> </td>
-<th>     </th>
+<th> no  </th>
 <td> </td>
-<th>extra</th>
+<th> no  </th>
 <td> </td>
 <th>packages/vector.git</th></tr>
 <tr><th>libraries/dph</th>
 <td>          	       </td>
 <th>     </th>
 <td> </td>
-<th>     </th>
+<th> no  </th>
 <td> </td>
-<th>extra</th>
+<th> no  </th>
 <td> </td>
 <th>packages/dph.git</th></tr>
 <tr><th>libraries/parallel</th>
 <td>     	       </td>
-<th>     </th>
+<th> yes </th>
 <td> </td>
 <th> no  </th>
 <td> </td>
-<th>extra</th>
+<th> no  </th>
 <td> </td>
 <th>packages/parallel.git</th></tr>
 <tr><th>libraries/stm</th>
 <td>          	       </td>
-<th>     </th>
+<th> yes </th>
 <td> </td>
 <th> no  </th>
 <td> </td>
-<th>extra</th>
+<th> no  </th>
 <td> </td>
 <th>packages/stm.git</th></tr></table>
 
