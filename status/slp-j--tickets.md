@@ -80,6 +80,7 @@ See also [TemplateHaskell](template-haskell)
 ## Optimisation
 
 
+- [\#9246](https://gitlab.staging.haskell.org/ghc/ghc/issues/9246): Too much case-of-case leads to bad code
 - [\#8613](https://gitlab.staging.haskell.org/ghc/ghc/issues/8613), [\#9070](https://gitlab.staging.haskell.org/ghc/ghc/issues/9070), [\#8319](https://gitlab.staging.haskell.org/ghc/ghc/issues/8319): simplifier ticks exhausted (there are others)
 - [\#9136](https://gitlab.staging.haskell.org/ghc/ghc/issues/9136): better constant folding
 - [\#9041](https://gitlab.staging.haskell.org/ghc/ghc/issues/9041): bad code from native code generator (NCG)
