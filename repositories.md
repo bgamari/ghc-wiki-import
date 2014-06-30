@@ -235,15 +235,6 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>     </th>
 <td> </td>
 <th>packages/directory.git</th></tr>
-<tr><th>libraries/extensible-exceptions</th>
-<td>   </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>     </th>
-<td> </td>
-<th>packages/extensible-exceptions.git</th></tr>
 <tr><th>libraries/filepath</th>
 <td>                </td>
 <th> yes </th>
