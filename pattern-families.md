@@ -102,7 +102,7 @@ but this would need to be defined for each `Int`. In this sense pattern families
 ```
 
 
-we can use `Take` with arguments (`Take 0`, `Take 1`, `Take 2`, …) to have the same meaning as the following pattern synonyms:
+we can use `Take` with arguments (`Take 0`, `Take 1`, `Take 2`, …) to have the same meaning as the following (hypothetical!) pattern synonyms:
 
 
 ```wiki
@@ -111,6 +111,10 @@ we can use `Take` with arguments (`Take 0`, `Take 1`, `Take 2`, …) to have the
     pattern Take2 xs <- (take 2 -> xs)
     …
 ```
+
+
+These patterns would not exist at all since pattern families desugar easily to view patterns — they're presented only to give an intuition of the `Take` family.
+
 
 ### Grammar
 
