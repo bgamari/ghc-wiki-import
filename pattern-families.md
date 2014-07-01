@@ -16,7 +16,7 @@ Rust's pattern matching](http://doc.rust-lang.org/master/tutorial.html#pattern-m
 
 
 ```wiki
-     between (from, to) n = from <= n && n <= to
+    between (from, to) n = from <= n && n <= to
 
     pattern Between from to <- (between (from, to) -> True)
 
