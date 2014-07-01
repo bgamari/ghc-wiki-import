@@ -16,17 +16,17 @@ Rust's pattern matching](http://doc.rust-lang.org/master/tutorial.html#pattern-m
 
 
 ```wiki
-between (from, to) n = from <= n && n <= to
+     between (from, to) n = from <= n && n <= to
 
-pattern Between from to <- (between (from, to) -> True)
+    pattern Between from to <- (between (from, to) -> True)
 
--- A teenager is between thirteen and nineteen, would be:
---     13..19 => true,
---     _      => false
--- in Rust.
-isTeen :: Age -> Bool
-isTeen (Between 13 19) = True
-isTeen _               = False
+    -- A teenager is between thirteen and nineteen, would be:
+    --     13..19 => true,
+    --     _      => false
+    -- in Rust.
+    isTeen :: Age -> Bool
+    isTeen (Between 13 19) = True
+    isTeen _               = False
 ```
 
 
@@ -34,9 +34,9 @@ that gets transformed into:
 
 
 ```wiki
-isTeen :: Age -> Bool
-isTeen (between (13, 19) -> True) = True
-isTeen _                          = False
+    isTeen :: Age -> Bool
+    isTeen (between (13, 19) -> True) = True
+    isTeen _                          = False
 ```
 
 
@@ -44,11 +44,11 @@ isTeen _                          = False
 
 
 ```wiki
-generalCategory' :: Char -> GeneralCategory 
-generalCategory' (Between '\x00' '\x16') = Control
-generalCategory' (Between 'a'    'z'   ) = LowercaseLetter
-generalCategory' (Between 'A'    'Z'   ) = UppercaseLetter
-generalCategory' (Between '0'    '9'   ) = DecimalNumber
+    generalCategory' :: Char -> GeneralCategory 
+    generalCategory' (Between '\x00' '\x16') = Control
+    generalCategory' (Between 'a'    'z'   ) = LowercaseLetter
+    generalCategory' (Between 'A'    'Z'   ) = UppercaseLetter
+    generalCategory' (Between '0'    '9'   ) = DecimalNumber
 ```
 
 ## Syntax
