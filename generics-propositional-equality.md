@@ -6,7 +6,7 @@ This page sketches the ideas how to equip `GHC.Generics` with type-level reasoni
 
 
 
-the gdiff library requires a family GADT for describing the constructors of datatypes that one wants to `diff` and `patch`. This family has to cover (identify) all appearing data type constructors in \_value tree\_ transitively. Given two such constructor identifiers gdiff uses propositional equality (called `decEq` in the library) to get hold of the constructor's data in a type-safe manner.
+the gdiff library requires a family GADT for describing the constructors of datatypes that one wants to `diff` and `patch`. This family has to cover (identify) all appearing data type constructors in *value tree* transitively. Given two such constructor identifiers gdiff uses propositional equality (called `decEq` in the library) to get hold of the constructor's data in a type-safe manner.
 
 
 
@@ -76,7 +76,7 @@ Rep Bool () :: *
 ```
 
 
-Given this metainformation reflected at the type level propositional equality
-can be implemented by `KnownSymbol` and `sameSymbol` from `GHC.TypeLits`.
+Given this metainformation reflected at the type level, propositional equality
+can be implemented by resorting to `KnownSymbol` and `sameSymbol` from `GHC.TypeLits`.
 
 
