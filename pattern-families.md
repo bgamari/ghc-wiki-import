@@ -16,9 +16,9 @@ Rust's pattern matching](http://doc.rust-lang.org/master/tutorial.html#pattern-m
 
 
 ```wiki
-    between (from, to) n = from <= n && n <= to
+    import Data.Ix
 
-    pattern Between from to <- (between (from, to) -> True)
+    pattern Between from to <- (inRange (from, to) -> True)
 
     -- A teenager is between thirteen and nineteen, would be:
     --     13..19 => true,
@@ -35,12 +35,12 @@ that gets transformed into:
 
 ```wiki
     isTeen :: Age -> Bool
-    isTeen (between (13, 19) -> True) = True
+    isTeen (inRange (13, 19) -> True) = True
     isTeen _                          = False
 ```
 
 
-`Between` will work on any orderable type:
+`Between` will work on any indexable type (`Ix a => a`):
 
 
 ```wiki
