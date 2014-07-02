@@ -121,7 +121,7 @@ Unsurprisingly the answer is "yes". `GHC.Generics` could provide a function
 
 
 ```wiki
-sameDatatype :: (Datatype l, Datatype r) => Proxy l -> Proxy l -> Maybe (l :~: r)
+sameDatatype :: (Datatype l, Datatype r) => Proxy l -> Proxy r -> Maybe (l :~: r)
 ```
 
 
