@@ -11,15 +11,15 @@ gdiff library](https://hackage.haskell.org/package/gdiff) requires a family GADT
 
 
 
-GHC.Generics provides a `Rep t p` (representation of the data structure at the type level) for every data type when the user demands `deriving Generic`. Metadata is attached to parts of this representation which can be queried for names, modules, fixity, etc. at runtime.
+[GHC.Generics](http://www.haskell.org/ghc/docs/latest/html/libraries/base-4.7.0.0/GHC-Generics.html) provides a `Rep t p` (representation of the data structure at the type level) for every data type when the user demands `deriving Generic`. Metadata is attached to parts of this representation which can be queried for names, modules, fixity, etc. at runtime.
 
 
 
-Marriage of GHC.Generics with `gdiff` appears straightforward weren't there one detail: the metadata is not available at the type level, so `gdiff`'s requirement for propositional equality cannot be satisfied.
+Marriage of `GHC.Generics` with `gdiff` appears straightforward weren't there one detail: the metadata is not available at the type level, so `gdiff`'s requirement for propositional equality cannot be satisfied.
 
 
 
-To support this propositional equality in GHC.Generics we have to equip the {datatype, constructor and selector} metatypes with type-level information so that we can use Data.TypeEquality-provided functions (e.g. sameNat, sameSymbol) on them.
+To support this propositional equality in `GHC.Generics`, we have to equip the {datatype, constructor and selector} metatypes with type-level information so that we can use `Data.Type.Equality`-provided functions (e.g. sameNat, sameSymbol) on them.
 
 
 # Metadata in `GHC.Generics`
