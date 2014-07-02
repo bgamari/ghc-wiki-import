@@ -102,7 +102,7 @@ Given the fact that for `d = (Dat "GHC.Generics" "Bool")` both pieces of informa
 
 
 
-After observing that `Datatype` is essentially just `KnownSymbol x KnownSymbol` we can ask the question:
+After observing that `Datatype` is essentially just `KnownSymbol × KnownSymbol` we can ask the question:
 
 
 >
@@ -124,7 +124,27 @@ and implement it in the same unsafe fashion as `GHC.TypeLits` does.
 
 
 
+This should be sufficient to satisfy `gdiff`'s requirements on propositional equality.
+
+
+
 The only con that I see with this approach is that `module GHC.Generics` gets additional
 dependencies on `import Data.Proxy`, `import Unsafe.Coerce` and `import Data.Type.Equality`.
+
+
+
+For `Constructor` and `Selector` we would need to add further base class constraints:
+
+
+```
+class Datatype c => Constructor c where
+  ...
+
+class Constructor s => Selector s where
+  ...
+```
+
+
+GHC would need to also instantiate these base constraints for constructors and selectors.
 
 
