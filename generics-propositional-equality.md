@@ -23,6 +23,18 @@ To support this propositional equality in GHC.Generics we have to equip the {dat
 
 
 
+Metadata in `GHC.Generics`
+
+
+- for data types: `D1 meta f p`
+- for data constructors: `C1 meta f p` (potentially more than one per data type)
+- for selectors: `S1 meta f p` (potentially more than one per constructor)
+
+
+Here `meta` is a private (phantom) type constructor which parametrises the `Datatype`, `Constructor` and `Selector` instances. The corresponding class constraint's methods give (runtime access) to the metainformation.
+
+
+
 Implementation Idea
 
 
