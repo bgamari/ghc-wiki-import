@@ -2,8 +2,7 @@
 This page sketches the ideas how to equip `GHC.Generics` with type-level reasoning facilities.
 
 
-
-Motivation
+# Motivation
 
 
 
@@ -22,8 +21,7 @@ Marriage of GHC.Generics with `gdiff` appears straightforward weren't there one 
 To support this propositional equality in GHC.Generics we have to equip the {datatype, constructor and selector} metatypes with type-level information so that we can use Data.TypeEquality-provided functions (e.g. sameNat, sameSymbol) on them.
 
 
-
-Metadata in `GHC.Generics`
+# Metadata in `GHC.Generics`
 
 
 - for data types: `D1 meta f p`
@@ -35,6 +33,37 @@ Here `meta` is a private (phantom) type constructor which parametrises the `Data
 
 
 
-Implementation Idea
+An example session with GHCi is provided below to illustrate the current system:
 
 
+```wiki
+
+```
+
+# Implementation Idea
+
+
+
+In order to [TypeLevelReasoning](type-level-reasoning) to work data types must be indexed by some type-level decoration (e.g. `GHC.TypeLits`' `Nat` and `Symbol` kinds).
+
+
+
+The idea is to change typecheck/TcGenGenerics to create
+\`meta = Constr "Mod" "Bool" "True"
+
+
+
+This idea is (partly) implemented on branch `wip/propeq-generics`. Here is a GHCi dialogue:
+
+
+```wiki
+Prelude> :m +GHC.Generics 
+Prelude GHC.Generics> :kind! Rep Bool ()
+Rep Bool () :: *
+= M1
+    D
+    (Dat "GHC.Generics" "Bool")
+    (M1 C (Constr (Dat "GHC.Generics" "Bool") "False") U1
+     :+: M1 C (Constr (Dat "GHC.Generics" "Bool") "True") U1)
+    ()
+```
