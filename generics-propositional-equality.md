@@ -7,7 +7,7 @@ This page sketches the ideas how to equip `GHC.Generics` with type-level reasoni
 
 
 the [
-gdiff library](https://hackage.haskell.org/package/gdiff) requires a family GADT for describing the constructors of datatypes that one wants to `diff` and `patch`. This family has to cover (identify) all appearing data type constructors in *value tree* transitively. Given two such constructor identifiers `gdiff` appeals to propositional equality (called `decEq` in the library) to get hold of the constructor's data in a type-safe manner.
+gdiff library](https://hackage.haskell.org/package/gdiff) requires a family GADT for describing the constructors of datatypes that one wants to `diff` and `patch`. This family has to cover (identify) all appearing data type constructors in the *value tree* transitively. Given two such constructor identifiers `gdiff` appeals to propositional equality (called `decEq` in the library) to get hold of the constructor's data in a type-safe manner.
 
 
 
@@ -19,7 +19,7 @@ Marriage of `GHC.Generics` with `gdiff` appears straightforward weren't there on
 
 
 
-To support this propositional equality in `GHC.Generics`, we have to equip the {datatype, constructor and selector} metatypes with type-level information so that we can use `Data.Type.Equality`-provided functions (e.g. sameNat, sameSymbol) on them.
+To support this propositional equality in `GHC.Generics`, we have to equip the {datatype, constructor and selector} metatypes with type-level information so that we can use `Data.Type.Equality`-provided functions (e.g. `sameNat`, `sameSymbol`) on them.
 
 
 # Metadata in `GHC.Generics`
