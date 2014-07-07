@@ -5,7 +5,7 @@
 
 
 
-We aim for an extension of the Standard Haskell Foreign Function Interface to include bindings to Objective-C.  We like to make it easy to embed Haskell code in Objective-C programs as well as the other way around.  Moreover, we like to be able to use object hierarchies stored in NIB files directly in Haskell code.
+We aim for an extension of the Standard Haskell Foreign Function Interface to include bindings to Objective-C.  We like to make it easy to embed Haskell code in Objective-C programs as well as the other way around.  Moreover, we like to be able to use object hierarchies stored in nib files directly in Haskell code.
 
 
 ### Consequences of the goals
@@ -27,7 +27,7 @@ Option (1) has the disadvantage that all class initialisation code needs to be e
 
 
 
-We require the programmer to supply headers for all Objective-C classes implemented in Haskell.  This enables the Objective-C compiler to do type checking and enables Interface Builder to recognises properties used as outlets.
+We require the programmer to supply headers for all Objective-C classes implemented in Haskell.  This enables the Objective-C compiler to do type checking and enables Interface Builder to recognise properties used as outlets.
 
 
 ## Architecture
