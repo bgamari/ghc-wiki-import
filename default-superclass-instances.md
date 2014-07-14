@@ -5,7 +5,7 @@
 
 
 
-A matter of much consternation, here is a proposal to allow type class declarations to include default instance declarations for their superclasses. It's based on [
+A matter of much consternation, here is a proposal to allow type class declarations to include default instance declarations for their superclasses. Moreover, subclass instance declarations should be able to override the method definitions in their default superclass instances. It's based on [
 Jón Fairbairn's proposal](http://www.haskell.org//pipermail/haskell-prime/2006-August/001587.html), but it has a more explicit 'off switch' and the policy on corner-cases is rejection. Credit is due also to the [
 superclass defaults proposal](http://www.haskell.org/haskellwiki/Superclass_defaults),  [
 class system extension proposal](http://www.haskell.org/haskellwiki/Class_system_extension_proposal) and its ancestors, in particular, John Meacham's [
@@ -37,7 +37,10 @@ instances gives rise to breakage of the existing codebase.
 
 Default superclass instances are implemented in the
 [
-Strathclyde Haskell Enhancement](http://personal.cis.strath.ac.uk/~conor/pub/she/superclass.html). 
+Strathclyde Haskell Enhancement](http://personal.cis.strath.ac.uk/~conor/pub/she/superclass.html).
+The crucial property which drives the feature is that method names uniquely identify the classes
+to which they belong, so that methods defined in a subclass instance can be distributed to the appropriate
+generated superclass instance.
 They should enable some tidying of
 the library, with relatively few tears. Moreover, they should allow us
 to deepen type class hierarchies as we learn. Retaining backward
