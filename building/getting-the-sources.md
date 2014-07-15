@@ -138,12 +138,20 @@ To check out a specific version of GHC, run
 
 
 ```wiki
-  $ VERSION=7.4.2
+
   $ git clone http://git.haskell.org/ghc.git
   $ cd ghc
-  $ git checkout ghc-${VERSION}-release
+  $ git checkout <tag>
   $ ./sync-all --no-dph get
-  $ ./sync-all checkout ghc-${VERSION}-release
+```
+
+
+For checking out a tag after you have already done ./sync-all \[options\] get
+
+
+```wiki
+  $ git checkout <tag>
+  $ git submodule update
 ```
 
 ## Getting a GHC repository from GitHub
