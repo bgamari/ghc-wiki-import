@@ -42,7 +42,10 @@ You can ask questions on `ghc-devs@haskell.org`. People are friendly.  See also 
   - *System F with Type Equality Coercions*, Martin Sulzmann, Manuel Chakravarty, and Simon Peyton Jones (TLDI 2007).  The first paper about System FC.
 
 - [
-  Unboxed values as first class citizens](http://research.microsoft.com/en-us/um/people/simonpj/papers/unboxed-values.ps.Z), SL Peyton Jones and J Launchbury, Functional Programming Languages and Computer Architecture (FPCA'91), Boston, LNCS 523, Springer Verlag, Sept 1991, pp636-666. How unboxed data types work in GHC.
+  Type Classes in Haskell](http://research.microsoft.com/~simonpj/Papers/classhask.ps.gz), Cordelia Hall, Kevin Hammond, Simon Peyton Jones, and Philip Wadler, European Symposium On Programming 1994. Type inference for type classes.
+
+- [
+  Once Upon a Polymorphic Type](http://research.microsoft.com/en-us/um/people/simonpj/papers/usage-types/popl99-usage.ps.gz), Keith Wansbrough and Simon Peyton Jones, POPL 1999.
 
 
 Please add: System FC, GADTs, kind polymorphism etc
