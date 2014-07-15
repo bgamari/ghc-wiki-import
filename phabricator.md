@@ -256,11 +256,15 @@ Finally, you have the rules screen. It should be mostly self explanatory: set co
 
 
 
-For example, I may create a **Personal Rule** for **Differential Revisions**. The rule is only triggered when the repository **is any of** `rGHC` (**NB**: the `r` is important!), and when **any changed filename** also **matches regexp** `rts/*`. Finally, the `action` to take will be to **Add me as a reviewier**.
+For example, Austin has a **Personal Rule** for **Differential Revisions**. The rule is only triggered when the repository **is any of** `rGHC` (**NB**: the `r` is important!), and **Every time** it **Adds me as a blocking reviewer**.
 
 
 
-With this rule, any commits which modify the RTS will then automatically have you added as a reviewier.
+[](https://i.imgur.com/lUPSMmZ.png)
+
+
+
+With this rule, all GHC patches must be signed off on.
 
 
 ### Audit: auditing commits that go by
