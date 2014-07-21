@@ -5,7 +5,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Urgent or in-flight
 
 
-- [\#8634](https://gitlab.staging.haskell.org/ghc/ghc/issues/8634): relaxing functional dependency rules `-XDysFunctionalDependencies`
+- [\#8634](https://gitlab.staging.haskell.org/ghc/ghc/issues/8634), [\#9267](https://gitlab.staging.haskell.org/ghc/ghc/issues/9267): relaxing functional dependency rules `-XDysFunctionalDependencies`
 - [\#9318](https://gitlab.staging.haskell.org/ghc/ghc/issues/9318): bad type error caused by wanted/wanted solving (talk to Dimitrios)
 - [\#8980](https://gitlab.staging.haskell.org/ghc/ghc/issues/8980), [\#8941](https://gitlab.staging.haskell.org/ghc/ghc/issues/8941) (possibly), [\#8960](https://gitlab.staging.haskell.org/ghc/ghc/issues/8960), [\#7898](https://gitlab.staging.haskell.org/ghc/ghc/issues/7898), [\#7068](https://gitlab.staging.haskell.org/ghc/ghc/issues/7068), [\#7944](https://gitlab.staging.haskell.org/ghc/ghc/issues/7944), [\#5550](https://gitlab.staging.haskell.org/ghc/ghc/issues/5550), [\#8836](https://gitlab.staging.haskell.org/ghc/ghc/issues/8836): `SpecConstr` blowup
 - [\#9242](https://gitlab.staging.haskell.org/ghc/ghc/issues/9242): per-instance pragmas for overlapping/incoherent
