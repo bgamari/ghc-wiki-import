@@ -72,34 +72,11 @@ And then read [Git Working Conventions](working-conventions/git) for instruction
 
 
 
-Note: If you're behind a **firewall blocking port 9418** (or `git clone git://...` fails for some other reason), replace `git://` by `http://` in the instructions above.
-
-
-### Push access
+**Note**: If you're behind a **firewall blocking port 9418** (or `git clone git://...` fails for some other reason), replace `git://` by `http://` in the instructions above.
 
 
 
-If you have commit access then you will need to also set the push URL:
-
-
-```wiki
-  $ ./sync-all -r ssh://git@git.haskell.org remote set-url --push origin
-```
-
-
-This uses the `ssh://` protocol (which has much higher latency due to the SSH handshake occurring for each connect) only for `git push` operations, and the very fast unauthenticated `git://` protocol for everything else.
-
-
-
-You will probably also want to run
-
-
-```wiki
-  $ git config --global diff.ignoreSubmodules dirty
-```
-
-
-to stop git in the ghc repo from checking for unrecorded changes in the submodules.
+**Note**: If you have push access, see the [Git Working Conventions](working-conventions/git) page for info on setting your push URLs.
 
 
 ## Making a local clone
