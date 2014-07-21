@@ -8,7 +8,7 @@ There are a number of services and tools that GHC developers should be aware of.
 ## Official tools
 
 
-- Our [git repositories](repositories), which are best using following the [
+- Our [git repositories](repositories), which are best used following the [
   Working Conventions](https://ghc.haskell.org/trac/ghc/wiki/)
 - The trac instance you are just using, which hosts the [wiki](/trac/ghc/wiki) and the [bug tracker](/trac/ghc/report)
 - Our [mailing lists](mailing-lists-and-irc)
