@@ -131,60 +131,7 @@ Here we have possible API implementations. Keep in mind that all this is a work 
 
 
 ```wiki
-
-data CapEvent
-  = CapEvent { ce_cap   :: Maybe Int, -- May belong to a Capability
-               ce_event :: Event
-             } deriving Show
-
--- | An incremental decoder for a single item (Header). It accepts input 
--- incrementally and produces a single result at the end.
-data Decoder a =
-      -- | The input data was malformed. The first field contains any
-      -- unconsumed input and third field contains information about
-      -- the parse error.
-      FailH !B.ByteString !ByteOffset String
-
-      -- | The parser needs more input data before it can produce a
-      -- result. Use an 'B.empty' string to indicate that no more
-      -- input data is available. If fed an 'B.empty string', the
-      -- continuation is guaranteed to return either 'FailH' or
-      -- 'DoneH'.
-    | Partial (B.ByteString -> Decoder a)
-
-      -- | The parse succeeded and produced the given 'Header'.
-    | DoneH !B.ByteString !ByteOffset a
-
-
--- | An incremental decoder for a sequence. It accepts input incrementally
--- and additionally it can produce sequence results incrementally.
-data SequenceDecoder a =
-      -- | The input data was malformed. The first field contains any
-      -- unconsumed input and third field contains information about
-      -- the parse error.
-      FailS !B.ByteString !ByteOffset String
-
-      -- | The decoder read zero or more records. Feed a 'B.ByteString' to
-      -- the continuation to continue parsing. Use an 'B.empty' string to
-      -- indicate that no more input data is available. If fed an 'B.empty'
-      -- string, the continuation is guaranteed to return either 'Fail'
-      -- or 'Done'.
-    | ManyS [a] (B.ByteString -> SequenceDecoder a)
-
-      -- | The decoder read zero or more records. This is the end of
-      -- the sequence.
-    | DoneS !B.ByteString !ByteOffset [a]
-    deriving Functor
-
-eventlogDecoder :: Decoder (SequenceDecoder Event)
-
---------------- Alternative --------------- 
-
--- Private
-data Decoder a =
-      FailH !B.ByteString !ByteOffset String
-    | Partial (B.ByteString -> Decoder a)
-    | DoneH !B.ByteString !ByteOffset a
+-------------- Private -------------
 
 data SequenceDecoder a =
       FailS !B.ByteString !ByteOffset String
@@ -192,19 +139,25 @@ data SequenceDecoder a =
     | DoneS !B.ByteString !ByteOffset (Maybe a)
 
 eventLogDecoder :: Decoder (SequenceDecoder Event)
+
 newtype EventHandle = EventHandle Header Handle
 
 
--- Public
+-------------- Public --------------
+
+-- Datatype that holds a link to the eventlog
 data EventHandle
 
-openEventHandle :: Handle -> IO EventHandle
 -- Opens the event stream from the specified handle,
 -- reads the header info, and initialises the EventHandle
+openEventHandle :: Handle -> IO EventHandle
 
+-- Gets the header of the log 
+getHeader :: EventHandle -> Header
+
+-- Reads one event from the handle. Returns Nothing if no events
+-- are readable from the log
 getEvent :: EventHandle -> IO (Maybe Event)
-
-
 
 
 ```
@@ -217,37 +170,71 @@ C side:
 
 
 ```
-// Initialise the event logging system
+
+///////////
+/* USAGE */
+///////////
+
+/*
+Functions in the API expect to be called in a certain sequence:
+1. initEventLogging(); - initialises the system using the default values for all settings
+   (see below)
+2. Settings functions can be called as per needs of an user
+3. sendHeader(); - sends header to the fd. This is necessary for parsing the log
+   as ghc-events expects all logs to begin with a header that defines the events
+   held in the log
+4. startEventLogging(); - starts sending the events to the fd. No settings functions should be
+   called when event logging is active
+5. stopEventLogging(); - stops sending the events to the fd. This closes all tags,
+   making the log "complete". May not be a good idea to restart streaming to the same fd
+*/
+
+//////////////
+/* RUNNING */
+//////////////
+
+// Initialise the event logging system with the default values
 initEventLogging();
 
-// Sets the destination file descriptor that the eventlog will be written to.
-// Should only be called when logging is not active.
-setDestination(fd);
-
-// Sets the size of the per-capability eventlog buffers to sz words.
-// Should only be called when logging is not active.
-setBufferSize(int sz);
-
-// Enable or disable particular classes of events. Argument is a bit array
-// Should only be called when logging is not active.
-// TODO: map bits to event classes
-enableEvents(long EventClasses);
-disableEvents(long EventClasses);
-
-// Sends the header file of the eventlog to the fd
+// Sends the header file of the eventlog via the fd
 sendHeader();
 
 //Starts sending the events to the fd
-startStreaming();
+startEventLogging();
 
 // Stops sending the events to the fd
 stopEventLogging();
 
+//////////////
+/* SETTINGS */
+//////////////
+
+// Sets the destination file descriptor that the eventlog will be written to.
+// Should only be called when logging is not active.
+// Default: a file called <progname>.eventlog
+setDestination(fd);
+
+// Sets the size of the per-capability eventlog buffers to sz words.
+// Should only be called when logging is not active.
+// Default: 2,097,152 (2MB)
+setBufferSize(int sz);
+
+// Enable or disable particular classes of events. Argument is a bit array
+// Should only be called when logging is not active
+// More info on the classes: 
+// http://www.haskell.org/ghc/docs/latest/html/users_guide/runtime-control.html
+// The list above may be out of date, refer to $ghc_source/rts/Trace.h for all 
+// currently available event classes
+// TODO: map bits to event classes
+enableEvents(long EventClasses);
+disableEvents(long EventClasses);
+
 // Set the flush timer for a Capability's buffer. I.e. the buffer will get 
 // flushed after ms milliseconds of inactivity
 // Should only be called when logging is not active.
+// Default: 0, i.e. do not flush buffers automatically
+// TODO: no equivalent in current RTS, may need a default value
 flushEventLog(int ms);
-
 
 ```
 
@@ -271,34 +258,35 @@ Example log reading user:
 
 ```wiki
 main = do
-  log <- readLogInc file
+  eh <- readLogInc file
   putStrLn $ ppEventLog log
 ```
 
 
-example log servers
-
-
-
-C:
+Scrap code
 
 
 ```wiki
-logserver.c
-  s = socket()
-  listen(s)
-  t = accept(s)
-  initEventLogging(t)
-```
+-- | An incremental decoder for a sequence. It accepts input incrementally
+-- and additionally it can produce sequence results incrementally.
+data SequenceDecoder a =
+      -- | The input data was malformed. The first field contains any
+      -- unconsumed input and third field contains information about
+      -- the parse error.
+      FailS !B.ByteString !ByteOffset String
 
+      -- | The decoder read zero or more records. Feed a 'B.ByteString' to
+      -- the continuation to continue parsing. Use an 'B.empty' string to
+      -- indicate that no more input data is available. If fed an 'B.empty'
+      -- string, the continuation is guaranteed to return either 'Fail'
+      -- or 'Done'.
+    | ManyS [a] (B.ByteString -> SequenceDecoder a)
 
-Haskell:
+      -- | The decoder read zero or more records. This is the end of
+      -- the sequence.
+    | DoneS !B.ByteString !ByteOffset [a]
+    deriving Functor
 
+eventlogDecoder :: Decoder (SequenceDecoder Event)
 
-```wiki
-logserver.hs
-  s <- socket
-  listen
-  t <- accept s
-  startEventLogging t
 ```
