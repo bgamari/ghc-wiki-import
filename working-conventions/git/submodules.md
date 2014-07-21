@@ -289,7 +289,7 @@ There are server-side validation hooks in place on `git.haskell.org` to make sur
 <td>     </td>
 <th>https://git.haskell.org/old-time.git</th>
 <td> </td>
-<th>pmaster</th></tr>
+<th>master</th></tr>
 <tr><th>libraries/process</th>
 <td>      </td>
 <th>https://git.haskell.org/process.git</th>
