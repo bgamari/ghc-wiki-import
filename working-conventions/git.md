@@ -28,7 +28,7 @@ Git](http://git-scm.com/) (version 1.7.3.4 or newer recommended) for revision co
 
 - Discuss anything you think might be controversial before pushing it.
 
-- When making changes to other repositories in a GHC tree, see [Repositories](repositories) and [Repositories/Upstream](repositories/upstream).
+- When making changes to other repositories in a GHC tree, see [WorkingConventions/Git/Submodules](working-conventions/git/submodules).
 
 ## Author
 
