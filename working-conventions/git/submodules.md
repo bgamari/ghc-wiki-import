@@ -195,6 +195,163 @@ There are server-side validation hooks in place on `git.haskell.org` to make sur
 ## Upstream repositories
 
 
+<table><tr><th>**Location in tree**</th>
+<td> </td>
+<th>**Upstream repo**</th>
+<td> </td>
+<th>**Upstream GHC branch**</th></tr>
+<tr><th>utils/hsc2hs</th>
+<td>           </td>
+<th>https://git.haskell.org/hsc2hs.git</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>utils/haddock</th>
+<td>          </td>
+<th>https://github.com/haskell/haddock</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>nofib</th>
+<td>                  </td>
+<th>https://git.haskell.org/nofib.git</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/array</th>
+<td>        </td>
+<th>https://git.haskell.org/array.git</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/binary</th>
+<td>       </td>
+<th>https://github.com/haskell/binary</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/bytestring</th>
+<td>   </td>
+<th>https://github.com/haskell/bytestring</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/Cabal</th>
+<td>        </td>
+<th>https://github.com/haskell/Cabal</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/containers</th>
+<td>   </td>
+<th>https://github.com/haskell/containers</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/deepseq</th>
+<td>      </td>
+<th>https://git.haskell.org/deepseq.git</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/directory</th>
+<td>    </td>
+<th>https://git.haskell.org/directory.git</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/filepath</th>
+<td>     </td>
+<th>https://git.haskell.org/filepath.git</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/haskeline</th>
+<td>    </td>
+<th>https://github.com/judah/haskeline</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/haskell98</th>
+<td>    </td>
+<th>https://git.haskell.org/haskell98.git</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/haskell2010</th>
+<td>  </td>
+<th>https://git.haskell.org/haskell2010.git</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/hoopl</th>
+<td>        </td>
+<th>https://git.haskell.org/hoopl.git</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/hpc</th>
+<td>          </td>
+<th>https://git.haskell.org/hpc.git</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/old-locale</th>
+<td>   </td>
+<th>https://git.haskell.org/old-locale.git</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/old-time</th>
+<td>     </td>
+<th>https://git.haskell.org/old-time.git</th>
+<td> </td>
+<th>pmaster</th></tr>
+<tr><th>libraries/process</th>
+<td>      </td>
+<th>https://git.haskell.org/process.git</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/terminfo</th>
+<td>     </td>
+<th>https://github.com/judah/terminfo</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/time</th>
+<td>         </td>
+<th>https://github.com/haskell/time</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/unix</th>
+<td>         </td>
+<th>https://github.com/haskell/unix</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/Win32</th>
+<td>        </td>
+<th>https://git.haskell.org/Win32.git</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/xhtml</th>
+<td>        </td>
+<th>https://github.com/haskell/xhtml</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/random</th>
+<td>       </td>
+<th>https://github.com/haskell/random</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/primitive</th>
+<td>    </td>
+<th>https://github.com/haskell/primitive</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/vector</th>
+<td>       </td>
+<th>https://github.com/haskell/vector</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/dph</th>
+<td>          </td>
+<th>https://</th>
+<td> </td>
+<th>packages/dph.git</th></tr>
+<tr><th>libraries/parallel</th>
+<td>     </td>
+<th>https://git.haskell.org/parallel.git</th>
+<td> </td>
+<th>master</th></tr>
+<tr><th>libraries/stm</th>
+<td>          </td>
+<th>https://git.haskell.org/stm.git</th>
+<td> </td>
+<th>master</th></tr></table>
+
+
 ## TODO
 
 
