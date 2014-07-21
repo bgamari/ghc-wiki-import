@@ -47,7 +47,7 @@ The cost of putting this generalization into the library is that all the client 
 
 
 
-We want to fix things so that `S` can be introduced in such a way that `C` instances in client code yield, by default, both `C` and `S` instances internally, each with the constraints given in the client code. The various definitions in client instances will need to be distributed to the appropriate internal instance.
+We want to fix things so that `S` can be introduced in such a way that `C` instances in client code yield, by default, both `C` and `S` instances internally, each with the constraints given in the client code. We do not imagine that all superclasses should have this relationship with their subclasses, but that some **intrinsic** superclasses might. The various definitions in client instances will need to be distributed to the appropriate internal instances of the class itself and its intrinsic superclasses.
 
 
 ###
@@ -82,7 +82,7 @@ because (technically) `g` is no longer in scope for the default `f` definition a
 
 
 
-If only we could write something like
+**Imagined solution.** If only we could write something like
 
 
 ```wiki
@@ -94,7 +94,7 @@ class (instance S x) => C x where
 ```
 
 
-where the extra `instance` marking the superclass constraint makes `S` an **intrinsic** superclass of `C`, so that `f` can be treated as if it were a method of `C` for purposes of `C`'s instances and for default definition in the `C` class declaration.
+where the extra `instance` marking the superclass constraint makes `S` an **intrinsic** superclass of `C`. Accordingly, `f` can be treated as if it were a method of `C` for purposes of `C`'s instances and for default definition in the `C` class declaration.
 
 
 
@@ -115,7 +115,7 @@ class (instance Applicative m) => Monad m where
 Note that explicit `Functor` instances do not have a default implementation of `fmap` (that being rather the point of such instances), but that explicit `Applicative` and `Monad` would, under this proposal.
 
 
-### Requirement 3: The most local definition is the definition.
+### Requirement 3: A member's most local definition is its definition.
 
 
 
@@ -234,7 +234,7 @@ then we have silently generated duplicate instances for `Functor Square` and no 
 
 
 
-We might perhaps write
+**Imagined solution.** We might perhaps write
 
 
 ```wiki
