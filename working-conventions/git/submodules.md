@@ -217,7 +217,7 @@ There are server-side validation hooks in place on `git.haskell.org` to make sur
 <th>master</th></tr>
 <tr><th>libraries/array</th>
 <td>        </td>
-<th>https://git.haskell.org/array.git</th>
+<th>https://git.haskell.org/packages/array.git</th>
 <td> </td>
 <th>master</th></tr>
 <tr><th>libraries/binary</th>
@@ -242,17 +242,17 @@ There are server-side validation hooks in place on `git.haskell.org` to make sur
 <th>master</th></tr>
 <tr><th>libraries/deepseq</th>
 <td>      </td>
-<th>https://git.haskell.org/deepseq.git</th>
+<th>https://git.haskell.org/packages/deepseq.git</th>
 <td> </td>
 <th>master</th></tr>
 <tr><th>libraries/directory</th>
 <td>    </td>
-<th>https://git.haskell.org/directory.git</th>
+<th>https://git.haskell.org/packages/directory.git</th>
 <td> </td>
 <th>master</th></tr>
 <tr><th>libraries/filepath</th>
 <td>     </td>
-<th>https://git.haskell.org/filepath.git</th>
+<th>https://git.haskell.org/packages/filepath.git</th>
 <td> </td>
 <th>master</th></tr>
 <tr><th>libraries/haskeline</th>
@@ -262,37 +262,37 @@ There are server-side validation hooks in place on `git.haskell.org` to make sur
 <th>master</th></tr>
 <tr><th>libraries/haskell98</th>
 <td>    </td>
-<th>https://git.haskell.org/haskell98.git</th>
+<th>https://git.haskell.org/packages/haskell98.git</th>
 <td> </td>
 <th>master</th></tr>
 <tr><th>libraries/haskell2010</th>
 <td>  </td>
-<th>https://git.haskell.org/haskell2010.git</th>
+<th>https://git.haskell.org/packages/haskell2010.git</th>
 <td> </td>
 <th>master</th></tr>
 <tr><th>libraries/hoopl</th>
 <td>        </td>
-<th>https://git.haskell.org/hoopl.git</th>
+<th>https://git.haskell.org/packages/hoopl.git</th>
 <td> </td>
 <th>master</th></tr>
 <tr><th>libraries/hpc</th>
 <td>          </td>
-<th>https://git.haskell.org/hpc.git</th>
+<th>https://git.haskell.org/packages/hpc.git</th>
 <td> </td>
 <th>master</th></tr>
 <tr><th>libraries/old-locale</th>
 <td>   </td>
-<th>https://git.haskell.org/old-locale.git</th>
+<th>https://git.haskell.org/packages/old-locale.git</th>
 <td> </td>
 <th>master</th></tr>
 <tr><th>libraries/old-time</th>
 <td>     </td>
-<th>https://git.haskell.org/old-time.git</th>
+<th>https://git.haskell.org/packages/old-time.git</th>
 <td> </td>
 <th>master</th></tr>
 <tr><th>libraries/process</th>
 <td>      </td>
-<th>https://git.haskell.org/process.git</th>
+<th>https://git.haskell.org/packages/process.git</th>
 <td> </td>
 <th>master</th></tr>
 <tr><th>libraries/terminfo</th>
@@ -312,7 +312,7 @@ There are server-side validation hooks in place on `git.haskell.org` to make sur
 <th>master</th></tr>
 <tr><th>libraries/Win32</th>
 <td>        </td>
-<th>https://git.haskell.org/Win32.git</th>
+<th>https://git.haskell.org/packages/Win32.git</th>
 <td> </td>
 <th>master</th></tr>
 <tr><th>libraries/xhtml</th>
@@ -337,17 +337,17 @@ There are server-side validation hooks in place on `git.haskell.org` to make sur
 <th>master</th></tr>
 <tr><th>libraries/dph</th>
 <td>          </td>
-<th>https://</th>
+<th>https://git.haskell.org/packages/dph.git</th>
 <td> </td>
-<th>packages/dph.git</th></tr>
+<th>master</th></tr>
 <tr><th>libraries/parallel</th>
 <td>     </td>
-<th>https://git.haskell.org/parallel.git</th>
+<th>https://git.haskell.org/packages/parallel.git</th>
 <td> </td>
 <th>master</th></tr>
 <tr><th>libraries/stm</th>
 <td>          </td>
-<th>https://git.haskell.org/stm.git</th>
+<th>https://git.haskell.org/packages/stm.git</th>
 <td> </td>
 <th>master</th></tr></table>
 
