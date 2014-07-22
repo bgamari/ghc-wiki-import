@@ -59,8 +59,8 @@ On Windows, you need to additionally fetch an extra repository containing some b
 
 
 ```wiki
-$ cd ghc
-$ ./sync-all get
+$ cd ghc/
+$ git clone git://git.haskell.org/ghc-tarballs.git
 ```
 
 
@@ -71,15 +71,15 @@ A source tree consists of more than one repository: at the top level there is th
 And then read [Git Working Conventions](working-conventions/git) for instructions on how to use Git with GHC development.
 
 
+- If you're behind a **firewall blocking port 9418** (or `git clone git://...` fails for some other reason), replace `git://` by `http://` in the instructions above.
 
-**Note**: If you're behind a **firewall blocking port 9418** (or `git clone git://...` fails for some other reason), replace `git://` by `http://` in the instructions above.
-
-
-
-**Note**: If you have push access, see the [Git Working Conventions](working-conventions/git) page for info on setting your push URLs.
-
+- If you have **push access**, see the [Git Working Conventions - Push Access](working-conventions/git#push-access) for info on setting your push URLs.
 
 ## Making a local clone
+
+
+
+TODO investigate&document `--reference`-based `git clone` which may work better with submodules and doesn't require resetting the origin Repo back to `git.haskell.org`
 
 
 
@@ -106,6 +106,22 @@ The above instructions will get the HEAD, the main trunk of GHC development. The
 
 
 
+The commands given below are slightly outdated. Since [\[db19c665ec5055c2193b2174519866045aeff09a/ghc\]](/trac/ghc/changeset/db19c665ec5055c2193b2174519866045aeff09a/ghc) converted all sub-repos into submodules, you can simply clone a specific branch via:
+
+
+
+`git clone -b ghc-7.10 --recursive git://git.haskell.org/ghc.git ghc-7.10`
+
+
+
+and switch between branches on an existing clone (assuming the current repo checkout and the branch to switch to are both past the commit mentioned above) by
+
+
+
+`git checkout <other-branchname>` followed by `git submodule update --init`
+
+
+
 To get a branch, you need to get from a repo that contains the branch; in particular, local clones of the central repo will normally not include the branches that are in the central repo.
 
 
@@ -120,6 +136,14 @@ To get one, run
 ```
 
 ## Getting a tag
+
+
+
+The commands given below may soon be outdated, starting with GHC 7.10.1, you can simply clone a specific tag via:
+
+
+
+`git clone -b ghc-7.10.1-release --recursive git://git.haskell.org/ghc.git ghc-7.10.1`
 
 
 
@@ -155,6 +179,32 @@ For checking out a tag after you have already done `./sync-all [OPTIONS] get`
 
 The official mirror for GHC on GitHub is located at [
 https://github.com/ghc/ghc](https://github.com/ghc/ghc).
+
+
+### New method
+
+
+
+You don't need `./sync-all` anymore and can use Git commands directly, if you configure the following Git url rewrites to account for the different naming scheme on GitHub (due to GitHub not supporting `/` in repository names) before cloning (those rules are persisted in `${HOME}/.gitconfig` so you need to perform it only once):
+
+
+```
+git config --global url."git://github.com/ghc/packages-".insteadOf     git://github.com/ghc/packages/ 
+git config --global url."http://github.com/ghc/packages-".insteadOf    http://github.com/ghc/packages/ 
+git config --global url."https://github.com/ghc/packages-".insteadOf   https://github.com/ghc/packages/ 
+git config --global url."ssh://git@github.com/ghc/packages-".insteadOf ssh://git@github.com/ghc/packages/ 
+git config --global url."git@github.com:/ghc/packages-".insteadOf      git@github.com:/ghc/packages/ 
+```
+
+
+and then simply proceed by
+
+
+```
+git clone --recursive git://github.com/ghc/ghc
+```
+
+### Old method
 
 
 ```wiki
