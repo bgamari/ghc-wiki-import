@@ -76,7 +76,7 @@ Requirement 2: Some subclasses should give default definitions for things declar
 
 
 
-Our refactoring problem deepens when classes define default methods. What if we actually had
+Our refactoring problem deepens when classes define default methods. What if our library defined class `C` with a default method for `f` that uses `g`, thus:
 
 
 ```wiki
@@ -87,7 +87,7 @@ class C x where
 ```
 
 
-to start with? That is, types with a `C` instance can be given an `S` instance in a "standard" way, but there are other types which have `S` instances defined differently and no `C` instance at all. Again, that is a familiar situation: every `Monad` has is `Applicative` with `(<*>) = ap`, but non-monadic `Applicative` instances have `(<*>)` defined in other ways. But now our split hits trouble. We cannot have
+Now our split hits trouble. We cannot have
 
 
 ```wiki
@@ -99,7 +99,18 @@ class S x => C x where
 ```
 
 
-because (technically) `g` is no longer in scope for the default `f` definition and (morally) because only the `S`s which are also `C` should have that default definition anyway: the default `f` definition rightly belongs in the declaration of `C`, but `f` is not a method of `C`.
+because (technically) `g` is no longer in scope for the default `f` definition, and (morally) because only the `S`s which are also `C` should have that default definition anyway. 
+
+
+
+The default method for `S`'s method `f` rightly belongs in the declaration of `C`, not `S`, because
+
+
+- types with a `C` instance can be given an `S` instance in a "standard" way (using `..g..`), but
+- there are other types which have `S` instances defined differently and no `C` instance at all.
+
+
+Again, that is a familiar situation: every `Monad` has is `Applicative` with `(<*>) = ap`, but non-monadic `Applicative` instances have `(<*>)` defined in other ways.
 
 
 
