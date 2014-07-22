@@ -55,6 +55,10 @@ The most important tool you're going to use with Phab is called **arcanist**, wh
 
 
 
+To install PHP on Debian or Ubuntu, run `apt-get install php5-cli php5-curl`.
+
+
+
 Getting the source is very easy, just check out two git repositories next to each other, and put the binaries in your `$PATH`:
 
 
