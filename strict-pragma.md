@@ -76,7 +76,7 @@ let !x = ...
 Adding `~` in front of `x` gives the old lazy behavior.
 
 
-## Data types
+### Data types
 
 
 
@@ -99,7 +99,7 @@ data T = C !a
 Haskell doesn't allow for `~` patterns in data constructor definitions today. We'll add support for such patterns and have it give the old lazy behavior.
 
 
-## Newtypes
+### Newtypes
 
 
 
@@ -116,7 +116,7 @@ case e of
 is strict in `x`.
 
 
-## Recursive definitions and polymorphism
+### Recursive definitions and polymorphism
 
 
 
@@ -125,6 +125,13 @@ Today strict bindings cannot be polymorphic. We have a translation that would al
 
 
 TODO(SPJ): The below comments from SPJ contains the translation, but it's somewhat interleaved with other stuff so I forgot what it was.
+
+
+## Implementation
+
+
+
+TODO Find all the places where we do special things for bang patterns and list them here.
 
 
 ## Raw chat log between SPJ, Johan, and Duncan
