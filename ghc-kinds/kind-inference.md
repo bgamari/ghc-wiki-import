@@ -59,7 +59,7 @@ Following the same three steps for `S` fails, because we need polymorphic recurs
 ```
 
 
-So in GHC 7.8 you can supply a "complete user kind signature" (CUSK) for `S`, thus:
+So in GHC 7.8 you can supply a "complete user-supplied kind" (CUSK) for `S`, thus:
 
 
 ```wiki
@@ -84,7 +84,7 @@ The real step 2 works thus:
 
 
 
-The main proposed change is to the definition of a "complete user kind signature" (CUSK).  The current story is in [Section 7.8.3 of the user manual](http://www.haskell.org/ghc/docs/latest/html/users_guide/kind-polymorphism.html#complete-kind-signatures).  Alas, it does not allow CUSKs for class declarations.
+The main proposed change is to the definition of a "complete user-supplied kind" (CUSK).  The current story is in [Section 7.8.3 of the user manual](http://www.haskell.org/ghc/docs/latest/html/users_guide/kind-polymorphism.html#complete-kind-signatures).  Alas, it does not allow CUSKs for class declarations.
 The new proposal is this:
 
 
