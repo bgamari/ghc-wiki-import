@@ -96,7 +96,7 @@ This change alone is enough to satisfy [\#9200](https://gitlab.staging.haskell.o
 
 
 
-**Simon** What about type synonym declarations? Don't we need a kind signature on the RHS?
+**Simon** What about type synonym declarations? Don't we need a kind signature on the RHS?  Also what about specifying the return kind of a type family (open or closed)?  Does it default to `*`, or must you specify it to get a CUSK?
 
 
 ## A possible variation
