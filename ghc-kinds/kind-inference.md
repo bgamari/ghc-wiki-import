@@ -96,7 +96,7 @@ This change alone is enough to satisfy [\#9200](https://gitlab.staging.haskell.o
 
 
 
-**Simon** What about type synonym declarations. Don't we need a kind signature on the RHS?
+**Simon** What about type synonym declarations? Don't we need a kind signature on the RHS?
 
 
 ## A possible variation
