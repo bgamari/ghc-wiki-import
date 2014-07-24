@@ -110,7 +110,7 @@ For the most part we simply assume that the bootstrap compiler already has the b
 - The only packages that we can "assume that the bootstrap compiler already has" are those packages that come with GHC itself; i.e. the installed boot packages.  So non-installed boot packages are also zero-boot packages.  Example: `bin-package-db` or `hoopl`.
 
 
-So we begin the entire build process by installing the zero-boot packages in the bootstrap compiler.  (This installation is purely local to the build tree.)  
+So we begin the entire build process by installing the zero-boot packages in the bootstrap compiler.  (This installation is purely local to the build tree.)  This is done in `ghc.mk` by setting `PACKAGES_STAGE0` to the list of zero-boot packages; indeed this is the only way in which zero-boot packages are identified in the build system.
 
 
 
