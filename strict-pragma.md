@@ -188,7 +188,7 @@ Continuing with this rule would mean that `-XStrict` would not allow recursive o
 
 >
 >
-> The result will be a (possibly) recursive set of bindings, binding only simple variables on the LHS.  (One could go one step further, as in the Hsakell Report and make the recursive bindings non-recursive using `fix`, but we do not do so in Core, and it only obfuscates matters, so we do not do so here.)
+> The result will be a (possibly) recursive set of bindings, binding only simple variables on the LHS.  (One could go one step further, as in the Haskell Report and make the recursive bindings non-recursive using `fix`, but we do not do so in Core, and it only obfuscates matters, so we do not do so here.)
 >
 >
 
