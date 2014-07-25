@@ -212,7 +212,7 @@ We need two rules, depending on whether or not a CUSK is detected.
 
 
 
-The first rule requires the equations to be fully parametric in its kinds, whereas the second allows non-parametric equations and polymorphic recursion. **Simon:** I don't know what this means.
+The first rule requires the equations to be fully parametric in its kinds, whereas the second allows non-parametric equations and polymorphic recursion. **Simon:** I don't know what this means. **Richard:** "Non-parametric" here refers to using a kind-indexed closed type family, where the equations match on the kinds, not just the types. It has a flavor of polymorphic recursion in that the instantiations for the kind variables are not always the same at every usage.
 
 
 
