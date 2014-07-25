@@ -88,7 +88,9 @@ The main proposed change is to the definition of a "complete user-supplied kind"
 The new proposal is this:
 
 
-- A class or datatype is said to have a CUSK if and only if all of its type variables are annotated. 
+- A class or datatype is said to have a CUSK if and only if all of its type variables are annotated.
+- A closed type family is said to have a CUSK if and only if all of its type variables and its return type are annotated. 
+- An open type family always has a CUSK -- unannotated type variables (and return type) default to `*`. (This is not a change.)
 
 
 This is somewhat simpler, it covers classes. See [comment:19:ticket:9200](https://gitlab.staging.haskell.org/ghc/ghc/issues/9200) for more exposition.
@@ -97,6 +99,10 @@ This change alone is enough to satisfy [\#9200](https://gitlab.staging.haskell.o
 
 
 **Simon** What about type synonym declarations? Don't we need a kind signature on the RHS?  Also what about specifying the return kind of a type family (open or closed)?  Does it default to `*`, or must you specify it to get a CUSK?
+
+
+
+**Richard** Type synonym declarations can never be recursive, right? So, this issue doesn't affect them. I've answered the other questions above.
 
 
 ## A possible variation
