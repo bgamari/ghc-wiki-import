@@ -12,6 +12,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#9123](https://gitlab.staging.haskell.org/ghc/ghc/issues/9123): higher order roles
 - [\#9200](https://gitlab.staging.haskell.org/ghc/ghc/issues/9200), [\#9151](https://gitlab.staging.haskell.org/ghc/ghc/issues/9151): kind inference for mutually recursive types
 - [\#9352](https://gitlab.staging.haskell.org/ghc/ghc/issues/9352): allow `State#` in FFI types.
+- [\#9211](https://gitlab.staging.haskell.org/ghc/ghc/issues/9211): using equalities to let-bind type variables; level numbers on skolems
 
 ## Front end
 
