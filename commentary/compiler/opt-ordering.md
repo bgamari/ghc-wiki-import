@@ -2,8 +2,7 @@
 
 
 
-This page has notes about the ordering of optimisation phases. An overview of the whole Core-to-Core optimisation pipeline can be found [
-here](https://ghc.haskell.org/trac/ghc/wiki/Commentary/Compiler/Core2CorePipeline).
+This page has notes about the ordering of optimisation phases. An overview of the whole Core-to-Core optimisation pipeline can be found [here](commentary/compiler/core2-core-pipeline).
 
 
 
