@@ -43,7 +43,7 @@ Look at the picture first.  The yellow boxes are compiler passes, while the blue
   - desugaring is not required to preserve type-inference properties.
 
 - The **SimplCore** pass ([compiler/simplCore/SimplCore.lhs](/trac/ghc/browser/ghc/compiler/simplCore/SimplCore.lhs)) is a bunch of Core-to-Core passes that optimise the program; see [
-  A transformation-based optimiser for Haskell (SCP'98)](http://research.microsoft.com/%7Esimonpj/Papers/comp-by-trans-scp.ps.gz) for a more-or-less accurate overview.  See [Commentary/Compiler/OptOrdering](commentary/compiler/opt-ordering) for a summary of pass ordering constraints. The main passes are:
+  A transformation-based optimiser for Haskell (SCP'98)](http://research.microsoft.com/%7Esimonpj/Papers/comp-by-trans-scp.ps.gz) for a more-or-less accurate overview.  See [Commentary/Compiler/Core2CorePipeline](commentary/compiler/core2-core-pipeline) for an overview of the Core-to-Core optimisation pipeline. The main passes are:
 
   - The **Simplifier**, which applies lots of small, local optimisations to the program.  The simplifier is big and complicated, because it implements a *lot* of transformations; and tries to make them cascade nicely.  The transformation-based optimiser paper gives lots of details, but two other papers are particularly relevant: [
     Secrets of the Glasgow Haskell Compiler inliner (JFP'02)](http://research.microsoft.com/%7Esimonpj/Papers/inlining/index.htm) and [
