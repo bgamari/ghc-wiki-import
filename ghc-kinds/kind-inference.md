@@ -97,6 +97,8 @@ This is somewhat simpler, it covers classes. See [comment:19:ticket:9200](https:
 This change alone is enough to satisfy [\#9200](https://gitlab.staging.haskell.org/ghc/ghc/issues/9200).
 
 
+- A type synonym has a CUSK if and only if all of its type variables and its RHS are annotated with kinds.
+
 
 **Simon** What about type synonym declarations? Don't we need a kind signature on the RHS?  Also what about specifying the return kind of a type family (open or closed)?  Does it default to `*`, or must you specify it to get a CUSK?
 
