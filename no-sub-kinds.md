@@ -33,7 +33,15 @@ Right now, there are several "base" kinds:
 - `BOX`: This classifies kinds. Thus, we have `* :: BOX` and `# :: BOX`. Somewhat cheekily, `BOX :: BOX`.
 
 
-hte 
+The entire handling of `OpenKind` is unsatisfactory. For example, it is not abstractable:
+
+
+```wiki
+myError s = error ("Blah" ++ s)
+```
+
+
+Currently `myError` cannot be used at type `Int#`.
 
 
 ## Down with kinds
@@ -66,8 +74,8 @@ Then, we create a new magical constant `TYPE`, of type `Levity -> TYPE Lifted`. 
 
 ```wiki
 (->) :: forall (l1 :: Levity) (l2 :: Levity). TYPE l1 -> TYPE l2 -> TYPE Lifted
-error :: forall (l :: Levity). String -> TYPE l
-undefined :: forall (l :: Levity). TYPE l
+error :: forall (l :: Levity) (a :: TYPE l). String -> a
+undefined :: forall (l :: Levity) (a :: TYPE l). a
 ```
 
 
@@ -81,6 +89,18 @@ type # = TYPE Unlifted
 
 
 and hope that GHC's existing preserve-type-synonyms-wherever-possible machinery keeps messages reasonable.
+
+
+
+Note that `myError` would get a natural inferred type
+
+
+```wiki
+myError :: forall (l :: Levity) (a :: TYPE l). String -> a
+```
+
+
+Whether users could write down such a signature is another matter.  (They probably should be able to.)
 
 
 
