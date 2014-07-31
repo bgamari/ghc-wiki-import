@@ -177,26 +177,14 @@ This currently applies even if the pattern is just a single variable, so that th
 Continuing with this rule would mean that `-XStrict` would not allow recursive or polymoprhic pattern bindings *at all*.  So instead we propose the following revised specification for bang patterns in let bindings.
 
 
-- **Static semantics.** Exactly as in Haskell, unaffected by `-XStrict`.  This is more permissive than the current rule for bang patterns in let bindings.
+- **Static semantics.** Exactly as in Haskell, unaffected by `-XStrict`.  This is more permissive than the current rule for bang patterns in let bindings, because it supports bang-patterns for polymorphic and recursive bindings.
 
 - **Dynamic semantics.** Consider the rules in the box of [
-  Section 3.12 of the Haskell report](http://www.haskell.org/onlinereport/exps.html#sect3.12).  Replace these rules with the following ones, where `v` stands for a variable.
+  Section 3.12 of the Haskell report](http://www.haskell.org/onlinereport/exps.html#sect3.12).  Replace these rules with the following ones, where `v` stands for a variable
 
+  - **(FORCE)**.  Replace any binding `!p = e` with `v = e; p = v` and replace `e0` with `v `seq` e0`, where `v` is fresh.  This translation works fine if `p` is already a variable `x`, but can obviously be optimised by not introducing a fresh variable `v`.
 
-\[BR\]\[BR\]
-
-
-- **(FORCE)**.  Replace any binding `!p = e` with `v = e; p = v` and replace `e0` with `v `seq` e0`, where `v` is fresh.  This translation works fine if `p` is already a variable `x`, but can obviously be optimised by not introducing a fresh variable `v`.
-
-
-\[BR\]\[BR\]
-
-
-- **(SPLIT)**. Replace any binding `p = e`, where `p` is not a variable, with `v = e; x1 = case v of p -> x1; ...; xn = case v of p -> xn`, where `v` is fresh and `x1`..`xn` are the bound variables of `p`.  Again if `e` is a variable, you can optimised his by not introducing a fresh variable.
-
-
-\[BR\]\[BR\]
-
+  - **(SPLIT)**. Replace any binding `p = e`, where `p` is not a variable, with `v = e; x1 = case v of p -> x1; ...; xn = case v of p -> xn`, where `v` is fresh and `x1`..`xn` are the bound variables of `p`.  Again if `e` is a variable, you can optimised his by not introducing a fresh variable.
 
 >
 >
