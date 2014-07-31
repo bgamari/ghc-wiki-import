@@ -14,6 +14,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#9200](https://gitlab.staging.haskell.org/ghc/ghc/issues/9200), [\#9151](https://gitlab.staging.haskell.org/ghc/ghc/issues/9151): kind inference for mutually recursive types (Richard owns)
 - [\#9352](https://gitlab.staging.haskell.org/ghc/ghc/issues/9352): allow `State#` in FFI types.
 - [\#9211](https://gitlab.staging.haskell.org/ghc/ghc/issues/9211), [\#9090](https://gitlab.staging.haskell.org/ghc/ghc/issues/9090): using equalities to let-bind type variables; level numbers on skolems
+- [\#9388](https://gitlab.staging.haskell.org/ghc/ghc/issues/9388): narrow the state hack
 
 ## Front end
 
