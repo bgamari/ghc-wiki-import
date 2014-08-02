@@ -97,10 +97,6 @@ need to be conservative.
 
 
 
-**This bug doesn't seem to exist in 7.10 anymore. Instead, 7.10 requires that at least one of `C a` or `C Int` in module S has an overlap flag**
-
-
-
 Interestingly, this isn't exactly true. Consider the following module:
 
 
@@ -110,9 +106,6 @@ module S where
 
 class C a where
   f :: a -> String
-
-instance C a where
-  f _ = "a"
 
 instance C [Int] where
   f _ = "[Int]"
@@ -136,8 +129,8 @@ import safe S
 instance C [a] where
   f _ = "[a]"
 
-test2 :: String
-test2 = f ([1,2,3,4] :: [Int])
+test :: String
+test = f ([1,2,3,4] :: [Int])
 ```
 
 
