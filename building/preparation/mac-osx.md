@@ -46,7 +46,7 @@ http://justtesting.org/post/64947952690/the-glasgow-haskell-compiler-ghc-on-os-x
 
 
 If you are not bootstrapping from the haskell platform, but building using a binary distribution of ghc, or using [
-ghcformacosx](http://github.com/ghcformacosx/ghc-dot-app) -- see the GHC section below -- then the configure script may still conclude that you are using gcc.  While this will still allow you to build ghc, you can specify that you are using clang explicitly by running the `configure` step thus:
+ghcformacosx](http://github.com/ghcformacosx/ghc-dot-app) -- see the GHC section below -- then the wrapper is not needed.  Nevertheless, the configure script may still conclude that you are using gcc.  While this will still allow you to build ghc, you can specify that you are using clang explicitly by running the `configure` step thus:
 
 
 ```wiki
