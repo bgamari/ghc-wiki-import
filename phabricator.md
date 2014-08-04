@@ -154,7 +154,7 @@ The very first thing you want to do before continuing is *configure the applicat
 
 
 
-[](http://i.imgur.com/JURmxre.png)
+[](https://i.imgur.com/JURmxre.png)
 
 
 
@@ -277,7 +277,7 @@ Owners](https://phabricator.haskell.org/owners)** is an application that lets yo
 
 
 
-[](http://i.imgur.com/cQe8zed.png)
+[](https://i.imgur.com/cQe8zed.png)
 
 
 
@@ -325,7 +325,7 @@ Here's a more complex rule that Austin uses, combining Owners, Herald, and Audit
 
 
 
-[](http://i.imgur.com/9eZYKJo.png)
+[](https://i.imgur.com/9eZYKJo.png)
 
 
 
@@ -426,7 +426,7 @@ In any place in Phabricator, if you say the word `#1234` to refer to a Trac tick
 
 
 
-[](http://i.imgur.com/Fv2Pi1v.png)
+[](https://i.imgur.com/Fv2Pi1v.png)
 
 
 
@@ -446,7 +446,7 @@ First, **when you submit a review, add the ticket number to the `GHC Trac Issues
 
 
 
-[](http://i.imgur.com/QIGhD0T.png)
+[](https://i.imgur.com/QIGhD0T.png)
 
 
 
