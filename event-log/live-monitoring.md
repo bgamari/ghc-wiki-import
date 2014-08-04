@@ -179,8 +179,8 @@ ghc-events library documentation](https://hackage.haskell.org/package/ghc-events
 
 ```wiki
 -- Datatype that holds a link to the eventlog
-data EventHandle   -- Abstract
-data Event = ....  -- Concrete data type (see the ghc-events library docs above)
+data EventHandle      -- Abstract
+data CapEvent = ....  -- Concrete data type (see the ghc-events library docs above)
 
 -- Opens the event stream from the specified handle,
 -- reads the header info, and initialises the EventHandle
