@@ -24,10 +24,6 @@ Dependency analysis is carried out by the `depanal` function; the resulting `Mod
 
 
 
-In fact, downsweep is also performed 
-
-
-
 ToDo: say something about how hs-boot files are 
 
 
