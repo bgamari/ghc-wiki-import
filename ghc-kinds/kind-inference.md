@@ -123,7 +123,7 @@ Examples:
 
 
 
-**RAE:** This variation is partially implemented in branch `re-sort-non-cusk-decls` at [
+**RAE:** This variation is partially implemented in tag `re-sort-non-cusk-decls` at [
 my GitHub fork](https://github.com/goldfirere/ghc).
 
 
