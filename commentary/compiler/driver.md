@@ -9,6 +9,10 @@ When compiling a single module, we can assume that all of our dependencies have 
 
 1. We have an opportunity to cache and reuse information from interface files which we may load from the environment.  This is why, for example, `ghc --make` outperforms parallel one-shot compilation on one core.
 
+
+This discussion is going to omit concerns related to dynamic code loading in GHC (as would be the case in GHCi).
+
+
 ## The overall driver
 
 
@@ -28,7 +32,7 @@ ToDo: say something about how hs-boot files are
 
 
 
-The dependency analysis is **cached** (in `hsc_mod_graph`), so later calls to `depanal` can reuse this information. (This is not germane for `--make`, which only calls `depanal` once.)  `discardProg` deletes this information entirely, while `invalidateModSummaryCache` simply "touches" the timestamp associated with the file so that we resummarize it.
+The dependency analysis is cached (in `hsc_mod_graph`), so later calls to `depanal` can reuse this information. (This is not germane for `--make`, which only calls `depanal` once.)  `discardProg` deletes this information entirely, while `invalidateModSummaryCache` simply "touches" the timestamp associated with the file so that we resummarize it.
 
 
 
@@ -43,7 +47,7 @@ See also the page on [recompilation avoidance](commentary/compiler/recompilation
 
 
 
-ToDo: say something about stability
+ToDo: say something about stability; it's per SCC
 
 
 ### Compilation
@@ -53,10 +57,23 @@ ToDo: say something about stability
 Compilation, also known as **upsweep**, walks the module graph in topological order and compiles everything. Depending on whether or not we are doing parallel compilation, this implemented by `upsweep` or by `parUpsweep`.  In this section, we'll talk about the sequential upsweep.
 
 
-### Home package table
+
+The key data structure which we are filling in as we perform compilation is the **home package table** or HPT (`hsc_HPT`, defined in [compiler/main/HscTypes.lhs](/trac/ghc/browser/ghc/compiler/main/HscTypes.lhs)). As its name suggests, it contains informations from the \*home package\*, i.e. the package we are currently compiling. Its entries, `HomeModInfo`, contain the sum total knowledge of a module after compilation: both its pre-linking interface `ModIface` as well as the post-linking details `ModDetails`.
 
 
 
-Finally, when the module is completely done being compiled, it is registered in the home package table or HPT (`hsc_HPT`, defined in [compiler/main/HscTypes.lhs](/trac/ghc/browser/ghc/compiler/main/HscTypes.lhs))
+We \*clear\* out the home package table in the session (for `--make`, this was empty anyway), but we pass in the old HPT.
+
+
+
+ToDo: talk about how we fix up loops after we finish the loop
+
+
+
+Finally, when the module is completely done being compiled, it is registered in the home package table 
+
+
+
+ToDo: Talk about what happens when we fail while in the middle of compiling a module cycle
 
 
