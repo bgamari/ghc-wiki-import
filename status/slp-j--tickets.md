@@ -24,11 +24,9 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 - [\#8968](https://gitlab.staging.haskell.org/ghc/ghc/issues/8968), [\#9226](https://gitlab.staging.haskell.org/ghc/ghc/issues/9226): pattern synonyms and GADTs
 - [\#8582](https://gitlab.staging.haskell.org/ghc/ghc/issues/8582): pattern synonyms and record syntax
-- [\#8581](https://gitlab.staging.haskell.org/ghc/ghc/issues/8581): explicitly bidirectional pattern synonyms
 - [\#9223](https://gitlab.staging.haskell.org/ghc/ghc/issues/9223): error message mentioning untouchables
 - [\#9198](https://gitlab.staging.haskell.org/ghc/ghc/issues/9198): slow typechecker (big types!)
 - [\#9210](https://gitlab.staging.haskell.org/ghc/ghc/issues/9210), [\#9103](https://gitlab.staging.haskell.org/ghc/ghc/issues/9103): functional dependencies and overlapping instances
-- [\#9156](https://gitlab.staging.haskell.org/ghc/ghc/issues/9156): duplicate record fields
 - [\#8673](https://gitlab.staging.haskell.org/ghc/ghc/issues/8673): more generous GADT record selectors
 - [\#8550](https://gitlab.staging.haskell.org/ghc/ghc/issues/8550): Don't build recursive type-function dictionaries
 - [\#8281](https://gitlab.staging.haskell.org/ghc/ghc/issues/8281): `UnliftedFFITypes` etc
@@ -236,19 +234,16 @@ See also [TemplateHaskell](template-haskell)
 ---
 
 
-## Type inference (longer term)
+## Types and type inference
 
 
 - [TypeFunctionsStatus](type-functions-status)
+- [\#9422](https://gitlab.staging.haskell.org/ghc/ghc/issues/9422): Glomming all instances in EPT is too crude for `--make`
 - [\#7908](https://gitlab.staging.haskell.org/ghc/ghc/issues/7908): Kind polymorphism notation
 - [\#7503](https://gitlab.staging.haskell.org/ghc/ghc/issues/7503): Kind polymorphism and mutual recursion
 - [\#6018](https://gitlab.staging.haskell.org/ghc/ghc/issues/6018), [\#4259](https://gitlab.staging.haskell.org/ghc/ghc/issues/4259): Injective type families and type family overlap
 - [\#4296](https://gitlab.staging.haskell.org/ghc/ghc/issues/4296): SkolemOccurs
 - [\#816](https://gitlab.staging.haskell.org/ghc/ghc/issues/816). [\#3108](https://gitlab.staging.haskell.org/ghc/ghc/issues/3108): extreme delicacy in solve order, involving fundeps
-
-## Types and type inference
-
-
 - [\#8109](https://gitlab.staging.haskell.org/ghc/ghc/issues/8109): as-patterns in type-family declarations
 - [\#6065](https://gitlab.staging.haskell.org/ghc/ghc/issues/6065): GHC suggests a type signature that it then rejects
 - [\#5320](https://gitlab.staging.haskell.org/ghc/ghc/issues/5320), [\#7296](https://gitlab.staging.haskell.org/ghc/ghc/issues/7296): overlap delicacy
