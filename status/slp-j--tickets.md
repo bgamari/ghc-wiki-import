@@ -5,6 +5,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Urgent or in-flight
 
 
+- [\#7015](https://gitlab.staging.haskell.org/ghc/ghc/issues/7015): support for `static`
 - [\#9390](https://gitlab.staging.haskell.org/ghc/ghc/issues/9390): primops being discarded (Simon has fix nearly done0
 - [\#9404](https://gitlab.staging.haskell.org/ghc/ghc/issues/9404): `tcInfer` infelicity (Richard owns)
 - [\#9400](https://gitlab.staging.haskell.org/ghc/ghc/issues/9400): `unpackCString#` rules (asked for volunteers)
