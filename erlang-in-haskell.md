@@ -19,3 +19,4 @@ Here are some resources relevant to this project:
   The source repository](https://github.com/haskell-distributed/distributed-process)
 - [
   Haskell Wiki page](http://www.haskell.org/haskellwiki/GHC/CloudAndHPCHaskell)
+- [Design notes](static-values) for a language extension to support the `static` form.
