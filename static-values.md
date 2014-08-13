@@ -1,4 +1,4 @@
-# Design notes for a language extension for static values
+# Design notes for static values
 
 
 
