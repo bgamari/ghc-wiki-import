@@ -38,6 +38,8 @@ Active tickets](https://ghc.haskell.org/trac/ghc/query?status=infoneeded&status=
 
 - **New, smaller array type** - Johan Tibell has recently added a new array type, `SmallArray#`, which uses less memory (2 words) than the `Array#` type, at the cost of being more expensive to garbage collect for array sizes larger than 128 elements.
 
+- **Faster small array allocation** - Johan Tibell has made array allocation of arrays of small, statically know size faster by making it inline with the normal heap check, instead of out-of-line in a separate nursery block.
+
 - **DWARF-based stack tracing** - Peter Wortmann and Arash Rouhani (with support from the Simons) are working on enabling GHC to generate and use DWARF debugging information. This should allow us to obtain stack traces and do profiling without the need for instrumentation.
 
 - **Reimplemented GMP-based `Integer` backend ([\#9281](https://gitlab.staging.haskell.org/ghc/ghc/issues/9281))** - This provides a GMP-based `Integer` backend not relying on registering GHC-specific [
