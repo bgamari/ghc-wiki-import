@@ -180,6 +180,23 @@ git commit -m 'update haddock submodule ... blablabla'
 git push
 ```
 
+
+Git supports a recursive `git push` operation. If you issue a
+
+
+```wiki
+git push --recurse-submodules=on-demand
+```
+
+
+this will cause Git to push all submodules changes that have been registered in the revisions
+to be pushed to the super repository.
+
+
+
+TODO show how to define a `git pushall` alias in the style of the `git pullall` alias
+
+
 ### Validation hooks
 
 
