@@ -239,6 +239,7 @@ See also [TemplateHaskell](template-haskell)
 
 
 - [TypeFunctionsStatus](type-functions-status)
+- [\#9427](https://gitlab.staging.haskell.org/ghc/ghc/issues/9427): SCC analysis for type and class decls
 - [\#9422](https://gitlab.staging.haskell.org/ghc/ghc/issues/9422): Glomming all instances in EPT is too crude for `--make`
 - [\#7908](https://gitlab.staging.haskell.org/ghc/ghc/issues/7908): Kind polymorphism notation
 - [\#7503](https://gitlab.staging.haskell.org/ghc/ghc/issues/7503): Kind polymorphism and mutual recursion
