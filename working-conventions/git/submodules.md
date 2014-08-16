@@ -233,6 +233,8 @@ Below is a table summarizing the repositories GHC uses. It lists the upstream lo
 
 - Patches for `github.com` repositories should be made into Pull Requests on GitHub. GHC developers have access to the repositories under the `haskell` organization in particular, and can push directly.
 
+- As of 14th August 2014, `ghc-head` is the branch to track for Haddock.
+
 
 As stated above - GHC tracks the branch listed here for the specific repository. If you're going to base your change on a branch, always do it on this one, and make sure your change is on the specified branch. Then update the submodule.
 
@@ -251,7 +253,7 @@ As stated above - GHC tracks the branch listed here for the specific repository.
 <td>          </td>
 <th>https://github.com/haskell/haddock</th>
 <td> </td>
-<th>master</th></tr>
+<th>ghc-head</th></tr>
 <tr><th>nofib</th>
 <td>                  </td>
 <th>https://git.haskell.org/nofib.git</th>
