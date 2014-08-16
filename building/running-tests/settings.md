@@ -1,4 +1,4 @@
-# Testsuite Variables / Settings and WAYS
+# Testsuite Variables / Settings and WAYs
 
 
 
@@ -31,7 +31,8 @@ The testsuite also has a concept called, *ways*. These refer to different settin
 
 
 
-The following ways are defined (see the file config/ghc for the complete list):
+The following ways are defined (see the file `testsuite/config/ghc`
+for the complete list):
 
 
 ```wiki
@@ -49,13 +50,14 @@ profthreaded         -- -O -prof -auto-all -threaded
 hpc                  -- -O -fhpc
 static               -- -O -static
 dyn                  -- -O -dynamic
+dynllvm              -- -fllvm -dyn
 ```
 
 
-certain ways are enabled automatically if the GHC build in the local
-tree supports them.  Ways that are enabled this way are optasm, optllvm,
-profasm, threaded1, threaded2, profthreaded, ghci, and whichever of
-static/dyn is not GHC's default mode.
+Certain ways are enabled automatically if the GHC build in the local
+tree supports them.  Ways that are enabled this way are `optasm`,
+`optllvm`, `profasm`, `threaded1`, `threaded2`, `profthreaded`, \`ghci,
+and whichever of `static`/`dyn` is not GHC's default mode.
 
 
 
