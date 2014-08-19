@@ -6,14 +6,12 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 
 - [\#7015](https://gitlab.staging.haskell.org/ghc/ghc/issues/7015): support for `static`
-- [\#9390](https://gitlab.staging.haskell.org/ghc/ghc/issues/9390): primops being discarded (Simon has fix nearly done0
 - [\#9404](https://gitlab.staging.haskell.org/ghc/ghc/issues/9404): `tcInfer` infelicity (Richard owns)
 - [\#9400](https://gitlab.staging.haskell.org/ghc/ghc/issues/9400): `unpackCString#` rules (asked for volunteers)
 - [\#9371](https://gitlab.staging.haskell.org/ghc/ghc/issues/9371): seg-fault due to inadequate conflict detection (Richard owns)
 - [\#8634](https://gitlab.staging.haskell.org/ghc/ghc/issues/8634), [\#9267](https://gitlab.staging.haskell.org/ghc/ghc/issues/9267), [\#9227](https://gitlab.staging.haskell.org/ghc/ghc/issues/9227): relaxing functional dependency rules `-XDysFunctionalDependencies`
 - [\#9318](https://gitlab.staging.haskell.org/ghc/ghc/issues/9318): bad type error caused by wanted/wanted solving (talk to Dimitrios)
 - [\#8852](https://gitlab.staging.haskell.org/ghc/ghc/issues/8852), [\#8980](https://gitlab.staging.haskell.org/ghc/ghc/issues/8980), [\#8941](https://gitlab.staging.haskell.org/ghc/ghc/issues/8941) (possibly), [\#8960](https://gitlab.staging.haskell.org/ghc/ghc/issues/8960), [\#7898](https://gitlab.staging.haskell.org/ghc/ghc/issues/7898), [\#7068](https://gitlab.staging.haskell.org/ghc/ghc/issues/7068), [\#7944](https://gitlab.staging.haskell.org/ghc/ghc/issues/7944), [\#5550](https://gitlab.staging.haskell.org/ghc/ghc/issues/5550), [\#8836](https://gitlab.staging.haskell.org/ghc/ghc/issues/8836): `SpecConstr` blowup
-- [\#9242](https://gitlab.staging.haskell.org/ghc/ghc/issues/9242): per-instance pragmas for overlapping/incoherent
 - [\#9123](https://gitlab.staging.haskell.org/ghc/ghc/issues/9123): higher order roles
 - [\#9200](https://gitlab.staging.haskell.org/ghc/ghc/issues/9200), [\#9151](https://gitlab.staging.haskell.org/ghc/ghc/issues/9151): kind inference for mutually recursive types (Richard owns)
 - [\#9352](https://gitlab.staging.haskell.org/ghc/ghc/issues/9352): allow `State#` in FFI types.
@@ -240,6 +238,7 @@ See also [TemplateHaskell](template-haskell)
 
 
 - [TypeFunctionsStatus](type-functions-status)
+- [\#9404](https://gitlab.staging.haskell.org/ghc/ghc/issues/9404): tcInfer and `PolyTv`
 - [\#9429](https://gitlab.staging.haskell.org/ghc/ghc/issues/9429): instance chains
 - [\#9427](https://gitlab.staging.haskell.org/ghc/ghc/issues/9427): SCC analysis for type and class decls
 - [\#9422](https://gitlab.staging.haskell.org/ghc/ghc/issues/9422): Glomming all instances in EPT is too crude for `--make`
