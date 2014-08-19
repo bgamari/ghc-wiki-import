@@ -107,10 +107,6 @@ The ticket workflow is illustrated in the following image. Most tickets will sta
 
 
 
-[](/trac/ghc/attachment/wiki/WorkingConventions/BugTracker/workflow.png)
-
-
-
 The following diagram is generated directly based on Trac's current configuration:
 
 
