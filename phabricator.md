@@ -392,7 +392,7 @@ Phab:D162](https://phabricator.haskell.org/D162) is a good example:
 
 Click on the link posted by Harbormaster (in this case, "Harbormaster completed building B467: Diff 379") to the build to go to the Buildable, like [
 Phab:B467](https://phabricator.haskell.org/B467) in this case. There you can follow links to individual builds, containing stdout/stderr logs, like [
-https://phabricator.haskell.org/harbormaster/build/468/](https://phabricator.haskell.org/harbormaster/build/468/):
+https://phabricator.haskell.org/harbormaster/build/468/](https://phabricator.haskell.org/harbormaster/build/468/)
 
 
 
@@ -401,7 +401,7 @@ Note that every time you run `arc diff` and update an existing review or create 
 
 
 Harbormaster also builds GHC commits that have been pushed. You can see more on the [
-https://phabricator.haskell.org/harbormaster Harbormaster](https://phabricator.haskell.org/harbormaster Harbormaster) application.
+Harbormaster](https://phabricator.haskell.org/harbormaster) application.
 
 
 
