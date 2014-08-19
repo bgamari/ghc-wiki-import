@@ -92,18 +92,6 @@ and hope that GHC's existing preserve-type-synonyms-wherever-possible machinery 
 
 
 
-Note that `myError` would get a natural inferred type
-
-
-```wiki
-myError :: forall (l :: Levity) (a :: TYPE l). String -> a
-```
-
-
-Whether users could write down such a signature is another matter.  (They probably should be able to.)
-
-
-
 Note that this proposal does not address the `Constraint` / `*` infelicity -- that is a separate problem.
 
 
