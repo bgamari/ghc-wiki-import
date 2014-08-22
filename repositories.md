@@ -27,8 +27,7 @@ GHC's repos use git; see [Git Working Conventions](working-conventions/git).
 
 
 
-**Be sure to read more on the working conventions for submodules, which are thoroughly documented here**: [
-https://ghc.haskell.org/trac/ghc/wiki/WorkingConventions/Git/Submodules](https://ghc.haskell.org/trac/ghc/wiki/WorkingConventions/Git/Submodules)
+**Be sure to read more on the working conventions for submodules, which are thoroughly documented [here](working-conventions/git/submodules)**
 
 
 ## GHC Repositories
