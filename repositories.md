@@ -118,6 +118,10 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 
 - **GHC repo**: in every case there is a repo on `http://git.haskell.org/`, which contains the bits we use for building GHC every night. For libraries with upstream repos, this is just a lagging mirror of the master (see [Repositories/Upstream](repositories/upstream)).  The read-only HTTP URL for the repo is `http://git.haskell.org/<table-entry>`.  To get a read/write URL, replace HTTP prefix `http://git.haskell.org` with the SSH prefix `ssh://git@git.haskell.org`. 
 
+
+This table might be out-of-date: for guaranteed up-to-date info, check the [packages](/trac/ghc/browser/ghc/packages) files.
+
+
 <table><tr><th>**Location in tree**</th>
 <td>   </td>
 <th> **Upstream repo?**</th>
@@ -174,7 +178,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>nofib.git</th></tr>
 <tr><th>libraries/array</th>
 <td>                   </td>
-<th> yes </th>
+<th>     </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -219,7 +223,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/containers.git</th></tr>
 <tr><th>libraries/deepseq</th>
 <td>      	       </td>
-<th> yes </th>
+<th>     </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -228,7 +232,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/deepseq.git</th></tr>
 <tr><th>libraries/directory</th>
 <td>               </td>
-<th> yes </th>
+<th>     </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -237,7 +241,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/directory.git</th></tr>
 <tr><th>libraries/filepath</th>
 <td>                </td>
-<th> yes </th>
+<th>     </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -255,7 +259,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/haskeline.git</th></tr>
 <tr><th>libraries/haskell98</th>
 <td>               </td>
-<th> yes </th>
+<th>     </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -264,7 +268,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/haskell98.git</th></tr>
 <tr><th>libraries/haskell2010</th>
 <td>             </td>
-<th> yes </th>
+<th>     </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -273,7 +277,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/haskell2010.git</th></tr>
 <tr><th>libraries/hoopl</th>
 <td>                   </td>
-<th> yes </th>
+<th>     </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -282,7 +286,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/hoopl.git</th></tr>
 <tr><th>libraries/hpc</th>
 <td>                     </td>
-<th> yes </th>
+<th>     </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -291,7 +295,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/hpc.git</th></tr>
 <tr><th>libraries/old-locale</th>
 <td>              </td>
-<th> yes </th>
+<th>     </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -300,7 +304,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/old-locale.git</th></tr>
 <tr><th>libraries/old-time</th>
 <td>                </td>
-<th> yes </th>
+<th>     </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -318,7 +322,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/pretty.git</th></tr>
 <tr><th>libraries/process</th>
 <td>                 </td>
-<th> yes </th>
+<th>     </th>
 <td> </td>
 <th>     </th>
 <td> </td>
@@ -426,7 +430,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/dph.git</th></tr>
 <tr><th>libraries/parallel</th>
 <td>     	       </td>
-<th> yes </th>
+<th>     </th>
 <td> </td>
 <th> no  </th>
 <td> </td>
@@ -435,7 +439,7 @@ A GHC source tree is made of a collection of repositories. Here is a list of the
 <th>packages/parallel.git</th></tr>
 <tr><th>libraries/stm</th>
 <td>          	       </td>
-<th> yes </th>
+<th>    </th>
 <td> </td>
 <th> no  </th>
 <td> </td>
