@@ -22,6 +22,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 
 - [\#8968](https://gitlab.staging.haskell.org/ghc/ghc/issues/8968), [\#9226](https://gitlab.staging.haskell.org/ghc/ghc/issues/9226): pattern synonyms and GADTs
+- [\#8581](https://gitlab.staging.haskell.org/ghc/ghc/issues/8581): bidirectional pattern synonyms (with different constraints)
 - [\#8582](https://gitlab.staging.haskell.org/ghc/ghc/issues/8582): pattern synonyms and record syntax
 - [\#9223](https://gitlab.staging.haskell.org/ghc/ghc/issues/9223): error message mentioning untouchables
 - [\#9198](https://gitlab.staging.haskell.org/ghc/ghc/issues/9198): slow typechecker (big types!)
