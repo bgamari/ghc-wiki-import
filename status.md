@@ -45,7 +45,6 @@ Haskell Communities and Activities Report](http://haskell.org/communities/)
 Here are our [release](working-conventions/releases) plans for
 
 
-- [GHC 7.8.3](status/gh-c-7.8.3)
 - [GHC 7.8.4](status/gh-c-7.8.4)
 - [GHC 7.10.1](status/gh-c-7.10.1)
 
