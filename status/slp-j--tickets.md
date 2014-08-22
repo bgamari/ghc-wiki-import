@@ -239,6 +239,7 @@ See also [TemplateHaskell](template-haskell)
 
 
 - [TypeFunctionsStatus](type-functions-status)
+- [\#9497](https://gitlab.staging.haskell.org/ghc/ghc/issues/9497): typed holes: silencing them
 - [\#9404](https://gitlab.staging.haskell.org/ghc/ghc/issues/9404): tcInfer and `PolyTv`
 - [\#9334](https://gitlab.staging.haskell.org/ghc/ghc/issues/9334): instance chains
 - [\#9427](https://gitlab.staging.haskell.org/ghc/ghc/issues/9427): SCC analysis for type and class decls
