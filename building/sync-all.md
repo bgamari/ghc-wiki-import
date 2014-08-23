@@ -34,7 +34,7 @@ The second step is required in the event that new packages or repositories have 
 
 
 
-See [Building/Rebuilding](building/rebuilding) for how to update your build after pulling patches.
+See [Building/Hacking](building/hacking) if you've never built anything before. See [Building/Rebuilding](building/rebuilding) for how to update your build after pulling patches.
 
 
 
