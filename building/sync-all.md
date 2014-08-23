@@ -2,7 +2,7 @@
 
 
 
-A GHC tree consists of [multiple repositories](repositories). The `sync-all` Perl script lets you operate over them all at once.
+A GHC tree consists of [multiple repositories](repositories). The `sync-all` Perl script lets you operate over them all at once. It is in the root directory of the tree.
 
 
 
