@@ -73,7 +73,7 @@ Phab:B609](https://phabricator.haskell.org/B609) to see the results for commit [
 
 
 
-[](https://i.imgur.com/UdRGunV)
+[](https://i.imgur.com/UdRGunV.png)
 
 
 
