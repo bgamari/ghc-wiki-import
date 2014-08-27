@@ -51,7 +51,7 @@ So we come to the
 
 
 
-Final approximation (this may even be precise; I don't know, but it's probably good enough for anything sane): Don't use `seq` or similar to force anything whose type contains `b` unless you could accomplish the same thing without using `seq`.
+Final approximation (this may even be precise; I don't know, but it's probably good enough for anything sane): Don't use `seq` or similar to force anything whose type contains `b` unless you could accomplish the same thing without using `seq` to force anything whose type contains `b`.
 
 
 
