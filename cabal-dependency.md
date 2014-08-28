@@ -39,15 +39,24 @@ Under the new approach, we have the following dependency structure for Cabal, gh
 
 
 ```wiki
-          +-------+   +----------------+
-          | Cabal |   | bin-package-db |
-          +-------+   +----------------+
-           .   ^         ^          ^
-           .    \       /            \
-  executes .     \     /              \
-           .   +---------+          +-----+
-           ...>| ghc-pkg |          | GHC |
-               +---------+          +-----+
+
+  +--------------+  +------------+  +-----------+
+  |    cabal     |  |  ghc-pkg   |  |   GHC     |
+  |  executable  |  | executable |  | executable|
+  +---+----------+  +------------+  +-+---------+
+          |                           |
+          |                     +-----v-------+
+     .....|...>                 |     GHC     |
+     .    |                     |   package   |
+     .    |      |      |       +-+-----------+
+     .    |      |      |         |
+     .  +-v------v-+  +-v---------v----+
+     .  |   Cabal  |  | bin-package-db |
+     .  |  package |  |    package     |
+     .  +----------+  +----------------+
+     .     .
+     .......
+     executes (an "up-dependency")
 ```
 
 
