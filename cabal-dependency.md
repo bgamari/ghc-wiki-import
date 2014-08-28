@@ -60,7 +60,7 @@ Under the new approach, we have the following dependency structure for Cabal, gh
 ```
 
 
-Cabal continues to have a `InstalledPackageInfo` type, which defines a representation for installed packages as per the Cabal specification; however, now `bin-package-db` defines a new variant of the type which contains \*only\* the fields that GHC relies on. (Call this GHC's type.) ghc-pkg depends on both Cabal and bin-package-db, and is responsible for converting Cabal's types to GHC's types, as well as writing these contents to a binary database, as before. (Cabal invokes ghc-pkg in order to register packages in the installed package database, and as before doesn't directly know about this format.)
+Cabal has a `InstalledPackageInfo` type, defined in the Cabal package, which defines a representation for installed packages as per the Cabal specification; however, now `bin-package-db` defines a new variant of the type which contains \*only\* the fields that GHC relies on. (Call this GHC's type.) ghc-pkg depends on both Cabal and bin-package-db, and is responsible for converting Cabal's types to GHC's types, as well as writing these contents to a binary database, as before. (Cabal invokes ghc-pkg in order to register packages in the installed package database, and as before doesn't directly know about this format.)
 
 
 
