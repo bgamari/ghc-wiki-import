@@ -123,7 +123,7 @@ A: Because the whole system is built around inlining, and no one really knows ho
 
 
 
-Q: Now can full laziness interfere with fusion?
+Q: How can full laziness interfere with fusion?
 
 
 
@@ -131,15 +131,15 @@ A: Full laziness can pull a piece of an expression up to the top level, away fro
 
 
 
-Q: Which NoFib benchmarks seem to be particularly sensitive to additional fusion rules?
+Q: What can we do to mitigate problems caused by full laziness?
 
 
 
-A (incomplete, and poorly remembered): `fft2` tends to get significant allocation reduction, around 20%, in general. `wang` gets a 50% allocation reduction with either `foldr/cons` or `cons/build`, but only if `-fsimple-list-literals` is enabled. `constraints` tends to do a little worse, with around +4% allocation. `cacheprof` has mixed results (nothing huge). Adding a (highly invasive) simplifier run with inlining and rules has all sorts of wild effects, many bad, but reduces allocation in `fannkuch-redux` by a whopping 100%.
+A: One thing to watch out for is the `($)` operator. For now, it seems best to avoid using it on the RHS of any fusion rules. For example, `foldr c n (build $ g)` actually looks, in the "gentle" phase, like `foldr c n (($) build g)`, which will not match the `fold/build` rule. We can't really stop anyone from writing `foldr c n $ build g`, which causes similar problems in some cases.
 
 
 
-Q: What can we do to keep full laziness from goofing up fusion, without having bad effects in many cases?
+Q: What can we do to the compiler to keep full laziness from goofing up fusion, without having bad effects in many cases?
 
 
 
@@ -148,5 +148,17 @@ Idea 1 (by Joachim Breitner): Let the `RULES` engine see through the introduced 
 
 
 Guess 2 (by David Feuer): Introduce the notion of something being "inlined early", specifically allowing inlining before any full laziness happens. Something that's inlinable, and that uses something that's inlined early becomes inlined early. This seems messier than Idea 1, but I thought I'd put it on the table.
+
+
+
+Guess 3 (perhaps just implemented by Simon Peyton-Jones?): restrict constant floating to try to prevent some of these problems.
+
+
+
+Q: Which NoFib benchmarks seem to be particularly sensitive to additional fusion rules?
+
+
+
+A (incomplete, and poorly remembered): `fft2` tends to get significant allocation reduction, around 20%, in general. `wang` gets a 50% allocation reduction with either `foldr/cons` or `cons/build`, but only if `-fsimple-list-literals` is enabled. `constraints` tends to do a little worse, with around +4% allocation. `cacheprof` has mixed results (nothing huge). Adding a (highly invasive) simplifier run with inlining and rules has all sorts of wild effects, many bad, but reduces allocation in `fannkuch-redux` by a whopping 100%.
 
 
