@@ -1,102 +1,80 @@
+CONVERSION ERROR
 
+Original source:
 
+```trac
 
-# Setting up a Linux system for building GHC
+[[PageOutline]]
 
-
+= Setting up a Linux system for building GHC =
 
 If you're on a recent Linux system, then you should be able to get a working build environment by installing the following packages using your system's package manager.
 
+== Fedora ==
 
-## Fedora
-
-
-- `glibc-devel`
-- `ncurses-devel`
-- `gmp-devel`
-- `autoconf`
-- `automake`
-- `libtool`
-- `gcc`
-- `make`
-- `perl`
-- `python`
-- `ghc`
-- `happy`
-- `alex`
-- `git`
-
+ * `glibc-devel`
+ * `ncurses-devel`
+ * `gmp-devel`
+ * `autoconf`
+ * `automake`
+ * `libtool`
+ * `gcc`
+ * `make`
+ * `perl`
+ * `python`
+ * `ghc`
+ * `happy`
+ * `alex`
+ * `git`
 
 For building the documentation: (User's Guide and Cabal guide):
 
-
-- `docbook-utils`
-- `docbook-utils-pdf`
-- `docbook-style-xsl`
-
+ * `docbook-utils`
+ * `docbook-utils-pdf`
+ * `docbook-style-xsl`
 
 other packages that are useful for development:
 
+ * `strace`
+ * `patch`
 
-- `strace`
-- `patch`
-
-## Debian, Ubuntu, and other Debian-based systems
-
-
+== Debian, Ubuntu, and other Debian-based systems ==
 
 You can make sure you have all dependencies by
 
-
-```wiki
+{{{
    sudo apt-get build-dep ghc
-```
-
+}}}
 
 But this might install some packages you do not use in your system (e.g. java, docbook, xsltproc).  Alternatively install the following:
 
-
-```wiki
+{{{
    sudo apt-get install haskell-platform git autoconf automake libtool make ncurses-dev g++ llvm
-```
-
+}}}
 
 (`ncurses-dev` is needed by the `terminfo` package, and `g++` is needed by a couple of tests, `ghcilink003` and `ghcilink006`).
 
+Due to the nature of Debian, you may have difficulty building GHC >7.6 due to version incompatibilities with the Happy and Alex packages.  To alleviate this issue simply install both packages using the haskell-platform provided cabal.
 
-
-Due to the nature of Debian, you may have difficulty building GHC \>7.6 due to version incompatibilities with the Happy and Alex packages.  To alleviate this issue simply install both packages using the haskell-platform provided cabal.
-
-
-```wiki
+{{{
    cabal install alex happy
-```
-
+}}}
 
 For building the documentation (User's Guide):
 
-
-```wiki
+{{{
    sudo apt-get install dblatex docbook-xsl docbook-utils
-```
-
+}}}
 
 other packages that are useful for development:
 
+{{{
+   sudo apt-get install linux-tools-generic
+}}}
 
-```wiki
-   sudo apt-get install linux-tools
+(includes `perf`, see [wiki:Debugging/LowLevelProfiling/Perf])
+
+== Arch ==
+
+The list of dependencies is the same as for [https://aur.archlinux.org/packages/ghc-git/ ghc-git] package on AUR.
 ```
-
-
-(includes `perf`, see [Debugging/LowLevelProfiling/Perf](debugging/low-level-profiling/perf))
-
-
-## Arch
-
-
-
-The list of dependencies is the same as for [
-ghc-git](https://aur.archlinux.org/packages/ghc-git/) package on AUR.
-
-
