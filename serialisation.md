@@ -76,8 +76,7 @@ Patrick Maier's IFL'11 paper](http://www.dcs.gla.ac.uk/~pmaier/papers/Maier_Trin
 
 
 
-Mathieu and Facundo Domínguez have implemented a GHC extension called
-"[StaticValues](static-values)".
+Mathieu and Facundo Domínguez have implemented a GHC extension called [StaticPointers](static-pointers).
 
 
 
