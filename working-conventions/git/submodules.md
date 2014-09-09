@@ -1,142 +1,100 @@
+CONVERSION ERROR
 
+Original source:
 
+```trac
+[[PageOutline()]]
 
-# Workflows for Handling GHC's Git Submodules
-
-
+= Workflows for Handling GHC's Git Submodules =
 
 GHC is a large project with several external dependencies. We use git submodules to track these repositories, and here you'll learn a bit about how to manage them.
 
-
-
 General information about Git's submodule support:
 
+ - [http://git-scm.com/docs/git-submodule "git submodule" manual page]
+ - [http://git-scm.com/book/en/Git-Tools-Submodules Pro Git "6.6 Git Tools - Submodules" chapter]
+ - [http://www.vogella.com/tutorials/Git/article.html#submodules Submodule Tutorial]
 
-- [ "git submodule" manual page](http://git-scm.com/docs/git-submodule)
-- [
-  Pro Git "6.6 Git Tools - Submodules" chapter](http://git-scm.com/book/en/Git-Tools-Submodules)
-- [
-  Submodule Tutorial](http://www.vogella.com/tutorials/Git/article.html#submodules)
-
-## Cloning a fresh GHC source tree
-
-
+== Cloning a fresh GHC source tree ==
 
 Initial cloning of GHC HEAD (into the folder `./ghc`) is a simple as:
 
-
-```
+{{{#!sh
 git clone --recursive git://git.haskell.org/ghc.git
-```
+}}}
 
+(Obviously, the clone URL can be replaced by any of the supported `ghc.git` URLs as listed on http://git.haskell.org/ghc.git)
 
-(Obviously, the clone URL can be replaced by any of the supported `ghc.git` URLs as listed on [
-http://git.haskell.org/ghc.git](http://git.haskell.org/ghc.git))
-
-
-## Updating an existing GHC source tree clone
-
-
+== Updating an existing GHC source tree clone ==
 
 Sometimes when you pull in new commits, the authors updated a submodule. After pulling, you'll also need to update your submodules, or you'll get errors.
 
-
-
 At the top-level of `ghc.git` working copy:
 
-
-```
+{{{#!sh
 git pull --rebase
 git submodule update --init
-```
+}}}
 
+{{{#!box note
 
 In seldom cases it can happen that `git submodule update` aborts with an error similar to the following one
 
-
-```wiki
+{{{
 fatal: Needed a single revision
 Unable to find current revision in submodule path 'libraries/parallel'
-```
-
+}}}
 
 This means that for some (unknown) reason, the Git submodule in question is in an unexpected/corrupted state. The easiest remedy is remove the named path (or just move it out of the way in case it contains unsaved work), and retry. E.g.
 
-
-```wiki
+{{{
 rm -rf libraries/parallel
 git submodule update --init
-```
+}}}
 
-### Using a Git alias
+}}}
 
-
+=== Using a Git alias ===
 
 A commonly defined Git alias that combines the two commands into one convenient Git alias is:
 
-
-```
+{{{#!sh
 git config --global alias.pullall '!f(){ git pull "$@" && git submodule update --init --recursive; }; f'
-```
-
+}}}
 
 (the `--global` flag make this alias persist in the `${HOME}/.gitconfig` file, so this needs to be done only once, the `--recursive` option is not needed for GHC but it's commonly used for the `pullall` alias)
 
-
-
 After setting this alias, one can now simply use the single invocation
 
-
-```
+{{{#!sh
 git pullall --rebase
-```
-
+}}}
 
 to update `ghc.git` and all its submodules.
 
+== `git status` and dirty submodules ==
 
-## `git status` and dirty submodules
+By default, git will consider your submodule as "dirty" when you do `git status` if it has any changes or any untracked files.  Sometimes this can be inconvenient, especially when using [wiki:Phabricator] which won't allow you to upload a diff if there are dirty submodules.  Phabricator will let you ignore untracked files in the main GHC repo, but to ignore untracked files in a submodule you'll need a change to `.git/config` in the GHC repo.  For example, to ignore untracked files in the `nofib` repo, add the line `ignore = untracked` to the section for `nofib` in `.git/config`:
 
-
-
-By default, git will consider your submodule as "dirty" when you do `git status` if it has any changes or any untracked files.  Sometimes this can be inconvenient, especially when using [Phabricator](phabricator) which won't allow you to upload a diff if there are dirty submodules.  Phabricator will let you ignore untracked files in the main GHC repo, but to ignore untracked files in a submodule you'll need a change to `.git/config` in the GHC repo.  For example, to ignore untracked files in the `nofib` repo, add the line `ignore = untracked` to the section for `nofib` in `.git/config`:
-
-
-```wiki
+{{{
 [submodule "nofib"]
 	url = /home/simon/ghc-mirror/nofib.git
         ignore = untracked
-```
+}}}
 
-## Making changes to GHC submodules
+== Making changes to GHC submodules ==
 
-
-
-It's very important to keep in mind that Git submodules track commits (i.e. not branches!) to avoid getting confused. Therefore, `git submodule update` will result in submodules having checked out a so-called [
-detached HEAD](http://alblue.bandlem.com/2011/08/git-tip-of-week-detached-heads.html).
-
-
+It's very important to keep in mind that Git submodules track commits (i.e. not branches!) to avoid getting confused. Therefore, `git submodule update` will result in submodules having checked out a so-called [http://alblue.bandlem.com/2011/08/git-tip-of-week-detached-heads.html detached HEAD].
 
 So, in order to make change to a submodule you can either:
 
+ 1) Work directly on the detached HEAD in the submodule directory.
 
->
->
-> 1) Work directly on the detached HEAD in the submodule directory.
->
->
-
->
->
-> 2) Checkout the respective branch the commit is supposed to be pointed at from (normally `master`. See the table below for the full branch/repo summary). 
->
->
-
+ 2) Checkout the respective branch the commit is supposed to be pointed at from (normally `master`. See the table below for the full branch/repo summary). 
 
 The example below will demonstrate the latter approach for the `utils/haddock` submodule:
 
-
-```
+{{{#!sh
 # do this *before* making changes to the submodule
 cd utils/haddock
 git checkout ghc-head
@@ -150,13 +108,11 @@ git push
 
 # go back to ghc.git top-level
 cd ../..
-```
-
+}}}
 
 At this point, the remote `haddock.git` contains newer commits in the `ghc-head` branch, which still need to be registered with `ghc.git`:
 
-
-```
+{{{#!sh
 # if you want, you can inspect with `git submodule` and/or `git status`
 # if there are submodules needing attention;
 # specifically, the commands below should report new commits in `util/haddock`
@@ -178,227 +134,39 @@ git commit -m 'update haddock submodule ... blablabla'
 
 # finally, push the commit to the remote `ghc.git` repo
 git push
-```
+}}}
 
 
+{{{#!box info
 Git supports a recursive `git push` operation. If you issue a
 
-
-```wiki
+{{{
 git push --recurse-submodules=on-demand
-```
-
+}}}
 
 this will cause Git to push all submodules changes that have been registered in the revisions
 to be pushed to the super repository.
 
+TODO: show how to define a `git pushall` alias in the style of the `git pullall` alias
+}}}
 
+=== Validation hooks ===
 
-TODO show how to define a `git pushall` alias in the style of the `git pullall` alias
+There are server-side validation hooks in place on `git.haskell.org` to make sure for non-`wip/` branches that `ghc.git` never points to non-existing commits. Also, as a safe-guard against accidental submodule reference updates, the string `submodule` ***must occur somewhere in commit messages of commits*** updating submodule references. So just remember that:
 
+ 1) If you update a submodule pointer,
 
-### Validation hooks
+ 2) You had to have pushed it upstream already,
 
+ 3) And you have to say the word 'submodule' in the commit.
 
+== Upstream repositories ==
 
-There are server-side validation hooks in place on `git.haskell.org` to make sure for non-`wip/` branches that `ghc.git` never points to non-existing commits. Also, as a safe-guard against accidental submodule reference updates, the string `submodule` **\*must occur somewhere in commit messages of commits**\* updating submodule references. So just remember that:
+Check out the [wiki:Repositories Repositories] page for a full breakdown of all the repositories GHC uses.
 
-
->
->
-> 1) If you update a submodule pointer,
->
->
-
->
->
-> 2) You had to have pushed it upstream already,
->
->
-
->
->
-> 3) And you have to say the word 'submodule' in the commit.
->
->
-
-## Upstream repositories
-
-
-
-Below is a table summarizing the repositories GHC uses. It lists the upstream location of the repository, and the branch name. All the upstream repositories are either located on `git.haskell.org` or `github.com` as of right now.
-
-
-- Patches for `git.haskell.org` repositories should go to GHC developers. Developers can push to these repositories directly.
-
-- Patches for `github.com` repositories should be made into Pull Requests on GitHub. GHC developers have access to the repositories under the `haskell` organization in particular, and can push directly.
-
-- As of 14th August 2014, `ghc-head` is the branch to track for Haddock.
-
-
-As stated above - GHC tracks the branch listed here for the specific repository. If you're going to base your change on a branch, always do it on this one, and make sure your change is on the specified branch. Then update the submodule.
-
-
-<table><tr><th>**Location in tree**</th>
-<td> </td>
-<th>**Upstream repo**</th>
-<td> </td>
-<th>**Upstream GHC branch**</th></tr>
-<tr><th>utils/hsc2hs</th>
-<td>           </td>
-<th>https://git.haskell.org/hsc2hs.git</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>utils/haddock</th>
-<td>          </td>
-<th>https://github.com/haskell/haddock</th>
-<td> </td>
-<th>ghc-head</th></tr>
-<tr><th>nofib</th>
-<td>                  </td>
-<th>https://git.haskell.org/nofib.git</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/array</th>
-<td>        </td>
-<th>https://git.haskell.org/packages/array.git</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/binary</th>
-<td>       </td>
-<th>https://github.com/haskell/binary</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/bytestring</th>
-<td>   </td>
-<th>https://github.com/haskell/bytestring</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/Cabal</th>
-<td>        </td>
-<th>https://github.com/haskell/Cabal</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/containers</th>
-<td>   </td>
-<th>https://github.com/haskell/containers</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/deepseq</th>
-<td>      </td>
-<th>https://git.haskell.org/packages/deepseq.git</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/directory</th>
-<td>    </td>
-<th>https://git.haskell.org/packages/directory.git</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/filepath</th>
-<td>     </td>
-<th>https://git.haskell.org/packages/filepath.git</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/haskeline</th>
-<td>    </td>
-<th>https://github.com/judah/haskeline</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/haskell98</th>
-<td>    </td>
-<th>https://git.haskell.org/packages/haskell98.git</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/haskell2010</th>
-<td>  </td>
-<th>https://git.haskell.org/packages/haskell2010.git</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/hoopl</th>
-<td>        </td>
-<th>https://git.haskell.org/packages/hoopl.git</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/hpc</th>
-<td>          </td>
-<th>https://git.haskell.org/packages/hpc.git</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/old-locale</th>
-<td>   </td>
-<th>https://git.haskell.org/packages/old-locale.git</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/old-time</th>
-<td>     </td>
-<th>https://git.haskell.org/packages/old-time.git</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/process</th>
-<td>      </td>
-<th>https://git.haskell.org/packages/process.git</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/terminfo</th>
-<td>     </td>
-<th>https://github.com/judah/terminfo</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/time</th>
-<td>         </td>
-<th>https://github.com/haskell/time</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/unix</th>
-<td>         </td>
-<th>https://github.com/haskell/unix</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/Win32</th>
-<td>        </td>
-<th>https://git.haskell.org/packages/Win32.git</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/xhtml</th>
-<td>        </td>
-<th>https://github.com/haskell/xhtml</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/random</th>
-<td>       </td>
-<th>https://github.com/haskell/random</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/primitive</th>
-<td>    </td>
-<th>https://github.com/haskell/primitive</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/vector</th>
-<td>       </td>
-<th>https://github.com/haskell/vector</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/dph</th>
-<td>          </td>
-<th>https://git.haskell.org/packages/dph.git</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/parallel</th>
-<td>     </td>
-<th>https://git.haskell.org/packages/parallel.git</th>
-<td> </td>
-<th>master</th></tr>
-<tr><th>libraries/stm</th>
-<td>          </td>
-<th>https://git.haskell.org/packages/stm.git</th>
-<td> </td>
-<th>master</th></tr></table>
-
-
-## TODO
-
+== TODO ==
 
 - Describe how to make use of `git submodule update --remote`
 - Describe darcs mirroring for `transformers`
 - Describe status of `pretty` which is one-off at the moment and doesn't exactly track upstream.
+```
