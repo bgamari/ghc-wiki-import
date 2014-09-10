@@ -153,6 +153,10 @@ and `configure` will find all the tools, using `<target>` as the prefix.
 
 
 
+In GHC 7.8 a bug in the configure macros prevents it from finding the cross-compiling gcc, so you will always need to use `--with-gcc`.
+
+
+
 If you need to specify the tools explicitly, then you can say
 
 
