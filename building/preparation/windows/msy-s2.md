@@ -105,7 +105,7 @@ The msys2 package uses `pacman` (the venerable ArchLinux package manager) to man
 
 ```wiki
 $ pacman -Syu
-$ pacman -S git wget tar gzip binutils autoconf make libtool automake xz
+$ pacman -Syu git wget tar binutils autoconf make libtool automake
 ```
 
 
