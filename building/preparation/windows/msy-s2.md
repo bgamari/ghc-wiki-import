@@ -1,80 +1,64 @@
+CONVERSION ERROR
 
-This page documents the instructions for setting up a Windows build using [
-msys2](http://sourceforge.net/projects/msys2/), which is a fairly complete build of MinGW + the msys tools. It is pretty self contained and fixes several pesky bugs with the traditional implementation. It's also smaller and has a convenient package manager, `pacman`.
+Original source:
 
+```trac
+= Building GHC on msys2 =
 
+This page documents the instructions for setting up a Windows build using [http://sourceforge.net/projects/msys2/ msys2], which is a fairly complete build of MinGW + the msys tools. It is pretty self contained and fixes several pesky bugs with the traditional implementation. It's also smaller and has a convenient package manager, `pacman`.
 
-It should get you running in \~5 minutes, modulo download speeds.
+It should get you running in ~5 minutes, modulo download speeds.
 
+== msys2 setup ==
 
-## msys2 setup
-
-
-- (64-bit) Download this package: [
-  http://sourceforge.net/projects/msys2/files/Base/x86\_64/msys2-x86\_64-20140910.exe/download](http://sourceforge.net/projects/msys2/files/Base/x86_64/msys2-x86_64-20140910.exe/download)
-
+ * (64-bit) Download this package: http://sourceforge.net/projects/msys2/files/Base/x86_64/msys2-x86_64-20140910.exe/download
 
 or
 
-
-- (32-bit) [
-  http://sourceforge.net/projects/msys2/files/Base/i686/msys2-i686-20140910.exe/download](http://sourceforge.net/projects/msys2/files/Base/i686/msys2-i686-20140910.exe/download)
-
+ * (32-bit) http://sourceforge.net/projects/msys2/files/Base/i686/msys2-i686-20140910.exe/download
 
 Install msys2 and open a shell.
 
+== Installing packages & tools ==
 
-## Installing packages & tools
+The msys2 package uses `pacman` (the venerable !ArchLinux package manager) to manage packages. Once you're set up, upgrade everything, and install system dependencies required for building GHC:
 
-
-
-The msys2 package uses `pacman` (the venerable ArchLinux package manager) to manage packages. Once you're set up, upgrade everything, and install some dependencies:
-
-
-```wiki
+{{{
 pacman -Syu
 pacman -S git curl tar binutils autoconf make libtool automake python2
-```
+}}}
 
-## ghc setup
+== Host GHC setup ==
 
+A host GHC binary is required for bootstrapping. Let's download and install a prebuilt GHC into /opt:
 
-```wiki
+{{{
 curl http://www.haskell.org/ghc/dist/7.8.3/ghc-7.8.3-$(uname -m)-unknown-mingw32.tar.xz | tar -xJ -C /tmp &&
 mv /tmp/ghc-7.8.3/* /opt &&
 rmdir /tmp/ghc-7.8.3
-```
+}}}
 
-## cabal setup
+== Cabal setup ==
 
+Building ghc requires [http://www.haskell.org/alex/ Alex] and [http://www.haskell.org/happy/ Happy]. It is easiest to install them using cabal:
 
-
-Building ghc requires [ Alex](http://www.haskell.org/alex/) and [
-Happy](http://www.haskell.org/happy/). It is easiest to install them using cabal, which we need to download first:
-
-
-```wiki
+{{{
 curl http://www.haskell.org/cabal/release/cabal-install-1.20.0.3/cabal-1.20.0.3-i386-unknown-mingw32.tar.gz | tar -xz -C /opt/bin &&
 cabal install -j --prefix=/opt alex happy
-```
+}}}
 
-## A Quick build
-
-
+== A Quick build ==
 
 You should now be able to build GHC:
 
-
-```wiki
+{{{
 cd ~ &&
 git clone --recursive git://git.haskell.org/ghc.git &&
 cd ghc &&
 git clone git://git.haskell.org/ghc-tarballs.git ghc-tarballs &&
 ./boot && ./configure &&
 make -j5
-```
-
+}}}
 
 Or just `./validate` works too.
-
-
+```
