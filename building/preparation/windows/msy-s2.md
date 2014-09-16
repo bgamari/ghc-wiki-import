@@ -1,63 +1,80 @@
-CONVERSION ERROR
 
-Original source:
+This page documents the instructions for setting up a Windows build using [
+msys2](http://sourceforge.net/projects/msys2/), which is a fairly complete build of MinGW + the msys tools. It is pretty self contained and fixes several pesky bugs with the traditional implementation. It's also smaller and has a convenient package manager, `pacman`.
 
-```trac
-This page documents the instructions for setting up a Windows build using [http://sourceforge.net/projects/msys2/ msys2], which is a fairly complete build of MinGW + the msys tools. It is pretty self contained and fixes several pesky bugs with the traditional implementation. It's also smaller and has a convenient package manager, `pacman`.
 
-It should get you running in ~5 minutes, modulo download speeds.
 
-== msys2 setup ==
+It should get you running in \~5 minutes, modulo download speeds.
 
- * (64-bit) Download this package: http://sourceforge.net/projects/msys2/files/Base/x86_64/msys2-x86_64-20140910.exe/download
+
+## msys2 setup
+
+
+- (64-bit) Download this package: [
+  http://sourceforge.net/projects/msys2/files/Base/x86\_64/msys2-x86\_64-20140910.exe/download](http://sourceforge.net/projects/msys2/files/Base/x86_64/msys2-x86_64-20140910.exe/download)
+
 
 or
 
- * (32-bit) http://sourceforge.net/projects/msys2/files/Base/i686/msys2-i686-20140910.exe/download
+
+- (32-bit) [
+  http://sourceforge.net/projects/msys2/files/Base/i686/msys2-i686-20140910.exe/download](http://sourceforge.net/projects/msys2/files/Base/i686/msys2-i686-20140910.exe/download)
+
 
 Install msys2 and open a shell.
 
-== ghc setup ==
 
-{{{
-$ cd /tmp
-$ wget http://www.haskell.org/ghc/dist/7.8.3/ghc-7.8.3-$(uname -m)-unknown-mingw32.tar.xz
-$ tar -xaf ghc-7.8.3-$(uname -m)-unknown-mingw32.tar.xz
-$ mkdir /opt && mv /tmp/ghc-7.8.3/* /opt
-}}}
+## Installing packages & tools
 
-== Installing packages & tools ==
 
-The msys2 package uses `pacman` (the venerable !ArchLinux package manager) to manage packages. Once you're set up, upgrade everything, and install some dependencies:
 
-{{{
-$ pacman -Syu
-$ pacman -S git wget tar binutils autoconf make libtool automake python2
-}}}
+The msys2 package uses `pacman` (the venerable ArchLinux package manager) to manage packages. Once you're set up, upgrade everything, and install some dependencies:
 
-We'll use the natively-built python and our own specific version of GCC on windows.
 
-Now install a `cabal.exe` prebuilt binary, and install `alex` and `happy`:
+```wiki
+pacman -Syu
+pacman -S git curl tar binutils autoconf make libtool automake python2
+```
 
-{{{
-$ cabal update
-$ cabal install alex happy
-$ alex --version
-$ happy --version
-}}}
+## ghc setup
 
-== A Quick build ==
+
+```wiki
+curl http://www.haskell.org/ghc/dist/7.8.3/ghc-7.8.3-$(uname -m)-unknown-mingw32.tar.xz | tar -xJ -C /tmp &&
+mv /tmp/ghc-7.8.3/* /opt &&
+rmdir /tmp/ghc-7.8.3
+```
+
+## cabal setup
+
+
+
+Building ghc requires [ Alex](http://www.haskell.org/alex/) and [
+Happy](http://www.haskell.org/happy/). It is easiest to install them using cabal, which we need to download first:
+
+
+```wiki
+curl http://www.haskell.org/cabal/release/cabal-install-1.20.0.3/cabal-1.20.0.3-i386-unknown-mingw32.tar.gz | tar -xz -C /opt/bin &&
+cabal install -j --prefix=/opt alex happy
+```
+
+## A Quick build
+
+
 
 You should now be able to build GHC:
 
-{{{
-$ cd ~
-$ git clone --recursive git://git.haskell.org/ghc.git
-$ cd ghc
-$ git clone git://git.haskell.org/ghc-tarballs.git ghc-tarballs
-$ ./boot && ./configure
-$ make -j5
-}}}
+
+```wiki
+cd ~ &&
+git clone --recursive git://git.haskell.org/ghc.git &&
+cd ghc &&
+git clone git://git.haskell.org/ghc-tarballs.git ghc-tarballs &&
+./boot && ./configure &&
+make -j5
+```
+
 
 Or just `./validate` works too.
-```
+
+
