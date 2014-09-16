@@ -24,7 +24,7 @@ prototype implementation](https://github.com/adamgundry/records-prototype) is al
 
 
 
-The plan is to merge these branches shortly after the release of GHC 7.8, so power users can try out the extension and we can refine the design. The extension should be stable and available for general use in GHC 7.10.
+The design has mostly stabilised, but there is still some work to do on the implementation. We hope to have it merged before the release of 7.10.
 
 
 ## History
