@@ -1,0 +1,11 @@
+CONVERSION ERROR
+
+Original source:
+
+```trac
+
+== Design of the monoidal category classes and the new Arrow/proc desugaring story ==
+
+[https://ghc.haskell.org/trac/ghc/ticket/9596 Trac ticket]
+[https://phabricator.haskell.org/D212 Phabricator differential]
+```
