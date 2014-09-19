@@ -43,7 +43,7 @@ How to implement the unit/counit morphisms from compact closed categories? That 
 
 == Desugaring plans ==
 Current (arrows):
-```
+{{{
     proc p -> f -< e = arr (\ p -> e) >>> f           if Vars(f) and Vars(p) disjoint
                      = arr (\ p -> (f, e)) >>> app    otherwise
 
@@ -68,7 +68,7 @@ Current (arrows):
              pn-1 -> Rightn-2 (Left (p, Flatten(pn-1)))
              pn -> Rightn-1 (p, Flatten(pn))) >>>
         (proc (p, Flatten(p1)) -> c1) ||| ... ||| (proc (p, Flatten(pn)) -> cn)
-```
+}}}
 New (SMC) (wip, these need to be as generalised as possible; look at GA thesis and https://www.haskell.org/ghc/docs/papers/arrow-rules.pdf):
 
 
