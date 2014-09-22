@@ -31,7 +31,7 @@ The testsuite also has a concept called, *ways*. These refer to different settin
 
 
 
-The following ways are defined (see the file `testsuite/config/ghc`
+The following ways are defined (see the file [testsuite/config/ghc](/trac/ghc/browser/ghc/testsuite/config/ghc)
 for the complete list):
 
 
@@ -54,9 +54,10 @@ dynllvm              -- -fllvm -dyn
 ```
 
 
-Certain ways are enabled automatically if the GHC build in the local
+By default, the 'normal' and 'hpc' ways are enabled. In addition,
+certain ways are enabled automatically if the GHC build in the local
 tree supports them.  Ways that are enabled this way are `optasm`,
-`optllvm`, `profasm`, `threaded1`, `threaded2`, `profthreaded`, \`ghci,
+`optllvm`, `profasm`, `threaded1`, `threaded2`, `profthreaded`, `ghci`,
 and whichever of `static`/`dyn` is not GHC's default mode.
 
 
