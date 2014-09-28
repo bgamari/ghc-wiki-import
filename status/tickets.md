@@ -210,6 +210,28 @@ col: owner, col: priority, col: time, col: changetime, col: os,
 col: architecture, col: keywords, order: id) 8 (Ticket query: status: !closed,
 component: Compiler+(Type+checker), type: task, max: 0, order: id)
 </th></tr>
+<tr><th>Core Libraries</th>
+<th>open tickets (Ticket query: status: !closed, component: Core+Libraries,
+type: !, group: priority, col: id, col: summary, col: status, col: type,
+col: owner, col: priority, col: time, col: changetime, col: os,
+col: architecture, col: keywords, order: id) 131 (Ticket query: status: !closed,
+component: Core+Libraries, type: !, max: 0, order: id)</th>
+<th>bugs (Ticket query: status: !closed, component: Core+Libraries, type: bug,
+group: priority, col: id, col: summary, col: status, col: type, col: owner,
+col: priority, col: time, col: changetime, col: os, col: architecture,
+col: keywords, order: id) 75 (Ticket query: status: !closed,
+component: Core+Libraries, type: bug, max: 0, order: id)</th>
+<th>feature requests (Ticket query: status: !closed, component: Core+Libraries,
+type: feature+request, group: priority, col: id, col: summary, col: status,
+col: type, col: owner, col: priority, col: time, col: changetime, col: os,
+col: architecture, col: keywords, order: id) 40 (Ticket query: status: !closed,
+component: Core+Libraries, type: feature+request, max: 0, order: id)</th>
+<th>tasks (Ticket query: status: !closed, component: Core+Libraries, type: task,
+group: priority, col: id, col: summary, col: status, col: type, col: owner,
+col: priority, col: time, col: changetime, col: os, col: architecture,
+col: keywords, order: id) 16 (Ticket query: status: !closed,
+component: Core+Libraries, type: task, max: 0, order: id)
+</th></tr>
 <tr><th>Data Parallel Haskell</th>
 <th>open tickets (Ticket query: status: !closed,
 component: Data+Parallel+Haskell, type: !, group: priority, col: id,
