@@ -1,14 +1,15 @@
-# Naming issues in type-level programming modules
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Naming issues in type-level programming modules =
 
 This page summarizes current type-level programming constructs in modules that ship with GHC. At the bottom is a list of open questions about good names for these operations.
 
+== Module `Data.Type.Equality` ==
 
-## Module `Data.Type.Equality`
-
-
-```wiki
+{{{
 -- Reified equality
 data a :~: b where
   Refl :: a :~: a
@@ -25,12 +26,15 @@ lower :: (f a :~: f b) -> a :~: b
 
 class EqualityT f where
   equalsT :: f a -> f b -> Maybe (a :~: b)
-```
 
-## Module `Data.Type.Coercion`
+type family a == b where
+  a == a = True
+  a == b = False
+}}}
 
+== Module `Data.Type.Coercion` ==
 
-```wiki
+{{{
 -- Reified representational equality
 data Coercion a b where
   Coercion :: Coercible a b => Coercion a b
@@ -41,23 +45,21 @@ trans :: Coercion a b -> Coercion b c -> Coercion a c
 
 class CoercionT f where
   coercionT :: f a -> f b -> Maybe (Coercion a b)
-```
+}}}
 
-## Module `Data.Proxy`
+== Module `Data.Proxy` ==
 
-
-```wiki
+{{{
 data Proxy t = Proxy
 data KProxy (t :: *) = KProxy
 
 asProxyTypeOf :: a -> Proxy a -> a
 asProxyTypeOf = const
-```
+}}}
 
-## Module `Data.Typeable`
+== Module `Data.Typeable` ==
 
-
-```wiki
+{{{
 cast :: forall a b. (Typeable a, Typeable b) => a -> Maybe b
 eqT :: forall a b. (Typeable a, Typeable b) => Maybe (a :~: b)
 gcast :: forall a b c. (Typeable a, Typeable b) => c a -> Maybe (c b)
@@ -65,12 +67,11 @@ gcast1 :: forall c t t' a. (Typeable t, Typeable t')
        => c (t a) -> Maybe (c (t' a)) 
 gcast2 :: forall c t t' a b. (Typeable t, Typeable t')
        => c (t a b) -> Maybe (c (t' a b)) 
-```
+}}}
 
-## Module `GHC.TypeLits`
+== Module `GHC.TypeLits` ==
 
-
-```wiki
+{{{
 data Nat
 data Symbol
 
@@ -100,48 +101,34 @@ type family (m :: Nat) + (n :: Nat) :: Nat
 type family (m :: Nat) * (n :: Nat) :: Nat
 type family (m :: Nat) ^ (n :: Nat) :: Nat
 type family (m :: Nat) - (n :: Nat) :: Nat
-```
+}}}
 
-## Module `GHC.Prim`
+== Module `GHC.Prim` ==
 
-
-```wiki
+{{{
 class Coercible a b where
   coerce :: a -> b
-```
+}}}
 
-# Issues
-
-
+= Issues =
 
 These are in no particular order, but they are numbered for easy reference.
 
-
 1. `EqualityT` and `CoercionT` sound like monad transformers. I (Richard) have actually been confused by this at one point.
 
-1. Should `KProxy`'s data constructor be named `KProxy`? Reusing the name here requires users to use a `'` every time they want to use the promoted data constructor `KProxy`.
+2. Should `KProxy`'s data constructor be named `KProxy`? Reusing the name here requires users to use a `'` every time they want to use the promoted data constructor `KProxy`.
 
-1. There are up to three different ways type-level predicates can be defined: as Constraints, as GADTs wrapping constraints, or as type families returning `Bool`s. Is there a common naming convention among these? Right now, we have `(~)` (constraint) vs `(:~:)` (GADT); `(<=?)` (Boolean-valued) vs. `(<=)` (constraint); and `Coercible` (constraint) vs. `Coercion` (GADT).
+3. There are up to three different ways type-level predicates can be defined: as Constraints, as GADTs wrapping constraints, or as type families returning `Bool`s. Is there a common naming convention among these? Right now, we have `(~)` (constraint) vs `(:~:)` (GADT); `(<=?)` (Boolean-valued) vs. `(<=)` (constraint); and `Coercible` (constraint) vs. `Coercion` (GADT).
 
-1. `eqT` (from `Data.Typeable`) and `equalsT` (from `Data.Type.Equality`) have similar names, achieve similar functions, but are subtly different. This may or may not be confusing.
+4. `eqT` (from `Data.Typeable`) and `equalsT` (from `Data.Type.Equality`) have similar names, achieve similar functions, but are subtly different. This may or may not be confusing.
 
-1. I (Richard) want to add the following function to `Data.Type.Equality`:
+5. I (Richard) want to add the following function to `Data.Type.Equality`:
+{{{
+gcastWith :: (a :~: b) -> ((a ~ b) => r) -> r
+gcastWith Refl x = x
+}}}
 
-  ```wiki
-  gcastWith :: (a :~: b) -> ((a ~ b) => r) -> r
-  gcastWith Refl x = x
-  ```
+    I've tested this function in a real setting, and it (that is, type inference for it) works great.
 
->
->
-> I've tested this function in a real setting, and it (that is, type inference for it) works great.
->
->
 
-1. I propose the following, further addition to `Data.Type.Equality`:
-
-  ```wiki
-  type family a == b where
-    a == a = True
-    a == b = False
-  ```
+```
