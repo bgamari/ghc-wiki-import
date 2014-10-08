@@ -24,6 +24,15 @@ This section lists show-stopper bugs in 7.8.3.  A show-stopper is a bug that sim
 >
 >
 
+- [\#8819](https://gitlab.staging.haskell.org/ghc/ghc/issues/8819) and [\#8849](https://gitlab.staging.haskell.org/ghc/ghc/issues/8849): Arithmetic is broken in unregisterised compiler. A regression in the C code backend leads to the compiler producing incorrect code that fails almost all arithmetic tests ([\#8849](https://gitlab.staging.haskell.org/ghc/ghc/issues/8849)) and others ([\#8819](https://gitlab.staging.haskell.org/ghc/ghc/issues/8819)) in the test suite. Moreover, the resulting 7.8.3 cannot bootstrap itself. This is a significant inconvenience for users of architectures where only the unregisterised backend via C is supported, such as ppc64 and z390.
+
+>
+>
+> Phabricator D173 [
+> https://phabricator.haskell.org/D173](https://phabricator.haskell.org/D173) has a patch that fixes both tickets. The patch applies cleanly (with an offset of a few lines).
+>
+>
+
 ## Tickets marked merge with no milestone
 
 
