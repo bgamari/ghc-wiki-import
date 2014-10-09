@@ -1,34 +1,50 @@
-CONVERSION ERROR
+#
+This is a proposal / discussion page for adding annotations to the AST, for ticket [\#9628](https://gitlab.staging.haskell.org/ghc/ghc/issues/9628)
 
-Original source:
 
-```trac
-= This is a proposal / discussion page for adding annotations to the AST, for ticket #9628 =
+
+The current design is outlined toward the end, see [design](ghc-ast-annotations#)
+
 
 
 Right now the locations of syntactic markers such as `do`/`let`/`where`/`in`/`of` in the source are discarded from the AST, although they are retained in the rich token stream.
 
-The `haskell-src-exts` package deals with this by means of using the [http://hackage.haskell.org/package/haskell-src-exts-1.15.0.1/docs/Language-Haskell-Exts-SrcLoc.html#t:SrcSpanInfo `SrcSpanInfo`] data type which contains the SrcSpan as per the current GHC Located type but also has a list of `SrcSpan`s for the  syntactic markers, depending on the particular AST fragment being annotated.
 
-In addition, the annotation type is provided as a parameter to the AST, so that it can be changed as required, see [http://hackage.haskell.org/package/haskell-src-exts-1.15.0.1/docs/Language-Haskell-Exts-Annotated-Syntax.html#t:Annotated here].
+
+The `haskell-src-exts` package deals with this by means of using the [
+\`SrcSpanInfo\`](http://hackage.haskell.org/package/haskell-src-exts-1.15.0.1/docs/Language-Haskell-Exts-SrcLoc.html#t:SrcSpanInfo) data type which contains the SrcSpan as per the current GHC Located type but also has a list of `SrcSpan`s for the  syntactic markers, depending on the particular AST fragment being annotated.
+
+
+
+In addition, the annotation type is provided as a parameter to the AST, so that it can be changed as required, see [
+here](http://hackage.haskell.org/package/haskell-src-exts-1.15.0.1/docs/Language-Haskell-Exts-Annotated-Syntax.html#t:Annotated).
+
+
 
 The motivation for this change is then
 
+
 1. Simplify the roundtripping and modification of source by explicitly capturing the missing location information for the syntactic markers.
 
-2. Allow the annotation to be a parameter so that it can be replaced with a different one in tools, for example HaRe would include the tokens for the AST fragment leaves.
+1. Allow the annotation to be a parameter so that it can be replaced with a different one in tools, for example HaRe would include the tokens for the AST fragment leaves.
 
-3. Aim for some level compatibility with haskell-src-exts so that tools developed for it could be easily ported to GHC, for example [http://hackage.haskell.org/package/haskell-src-exts-1.15.0.1/docs/Language-Haskell-Exts-Annotated-ExactPrint.html#v:exactPrint exactPrint].
+1. Aim for some level compatibility with haskell-src-exts so that tools developed for it could be easily ported to GHC, for example [
+  exactPrint](http://hackage.haskell.org/package/haskell-src-exts-1.15.0.1/docs/Language-Haskell-Exts-Annotated-ExactPrint.html#v:exactPrint).
 
-4. Allow simple round-tripping of code via a GHC variant of [https://hackage.haskell.org/package/hindent hindent]
+1. Allow simple round-tripping of code via a GHC variant of [
+  hindent](https://hackage.haskell.org/package/hindent)
 
-5. There is a strong motivation for the annotation to be / support Functor [http://www.davidchristiansen.dk/2014/09/06/pretty-printing-idris/ here] for the idris IDE support
+1. There is a strong motivation for the annotation to be / support Functor [
+  here](http://www.davidchristiansen.dk/2014/09/06/pretty-printing-idris/) for the idris IDE support
 
-== Richard Eisenberg response ==
+## Richard Eisenberg response
+
+
 
 For what it's worth, my thought is not to use SrcSpanInfo (which, to me, is the wrong way to slice the abstraction) but instead to add SrcSpan fields to the relevant nodes. For example:
-{{{
-#!haskell
+
+
+```
 
   | HsDo        SrcSpan              -- of the word "do"
                 BlockSrcSpans
@@ -43,53 +59,89 @@ For what it's worth, my thought is not to use SrcSpanInfo (which, to me, is the 
 data BlockSrcSpans = LayoutBlock Int  -- the parameter is the indentation level
                                  ...  -- stuff to track the appearance of any semicolons
                    | BracesBlock ...  -- stuff to track the braces and semicolons
-}}}
+```
+
 
 The way I understand it, the SrcSpanInfo proposal means that we would have lots of empty SrcSpanInfos, no? Most interior nodes don't need one, I think.
 
+
+
 Popping up a level, I do support the idea of including this info in the AST.
 
-== SPJ response to concern re extra noise in AST ==
 
- I thiink the key question is whether it is acceptable to sprinkle this kind of information throughout the AST. For someone interested in source-to-source conversions (like me) this is great, others may find it intrusive.
+## SPJ response to concern re extra noise in AST
+
+
+>
+>
+> I thiink the key question is whether it is acceptable to sprinkle this kind of information throughout the AST. For someone interested in source-to-source conversions (like me) this is great, others may find it intrusive.
+>
+>
+
 
 It’s probably not too bad if you use record syntax; thus
 
-{{{
-#!haskell
+
+```
   | HsDo  { hsdo_do_loc :: SrcSpan              -- of the word "do"
           , hsdo_blocks :: BlockSrcSpans
           , hsdo_ctxt   :: HsStmtContext Name
           , hsdo_stmts  :: [ExprLStmt id]
           , hsdo_type    :: PostTcType }
 
-}}} 
+```
 
-== Other issues ==
+## Other issues
+
+
 
 The AST is initially created by the parser, and then changed through the renamer and type checker.
 
+
+
 From a source to source conversion perspective the `ParsedSource` is closest to the original source code, as it respects the original linear ordering of the declarations, which are each wrapped in an appropriate constructor from `HsDecl`.
+
+
 
 The `RenamedSource` gathers all the like declarations together, and strips out the `HsDecl`, as well as re-ordering binds to appear in dependency order.
 
+
+
 The `TypeCheckedSource` further changes the `RenamedSource` to replace the original type information with the calculated types.
+
+
 
 So manipulations need to happen at the `ParsedSource` level, but with the ability to query information from the `RenamedSource` or `TypecheckedSource` as required.
 
+
+
 At the moment HaRe manages this by building up a token tree indexed by SrcSpan with tokens at the leaves, constructed from the `ParsedSource`, and then indexes into it for changes based on the `RenamedSource`.  The token tree is fiddly and brittle, so it would be better to keep this information directy in the AST.
 
-== Abortive annotation parameter attempt ==
 
-[https://phabricator.haskell.org/D246 D246] captures an attempt to work through a type parameter. This exploded in complexity, and was abandoned.
+## Abortive annotation parameter attempt
 
-== SPJ alternative suggestion ==
 
-    Another way to tackle this would be to ensure that syntax tree nodes have a "node-key" (a bit like their source location) that clients could use in a finite map, to map node-key to values of their choice.
+
+[
+D246](https://phabricator.haskell.org/D246) captures an attempt to work through a type parameter. This exploded in complexity, and was abandoned.
+
+
+## SPJ alternative suggestion
+
+
+>
+>
+> Another way to tackle this would be to ensure that syntax tree nodes have a "node-key" (a bit like their source location) that clients could use in a finite map, to map node-key to values of their choice.
+>
+>
+
 
 An initial investigation shows some complexity blow up too.  The same effect can be achieved with a virtual node key.
 
-== AZ Virtual node key proposal ==
+
+## AZ Virtual node key proposal
+
+
 
 Instead of physically placing a "node-key" in each AST Node, a virtual
 node key can be generated from any `GenLocated SrcSpan e` comprising a
@@ -97,15 +149,19 @@ combination of the `SrcSpan` value and a unique identifier from the
 constructor for `e`, perhaps using its `TypeRep`, since the entire AST
 derives Typeable.
 
+
+
 To further reduce the intrusiveness, a base Annotation type can be
 defined that captures the location of noise tokens for each AST
 constructor. This can then be emitted from the parser, if the
 appropriate flag is set to enable it.
 
+
+
 So
 
-{{{
-#!haskell
+
+```
 
     data ApiAnnKey = AK SrcSpan TypeRep
 
@@ -118,54 +174,72 @@ So
                     SrcSpan -- of the word "in"
 
       | AnnHsDo     SrcSpan -- of the word "do"
-}}}
+```
+
 
 And then in the parser
 
-{{{
-#!haskell
+
+```
 
         | 'let' binds 'in' exp   { mkAnnHsLet $1 $3 (LL $ HsLet (unLoc $2) $4) }
-}}}
+```
+
 
 The helper is
 
-{{{
-#!haskell
+
+```
 
     mkAnnHsLet :: Located a -> Located b -> LHsExpr RdrName -> P (LHsExpr RdrName)
     mkAnnHsLet (L l_let _) (L l_in _) e = do
       addAnnotation (mkAnnKey e) (AnnHsLet l_let l_in)
       return e;
-}}}
+```
+
 
 The Parse Monad would have to accumulate the annotations to be
 returned at the end, if called with the appropriate flag.
 
+
+
 There will be some boilerplate in getting the annotations and helper
 functions defined, but it will not pollute the rest.
 
+
+
 This technique can also potentially be backported to support older GHC
-versions via a modification to ghc-parser[1].
+versions via a modification to ghc-parser\[1\].
 
 
-https://hackage.haskell.org/package/ghc-parser
 
-== Neil Mitchell Response ==
+[
+https://hackage.haskell.org/package/ghc-parser](https://hackage.haskell.org/package/ghc-parser)
+
+
+## Neil Mitchell Response
+
+
 
 I was getting a bit lost between the idea and the implementation. Let
 me try rephrasing the idea in my own words.
 
+
+
 The goal: Capture inner source spans in AST syntax nodes. At the
-moment if ... then ... else ... captures the spans [if [...] then
-[...] else [...]]. We want to capture the spans for each keyword as
-well, so: [{if} [...] {then} [...] {else} [...]].
+moment if ... then ... else ... captures the spans \[if \[...\] then
+\[...\] else \[...\]\]. We want to capture the spans for each keyword as
+well, so: \[{if} \[...\] {then} \[...\] {else} \[...\]\].
+
+
 
 The proposal: Rather than add anything to the AST, have a separate
 mapping `(SrcSpan,AstCtor)` to `[SrcSpan]`. So you give in the `SrcSpan`
 from the `IfThenElse` node, and some token for the `IfThenElse`
 constructor, and get back a list of `IfThenElse` for the particular
 keyword.
+
+
 
 I like the proposal because it adds nothing inside the AST, and
 requires no fresh invariants of the AST. I dislike it because the
@@ -177,66 +251,84 @@ able to represent things other than `SrcSpan` without introducing a
 polymorphic src span; 3) the people who pay the complexity are the
 people who use it, which is relatively few people.
 
+
+
 That said, as a tweak to the API, rather than a single data type for
 all annotations, you could have:
 
-{{{
-#!haskell
+
+```
 data AnnIfThenElse = AnnIfThenElse {posIf, posThen, posElse :: SrcSpan}
 data AnnDo = AnnDo {posDo :: SrcSpan}
-}}}
+```
+
 
 Then you could just have an opaque `Map (SrcSpan, TypeRep) Dynamic`,
 with the invariant that the `TypeRep` in the key matches the `Dynamic`.
 Then you can have: 
 
-{{{
-#!haskell
+
+```
 getAnnotation :: Typeable a => Annotations -> SrcSpan -> Maybe a
-}}}
+```
+
 
 I think it simplifies some of the TypeRep trickery
 you are engaging in with `mkAnnKey`.
 
 
+
 There was some further email between AZ and NDM (teaching AZ some basics) resulting in the following
 
-== Current POC implementation [https://phabricator.haskell.org/D297 D297] ==
+
+## Current POC implementation [ D297](https://phabricator.haskell.org/D297)
+
+
 
 Theory of operation.
+
+
 
 The HsSyn AST does not capture the locations of certain keywords and
 punctuation, such as 'let', 'in', 'do', etc.
 
+
+
 These locations are required by any tools wanting to parse a haskell
 file, transform the AST in some way, and then regenerate the original
 layout for the unchaged parts.
+
+
 
 Rather than pollute the AST with information irrelevant to the actual
 compilation process, these locations are captured in the lexer /
 parser and returned as a separate structure ApiAnns structure in the
 ParsedSource.
 
+
+
 Each AST element that needs an annotation has an entry in this Map,
 which as a key comprising the SrcSpan of the original element and the
 TyeRep of the stored annotation, if it were wrapped in a Just.
 
+
+
 This allows code using the annotation to access this as follows
 
-{{{
-#!haskell
+
+```
 processHsLet :: ApiAnns -> LHsExpr -> CustomReturnType
 processHsLet anns (L l (HsExpr localBinds expr)) = r
   where
     Just ann = getAnnotation anns l :: Maybe AnnHsLet
     ...
-}}}
+```
 
 
 Key data structures
 
-{{{
-#!haskell
+
+```
 type ApiAnns = Map.Map ApiAnnKey Value
 
 data ApiAnnKey = AK SrcSpan TypeRep
@@ -260,14 +352,18 @@ fromValue (Value x) = fromMaybe (error errMsg) $ res
     errMsg = "fromValue, bad cast from " ++ show (typeOf x)
                 ++ " to " ++ show (typeOf res)
 
-}}}
+```
 
-Note that the `Value` type is based on the one in [https://github.com/ndmitchell/shake/blob/master/Development/Shake/Value.hs shake]
+
+Note that the `Value` type is based on the one in [
+shake](https://github.com/ndmitchell/shake/blob/master/Development/Shake/Value.hs)
+
+
 
 This allows the annotation to be retrieved by
 
-{{{
-#!haskell
+
+```
 
 -- | Retrieve an annotation based on the SrcSpan of the annotated AST
 -- element, and the known type of the annotation.
@@ -276,18 +372,24 @@ getAnnotation anns span = res
   where res = case  Map.lookup (AK span (typeOf res)) anns of
                        Nothing -> Nothing
                        Just d -> Just $ fromValue d
-}}}
+```
 
-=== Annotation structures
+### Annotation structures
+
+
 
 Each annotation is a separate data structure, named specifically for the constructor of the AST element being retrieved.
 
+
+
 So if we have an AST element `L l ConstructorXXX` the corresponding annotation will be called `AnnConstructorXXX`.
+
+
 
 An examples
 
-{{{
-#!haskell
+
+```
 
 -- TyClDecl
 data AnnClassDecl = AnnClassDecl
@@ -296,46 +398,51 @@ data AnnClassDecl = AnnClassDecl
         , aclassdecl_mbraces :: Maybe (SrcSpan,SrcSpan) }
             deriving (Eq,Data,Typeable,Show)
 
-}}}
+```
 
-=== Capturing in the parser
+### Capturing in the parser
+
+
 
 The annotations are captured in the lexer / parser by extending `PState` to include a field
 
-{{{
-#!haskell
+
+```
 data PState = PState {
        ...
         annotations :: [(ApiAnnKey,Value)]
        }
-}}}
+```
+
 
 The lexer exposes a helper function to add an annotation
 
-{{{
-#!haskell
+
+```
 addAnnotation :: (Typeable a,Outputable a,Show a,Eq a) => SrcSpan -> a -> P ()
 addAnnotation l v = P $ \s -> POk s {
   annotations = (AK l (typeOf (Just v)), newValue v) : annotations s
   } ()
-}}}
+```
+
 
 The parser also has some helper functions of the form
 
-{{{
-#!haskell
+
+```
 
 gl = getLoc
 
 -- aa :: (Typeable a) => Located a -> b -> P ()
 aa a@(L l _) b = addAnnotation l b >> return a
 
-}}}
+```
+
 
 This allows the annotations to be added in the parser productions as follows
 
-{{{
-#!haskell
+
+```
 export_subspec :: { Located ImpExpSubSpec }
         : {- empty -}             { L0 ImpExpAbs }
         | '(' '..' ')'            {% aa (LL ImpExpAll)
@@ -345,12 +452,12 @@ export_subspec :: { Located ImpExpSubSpec }
         | '(' qcnames ')'         {% aa (LL (ImpExpList (reverseCL $2)))
                                         (AnnImpExpList (gl $1) (gl $3)) }
 
-}}}
+```
 
-=== Parse result ===
+### Parse result
 
-{{{
-#!haskell
+
+```
 data HsParsedModule = HsParsedModule {
     hpm_module    :: Located (HsModule RdrName),
     hpm_src_files :: [FilePath],
@@ -368,35 +475,51 @@ data ParsedModule =
                , pm_parsed_source :: ParsedSource
                , pm_extra_src_files :: [FilePath]
                , pm_annotations :: ApiAnns }
-}}}
+```
 
-=== Implications ===
+### Implications
+
+
 
 This approach has minimal implications on the rest of GHC, except that some AST elements will require to be `Located` to enable the annotation to be looked up.
 
+
+
 Also, initial `./validate` tests show that haddock complains of increased memory usage, due to the extra information being captured in the AST. If this becomes a major problem a flag could be introduced when invoking the parser as to whether to actually capture the annotations or not.
 
-== Open Questions (AZ) ==
+
+## Open Questions (AZ)
+
+
 
 I am currently working annotations into the parser, provided them as a separate structure at the end of the parse, indexed to the original by SrcSpan and AST element type.
 
+
+
 The question I have is how to capture commas and semicolons in lists of items.
+
+
 
 There are at least three ways of doing this
 
+
 1. Make sure each of the items is Located, and add the possible comma location to the annotation structure for it.
+
 
 This has the drawback that all instances of the AST item annotation have the possible comma location in them, and it does not cope with multiple separators where these are allowed.
 
 
-2. Introduce a new hsSyn structure to explicitly capture comma-separated lists.
+1. Introduce a new hsSyn structure to explicitly capture comma-separated lists.
+
 
 This is the current approach I am taking, modelled on the OrdList implementation, but with an extra constructor to capture the separator location.
 
+
+
 Thus
 
-{{{
-#!haskell
+
+```
 data HsCommaList a
   = Empty
   | Cons a (HsCommaList a)
@@ -405,23 +528,21 @@ data HsCommaList a
   | Snoc (HsCommaList a) a
   | Two (HsCommaList a) -- Invariant: non-empty
         (HsCommaList a) -- Invariant: non-empty
-}}}
+```
 
+1. Change the lists to be of type `[Either SrcSpan a]` to explicitly capture the comma locations in the list.
 
-3. Change the lists to be of type `[Either SrcSpan a]` to explicitly capture the comma locations in the list.
-
-
-4. A fourth way is to add a list of SrcSpan to the annotation for the parent structure of the list, simply tracking the comma positions. This will make working with the annotations complicated though.
+1. A fourth way is to add a list of SrcSpan to the annotation for the parent structure of the list, simply tracking the comma positions. This will make working with the annotations complicated though.
 
 
 I am currently proceeding with option 2, but would appreciate some comment on whether this is the best approach to take. 
 
+
+
 Option 2 will allow the AST to capture the extra commas in record constructors, as suggested by SPJ in the debate on that feature.
+
+
 
 However, the structure is being misused in that `ExtraComma` is used to capture ALL commas, as well as semicolons in the `{ .. ; .. }` idiom.
 
 
-
-
-
-```
