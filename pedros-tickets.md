@@ -31,4 +31,7 @@ Closed:
 * #9576 (-fdefer-type-errors doesn't defer errors from `deriving`)
 * #9650 (Unsatisfiable default signature)
 
+Wiki pages:
+
+* GenericDeriving
 ```
