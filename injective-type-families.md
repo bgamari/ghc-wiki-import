@@ -1,104 +1,128 @@
-CONVERSION ERROR
+# Injective type families
 
-Original source:
 
-```trac
-= Injective type families
 
-This page summarizes the design behind injective type families (#6018). It is a
+This page summarizes the design behind injective type families ([\#6018](https://gitlab.staging.haskell.org/ghc/ghc/issues/6018)). It is a
 work in progress. This page will evolve to reflect the progress made.
+
+
 
 Person responsible for this page and the implementation: Jan Stolarek (just so
 you now who is meant by "I").
 
-== Forms of injectivity
 
-The idea behind #6018 is to allow users to declare that a type family is
+## Forms of injectivity
+
+
+
+The idea behind [\#6018](https://gitlab.staging.haskell.org/ghc/ghc/issues/6018) is to allow users to declare that a type family is
 injective. So far we have identified these forms of injectivity:
 
-  A. Injectivity in all the arguments, where knowing the result (right-hand
-     side) of a type family determines all the arguments on the left-hand
-     side. Examples:
 
-{{{#!hs
+1. Injectivity in all the arguments, where knowing the result (right-hand
+  side) of a type family determines all the arguments on the left-hand
+  side. Examples:
+
+```
 type family Id a where
      Id a = a
-}}}
+```
 
-{{{#!hs
+```
 type family F a b c
 type instance F Int  Char Bool = Bool
 type instance F Char Bool Int  = Int
 type instance F Bool Int  Char = Char
-}}}
+```
 
-  B. Injectivity in some of the arguments, where knowing the RHS of a type
-     family determines only some of the arguments on the LHS. Example:
+1. Injectivity in some of the arguments, where knowing the RHS of a type
+  family determines only some of the arguments on the LHS. Example:
 
-{{{#!hs
+```
 type family G a b c
 type instance G Int  Char Bool = Bool
 type instance G Int  Char Int  = Bool
 type instance G Bool Int  Int  = Int
-}}}
+```
 
-  Here knowing the RHS allows us to determine first two arguments, but not the
-  third one.
+>
+>
+> Here knowing the RHS allows us to determine first two arguments, but not the
+> third one.
+>
+>
 
-  C. Injectivity in some of the arguments, where knowing the RHS of a type
-     family and some of the LHS arguments determines other (possibly not all)
-     LHS arguments. Examples:
+1. Injectivity in some of the arguments, where knowing the RHS of a type
+  family and some of the LHS arguments determines other (possibly not all)
+  LHS arguments. Examples:
 
-{{{#!hs
+```
 type family Plus a b where
      Plus Z      n = n
      Plus (S m ) n = S (Plus n m)
-}}}
+```
 
-  Here knowing the RHS and any single argument uniquely determines the
-  remaining argument.
+>
+>
+> Here knowing the RHS and any single argument uniquely determines the
+> remaining argument.
+>
+>
 
-{{{#!hs
+```
 type family H a b c
 type instance H Int  Char   Double = Int
 type instance H Bool Double Double = Int
-}}}
+```
 
-  Knowing the RHS and either `a` or `b` allows to uniquely determine the
-  remaining two arguments, but knowing the RHS and `c` gives us no information
-  about `a` or `b`.
+>
+>
+> Knowing the RHS and either `a` or `b` allows to uniquely determine the
+> remaining two arguments, but knowing the RHS and `c` gives us no information
+> about `a` or `b`.
+>
+>
 
 
 In the following text I will refer to these three forms of injectivity as A, B
 and C.
 
-'''Note that at the moment we only have practical use cases for injectivity of
-form A. Because of that I propose that we implement only this form of injectivity.'''
+
+
+**Note that at the moment we only have practical use cases for injectivity of
+form A. Because of that I propose that we implement only this form of injectivity.**
 We can implement B and C when somebody comes up with compelling use cases.
 
-== Proposed syntax
+
+## Proposed syntax
+
+
 
 Two important things to consider when deciding on a concrete syntax are:
 
-  * '''Backwards compatibility''': at the moment no decision has been made on
-    whether injectivity will become a part of existing `TypeFamilies` extension
-    or if we create a new `InjectiveTypeFamilies` extension that implies
-    `TypeFamilies`. If we choose the former then we need to come up with syntax
-    that is backwards compatible. (Perhaps this is the other way around: if we
-    end up having backwards incompatible syntax then we must create a new
-    language extension).
 
-  * '''Future extensibility''': if we only implement A we still want to be able
-    to add B and C in the future without breaking A.
+- **Backwards compatibility**: at the moment no decision has been made on
+  whether injectivity will become a part of existing `TypeFamilies` extension
+  or if we create a new `InjectiveTypeFamilies` extension that implies
+  `TypeFamilies`. If we choose the former then we need to come up with syntax
+  that is backwards compatible. (Perhaps this is the other way around: if we
+  end up having backwards incompatible syntax then we must create a new
+  language extension).
+
+- **Future extensibility**: if we only implement A we still want to be able
+  to add B and C in the future without breaking A.
+
 
 We decided to use syntax similar to functional dependencies.  The injectivity
 declaration begins with `|` following type family declaration head.  `|` is
 followed by a list of comma-separated injectivity conditions. Each injectivity
 condition has the form:
 
-{{{#!hs
+
+```
 A -> B
-}}}
+```
+
 
 where `A` and `B` are non-empty lists of type variables declared in type family
 head. Things on the left and right of `->` are called LHS and RHS of an
@@ -108,52 +132,65 @@ to write `= tyvar` or `= (tyvar :: kind)` annotations in addition to already
 allowed `:: kind` annotation. In other words all these declaration are
 well-formed:
 
-{{{#!hs
+
+```
 type family Plus (a :: Nat) (b :: Nat) where ...
 type family Plus (a :: Nat) (b :: Nat) :: Nat where ...
 type family Plus (a :: Nat) (b :: Nat) = c where ...
 type family Plus (a :: Nat) (b :: Nat) = (c :: Nat) where ...
-}}}
+```
+
 
 but the third or fourth form is required if the user wants to introduce
 injectivity declaration. Here are examples of injectivity declarations using
 proposed syntax:
 
-{{{#!hs
+
+```
 type family Id a = result | result -> a where
 type family F a b c = d | d -> a b c
 type family G a b c = foo | foo -> a b where
 type family Plus a b = (sum :: Nat) | sum a -> b, sum b -> a where
 type family H a b c = xyz | xyz a -> b c, xyz b -> a c
-}}}
+```
+
 
 Note that above examples demonstrate all three types of injectivivity but for
 now we only plan to implement injectivity A.
 
+
+
 Pros:
 
-  * natural reading: `res a -> b` reads as "knowing res and a determines b".
 
-  * extensible for the future
+- natural reading: `res a -> b` reads as "knowing res and a determines b".
 
-  * backwards compatible
+- extensible for the future
+
+- backwards compatible
+
 
 Cons:
 
-  * since we only plan to implement injectivity of form A we require that there
-    is only one injectivity condition, its LHS contains only a type variable
-    naming the result and its RHS contains all type variables naming the
-    arguments to a type family. This might be a bit annoying.
+
+- since we only plan to implement injectivity of form A we require that there
+  is only one injectivity condition, its LHS contains only a type variable
+  naming the result and its RHS contains all type variables naming the
+  arguments to a type family. This might be a bit annoying.
+
+## Real-life use cases
 
 
-== Real-life use cases
 
-''If you can supply more examples (type family declarations + their usage that
-currently doesn't work but should work with injectivity) please add them here.''
+*If you can supply more examples (type family declarations + their usage that
+currently doesn't work but should work with injectivity) please add them here.*
 
-'''Example 1'''
 
-{{{#!hs
+
+**Example 1**
+
+
+```
 type family F a = result | result -> a where
     F Char = Bool
     F Bool = Int
@@ -161,13 +198,17 @@ type family F a = result | result -> a where
 
 idChar :: (F a ~ Bool) => a -> Char
 idChar a = a
-}}}
+```
+
 
 GHC should infer that `a` is in fact `Char`. Right now this program is rejected.
 
-'''Example 2''' (taken from [ticket:6018#comment:5])
 
-{{{#!hs
+
+**Example 2** (taken from [6018\#comment:5](https://gitlab.staging.haskell.org/ghc/ghc/issues/6018))
+
+
+```
 data Nat
     = Zero
     | Suc Nat
@@ -179,13 +220,17 @@ data CoNat
 type family Succ (t ::  CoNat) :: CoNat
 type instance Succ (Co n)           = Co (Suc n)
 type instance Succ Infinity         = Infinity
-}}}
+```
+
 
 GHC can't infer `Succ n ~ Succ m => n ~ m` because it can't see that `Succ` is injective.
 
-'''Example 3''' (taken from [ticket:6018#comment:26])
 
-{{{#!hs
+
+**Example 3** (taken from [6018\#comment:26](https://gitlab.staging.haskell.org/ghc/ghc/issues/6018))
+
+
+```
 class Manifold' a where
     type Field a
     type Base  a
@@ -209,136 +254,175 @@ id' input = project out
 id' :: forall a. ( Manifold' a ) => Base a -> Base a
 id' = project . unproject
 
-}}}
+```
 
-== Implementation outline
+## Implementation outline
 
-=== Verifying correctness of user's injectivity declaration
+
+### Verifying correctness of user's injectivity declaration
+
+
 
 Once the user declares type family to be injective GHC must verify that this
 declaration is correct, ie. type family really is injective. Below is an outline
-of the algorithm. It is then follow with a discussion and rationale. ''Note: I
+of the algorithm. It is then follow with a discussion and rationale. *Note: I
 am not too familiar with GHC's type checking so please tell me if I'm making any
 wrong assumptions here. Also, I might be using incorrect terminology. If so
-please complain or fix.''
+please complain or fix.*
 
-'''Important''': this algorithm is only for the injectivity of type A. RHS
+
+
+**Important**: this algorithm is only for the injectivity of type A. RHS
 refers to the right-hand side of the type family being checked for
 injectivity. LHS refers to the arguments of that type family.
 
-'''Algorithm'''
+
+
+**Algorithm**
+
 
 1. If a RHS contains a call to a type family we conclude that the type family is
-   not injective. I am not certain if this extends to self-recursion -- see
-   discussion below.
+  not injective. I am not certain if this extends to self-recursion -- see
+  discussion below.
+
 
 Open type families:
 
-2. When checking equation of an open type family we try to unify its RHS with
-   RHSs of all equations we've seen so far. If we succeed then LHSs of unified
-   equations must be identical under that substitution. If they are not identical
-   then we declare that a type family is not injective.
 
-'''RAE:''' I believe this would also have to check that all variables mentioned in the LHS are mentioned in the RHS. Or, following along with Simon's idea in comment:76:ticket:6018, those variables that appear in the injectivity annotation must be mentioned in the RHS. '''End RAE'''
+1. When checking equation of an open type family we try to unify its RHS with
+  RHSs of all equations we've seen so far. If we succeed then LHSs of unified
+  equations must be identical under that substitution. If they are not identical
+  then we declare that a type family is not injective.
+
+
+**RAE:** I believe this would also have to check that all variables mentioned in the LHS are mentioned in the RHS. Or, following along with Simon's idea in [comment:76:ticket:6018](https://gitlab.staging.haskell.org/ghc/ghc/issues/6018), those variables that appear in the injectivity annotation must be mentioned in the RHS. **End RAE**
+
+
 
 Closed type families
 
-3. If a type family has only one equation we declare it to be injective (unless
-   case 1 above applies). '''RAE''' or there are variables missing from the RHS '''End RAE'''
 
-4. If a type family has more equations then we check them one by one. Checking
-   each equation consists of these steps:
+1. If a type family has only one equation we declare it to be injective (unless
+  case 1 above applies). **RAE** or there are variables missing from the RHS **End RAE**
 
-  0) verify 1) for the current equation.
+1. If a type family has more equations then we check them one by one. Checking
+  each equation consists of these steps:
 
-  a) attempt to unify RHS with RHSs of all previous equations. If this does not
-  succeed proceed to next equation. If this was the last equation then type
-  family is injective.
+>
+>
+> 0) verify 1) for the current equation.
+>
+>
 
-  b) if unification in a) succeeds and no substitutions are required then type
-  family is not injective and we report an error to the user. By "no
-  substitution" I mean situation when there are no type variables involved
-  ie. both sides declare the same concrete type (eg. Int). '''RAE''' This seems to be a straightforward special case of (c). Omit? '''End RAE'''
+>
+>
+> a) attempt to unify RHS with RHSs of all previous equations. If this does not
+> succeed proceed to next equation. If this was the last equation then type
+> family is injective.
+>
+>
 
-  c) if unification succeeds and there are type variables involved we substitute
-  unified type variables on the LHS and check whether this LHS overlaps with
-  any of the previous equations. If it does we proceed to the next equation
-  (if this was the last equation then type family is injective). If it
-  doesn't then type family is not injective and we report an error to the
-  user. See examples and discussion below for more details.
+>
+>
+> b) if unification in a) succeeds and no substitutions are required then type
+> family is not injective and we report an error to the user. By "no
+> substitution" I mean situation when there are no type variables involved
+> ie. both sides declare the same concrete type (eg. Int). **RAE** This seems to be a straightforward special case of (c). Omit? **End RAE**
+>
+>
 
-'''RAE:''' We have to be careful with the word ''overlap'' here. I think we want "overlaps" to be "is subsumed by". Basically, you want to know of the equation at hand is reachable, given the LHS substitution. Even if it is reachable, the (substituted) LHS may coincide with the LHS of the earlier equation whose RHS unified with the current RHS. So, just because the current LHS is reachable doesn't mean the family is not injective.
+>
+>
+> c) if unification succeeds and there are type variables involved we substitute
+> unified type variables on the LHS and check whether this LHS overlaps with
+> any of the previous equations. If it does we proceed to the next equation
+> (if this was the last equation then type family is injective). If it
+> doesn't then type family is not injective and we report an error to the
+> user. See examples and discussion below for more details.
+>
+>
 
-Even subtler, it's possible that certain values for type variables are excluded if the current LHS is reachable (for example, some variable `a` couldn't be `Int`, because if `a` were `Int`, then a previous equation would have triggered). Perhaps these exclusions can also be taken into account. Thankfully, forgetting about the exclusions is conservative -- the exclusions can only make ''more'' families injective, not ''fewer''. '''End RAE'''
 
-'''RAE's examples'''
+**RAE:** We have to be careful with the word *overlap* here. I think we want "overlaps" to be "is subsumed by".
 
-Here are some examples that I've come up with that show some tricky points:
 
-{{{#!hs
-type family E1 a = r | r -> a where
-  E1 Int = Int
-  E1 a   = a
-}}}
 
-According to the algorithm above, this would be rejected as non-injective. This is because clause (c) of the closed type family check says that if an equation is not subsumed by a previous equation, yet the RHSs unify, the family is flagged as non-injective. Yet, `E1` ''is'' injective.
+Even subtler, it's possible that certain values for type variables are excluded if the current LHS is reachable (for example, some variable `a` couldn't be `Int`, because if `a` were `Int`, then a previous equation would have triggered). Perhaps these exclusions can also be taken into account. Thankfully, forgetting about the exclusions is conservative -- the exclusions can only make *more* families injective, not *fewer*. **End RAE**
 
-Here's another one:
 
-{{{#!hs
+
+**RAE's examples**
+
+
+```
 type family E2 (a :: Bool) = r | r -> a where
   E2 False = True
   E2 True  = False
   E2 a     = False
-}}}
+```
 
-A naive injectivity check here would conclude that `E2` is not injective, because the RHS of the last equation unifies with the RHS of a previous equation, and the LHS of the last equation is not subsumed by any previous equation. But, noting that `a` (as used in the last equation) can neither be `True` nor `False`, `E2 is in fact injective. These are the "exclusions" I talk about above.
 
-'''Discussion'''
+A naive injectivity check here would conclude that `E2` is not injective, because the RHS of the last equation unifies with the RHS of a previous equation, and the LHS of the last equation is not subsumed by any previous equation. But, noting that `a` (as used in the last equation) can neither be `True` nor `False`, \`E2 is in fact injective. These are the "exclusions" I talk about above.
+
+
+
+**Discussion**
+
+
 
 Case 1 above is conservative and may incorrectly reject injectivity declaration
 for some type families. For example type family `I`:
 
-{{{#!hs
+
+```
 type family I a = r | r -> a where
      I a = Id a -- Id defined earlier
-}}}
+```
+
 
 is injective but restriction in case 1 will reject it. Why such a restriction?
 Consider this example. Let us assume that we have type families `X` and `Y` that
 we already know are injective, and type constructors `Bar :: * -> *` and
 `Baz :: * -> * -> *`. Now we declare:
 
-{{{#!hs
+
+```
 type family Foo a = r | r -> a where
      Foo (Bar a)   = X a
      Foo (Baz a b) = Y a b
-}}}
+```
+
 
 Here we would need to check whether results of `X a` and `Y a b` can overlap and
 I don't see a good way of doing this once the RHS has nested calls to type
 families. Second of all if we see `Foo a ~ Bool` during type checking GHC can't
 solve that without trying each equation one by one to see which one returns
 `Bool`. This takes a lot of guessing and I believe GHC should refuse to do that.
-See also #4259.
+See also [\#4259](https://gitlab.staging.haskell.org/ghc/ghc/issues/4259).
+
+
 
 What about self-recursion? Consider this type family:
 
-{{{#!hs
+
+```
 -- assumes promoted Maybe and Nat
 type family NatToMaybe a = r | r -> a where
      NatToMaybe Z     = Nothing
      NatToMaybe (S n) = Just (NatToMaybe n)
-}}}
+```
+
 
 Using Case 4a we will infer correctly that this type family is injective. Now
 consider this:
 
-{{{#!hs
+
+```
 type family Ban a = r | r -> a where
      Ban Z     = Z
      Ban (S n) = Ban n
-}}}
+```
+
 
 To verify injectivity in this case we need to ask whether `Z ~ Ban n` (case 4a
 above). We can only answer such question when a type family is injective. Here
@@ -347,24 +431,32 @@ we have not confirmed that `Ban` is injective so we may rightly refuse to answer
 seems to me that we could allow self-recursion - I have not yet identified any
 corner cases that would prevent us from doing so.
 
-'''RAE:''' But it seems that, under this treatment, any self-recursion would automatically lead to a conclusion of "not injective", just like any other use of a type family. For example:
 
-{{{#!hs
+
+**RAE:** But it seems that, under this treatment, any self-recursion would automatically lead to a conclusion of "not injective", just like any other use of a type family. For example:
+
+
+```
 type family IdNat n = r | r -> a where
   IdNat Z = Z
   IdNat (S n) = S (IdNat n)
-}}}
+```
 
-`IdNat` is injective. But, following the algorithm above, GHC would see the recursive use of `IdNat`, not know whether `IdNat` is injective, and then give up, concluding "not injective". Is there a case where the special treatment of self-recursion leads to a conclusion of "injective"? '''End RAE'''
+
+`IdNat` is injective. But, following the algorithm above, GHC would see the recursive use of `IdNat`, not know whether `IdNat` is injective, and then give up, concluding "not injective". Is there a case where the special treatment of self-recursion leads to a conclusion of "injective"? **End RAE**
+
+
 
 Here's an example of case 4c in action:
 
-{{{#!hs
+
+```
 type family Bak a = r | r -> a where
      Bak Int  = Char
      Bak Char = Int
      Bak a    = a
-}}}
+```
+
 
 Equation 2 falls under case 4a. When we reach equation 3 we attempt to verify
 it's RHS with each RHS of the previous equations. Attempt to unify `a` with
@@ -377,78 +469,85 @@ know repeat the same steps for the second equations and conclude that 3rd
 equation will never produce an `Int` because this will be caught by the 1st
 equation. We thus conclude that `Bak` is injective.
 
-=== Other implementation details
+
+### Other implementation details
+
+
 
 The implementation needs to check the correctness of injectivity conditions
 declarations. This includes checking that:
 
-  * only in-scope type variables are used. For example
-    `type family F a | result -> b` should result with "not in scope: b" error.
 
-  * there are no identical conditions (this wouldn't hurt, but the user deserves
-    a warning about this)
+- only in-scope type variables are used. For example
+  `type family F a | result -> b` should result with "not in scope: b" error.
 
-  * type variables are not repeated on either LHS or RHS of the injectivity
-    condition. For example `result a a -> ...` or `... -> a b a` should generate
-    a warning. Note that it probably is OK to have the same variable both on the
-    LHS and RHS of an injectivity condition: in the above examples it is true
-    that `type family G a b c | result c -> a b c`. The question is whether this
-    has any practical relevance.
+- there are no identical conditions (this wouldn't hurt, but the user deserves
+  a warning about this)
 
-  * injectivity conditions don't overlap (eg. `result -> a b` overlaps
-    `result -> a`). This probably deserves a warning.
+- type variables are not repeated on either LHS or RHS of the injectivity
+  condition. For example `result a a -> ...` or `... -> a b a` should generate
+  a warning. Note that it probably is OK to have the same variable both on the
+  LHS and RHS of an injectivity condition: in the above examples it is true
+  that `type family G a b c | result c -> a b c`. The question is whether this
+  has any practical relevance.
+
+- injectivity conditions don't overlap (eg. `result -> a b` overlaps
+  `result -> a`). This probably deserves a warning.
+
 
 I am not certain at the moment how to treat these injectivity conditions
 declarations:
 
-  * `result -> a, result -> b` is technically correct but we could just say
-    `result -> a b`. Do the two separate declarations have the same power as the
-    combined one?
 
-=== Inferring injectivity
+- `result -> a, result -> b` is technically correct but we could just say
+  `result -> a b`. Do the two separate declarations have the same power as the
+  combined one?
 
-[ticket:6018#comment:45 Here] it was suggested by Simon that we could infer
+### Inferring injectivity
+
+
+
+[Here](https://gitlab.staging.haskell.org/ghc/ghc/issues/6018) it was suggested by Simon that we could infer
 injectivity for closed type families. This is certainly possible for injectivity
 A, but not for B or C, where the number of possible injectivity conditions is
 exponential in the number of arguments. I personally am against inferring
 injectivity. The reasons are:
 
-  * Before 7.10 comes out there will already be some code in the wild that uses
-    closed type families introduced in GHC 7.8. None of these type families
-    require injectivity to work because GHC 7.8 does not support injectivity. If
-    we attempt to infer injectivity for all these already existing closed type
-    families we will only increase compilation time of existing code with
-    absolutely no gain in functionality of the code. There were some complaints
-    about GHC's performance decreasing with each release and I don't want to add
-    to that.
 
-  * I believe that requiring explicit injectivity annotations is a valuable
-    source code documentation for the programmer.
+- Before 7.10 comes out there will already be some code in the wild that uses
+  closed type families introduced in GHC 7.8. None of these type families
+  require injectivity to work because GHC 7.8 does not support injectivity. If
+  we attempt to infer injectivity for all these already existing closed type
+  families we will only increase compilation time of existing code with
+  absolutely no gain in functionality of the code. There were some complaints
+  about GHC's performance decreasing with each release and I don't want to add
+  to that.
 
-  * Annotations also make it explicit which code will compile with GHC 7.10 and
-    which will not.
+- I believe that requiring explicit injectivity annotations is a valuable
+  source code documentation for the programmer.
 
-  * I don't like the idea of mismatch between open type families and closed type
-    families, meaning that injectivity of open type families would be openly
-    documented whereas for closed type families it would be hidden.
+- Annotations also make it explicit which code will compile with GHC 7.10 and
+  which will not.
+
+- I don't like the idea of mismatch between open type families and closed type
+  families, meaning that injectivity of open type families would be openly
+  documented whereas for closed type families it would be hidden.
+
+## Other notes
 
 
-== Other notes
+- This page does not mention anything about associated types. The intention is
+  that injectivity will also work for those. I just haven't thought about the
+  details yet.
 
-  * This page does not mention anything about associated types. The intention is
-    that injectivity will also work for those. I just haven't thought about the
-    details yet.
+- [Here](https://gitlab.staging.haskell.org/ghc/ghc/issues/6018) Richard mentions head-injectivity used by
+  Agda. We don't plan to follow that direction.
 
-  * [ticket:6018#comment:48 Here] Richard mentions head-injectivity used by
-    Agda. We don't plan to follow that direction.
-
-  * I'm not yet sure what is the exact scope of things we want to do with
-    injectivity. Certainly if we have `F a ~ F b` and `F` is injective then we
-    can declare `a ~ b`. (Note: Simon remarks that in such case `a` must be a
-    skolem constant and `b` a unification variable. I don't know the difference
-    between the two). Moreover if we have `F a ~ Int` then we can infer `a`. But
-    what if we also have injective type family `G` and see a constraint like
-    `F a ~ G b c`? For injective type families there exists at most one solution
-    but I think that GHC should refuse to solve such riddles.
-
-```
+- I'm not yet sure what is the exact scope of things we want to do with
+  injectivity. Certainly if we have `F a ~ F b` and `F` is injective then we
+  can declare `a ~ b`. (Note: Simon remarks that in such case `a` must be a
+  skolem constant and `b` a unification variable. I don't know the difference
+  between the two). Moreover if we have `F a ~ Int` then we can infer `a`. But
+  what if we also have injective type family `G` and see a constraint like
+  `F a ~ G b c`? For injective type families there exists at most one solution
+  but I think that GHC should refuse to solve such riddles.
