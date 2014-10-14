@@ -351,6 +351,39 @@ Even subtler, it's possible that certain values for type variables are excluded 
 
 
 
+**RAE's examples**
+
+
+
+Here are some examples that I've come up with that show some tricky points:
+
+
+```
+type family E1 a = r | r -> a where
+  E1 Int = Int
+  E1 a   = a
+```
+
+
+According to the algorithm above, this would be rejected as non-injective. This is because clause (c) of the closed type family check says that if an equation is not subsumed by a previous equation, yet the RHSs unify, the family is flagged as non-injective. Yet, `E1` *is* injective.
+
+
+
+Here's another one:
+
+
+```
+type family E2 (a :: Bool) = r | r -> a where
+  E2 False = True
+  E2 True  = False
+  E2 a     = False
+```
+
+
+A naive injectivity check here would conclude that `E2` is not injective, because the RHS of the last equation unifies with the RHS of a previous equation, and the LHS of the last equation is not subsumed by any previous equation. But, noting that `a` (as used in the last equation) can neither be `True` nor `False`, \`E2 is in fact injective. These are the "exclusions" I talk about above.
+
+
+
 **Discussion**
 
 
