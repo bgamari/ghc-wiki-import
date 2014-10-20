@@ -44,6 +44,8 @@ Structures with one field are allowed.
 
 The extension should be enabled via `CStructures` language pragma.
 
+TODO Recursive definitions
+
 === Examples ===
 
 Here is few examples of C declarations and corresponding Haskell foreign import declaration. 
