@@ -87,7 +87,7 @@ The table below explains where most build variables are defined (this is taken f
 
 <table><tr><th>  Variable </th>
 <th> Purpose </th>
-<th> Defined by 
+<th> Defined by<sup>\*</sup> 
 </th></tr>
 <tr><th>`$1_PACKAGE`           </th>
 <th> Package name for this dir, if it is a package </th>
@@ -156,6 +156,7 @@ The table below explains where most build variables are defined (this is taken f
 
 
 
+<sup>\*</sup> Note: this now appears to be outdated -- some variable definitions have been moved to other files.
                           
 
 
