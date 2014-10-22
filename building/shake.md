@@ -70,7 +70,7 @@ Development.Make](https://github.com/ndmitchell/shake/tree/master/Development/Ma
 
 
 
-Parsing the existing `*.mk` files and extracting variables is an interesting small standalone project.
+Parsing the existing `*.mk` files and extracting variables is an interesting small standalone project (see intermediate goals).
 
 
 ### Where options come from
@@ -167,11 +167,22 @@ The table below explains where most build variables are defined (this is taken f
 Following the divide-and-conquer principle, we split the big goal into a number of less ambitious ones below. More intermediate goals will be added here as the project progresses.
 
 
+### Mining variables
+
+
+
+A parser for (a subset of) makefiles is being implemented in order to mine all variable definitions and associated conditions from the existing makefiles (876 makefiles found in the entire GHC tree). The definitions are to be further converted to Haskell code in a semi-automated way.
+
+
+
+System related `@variables@` which are expanded by `configure` are to be placed in `default.config.in` file that will be processed by `configure` to produce `default.config` file that will be read by the `Shake` build system. GHC developers can override some of the default settings using the `user.config` file, whose role will correspond to that of `build.mk` in the current build system.
+
+
 ### Shaking up a library
 
 
 
-The first intermediate goal is to choose a library and build it with `Shake`. This will be tested by running the existing build system, removing all the built stuff for this particular library, and then restoring it with `Shake`, hopefully getting the same result. It was decided to choose a library without `cbits` and `#include`'s for the first attempt; `libraries/haskell2010` seems like a good candidate.
+The first intermediate goal is to choose a library and build it with `Shake`. This will be tested by running the existing build system, removing all the built stuff for this particular library, and then restoring it with `Shake`, hopefully getting the same result. It was decided to choose a library without `cbits` and `#include`'s for the first attempt; `libraries/haskell2010` seems like a good candidate. The build code should be sufficiently generic to handle all other libraries without much rewriting.
 
 
 ## How to contribute
