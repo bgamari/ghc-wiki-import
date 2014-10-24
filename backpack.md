@@ -12,7 +12,9 @@ See also [CabalDependency](cabal-dependency)
 
 
 - [
-  Design document](http://web.mit.edu/~ezyang/Public/backpack-impl.pdf): quite technical, but a lot of good information about how the system we are implementing differs from the Backpack paper
+  Design document](https://git.haskell.org/ghc.git/blob/HEAD:/docs/backpack/backpack-impl.pdf): quite technical, but a lot of good information about how the system we are implementing differs from the Backpack paper
+- [
+  Manual](https://git.haskell.org/ghc.git/blob/HEAD:/docs/backpack/backpack-manual.pdf): user facing specification of the system
 - [
   What's a module system good for anyway?](http://blog.ezyang.com/2014/08/whats-a-module-system-good-for-anyway/) Motivates \*why\* you might care about Backpack
 - [
