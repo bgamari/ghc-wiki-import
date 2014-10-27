@@ -1,57 +1,46 @@
-## Distriubted closures
+CONVERSION ERROR
 
+Original source:
 
+```trac
+== Distriubted closures ==
 
 This page desribes a possible design for `distributed-closure`, a library that implements
-serialisable closures, building on top of [Typeable](typeable) and [StaticPointers](static-pointers).
-See the root page [DistributedHaskell](distributed-haskell).
+serialisable closures, building on top of [wiki:Typeable] and [wiki:StaticPointers].
+See the root page [wiki:DistributedHaskell].
 
-
-
-The [
-distributed-process package](https://hackage.haskell.org/package/distributed-process) implements a framework for distributed
-programming *à la* Erlang. Support for static closures is implemented in a separate package called
-[
-distributed-static package](https://hackage.haskell.org/package/distributed-static). We propose to patch this library in the
+The [https://hackage.haskell.org/package/distributed-process distributed-process package] implements a framework for distributed
+programming ''à la'' Erlang. Support for static closures is implemented in a separate package called
+[https://hackage.haskell.org/package/distributed-static distributed-static package]. We propose to patch this library in the
 following way, and rename it to `distributed-closure`. Ultimately, distributed-closure should be the one-stop shop for all distributed frameworks that wish to allow users to program with static closures.
 
-
-## Proposed design
-
-
+== Proposed design == 
 
 `distributed-closure` will define the following datatype:
 
-
-```wiki
+{{{
 data Closure a
-```
+}}}
 
-
-`Closure` is the type of *static closures*. Morally, it contains some
+`Closure` is the type of ''static closures''. Morally, it contains some
 pointer to a static expression, paired with an environment of only
 serializable values.
 
-
-
 Why do we need `Closure`? `Closure` is strictly more expressive than
-`StaticPtr`. `StaticPtr` can only be constructed from *closed* expressions
+`StaticPtr`. `StaticPtr` can only be constructed from ''closed'' expressions
 (no free variables). `Closure` is built on top of `StaticPtr`. It allows
-encoding *serializable expressions*. That is, expressions formed of
+encoding ''serializable expressions''. That is, expressions formed of
 only top-level identifiers, literals, and serializable free variables.
 for example, using `Closure`, one can write:
 
-
-```wiki
+{{{
 f :: Int -> Int -> ...
 f x y = ... closure (static (+)) `closureAp` closurePure x `closureAp` closurePure y ...
-```
-
+}}}
 
 We introduce the following library functions on `Closure`. This is the full API of `distributed-closure`:
 
-
-```wiki
+{{{
 data Closure a
 
 closure :: StaticPtr a -> Closure a
@@ -59,115 +48,83 @@ unclosure :: Closure a -> a
 
 closurePure :: Serializable a => a -> Closure a
 closureAp :: Closure (a -> b) -> Closure a -> Closure b
-```
-
+}}}
 
 The signature of `closure` mentions `Serializable`, which is a class
 defined as follows:
 
-
-```wiki
+{{{
 data Dict c = c => Dict
 newtype ctx :- c = Sub (ctx => Dict c)
 
 class (Binary a, Typeable a, Typeable (Ctx a), Ctx a :=> Serializable a) => Serializable a where
   type Ctx a :: Constraint
   serializableDict :: StaticPtr (ctx :- Serializable a)
-```
+}}}
 
+'''NOTE: this definition of `Serializable` is different from the current one as found in `distributed-process`, and also different from the one DistributedHaskell#Serialization.'''
 
-**NOTE: this definition of `Serializable` is different from the current one as found in `distributed-process`, and also different from the one [DistributedHaskell\#Serialization](distributed-haskell#).**
-
-
-
-In words, a *serializable value* is a value for which we have
+In words, a ''serializable value'' is a value for which we have
 a `Binary` instance and a `Typeable` instance, but moreover for which
-we can obtain a `StaticPtr` referencing a *proof that the set of constraints `ctx` entails `Serializable a`*. (The `Dict` datatype and `(:-)` can be obtained from the [
-constraints package](http://hackage.haskell.org/package/constraints) on Hackage). In other words, a value of type `ctx :- Serializable a` is *explicit* evidence that GHC's instance resolution can derive `Serializable a` from `ctx`. The constraint `ctx :=> Serializable a` is what allows reifying this evidence of instance resolution.
-
-
+we can obtain a `StaticPtr` referencing a ''proof that the set of constraints `ctx` entails `Serializable a`''. (The `Dict` datatype and `(:-)` can be obtained from the [http://hackage.haskell.org/package/constraints constraints package] on Hackage). In other words, a value of type `ctx :- Serializable a` is ''explicit'' evidence that GHC's instance resolution can derive `Serializable a` from `ctx`. The constraint `ctx :=> Serializable a` is what allows reifying this evidence of instance resolution.
 
 One could make do with an empty class definition for `Serializable`, as is currently the case, but without this augmented definition, lifting arbitrary serializable values to `Closure`s becomes much less convenient (see `closurePure` below).
 
+'''Variation:''' the above definition uses type families to to determine some context of constraints `ctx` from a type `a`, but one could equally well use functional dependencies for this:
 
-
-**Variation:** the above definition uses type families to to determine some context of constraints `ctx` from a type `a`, but one could equally well use functional dependencies for this:
-
-
-```wiki
+{{{
 class (Binary a, Typeable a, Typeable ctx, ctx :=> Serializable a) => Serializable ctx a | a -> ctx where
   serializableDict :: StaticPtr (ctx :- Serializable a)
-```
-
+}}}
 
 Most of the time, instance definitions have an empty context, meaning that one can very often take `Ctx a == ()`.
 
+One might argue that `Serializable` is rather more complex than it could be. The central issue is that the `-XStaticPointers` extension alone does not offer any means to reify a constraint to ''static'' evidence in the form of a dictionary - a feature that is in general very useful indeed (see below). In principle this could be done, since dictionaries are morally either static, or simple combinations of static dictionaries, but it would require a further extension to the compiler, possibly to the type system itself. The above definition of `Serializable` comes at the economy of such a compiler extension.
 
+== Implementation
 
-One might argue that `Serializable` is rather more complex than it could be. The central issue is that the `-XStaticPointers` extension alone does not offer any means to reify a constraint to *static* evidence in the form of a dictionary - a feature that is in general very useful indeed (see below). In principle this could be done, since dictionaries are morally either static, or simple combinations of static dictionaries, but it would require a further extension to the compiler, possibly to the type system itself. The above definition of `Serializable` comes at the economy of such a compiler extension.
+=== Implementation in GHC
 
+TODO See [https://ghc.haskell.org/trac/ghc/wiki/StaticPointers/Old old proposal] and [https://ghc.haskell.org/trac/ghc/blog/simonpj/StaticPointers blog post] by Simon PJ.
 
-## Implementation
-
-
-### Implementation in GHC
-
-
-
-TODO See [
-old proposal](https://ghc.haskell.org/trac/ghc/wiki/StaticPointers/Old) and [
-blog post](https://ghc.haskell.org/trac/ghc/blog/simonpj/StaticPointers) by Simon PJ.
-
-
-### Implementation of `distributed-closure`
-
-
+=== Implementation of `distributed-closure`
 
 The definition of `Closure a` is as follows:
 
-
-```wiki
+{{{
 data Closure a where
   StaticPtr :: StaticPtr b -> Closure b
   Encoded :: ByteString -> Closure ByteString
   Ap :: Closure (b -> c) -> Closure b -> Closure c
-```
-
+}}}
 
 This definition permits an efficient implementation: there is no need
 to reserialize the environment everytime one composes two `Closures`s.
 The definition in the Cloud Haskell paper is as follows:
 
-
-```wiki
+{{{
 data Closure' a where
   Closure' :: StaticPtr (ByteString -> b) -> ByteString -> Closure b
-```
-
+}}}
 
 Note that the `Closure'` constructor can be simulated:
 
-
-```wiki
+{{{
 Closure cf env <=> Ap (StaticPtr cf) (Encoded env)
-```
-
+}}}
 
 One can even add the following constructor for better efficiency:
 
-
-```wiki
+{{{
 data Closure a where
   ...
   Closure :: Closure a -> a -> Closure a
-```
-
+}}}
 
 Any `StaticPtr` can be lifted to a `Closure`, and so can any
 serializable value:
 
-
-```wiki
+{{{
 closure :: StaticPtr a -> Closure a
 closure x = StaticPtr 
 
@@ -179,14 +136,12 @@ closurePure x =
   where
     decodeD :: (Ctx a :- Serializable a) -> ByteString -> a
     decodeD Sub = decode
-```
+}}}
 
+'''Side note:'''
+What if we didn't have `serializableDict`? What if we reverted to the current definition of `Serializable`? Then it would be impossible to write `closurePure` with the above signature. We would need to pass in explicitly some ''static'' serialization dictionary. This is quite a bother, since it forces us to introduce spurious top-level bindings for dictionaries, e.g.:
 
-**Side note:**
-What if we didn't have `serializableDict`? What if we reverted to the current definition of `Serializable`? Then it would be impossible to write `closurePure` with the above signature. We would need to pass in explicitly some *static* serialization dictionary. This is quite a bother, since it forces us to introduce spurious top-level bindings for dictionaries, e.g.:
-
-
-```wiki
+{{{
 closurePure' :: Static (Dict (Serializable a)) -> a -> Closure a
 closurePure' sdict x = StaticPtr sdict `closureAp` Encoded (encode x)
 
@@ -194,133 +149,146 @@ sdictInt :: Static (Dict (Serializable a))
 sdictInt = static Dict
 
 thirtyClosure = plusClosure `closureAp` closurePure sdictInt 10 `closureAp` closurePure sdictInt 20
-```
+}}}
 
-
-**End side note.**
-
-
+'''End side note.'''
 
 Given any two `Closure`s with compatible types, they can be combined
 using `closureAp`:
 
-
-```wiki
+{{{
 closureAp :: Closure (a -> b) -> Closure a -> Closure b
 closureAp = Ap
-```
+}}}
 
-
-Notice how `Closure` is *nearly* the free applicative functor, though not completely free, because we impose `Serializable a` in `closurePure`. It *is*, however, a [
-semigroupoid](https://hackage.haskell.org/package/semigroupoids).
-
-
+Notice how `Closure` is ''nearly'' the free applicative functor, though not completely free, because we impose `Serializable a` in `closurePure`. It ''is'', however, a [https://hackage.haskell.org/package/semigroupoids semigroupoid].
 
 Closure serialization is straightforward, but closure deserialization
 is tricky. See
-[
-this blog post section](https://ghc.haskell.org/trac/ghc/blog/simonpj/StaticPointers#Serialisingstaticpointers) from Simon PJ as to why. The issue is that
+[https://ghc.haskell.org/trac/ghc/blog/simonpj/StaticPointers#Serialisingstaticpointers this blog post section] from Simon PJ as to why. The issue is that
 when deserializing from a bytestring to target type `Closure b`, one
 needs to ensure that the target type matches the type of the closure
-before it was serialized, lest *bad things happen*. We need to impose
+before it was serialized, lest ''bad things happen''. We need to impose
 that `Typeable b` when deserializing to `Closure b`, but that doesn't
 help us for all closures. Consider in particular the type of `Ap`:
 
-
-```wiki
+{{{
 Ap :: Closure (b -> c) -> Closure b -> Closure c
-```
-
+}}}
 
 Notice that the type `b` is not mentioned in the return type of the
 constructor. We need to know `Typeable (b -> c)` and `Typeable b` in
 order to recursively deserialize the subclosures, but we can't infer
-either from the context `Typeable c`. 
+either from the context `Typeable c`.
 
+There are solutions to this problem.
 
+'''Alternative 1:'''
 
-The trick is to realize that in fact the type `b` does not matter: it could be arbitrary. After all, that's why it appears existentially quantified in the type of the `Ap` constructor. Type safety guarantees that the `Ap` constructor always combines two `Closure`s of compatible type. In other words, the type of the first argument of `Ap` could as well be taken to be `Closure (Any -> c)`, because any lifted type can be coerced to/from `Any`, so that any value of type `b` can reasonably also be ascribed type `Any`. Since we don't care about the type `b`, might as well take it to be `Any`. If one trusts closure serialization, and indeed closure serialization must be part of the TCB (see [DistributedHaskell\#Thetrustedcodebase](distributed-haskell#the-trusted-code-base)), then when deserializing a closure, we can reconstruct an `Ap` node, taking `b ~ Any`, or equivalently, always deserializing at the following type:
+The trick is to realize that in fact the type `b` does not matter: it could be arbitrary. After all, that's why it appears existentially quantified in the type of the `Ap` constructor. Type safety guarantees that the `Ap` constructor always combines two `Closure`s of compatible type. In other words, the type of the first argument of `Ap` could as well be taken to be `Closure (Any -> c)`, because any lifted type can be coerced to/from `Any`, so that any value of type `b` can reasonably also be ascribed type `Any`. Since we don't care about the type `b`, might as well take it to be `Any`. If one trusts closure serialization, and indeed closure serialization must be part of the TCB (see DistributedHaskell#Thetrustedcodebase), then when deserializing a closure, we can reconstruct an `Ap` node, taking `b ~ Any`, or equivalently, always deserializing at the following type:
 
-
-```wiki
+{{{
 Ap :: Closure (Any -> c) -> Closure Any -> Closure c
-```
+}}}
 
+'''Note:''' `Any` ''must'' have a `Typeable` instance. This is the case in GHC 7.8, but in GHC >= 7.9, `Any` is now a type family with no instance, hence cannot be given a `Typeable` instance (see tickets XXX and XXX). Deserialization can go something along the following lines (beware, highly idealized code):
 
-One way to do this is to redefine `Closure`:
-
-
-```wiki
-data Closure a where
-  ...
-  Ap :: Closure (Any -> c) -> Closure Any -> Closure c
-
-closureAp :: forall b c. Closure (b -> c) -> Closure b -> Closure c
-closureAp cf cx = Ap (unsafeCoerce cf :: Closure (Any -> c)) (unsafeCoerce cx)
-```
-
-
-The calls to `unsafeCoerce` are safe, as per the documentation on `Any` (TODO ref).
-
-
-
-**Note:** `Any` *must* have a `Typeable` instance. This is the case in GHC 7.8, but in GHC \>= 7.9, `Any` is now a type family with no instance, hence cannot be given a `Typeable` instance (see tickets XXX and XXX). Deserialization can go something along the following lines (beware, highly idealized code):
-
-
-```wiki
-decodeClosure :: Typeable a => ByteString -> (ByteString, Closure a)
+{{{
+decodeClosure :: forall a. Typeable a => ByteString -> (ByteString, Closure a)
 decodeClosure (B.uncons -> '0':bs) = (StaticPtr <$> decodeStaticPtr) bs
 decodeClosure (B.uncons -> '1':bs) = Encoded bs
-decodeClosure (B.uncons -> '2':bs) = (Ap <$> decodeClosure <*> decodeClosure) bs
-```
+decodeClosure (B.uncons -> '2':bs) = (do
+    cf <- decodeClosure :: Any -> a
+    cx <- decodeClosure :: Any
+    return $ ClosureAp cf cx
+    ) bs
+}}}
 
+Now it may often happen that `decodeStaticPtr` will be called against type `StaticPtr Any`, or `StaticPtr (Any -> c)`. `decodeStatic` internally compares `TypeRep`s before producing a result: it compares the `TypeRep` of the target type against the type found in the SPT. With the above definition of `Ap`, the `TypeRep`s in general will not match exactly: we will be comparing the `Typerep` of `Any -> c` to that of `b -> c` for some type `b`. For this to work, '''we need to carry out `TypeRep` matching modulo `Any`'''. More precisely, we require the following laws (for some `Typeable b`):
 
-Now it may often happen that `decodeStaticPtr` will be called against type `StaticPtr Any`, or `StaticPtr (Any -> c)`. `decodeStatic` internally compares `TypeRep`s before producing a result: it compares the `TypeRep` of the target type against the type found in the SPT. With the above definition of `Ap`, the `TypeRep`s in general will not match exactly: we will be comparing the `Typerep` of `Any -> c` to that of `b -> c` for some type `b`. For this to work, **we need to carry out `TypeRep` matching modulo `Any`**. More precisely, we require the following laws (for some `Typeable b`):
-
-
-```wiki
+{{{
 isJust (cast :: Any -> Maybe b) == True
 isJust (cast :: b -> Maybe Any) == True
-```
-
+}}}
 
 Insofar as `Any` is an internal compiler type not normally accessible to the user, the above should not compromise type safety.
 
+'''Alternative 2:'''
 
+Define
+
+{{{
+data DynClosure
+  = DynStaticPtr DynStaticPtr 
+  | DynEncoded ByteString 
+  | DynAp DynClosure DynClosure
+}}}
+
+{{{
+decodeDynStaticPtr :: ByteString -> (ByteString, DynStaticPtr)
+
+-- | Decodes an encoded @'Closure' a@ into a 'DynClosure'.
+decodeDynClosure :: ByteString -> (ByteString, DynClosure)
+decodeDynClosure (B.uncons -> '0':bs) = (DynStaticPtr <$> decodeDynStaticPtr) bs
+decodeDynClosure (B.uncons -> '1':bs) = DynEncoded bs
+decodeDynClosure (B.uncons -> '2':bs) = (DynAp <$> decodeClosure <*> decodeClosure) bs
+
+fromDynClosure :: Typeable a => DynClosure -> Closure a
+fromDynClosure = error "TODO"
+}}}
+
+'''End of alternatives.'''
 
 All that remains is to implement `unclosure`:
 
-
-```wiki
+{{{
 unstatic :: StaticPtr a -> a
 
 unclosure :: Closure a -> a
 unclosure (StaticPtr sptr) = unstatic sptr
-unclosure (Encoded x) = x
 unclosure (Ap cf cx) = (unstatic cf) (unstatic cx)
 unclosure (Closure cx x) = x
-```
+}}}
 
-### About performance
+Or in the case of Alternative 2 above:
 
+{{{
+unclosure :: Closure a -> a
+...
+unclosure (DynClosure dynclos) = fromJust $ unDynClosure dynclos
 
+unDynClosure :: Typeable a => DynClosure -> Maybe a
+unDynClosure dynclos = join $ fromDyn <$> go dynclos
+  where
+    go :: DynClosure -> Maybe Dynamic
+    go (DynStaticPtr (DSP sptr)) = return $ toDyn (unstatic sptr)
+    go (DynEncoded x) = return x
+    go (DynAp cf cx) = dynApply (go cf) (go cx)
+}}}
+
+'''Tradeoffs:'''
+
+Alternative 1:
+- requires a `Typeable` instance for `Any`.
+- requires type casting modulo `Any`.
+- Potentially faster: dynamic type checks done only once per `StaticPtr` in `decodeClosure`.
+
+Alternative 2:
+- requires `dynApply`, which in turn requires `TypeRep`s to be trees, not simple fingerprints.
+- Potentially slower: dynamic type checks at every `Ap` node when doing `unDynClosure`.
+
+=== About performance
 
 In the case of monomorphic functions, there need be no `TypeRep` sent over the wire in the scheme presented above, yet we still preserve type safety. `TypeRep`s bloat the messages sent on the wire, so their absence can only be a good thing for performance. That said, we anticipate that even the dynamic type checks performed by `decodeStatic` can be detrimental for performance. For this reason, there ought to be a
 
-
-```wiki
+{{{
 unsafeDecodeStaticPtr :: ByteString -> (ByteString, StaticPtr a)
 unsafeDecodeClosure :: ByteString -> (ByteString, Closure a)
 unsafeDecodeClosure = ... unsafeDecodeStaticPtr ...
-```
-
-
+}}}
 that perform no dynamic type checks. This of course may come at the cost of some type safety, but only if the user somehow writes something equivalent to `decodeClosure (encodeClosure (x :: Closure a)) :: Closure b`, or if the remote side crafts devious applications of two closures of incompatible type. In high performance settings, one can often make the simplifying assumption that peers can be trusted, so this should not be a problem in practice.
 
-
-## Conclusion
-
-
+== Conclusion
 
 It appears possible to implement a language extension first proposed
 in the original Cloud Haskell paper in a way that supports polymorphic
@@ -329,8 +297,6 @@ the proposal in the original Cloud Haskell paper compromised type
 safety since it allowed deserializing `Closure`s at arbitrary type,
 while this proposal adds extra safety yet still making it possible to
 use a backdoor for performance.
-
-
 
 What's the trusted code base (TCB) that you need to trust in order to
 guarantee type safety? GHC of course, but not only. This language
@@ -341,5 +307,4 @@ one would only have to trust GHC and its standard libraries, and have
 `dynamic-closure` depends on at least `binary` in order to do its
 work, which it would be undesirable to pull into `base`, so is best
 kept separate from GHC.
-
-
+```
