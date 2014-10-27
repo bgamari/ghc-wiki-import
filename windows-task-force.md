@@ -11,6 +11,7 @@ Original source:
 * '''Gintautas Miliauskas''' <gintautas.miliauskas@gmail.com> (current coordinator)
 * '''Tamar Christina''' <lonetiger@gmail.com>
 * '''Roman Kuznetsov''' <kuznero@gmail.com>
+* '''Kyrill Briantsev''' <kyrab@mail.ru>
 * Should your name be here? Just edit the page and add yourself!
 
 == The Tasks
