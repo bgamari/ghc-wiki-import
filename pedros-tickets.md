@@ -19,6 +19,7 @@ Pedro](http://dreixel.net) wants to keep an eye on (it doesn't necessarily mean 
 - [\#9630](https://gitlab.staging.haskell.org/ghc/ghc/issues/9630) (compile-time performance regression (probably due to Generics))
 - [\#9639](https://gitlab.staging.haskell.org/ghc/ghc/issues/9639) (Remove OldTypeable)
 - [\#9642](https://gitlab.staging.haskell.org/ghc/ghc/issues/9642) (LANGUAGE pragma synonyms)
+- [\#9750](https://gitlab.staging.haskell.org/ghc/ghc/issues/9750) (Core lint failure with TypeLits Symbol)
 
 
 Closed:
