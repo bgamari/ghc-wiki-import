@@ -13,6 +13,14 @@ can extend it, modify it, and use it to build your code.
 
 
 
+**Getting started for developers**
+
+
+- [Getting started with the build system](building/hacking)
+- [How do I re-build after updating or changing GHC?](building/rebuilding)
+- [Working Conventions (Git workflows, bug tracker, coding style etc.) ](working-conventions)
+
+
 **Building GHC**
 
 
@@ -21,14 +29,6 @@ can extend it, modify it, and use it to build your code.
 - [Just building and installing GHC](building/quick-start)
 - [Platforms that GHC currently supports](platforms)
 - [The GHC Builder, which coordinates distributed nightly builds](builder)
-
-
-**Getting started for developers**
-
-
-- [Getting started with the build system](building/hacking)
-- [How do I re-build after updating or changing GHC?](building/rebuilding)
-- [Working Conventions (Git workflows, bug tracker, coding style etc.) ](working-conventions)
 
 
 **More detailed information about using the build system**
