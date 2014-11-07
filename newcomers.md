@@ -1,24 +1,19 @@
-CONVERSION ERROR
+# Resources for newcomers to GHC
 
-Original source:
 
-```trac
-= Resources for newcomers to GHC =
 
-This page is intended to serve as the first stop for those people who say, "I want to contribute to GHC, but I don't know quite where to begin." Begin here. While [wiki:WorkingConventions the working conventions page] has great information that can come in handy while you're working on your first, or first several patches, this page is intended to have the details you will need to get rolling.
+This page is intended to serve as the first stop for those people who say, "I want to contribute to GHC, but I don't know quite where to begin." Begin here. While [the working conventions page](working-conventions) has great information that can come in handy while you're working on your first, or first several patches, this page is intended to have the details you will need to get rolling.
 
-== First steps ==
 
-* To orient yourself to the general architecture of GHC, [http://www.aosabook.org/en/ghc.html this article], written by two of the chief architects of GHC, Simon Marlow and Simon Peyton-Jones, is excellent and current (2012).
+## First steps
 
-* While you're reading that article, download and build the sources. [wiki:Building/Preparation Prepare] your machine, [wiki:Building/GettingTheSources download] the source, and [wiki:Building/Hacking build]. For the short, short version, which may or may not work for your machine, you can try this:
 
-{{{#!comment
-git clone --recursive git://git.haskell.org/ghc.git   # see note below if this fails
-}}}
+- To orient yourself to the general architecture of GHC, [
+  this article](http://www.aosabook.org/en/ghc.html), written by two of the chief architects of GHC, Simon Marlow and Simon Peyton-Jones, is excellent and current (2012).
 
-{{{
-#!sh
+- While you're reading that article, download and build the sources. [Prepare](building/preparation) your machine, [download](building/getting-the-sources) the source, and [build](building/hacking). For the short, short version, which may or may not work for your machine, you can try this:
+
+```
 # needed only once, URL rewrite rule is persisted in ${HOME}/.gitconfig
 git config --global url."git://github.com/ghc/packages-".insteadOf git://github.com/ghc/packages/ 
 
@@ -38,57 +33,78 @@ perl boot
 # build GHC
 make -j8 # parallelize to at most 8 parallel jobs; adapt to actual number of cpu cores
 ## edit build.mk to remove the comment marker # on the line stage=2
-}}}
+```
 
-    {{{#!box note
-    replace `git://` by `http://` or `https://` in the instructions above if you're behind a firewall blocking port 9418. For more details see also [[Building/GettingTheSources]].
-    }}}
 
-    If your machine has all the prerequisites, this might just work. Expect it all to take roughly an hour.
+replace `git://` by `http://` or `https://` in the instructions above if you're behind a firewall blocking port 9418. For more details see also [Building/GettingTheSources](building/getting-the-sources).
 
-* After a successful build, you should have your brand new compiler in `ghc/inplace/bin/ghc-stage2`. (GHCi is launched with `ghc/inplace/bin/ghc-stage2 --interactive`). Try it out.
 
-* The final edit of `build.mk` makes sure that only the stage-2 compiler will be build after this (see [wiki:Building/Architecture/Idiom/Stages here] about stages). This will be much faster, and usually what you want. If, for some reason, you're working on the stage-1 compiler, you can undo that change and use `make 1`, but you must be in the compiler subdirectory, not the ghc subdirectory.
+>
+>
+> If your machine has all the prerequisites, this might just work. Expect it all to take roughly an hour.
+>
+>
 
-* A good first sanity check is to twiddle some error message in the code, just to see that changed error message pop up when you compile a file. Write some Haskell code with an error in it, and look at the error message. Search through the ghc code for that error message (almost all the relevant code is in the `compiler/` subdirectory of `ghc`). Change the message, and then rebuild (run `make` in the `ghc` subdirectory of `ghc` -- that is, `ghc/ghc`). If you see the changed message, you're good to go.
+- After a successful build, you should have your brand new compiler in `ghc/inplace/bin/ghc-stage2`. (GHCi is launched with `ghc/inplace/bin/ghc-stage2 --interactive`). Try it out.
 
-* If you've made it this far, you're well on your way to becoming a GHC developer. You should subscribe to the [http://www.haskell.org/mailman/listinfo/ghc-devs ghc-devs] mailing list.
+- The final edit of `build.mk` makes sure that only the stage-2 compiler will be build after this (see [here](building/architecture/idiom/stages) about stages). This will be much faster, and usually what you want. If, for some reason, you're working on the stage-1 compiler, you can undo that change and use `make 1`, but you must be in the compiler subdirectory, not the ghc subdirectory.
 
-== Fixing a bug ==
+- A good first sanity check is to twiddle some error message in the code, just to see that changed error message pop up when you compile a file. Write some Haskell code with an error in it, and look at the error message. Search through the ghc code for that error message (almost all the relevant code is in the `compiler/` subdirectory of `ghc`). Change the message, and then rebuild (run `make` in the `ghc` subdirectory of `ghc` -- that is, `ghc/ghc`). If you see the changed message, you're good to go.
+
+- If you've made it this far, you're well on your way to becoming a GHC developer. You should subscribe to the [
+  ghc-devs](http://www.haskell.org/mailman/listinfo/ghc-devs) mailing list.
+
+## Fixing a bug
+
+
 
 Below is a list of bugs that appear to be "low-hanging fruit" -- things that might be reasonable for a newcomer to GHC hacking. Of course, we can't ever be sure of how hard a task is before doing it, so apologies if one of these is too hard.
 
-* #2258 - ghc --cleanup / #4114 - Add a flag to remove/delete intermediate files generated by GHC
-* #7401 - Can't derive instance for Eq when datatype has no constructor, while it is trivial do do so.
-* #8100 - Standalone deriving using template haskell
-* #8308 - Resurrect ticky code for counting constructor arity
-* #9259 - GHCi should list its available command line options
-* #9776 - -frule-check flag not recognized without parameter
-* #9777 - -msse flag could be handled better by the driver
-* Most [https://ghc.haskell.org/trac/ghc/query?component=Documentation&status=new documentation] bugs.
 
-You can also take a look at the [/roadmap Roadmap]. Click on a milestone for a nice breakdown of tickets by component (for example for [/milestone/7.10.1 Milestone 7.10.1]).
-
-Once you fix the bug, make sure to write a test-case proving that you've done what you said. Then take some time to get to know and submit a code review to [wiki:Phabricator]. If the patch looks good, one of the committers will put it into the GHC codebase. Then, tackle another bug!
-
-== Practical advice ==
-
-* [WorkingConventions/FixingBugs This page] describes in more detail workflow for fixing bugs.
-
-* Learn about our [WorkingConventions/Git git working conventions] and [WorkingConventions/Git/Submodules git submodules].
-
-* I (Richard E) use emacs to edit the code, and I have a hotkey dedicated to searching the ghc codebase, and another one dedicated to compiling ghc. This makes work on ghc much more interactive. See [wiki:Emacs the Emacs page] for more info.
-
-== Less practical advice ==
-
-* Don't get scared. GHC is a big codebase, but it makes sense when you stare at it long enough!
-
-* Be forewarned that many pages on the GHC wiki are somewhat out-of-date. Always check the last modification date. Email if you're not sure.
+- [\#2258](https://gitlab.staging.haskell.org/ghc/ghc/issues/2258) - ghc --cleanup / [\#4114](https://gitlab.staging.haskell.org/ghc/ghc/issues/4114) - Add a flag to remove/delete intermediate files generated by GHC
+- [\#7401](https://gitlab.staging.haskell.org/ghc/ghc/issues/7401) - Can't derive instance for Eq when datatype has no constructor, while it is trivial do do so.
+- [\#8100](https://gitlab.staging.haskell.org/ghc/ghc/issues/8100) - Standalone deriving using template haskell
+- [\#8308](https://gitlab.staging.haskell.org/ghc/ghc/issues/8308) - Resurrect ticky code for counting constructor arity
+- [\#8815](https://gitlab.staging.haskell.org/ghc/ghc/issues/8815) - Confusing language in error message
+- [\#9259](https://gitlab.staging.haskell.org/ghc/ghc/issues/9259) - GHCi should list its available command line options
+- [\#9776](https://gitlab.staging.haskell.org/ghc/ghc/issues/9776) - -frule-check flag not recognized without parameter
+- [\#9777](https://gitlab.staging.haskell.org/ghc/ghc/issues/9777) - -msse flag could be handled better by the driver
+- Most [
+  documentation](https://ghc.haskell.org/trac/ghc/query?component=Documentation&status=new) bugs.
 
 
-== Need help? ==
+You can also take a look at the [Roadmap](/trac/ghc/roadmap). Click on a milestone for a nice breakdown of tickets by component (for example for [Milestone 7.10.1](/trac/ghc/milestone/7.10.1)).
 
-You can email the [http://www.haskell.org/mailman/listinfo/ghc-devs ghc-devs] list, or Richard Eisenberg (`eir at cis . upenn . edu`), a newish GHC developer himself who would be happy to foster more participation and answer your emails.
+
+
+Once you fix the bug, make sure to write a test-case proving that you've done what you said. Then take some time to get to know and submit a code review to [Phabricator](phabricator). If the patch looks good, one of the committers will put it into the GHC codebase. Then, tackle another bug!
+
+
+## Practical advice
+
+
+- [This page](working-conventions/fixing-bugs) describes in more detail workflow for fixing bugs.
+
+- Learn about our [git working conventions](working-conventions/git) and [git submodules](working-conventions/git/submodules).
+
+- I (Richard E) use emacs to edit the code, and I have a hotkey dedicated to searching the ghc codebase, and another one dedicated to compiling ghc. This makes work on ghc much more interactive. See [the Emacs page](emacs) for more info.
+
+## Less practical advice
+
+
+- Don't get scared. GHC is a big codebase, but it makes sense when you stare at it long enough!
+
+- Be forewarned that many pages on the GHC wiki are somewhat out-of-date. Always check the last modification date. Email if you're not sure.
+
+## Need help?
+
+
+
+You can email the [
+ghc-devs](http://www.haskell.org/mailman/listinfo/ghc-devs) list, or Richard Eisenberg (`eir at cis . upenn . edu`), a newish GHC developer himself who would be happy to foster more participation and answer your emails.
+
+
 
 Happy hacking!
-```
+
+
