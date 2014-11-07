@@ -10,7 +10,7 @@ To do an unregisterised build, use the `--enable-unregisterised` flag when confi
 
 
 
-GHC will automatically do an unregisterised build on platforms that it knows don't currently have registerised support.
+GHC will automatically do an unregisterised build on platforms that it knows don't currently have registerised support. See the variable `UnregisterisedDefault` in [configure.ac](/trac/ghc/browser/configure.ac)[](/trac/ghc/export/HEAD/ghc/configure.ac).
 
 
 
