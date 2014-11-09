@@ -144,9 +144,23 @@ rebuild the corresponding `configure`.
 </td></tr></table>
 
 
+<table><tr><th>`diff`</th>
+<td>
+Most installations should have this by default.
+</td></tr></table>
+
+
+<table><tr><th>`lndir`</th>
+<td>
+Needed if you want to prepare a binary distribution with 
+`make sdist`, and useful for maintaining a separate
+[build tree](building/using).
+</td></tr></table>
+
+
 <table><tr><th>`sed`</th>
 <td>
-Most Unix installations and Cygwin/MSYS on
+Most Unix installations and MSYS2 on
 Windows already come with `sed`, so you're probably OK.
 GNU sed version 2.0.4 is no good!  It has a bug
 in it that is tickled by the build-configuration.  2.0.5 is
@@ -155,17 +169,10 @@ elaborate configure scripts.)
 </td></tr></table>
 
 
-<table><tr><th>`diff`</th>
-<td>
-Most installations should have this by default, but inexplicably 
-Cygwin does not bundle it by default.
-</td></tr></table>
-
-
 <table><tr><th>Python</th>
 <td>
 Required for [running the testsuite](building/running-tests).
-Version 2.6 or later is needed. Should also work with Python3.
+Version 2.6 or later is needed. Python3 should also work.
 </td></tr></table>
 
 
