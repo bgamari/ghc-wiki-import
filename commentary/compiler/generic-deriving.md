@@ -1,57 +1,73 @@
-CONVERSION ERROR
+# Support for generic programming
 
-Original source:
 
-```trac
-= Support for generic programming =
-[[PageOutline]]
 
-GHC includes a new (in 2010) mechanism to let you write generic functions.  It is described in paper [http://www.dreixel.net/research/pdf/gdmh_nocolor.pdf A generic deriving mechanism for Haskell]. This page sketches the specifics of the implementation; we assume you have read the paper. The [http://www.haskell.org/haskellwiki/Generics HaskellWiki page] gives a more general overview.
 
-This mechanism replaces the [http://www.haskell.org/ghc/docs/6.12.2/html/users_guide/generic-classes.html previous generic classes implementation]. What we describe until the "Kind polymorphic overhaul" section is implemented and released in GHC 7.2.1.
 
-== Main components ==
 
- * `TcDeriv.tcDeriving` now allows deriving `Generic` instances.
+GHC includes a new (in 2010) mechanism to let you write generic functions.  It is described in paper [
+A generic deriving mechanism for Haskell](http://www.dreixel.net/research/pdf/gdmh_nocolor.pdf). This page sketches the specifics of the implementation; we assume you have read the paper. The [
+HaskellWiki page](http://www.haskell.org/haskellwiki/Generics) gives a more general overview.
 
- * The representation types and core functionality of the library live on `GHC.Generics` (on the `ghc-prim` package).
 
- * Many names have been added as known in `prelude/PrelNames`
 
- * Most of the code generation is handled by `types/Generics`
+This mechanism replaces the [previous generic classes implementation](http://www.haskell.org/ghc/docs/6.12.2/html/users_guide/generic-classes.html). What we describe until the "Kind polymorphic overhaul" section is implemented and released in GHC 7.2.1.
 
-== Things that have been removed ==
 
- * All of the [http://www.haskell.org/ghc/docs/6.12.2/html/users_guide/generic-classes.html generic classes stuff]. In particular, the following have been removed:
-   * `hasGenerics` field from `TyCon`;
-   * `HsNumTy` constructor from `HsType`;
-   * `TypePat` constructor from `Pat`.
+## Main components
 
- * The `-XGenerics` flag is now deprecated.
 
-== What already works ==
+- `TcDeriv.tcDeriving` now allows deriving `Generic` instances.
 
- * `Generic` instances can be derived when `-XDeriveGeneric` is enabled.
+- The representation types and core functionality of the library live on `GHC.Generics` (on the `ghc-prim` package).
 
- * The `default` keyword can used for generic default method signatures when `-XDefaultSignatures` is enabled.
+- Many names have been added as known in `prelude/PrelNames`
 
- * Generic defaults are properly instantiated when giving an instance without defining the generic default method.
+- Most of the code generation is handled by `types/Generics`
 
- * Base types like `[]`, `Maybe`, tuples, come with Generic instances.
+## Things that have been removed
 
-== To be done ==
 
- * Derive `Generic1` instances
+- All of the [generic classes stuff](http://www.haskell.org/ghc/docs/6.12.2/html/users_guide/generic-classes.html). In particular, the following have been removed:
 
-== Testing ==
+  - `hasGenerics` field from `TyCon`;
+  - `HsNumTy` constructor from `HsType`;
+  - `TypePat` constructor from `Pat`.
 
- * Tests are available under the `generics` directory of the testsuite.
+- The `-XGenerics` flag is now deprecated.
 
-= Kind polymorphic overhaul =
+## What already works
+
+
+- `Generic` instances can be derived when `-XDeriveGeneric` is enabled.
+
+- The `default` keyword can used for generic default method signatures when `-XDefaultSignatures` is enabled.
+
+- Generic defaults are properly instantiated when giving an instance without defining the generic default method.
+
+- Base types like `[]`, `Maybe`, tuples, come with Generic instances.
+
+## To be done
+
+
+- Derive `Generic1` instances
+
+## Testing
+
+
+- Tests are available under the `generics` directory of the testsuite.
+
+# Kind polymorphic overhaul
+
+
 
 With the new `-XPolyKinds` functionality we can make the support for generic programming better typed. The basic idea is to define the universe codes (`M1`, `:+:`, etc.) as constructors of a datatype. Promotion then lifts these constructors to types, which we can use as before, only that now we have them all classified under a new kind. The overhaul of the main module is explained below; for easier comparison with the current approach, names are kept the same whenever possible.
 
-== Generic representation universe ==
+
+## Generic representation universe
+
+
+
 `m` is the only real parameter here. `f` and `x` are there because we
 can't write kinds directly, since `Universe` is also a datatype (even if
 we're only interested in its promoted version). So we pass `f` and `x`
@@ -59,7 +75,9 @@ only to set them to `* -> *` and `*`, respectively, in `Interprt`.
 `m` is different: it stands for the kind of metadata representation types,
 and we really want to be polymorphic over that, since each user datatype
 will introduce a new metadata kind.
-{{{
+
+
+```wiki
 data Universe f x m = 
   -- Void (used for datatypes without constructors)
     VV
@@ -103,14 +121,18 @@ data MetaDataV (m :: MetaData) where
   C :: MetaDataV CC
   D :: MetaDataV DD
   S :: MetaDataV SS
-}}}
+```
 
-== Universe interpretation ==
+## Universe interpretation
+
+
 
 As promised, we set `f` to `* -> *` and `x` to `*`.
-Unfortunately we don't have [GhcKinds#Explicitkindvariables explicit kind variable annotations]
+Unfortunately we don't have [explicit kind variable annotations](ghc-kinds#explicit-kind-variables)
 yet, so we cannot leave `m` polymorphic! So this code doesn't compile:
-{{{
+
+
+```wiki
 data Interprt :: Universe (* -> *) * m -> * -> * where
 
   -- No interpretation for VV, as it shouldn't map to any value
@@ -142,9 +164,11 @@ data Interprt :: Universe (* -> *) * m -> * -> * where
   R1     :: Interprt b r -> Interprt (a :++: b) r
   (:*:)  :: Interprt a r -> Interprt b r -> Interprt (a :**: b) r
   Comp1  :: f (Interprt g r) -> Interprt (f :..: g) r
-}}}
+```
 
-=== Names ===
+### Names
+
+
 
 As an aside, note that we have to come up with names like `UU` and `KK` for the `Universe`
 even though we really just wanted to use `U1` and `K1`, like before. Then we would have
@@ -157,23 +181,30 @@ This is a slight annoyance of automatic promotion: when you define a "singleton 
 (like our GADT `Interprt` for `Universe`) you cannot reuse the constructor names.
 
 
-== Metadata representation ==
-{{{
+## Metadata representation
+
+
+```wiki
 data Proxy d = Proxy -- kind polymorphic
 
 -- Meta data classes
 class Datatype d where -- kind polymorphic
   -- The name of the datatype, fully qualified
   datatypeName :: Proxy d -> String
-}}}
+```
+
+
 There's more of these, but they don't add any new concerns.
 
 
-== Conversion between user datatypes and generic representation ==
+## Conversion between user datatypes and generic representation
+
+
 
 We now get a more precise kind for `Rep`:
 
-{{{
+
+```wiki
 -- Representable types of kind *
 class Generic a where
   type Rep a :: Universe (* -> *) * m
@@ -185,20 +216,31 @@ class Generic1 (f :: * -> *) where
   type Rep1 f :: Universe (* -> *) * m
   from1  :: f a -> Interprt (Rep1 f) a
   to1    :: Interprt (Rep1 f) a -> f a
-}}}
+```
+
+
   
-== Example generic function: `fmap` (kind `* -> *`) ==
+
+
+## Example generic function: `fmap` (kind `* -> *`)
+
+
 
 User-visible class, exported:
-{{{
+
+
+```wiki
 class Functor (f :: * -> *) where
   fmap :: (a -> b) -> f a -> f b
   default fmap :: (Generic1 f, GFunctor (Rep1 f)) => (a -> b) -> f a -> f b
   fmap f = to1 . gfmap f . from1  
-}}}
+```
+
 
 Defined by the generic programmer, not exported:
-{{{
+
+
+```wiki
 class GFunctor (f :: Universe (* -> *) * m) where
   gfmap :: (a -> b) -> Interprt f a -> Interprt f b
   
@@ -226,23 +268,34 @@ instance (GFunctor f, GFunctor g) => GFunctor (f :**: g) where
 
 instance (Functor f, GFunctor g) => GFunctor (f :..: g) where
   gfmap f (Comp1 x) = Comp1 (fmap (gfmap f) x)
-}}}
+```
+
 
 Note that previously `Functor` and `GFunctor` had exactly the same types.
 Now we can make clear what the difference between them is.
   
-== Example generic function: `show` (kind `*`, uses metadata) ==
+
+
+## Example generic function: `show` (kind `*`, uses metadata)
+
+
 
 User-visible class, exported:
-{{{
+
+
+```wiki
 class Show (a :: *) where
   show :: a -> String
   default show :: (Generic a, GShow (Rep a)) => a -> String
   show = gshow . from
-}}}
+```
+
+
   
 Defined by the generic programmer, not exported:
-{{{
+
+
+```wiki
 class GShow (f :: Universe (* -> *) * m) where
   gshow :: Interprt f x -> String
   
@@ -254,13 +307,18 @@ instance (P.Show c) => GShow (KK i c) where
   
 instance (Datatype c, GShow f) => GShow (MM DD c f) where
   gshow (M1 x) = datatypeName (Proxy :: Proxy c) ++ " " ++ gshow x
-}}}
+```
+
 
 The other cases do not add any further complexity.
   
   
-== Example datatype encoding: lists (derived by the compiler) ==
-{{{  
+
+
+## Example datatype encoding: lists (derived by the compiler)
+
+
+```wiki
 instance Generic [a] where
   type Rep [a] = MM DD DList 
                    (MM CC DList_Nil UU :++: 
@@ -273,7 +331,8 @@ instance Generic [a] where
   
 -- Metadata
 data List_Meta = DList | DList_Nil | DList_Cons
-}}}
+```
+
 
 Note that we use only one datatype; more correct would be to use 3, one for
 `DList`, another for the constructors, and yet another for the selectors
@@ -282,29 +341,51 @@ But we don't do that because `Universe` is polymorphic only over `m`, so
 a single metadata representation type. If we want a more fine-grained
 distinction then we would need more parameters in `Universe`, and also to
 split the `MM` case.
-{{{
+
+
+```wiki
 instance Datatype DList where datatypeName _ = "[]"
-}}}
+```
+
+
   
-=== Digression ===
+
+
+### Digression
+
+
+
 Even better would be to index the metadata representation types over
 the type they refer to. Something like:
-{{{
+
+
+```wiki
   data family MetaTypes a -- kind polymorphic
   data instance MetaTypes [] = DList | DList_Nil | DList_Cons
-}}}
+```
+
+
 But now we are basically asking for promotion of data families, since we want
 to use promoted `DList`. Also, the case for `MM` in `Universe` would then
 be something like:
-{{{
+
+
+```wiki
   | MM MetaData (MetaTypes m) (Universe f x m)
-}}}
+```
+
+
 But I'm not entirely sure about this.
 
-== A more conservative first approach to this problem ==
 
-Because what we've described so far is rather backwards-incompatible, we could at least try to improve the encoding of metadata, which is currently rather clunky (giving rise to lots of empty, compiler-generated datatypes and respective instances). We can do that by changing `M1` to keep the meta-information ''at the type level'':
-{{{
+## A more conservative first approach to this problem
+
+
+
+Because what we've described so far is rather backwards-incompatible, we could at least try to improve the encoding of metadata, which is currently rather clunky (giving rise to lots of empty, compiler-generated datatypes and respective instances). We can do that by changing `M1` to keep the meta-information *at the type level*:
+
+
+```wiki
 newtype M1 i (c :: Meta) f p = M1 { unM1 :: f p }
 
 data Meta = MetaData Symbol Symbol  Bool
@@ -317,10 +398,13 @@ data FixityI = PrefixI | InfixI Associativity Nat
 data Associativity = LeftAssociative
                    | RightAssociative
                    | NotAssociative
-}}}
+```
+
 
 Why do we need to add `FixityI`? Because `Fixity` does not promote. Yet, we want to expose `Fixity` to the user, not `FixityI`. Note that the meta-data classes remain unchanged:
-{{{
+
+
+```wiki
 class Datatype d where
   datatypeName :: t d (f :: * -> *) a -> [Char]
   moduleName   :: t d (f :: * -> *) a -> [Char]
@@ -333,10 +417,13 @@ class Constructor c where
 
 class Selector s where
   selName :: t s (f :: * -> *) a -> [Char]
-}}}
+```
 
-But now, using the magic of singletons, we can give ''one single instance'' for each of these classes, instead of having to instantiate them each time a user derives `Generic`:
-{{{
+
+But now, using the magic of singletons, we can give *one single instance* for each of these classes, instead of having to instantiate them each time a user derives `Generic`:
+
+
+```wiki
 instance (KnownSymbol n, KnownSymbol m, SingI nt)
     => Datatype (MetaData n m nt) where
   datatypeName _ = symbolVal (Proxy :: Proxy n)
@@ -351,125 +438,198 @@ instance (KnownSymbol n, SingI f, SingI r)
 
 instance (KnownSymbol s) => Selector (MetaSel s) where
   selName _ = symbolVal (Proxy :: Proxy s)
-}}}
+```
+
 
 Naturally, we require singletons for `Bool`, `FixityI`, and `Associativity`, but that is one time boilerplate code, and is not visible for the user. (In particular, this is where we encode that the demotion of (the kind) `FixityI` is (the type) `Fixity`.)
 
+
+
 I believe this change is almost fully backwards-compatible, and lets us simplify the code for `deriving Generic` in GHC. Furthermore, I suspect it will be useful to writers of generic functions, who can now match at the type-level on things such as whether a constructor is a record or not.
+
+
 
 I say "almost fully backwards-compatible" because handwritten `Generic` instances might break with this change. But we've never recommended doing this, and I think users who do this are more than aware that they shouldn't rely on it working across different versions of GHC.
 
-= Using standard deriving for generic functions =
+
+# Using standard deriving for generic functions
+
+
 
 Currently, users can instantiate a generic function to their datatypes by doing the following:
 
+
 1. Attaching a `deriving Generic` clause to their datatype declaration:
-{{{
-data MyDatatype = .... deriving Generic
-}}}
-2. Giving an empty instance:
-{{{
-instance GBinary MyDatatype
-}}}
+
+  ```wiki
+  data MyDatatype = .... deriving Generic
+  ```
+1. Giving an empty instance:
+
+  ```wiki
+  instance GBinary MyDatatype
+  ```
+
 
 However, it would be more natural and concise to simply be able to write:
-{{{
+
+
+```wiki
 data MyDatatype = .... deriving (Generic, GBinary)
-}}}
+```
+
 
 Ultimately, this might even allow us to replace the generated code by classes such as `Eq`, `Ord`, etc. with plain generic code.
 
-The ticket for this request is #5462. For this discussion, we'll refer to this new feature as `GeneralizedDeriving`.
 
-== Which classes can be derived? ==
 
-How do we figure out which classes will now be allowed as part of a deriving clause? We've decided against coming up with a new pragma for tagging classes that can be derived. Instead, we will simply re-use the [http://www.haskell.org/ghc/docs/latest/html/users_guide/pragmas.html#minimal-pragma `MINIMAL` pragma]: if a class has an empty `MINIMAL` set, it means that its author is happy for it to be instantiated without giving any method definitions. This is exactly what we need for deriving the class: all its methods must have a default (be it a `DefaultSignature` or just a regular default).
+The ticket for this request is [\#5462](https://gitlab.staging.haskell.org/ghc/ghc/issues/5462). We refer to this new feature as `DeriveAnyClass`.
 
-Note that:
-1. Classes don't even have to use generics to be derivable.
-2. The typical generics class has one default signature, and perhaps a few more methods with a standard default. In this case, if there is no `MINIMAL` specified, it defaults to the empty set (as all methods have a default), so the class will be derivable.
 
-== Interaction with `GeneralizedNewtypeDeriving` ==
+## Which classes can be derived?
 
-[http://www.haskell.org/ghc/docs/latest/html/users_guide/deriving.html#newtype-deriving `GeneralizedNewtypeDeriving`] (GND) already allows many non-standard classes to be derived, but:
+
+
+How do we figure out which classes will now be allowed as part of a deriving clause? We don't; we allow any class! Although the feature makes more sense for classes whose [\`MINIMAL\` set](http://www.haskell.org/ghc/docs/latest/html/users_guide/pragmas.html#minimal-pragma) is empty, it'll work for any other class too. It simply generates an instance without any method definitions.
+
+
+## Interaction with `GeneralizedNewtypeDeriving`
+
+
+
+[\`GeneralizedNewtypeDeriving\`](http://www.haskell.org/ghc/docs/latest/html/users_guide/deriving.html#newtype-deriving) (GND) already allows many non-standard classes to be derived, but:
+
+
 1. It means something different from ordinary deriving. Instead of generating new code for the instance, GHC simply uses the instance for the type inside the newtype.
-2. As such, this only works when deriving newtypes, and
-3. The classes `Read`, `Show`, `Typeable`, `Data`, and `Generic` even with `GND on, give rise to standard instances. That is, in the following deriving clause
-{{{
-newtype MyInt = MyInt Int deriving (Eq, Num, Show)
-}}}
+1. As such, this only works when deriving newtypes, and
+1. The classes `Read`, `Show`, `Typeable`, `Data`, and `Generic` even with \`GND on, give rise to standard instances. That is, in the following deriving clause
+
+  ```wiki
+  newtype MyInt = MyInt Int deriving (Eq, Num, Show)
+  ```
+
+
 `Eq` and `Num` operations will simply be lifted through the newtype coercion, but `show (MyInt 3)` will still print `MyInt 3`, not just `3`.
 
-GND interacts with `GeneralizedDeriving` because both are about generating instances for arbitrary classes, but they do it in different ways. There are multiple ways to handle this.
 
-==== 1. Disallow `GeneralizedDeriving` for newtypes ====
+
+GND interacts with `DeriveAnyClass` because both are about generating instances for arbitrary classes, but they do it in different ways. There are multiple ways to handle this.
+
+
+#### 1. Disallow `DeriveAnyClass` for newtypes
+
+
 
 In this case we simply do not allow `GeneralizedDeriving` for newtypes. It's simple to implement, but it's a bit limiting, in that if you happen to be using newtypes for which you want generic instances, you have to go back to manually writing down the empty instances.
 
-==== 2. Try both approaches, fail if there's ambiguity ====
 
-In many cases it will be clear whether the user wants GND or the new `GeneralizedDeriving`:
-1. If GND is on, and `GeneralizedDeriving` is off, then we do GND.
-2. Conversely, if GND is off, and `GeneralizedDeriving` is on, then we do the latter.
-3. If both are on, but the class being derived does not have an empty `MINIMAL` set, we do GND.
-4. If both are on, and the class being derived has an empty `MINIMAL` set, we fail, because it's ambiguous.
-
-The problem with this approach is that in situation 4 (which might be rather rare) users are left in a bad situation. If they wanted a `GeneralizedDeriving` instance, they can easily give an empty instance instead. However, if they wanted GND, they'll have to manually write a `Coercible` instance, which is not nice.
+#### 2. Try both approaches, fail if there's ambiguity
 
 
-==== 3. Let class authors specify how their classes should be derived ====
 
-Right now we already treat some classes specially for GND: `Read`, `Show`, `Typeable`, `Data`, and `Generic` are derivable, but not via GND. We could make it a property of the class to say "do not use GND" in deriving clauses. In that case, we know that we can use the `GeneralizedDeriving` strategy for newtypes instead.
+In many cases it will be clear whether the user wants GND or the new `DeriveAnyClass`:
+
+
+1. If GND is on, and `DeriveAnyClass` is off, then we do GND.
+1. Conversely, if GND is off, and `DeriveAnyClass` is on, then we do the latter.
+1. If both are on, we pick the `DeriveAnyClass` approach.
+
+
+The problem with this approach is that in situation 3 users are left in a bad situation if they actually wanted GND; they'll have to manually write a `Coercible` instance, which is not nice.
+
+
+#### 3. Let class authors specify how their classes should be derived
+
+
+
+Right now we already treat some classes specially for GND: `Read`, `Show`, `Typeable`, `Data`, and `Generic` are derivable, but not via GND. We could make it a property of the class to say "do not use GND" in deriving clauses. In that case, we know that we can use the `DeriveAnyClass` strategy for newtypes instead.
+
+
 
 Maybe we don't even need to make this user-controllable; a handful of built-in classes may suffice.
 
 
-==== 4. Let users annotate their deriving clauses ====
+#### 4. Let users annotate their deriving clauses
+
+
 
 We could even let users specify which of the two types of deriving they want:
-{{{
+
+
+```wiki
 newtype MyInt = MyInt Int deriving (newtype GBinary, default GShow)
-}}}
+```
+
+
 Here, we re-use the keywords `newtype` and `default` to specify that the `GBinary` instance should be created using GND (so that we do not have the unnecessary extra tag in the binary encoding), but `GShow` should use the "generic" instance (so that we still print "MyInt").
 
+
+
 Of course, then we'd need to:
+
+
 1. Agree on the syntax;
-2. Decide what to do when users ask for e.g. `... deriving (newtype Typeable)`.
+1. Decide what to do when users ask for e.g. `... deriving (newtype Typeable)`.
+
+## Standard vs. Standalone deriving
 
 
-== Standard vs. Standalone deriving ==
 
 There's no reason to restrict this new deriving form to be attached to a datatype. Users should be free to write the following, if they wish:
-{{{
-deriving instance (GBinary a) => GBinary (Maybe a)
-}}}
-... even though the following would do exactly the same with 9 characters less:
-{{{
-instance (GBinary a) => GBinary (Maybe a)
-}}}
 
-== Figuring out the context ==
+
+```wiki
+deriving instance (GBinary a) => GBinary (Maybe a)
+```
+
+
+... even though the following would do exactly the same with 9 characters less:
+
+
+```wiki
+instance (GBinary a) => GBinary (Maybe a)
+```
+
+## Figuring out the context
+
+
 
 The only non-trivial part of actually generating the instances from a deriving clause is that now we have to figure out the context. Previously the user would have written
-{{{
+
+
+```wiki
 data MyMaybe a ... deriving Generic
 instance (GBinary a) => GBinary (MyMaybe a)
-}}}
+```
+
+
 Now they'll simply write
-{{{
+
+
+```wiki
 data MyMaybe a ... deriving (Generic, GBinary)
-}}}
+```
+
+
 So it's now up to us to find out that the instance needs a `GBinary a =>` head.
 
+
+
 For this we propose using the already existing strategy in GHC. Consider the following case:
-{{{
+
+
+```wiki
 class GBinary  (a :: *)      where ...
 class GFunctor (f :: * -> *) where ...
 
 data MyMaybe a ... deriving (Generic, GBinary, GFunctor)
-}}}
+```
+
+
 The instance head for the `GBinary (MyMaybe a)` instance will be guessed in the same way as if we were deriving an `Eq` instance. The instance head for the `GFunctor MyMaybe` instance will be guessed in the same way as if we were deriving a `Functor` instance.
 
-The context might end up not being exactly what the user intended. For example, the class being derived might not require instances for each of the type arguments of the datatype. We ''could'' try to figure this out in a clever way from the definition of the class being derived, but this is very hard in general. So, in this case, we just leave the user to specify the context manually via standalone deriving (or, well, just giving an empty instance with a context, as they had to do before).
 
-```
+
+The context might end up not being exactly what the user intended. For example, the class being derived might not require instances for each of the type arguments of the datatype. We *could* try to figure this out in a clever way from the definition of the class being derived, but this is very hard in general. So, in this case, we just leave the user to specify the context manually via standalone deriving (or, well, just giving an empty instance with a context, as they had to do before).
+
+
