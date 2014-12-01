@@ -127,6 +127,7 @@ Original source:
 * #1475: Adding imports/exports
 * #1831: `reify` never provides variable info
 * #4222: Reifying abstract types
+* #5467: Haddock in TH
 * #8679: Include value and function signatures in their declarations
 * #8761: Pattern synonyms
 
