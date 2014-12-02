@@ -1,102 +1,79 @@
-# Hoopl cleanup
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Hoopl cleanup
 
-*This page was created in August 2013 as a temporary place to store proposals about cleaning up Hoopl library. After these changes are implemented we should replace this page with either another page or a Note in the source code that would explain current design of Hoopl.*
-
-
+''This page was created in August 2013 as a temporary place to store proposals about cleaning up Hoopl library. After these changes are implemented we should replace this page with either another page or a Note in the source code that would explain current design of Hoopl.''
 
 Me (Jan Stolarek, JS) and Simon PJ recently had some discussion about cleaning up Hoopl to make its interface more consistent and less confusing. Here are some of the key proposals and ideas:
 
+== The API for forward and backward analysis ==
 
-## The API for forward and backward analysis
+=== Observations about forward analysis ===
 
+  * Forwards analysis starts with a list of entry labels (typically just one), and it makes sense to have an in-flowing fact for each such label.  Yes, it could default to bottom, but it's probably a user error not to supply such a fact.
 
-### Observations about forward analysis
+  * If forwards analysis ''does'' is given a fact for each entry label, ''Hoopl never needs to know the bottom of the lattice''; indeed there doesn't need to ''be'' a bottom.  Hoopl treats the block in dependency order, so it always has an in-flowing fact before it starts to analyse a block.  It needs still a join for the lattice, of course.
 
-
-- Forwards analysis starts with a list of entry labels (typically just one), and it makes sense to have an in-flowing fact for each such label.  Yes, it could default to bottom, but it's probably a user error not to supply such a fact.
-
-- If forwards analysis *does* is given a fact for each entry label, *Hoopl never needs to know the bottom of the lattice*; indeed there doesn't need to *be* a bottom.  Hoopl treats the block in dependency order, so it always has an in-flowing fact before it starts to analyse a block.  It needs still a join for the lattice, of course.
-
-- For some analyses, it's quite clumsy to have a bottom element. Consider constant-propagation, where we want to transform
-
-  ```wiki
-    x := 3     ===>    x := 3
-    ....               ...
-    y = x+2            y = 3+2
-  ```
-
+  * For some analyses, it's quite clumsy to have a bottom element. Consider constant-propagation, where we want to transform
+{{{
+  x := 3     ===>    x := 3
+  ....               ...
+  y = x+2            y = 3+2
+}}}
   (We might then do constant folding and dead code elim, but ignore that for now.)  If we need a bottom in the lattice, our facts look like
-
-  ```wiki
-    data CPFact = Bot | CP (Map LocaReg Const)
-  ```
-
+{{{
+  data CPFact = Bot | CP (Map LocaReg Const)
+}}}
   When a variable is not in the domain of the map it means it maps to top (ie the variable can hold different values on different control-flow paths).  This is all fine, but the join operation needs to deal with `Bot` etc.  And what is frustrating is that `Bot` is never, ever used!  I don't want to define it and manipulate it when it is never used!
-
 
 Conclusion: for fwd analysis we don't need a bottom in the lattice, and it's a pain for (some) clients to supply one.
 
+=== Observations about backward analysis ===
 
-### Observations about backward analysis
+ * Backwards analysis currently takes a list of entry points, so
+   that it find the reachable code and enumerate it in reverse
+   order.  But that's ''all'' the entry point list does.  It'd be just fine
+   to enumerate ''all the blocks in the graph'' in reverse order, and not supply
+   a list of entry points.
 
+ * Backwards analysis (for a closed-on-entry graph) takes a `(Fact x f)` argument, for 
+   a graph where `x` describes its open/closed on exit status.  So if x=O we pass one fact; 
+   and that is entirely reasonable becuse it is the fact flowing backwards into the exit.
+   But if x=C we pass a `FactBase`.  At first I thought that was stupid, but now I see 
+   some sense in it: ''these are facts labels outside (downstream successors of) the graph being analysed''.
+   We'd better document this point.
 
-- Backwards analysis currently takes a list of entry points, so
-  that it find the reachable code and enumerate it in reverse
-  order.  But that's *all* the entry point list does.  It'd be just fine
-  to enumerate *all the blocks in the graph* in reverse order, and not supply
-  a list of entry points.
+ * NB: returning to the first bullet, we can't just take code
+   reachable from downstream successors (ie behave dually to fwd
+   anal), because tail calls, returns, and infinite loops don't
+   have any such downstream successors, but we jolly well want to
+   analyse them.
 
-- Backwards analysis (for a closed-on-entry graph) takes a `(Fact x f)` argument, for 
-  a graph where `x` describes its open/closed on exit status.  So if x=O we pass one fact; 
-  and that is entirely reasonable becuse it is the fact flowing backwards into the exit.
-  But if x=C we pass a `FactBase`.  At first I thought that was stupid, but now I see 
-  some sense in it: *these are facts labels outside (downstream successors of) the graph being analysed*.
-  We'd better document this point.
+ * Backward analysis ''does'' need a bottom for the lattice, to initialise loops. Example:
+{{{
+   L1: ...blah blah...
+       CondBranch e L1 L2
 
-- NB: returning to the first bullet, we can't just take code
-  reachable from downstream successors (ie behave dually to fwd
-  anal), because tail calls, returns, and infinite loops don't
-  have any such downstream successors, but we jolly well want to
-  analyse them.
+   L2: blah blah
+}}}
+   When analysing L1 (backwards) we must join the facts flowing back from L2
+   (which we will have analysed first) and L1; and on the first iteration, we don't 
+   have any fact from L1.  You might think we could just use the fact from L2, and 
+   merely refrain from joining with L1, but that doesn't deal with the case where
+   the `CondBranch` was an unconditional branch to L1, so there is no other fact
+   to join with.
 
-- Backward analysis *does* need a bottom for the lattice, to initialise loops. Example:
+   Conclusion: for backwards analysis the client really must give us a bottom element.
 
-  ```wiki
-     L1: ...blah blah...
-         CondBranch e L1 L2
-
-     L2: blah blah
-  ```
-
-  When analysing L1 (backwards) we must join the facts flowing back from L2
-  (which we will have analysed first) and L1; and on the first iteration, we don't 
-  have any fact from L1.  You might think we could just use the fact from L2, and 
-  merely refrain from joining with L1, but that doesn't deal with the case where
-  the `CondBranch` was an unconditional branch to L1, so there is no other fact
-  to join with.
-
->
-> >
-> >
-> > Conclusion: for backwards analysis the client really must give us a bottom element.
-> >
-> >
->
-
-### Conclusions
-
-
+=== Conclusions ===
 
 We could reflect these observations in the API for forwards and backward analysis, as follows.
 
-
-
 Current situation:
-
-
-```wiki
+{{{
 data FwdPass m n f
   = FwdPass { fp_lattice  :: DataflowLattice f
             , fp_transfer :: FwdTransfer n f
@@ -119,13 +96,9 @@ analyzeAndRewriteBwd
    => BwdPass m n f
    -> MaybeC e entries -> Graph n e x -> Fact x f
    -> m (Graph n e x, FactBase f, MaybeO e f)
-```
-
-
+}}}
 Possible refactoring:
-
-
-```wiki
+{{{
 data FwdPass m n f
   = FwdPass { fp_join     :: JoinFun f   -- No "bottom" for fwd
             , fp_transfer :: FwdTransfer n f
@@ -150,58 +123,50 @@ analyzeAndRewriteBwd
    -> Fact x f       -- Facts about successors
    -> Graph n e x
    -> m (Graph n e x, FactBase f, MaybeO e f)
-```
-
-
+}}}
 The differences are not great. But the types are still nicely symmetrical; and they
 say more precisely what is
 actually necessary and useful.
 
 
-## Smaller proposals
+== Smaller proposals == 
 
-
-- (David Luposchainsky) Hoopl is the only library in GHC that defines its own `<*>` operation, 
+  * (David Luposchainsky) Hoopl is the only library in GHC that defines its own `<*>` operation, 
   which will clash with the AMP. Hoopl's `<*>` is conceptually
   just `mappend`, so if you're doing a large-scale refactoring of the
   module maybe consider adding a suitable Monoid instance to replace `<*>`
   with `<>` (or something) before it even becomes a problem.
 
-- Simon doesn't like the `joinInFacts` function, which is only called to possibly produce some debugging output from the join function.
+  * Simon doesn't like the `joinInFacts` function, which is only called to possibly produce some debugging output from the join function.
 
-- (Jan Stolarek) To add more to the above point, the lattice join function is required to take a `Label` paramter for debugging purposes. All join functions I've seen so far simply ignore that parameter but it still leads to problems. One example of this is `joinFacts` function, which requires the `Label` of a block for which we join facts so that it can pass it to the join function. The problem is there is no easy way to recover that `Label` at the call site of `joinFacts`. The alternatives here are: a) pass a bogus `Label` (it can even be `undefined`) since it won't be used anyway; b) use `joinOutFacts` which does not require a `Label` but is marked as deprecated, which requires us to use `-fno-warn-deprecation-warnings`. Both solutions feel wrong and the only good one seems to be changing the type of lattice join function.
+  * (Jan Stolarek) To add more to the above point, the lattice join function is required to take a `Label` paramter for debugging purposes. All join functions I've seen so far simply ignore that parameter but it still leads to problems. One example of this is `joinFacts` function, which requires the `Label` of a block for which we join facts so that it can pass it to the join function. The problem is there is no easy way to recover that `Label` at the call site of `joinFacts`. The alternatives here are: a) pass a bogus `Label` (it can even be `undefined`) since it won't be used anyway; b) use `joinOutFacts` which does not require a `Label` but is marked as deprecated, which requires us to use `-fno-warn-deprecation-warnings`. Both solutions feel wrong and the only good one seems to be changing the type of lattice join function.
 
-- Jan doesn't like mess in Hoopl repo. There are unused modules (`Compiler.Hoopl.OldDataflow`, `Compiler.Hoopl.DataflowFold`), older versions of some modules (in `prototypes/` directory) or private correspondence with paper reviewers and between authors.
+  * Jan doesn't like mess in Hoopl repo. There are unused modules (`Compiler.Hoopl.OldDataflow`, `Compiler.Hoopl.DataflowFold`), older versions of some modules (in `prototypes/` directory) or private correspondence with paper reviewers and between authors.
 
-## Changing the graph type
+== Changing the graph type ==
 
-
-
-Suppose you want to do liveness analysis, but afterwards to know the liveness *at every node* not just at every block Id.  One way might be to allow rewriting to transform to a graph with a different node type, so that liveness analysis would have type
-
-
-```wiki
+Suppose you want to do liveness analysis, but afterwards to know the liveness ''at every node'' not just at every block Id.  One way might be to allow rewriting to transform to a graph with a different node type, so that liveness analysis would have type
+{{{
   Graph CmmNode -> Graph (CmmNode, Liveness)
-```
-
-
+}}}
 To do this, the rewrite functions would have to be able to return graphs of a new type, something like this:
-
-
-```wiki
+{{{
 newtype BwdRewrite m n n' f 
   = BwdRewrite3 { getBRewrite3 ::
                     ( n C O -> f          -> m (Maybe (Graph n' C O, BwdRewrite m n' n' f))
                     , n O O -> f          -> m (Maybe (Graph n' O O, BwdRewrite m n' n' f))
                     , n O C -> FactBase f -> m (Maybe (Graph n' O C, BwdRewrite m n' n' f))
                     ) }
-```
-
-
+}}}
 We would have to eliminate the `Maybe`, however, because the no-rewrite case still changes the type.  
-
-
 
 I'm not sure of the consequences of this, but it's intriguing.
 
+== Tickets ==
 
+Here are some Hoopl tickets: 
+
+  * #9851 - Hoopl library in GHC hides runWithFuel / version number clash
+  * #9853 - Stateful transformation causes non-termination in Hoopl analysis.
+  * #8315 - Improve specialized Hoopl module
+```
