@@ -199,6 +199,7 @@ See also [TemplateHaskell](template-haskell)
 - [\#3462](https://gitlab.staging.haskell.org/ghc/ghc/issues/3462): allocate large objects with `allocateLocal()`
 - [\#2289](https://gitlab.staging.haskell.org/ghc/ghc/issues/2289): cheap check at start of case alternatives
 - [\#2731](https://gitlab.staging.haskell.org/ghc/ghc/issues/2731): avoiding unnecessary evaluation when unpacking constructors
+- [\#4121](https://gitlab.staging.haskell.org/ghc/ghc/issues/4121): arity and CAF info computation is horribly fragile
 
 ### Optimiser
 
