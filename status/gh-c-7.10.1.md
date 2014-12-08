@@ -25,6 +25,8 @@ plans for the 7.10.1 release](https://haskell.org/pipermail/ghc-devs/2014-Octobe
 - [ Phab:D550](https://phabricator.haskell.org/D550): Static values. **Done**.
 - [
   Phab:D519](https://phabricator.haskell.org/D519): preliminary Complex and Ratio Storable instances for Base. **Done**
+- [
+  Phab:D524](https://phabricator.haskell.org/D524): Two step allocator for 64-bit systems. **Done**
 
 
 See [milestone:7.10.1](/trac/ghc/milestone/7.10.1) and [
