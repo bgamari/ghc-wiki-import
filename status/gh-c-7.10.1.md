@@ -1,34 +1,236 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
-= GHC plans for 7.10.1 =
-
-We've written up some tentative [https://haskell.org/pipermail/ghc-devs/2014-October/006518.html plans for the 7.10.1 release]. Here's a short recap:
-
- * We're planning to freeze sometime in mid November, most likely.
- * We'd like a 3-4 month stable freeze (from Nov-Feb)
- * We'd like a release in **Feb 2015**, which is our goal.
- * We haven't planned an RC yet, but hope one **might be out by Christmas**.
-
-   - Phab:D168: Partial type signatures. **Done**.
-   - Phab:D155: LLVM 3.5 compatibility. **Done**.
-   - Phab:D169: Source code note infrastructure. **Final revision from Peter**.
-   - Phab:D396: DWARF debug information (dependent on Phab:D169). **Still needs closer review**.
-   - Phab:D476: Deriving for arbitrary classes. **Done**.
-   - Phab:D519: preliminary Complex and Ratio Storable instances for Base. **Done**
-   - Phab:D493: Use `TypeLits` in the meta-data encoding of `GHC.Generics` **stuck on Haddock panic, needs help**
-
-See milestone:7.10.1 and [https://ghc.haskell.org/trac/ghc/query?status=infoneeded&status=merge&status=new&status=patch&group=status&milestone=7.10.1 Active tickets] for more.
+# GHC plans for 7.10.1
 
 
-== Tickets marked merge with no milestone
 
-[[TicketQuery(status=merge,milestone=,format=table,col=type|summary|priority|owner,group=status)]]
+We've written up some tentative [
+plans for the 7.10.1 release](https://haskell.org/pipermail/ghc-devs/2014-October/006518.html). Here's a short recap:
 
-== Tickets slated for 7.10.1
 
-[[TicketQuery(milestone=7.10.1,status!=closed,format=table,col=type|summary|priority|owner,group=status,order=priority)]]
+- We're planning to freeze sometime in mid November, most likely.
+- We'd like a 3-4 month stable freeze (from Nov-Feb)
+- We'd like a release in **Feb 2015**, which is our goal.
+- We haven't planned an RC yet, but hope one **might be out by Christmas**.
 
-```
+- [
+  Phab:D168](https://phabricator.haskell.org/D168): Partial type signatures. **Done**.
+- [
+  Phab:D155](https://phabricator.haskell.org/D155): LLVM 3.5 compatibility. **Done**.
+- [
+  Phab:D169](https://phabricator.haskell.org/D169): Source code note infrastructure. **Final revision from Peter**.
+- [
+  Phab:D396](https://phabricator.haskell.org/D396): DWARF debug information (dependent on [
+  Phab:D169](https://phabricator.haskell.org/D169)). **Done**.
+- [
+  Phab:D476](https://phabricator.haskell.org/D476): Deriving for arbitrary classes. **Done**.
+- [ Phab:D550](https://phabricator.haskell.org/D550): Static values. **Done**.
+- [
+  Phab:D519](https://phabricator.haskell.org/D519): preliminary Complex and Ratio Storable instances for Base. **Done**
+- [
+  Phab:D493](https://phabricator.haskell.org/D493): Use `TypeLits` in the meta-data encoding of `GHC.Generics` **stuck on Haddock panic, needs help**
+
+
+See [milestone:7.10.1](/trac/ghc/milestone/7.10.1) and [
+Active tickets](https://ghc.haskell.org/trac/ghc/query?status=infoneeded&status=merge&status=new&status=patch&group=status&milestone=7.10.1) for more.
+
+
+## Tickets marked merge with no milestone
+
+
+
+
+  
+  
+  
+  
+  
+    
+
+## Status: merge (1 match)
+
+
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: merge, milestone: , group: status, max: 0,
+col: id, col: type, col: summary, col: priority, col: owner, desc: 1, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: merge, milestone: , group: status, max: 0,
+col: id, col: type, col: summary, col: priority, col: owner, order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: merge, milestone: , group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: merge, milestone: , group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: merge, milestone: , group: status, max: 0,
+col: id, col: type, col: summary, col: priority, col: owner, order: owner)
+      </th>
+<td>
+    </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#16094](https://gitlab.staging.haskell.org/ghc/ghc/issues/16094)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [panic! (the 'impossible' happened): for powerpc-unknown-linux getRegister(ppc): I64\[I32\[BaseReg + 812\] + 64\]](https://gitlab.staging.haskell.org/ghc/ghc/issues/16094)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      trommler
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr></table>
+
+
+  
+
+
+
+## Tickets slated for 7.10.1
+
+
+
+
+  
+  
+  
+  
+  
+    
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: !closed, milestone: 7.10.1, group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: !closed, milestone: 7.10.1, group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: !closed, milestone: 7.10.1,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: !closed, milestone: 7.10.1,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, desc: 1, order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: !closed, milestone: 7.10.1, group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+order: owner)
+      </th>
+<td>
+    </td></tr>
+<tr><td>
+          </td>
+<th>
+            No tickets found
+          </th>
+<td>
+        </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr></table>
+
+
+  
+
+
+
