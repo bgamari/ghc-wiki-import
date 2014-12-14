@@ -22,6 +22,7 @@ Common tasks:
 
 === [hackage:array] ===
 
+ - TODO: point release
 
 === [hackage:base] ===
 
@@ -62,7 +63,7 @@ module GHC.Exts
 
 [[Image(https://travis-ci.org/ghc/packages-hoopl.png?branch=master,link=https://travis-ci.org/ghc/packages-hoopl)]]
 
- - TODO
+ - TODO: point rls
 
 === [hackage:hpc] ===
 
@@ -121,7 +122,7 @@ module GHC.Exts
 
 === [hackage:template-haskell] ===
 
- - TODO
+ - TODO: `changelog.md`(?)
 
 === [hackage:unix] ===
 
@@ -154,7 +155,7 @@ Note: Libraries with a "^1^" marker are used internally (e.g. by `ghci` or `hadd
 === Win32 ===
 
  - upstream: http://github.com/haskell/win32.git
- - TODO
+ - TODO: contact Bryan
 
 === binary ===
 
@@ -176,8 +177,8 @@ Note: Libraries with a "^1^" marker are used internally (e.g. by `ghci` or `hadd
 === [hackage:filepath] ===
 
  - upstream: http://github.com/haskell/filepath
- - reminded about RC
- - TODO: wait for reaction
+ - Synced up to hackage:filepath-1.3.1.0 RC
+ - TODO: wait for final release of hackage:filepath-1.3.1.0
 
 === haskeline^1^ ===
 
@@ -194,12 +195,11 @@ Note: Libraries with a "^1^" marker are used internally (e.g. by `ghci` or `hadd
 === primitive^2^ ===
 
  - upstream: https://github.com/haskell/primitive
- - TODO (can wait till RC2)
+ - TODO (RC2)
 
 === random^2^ ===
 
- - TODO (can wait till RC2): GHC's repo has diverged from upstream
-   
+ - TODO: GHC's repo has diverged from upstream
 
 === terminfo^1^ ===
 
@@ -219,7 +219,7 @@ Note: Libraries with a "^1^" marker are used internally (e.g. by `ghci` or `hadd
 === vector^2^ ===
 
  - upstream: https://github.com/haskell/vector
- - TODO (can wait till RC2)
+ - TODO (RC2)
 
 === xhtml^1^ ===
 
