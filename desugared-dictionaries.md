@@ -1,15 +1,17 @@
-CONVERSION ERROR
+## Base proposal
 
-Original source:
 
-```trac
 
-== Base proposal ==
 Expose the constructor of the dictionary datatype created by desugaring typeclasses. This seems unlikely to require any further changes - local type-based instances are still not allowed, but arbitrary dictionaries can be constructed and passed manually. This is possible /already/, but it requires creating a seperate type which mimics the structure of the desugared dictionary. No inference changes are required, no new syntax.
-=== Additional proposals ===
-* Integrate the ''reflection'' and parts of the ''constraints'' library into the core class libraries, and this: 
 
-{{{
+
+### Additional proposals
+
+
+- Integrate the *reflection* and parts of the *constraints* library into the core class libraries, and this: (code from [
+  here](https://www.fpcomplete.com/user/thoughtpolice/using-reflection)) 
+
+```wiki
 newtype Lift (p :: * -> Constraint) (a :: *) (s :: *) = Lift { lower :: a }
 
 class ReifiableConstraint p where
@@ -29,11 +31,13 @@ using d m = reify d $ \(_ :: Proxy s) ->
         where proof = unsafeCoerceConstraint :: p (Lift p a s) :- p a
   in m \\ replaceProof
 
-}}}
+```
+
 
 Example usage of this:
 
-{{{
+
+```wiki
 --These two instances can and should be automatically created by the compiler eventually, but it isn't strictly necessary
 instance ReifiableConstraint Monoid where
   reifiedIns = Sub Dict
@@ -46,31 +50,57 @@ instance Reifies s (Monoid a) => Monoid (Lift Monoid a s) where
 
 using (Monoid (+) 0) $ mempty <> 10 <> 12 -- evaluates to 22
 using (Monoid (*) 1) $ mempty <> 10 <> 12 -- evaluates to 120
-}}}
+```
 
-== What this proposal is NOT ==
+## What this proposal is NOT
+
+
 
 It is not a proposal for local typeclass instances based on type. That is, this proposal allows easier access to creating dictionary terms, but not not in types. This is basically just removing the need to create identical data structures as a workaround. 
 
+
+
 It is not a proposal for any new syntax or runtime behaviour or types.
 
-== Rationale ==
-There are several examples where one would like access to desugared typeclass dictionary types. For example, creating new instances at runtime like in [https://www.fpcomplete.com/user/thoughtpolice/using-reflection#turning-up-the-magic-to-over-9000 reflection]. Indeed, access to dictionary constructors would probably make the reflection package much simpler and less spooky.
 
-Currently, typeclass dictionary constructors are [https://github.com/ghc/ghc/blob/4d5f83a8dcf1f1125863a8fb4f847d78766f1617/compiler/basicTypes/OccName.hs#L615 prepended with "D:"], ensuring that no source level Haskell code can access them.  
+## Rationale
+
+
+
+There are several examples where one would like access to desugared typeclass dictionary types. For example, creating new instances at runtime like in [
+reflection](https://www.fpcomplete.com/user/thoughtpolice/using-reflection#turning-up-the-magic-to-over-9000). Indeed, access to dictionary constructors would probably make the reflection package much simpler and less spooky.
+
+
+
+Currently, typeclass dictionary constructors are [
+prepended with "D:"](https://github.com/ghc/ghc/blob/4d5f83a8dcf1f1125863a8fb4f847d78766f1617/compiler/basicTypes/OccName.hs#L615), ensuring that no source level Haskell code can access them.  
+
+
 
 This proposal is about allowing source level access to the dictionary constructors. Note that it is not about local instances: There would be no way to override the type-based dictionary usage, just like the present. 
 
+
+
 It would allow, for example, far greater ease of implementation of dictionary-based methods, such as is often needed in constructive category theory. 
-== Implementation ==
+
+
+## Implementation
+
+
+
 The first shot at allowing access to the constructors is to simply replace the string "D:" with "".
 
+
+
 Doing so reveals two things: 
+
+
 
 1) It still does not work - the parser catches "Monoid undefined undefined undefined" with "Not in scope: data constructor Monoid". Is this because it's getting caught in the parser?
 2) 
 
-{{{
+
+```wiki
 spacekitteh@sophielinux:~/code/ghc-T9819$ inst/bin/ghc testsuite/tests/indexed-types/should_compile/Deriving
 [1 of 1] Compiling ShouldCompile    ( testsuite/tests/indexed-types/should_compile/Deriving.hs, testsuite/tests/indexed-types/should_compile/Deriving.o )
 
@@ -83,7 +113,9 @@ testsuite/tests/indexed-types/should_compile/Deriving.hs:8:1: Warning:
 
 /tmp/ghc13400_0/ghc13400_2.s:811:0:
      Error: symbol `ShouldCompile_C_static_info' is already defined
-}}}
+```
+
 
 This goes away when the "D:" is replaced with something like "MkDict" instead of a blank.
-```
+
+
