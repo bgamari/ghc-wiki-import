@@ -1,86 +1,55 @@
-# Setting up a MacOS X system for building  GHC (HEAD)
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Setting up a MacOS X system for building  GHC (HEAD) =
 
-**If** your host OS X environment indicates that GCC is a wrapper for clang, (easily detected by looking at output of `/usr/bin/gcc --version` in the terminal),
+'''If''' your host OS X environment indicates that GCC is a wrapper for clang, (easily detected by looking at output of `/usr/bin/gcc --version` in the terminal),
 then please make sure you have an up to date release of GHC, Currently 7.8.3.
 
+You will need to install several tools, using one of  [http://mxcl.github.com/homebrew/ Homebrew]  !MacPorts or Fink.
 
+== Xcode (GCC) ==
 
-You will need to install several tools, using one of  [
-Homebrew](http://mxcl.github.com/homebrew/)  MacPorts or Fink.
-
-
-## Xcode (GCC)
-
-
-### For Lion (10.7), Xcode 7.3 or higher
-
-
+=== For Lion (10.7), Xcode 7.3 or higher ===
 
 Firstly, you need to install the Xcode Command Line tools from Apple. You can do that in two ways (the second is faster):
 
+ 1. Install all of Xcode:
+   * Install Xcode from the Mac App Store.
+   * Launch Xcode.
+   * In the Preference dialog of Xcode, select the "Downloads" pane and install "Command line tools".
+ 2. Install the command line tools only:
+   * At the [http://developer.apple.com/downloads downloads page of Apple Developer], download the latest "Command line tools".
+   * Install them.
 
-1. Install all of Xcode:
+=== Previous versions of OS X and Xcode ===
 
-  - Install Xcode from the Mac App Store.
-  - Launch Xcode.
-  - In the Preference dialog of Xcode, select the "Downloads" pane and install "Command line tools".
-1. Install the command line tools only:
+Get the most recent version of Apple's Xcode tools that you can. Your OS X CD has a version on it. You may be able to download a newer version from the [http://developer.apple.com/tools/xcode Apple Developer Connection] website. You may need to sign up for a free membership in the Apple Developer Connection, and downloading may still cost a little money.  In later versions of OS X (10.6 / 10.7), Apple added the "App Store". Xcode is available within the App Store for "Free".
 
-  - At the [
-    downloads page of Apple Developer](http://developer.apple.com/downloads), download the latest "Command line tools".
-  - Install them.
+Successful builds of older GHC sources have been reported using Xcode 3.0, 2.4 and 2.4.1 on Intel Macs. Xcode 2.2.1 is known ''not'' to work out of the box on Intel Macs, and Xcode 3.0 is known ''not'' to work out of the box on PowerPC Macs (#2887). Versions prior to 3.1 may build GHC successfully, but choke on certain libraries.
 
-### Previous versions of OS X and Xcode
-
-
-
-Get the most recent version of Apple's Xcode tools that you can. Your OS X CD has a version on it. You may be able to download a newer version from the [
-Apple Developer Connection](http://developer.apple.com/tools/xcode) website. You may need to sign up for a free membership in the Apple Developer Connection, and downloading may still cost a little money.  In later versions of OS X (10.6 / 10.7), Apple added the "App Store". Xcode is available within the App Store for "Free".
-
-
-
-Successful builds of older GHC sources have been reported using Xcode 3.0, 2.4 and 2.4.1 on Intel Macs. Xcode 2.2.1 is known *not* to work out of the box on Intel Macs, and Xcode 3.0 is known *not* to work out of the box on PowerPC Macs ([\#2887](https://gitlab.staging.haskell.org/ghc/ghc/issues/2887)). Versions prior to 3.1 may build GHC successfully, but choke on certain libraries.
-
-
-## GHC
-
-
+== GHC ==
 
 Secondly, you need an installation of GHC for use as your bootstrap compiler environment. 
 
+There are 4 different choices. Choose the one you are most comfortable with! The options below should be a GHC version >= 7.8.3.
 
+  1. Install a [http://www.haskell.org/ghc/download binary distribution from GHC]. 
+  2. Get the relocatable .app bundle using [http://github.com/ghcformacosx/ghc-dot-app ghcformacosx]
+  3. Use one of Fink, MacPorts or Homebrew.
+  4. Install the [http://www.haskell.org/platform/ Haskell Platform].  If your OS X version predates 10.8, This build (currently of GHC 7.8.3) is known to support as far back as OS X 10.6 
 
-There are 4 different choices. Choose the one you are most comfortable with! The options below should be a GHC version \>= 7.8.3.
+'''NB:''' You need to use a binary distribution of GHC 7.4.1 (or later) as your bootstrap compiler.
 
-
-1. Install a [binary distribution from GHC](http://www.haskell.org/ghc/download). 
-1. Get the relocatable .app bundle using [
-  ghcformacosx](http://github.com/ghcformacosx/ghc-dot-app)
-1. Use one of Fink, MacPorts or Homebrew.
-1. Install the [
-  Haskell Platform](http://www.haskell.org/platform/).  If your OS X version predates 10.8, This build (currently of GHC 7.8.3) is known to support as far back as OS X 10.6 
-
-
-**NB:** You need to use a binary distribution of GHC 7.4.1 (or later) as your bootstrap compiler.
-
-
-## Additional Haskell tools
-
-
+== Additional Haskell tools ==
 
 Make sure you have up to date versions of  `alex` and `happy` installed and visible in your shell path. `cabal update ; cabal install alex happy` will install the most recent release for you.
 
+If you are trying out  using GHC head ( currently GHC 7.9 ) for software dev, you will need cabal and cabal install  Head  (current Cabal Head is 1.21, or a release version >= 1.22, currently cabal versions >= 1.21 are only on the github master for cabal and cabal-install).
 
-
-If you are trying out  using GHC head ( currently GHC 7.9 ) for software dev, you will need cabal and cabal install  Head  (current Cabal Head is 1.21, or a release version \>= 1.22, currently cabal versions \>= 1.21 are only on the github master for cabal and cabal-install).
-
-
-## Important Considerations
-
-
-
+== Important Considerations ==
 By default GHC tries to link to a system installed GMP lib, but depending on how you wish to distribute the resulting applications,
 its worth considering either using one of the non GMP integer libs.
 If you're OK with static linking GMP into the GHC RTS,
@@ -88,49 +57,34 @@ you can add the line
 `libraries/integer-gmp2_CONFIGURE_OPTS += --configure-option=--with-intree-gmp`
 to you `mk/build.mk` file  (which hosts all your other build system config preferences also.)
 
+== Supporting Older OS X versions with your build ==
 
-## Other tools
+running a command like  `export MACOSX_DEPLOYMENT_TARGET=version` before building will  imply setting `-mmacosx-version-min=version` for clang and friends, and will result in a GHC build that can run on any OS X `>= version` (where version can be older than the host machine's OS X version).  Of course, test that this actually works for you.  Theres a lot of decent resources online about how these flags work for OS X 
 
-
+== Other tools ==
 
 Thirdly, if you want to build the development version of GHC from the Git repositories, you also need to install the GNU auto tools. You can build them yourself or use any of brew, fink, or macports:
 
-
-- (Homebrew): `brew install autoconf automake`
-
+ * (Homebrew): `brew install autoconf automake`
 
 Fourthly, if you like to use GHC's LLVM backend:
 
+ * (Homebrew): `brew tap homebrew/dupes ; brew llvm34`
 
-- (Homebrew): `brew tap homebrew/dupes ; brew llvm34`
+GHC 7.8 and older does not support LLVM >=3.5, which is the default version of llvm installed by Homebrew. Thus you have to install LLVM 3.4 for those GHC versions
 
+Finally, if you want to build the documentation you need to install !DocBook. You can install it like so:
 
-GHC 7.8 and older does not support LLVM \>=3.5, which is the default version of llvm installed by Homebrew. Thus you have to install LLVM 3.4 for those GHC versions
+ * (Homebrew): `brew install docbook` and `brew install docbook-xsl`
 
+!DocBook is a fairly large system unto itself and configuring it to build the documentation in its various formats can be a maze. Verifying that your SGML_CATALOG_FILES and XML_CATALOG_FILES environment variables are pointed at the right places will fix most problems.
 
-
-Finally, if you want to build the documentation you need to install DocBook. You can install it like so:
-
-
-- (Homebrew): `brew install docbook` and `brew install docbook-xsl`
-
-
-DocBook is a fairly large system unto itself and configuring it to build the documentation in its various formats can be a maze. Verifying that your SGML\_CATALOG\_FILES and XML\_CATALOG\_FILES environment variables are pointed at the right places will fix most problems.
-
-
-## Docker
-
-
+== Docker ==
 
 See the Linux page for instructions on running Docker
-[
-https://ghc.haskell.org/trac/ghc/wiki/Building/Preparation/Linux\#Docker](https://ghc.haskell.org/trac/ghc/wiki/Building/Preparation/Linux#Docker)
+https://ghc.haskell.org/trac/ghc/wiki/Building/Preparation/Linux#Docker
 
+== VMWare / Virtualbox ==
 
-## VMWare / Virtualbox
-
-
-
-If you are familiar with VMWare or Virtualbox you can compile Haskell on Linux. You can go to the [Building/Preparation/Linux](building/preparation/linux) page to install GHC.
-
-
+If you are familiar with VMWare or Virtualbox you can compile Haskell on Linux. You can go to the [wiki:Building/Preparation/Linux] page to install GHC.
+```
