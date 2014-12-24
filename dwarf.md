@@ -1,9 +1,3 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
-
 
 As of 7.10, GHC has basic functionality to generate DWARF-compliant
 debugging information with its binaries. This opens up a completely
@@ -14,6 +8,8 @@ This means that we gain debugging and profiling capabilities in
 situations where existing profiling approaches could not help us, such
 as for crashes or code that we cannot meaningfully instrument.
 
+
+
 There are a few caveats to this method. Firstly, GHC optimisations can
 be very aggressive in reorganizing the code and avoiding redundancies
 at runtime. This means that even with good heuristics, there will be
@@ -21,62 +17,86 @@ situations where information is lost. On the other hand, DWARF-based
 debugging tools also make assumptions about the code that are more
 geared towards C-like languages, and get confused for Haskell programs.
 
+
+
 Bottom line: While the infrastructure should be perfectly stable and
 safe to use, inspecting Haskell programs like this is still very much
 "wild west". Having a good working knowledge of low-level Haskell
 execution is definetely a good idea. We hope that some experience will
 help us improve the situation.
 
-== Basic Set-Up
+
+## Basic Set-Up
+
+
 
 To keep things simple for the moment, let's say we compile the
 tried-and-true `fib`:
-{{{
+
+
+```wiki
 fib :: Int -> Int
 fib 0 = 0
 fib 1 = 1
 fib n = fib (n-1) + fib (n-2)
 main :: IO ()
 main = putStrln $ fib 20
-}}}
+```
+
 
 Just like with GCC, the "magic" command line flag here is `-g`. This
 causes GHC to generate DWARF sections into produced binaries:
-{{{
+
+
+```wiki
 ghc -O -g -rtsopts fib.hs
-}}}
+```
+
 
 For Mac Os, debug information is actually kept separate from the
 binary, so we first have to package it using `dsymutil` at this point:
-{{{
+
+
+```wiki
 dsymutil fib
-}}}
+```
+
 
 If we want, we can now check that DWARF information was generated
 correctly using `objdump` or `dwarfdump` respectively:
-{{{
+
+
+```wiki
 [Linux] objdump -Wi fib
 [MacOs] dwarfdump fib.dSYM
-}}}
+```
+
 
 Either should show us something of the form:
-{{{
+
+
+```wiki
 TAG_compile_unit [1] *
  AT_name( "fib.hs" )
  AT_producer( "The Glorious Glasgow Haskell Compilation System 7.9.20141217" )
  AT_language( DW_LANG_Haskell )
-}}}
+```
+
 
 Which tells us that we have DWARF information about the compilation
 unit `fib.hs`. Note that the Haskell language ID `0x18` is not
 recognized by all tools yet, so you might see an "Unknown" there
 instead.
 
+
+
 It is important to realize that - in contrast to instrumentation -
 adding DWARF debug information does not actually change the executable
 sections of the executable. In fact, we can strip them without
 changing the performance characteristics of the program at all:
-{{{
+
+
+```wiki
 $ cp fib fib_stripped
 $ strip fib_stripped
 $ time ./fib
@@ -92,18 +112,24 @@ real	0m13.179s
 user	0m13.168s
 sys	0m0.000s
 $ 
-}}}
+```
+
 
 This is a very good property in certain situations - DWARF information
 is simply painless to add and throw away. Furthermore, we can now
 profile code and always be sure that the measurements actually reflect
 real-life performance.
 
-== Debugging
+
+## Debugging
+
+
 
 At this point, we can simply invoke `gdb` and set breakpoints (TODO -
 doesn't work on Mac yet):
-{{{
+
+
+```wiki
 gdb -q fib
 Reading symbols fib...done.
 (gdb) break fib.hs:3
@@ -114,12 +140,15 @@ Starting program: fib +RTS -V0
 Breakpoint 1, Main_zdwfib_info () at fib.hs:3
 3	fib 1 = 1
 (gdb) 
-}}}
+```
+
 
 At this point we have actually stopped the Haskell program at the
 given line. We can now step a bit further to see the program working
 its magic:
-{{{
+
+
+```wiki
 (gdb) s
 Main_zdwfib_info () at fib.hs:4
 4	fib n = fib (n-1) + fib (n-2)
@@ -140,14 +169,19 @@ Breakpoint 1, Main_zdwfib_info () at fib.hs:3
 c3Vy_info () at fib.hs:4
 4	fib n = fib (n-1) + fib (n-2)
 (gdb)
-}}}
+```
+
 
 Note that passing `+RTS -V0` as we did above is necessary for this to
 work, as otherwise we would end up stepping into the RTS timer.
 
+
+
 Furthermore, we can back-trace to get an idea of where we were coming
 from:
-{{{
+
+
+```wiki
 (gdb) bt
 #0  c3Vy_info () at fib.hs:4
 #1  0x0000000000403de0 in Main_zdwfib_info () at fib.hs:2
@@ -162,14 +196,18 @@ Backtrace stopped: previous frame identical to this frame (corrupt stack?)
 stg_catch_frame_info in section .text of /home/cserv1_a/soc_pg/scpmw/leeds/tests/haskell/fib/fib
 (gdb) info symbol 0x0000000000682530
 stg_stop_thread_info in section .text of /home/cserv1_a/soc_pg/scpmw/leeds/tests/haskell/fib/fib
-}}}
+```
+
 
 The stack trace you get at this point might look a bit different - to
 get the above result you will need to compile both libraries and the
 runtime system with debugging support (`GhcRtsHcOpts += -g` and
 `GhcLibHcOpts += -g`).
 
+
+
 Let us have a closer look at the stack:
+
 
 - First we have a number of return closures to our `fib`
   function. That the stack is so "clean" means that we have no lazy
@@ -190,21 +228,28 @@ Let us have a closer look at the stack:
   from the DWARF information and complains with "corrupt stack?"
   error.
 
-== Profiling
+## Profiling
+
+
 
 Another application of DWARF information is that we can use low-level
 profiling to map performance data to source code. On Linux, we can use
 the `perf` utility to gather and annotate such data, for example:
-{{{
+
+
+```wiki
 $ perf record ./fib
 1134903170
 [ perf record: Woken up 9 times to write data ]
 [ perf record: Captured and wrote 2.027 MB perf.data (~88582 samples) ]
 $ perf annotate
-}}}
+```
+
 
 This yields us a profiling view that looks as follows:
-{{{
+
+
+```wiki
        │    0000000000403de0 <c3Vl_info>:
        │    fib :: Int -> Int
        │    fib 0 = 0
@@ -218,20 +263,27 @@ This yields us a profiling view that looks as follows:
        │      nop
        │      add    %al,(%r8) 
        │      add    %al,(%rax)
-}}}
+```
+
 
 Note that due to DWARF information, `perf` has managed to locate the
 source code that belongs to the "hot" assembler code.
 
-== Open Issues
+
+## Open Issues
+
+
 
 The example should give an idea of the potential we have
 here. Unfortunately, it is still quite easy to run into
 show-stoppers. The following list shows the most pressing issues on
 the way to truly "supporting" DWARF-based debugging:
 
+
+
 Debugger problems - these could go away by either patching the used
 debugging tools or replacing them with our own:
+
 
 - Note that both `perf` as well as `gdb` refer to blocks using their
   backend names (e.g. `c3Vl_info`). This is not GHC's fault - we
@@ -242,8 +294,8 @@ debugging tools or replacing them with our own:
   for Haskell code.
 
 - Furthermore, the symbol names in `gbd`'s backtrace are actually
-  wrong -- notice the `??` entries. On the other hand, note that `info
-  symbol` still gives us the right answer. What is actually happening
+  wrong -- notice the `??` entries. On the other hand, note that \`info
+  symbol\` still gives us the right answer. What is actually happening
   here is that `gdb` looks up the symbol with an offset of 1, as that
   makes sense for C-like programs (see `[Note: Info Offset]` in
   `compiler/nativeGen/Dwarf/Types.hs` for details). This is another
@@ -260,15 +312,17 @@ debugging tools or replacing them with our own:
   and `lldb` seem to simply crash once you set breakpoints. Possibly
   something overwriting info tables? Investigation necessary.
 
+
 Runtime problems - can probably be fixed by using Haskell-specific
 tools and/or improving infrastructure further:
+
 
 - When trying to look at stack traces, there are two characteristics
   of Haskell code that give us a hard time. The first one is that
   tail-calls are very common, and not entirely straight-forward to
   prevent. This is significant, because sometimes we positively want
   to know whether a certain function is on the stack frame or not.
-  Arash Hourani has been working on a way to implement
+  Arash Rouhani has been working on a way to implement
   `forceStackFrame`, hopefully we'll have something like that
   eventually.
 
@@ -287,10 +341,12 @@ tools and/or improving infrastructure further:
   compilation unit. This heuristic works quite well, but it is not
   hard to demonstrate situations where it goes wrong.
 
+
 Architectural problems - might need us to re-think our infrastructure
 a bit:
 
-- While this sort of debugging does not *require* all libraries and
+
+- While this sort of debugging does not \*require\* all libraries and
   RTS to be built with `-g`, it certainly is a very good idea. After
   all, currently stack unwinding stops at the first closure that
   doesn't have DWARF information associated with it. As Johan Tibell
@@ -298,10 +354,14 @@ a bit:
   implement `-gsplit-dwarf`, which would allow us to ship a DWARF
   package separately.
 
-  (Also note that tools with more knowledge about the Haskell stack
-  can work around this issue somewhat by using info tables to traverse
-  the Haskell stack. Explaining this strategy to DWARF readers might
-  also be possible, Nathan Howell had done some experiments on this.)
+>
+>
+> (Also note that tools with more knowledge about the Haskell stack
+> can work around this issue somewhat by using info tables to traverse
+> the Haskell stack. Explaining this strategy to DWARF readers might
+> also be possible, Nathan Howell had done some experiments on this.)
+>
+>
 
 - Implementing our own tools depends on our ability to read binaries
   and the contained DWARF information. So far we have used `libdwarf`,
@@ -310,5 +370,3 @@ a bit:
   use). Possibly use `libbfd` with a custom-built DWARF reader?
 
 - Windows situation completely unclear.
-
-```
