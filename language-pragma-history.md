@@ -85,5 +85,9 @@ Added LANGUAGE extensions:
 Added LANGUAGE extensions:
 
  - (`No`)`BinaryLiterals`
+ - (`No`)`DeriveAnyClass`
+ - (`No`)`NamedWildCards`
+ - (`No`)`PartialTypeSignatures`
+ - (`No`)`StaticPointers`
 
 ```
