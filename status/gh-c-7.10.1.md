@@ -29,6 +29,14 @@ Special things of note:
 
 - Austin & Herbert will deal with Haddock branching.
 
+## Migration Guide to 7.10
+
+
+
+[
+https://ghc.haskell.org/trac/ghc/wiki/Migration/7.10](https://ghc.haskell.org/trac/ghc/wiki/Migration/7.10)
+
+
 ## Tickets slated for 7.10.1
 
 
