@@ -5,10 +5,9 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Urgent or in-flight
 
 
+- [\#9960](https://gitlab.staging.haskell.org/ghc/ghc/issues/9960), [\#9805](https://gitlab.staging.haskell.org/ghc/ghc/issues/9805): `TrieMap` stuff
 - [\#9260](https://gitlab.staging.haskell.org/ghc/ghc/issues/9260): type lits (Iavor owns)
-- [\#7015](https://gitlab.staging.haskell.org/ghc/ghc/issues/7015): support for `static` (Facundo)
 - [\#9953](https://gitlab.staging.haskell.org/ghc/ghc/issues/9953), [\#9900](https://gitlab.staging.haskell.org/ghc/ghc/issues/9900), [\#9867](https://gitlab.staging.haskell.org/ghc/ghc/issues/9867), [\#9891](https://gitlab.staging.haskell.org/ghc/ghc/issues/9891), [\#9793](https://gitlab.staging.haskell.org/ghc/ghc/issues/9793), [\#8761](https://gitlab.staging.haskell.org/ghc/ghc/issues/8761), [\#8581](https://gitlab.staging.haskell.org/ghc/ghc/issues/8581), [\#8779](https://gitlab.staging.haskell.org/ghc/ghc/issues/8779), [\#8761](https://gitlab.staging.haskell.org/ghc/ghc/issues/8761), [\#8583](https://gitlab.staging.haskell.org/ghc/ghc/issues/8583): pattern synonyms (Gergo)
-- [\#9879](https://gitlab.staging.haskell.org/ghc/ghc/issues/9879): partial type signature panic (Thomas)
 - [\#8634](https://gitlab.staging.haskell.org/ghc/ghc/issues/8634), [\#9267](https://gitlab.staging.haskell.org/ghc/ghc/issues/9267), [\#9227](https://gitlab.staging.haskell.org/ghc/ghc/issues/9227): relaxing functional dependency rules `-XDysFunctionalDependencies`
 - [\#8852](https://gitlab.staging.haskell.org/ghc/ghc/issues/8852), [\#8980](https://gitlab.staging.haskell.org/ghc/ghc/issues/8980), [\#8941](https://gitlab.staging.haskell.org/ghc/ghc/issues/8941) (possibly), [\#8960](https://gitlab.staging.haskell.org/ghc/ghc/issues/8960), [\#7898](https://gitlab.staging.haskell.org/ghc/ghc/issues/7898), [\#7068](https://gitlab.staging.haskell.org/ghc/ghc/issues/7068), [\#7944](https://gitlab.staging.haskell.org/ghc/ghc/issues/7944), [\#5550](https://gitlab.staging.haskell.org/ghc/ghc/issues/5550), [\#8836](https://gitlab.staging.haskell.org/ghc/ghc/issues/8836): `SpecConstr` blowup
 - [\#9123](https://gitlab.staging.haskell.org/ghc/ghc/issues/9123): higher order roles
