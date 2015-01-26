@@ -35,6 +35,7 @@ Original source:
 * #9637: Type-level `Error` that aborts compilation
 * #9649: Proper type-level strings
 * #9667: Don't make tyvars untouchable when a GADT pattern-match isn't informative
+* #9883: Heterogeneous `OverloadedLists`
 
 '''Hard'''
 
