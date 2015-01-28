@@ -32,22 +32,22 @@ Nothing here proposes any change to AMP (which made `Applicative` a superclass o
 ## Proposal 1:
 
 
--    Add a new pragma
 
->
->
-> `{-# LANGUAGE Prelude=AlternativePrelude #-}`
->
->
+ 
 
--   This is a new feature, but it is easy and low-risk to implement.
--   Which Prelude you use really is a language choice; appropriate for a LANGUAGE pragma.
--   Semantics is name-space only: import Prelude (); import AlternativePrelude
--   No effect on desugaring or typing of built-in syntax (list comprehensions, do-notation etc).
 
--    Ship with both old and new prelude.
--    So now old and new behaviour are easy to achieve, in the module or in a .cabal file.
--    The question becomes "what is the default".
+- Add a new pragma `{-# LANGUAGE Prelude=AlternativePrelude #-}`
+
+  -   This is a new feature, but it is easy and low-risk to implement.
+  -   Which Prelude you use really is a language choice; appropriate for a LANGUAGE pragma.
+  -   Semantics is name-space only: import Prelude (); import AlternativePrelude
+  -   No effect on desugaring or typing of built-in syntax (list comprehensions, do-notation etc).
+- Ship with both old and new prelude.
+
+
+With these changes, the current and new behaviour are easy to achieve, in the module or in a .cabal file.
+The question becomes "what is the default?".
+
 
 
 NB: `{-# LANGUAGE Prelude=AlternativePrelude #-}` is *not* the same as `{-# LANGUAGE NoImplicitPrelude #-}` combined with `import AlternativePrelude`.  The latter affects the typing and desugaring of built-in syntax; the former does not.
@@ -56,11 +56,13 @@ NB: `{-# LANGUAGE Prelude=AlternativePrelude #-}` is *not* the same as `{-# LANG
 ## Proposal 2:
 
 
--    Make the default be the old rather than the new.
 
-  -   Altering the default Prelude API should be done slowly, with lots of warning; because all users get it willy-nilly.
-  -   Unlike AMP, the change is controversial (clearly).
-  -   Easier to make changes to New Prelude if it isn't the default.
+Make the default be the old rather than the new.
+
+
+-   Altering the default Prelude API should be done slowly, with lots of warning; because all users get it willy-nilly.
+-   Unlike AMP, the change is controversial (clearly).
+-   Easier to make changes to New Prelude if it isn't the default.
 
 ## Proposal 3:
 
