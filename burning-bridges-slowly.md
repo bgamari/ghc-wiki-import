@@ -1,17 +1,17 @@
+CONVERSION ERROR
 
+Original source:
+
+```trac
 The next version (7.10) of GHC is slated to have a drastically changed Prelude,
-driven by the (aptly) named Burning Bridges Proposal (BBP), ticket [9586](https://gitlab.staging.haskell.org/ghc/ghc/issues/9586). This proposal generalises
+driven by the (aptly) named Burning Bridges Proposal (BBP), ticket [ticket:9586]. This proposal generalises
 many list operations, e.g. foldr, so they are overloaded - typically becoming members of
-either Foldable or Traversable.
-
-
+either Foldable or Traversable.  A complete list pf changes is given at the foot of this page.
 
 This message comes very late in the release process, but we would urge caution before changing.
 Even though the work has been going on for a while, it seems that this
 change is coming as a surprise to many people (including Simon Peyton
 Jones).
-
-
 
 There is much to welcome in BBP, but changing the Prelude cannot be
 done lightly since it really is like changing the language.
@@ -19,169 +19,96 @@ So I think it's really important for a large number of people to be able to
 try out such changes before they come into effect, and to have time
 to let the changes stabilize (you rarely get it right the first time).
 
-
-
 I've discussed this with a number of people, including Simon PJ, and
 we have concrete proposals.
 
-
-
 Nothing here proposes any change to AMP (which made `Applicative` a superclass of `Monad`).  AMP is a change to Preludec, but it was discussed for much longer; was brought in over more than one GHC version (GHC 7.8 had custom warnings to encourage library authors to make changes); and is structurally baked into GHC (because of the connection with desugaring).   In contrast BBP is a library-only change.   Anyway, there is no suggestion here to row back on AMP.
 
-
-## Proposal 1:
-
-
-
+== Proposal 1: ==
  
-
-
-- Add a new pragma `{-# LANGUAGE Prelude=AlternativePrelude #-}`
-
-  -   This is a new feature, but it is easy and low-risk to implement.
-  -   Which Prelude you use really is a language choice; appropriate for a LANGUAGE pragma.
-  -   Semantics is name-space only: import Prelude (); import AlternativePrelude
-  -   No effect on desugaring or typing of built-in syntax (list comprehensions, do-notation etc).
-- Ship with both old and new prelude.
-
+ * Add a new pragma `{-# LANGUAGE Prelude=AlternativePrelude #-}`
+      *   This is a new feature, but it is easy and low-risk to implement.
+      *   Which Prelude you use really is a language choice; appropriate for a LANGUAGE pragma.
+      *   Semantics is name-space only: import Prelude (); import AlternativePrelude
+      *   No effect on desugaring or typing of built-in syntax (list comprehensions, do-notation etc).
+ * Ship with both old and new prelude.
 
 With these changes, the current and new behaviour are easy to achieve, in the module or in a .cabal file.
 The question becomes "what is the default?".
 
+NB: `{-# LANGUAGE Prelude=AlternativePrelude #-}` is ''not'' the same as `{-# LANGUAGE NoImplicitPrelude #-}` combined with `import AlternativePrelude`.  The latter affects the typing and desugaring of built-in syntax; the former does not.
 
-
-NB: `{-# LANGUAGE Prelude=AlternativePrelude #-}` is *not* the same as `{-# LANGUAGE NoImplicitPrelude #-}` combined with `import AlternativePrelude`.  The latter affects the typing and desugaring of built-in syntax; the former does not.
-
-
-## Proposal 2:
-
-
+== Proposal 2: ==
 
 Make the default be the old rather than the new.
+      *   Altering the default Prelude API should be done slowly, with lots of warning; because all users get it willy-nilly.
+      *   Unlike AMP, the change is controversial (clearly).
+      *   Easier to make changes to New Prelude if it isn't the default.
 
-
--   Altering the default Prelude API should be done slowly, with lots of warning; because all users get it willy-nilly.
--   Unlike AMP, the change is controversial (clearly).
--   Easier to make changes to New Prelude if it isn't the default.
-
-## Proposal 3:
-
-
+== Proposal 3: ==
 
 The only remaining problem is that `Data.List` and `Control.Monad` have been similarly generalised, and while changing the Prelude with a language pragma makes sense, changing those modules doesn't.  This problem only exists if, e.g. `Data.List` has been imported unqualified and without an import list.
 
-
-
 We can solve this by leaving `Data.List` and `Control.Monad` unchanged and having ghc warn when they are imported in a way that will conflict when BPP goes into effect (in a similar way ghc warned about AMP).  It could look like this:
-
-
-```wiki
+{{{
 Foo:5:1  Warning: Data.List imported unqualified, this will conflict with BBP.  Instead use 'import Data.List(maximumBy, sortBy)'
-```
+}}}
 
-## Rationale
-
-
-
+== Rationale ==
 What is the rationale behind proposal 1?  We want to make it easy to switch an entire package over to an alternative Prelude.  This can be done by putting the pragma in the .cabal file.  Using the `NoImplicitPrelude` doesn't work, because that disables importing the Prelude altogether; we just want a different one, but with desugaring still being done in terms of the regular Prelude.
 
-
-## Questions
-
-
+== Questions ==
 
 Discussing the BBP proposal we also came up with a number of technical questions:
 
-
-### Q1
-
-
-
+=== Q1 ===
 An alternative to Foldable would be
-
-
-```wiki
+{{{
   class Enumerable t where
     toList :: t a -> [a]   -- Implementations should use 'build'
-```
-
-
+}}}
 Is `Foldable` more general (or efficient) than a `Enumerable` class, plus fusion?
 
-
-
 Consider a new data type X a.  I write
-
-
-```wiki
+{{{
   foldX :: (a -> b -> b) -> b -> X a -> b
   foldX = ...lots of code...
 
   toList :: X a -> [a]  {-# INLINE toList #-}
   toList x = build (\c n. foldX c n x)
-```
-
+}}}
 
 So now `toList` is small and easy to inline.  Every good list consumer of a call to `toList` will turn into a call to `foldX`, which is what we want.
 
-
-### Q2
-
-
-
+=== Q2 ===
 What are the criteria for being in Foldable?
 For instance, why are `sum`, `product` in `Foldable`, but not `and`, `or`?
 
-
-### Q3
-
-
+=== Q3 ===
 
 What's the relationship of `Foldable` to `GHC.Exts.IsList`?
 Which also has `toList`, `fromList`, and does work with `ByteString`.
+*  For example, could we use `IsList` instead of `Foldable`?
+    Specifically, `Foldable` does not use its potential power to apply the type constructor `t` to different arguments.  (Unlike `Traversable` which does.)
+{{{
+  foldr :: IsList l => (Item l->b->b) -> b -> l -> b
+}}}
 
+=== Q4 ===
 
--  For example, could we use `IsList` instead of `Foldable`?
+The operations themselves (listed below) seem to miss some operations that could be generalised (isPrefixOf, scanl, findIndex), and some contexts still use Monad when they could be adjusted to Applicative (sequence_). We suspect there will be additional generalisations in the next version of the base library.
 
->
->
-> Specifically, `Foldable` does not use its potential power to apply the type constructor `t` to different arguments.  (Unlike `Traversable` which does.)
->
->
-> ```wiki
->   foldr :: IsList l => (Item l->b->b) -> b -> l -> b
-> ```
-
-
-### Q4
-
-
-
-The operations themselves (listed below) seem to miss some operations that could be generalised (isPrefixOf, scanl, findIndex), and some contexts still use Monad when they could be adjusted to Applicative (sequence\_). We suspect there will be additional generalisations in the next version of the base library.
-
-
-## Some historical remarks
-
-
+== Some historical remarks ==
 
 Many moons ago a similar generalization of the Prelude was considered.  That time it was about, e.g., generalizing the type of `map` that was generalized to have the type that `fmap` has today.  This proposal was consider too radical and was ultimately rejected.
 
+== Links ==
+ * http://neilmitchell.blogspot.co.uk/2014/10/how-to-rewrite-prelude.html
+ * http://neilmitchell.blogspot.co.uk/2014/10/why-traversablefoldable-should-not-be.html
+ * http://www.yesodweb.com/blog/2014/10/classy-base-prelude, http://www.reddit.com/r/haskell/comments/2if0fu/on_concerns_about_haskells_prelude_favoring/
 
-## Links
-
-
-- [
-  http://neilmitchell.blogspot.co.uk/2014/10/how-to-rewrite-prelude.html](http://neilmitchell.blogspot.co.uk/2014/10/how-to-rewrite-prelude.html)
-- [
-  http://neilmitchell.blogspot.co.uk/2014/10/why-traversablefoldable-should-not-be.html](http://neilmitchell.blogspot.co.uk/2014/10/why-traversablefoldable-should-not-be.html)
-- [
-  http://www.yesodweb.com/blog/2014/10/classy-base-prelude](http://www.yesodweb.com/blog/2014/10/classy-base-prelude), [
-  http://www.reddit.com/r/haskell/comments/2if0fu/on\_concerns\_about\_haskells\_prelude\_favoring/](http://www.reddit.com/r/haskell/comments/2if0fu/on_concerns_about_haskells_prelude_favoring/)
-
-## Raw diff of changes to base from 7.8 to 7.10
-
-
-```wiki
+== Raw diff of changes to base from 7.8 to 7.10 ==
+{{{
 Control.Monad
 + (<$!>) :: Monad m => (a -> b) -> m a -> m b
 - class Monad m
@@ -412,4 +339,6 @@ Data.Void
 + absurd :: Void -> a
 + data Void
 + vacuous :: Functor f => f Void -> f a
+}}}
+
 ```
