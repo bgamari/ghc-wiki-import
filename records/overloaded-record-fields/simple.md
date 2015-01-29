@@ -1,48 +1,39 @@
-## Reuse of Field Names in Haskell Records
+CONVERSION ERROR
 
+Original source:
 
+```trac
+== Reuse of Field Names in Haskell Records ==
 
-**The Problem:** The current design of Haskell's record system does not allow for field names
+'''The Problem:''' The current design of Haskell's record system does not allow for field names
 to be reused  across different record types.  For example, a programmer may not define
 two record types in the same module that both have a field called `name`.  Even when the records
 are defined in different modules, it is inconvenient to work with records that have the same field
 name.
 
-
-
 This page describes a point in the design space that lifts this restriction, and has the following additional
 benefits:
+   * the change is '''simple''' and easy to describe to a Haskell programmer,
+   * it is '''fully compatible with other record extensions''', such as `RecordWildCards` and `NamedFieldPuns`,
+   * it does not preclude further record system extensions for more sophisticated behavior,
+   * the compiler needs to do '''less work''' than in the current record implementation.
 
-
-- the change is **simple** and easy to describe to a Haskell programmer,
-- it is **fully compatible with other record extensions**, such as `RecordWildCards` and `NamedFieldPuns`,
-- it does not preclude further record system extensions for more sophisticated behavior,
-- the compiler needs to do **less work** than in the current record implementation.
-
-## The Design
-
-
+== The Design ==
 
 The following paragraphs describe the various operations on records.
 
 
-### Declaration
-
-
+=== Declaration ===
 
 Records are declared in exactly the same way as they are in Haskell'98.
 However, we don't need to check that multiple record declarations in
 the same module have distinct field names.
 
-
-
 For example:
-
-
-```wiki
+{{{
 data Person   = Person   { name :: String, age :: Int }
 data Variable = Variable { name :: Int, varType :: Type }
-
+}}}
 
 === Construction ===
 
@@ -177,6 +168,7 @@ Both notations seem compatible with parsing Haskell.
 This notation emphasizes the fields that are being changed, while the other
 emphasizes the old record.  It is not immediately clear, which of the
 two variations is more readable in practice.
+
 
 
 
