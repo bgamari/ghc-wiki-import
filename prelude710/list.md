@@ -1,67 +1,62 @@
-# The 7.10 Prelude should remain list based
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= The 7.10 Prelude should remain list based =
 
-As per [Prelude710](prelude710), there is debate over whether the list functions in the GHC 7.10 should be generalized to Foldable/Traversable. This page attempts to itemize some of the concerns about the generalization, and also some alternative approaches to getting some of the benefits of generalization. There is more information at:
+As per [[Prelude710]], there is debate over whether the list functions in the GHC 7.10 should be generalized to Foldable/Traversable. This page attempts to itemize some of the concerns about the generalization, and also some alternative approaches to getting some of the benefits of generalization. There is more information at:
 
+* [[BurningBridgesSlowly]]
+* http://neilmitchell.blogspot.co.uk/2014/10/how-to-rewrite-prelude.html
+* http://neilmitchell.blogspot.co.uk/2014/10/why-traversablefoldable-should-not-be.html
 
-- [BurningBridgesSlowly](burning-bridges-slowly)
-- [
-  http://neilmitchell.blogspot.co.uk/2014/10/how-to-rewrite-prelude.html](http://neilmitchell.blogspot.co.uk/2014/10/how-to-rewrite-prelude.html)
-- [
-  http://neilmitchell.blogspot.co.uk/2014/10/why-traversablefoldable-should-not-be.html](http://neilmitchell.blogspot.co.uk/2014/10/why-traversablefoldable-should-not-be.html)
+== Concerns with the generalization ==
 
-## Concerns with the generalization
+There are a number of concerns with the generalizations proposed for GHC 7.10. Some of these could be ignored, but the volume of concerns is in itself somewhat concerning.
 
+* Foldable has lots of class members. While the minimal definition is foldMap, in GHC 7.8 it contains 8 fold functions. In the Foldable/Traversable extension many members have been added, including sum, product, maximum, minimum. There is no obvious bound on the number of specialized folds that could be added.
 
+* Traversable contains both Monad and Applicative variants for each function, and following the Applicative-Monad proposal, the Monad variants (mapM and sequence) are now redundant. As a consequence, the derived functions forM and for are also duplicates.
 
-There are a number of concerns with the generalization as proposed for GHC 7.10. Some of these could be ignored, but the volume of concerns is in itself somewhat concerning.
+* Given Foldable and Traversable may benefit from further refinement, dragging them into Prelude seems premature.
 
+* Data.List now has many functions that don't mention list in their type signature, for example find, length and null. Having such functions in the Data.List module is awkward from a naming perspective.
 
-- Foldable has lots of class members. While the minimal definition is foldMap, in GHC 7.8 it contains 8 fold functions. In the Foldable/Traversable extension many members have been added, including sum, product, maximum, minimum. There is no obvious bound on the number of specialized folds that could be added.
+* There are lots of functions that could be generalized further, but are not. For example, mapM, forM and sequence could all be expressed in terms of Applicative instead of Monad. Similarly things like length could be generalized to Num, making length and genericLength equivalent.
 
-- Traversable contains both Monad and Applicative variants for each function, and following the Applicative-Monad proposal, the Monad variants (mapM and sequence) are now redundant. As a consequence, the derived functions forM and for are also duplicates.
+* While the Prelude operations (e.g. foldr) will now work on contains such as Vector, they still won't work on things like ByteString or Text, which in some code is used far more than other non-list containers.
 
-- Given Foldable and Traversable may benefit from further refinement, dragging them into Prelude seems premature.
+* Some functions in Data.List could be generalised to Foldable, but have not been. For example, isPrefixOf and isInfixOf can be generalised. More generally, anything with a list in an argument position can be generalized.
 
-- Data.List now has many functions that don't mention list in their type signature, for example find, length and null. Having such functions in the Data.List module is awkward from a naming perspective.
+* Some functions in Data.List could be generalised to Traversable, but have not been. For example, sort and reverse can be generalized. However, such generalizations are likely to add a performance penalty.
 
-- There are lots of functions that could be generalised further, but are not. For example, mapM, forM and sequence could all be expressed in terms of Applicative instead of Monad. Similarly things like length could be generalised to Num, making length vs genericLength more inconsistent.
+* Given that lots of functions could be generalized, it seems we should either generalize everything, or have a good story for where to stop. For example, isPrefix can be generalized, but stripPrefix can only be partly generalized, so should isPrefixOf be generalized?
 
-- While the Prelude operations (e.g. foldr) will now work on things like Vector, they still won't work on things like ByteString or Text, which in some code is used far more than other non-list containers.
+* The IsList class seems an alternative generalization that could be made for some functions, and would work for ByteString and Text. Neither Foldable nor IsList is strictly more general, so both are potential alternatives.
 
-- Some functions in Data.List could be generalised to Foldable, but have not been. For example, isPrefixOf and isInfixOf can be generalised. More generally, anything with a list in an argument position can be generalised.
-
-- Some functions in Data.List could be generalised to Traversable, but have not been. For example, sort and reverse can be generalized. However, such generalizations are likely to add a performance penalty.
-
-- Given that lots of functions could be generalized, we should either generalize everything, or have a good story for where to stop.
-
-## Concerns for the ecosystem
-
-
+== Concerns for the ecosystem ==
 
 Not all concerns are about the libraries themselves. The base libraries, and especially the Prelude, are foundations of the larger ecosystem around Haskell. How such a change alters that ecosystem should be taken into account.
 
+* While most code compiles and works as intended with the Foldable changes in, not all does. For very large code bases (think 1M lines or more), moving up to a generalized Prelude would take considerable engineering effort. Most such installations would probably delay adopting such a Prelude, perhaps for years.
 
-- While most code compiles and works as intended with the Foldable changes in, not all does. For very large code bases (think 1M lines or more), moving up to a generalized Prelude would take considerable engineering effort. Most such installations would probably delay adopting such a Prelude, perhaps for years.
+* The existing corpus of books, tutorials, syllabi, and the like usually have a significant portion of the text dedicated to these very Prelude functions - and they would all need significant revision. 
 
-- The existing corpus of books, tutorials, syllabi, and the like usually have a significant portion of the text dedicated to these very Prelude functions - and they would all need significant revision. 
+* Teaching beginners what sequence means in its full generality is going to be a challenge.
 
-- Teaching beginners what sequence means in its full generality is going to be a challenge.
-
-- While teaching beginners who end up on \#haskell IRC might be possible, this is likely to increase the "bounce" rate, people who see Haskell, play around, and run away scared. I think Haskell probably has a higher bounce rate than most other languages, making it worse would be bad.
-
-## Alternatives to the generalization
+* While teaching beginners who end up on #haskell IRC might be possible, this is likely to increase the "bounce" rate, people who see Haskell, play around, and run away scared. I think Haskell probably has a higher bounce rate than most other languages, making it worse would be bad.
 
 
+== Alternatives to the generalization ==
 
-The primary motivation behind the generalization seems to be to avoid name clashes. There are a number of approaches to fix the name clashes without generalizing Prelude. None of these approaches are fully worked through, and would not be ready for GHC 7.10, but could be adapted for GHC 7.12.
+The primary motivation behind the generalization seems to be to avoid name clashes, so that both Data.List and Data.Foldable can be imported without making functions such as sum ambiguous. There are a number of approaches to fix the name clashes without generalizing Prelude. None of these approaches are fully worked through, and would not be ready for GHC 7.10, but could be adapted for GHC 7.12.
 
+* Make no change at all, and simply import Foldable and Traversable qualified. This adds as little as two characters to each use (F.foldr instead of foldr), and is the norm for many common modules (Map, Text, Vector, ByteString, Lazy ByteString, etc...). In particular, the Text and ByteString packages both provide lazy and strict variants, which are often used together, and clash on almost all identifiers.
 
-- Make no change at all, and simply import Foldable and Traversable qualified. This adds as little as two characters to each use, and is the norm for many common modules (Map, Text, Vector, etc...).
+* A language pragma could be used select alternative Preludes.
 
-- A language pragma could be used select alternative Preludes.
+* We could support restricting type signatures in export lists, so that when both a specific and general version were imported they did not clash.
 
-- We could support restricting type signatures in export lists, so that when both a specific and general version were imported they did not clash.
-
-- A module with only the non-Foldable overlapping bits of Data.List could be created.
+* A module with only the non-Foldable overlapping bits of Data.List could be created, allowing users who wanted Foldable plus some list functions to avoid name clashes.
+```
