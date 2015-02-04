@@ -1,59 +1,65 @@
-CONVERSION ERROR
+# The 7.10 Prelude should remain list based
 
-Original source:
 
-```trac
-= The 7.10 Prelude should remain list based =
 
-As per [[Prelude710]], there is debate over whether the list functions in the GHC 7.10 should be generalized to Foldable/Traversable. This page attempts to itemize some of the concerns about the generalization, and also some alternative approaches to getting some of the benefits of generalization. There is more information at:
+As per [Prelude710](prelude710), there is debate over whether the list functions in the GHC 7.10 should be generalized to Foldable/Traversable. This page attempts to itemize some of the concerns about the generalization, and also some alternative approaches to getting some of the benefits of generalization. There is more information at:
 
-* [[BurningBridgesSlowly]]
-* http://neilmitchell.blogspot.co.uk/2014/10/how-to-rewrite-prelude.html
-* http://neilmitchell.blogspot.co.uk/2014/10/why-traversablefoldable-should-not-be.html
 
-== Concerns with the generalization ==
+- [BurningBridgesSlowly](burning-bridges-slowly)
+- [
+  http://neilmitchell.blogspot.co.uk/2014/10/how-to-rewrite-prelude.html](http://neilmitchell.blogspot.co.uk/2014/10/how-to-rewrite-prelude.html)
+- [
+  http://neilmitchell.blogspot.co.uk/2014/10/why-traversablefoldable-should-not-be.html](http://neilmitchell.blogspot.co.uk/2014/10/why-traversablefoldable-should-not-be.html)
+
+## Concerns with the generalization
+
+
 
 There are a number of concerns with the generalization as proposed for GHC 7.10. Some of these could be ignored, but the volume of concerns is in itself somewhat concerning.
 
-* Foldable seems too big. It has gained a number of methods, and seems to have no natural bound on its eventual size.
 
-* Traversable seem to be twice as big as it should be, with both Monad and Applicative variants.
+- Foldable seems too big. It has gained a number of methods, and seems to have no natural bound on its eventual size.
 
-* Given Foldable and Traversable could do with further refinement, dragging them into Prelude seems too soon.
+- Traversable seem to be twice as big as it should be, with both Monad and Applicative variants.
 
-* Data.List is now methods not on list, but on Foldable, which is weird just from a naming perspective.
+- Given Foldable and Traversable could do with further refinement, dragging them into Prelude seems too soon.
 
-* There are lots of places that are Monad that could be Applicative. Given we're generalising List to Foldable, that now seems a bit weird. Similarly things like length vs genericLength now look very weird, given the structure is generalised but the number isn't.
+- Data.List is now methods not on list, but on Foldable, which is weird just from a naming perspective.
 
-* While the list operations will now work on things like Vector, they still won't work on things like ByteString or Text, which in some code is used far more than other non-list containers.
+- There are lots of places that are Monad that could be Applicative. Given we're generalising List to Foldable, that now seems a bit weird. Similarly things like length vs genericLength now look very weird, given the structure is generalised but the number isn't.
 
-* The functions in List which are generalised vs those which aren't is a bit surprising. isPrefixOf is not generalised, why not? Is there any good reason for Data.List having a single list in an argument position in the new world.
+- While the list operations will now work on things like Vector, they still won't work on things like ByteString or Text, which in some code is used far more than other non-list containers.
 
-* Where should we stop? Certainly you can write any length-preserving transformation, e.g. sort/reverse, on Traversable. Should we? Of course, you can't write reverse on Traversable as efficiently without adding a new method to Traversable - are we going to not do that?
+- The functions in List which are generalised vs those which aren't is a bit surprising. isPrefixOf is not generalised, why not? Is there any good reason for Data.List having a single list in an argument position in the new world?
+
+- Where should we stop? Certainly you can write any length-preserving transformation, e.g. sort/reverse, on Traversable. Should we? Of course, you can't write reverse on Traversable as efficiently without adding a new method to Traversable - are we going to not do that?
+
+## Concerns for the ecosystem
 
 
-== Concerns for the ecosystem ==
 
 Not all concerns are about the libraries themselves. The base libraries, and especially the Prelude, are foundations of the larger ecosystem around Haskell. How such a change alters that ecosystem should be taken into account.
 
-* While most code compiles and works as intended with the Foldable changes in, not all does. For very large code bases (think 1M lines or more), moving up to a generalized Prelude would take considerable engineering effort. Most such installations would probably delay adopting such a Prelude, perhaps for years.
 
-* The existing corpus of books, tutorials, syllabi, and the like usually have a significant portion of the text dedicated to these very Prelude functions - and they would all need significant revision. 
+- While most code compiles and works as intended with the Foldable changes in, not all does. For very large code bases (think 1M lines or more), moving up to a generalized Prelude would take considerable engineering effort. Most such installations would probably delay adopting such a Prelude, perhaps for years.
 
-* Teaching beginners what sequence means in its full generality is going to be a challenge.
+- The existing corpus of books, tutorials, syllabi, and the like usually have a significant portion of the text dedicated to these very Prelude functions - and they would all need significant revision. 
 
-* While teaching beginners who end up on #haskell IRC might be possible, this is likely to increase the "bounce" rate, people who see Haskell, play around, and run away scared. I think Haskell probably has a higher bounce rate than most other languages, making it worse would be bad.
+- Teaching beginners what sequence means in its full generality is going to be a challenge.
+
+- While teaching beginners who end up on \#haskell IRC might be possible, this is likely to increase the "bounce" rate, people who see Haskell, play around, and run away scared. I think Haskell probably has a higher bounce rate than most other languages, making it worse would be bad.
+
+## Alternatives to the generalization
 
 
-== Alternatives to the generalization ==
 
 The primary motivation behind the generalization seems to be to avoid name clashes. There are a number of approaches to fix the name clashes without generalizing Prelude. None of these approaches are fully worked through, and would not be ready for GHC 7.10, but could be adapted for GHC 7.12.
 
-* Make no change at all, and simply import Foldable and Traversable qualified. This adds as little as two characters to each use, and is the norm for many common modules (Map, Text, Vector, etc...).
 
-* A language pragma could be used select alternative Preludes.
+- Make no change at all, and simply import Foldable and Traversable qualified. This adds as little as two characters to each use, and is the norm for many common modules (Map, Text, Vector, etc...).
 
-* We could support restricting type signatures in export lists, so that when both a specific and general version were imported they did not clash.
+- A language pragma could be used select alternative Preludes.
 
-* A module with only the non-Foldable overlapping bits of Data.List could be created.
-```
+- We could support restricting type signatures in export lists, so that when both a specific and general version were imported they did not clash.
+
+- A module with only the non-Foldable overlapping bits of Data.List could be created.
