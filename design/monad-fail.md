@@ -1,19 +1,21 @@
-# `MonadFail`
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= `MonadFail`
+
+{{{#!box info
 
 At this point this is just a scratch pad for collecting ideas
 
+}}}
 
-## History
+== History
 
+In [http://haskell.org/definition/haskell-report-1.4.ps.gz Haskell 1.4 (postscript)] `fail` was not part of the `Monad` class. Instead there was a separate `MonadZero` class containing the `zero` operation whose purpose was to handle pattern-failures in `do`-syntax (akin to what `fail` does today). Here are the original Haskell 1.4 class definitions quoted from section "6.2.5 Monadic Classes":
 
-
-In [
-Haskell 1.4 (postscript)](http://haskell.org/definition/haskell-report-1.4.ps.gz) `fail` was not part of the `Monad` class. Instead there was a separate `MonadZero` class containing the `zero` operation whose purpose was to handle pattern-failures in `do`-syntax (akin to what `fail` does today). Here are the original Haskell 1.4 class definitions quoted from section "6.2.5 Monadic Classes":
-
-
-```
+{{{#!hs
 class Functor f where
   map :: (a -> b) -> (f a -> f b)
 
@@ -27,4 +29,24 @@ class (Monad m) => MonadZero m where
 
 class (MonadZero m) => MonadPlus m where
   (++) :: m a -> m a -> m a
+}}}
+
+However, when Haskell 98 was drafted [http://marc.info/?l=haskell&m=66622011823641 issues with irrefutable patterns]  lead to `MonadZero` being folded into the `Monad` class (but it doesn't seem to have been an unanimous nor easy decision back then).
+
+The issue is highlighted by deconstructing a monadic action returning a single-constructor value:
+
+{{{#!hs
+f :: Monad m => m (a,b) -> m a
+f m1 = do { x <- m1; return (fst x) }
+
+g :: ??? m => m (a,b) -> m a
+g m1 = do { (a,_) <- m1; return a }
+
+h :: Monad m => m (a,b) -> m a
+h m1 = do { ~(a,_) <- m1; return a }
+}}}
+
+Should `???` for `g` be `Monad` or `MonadZero`? The single-constructor pattern match will never fail ("unfailable"), so `zero` is never used. In fact, in Haskell 1.4 `g` would only require `Monad`, but requires the concept of `"unfailable" pattern matches (in addition to "irrefutable" pattern matches).
+
+
 ```
