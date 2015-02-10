@@ -153,7 +153,8 @@ There are two clear paths for how to evolve `Data.List` from here.
 
 
 
-1.) Deprecate the re-export of the methods from the `Prelude` in GHC 7.12 and to remove them entirely in GHC 7.14. This ensures that group A never feels any pain at all, and that group B gets a deprecation window of warnings notifying them that they don't have to use the combinators qualified any more. The cost of this approach is that we'd have no place in `base` to house monomorphic versions of these combinators.
+1.) Deprecate the re-export of the methods from the `Prelude` in GHC 7.12 and to remove them entirely in GHC 7.14. This ensures that group A never feels any pain at all, and that group B gets a deprecation window of warnings notifying them that they don't have to use the combinators qualified any more. The cost of this approach is that we'd have no place in `base` to house monomorphic versions of these combinators. Ticket [
+\#4879](https://ghc.haskell.org/trac/ghc/ticket/4879) addresses the need for deprecated re-exports, which are useful for many things and a patch is now available that can enable this functionality.
 
 
 
@@ -262,7 +263,7 @@ The same argument has historically been applied to argue against adding `Applica
 
 
 #
-The existing corpus of books, tutorials, syllabi, and the like usually have a significant portion of the text dedicated to these very Prelude functions - and they would all need significant revision.
+The existing corpus of books, tutorials, syllabi, and the like usually have a significant portion of the text dedicated to these very `Prelude` functions - and they would all need significant revision.
 
 
 
@@ -277,7 +278,7 @@ Teaching beginners what sequence means in its full generality is going to be a c
 This somehow has never been a problem for Python. They don't even have the types to help guide them!
 
 
-# A language pragma could be used select alternative Preludes.
+# A language pragma could be used select alternative `Prelude` options.
 
 
 
@@ -295,11 +296,11 @@ We could support restricting type signatures in export lists, so that when both 
 
 
 
-When and if such a proposal was implemented we could use this to resolve the intermediate Data.List ugliness, yes!
+When and if such a proposal was implemented we could use this to resolve the intermediate `Data.List` ugliness, yes!
 
 
 #
-A module with only the non-Foldable overlapping bits of Data.List could be created, allowing users who wanted Foldable plus some list functions to avoid name clashes.
+A module with only the non-`Foldable` overlapping bits of `Data.List` could be created, allowing users who wanted `Foldable` plus some list functions to avoid name clashes.
 
 
 
