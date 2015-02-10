@@ -366,9 +366,7 @@ or
 >
 
 
-So, generalisations such as Foldable/Traversable are in fact taught (and
-recommended) to beginners via books. Its use is rather going to
-increase the more newcomers read those books, so we should rather make sure they're properly integrated into the standard libraries than sending mixed signals by making them awkward to use.
+So, generalizations such as `Foldable`/`Traversable` are in fact taught (and recommended) to beginners via existing books. Its use is rather going to increase the more newcomers read those books, so we should rather make sure they're properly integrated into the standard libraries than sending mixed signals by making them awkward to use.
 
 
 #
