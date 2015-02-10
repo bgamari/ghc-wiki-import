@@ -288,7 +288,7 @@ Learn You a Haskell](http://learnyouahaskell.com/functors-applicative-functors-a
 
 
 [
-Real World Haskell](http://book.realworldhaskell.org/read/io.html#x_TE) dispels this concern around the generality of the `Monad` operations with a quick aside:
+Real World Haskell](http://book.realworldhaskell.org/read/io.html#x_TE) dispels this same sort of concern around the generality of the `Monad` operations with a quick aside:
 
 
 
