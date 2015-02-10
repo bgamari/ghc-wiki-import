@@ -55,13 +55,13 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
  
 
 
+- [\#10075](https://gitlab.staging.haskell.org/ghc/ghc/issues/10075): `Constraint` vs `*`
 - [\#10056](https://gitlab.staging.haskell.org/ghc/ghc/issues/10056): more systematic treatment of `(~)` in parser and renamer 
 - [\#9918](https://gitlab.staging.haskell.org/ghc/ghc/issues/9918): closed type families, apartness, and overlapping instances (inconsistency)
 - [\#9118](https://gitlab.staging.haskell.org/ghc/ghc/issues/9118): Eta reduction for `Coercible` (not expressible in Core, yet)
 - [\#6018](https://gitlab.staging.haskell.org/ghc/ghc/issues/6018): injective type families
 - [\#8161](https://gitlab.staging.haskell.org/ghc/ghc/issues/8161): associated type more specific than class decl
 - [\#8177](https://gitlab.staging.haskell.org/ghc/ghc/issues/8177): role signature for type families
-- [\#8984](https://gitlab.staging.haskell.org/ghc/ghc/issues/8984): better error message for `Coercible`
 
 ## Template Haskell
 
