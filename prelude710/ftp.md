@@ -3,8 +3,8 @@
 
 
 In 2013, two proposals passed through the libraries@ process. Unlike most proposals before them, these proposals affect types in the Prelude. These are the [
-Applicative/Monad Proposal (AMP)](https://wiki.haskell.org/Functor-Applicative-Monad_Proposal) and the [
-Foldable/Traversable Proposal (FTP)](https://wiki.haskell.org/Foldable_Traversable_In_Prelude) (also sometimes referred to as the "Burning Bridges Proposal" based on the title of the original thread).
+\`Applicative\`/\`Monad\` Proposal (AMP)](https://wiki.haskell.org/Functor-Applicative-Monad_Proposal) and the [
+\`Foldable\`/\`Traversable\` Proposal (FTP)](https://wiki.haskell.org/Foldable_Traversable_In_Prelude) (also sometimes referred to as the "Burning Bridges Proposal" based on the title of the original thread).
 
 
 
