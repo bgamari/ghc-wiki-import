@@ -1,27 +1,24 @@
-# Type Checker Plugins
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Type Checker Plugins =
 
-See [
-Phab:D489](https://phabricator.haskell.org/D489) for the implementation and review.
+See Phab:D489 for the implementation and review.
 
-
-## Motivation
-
-
+== Motivation ==
 
 There is much interest at present in various extensions to GHC Haskell
 type checking:
 
+ * Type-level natural numbers, with an SMT solver... (Iavor Diatchki)
 
-- Type-level natural numbers, with an SMT solver... (Iavor Diatchki)
+ * ...or integer ring unification (Christiaan Baaij)
 
-- ...or integer ring unification (Christiaan Baaij)
+ * Units of measure, with a solver for abelian group unification (Adam Gundry)
 
-- Units of measure, with a solver for abelian group unification (Adam Gundry)
-
-- Type-level sets and maps, e.g. for effect tracking
-
+ * Type-level sets and maps, e.g. for effect tracking
 
 All of these share a common pattern: they introduce extensions to the
 language of constraints or the equational theory of types, and
@@ -31,50 +28,40 @@ OutsideIn is parametric in the constraint solver, but in practice GHC
 provides only one solver, which supports type families and GADT
 equality constraints.
 
-
-
 Type families can be used to encode some of the desired extensions,
 but they do not provide exactly the desired equational theory, and
 this leads to worse type inference behaviour and worse error messages
 than we might expect for a native implementation.
 
-
-
 The aim of this proposal is to make it easier to experiment with
 alternative constraint solvers, by making it possible to supply them
 in normal Haskell libraries and dynamically loading them at compile
 time, rather than requiring implementation inside GHC itself.  This is
-much like the situation for [Core plugins](plugins), which allow
+much like the situation for [wiki:Plugins Core plugins], which allow
 experiments with transformations and optimizations of the intermediate
 language.  The fact that plugins can be developed without recompiling
 GHC is crucial, as it reduces barriers to entry and allows the
 resulting constraint solvers to be used by non-developers.
 
 
-## Design
+== Design ==
 
-
-### Creating a plugin
-
-
+=== Creating a plugin ===
 
 A type checker plugin, like a Core plugin, consists of a normal Haskell
 module that exports an identifier `plugin :: Plugin`.  We extend the
 `Plugin` type (moved to a new module `Plugins`) with an additional field:
 
-
-```wiki
+{{{
 data Plugin = Plugin
   { installCoreToDos :: ... -- as at present
   , tcPlugin         :: [CommandLineOption] -> Maybe TcPlugin
   }
-```
-
+}}}
 
 The `TcPlugin` type and related pieces are defined in `TcRnTypes`:
 
-
-```wiki
+{{{
 data TcPlugin = forall s . TcPlugin
   { tcPluginInit  :: TcPluginM s
   , tcPluginSolve :: s -> TcPluginSolver
@@ -89,79 +76,59 @@ type TcPluginSolver = [Ct]    -- given
 data TcPluginResult
   = TcPluginContradiction [Ct]
   | TcPluginOk [(EvTerm,Ct)] [Ct]
-```
-
+}}}
 
 The basic idea is as follows:
 
+ * When type checking a module, GHC calls `tcPluginInit` once before constraint solving starts.  This allows the plugin to look things up in the context, initialise mutable state or open a connection to an external process (e.g. an external SMT solver).  The plugin can return a result of any type it likes, and the result will be passed to the other two fields.
 
-- When type checking a module, GHC calls `tcPluginInit` once before constraint solving starts.  This allows the plugin to look things up in the context, initialise mutable state or open a connection to an external process (e.g. an external SMT solver).  The plugin can return a result of any type it likes, and the result will be passed to the other two fields.
+ * During constraint solving, GHC repeatedly calls `tcPluginSolve`.  Given lists of Given, Derived and Wanted constraints, this function should attempt to simplify them and return a `TcPluginResult` that indicates whether a contradiction was found or progress was made.  If the plugin solver makes progress, GHC will re-start the constraint solving pipeline, looping until a fixed point is reached.
 
-- During constraint solving, GHC repeatedly calls `tcPluginSolve`.  Given lists of Given, Derived and Wanted constraints, this function should attempt to simplify them and return a `TcPluginResult` that indicates whether a contradiction was found or progress was made.  If the plugin solver makes progress, GHC will re-start the constraint solving pipeline, looping until a fixed point is reached.
+ * Finally, GHC calls `tcPluginStop` after constraint solving is finished, allowing the plugin to dispose of any resources it has allocated (e.g. terminating the SMT solver process).
 
-- Finally, GHC calls `tcPluginStop` after constraint solving is finished, allowing the plugin to dispose of any resources it has allocated (e.g. terminating the SMT solver process).
-
-
-The `Ct` type, representing constraints, is defined in [
-TcRnTypes](https://ghc.haskell.org/trac/ghc/browser/ghc/compiler/typecheck/TcRnTypes.lhs#L932). A constraint is essentially a triple of a type (of kind `Constraint`, e.g. an equality or fully applied typeclass), an evidence term of that type (which will be a metavariable, for wanted constraints) and an original source location.
-
-
+The `Ct` type, representing constraints, is defined in [https://ghc.haskell.org/trac/ghc/browser/ghc/compiler/typecheck/TcRnTypes.lhs#L932 TcRnTypes]. A constraint is essentially a triple of a type (of kind `Constraint`, e.g. an equality or fully applied typeclass), an evidence term of that type (which will be a metavariable, for wanted constraints) and an original source location.
 
 Plugin code runs in the `TcPluginM` monad defined in `TcRnTypes` as a wrapper around `TcM` (and hence around `IO`). Eventually the `TcPluginM` monad will supply wrappers for `TcM` functions that are appropriate for use in a plugin. Initially, plugins will need to rely on `unsafeTcPluginTcM :: TcM a -> TcPluginM a` if a wrapper is not available.
-
-
 
 Note that `TcPluginM` can perform arbitrary IO via `tcPluginIO :: IO a -> TcPluginM a`, although some care must be taken with side effects (particularly in `tcPluginSolve`).  In general, it is up to the plugin author to make sure that any IO they do is safe.
 
 
-### Calling plugins from the typechecker
-
-
+=== Calling plugins from the typechecker ===
 
 Typechecker plugins will be invoked at two points in the constraint solving process: after simplification of given constraints, and after unflattening of wanted constraints.  They can be distinguished because the deriveds/wanteds will be empty in the first case.
 
-
-
 During simplification of givens:
 
+ * The deriveds and wanteds lists will be empty.
 
-- The deriveds and wanteds lists will be empty.
+ * The givens will be flat, un-zonked and inert.
 
-- The givens will be flat, un-zonked and inert.
+ * If the plugin finds a contradiction amongst the givens, it should return `TcPluginContradiction` containing the contradictory constraints.  These will turn into inaccessible code errors.
 
-- If the plugin finds a contradiction amongst the givens, it should return `TcPluginContradiction` containing the contradictory constraints.  These will turn into inaccessible code errors.
+ * Otherwise, the plugin should return `TcPluginOk` with lists of "solved" givens and new givens.  "Solved" givens (i.e. those that are uninformative, such as `x * y ~ y * x` in a plugin for arithmetic) must be exactly as supplied to the plugin and will simply be dropped; the evidence term is ignored.  If there are any new givens, the main constraint solver will be re-invoked in case it can make progress, then the plugin will be invoked again.
 
-- Otherwise, the plugin should return `TcPluginOk` with lists of "solved" givens and new givens.  "Solved" givens (i.e. those that are uninformative, such as `x * y ~ y * x` in a plugin for arithmetic) must be exactly as supplied to the plugin and will simply be dropped; the evidence term is ignored.  If there are any new givens, the main constraint solver will be re-invoked in case it can make progress, then the plugin will be invoked again.
-
-- If the plugin cannot make any progress, it should return `TcPluginOk [] []`.
-
+ * If the plugin cannot make any progress, it should return `TcPluginOk [] []`.
 
 During solving of wanteds:
 
+ * The givens and deriveds will be flat, un-zonked and inert.
 
-- The givens and deriveds will be flat, un-zonked and inert.
+ * The wanteds will be unflattened and zonked.
 
-- The wanteds will be unflattened and zonked.
+ * If the plugin finds a contradiction amongst the wanteds, it should return `TcPluginContradiction` containing the contradictory constraints.  These will turn into unsolved constraint errors.
 
-- If the plugin finds a contradiction amongst the wanteds, it should return `TcPluginContradiction` containing the contradictory constraints.  These will turn into unsolved constraint errors.
+ * Otherwise, the plugin should return `TcPluginOk` with lists of solved wanteds and new work.  Solved wanteds must be exactly as supplied to the plugin and must have a corresponding evidence term of the correct type.  If there are any new constraints, the main constraint solver will be re-invoked in case it can make progress, then the plugin will be invoked again.
 
-- Otherwise, the plugin should return `TcPluginOk` with lists of solved wanteds and new work.  Solved wanteds must be exactly as supplied to the plugin and must have a corresponding evidence term of the correct type.  If there are any new constraints, the main constraint solver will be re-invoked in case it can make progress, then the plugin will be invoked again.
-
-- If the plugin cannot make any progress, it should return `TcPluginOk [] []`.
-
+ * If the plugin cannot make any progress, it should return `TcPluginOk [] []`.
 
 Plugins are provided with all available constraints, but it is easy for them to discard those that are not relevant to their domain, because they need return only those constraints for which they have made progress (either by solving or contradicting them).
 
 
-### Using a plugin
-
-
+=== Using a plugin ===
 
 Just as at present, a module that uses a plugin must request it with a
 new GHC command-line option `-fplugin=<module>` and command line
 options may be supplied via `-fplugin-opt=<module>:<args>`.
-
-
 
 This means that a user should always know which plugins are affecting
 the type checking of a module.  It does mean that a library that relies
@@ -171,8 +138,6 @@ explicitly activate a plugin for their programs to type check.  This is
 probably desirable, since type checker plugins may cause unexpected
 type checker behaviour (even performing arbitrary IO).
 
-
-
 If multiple type checker plugins are specified, they will be
 initialised, executed and closed in the order given on the command
 line.  This makes it possible to use plugins that work on disjoint
@@ -181,9 +146,7 @@ numbers plugin), or even experiment with combining plugins for the
 same constraint domains.
 
 
-### Evidence
-
-
+=== Evidence ===
 
 The interface sketched above expects type checker plugins to produce
 evidence terms `EvTerm` for constraints they have simplified.
@@ -195,83 +158,82 @@ way.  However, in some cases (such as an abelian group unifier used
 for units of measure) it should be possible for the solver to encode
 the axioms of the equational theory and build proofs from them.
 
+At present, plugins can produce blatant assertions using a `UnivCo` inside a `TcCoercion`. GHC has limited support for theory-specific axioms in the form of `CoAxiomRule`, but this is limited to built-in axioms relating to type literals. A plugin that creates its own `CoAxiomRule` may at first appear to work fine, but if such an axiom is exposed in an interface file (e.g. via an unfolding) then GHC will crash with a `tcIfaceCoAxiomRule` panic when importing it. See [https://www.haskell.org/pipermail/ghc-devs/2014-December/007626.html this ghc-devs thread] for discussion of the problem and a potential solution.
 
 
-At present, plugins can produce blatant assertions using a `UnivCo` inside a `TcCoercion`. GHC has limited support for theory-specific axioms in the form of `CoAxiomRule`, but this is limited to built-in axioms relating to type literals. A plugin that creates its own `CoAxiomRule` may at first appear to work fine, but if such an axiom is exposed in an interface file (e.g. via an unfolding) then GHC will crash with a `tcIfaceCoAxiomRule` panic when importing it. See [
-this ghc-devs thread](https://www.haskell.org/pipermail/ghc-devs/2014-December/007626.html) for discussion of the problem and a potential solution.
+== Open questions and future directions ==
+
+ * For units of measure, it would be nice to be able to extend the
+   pretty-printer for types (so we could get a nicely formatted
+   inferred type like `m/s^2` rather than a nested type family
+   application).  This ought to be possible using a plugin approach,
+   provided we can thread the required information via the
+   `SDocContext`.
+
+ * It would be nice for plugins to be able to manipulate the error
+   messages that result from type checking, along the lines of error
+   reflection in Idris.
+
+ * At the moment there is not a very clear relationship between plugins and [wiki:Ghc/Hooks hooks].  It might be nice to unify the two approaches, but they have quite different design goals.
 
 
-## Open questions and future directions
-
-
-- For units of measure, it would be nice to be able to extend the
-  pretty-printer for types (so we could get a nicely formatted
-  inferred type like `m/s^2` rather than a nested type family
-  application).  This ought to be possible using a plugin approach,
-  provided we can thread the required information via the
-  `SDocContext`.
-
-- It would be nice for plugins to be able to manipulate the error
-  messages that result from type checking, along the lines of error
-  reflection in Idris.
-
-- At the moment there is not a very clear relationship between plugins and [hooks](ghc/hooks).  It might be nice to unify the two approaches, but they have quite different design goals.
-
-## Reactions from community
-
-
+== Reactions from community ==
 
 **N.B.** These comments refer to an earlier version of this page, prior to the implementation of the proposal.
 
-
-
-**Richard:** I really like the use of an existential type variable.
-
-
-- Should `solve` have the ability to modify the custom state? (I don't know -- just thinking about it.)
-- Should the plugin specify some domain of interest, so that it isn't barraged with irrelevant constraints? (Perhaps not -- it's easy enough for the plugin to do its own filtering.)
-- I think the interface you describe subsumes type family / type class lookup, as both of these take the form of constraints to be solved.
-- I don't like forcing all users of a library to have to specify the plugin on the command line. It's very anti-modular. I *do* like requiring all users to opt into using plugins at all, say with `-XCustomConstraintSolvers`, but then the module that needs the custom solver should specify the details. There should also be a mechanism whereby importing (even transitively) a module that needs a custom solver can warn users to enable `-XCustomConstraintSolvers`.
-
+'''Richard:''' I really like the use of an existential type variable.
+ * Should `solve` have the ability to modify the custom state? (I don't know -- just thinking about it.)
+ * Should the plugin specify some domain of interest, so that it isn't barraged with irrelevant constraints? (Perhaps not -- it's easy enough for the plugin to do its own filtering.)
+ * I think the interface you describe subsumes type family / type class lookup, as both of these take the form of constraints to be solved.
+ * I don't like forcing all users of a library to have to specify the plugin on the command line. It's very anti-modular. I ''do'' like requiring all users to opt into using plugins at all, say with `-XCustomConstraintSolvers`, but then the module that needs the custom solver should specify the details. There should also be a mechanism whereby importing (even transitively) a module that needs a custom solver can warn users to enable `-XCustomConstraintSolvers`.
 
 Have you tried out this interface? Does it work?
-**End Richard**
+'''End Richard'''
 
+'''Adam:''' 
+ * At the moment, `solve` doesn't explicitly modify the custom state because I suspect that threading the returned values through the `TcS` pipeline might be tricky, and that plugins wanting this can use `IORef`s instead. Actually, I wonder if instead of using an existential type variable, `tcPlugin` should return subsume `init` and return a `TcM (Maybe TcPlugin)`; then any state can be stored in a closure.
+ * I expect most plugins to work on equality constraints of a particular kind, or typeclass constraints for a fixed typeclass, but I don't see an obvious way to specify such domains. As you say, I think it should be easy for the plugin to filter constraints itself.
+ * I can see the appeal of a language option to enable plugins, but the advantages of specifying them on the command line are that it fits perfectly with the existing plugins feature, and that it provides the order in which to run multiple plugins.
+ * I haven't tried this yet, but I'll work on implementing it and let you know how I get on. The interface is essentially based on Iavor's ext-solver work, and I'm pretty sure my units solver can be adapted to fit.
+'''End Adam'''
 
-
-**Adam:** 
-
-
-- At the moment, `solve` doesn't explicitly modify the custom state because I suspect that threading the returned values through the `TcS` pipeline might be tricky, and that plugins wanting this can use `IORef`s instead. Actually, I wonder if instead of using an existential type variable, `tcPlugin` should return subsume `init` and return a `TcM (Maybe TcPlugin)`; then any state can be stored in a closure.
-- I expect most plugins to work on equality constraints of a particular kind, or typeclass constraints for a fixed typeclass, but I don't see an obvious way to specify such domains. As you say, I think it should be easy for the plugin to filter constraints itself.
-- I can see the appeal of a language option to enable plugins, but the advantages of specifying them on the command line are that it fits perfectly with the existing plugins feature, and that it provides the order in which to run multiple plugins.
-- I haven't tried this yet, but I'll work on implementing it and let you know how I get on. The interface is essentially based on Iavor's ext-solver work, and I'm pretty sure my units solver can be adapted to fit.
-
-
-**End Adam**
-
-
-
-**Christiaan**:
+'''Christiaan''':
 The interface looks fine by me, I do have some questions/remarks:
+ * How does the solver architecture check/enforce that the SolveResults match up with the Wanted constraints?
+   Perhaps return tuples of wanted constraints and correspondig SolveResults?
+ * Do we consider a result with a list of all Stuck SolveResults, but with new constraints, as progress?
+'''End Christiaan'''
+
+'''Adam:'''
+ * We certainly could return `(Ct, SolveResult)` tuples, and perhaps that will be simpler - I'll try it when I'm working on the implementation. Some of the details around exactly how `solve` fits into the constraint solving pipeline are still a bit hazy...
+ * Yes, generating new constraints is a form of progress: some plugins might simply add new constraints that are implied by the existing ones, which might lead to additional metavariables being solved by the main solver. (This is basically how functional dependencies work.)
+'''End Adam'''
 
 
-- How does the solver architecture check/enforce that the SolveResults match up with the Wanted constraints?
-  Perhaps return tuples of wanted constraints and correspondig SolveResults?
-- Do we consider a result with a list of all Stuck SolveResults, but with new constraints, as progress?
+== FAQ ==
 
+=== Error: `Module imports form a cycle` ===
 
-**End Christiaan**
+If you use `-fplugin=MyPlugin` on the command-line and compile in `--make` mode, you may get the error
 
+{{{
+Module imports form a cycle:
+  module ‘MyPlugin’ (./MyPlugin.hs) imports itself
+}}}
 
+This occurs because `-fplugin=MyPlugin` essentially imports `MyPlugin` in every module being compiled. When you do `ghc -fplugin=MyPlugin --make M` the dependencies of `M` are compiled with the `-fplugin=MyPlugin` command-line flag, and hence you end up compiling `MyPlugin` with a dependency on itself.
 
-**Adam:**
+If you're defining and using a plugin in a single package, use `OPTIONS_GHC` pragmas in the modules that rely on the plugin, rather than supplying `-fplugin` on the command line. Alternatively, you can define the plugin in one package and use it in another, then it is easy to compile the first package without `-fplugin`, and you can use it globally in the second package.
 
+=== Error: `cannot find normal object file` ===
 
-- We certainly could return `(Ct, SolveResult)` tuples, and perhaps that will be simpler - I'll try it when I'm working on the implementation. Some of the details around exactly how `solve` fits into the constraint solving pipeline are still a bit hazy...
-- Yes, generating new constraints is a form of progress: some plugins might simply add new constraints that are implied by the existing ones, which might lead to additional metavariables being solved by the main solver. (This is basically how functional dependencies work.)
+When compiling with a plugin, if you receive the error
 
+{{{
+<no location info>:
+    cannot find normal object file ‘./MyPlugin.dyn_o’
+    while linking an interpreted expression
+}}}
 
-**End Adam**
-
-
+you need to compile `MyPlugin` with one of the `-dynamic` or `-dynamic-too` options.
+```
