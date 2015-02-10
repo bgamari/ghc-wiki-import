@@ -160,7 +160,7 @@ Finally, in a proposal back in September, David Feuer and Reid Barton proposed a
 
 
 
-As ugly as it may be, `Foldable` is nearly as small as it can be without either changing the semantics of existing programs on their authors, or compromising the asymptotic performance of `Foldable` operations.
+`Foldable` is nearly as small as it can be without either changing the semantics of existing programs on their authors, or compromising the asymptotic performance of `Foldable` operations.
 
 
 #
