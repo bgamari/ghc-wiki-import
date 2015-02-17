@@ -8,7 +8,6 @@ Original source:
 
 == The People
 
-* '''Gintautas Miliauskas''' <gintautas.miliauskas@gmail.com> (current coordinator)
 * '''Tamar Christina''' <lonetiger@gmail.com>
 * '''Roman Kuznetsov''' <kuznero@gmail.com>
 * '''Kyrill Briantsev''' <kyrab@mail.ru>
