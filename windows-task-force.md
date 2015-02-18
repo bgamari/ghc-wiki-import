@@ -12,6 +12,7 @@ Original source:
 * '''Roman Kuznetsov''' <kuznero@gmail.com>
 * '''Kyrill Briantsev''' <kyrab@mail.ru>
 * '''Darren Grant''' <dedgrant@gmail.com>
+* '''David Macek''' <david.macek.0@gmail.com>
 
 {{{#!box info
 Should your name be here? Just edit the page and add yourself 
