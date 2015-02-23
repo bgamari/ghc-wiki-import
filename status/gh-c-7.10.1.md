@@ -1,38 +1,237 @@
-CONVERSION ERROR
+# GHC plans for 7.10.1
 
-Original source:
 
-```trac
-= GHC plans for 7.10.1 =
 
 GHC 7.10.1 RC1 has been released. We're moving into stabilization and bug-fixing now.
 
-See milestone:7.10.1 and [https://ghc.haskell.org/trac/ghc/query?status=infoneeded&status=merge&status=new&status=patch&group=status&milestone=7.10.1 Active tickets] for more.
+
+
+See [milestone:7.10.1](/trac/ghc/milestone/7.10.1) and [
+Active tickets](https://ghc.haskell.org/trac/ghc/query?status=infoneeded&status=merge&status=new&status=patch&group=status&milestone=7.10.1) for more.
+
+
 
 Anything in 'patch' status will be merged for 7.10.1.
 
+
+
 Special things of note:
 
-  - The '''Final Release''' will probably happen in (late) March 2015.
 
-  - We'll probably do an RC3 in ~~February~~March.
+- The **Final Release** will probably happen in (late) March 2015.
 
-  - We will fix `merge`, `patch`, and `highest` priority bugs (only) in the list below
+- We'll probably do an RC3 in ~~February~~March.
 
-  - Austin will disable the `dll-split` check for 7.10.1 RC2 since we're not building dynamically on Windows.
+- We will fix `merge`, `patch`, and `highest` priority bugs (only) in the list below
 
-  - For 7.10.1, we're going to try to distribute Windows binaries using `minghc`.
+- For 7.10.1, we're going to try to distribute Windows binaries using `minghc`.
 
-== Migration Guide to 7.10
+## Migration Guide to 7.10
 
-https://ghc.haskell.org/trac/ghc/wiki/Migration/7.10
 
-== Tickets slated for 7.10.1
 
-[[TicketQuery(milestone=7.10.1,status!=closed,format=table,col=type|summary|priority|owner,group=status,order=priority)]]
+[
+https://ghc.haskell.org/trac/ghc/wiki/Migration/7.10](https://ghc.haskell.org/trac/ghc/wiki/Migration/7.10)
 
-== Tickets marked merge with no milestone
 
-[[TicketQuery(status=merge,milestone=,format=table,col=type|summary|priority|owner,group=status)]]
+## Tickets slated for 7.10.1
 
-```
+
+
+
+  
+  
+  
+  
+  
+    
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: !closed, milestone: 7.10.1, group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: !closed, milestone: 7.10.1, group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: !closed, milestone: 7.10.1,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: !closed, milestone: 7.10.1,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, desc: 1, order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: !closed, milestone: 7.10.1, group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+order: owner)
+      </th>
+<td>
+    </td></tr>
+<tr><td>
+          </td>
+<th>
+            No tickets found
+          </th>
+<td>
+        </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr></table>
+
+
+  
+
+
+
+## Tickets marked merge with no milestone
+
+
+
+
+  
+  
+  
+  
+  
+    
+
+## Status: merge (1 match)
+
+
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: merge, milestone: , group: status, max: 0,
+col: id, col: type, col: summary, col: priority, col: owner, desc: 1, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: merge, milestone: , group: status, max: 0,
+col: id, col: type, col: summary, col: priority, col: owner, order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: merge, milestone: , group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: merge, milestone: , group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: merge, milestone: , group: status, max: 0,
+col: id, col: type, col: summary, col: priority, col: owner, order: owner)
+      </th>
+<td>
+    </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#16094](https://gitlab.staging.haskell.org/ghc/ghc/issues/16094)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [panic! (the 'impossible' happened): for powerpc-unknown-linux getRegister(ppc): I64\[I32\[BaseReg + 812\] + 64\]](https://gitlab.staging.haskell.org/ghc/ghc/issues/16094)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      trommler
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr></table>
+
+
+  
+
+
+
