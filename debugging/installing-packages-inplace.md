@@ -18,7 +18,7 @@ This method is quick and easy, but can fail if your `cabal` program is out of da
 
 
 ```wiki
-cabal install --with-compiler=<inplace-ghc> --with-package-db=<inplace-package-db> <package>
+cabal install --with-compiler=<inplace-ghc> --package-db=<inplace-package-db> <package>
 ```
 
 
