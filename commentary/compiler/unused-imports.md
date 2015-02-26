@@ -6,7 +6,8 @@ Original source:
 = Unused imports = 
 
 GHC has a series of bugs related to the "report unused imports"
-flags, including #1148, #2267, #1074, #2436. 
+flags, including #1148, #2267, #1074, #2436, #10117.
+
 This page describes a new design.
 
 == The current story == 
