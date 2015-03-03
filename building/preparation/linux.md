@@ -1,126 +1,130 @@
+CONVERSION ERROR
 
+Original source:
 
+```trac
 
-# Setting up a Linux system for building GHC
+[[PageOutline]]
 
-
+= Setting up a Linux system for building GHC =
 
 If you're on a recent Linux system, then you should be able to get a working build environment by installing the following packages using your system's package manager.
 
-
-## Docker
-
-
+== Docker ==
 
 If you are familiar with docker, this is a 1 step install for a development image (ghc build requirements plus a few development related tools).
-First cd into your ghc directory that you checkout according to [Building/GettingTheSources](building/getting-the-sources)
+First cd into your ghc directory that you checkout according to [wiki:Building/GettingTheSources]
 
-
-```wiki
+{{{
      docker run --rm -i -t -v `pwd`:/home/ghc gregweber/ghc-haskell-dev /bin/bash
-```
-
+}}}
 
 Thats it!
 This mounts your ghc source code into the docker container.
 This way you can still hack on GHC with Emacs, etc, but you are just building from the docker container.
 Note that `arc` (the ghc patch submission tool) is installed in the image (although you can also use it from your docker host) along with vim-tiny for editing commit messages.
 
+== Fedora ==
 
-## Fedora
-
-
-- `glibc-devel`
-- `ncurses-devel`
-- `gmp-devel`
-- `autoconf`
-- `automake`
-- `libtool`
-- `gcc`
-- `make`
-- `perl`
-- `python`
-- `ghc`
-- `happy`
-- `alex`
-- `git`
-
+ * `glibc-devel`
+ * `ncurses-devel`
+ * `gmp-devel`
+ * `autoconf`
+ * `automake`
+ * `libtool`
+ * `gcc`
+ * `make`
+ * `perl`
+ * `python`
+ * `ghc`
+ * `happy`
+ * `alex`
+ * `git`
 
 For building the documentation: (User's Guide and Cabal guide):
 
-
-- `docbook-utils`
-- `docbook-utils-pdf`
-- `docbook-style-xsl`
-
+ * `docbook-utils`
+ * `docbook-utils-pdf`
+ * `docbook-style-xsl`
 
 other packages that are useful for development:
 
+ * `strace`
+ * `patch`
 
-- `strace`
-- `patch`
-
-## Debian, Ubuntu, and other Debian-based systems
-
-
+== Debian, Ubuntu, and other Debian-based systems ==
 
 You can make sure you have all dependencies by
 
-
-```wiki
+{{{
    sudo apt-get build-dep ghc
-```
-
+}}}
 
 But this might install some packages you do not use in your system (e.g. java, docbook, xsltproc).  Alternatively install the following:
 
-
-```wiki
+{{{
    sudo apt-get install haskell-platform git autoconf automake libtool make libgmp-dev ncurses-dev g++ python bzip2
-```
-
+}}}
 
 (`ncurses-dev` is needed by the `terminfo` package, and `g++` is needed by a couple of tests, `ghcilink003` and `ghcilink006`).
 
+To install llvm-3.6, as required by GHC > 7.10, see http://llvm.org/apt. Note: I had to replace `llvm-toolchain-trusty-3.6` by `llvm-toolchain-trusty-3.6-binaries`. See also the file `.travis.yml` in the ghc rootfolder.
 
 
-To install llvm-3.6, as required by GHC \> 7.10, see [
-http://llvm.org/apt](http://llvm.org/apt). Note: I had to replace `llvm-toolchain-trusty-3.6` by `llvm-toolchain-trusty-3.6-binaries`. See also the file `.travis.yml` in the ghc rootfolder.
+Due to the nature of Debian, you may have difficulty building GHC >7.6 due to version incompatibilities with the Happy and Alex packages.  To alleviate this issue simply install both packages using the haskell-platform provided cabal.
 
-
-
-Due to the nature of Debian, you may have difficulty building GHC \>7.6 due to version incompatibilities with the Happy and Alex packages.  To alleviate this issue simply install both packages using the haskell-platform provided cabal.
-
-
-```wiki
+{{{
    cabal install alex happy
-```
-
+}}}
 
 For building the documentation (User's Guide):
 
-
-```wiki
+{{{
    sudo apt-get install dblatex docbook-xsl docbook-utils libxml2-utils
-```
-
+}}}
 
 other packages that are useful for development:
 
-
-```wiki
+{{{
    sudo apt-get install linux-tools-generic xutils-dev
+}}}
+
+The package `linux-tools` includes `perf`, see [wiki:Debugging/LowLevelProfiling/Perf]. The package `xutils-dev` provides the `lndir` program, need for running `make sdist` and useful for maintaining a separate build tree, see [wiki:Building/Using].
+
+== Arch ==
+
+The list of dependencies is the same as for [https://aur.archlinux.org/packages/ghc-git/ ghc-git] package on AUR.
+
+== Nix/NixOS ==
+
+First, you need to clone Nixpkgs, so you could use recent Nix recipes:
+
+{{{
+   git clone https://github.com/NixOS/nixpkgs  
+}}}
+
+Then, you can build the environment needed for compiling HEAD (assuming that the `nixpkgs` directory is in `/home/user`):
+
+{{{
+   cd ~
+   nix-build '<nixpkgs>' -A haskell-ng.compiler.ghcHEAD --run-env -I /home/user
+}}}
+
+Finally, clone, configure, and build GHC (see [wiki:/Newcomers] for details), but replace the usual `configure && make` with the Nix build phases:
+
+{{{
+   git clone --recursive git://github.com/ghc/ghc
+   cd ghc/
+   # configure build
+   cd mk
+   cp build.mk.sample build.mk
+   ## edit build.mk to remove the comment marker # on the line "BuildFlavour = quick"
+   cd ..
+   ./sync-all get
+   patchShebangs .
+   ./boot
+   configurePhase
+   buildPhase
+   # edit build.mk to remove the comment marker # on the line stage=2
+}}}
 ```
-
-
-The package `linux-tools` includes `perf`, see [Debugging/LowLevelProfiling/Perf](debugging/low-level-profiling/perf). The package `xutils-dev` provides the `lndir` program, need for running `make sdist` and useful for maintaining a separate build tree, see [Building/Using](building/using).
-
-
-## Arch
-
-
-
-The list of dependencies is the same as for [
-ghc-git](https://aur.archlinux.org/packages/ghc-git/) package on AUR.
-
-
