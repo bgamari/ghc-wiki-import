@@ -1,712 +1,834 @@
-CONVERSION ERROR
+# The Glasgow Haskell Team
 
-Original source:
 
-```trac
-= The Glasgow Haskell Team =
 
-[[PageOutline]]
 
-GHC is the result of the hard work of many people. This page gives detail on exactly who is responsible for what in precise detail. For a more general overview of the responsibilities people take, see [wiki:CodeOwners the Code Owners] page.
 
-== Committers ==
 
-The following page lists the current people who are allowed to commit to GHC, along with some details about the role they play and how to contact them. If you need guidance or help for your patches, this list may help you find out who you should contact, both on the mailing lists and here. It also gives some indication of ''where'' people are, which is convenient when you need to cross time-zone barriers, etc.
+GHC is the result of the hard work of many people. This page gives detail on exactly who is responsible for what in precise detail. For a more general overview of the responsibilities people take, see [the Code Owners](code-owners) page.
 
-In order to see emails below, '''you must login'''.
 
-('''NB''': GHC's development ''as a whole'' is not lead by any particular group, company, or individual. Affiliations below are listed for identification purposes only, and are optional; contributions do not necessarily represent the interests of employers or academic institutions.)
+## Committers
 
-=== Current list ===
 
- * [http://haskell.cs.yale.edu/people/andreas-voellmy/ Andreas Voellmy]
-  * Yale University - New Haven, CT
-  * '''Trac''': !AndreasVoellmy; '''email''': andreas.voellmy@gmail.com
-  * '''Committer since''': March, 2013.
-  * '''Main areas of interest''': IO manager
 
- * Andrey Mokhov
-  * Newcastle University, UK
-  * '''Trac''': snowleopard; '''email''': andrey.mokhov@gmail.com
-  * '''Committer since''': November, 2014.
-  * '''Main areas of interest''': build system, optimiser
+The following page lists the current people who are allowed to commit to GHC, along with some details about the role they play and how to contact them. If you need guidance or help for your patches, this list may help you find out who you should contact, both on the mailing lists and here. It also gives some indication of *where* people are, which is convenient when you need to cross time-zone barriers, etc.
 
- * [https://personal.cis.strath.ac.uk/adam.gundry/ Adam Gundry]
-  * Well-Typed LLP - Glasgow, UK
-  * '''Trac''': adamgundry; '''email''': adam@well-typed.com
-  * '''Committer since''': May 2014
-  * '''Main areas of interest''': frontend, typechecking
 
- * [http://hacks.yi.org Austin Seipp]
-  * Well-Typed LLP - Austin, TX
-  * '''Trac''': thoughtpolice; '''email''': austin@well-typed.com; '''github''': https://github.com/thoughtpolice
-  * '''Committer since''': Janurary 2013.
-  * '''Main areas of interest''': ARM support, build system, cross compilation, FFI, optimiser, release management, git management, ghc.haskell.org server maintenance
 
- * [http://bgamari.github.com/ Ben Gamari]
-  * University of Massachusetts - Amherst, MA
-  * '''Trac''': bgamari; '''email''': bgamari.foss@gmail.com; '''github''': https://github.com/bgamari
-  * '''Committer since''': September, 2014.
-  * '''Main areas of interest''': ARM support, LLVM backend
+In order to see emails below, **you must login**.
 
- * [http://www.cse.unsw.edu.au/~benl/ Ben Lippmeier]
-  * University of New South Wales - Sydney, Australia
-  * '''Trac''': benl; '''email''': benl@ouroborus.net
-  * '''Committer since''': November, 2010.
-  * '''Main areas of interest''': DPH, vector, code generators
 
-* [http://www.serpentine.com/ Bryan O'Sullivan]
- * Facebook Inc - San Francisco, CA
- * '''Trac''': bos, '''email''': bos@serpentine.com
- * '''Commiter since''': September, 2013.
- * '''Main areas of interest''': performance
 
- * [https://davidterei.com/ David Terei]
-  * !MemCachier; Stanford University - San Francisco, CA
-  * '''Trac''': dterei; '''email''': dave.terei@gmail.com
-  * '''Committer since''': June, 2010.
-  * '''Main areas of interest''': llvm backend, safe haskell
+(**NB**: GHC's development *as a whole* is not lead by any particular group, company, or individual. Affiliations below are listed for identification purposes only, and are optional; contributions do not necessarily represent the interests of employers or academic institutions.)
 
- * David Waern
-  * LexiFI - Paris, France
-  * '''Trac''': waern; '''email''': david.waern@gmail.com
-  * '''Committer since''': July, 2007.
-  * '''Main areas of interest''': haddock
 
- * [http://research.microsoft.com/en-us/people/dimitris/ Dimitrios Vytiniotis]
-  * Microsoft Research - Cambridge, UK
-  * '''Trac''': dimitris; '''email''': dimitris@microsoft.com
-  * '''Committer since''': May 2011.
-  * '''Main areas of interest''': ...
+### Current list
 
- * [http://www.well-typed.com/people/duncan Duncan Coutts]
-  * Well-Typed LLP - Oxford, UK
-  * '''Trac''': duncan; '''email''': duncan@well-typed.com
-  * '''Committer since''': Janurary, 2006.
-  * '''Main areas of interest''': bytestring support, cabal integration, etc
 
- * [http://www.well-typed.com/people/edsko Edsko de Vries]
-  * Well-Typed LLP - Dublin, Ireland
-  * '''Trac''': edsko; '''email''': edsko@well-typed.com
-  * '''Committer since''': July, 2013.
-  * '''Main areas of interest''': ...
+- [ Andreas Voellmy](http://haskell.cs.yale.edu/people/andreas-voellmy/)
 
- * [http://www.mega-nerd.com/erikd/Blog/ Erik de Castro Lopo]
-  * Independent - Sydney, Australia
-  * '''Trac''': erikd; '''email''': erikd@mega-nerd.com
-  * '''Committer since''': August, 2012.
-  * '''Main areas of interest''': PPC support
+  - Yale University - New Haven, CT
+  - **Trac**: AndreasVoellmy; **email**: andreas.voellmy@…
+  - **Committer since**: March, 2013.
+  - **Main areas of interest**: IO manager
 
- * [http://ezyang.com/ Edward Yang]
-  * Stanford University - Stanford, CA
-  * '''Trac''': ezyang; '''email''': ezyang@mit.edu
-  * '''Committer since''': September, 2010.
-  * '''Main areas of interest''': runtime system, codegen, gc
+- Andrey Mokhov
 
- * Facundo Domínguez
-  * Tweag I/O - Montevideo, Uruguay
-  * '''Trac''': facundo.dominguez; '''email''': facundo.dominguez@tweag.io
-  * '''Committer since''': November, 2014.
-  * '''Main areas of interest''': static pointers, cloud haskell
+  - Newcastle University, UK
+  - **Trac**: snowleopard; **email**: andrey.mokhov@…
+  - **Committer since**: November, 2014.
+  - **Main areas of interest**: build system, optimiser
 
- * [http://heisenbug.blogspot.com/ Gabor Greif]
-  * Alcatel-Lucent - Nuremberg, Germany
-  * '''Trac''': heisenbug; '''email''': ggreif@gmail.com; '''github''': https://github.com/ggreif
-  * '''Committer since''': January, 2012.
-  * '''Main areas of interest''': cross-compilation, type systems
+- [ Adam Gundry](https://personal.cis.strath.ac.uk/adam.gundry/)
 
- * [http://www.cs.drexel.edu/~mainland Geoffrey Mainland]
-  * Drexel University - Philadelphia, PA
-  * '''Trac''': gmainland; '''email''': mainland@cs.drexel.edu
-  * '''Committer since''': August, 2011.
-  * '''Main areas of interest''': Code generator (SIMD support, LLVM back-end), quasiquotation, Template Haskell.
+  - Well-Typed LLP - Glasgow, UK
+  - **Trac**: adamgundry; **email**: adam@…
+  - **Committer since**: May 2014
+  - **Main areas of interest**: frontend, typechecking
 
- * [http://people.cs.kuleuven.be/~george.karachalias George Karachalias]
-  * KU Leuven, Belgium
-  * '''Trac''': gkarachalias; '''email''': george.karachalias@gmail.com
-  * '''Committer since''': November, 2014.
-  * '''Main areas of interest''': frontend, type checker
+- [ Austin Seipp](http://hacks.yi.org)
 
- * [http://gergo.erdi.hu/ Gergő Érdi]
-  * Standard Chartered - London, UK
-  * '''Trac''': cactus; '''email''': gergo@erdi.hu; '''github''': https://github.com/gergoerdi
-  * '''Committer since''': January, 2014.
-  * '''Main areasa of interest''': frontend, type systems
+  - Well-Typed LLP - Austin, TX
+  - **Trac**: thoughtpolice; **email**: austin@…; **github**: [
+    https://github.com/thoughtpolice](https://github.com/thoughtpolice)
+  - **Committer since**: Janurary 2013.
+  - **Main areas of interest**: ARM support, build system, cross compilation, FFI, optimiser, release management, git management, ghc.haskell.org server maintenance
 
- * Herbert Valerio Riedel
-  * Vienna University of Technology - Vienna, Austria
-  * '''Trac''': hvr; '''email''': hvr@gnu.org; '''github''': https://github.com/hvr
-  * '''Committer since''': August, 2013.
-  * '''Main areas of interest''': GHCi, core/boot libraries, Git management, Trac integration, ghc.haskell.org server maintenance
+- [ Ben Gamari](http://bgamari.github.com/)
 
- * Ian Lynagh
-  * Semmle - Oxford, UK
-  * '''Trac''': Igloo; '''email''': igloo@earth.li
-  * '''Committer since''': ~2006.
-  * '''Main areas of interest''': ...
+  - University of Massachusetts - Amherst, MA
+  - **Trac**: bgamari; **email**: bgamari.foss@…; **github**: [
+    https://github.com/bgamari](https://github.com/bgamari)
+  - **Committer since**: September, 2014.
+  - **Main areas of interest**: ARM support, LLVM backend
 
- * [http://purely-functional.net/ Iavor Diatchki]
-  * Galois Inc - Portland, OR
-  * '''Trac''': diatchki; '''email''': diatchki@galois.com
-  * '''Committer since''': January, 2011.
-  * '''Main areas of interest''': 'type literals' support, type checking
+- [ Ben Lippmeier](http://www.cse.unsw.edu.au/~benl/)
 
- * [http://ilyasergey.net/ Ilya Sergey]
-  * IMDEA Software Institute - Madrid, Spain
-  * '''Trac''': ilya; '''email''': ilya.sergey@imdea.org
-  * '''Committer since''': August, 2012.
-  * '''Main areas of interest''': optimiser
+  - University of New South Wales - Sydney, Australia
+  - **Trac**: benl; **email**: benl@…
+  - **Committer since**: November, 2010.
+  - **Main areas of interest**: DPH, vector, code generators
 
- * [http://ics.p.lodz.pl/~stolarek/ Jan Stolarek]
-  * Politechnika Łódzka (a.k.a. Lodz University of Technology) - Łódź, Poland
-  * '''Trac''': jstolarek; '''email''': jan.stolarek@p.lodz.pl; '''github''': https://github.com/jstolarek
-  * '''Committer since''': July, 2013.
-  * '''Main areas of interest''': codegen, optimiser
+- [ Bryan O'Sullivan](http://www.serpentine.com/)
 
- * [http://www.joachim-breitner.de/ Joachim Breitner]
-  * Karlsruhe Institute of Technology, Germany
-  * '''Trac''': nomeata; '''email''': mail@joachim-breitner.de
-  * '''Committer since''': September, 2013.
-  * '''Main areas of interest''' (so far): newtype coercions
+  - Facebook Inc - San Francisco, CA
+  - **Trac**: bos, **email**: bos@…
+  - **Commiter since**: September, 2013.
+  - **Main areas of interest**: performance
 
- * [http://blog.johantibell.com/ Johan Tibell]
-  * Google Inc - San Francisco, CA
-  * '''Trac''': tibbe; '''email''': johan.tibell@gmail.com
-  * '''Committer since''': July, 2010.
-  * '''Main areas of interest''': IO manager, codegen
+- [ David Terei](https://davidterei.com/)
 
- * [http://dreixel.net/ José Pedro Magalhães]
-  * University of Oxford - Oxford, UK
-  * '''Trac''': dreixel; '''email''': jpm@cs.ox.ac.uk
-  * '''Committer since''': October, 2008.
-  * '''Main areas of interest''': generics support, type checker. See also [wiki:PedrosTickets Pedro's Tickets].
+  - MemCachier; Stanford University - San Francisco, CA
+  - **Trac**: dterei; **email**: dave.terei@…
+  - **Committer since**: June, 2010.
+  - **Main areas of interest**: llvm backend, safe haskell
 
- * [http://www.objectsecurity.com/en-home-aboutus-team.html Karel Gardas]
-  * ObjectSecurity Limited - Roznov pod Radhostem, The Czech Republic
-  * '''Trac''': kgardas; '''email''': karel.gardas@centrum.cz
-  * '''Committer since''': August 2014.
-  * '''Main areas of interest''': Solaris platform support.
+- David Waern
 
- * [http://www.cs.purdue.edu/homes/chandras/kcs_academic_page/Welcome.html KC Sivaramakrishnan]
-  * Purdue University - West Lafayette, IN
-  * '''Trac''': kc; '''email''': chandras@cs.purdue.edu
-  * '''Committer since''': March 2012.
-  * '''Main areas of interest''': lightweight concurrency primitives, rts, etc.
+  - LexiFI - Paris, France
+  - **Trac**: waern; **email**: david.waern@…
+  - **Committer since**: July, 2007.
+  - **Main areas of interest**: haddock
 
- * Krzysztof Gogolewski
-  * University of Warsaw - Poland
-  * '''Trac''': monoidal; '''email''': krz.gogolewski@gmail.com
-  * '''Committer since''': September, 2013.
-  * '''Main areas of interest''': type checker
+- [ Dimitrios Vytiniotis](http://research.microsoft.com/en-us/people/dimitris/)
 
- * [http://www.cse.unsw.edu.au/~chak/ Manuel Chakravarty]
-  * University of New South Wales - Sydney, Australia
-  * '''Trac''': chak; '''email''': chak@cse.unsw.edu.au
-  * '''Committer since''': August, 2006.
-  * '''Main areas of interest''': DPH
+  - Microsoft Research - Cambridge, UK
+  - **Trac**: dimitris; **email**: dimitris@…
+  - **Committer since**: May 2011.
+  - **Main areas of interest**: ...
 
- * [http://fuuzetsu.co.uk/blog Mateusz Kowalczyk]
-  * University of Bath, United Kingdom
-  * '''Trac''': Fuuzetsu; '''email''': fuuzetsu@fuuzetsu.co.uk; '''github''': https://github.com/Fuuzetsu; '''IRC''': Fuuzetsu
-  * '''Committer since''': February, 2014.
-  * '''Main areas of interest''': Haddock
+- [ Duncan Coutts](http://www.well-typed.com/people/duncan)
 
- * [http://www.cl.cam.ac.uk/~mb566/ Max Bolingbroke]
-  * N/A - Cambridge, UK
-  * '''Trac''': batterseapower; '''email''': batterseapower@hotmail.com; '''github''': https://github.com/batterseapower
-  * '''Committer since''': Feburary, 2008.
-  * '''Main areas of interest''': optimiser, type checker
+  - Well-Typed LLP - Oxford, UK
+  - **Trac**: duncan; **email**: duncan@…
+  - **Committer since**: Janurary, 2006.
+  - **Main areas of interest**: bytestring support, cabal integration, etc
 
- * [http://www.ittc.ku.edu/~nfrisby/ Nicolas Frisby]
-  * University of Kansas - Lawrence, Kansas
-  * '''Trac''': nfrisby; '''email''': nicolas.frisby@gmail.com
-  * '''Committer since''': March, 2013.
-  * '''Main areas of interest''': optimiser
+- [ Edsko de Vries](http://www.well-typed.com/people/edsko)
 
- * [http://people.freebsd.org/~pgj/ Páli Gábor János]
-  * Eötvös Lóránd University - Budapest, Hungary
-  * '''Trac''': pgj; '''email''': pali.gabor@gmail.com
-  * '''Committer since''': July, 2010.
-  * '''Main areas of interest''': FreeBSD support
+  - Well-Typed LLP - Dublin, Ireland
+  - **Trac**: edsko; **email**: edsko@…
+  - **Committer since**: July, 2013.
+  - **Main areas of interest**: ...
 
- * [http://paolocapriotti.com/ Paolo Capriotti]
-  * University of Nottingham - Nottingham, UK
-  * '''Trac''': pcapriotti; '''email''': p.capriotti@gmail.com
-  * '''Committer since''': March, 2012.
-  * '''Main areas of interest''': ...
+- [ Erik de Castro Lopo](http://www.mega-nerd.com/erikd/Blog/)
 
- * Patrick Palka
-  * N/A - Garfield, NJ, USA
-  * '''Trac''': parcs; '''email''': patrick@parcs.ath.cx; '''github''': https://github.com/parcs
-  * '''Committer since''': August, 2013.
-  * '''Main areas of interest''': GHC --make
+  - Independent - Sydney, Australia
+  - **Trac**: erikd; **email**: erikd@…
+  - **Committer since**: August, 2012.
+  - **Main areas of interest**: PPC support
 
- * Reid Barton
-  * N/A - Arlington, MA, USA
-  * '''Trac''': rwbarton; '''email''': rwbarton@gmail.com
-  * '''Committer since''': June, 2014.
-  * '''Main areas of interest''': code generation, runtime system
+- [ Edward Yang](http://ezyang.com/)
 
- * [http://www.cis.upenn.edu/~eir Richard Eisenberg]
-  * University of Pennsylvania - Philadelphia, PA
-  * '''Trac''': goldfire; '''email''': eir@cis.upenn.edu
-  * '''Committer since''': May, 2012.
-  * '''Main areas of interest''': type checker, core, Template Haskell
+  - Stanford University - Stanford, CA
+  - **Trac**: ezyang; **email**: ezyang@…
+  - **Committer since**: September, 2010.
+  - **Main areas of interest**: runtime system, codegen, gc
 
- * Roman Leshchinskiy
-  * Standard Chartered - London, UK
-  * '''Trac''': rl; '''email''': rl@cse.unsw.edu.au
-  * '''Committer since''': August, 2006.
-  * '''Main areas of interest''': vector library
+- Facundo Domínguez
 
- * [http://www.soi.city.ac.uk/~ross/ Ross Paterson]
-  * City University - London, UK
-  * '''Trac''': ross; '''email''': ross@soi.city.ac.uk
-  * '''Committer since''': Feburary, 2006.
-  * '''Main areas of interest''': arrow support
+  - Tweag I/O - Montevideo, Uruguay
+  - **Trac**: facundo.dominguez; **email**: facundo.dominguez@…
+  - **Committer since**: November, 2014.
+  - **Main areas of interest**: static pointers, cloud haskell
 
- * [http://www.cs.indiana.edu/~rrnewton/homepage.html Ryan Newton]
-  * Intel Corporation; Indiana University - Bloomington, IN
-  * '''Trac''': rrnewton; '''email''': rrnewton@gmail.com
-  * '''Committer since''': August, 2013.
-  * '''Main areas of interest''': runtime system, smp support (atomic memory op support)
+- [ Gabor Greif](http://heisenbug.blogspot.com/)
 
- * [http://trofi.github.io/ Sergei Trofimovich]
-  * Google Inc - London, UK
-  * '''Trac''': slyfox; '''email''': slyfox@inbox.ru; '''github''': https://github.com/trofi
-  * '''Committer since''': August, 2014.
-  * '''Main areas of interest''': runtime system, cross-compilation, unregisterised ghc, codegen
+  - Alcatel-Lucent - Nuremberg, Germany
+  - **Trac**: heisenbug; **email**: ggreif@…; **github**: [
+    https://github.com/ggreif](https://github.com/ggreif)
+  - **Committer since**: January, 2012.
+  - **Main areas of interest**: cross-compilation, type systems
 
- * [http://typeful.net Simon Hengel]
-  * Zalora South East Asia Pte. Lte - Singapore, Republic of Singapore
-  * '''Trac''': !SimonHengel; '''email''': sol@typeful.net; '''github''': https://github.com/sol
-  * '''Committer since''': Feburary, 2013.
-  * '''Main areas of interest''': Haddock
+- [ Geoffrey Mainland](http://www.cs.drexel.edu/~mainland)
 
- * [https://github.com/simonmar Simon Marlow]
-  * Facebook Inc - Cambridge, UK
-  * '''Trac''': simonmar; '''email''': marlowsd@gmail.com
-  * '''Committer since''': always.
-  * '''Main areas of interest''': runtime system, codegen, gc, smp scalability, etc
+  - Drexel University - Philadelphia, PA
+  - **Trac**: gmainland; **email**: mainland@…
+  - **Committer since**: August, 2011.
+  - **Main areas of interest**: Code generator (SIMD support, LLVM back-end), quasiquotation, Template Haskell.
 
- * [http://research.microsoft.com/~simonpj Simon Peyton Jones]
-  * Microsoft Research - Cambridge, UK
-  * '''Trac''': simonpj; '''email''': simonpj@microsoft.com
-  * '''Committer since''': always.
-  * '''Main areas of interest''': renamer, type checker, optimiser.
+- [ George Karachalias](http://people.cs.kuleuven.be/~george.karachalias)
 
- * [http://nominolo.blogspot.com/ Thomas Schilling]
-  * Erudify AG - Zürich, Switzerland
-  * '''Trac''': nominolo; '''email''': nominolo@googlemail.com; '''github''': https://github.com/nominolo
-  * '''Committer since''': September, 2008.
-  * '''Main areas of interest''': GHC API
+  - KU Leuven, Belgium
+  - **Trac**: gkarachalias; **email**: george.karachalias@…
+  - **Committer since**: November, 2014.
+  - **Main areas of interest**: frontend, type checker
 
-=== Becoming a committer ===
+- [ Gergő Érdi](http://gergo.erdi.hu/)
+
+  - Standard Chartered - London, UK
+  - **Trac**: cactus; **email**: gergo@…; **github**: [
+    https://github.com/gergoerdi](https://github.com/gergoerdi)
+  - **Committer since**: January, 2014.
+  - **Main areasa of interest**: frontend, type systems
+
+- Herbert Valerio Riedel
+
+  - Vienna University of Technology - Vienna, Austria
+  - **Trac**: hvr; **email**: hvr@…; **github**: [
+    https://github.com/hvr](https://github.com/hvr)
+  - **Committer since**: August, 2013.
+  - **Main areas of interest**: GHCi, core/boot libraries, Git management, Trac integration, ghc.haskell.org server maintenance
+
+- Ian Lynagh
+
+  - Semmle - Oxford, UK
+  - **Trac**: Igloo; **email**: igloo@…
+  - **Committer since**: \~2006.
+  - **Main areas of interest**: ...
+
+- [ Iavor Diatchki](http://purely-functional.net/)
+
+  - Galois Inc - Portland, OR
+  - **Trac**: diatchki; **email**: diatchki@…
+  - **Committer since**: January, 2011.
+  - **Main areas of interest**: 'type literals' support, type checking
+
+- [ Ilya Sergey](http://ilyasergey.net/)
+
+  - IMDEA Software Institute - Madrid, Spain
+  - **Trac**: ilya; **email**: ilya.sergey@…
+  - **Committer since**: August, 2012.
+  - **Main areas of interest**: optimiser
+
+- [ Jan Stolarek](http://ics.p.lodz.pl/~stolarek/)
+
+  - Politechnika Łódzka (a.k.a. Lodz University of Technology) - Łódź, Poland
+  - **Trac**: jstolarek; **email**: jan.stolarek@…; **github**: [
+    https://github.com/jstolarek](https://github.com/jstolarek)
+  - **Committer since**: July, 2013.
+  - **Main areas of interest**: codegen, optimiser
+
+- [ Joachim Breitner](http://www.joachim-breitner.de/)
+
+  - Karlsruhe Institute of Technology, Germany
+  - **Trac**: nomeata; **email**: mail@…
+  - **Committer since**: September, 2013.
+  - **Main areas of interest** (so far): newtype coercions
+
+- [ Johan Tibell](http://blog.johantibell.com/)
+
+  - Google Inc - San Francisco, CA
+  - **Trac**: tibbe; **email**: johan.tibell@…
+  - **Committer since**: July, 2010.
+  - **Main areas of interest**: IO manager, codegen
+
+- [ José Pedro Magalhães](http://dreixel.net/)
+
+  - University of Oxford - Oxford, UK
+  - **Trac**: dreixel; **email**: jpm@…
+  - **Committer since**: October, 2008.
+  - **Main areas of interest**: generics support, type checker. See also [Pedro's Tickets](pedros-tickets).
+
+- [ Karel Gardas](http://www.objectsecurity.com/en-home-aboutus-team.html)
+
+  - ObjectSecurity Limited - Roznov pod Radhostem, The Czech Republic
+  - **Trac**: kgardas; **email**: karel.gardas@…
+  - **Committer since**: August 2014.
+  - **Main areas of interest**: Solaris platform support.
+
+- [
+  KC Sivaramakrishnan](http://www.cs.purdue.edu/homes/chandras/kcs_academic_page/Welcome.html)
+
+  - Purdue University - West Lafayette, IN
+  - **Trac**: kc; **email**: chandras@…
+  - **Committer since**: March 2012.
+  - **Main areas of interest**: lightweight concurrency primitives, rts, etc.
+
+- Krzysztof Gogolewski
+
+  - University of Warsaw - Poland
+  - **Trac**: monoidal; **email**: krz.gogolewski@…
+  - **Committer since**: September, 2013.
+  - **Main areas of interest**: type checker
+
+- [ Manuel Chakravarty](http://www.cse.unsw.edu.au/~chak/)
+
+  - University of New South Wales - Sydney, Australia
+  - **Trac**: chak; **email**: chak@…
+  - **Committer since**: August, 2006.
+  - **Main areas of interest**: DPH
+
+- [ Mateusz Kowalczyk](http://fuuzetsu.co.uk/blog)
+
+  - University of Bath, United Kingdom
+  - **Trac**: Fuuzetsu; **email**: fuuzetsu@…; **github**: [
+    https://github.com/Fuuzetsu](https://github.com/Fuuzetsu); **IRC**: Fuuzetsu
+  - **Committer since**: February, 2014.
+  - **Main areas of interest**: Haddock
+
+- [ Max Bolingbroke](http://www.cl.cam.ac.uk/~mb566/)
+
+  - N/A - Cambridge, UK
+  - **Trac**: batterseapower; **email**: batterseapower@…; **github**: [
+    https://github.com/batterseapower](https://github.com/batterseapower)
+  - **Committer since**: Feburary, 2008.
+  - **Main areas of interest**: optimiser, type checker
+
+- [ Nicolas Frisby](http://www.ittc.ku.edu/~nfrisby/)
+
+  - University of Kansas - Lawrence, Kansas
+  - **Trac**: nfrisby; **email**: nicolas.frisby@…
+  - **Committer since**: March, 2013.
+  - **Main areas of interest**: optimiser
+
+- [ Páli Gábor János](http://people.freebsd.org/~pgj/)
+
+  - Eötvös Lóránd University - Budapest, Hungary
+  - **Trac**: pgj; **email**: pali.gabor@…
+  - **Committer since**: July, 2010.
+  - **Main areas of interest**: FreeBSD support
+
+- [ Paolo Capriotti](http://paolocapriotti.com/)
+
+  - University of Nottingham - Nottingham, UK
+  - **Trac**: pcapriotti; **email**: p.capriotti@…
+  - **Committer since**: March, 2012.
+  - **Main areas of interest**: ...
+
+- Patrick Palka
+
+  - N/A - Garfield, NJ, USA
+  - **Trac**: parcs; **email**: patrick@…; **github**: [
+    https://github.com/parcs](https://github.com/parcs)
+  - **Committer since**: August, 2013.
+  - **Main areas of interest**: GHC --make
+
+- Reid Barton
+
+  - N/A - Arlington, MA, USA
+  - **Trac**: rwbarton; **email**: rwbarton@…
+  - **Committer since**: June, 2014.
+  - **Main areas of interest**: code generation, runtime system
+
+- [ Richard Eisenberg](http://www.cis.upenn.edu/~eir)
+
+  - University of Pennsylvania - Philadelphia, PA
+  - **Trac**: goldfire; **email**: eir@…
+  - **Committer since**: May, 2012.
+  - **Main areas of interest**: type checker, core, Template Haskell
+
+- Roman Leshchinskiy
+
+  - Standard Chartered - London, UK
+  - **Trac**: rl; **email**: rl@…
+  - **Committer since**: August, 2006.
+  - **Main areas of interest**: vector library
+
+- [ Ross Paterson](http://www.soi.city.ac.uk/~ross/)
+
+  - City University - London, UK
+  - **Trac**: ross; **email**: ross@…
+  - **Committer since**: Feburary, 2006.
+  - **Main areas of interest**: arrow support
+
+- [ Ryan Newton](http://www.cs.indiana.edu/~rrnewton/homepage.html)
+
+  - Intel Corporation; Indiana University - Bloomington, IN
+  - **Trac**: rrnewton; **email**: rrnewton@…
+  - **Committer since**: August, 2013.
+  - **Main areas of interest**: runtime system, smp support (atomic memory op support)
+
+- [ Sergei Trofimovich](http://trofi.github.io/)
+
+  - Google Inc - London, UK
+  - **Trac**: slyfox; **email**: slyfox@…; **github**: [
+    https://github.com/trofi](https://github.com/trofi)
+  - **Committer since**: August, 2014.
+  - **Main areas of interest**: runtime system, cross-compilation, unregisterised ghc, codegen
+
+- [ Simon Hengel](http://typeful.net)
+
+  - Zalora South East Asia Pte. Lte - Singapore, Republic of Singapore
+  - **Trac**: SimonHengel; **email**: sol@…; **github**: [
+    https://github.com/sol](https://github.com/sol)
+  - **Committer since**: Feburary, 2013.
+  - **Main areas of interest**: Haddock
+
+- [ Simon Marlow](https://github.com/simonmar)
+
+  - Facebook Inc - Cambridge, UK
+  - **Trac**: simonmar; **email**: marlowsd@…
+  - **Committer since**: always.
+  - **Main areas of interest**: runtime system, codegen, gc, smp scalability, etc
+
+- [ Simon Peyton Jones](http://research.microsoft.com/~simonpj)
+
+  - Microsoft Research - Cambridge, UK
+  - **Trac**: simonpj; **email**: simonpj@…
+  - **Committer since**: always.
+  - **Main areas of interest**: renamer, type checker, optimiser.
+
+- [ Thomas Miedema](http://thomie.github.io)
+
+  - N/A - Paris, France
+  - **Trac**: thomie; **email**: thomasmiedema@…; **github**: [
+    https://github.com/thomie](https://github.com/thomie)
+  - **Committer since**: March, 2014.
+  - **Main areas of interest**: bugs
+
+- [ Thomas Schilling](http://nominolo.blogspot.com/)
+
+  - Erudify AG - Zürich, Switzerland
+  - **Trac**: nominolo; **email**: nominolo@…; **github**: [
+    https://github.com/nominolo](https://github.com/nominolo)
+  - **Committer since**: September, 2008.
+  - **Main areas of interest**: GHC API
+
+### Becoming a committer
+
+
 
 At a certain point after you've made enough contributions, the question of commit access inevitably arises. We welcome a steady stream of contributors, because it broadens the sense of ownership of GHC, which is great.
 
+
+
 A key point is to have a history of contributing good patches, with attention to detail. These patches do not necessarily need to constitute 'huge' features in their own right - and you certainly don't need to implement a 'huge' feature to get access. But we should be able to see your work. There is really no end of things to do for GHC - so please find something and work at it!
 
-To be granted access, please contact '''Austin Seipp''' above. As it currently stands, SPJ will make the final call, and Austin will add your information once verified.
+
+
+To be granted access, please contact **Austin Seipp** above. As it currently stands, SPJ will make the final call, and Austin will add your information once verified.
+
+
 
 (In some cases, you may also be approached by an existing committer who's willing to represent you, which is great! You'll be contacted appropriately, then.)
 
-=== Prior committers ===
 
-This list people who have contributed wonderful things to GHC in the past, but are no longer actively working with us. After 1 year of no commits, '''we revoke peoples access and add them from the list above to this one'''. If you're one of these people, contact Austin and we can give access back to you.
-
- * Don Stewart
-  * Standard Chartered - London, UK
-  * '''Trac''': dons; '''email''': dons00@gmail.com
-  * '''Committer until''': August, 2013.
-  * '''Main areas of interest''': bytestring, code generation, optimisers
-
- * Lennart Augustsson
-  * Standard Chartered - London, UK
-  * '''Trac''': Lennart; '''email''': lennart.augustsson@sc.com
-  * '''Committer until''': August, 2013.
-  * '''Main areas of interest''': ...
+### Prior committers
 
 
-== Contributors ==
+
+This list people who have contributed wonderful things to GHC in the past, but are no longer actively working with us. After 1 year of no commits, **we revoke peoples access and add them from the list above to this one**. If you're one of these people, contact Austin and we can give access back to you.
+
+
+- Don Stewart
+
+  - Standard Chartered - London, UK
+  - **Trac**: dons; **email**: dons00@…
+  - **Committer until**: August, 2013.
+  - **Main areas of interest**: bytestring, code generation, optimisers
+
+- Lennart Augustsson
+
+  - Standard Chartered - London, UK
+  - **Trac**: Lennart; **email**: lennart.augustsson@…
+  - **Committer until**: August, 2013.
+  - **Main areas of interest**: ...
+
+## Contributors
+
+
+
 Listed by year of last contribution. The total number of commits to the ghc repository, excluding merge commits, is shown in parenthesis (December 2014).
 
-{{{#!comment
-Generated by this script: https://github.com/thomie/authors/blob/master/authors.hs
-If some name is shown twice, update the .mailmap file in the root of the ghc repository.
-Known issues: nx200, mbs, cryder.
-"Other wonderful past contributors" have contributed in some way other than commits to the main ghc repository, and were listed on [wiki:Contributors] before.
-}}}
 
-=== 2014 ===
- * Simon Marlow (11229)
- * Simon Peyton Jones (7633)
- * Austin Seipp (630)
- * David Terei (478)
- * Herbert Valerio Riedel (411)
- * Joachim Breitner (346)
- * Edward Z. Yang (319)
- * Jose Pedro Magalhaes (211)
- * Richard Eisenberg (211)
- * Gabor Greif (208)
- * Duncan Coutts (171)
- * Iavor S. Diatchki (121)
- * Jan Stolarek (119)
- * Geoffrey Mainland (107)
- * Johan Tibell (98)
- * Sergei Trofimovich (79)
- * Krzysztof Gogolewski (68)
- * Andreas Voellmy (61)
- * Karel Gardas (59)
- * Reid Barton (53)
- * Gergő Érdi (52)
- * David Feuer (42)
- * Ben Gamari (36)
- * Erik de Castro Lopo (33)
- * Thomas Miedema (29)
- * Mateusz Kowalczyk (20)
- * Bertram Felgenhauer (18)
- * Gintautas Miliauskas (18)
- * Gabor Pali (17)
- * Peter Wortmann (16)
- * Kazu Yamamoto (13)
- * Edsko de Vries (10)
- * Alexander Berntsen (9)
- * Alan Zimmerman (7)
- * Andrew Farmer (7)
- * Arash Rouhani (7)
- * Kyrill Briantsev (7)
- * Peter Trommler (7)
- * Simon Hengel (7)
- * Yuras Shumovich (7)
- * Lennart Kolmodin (6)
- * Sjoerd Visscher (6)
- * Carter Tazio Schonwald (5)
- * Greg Weber (5)
- * Michael Orlitzky (5)
- * Nicolas Trangez (5)
- * Niklas Larsson (5)
- * Colin Watson (4)
- * Jost Berthold (4)
- * Luite Stegeman (4)
- * Luke Iannini (4)
- * Merijn Verstraaten (4)
- * Chris Heller (3)
- * Facundo Domínguez (3)
- * Mateusz Lenik (3)
- * Mikhail Glushenkov (3)
- * Muhaimin Ahsan (3)
- * Yorick Laupa (3)
- * Yuri de Wit (3)
- * Adam Gundry (2)
- * Bob Ippolito (2)
- * Christian Maeder (2)
- * Csernik Flaviu Andrei (2)
- * Gergely Risko (2)
- * John Lenz (2)
- * Konstantin Zudov (2)
- * Mathieu Boespflug (2)
- * Matt Kraai (2)
- * Michael Snoyman (2)
- * Moritz Angermann (2)
- * Shachaf Ben-Kiki (2)
- * Thomas Winant (2)
- * Vitaly Bragilevsky (2)
- * Ömer Sinan Ağacan (2)
- * Alex Petrov (1)
- * Andrew Gibiansky (1)
- * Baldur Blöndal (1)
- * Benno Fünfstück (1)
- * Boris Egorov (1)
- * Brian Brooks (1)
- * Brian McKenna (1)
- * Carlos Tomé (1)
- * Chris Catalfo (1)
- * Chris Dueck (1)
- * Christiaan Baaj (1)
- * Dave Laing (1)
- * Eric Mertens (1)
- * Eric Seidel (1)
- * Erlend Hamberg (1)
- * Florian Weimer (1)
- * Guido Zayas (1)
- * Heinrich Hördegen (1)
- * Isamu Mogi (1)
- * Jack Henahan (1)
- * Jens Petersen (1)
- * Joel Burget (1)
- * Julian K. Arni (1)
- * Kjetil Limkjær (1)
- * Krzysztof Langner (1)
- * Kyle J. Van Berendonck (1)
- * Lorenzo Tabacchini (1)
- * Michael Karg (1)
- * Mike Izbicki (1)
- * Nicholas Hart (1)
- * Owen Stephens (1)
- * Ricky Elrod (1)
- * Ryan Mulligan (1)
- * Sean Leather (1)
- * Sebastian Dröge (1)
- * Sergey Vinokurov (1)
- * Sivaram Balakrishnan (1)
- * Thijs Alkemade (1)
- * Tuncer Ayaz (1)
- * Wieland Hoffmann (1)
+### 2014
 
-=== 2013 ===
- * Ian Lynagh (6868)
- * Manuel M T Chakravarty (749)
- * Ross Paterson (630)
- * Ben Lippmeier (338)
- * Max Bolingbroke (264)
- * Twan van Laarhoven (150)
- * Daniel Fischer (96)
- * Patrick Palka (67)
- * Takano Akio (22)
- * Nicolas Frisby (19)
- * PHO (18)
- * Michal Terepeta (17)
- * Ryan Newton (15)
- * Niklas Hambüchen (10)
- * Bryan O'Sullivan (9)
- * shelarcy (8)
- * Amos Robinson (5)
- * Stephen Blackheath (5)
- * Ben Chan (3)
- * Boris Sukholitko (3)
- * Edward Kmett (3)
- * Andy Adams-Moran (2)
- * Bart Massey (2)
- * Christopher Rodrigues (2)
- * Dan Frumin (2)
- * Darin Morrison (2)
- * Evan Hauck (2)
- * Ryan Yates (2)
- * Stephen Paul Weber (2)
- * Anders Papitto (1)
- * David Luposchainsky (1)
- * Kirill Boltaev (1)
- * Nathan Huesken (1)
- * Oliver Charles (1)
- * Pedro Rodrigues (1)
- * Zac Slade (1)
 
-=== 2012 ===
- * Roman Leshchinskiy (392)
- * Paolo Capriotti (170)
- * Dimitrios Vytiniotis (89)
- * Bas van Dijk (39)
- * Gabriele Keller (26)
- * Judah Jacobson (18)
- * Reiner Pope (11)
- * Mikhail Vorozhtsov (9)
- * Gregory Wright (7)
- * Joey Adams (7)
- * Mikolaj Konarski (6)
- * Peter Hercek (5)
- * Nils Schweinsberg (3)
- * Ben Millwood (2)
- * Daniel Vainsencher (2)
- * Evan Laforge (2)
- * Gábor Lehel (2)
- * Iku Iwasa (2)
- * John Lato (2)
- * A. Bram Neijt (1)
- * Eric Kow (1)
- * Iustin Pop (1)
- * Michał Masłowski (1)
- * Nathan Howell (1)
- * Thomas Dziedzic (1)
- * Trevor Elliott (1)
+- Simon Marlow (11229)
+- Simon Peyton Jones (7633)
+- Austin Seipp (630)
+- David Terei (478)
+- Herbert Valerio Riedel (411)
+- Joachim Breitner (346)
+- Edward Z. Yang (319)
+- Jose Pedro Magalhaes (211)
+- Richard Eisenberg (211)
+- Gabor Greif (208)
+- Duncan Coutts (171)
+- Iavor S. Diatchki (121)
+- Jan Stolarek (119)
+- Geoffrey Mainland (107)
+- Johan Tibell (98)
+- Sergei Trofimovich (79)
+- Krzysztof Gogolewski (68)
+- Andreas Voellmy (61)
+- Karel Gardas (59)
+- Reid Barton (53)
+- Gergő Érdi (52)
+- David Feuer (42)
+- Ben Gamari (36)
+- Erik de Castro Lopo (33)
+- Thomas Miedema (29)
+- Mateusz Kowalczyk (20)
+- Bertram Felgenhauer (18)
+- Gintautas Miliauskas (18)
+- Gabor Pali (17)
+- Peter Wortmann (16)
+- Kazu Yamamoto (13)
+- Edsko de Vries (10)
+- Alexander Berntsen (9)
+- Alan Zimmerman (7)
+- Andrew Farmer (7)
+- Arash Rouhani (7)
+- Kyrill Briantsev (7)
+- Peter Trommler (7)
+- Simon Hengel (7)
+- Yuras Shumovich (7)
+- Lennart Kolmodin (6)
+- Sjoerd Visscher (6)
+- Carter Tazio Schonwald (5)
+- Greg Weber (5)
+- Michael Orlitzky (5)
+- Nicolas Trangez (5)
+- Niklas Larsson (5)
+- Colin Watson (4)
+- Jost Berthold (4)
+- Luite Stegeman (4)
+- Luke Iannini (4)
+- Merijn Verstraaten (4)
+- Chris Heller (3)
+- Facundo Domínguez (3)
+- Mateusz Lenik (3)
+- Mikhail Glushenkov (3)
+- Muhaimin Ahsan (3)
+- Yorick Laupa (3)
+- Yuri de Wit (3)
+- Adam Gundry (2)
+- Bob Ippolito (2)
+- Christian Maeder (2)
+- Csernik Flaviu Andrei (2)
+- Gergely Risko (2)
+- John Lenz (2)
+- Konstantin Zudov (2)
+- Mathieu Boespflug (2)
+- Matt Kraai (2)
+- Michael Snoyman (2)
+- Moritz Angermann (2)
+- Shachaf Ben-Kiki (2)
+- Thomas Winant (2)
+- Vitaly Bragilevsky (2)
+- Ömer Sinan Ağacan (2)
+- Alex Petrov (1)
+- Andrew Gibiansky (1)
+- Baldur Blöndal (1)
+- Benno Fünfstück (1)
+- Boris Egorov (1)
+- Brian Brooks (1)
+- Brian McKenna (1)
+- Carlos Tomé (1)
+- Chris Catalfo (1)
+- Chris Dueck (1)
+- Christiaan Baaj (1)
+- Dave Laing (1)
+- Eric Mertens (1)
+- Eric Seidel (1)
+- Erlend Hamberg (1)
+- Florian Weimer (1)
+- Guido Zayas (1)
+- Heinrich Hördegen (1)
+- Isamu Mogi (1)
+- Jack Henahan (1)
+- Jens Petersen (1)
+- Joel Burget (1)
+- Julian K. Arni (1)
+- Kjetil Limkjær (1)
+- Krzysztof Langner (1)
+- Kyle J. Van Berendonck (1)
+- Lorenzo Tabacchini (1)
+- Michael Karg (1)
+- Mike Izbicki (1)
+- Nicholas Hart (1)
+- Owen Stephens (1)
+- Ricky Elrod (1)
+- Ryan Mulligan (1)
+- Sean Leather (1)
+- Sebastian Dröge (1)
+- Sergey Vinokurov (1)
+- Sivaram Balakrishnan (1)
+- Thijs Alkemade (1)
+- Tuncer Ayaz (1)
+- Wieland Hoffmann (1)
 
-=== 2011 ===
- * Malcolm Wallace (225)
- * Thomas Schilling (119)
- * David Waern (31)
- * Matthias Kilian (25)
- * Thorkil Naur (19)
- * David M Peixotto (11)
- * Sam Anklesaria (6)
- * Vivian McPhail (5)
- * Dmitry Astapov (4)
- * William Knop (4)
- * Daniel Peebles (3)
- * George Giorgidze (3)
- * CJ van den Berg (2)
- * George Roldugin (2)
- * Mark Lentczner (2)
- * Spencer Janssen (2)
- * gwern (2)
- * Adam Megacz (1)
- * Brent Yorgey (1)
- * Daniel Winograd-Cort (1)
- * Denys Rtveliashvili (1)
- * Liyang HU (1)
- * Marco Silva (1)
- * Paul Monday (1)
- * Stefan Wehr (1)
+### 2013
 
-=== 2010 ===
- * Pepe Iborra (272)
- * John Dias (46)
- * Marco Túlio Gontijo e Silva (5)
- * Milan Straka (5)
- * Neil Mitchell (4)
- * Jim Apple (3)
- * Orphi (3)
- * Adam Vogt (2)
- * Antoine Latter (2)
- * Anton Nikishaev (2)
- * Boris Lykah (2)
- * Christoph Bauer (2)
- * Cain Norris (1)
 
-=== 2009 ===
- * Tim Chevalier (86)
- * Isaac Dupree (36)
- * Samuel Bronson (15)
- * Tom Schrijvers (12)
- * Ashley Yakeley (10)
- * Donnie Jones (7)
- * Alexander Dunlap (4)
- * Peter Jonsson (3)
- * Colin McQuillan (2)
- * Howard B. Golden (2)
- * Andrew Coppin (1)
- * Jon Fairbairn (1)
- * Louis Zhuang (1)
+- Ian Lynagh (6868)
+- Manuel M T Chakravarty (749)
+- Ross Paterson (630)
+- Ben Lippmeier (338)
+- Max Bolingbroke (264)
+- Twan van Laarhoven (150)
+- Daniel Fischer (96)
+- Patrick Palka (67)
+- Takano Akio (22)
+- Nicolas Frisby (19)
+- PHO (18)
+- Michal Terepeta (17)
+- Ryan Newton (15)
+- Niklas Hambüchen (10)
+- Bryan O'Sullivan (9)
+- shelarcy (8)
+- Amos Robinson (5)
+- Stephen Blackheath (5)
+- Ben Chan (3)
+- Boris Sukholitko (3)
+- Edward Kmett (3)
+- Andy Adams-Moran (2)
+- Bart Massey (2)
+- Christopher Rodrigues (2)
+- Dan Frumin (2)
+- Darin Morrison (2)
+- Evan Hauck (2)
+- Ryan Yates (2)
+- Stephen Paul Weber (2)
+- Anders Papitto (1)
+- David Luposchainsky (1)
+- Kirill Boltaev (1)
+- Nathan Huesken (1)
+- Oliver Charles (1)
+- Pedro Rodrigues (1)
+- Zac Slade (1)
 
-=== 2008 ===
- * Don Stewart (180)
- * Andy Gill (177)
- * Clemens Fruhwirth (81)
- * Norman Ramsey (75)
- * Josef Svenningsson (16)
- * Claus Reinke (11)
- * Ivan Tomac (2)
- * Marc Weber (2)
- * Chaddai Fouche (1)
- * Daniel Rogers (1)
- * Ori Avtalion (1)
+### 2012
 
-=== 2007 ===
- * Sven Panne (769)
- * Wolfgang Thaller (230)
- * Michael D. Adams (100)
- * David Himmelstrup (73)
- * Esa Ilari Vuokko (22)
- * Jean-Philippe Bernardy (15)
- * Alexey Rodriguez (14)
- * Audrey Tang (14)
- * Dana N. Xu (13)
- * Lennart Augustsson (13)
- * Stefan O'Rear (7)
- * Alec Berryman (4)
- * Chris Rodrigues (4)
- * Tyson Whitehead (4)
- * Jochem Berndsen (3)
- * John Meacham (3)
- * Peter Simons (3)
- * Aaron Tomb (2)
- * Bernie Pope (2)
- * Dan Licata (2)
- * Isaac Potoczny-Jones (2)
- * Magnus Jonsson (2)
- * Shae Matijs Erisson (2)
- * Andrew Pimlott (1)
- * Brian Alliet (1)
- * Chris Smith (1)
- * Daniel Franke (1)
- * Jeffrey Yasskin (1)
- * Neil Davies (1)
- * nx200 (1)
 
-=== 2006 ===
- * Sigbjorn Finne (2733)
- * Volker Stolz (96)
- * Krasimir Angelov (77)
- * Björn Bringert (20)
- * Tim Harris (15)
- * John Goerzen (10)
- * Ravi Nanavati (6)
- * Brian Smith (3)
- * Jan Rochel (3)
- * Einar Karttunen (2)
- * Kevin G Donnelly (2)
- * Andres Loeh (1)
- * Andriy Palamarchuk (1)
- * Dinko Tenev (1)
- * John McCall (1)
- * Markus Lauer (1)
- * Martin Grabmueller (1)
- * Nils Anders Danielsson (1)
+- Roman Leshchinskiy (392)
+- Paolo Capriotti (170)
+- Dimitrios Vytiniotis (89)
+- Bas van Dijk (39)
+- Gabriele Keller (26)
+- Judah Jacobson (18)
+- Reiner Pope (11)
+- Mikhail Vorozhtsov (9)
+- Gregory Wright (7)
+- Joey Adams (7)
+- Mikolaj Konarski (6)
+- Peter Hercek (5)
+- Nils Schweinsberg (3)
+- Ben Millwood (2)
+- Daniel Vainsencher (2)
+- Evan Laforge (2)
+- Gábor Lehel (2)
+- Iku Iwasa (2)
+- John Lato (2)
+- A. Bram Neijt (1)
+- Eric Kow (1)
+- Iustin Pop (1)
+- Michał Masłowski (1)
+- Nathan Howell (1)
+- Thomas Dziedzic (1)
+- Trevor Elliott (1)
 
-=== 2005 ===
- * Ralf Laemmel (78)
- * Ryan Lortie (13)
+### 2011
 
-=== 2004 ===
- * Mike Thomas (32)
- * Geoffrey Washburn (1)
- * Sean Seefried (1)
 
-=== 2003 ===
- * Marcin 'Qrczak' Kowalczyk (186)
- * Alastair Reid (37)
- * Matt Chapman (22)
- * Tobias Gedell (1)
- * Umut Acar (1)
+- Malcolm Wallace (225)
+- Thomas Schilling (119)
+- David Waern (31)
+- Matthias Kilian (25)
+- Thorkil Naur (19)
+- David M Peixotto (11)
+- Sam Anklesaria (6)
+- Vivian McPhail (5)
+- Dmitry Astapov (4)
+- William Knop (4)
+- Daniel Peebles (3)
+- George Giorgidze (3)
+- CJ van den Berg (2)
+- George Roldugin (2)
+- Mark Lentczner (2)
+- Spencer Janssen (2)
+- gwern (2)
+- Adam Megacz (1)
+- Brent Yorgey (1)
+- Daniel Winograd-Cort (1)
+- Denys Rtveliashvili (1)
+- Liyang HU (1)
+- Marco Silva (1)
+- Paul Monday (1)
+- Stefan Wehr (1)
 
-=== 2002 ===
- * Julian Seward (1041)
- * Ken Shan (107)
- * Jeff Lewis (67)
- * Keith Wansbrough (60)
- * Michael Weber (14)
- * Levent Erkök (13)
- * Rob Ennals (11)
- * Sébastien Carlier (11)
- * Nicholas Nethercote (3)
+### 2010
 
-=== 2001 ===
- * Reuben Thomas (648)
- * Andrew Tolmach (16)
- * Kevin Glynn (13)
- * Sungwoo Park (12)
- * Don Syme (10)
- * Hans-Wolfgang Loidl (7)
- * mbs (1)
 
-=== 2000 ===
- * Will Partain (66)
- * André Santos (18)
- * Daan Leijen (5)
- * cryder (1)
+- Pepe Iborra (272)
+- John Dias (46)
+- Marco Túlio Gontijo e Silva (5)
+- Milan Straka (5)
+- Neil Mitchell (4)
+- Jim Apple (3)
+- Orphi (3)
+- Adam Vogt (2)
+- Antoine Latter (2)
+- Anton Nikishaev (2)
+- Boris Lykah (2)
+- Christoph Bauer (2)
+- Cain Norris (1)
 
-=== 1998 ===
- * Juan J. Quintela (14)
+### 2009
 
-=== 1997 ===
- * David Turner (8)
 
-=== Other wonderful past contributors ===
+- Tim Chevalier (86)
+- Isaac Dupree (36)
+- Samuel Bronson (15)
+- Tom Schrijvers (12)
+- Ashley Yakeley (10)
+- Donnie Jones (7)
+- Alexander Dunlap (4)
+- Peter Jonsson (3)
+- Colin McQuillan (2)
+- Howard B. Golden (2)
+- Andrew Coppin (1)
+- Jon Fairbairn (1)
+- Louis Zhuang (1)
+
+### 2008
+
+
+- Don Stewart (180)
+- Andy Gill (177)
+- Clemens Fruhwirth (81)
+- Norman Ramsey (75)
+- Josef Svenningsson (16)
+- Claus Reinke (11)
+- Ivan Tomac (2)
+- Marc Weber (2)
+- Chaddai Fouche (1)
+- Daniel Rogers (1)
+- Ori Avtalion (1)
+
+### 2007
+
+
+- Sven Panne (769)
+- Wolfgang Thaller (230)
+- Michael D. Adams (100)
+- David Himmelstrup (73)
+- Esa Ilari Vuokko (22)
+- Jean-Philippe Bernardy (15)
+- Alexey Rodriguez (14)
+- Audrey Tang (14)
+- Dana N. Xu (13)
+- Lennart Augustsson (13)
+- Stefan O'Rear (7)
+- Alec Berryman (4)
+- Chris Rodrigues (4)
+- Tyson Whitehead (4)
+- Jochem Berndsen (3)
+- John Meacham (3)
+- Peter Simons (3)
+- Aaron Tomb (2)
+- Bernie Pope (2)
+- Dan Licata (2)
+- Isaac Potoczny-Jones (2)
+- Magnus Jonsson (2)
+- Shae Matijs Erisson (2)
+- Andrew Pimlott (1)
+- Brian Alliet (1)
+- Chris Smith (1)
+- Daniel Franke (1)
+- Jeffrey Yasskin (1)
+- Neil Davies (1)
+- nx200 (1)
+
+### 2006
+
+
+- Sigbjorn Finne (2733)
+- Volker Stolz (96)
+- Krasimir Angelov (77)
+- Björn Bringert (20)
+- Tim Harris (15)
+- John Goerzen (10)
+- Ravi Nanavati (6)
+- Brian Smith (3)
+- Jan Rochel (3)
+- Einar Karttunen (2)
+- Kevin G Donnelly (2)
+- Andres Loeh (1)
+- Andriy Palamarchuk (1)
+- Dinko Tenev (1)
+- John McCall (1)
+- Markus Lauer (1)
+- Martin Grabmueller (1)
+- Nils Anders Danielsson (1)
+
+### 2005
+
+
+- Ralf Laemmel (78)
+- Ryan Lortie (13)
+
+### 2004
+
+
+- Mike Thomas (32)
+- Geoffrey Washburn (1)
+- Sean Seefried (1)
+
+### 2003
+
+
+- Marcin 'Qrczak' Kowalczyk (186)
+- Alastair Reid (37)
+- Matt Chapman (22)
+- Tobias Gedell (1)
+- Umut Acar (1)
+
+### 2002
+
+
+- Julian Seward (1041)
+- Ken Shan (107)
+- Jeff Lewis (67)
+- Keith Wansbrough (60)
+- Michael Weber (14)
+- Levent Erkök (13)
+- Rob Ennals (11)
+- Sébastien Carlier (11)
+- Nicholas Nethercote (3)
+
+### 2001
+
+
+- Reuben Thomas (648)
+- Andrew Tolmach (16)
+- Kevin Glynn (13)
+- Sungwoo Park (12)
+- Don Syme (10)
+- Hans-Wolfgang Loidl (7)
+- mbs (1)
+
+### 2000
+
+
+- Will Partain (66)
+- André Santos (18)
+- Daan Leijen (5)
+- cryder (1)
+
+### 1998
+
+
+- Juan J. Quintela (14)
+
+### 1997
+
+
+- David Turner (8)
+
+### Other wonderful past contributors
+
+
+
 These people have also contributed to GHC and its core libraries in the past, in various wonderful ways:
 
-  * Andrew Cheadle
-  * Ben Rudiak-Gould
-  * Christopher D. Thompson-Walsh
-  * Cordy Hall
-  * Darren Moffat
-  * Dominic Steinitz
-  * Dylan Thurston
-  * Jim Mattson
-  * John Launchbury
-  * Kevin Hammond
-  * Mark Tullsen
-  * Patrick Sansom
-  * Phil Trinder
-  * Philip Wadler
-  * Thomas Nordin
-  * Wolfgang Thaller
-```
+
+- Andrew Cheadle
+- Ben Rudiak-Gould
+- Christopher D. Thompson-Walsh
+- Cordy Hall
+- Darren Moffat
+- Dominic Steinitz
+- Dylan Thurston
+- Jim Mattson
+- John Launchbury
+- Kevin Hammond
+- Mark Tullsen
+- Patrick Sansom
+- Phil Trinder
+- Philip Wadler
+- Thomas Nordin
+- Wolfgang Thaller
