@@ -1,15 +1,6 @@
-CONVERSION ERROR
+# Building and Porting GHC
 
-Original source:
 
-```trac
-{{{#!comment
-
-Let's try to keep this page for information about manually building and installing of GHC only. Any information that developers need to make *changes* to GHC is better linked to from [wiki:Newcomers] and [wiki:WorkingConventions]. Information about automatic builders is all under [wiki:Status] and [wiki:Infrastructure].
-
-}}}
-
-= Building and Porting GHC =
 
 This Guide is primarily aimed at those who want to build and/or
 hack on GHC.  It describes how to get started with building GHC on your
@@ -17,63 +8,83 @@ machine, and how to tweak the settings to get the kind of build you
 want.  It also describes the inner workings of the build system, so you
 can extend it, modify it, and use it to build your code.
 
-== Contents ==
 
-'''Getting started'''
+## Contents
 
- * [wiki:Building/Preparation Setting up your system for building GHC]
- * [wiki:Building/GettingTheSources Getting the sources]
- * [wiki:Building/QuickStart Quick Start to just building and installing GHC]
- * [wiki:Building/Hacking Quick Start to using the build system as a developer]
 
-'''More detailed information about using the build system'''
 
- * [wiki:Building/Using Comprehensive overview of using the build system]
- * [wiki:Building/StandardTargets Standard targets]
- * [wiki:Building/Hoogle Making GHC's source code searchable with Hoogle]
- * [wiki:Building/Docs Building the documentation]
- * [wiki:Building/Installing Installing GHC from a build]
- * [wiki:Building/Unregisterised Unregisterised builds]
- * [wiki:Platforms Platforms that GHC currently supports]
+**Getting started**
 
-'''Platform-specific building notes (see also''' [wiki:Building/Preparation Setting up your system for building GHC]''')'''
 
- * [wiki:Building/MacOSX Building under MacOS X]
- * [wiki:Building/Solaris Building under Solaris]
- * [wiki:Building/Preparation/FreeBSD Building under FreeBSD]
- * [wiki:WindowsGhc Building under Windows]
+- [Setting up your system for building GHC](building/preparation)
+- [Getting the sources](building/getting-the-sources)
+- [Quick Start to just building and installing GHC](building/quick-start)
+- [Quick Start to using the build system as a developer](building/hacking)
 
-'''How to test and benchmark changes to GHC'''
 
- * [wiki:TestingPatches Validating changes]
- * [wiki:Building/RunningTests Running the GHC test framework]
- * [wiki:Building/RunningNoFib The NoFib benchmark suite]
- * [wiki:HackageTesting Testing GHC against all of Hackage]
- * [wiki:Debugging Debugging and performance-tuning for GHC]
+**More detailed information about using the build system**
 
-'''Information about libraries (= packages)'''
 
- * [wiki:Debugging/InstallingPackagesInplace Installing extra libraries for your in-place GHC]
- * [wiki:Commentary/Libraries The libraries on which GHC depends]
+- [Comprehensive overview of using the build system](building/using)
+- [Standard targets](building/standard-targets)
+- [Making GHC's source code searchable with Hoogle](building/hoogle)
+- [Building the documentation](building/docs)
+- [Installing GHC from a build](building/installing)
+- [Unregisterised builds](building/unregisterised)
 
-'''More detailed information about how the build system works'''
 
- * [wiki:Commentary/SourceTree Overview of files and directories]
- * [wiki:Building/Architecture Architecture of the build system]
- * [wiki:Building/Modifying Modifying the build system]
+**Platform-specific building notes**
 
-'''Porting GHC and building cross compilers'''
 
- * [wiki:Building/CrossCompiling Cross-compilation]
- * [wiki:Building/Compiling32on64 Compiling for 32 bits on 64 bits]
+- [Platforms that GHC currently supports](platforms)
+- [Building under MacOS X](building/mac-osx)
+- [Building under Solaris](building/solaris)
+- [Building under FreeBSD](building/preparation/free-bsd)
+- [Building under Windows](windows-ghc)
 
-'''Troubleshooting'''
 
- * [wiki:Building/Troubleshooting FAQ: Solving common problems with building GHC]
+**How to test and benchmark changes to GHC**
 
-== Contributed documentation ==
+
+- [Validating changes](testing-patches)
+- [Running the GHC test framework](building/running-tests)
+- [The NoFib benchmark suite](building/running-no-fib)
+- [Testing GHC against all of Hackage](hackage-testing)
+- [Debugging and performance-tuning for GHC](debugging)
+
+
+**Information about libraries (= packages)**
+
+
+- [Installing extra libraries for your in-place GHC](debugging/installing-packages-inplace)
+- [The libraries on which GHC depends](commentary/libraries)
+
+
+**More detailed information about how the build system works**
+
+
+- [Overview of files and directories](commentary/source-tree)
+- [Architecture of the build system](building/architecture)
+- [Modifying the build system](building/modifying)
+
+
+**Porting GHC and building cross compilers**
+
+
+- [Cross-compilation](building/cross-compiling)
+- [Compiling for 32 bits on 64 bits](building/compiling32on64)
+
+
+**Troubleshooting**
+
+
+- [FAQ: Solving common problems with building GHC](building/troubleshooting)
+
+## Contributed documentation
+
+
 
 Please feel free to add pages here.  In due course, information can be incorporated into the main documentation above.
 
- * [wiki:SonyPS3] : Hints for building on the Sony PS3
-```
+
+- [SonyPS3](sony-p-s3) : Hints for building on the Sony PS3
