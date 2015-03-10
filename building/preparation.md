@@ -1,37 +1,21 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
+# Setting up your system for building GHC
 
 
-= Setting up your system for building GHC =
 
-This section describes how to set up your system with all the tools you need to build and develop GHC. Jump to the relevant section for your [wiki:Platforms platform]:
+This section describes how to set up your system with all the tools you need to build and develop GHC. Jump to the relevant section for your [platform](platforms):
 
-{{{#!comment
-TODO. Cleanup. For some platforms the information is split between 'preparation' and 'building', for others it isn't. There are even more platform pages linked from [wiki:Platforms]. 
 
-If you think one of these pages linked from here is out-of-date, either update that page, or 
-1. remove the link here
-2. delete its content (really, all these outdated instructions are useless) and replace it with a link to a page that is up-to-date
-}}}
+- [Preparation Linux](building/preparation/linux)
+- [Preparation Windows](building/preparation/windows) and [Building under Windows](windows-ghc)
+- [Preparation MacOS X](building/preparation/mac-osx) and [Building under MacOS X](building/mac-osx)
+- [Preparation FreeBSD](building/preparation/free-bsd) and [Building under FreeBSD](free-bsd-ghc)
+- [Preparation Solaris](building/preparation/solaris) and [Building under Solaris](building/solaris)
+- [Illumos](building/preparation/illumos) (SmartOS, OpenIndiana, etc.)
+- [Raspberry Pi](building/preparation/raspberry-pi) (cross-compiling from Linux)
 
- * [wiki:Building/Preparation/Linux Preparation Linux]
- * [wiki:Building/Preparation/Windows Preparation Windows] and [wiki:WindowsGhc Building under Windows]
- * [wiki:Building/Preparation/MacOSX Preparation MacOS X] and [wiki:Building/MacOSX Building under MacOS X]
- * [wiki:Building/Preparation/Solaris Preparation Solaris] and [wiki:Building/Solaris Building under Solaris]
- * [wiki:Building/Preparation/Illumos Illumos] (SmartOS, OpenIndiana, etc.)
- * [wiki:Building/Preparation/RaspberryPi Raspberry Pi] (cross-compiling from Linux)
- * [wiki:Building/Preparation/FreeBSD Preparation FreeBSD] and [wiki:FreeBSDGhc Building under FreeBSD]
 
  
 Alternatively:
 
- * [wiki:Building/Preparation/Tools List of tools needed to build GHC]
 
-See also
-  
- * [wiki:Emacs Emacs lore]
- * [wiki:WorkingConventions/Git Git lore]
-```
+- [List of tools needed to build GHC](building/preparation/tools)
