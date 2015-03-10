@@ -3,7 +3,7 @@ CONVERSION ERROR
 Original source:
 
 ```trac
-= Quick Start to building and installing GHC =
+= Quick Start to just building and installing GHC =
 
 Below are quick instructions for '''just building and installing GHC'''. For instructions on how to '''work on GHC''', go to the [wiki:Building/Hacking Quick Start to using the build system as a developer].
 
