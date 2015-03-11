@@ -40,6 +40,7 @@ Original source:
 * #10075: `Constraint` vs `*`
 * #10114: Non-`*` bodies of foralls
 * #10121: Correct operational semantics around letrec.
+* #10134: Unexpected "Let should not be generalised" problem 
 
 '''Hard'''
 
