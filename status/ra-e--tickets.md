@@ -38,6 +38,7 @@ Original source:
 * #9667: Don't make tyvars untouchable when a GADT pattern-match isn't informative
 * #9883: Heterogeneous `OverloadedLists`
 * #10075: `Constraint` vs `*`
+* #10114: Non-`*` bodies of foralls
 * #10121: Correct operational semantics around letrec.
 
 '''Hard'''
