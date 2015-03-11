@@ -36,20 +36,16 @@ Suppose you have a Haskell file with an import `import System.Directory (doesFil
 
 
 ```wiki
--- importlist.bkp
-package directory-sigs where
-    includes: base, time
-    exposed-signatures: System.Directory
-
 package p where
-    includes: base, directory-sigs
+    includes: base
     exposed-modules: P Q
+    required-signatures: System.Directory
 
 executable Main where
     includes: base, directory, p
     main-is: Main
 
--- directory-sigs/System/Directory.hsig
+-- p/System/Directory.hsig
 module System.Directory where
 doesFileExist :: FilePath -> IO Bool
 
@@ -75,6 +71,10 @@ These files will successfully compile with `ghc --backpack importlist.bkp`.
 
 
 You can check that other functions from `System.Directory` are not available by editing `P.hs` or `Q.hs` to attempt to use another function from the module, e.g. `doesDirectoryExist`.
+
+
+
+In general, to import a subset of the interface of a module, you create an hsig file which contains the signatures you want and make sure that the original module is not in scope (notice how directory is not included in package p). Then, when you actually want to compile the module (as in the executable Main in this example) make sure you import all the packages that define the modules you defined in this way. 
 
 
 
