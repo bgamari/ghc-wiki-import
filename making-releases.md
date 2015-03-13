@@ -1,78 +1,59 @@
-# Making Releases
+CONVERSION ERROR
 
+Original source:
 
-## Branching the tree
+```trac
+= Making Releases =
 
-
+== Branching the tree ==
 
 Make a `ghc-x.y` branch of all of the repos (including those with a 'dph' tag). In the ghc branch, change `sync-all` so that it doesn't get the `dph` repos by default, and change `validate` so that it doesn't require them to be present.
 
-
-
 For repos with an upstream maintainer, ask upstream what commit we should be using in the branch.
 
+Update http://ghc.haskell.org/trac/ghc/wiki/Repositories#Branches
 
-
-Update [
-http://ghc.haskell.org/trac/ghc/wiki/Repositories\#Branches](http://ghc.haskell.org/trac/ghc/wiki/Repositories#Branches)
-
-
-## Make release notes
-
-
+== Make release notes ==
 
 In `docs/users_guide`, add a `$VERSION-notes.xml` file and write the release notes.
 
-
-
 Add a corresponding `relnotes$PATCH_LEVEL` entity to `ug-ent.xml.in`, and use the entity at the end of the chapter in `intro.xml`.
 
-
-## Updating the tree
-
-
+== Updating the tree ==
 
 Update the `ANNOUNCE` file in the root of the tree.
 
-
-
 In the `AC_INIT` line of `configure.ac`, set the version number. A few lines below, set `RELEASE=YES`.
 
-
-## Making the source tarball
-
-
+== Making the source tarball ==
 
 The source tarball includes some generated files, such as `Parser.hs` (generated from `Parser.y.pp`). We therefore need to do a build before generating the source tarball.
 
+First [wiki:Building/GettingTheSources#Gettingabranch check out the branch], and ensure that the version number and `RELEASE` near the top of `configure.ac` are correct. Then:
 
-
-First [check out the branch](building/getting-the-sources#getting-a-branch), and ensure that the version number and `RELEASE` near the top of `configure.ac` are correct. Then:
-
-
-```wiki
+{{{
 $ perl boot
 $ ./configure
 $ make
 $ make sdist
-```
-
+}}}
 
 It is advisable to use a machine with as recent an `autoreconf` as possible; in particular, 2.61 is known to make a configure script that doesn't work on Windows.
 
-
-
 You should now have source tarballs `sdistprep/ghc-<VERSION>-src.tar.bz2` and `sdistprep/ghc-<VERSION>-testsuite.tar.bz2`.
 
+== Making the binary builds ==
 
-## Making the binary builds
+First, you should make sure your environment has all of the tools necessary to make a proper release build.  This can include more tools than an "ordinary" build of GHC requires, since documentation requires extra tools.  You will need:
 
+ * dblatex
+ * HsColour (cabal install hscolour)
+ * docbook-xsl (otherwise you will get error `failed to load external entity "http://docbook.sourceforge.net/release/xsl/current/html/chunk.xsl"`)
 
+A good sanity check is to check the output of `configure` and make sure all of the tool fields are filled out.
 
 Untar the `src` tarball. Then:
-
-
-```wiki
+{{{
 $ cat > mk/build.mk <<EOF
 V=1
 HADDOCK_DOCS=YES
@@ -83,131 +64,94 @@ BUILD_DOCBOOK_PDF=YES
 BUILD_DOCBOOK_PS=YES
 BeConservative=YES
 EOF
-```
-
+}}}
 
 (Note that `BeConservative` is only relevant on Linux, as it controls usage of `clock_gettime` in the RTS.)
 
-
-
 Then:
-
-
-```wiki
+{{{
 $ ./configure      2>&1 | tee ../conf.log
 $ make             2>&1 | tee ../make.log
 $ make binary-dist 2>&1 | tee ../bd.log
-```
+}}}
 
+Nightly builders will automatically produce release builds on FreeBSD, putting the results [http://haskell.inf.elte.hu/ghc/dist/freebsd8/ here].
 
-Nightly builders will automatically produce release builds on FreeBSD, putting the results [
-here](http://haskell.inf.elte.hu/ghc/dist/freebsd8/).
-
-
-## Sanity checking the binary builds
-
-
+== Sanity checking the binary builds ==
 
 The `compare` tool compares the tarballs of different releases, and warns about possible problems:
 
-
-```wiki
+{{{
 $ cd <</path/to/ghc/tree>>/distrib/compare
 $ make
-```
+}}}
 
-```wiki
+{{{
 $ <</path/to/ghc/tree>>/distrib/compare/compare <<previous_release_files>> <<this_release_files>>
-```
+}}}
 
-## Check that the build can build the release
-
-
+== Check that the build can build the release ==
 
 Install the release, set your `$PATH`, then just untar and:
 
-
-```wiki
+{{{
 $ ./configure
 $ make
-```
+}}}
 
-## Create and upload the library documentation
+== Create and upload the library documentation ==
 
-
-```wiki
+{{{
 haskell.org$ mkdir /srv/web/haskell.org/ghc/docs/<<VERSION>>
-```
+}}}
 
-```wiki
+{{{
 $ <</path/to/ghc/tree>>/distrib/mkDocs/mkDocs ghc-*-x86_64-unknown-linux.tar.bz2 ghc-*-i386-unknown-mingw32.tar.bz2
 $ cd docs
 $ scp * haskell.org:/srv/web/haskell.org/ghc/docs/<<VERSION>>
-```
+}}}
 
-```wiki
+{{{
 haskell.org$ cd /srv/web/haskell.org/ghc/docs/<<VERSION>>
 haskell.org$ mkdir html
 haskell.org$ cd html
 haskell.org$ mv ../index.html .
 haskell.org$ for i in ../*.tar.bz2; do tar -jxf $i; done
-```
-
+}}}
 
 Sanity check `http://www.haskell.org/ghc/docs/<<VERSION>>/`. In particular, check that the libraries docs include both Win32 and unix.
 
-
-## Prepare the webpage
-
-
+== Prepare the webpage ==
 
 In the `http://www.haskell.org/ghc` darcs repository, create a `download_ghc_<<MANGLED_VERSION>>.shtml` page based on the previous one.
 
-
-
 Sanity check `http://www.haskell.org/ghc/download_ghc_<<MANGLED_VERSION>>`. In particular, check that the release notes and documentation links work.
 
+== Upload the binaries ==
 
-## Upload the binaries
-
-
-```wiki
+{{{
 scp -r 7.6.2 haskell.org:/srv/web/haskell.org/ghc/dist/
-```
-
+}}}
 
 Sanity check that the download links work.
 
-
-## Announcing
-
-
+== Announcing ==
 
 Add the release to "Versions" in the trac admin section, and make it the default version.
 
-
-
 Update "Current Stable Release" in `download.shtml`, and move the previous release down to "Older Releases".
-
-
 
 Update "Latest News" in `index.shtml`.
 
-
-```wiki
+{{{
 haskell.org$ ~/mk-latest-links
 haskell.org$ ~/mk-latest-links | sh
-```
-
+}}}
 
 Mail `ANNOUNCE` to `glasgow-haskell-users@haskell.org, haskell@haskell.org`, subject `ANNOUNCE: GHC version <<VERSION>>`.
 
-
-
 For an RC, a smaller message is sent to just `glasgow-haskell-users@haskell.org`, e.g.:
-
-
-```wiki
+{{{
 Subject: ANNOUNCE: GHC x.y.z Release Candidate 1
 
 We are pleased to announce the first release candidate for GHC x.y.z:
@@ -220,39 +164,30 @@ We plan to make the x.y.z release <sometime>.
 
 Please test as much as possible; bugs are much cheaper if we find them
 before the release!
-```
+}}}
 
-## Tagging repositories
+== Tagging repositories ==
 
-
-```wiki
+{{{
 ./sync-all tag ghc-7.6.2-release
-```
+}}}
 
-
-Also `git tag <<LIBRARY>>-<<VERSION>>-release` [libraries that we maintain](repositories) (other than `ghc-prim`).
-
-
+Also `git tag <<LIBRARY>>-<<VERSION>>-release` [wiki:Repositories libraries that we maintain] (other than `ghc-prim`).
 
 Set `RELEASE` back to `NO` and commit.
 
-
-```wiki
+{{{
 ./sync-all push --tags
-```
+}}}
 
-## Uploading libraries
+== Uploading libraries ==
 
-
-
-If any library [that we maintain](repositories) (other than bin-package-db, ghc-prim, integer-gmp and integer-simple which don't get uploaded) has been changed, then the new version should be uploaded to hackage.
-
-
+If any library [wiki:Repositories that we maintain] (other than bin-package-db, ghc-prim, integer-gmp and integer-simple which don't get uploaded) has been changed, then the new version should be uploaded to hackage.
 
 For example, for `base`, in a built tree:
-
-
-```wiki
+{{{
 make sdist_base
 cabal upload libraries/base/dist-install/*.tar.gz
+}}}
+
 ```
