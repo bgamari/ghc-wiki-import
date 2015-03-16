@@ -1,4 +1,8 @@
 
+For ongoing (as of Mar '15) work about the solver, see [here](design/new-coercible-solver/v2).
+
+
+
 (In the text below, "I" = Richard Eisenberg)
 
 
@@ -147,6 +151,10 @@ https://github.com/goldfirere/ghc/tree/two-flatteners](https://github.com/goldfi
 
 
 It's a delicate thing, this termination. This section is about how we know that rewriting terminates.
+
+
+
+**UPDATE:** With the decision by Simon and Dimitrios to eliminate D-rewrite-D, this section becomes moot. Adding roles does not complicate rewriting without D-rewrite-D.
 
 
 ## Current situation
