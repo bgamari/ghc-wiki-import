@@ -59,7 +59,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
  
 
 
-- [\#10185](https://gitlab.staging.haskell.org/ghc/ghc/issues/10185): incompleteness in `Coercible` solver
+- [\#10184](https://gitlab.staging.haskell.org/ghc/ghc/issues/10184),[\#10185](https://gitlab.staging.haskell.org/ghc/ghc/issues/10185): incompleteness in `Coercible` solver
 - [\#8165](https://gitlab.staging.haskell.org/ghc/ghc/issues/8165): GND for classes with associated types
 - [\#10075](https://gitlab.staging.haskell.org/ghc/ghc/issues/10075): `Constraint` vs `*`
 - [\#10056](https://gitlab.staging.haskell.org/ghc/ghc/issues/10056): more systematic treatment of `(~)` in parser and renamer 
