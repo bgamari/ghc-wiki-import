@@ -5,6 +5,8 @@ Original source:
 ```trac
 = GHC plans for 7.12.1 =
 
+[[PageOutline]]
+
 '''Development currently ongoing'''.
 
 See milestone:7.12.1 and [https://ghc.haskell.org/trac/ghc/query?status=infoneeded&status=merge&status=new&status=patch&group=status&milestone=7.12.1 Active tickets] for more.
