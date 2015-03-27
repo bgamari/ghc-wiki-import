@@ -1,49 +1,66 @@
-CONVERSION ERROR
+#
+[OverloadedRecordFields](records/overloaded-record-fields) implementation notes
 
-Original source:
 
-```trac
-= OverloadedRecordFields implementation notes =
 
-'''This page gives implementation details of the [wiki:Records/OverloadedRecordFields OverloadedRecordFields] extension.  It is targeted at GHC hackers.'''
+**This page gives implementation details of the [OverloadedRecordFields](records/overloaded-record-fields) extension.  It is targeted at GHC hackers.**
 
-See the [wiki:Records/OverloadedRecordFields/Redesign redesign page] for a more gentle introduction.
+
+
+See the [redesign page](records/overloaded-record-fields/redesign) for a more gentle introduction.
+
+
 
 Following the 2015 redesign, we have three separate components to implement, which will be described (and implemented) in order:
 
- * the `OverloadedRecordFields` extension, which permits the same field name to be used multiple times in the same module, but only where unambiguous;
- * the `ImplicitValues` extension, to enable the `#x` syntax;
- * the `HasField` and `FieldUpdate` typeclasses, with special-purpose constraint solving behaviour, which do not require a language extension.
+
+- the `OverloadedRecordFields` extension, which permits the same field name to be used multiple times in the same module, but only where unambiguous;
+- the `ImplicitValues` extension, to enable the `#x` syntax;
+- the `HasField` and `FieldUpdate` typeclasses, with special-purpose constraint solving behaviour, which do not require a language extension.
+
 
 As of March 2015, work is progressing on the implementation, and Part 1 (the simplified `OverloadedRecordFields` extension) is nearly complete. Once it is ready, a Phab diff will be opened for review, then parts 2 and 3 will be worked on. Note that all the parts are useful in isolation.
 
-= 1. The `OverloadedRecordFields` extension =
+
+# 1. The `OverloadedRecordFields` extension
+
+
 
 When this extension is enabled, typechecking a record datatype still generates record selectors, but their `Name`s have a `$sel` prefix and end with the name of their type. For example,
 
-{{{
+
+```wiki
 data T = MkT { x :: Int }
-}}}
+```
+
 
 generates
 
-{{{
+
+```wiki
 $sel:x:T :: T -> Int -- record selector (used to be called `x`)
 $sel:x:T (MkT x) = x
-}}}
+```
+
 
 This allows the same field label to occur multiple times in the same module, but with distinct `Name`s.
+
+
 
 Turning on the `OverloadedRecordFields` extension automatically enables `DisambiguateRecordFields`, because ORF strictly generalises it. Once `ImplicitValues` is implemented, ORF will also enable `ImplicitValues` by default.
 
 
-== The naming of cats ==
+## The naming of cats
 
-=== `FieldLabel` ===
+
+### `FieldLabel`
+
+
 
 A field is represented by the following datatype, parameterised by the representation of names:
 
-{{{
+
+```wiki
 data FieldLbl a = FieldLabel {
       flLabel        :: FieldLabelString, -- ^ Label of the field
       flIsOverloaded :: Bool,             -- ^ Is this field overloaded?
@@ -52,28 +69,36 @@ data FieldLbl a = FieldLabel {
 
 type FieldLabelString = FastString
 type FieldLabel = FieldLbl Name
-}}}
+```
+
 
 For this purpose, a field "is overloaded" if it was defined in a module with `-XOverloadedRecordFields` enabled, so its selector name differs from its label. That is, it is irrelevant whether there are actually multiple identical field labels in the module. Every field has a label (`FastString`) and selector name. The `dcFields` field of `DataCon` stores a list of `FieldLabel`. In interface files, the `ifConFields` field of `IfaceConDecl` stores a list of `IfaceTopBndr`s for selectors, and `IfaceConDecls` for datatypes/newtypes stores the field labels.
 
 
-=== `AvailInfo` and `IE` ===
+### `AvailInfo` and `IE`
+
+
 
 The new definition of `AvailInfo` is:
 
-{{{
+
+```wiki
 data AvailInfo      = Avail Name | AvailTC Name [Name] AvailFields
 type AvailFlds name = [AvailFld name]
 type AvailFld name  = (name, Maybe FieldLabelString)
 type AvailFields    = AvailFlds Name
 type AvailField     = AvailFld Name
-}}}
+```
+
 
 The `AvailTC` constructor represents a type and its pieces that are in scope. Record fields are now stored separately in the third argument. If a field is not overloaded, we store only its selector name (the second component of the pair is `Nothing`), whereas if it is overloaded, we store the label as well. The `IEThingWith name [name] (AvailFlds name)` constructor of `IE` represents a thing that can be imported or exported, and also has a separate argument for fields.
 
+
+
 Note that a `FieldLabelString` and parent is not enough to uniquely identify a selector, because of data families: if we have
 
-{{{
+
+```wiki
 module M ( F (..) ) where
   data family F a
   data instance F Int { foo :: Int }
@@ -81,158 +106,219 @@ module M ( F (..) ) where
 module N ( F (..) ) where
   import M ( F(..) )
   data instance F Char { foo :: Char }
-}}}
+```
+
 
 then `N` exports two different selectors with the `FieldLabelString` `"foo"`. Similar tricks can be used to generate parents that have a mixture of overloaded and non-overloaded fields as children.
 
 
-=== `Parent` and `GlobalRdrElt` ===
+### `Parent` and `GlobalRdrElt`
+
+
 
 The `Parent` type has an extra constructor `FldParent Name (Maybe FieldLabelString)` that stores the parent `Name` and the field label. The `GlobalRdrElt` (`GRE`) for a field stores the selector name directly, and uses the `FldParent` constructor to store the field. Thus a field `x` of type `T` gives rise this entry in the `GlobalRdrEnv`:
 
-{{{
+
+```wiki
 x |->  GRE $sel:x:T (FldParent T (Just x)) LocalDef
-}}}
+```
+
 
 Note that the `OccName` used when adding a GRE to the environment (`greOccName`) now depends on the parent field: for `FldParent` it is the field label, if present, rather than the selector name.
 
 
-== Source expressions ==
+## Source expressions
+
+
 
 The `HsExpr` type has an extra constructor `HsSingleRecFld RdrName id`. Regardless of whether `-XOverloadedRecordFields` is enabled, when `rnExpr` encounters `HsVar "x"` where `x` refers to an unambiguous record field `foo`, it replaces it with `HsSingleRecFld foo $sel_foo_T`. The point of this constructor is so we can pretty-print the field name (as the user typed it, hence a `RdrName`), but store the selector name for typechecking.
 
+
+
 Where an AST representation type (e.g. `HsRecField` or `ConDeclField`) contained an argument of type `Located id` for a field, it now stores a `Located RdrName` for the label, and some representation of the selector. The parser uses a placeholder for the selector; it is filled in by the renamer  (by `rnHsRecFields` in `RnPat`, and `rnField` in `RnTypes`). The new definition of `ConDeclField` (used in types) is:
 
-{{{
+
+```wiki
 data ConDeclField name
   = ConDeclField { cd_fld_names :: [(Located RdrName, PostRn name Name)]
                    cd_fld_type  :: LBangType name, 
                    cd_fld_doc   :: Maybe LHsDocString }
-}}}
+```
+
 
 The new definition of `HsRecField` is:
 
-{{{
+
+```wiki
 data HsRecField id arg = HsRecField {
         hsRecFieldLbl :: Located RdrName,
         hsRecFieldSel :: Either id [(id, id)],
         hsRecFieldArg :: arg,
         hsRecPun      :: Bool }
-}}}
+```
+
 
 The renamer (`rnHsRecFields`) supplies `Left sel_name` for the selector if it is unambiguous, or `Right xs` if it is ambiguous (because it is for a record update, and there are multiple fields with the correct label in scope). In the latter case, the possibilities `xs` are represented as a list of (parent name, selector name) pairs. The typechecker (`tcExpr`) tries three ways to disambiguate the update:
 
+
 1. Perhaps only one type has all the fields that are being updated.
 
-2. Use the type being pushed in, if it is already a `TyConApp`. 
+1. Use the type being pushed in, if it is already a `TyConApp`. 
 
-3. Use the type signature of the record expression, if it exists and is a `TyConApp`.
+1. Use the type signature of the record expression, if it exists and is a `TyConApp`.
+
+## Deprecated field names
 
 
-== Deprecated field names ==
 
 Deprecations and fixity declarations look for a top-level name, so they cannot be applied to overloaded record fields. Perhaps this should change. Deprecations actually work by `OccName`, so we could make
 
-{{{
+
+```wiki
 {-# DEPRECATED foo "Don't use foo" #-}
-}}}
-
-apply to all the `foo` fields in a module, but there are difficulties in deciding when a deprecated field has been used similar to those for [#Unusedimports unused imports].
+```
 
 
-== Data families ==
+apply to all the `foo` fields in a module, but there are difficulties in deciding when a deprecated field has been used similar to those for [unused imports](records/overloaded-record-fields/implementation#unused-imports).
+
+
+## Data families
+
+
 
 Consider the following:
 
-{{{
+
+```wiki
 data family F (a :: *) :: *
 data instance F Int  = MkF1 { foo :: Int }
 data instance F Bool = MkF2 { foo :: Bool }
-}}}
+```
 
-This is perfectly sensible, and gives rise to two *different* record selectors `foo`. Thus we use the name of the representation tycon, rather than the family tycon, when naming the record selectors: we get `$sel:foo:R:FInt` and `$sel:foo:R:FBool`. This requires a bit of care, because lexically (in the `GlobalRdrEnv`) the selectors still have the family tycon are their parent.
+
+This is perfectly sensible, and gives rise to two \*different\* record selectors `foo`. Thus we use the name of the representation tycon, rather than the family tycon, when naming the record selectors: we get `$sel:foo:R:FInt` and `$sel:foo:R:FBool`. This requires a bit of care, because lexically (in the `GlobalRdrEnv`) the selectors still have the family tycon are their parent.
+
+
 
 In order to have access to the representation tycon name in the renamer, it is generated by `getLocalNonValBinders` and stored in a new field `dfid_rep_tycon` of `DataFamInstDecl`. It would be nice if we could do the same for all the derived names, in order to localise the set of names that have been used (currently stored in the `tcg_dfun_n` mutable field). However, this is tricky:
-* Default associated type declarations result in axioms being generated during typechecking.
-* DFun names for instances of `Typeable` and the `Generics` classes are generated during typechecking.
+
+
+- Default associated type declarations result in axioms being generated during typechecking.
+- DFun names for instances of `Typeable` and the `Generics` classes are generated during typechecking.
+
+
 We could work around this but it may not be worth the bother.
 
 
-== Mangling selector names ==
+## Mangling selector names
+
+
 
 We could mangle selector names (using `$sel:foo:T` instead of `foo`) even when the extension is disabled, but we decided not to because the selectors really should be in scope with their original names, and doing otherwise leads to:
-  * Trouble with import/export
-  * Trouble with deriving instances in GHC.Generics (makes up un-renamed syntax using field `RdrName`s)
-  * Boot files that export record selectors not working
 
 
-== GHC API changes ==
-
-* The `minf_exports` field of `ModuleInfo` is now of type `[AvailInfo]` rather than `NameSet`, as this provides accurate export information. An extra function `modInfoExportsWithSelectors` gives a list of the exported names including overloaded record selectors (whereas `modInfoExports` includes only non-mangled selectors).
-* The `HsExpr`, `hsRecField` and `ConDeclField` AST types have changed as described above.
-* TODO: are there any more changes?
+- Trouble with import/export
+- Trouble with deriving instances in GHC.Generics (makes up un-renamed syntax using field `RdrName`s)
+- Boot files that export record selectors not working
 
 
-== 2. The `ImplicitValues` extension ==
+Note that Template Haskell will see the mangled selector names instead of the original field labels, when looking at a datatype declared in a module with `OverloadedRecordFields` enabled. This isn't ideal - should we change the TH representation type so it can get access to both the label and selector?
+
+
+
+In the new design, we could perhaps consider only mangling selector names when there is actually a name conflict, but this has not been investigated in any detail.
+
+
+## GHC API changes
+
+
+- The `minf_exports` field of `ModuleInfo` is now of type `[AvailInfo]` rather than `NameSet`, as this provides accurate export information. An extra function `modInfoExportsWithSelectors` gives a list of the exported names including overloaded record selectors (whereas `modInfoExports` includes only non-mangled selectors).
+- The `HsExpr`, `hsRecField` and `ConDeclField` AST types have changed as described above.
+- TODO are there any more changes?
+
+## 2. The `ImplicitValues` extension
+
+
 
 This part is new in the 2015 redesign, and has not previously been implemented, so there is not yet much to record here.  However, the implementation should be fairly straightforward and close to (but simpler than) the existing `ImplicitParameters` extension.
 
 
-== 3. The magic type classes ==
+## 3. The magic type classes
 
-The `HasField` and `FieldUpdate` classes, and `FieldType` and `UpdatedRecordType` type families, will be defined in the module `GHC.Records` in the `base` package.  Contrary to the previous design, we will not generate any dfuns/axioms for these classes *at all*.  Instead, the typechecker will implicitly create evidence as required.  This gets rid of a whole lot of complexity.
+
+
+The `HasField` and `FieldUpdate` classes, and `FieldType` and `UpdatedRecordType` type families, will be defined in the module `GHC.Records` in the `base` package.  Contrary to the previous design, we will not generate any dfuns/axioms for these classes \*at all\*.  Instead, the typechecker will implicitly create evidence as required.  This gets rid of a whole lot of complexity.
+
+
 
 The only additional things that need to be generated at datatype declarations are updater functions (one per field), which correspond to the selector functions that are already generated.  So for example
 
-{{{
+
+```wiki
 data T = MkT { x, y :: Int }
-}}}
+```
+
 
 will generate
 
-{{{
+
+```wiki
 $sel:x:T :: T -> Int
 $sel:x:T (MkT x _) = x
 
 $upd:x:T :: T -> Int -> T
 $upd:x:T (MkT _ y) x = MkT x y
-}}}
+```
+
 
 The updater function will always have a name prefixed with `$upd:`, regardless of whether `OverloadedRecordFields` is enabled.
 
 
-== GADT record updates ==
+## GADT record updates
+
+
 
 Consider the example
 
-{{{
+
+```wiki
 data W a where
     MkW :: a ~ b => { x :: a, y :: b } -> W (a, b)
-}}}
+```
+
 
 It would be nice to generate
 
-{{{
+
+```wiki
 -- $upd:x:W :: W (a, b) -> a -> W (a, b)
 $upd:x:W s e = s { x = e }
-}}}
+```
 
-but this record update is rejected by the typechecker, even though it is perfectly sensible, because of #2595. The currently implemented workaround is instead to generate the explicit update
 
-{{{
+but this record update is rejected by the typechecker, even though it is perfectly sensible, because of [\#2595](https://gitlab.staging.haskell.org/ghc/ghc/issues/2595). The currently implemented workaround is instead to generate the explicit update
+
+
+```wiki
 $upd:x:W (MkW _ y) x = MkW x y
-}}}
+```
+
 
 which is fine, but rather long-winded if there are many constructors or fields. Essentially this is doing the job of the desugarer for record updates.
+
+
 
 Note that `W` does not admit type-changing single update for either field, because of the `a ~ b` constraint. Without it, though, type-changing update should be allowed.
 
 
-== Unused imports ==
+## Unused imports
+
+
 
 Unused imports and generation of the minimal import list (`RnNames.warnUnusedImportDecls`) use a map from selector names to labels, in order to print fields correctly. Moreover, consider the following:
 
-{{{
+
+```wiki
 module A where
   data T = MkT { x,y:Int }
 
@@ -245,21 +331,26 @@ module C where
 
   foo :: T -> Int
   foo r = #x r + 2
-}}}
+```
+
 
 Now, do we expect to report the `import B( S(x) )` as unused? Only the typechecker will eventually know that. To record this, a new field `tcg_used_selectors :: TcRef NameSet` in the `TcGblEnv` records the selector names for fields that are encountered during typechecking (when looking up a `HasField` instance etc.). This set is used to calculate the import usage and unused top-level bindings. Thus a field will be counted as used if it is needed by the typechecker, regardless of whether any definitions it appears in are themselves used.
 
+
+
 Unused local bindings are trickier, as the following example illustrates:
 
-{{{
+
+```wiki
 module M (f)
   data S = MkS { foo :: Int }
   data T = MkT { foo :: Int }
 
   f = #foo (MkS 3)
   g x = #foo x
-}}}
+```
+
 
 The renamer calculates the free variables of each definition, to produce a list of `DefUses`. The typechecker will discover that `f` uses only `S(foo)` while `g` uses neither. The simplest thing is to make an occurrence of an overloaded field in an expression return as free variables all the selectors it might refer to. This will sometimes fail to report unused local bindings: in the example, it will not spot that `T(foo)` is unused.
 
-```
+
