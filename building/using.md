@@ -433,7 +433,7 @@ simple, BSD-licensed Haskell implementation will be used instead.
 
 <table><tr><th>`BUILD_DPH`</th>
 <td>
-(default: `YES`)
+(default: `NO`)
 Enable building of DPH libraries
 </td></tr></table>
 
@@ -464,7 +464,6 @@ GhcStage2HcOpts = -O0 -DDEBUG -Wall
 GhcLibHcOpts    = -O -fasm -XGenerics
 GhcLibWays      = v
 SplitObjs       = NO
-BUILD_DPH       = NO
 ```
 
 
