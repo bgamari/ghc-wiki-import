@@ -52,6 +52,7 @@
 
   - [\#7669](https://gitlab.staging.haskell.org/ghc/ghc/issues/7669): Empty case warnings are broken
 - [\#8828](https://gitlab.staging.haskell.org/ghc/ghc/issues/8828): Type pattern synonyms
+- [\#10227](https://gitlab.staging.haskell.org/ghc/ghc/issues/10227): Backward reasoning from closed type families
 
 
 **Rocket Science**
