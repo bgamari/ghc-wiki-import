@@ -1,14 +1,16 @@
-# Template Haskell
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Template Haskell =
 
 Stuff about Template Haskell
-
-
-- [Major revision of Template Haskell](template-haskell/blog-post-changes) propsed in Simon's blog post.  
-- [Implementation page for typed Template Haskell](template-haskell/typed) implementing the blog-post proposals.
-- [Polymorphic kinds in Template Haskell](template-haskell/rich-kinds)
-- [Unifying TH syntax with \`haskell-src-exts\`](template-haskell/using-haskell-src-exts)
-- [Conversions between different data types in TH](template-haskell/conversions)
-- [A Proposal for restricted subsets of TH](template-haskell/restricted)
-- Compilation?
+ * [wiki:TemplateHaskell/BlogPostChanges Major revision of Template Haskell] propsed in Simon's blog post.  
+ * [wiki:TemplateHaskell/Typed Implementation page for typed Template Haskell] implementing the blog-post proposals.
+ * [wiki:TemplateHaskell/RichKinds Polymorphic kinds in Template Haskell]
+ * [wiki:TemplateHaskell/UsingHaskellSrcExts Unifying TH syntax with `haskell-src-exts`]
+ * [wiki:TemplateHaskell/Conversions Conversions between different data types in TH]
+ * [wiki:TemplateHaskell/Restricted A Proposal for restricted subsets of TH]
+ * [wiki:TemplateHaskell/CrossCompilation Cross Compilation]
+```
