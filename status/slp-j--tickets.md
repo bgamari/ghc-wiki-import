@@ -6,7 +6,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 
 - [\#10114](https://gitlab.staging.haskell.org/ghc/ghc/issues/10114): `AnyK` and kind generalisation in type synonyms
-- [\#10079](https://gitlab.staging.haskell.org/ghc/ghc/issues/10079), [\#10139](https://gitlab.staging.haskell.org/ghc/ghc/issues/10139), [\#7788](https://gitlab.staging.haskell.org/ghc/ghc/issues/7788): type inference for `Coercible` (Richard)
+- [\#10285](https://gitlab.staging.haskell.org/ghc/ghc/issues/10285): a small bug in `Coercible` (Richard)
 - [\#10087](https://gitlab.staging.haskell.org/ghc/ghc/issues/10087): typechecking generic default methods (Pedro)
 - [\#10068](https://gitlab.staging.haskell.org/ghc/ghc/issues/10068): runtime reflection API for modules, names.
 - [\#9858](https://gitlab.staging.haskell.org/ghc/ghc/issues/9858): `Typeable` should be kind-aware (Iavor)
