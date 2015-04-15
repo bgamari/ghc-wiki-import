@@ -18,6 +18,7 @@ Original source:
 * #9687: Need `Typeable (,,,,,,,,,,)` and friends
 * #9840: Allow empty closed type families
 * #10116: Warn on incomplete closed type families
+* #10177: `Typeable` "regression"
 
 '''Medium'''
 
