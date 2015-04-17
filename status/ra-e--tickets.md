@@ -13,7 +13,6 @@ Original source:
 * #7494: Allow type synonyms in GADT return types
 * #8109: As-patterns in type patterns
 * #8634: Dysfunctional dependencies
-* #9122: Check for bogus `unsafeCoerce`
 * #9636: Should `F Bool` be well-formed, if `F` is an empty closed type family? (blocked by #9637)
 * #9687: Need `Typeable (,,,,,,,,,,)` and friends
 * #9840: Allow empty closed type families
@@ -42,6 +41,7 @@ Original source:
 * #10114: Non-`*` bodies of foralls
 * #10121: Correct operational semantics around letrec.
 * #10134: Unexpected "Let should not be generalised" problem 
+* #10318: Allow superclass cycles
 
 '''Hard'''
 
@@ -65,10 +65,7 @@ Original source:
 
 == Typechecker ==
 
-* #7788: More intelligent behavior around loopy type families
-  * #8550: Probably a dup of #7788
 * #9450: Interleave checking against an hs-boot file while typechecking definitions
-* #9554: `-XUndecidableInstances` causes runtime loop
 * #9557: Deriving instances is slow
 * #10141: Add a hint about CUSKs to relevant error messages
 
@@ -94,7 +91,6 @@ Original source:
 * #9376: Improve error messages for closed type families that get stuck on the dark corners
 * #9378: Make unknown LANGUAGE pragmas warnings
 * #9394: `:info` should show instances of data and type families.
-* #9778: Allow warnings for unticked promoted things
 * #9784: Report better error for `Foo.'Z`
 * #10056: Remove the magic from parsing `~`. Some open design questions.
 
@@ -119,10 +115,7 @@ Original source:
 
 ''Unknown''
 
-* #9160: Some panic with optimizations and `singletons`.
 * #9693: Stale state left in failed compilation with GHCi and TH.
-* #10019: Reification in GHCi
-* #10047: Scoping weirdness around quasiquotation
 
 '''Design needed'''
 
