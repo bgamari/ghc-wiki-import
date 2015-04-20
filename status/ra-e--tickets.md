@@ -106,6 +106,7 @@ Original source:
 
 '''Easy'''
 
+* #6089: Allow nested declaration splices
 * #7808: Allow reification of a data instance name
 * #9022: Fix semicolons in pretty-printer
 * #9113: Warn about incomplete patterns in quotes. Fixed by #3927?
