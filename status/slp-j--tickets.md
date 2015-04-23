@@ -61,6 +61,7 @@ Original source:
 == Type families, roles, `Coercible`, `Typeable`, kind polymorphism ==
  
  * #9858, #10343: `Typeable` and kind polymorphism
+ * #10347: wrong "unused data constructor" warning for a newtype (using `Coercible`)
  * #10184,#10185: incompleteness in `Coercible` solver
  * #8165: GND for classes with associated types
  * #10075: `Constraint` vs `*`
