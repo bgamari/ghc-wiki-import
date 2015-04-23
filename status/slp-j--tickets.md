@@ -11,7 +11,6 @@ Original source:
  * #10285: a small bug in `Coercible` (Richard)
  * #10087: typechecking generic default methods (Pedro)
  * #10068: runtime reflection API for modules, names.
- * #9858: `Typeable` should be kind-aware (Iavor)
  * #10045: partial type sig bug (Thomas W is working on this)
  * #9960, #9805: `TrieMap` stuff
  * #10016: UNPACK support for existentials
@@ -59,8 +58,9 @@ Original source:
  * #7862: overlap beween givens and instances
  * #7842: polymorphism in recursive do-blocks
 
-== Type families, roles, and `Coercible` ==
+== Type families, roles, `Coercible`, `Typeable`, kind polymorphism ==
  
+ * #9858, #10343: `Typeable` and kind polymorphism
  * #10184,#10185: incompleteness in `Coercible` solver
  * #8165: GND for classes with associated types
  * #10075: `Constraint` vs `*`
