@@ -366,7 +366,7 @@ There are many pre-defined functions which can be used in this field:
 
 - **ignore\_output**         don't try to compare output
 
-- **timeout\_multiplier(n)** modify the default timeout (usually 300s, displayed at the beginning of the testsuite) by a given factor
+- **timeout\_multiplier(n)** modify the default timeout (usually 300s, displayed at the beginning of the testsuite) by a given factor. Currently this field does not seem to work as expected - see [\#10345](https://gitlab.staging.haskell.org/ghc/ghc/issues/10345)
 
 - **high\_memory\_usage**     this test uses a lot of memory (allows the testsuite driver to be intelligent about what it runs in parallel)
 
