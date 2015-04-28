@@ -70,6 +70,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
  
 
 
+- [\#10362](https://gitlab.staging.haskell.org/ghc/ghc/issues/10362): make tuple constraints into a class
 - [\#9858](https://gitlab.staging.haskell.org/ghc/ghc/issues/9858), [\#10343](https://gitlab.staging.haskell.org/ghc/ghc/issues/10343): `Typeable` and kind polymorphism
 - [\#10347](https://gitlab.staging.haskell.org/ghc/ghc/issues/10347): wrong "unused data constructor" warning for a newtype (using `Coercible`)
 - [\#10184](https://gitlab.staging.haskell.org/ghc/ghc/issues/10184),[\#10185](https://gitlab.staging.haskell.org/ghc/ghc/issues/10185): incompleteness in `Coercible` solver
