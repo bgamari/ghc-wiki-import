@@ -1,127 +1,92 @@
-# Defining kinds without an associated datatype
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Defining kinds without an associated datatype = 
 
-This ticket to track this request is [\#6024](https://gitlab.staging.haskell.org/ghc/ghc/issues/6024).
-
-
+This ticket to track this request is #6024.
 
 When using `-XDataKinds` GHC automatically promotes every datatype to a kind, and its constructors to
 types. This forces us to declare a datatype for every kind. However, sometimes we are not interested
 in the datatype at all, only on the kind. Consider the following data kind that defines a small
 universe for generic programming:
 
-
-```wiki
+{{{
 data Universe star = Sum  Universe Universe
                    | Prod Universe Universe
                    | K star
-```
-
+}}}
 
 This universe comes with an associated interpretation:
 
-
-```wiki
+{{{
 data Interpretation :: Universe * -> * where
   L    :: Interpretation a -> Interpretation (Sum a b)
   R    :: Interpretation b -> Interpretation (Sum a b)
   Prod :: Interpretation a -> Interpretation b -> Interpretation (Prod a b)
   K    :: a -> Interpretation (K a)
-```
-
+}}}
 
 In this case, having to declare a datatype for `Universe` has two disadvantages:
 
+  1. We cannot use kinds (such as `*`) while defining a datatype, so we are forced to make `Universe` a parametrised datatype, and later always instantiate this parameter to `*` (like in the kind of `Interpretation`).
 
-1. We cannot use kinds (such as `*`) while defining a datatype, so we are forced to make `Universe` a parametrised datatype, and later always instantiate this parameter to `*` (like in the kind of `Interpretation`).
+  2. We lose constructor name space, because the datatype constructor names will be taken, even though we will never use them. So `Prod` and `K` cannot be used as constructors of `Interpretation` as above, because those are also constructors of `Universe`.
 
-1. We lose constructor name space, because the datatype constructor names will be taken, even though we will never use them. So `Prod` and `K` cannot be used as constructors of `Interpretation` as above, because those are also constructors of `Universe`.
-
-
-**Solution**: let users define things like
-
-
-```wiki
+'''Solution''': let users define things like
+{{{
 data kind Universe = Sum  Universe Universe
                    | Prod Universe Universe
                    | K *
-```
-
-
+}}}
 By using `data kind`, we tell GHC that we are only interested in the `Universe` kind, and not the datatype.
 Consequently, `Sum`, `Prod`, and `K` will be types only, and not constructors.
 
-
-
 Also,
-
-
-```wiki
+{{{
 data type D = C
-```
-
-
+}}}
 defines a datatype `D` which is not promoted to a kind, and its constructor `C` is
 not promoted to a type.
 
-
-## Caveats
-
-
-### Star in Star
+== Caveats ==
 
 
-
+=== Star in Star ===
 If, in the future, we make `* :: *`, we will no longer have separation of
 types and kinds, so we won't be able to make such fine distinctions.
 
 
-### Recursive Groups
+=== Recursive Groups ===
 
 
-### Kind and Type Namespaces
-
-
-
+=== Kind and Type Namespaces ===
 As kinds and types currently share a namespace, `data kind` and
-`data type` declarations ```in the same module``` can still
+`data type` declarations '''in the same module''' can still
 conflict.  However, if they are in separate modules, this can be controlled by
 use of the module system.
 
 
-## Alternative Solutions
-
-
+== Alternative Solutions ==
 
 Add
-
-
-```wiki
+{{{
 data Star
-```
-
-
+}}}
 in `GHC.Exts` such that the promotion of datatype `Star` is the kind `*`. As a
 datatype, `Star` is just an empty datatype.
 
+''Advantages'': very easy, backwards compatible
+
+''Disadvantages'': somewhat verbose, doesn't fix (2)
 
 
-*Advantages*: very easy, backwards compatible
+== Alternative Notations ==
 
-
-
-*Disadvantages*: somewhat verbose, doesn't fix (2)
-
-
-## Alternative Notations
-
-
-- Use `data only` instead of `data type`.
-- Use `'data` instead of `data kind`, suggested by Gabor Greif.
-- Use `type data` instead of `data type`, suggested (preferred) by Gabor Greif.
-
+ * Use `data only` instead of `data type`.
+ * Use `'data` instead of `data kind`, suggested by Gabor Greif.
+ * Use `type data` instead of `data kind`, suggested (preferred) by Gabor Greif.
 
 In both cases, we felt that using `type` and `kind` as the modifiers to the `data` declaration better reflect what's being defined.
-
-
+```
