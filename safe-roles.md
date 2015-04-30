@@ -1,26 +1,34 @@
-CONVERSION ERROR
+# Roles, Abstraction & Safety
 
-Original source:
 
-```trac
-= Roles, Abstraction & Safety =
 
 GHC 7.8 introduced a new mechanism, roles, for implementing `GeneralizedNewtypeDeriving` safely. Roles solves a big issue with GND, type-safety. Previously, GND could be used to generate an `unsafeCoerce` function, which can easily segfault a program.
 
+
+
 However, GND had a second issue, it's ability to break module boundaries. How this should be handled with the new roles infrastructure and what the default should be was a major point of discussion before GHC 7.8 and after.
+
+
 
 The design chosen settled on enabling easier use of GND over enforcing module boundaries. This document tries to summaries the situation and propose alternatives for future GHC versions.
 
+
+
 A major focus is on improving the situation of Roles & GND for Safe Haskell.
 
-== Problem Pre-GHC-7.8 ==
+
+## Problem Pre-GHC-7.8
+
+
 
 We will ignore the type-safety issues as they have been resolved, instead we'll just look at the module boundary / abstraction issues.
+
+
 
 In GHC 7.6 or earlier, assume a library author writes the following `MinList` data type:
 
 
-{{{
+```wiki
 module MinList (
         MinList,
         newMinList,
@@ -36,13 +44,17 @@ newMinList n = MinList n []
 insertMinList :: Ord a => MinList a -> a -> MinList a
 insertMinList s@(MinList m xs) n | n > m     = MinList m (n:xs)
                                  | otherwise = s
-}}}
+```
+
 
 The `MinList` data type has an invariant (that depends on the `Ord` typeclass for the type parameter `a` that `MinList` is instantiated at) that after initialization it doesn't accept any element less than the initial element.
 
+
+
 In GHC 7.6 and earlier, we could use GND to violate this invariant:
 
-{{{
+
+```wiki
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 module Main where
 
@@ -70,53 +82,324 @@ bad = unsafeCast fine
 
 main = do
     print bad
-}}}
+```
+
 
 Essentially, through GND we have created the function `unsafeCast :: MinList (Down Int) -> MinList Int`. This is a function we can't write by hand since we don't have access to the `MinList` constructor and so can't "see" into the data type.
 
-== Safe Haskell Pre-GHC-7.8 ==
+
+## Safe Haskell Pre-GHC-7.8
+
+
 
 Due to both the type-safety and abstraction issues, GND was considered unsafe in Safe Haskell.
 
-== Background Reading ==
+
+## Background Reading
+
+
 
 Userguide:
-* https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/roles.html
+
+
+- [
+  https://downloads.haskell.org/\~ghc/latest/docs/html/users\_guide/roles.html](https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/roles.html)
+
 
 GHC Wiki:
-* https://ghc.haskell.org/trac/ghc/wiki/Roles
-* https://ghc.haskell.org/trac/ghc/wiki/Roles2
+
+
+- [
+  https://ghc.haskell.org/trac/ghc/wiki/Roles](https://ghc.haskell.org/trac/ghc/wiki/Roles)
+- [
+  https://ghc.haskell.org/trac/ghc/wiki/Roles2](https://ghc.haskell.org/trac/ghc/wiki/Roles2)
+
 
 Email Threads:
-* "Default Roles" -- https://mail.haskell.org/pipermail/glasgow-haskell-users/2013-October/024360.html
-* "Role Signatures in Libraries" -- https://mail.haskell.org/pipermail/libraries/2013-November/021707.html
-* "We need to add role annotations for 7.8" -- https://mail.haskell.org/pipermail/libraries/2014-March/022321.html
+
+
+- "Default Roles" -- [
+  https://mail.haskell.org/pipermail/glasgow-haskell-users/2013-October/024360.html](https://mail.haskell.org/pipermail/glasgow-haskell-users/2013-October/024360.html)
+- "Role Signatures in Libraries" -- [
+  https://mail.haskell.org/pipermail/libraries/2013-November/021707.html](https://mail.haskell.org/pipermail/libraries/2013-November/021707.html)
+- "We need to add role annotations for 7.8" -- [
+  https://mail.haskell.org/pipermail/libraries/2014-March/022321.html](https://mail.haskell.org/pipermail/libraries/2014-March/022321.html)
+
 
 Tickets:
-* "Inferring Safe mode with GeneralizedNewtypeDeriving is wrong" -- https://ghc.haskell.org/trac/ghc/ticket/8827
-* "GeneralizedNewtypeDeriving is still not Safe" -- https://ghc.haskell.org/trac/ghc/ticket/8745
-* "Require -XIncoherentInstances to write role annotations on class definitions" -- https://ghc.haskell.org/trac/ghc/ticket/8773
-* "Incoherent instances without -XIncoherentInstances" -- https://ghc.haskell.org/trac/ghc/ticket/8338
 
 
-== Opinions ==
+- "Inferring Safe mode with GeneralizedNewtypeDeriving is wrong" -- [
+  https://ghc.haskell.org/trac/ghc/ticket/8827](https://ghc.haskell.org/trac/ghc/ticket/8827)
+- "GeneralizedNewtypeDeriving is still not Safe" -- [
+  https://ghc.haskell.org/trac/ghc/ticket/8745](https://ghc.haskell.org/trac/ghc/ticket/8745)
+- "Require -XIncoherentInstances to write role annotations on class definitions" -- [
+  https://ghc.haskell.org/trac/ghc/ticket/8773](https://ghc.haskell.org/trac/ghc/ticket/8773)
+- "Incoherent instances without -XIncoherentInstances" -- [
+  https://ghc.haskell.org/trac/ghc/ticket/8338](https://ghc.haskell.org/trac/ghc/ticket/8338)
 
-https://mail.haskell.org/pipermail/glasgow-haskell-users/2013-October/024368.html
+## Roles Overview
 
-https://mail.haskell.org/pipermail/glasgow-haskell-users/2013-October/024378.html
+
+
+GHC 7.10 and later include a new implementation of GND that fixes the type-safety issues of previous versions.
+
+
+
+However, it also introduces a new concept of representation equality, that is, two types that have the same in-memory representation. This is to allow 'safe' casting from one type to another when they have representational equality, allowing newtypes to finally have no performance overhead.
+
+
+
+For example, before representational equality was introduced, the following code exacted a performance penalty:
+
+
+```wiki
+newtype N = MkN { unN :: Int }
+
+nsToInts :: [N] = [Int]
+nsToInts = map unN
+```
+
+
+Even though it's equivalent to `id`, GHC keeps a typed intermediate representation and can't optimize across the type conversion.
+
+
+### Data.Coerce
+
+
+
+The `Data.Coerce` package defines a new type-class:
+
+
+```wiki
+class Coercible a b
+
+coerce :: Coercible * a b => a -> b
+```
+
+
+The `Coercible` type-class can't be instantiated by hand, instead GHC will infer and generate them for two types with the same run-time representation.
+
+
+
+GHC generate three kinds of instances. First, the trivial base case:
+
+
+```wiki
+instance a a
+```
+
+
+Secondly, two instance exist for every `newtype NT = MkNT T`:
+
+
+```wiki
+instance Coercible a T => Coercible a NT
+instance Coercible T b => Coercible NT b
+```
+
+
+These two instances are only available if the `MkNT` constructor is in scope.
+
+
+
+Thirdly, for every type constructor there is an instance that allows coercion under the type. For example, let D be a type constructor (`data` or `newtype`) with three type arguments, which have roles nominal, representational, and phantom respectively. Then there is an instance of the form:
+
+
+```wiki
+instance Coercible b b' => Coercible (D a b c) (D a b' c')
+```
+
+
+This means that by default, as a library author of a type constructor like `Set a`, users of your library will have access to `coerce :: Set T -> Set NT`.
+
+
+
+To prevent this, you need to set the role of Set's type parameter to nominal by writing:
+
+
+```wiki
+type role Set nominal
+```
+
+### Roles
+
+
+
+The goal of the roles system is to track when two types have the same
+underlying representation. For example:
+
+
+```wiki
+newtype Age = MkAge Int
+
+type family Inspect x
+type instance Inspect Age = Int
+type instance Inspect Int = Bool
+
+class BadIdea a where { bad :: a -> Inspect a }
+instance BadIdea Int where { bad = (> 0) }
+deriving instance BadIdea Age -- not allowed!
+```
+
+
+If the derived instance was allowed, the type would be `bad :: Age -> Instpect Age`, which is equivalent to `bad :: Age -> Int`, and so if we simply used the `BadIdea Int` dictionary, then we'd produce a `Bool` when an `Int` is expected. Roles track how type variables are used to make sure
+such things can't happen!
+
+
+
+A role declares how a type parameter affects the equality of a type constructor when we have two applications that differ only in one parameter. For example:
+
+
+```wiki
+x :: T Age Bool c
+y :: T Int Bool c
+```
+
+
+Do `x` and `y` have representational equality? The role for the first type parameter of `T` determines this.
+
+
+
+There are three roles: representational, nominal and phantom.
+
+
+#### Representational
+
+
+```wiki
+data Simple a = MkSimple a -- a has role representational
+```
+
+
+The most common, and default, case is representational. This role allows
+coercion between the outer type when we the inner types are equal. For example:
+
+
+```wiki
+newtype MyInt = MkMyInt Int
+
+toMyInt :: Simple Int -> Simple MkMyInt
+toMyInt = coerce
+```
+
+#### Nominal
+
+
+```wiki
+type family F
+type instance F Int = Bool
+type instance F Age = Char
+
+data Complex a = MkComplex (F a) -- a has role nominal
+```
+
+
+Inferred when a type parameter may no longer have equivalent run-time
+representation despite the arguments having equality.
+
+
+#### Phantom
+
+
+```wiki
+data Phant a = MkPhant Bool -- a has role phantom
+```
+
+
+Inferred when the type parameter doesn't affect the run-time representation of
+the outer type.
+
+
+#### Role Annotations (-XRoleAnnotations)
+
+
+```wiki
+type role T nominal _ representational
+data T a b c = MkT a b
+```
+
+
+Roles have an ordering, `nominal > representational > phantom`, and annotations
+can only declare a type parameter to be a higher or equal role to the one
+inferred.
+
+
+## Roles & Safe Haskell
+
+
+
+Roles are an unfortunate mechanism for control right now. Since
+representational is the default role for most type constructors, to enforce
+invariants on abstract data types, library authors need to set their type
+constructors to have nominal roles.
+
+
+
+This requires that library authors understand roles to enforce what they expect
+to happen according to Haskell2010 semantics. It also prevents them using
+`coerce` internally and gaining the optimization, which is insulting as they
+can write the code that coerce is semantically equivalent to.
+
+
+
+It seems a different approach is needed, of either:
+
+
+
+1) Require that all constructors are in scope when calling `coerce`. There is
+some precedence for this as 7.10 requires that a newtype's constructor is in
+scope to use `coerce`.
+
+
+
+**NO**: This was requirement wasn't place of data types since some types (like
+`IORef`) don't even have constructors that can be in scope.
+
+
+
+2) Allow specifying internal + external role annotations.
+
+
+
+3) Change the default to be nominal when all the constructors aren't exported,
+and allow weakening of this to referential with role annotations.
+
+
+## Opinions
+
+
+
+[
+https://mail.haskell.org/pipermail/glasgow-haskell-users/2013-October/024368.html](https://mail.haskell.org/pipermail/glasgow-haskell-users/2013-October/024368.html)
+
+
+
+[
+https://mail.haskell.org/pipermail/glasgow-haskell-users/2013-October/024378.html](https://mail.haskell.org/pipermail/glasgow-haskell-users/2013-October/024378.html)
+
+
 
 2.) It also indicates that making any typeclass with a representational (/
-phantom?) argument shouldn't be possible in valid SafeHaskell, as you can
+phantom?) argument shouldn't be possible in valid [SafeHaskell](safe-haskell), as you can
 use it to subvert the current restrictions on OverlappingInstances.
+
 
 - If you could use GND only where the constructors are available, then some valid current use of GND would break, I believe. It would mean that GND would be unable to coerce a (Map String Int) to a (Map String Age), because the constructor of Set is (rightly) not exported. This would have a direct runtime significance for some users -- their code would run slower.
 
-== Pathways ==
+## Pathways
+
+
 
 Changing default role to nominal
 In GHC 7.8, unannotated datatype parameters default to phantom. This means that most normal parameters are given a representational role. It has been argued that perhaps nominal is a better (safer) default, and that users should specify representational when they want it. The problem with a nominal default is that it breaks all current usages of GND by default. Furthering the problem, when a user is unable to use GND it's the library that has to change, not the user's code.
 
+
+
 On Mar 31, 2014, Dominique Devriese writes the following suggestion:
 
+
+
 What I was wondering about is if the dilemma could be solved by choosing nominal-by-default in the long term for the role inference (so that library writers cannot accidentally leave abstraction holes open by forgetting to add role annotations) and use them in the long-term-supported SafeNewtypeDeriving extension, but provide a deprecated not-quite-as-safe GND extension for helping out users of libraries that have not yet added role annotations. I would fancy that this not-quite-as-safe GND could use unsafeCoerce wherever the safe one would give an error about annotated roles.
-```
+
+
