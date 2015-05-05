@@ -80,6 +80,7 @@
 - [\#9450](https://gitlab.staging.haskell.org/ghc/ghc/issues/9450): Interleave checking against an hs-boot file while typechecking definitions
 - [\#9557](https://gitlab.staging.haskell.org/ghc/ghc/issues/9557): Deriving instances is slow
 - [\#10141](https://gitlab.staging.haskell.org/ghc/ghc/issues/10141): Add a hint about CUSKs to relevant error messages
+- [\#10381](https://gitlab.staging.haskell.org/ghc/ghc/issues/10381): RebindableSyntax and RankNTypes
 
 ## Roles & such
 
