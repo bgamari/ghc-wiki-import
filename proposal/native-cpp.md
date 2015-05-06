@@ -9,12 +9,62 @@ Currently, GHC relies on the system-installed [
 C-preprocessor](http://en.wikipedia.org/wiki/C_preprocessor) (lateron referred to as system-`cpp`) accompanying the C compiler for implementing `{-# LANGUAGE CPP #-}`. However, this has several drawbacks:
 
 
+- We already have a couple of tickets filed w/ the `cpp` keyword: 
+
+  <table><tr><th>[\#860](https://gitlab.staging.haskell.org/ghc/ghc/issues/860)</th>
+  <td>CPP fails when a macro is used on a line containing a single quote character</td></tr>
+  <tr><th>[\#1290](https://gitlab.staging.haskell.org/ghc/ghc/issues/1290)</th>
+  <td>ghc runs preprocessor too much</td></tr>
+  <tr><th>[\#6132](https://gitlab.staging.haskell.org/ghc/ghc/issues/6132)</th>
+  <td>Can't use both shebang line and \#ifdef declarations in the same file.</td></tr>
+  <tr><th>[\#8444](https://gitlab.staging.haskell.org/ghc/ghc/issues/8444)</th>
+  <td>Fix CPP issue with Xcode5 in integer-simple</td></tr>
+  <tr><th>[\#8445](https://gitlab.staging.haskell.org/ghc/ghc/issues/8445)</th>
+  <td>Fix Xcode5 CPP issue with compiler/deSugar/DsBinds.lhs and compiler/utils/FastString.lhs</td></tr>
+  <tr><th>[\#8493](https://gitlab.staging.haskell.org/ghc/ghc/issues/8493)</th>
+  <td>Can't compile happy + ghc with clang's CPP</td></tr>
+  <tr><th>[\#9399](https://gitlab.staging.haskell.org/ghc/ghc/issues/9399)</th>
+  <td>CPP does not process test case enum01.hs correctly</td></tr>
+  <tr><th>[\#9978](https://gitlab.staging.haskell.org/ghc/ghc/issues/9978)</th>
+  <td>DEBUG is always replaced as 1 when CPP pragma is on</td></tr>
+  <tr><th>[\#10044](https://gitlab.staging.haskell.org/ghc/ghc/issues/10044)</th>
+  <td>Wrong line number reported with CPP and line beginning with \#</td></tr>
+  <tr><th>[\#10146](https://gitlab.staging.haskell.org/ghc/ghc/issues/10146)</th>
+  <td>Clang CPP adds extra newline character</td></tr>
+  <tr><th>[\#10147](https://gitlab.staging.haskell.org/ghc/ghc/issues/10147)</th>
+  <td>Clang CPP adds extra newline character</td></tr>
+  <tr><th>[\#10230](https://gitlab.staging.haskell.org/ghc/ghc/issues/10230)</th>
+  <td>multiline literals doesn't work with CPP extension.</td></tr>
+  <tr><th>[\#10543](https://gitlab.staging.haskell.org/ghc/ghc/issues/10543)</th>
+  <td>MacOS: validate fails on \\u</td></tr>
+  <tr><th>[\#10628](https://gitlab.staging.haskell.org/ghc/ghc/issues/10628)</th>
+  <td>clang's cpp causes incorrect line numbers in type errors</td></tr>
+  <tr><th>[\#12391](https://gitlab.staging.haskell.org/ghc/ghc/issues/12391)</th>
+  <td>LANGUAGE CPP messes up parsing when backslash like \\\\ is at end of line (eol)</td></tr>
+  <tr><th>[\#12516](https://gitlab.staging.haskell.org/ghc/ghc/issues/12516)</th>
+  <td>Preprocessing: no way to portably use stringize and string concatenation</td></tr>
+  <tr><th>[\#12628](https://gitlab.staging.haskell.org/ghc/ghc/issues/12628)</th>
+  <td>\_\_GLASGOW\_HASKELL\_LLVM\_\_ is no longer an Int</td></tr>
+  <tr><th>[\#14113](https://gitlab.staging.haskell.org/ghc/ghc/issues/14113)</th>
+  <td>Error message carets point at the wrong places in the presence of CPP macros</td></tr>
+  <tr><th>[\#14756](https://gitlab.staging.haskell.org/ghc/ghc/issues/14756)</th>
+  <td>\`ghc -M\` doesn't emit dependencies for header files included either via CPP or CApiFFI</td></tr>
+  <tr><th>[\#14757](https://gitlab.staging.haskell.org/ghc/ghc/issues/14757)</th>
+  <td>ghc recompilation check doesn't take into account headers directly included by CApiFFI</td></tr>
+  <tr><th>[\#15279](https://gitlab.staging.haskell.org/ghc/ghc/issues/15279)</th>
+  <td>CPP \#includes may result in nonsensical SrcSpans</td></tr>
+  <tr><th>[\#15328](https://gitlab.staging.haskell.org/ghc/ghc/issues/15328)</th>
+  <td>cpphs: internal error: evacuate(static): strange closure type 8440</td></tr>
+  <tr><th>[\#15775](https://gitlab.staging.haskell.org/ghc/ghc/issues/15775)</th>
+  <td>Interpreter is treating a comment character as an identifier character.</td></tr></table>
+
+
 - Fragile semantics, as the "traditional mode" in `cpp` GHC relies on is not well-specified, and therefore implementations disagree in subtle but annoying ways
 
   - Consider all the Clang-issues GHC experienced when Apple switched from the GCC toolchain to the Clang toolchain
   - Packages using `-XCPP` only tested with one system-`cpp` variant may not work with another system-`cpp` which either means more testing-cost and/or support-costs
 
-- As system-`cpp` is designed to handle mostly C-code, it conflicts with Haskell's tokenization/syntax, for instance:
+- As system-`cpp` is designed to handle mostly C-code, it conflicts with Haskell's tokenization/syntax, specifically:
 
   - Haskell-multi-line string literals can't be used anymore with `-XCPP` (c.f. [
     SO Question](http://stackoverflow.com/questions/2549167/cpp-extension-and-multiline-literals-in-haskell) and/or [\#10230](https://gitlab.staging.haskell.org/ghc/ghc/issues/10230))
