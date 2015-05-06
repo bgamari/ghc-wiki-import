@@ -31,14 +31,10 @@ C-preprocessor](http://en.wikipedia.org/wiki/C_preprocessor) (lateron referred t
   <td>Wrong line number reported with CPP and line beginning with \#</td></tr>
   <tr><th>[\#10146](https://gitlab.staging.haskell.org/ghc/ghc/issues/10146)</th>
   <td>Clang CPP adds extra newline character</td></tr>
-  <tr><th>[\#10147](https://gitlab.staging.haskell.org/ghc/ghc/issues/10147)</th>
-  <td>Clang CPP adds extra newline character</td></tr>
   <tr><th>[\#10230](https://gitlab.staging.haskell.org/ghc/ghc/issues/10230)</th>
   <td>multiline literals doesn't work with CPP extension.</td></tr>
   <tr><th>[\#10543](https://gitlab.staging.haskell.org/ghc/ghc/issues/10543)</th>
   <td>MacOS: validate fails on \\u</td></tr>
-  <tr><th>[\#10628](https://gitlab.staging.haskell.org/ghc/ghc/issues/10628)</th>
-  <td>clang's cpp causes incorrect line numbers in type errors</td></tr>
   <tr><th>[\#12391](https://gitlab.staging.haskell.org/ghc/ghc/issues/12391)</th>
   <td>LANGUAGE CPP messes up parsing when backslash like \\\\ is at end of line (eol)</td></tr>
   <tr><th>[\#12516](https://gitlab.staging.haskell.org/ghc/ghc/issues/12516)</th>
