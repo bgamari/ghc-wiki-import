@@ -1,86 +1,106 @@
-CONVERSION ERROR
-
-Original source:
-
-```trac
-[[PageOutline]]
-
-== Nofib results ==
-
-Full results [https://gist.githubusercontent.com/thoughtpolice/498d51153240cc4d899c/raw/9a43f6bbfd642cf4e7b15188f9c0b053d311f7b9/gistfile1.txt are here] (updated '''May 5th, 2015''')
-
-'''NB''': The baseline here is 7.6.3
 
 
 
-=== Nofib outliers ===
+## Nofib results
 
-==== Binary sizes ====
 
-===== 7.6 to 7.8 =====
 
-  - Solid average binary size increase of '''5.3%'''.
+Full results [
+are here](https://gist.githubusercontent.com/thoughtpolice/498d51153240cc4d899c/raw/9a43f6bbfd642cf4e7b15188f9c0b053d311f7b9/gistfile1.txt) (updated **May 5th, 2015**)
 
-===== 7.8 to 7.10 =====
 
-  - Average size increase of '''0.5%'''.
 
-==== Allocations ====
+**NB**: The baseline here is 7.6.3
 
-===== 7.6 to 7.8 =====
 
-  - '''spectral-norm''': increases by '''17.0%'''.
+### Nofib outliers
 
-===== 7.8 to 7.10 =====
 
-  - '''gcd''': increases by '''20.7%'''.
-  - '''multiplier''': increases by '''9.1%'''.
-  - '''pidigits''': increases by '''7.4%'''.
-  - '''primetest''': went down '''27.5%''' in 7.6-to-7.8, but '''8.8%''' slower than 7.6 now - in total it got something like '''36.6%''' worse.
+#### Binary sizes
 
-==== Runtime ====
 
-===== 7.6 to 7.8 =====
+##### 7.6 to 7.8
 
-  - `lcss`: increases by '''12.6%'''.
 
-===== 7.8 to 7.10 =====
+- Solid average binary size increase of **5.3%**.
 
-  - `lcss`: decreased by ~5% in 7.10, but still '''7%''' slower than 7.6.
-  - `multiplier`: increases by '''7.6%'''.
+#### Allocations
 
-== tests/perf/compiler` results ==
 
-=== 7.6 vs 7.8 ===
+##### 7.6 to 7.8
 
-  - A bit difficult to decipher, since a lot of the stats/surrounding numbers were totally rewritten due to some Testsuite API overhauls.
-  - The results are a mix; there are things like `peak_megabytes_allocated` being bumped up a lot, but a lot of them also had `bytes_allocated` go down as well. This one seems pretty mixed.
+
+- **spectral-norm**: increases by **17.0%**.
+
+##### 7.8 to 7.10
+
+
+- **gcd**: increases by **20.7%**.
+- **multiplier**: increases by **9.1%**.
+- **pidigits**: increases by **7.4%**.
+- **primetest**: went down **27.5%** in 7.6-to-7.8, but **8.8%** slower than 7.6 now - in total it got something like **36.6%** worse.
+
+#### Runtime
+
+
+##### 7.6 to 7.8
+
+
+- `lcss`: increases by **12.6%**.
+
+##### 7.8 to 7.10
+
+
+- `lcss`: decreased by \~5% in 7.10, but still **7%** slower than 7.6.
+- `multiplier`: increases by **7.6%**.
+
+## tests/perf/compiler\` results
+
+
+### 7.6 vs 7.8
+
+
+- A bit difficult to decipher, since a lot of the stats/surrounding numbers were totally rewritten due to some Testsuite API overhauls.
+- The results are a mix; there are things like `peak_megabytes_allocated` being bumped up a lot, but a lot of them also had `bytes_allocated` go down as well. This one seems pretty mixed.
+
+
   
-=== 7.8 vs 7.10 ===
 
-  - Things mostly got **better** according to these, not worse!
-  - Many of them had drops in `bytes_allocated`, for example, `T4801`.
-  - The average improvement range is something like 1-3%.
-  - But one got much worse; `T5837`'s `bytes_allocated` jumped from 45520936 to 115905208, 2.5x worse!
 
-=== 7.10 vs HEAD ===
+### 7.8 vs 7.10
 
-  - Most results actually got **better**, not worse!
-  - Silent superclasses made HEAD drop in several places, some noticeably over 2x
-    - `max_bytes_used` increased in some cases, but not much, probably GC wibbles.
-  - No major regressions, mostly wibbles.
 
-== Build times ==
+- Things mostly got **better** according to these, not worse!
+- Many of them had drops in `bytes_allocated`, for example, `T4801`.
+- The average improvement range is something like 1-3%.
+- But one got much worse; `T5837`'s `bytes_allocated` jumped from 45520936 to 115905208, 2.5x worse!
+
+### 7.10 vs HEAD
+
+
+- Most results actually got **better**, not worse!
+- Silent superclasses made HEAD drop in several places, some noticeably over 2x
+
+  - `max_bytes_used` increased in some cases, but not much, probably GC wibbles.
+- No major regressions, mostly wibbles.
+
+## Build times
+
+
 
 (NB: Sporadically updated)
 
-'''As of April 22nd''':
 
-  - GHC HEAD: 14m9s  (via 7.8.3) (because of Joachim's call-arity improvements)
-  - GHC 7.10: 15m43s (via 7.8.3)
-  - GHC 7.8:  12m54s (via 7.8.3)
-  - GHC 7.6:  8m19s  (via 7.4.1)
 
-Random note: GHC 7.10's build system actually disabled DPH (half a dozen more packages and probably a hundred extra modules), yet things *still* got slower over time!
+**As of April 22nd**:
 
-```
+
+- GHC HEAD: 14m9s  (via 7.8.3) (because of Joachim's call-arity improvements)
+- GHC 7.10: 15m43s (via 7.8.3)
+- GHC 7.8:  12m54s (via 7.8.3)
+- GHC 7.6:  8m19s  (via 7.4.1)
+
+
+Random note: GHC 7.10's build system actually disabled DPH (half a dozen more packages and probably a hundred extra modules), yet things \*still\* got slower over time!
+
+
