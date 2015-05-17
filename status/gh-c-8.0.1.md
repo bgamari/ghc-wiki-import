@@ -26,6 +26,7 @@ Active tickets](https://ghc.haskell.org/trac/ghc/query?status=infoneeded&status=
   their paper](http://research.microsoft.com/en-us/um/people/simonpj/papers/pattern-matching/gadtpm.pdf).
 - A (possible) overhaul of GHC's build system to use **Shake** instead of Make.
 - Support for reasoning about kind equalities, which gives promotion of GADTs to kinds, kind families, heterogeneous equality (kind-indexed GADTs), and `* :: *`. There is some discussion in [DependentHaskell/Phase1](dependent-haskell/phase1), but that's very low-level. I (Richard) have no good user-oriented write-up yet, but there shouldn't be much in the way of new syntax -- just fewer type errors.
+- A new, type-indexed type representation, `data TTypeRep (a :: k)`. This change should be fully backward compatible. See [Typeable](typeable).
 
 ## Migration Guide to 7.12
 
