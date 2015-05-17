@@ -1,33 +1,45 @@
-CONVERSION ERROR
+# Developer’s Infrastructure
 
-Original source:
 
-```trac
-= Developer’s Infrastructure =
 
 There are a number of services and tools that GHC developers should be aware of.
 
-== Official tools ==
 
- * Our [[Repositories|git repositories]], which are best used following the [[https://ghc.haskell.org/trac/ghc/wiki/|Working Conventions]]
- * The trac instance you are just using, which hosts the [[/wiki|wiki]] and the [[/report|bug tracker]]
- * Our [[MailingListsAndIRC|mailing lists]]
- * For code review, we use a [[Phabricator]] instance at https://phabricator.haskell.org/
- * We use [[Travis]] to validate each new commit: see https://travis-ci.org/ghc/ghc/builds for the current status
- * We also validate new commits using [[Phabricator/Harbormaster|Harbormaster]]: see https://phabricator.haskell.org/diffusion/GHC/history/ for the current status
- * We also use dedicated [wiki:Builder builders] to do nightly [[http://haskell.inf.elte.hu/builders/|builds]] of GHC and the [[http://haskell.inf.elte.hu/docs/|user documentation]]. See the [[wiki:BuilderSummary| builder summary page]] for more information. 
- * We can quickly install different versions of GHC with these [[http://deb.haskell.org/|Debian packages]].
+## Official tools
 
-== Beta tools ==
+
+- Our [git repositories](repositories), which are best used following the [
+  Working Conventions](https://ghc.haskell.org/trac/ghc/wiki/)
+- The trac instance you are just using, which hosts the [wiki](/trac/ghc/wiki) and the [bug tracker](/trac/ghc/report)
+- Our [mailing lists](mailing-lists-and-irc)
+- For code review, we use a [Phabricator](phabricator) instance at [
+  https://phabricator.haskell.org/](https://phabricator.haskell.org/)
+- We use [Travis](travis) to validate each new commit: see [
+  https://travis-ci.org/ghc/ghc/builds](https://travis-ci.org/ghc/ghc/builds) for the current status
+- We also validate new commits using [Harbormaster](phabricator/harbormaster): see [
+  https://phabricator.haskell.org/diffusion/GHC/history/](https://phabricator.haskell.org/diffusion/GHC/history/) for the current status
+- We also use dedicated [builders](builder) to do nightly [
+  builds](http://haskell.inf.elte.hu/builders/) of GHC and the [
+  user documentation](http://haskell.inf.elte.hu/docs/). See the [ builder summary page](builder-summary) for more information. 
+
+## Beta tools
+
+
 
 These tools are currently being evaluated.
 
- * A dashboard tracking the performance numbers of each commit is running at http://ghcspeed-nomeata.rhcloud.com/ by nomeata
 
-== External tools ==
+- A dashboard tracking the performance numbers of each commit is running at [
+  http://ghcspeed-nomeata.rhcloud.com/](http://ghcspeed-nomeata.rhcloud.com/) by nomeata
+
+## External tools
+
+
 
 There are a bunch of external services that might be of interest to GHC developers:
 
- * Source code statistics on Ohloh: https://www.ohloh.net/p/ghc
- * Similar statistics, on GitHub: https://github.com/ghc/ghc/graphs
-```
+
+- Source code statistics on Ohloh: [
+  https://www.ohloh.net/p/ghc](https://www.ohloh.net/p/ghc)
+- Similar statistics, on GitHub: [
+  https://github.com/ghc/ghc/graphs](https://github.com/ghc/ghc/graphs)
