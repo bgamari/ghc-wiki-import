@@ -1,106 +1,87 @@
+CONVERSION ERROR
+
+Original source:
+
+```trac
+[[PageOutline]]
+
+== Nofib results ==
+
+Full results [https://gist.githubusercontent.com/thoughtpolice/498d51153240cc4d899c/raw/9a43f6bbfd642cf4e7b15188f9c0b053d311f7b9/gistfile1.txt are here] (updated '''May 5th, 2015''')
+
+'''NB''': The baseline here is 7.6.3
 
 
 
-## Nofib results
+=== Nofib outliers ===
 
+==== Binary sizes ====
 
+===== 7.6 to 7.8 =====
 
-Full results [
-are here](https://gist.githubusercontent.com/thoughtpolice/498d51153240cc4d899c/raw/9a43f6bbfd642cf4e7b15188f9c0b053d311f7b9/gistfile1.txt) (updated **May 5th, 2015**)
+  - Solid average binary size increase of '''5.3%'''.
 
+==== Allocations ====
 
+===== 7.6 to 7.8 =====
 
-**NB**: The baseline here is 7.6.3
+  - '''spectral-norm''': increases by '''17.0%'''.
+    - A '''lot''' more calls to `map`, over 100 more! Maybe inliner failure?
+    - Over '''twice''' as many calls to `ghc-prim:GHC.Classes.$fEqChar_$c=={v r90O}` (& similar functions). Also over twice as many calls to `elem`, 
+    - Similarly, many more calls to other specializations, like `base:Text.ParserCombinators.ReadP.$fMonadPlusP_$cmplus{v r1sr}`, which adds even more allocations (from 301 to 3928!)
+    - Basically the same story up to HEAD!
 
+===== 7.8 to 7.10 =====
 
-### Nofib outliers
+  - '''gcd''': increases by '''20.7%'''.
+    - Ticky tells us that this seems to be a combination of a few things; most everything seems fairly similar, but we see a large amount of allocations attributable to 7.10 that I can't figure out where they came from, aside from the new `integer-gmp`: `integer-gmp-1.0.0.0:GHC.Integer.Type.$WS#{v rwl}` accounts for 106696208 extra bytes of allocation! It also seems like there are actual extant calls to `GHC.Base.map` in 7.10, and none in 7.8. These are the main differences.
+  - '''pidigits''': increases by '''7.4%'''.
+    - Ticky tells us that this seems to be, in large part, due to `integer-gmp` (which is mostly what it benchmarks anyway). I think part of this is actually an error, because before integer-gmp, a lot of things were done in C-- code or whatnot, while the new `integer-gmp` does everything in Haskell, so a lot more Haskell code shows up in the profile. So the results aren't 1-to-1. One thing that seems to be happening is that there are a lot more specializations going on that are called repeatedly, it seems; many occurrences of things like `sat_sad2{v} (integer-gmp-1.0.0.0:GHC.Integer.Type) in rfK` which don't exist in the 7.8 profiles, each with a lot of entries and allocations.
+  - '''primetest''': went down '''27.5%''' in 7.6-to-7.8, but '''8.8%''' slower than 7.6 now - in total it got something like '''36.6%''' worse.
+    - Much like '''pidigits''', a lot more `integer-gmp` stuff shows up in these profiles. While it's still just like the last one, there are some other regressions; for example, `GHC.Integer.Type.remInteger` seems to have 245901/260800 calls/bytes allocated, vs 121001/200000 for 7.8
+==== Runtime ====
 
+===== 7.6 to 7.8 =====
 
-#### Binary sizes
+  - `lcss`: increases by '''12.6%'''.
 
+===== 7.8 to 7.10 =====
 
-##### 7.6 to 7.8
+  - `lcss`: decreased by ~5% in 7.10, but still '''7%''' slower than 7.6.
+  - `multiplier`: increases by '''7.6%'''.
 
+== tests/perf/compiler` results ==
 
-- Solid average binary size increase of **5.3%**.
+=== 7.6 vs 7.8 ===
 
-#### Allocations
-
-
-##### 7.6 to 7.8
-
-
-- **spectral-norm**: increases by **17.0%**.
-
-##### 7.8 to 7.10
-
-
-- **gcd**: increases by **20.7%**.
-- **multiplier**: increases by **9.1%**.
-- **pidigits**: increases by **7.4%**.
-- **primetest**: went down **27.5%** in 7.6-to-7.8, but **8.8%** slower than 7.6 now - in total it got something like **36.6%** worse.
-
-#### Runtime
-
-
-##### 7.6 to 7.8
-
-
-- `lcss`: increases by **12.6%**.
-
-##### 7.8 to 7.10
-
-
-- `lcss`: decreased by \~5% in 7.10, but still **7%** slower than 7.6.
-- `multiplier`: increases by **7.6%**.
-
-## tests/perf/compiler\` results
-
-
-### 7.6 vs 7.8
-
-
-- A bit difficult to decipher, since a lot of the stats/surrounding numbers were totally rewritten due to some Testsuite API overhauls.
-- The results are a mix; there are things like `peak_megabytes_allocated` being bumped up a lot, but a lot of them also had `bytes_allocated` go down as well. This one seems pretty mixed.
-
-
+  - A bit difficult to decipher, since a lot of the stats/surrounding numbers were totally rewritten due to some Testsuite API overhauls.
+  - The results are a mix; there are things like `peak_megabytes_allocated` being bumped up a lot, but a lot of them also had `bytes_allocated` go down as well. This one seems pretty mixed.
   
+=== 7.8 vs 7.10 ===
 
+  - Things mostly got **better** according to these, not worse!
+  - Many of them had drops in `bytes_allocated`, for example, `T4801`.
+  - The average improvement range is something like 1-3%.
+  - But one got much worse; `T5837`'s `bytes_allocated` jumped from 45520936 to 115905208, 2.5x worse!
 
-### 7.8 vs 7.10
+=== 7.10 vs HEAD ===
 
+  - Most results actually got **better**, not worse!
+  - Silent superclasses made HEAD drop in several places, some noticeably over 2x
+    - `max_bytes_used` increased in some cases, but not much, probably GC wibbles.
+  - No major regressions, mostly wibbles.
 
-- Things mostly got **better** according to these, not worse!
-- Many of them had drops in `bytes_allocated`, for example, `T4801`.
-- The average improvement range is something like 1-3%.
-- But one got much worse; `T5837`'s `bytes_allocated` jumped from 45520936 to 115905208, 2.5x worse!
-
-### 7.10 vs HEAD
-
-
-- Most results actually got **better**, not worse!
-- Silent superclasses made HEAD drop in several places, some noticeably over 2x
-
-  - `max_bytes_used` increased in some cases, but not much, probably GC wibbles.
-- No major regressions, mostly wibbles.
-
-## Build times
-
-
+== Build times ==
 
 (NB: Sporadically updated)
 
+'''As of April 22nd''':
 
+  - GHC HEAD: 14m9s  (via 7.8.3) (because of Joachim's call-arity improvements)
+  - GHC 7.10: 15m43s (via 7.8.3)
+  - GHC 7.8:  12m54s (via 7.8.3)
+  - GHC 7.6:  8m19s  (via 7.4.1)
 
-**As of April 22nd**:
+Random note: GHC 7.10's build system actually disabled DPH (half a dozen more packages and probably a hundred extra modules), yet things *still* got slower over time!
 
-
-- GHC HEAD: 14m9s  (via 7.8.3) (because of Joachim's call-arity improvements)
-- GHC 7.10: 15m43s (via 7.8.3)
-- GHC 7.8:  12m54s (via 7.8.3)
-- GHC 7.6:  8m19s  (via 7.4.1)
-
-
-Random note: GHC 7.10's build system actually disabled DPH (half a dozen more packages and probably a hundred extra modules), yet things \*still\* got slower over time!
-
-
+```
