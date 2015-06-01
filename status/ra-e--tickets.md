@@ -85,6 +85,7 @@ Original source:
 '''Error messages'''
 
 * #9518
+* #10471: When someone forgets `deriving`
 
 '''Solver'''
 
