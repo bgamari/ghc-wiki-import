@@ -88,6 +88,8 @@ Original source:
 
 '''Solver'''
 
+* #8095: More type-families optimizations
+
 == Front end ==
 
 * #7169: Warn about incomplete record selectors
