@@ -40,6 +40,7 @@ Original source:
 == Front end ==
 
  * #10321: normalising a type in `:type` in GHCi
+ * #10018: fixity for data constructors in GHCi
  * #10318: recursive superclasses
  * #10183: warning for redundant constraints, and pattern-match overlap warnings
  * #10179: displaying kinds
