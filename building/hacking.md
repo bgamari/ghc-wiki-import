@@ -34,7 +34,7 @@ is usually a good choice.  For more information on what you can do with `build.m
 To build the whole thing (compiler, libraries, compiler again), do this:
 
 {{{
-$ perl boot
+$ ./boot
 $ ./configure
 $ make
 }}}
