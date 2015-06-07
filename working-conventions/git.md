@@ -166,7 +166,7 @@ This uses the `ssh://` protocol (which has much higher latency due to the SSH ha
 
 - If possible, commit often.  This helps to avoid conflicts.
 
-## General git tips
+## More git tips
 
 
 
