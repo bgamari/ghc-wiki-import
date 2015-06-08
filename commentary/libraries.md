@@ -152,7 +152,7 @@ Alas, since the `ghc` package (implementing the GHC API) is certainly an install
 
 
 
-Currently the Boot Packages that are not installed are `haskelline`, `mtl`, and `terminfo`; these are needed to build the GHC front-end, but not to build the `ghc` *package*.
+Currently the Boot Packages that are not installed are `haskeline`, `mtl`, and `terminfo`; these are needed to build the GHC front-end, but not to build the `ghc` *package*.
 
 
 
