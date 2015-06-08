@@ -1,116 +1,169 @@
-CONVERSION ERROR
 
-Original source:
 
-```trac
 
-[[PageOutline]]
+# Setting up a Linux system for building GHC
 
-= Setting up a Linux system for building GHC =
+
 
 If you're on a recent Linux system, then you should be able to get a working build environment by installing the following packages using your system's package manager.
 
-== Docker ==
+
+## Docker
+
+
 
 If you are familiar with docker, this is a 1 step install for a development image (ghc build requirements plus a few development related tools).
-First cd into your ghc directory that you checkout according to [wiki:Building/GettingTheSources]
+First cd into your ghc directory that you checkout according to [Building/GettingTheSources](building/getting-the-sources)
 
-{{{
+
+```wiki
      docker run --rm -i -t -v `pwd`:/home/ghc gregweber/ghc-haskell-dev /bin/bash
-}}}
+```
+
 
 Thats it!
 This mounts your ghc source code into the docker container.
 This way you can still hack on GHC with Emacs, etc, but you are just building from the docker container.
 Note that `arc` (the ghc patch submission tool) is installed in the image (although you can also use it from your docker host) along with vim-tiny for editing commit messages.
 
-== Fedora ==
 
-Install the [https://ghc.haskell.org/trac/ghc/wiki/Building/Preparation/Tools required tools] using the following command for Fedora 22 and later (for earlier versions of Fedora, use `yum` instead of `dnf`):
 
-{{{
+Send pull requests to [
+https://github.com/gregwebs/ghc-docker-dev](https://github.com/gregwebs/ghc-docker-dev) if something is out-of-date.
+
+
+## Fedora
+
+
+
+Install the [
+required tools](https://ghc.haskell.org/trac/ghc/wiki/Building/Preparation/Tools) using the following command for Fedora 22 and later (for earlier versions of Fedora, use `yum` instead of `dnf`):
+
+
+```wiki
    sudo dnf install glibc-devel ncurses-devel gmp-devel autoconf automake libtool gcc make perl python ghc happy alex git
-}}}
+```
+
 
 For building the documentation: (User's Guide and Cabal guide):
 (optional)
-{{{
+
+
+```wiki
    sudo dnf install docbook-utils docbook-utils-pdf docbook-style-xsl
-}}}
+```
+
 
 other  packages that are useful for development:
 (optional)
-{{{
+
+
+```wiki
    sudo dnf install strace patch
-}}}
+```
+
 
 Now the system should be ready to build GHC.
 
+
+
 For a quickstart, follow the commands listed under:
 
-https://github.com/ghc/ghc#building--installing
 
-== Debian, Ubuntu, and other Debian-based systems ==
+
+[
+https://github.com/ghc/ghc\#building--installing](https://github.com/ghc/ghc#building--installing)
+
+
+## Debian, Ubuntu, and other Debian-based systems
+
+
 
 You can make sure you have all dependencies by
 
-{{{
+
+```wiki
    sudo apt-get build-dep ghc
-}}}
+```
+
 
 But this might install some packages you do not use in your system (e.g. java, docbook, xsltproc).  Alternatively install the following:
 
-{{{
+
+```wiki
    sudo apt-get install haskell-platform git autoconf automake libtool make libgmp-dev ncurses-dev g++ python bzip2
-}}}
+```
+
 
 (`ncurses-dev` is needed by the `terminfo` package, and `g++` is needed by a couple of tests, `ghcilink003` and `ghcilink006`).
 
-To install llvm-3.6, as required by GHC > 7.10, see http://llvm.org/apt. Note: I had to replace `llvm-toolchain-trusty-3.6` by `llvm-toolchain-trusty-3.6-binaries`. See also the file `.travis.yml` in the ghc rootfolder.
 
 
-Due to the nature of Debian, you may have difficulty building GHC >7.6 due to version incompatibilities with the Happy and Alex packages.  To alleviate this issue simply install both packages using the haskell-platform provided cabal.
+To install llvm-3.6, as required by GHC \> 7.10, see [
+http://llvm.org/apt](http://llvm.org/apt). Note: I had to replace `llvm-toolchain-trusty-3.6` by `llvm-toolchain-trusty-3.6-binaries`. See also the file `.travis.yml` in the ghc rootfolder.
 
-{{{
+
+
+Due to the nature of Debian, you may have difficulty building GHC \>7.6 due to version incompatibilities with the Happy and Alex packages.  To alleviate this issue simply install both packages using the haskell-platform provided cabal.
+
+
+```wiki
    cabal install alex happy
-}}}
+```
+
 
 For building the documentation (User's Guide):
 
-{{{
+
+```wiki
    sudo apt-get install dblatex docbook-xsl docbook-utils libxml2-utils
-}}}
+```
+
 
 other packages that are useful for development:
 
-{{{
+
+```wiki
    sudo apt-get install linux-tools-generic xutils-dev
-}}}
+```
 
-The package `linux-tools` includes `perf`, see [wiki:Debugging/LowLevelProfiling/Perf]. The package `xutils-dev` provides the `lndir` program, need for running `make sdist` and useful for maintaining a separate build tree, see [wiki:Building/Using].
 
-== Arch ==
+The package `linux-tools` includes `perf`, see [Debugging/LowLevelProfiling/Perf](debugging/low-level-profiling/perf). The package `xutils-dev` provides the `lndir` program, need for running `make sdist` and useful for maintaining a separate build tree, see [Building/Using](building/using).
 
-The list of dependencies is the same as for [https://aur.archlinux.org/packages/ghc-git/ ghc-git] package on AUR.
 
-== Nix/NixOS ==
+## Arch
+
+
+
+The list of dependencies is the same as for [
+ghc-git](https://aur.archlinux.org/packages/ghc-git/) package on AUR.
+
+
+## Nix/NixOS
+
+
 
 First, you need to clone Nixpkgs, so you could use recent Nix recipes:
 
-{{{
+
+```wiki
    git clone https://github.com/NixOS/nixpkgs  
-}}}
+```
+
 
 Then, you can build the environment needed for compiling HEAD (assuming that the `nixpkgs` directory is in `/home/user`):
 
-{{{
+
+```wiki
    cd ~
    nix-build '<nixpkgs>' -A haskell-ng.compiler.ghcHEAD --run-env -I /home/user
-}}}
+```
 
-Finally, clone, configure, and build GHC (see [wiki:/Newcomers] for details), but replace the usual `configure && make` with the Nix build phases:
 
-{{{
+Finally, clone, configure, and build GHC (see [Newcomers](newcomers) for details), but replace the usual `configure && make` with the Nix build phases:
+
+
+```wiki
    git clone --recursive https://github.com/ghc/ghc
    cd ghc/
    ./sync-all get
@@ -124,5 +177,4 @@ Finally, clone, configure, and build GHC (see [wiki:/Newcomers] for details), bu
    cd ..
    buildPhase
    # edit build.mk to remove the comment marker # on the line stage=2
-}}}
 ```
