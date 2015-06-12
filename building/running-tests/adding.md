@@ -354,7 +354,8 @@ There are many pre-defined functions which can be used in this field:
 
 - **ignore\_output**         don't try to compare output
 
-- **timeout\_multiplier(n)** modify the default timeout (usually 300s, displayed at the beginning of the testsuite) by a given factor. Currently this field does not seem to work as expected - see [\#10345](https://gitlab.staging.haskell.org/ghc/ghc/issues/10345)
+- **compile\_timeout\_multiplier(n)** and **run\_timeout\_multiplier(n)**
+  modify the default compile and run timeout respectively (usually 300s, displayed at the beginning of the testsuite) by a given factor. The timeout program returns with exit code 99 if it kills your test. So if you want a timeout to mean success instead of failure, add exit\_code(99) as a setup function.
 
 - **high\_memory\_usage**     this test uses a lot of memory (allows the testsuite driver to be intelligent about what it runs in parallel)
 
