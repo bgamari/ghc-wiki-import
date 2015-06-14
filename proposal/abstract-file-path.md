@@ -60,20 +60,31 @@ Instead, we propose to phase out `type FilePath = String` in 3 phases:
 
 
 <table><tr><th>**Phase 1**</th>
-<td>Introduce conversion functions for
-forward-compatibility in the `filepath` package:
+<td>
+Add type forward-compat conversion functions `toFilePath` & `fromFilePath` to the standard `System.IO` module, as that module is the official home of the `FilePath` type in the Haskell Report.
 </td></tr></table>
 
+
+>
+>
+> Also add these conversion functions for
+> forward-compatibility to the `filepath` package:
+>
+>
 
 ```
 module System.FilePath where
 
+#if MIN_VERSION_base(4,9,0)
+-- re-export {to,from}FilePath from System.IO
+#else
 -- | Total Unicode-friendly encoding
 toFilePath :: String -> FilePath
 toFilePath = id
 
 fromFilePath :: FilePath -> String
 fromFilePath = id
+#endif
 ```
 
 <table><tr><th>**Phase 2**</th>
@@ -91,8 +102,8 @@ fromFilePath = id
 <table><tr><th>**Phase 3**</th>
 <td>Make `FilePath` abstract in `base`, i.e. make
 `FilePath` into a `newtype`/`data` but don't export its
-constructor via non-internal modules. `Prelude` would continue to
-export the type `FilePath`.
+constructor via non-internal modules. `Prelude`  and `System.IO` would continue to
+export the type `FilePath`. `System.IO` will continue to export `toFilePath`/`fromFilePath`. 
 </td></tr></table>
 
 
@@ -130,7 +141,8 @@ type PlatformFilePath = PosixFilePath
 -- | Type representing filenames/pathnames
 newtype FilePath = FilePath PlatformFilePath -- constructor not exported from Prelude
 
-instance IsString FilePath where fromString = toFilePath
+instance IsString FilePath where 
+    fromString = toFilePath
 
 -- | \"String-Concatenation\" for 'FilePaths'
 --
@@ -143,7 +155,8 @@ instance IsString FilePath where fromString = toFilePath
 -- That has the same semantics with pre-AFPP and post-AFPP 'FilePath's
 --
 -- NB: 'mappend' is *not* the same as '(</>)', but rather matches the semantics for pre-AFPP 'FilePaths'
-instance Monoid FilePath where mappend a b = <...string-concat...>
+instance Monoid FilePath where 
+    mappend a b = <...string-concat...>
 ```
 
 
