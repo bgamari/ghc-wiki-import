@@ -56,7 +56,7 @@ So, deliberately, a module that gathers and re-exports deprecated functions does
 module Gather( foo, f, g ) wehre
   import Def( foo, f )
   import Blah( g )
-}}
+}}}
 
 == Specification of deprecated class methods ==
 
