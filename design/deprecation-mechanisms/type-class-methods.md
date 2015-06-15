@@ -98,7 +98,7 @@ x = bar () -- no warning, because the import doesn't limit `bar` to be a method 
 
 
 
-The existing `{-# DEPRECATED bar ".." #}` pragma causes a deprecation warning to be emitted whenever `foo` is referred to in any way.
+The existing `{-# DEPRECATED foo ".." #}` pragma causes a deprecation warning to be emitted whenever `foo` is referred to in any way.
 
 
 
