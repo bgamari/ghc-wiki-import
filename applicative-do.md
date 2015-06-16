@@ -1,227 +1,172 @@
-# Applicative do-notation
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Applicative do-notation =
 
 This is a proposal to add support to GHC for desugaring do-notation into Applicative expressions where possible.
 
+To jump to the code, see [https://phabricator.haskell.org/D729].
 
-
-To jump to the code, see [
-https://phabricator.haskell.org/D729](https://phabricator.haskell.org/D729).
-
-
-## Summary
-
-
+== Summary ==
 
 `ApplicativeDo` is a language extension enabled in the usual way via
 
-
-```wiki
+{{{
 {-# LANGUAGE ApplicativeDo #-}
-```
-
+}}}
 
 When `ApplicativeDo` is turned on, GHC will use a different method for desugaring `do`-notation, which attempts to use the `Applicative` operator `<*>` as far as possible, along with `fmap` and `join`.
 
-
-
 `ApplicativeDo` makes it possible to use `do`-notation for types that are `Applicative` but not `Monad`.  (See examples below).
-
-
 
 For a type that is a`Monad`, `ApplicativeDo` implements the same semantics as the standard `do`-notation desugaring, provided `<*>` = `ap` for this type.
 
-
-
 `ApplicativeDo` respects `RebindableSyntax`: it will pick up whatever `<*>`, `fmap`, and `join` are in scope when `RebindableSyntax` is on.
 
+== Motivation
 
-## Motivation
+ 1. Some Monads have the property that Applicative bind is more
+    efficient than Monad bind.  Sometimes this is ''really
+    important'', such as when the Applicative bind is 
+    concurrent whereas the Monad bind is sequential (c.f. [https://github.com/facebook/Haxl Haxl]).  For
+    these monads we would like the do-notation to desugar to
+    Applicative bind where possible, to take advantage of the improved
+    behaviour but without forcing the user to explicitly choose.
 
+ 2. Applicative syntax can be a bit obscure and hard to write.
+    Do-notation is more natural, so we would like to be able to write
+    Applicative composition in do-notation where possible.  For example:
+{{{
+(\x y z -> x*y + y*z + z*x) <$> expr1 <*> expr2 <*> expr3
+}}}
+    vs.
+{{{
+do x <- expr1; y <- expr2; z <- expr3; return (x*y + y*z + z*x)
+}}}
 
-1. Some Monads have the property that Applicative bind is more
-  efficient than Monad bind.  Sometimes this is *really
-  important*, such as when the Applicative bind is 
-  concurrent whereas the Monad bind is sequential (c.f. [
-  Haxl](https://github.com/facebook/Haxl)).  For
-  these monads we would like the do-notation to desugar to
-  Applicative bind where possible, to take advantage of the improved
-  behaviour but without forcing the user to explicitly choose.
+== Example 1 ==
 
-1. Applicative syntax can be a bit obscure and hard to write.
-  Do-notation is more natural, so we would like to be able to write
-  Applicative composition in do-notation where possible.  For example:
-
-  ```wiki
-  (\x y z -> x*y + y*z + z*x) <$> expr1 <*> expr2 <*> expr3
-  ```
-
-  vs.
-
-  ```wiki
-  do x <- expr1; y <- expr2; z <- expr3; return (x*y + y*z + z*x)
-  ```
-
-## Example 1
-
-
-```wiki
+{{{
 do
   x <- a
   y <- b
   return (f x y)
-```
-
+}}}
 
 This translates to
 
-
-```wiki
+{{{
 (\x y -> f x y) <$> a <*> b
-```
-
+}}}
 
 Here we noticed that the statements `x <- a` and `y <- b` are independent, so we can make an `Applicative` expression.  Note that the desugared version uses the operators `<$>` and `<*>`, so its inferred type will mention `Applicative` only rather than `Monad`.  Therefore this `do` block will work for a type that is `Applicative` but not `Monad`.
 
-
-## Example 2
-
-
+== Example 2 ==
 
 If the final statement does not have a `return`, then we need to use `join`:
 
-
-```wiki
+{{{
 do
   x <- a
   y <- b
   f x y
-```
-
+}}}
 
 Translates to
 
-
-```wiki
+{{{
 join ((\x y -> f x y) <$> a <*> b)
-```
-
+}}}
 
 Since `join` is a `Monad` operation, this expression requires `Monad`.
 
 
-## Example 3
+== Example 3 ==
 
-
-```wiki
+{{{
   do
     x1 <- A
     x2 <- B
     x3 <- C x1
     x4 <- D x2
     return (x1,x2,x3,x4)
-```
-
+}}}
 
 Here we can do `A` and `B` together, and `C` and `D` together.  We could do it like this:
 
-
-```wiki
+{{{
   do
     (x1,x2) <- (,) <$> A <*> B
     (\x3 x4 -> (x1,x2,x3,x4)) <$> C x1 <*> D x2
-```
-
+}}}
 
 But it is slightly more elegant like this:
 
-
-```wiki
+{{{
    join ((\x1 x2 -> (\x3 x4 -> (x1,x2,x3,x4)) <$> C x1 <*> D x2)) <$> A <*> B)
-```
-
+}}}
 
 because we avoid the intermediate tuple.
 
+== Example 4 ==
 
-## Example 4
-
-
-```wiki
+{{{
    do
      x <- A
      y <- B x
      z <- C
      return (f x y z)
-```
-
+}}}
 
 Now we have a dependency: `y` depends on `x`, but there is still an opportunity to use `Applicative` since `z` does not depend on `x` or `y`.  In this case we end up with:
 
-
-```wiki
+{{{
   (\(x,y) z -> f x y z) <$> (do x <- A; y <- B x; return (x,y)) <*> C
-```
-
+}}}
 
 Note that we had to introduce a tuple to return both the values of `x` and `y` from the inner `do` expression
 
-
-
 It's important that we keep the original ordering.  For example, we don't want this:
 
-
-```wiki
+{{{
   do 
     (x,z) <- (,) <$> A <*> C
     y <- B x
     return (f x y z)
-```
-
+}}}
 
 because this has a different semantics from the standard 'do' desugaring; a `Monad` that cares about ordering will expose the difference.
 
-
-
 Another wrong result would be:
 
-
-```wiki
+{{{
   do
     x <- A
     (\y z -> f x y z) <$> B x <*> C
-```
-
+}}}
 
 Because this version has less parallelism than the first result, in which `A` and `B` could be performed at the same time as `C`.
 
-
-## Example 5
-
-
+== Example 5 ==
 
 In general, `ApplicativeDo` might have to build a complicated nested `Applicative` expression.
 
-
-```wiki
+{{{
 do
   x1 <- a
   x2 <- b
   x3 <- c x1
   x4 <- d
   return (x2,x3,x4)
-```
-
+}}}
 
 Here we can do `a/b/d` in parallel, but `c` depends on `x1`, which makes things a bit tricky: remember that we have to retain the semantics of standard `do` desugaring, so we can't move the call to `c` after the call to `d`.
 
-
-
 This translates to
 
-
-```wiki
+{{{
 (\(x2,x3) x4 -> (x2, x3, x4))
   <$> join ((\x1 x2 -> do
                          x3 <- c x1
@@ -229,36 +174,35 @@ This translates to
               <$> a
               <*> b)
   <*> d)
-```
-
+}}}
 
 We can write this expression in a simpler way using `|` for applicative composition (like parallel composition) and `;` for monadic composition (like sequential composition): `((a | b) ; c) | d`.
 
-
-
 Note that this isn't the only good way to translate this expression, this is also possible: `(a ; b | c) | d`.  It's not possible to know which is better.  `ApplicativeDo` makes a best-effort attempt to use parallel composition where possible while retaining the semantics of the standard 'do' desugaring.
 
+---------------------------------
 
----
-
-
-## Related proposals
-
-
-- [
-  Max's proposal on haskell-cafe](http://www.haskell.org/pipermail/haskell-cafe/2011-September/095153.html)
-- [
-  Control.Applicative.QQ.ADo](http://hackage.haskell.org/package/applicative-quoters-0.1.0.7/docs/Control-Applicative-QQ-ADo.html)
-
-## Implementation
+== Related proposals
+ * [http://www.haskell.org/pipermail/haskell-cafe/2011-September/095153.html Max's proposal on haskell-cafe]
+ * [http://hackage.haskell.org/package/applicative-quoters-0.1.0.7/docs/Control-Applicative-QQ-ADo.html Control.Applicative.QQ.ADo]
 
 
+
+== Implementation
 
 The implementation is tricky, because we want to do a transformation that affects type checking (and renaming, because we might be using `RebindableSyntax`), but we still want type errors in terms of the original source code.  Therefore we calculate everything necessary to do the transformation during renaming, but leave enough information behind to reconstruct the original source code for the purposes of error messages.
 
+See comments in [https://phabricator.haskell.org/D729] for more details.
+
+=== Tricky case
+
+{{{
+ do { x <- A
+    ; y <- B
+    ; z <- C x
+    ; return (z+y) }
+}}}
+Then we could do `A ; (B | C)` or `(A | B) ; C`.  If B is long-running, then the second is best; if C is long-running then the first is best.  Neither wins all the time.
 
 
-See comments in [
-https://phabricator.haskell.org/D729](https://phabricator.haskell.org/D729) for more details.
-
-
+```
