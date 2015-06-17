@@ -116,7 +116,7 @@ For building the documentation (User's Guide):
 
 
 ```wiki
-   sudo apt-get install dblatex docbook-xsl docbook-utils libxml2-utils
+   sudo apt-get install dblatex docbook-xsl docbook-utils libxml2-utils texlive-font-utils
 ```
 
 
