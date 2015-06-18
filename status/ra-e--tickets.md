@@ -141,6 +141,7 @@ Original source:
 * #8679: Include value and function signatures in their declarations
 * #8761: Pattern synonyms
 * #10331: Better interop between TH and !HsSyn
+* #10541: Reifying tyvars' kinds
 
 == Generic programming ==
 
