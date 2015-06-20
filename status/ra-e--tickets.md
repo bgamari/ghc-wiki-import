@@ -124,6 +124,7 @@ Original source:
 * #10385: Add extra check around TH annotations
 * #10486: More `addTopDecls`
 * #10522: Type-level operator support
+* #10548: Type wildcards
 
 '''Unknown'''
 
