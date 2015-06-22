@@ -3,6 +3,7 @@ CONVERSION ERROR
 Original source:
 
 ```trac
+'''This is implemented, and partially working. See DynamicLinkingDebate for further contemplation.'''
 
 = Dynamic GHC programs =
 
