@@ -2,7 +2,7 @@
 
 
 
-In GHC 7.8 we made GHCi dynamically-linked.  That is, it links against compiled Haskell packages (it already used dynamically-linked C libraries, that is not the issue here).
+In GHC 7.8 we [made](dynamic-ghc-programs) GHCi dynamically-linked.  That is, it links against compiled Haskell packages (it already used dynamically-linked C libraries, that is not the issue here).
 
 
 
