@@ -1,7 +1,3 @@
-
-**WORK-IN-PROGRESS - NOT READY FOR PUBLICATION YET**
-
-
 # Abstract `FilePath` Proposal (AFPP)
 
 
@@ -148,7 +144,7 @@ instance IsString FilePath where
 --
 -- This allows to write forward-compatible code for Haskell2010 'FilePath`s
 --
--- E.g. code can be written like
+-- E.g. code can be written (assuming `-XOverloadedStrings`) like
 --
 -- > tarfname = basedir </> "ghc-" <> ver <> "~" <> gitid <.> "tar.xz"
 --
@@ -156,6 +152,7 @@ instance IsString FilePath where
 --
 -- NB: 'mappend' is *not* the same as '(</>)', but rather matches the semantics for pre-AFPP 'FilePaths'
 instance Monoid FilePath where 
+    mempty      = <...>
     mappend a b = <...string-concat...>
 ```
 
