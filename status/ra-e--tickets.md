@@ -125,6 +125,7 @@ Original source:
 * #10486: More `addTopDecls`
 * #10522: Type-level operator support
 * #10548: Type wildcards
+* #10572: Quantify over quoted variables
 
 '''Unknown'''
 
