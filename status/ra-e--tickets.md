@@ -42,6 +42,7 @@ Original source:
 * #10121: Correct operational semantics around letrec.
 * #10134: Unexpected "Let should not be generalised" problem 
 * #10318: Allow superclass cycles
+* #10581: Recommend !ScopedTypeVariables
 
 '''Hard'''
 
