@@ -367,6 +367,10 @@ If you switch between active trees, you must use a `setq` to change this variabl
 
 
 
+TODO the description below does not make use of `(haskell-compile)`, nor the use of `-ferror-spans`, which provide a much better experience than the vanilla `(compile)`-mode
+
+
+
 **How to enable**:
 
 
