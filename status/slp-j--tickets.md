@@ -28,7 +28,7 @@ Original source:
  * #10487: `Generic` name clash
  * #10514: `Generic` for existentials
 
-=== Impredicativity and higher rank ===
+== Impredicativity and higher rank ==
  * #10619: higher rank and order of equations
  * #4281, #4295, #4347, #7264, #8808, #9420, #9730: impredicativity
 
@@ -94,6 +94,7 @@ Original source:
 == Template Haskell ==
 See also [wiki:TemplateHaskell]
 
+ * #10267: typed holes and TH
  * #10548: partial type sigs and TH
  * #10541: reify kind information
  * #10385: TH and annotations
