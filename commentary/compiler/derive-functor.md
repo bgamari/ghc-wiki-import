@@ -1,25 +1,30 @@
-CONVERSION ERROR
+# Support for deriving `Functor`, `Foldable`, and `Traversable` instances
 
-Original source:
 
-```trac
-= Support for deriving {{{Functor}}}, {{{Foldable}}}, and {{{Traversable}}} instances =
-[[PageOutline]]
 
-GHC 6.12.1 introduces an extension to the {{{deriving}}} mechanism allowing for automatic derivation of {{{Functor}}}, {{{Foldable}}}, and {{{Traversable}}} instances using the {{{DeriveFunctor}}}, {{{DeriveFoldable}}}, and {{{DeriveTraversable}}} extensions, respectively. Twan van Laarhoven [https://mail.haskell.org/pipermail/haskell-prime/2007-March/002137.html first proposed this feature] in 2007, and [https://ghc.haskell.org/trac/ghc/ticket/2953 opened a related GHC Trac ticket] in 2009.
 
-== Example ==
 
-{{{#!hs
+
+GHC 6.12.1 introduces an extension to the `deriving` mechanism allowing for automatic derivation of `Functor`, `Foldable`, and `Traversable` instances using the `DeriveFunctor`, `DeriveFoldable`, and `DeriveTraversable` extensions, respectively. Twan van Laarhoven [
+first proposed this feature](https://mail.haskell.org/pipermail/haskell-prime/2007-March/002137.html) in 2007, and [
+opened a related GHC Trac ticket](https://ghc.haskell.org/trac/ghc/ticket/2953) in 2009.
+
+
+## Example
+
+
+```
 {-# LANGUAGE DeriveFunctor, DeriveFoldable, DeriveTraversable #-}
 
 data Example a = Ex a Char (Example a) (Example Char)
   deriving (Functor, Foldable, Traversable)
-}}}
+```
+
 
 The derived code would look something like this:
 
-{{{#!hs
+
+```
 instance Functor Example where
     fmap f (Ex a1 a2 a3 a4) = Ex (f a1) a2 (fmap f a3) a4
 
@@ -29,25 +34,34 @@ instance Foldable Example where
 
 instance Traversable Example where
     traverse f (Ex a1 a2 a3 a4) = Ex <$> (f a) <*> pure a2 <*> traverse f a3 <*> pure a4
-}}}
+```
 
-== Algorithm description ==
+## Algorithm description
 
-{{{DeriveFunctor}}}, {{{DeriveFoldable}}}, and {{{DeriveTraversable}}} all operate using the same underlying mechanism. GHC inspects the arguments of each constructor and derives some operation to perform on each argument, which depends of the type of the argument itself. In a {{{Functor}}} instance, for example {{{fmap}}} would be applied to occurrences of the last type parameter, but {{{id}}} would be applied to other type parameters. Typically, there are five cases to consider. (Suppose we have a data type {{{data A a = ...}}}.)
 
-1. Terms whose type does not mention {{{a}}}
-2. Terms whose type mentions {{{a}}}
-3. Occurrences of {{{a}}}
-4. Tuple values
-5. Function values
 
-After this is done, the new terms are combined in some way. For instance, {{{Functor}}} instances combine terms in a derived {{{fmap}}} definition by applying the appropriate constructor to all terms, whereas in {{{Foldable}}} instances, a derived {{{foldMap}}} definition would {{{mappend}}} the terms together.
+`DeriveFunctor`, `DeriveFoldable`, and `DeriveTraversable` all operate using the same underlying mechanism. GHC inspects the arguments of each constructor and derives some operation to perform on each argument, which depends of the type of the argument itself. In a `Functor` instance, for example `fmap` would be applied to occurrences of the last type parameter, but `id` would be applied to other type parameters. Typically, there are five cases to consider. (Suppose we have a data type `data A a = ...`.)
 
-=== {{{DeriveFunctor}}} ===
 
-A comment in [http://git.haskell.org/ghc.git/blob/9f968e97a0de9c2509da00f6337b612dd72a0389:/compiler/typecheck/TcGenDeriv.hs#l1476 TcGenDeriv.hs] lays out the basic structure of {{{DeriveFunctor}}}, which derives an implementation for {{{fmap}}}.
+1. Terms whose type does not mention `a`
+1. Terms whose type mentions `a`
+1. Occurrences of `a`
+1. Tuple values
+1. Function values
 
-{{{
+
+After this is done, the new terms are combined in some way. For instance, `Functor` instances combine terms in a derived `fmap` definition by applying the appropriate constructor to all terms, whereas in `Foldable` instances, a derived `foldMap` definition would `mappend` the terms together.
+
+
+### `DeriveFunctor`
+
+
+
+A comment in [
+TcGenDeriv.hs](http://git.haskell.org/ghc.git/blob/9f968e97a0de9c2509da00f6337b612dd72a0389:/compiler/typecheck/TcGenDeriv.hs#l1476) lays out the basic structure of `DeriveFunctor`, which derives an implementation for `fmap`.
+
+
+```wiki
 For the data type:
 
   data T a = T1 Int a | T2 (T a)
@@ -105,15 +119,21 @@ This is pretty much the same as $fmap, only without the $(cofmap 'a 'a) case:
   $(cofmap 'a '[b])        =  map $(cofmap 'a 'b)
   $(cofmap 'a '(T b1 b2))  =  fmap $(cofmap 'a 'b2)   -- when a only occurs in the last parameter, b2
   $(cofmap 'a '(b -> c))   =  \x b -> $(cofmap 'a' 'c) (x ($(fmap 'a 'c) b))
-}}}
+```
 
-{{{DeriveFunctor}}} is special in that it can recurse into function types, whereas {{{DeriveFoldable}}} and {{{DeriveTraversable}}} cannot (see the section on covariant and contravariant positions).
 
-=== {{{DeriveFoldable}}} ===
+`DeriveFunctor` is special in that it can recurse into function types, whereas `DeriveFoldable` and `DeriveTraversable` cannot (see the section on covariant and contravariant positions).
 
-Another comment in [http://git.haskell.org/ghc.git/blob/9f968e97a0de9c2509da00f6337b612dd72a0389:/compiler/typecheck/TcGenDeriv.hs#l1725 TcGenDeriv.hs] reveals the underlying mechanism behind {{{DeriveFoldable}}}:
 
-{{{
+### `DeriveFoldable`
+
+
+
+Another comment in [
+TcGenDeriv.hs](http://git.haskell.org/ghc.git/blob/9f968e97a0de9c2509da00f6337b612dd72a0389:/compiler/typecheck/TcGenDeriv.hs#l1725) reveals the underlying mechanism behind `DeriveFoldable`:
+
+
+```wiki
 Deriving Foldable instances works the same way as Functor instances,
 only Foldable instances are not possible for function types at all.
 Here the derived instance for the type T above is:
@@ -130,22 +150,29 @@ The cases are:
 
 Note that the arguments to the real foldr function are the wrong way around,
 since (f :: a -> b -> b), while (foldr f :: b -> t a -> b).
-}}}
+```
 
-In addition to {{{foldr}}}, {{{DeriveFoldable}}} also generates a definition for {{{foldMap}}} as of GHC 7.8.1 (addressing [https://ghc.haskell.org/trac/ghc/ticket/7436 #7436]). The pseudo-definition for {{{$(foldMap)}}} would look something like this:
 
-{{{
+In addition to `foldr`, `DeriveFoldable` also generates a definition for `foldMap` as of GHC 7.8.1 (addressing [
+\#7436](https://ghc.haskell.org/trac/ghc/ticket/7436)). The pseudo-definition for `$(foldMap)` would look something like this:
+
+
+```wiki
   $(foldMap 'a 'b)         = \x -> mempty     -- when b does not contain a
   $(foldMap 'a 'a)         = f
   $(foldMap 'a '(b1,b2))   = \x -> case x of (x1, x2) -> mappend ($(foldMap 'a 'b1) x1) ($(foldMap 'a 'b2) x2)
   $(foldMap 'a '(T b1 b2)) = \x -> foldMap $(foldMap 'a 'b2) x -- when a only occurs in the last parameter, b2
-}}}
+```
 
-=== {{{DeriveTraversable}}} ===
+### `DeriveTraversable`
 
-From [http://git.haskell.org/ghc.git/blob/9f968e97a0de9c2509da00f6337b612dd72a0389:/compiler/typecheck/TcGenDeriv.hs#l1800 TcGenDeriv.hs]:
 
-{{{
+
+From [
+TcGenDeriv.hs](http://git.haskell.org/ghc.git/blob/9f968e97a0de9c2509da00f6337b612dd72a0389:/compiler/typecheck/TcGenDeriv.hs#l1800):
+
+
+```wiki
 Again, Traversable is much like Functor and Foldable.
 
 The cases are:
@@ -161,53 +188,74 @@ Note that the generated code is not as efficient as it could be. For instance:
 
 gives the function: traverse f (T x y) = T <$> pure x <*> f y
 instead of:         traverse f (T x y) = T x <$> f y
-}}}
+```
 
-=== Covariant and contravariant positions ===
+### Covariant and contravariant positions
 
-One challenge of deriving {{{Functor}}} instances for arbitrary data types is handling function types. To illustrate this, note that these all can have derived {{{Functor}}} instances:
 
-{{{#!hs
+
+One challenge of deriving `Functor` instances for arbitrary data types is handling function types. To illustrate this, note that these all can have derived `Functor` instances:
+
+
+```
 data CovFun1 a = CovFun1 (Int -> a)
 data CovFun2 a = CovFun2 ((a -> Int) -> a)
 data CovFun3 a = CovFun3 (((Int -> a) -> Int) -> a)
-}}}
+```
+
 
 but none of these can:
 
-{{{#!hs
+
+```
 data ContraFun1 a = ContraFun1 (a -> Int)
 data ContraFun2 a = ContraFun2 ((Int -> a) -> Int)
 data ContraFun3 a = ContraFun3 (((a -> Int) -> a) -> Int)
-}}}
+```
 
-In {{{CovFun1}}}, {{{CovFun2}}}, and {{{CovFun3}}}, all occurrences of the type variable {{{a}}} are in ''covariant'' positions (i.e., the {{{a}}} values are produced), whereas in {{{ContraFun1}}}, {{{ContraFun2}}}, and {{{ContraFun3}}}, all occurrences of {{{a}}} are in ''contravariant'' positions (i.e., the {{{a}}} values are consumed). If we have a function {{{f :: a -> b}}}, we can't apply {{{f}}} to an {{{a}}} value in a contravariant position, which precludes a {{{Functor}}} instance.
 
-Most type variables appear in covariant positions. Functions are special in that the lefthand side of a function arrow reverses variance. If a function type {{{a -> b}}} appears in a covariant position (e.g., {{{CovFun1}}} above), then {{{a}}} is in a contravariant position and {{{b}}} is in a covariant position. Similarly, if {{{a -> b}}} appears in a contravariant position (e.g., {{{CovFun2}}} above), then {{{a}}} is in a covariant position and {{{b}}} is in a contravariant position.
+In `CovFun1`, `CovFun2`, and `CovFun3`, all occurrences of the type variable `a` are in *covariant* positions (i.e., the `a` values are produced), whereas in `ContraFun1`, `ContraFun2`, and `ContraFun3`, all occurrences of `a` are in *contravariant* positions (i.e., the `a` values are consumed). If we have a function `f :: a -> b`, we can't apply `f` to an `a` value in a contravariant position, which precludes a `Functor` instance.
 
-If we annotate covariant positions with {{{p}}} (for positive) and contravariant positions with {{{n}}} (for negative), then we can examine the above examples with the following pseudo-type signatures:
 
-{{{
+
+Most type variables appear in covariant positions. Functions are special in that the lefthand side of a function arrow reverses variance. If a function type `a -> b` appears in a covariant position (e.g., `CovFun1` above), then `a` is in a contravariant position and `b` is in a covariant position. Similarly, if `a -> b` appears in a contravariant position (e.g., `CovFun2` above), then `a` is in a covariant position and `b` is in a contravariant position.
+
+
+
+If we annotate covariant positions with `p` (for positive) and contravariant positions with `n` (for negative), then we can examine the above examples with the following pseudo-type signatures:
+
+
+```wiki
 CovFun1/ContraFun1 :: n -> p
 CovFun2/ContraFun2 :: (p -> n) -> p
 CovFun3/ContraFun3 :: ((n -> p) -> n) -> p
-}}}
+```
 
-Since {{{ContraFun1}}}, {{{ContraFun2}}}, and {{{ContraFun3}}} all use the last type parameter in at least one {{{n}}} position, GHC would reject a derived {{{Functor}}} instance for each of them.
 
-== Requirements for legal instances ==
+Since `ContraFun1`, `ContraFun2`, and `ContraFun3` all use the last type parameter in at least one `n` position, GHC would reject a derived `Functor` instance for each of them.
 
-This mechanism cannot derive {{{Functor}}}, {{{Foldable}}}, or {{{Traversable}}} instances for all data types. Currently, GHC checks if a data type meets the following criteria:
 
-1. The data type has at least one type parameter. (For example, {{{data NoArg = NoArg}}} cannot have a {{{Functor}}} instance.)
-2. The data type's last type parameter cannot be used contravariantly. (see the section on covariant and contravariant positions.)
-3. The data type's last type parameter cannot be used in the "wrong place" in any constructor's data arguments. For example, in {{{data Right a = Right [a] (Either Int a)}}}, the type parameter {{{a}}} is only ever used as the last type argument in {{{[]}}} and {{{Either}}}, so both {{{[a]}}} and {{{Either Int a}}} values can be {{{fmap}}}ped. However, in {{{data Wrong a = Wrong (Either a a)}}}, the type variable {{{a}}} appears in a position other than the last, so trying to {{{fmap}}} an {{{Either a a}}} value would not typecheck.
+## Requirements for legal instances
 
-   Note that there are two exceptions to this rule: tuple and function types.
-4. The data type's last type variable cannot used in a {{{-XDatatypeContexts}}} constraint. For example, {{{data Ord a => O a = O a deriving Functor}}} would be rejected.
-5. The data type's last type variable must be truly universally quantified, i.e., it must not have any class or equality constraints. This means that the following is legal:
 
-{{{#!hs
+
+This mechanism cannot derive `Functor`, `Foldable`, or `Traversable` instances for all data types. Currently, GHC checks if a data type meets the following criteria:
+
+
+1. The data type has at least one type parameter. (For example, `data NoArg = NoArg` cannot have a `Functor` instance.)
+1. The data type's last type parameter cannot be used contravariantly. (see the section on covariant and contravariant positions.)
+1. The data type's last type parameter cannot be used in the "wrong place" in any constructor's data arguments. For example, in `data Right a = Right [a] (Either Int a)`, the type parameter `a` is only ever used as the last type argument in `[]` and `Either`, so both `[a]` and `Either Int a` values can be `fmap`ped. However, in `data Wrong a = Wrong (Either a a)`, the type variable `a` appears in a position other than the last, so trying to `fmap` an `Either a a` value would not typecheck.
+
+>
+>
+> Note that there are two exceptions to this rule: tuple and function types.
+>
+>
+
+1. The data type's last type variable cannot used in a `-XDatatypeContexts` constraint. For example, `data Ord a => O a = O a deriving Functor` would be rejected.
+1. The data type's last type variable must be truly universally quantified, i.e., it must not have any class or equality constraints. This means that the following is legal:
+
+```
 data T a b where
     T1 :: a -> b -> T a b      -- Fine! Vanilla H-98
     T2 :: b -> c -> T a b      -- Fine! Existential c, but we can still map over 'b'
@@ -221,35 +269,50 @@ instance Functor (T a) where
     fmap f (T2 b c) = T2 (f b) c
     fmap f (T3 x)   = T3 (f x)
 -}
-}}}
+```
 
-   but the following is not legal:
+>
+>
+> but the following is not legal:
+>
+>
 
-{{{#!hs
+```
 data T a b where
     T4 :: Ord b => b -> T a b  -- No!  'b' is constrained
     T5 :: b -> T b b           -- No!  'b' is constrained
     T6 :: T a (b,b)            -- No!  'b' is constrained
-}}}
+```
 
-For derived {{{Foldable}}} and {{{Traversable}}} instances, a data type cannot use function types. This restriction does not apply to derived {{{Functor}}} instances, however.
 
-=== Proposal: relax universality check for {{{DeriveFoldable}}} ===
+For derived `Foldable` and `Traversable` instances, a data type cannot use function types. This restriction does not apply to derived `Functor` instances, however.
 
-In the Requirements for legal instances section, restriction 5 applies to {{{DeriveFunctor}}}, {{{DeriveFoldable}}}, and {{{DeriveTraversable}}} alike. However, {{{Foldable}}} instances are unique in that they do not produce constraints, but only consume them. Therefore, it is permissible to derive {{{Foldable}}} instances for constrained data types (e.g., GADTs), so restriction 5 should be lifted for {{{DeriveFoldable}}}.
+
+### Proposal: relax universality check for `DeriveFoldable`
+
+
+
+In the Requirements for legal instances section, restriction 5 applies to `DeriveFunctor`, `DeriveFoldable`, and `DeriveTraversable` alike. However, `Foldable` instances are unique in that they do not produce constraints, but only consume them. Therefore, it is permissible to derive `Foldable` instances for constrained data types (e.g., GADTs), so restriction 5 should be lifted for `DeriveFoldable`.
+
+
 
 For example, consider the following GADT:
 
-{{{#!hs
+
+```
 data T a where
     T1 :: Ord a => a -> T a
-}}}
+```
 
-In the type signatures for {{{fmap :: Functor t => (a -> b) -> t a -> t b}}} and {{{traverse :: (Applicative f, Traversable t) => (a -> f b) -> t a -> f (t b)}}}, the {{{t}}} parameter appears both in an argument and the result type, so pattern-matching on a value of {{{t}}} must not impose any constraints, as neither {{{fmap}}} nor {{{traverse}}} would typecheck.
 
-{{{Foldable}}}, however, only mentions {{{t}}} in argument types:
+In the type signatures for `fmap :: Functor t => (a -> b) -> t a -> t b` and `traverse :: (Applicative f, Traversable t) => (a -> f b) -> t a -> f (t b)`, the `t` parameter appears both in an argument and the result type, so pattern-matching on a value of `t` must not impose any constraints, as neither `fmap` nor `traverse` would typecheck.
 
-{{{#!hs
+
+
+`Foldable`, however, only mentions `t` in argument types:
+
+
+```
 class Foldable t where
     fold :: Monoid m => t m -> m
     foldMap :: Monoid m => (a -> m) -> t a -> m
@@ -267,29 +330,35 @@ class Foldable t where
     minimum :: forall a. Ord a => t a -> a
     sum :: Num a => t a -> a
     product :: Num a => t a -> a
-}}}
+```
 
-Therefore, a derived {{{Foldable}}} instance for {{{T}}} would typecheck:
 
-{{{#!hs
+Therefore, a derived `Foldable` instance for `T` would typecheck:
+
+
+```
 instance Foldable T where
     foldr f z (T1 a) = f a z -- foldr :: Ord a => (a -> b -> b) -> b -> T a -> b
     foldMap f (T1 a) = f a   -- foldMap :: (Monoid m, Ord a) => (a -> m) -> T a -> m
-}}}
+```
 
-Deriving {{{Foldable}}} instances for GADTs with equality constraints can become murky, however. Consider this GADT:
 
-{{{#!hs
+Deriving `Foldable` instances for GADTs with equality constraints can become murky, however. Consider this GADT:
+
+
+```
 data E a where
     E1 :: (a ~ Int) => a   -> E a
     E2 ::              Int -> E Int
-    E3 :: (b ~ Int) => b   -> E Int
+    E3 :: (a ~ Int) => a   -> E Int
     E4 :: (a ~ Int) => Int -> E a
-}}}
+```
 
-All four {{{E}}} constructors have the same "shape" in that they all take an argument of type {{{a}}} (or {{{Int}}}, to which {{{a}}} is constrained to be equal). Does that mean all four constructors would have their arguments folded over? While it is possible to derive perfectly valid code which would do so:
 
-{{{#!hs
+All four `E` constructors have the same "shape" in that they all take an argument of type `a` (or `Int`, to which `a` is constrained to be equal). Does that mean all four constructors would have their arguments folded over? While it is possible to derive perfectly valid code which would do so:
+
+
+```
 instance Foldable E where
     foldr f z (E1 e) = f e z
     foldr f z (E2 e) = f e z
@@ -300,20 +369,26 @@ instance Foldable E where
     foldMap f (E2 e) = f e
     foldMap f (E3 e) = f e
     foldMap f (E4 e) = f e
-}}}
+```
 
-it is much harder to determine which arguments are equivalent to {{{a}}}. Also consider this case:
 
-{{{#!hs
+it is much harder to determine which arguments are equivalent to `a`. Also consider this case:
+
+
+```
 data UnknownConstraints a where
     UC :: Mystery a => Int -> UnknownConstraints a
-}}}
+```
 
-For all we know, it may be that {{{a ~ Int => Mystery a}}}. Does this mean that the {{{Int}}} argument in {{{UC}}} should be folded over?
 
-To avoid these thorny edge cases, we only consider constructor arguments (1) whose types are ''syntactically'' equivalent to the last type parameter and (2) in cases when the last type parameter is a ''simple'' type variable. In the above {{{E}}} example, only {{{E1}}} fits the bill, so the derived {{{Foldable}}} instance should actually be:
+For all we know, it may be that `a ~ Int => Mystery a`. Does this mean that the `Int` argument in `UC` should be folded over?
 
-{{{#!hs
+
+
+To avoid these thorny edge cases, we only consider constructor arguments (1) whose types are *syntactically* equivalent to the last type parameter and (2) in cases when the last type parameter is a *simple* type variable. In the above `E` example, only `E1` fits the bill, so the derived `Foldable` instance should actually be:
+
+
+```
 instance Foldable E where
     foldr f z (E1 e) = f e z
     foldr f z (E2 e) = z
@@ -324,16 +399,23 @@ instance Foldable E where
     foldMap f (E2 e) = mempty
     foldMap f (E3 e) = mempty
     foldMap f (E4 e) = mempty
-}}}
+```
 
-To expound more on the meaning of criterion (2), we want not only to avoid cases like {{{E2 :: Int -> E Int}}}, but also something like this:
 
-{{{#!hs
+To expound more on the meaning of criterion (2), we want not only to avoid cases like `E2 :: Int -> E Int`, but also something like this:
+
+
+```
 data HigherKinded f a where
     HigherKinded :: f a -> HigherKinded f (f a)
-}}}
-
-In this example, the last type variable is instantiated with {{{f a}}}, which contains one type variable {{{f}}} applied to another type variable {{{a}}}. We would ''not'' fold over the argument of type {{{f a}}} in this case, because the last type variable should be ''simple'', i.e., contain only a single variable without any application.
-
-For the original discussion on this proposal, see [https://ghc.haskell.org/trac/ghc/ticket/10447 #10447].
 ```
+
+
+In this example, the last type variable is instantiated with `f a`, which contains one type variable `f` applied to another type variable `a`. We would *not* fold over the argument of type `f a` in this case, because the last type variable should be *simple*, i.e., contain only a single variable without any application.
+
+
+
+For the original discussion on this proposal, see [
+\#10447](https://ghc.haskell.org/trac/ghc/ticket/10447).
+
+
