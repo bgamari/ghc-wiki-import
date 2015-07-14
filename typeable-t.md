@@ -1,19 +1,24 @@
-CONVERSION ERROR
+# Type Indexed Type Representations Proposal
 
-Original source:
 
-```trac
-= Type Indexed Type Representations Proposal =
+## Overview
 
-== Overview ==
-Proposed API for type indexed type representations, and basic {{{Dynamic}}} functionality, without using pattern synonyms.
-We consider 3 modules {{{TyConT}}}, {{{Typeable}}} and {{{Dynamic}}}, built up in that order.
-We consider two varients, one for ghc as of 2015-07-10 with kind-homogenous equalities {{{a:~:b}}} only, and one for type hetrogenous type equalities {{{a:~~:b}}}.
-The TCB consists of {{{TyConT}}} and {{{Typeable}}} in the homogenous case, and just {{{TyConT}}} in the hetrogenous case.
 
-== Homogenous Case ==
-{{{TyConT}}}:
-{{{#!hs
+
+Proposed API for type indexed type representations, and basic `Dynamic` functionality, without using pattern synonyms.
+We consider 3 modules `TyConT`, `Typeable` and `Dynamic`, built up in that order.
+We consider two varients, one for ghc as of 2015-07-10 with kind-homogenous equalities `a:~:b` only, and one for type hetrogenous type equalities `a:~~:b`.
+The TCB consists of `TyConT` and `Typeable` in the homogenous case, and just `TyConT` in the hetrogenous case.
+
+
+## Homogenous Case
+
+
+
+`TyConT`:
+
+
+```
 data TyConT (a::k) -- abstract
 
 eqTyConT :: TyConT (a :: k1) -> TyConT (b :: k2) -> Bool
@@ -23,11 +28,21 @@ eqTyConTHom :: TyConT (a :: k) -> TyConT (b :: k) -> Maybe (a :~: b)
 -- compiler support for generating (e.g.)
 tyConTBool :: TyConT Bool
 tyConTArr :: TyConT (->)
-}}}
-Note {{{eqTyConT}}} is not hugely useful as (if it returns True) we know that types and kinds are the same, but GHC doesn't, so unsafeCoerce is often needed.
+```
 
-{{{Typeable}}}:
-{{{#!hs
+
+The type `(:~:)` comes from `Data.Type.Equality`.
+
+
+
+Note `eqTyConT` is not hugely useful as (if it returns True) we know that types and kinds are the same, but GHC doesn't, so unsafeCoerce is often needed.
+
+
+
+`Typeable`:
+
+
+```
 data TypeRepT (a::k) -- Type-indexed type representation; abstract
 
 appT   :: TypeRepT a -> TypeRepT b -> TypeRepT (a b)
@@ -72,11 +87,17 @@ getFnT = getT2 (tyConT tyConTFun)
 instance (Typeable c, Typeable a) => Typeable (c a)
 instance Typeable Bool
 instance Typeable (->)
-}}}
-Similar notes to {{{eqTyConT}}} apply to {{{eqTT}}}.
+```
 
-{{{Dynamic}}}
-{{{#!hs
+
+Similar notes to `eqTyConT` apply to `eqTT`.
+
+
+
+`Dynamic`
+
+
+```
 data Dynamic where
   Dyn :: TypeRepT a -> a -> Dynamic
 
@@ -90,9 +111,13 @@ getDynamic
         -> Maybe a      -- ^ returns: @'Just' a@, if the dynamically-typed
                         -- object has the correct type (and @a@ is its value), 
                         -- or 'Nothing' otherwise.
-}}}
-
-== Hetrogenous Case ==
-The only changes are that {{{eqTyConT}}} and {{{eqTT}}} now return {{{a:~~:b}}}, and are more useful (don't force us to use {{{unsafeCoerce}}}), {{{get1}}} and {{{get2}}} don't need {{{unsafeCoerce}}}, and we can generalise {{{getFn}}} to be poly-kinded.
-The {{{get*}}} could now be implemented outside of the TCB, but we should keep them around for compatibility and convenience.
 ```
+
+## Hetrogenous Case
+
+
+
+The only changes are that `eqTyConT` and `eqTT` now return `a:~~:b`, and are more useful (don't force us to use `unsafeCoerce`), `get1` and `get2` don't need `unsafeCoerce`, and we can generalise `getFn` to be poly-kinded.
+The `get*` could now be implemented outside of the TCB, but we should keep them around for compatibility and convenience.
+
+
