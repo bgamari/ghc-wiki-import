@@ -1,67 +1,45 @@
+CONVERSION ERROR
 
+Original source:
 
+```trac
 
-# Wired-in and known-key things
+[[PageOutline]]
 
-
+= Wired-in and known-key things =
 
 There are three categories of entities that GHC "knows about"; that is, information about them is baked into GHC's source code.
 
+  * [wiki:Commentary/Compiler/WiredIn#Wiredinthings Wired-in things] --- GHC knows everything about these
+  * [wiki:Commentary/Compiler/WiredIn#Knownkeythings Known-key things] --- GHC knows the ''name'', including the {{{Unique}}}, but not the definition
+  * [wiki:Commentary/Compiler/WiredIn#OrigRdrNamethings Orig RdrName  things] --- GHC knows which module it's defined in
 
-- [Wired-in things](commentary/compiler/wired-in#wired-in-things) --- GHC knows everything about these
-- [Known-key things](commentary/compiler/wired-in#known-key-things) --- GHC knows the *name*, including the `Unique`, but not the definition
-- [Orig RdrName  things](commentary/compiler/wired-in#orig-rdrname-things) --- GHC knows which module it's defined in
+== Wired-in things ==
 
-## Wired-in things
+A '''Wired-in thing''' is fully known to GHC.  Most of these are `TyCon`s such as `Bool`. It is very convenient to simply be able to refer to `boolTyCon :: TyCon` without having to look it up in an environment.  
 
+All [wiki:Commentary/Compiler/TypeType#Classifyingtypes primitive types] are wired-in things, and have wired-in `Name`s.  The primitive types (and their `Names`) are all defined in [[GhcFile(compiler/prelude/TysPrim.hs)]].
 
+The non-primitive wired-in type constructors are defined in [[GhcFile(compiler/prelude/TysWiredIn.hs)]].  There are a handful of wired-in `Id`s in [[GhcFile(compiler/basicTypes/MkId.hs)]]. There are no wired-in classes (they are too complicated). 
 
-A **Wired-in thing** is fully known to GHC.  Most of these are `TyCon`s such as `Bool`. It is very convenient to simply be able to refer to `boolTyCon :: TyCon` without having to look it up in an environment.  
+All the non-primitive wired-in things are ''also'' defined in GHC's libraries, because even though GHC knows about them we still need to generate code for them. For example, `Bool` is a wired-in type constructor, but it is still defined in `GHC.Base` because we need the info table etc for the data constructors.  Arbitrarily bad things will happen if the wired-in definition in [[GhcFile(compiler/prelude/TysWiredIn.hs)]] differs from that in the library module.
 
+All wired-in things have a `WiredIn` `Name` (see [wiki:Commentary/Compiler/NameType Names]), which in turn contains the thing.  See [wiki:Commentary/Compiler/CaseStudies/Bool a case study of Bool implementation] for more details.
 
+== Known-key things ==
 
-All [primitive types](commentary/compiler/type-type#classifying-types) are wired-in things, and have wired-in `Name`s.  The primitive types (and their `Names`) are all defined in [compiler/prelude/TysPrim.lhs](/trac/ghc/browser/ghc/compiler/prelude/TysPrim.lhs).
+A '''known-key thing''' has a fixed, pre-allocated `Unique` or '''key'''.  They should really be called "known-Name" things, because the baked-in knowledge is:
+ * Its defining `Module`
+ * Its `OccName`
+ * Its `Unique`
+Almost all known-key names are defined in [[GhcFile(compiler/prelude/PrelNames.hs)]]; for example: {{{PrelNames.eqClassName :: Name}}}.
 
+The point about known-key things is that GHC knows its ''name'', but not its ''definition''.  The definition must still be read from an interface file as usual. The known key just allows an efficient lookup in the environment.
 
-
-The non-primitive wired-in type constructors are defined in [compiler/prelude/TysWiredIn.lhs](/trac/ghc/browser/ghc/compiler/prelude/TysWiredIn.lhs).  There are a handful of wired-in `Id`s in [compiler/basicTypes/MkId.lhs](/trac/ghc/browser/ghc/compiler/basicTypes/MkId.lhs). There are no wired-in classes (they are too complicated). 
-
-
-
-All the non-primitive wired-in things are *also* defined in GHC's libraries, because even though GHC knows about them we still need to generate code for them. For example, `Bool` is a wired-in type constructor, but it is still defined in `GHC.Base` because we need the info table etc for the data constructors.  Arbitrarily bad things will happen if the wired-in definition in [compiler/prelude/TysWiredIn.lhs](/trac/ghc/browser/ghc/compiler/prelude/TysWiredIn.lhs) differs from that in the library module.
-
-
-
-All wired-in things have a `WiredIn` `Name` (see [Names](commentary/compiler/name-type)), which in turn contains the thing.  See [a case study of Bool implementation](commentary/compiler/case-studies/bool) for more details.
-
-
-## Known-key things
-
-
-
-A **known-key thing** has a fixed, pre-allocated `Unique` or **key**.  They should really be called "known-Name" things, because the baked-in knowledge is:
-
-
-- Its defining `Module`
-- Its `OccName`
-- Its `Unique`
-
-
-Almost all known-key names are defined in [compiler/prelude/PrelNames.lhs](/trac/ghc/browser/ghc/compiler/prelude/PrelNames.lhs); for example: `PrelNames.eqClassName :: Name`.
-
-
-
-The point about known-key things is that GHC knows its *name*, but not its *definition*.  The definition must still be read from an interface file as usual. The known key just allows an efficient lookup in the environment.
-
-
-## Initialisation
-
-
+== Initialisation ==
 
 When reading an interface file, GHC might come across "GHC.Base.Eq", which is the name of the `Eq` class.  How does it match up this occurrence in the interface file with `eqClassName` defined in `PrelNames`?  Because the global name cache maintained by the renamer is initialised with all the known-key names.  This is done by the (hard-to-find) function `HscMain.newHscEnv`:
-
-
-```wiki
+{{{
 newHscEnv :: DynFlags -> IO HscEnv
 newHscEnv dflags
   = do { ...
@@ -71,24 +49,15 @@ newHscEnv dflags
 
 knownKeyNames :: [Name]
 knownKeyNames = map getName wiredInThings ++ basicKnownKeyNames ++ templateHaskellNames
-```
-
-
+}}}
 Notice that the initialisation embraces both the wired-in and ("basic") known-key names.
 
+== `Orig` `RdrName` things ==
 
-## `Orig` `RdrName` things
+An '''Orig !RdrName thing''' has a top-level definition of a `RdrName`, using the `Orig` constructor.  Here, the baked-in information is:
+  * Its defining `Module`
+  * Its `OccName`
+Again, almost all of these are in [[GhcFile(compiler/prelude/PrelNames.hs)]].
+Example: {{{PrelNames.not_RDR :: RdrName}}}.
 
-
-
-An **Orig RdrName thing** has a top-level definition of a `RdrName`, using the `Orig` constructor.  Here, the baked-in information is:
-
-
-- Its defining `Module`
-- Its `OccName`
-
-
-Again, almost all of these are in [compiler/prelude/PrelNames.lhs](/trac/ghc/browser/ghc/compiler/prelude/PrelNames.lhs).
-Example: `PrelNames.not_RDR :: RdrName`.
-
-
+```
