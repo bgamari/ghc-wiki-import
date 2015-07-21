@@ -120,7 +120,7 @@ On MSYS I got this:
 
 
 ```wiki
-bash$ ./sync-all get
+bash$ git pullall
      ....snip...
 == Syncing tarballs
 == running  wget http://darcs.haskell.org/ghc-tarballs/binutils-2.19.1-mingw32-
@@ -440,7 +440,7 @@ make: *** [stage1] Error 1
 
 
 **Possible Solution**::
-Be sure you have run `./sync-all get` to get all necessary packages. Don't forget to run `./boot` again after you pull in new packages.
+Be sure you have run `git pullall (which runs git submodule update --init)` to get all necessary packages. Don't forget to run `./boot` again after you pull in new packages.
 
 
 ### xargs: /usr/bin/ar: terminated by signal 11
@@ -644,23 +644,6 @@ As far as I could tell all .dyn\_o files had been built to allow relocation, but
 
 
 There was another GCC on the system however (4.3.3). Using that version did allow GHC to build. 
-
-
-### git is too old
-
-
-
-On RHEL6 systems, I have git 1.7.1 by default.  On such a system, `./sync-all --testsuite get` will fail with this error:
-
-
-```wiki
-warning: ghc-tarballs already present; omitting                                                                                                                                       
-== ghc-tarballs: running git config --local core.ignorecase true
-error: unknown option `local'
-```
-
-
-Building a newer version of git fixes the problem.
 
 
 ### MacOS gmp compiled --with-pic
