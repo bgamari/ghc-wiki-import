@@ -176,6 +176,7 @@ See also [TemplateHaskell](template-haskell)
 
 
 - [\#8457](https://gitlab.staging.haskell.org/ghc/ghc/issues/8457) (summarises), [\#917](https://gitlab.staging.haskell.org/ghc/ghc/issues/917), [\#1945](https://gitlab.staging.haskell.org/ghc/ghc/issues/1945), [\#3273](https://gitlab.staging.haskell.org/ghc/ghc/issues/3273), [\#4276](https://gitlab.staging.haskell.org/ghc/ghc/issues/4276), [\#5729](https://gitlab.staging.haskell.org/ghc/ghc/issues/5729) (closed as dups, but not fixed): full laziness sometimes makes things worse.
+- [\#10535](https://gitlab.staging.haskell.org/ghc/ghc/issues/10535), [\#7367](https://gitlab.staging.haskell.org/ghc/ghc/issues/7367), [\#7206](https://gitlab.staging.haskell.org/ghc/ghc/issues/7206), [\#7309](https://gitlab.staging.haskell.org/ghc/ghc/issues/7309): float-out and excessive sharing 
 - [\#9370](https://gitlab.staging.haskell.org/ghc/ghc/issues/9370): respecting mixed `-O` and `-O0` in `ghc --make`, especially concerning cross-module inlining
 - [\#9279](https://gitlab.staging.haskell.org/ghc/ghc/issues/9279): local wrapper remains in final program
 - [\#9246](https://gitlab.staging.haskell.org/ghc/ghc/issues/9246): Too much case-of-case leads to bad code
@@ -194,7 +195,6 @@ See also [TemplateHaskell](template-haskell)
 - [\#7378](https://gitlab.staging.haskell.org/ghc/ghc/issues/7378): (a) identical-alts when the RHSs are bigger; (b) nested comparisions (cf [\#2132](https://gitlab.staging.haskell.org/ghc/ghc/issues/2132))
 - [\#7511](https://gitlab.staging.haskell.org/ghc/ghc/issues/7511): inlining can make programs allocate MORE!!
 - [\#7307](https://gitlab.staging.haskell.org/ghc/ghc/issues/7307): low hanging fruit for shrinking code size for string constants and top-level indirections
-- [\#10535](https://gitlab.staging.haskell.org/ghc/ghc/issues/10535), [\#7367](https://gitlab.staging.haskell.org/ghc/ghc/issues/7367), [\#7206](https://gitlab.staging.haskell.org/ghc/ghc/issues/7206), [\#7309](https://gitlab.staging.haskell.org/ghc/ghc/issues/7309): float-out and excessive sharing 
 - [\#8833](https://gitlab.staging.haskell.org/ghc/ghc/issues/8833), [\#3872](https://gitlab.staging.haskell.org/ghc/ghc/issues/3872), [\#5400](https://gitlab.staging.haskell.org/ghc/ghc/issues/5400), [\#5448](https://gitlab.staging.haskell.org/ghc/ghc/issues/5448), [\#5722](https://gitlab.staging.haskell.org/ghc/ghc/issues/5722), [\#7057](https://gitlab.staging.haskell.org/ghc/ghc/issues/7057), [\#7369](https://gitlab.staging.haskell.org/ghc/ghc/issues/7369), [\#9235](https://gitlab.staging.haskell.org/ghc/ghc/issues/9235): contravariant data type loop in simplifier inliner
 - [\#5954](https://gitlab.staging.haskell.org/ghc/ghc/issues/5954): performance regression. Duplication of primops?
 - [\#6047](https://gitlab.staging.haskell.org/ghc/ghc/issues/6047): GHC retains unnecessary binding
