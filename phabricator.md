@@ -57,7 +57,7 @@ On OS X PHP is already installed and you can skip directly to grabbing the arcan
 
 
 
-Don't install `arc` using the package manager from your Linux distribution (e.g. Debian). It is too old. You need the source checked out.
+Don't install `arc` using the package manager from your Linux distribution (e.g. Debian, even unstable). It might work when you first install it from Debian, but sooner or later the packaged version will fall behind the version used on the server. You need the source checked out.
 
 
 
