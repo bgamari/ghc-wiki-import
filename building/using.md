@@ -24,9 +24,9 @@ GHC uses the `autoconf` tools in the standard Unixy way, described in more detai
       |             |                      |
       ---------------            maintainer-clean
         |                                  |
-      ./boot (runs autoconf)               | 
+      ./boot (runs autoconf)               |
         |                                  |
-        v                                  |   
+        v                                  |
       ----------------------------         |
       | Source tar-ball          |>-------/|
       |  ./configure             |         |
@@ -37,18 +37,18 @@ GHC uses the `autoconf` tools in the standard Unixy way, described in more detai
       ./configure               distclean  |
         |                           |      |
         v                           |      |
-      ------------------            |      |         
+      ------------------            |      |
       | Configured     |>----------/|      |
-      |   mk/config.mk |            |      |
-      |                |>-----------------/|
-      ------------------            |      |
-        |                           |      |
-       make                         |      |
-        |                           |      |
-        v                           |      |
-      ------------------            |      |
-      | Built          |>-----------/      |
-      |                |                   |
+      |   mk/config.mk |>-----------------/|
+      |                |<---\       |      |
+      ------------------    |       |      |
+        |                   |       |      |
+       make                 |       |      |
+        |                 clean     |      |
+        v                   |       |      |
+      ------------------    |       |      |
+      | Built          |>---/       |      |
+      |                |>-----------/      |
       |                |>------------------/
       ------------------
 }}}
