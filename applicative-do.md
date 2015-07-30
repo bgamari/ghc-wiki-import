@@ -251,101 +251,39 @@ https://github.com/simonmar/ado/blob/52ba028cad68af578bcdfb3f1c5b905f5b9c5617/ad
 Syntax: 
 
 
+```wiki
+  expr ::= ... | do [stmt] expr | ...
 
-``\`
-
-
->
->
-> expr ::= ... \| do \[stmt\] expr \| ...
->
->
-
->
->
-> stmt ::= pat \<- expr
->
->
-> >
-> >
-> > \| (mblock\_1{vs1} \| ... \| mblock\_n{vsn})    -- n\>=2
-> >
-> >
->
-
-
-``\`
-
+  stmt ::= pat <- expr
+         | (mblock_1{vs1} | ... | mblock_n{vsn})    -- n>=2
+```
 
 
 Desugaring for `do stmts expr`:
 
 
+```wiki
+dsBlock [] tail = tail
 
-``\`
-dsBlock \[\] tail = tail
+dsBlock [pat <- rhs] (return expr)
+  | pat == expr = rhs
+  | otherwise = (\pat -> expr) <$> rhs
 
+dsBlock [stmts1{vs1} | ... | stmtsn{vsn}] (return expr) =
+  (\vs1 .. vsn -> expr)
+     <$> dsBlock stmts1 (return vs1)
+     <*> ...
+     <*> dsBlock stmtsn (return vsn)
 
+dsBlock [pat <- rhs : stmts] tail =
+   rhs >>= \pat -> dsBlock stmts tail
 
-dsBlock \[pat \<- rhs\] (return expr)
-
-
->
->
-> \| pat == expr = rhs
-> \| otherwise = (\\pat -\> expr) \<$\> rhs
->
->
-
-
-dsBlock \[stmts1{vs1} \| ... \| stmtsn{vsn}\] (return expr) =
-
-
->
->
-> (\\vs1 .. vsn -\> expr)
->
->
-> >
-> >
-> > \<$\> dsBlock stmts1 (return vs1)
-> > \<\*\> ...
-> > \<\*\> dsBlock stmtsn (return vsn)
-> >
-> >
->
-
-
-dsBlock \[pat \<- rhs : stmts\] tail =
-
-
->
->
-> rhs \>\>= \\pat -\> dsBlock stmts tail
->
->
-
-
-dsBlock \[stmts1{vs1} \| ... \| stmtsn{vsn} : stmts\] tail =
-
-
->
->
-> join (\\vs1 .. vsn -\> dsBlock stmts tail) 
->
->
-> >
-> >
-> > \<$\> dsBlock stmts1 (return vs1)
-> > \<\*\> ...
-> > \<\*\> dsBlock stmtsn (return vsn)
-> >
-> >
->
-
-
-``\`
-
+dsBlock [stmts1{vs1} | ... | stmtsn{vsn} : stmts] tail =
+  join (\vs1 .. vsn -> dsBlock stmts tail) 
+     <$> dsBlock stmts1 (return vs1)
+     <*> ...
+     <*> dsBlock stmtsn (return vsn)
+```
 
 ---
 
