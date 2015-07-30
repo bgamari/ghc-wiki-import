@@ -1,12 +1,11 @@
-CONVERSION ERROR
+## The problem
 
-Original source:
 
-```trac
-== The problem ==
 
 Currently, the pragmas used for inlining phase control are rather tricky to remember right:
-{{{
+
+
+```wiki
   Should we inline `f`?       -- Before phase 2     Phase 2 and later
 
   no inline pragmas (default) --      Maybe              Maybe
@@ -18,70 +17,108 @@ Currently, the pragmas used for inlining phase control are rather tricky to reme
 
   {-# INLINE   f #-}          --      Yes                Yes
   {-# NOINLINE f #-}          --      No                 No
-}}}
+```
+
 
 Note that there are three possible states per phase (inline, do not inline, maybe inline).
 
+
+
 Without this table from the docs, most of us are lost as to the precise semantics of these.
 
-The problems are:
-1. The phase controls `[2]` and `[~2]` are not self-explanatory.
-2. `NO_INLINE [2]` and `INLINE [2]` are asymmetric. `NO_INLINE [2]` affects inlining before phase 2 only, whereas `INLINE [2]` affects inlining for all phases. This assymetry is unfortunate, given the symmetry between `NO_INLINE` and `INLINE` (without phase controls). 
 
-== The proposals ==
+
+The problems are:
+
+
+1. The phase controls `[2]` and `[~2]` are not self-explanatory.
+1. `NO_INLINE [2]` and `INLINE [2]` are asymmetric. `NO_INLINE [2]` affects inlining before phase 2 only, whereas `INLINE [2]` affects inlining for all phases. This assymetry is unfortunate, given the symmetry between `NO_INLINE` and `INLINE` (without phase controls). 
+
+## The proposals
+
+
 
 We can probably do a better job by using easier-to-understand pragmas.
 
-=== Proposal 1 ===
 
-{{{
-INLINE[n]    becomes   INLINE_FROM[n]
-INLINE[~n]   becomes   INLINE_BEFORE[n]
-NOINLINE[n]  becomes NOINLINE_BEFORE[n]
-NOINLINE[~n] becomes NOINLINE_FROM[n]
-}}}
+### Proposal 1
+
+
+```wiki
+{-#   INLINE[n]  f #-}  becomes  {-#   INLINE_FROM[n]   f #-}
+{-#   INLINE[~n] f #-}  becomes  {-#   INLINE_BEFORE[n] f #-}
+{-# NOINLINE[n]  f #-}  becomes  {-# NOINLINE_BEFORE[n] f #-}
+{-# NOINLINE[~n] f #-}  becomes  {-# NOINLINE_FROM[n]   f #-}
+```
+
 
 The choice of “from” and “before” over (as was proposed as well) ”after” is that with “after” it is not so clear what should happen in stage `n`.
 
+
+
 Con: `INLINE_FROM[n]` and `NOINLINE_FROM[n]` are still asymmetric (don't affect the same phases), as are `INLINE_BEFORE[n]` and `NOINLINE_BEFORE[n]`.
 
-=== Proposal 2 ===
-{{{
-INLINE[n]    becomes NO_INLINE_BEFORE[n], INLINE_FROM[n]
-INLINE[~n]   becomes NO_INLINE_FROM[n], INLINE_BEFORE[n]
-NOINLINE[n]  becomes NO_INLINE_BEFORE[n]
-NOINLINE[~n] becomes NO_INLINE_FROM[n]
-}}}
+
+### Proposal 2
+
+
+```wiki
+{-#   INLINE[n]  f #-}  becomes {-#     INLINE_FROM[n]   f #-} {-# NOINLINE_BEFORE[n] f #-} 
+{-#   INLINE[~n] f #-}  becomes {-#     INLINE_BEFORE[n] f #-} {-# NOINLINE_FROM[n]   f #-} 
+{-# NOINLINE[n]  f #-}  becomes {-# MAY_INLINE_FROM[n]   f #-} {-# NOINLINE_BEFORE[n] f #-} 
+{-# NOINLINE[~n] f #-}  becomes {-# MAY_INLINE_BEFORE[n] f #-} {-# NOINLINE_FROM[n]   f #-}
+```
+
 
 Con: too verbose?
 
-=== Proposal 3 ===
-{{{
-INLINE[n]    becomes     INLINE_FROM[n]
-INLINE[~n]   becomes     INLINE_BEFORE[n]
-NOINLINE[n]  becomes MAY_INLINE_FROM[n]
-NOINLINE[~n] becomes MAY_INLINE_BEFORE[n]
-}}}
 
-== Questions and possible minor variations ==
-
-  * With these pragmas, do we still need the brackets `[`..`]` as part of the syntax, or can we drop that, as in
-
-    {{{
-    {-# INLINE_FROM 2 f #-}
-    }}}
+### Proposal 3
 
 
-== Alternatives ==
+```wiki
+{-#   INLINE[n]  f #-}  becomes  {-#     INLINE_FROM[n]   f #-}
+{-#   INLINE[~n] f #-}  becomes  {-#     INLINE_BEFORE[n] f #-}
+{-# NOINLINE[n]  f #-}  becomes  {-# MAY_INLINE_FROM[n]   f #-}
+{-# NOINLINE[~n] f #-}  becomes  {-# MAY_INLINE_BEFORE[n] f #-}
+```
+
+
+Con: not immediately clear what will happen in the phases that aren't specified (the answer is: 'no inline', as opposed to the default 'maybe inline').
+
+
+## Questions and possible minor variations
+
+
+- With these pragmas, do we still need the brackets `[`..`]` as part of the syntax, or can we drop that, as in
+
+```wiki
+{-# INLINE_FROM 2 f #-}
+```
+
+## Alternatives
+
+
 
 Instead of adding such wordy pragmas, we can maybe make the content of the `[..]` more helpful, by allowing more complex specification of phase ranges.
 
-=== Proposal 3b ===
-Using comparis operators (note that phases count down):
-{{{
-INLINE[n]    becomes     INLINE <= n
-INLINE[~n]   becomes     INLINE > n
-NOINLINE[n]  becomes MAY_INLINE <= n
-NOINLINE[~n] becomes MAY_INLINE > n
-}}}
+
+### Proposal 2b
+
+
+```wiki
+{-#   INLINE[n]  f #-}  becomes  {-#     INLINE[<= n] f #-} {-# NOINLINE[ > n] f #-}
+{-#   INLINE[~n] f #-}  becomes  {-#     INLINE[ > n] f #-} {-# NOINLINE[<= n] f #-}
+{-# NOINLINE[n]  f #-}  becomes  {-# MAY_INLINE[<= n] f #-} {-# NOINLINE[ > n] f #-}
+{-# NOINLINE[~n] f #-}  becomes  {-# MAY_INLINE[ > n] f #-} {-# NOINLINE[<= n] f #-}
+```
+
+### Proposal 3b
+
+
+```wiki
+{-#   INLINE[n]  f #-}  becomes  {-#     INLINE[<= n] f #-}
+{-#   INLINE[~n] f #-}  becomes  {-#     INLINE[ > n] f #-}
+{-# NOINLINE[n]  f #-}  becomes  {-# MAY_INLINE[<= n] f #-}
+{-# NOINLINE[~n] f #-}  becomes  {-# MAY_INLINE[ > n] f #-}
 ```
