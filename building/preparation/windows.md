@@ -1,178 +1,114 @@
-# Building GHC on Windows
+CONVERSION ERROR
 
+Original source:
 
+```trac
+= Building GHC on Windows =
 
-This page documents the instructions for setting up a Windows build using [
-MSYS2](http://sourceforge.net/projects/msys2/), which is a fairly complete build of [
-MinGW-w64](http://mingw-w64.org/) + the MSYS2 tools.
+This page documents the instructions for setting up a Windows build using [http://sourceforge.net/projects/msys2/ MSYS2], which is a fairly complete build of [http://mingw-w64.org/ MinGW-w64] + the MSYS2 tools.
 
+This guide should get you running in ~5 minutes, modulo download speeds.
 
+== MSYS2 setup ==
 
-This guide should get you running in \~5 minutes, modulo download speeds.
+=== 64-bit ===
 
+Download and run the [http://sourceforge.net/projects/msys2/files/latest/download 64-bit MSYS2 installer]. Be sure to open a mingw64 shell (see below).
 
-## MSYS2 setup
+=== 32-bit ===
 
-
-### 64-bit
-
-
-
-Download and run the [
-64-bit MSYS2 installer](http://sourceforge.net/projects/msys2/files/latest/download). Be sure to open a mingw64 shell (see below).
-
-
-### 32-bit
-
-
-
-Download and run the [
-32-bit MSYS2 installer](http://sourceforge.net/projects/msys2/files/Base/i686/). Be sure to open a mingw32 shell (see below).
-
-
+Download and run the [http://sourceforge.net/projects/msys2/files/Base/i686/ 32-bit MSYS2 installer]. Be sure to open a mingw32 shell (see below).
 
 The result of attempting to create a 32-bit build on a 64-bit machine has not been documented yet. Building on a 32-bit version of Windows works, of course.
 
 
-### Configuring MinGW properly
+=== Configuring MinGW properly ===
 
-
-
-**IMPORTANT:** The MSYS2 installer creates multiple shortcuts, "MSYS2 Shell", "MinGW-w64 Win32 Shell" and "MinGW-w64 Win64 Shell". You do **not** want the "MSYS2 Shell." The MSYS2 shell is set up for building applications with Cygwin which provides an additional POSIX compatibility layer, while MinGW is set up for building native Windows applications which is what we need for GHC. 
-
-
+'''IMPORTANT:''' The MSYS2 installer creates multiple shortcuts, "MSYS2 Shell", "MinGW-w64 Win32 Shell" and "MinGW-w64 Win64 Shell". You do '''not''' want the "MSYS2 Shell." The MSYS2 shell is set up for building applications with Cygwin which provides an additional POSIX compatibility layer, while MinGW is set up for building native Windows applications which is what we need for GHC. 
 
 An easy way to check that you are running the right shell is to check the output of `echo $MSYSTEM`. It should show either `MINGW32` or `MINGW64`. You can also tell by examining the `$PATH`.
 
+Consider upgrading all installed packages to the latest versions. See [http://sourceforge.net/p/msys2/wiki/MSYS2%20installation/ MSYS2 installation instructions] (section III) for details.
 
+== Installing packages & tools ==
 
-Consider upgrading all installed packages to the latest versions. See [
-MSYS2 installation instructions](http://sourceforge.net/p/msys2/wiki/MSYS2%20installation/) (section III) for details.
+The msys2 package uses `pacman` (the venerable !ArchLinux package manager) to manage packages. Let's install system dependencies required for building GHC:
 
-
-## Installing packages & tools
-
-
-
-The msys2 package uses `pacman` (the venerable ArchLinux package manager) to manage packages. Let's install system dependencies required for building GHC:
-
-
-```wiki
+{{{
 pacman -Sy git tar binutils autoconf make libtool automake python2 p7zip patch gcc docbook-xsl
-```
+}}}
 
-
-Note: `dblatex` isn't available as a [
-MSYS2 package](https://github.com/Alexpux/MSYS2-packages), so the user's guide won't be build in ps and pdf format (only html).
-
-
+Note: `dblatex` isn't available as a [https://github.com/Alexpux/MSYS2-packages MSYS2 package], so the user's guide won't be build in ps and pdf format (only html).
 
 It may be necessary to explicitly set the `XML_CATALOG_FILES` environment variable to convince `configure` that docbook is usable,
-
-
-```wiki
+{{{
 export XML_CATALOG_FILES="/etc/xml/docbook-xml /etc/xml/catalog"
-```
+}}}
 
-## Host GHC setup
-
-
+== Host GHC setup ==
 
 A host GHC binary is required for bootstrapping. In order to keep different architectures separate, download and install a prebuilt GHC into `/mingw64` or `/mingw32`:
 
-
-
 So for 64-bit you'd run
-
-
-```wiki
+{{{
 curl -L http://www.haskell.org/ghc/dist/7.8.4/ghc-7.8.4-x86_64-unknown-mingw32.tar.xz | tar -xJ -C /mingw64
-```
-
+}}}
 
 and for 32-bit you'd run
-
-
-```wiki
+{{{
 curl -L http://www.haskell.org/ghc/dist/7.8.4/ghc-7.8.4-i386-unknown-mingw32.tar.xz | tar -xJ -C /mingw32
-```
+}}}
 
-## Cabal setup
+== Cabal setup ==
 
+Building GHC requires [http://www.haskell.org/alex/ Alex] and [http://www.haskell.org/happy/ Happy]. It is easiest to install them using cabal. We will also put them in `/usr/local` to make sure that they end up on `$PATH`.
 
-
-Building GHC requires [ Alex](http://www.haskell.org/alex/) and [
-Happy](http://www.haskell.org/happy/). It is easiest to install them using cabal. We will also put them in `/usr/local` to make sure that they end up on `$PATH`.
-
-
-```wiki
+{{{
 curl -L https://www.haskell.org/cabal/release/cabal-install-1.22.0.0/cabal-1.22.0.0-i386-unknown-mingw32.tar.gz | tar -xz -C /usr/local/bin && # for some version of cabal you may need to rename the exe to cabal.exe
 cabal update &&
 cabal install -j --prefix=/usr/local alex happy
-```
+}}}
 
-## A Quick Build
-
-
+== A Quick Build ==
 
 You should now be able to build GHC:
 
-
-```wiki
+{{{
 cd ~ &&
 git clone --recursive git://git.haskell.org/ghc.git &&
-cd ghc &&
-git clone git://git.haskell.org/ghc-tarballs.git
-```
-
+cd ghc
+}}}
 
 Consider setting up `mk/build.mk` here (`cp mk/build.mk.sample mk/build.mk && vim mk/build.mk`).
 
-
-
 Finally, to perform the actual build:
 
-
-```wiki
+{{{
 ./boot &&
-./configure &&
+./configure --enable-tarballs-autodownload &&
 make
-```
+}}}
 
+,,Running parallel make (e.g., make -j5) is faster, but appears to cause segfaults during the build sometimes. The reasons are not clear yet.,,
 
-<sub>Running parallel make (e.g., make -j5) is faster, but appears to cause segfaults during the build sometimes. The reasons are not clear yet.</sub>
-
-
-
-MSYS2 is known to be glitchy in some situations. If you see errors related to fork(), try closing and reopening the shell; see also [
-msys2 issue \#74](http://sourceforge.net/p/msys2/tickets/74/). Also there have been issues with the build process segfaulting. The reason is not known (we're looking into it). If that happens, simply rerunning `make` will continue the build process.
-
-
+MSYS2 is known to be glitchy in some situations. If you see errors related to fork(), try closing and reopening the shell; see also [http://sourceforge.net/p/msys2/tickets/74/ msys2 issue #74]. Also there have been issues with the build process segfaulting. The reason is not known (we're looking into it). If that happens, simply rerunning `make` will continue the build process.
 
 Alternatively, to run a pristine build and tests (takes a while):
-
-
-```wiki
+{{{
 ./validate
-```
+}}}
 
+'''NOTE''': You may see an error like `make 7628 child_info_fork::abort: ... make: fork: Resource temporarily unavailable` when running `make`. To fix this, go to the root of your MSYS dir and run `autorebase.bat`; see http://sourceforge.net/projects/mingw/files/MSYS/Extension/rebase/rebase-4.0.1_1-1/ and again http://sourceforge.net/p/msys2/tickets/74/. Alternatively, run `shutdown //r`.
 
-**NOTE**: You may see an error like `make 7628 child_info_fork::abort: ... make: fork: Resource temporarily unavailable` when running `make`. To fix this, go to the root of your MSYS dir and run `autorebase.bat`; see [
-http://sourceforge.net/projects/mingw/files/MSYS/Extension/rebase/rebase-4.0.1\_1-1/](http://sourceforge.net/projects/mingw/files/MSYS/Extension/rebase/rebase-4.0.1_1-1/) and again [
-http://sourceforge.net/p/msys2/tickets/74/](http://sourceforge.net/p/msys2/tickets/74/). Alternatively, run `shutdown //r`.
-
-
-## Other documentation
-
-
+== Other documentation ==
 
 Other documentation for Windows includes:
 
+ * [wiki:Building/Platforms/Windows MinGW/MSYS/Cygwin] information for people new to using UNIX tools on Windows.
+ * [wiki:Building/Windows/SSHD Setting up a SSH Daemon] on CygWin/MinGW and let's you treat Windows as yet another remote SSH session.
+ * [wiki:Building/Preparation/Windows/MSYS1 Using MSYS1] to build GHC (not recommended any more)
+ * [wiki:Building/Windows/Cygwin Using Cygwin] to build GHC. (no longer supported)
+ * [wiki:Building/Windows/SSH Using SSH] on Windows.
+ * [http://www.haskell.org/haskellwiki/Windows Guidance on how to use Haskell on Windows]
 
-- [MinGW/MSYS/Cygwin](building/platforms/windows) information for people new to using UNIX tools on Windows.
-- [Setting up a SSH Daemon](building/windows/sshd) on CygWin/MinGW and let's you treat Windows as yet another remote SSH session.
-- [Using MSYS1](building/preparation/windows/msy-s1) to build GHC (not recommended any more)
-- [Using Cygwin](building/windows/cygwin) to build GHC. (no longer supported)
-- [Using SSH](building/windows/ssh) on Windows.
-- [
-  Guidance on how to use Haskell on Windows](http://www.haskell.org/haskellwiki/Windows)
+```
