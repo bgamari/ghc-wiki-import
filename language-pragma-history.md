@@ -2,7 +2,11 @@
 
 
 
-(see also the [GHC Boot Library Version History](commentary/libraries/version-history))
+Here is the list of language extensions added (and sometimes removed) by the Glasgow Haskell Compiler (GHC) for each major version release.  This may be useful for those interested in seeing whether an extension is available on an older version of GHC for compatibility reasons.
+
+
+
+See also [GHC Boot Library Version History](commentary/libraries/version-history), which tabulates the GHC versions against the versions of the `base` library and other boot libraries.
 
 
 ## Changes in GHC 7.0 (since GHC 6.12)
