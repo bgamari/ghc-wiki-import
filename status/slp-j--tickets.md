@@ -89,6 +89,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
  
 
 
+- [\#7102](https://gitlab.staging.haskell.org/ghc/ghc/issues/7102): type instance overlap in GHCi is unsound
 - [\#10493](https://gitlab.staging.haskell.org/ghc/ghc/issues/10493), [\#10494](https://gitlab.staging.haskell.org/ghc/ghc/issues/10494): Bogus inaccessible code from `Coercible`
 - [\#10362](https://gitlab.staging.haskell.org/ghc/ghc/issues/10362), [\#10359](https://gitlab.staging.haskell.org/ghc/ghc/issues/10359): make tuple constraints into a class
 - [\#9858](https://gitlab.staging.haskell.org/ghc/ghc/issues/9858), [\#10343](https://gitlab.staging.haskell.org/ghc/ghc/issues/10343): `Typeable` and kind polymorphism
