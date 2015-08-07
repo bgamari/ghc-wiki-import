@@ -12,7 +12,7 @@ Implementing lazy functional languages on stock hardware: the Spineless Tagless 
 
 
 
-The best way to think of STG is as special form of [Core](commentary/compiler/core-syn-type).  Specifically, the differences are these (see [compiler/stgSyn/StgSyn.lhs](/trac/ghc/browser/ghc/compiler/stgSyn/StgSyn.lhs)):
+The best way to think of STG is as special form of [Core](commentary/compiler/core-syn-type).  Specifically, the differences are these (see [compiler/stgSyn/StgSyn.hs](/trac/ghc/browser/ghc/compiler/stgSyn/StgSyn.hs)):
 
 
 - Function arguments are atoms (literals or variables), of type `StgArg`.
