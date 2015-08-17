@@ -234,7 +234,11 @@ Note that when you run `arc diff`, it will drop you into an editor to summarize 
 
 
 
-**You should always at least add `austin` to a review**. If you want wider attention, you can specify the reviewer as `#ghc` - this specifies a group of GHC developers who may come to review it as well.
+Some reviewers are automatically added by **herald**. These are currently bgamari and austin.
+
+
+
+If you want wider attention, you can specify the reviewer as `#ghc` - this specifies a group of GHC developers who may come to review it as well.
 
 
 
