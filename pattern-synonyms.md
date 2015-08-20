@@ -31,6 +31,8 @@ Relevant open tickets:
 - [\#8761](https://gitlab.staging.haskell.org/ghc/ghc/issues/8761) (template haskell support)
 - [\#8779](https://gitlab.staging.haskell.org/ghc/ghc/issues/8779) (exhaustiveness checks)
 
+- [\#10783](https://gitlab.staging.haskell.org/ghc/ghc/issues/10783) (partial type signatures in pattern synonym signatures)
+
 ## Motivating example
 
 
