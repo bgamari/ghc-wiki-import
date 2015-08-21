@@ -184,10 +184,10 @@ dynApply (Dyn tf f) (Dyn tx x)
 
 
 ```wiki
-pattern type TRFun :: fun ~ (arg -> res)
-                   => TTypeRep arg 
-                   -> TTypeRep res 
-                   -> TTypeRep fun
+pattern TRFun :: fun ~ (arg -> res)
+              => TTypeRep arg 
+              -> TTypeRep res 
+              -> TTypeRep fun
 ```
 
 
