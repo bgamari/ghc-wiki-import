@@ -24,6 +24,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 
 - [\#10598](https://gitlab.staging.haskell.org/ghc/ghc/issues/10598): `DeriveAnyClasss` and GND
+- [\#10716](https://gitlab.staging.haskell.org/ghc/ghc/issues/10716): strictness annotations and generics
 - [\#10604](https://gitlab.staging.haskell.org/ghc/ghc/issues/10604): make `Generic1` kind-polymorphic
 - [\#10087](https://gitlab.staging.haskell.org/ghc/ghc/issues/10087): typechecking generic default methods (Pedro)
 - [\#10487](https://gitlab.staging.haskell.org/ghc/ghc/issues/10487): `Generic` name clash
