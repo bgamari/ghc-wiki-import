@@ -1,53 +1,403 @@
-CONVERSION ERROR
+# GHC plans for 7.12.1
 
-Original source:
 
-```trac
-= GHC plans for 7.12.1 =
 
-[[PageOutline]]
 
-'''Development currently ongoing'''.
 
-See milestone:7.12.1 and [https://ghc.haskell.org/trac/ghc/query?status=infoneeded&status=merge&status=new&status=patch&group=status&milestone=7.12.1 Active tickets] for more.
 
-== Tentative release highlights
+**Development currently ongoing**.
 
-  - An [wiki:ImprovedLLVMBackend Improved LLVM Backend] that ships with every major Tier 1 platform.
-  - Improved [wiki:DWARF DWARF based debugging support] from Peter Wortmann & Arash Rouhani, with e.g. LLVM support and Haskell backtraces from Haskell code.
-  - Support for [wiki:ApplicativeDo Applicative Do], allowing GHC to desugar do-notation to `Applicative` where possible.
-  - Support for [wiki:InjectiveTypeFamilies Injective Type Families], which allows you to specify type families which are injective, i.e. a one-to-one relationship.
-  - Support for [wiki:OverloadedRecordFields Overloaded Record Fields], allowing multiple uses of the same field name and a form of type-directed name resolution.
-  - Support for [wiki:ExplicitCallStack/ImplicitLocations implicit parameters providing callstacks/source locations], allowing you to have a light-weight means of getting a call-stack in a Haskell application.
-  - Support for '''Type Signature Sections''', allowing you to write `(:: ty)` as a shorthand for `(\x -> x :: ty)`.
-  - A huge improvement to pattern matching (including much better coverage of GADTs), based on the work of Simon PJ and Georgios Karachalias. For more details, see [http://research.microsoft.com/en-us/um/people/simonpj/papers/pattern-matching/gadtpm.pdf their paper].
-  - A (possible) overhaul of GHC's build system to use '''Shake''' instead of Make.
-  - Support for reasoning about kind equalities, which gives promotion of GADTs to kinds, kind families, heterogeneous equality (kind-indexed GADTs), and `* :: *`. There is some discussion in [wiki:DependentHaskell/Phase1], but that's very low-level. I (Richard) have no good user-oriented write-up yet, but there shouldn't be much in the way of new syntax -- just fewer type errors.
-  - A new, type-indexed type representation, `data TTypeRep (a :: k)`. This change should be fully backward compatible. See [wiki:Typeable].
-  - More Backpack is chugging along; we have a new user-facing syntax which allows multiple modules to be defined a single file, and are hoping to release at least the ability to publish multiple "units" in a single Cabal file.
 
-== Migration Guide to 7.12
 
-FIXME: Write the migration guide.
+See milestone:7.12.1 and [
+Active tickets](https://ghc.haskell.org/trac/ghc/query?status=infoneeded&status=merge&status=new&status=patch&group=status&milestone=7.12.1) for more.
 
-https://ghc.haskell.org/trac/ghc/wiki/Migration/7.12
 
-== Tickets marked merge with no milestone
 
-[[TicketQuery(status=merge,milestone=,format=table,col=type|summary|priority|owner,group=status)]]
+Release candidate by mid-December. Release in January 2016.
 
-== Tickets slated for 7.12.1
 
-=== merge/patch/upstream
+## Tentative release highlights
 
-[[TicketQuery(milestone=7.12.1,status=merge|patch|upstream,format=table,col=type|summary|priority|differential|owner,group=status,order=priority)]]
 
-=== new
 
-[[TicketQuery(milestone=7.12.1,status=new,format=table,col=type|summary|priority|owner,group=status,order=priority)]]
+Below are the major highlights of 7.12. If you believe your 
 
-=== infoneeded
 
-[[TicketQuery(milestone=7.12.1,status=infoneeded,format=table,col=type|summary|priority|owner,group=status,order=priority)]]
+### Done
 
-```
+
+- Support for [Injective Type Families](injective-type-families), which allows you to specify type families which are injective, i.e. a one-to-one relationship.
+- Support for Strict language extension?, 
+- Support for [implicit parameters providing callstacks/source locations](explicit-call-stack/implicit-locations), allowing you to have a light-weight means of getting a call-stack in a Haskell application.
+- Support for **Type Signature Sections**, allowing you to write `(:: ty)` as a shorthand for `(\x -> x :: ty)`.
+- A (possible) overhaul of GHC's build system to use **Shake** instead of Make.
+- Support for reasoning about kind equalities, which gives promotion of GADTs to kinds, kind families, heterogeneous equality (kind-indexed GADTs), and `* :: *`. There is some discussion in [DependentHaskell/Phase1](dependent-haskell/phase1), but that's very low-level. I (Richard) have no good user-oriented write-up yet, but there shouldn't be much in the way of new syntax -- just fewer type errors.
+- A new, type-indexed type representation, `data TTypeRep (a :: k)`. This change should be fully backward compatible. See [Typeable](typeable).
+- Better performance feedback. The compiler will now attempt to warn you if a requested inlining could not be performed due to missing `INLINE` pragma
+- More Backpack is chugging along; we have a new user-facing syntax which allows multiple modules to be defined a single file, and are hoping to release at least the ability to publish multiple "units" in a single Cabal file.
+
+### To-do
+
+
+- A huge improvement to pattern matching (including much better coverage of GADTs), based on the work of Simon PJ and Georgios Karachalias. For more details, see [
+  their paper](http://research.microsoft.com/en-us/um/people/simonpj/papers/pattern-matching/gadtpm.pdf).
+- Support for [injective type families](injective-type-families). Phab
+- Improved [DWARF based debugging support](dwarf) from Peter Wortmann & Arash Rouhani, with e.g. LLVM support and Haskell backtraces from Haskell code.
+- Support for [Applicative Do](applicative-do), allowing GHC to desugar do-notation to `Applicative` where possible.
+- An [Improved LLVM Backend](improved-llvm-backend) that ships with every major Tier 1 platform.
+- Support for [Overloaded Record Fields](overloaded-record-fields), allowing multiple uses of the same field name and a form of type-directed name resolution.
+
+## Migration Guide to 7.12
+
+
+
+FIXME Write the migration guide.
+
+
+
+[
+https://ghc.haskell.org/trac/ghc/wiki/Migration/7.12](https://ghc.haskell.org/trac/ghc/wiki/Migration/7.12)
+
+
+## Tickets marked merge with no milestone
+
+
+
+
+  
+  
+  
+  
+  
+    
+
+## Status: merge (1 match)
+
+
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: merge, milestone: , group: status, max: 0,
+col: id, col: type, col: summary, col: priority, col: owner, desc: 1, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: merge, milestone: , group: status, max: 0,
+col: id, col: type, col: summary, col: priority, col: owner, order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: merge, milestone: , group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: merge, milestone: , group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: merge, milestone: , group: status, max: 0,
+col: id, col: type, col: summary, col: priority, col: owner, order: owner)
+      </th>
+<td>
+    </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#16094](https://gitlab.staging.haskell.org/ghc/ghc/issues/16094)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [panic! (the 'impossible' happened): for powerpc-unknown-linux getRegister(ppc): I64\[I32\[BaseReg + 812\] + 64\]](https://gitlab.staging.haskell.org/ghc/ghc/issues/16094)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      trommler
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr></table>
+
+
+  
+
+
+
+## Tickets slated for 7.12.1
+
+
+### merge/patch/upstream
+
+
+
+
+  
+  
+  
+  
+  
+    
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: merge, status: patch, status: upstream,
+milestone: 7.12.1, group: status, max: 0, col: id, col: type, col: summary,
+col: priority, col: differential, col: owner, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: merge, status: patch, status: upstream,
+milestone: 7.12.1, group: status, max: 0, col: id, col: type, col: summary,
+col: priority, col: differential, col: owner, order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: merge, status: patch, status: upstream,
+milestone: 7.12.1, group: status, max: 0, col: id, col: type, col: summary,
+col: priority, col: differential, col: owner, order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: merge, status: patch, status: upstream,
+milestone: 7.12.1, group: status, max: 0, col: id, col: type, col: summary,
+col: priority, col: differential, col: owner, desc: 1, order: priority)
+      </th>
+<th>
+        
+        Differential Rev(s) (Ticket query: status: merge, status: patch,
+status: upstream, milestone: 7.12.1, group: status, max: 0, col: id, col: type,
+col: summary, col: priority, col: differential, col: owner, order: differential)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: merge, status: patch, status: upstream,
+milestone: 7.12.1, group: status, max: 0, col: id, col: type, col: summary,
+col: priority, col: differential, col: owner, order: owner)
+      </th>
+<td>
+    </td></tr>
+<tr><td>
+          </td>
+<th>
+            No tickets found
+          </th>
+<td>
+        </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr></table>
+
+
+  
+
+
+
+### new
+
+
+
+
+  
+  
+  
+  
+  
+    
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: new, milestone: 7.12.1, group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: new, milestone: 7.12.1, group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: new, milestone: 7.12.1, group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: new, milestone: 7.12.1, group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner, desc: 1,
+order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: new, milestone: 7.12.1, group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+order: owner)
+      </th>
+<td>
+    </td></tr>
+<tr><td>
+          </td>
+<th>
+            No tickets found
+          </th>
+<td>
+        </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr></table>
+
+
+  
+
+
+
+### infoneeded
+
+
+
+
+  
+  
+  
+  
+  
+    
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: infoneeded, milestone: 7.12.1,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: infoneeded, milestone: 7.12.1,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: infoneeded, milestone: 7.12.1,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: infoneeded, milestone: 7.12.1,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, desc: 1, order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: infoneeded, milestone: 7.12.1,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, order: owner)
+      </th>
+<td>
+    </td></tr>
+<tr><td>
+          </td>
+<th>
+            No tickets found
+          </th>
+<td>
+        </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr></table>
+
+
+  
+
+
+
