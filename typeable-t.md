@@ -252,11 +252,9 @@ Notes
   e.g., `SDynamic Maybe` contains a value that is definitely a `Maybe ty` for some type `ty`, but the type `ty` can vary between values of type `SDynamic Maybe`.
 
 >
-> >
-> >
-> > One use-case is in the implementation of `StaticPtr`.
-> >
-> >
+>
+> One use-case is in the implementation of `StaticPtr`.
+>
 >
 
 ### Questions
