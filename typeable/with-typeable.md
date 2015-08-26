@@ -13,6 +13,10 @@ withTypeable :: TTypeRep a -> (Typeable a => r) -> r
 Currently, `withTypeable` cannot be written in Haskell, but it is straightforward to write in Core. Can we fix this?
 
 
+
+A facility like this is needed by Edward Kmett: see [2439\#comment:25](https://gitlab.staging.haskell.org/ghc/ghc/issues/2439)
+
+
 ## Fully general approach
 
 
