@@ -7,7 +7,7 @@ Under this extension a user can open a previously qualified import (defined at t
 
 
 
-**Example**
+**Examples**
 
 
 ```wiki
@@ -21,6 +21,29 @@ helloFile = do
   contents <- readFile "name"
   return $ pack "Hello, " <> contents
   where open T
+```
+
+
+The following is an updated form of the original example in my first email on this extension:
+
+
+```wiki
+import qualified HTML
+import qualified CSS
+
+myDocument :: HTML
+myDocument = html
+  where html =
+          div [ style containerStyle ] 
+              [ div [ style rowStyle ] "Hello"
+              , div [ style rowStyle ] "World!" ]
+          where open HTML
+        containerStyle =
+          [ backgroundColor ..., padding ..., margin ... ]
+          where open CSS
+        rowStyle = 
+          [ backgroundColor ..., padding ..., margin ... ]
+          where open CSS
 ```
 
 
@@ -102,3 +125,14 @@ When opening a qualified import, the symbols imported are valid to both:
 Point 2 is consistent with the behavior of importing in a module and defining top-level definitions - the top-level definitions have access to imported symbols.
 
 
+
+*Comparison With Other Languages*
+
+
+
+This concept has been explored in other languages.
+
+
+- Agda: Agda has a very elaborate module system. Modules can be imported which is similar to Haskell `import qualified` syntax. Symbols can be moved into the current environment without needing to be qualified by using `open` on the name of a module. It's possible to combine the two steps (importing and opening) with `open import`. Agda supports the exact proposed syntax in this wiki page (`where open Module.Name`).
+
+- SML and Ocaml both support `let open M in expr end`,  which is almost exactly the syntax proposed in this document.
