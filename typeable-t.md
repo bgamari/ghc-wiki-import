@@ -80,7 +80,7 @@ instance (Typeable c, Typeable a) => Typeable (c a)
 instance Typeable Bool
 instance Typeable (->)
 
-withTypeRep :: TypeRep a -> (Typeable a => b) -> b
+withTypeable :: TypeRep a -> (Typeable a => b) -> b
 -- c.f. Trac #2439
 
 eqRR :: TypeRep (a :: k1) -> TypeRep (b :: k2) -> Bool
@@ -131,6 +131,8 @@ Notes:
 - Note that the type `(:~:)` comes from `Data.Type.Equality`.
 
 - Note also `eqRR` is not hugely useful as (if it returns True) we know that types and kinds are the same, but GHC doesn't, so `unsafeCoerce` is often needed.
+
+- The `withTypeable` function is useful, and illustrates a generally useful pattern: see [Typeable/WithTypeable](typeable/with-typeable).
 
 ### Key differences from GHC 7.10
 
