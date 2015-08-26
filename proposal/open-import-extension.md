@@ -126,7 +126,7 @@ Point 2 is consistent with the behavior of importing in a module and defining to
 
 
 
-*Comparison With Other Languages*
+**Comparison With Other Languages**
 
 
 
