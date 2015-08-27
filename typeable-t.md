@@ -69,6 +69,7 @@ But until GHC gets kind equalities we offer a variant ("homogeneous case") that 
 
 ```
 data TypeRep (a :: k) -- abstract
+typeRepFingerprint :: TypeRep a -> Fingerprint
 appR :: TypeRep (a :: k -> k') -> TypeRep (b :: k) -> TypeRep (a b)
 
 class Typeable (a :: k) where
@@ -117,9 +118,9 @@ gcast2 :: (Typeable (t :: k1 -> k2 -> k3), Typeable (t' :: k1 -> k2 -> k3)) => c
 Notes:
 
 
-- Many of these functions come in two variants: 
+- Many of these functions come in two variants:
 
-  - one which takes an explicit `TypeRep` argument, and 
+  - one which takes an explicit `TypeRep` argument, and
   - one that take an implicit `TypeRep` argument via a `Typeable a` constraint.
 
 >
@@ -129,6 +130,10 @@ Notes:
 >
 
 - Note that the type `(:~:)` comes from `Data.Type.Equality`.
+  And `Fingerprint` is from `GHC.Fingerprint`.
+
+- `typeRepFingerprint` is not used internally (although it could be for `eqRR`), but is provided for users.
+  e.g. to add consistency checks when using `Control.DistributedClosure` that two nodes agree on their static pointer table (or at least the types agree, if not the values).
 
 - Note also `eqRR` is not hugely useful as (if it returns True) we know that types and kinds are the same, but GHC doesn't, so `unsafeCoerce` is often needed.
 
@@ -180,6 +185,11 @@ In the kind-heterogeneous case, `getR1` and `getR2` come out of the TCB.
 
 
 - How many `getR1`, `getR2` etc should we provide?
+
+- Currently, equality checks for `TypeRep`s are done recursively rather than using fingerprints, and once no-kinds is merged, it will actually build equality evidence out of smaller equality evidince.
+  However, using fingerprints and one `unsafeCoerce` may be more efficient (especially if fingerprints are cached in the datatype), but is argueably less principled, and certainly brings more code into the TCB.
+  Which method do we want to use?
+  Or perhaps provide both `eqRR` with fingerprints and `eqRRParanoid` recursively?
 
 - Do we want explicit names for some type representations?
   Perhaps `typeRepBool` etc., and just for Prelude defined types.
