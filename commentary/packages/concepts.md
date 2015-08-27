@@ -200,7 +200,7 @@ For Backpack units, the unit key is the indefinite unit ID plus a mapping from h
 </td></tr></table>
 
 
-<table><tr><th>Installed Definite Unit ID</th>
+<table><tr><th>Installed (Fully) Definite Unit ID</th>
 <td>
 An installed definite unit ID, is a unit key, whose holes are filled with installed definite unit IDs (transitively); alternately, it's just a unit key with no occurrences of the unit key HOLE.
 </td></tr></table>
