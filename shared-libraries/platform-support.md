@@ -170,14 +170,14 @@ The following tables show which combinations of the `-dynamic` and `-fPIC` flags
 <th>NO               </th>
 <th>YES        </th>
 <th>NO                            </th>
-<th>YES**         **</th>
+<th>YES`**`   </th>
 <th>NO
 </th></tr>
 <tr><th>-dynamic      </th>
 <th>NO               </th>
 <th>YES        </th>
 <th>YES\*                          </th>
-<th>YES         </th>
+<th>YES`**`   </th>
 <th>NO
 </th></tr>
 <tr><th>-fPIC         </th>
@@ -201,8 +201,7 @@ The following tables show which combinations of the `-dynamic` and `-fPIC` flags
 
 
 
-(**) Position-dependent code theoretically leads to increased load times and prevents sharing between multiple instances of the code.
-**
+(`**`) Position-dependent code theoretically leads to increased load times and prevents sharing between multiple instances of the code.
 
 
 
