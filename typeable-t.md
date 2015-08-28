@@ -453,17 +453,10 @@ So we want:
   This we can serialise as
 
   - a tag to show this is a polymorphic thing (as opposed to a `staticApp` or a plain `StaticPtr`)
-- then `"sMaybeDB-key"`
-- finally the serialization of `staticTypeDictMaybeInt` (which will itself probably be `sMaybeDB staticTypeDictInt`, where `staticTypeDictInt` is finally a plain `StaticPtr`, which is serialized as `"staticTypeDictInt-key"`).
+  - then `"sMaybeDB-key"`
+  - finally the serialization of `staticTypeDictMaybeInt` (which will itself probably be `sMaybeDB staticTypeDictInt`, where `staticTypeDictInt` is finally a plain `StaticPtr`, which is serialized as `"staticTypeDictInt-key"`).
 
->
-> >
-> >
-> > We can then decode in the obvious way, making dynamic typechecks where necessary.
-> >
-> >
->
-
+  We can then decode in the obvious way, making dynamic typechecks where necessary.
 - The implementation could work by giving `<expr>` a top-level definition with a new name, `polystatic34 = \(Dict :: Dict(Typeable a))  -> <expr>`, then `expr'` in the PPT becomes the code pointer to `polystatic34`
 - Note the types won't line up nicely to naively have the PPT being a list, so we currently use type families to have a type-level function, `PolyTag`, so instead of `t` above, we have `PolyTag MaybeDBTag a` instead (where `MaybeDBTag` is a new data type whose only role is as an argument to PolyTag.
   Then we can have the homgeneous rows (Key, tag , forall a . Dict (Typeable a) -\> (PolyTag tag a, TypeRep (PolyTag tag a))).
@@ -613,6 +606,17 @@ However, if we want all combinations of, say, `Int`, `Bool`, `[]` and `Maybe`, t
 
 
 
+We must write something akin to
+
+
+```
+purify :: SDynamic Closure -> SDynamic Closure
+purify (SDynamic (tr :: TypeRep a) (cval :: Closure a))
+  = let val :: a = unclosure cval
+    in SDynamic tr (closurePure val)  -- NOTE: this fails to typecheck, as we need `Serializable a`
+```
+
+
 Exersise: implement this!
 (Hint: consider `getSerializeable :: TypeRep a -> Maybe (Dict (Serializable a))` which recurses on the `TypeRep`, doing dynamic checks to see if it is `Int` or `Bool` or `[_]` or `Maybe _` at each stage.)
 
@@ -627,6 +631,12 @@ Just the RTS and GHC support for building the static pointer table.
 
 ### Questions
 
+
+- Should `StaticPtr` be merged with `Static`?
+
+  - For: Simplicity, smaller API.
+  - Against: It is nice to syntactally know that a `StaticPtr` will have a small serialisation (as it is just a key into the SPT).
+    Recall a `Static` may be a big thing, built from lots of `staticApp`s and polymorphism.
 
 - Naming of `deRef*`: for StaticPtr, this was chosen for consistency with current GHC.
   Consistency between `Static` and `StaticPtr` is nice, but `deRefStatic` makes the operation sound trivial (follow a pointer?), but we may need to do arbitrary computations to evaluate applications.
@@ -652,6 +662,7 @@ Just the RTS and GHC support for building the static pointer table.
 
 `Closure`s are based on the fact that both `Static`s and `ByteString`s are easilly serialisable.
 The `Serialisable` class and `closurePure` use this by noting that if we have a 'static' decoding function `sf` for `a`, then we can serialise `sf` and `encode a :: ByteString`, and this is a serialisation of `a` itself.
+(Note that the sole use of `Serialisable` is to implement `closurePure`.
 
 
 
