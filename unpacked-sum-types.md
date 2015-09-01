@@ -10,8 +10,8 @@ GHC does a good job of unpacking product types. Given a declaration like
 
 
 ```wiki
-data T1 = C1 a b
-data T2 = C2 {-# UNPACK #-} !T1
+data T1 a b = C1 a b
+data T2 a b = C2 {-# UNPACK #-} !(T1 a b)
 ```
 
 
@@ -23,8 +23,8 @@ Unfortunately, a similar example using sum types cannot be unpacked today:
 
 
 ```wiki
-data T1 = Some a | None
-data T2 = C !T1  -- Cannot UNPACK here
+data T1 a = Some a | None
+data T2 a = C !(T1 a)  -- Cannot UNPACK here
 ```
 
 
