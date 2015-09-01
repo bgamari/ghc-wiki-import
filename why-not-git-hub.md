@@ -87,6 +87,8 @@ GitHub](https://github.com/) instead of maintaining our own infrastructure for G
 
 - Github is not open-source, so we can't fix any (future) issue we might have with it.
 
+- Some people will have a different handle on GitHub then they do on Trac.
+
 ## Related mailing-list discussion threads
 
 
