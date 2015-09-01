@@ -212,7 +212,7 @@ We add a new type of unboxed sums:
 
 
 ```wiki
-|#_n_m t_1 | ... | t_n #|  -- stands for nth constructor out of m
+|# t_1 | ... | t_n #|  -- stands for nth constructor out of m
 ```
 
 
@@ -220,7 +220,7 @@ There's an construction and elimination form. Construction:
 
 
 ```wiki
-|#_n_m x_n #|
+|#_n x_n #|
 ```
 
 
@@ -229,11 +229,34 @@ Elimination:
 
 ```wiki
 case x of
-    |#_1_m x_1 #| -> ...
+    |#_1 x_1 #| -> ...
     ...
-    |#_n_m x_n #| -> ...
+    |#_n x_n #| -> ...
 ```
 
 ## Core to STG
+
+
+
+Given the Core function
+
+
+```wiki
+f :: |# t_1 | ... | t_n #| -> ...
+```
+
+
+we convert it to a call to STG which includes the minimal number of arguments needed to catch all pointer and non-pointer arguments e.g.
+
+
+```wiki
+f args...
+```
+
+## Storage representation
+
+
+
+code: codeGen/StgCmmCon
 
 
