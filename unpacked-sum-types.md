@@ -234,6 +234,10 @@ case x of
     |#_n x_n #| -> ...
 ```
 
+
+code: compiler/prelude/TysWiredIn.hs
+
+
 ## Core to STG
 
 
