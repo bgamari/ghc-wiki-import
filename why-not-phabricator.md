@@ -72,7 +72,7 @@ Compare this to a Github workflow, where you just push your updated branch (with
 >
 >
 
-- All commits for a revisions get squashed upon landing. This makes it more difficult to use tools such as `git blame`. The `history.immutable` setting might be a solution here.
+- All commits in a revision get squashed upon landing. This makes it more difficult to use tools such as `git blame`. The `history.immutable` setting might be a solution here.
 
 >
 >
