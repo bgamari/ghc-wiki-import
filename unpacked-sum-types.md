@@ -229,6 +229,7 @@ Elimination:
 
 ```wiki
 case x of
+    |#_1_m x_1 #| -> ...
     |#_n_m x_n #| -> ...
 ```
 
