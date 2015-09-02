@@ -18,7 +18,7 @@ GHC includes a comprehensive testsuite for catching any regressions.
 
 
 
-In the root directory of the ghc repository or source distribution, run either `make fasttest`, `make test` (which uses the normal speed settings) or `make slowtest` (called `fulltest` for GHC \<= 7.10).
+In the root directory of the ghc repository or source distribution, run either `make fasttest`, `make test` (which uses the normal speed settings) or `make slowtest` (called `fulltest` in GHC \<= 7.10).
 
 
 
@@ -30,5 +30,5 @@ The run time of the testsuite can be reduced by running it with multiple threads
 
 
 ```wiki
-$ make fulltest THREADS=6
+$ make test THREADS=6
 ```
