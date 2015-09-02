@@ -195,6 +195,6 @@ case e of
 ```
 
 
-This above reboxing will go away, using case-of-case and case-of-known-constructor, if we scrutinize the result of the above expression again.
+This above reboxing will go away, using case-of-case and case-of-known-constructor, if we scrutinize `x` again.
 
 
