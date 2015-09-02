@@ -43,6 +43,10 @@ This table shows the differences between these three speed settings.
 
 
 
+Note: `make slow` is GHC \>= 7.11 only.
+
+
+
 See also `Note [validate and testsuite speed]` in the toplevel `Makefile`.
 
 
