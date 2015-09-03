@@ -65,7 +65,15 @@ We add a new primitive type constructor for the family of unboxed sums:
 
 
 ```wiki
-|# t_1 | ... | t_n #|_n
+(# | ... | #)
+```
+
+
+A sum of n "\|"s is a n+1 ary sum. The type constructor can then be used to create a type, like so:
+
+
+```wiki
+(# t1 | ... | tn #)
 ```
 
 
@@ -81,11 +89,11 @@ Construction:
 
 
 ```wiki
-|# x #|_i_n
+(# ... | x | ... #)
 ```
 
 
-This creates the *i*th option of an n-ary sum.
+Again we count the bars to decide which alternative of the sum we are creating.
 
 
 
@@ -94,11 +102,11 @@ Elimination:
 
 ```wiki
 case x of
-    |# x_1 #|_i_n -> ...
+    (# ... | x | ... #) -> ...
 ```
 
 
-This matches against the *i*th option of an n-ary sum.
+This matches against one of the alternatives of the n-ary sum.
 
 
 ### Core to STG
@@ -113,7 +121,7 @@ Given the Core function
 
 
 ```wiki
-f :: |# t_1 | ... | t_n #| -> ...
+f :: (# t_1 | ... | t_n #) -> ...
 ```
 
 
@@ -123,10 +131,10 @@ we convert it to a call to STG which includes the tag and the maximum number of 
 <table><tr><th> Core </th>
 <th> STG 
 </th></tr>
-<tr><th> ` f :: |# Int#, Bool #|_n -> ... ` </th>
+<tr><th> ` f :: (# Int# | Bool #) -> ... ` </th>
 <th> ` f :: Word -> Word -> Pointer -> ... ` 
 </th></tr>
-<tr><th> ` f :: |# Int#, Word# #|_n -> ... ` </th>
+<tr><th> ` f :: (# Int# | Word# #) -> ... ` </th>
 <th> ` f :: Word -> Word -> ... ` 
 </th></tr></table>
 
@@ -176,8 +184,8 @@ C x
 ===> (translates to)
 
 case x of
-    Some y -> C (|# #|_1_2 y)
-    None   -> C (|# #|_2_2 (# #))
+    Some y -> C (# y | #)
+    None   -> C (# | (# #) #)
 ```
 
 
@@ -193,8 +201,8 @@ case e of
 case e of
     C x' ->
         let x = case x' of
-            |# #|_1_2 y -> Some y
-            |# #|_2_2 _ -> None
+            (# y | #) -> Some y
+            (# | _ #) -> None
         in ... x ...
 ```
 
