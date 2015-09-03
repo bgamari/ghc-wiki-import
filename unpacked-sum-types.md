@@ -167,7 +167,7 @@ we generate a "worker" constructor
 
 
 ```wiki
-C |# a, (# #) #|_2
+C (# a | (# #) #)
 ```
 
 
