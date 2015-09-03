@@ -70,7 +70,7 @@ type instance G Bool Int  Int  = Int
 ```
 type family Plus a b where
      Plus Z     n = n
-     Plus (S m) n = S (Plus n m)
+     Plus (S m) n = S (Plus m n)
 ```
 
 >
