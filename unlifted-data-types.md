@@ -172,3 +172,7 @@ Should be simple, except maybe for syntax.
 **Is `Force [a]` the type of strict lists?** No. It is the type of a lazy list whose head is always evaluated and non-bottom.
 
 
+
+**Does `foo :: Force [a] -> Force [a]` force just the first constructor or the whole spine?** You can't tell; the head not withstanding, `[a]` is still a lazy list, so you would need to look at the function body to see if any extra forcing goes on. `Force` does not induce `seq`ing: it is an obligation for the call-site.
+
+
