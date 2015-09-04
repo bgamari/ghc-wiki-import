@@ -119,7 +119,7 @@ Of course, this is just the well-known phenomenon that inlining in a CBV languag
 
 
 
-Additionally, we would also like to have the coercion `Coercible (Box (Force a)) a` . However, without any optimization for `Box` in this case, these are NOT representationally equal, so this coercion is not valid.
+A well-kinded coercion would be `Coercible (Box (Force a)) a` . However, without any optimization for `Box` in this case, these are NOT representationally equal, so this coercion is not valid.
 
 
 
