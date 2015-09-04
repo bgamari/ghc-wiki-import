@@ -92,7 +92,10 @@ Should be simple, except maybe for syntax.
 
 
 
-**What order to my binders get evaluated?** Backwards, but we should fix this. See: [
-https://ghc.haskell.org/trac/ghc/ticket/10824](https://ghc.haskell.org/trac/ghc/ticket/10824)
+**What order to my binders get evaluated?** Backwards, but we should fix this. See [\#10824](https://gitlab.staging.haskell.org/ghc/ghc/issues/10824)
+
+
+
+**Why do we need a new kind `Unlifted`, does `#` work OK?** Actually, it would; but with a new kind, we can make a distinction between types with uniform representation (boxed), and types without it (unboxed).
 
 
