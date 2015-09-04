@@ -91,3 +91,8 @@ Should be simple, except maybe for syntax.
 **How do I unlift a symbolic type constructor?** Syntax is currently unspecified. Suggestions welcome.
 
 
+
+**What order to my binders get evaluated?** Backwards, but we should fix this. See: [
+https://ghc.haskell.org/trac/ghc/ticket/10824](https://ghc.haskell.org/trac/ghc/ticket/10824)
+
+
