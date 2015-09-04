@@ -92,7 +92,7 @@ Should be simple, except maybe for syntax.
 
 
 
-**What order to my binders get evaluated?** Backwards, but we should fix this. See [\#10824](https://gitlab.staging.haskell.org/ghc/ghc/issues/10824)
+**In what order do my binders get evaluated?** Backwards, but we should fix this. See [\#10824](https://gitlab.staging.haskell.org/ghc/ghc/issues/10824)
 
 
 
