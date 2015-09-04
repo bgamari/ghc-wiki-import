@@ -103,3 +103,7 @@ Should be simple, except maybe for syntax.
 **Can I unlift newtypes/type synonyms/...?** This is probably OK, in which case this proposal should be called `UnliftedTypes` instead?
 
 
+
+**How do I convert between Int and !Int?** We want functions `force :: a -> !a` and `suspend :: !a -> a`, but we have to be careful; suspend is a special form!
+
+
