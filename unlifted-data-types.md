@@ -211,7 +211,11 @@ In this section, we review the dynamic semantics of unlifted types.  These are n
 
 
 
-**Constructors.** Given `K e` where `e` is `Unlifted`, this desugars into `case e of !x -> K x`. Nb: if `K` is in kind star, then this expression admits bottom!
+**Constructors and function application.** Given `K e` where `e` is `Unlifted`, this desugars into `case e of !x -> K x`. NB: if `K` is in kind star, then this expression admits bottom!
+
+
+
+Intuitively, if you have an unlifted type, anywhere you let bind it or pass it to a function, you evaluate it. Strict let bindings cannot be arbitrarily floated; you must preserve the ordering of bindings and they cannot be floated beyond an expression kinded `*`.
 
 
 ## Implementation
