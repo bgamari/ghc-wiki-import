@@ -2,7 +2,7 @@
 
 
 
-Below are quick instructions for **just building and installing GHC**. If you are an aspiring GHC developer, read the Newcomers page instead.
+Below are quick instructions for **just building and installing GHC**. If you are an aspiring GHC developer, read the [Newcomers](newcomers) page instead.
 
 
 
