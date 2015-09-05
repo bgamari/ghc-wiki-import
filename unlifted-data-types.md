@@ -71,7 +71,7 @@ data Force :: * -> Unlifted where
   Force :: !a -> Force a
 
 data Box :: Unlifted -> * where
-  Box :: Force a -> Box (Force a)
+  Box :: forall (a :: Unlifted). a -> Box a
 ```
 
 
@@ -106,7 +106,7 @@ Of course, this is just the well-known phenomenon that inlining in a CBV languag
 
 
 
-**Box is compiled without any boxing.** A value of type `Box (Force a)` is only admits the values `undefined` and `Box a`: `Box undefined` is excluded by the `Unlifted` kind of `Force a`.  Thus, we can represent `Box` on the heap simply as a lifted pointer to `a` which may be undefined.
+**Box is compiled without any boxing.** A value of type `Box a` is only admits the values `undefined` and `Box a`: `Box undefined` is excluded by the `Unlifted` kind of `a`.  Thus, we can represent `Box` on the heap simply as a lifted pointer to `a` which may be undefined.
 
 
 
@@ -114,8 +114,31 @@ Of course, this is just the well-known phenomenon that inlining in a CBV languag
 
 
 
-Instead, we introduce the well-kinded coercion `Coercible (Box (Force a)) a` . This is valid due to the special case representational equality for `Box`.
+Instead, we introduce the well-kinded coercion `Coercible (Box (Force a)) a` . This is valid due to the special case representational equality for `Box`. You can box and coerce using the special bidirectional pattern synonym `Thunk`:
 
+
+```wiki
+pattern Thunk a <- x | let a = Force x
+  where Thunk a = (coerce :: Box (Force a) -> a) (Box a)
+```
+
+
+For example:
+
+
+```wiki
+let x = Thunk (error "foo" :: Force Int) :: Int
+in True
+```
+
+
+does not error. Pattern matching over `Thunk` forces the argument (similar to bang patterns) and returns the unlifted value (unlike bang patterns):
+
+
+```wiki
+let Thunk x = 3 + 5 :: Int
+in x :: Force Int
+```
 
 
 **Non-polymorphic unlifted types can directly be unpacked.** The following declarations are representationally equivalent:
