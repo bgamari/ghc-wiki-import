@@ -233,7 +233,7 @@ Should be simple, except maybe for syntax and the special `Thunk` pattern synony
 
 
 
-**Why not `!Int` rather than `Int!` as the syntax proposal?** This syntax conflicts with strict data fields. `data S a = S !a` has a constructor of type `S :: Int -> S`, taking a lifted type and evaluating it before placing it in the constructor; `data S a = S a!` has a constructor of type `S :: Force Int -> S`, which requires the \*user\* to have forced the integer.
+**Why not `!Int` rather than `Int!` as the syntax proposal?** This syntax conflicts with strict data fields. `data S a = S !a` has a constructor of type `S :: Int -> S`, taking a lifted type and evaluating it before placing it in the constructor; `data S a = S a!` has a constructor of type `S :: Force Int -> S`, which requires the *user* to have forced the integer. Representationally, the data types are the same, but the outward behavior for clients differs dramatically.
 
 
 
