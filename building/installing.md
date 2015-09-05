@@ -20,7 +20,15 @@ $ make install
 ```
 
 
-This will build anything that isn't up-to-date, copy the files into the right places (see below) and make sure all the packages are registered properly.
+or
+
+
+```wiki
+$ make install-strip
+```
+
+
+This will build anything that isn't up-to-date, copy the files into the right places (see below) and make sure all the packages are registered properly. The `install-strip` variant strips executable files while installing them.
 
 
 
