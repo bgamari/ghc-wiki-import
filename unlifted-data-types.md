@@ -127,6 +127,19 @@ Instead, we introduce the well-kinded coercion `Coercible (Box (Force a)) a` . T
 
 
 
+**Non-polymorphic unlifted types can directly be unpacked.** The following declarations are representationally equivalent:
+
+
+```wiki
+data T = T {-# UNPACK #-} !Int
+data T = T {-# UNPACK #-} (Force Int)
+```
+
+
+Of course, the constructors still have different types.
+
+
+
 **(OPTIONAL) Give some syntax for `Force`.** Instead of writing `f :: Force Int -> Force Int`, we might like to write `f :: Int! -> Int!`. We define post-fix application of bang to be a wrapping of `Force`.
 
 
