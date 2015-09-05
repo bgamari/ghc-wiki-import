@@ -164,7 +164,7 @@ In this section, we review the dynamic semantics of unlifted types.  These are n
 
 
 
-**Case binding.** Given `case e of x1 -> e1`, where `e` is `Unlifted`, `e` is evaluated to whnf, and then the result is case-matched upon.
+**Case binding.** Given `case e of x1 -> e1`, where `e` is `Unlifted`, `e` is evaluated to whnf, and then the result is case-matched upon. (i.e. it is always as if it is a strict pattern match.)
 
 
 
