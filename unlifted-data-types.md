@@ -210,15 +210,7 @@ Should be simple, except maybe for syntax and the special `Thunk` pattern synony
 
 
 
-**In what order do my binders get evaluated?** Backwards, but we should fix this. See [\#10824](https://gitlab.staging.haskell.org/ghc/ghc/issues/10824)
-
-
-
 **Why do we need a new kind `Unlifted`, does `#` work OK?** Actually, it would; but with a new kind, we can make a distinction between types with uniform representation (boxed), and types without it (unboxed).
-
-
-
-**Can I unlift newtypes/type synonyms/...?** This is probably OK, in which case this proposal should be called `UnliftedTypes` instead?
 
 
 
