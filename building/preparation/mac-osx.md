@@ -116,19 +116,14 @@ GHC 7.8 and older does not support LLVM \>=3.5, which is the default version of 
 
 
 
-Finally, if you want to build the documentation you need to install DocBook. You can install it like so:
+Finally, if you want to build the documentation you need to install DocBook and PsUtils. You can install it like so:
 
 
-- (Homebrew): `brew install docbook` and `brew install docbook-xsl`
+- (Homebrew): `brew install docbook`, `brew install docbook-xsl`, `brew install docbook2x`, `brew install psutils`
 
->
->
-> A Reddit user [
-> reported](https://www.reddit.com/r/haskell/comments/3jq3cu/hacking_on_ghc_is_not_that_hard/cursd94)
-> that `brew install docbook2x` is needed.
-> Please update this page if that is indeed the magic command to get the documentation to build on Mac.
->
->
+
+Without `docbook2x`, the build fails after attempting network access for a required DTD. Without `psutils`, the build fails when trying to build the PostScript file used to generate `haddock.pdf`.
+
 
 
 DocBook is a fairly large system unto itself and configuring it to build the documentation in its various formats can be a maze. Verifying that your SGML\_CATALOG\_FILES and XML\_CATALOG\_FILES environment variables are pointed at the right places will fix most problems.
