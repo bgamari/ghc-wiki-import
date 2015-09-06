@@ -116,7 +116,7 @@ GHC 7.8 and older does not support LLVM \>=3.5, which is the default version of 
 
 
 
-Finally, if you want to build the documentation you need to install DocBook and !PSUtils. You can install it like so:
+Finally, if you want to build the documentation you need to install DocBook and PsUtils. You can install it like so:
 
 
 - (Homebrew): `brew install docbook`, `brew install docbook-xsl`, `brew install docbook2x`, `brew install psutils`
