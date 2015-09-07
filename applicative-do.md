@@ -236,7 +236,7 @@ We can write this expression in a simpler way using `|` for applicative composit
 
 
 
-Note that this isn't the only good way to translate this expression, this is also possible: `(a ; b | c) | d`.  It's not possible to know which is better.  `ApplicativeDo` makes a best-effort attempt to use parallel composition where possible while retaining the semantics of the standard 'do' desugaring.
+Note that this isn't the only good way to translate this expression, this is also possible: `(a ; (b | c)) | d`.  It's not possible to know which is better.  `ApplicativeDo` makes a best-effort attempt to use parallel composition where possible while retaining the semantics of the standard 'do' desugaring.
 
 
 ## Syntax & spec
