@@ -98,7 +98,7 @@ Currently, we have two different kinds (ahem) of unlifted types which live in `#
 
 
 
-This subproposal is to distinguish between these two kinds, calling boxed, unlifted kinds `Unlifted`. The motivation is that if users start defining and using unlifted types in normal code, they are more likely to be able to be polymorphic over unlifted types. There are two particular cases of polymorphism we might like to support:
+This subproposal is to distinguish between these two kinds, calling boxed, unlifted kinds `Unlifted`. If users start defining and using unlifted types in normal code,  it is likely that they will request polymorphism over unlifted types. There are two particular cases of polymorphism we might like to support:
 
 
 
