@@ -5,6 +5,13 @@
 This page is intended to serve as the first stop for those people who say, "I want to contribute to GHC, but I don't know quite where to begin." Begin here. While the [building guide](building), [working conventions](working-conventions), [commentary](commentary) and [debugging](debugging) pages (always linked from the left sidebar) have great information that can come in handy while you're working on your first, or first several patches, this page is intended to have the details you will need to get rolling.
 
 
+
+You may want to look at these "how it went for me" blog posts.  (Do add more here.)
+
+
+- [
+  Hacking on GHC](http://www.theregister.co.uk/2015/09/04/number_of_schools_fail_to_train_teachers_in_coding_computing_curriculum/?mt=1441400335078) by Andrew Gibiansky
+
 ## First steps
 
 
