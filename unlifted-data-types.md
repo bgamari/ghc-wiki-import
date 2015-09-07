@@ -61,11 +61,11 @@ unot UFalse = UTrue
 
 main :: IO ()
 main = let y = unot (error "foo")
-       in error "bar"
+       in return ()
 ```
 
 
-In this example, we get the error "foo", not bar, because the binding of `y` must be evaluated strictly.
+In this example, we get the error "foo", rather than returning `()`, because the binding of `y` must be evaluated strictly.
 
 
 
@@ -90,7 +90,7 @@ data MyInt' = MyInt' {-# UNPACK #-} !Int
 Of course, the constructors for `MyInt` and `MyInt#` have different types.
 
 
-## Proposal 1.1: Polymorphism over a new Unlifted kind
+## Proposal 2: Polymorphism over a new Unlifted kind
 
 
 
@@ -142,7 +142,7 @@ map f (BCons x xs) = BCons (f x) (map f xs)
 We do not know if `f x` should be evaluated strictly or lazily; it depends on whether or not `b` is unlifted or lifted. This case can be handled by specializing `map` for the lifted and unlifted cases.
 
 
-## Proposal 2: Allow newtypes over unlifted types
+## Proposal 3: Allow newtypes over unlifted types
 
 
 
@@ -157,7 +157,7 @@ newtype MyInt# = MkInt# Int#
 with `MyInt# :: #`. GHC already supports coercions in kind `#`, so this should be very simple to implement.
 
 
-## Proposal 3: Allow unlifting existing data types with no overhead
+## Proposal 4: Allow unlifting existing data types with no overhead
 
 
 
