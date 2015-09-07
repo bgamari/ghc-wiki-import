@@ -130,7 +130,7 @@ map f (BCons x xs) = BCons (f x) (map f xs)
 ```
 
 
-We do not know if `f x` should be evaluated strictly or lazily; it depends on whether or not `b` is unlifted or lifted.
+We do not know if `f x` should be evaluated strictly or lazily; it depends on whether or not `b` is unlifted or lifted. This case can be handled by specializing `map` for the lifted and unlifted cases.
 
 
 ## Proposal 2: Allow newtypes over unlifted types
@@ -164,35 +164,14 @@ suspend a = a
 ```
 
 
-For example, `suspend (error "foo" :: Int#)` does not error until forced. Like `Box`, unlifted computations may not be lifted out of `suspend` without changing the semantics.
+`Force a` is the "head strict" version of `a`: if you have `x :: Force Int` in scope, it is guaranteed to have already been evaluated to an `Int`. Forced computations can be lifted:
 
 
-
-Note that `suspend` must be used carefully. This example errors:
-
-
-```wiki
-  let x = error "foo" :: Force Int
-      y = suspend x :: Int
-  in True
-```
-
-
-but this example does not:
-
-
-```wiki
-  let y = suspend (error "foo" :: Force Int) :: Int
-  in True
-```
-
-
-Of course, this is just the well-known phenomenon that inlining in a CBV language does not necessarily preserve semantics.
-
-
-
-Intuitively, `Force a` is the "head strict" version of `a`: if you have `x :: Force Int` in scope, it is guaranteed to have already been evaluated to an `Int`.
-
+>
+>
+> `suspend (error "foo" :: Int#)` does not error until forced. Like `Box`, unlifted computations may not be lifted out of `suspend` without changing the semantics.
+>
+>
 
 
 This can all be written as library code under the first proposal; however, we notice that the value of type `Force a` only admits the value `Force a`: `undefined` is excluded by the `Unlifted` kind, and `Force undefined` is excluded by the strict field.  Thus, we can represent `Force` on the heap simply as an unlifted pointer to `a`, which is never undefined.
@@ -296,6 +275,25 @@ Should be simple, except maybe for syntax and the special `Thunk` pattern synony
 
 **Is `Force (Maybe (Force Int))` allowed?** No, because `Force Int` has kind `Unlifted` but `Maybe` has kind `* -> Unlifted`. A data type declaration must be explicitly written to accept an unlifted type (`data StrictMaybe (a :: Unlifted) = SMaybe a`), or simply be strict in its field (`data StrictMaybe2 a = SMaybe2 !a`).
 
+
+
+**How does this affect inlining?** In any CBV language, inlining doesn't always preserve semantics; unlifted types are no different. For example, this errors:
+
+
+```wiki
+  let x = error "foo" :: Force Int
+      y = suspend x :: Int
+  in True
+```
+
+
+but this example does not:
+
+
+```wiki
+  let y = suspend (error "foo" :: Force Int) :: Int
+  in True
+```
 
 
 **What's the difference between `Force Int` and `Int#`?** `Force Int` is an unlifted, boxed integer; `Int#` is an unlifted, unboxed integer.
