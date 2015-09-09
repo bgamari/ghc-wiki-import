@@ -12,7 +12,7 @@ We have not yet decided when, or even whether, to release GHC 7.10.3.  We will d
 - The fix is not too disruptive; i.e. does not risk introducing a raft of new bugs
 
 
-So please tell us if your problem falls in to this category.
+So please tell us if your problem falls in to this category, saying a bit about why it is important to you, and why you can't work around it.  It's worth attaching the details to the relevant ticket, plus send a heads-up email to ghc-devs to draw attention to it.
 
 
 
