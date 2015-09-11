@@ -23,7 +23,7 @@ In order to see emails below, **you must login**.
 
 
 
-(**NB**: GHC's development *as a whole* is not lead by any particular group, company, or individual. Affiliations below are listed for identification purposes only, and are optional; contributions do not necessarily represent the interests of employers or academic institutions.)
+(**NB**: GHC's development *as a whole* is not led by any particular group, company, or individual. Affiliations below are listed for identification purposes only, and are optional; contributions do not necessarily represent the interests of employers or academic institutions.)
 
 
 ### Current list
