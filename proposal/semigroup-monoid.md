@@ -79,6 +79,7 @@ Move `Data.Semigroup` & `Data.List.NonEmpty` from `semigroups-0.18` to `base`.
 
 
 
-TODO ...
+TODO ...integrate migration roadmap outlined in [
+http://permalink.gmane.org/gmane.comp.lang.haskell.libraries/24526](http://permalink.gmane.org/gmane.comp.lang.haskell.libraries/24526)
 
 
