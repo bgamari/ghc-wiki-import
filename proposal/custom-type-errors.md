@@ -154,6 +154,15 @@ and type-family instances.  This seems like a bit heavy-weight, and it is not cl
 have to think of more syntax and implement it.
 
 
+## Design questions (RAE)
+
+
+1. What happens with Given `TypeError` constraints? Naively, the `TypeError` constraint on an instance would seem to lead to an "inaccessible code" error. (And this point would be right! It *is* inaccessible code.)
+
+1. Relatedly, when definition an instance with a `TypeError` constraint, what should users write in the body? Leaving it empty causes warnings, but anything written in there would never be called.
+
+1. Do we support `foo :: TypeError (Text "") -> TypeError (Text ""); foo = id`? I don't have a strong feeling one way or the other, but it would be nice to have this specified.
+
 
     
 
