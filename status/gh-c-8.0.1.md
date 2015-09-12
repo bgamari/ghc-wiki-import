@@ -260,37 +260,37 @@ col: id, col: type, col: summary, col: priority, col: owner, order: owner)
 <th>
         
         Ticket (Ticket query: status: merge, status: patch, status: upstream,
-milestone: 7.12.1, group: status, max: 0, col: id, col: type, col: summary,
+milestone: 8.0.1, group: status, max: 0, col: id, col: type, col: summary,
 col: priority, col: differential, col: owner, order: id)
       </th>
 <th>
         
         Type (Ticket query: status: merge, status: patch, status: upstream,
-milestone: 7.12.1, group: status, max: 0, col: id, col: type, col: summary,
+milestone: 8.0.1, group: status, max: 0, col: id, col: type, col: summary,
 col: priority, col: differential, col: owner, order: type)
       </th>
 <th>
         
         Summary (Ticket query: status: merge, status: patch, status: upstream,
-milestone: 7.12.1, group: status, max: 0, col: id, col: type, col: summary,
+milestone: 8.0.1, group: status, max: 0, col: id, col: type, col: summary,
 col: priority, col: differential, col: owner, order: summary)
       </th>
 <th>
         
         Priority (Ticket query: status: merge, status: patch, status: upstream,
-milestone: 7.12.1, group: status, max: 0, col: id, col: type, col: summary,
+milestone: 8.0.1, group: status, max: 0, col: id, col: type, col: summary,
 col: priority, col: differential, col: owner, desc: 1, order: priority)
       </th>
 <th>
         
         Differential Rev(s) (Ticket query: status: merge, status: patch,
-status: upstream, milestone: 7.12.1, group: status, max: 0, col: id, col: type,
+status: upstream, milestone: 8.0.1, group: status, max: 0, col: id, col: type,
 col: summary, col: priority, col: differential, col: owner, order: differential)
       </th>
 <th>
         
         Owner (Ticket query: status: merge, status: patch, status: upstream,
-milestone: 7.12.1, group: status, max: 0, col: id, col: type, col: summary,
+milestone: 8.0.1, group: status, max: 0, col: id, col: type, col: summary,
 col: priority, col: differential, col: owner, order: owner)
       </th>
 <td>
@@ -324,6 +324,10 @@ col: priority, col: differential, col: owner, order: owner)
   
   
     
+
+## Status: new (3 matches)
+
+
   
   
 
@@ -331,46 +335,273 @@ col: priority, col: differential, col: owner, order: owner)
       </td>
 <th>
         
-        Ticket (Ticket query: status: new, milestone: 7.12.1, group: status,
+        Ticket (Ticket query: status: new, milestone: 8.0.1, group: status,
 max: 0, col: id, col: type, col: summary, col: priority, col: owner, order: id)
       </th>
 <th>
         
-        Type (Ticket query: status: new, milestone: 7.12.1, group: status,
+        Type (Ticket query: status: new, milestone: 8.0.1, group: status,
 max: 0, col: id, col: type, col: summary, col: priority, col: owner,
 order: type)
       </th>
 <th>
         
-        Summary (Ticket query: status: new, milestone: 7.12.1, group: status,
+        Summary (Ticket query: status: new, milestone: 8.0.1, group: status,
 max: 0, col: id, col: type, col: summary, col: priority, col: owner,
 order: summary)
       </th>
 <th>
         
-        Priority (Ticket query: status: new, milestone: 7.12.1, group: status,
+        Priority (Ticket query: status: new, milestone: 8.0.1, group: status,
 max: 0, col: id, col: type, col: summary, col: priority, col: owner, desc: 1,
 order: priority)
       </th>
 <th>
         
-        Owner (Ticket query: status: new, milestone: 7.12.1, group: status,
+        Owner (Ticket query: status: new, milestone: 8.0.1, group: status,
 max: 0, col: id, col: type, col: summary, col: priority, col: owner,
 order: owner)
       </th>
 <td>
-    </td></tr>
+    </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr>
 <tr><td>
-          </td>
-<th>
-            No tickets found
-          </th>
+                
+                  
+                    </td>
+<th>[\#10735](https://gitlab.staging.haskell.org/ghc/ghc/issues/10735)</th>
 <td>
-        </td>
-<td></td>
-<td></td>
-<td></td>
-<td></td></tr></table>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      task
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Smooth out the differences between \`compiler/utils/Pretty.hs\` and \`libraries/pretty\`](https://gitlab.staging.haskell.org/ghc/ghc/issues/10735)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#10927](https://gitlab.staging.haskell.org/ghc/ghc/issues/10927)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [IndexError: pop from empty list](https://gitlab.staging.haskell.org/ghc/ghc/issues/10927)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#3351](https://gitlab.staging.haskell.org/ghc/ghc/issues/3351)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Generated ghc man page missing xrefs](https://gitlab.staging.haskell.org/ghc/ghc/issues/3351)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      lowest
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr></table>
 
 
   
@@ -395,31 +626,31 @@ order: owner)
       </td>
 <th>
         
-        Ticket (Ticket query: status: infoneeded, milestone: 7.12.1,
+        Ticket (Ticket query: status: infoneeded, milestone: 8.0.1,
 group: status, max: 0, col: id, col: type, col: summary, col: priority,
 col: owner, order: id)
       </th>
 <th>
         
-        Type (Ticket query: status: infoneeded, milestone: 7.12.1,
-group: status, max: 0, col: id, col: type, col: summary, col: priority,
-col: owner, order: type)
+        Type (Ticket query: status: infoneeded, milestone: 8.0.1, group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+order: type)
       </th>
 <th>
         
-        Summary (Ticket query: status: infoneeded, milestone: 7.12.1,
+        Summary (Ticket query: status: infoneeded, milestone: 8.0.1,
 group: status, max: 0, col: id, col: type, col: summary, col: priority,
 col: owner, order: summary)
       </th>
 <th>
         
-        Priority (Ticket query: status: infoneeded, milestone: 7.12.1,
+        Priority (Ticket query: status: infoneeded, milestone: 8.0.1,
 group: status, max: 0, col: id, col: type, col: summary, col: priority,
 col: owner, desc: 1, order: priority)
       </th>
 <th>
         
-        Owner (Ticket query: status: infoneeded, milestone: 7.12.1,
+        Owner (Ticket query: status: infoneeded, milestone: 8.0.1,
 group: status, max: 0, col: id, col: type, col: summary, col: priority,
 col: owner, order: owner)
       </th>
