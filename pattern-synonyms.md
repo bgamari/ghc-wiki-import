@@ -721,7 +721,7 @@ not control. Having to define these synonyms at the definition site is too restr
 In both cases it is noted that the type of the associated synonym should be checked to ensure it matches with the other constructors.
 
 
-## Unnatural Association
+### Unnatural Association
 
 
 
@@ -730,7 +730,7 @@ It is very uncommon to explicitly import datatypes defined in the prelude, thus 
 but should be allowed.
 
 
-## Module Chasing
+### Module Chasing
 
 
 
@@ -740,7 +740,7 @@ defined. With this proposal `T(..)` has no maximal meaning, I don't see any prob
 be determined by the renamer.
 
 
-## The Privilege Objection
+### The Privilege Objection
 
 
 
@@ -749,7 +749,7 @@ I don't think this is particularly puzzling as at their most general pattern syn
 data constructors. Being able to later associate them with types only brings their behaviour closer to ordinary data constructors.
 
 
-## Polymorphic Synonyms
+### Polymorphic Synonyms
 
 
 
