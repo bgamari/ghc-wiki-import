@@ -44,6 +44,9 @@ Below are the major highlights of 8.0.
 - Support for wildcards in data and type family instances ([
   Phab:D1092](https://phabricator.haskell.org/D1092))
 
+- Support for [Injective Type Families](injective-type-families), which allows you to specify type families which are injective, i.e. a one-to-one relationship. ([
+  Phab:D202](https://phabricator.haskell.org/D202))
+
 ### In-flight, and likely to land in time
 
 
@@ -57,9 +60,6 @@ Below are the major highlights of 8.0.
 
 - Support for reasoning about kind equalities, which gives promotion of GADTs to kinds, kind families, heterogeneous equality (kind-indexed GADTs), and `* :: *`. There is some discussion in [DependentHaskell/Phase1](dependent-haskell/phase1), but that's very low-level. I (Richard) have no good user-oriented write-up yet, but there shouldn't be much in the way of new syntax -- just fewer type errors. ([
   Phab:D808](https://phabricator.haskell.org/D808))
-
-- Support for [Injective Type Families](injective-type-families), which allows you to specify type families which are injective, i.e. a one-to-one relationship. ([
-  Phab:D202](https://phabricator.haskell.org/D202))
 
 - Support for [Strict Haskell](strict-pragma) including both the `StrictData` and `Strict` language extensions
 
