@@ -635,6 +635,13 @@ baz = Pat { foo = 5 }
 >
 >
 
+#### Answer
+
+
+
+Not currently - `baz` is parsed as a `RecordCon` which then fails as `Pat` is not a constructor with field `foo`.
+
+
 - Import/export syntax has to be extended to accommodate the field labels. So, if we have
 
 ```wiki
