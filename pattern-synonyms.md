@@ -992,7 +992,7 @@ As `M` imports `N` and imports `T`, `P` is associated with `T` relative to `M`. 
 
 
 
-Therefore when `O` imports `T(..)` from `M`, it also imports `P`. 
+Therefore when `O` imports `T(..)` from `M`, it imports `T` and `P`. 
 
 
 ```
