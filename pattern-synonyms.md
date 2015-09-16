@@ -914,7 +914,7 @@ For any modules `M` `N`, if we import `N` from `M`,
 #### Examples
 
 
-```wiki
+```
 module N(T(.., P)) where
 
 data T = MkT Int
@@ -931,7 +931,7 @@ import N (T(..))
 `P` is associated with `T` relative to `N`. M imports `T`, `MkT` and `P`.
 
 
-```wiki
+```
 module N(T(..)) where
 
 data T = MkT Int
@@ -948,7 +948,7 @@ import N (T(..))
 `P` is unassociated. `M` imports `T` and `MkT`. 
 
 
-```wiki
+```
 module N(T(P)) where
 
 data T = MkT Int
@@ -965,7 +965,7 @@ import N (T(..))
 `P` is associated with `T` relative to `N`. M imports `T`, and `P`.
 
 
-```wiki
+```
 module N(T(P)) where
 
 data T = MkT Int
@@ -995,7 +995,7 @@ As `M` imports `N` and imports `T`, `P` is associated with `T` relative to `M`. 
 Therefore when `O` imports `T(..)` from `M`, it also imports `P`. 
 
 
-```wiki
+```
 module N(T(..)) where
 
 data T = MkT Int
