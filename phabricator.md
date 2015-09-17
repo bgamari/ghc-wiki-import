@@ -104,6 +104,11 @@ Help! I'm getting a strange error when running `arc` that I didn't get yesterday
 Probably GHC's Phabricator instance was updated and your `arc` client is now out of sync. Try `arc upgrade`.
 
 
+
+For other problems, file a ticket in the [
+GHC project](https://phabricator.haskell.org/project/view/2/) on Phabricator.
+
+
 ## Starting off: Fixing a bug, submitting a review
 
 
