@@ -173,6 +173,7 @@
 
 
 - [\#8560](https://gitlab.staging.haskell.org/ghc/ghc/issues/8560): Generic representation for GADTs
+- [\#10514](https://gitlab.staging.haskell.org/ghc/ghc/issues/10514): Generic representation for existentials
 
 ## Documentation
 
