@@ -127,7 +127,7 @@ Without `docbook2x`, the build fails after attempting network access for a requi
 
 
 
-DocBook is a fairly large system unto itself and configuring it to build the documentation in its various formats can be a maze. Verifying that your SGML\_CATALOG\_FILES and XML\_CATALOG\_FILES environment variables are pointed at the right places will fix most problems.
+DocBook is a fairly large system unto itself and configuring it to build the documentation in its various formats can be a maze. Verifying that your SGML\_CATALOG\_FILES and XML\_CATALOG\_FILES environment variables are pointed at the right places will fix most problems. (What should they point to? After `brew install docbook-xsl` they are both empty.)
 
 
 ## Docker
