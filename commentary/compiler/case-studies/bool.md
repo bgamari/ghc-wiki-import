@@ -9,7 +9,7 @@ This page gives a hopefully comprehensive view of how `Bool` type is wired-in in
 
 
 
-All data constructors, type constructors and so on have their unique identifier which is needed during the compilation process. For the wired-in types these unique values are defined in the [prelude/PrelNames.lhs](/trac/ghc/browser/ghc/prelude/PrelNames.lhs). In case of `Bool` the relevant definitions look like this:
+All data constructors, type constructors and so on have their unique identifier which is needed during the compilation process. For the wired-in types these unique values are defined in the [prelude/PrelNames.hs](/trac/ghc/browser/ghc/prelude/PrelNames.hs). In case of `Bool` the relevant definitions look like this:
 
 
 ```wiki
@@ -23,7 +23,7 @@ trueDataConKey  = mkPreludeDataConUnique 15 -- line 1451
 
 
 
-The `mkPreludeTyConUnique` and `mkPreludeDataConUnique` take care of generating a unique `Unique` value. They are defined in [basicTypes/Unique.lhs](/trac/ghc/browser/ghc/basicTypes/Unique.lhs):
+The `mkPreludeTyConUnique` and `mkPreludeDataConUnique` take care of generating a unique `Unique` value. They are defined in [basicTypes/Unique.hs](/trac/ghc/browser/ghc/basicTypes/Unique.hs):
 
 
 ```wiki
@@ -37,14 +37,14 @@ mkPreludeDataConUnique i = mkUnique '6' (2*i)
 ```
 
 
-You will find definition of `mkUnique :: Char -> Int -> Unique` at line 135 in [basicTypes/Unique.lhs](/trac/ghc/browser/ghc/basicTypes/Unique.lhs).
+You will find definition of `mkUnique :: Char -> Int -> Unique` at line 135 in [basicTypes/Unique.hs](/trac/ghc/browser/ghc/basicTypes/Unique.hs).
 
 
 ## Defining wired-in information about Bool
 
 
 
-All the wired-in information that compiler needs to know about `Bool` is defined in [prelude/TysWiredIn.lhs](/trac/ghc/browser/ghc/prelude/TysWiredIn.lhs). This file exports following functions related to `Bool`:
+All the wired-in information that compiler needs to know about `Bool` is defined in [prelude/TysWiredIn.hs](/trac/ghc/browser/ghc/prelude/TysWiredIn.hs). This file exports following functions related to `Bool`:
 
 
 ```wiki
@@ -76,7 +76,7 @@ trueDataConName   = mkWiredInDataConName UserSyntax gHC_TYPES (fsLit "True")  tr
 ```
 
 
-`boolTyConKey`, `falseDataConKey` and `trueDataConKey` are `Unique` values defined earlier. `boolTyCon`, `falseDataCon` and `trueDataCon` are yet undefined. Type of syntax is defined in [basicTypes/Names.lhs](/trac/ghc/browser/ghc/basicTypes/Names.lhs), line 129:
+`boolTyConKey`, `falseDataConKey` and `trueDataConKey` are `Unique` values defined earlier. `boolTyCon`, `falseDataCon` and `trueDataCon` are yet undefined. Type of syntax is defined in [basicTypes/Names.hs](/trac/ghc/browser/ghc/basicTypes/Names.hs), line 129:
 
 
 ```wiki
@@ -84,7 +84,7 @@ data BuiltInSyntax = BuiltInSyntax | UserSyntax
 ```
 
 
-`BuiltInSyntax` is used for things like (:), \[\] and tuples. All other things are `UserSyntax`. `gHC_TYPES` is a module `GHC.Types` to which these type and data constructors get assigned. It is defined in [prelude/PrelNames.lhs](/trac/ghc/browser/ghc/prelude/PrelNames.lhs):
+`BuiltInSyntax` is used for things like (:), \[\] and tuples. All other things are `UserSyntax`. `gHC_TYPES` is a module `GHC.Types` to which these type and data constructors get assigned. It is defined in [prelude/PrelNames.hs](/trac/ghc/browser/ghc/prelude/PrelNames.hs):
 
 
 ```wiki
@@ -95,7 +95,7 @@ mkPrimModule m = mkModule primPackageId (mkModuleNameFS m)
 ```
 
 
-`FastString` is a string type based on `ByteStrings` and the `fsLit` function converts a standard Haskell `Strings` to `FastString`. See [utils/FastString.lhs](/trac/ghc/browser/ghc/utils/FastString.lhs) for more details.
+`FastString` is a string type based on `ByteStrings` and the `fsLit` function converts a standard Haskell `Strings` to `FastString`. See [utils/FastString.hs](/trac/ghc/browser/ghc/utils/FastString.hs) for more details.
 
 
 ### A side note on creating wired-in Names
@@ -122,7 +122,7 @@ data NameSort
 ```
 
 
-The `mkWiredInTyConName` and `mkWiredInDataConName` are functions that create `Name`s for wired in types and data constructors. They are defined in [prelude/TysWiredIn.lhs](/trac/ghc/browser/ghc/prelude/TysWiredIn.lhs), lines 163-173:
+The `mkWiredInTyConName` and `mkWiredInDataConName` are functions that create `Name`s for wired in types and data constructors. They are defined in [prelude/TysWiredIn.hs](/trac/ghc/browser/ghc/prelude/TysWiredIn.hs), lines 163-173:
 
 
 ```wiki
@@ -140,7 +140,7 @@ mkWiredInDataConName built_in modu fs unique datacon
 ```
 
 
-The `mkWiredInName` is defined in [basicTypes/Names.lhs](/trac/ghc/browser/ghc/basicTypes/Names.lhs) (lines 279-283), and it just assigns values to fields of `Name`:
+The `mkWiredInName` is defined in [basicTypes/Names.hs](/trac/ghc/browser/ghc/basicTypes/Names.hs) (lines 279-283), and it just assigns values to fields of `Name`:
 
 
 ```wiki
@@ -155,7 +155,7 @@ mkWiredInName mod occ uniq thing built_in
 
 
 
-Having defined `Name`s for `Bool`, the [RdrName](commentary/compiler/rdr-name-type)s can be defined ([prelude/TysWiredIn.lhs](/trac/ghc/browser/ghc/prelude/TysWiredIn.lhs), lines 221-225):
+Having defined `Name`s for `Bool`, the [RdrName](commentary/compiler/rdr-name-type)s can be defined ([prelude/TysWiredIn.hs](/trac/ghc/browser/ghc/prelude/TysWiredIn.hs), lines 221-225):
 
 
 ```wiki
@@ -166,7 +166,7 @@ true_RDR  = nameRdrName trueDataConName
 ```
 
 
-`nameRdrName` is defined in `basicTypes.lhs` (line 203) and it simply wraps the `Name` into one of `RdrName`'s value constructors:
+`nameRdrName` is defined in `basicTypes.hs` (line 203) and it simply wraps the `Name` into one of `RdrName`'s value constructors:
 
 
 ```wiki
@@ -203,7 +203,7 @@ Note that `boolTyCon` is on the list of wired in type constructors created by `w
 
 
 
-[types/TypeRep.lhs](/trac/ghc/browser/ghc/types/TypeRep.lhs), lines 281-282:
+[types/TypeRep.hs](/trac/ghc/browser/ghc/types/TypeRep.hs), lines 281-282:
 
 
 ```wiki
@@ -212,7 +212,7 @@ mkTyConTy tycon = TyConApp tycon []
 ```
 
 
-[prelude/TysWiredIn.lhs](/trac/ghc/browser/ghc/prelude/TysWiredIn.lhs), 247-257:
+[prelude/TysWiredIn.hs](/trac/ghc/browser/ghc/prelude/TysWiredIn.hs), 247-257:
 
 
 ```wiki
@@ -232,7 +232,7 @@ pcTyCon is_enum is_rec name cType tyvars cons
 ```
 
 
-`prelude/TysWiredIn.lhs`, 261-297:
+`prelude/TysWiredIn.hs`, 261-297:
 
 
 ```wiki
@@ -280,7 +280,7 @@ trueDataConId  = dataConWorkId trueDataCon
 ```
 
 
-`falseDataConId` and `trueDataConId` just extract `Id` from previously defined data constructors. These definitions are from [basicTypes/DataCon.lhs](/trac/ghc/browser/ghc/basicTypes/DataCon.lhs):
+`falseDataConId` and `trueDataConId` just extract `Id` from previously defined data constructors. These definitions are from [basicTypes/DataCon.hs](/trac/ghc/browser/ghc/basicTypes/DataCon.hs):
 
 
 ```wiki
