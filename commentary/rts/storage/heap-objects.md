@@ -199,7 +199,7 @@ Objects fall into two categories:
   scattered through the object code, and only the linker knows where.
 
 
-To find out whether a particular object is dynamic or static, use the [HEAP\_ALLOCED()](commentary/rts/storage/heap-alloced) macro, from rts/sm/MBlock.h.  This macro works by consulting a bitmap (or structured bitmap) that tells for each [megablock](commentary/rts/storage#structure-of-blocks) of memory whether it is part of the dynamic heap or not.
+To find out whether a particular object is dynamic or static, use the [HEAP\_ALLOCED()](commentary/rts/storage/heap-alloced) macro, from [rts/sm/HeapAlloc.h](/trac/ghc/browser/rts/sm/HeapAlloc.h)[](/trac/ghc/export/HEAD/ghc/rts/sm/HeapAlloc.h).  This macro works by consulting a bitmap (or structured bitmap) that tells for each [megablock](commentary/rts/storage#structure-of-blocks) of memory whether it is part of the dynamic heap or not.
 
 
 ### Dynamic objects
