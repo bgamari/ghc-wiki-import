@@ -76,7 +76,7 @@ trueDataConName   = mkWiredInDataConName UserSyntax gHC_TYPES (fsLit "True")  tr
 ```
 
 
-`boolTyConKey`, `falseDataConKey` and `trueDataConKey` are `Unique` values defined earlier. `boolTyCon`, `falseDataCon` and `trueDataCon` are yet undefined. Type of syntax is defined in [compiler/basicTypes/Names.hs](/trac/ghc/browser/ghc/compiler/basicTypes/Names.hs), line 129:
+`boolTyConKey`, `falseDataConKey` and `trueDataConKey` are `Unique` values defined earlier. `boolTyCon`, `falseDataCon` and `trueDataCon` are yet undefined. Type of syntax is defined in [compiler/basicTypes/Name.hs](/trac/ghc/browser/ghc/compiler/basicTypes/Name.hs), line 129:
 
 
 ```wiki
@@ -140,7 +140,7 @@ mkWiredInDataConName built_in modu fs unique datacon
 ```
 
 
-The `mkWiredInName` is defined in [compiler/basicTypes/Names.hs](/trac/ghc/browser/ghc/compiler/basicTypes/Names.hs) (lines 279-283), and it just assigns values to fields of `Name`:
+The `mkWiredInName` is defined in [compiler/basicTypes/Name.hs](/trac/ghc/browser/ghc/compiler/basicTypes/Name.hs) (lines 279-283), and it just assigns values to fields of `Name`:
 
 
 ```wiki
