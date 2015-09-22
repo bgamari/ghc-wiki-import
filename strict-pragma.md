@@ -1,5 +1,11 @@
+# Strict & StrictData
+
+
 
 This page explains the motivation, semantics, and implementation of the new language extensions `StrictData` and  `Strict`.
+
+
+
 
 
 ## The Problem
