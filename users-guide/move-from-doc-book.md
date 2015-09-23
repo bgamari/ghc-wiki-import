@@ -78,8 +78,7 @@ There are a few alternatives that we could switch to (I here refers to Ben Gamar
 > >
 >
 
-
-\# Proposal
+# Proposal
 
 
 
@@ -88,8 +87,7 @@ and expressive enough to accommodate the majority of the users guide
 unmodified.
 
 
-
-\# Execution
+# Execution
 
 
 
