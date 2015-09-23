@@ -68,7 +68,7 @@ Of course, there are a few annoyances: the doctree construct doesn't quite work 
 
 
 Another nice advantage here is that Trac has [
-http://trac.edgewall.org/wiki/WikiRestructuredText native support](http://trac.edgewall.org/wiki/WikiRestructuredText native support) for rendering RST which could come in handy when pasting between documents.
+native support](http://trac.edgewall.org/wiki/WikiRestructuredText) for rendering RST which could come in handy when pasting between documents.
 
 
 # Proposal
