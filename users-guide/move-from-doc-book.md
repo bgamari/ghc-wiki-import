@@ -1,4 +1,7 @@
-# The Problem
+# Moving User's Guide Away from DocBook
+
+
+## The Problem
 
 
 
@@ -18,21 +21,21 @@ choice of markup language used for GHC's users guide motivated by a few issues w
 - Getting even a simple image displayed consistently in the PDF and HTML output is an [
   exercise in futility](https://ghc.haskell.org/trac/ghc/ticket/10416)
 
-# Alternatives to DocBook
+## Alternatives to DocBook
 
 
 
 There are a few alternatives that we could switch to (I here refers to Ben Gamari),
 
 
-## Markdown
+### Markdown
 
 
 
 While ubiquitous, its syntax isn't nearly expressive enough to accommodate the users guide.
 
 
-## asciidoc
+### asciidoc
 
 
 
@@ -43,7 +46,7 @@ asciidoc-ification](https://github.com/bgamari/ghc/blob/asciidoc/docs/users_guid
 ghci.asciidoc](https://github.com/bgamari/ghc/blame/asciidoc/docs/users_guide/ghci.asciidoc#L2162).
 
 
-## ReStructuredText
+### ReStructuredText
 
 
 
@@ -72,7 +75,7 @@ Another nice advantage here is that Trac has [
 native support](http://trac.edgewall.org/wiki/WikiRestructuredText) for rendering RST which could come in handy when pasting between documents.
 
 
-# Proposal
+## Proposal
 
 
 
@@ -81,7 +84,7 @@ the tooling is much better the DocBook, the format reasonably easy to grok and
 expressive enough to accommodate the majority of the users guide unmodified.
 
 
-# Execution
+## Execution
 
 
 
