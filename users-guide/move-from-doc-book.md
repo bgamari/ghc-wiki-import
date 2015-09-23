@@ -55,11 +55,11 @@ I have converted the entire users guide to ReStructuredText with a modified Pand
 
 - HTML (using a modified version of LLVM's theme), [
   http://smart-cactus.org/\~ben/ghc-user-manual/html/index.html](http://smart-cactus.org/~ben/ghc-user-manual/html/index.html)
-- PDF produced by xetex (used to get convenient Unicode support), [
+- PDF produced by xetex (for convenient Unicode support), [
   http://smart-cactus.org/\~ben/ghc-user-manual/xetex/GHCUsersGuide.pdf](http://smart-cactus.org/~ben/ghc-user-manual/xetex/GHCUsersGuide.pdf)
 - ePub (I know nothing about this format) [
   http://smart-cactus.org/\~ben/ghc-user-manual/epub/GHCUsersGuide.epub](http://smart-cactus.org/~ben/ghc-user-manual/epub/GHCUsersGuide.epub)
-- Even Github's rendering of the source looks reasonable good, [
+- Even Github's rendering of the source looks reasonably good, [
   https://github.com/bgamari/ghc/blob/doc-rst/docs/users\_guide/ghci.rst](https://github.com/bgamari/ghc/blob/doc-rst/docs/users_guide/ghci.rst)
 
 
