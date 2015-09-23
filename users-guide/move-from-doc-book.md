@@ -30,7 +30,7 @@ There are a few alternatives that we could switch to (I here refers to Ben Gamar
 
 
 - Markdown: While ubiquitous, its syntax isn't nearly expressive
-  enough to accomodate the users guide.
+  enough to accommodate the users guide.
 
 - asciidoc: This was the front-runner in \[1\]. Unfortunately, when I
   tried to use it in anger on the users guide things pretty quickly
