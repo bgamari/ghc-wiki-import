@@ -762,6 +762,13 @@ For any modules `M` `N`, if we import `N` from `M`,
 - The abbreviated form `T(..)` brings into scope all the constructors, methods or field names exported by `N` as well any patterns associated with `T` relative to `N`. 
 - The explicit form `T(c1,...,cn)` can name any constructors, methods or field names exported by `N` as well as any patterns associated with `T` relative to `N`. 
 
+#### Typing
+
+
+
+WIP
+
+
 #### Clarification
 
 
