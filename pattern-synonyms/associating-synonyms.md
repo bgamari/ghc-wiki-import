@@ -114,7 +114,7 @@ WIP
 
 
 
-If we associate a pattern synonym `P` with a type `T` then we consider two separate cases depending on the type of `P`. 
+If we associate a pattern synonym `P` with a type `T` then we consider three separate cases depending on the type of `P`. 
 
 
 - If `P :: T t1 t2 .. tn` then `P` is an instance of \`T. We completely ignore constraints in this case.
@@ -332,7 +332,7 @@ pattern P x <- (destruct -> x)
 In this example, `P` is once again polymorphic in the constructor `f`. It might
 seem that we should only allow `P` when there is an instance for `C Identity`
 in scope. However, we completely ignore class constraints as a user may
-provide an orphan instance whichs allows the pattern to be used. Despite this,
+provide an orphan instance which allows the pattern to be used. Despite this,
 it is more conservative and perhaps less surprising to require that the correct
 instance is in scope.
 
@@ -363,7 +363,7 @@ pattern P = B
 
 
 Things get even more hairy when we remember that classes can have equality constraints.
-Consider the quite weird example.
+Consider this quite weird example.
 
 
 ```
