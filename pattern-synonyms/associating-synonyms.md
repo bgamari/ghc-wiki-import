@@ -332,7 +332,7 @@ pattern P x <- (destruct -> x)
 In this example, `P` is once again polymorphic in the constructor `f`. It might
 seem that we should only allow `P` when there is an instance for `C Identity`
 in scope. However, we completely ignore class constraints as a user may
-provide an orphan instance whichs allows the pattern to be used. However,
+provide an orphan instance whichs allows the pattern to be used. Despite this,
 it is more conservative and perhaps less surprising to require that the correct
 instance is in scope.
 
@@ -400,7 +400,7 @@ We should only allow `P` to be associated with `A` due to the superclass constra
 
 
 
-The final example is when an equality constraint involves a type family.
+The final example is when the result type is given by a type family.
 
 
 ```
@@ -422,7 +422,7 @@ could provide such an instance which then may or may not type check.
 
 
 
-I think that such patterns should not be allowed to be associated.
+Like classes, unless `F Bool` is defined then we should not allow `P` to be associated with `A`.
 
 
 ### Unnatural Association
