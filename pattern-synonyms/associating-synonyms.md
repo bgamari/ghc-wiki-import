@@ -396,7 +396,7 @@ We should only allow `P` to be associated with `A` due to the superclass constra
 `f ~ A`.
 
 
-##### Type Families =
+##### Type Families
 
 
 
