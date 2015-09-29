@@ -21,10 +21,11 @@ Here's a list of the tickets that appear to fall into this show-stopping categor
 
 - [\#10528](https://gitlab.staging.haskell.org/ghc/ghc/issues/10528), [\#10829](https://gitlab.staging.haskell.org/ghc/ghc/issues/10829), [\#10745](https://gitlab.staging.haskell.org/ghc/ghc/issues/10745) (simplification on LHS and RHS of rules)
 - [\#10726](https://gitlab.staging.haskell.org/ghc/ghc/issues/10726), [\#10795](https://gitlab.staging.haskell.org/ghc/ghc/issues/10795) ([
-  Ruben Moor email](https://mail.haskell.org/pipermail/glasgow-haskell-users/2015-September/026035.html))
+  Ruben Moor email](https://mail.haskell.org/pipermail/glasgow-haskell-users/2015-September/026035.html), [
+  Moritz Drexl email](https://mail.haskell.org/pipermail/glasgow-haskell-users/2015-September/026049.html))
 - [\#10568](https://gitlab.staging.haskell.org/ghc/ghc/issues/10568), [\#10672](https://gitlab.staging.haskell.org/ghc/ghc/issues/10672) ([
   Luke Iannini email](https://mail.haskell.org/pipermail/ghc-devs/2015-September/009973.html))
-- [\#10726](https://gitlab.staging.haskell.org/ghc/ghc/issues/10726) and [\#10777](https://gitlab.staging.haskell.org/ghc/ghc/issues/10777) (Windows): some pressure to get these patches into 7.10.3
+- [\#10777](https://gitlab.staging.haskell.org/ghc/ghc/issues/10777) (Windows): some pressure to get these patches into 7.10.3
 
 
 Possible (not world ending, but probably not easy to workaround and breaks):
