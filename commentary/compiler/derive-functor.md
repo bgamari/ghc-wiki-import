@@ -218,7 +218,7 @@ In `CovFun1`, `CovFun2`, and `CovFun3`, all occurrences of the type variable `a`
 
 
 
-Most type variables appear in covariant positions. Functions are special in that the lefthand side of a function arrow reverses variance. If a function type `a -> b` appears in a covariant position (e.g., `CovFun1` above), then `a` is in a contravariant position and `b` is in a covariant position. Similarly, if `a -> b` appears in a contravariant position (e.g., `CovFun2` above), then `a` is in a covariant position and `b` is in a contravariant position.
+Most type variables appear in covariant positions. Functions are special in that the lefthand side of a function arrow reverses variance. If a function type `a -> b` appears in a covariant position (e.g., `CovFun1` above), then `a` is in a contravariant position and `b` is in a covariant position. Similarly, if `a -> b` appears in a contravariant position (e.g., `ContraFun1` above), then `a` is in a covariant position and `b` is in a contravariant position.
 
 
 
