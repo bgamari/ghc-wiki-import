@@ -47,11 +47,6 @@ This mechanism replaces the [previous generic classes implementation](http://www
 
 - Base types like `[]`, `Maybe`, tuples, come with Generic instances.
 
-## To be done
-
-
-- Derive `Generic1` instances
-
 ## Testing
 
 
