@@ -45,6 +45,9 @@ I'll list the commits in the order of their logical progression,
 ## The Patches
 
 
+### Basic DWARF support
+
+
 
 These preparatory commits address a few bugs and deficiencies in the
 current DWARF production implementation,
@@ -94,6 +97,9 @@ unwind all the way back to `_start`,
 
 This should be enough to get reasonable backtraces for error-handling
 and reporting.
+
+
+### Statistical Profiling
 
 
 
