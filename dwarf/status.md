@@ -148,6 +148,13 @@ be measured.
 
 
 
+It would also be nice to support time- or cycle-based sampling.
+
+
+- \[IDEA\]   Support basic timer-based sampled
+- \[IDEA\]   Support sampling with Linux `perf_events` interface
+
+
 In his prototype implementation Peter also had the lovely ability to
 preserve simplified Core for later examination. This would be a nice
 thing to have but probably won't happen for 8.0. The challenge here is
