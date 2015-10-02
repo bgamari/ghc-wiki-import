@@ -229,7 +229,7 @@ In order to see emails below, **you must login**.
   - **Trac**: jstolarek; **email**: jan.stolarek@…; **github**: [
     https://github.com/jstolarek](https://github.com/jstolarek)
   - **Committer since**: July, 2013.
-  - **Main areas of interest**: codegen, optimiser
+  - **Main areas of interest**: injective type families, Template Haskell, codegen
 
 - [ Joachim Breitner](http://www.joachim-breitner.de/)
 
