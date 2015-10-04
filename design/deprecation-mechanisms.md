@@ -36,6 +36,6 @@ As of GHC 7.10 there is no effective way to demote a typeclass method to a norma
 
 
 
-A concrete proposal for allowing `DEPRECATED` pragmas to be attached to class methods can be found at [Design/MethodDeprecations](design/method-deprecations).
+A concrete proposal for allowing `DEPRECATED` pragmas to be attached to class methods can be found at [Design/DeprecationMechanisms/TypeClassMethods](design/deprecation-mechanisms/type-class-methods).
 
 
