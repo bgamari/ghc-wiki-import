@@ -18,33 +18,33 @@ becomes
 
 
 ```
-    class  Functor f  where
-        fmap    :: (a -> b) -> f a -> f b
+class  Functor f  where
+    fmap    :: (a -> b) -> f a -> f b
 
 
-    class  Functor f => Applicative f  where
-        pure    :: a -> f a
-        (<*>)   :: f (a -> b) -> f a -> f b
-     
-        (*>)    :: f a -> f b -> f b
-        u *> v  = …
-     
-        (<*)    :: f a -> f b -> f a
-        u <* v  = …
+class  Functor f => Applicative f  where
+    pure    :: a -> f a
+    (<*>)   :: f (a -> b) -> f a -> f b
+ 
+    (*>)    :: f a -> f b -> f b
+    u *> v  = …
+ 
+    (<*)    :: f a -> f b -> f a
+    u <* v  = …
 
 
-    class  Applicative m => Monad m  where
-        (>>=)   :: m a -> (a -> m b) -> m b
+class  Applicative m => Monad m  where
+    (>>=)   :: m a -> (a -> m b) -> m b
 
-        return  :: a -> m a
-        return  = pure
+    return  :: a -> m a
+    return  = pure
+
+    (>>)    :: m a -> m b -> m b
+    m >> k  = …
     
-        (>>)    :: m a -> m b -> m b
-        m >> k  = …
-        
 
-    class  Monad m => MonadFail m  where
-        fail    :: String -> m a
+class  Monad m => MonadFail m  where
+    fail    :: String -> m a
 ```
 
 
@@ -96,9 +96,9 @@ constraint:
 
 
 ```
-    -- | Legacy alias for 'pure' 
-    return :: Applicative f => a -> f a
-    return = pure
+-- | Legacy alias for 'pure' 
+return :: Applicative f => a -> f a
+return = pure
 ```
 
 
@@ -137,17 +137,17 @@ represents a proper minimal instance definition post-AMP:
 
 
 ```
-    instance Functor Foo where
-        fmap g foo  = …
+instance Functor Foo where
+    fmap g foo  = …
 
-    instance Applicative Foo where
-        pure x      = …
-        a1 <*> a2   = …
+instance Applicative Foo where
+    pure x      = …
+    a1 <*> a2   = …
 
-    instance Monad Foo where
-        m >>= f     = …
+instance Monad Foo where
+    m >>= f     = …
 
-        -- NB: No mention of `return`
+    -- NB: No mention of `return`
 ```
 
 
@@ -173,7 +173,7 @@ method of `Monad`, e.g.:
 
 
 ```
-    import Control.Monad  (Monad ((>>=), return))
+import Control.Monad  (Monad ((>>=), return))
 ```
 
 
@@ -181,10 +181,10 @@ or
 
 
 ```
-    import Prelude hiding (Monad(..))
-    import Control.Monad  (Monad(..)) as Monad
+import Prelude hiding (Monad(..))
+import Control.Monad  (Monad(..)) as Monad
 
-    f = Monad.return ()
+f = Monad.return ()
 ```
 
 
@@ -203,19 +203,19 @@ Hackage source-code revealed only 21 packages affected.
 
 
 ```
-    instance Functor Foo where
-        fmap g foo  = …
+instance Functor Foo where
+    fmap g foo  = …
 
-    instance Applicative Foo where
-        pure x      = …
-        a1 <*> a2   = …
+instance Applicative Foo where
+    pure x      = …
+    a1 <*> a2   = …
 
-    instance Monad Foo where
-        m >>= f     = …
+instance Monad Foo where
+    m >>= f     = …
 
-    #if !(MIN_VERSION_base(4,8,0))
-        return = pure
-    #endif
+#if !(MIN_VERSION_base(4,8,0))
+    return = pure
+#endif
 ```
 
 ## Migration Strategy
