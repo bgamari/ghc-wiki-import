@@ -15,7 +15,7 @@ GHC has for a long time allowed users to attach `DEPRECATED` pragmas to definiti
 
 
 
-Sadly, this design doesn't account for instances where a deprecated definition is explicitly imported but not actually *used*. [\#2119](https://gitlab.staging.haskell.org/ghc/ghc/issues/2119) argues that we should throw a warning when an explicit import of a deprecated definition is found.
+Sadly, this design doesn't account for instances where a deprecated definition is explicitly imported but not actually *used*. [\#2119](https://gitlab.staging.haskell.org/ghc/ghc/issues/2119) argues that GHC should issue a warning when an explicit import of a deprecated definition is found.
 
 
 
