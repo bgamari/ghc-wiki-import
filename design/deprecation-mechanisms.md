@@ -55,6 +55,10 @@ A concrete proposal for allowing `DEPRECATED` pragmas to be attached to class me
 
 
 
+See also [\#10933](https://gitlab.staging.haskell.org/ghc/ghc/issues/10933).
+
+
+
 Once a method or function is finally removed, we just get a compiler error which doesn't give much guidance what to use instead. A suggestion is to have a `REMOVED` pragma into which a `DEPRECATED` pragma can be rewritten into, providing additional guidance for a missing symbol that was once there.
 
 
