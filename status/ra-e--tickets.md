@@ -126,6 +126,11 @@
 
 - [\#7870](https://gitlab.staging.haskell.org/ghc/ghc/issues/7870): Customized error messages
 
+## Optimizations
+
+
+- [\#10906](https://gitlab.staging.haskell.org/ghc/ghc/issues/10906): Better `SPECIALISE instance`
+
 ## Template Haskell
 
 
