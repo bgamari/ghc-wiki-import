@@ -22,7 +22,7 @@ Sadly, this design doesn't account for instances where a deprecated definition i
 
 
 
-**SimonM** If you import a `DEPRECATED` identifier, then there are two cases: either it is mentioned somewhere, in which case the deprecation warning will be shows, or it is not mentioned, in which case there will be an unused import warning (provided it is enabled), so this seems less useful than the other suggestions on this page. **End SimonM**
+**SimonM** If you import a `DEPRECATED` identifier, then there are two cases: either it is mentioned somewhere, in which case the deprecation warning will be shown, or it is not mentioned, in which case there will be an unused import warning (provided it is enabled), so this seems less useful than the other suggestions on this page. **End SimonM**
 
 
 
