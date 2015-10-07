@@ -3,6 +3,10 @@ This is a proposal (formerly named *pattern families*) for extending pattern syn
 
 
 
+The ticket associated with this design is [\#9671](https://gitlab.staging.haskell.org/ghc/ghc/issues/9671).
+
+
+
 The simplest use case is checking whether a set contains a value:
 
 
