@@ -43,7 +43,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Performance (compile time or runtime)
 
 
-- [\#8095](https://gitlab.staging.haskell.org/ghc/ghc/issues/8095): very slow constraint solving
+- [\#8095](https://gitlab.staging.haskell.org/ghc/ghc/issues/8095): very slow constraint solving; perhaps discard large constraints using `UnivCo`
 - [\#5642](https://gitlab.staging.haskell.org/ghc/ghc/issues/5642): slow constraint solving
 - [\#9979](https://gitlab.staging.haskell.org/ghc/ghc/issues/9979), [\#8814](https://gitlab.staging.haskell.org/ghc/ghc/issues/8814), [\#8835](https://gitlab.staging.haskell.org/ghc/ghc/issues/8835): attoparsec regressed 7.8.4 to HEAD
 - [\#8852](https://gitlab.staging.haskell.org/ghc/ghc/issues/8852), [\#8980](https://gitlab.staging.haskell.org/ghc/ghc/issues/8980), [\#8941](https://gitlab.staging.haskell.org/ghc/ghc/issues/8941) (possibly), [\#9803](https://gitlab.staging.haskell.org/ghc/ghc/issues/9803), [\#8960](https://gitlab.staging.haskell.org/ghc/ghc/issues/8960), [\#7898](https://gitlab.staging.haskell.org/ghc/ghc/issues/7898), [\#7068](https://gitlab.staging.haskell.org/ghc/ghc/issues/7068), [\#7944](https://gitlab.staging.haskell.org/ghc/ghc/issues/7944), [\#5550](https://gitlab.staging.haskell.org/ghc/ghc/issues/5550), [\#8836](https://gitlab.staging.haskell.org/ghc/ghc/issues/8836): `SpecConstr` blowup
