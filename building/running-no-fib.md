@@ -24,6 +24,10 @@ Firstly, the `nofib-analyse` program requires the `html` and `regex-compat` caba
 Then, to run the tests execute:
 
 
+
+CPU frequency scaling can result in distorted measurement! Try temporarily disabling frequency scaling during `nofib` runs.
+
+
 ```wiki
   $ cd nofib
   $ make clean
