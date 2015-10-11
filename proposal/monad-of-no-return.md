@@ -30,7 +30,6 @@ becomes
 class  Functor f  where
     fmap    :: (a -> b) -> f a -> f b
 
-
 class  Functor f => Applicative f  where
     pure    :: a -> f a
     (<*>)   :: f (a -> b) -> f a -> f b
@@ -41,7 +40,6 @@ class  Functor f => Applicative f  where
     (<*)    :: f a -> f b -> f a
     u <* v  = …
 
-
 class  Applicative m => Monad m  where
     (>>=)   :: m a -> (a -> m b) -> m b
 
@@ -50,7 +48,6 @@ class  Applicative m => Monad m  where
 
     (>>)    :: m a -> m b -> m b
     m >> k  = …
-    
 
 class  Monad m => MonadFail m  where
     fail    :: String -> m a
@@ -234,29 +231,21 @@ instance Monad Foo where
 The migration strategy is straightforward:
 
 
-
-**Phase 1** *(GHC 8.0)*: Implement new warning in GHC which gets
-
-
->
->
-> triggered when `Monad` instances explicitly override the
-> default `return` method implementation.
->
->
+<table><tr><th>Phase 1 *(GHC 8.0)*</th>
+<td>Implement new warning in GHC which gets
+triggered when `Monad` instances explicitly override the
+default `return` method implementation.
+</td></tr></table>
 
 
-**Phase 2** *(GHC 8.2 or later)*: When we're confident that the
+<table><tr><th>Phase 2 *(GHC 8.2 or later)*</th>
+<td>When we're confident that the
+majority of Hackage has reacted to the warning (with the help of
+Stackage actively pursuing maintainers to update their packages) we
+turn the `return` method into a top-level binding and remove the
+warning implemented in **Phase 1** from GHC again.
+</td></tr></table>
 
-
->
->
-> majority of Hackage has reacted to the warning (with the help of
-> Stackage actively pursuing maintainers to update their packages) we
-> turn the `return` method into a top-level binding and remove the
-> warning implemented in Phase 1 from GHC again.
->
->
 
 ## Discussion period
 
