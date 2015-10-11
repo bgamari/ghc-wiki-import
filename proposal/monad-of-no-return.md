@@ -116,11 +116,11 @@ constraint:
 
 
 ```
--- | Legacy alias for 'pure' 
+-- | Alias for 'pure' 
 return :: Applicative f => a -> f a
 return = pure
 
--- | Legacy alias for `(*>)`
+-- | Alias for `(*>)`
 (>>) :: Applicative f => f a -> f b -> f b
 (>>) = (*>)
 ```
