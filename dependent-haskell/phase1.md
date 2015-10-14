@@ -76,7 +76,7 @@ data TypeRep (a :: k) where
   TMaybe :: TypeRep Maybe
 ```
 
-## `*` is hard to parse, will become `type`
+## `*` is hard to parse, will become `Type`
 
 
 
@@ -92,7 +92,7 @@ With `-XTypeInType`, GHC will treat the kind `*` as an identifier exported from 
 
 
 
-In addition to the above treatment, the keyword `type` will have the same meaning as `*`, as requested by several people in the community. The eventual plan is to deprecate and remove `*` as a parsing oddity. `type` will work both with and without `-XTypeInType`. The primary motivation for using `type` here (as opposed to `Type` or `TYPE` or `U`) is that it does not clobber any existing syntax.
+In addition to the above treatment, some standard library module (probably `Data.Kind`, if that's not taken) will export `Type`, which will have the same meaning as `*`, as requested by several people in the community. The eventual plan is to deprecate and remove `*` as a parsing oddity. `Type`, naturally, will work both with and without `-XTypeInType`. `Type` does conflict with existing code, but the choice is backward compatible because it's not exported from the `Prelude`. `Type` will be a normal identifier in every way, and it can be aliased through a normal type synonym definition if necessary to avoid naming conflicts.
 
 
 
