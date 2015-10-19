@@ -23,7 +23,7 @@ We now propose the following changes to the TH API in order to track these chang
 - [\#10279](https://gitlab.staging.haskell.org/ghc/ghc/issues/10279): breakage caused by faking package keys
 - [ Similar lens bug](https://github.com/ekmett/lens/issues/496)
 
-## Rename PkgName to PkgKey
+## Rename PkgName to UnitId
 
 
 
@@ -35,13 +35,13 @@ newtype PkgName = PkgName String
 ```
 
 
-This is badly misleading, even in the old world order, since these needed version numbers as well (except for wired-in packages, which are always just a bare package name). We propose that this be renamed to `PkgKey`:
+This is badly misleading, even in the old world order, since these needed version numbers as well (except for wired-in packages, which are always just a bare package name). We propose that this be renamed to `UnitId`:
 
 
 ```wiki
-newtype PkgKey = PkgKey String
-mkPackageKey :: String -> PackageKey
-mkPackageKey = PkgKey
+newtype UnitId = UnitId String
+mkUnitId :: String -> UnitId
+mkUnitId = UnitId
 ```
 
 
@@ -53,20 +53,20 @@ Here is the GitHub search for uses of `NameG`, which usually indicates a package
 https://github.com/search?l=haskell&q=NameG&type=Code&utf8=%E2%9C%93](https://github.com/search?l=haskell&q=NameG&type=Code&utf8=%E2%9C%93)
 
 
-## Querying about packages
+## Querying about units
 
 
 
-Package keys are somewhat hard to synthesize, so we also offer an API for querying the package database of the GHC which is compiling your code for information about packages.  So, we introduce a new abstract data type:
+Unit IDs are somewhat hard to synthesize, so we also offer an API for querying the package database of the GHC which is compiling your code for information about packages.  So, we introduce a new abstract data type:
 
 
 ```wiki
-data Package
-packageKey :: Package -> PkgKey
-packageVersionString :: Package -> String
-packageName          :: Package -> String
+data Unit
+unitId :: Unit -> UnitId
+unitVersionString :: Unit -> String
+unitPackageName   :: Unit -> String
 
-packageDependencies :: Package -> Q [Package]
+unitDependencies :: Unit -> Q [Unit]
 ```
 
 
@@ -74,11 +74,11 @@ and some functions for getting packages:
 
 
 ```wiki
-searchPackage :: String -- Package name
-              -> String -- Version
-              -> Q [Package]
+searchUnit :: String -- Package name
+           -> String -- Version
+           -> Q [Unit]
 
-reifyPackage :: PkgKey -> Q Package
+reifyUnit :: UnitId -> Q Unit
 ```
 
 
@@ -107,7 +107,7 @@ We'll also add a function for accessing the module package key:
 
 
 ```wiki
-modulePackageKey :: Module -> PkgKey
+moduleUnitId :: Module -> UnitId
 ```
 
 
@@ -115,11 +115,11 @@ And a convenience function for accessing the current module:
 
 
 ```wiki
- thisPackageKey :: Q PkgKey
- thisPackageKey = fmap (modulePackageKey . mi_this_mod) qReifyModule
+ thisUnitId :: Q UnitId
+ thisUnitId = fmap (moduleUnitId . mi_this_mod) qReifyModule
 
- thisPackage :: Q Package
- thisPackage = reifyPackage =<< thisPackageKey
+ thisPackage :: Q Unit
+ thisPackage = reifyUnit =<< thisUnitId
 ```
 
 
