@@ -41,7 +41,8 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#10619](https://gitlab.staging.haskell.org/ghc/ghc/issues/10619): higher rank and order of equations
 - [\#4281](https://gitlab.staging.haskell.org/ghc/ghc/issues/4281), [\#4295](https://gitlab.staging.haskell.org/ghc/ghc/issues/4295), [\#4347](https://gitlab.staging.haskell.org/ghc/ghc/issues/4347), [\#7264](https://gitlab.staging.haskell.org/ghc/ghc/issues/7264), [\#8808](https://gitlab.staging.haskell.org/ghc/ghc/issues/8808), [\#9420](https://gitlab.staging.haskell.org/ghc/ghc/issues/9420), [\#9730](https://gitlab.staging.haskell.org/ghc/ghc/issues/9730), [\#10709](https://gitlab.staging.haskell.org/ghc/ghc/issues/10709): impredicativity
 
-## Performance (compile time or runtime)
+##
+Performance: [compile time](performance/compiler) and [run time](performance/runtime)
 
 
 - [\#8095](https://gitlab.staging.haskell.org/ghc/ghc/issues/8095): very slow constraint solving; perhaps discard large constraints using `UnivCo`
