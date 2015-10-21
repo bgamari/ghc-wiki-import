@@ -34,19 +34,8 @@ See [separate notes of the implementation of DuplicateRecordFields](records/over
 
 
 
-This part is new in the 2015 redesign  The implementation is fairly straightforward and close to (but simpler than) the existing `ImplicitParameters` extension. The key points:
+See [separate notes of the implementation of OverloadedLabels](records/overloaded-record-fields/overloaded-labels#implementation).
 
-
-- We extend the lexer to treat `#x` as a single lexeme (only when `OverloadedLabels` is enabled) and parse it into a new constructor `HsOverLabel "x"` of `HsSyn`.
-
-- A new module `GHC.OverloadedLabels` defines the (renamed) `IV` class
-
-  ```wiki
-  class OverloadedLabel (x :: Symbol) a where
-    overloadedLabel :: a
-  ```
-
-- When the typechecker sees `HsOverLabel "x"`, it emits a new wanted constraint `OverloadedLabel "x" alpha`, just like `HsIPVar`.
 
 ## 3. The magic type classes
 
