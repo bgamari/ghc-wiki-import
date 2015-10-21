@@ -102,8 +102,8 @@ But this might install some packages you do not use in your system (e.g. java, d
 
 
 
-To install llvm-3.6, as required by GHC \> 7.10, see [
-http://llvm.org/apt](http://llvm.org/apt). Note: I had to replace `llvm-toolchain-trusty-3.6` by `llvm-toolchain-trusty-3.6-binaries`. See also the file `.travis.yml` in the ghc rootfolder.
+To install llvm-3.7, as required by GHC \> 7.10, see [
+http://llvm.org/apt](http://llvm.org/apt).
 
 
 
