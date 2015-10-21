@@ -1,34 +1,42 @@
-CONVERSION ERROR
+# [OverloadedRecordFields](records/overloaded-record-fields)
 
-Original source:
 
-```trac
-= OverloadedRecordFields =
 
 The `OverloadedRecordFields` extension for GHC allows multiple record datatypes to share the same field names, and uses type information to disambiguate them. For more information, see:
 
- * [wiki:Records/OverloadedRecordFields/Design Original design of the extension]
- * [wiki:Records/OverloadedRecordFields/Redesign Redesigned variant involving three extensions] (being implemented as of March 2015)
- * [wiki:Records/OverloadedRecordFields/Implementation Notes on the implementation]
- * [http://www.well-typed.com/blog/2015/03/overloadedrecordfields-revived/ Adam Gundry's blog post]
 
-Content previously on this page has been moved to the [wiki:Records/OverloadedRecordFields/SORF SORF] page.
+- [Redesigned variant involving three extensions](records/overloaded-record-fields/redesign)
 
-== Code ==
+  - Part 1: [DuplicateRecordFields](records/overloaded-record-fields/duplicate-record-fields)
+  - Part 2: [OverloadedLabels](records/overloaded-record-fields/overloaded-labels)
+- [Notes on the implementation](records/overloaded-record-fields/implementation)
+- [
+  Adam Gundry's blog post](http://www.well-typed.com/blog/2015/03/overloadedrecordfields-revived/)
 
-See Phab:D761 for the first part of the latest implementation. The latest code is on the `wip/orf-*` branches of the `ghc` and `haddock` development repositories.  The forks of [https://github.com/adamgundry/ghc ghc], [https://github.com/adamgundry/packages-base packages-base] and [https://github.com/adamgundry/haddock haddock] have been superseded.
 
-A [https://github.com/adamgundry/records-prototype prototype implementation] of the design is also available.
+Content previously on this page has been moved to the [SORF](records/overloaded-record-fields/sorf) page.
 
-The design has mostly stabilised, but there is still some work to do on the implementation. We aim to merge in the summer of 2015.
 
-== History ==
+## Code
+
+
+- [
+  Phab:D761](https://phabricator.haskell.org/D761) (merged): `DuplicateRecordFields` extension
+- [
+  Phab:D1331](https://phabricator.haskell.org/D1331) (being worked on): `OverloadedLabels` extension
+- A [
+  prototype implementation](https://github.com/adamgundry/records-prototype) of an early design is also available.
+
+## History
+
+
 
 The extension was implemented in 2013 as a Google Summer of Code project, by Adam Gundry under the mentorship of Simon Peyton Jones.
 
- * [wiki:Records/OverloadedRecordFields/SORF Simple Overloaded Record Fields (SORF)], Simon PJ's original proposal
- * [wiki:Records/DeclaredOverloadedRecordFields Declared Overloaded Record Fields (DORF)], a counterpoint proposal by Anthony Clayden
- * [wiki:Records Discussion of the problem and possible solutions]
- * [http://www.google-melange.com/gsoc/project/google/gsoc2013/adamgundry/4766932662222848 Google Summer of Code project details]
 
-```
+- [Simple Overloaded Record Fields (SORF)](records/overloaded-record-fields/sorf), Simon PJ's original proposal
+- [Declared Overloaded Record Fields (DORF)](records/declared-overloaded-record-fields), a counterpoint proposal by Anthony Clayden
+- [Original design of the extension](records/overloaded-record-fields/design)
+- [Discussion of the problem and possible solutions](records)
+- [
+  Google Summer of Code project details](http://www.google-melange.com/gsoc/project/google/gsoc2013/adamgundry/4766932662222848)
