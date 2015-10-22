@@ -9,13 +9,10 @@ This is where we track various efforts to characterize and improve the performan
 
 
 - [\#2346](https://gitlab.staging.haskell.org/ghc/ghc/issues/2346): desugaring let-bindings
-- [\#9583](https://gitlab.staging.haskell.org/ghc/ghc/issues/9583), [\#9630](https://gitlab.staging.haskell.org/ghc/ghc/issues/9630): code blowup in Generics/Binary
 - [\#10228](https://gitlab.staging.haskell.org/ghc/ghc/issues/10228): increase in compiler memory usage, regression from 7.8.4 to 7.10.1
 - [\#10289](https://gitlab.staging.haskell.org/ghc/ghc/issues/10289): 2.5k static HashSet takes too much memory to compile
 
   - Significantly improved in memory usage from [\#10370](https://gitlab.staging.haskell.org/ghc/ghc/issues/10370), but worse at overall wall-clock time!
-- [\#8731](https://gitlab.staging.haskell.org/ghc/ghc/issues/8731): long compilation time for module with large data type and partial record selectors 
-- [\#7258](https://gitlab.staging.haskell.org/ghc/ghc/issues/7258): Compiling DynFlags is jolly slow
 - [\#7450](https://gitlab.staging.haskell.org/ghc/ghc/issues/7450): Regression in optimisation time of functions with many patterns (6.12 to 7.4)? 
 
   - [ Phab:D1041](https://phabricator.haskell.org/D1041), [
@@ -24,7 +21,7 @@ This is where we track various efforts to characterize and improve the performan
     Phab:D1012](https://phabricator.haskell.org/D1012))
   - Thunk leak in `Bitmap` ([
     Phab:D1040](https://phabricator.haskell.org/D1040))
-- [\#9669](https://gitlab.staging.haskell.org/ghc/ghc/issues/9669): Long compile time/high memory usage for modules with many deriving clauses
+- 
 
 
 [
@@ -54,13 +51,25 @@ One possible solution (proposed in [\#8095](https://gitlab.staging.haskell.org/g
 
 
 
-Another theme often seen is issues characterized by perceived slowness during compilation of code deriving instances. These don't usually share much as far as root-cause is concerned, but nevertheless this is a useful categorization,
+Another theme often seen is issues characterized by perceived slowness during compilation of code deriving instances. This could be due to a number of reasons,
 
 
+1. the implementation of the logic responsible for producing the instance code is inefficient
+1. the instance itself is large but could be expressed more concisely
+1. the instance itself is large but irreducibly so
+
+
+While it's possible to fix (1) and (2), (3) is inherent.
+
+
+- [\#8731](https://gitlab.staging.haskell.org/ghc/ghc/issues/8731): long compilation time for module with large data type and partial record selectors 
 - [\#9557](https://gitlab.staging.haskell.org/ghc/ghc/issues/9557): Deriving instances is slow
 - [\#10858](https://gitlab.staging.haskell.org/ghc/ghc/issues/10858): Smaller generated `Ord` instances
 - [\#10980](https://gitlab.staging.haskell.org/ghc/ghc/issues/10980): quadratic behaviour of derived `Read`.
 - [\#5642](https://gitlab.staging.haskell.org/ghc/ghc/issues/5642): Deriving Generic of a big type takes a long time and lots of space
+- [\#9583](https://gitlab.staging.haskell.org/ghc/ghc/issues/9583), [\#9630](https://gitlab.staging.haskell.org/ghc/ghc/issues/9630): code blowup in Generics/Binary
+- [\#9669](https://gitlab.staging.haskell.org/ghc/ghc/issues/9669): Long compile time/high memory usage for modules with many deriving clauses
+- [\#7258](https://gitlab.staging.haskell.org/ghc/ghc/issues/7258): (probably) Compiling DynFlags is jolly slow
 
 ## tests/perf/compiler\` results
 
