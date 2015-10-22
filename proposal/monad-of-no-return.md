@@ -338,13 +338,23 @@ turn the `return` and `(>>)` methods into a top-level binding and let GHC ignore
 </td></tr></table>
 
 
-## Discussion period
+## Discussion
+
+
+### Discussion Period
 
 
 
 A discussion period of three weeks (until 2015-10-15) should be enough
 to allow everyone to chime in as well as leave enough time to make the
 required preparations for GHC 8.0 should this proposal pass as we hope.
+
+
+### Discussion Summary
+
+
+
+See [MonadOfNoReturn/Discussion](proposal/monad-of-no-return/discussion)
 
 
 ---
