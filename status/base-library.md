@@ -14,11 +14,11 @@ This page aims to provide a concise summarized view of major planned changes for
 - Add `Data.Semigroup` and `Data.List.NonEmpty` modules
 
   ([\#10365](https://gitlab.staging.haskell.org/ghc/ghc/issues/10365), i.e. Phase1 of [Proposal/SemigroupMonoid](proposal/semigroup-monoid))
-- Add -Wcompat warnings about missing Semigroup instances.
-- Add `Control.Monad.Fail` and a MonadFail language pragma. (Phase 1 of [
+- Add `-Wcompat` warnings about missing Semigroup instances.
+- Add `Control.Monad.Fail` and a `MonadFail` language pragma. (Phase 1 of [
   https://wiki.haskell.org/MonadFail\_Proposal](https://wiki.haskell.org/MonadFail_Proposal))
-- Add -Wcompat warnings about missing MonadFail instances.
-- Add `expm1`, `log1p`, `log1pexp`, `log1mexp` to Floating (with defaults).
+- Add `-Wcompat` warnings about missing `MonadFail` instances.
+- Add `expm1`, `log1p`, `log1pexp`, `log1mexp` to `Floating` (with defaults).
 
 
  
@@ -39,7 +39,7 @@ This page aims to provide a concise summarized view of major planned changes for
 
 
 - Turn on `MonadFail` by default.
-- Move `Semigroup` into Prelude.
+- Move `Semigroup` into `Prelude`.
 - Remove the default definitions of  `log1p`, etc.
 
 ## GHC 8.8
