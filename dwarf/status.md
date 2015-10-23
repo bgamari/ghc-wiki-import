@@ -68,9 +68,9 @@ introducing an optional dependency on `libdw`. This is the same library
 used by `perf`.
 
 
-- \[READY\]   [
+- \[MERGED\]   [
   Phab:D1196](https://phabricator.haskell.org/D1196): Libdw: Add libdw-based stack unwinding
-- \[READY\]   [
+- \[MERGED\]   [
   Phab:D1197](https://phabricator.haskell.org/D1197): Signals: Print backtrace on SIGUSR2
 
 
