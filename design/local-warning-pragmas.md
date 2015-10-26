@@ -36,7 +36,7 @@ I don't know conventions about naming pragmas, so let it be something like this.
 
 
 ```
-{-# SUPPRESS_WARNINGS $warning_name$ #-}
+{-# SUPPRESS_WARNINGS #-}
 foo :: IORef Int
 foo = unsafePerformIO (newIORef 10)
 ```
@@ -50,7 +50,7 @@ Or we can suppress warnings for some part of source code:
 
 
 ```
-{-# SUPPRESS_WARNINGS $warning_names$ #-}
+{-# SUPPRESS_WARNINGS #-}
 foo :: IORef Int
 foo = unsafePerformIO (newIORef 10)
 
@@ -59,5 +59,5 @@ bar = unsafePerformIO (newIORef 11)
 
 baz :: IORef Int
 baz = unsafePerformIO (newIORef 12)
-{-# UNSUPPRESS_WARNINGS $warning_names$ #-}
+{-# UNSUPPRESS_WARNINGS #-}
 ```
