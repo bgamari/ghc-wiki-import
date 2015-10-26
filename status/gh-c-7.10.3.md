@@ -2,7 +2,7 @@
 
 
 
-We have not yet decided when, or even whether, to release GHC 7.10.3.  We will do so if (but only if!) we have documented cases of "show-stoppers" in 7.10.2.  Namely, cases from users where
+GHC 7.10.3 will be released in early November 2015. We will do so if (but only if!) we have documented cases of "show-stoppers" in 7.10.2.  Namely, cases from users where
  
 
 
