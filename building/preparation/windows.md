@@ -46,7 +46,15 @@ An easy way to check that you are running the right shell is to check the output
 
 
 
-Consider upgrading all installed packages to the latest versions. See [
+Consider upgrading all installed packages to the latest versions
+
+
+```wiki
+pacman -Suy
+```
+
+
+See [
 MSYS2 installation instructions](http://sourceforge.net/p/msys2/wiki/MSYS2%20installation/) (section III) for details.
 
 
@@ -58,20 +66,7 @@ The msys2 package uses `pacman` (the venerable ArchLinux package manager) to man
 
 
 ```wiki
-pacman -Sy git tar binutils autoconf make libtool automake python2 p7zip patch gcc docbook-xsl
-```
-
-
-Note: `dblatex` isn't available as a [
-MSYS2 package](https://github.com/Alexpux/MSYS2-packages), so the user's guide won't be build in ps and pdf format (only html).
-
-
-
-It may be necessary to explicitly set the `XML_CATALOG_FILES` environment variable to convince `configure` that docbook is usable,
-
-
-```wiki
-export XML_CATALOG_FILES="/etc/xml/docbook-xml /etc/xml/catalog"
+pacman -Sy git tar binutils autoconf make libtool automake python2 p7zip patch gcc
 ```
 
 ## Host GHC setup
