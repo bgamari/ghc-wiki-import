@@ -63,3 +63,14 @@ this](https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/pragmas.ht
 foo :: IORef Int
 foo = unsafePerformIO (newIORef 10)
 ```
+
+
+Or as seen [
+here](https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/pragmas.html) for INLINE pragma one can write
+
+
+```
+foo :: IORef Int
+foo = unsafePerformIO (newIORef 10)
+{-# SUPPRESS foo #-}
+```
