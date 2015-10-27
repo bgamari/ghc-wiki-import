@@ -181,8 +181,8 @@ instance Monad Foo where
 ```
 
 
-Consequently, it is possible to write forward-compatible instances
-that are valid under this proposal starting with GHC 7.10/`base-4.8`.
+Consequently, it is possible to write forward-compatible instances omitting `return`
+that are valid starting with GHC 7.10/`base-4.8`.
 
 
 
@@ -191,6 +191,10 @@ non-negligible number of packages defining `Monad` instances with
 explicit `return` definitions\[4\]. This has a comparable impact to the
 AMP, and similarly will require a transition scheme aided by compiler
 warnings.
+
+
+
+As large code bases are reported to not have been updated to GHC 7.10 yet, it's more economical to follow-up with MRP warnings closely in the wake of AMP/MFP to have all required `Monad`-related changes applied in one sweep when upgrading.
 
 
 ### Module Import/Export Specifications
@@ -271,6 +275,10 @@ instance Monad Foo where
 
 
 
+This is transition scheme is **not** proposed anymore; see [new strategy below](proposal/monad-of-no-return#reduced-breakage-variant)
+
+
+
 In this transition scheme, the time when **Phase 2** starts is determined by the amount of packages already converted at that time. "GHC 8.2" is only the earliest *theoretical* time to begin **Phase 2**, but a more realistic time would be "GHC 8.6" or even later.
 
 
@@ -298,7 +306,7 @@ warning implemented in **Phase 1** from GHC again.
 
 
 
-Based on the feedback from the proposal discussion this alternative transition scheme is expected to address all concerns raised: This scheme aims to avoid breakage while allowing code to be written in a way working across a large range of GHC versions with the same semantics. Specifically, this allows a 3-year-compatibility window, avoidance of `-XCPP`, as well as the ability to write code in such a way to avoid any warnings.
+**Based on the feedback from the proposal discussion this revised transition scheme is expected to address all concerns raised**: This scheme aims to avoid breakage while allowing code to be written in a way working across a large range of GHC versions with the same semantics. Specifically, this allows a 3-year-compatibility window, avoidance of `-XCPP`, as well as the ability to write code in such a way to avoid any warnings.
 
 
 <table><tr><th>Phase 1 *(starting with GHC 8.0)*</th>
@@ -308,6 +316,12 @@ default `return` and `(>>)` method implementations with non-lawful
 definitions (see compatible instance definition example in previous section).
 </td></tr></table>
 
+
+>
+>
+> This warning can be controlled via the new flag `-fwarn-mrp-compat`, and becomes part of the `-Wall` and `-Wcompat` ([\#11000](https://gitlab.staging.haskell.org/ghc/ghc/issues/11000)) warning-sets, but *not* part of the default warning-set.
+>
+>
 
 <table><tr><th>Phase 2 *(GHC 8.4 or even later)*</th>
 <td>When we're confident that the
