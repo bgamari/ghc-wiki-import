@@ -308,7 +308,7 @@ instance Monad Foo where
 
 
 
-This is transition scheme is **not** proposed anymore; see [new strategy below](proposal/monad-of-no-return#reduced-breakage-variant)
+This transition scheme is **not** proposed anymore; see [new strategy below](proposal/monad-of-no-return#reduced-breakage-variant)
 
 
 
