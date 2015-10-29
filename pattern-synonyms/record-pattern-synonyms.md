@@ -121,7 +121,10 @@ f1 pat = f1
 Unidirectional pattern synonyms can only be used in pattern contexts and as record selectors. 
 
 
-### Design
+---
+
+
+# Further Design (Old)
 
 
 
