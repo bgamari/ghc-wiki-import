@@ -62,7 +62,7 @@ We can use `P` to construct a value of type `T a1 ... am` by using `P` in an app
 
 
 
-Further, we can also use record syntax to construct the same value. `P { fi = vi, ..., fj = vj }` where for all `i, j` `fi` is distinct from `fj` and all field labels `fk` are labels of `P`. We then perform the obvious substitution \`pat\[fi/vi\]...\[fj/vj\] in order to construct the value.
+Further, we can also use record syntax to construct the same value. `P { fi = vi, ..., fj = vj }` where for all `i, j` `fi` is distinct from `fj` and all field labels `fk` are labels of `P`. We then perform the obvious substitution `pat[fi/vi]...[fj/vj]` in order to construct the value.
 
 
 ### Record Updates
