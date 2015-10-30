@@ -121,6 +121,8 @@ code,
   Phab:D1280](https://phabricator.haskell.org/D1280): rts: Emit debug information about program to event log
 - \[READY\]  [
   Phab:D1281](https://phabricator.haskell.org/D1281): Support multiple debug output levels
+- \[RFC\]    [
+  Phab:D1387](https://phabricator.haskell.org/D1387): Preserve tick parentage
 
 
 Now we have everything necessary to add some basic statistical
