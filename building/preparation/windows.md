@@ -58,7 +58,9 @@ The msys2 package uses `pacman` (the venerable ArchLinux package manager) to man
 
 
 ```wiki
-pacman --sync --sysupgrade --needed --refresh git tar binutils autoconf make libtool automake python2 p7zip patch gcc mingw-w64-$(uname -m)-python3-sphinx
+pacman --sync --sysupgrade --needed --refresh git tar \
+    binutils autoconf make libtool automake python2 \
+    p7zip patch gcc mingw-w64-$(uname -m)-python3-sphinx
 ```
 
 
