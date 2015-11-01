@@ -50,6 +50,10 @@ See [
 MSYS2 installation instructions](http://sourceforge.net/p/msys2/wiki/MSYS2%20installation/) (section III) for details.
 
 
+
+**\*NOTE:**\* if after installing packages like Sphinx ./configure still reports it is missing, make sure `/mingw64/bin` (or `/mingw32/bin` depending on the arch you're building for)  is on the `$PATH`
+
+
 ## Installing packages & tools
 
 
