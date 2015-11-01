@@ -87,11 +87,11 @@ Haskell code back to the C stack. These commits introduce the ability to
 unwind all the way back to `_start`,
 
 
-- \[READY\]  [
+- \[MERGED\]  [
   Phab:D1224](https://phabricator.haskell.org/D1224): Dwarf: Preserve stack pointer register
-- \[READY\]  [
+- \[MERGED\]  [
   Phab:D1225](https://phabricator.haskell.org/D1225): cmm: Expose machine's stack pointer and return address registers
-- \[READY\]  [
+- \[MERGED\]  [
   Phab:D1223](https://phabricator.haskell.org/D1223): StgStartup: Add DWARF unwinding annotations for stg\_stop\_thread
 
 
@@ -165,7 +165,7 @@ redundancy.
 
 
 - \[EXPLOR\] [ Phab:D1213](https://phabricator.haskell.org/D1213): Core notes
-- \[IDEA\]   Record tree of Core fragments into DWARF DIEs
+- \[IDEA\]   Record tree of Core fragments into DWARF DIEs (Core Notes)
 
 ### Documentation
 
