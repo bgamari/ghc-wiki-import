@@ -72,7 +72,7 @@ used by `perf`.
   Phab:D1196](https://phabricator.haskell.org/D1196): Libdw: Add libdw-based stack unwinding
 - \[MERGED\]   [
   Phab:D1197](https://phabricator.haskell.org/D1197): Signals: Print backtrace on SIGUSR2
-- \[RFC\]      [
+- \[MERGED\]      [
   Phab:D1418](https://phabricator.haskell.org/D1418): Produce a stacktrace when the RTS barfs
 
 
