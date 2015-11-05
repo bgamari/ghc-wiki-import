@@ -3,7 +3,7 @@ This proposal has been revised based on the feedback gathered from the [proposal
 here](https://mail.haskell.org/pipermail/libraries/2015-September/026121.html). See wiki page [History](proposal/monad-of-no-return?action=history) for changes relative to that first revision.
 
 
-# Monad of no `return` Proposal (MRP) <sup>*2e*</sup>
+# Monad of no `return`/`>>` Proposal (MRP) <sup>*2e*</sup>
 
 
 
@@ -13,7 +13,7 @@ here](https://mail.haskell.org/pipermail/libraries/2015-September/026121.html). 
 
 
 
-To complete the AMP, move `Monad(return)` and `Monad((>>))` methods out of the `Monad` class into top-level bindings aliasing `Applicative(pure)` and `Applicative((*>))` respectively.
+To complete the `Monad`-hierarchy refactoring started with AMP (& MFP) and unify `return`/`pure` & `>>`/`*>`, move `Monad(return)` and `Monad((>>))` methods out of the `Monad` class into top-level bindings aliasing `Applicative(pure)` and `Applicative((*>))` respectively.
 
 
 
