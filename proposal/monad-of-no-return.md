@@ -133,7 +133,7 @@ retaining language warts which persist in the language indefinitely.
 
 
 
-Remove `return` and `(>>)` as a methods from the `Monad` class and in its place
+Remove `return` and `(>>)` as methods from the `Monad` class and in its place
 define top-level bindings with the weaker `Applicative` typeclass
 constraint:
 
