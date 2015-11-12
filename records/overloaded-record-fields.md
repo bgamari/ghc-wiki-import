@@ -31,7 +31,7 @@ Since instances are silently exported and imported it means that this instance i
 
 
 
-*Adam*: I don't think so. We will only solve a `HasField` constraint automatically in modules that have the field in scope, and thus we can retain the same abstraction rules as normal Haskell. This is just like `Coercible`. We don't really generate and export instances, rather there is special behaviour in the constraint solver. See [discussion on representation hiding](records/overloaded-record-fields/design#representation-hiding) (which needs to be updated to the latest design).
+*Adam*: I don't think so. We will only solve a `HasField` constraint automatically in modules that have the field in scope, and thus we can retain the same abstraction rules as normal Haskell. This is just like `Coercible`. We don't really generate and export instances, rather there is special behaviour in the constraint solver. See [discussion on representation hiding](records/overloaded-record-fields/magic-classes#representation-hiding) (now updated to the latest design).
 
 
 ## Code
