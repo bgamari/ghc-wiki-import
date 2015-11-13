@@ -356,7 +356,7 @@ Note that the bang has no effect at all in this case
 
 
 
-With `-XStrict` the `~` is used to recover ordinary patterns, to build an irrefutable pattern  `~~` is used.
+With `-XStrict` the `~` is used to recover ordinary patterns, to build an irrefutable pattern  `~(~pat)` is used.
 
 
 ## Implementation notes
