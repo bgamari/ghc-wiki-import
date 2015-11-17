@@ -406,11 +406,12 @@ At the moment, Template Haskell has no special support for distinguishing betwee
 
 
 
-TODO should we modify the TH AST to be able to represent fields correctly?
+Should we modify the TH AST to be able to represent fields correctly? This has been raised as [\#11103](https://gitlab.staging.haskell.org/ghc/ghc/issues/11103).
 
 
 
-TODO similarly, GHC.Generics currently shows the selector name in the metadata, whereas it ought to show the label.
+Similarly, GHC.Generics currently shows the selector name in the metadata, whereas it ought to show the label. But in this case the fix is easy (see [
+Phab:D1486](https://phabricator.haskell.org/D1486)).
 
 
 ### GHC API changes
