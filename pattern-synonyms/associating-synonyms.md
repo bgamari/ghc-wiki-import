@@ -126,23 +126,13 @@ how Simon described the implementation.
 > `T`.
 >
 >
-
->
 >
 > What does "visibly incompatible" mean?  `P` is visibly incompatible
-> with
+> with `T` if
 >
->
-> >
-> >
-> > `T` if
-> >
-> >
 >
 > - `P`'s type is of form `... -> S t1 t2`
 > - `S` is a data/newtype constructor distinct from `T`
-
-
 >
 >
 > Nothing harmful happens if we allow `P` to be exported with
