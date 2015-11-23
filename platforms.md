@@ -223,7 +223,7 @@ Tier 2 platforms as possible to Tier 1, as soon as they meet the Tier 1 criteria
 <th> Yes    </th>
 <th> Yes          </th>
 <th> No                </th>
-<th> [Building/Solaris](building/solaris)
+<th> [Building/Solaris](building/solaris) 
 </th></tr>
 <tr><th> Sparc        </th>
 <th> Linux           </th>
@@ -243,7 +243,7 @@ Tier 2 platforms as possible to Tier 1, as soon as they meet the Tier 1 criteria
 <th> No     </th>
 <th> No           </th>
 <th> No                </th>
-<th> [Building/IA64Linux](building/i-a64-linux)
+<th> [Building/IA64Linux](building/i-a64-linux) 
 </th></tr>
 <tr><th> Alpha        </th>
 <th> Linux           </th>
@@ -334,6 +334,16 @@ Tier 2 platforms as possible to Tier 1, as soon as they meet the Tier 1 criteria
 <th> No           </th>
 <th> No                      </th>
 <th> [Building/CrossCompiling/iOS](building/cross-compiling/i-os) 
+</th></tr>
+<tr><th> PowerPC      </th>
+<th> AIX             </th>
+<th> powerpc-ibm-aix         </th>
+<th> No           </th>
+<th> No   </th>
+<th> No          </th>
+<th> ?                </th>
+<th> No </th>
+<th> [Building/AIX](building/aix) 
 </th></tr></table>
 
 
@@ -434,16 +444,6 @@ Tier 3 platforms worked in the past, but probably do not work now.
 <th> amd64-unknown-netbsd    </th>
 <th> Yes          </th>
 <th> Yes  </th>
-<th> Yes    </th>
-<th> Yes          </th>
-<th> No                </th>
-<th> 
-</th></tr>
-<tr><th> PowerPC      </th>
-<th> AIX             </th>
-<th> powerpc-ibm-aix         </th>
-<th> Yes          </th>
-<th>      </th>
 <th> Yes    </th>
 <th> Yes          </th>
 <th> No                </th>
