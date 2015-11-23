@@ -68,11 +68,11 @@ introducing an optional dependency on `libdw`. This is the same library
 used by `perf`.
 
 
-- \[MERGED\]   [
+- \[MERGED\]  [
   Phab:D1196](https://phabricator.haskell.org/D1196): Libdw: Add libdw-based stack unwinding
-- \[MERGED\]   [
+- \[MERGED\]  [
   Phab:D1197](https://phabricator.haskell.org/D1197): Signals: Print backtrace on SIGUSR2
-- \[MERGED\]      [
+- \[MERGED\]  [
   Phab:D1418](https://phabricator.haskell.org/D1418): Produce a stacktrace when the RTS barfs
 
 
@@ -80,7 +80,7 @@ With the RTS groundwork in place we can plumb things in for use by user
 programs,
 
 
-- \[READY\]   [
+- \[MERGED\]  [
   Phab:D1198](https://phabricator.haskell.org/D1198): Provide DWARF-based backtraces to Haskell-land
 
 
@@ -117,13 +117,13 @@ emits a representation of them to the eventlog for later use by analysis
 code,
 
 
-- \[RFC\]    [
+- \[MERGED\] [
   Phab:D1279](https://phabricator.haskell.org/D1279): Output source notes in extended DWARF DIEs
 - \[RFC\]    [
   Phab:D1280](https://phabricator.haskell.org/D1280): rts: Emit debug information about program to event log
-- \[READY\]  [
+- \[MERGED\] [
   Phab:D1281](https://phabricator.haskell.org/D1281): Support multiple debug output levels
-- \[RFC\]    [
+- \[MERGED\] [
   Phab:D1387](https://phabricator.haskell.org/D1387): Preserve tick parentage
 
 
@@ -156,7 +156,7 @@ It would also be nice to support time- or cycle-based sampling.
 
 
 - \[IDEA\]   Support basic timer-based sampling
-- \[IDEA\]   Support sampling with Linux `perf_events` interface
+- \[RFC\]    Support sampling with Linux `perf_events` interface
 
 
 In addition, we may want to support some form of call-graph collection.
