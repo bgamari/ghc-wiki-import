@@ -312,6 +312,14 @@ In order to see emails below, **you must login**.
   - **Committer since**: March, 2013.
   - **Main areas of interest**: optimiser
 
+- [ Ömer Sinan Ağacan](http://osa1.net)
+
+  - Indiana University - Bloomington, IN, USA
+  - **Trac**: osa1; **email**: omeragacan@…; **github**: [
+    https://github.com/osa1](https://github.com/osa1); **IRC**: osa1
+  - **Committer since**: November, 2015.
+  - **Main areas of interest**: Core-to-Core optimization passes, supercompilation, [TemplateHaskell](template-haskell)
+
 - [ Páli Gábor János](http://people.freebsd.org/~pgj/)
 
   - Eötvös Lóránd University - Budapest, Hungary
