@@ -185,6 +185,16 @@ Tier 2 platforms as possible to Tier 1, as soon as they meet the Tier 1 criteria
 <th> No                </th>
 <th> 
 </th></tr>
+<tr><th> x86-64       </th>
+<th> DragonFly       </th>
+<th> x86\_64-portbld-dragonfly </th>
+<th> Yes         </th>
+<th> Yes  </th>
+<th> Yes    </th>
+<th> Yes          </th>
+<th> Yes               </th>
+<th> 
+</th></tr>
 <tr><th> PowerPC      </th>
 <th> Linux           </th>
 <th> powerpc-unknown-linux   </th>
@@ -348,9 +358,6 @@ Tier 2 platforms as possible to Tier 1, as soon as they meet the Tier 1 criteria
 
 
 
-**\*S1** Goetz Isenmann [
-reports](http://www.haskell.org/pipermail/glasgow-haskell-users/2009-November/017961.html) that GHCi is currently unable to load compiled code that refers to errno.
-
 **\*S2** but see [\#591](https://gitlab.staging.haskell.org/ghc/ghc/issues/591)
 
 **\*S3** registerised in the past up to GHC 7.0.4 release, then unregisterised due to removal of registerised -fvia-C way (mangler)
@@ -424,16 +431,6 @@ Tier 3 platforms worked in the past, but probably do not work now.
 <th> i386-unknown-netbsd     </th>
 <th> Yes          </th>
 <th> Yes  </th>
-<th> Yes    </th>
-<th> Yes          </th>
-<th> No                </th>
-<th> 
-</th></tr>
-<tr><th> x86          </th>
-<th> DragonFlyBSD    </th>
-<th> i386-unknown-dflybsd    </th>
-<th> Yes          </th>
-<th> No(\*S1) </th>
 <th> Yes    </th>
 <th> Yes          </th>
 <th> No                </th>
