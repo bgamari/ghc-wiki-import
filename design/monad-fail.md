@@ -10,7 +10,7 @@ This page contains some notes and ideas that predate the official **[MonadFail](
 
 
 [
-https://wiki.haskell.org/MonadFail\_Proposal](https://wiki.haskell.org/MonadFail_Proposal)
+prime:Libraries/Proposals/MonadFail](https://prime.haskell.org/intertrac/Libraries/Proposals/MonadFail)
 
 
 ## The Basic Idea
