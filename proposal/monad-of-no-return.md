@@ -406,7 +406,7 @@ See [MonadOfNoReturn/Discussion](proposal/monad-of-no-return/discussion)
 - \[1\]: [
   https://wiki.haskell.org/Functor-Applicative-Monad\_Proposal](https://wiki.haskell.org/Functor-Applicative-Monad_Proposal)
 - \[2\]: [
-  https://wiki.haskell.org/MonadFail\_Proposal](https://wiki.haskell.org/MonadFail_Proposal)
+  https://prime.haskell.org/wiki/Libraries/Proposals/MonadFail](https://prime.haskell.org/wiki/Libraries/Proposals/MonadFail)
 - \[3\]: [
   https://ghc.haskell.org/trac/ghc/wiki/ApplicativeDo](https://ghc.haskell.org/trac/ghc/wiki/ApplicativeDo)
 - \[4\]: [
