@@ -31,8 +31,11 @@ Java](http://docs.oracle.com/javase/7/docs/api/java/lang/SuppressWarnings.html) 
 
 
 
-For example you have a function in your source file that can perform some unsafe actions(unsafe I/O maybe). You think you are smarter than GHC, and you don't want to read such long warning's texts. So you apply pragma to your function and compiler does not throw warnings and you are happy with that.
+It is not very easy to form a good use case for this but nevertheless. 
 
+
+1. For example, if you depend on particular library function(if you want to support backward compatability) but in newer version of library this function marked as deprecated and so you get warnings about it. Here it may be useful to suppress them instead of rewriting the whole codebase. 
+1. Recent monad of no return proposal suggests that having `Applicative` context sufficed for `Monad` assumes that `return` is already implemented as `pure`, so we don't need to duplicate code. However, Monad still has minimal complete definition `>>=` and `return`, so we can have warnings about incomplete minimal definition.
 
 ## Exempli gratia
 
@@ -42,36 +45,29 @@ I don't know conventions about naming pragmas, so let it be something like this.
 
 
 ```
-{-# SUPPRESS #-}
-foo :: IORef Int
-foo = unsafePerformIO (newIORef 10)
-```
+module Test where
 
+import old_lib (foo) 
 
-We are suppressing warnings for one particular function 
+...
 
-
-
-Alternatively, we can do this in top-level, i mean in the file header we can write and compiler will suppress warnings, that foo will throw, see [
-this](https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/pragmas.html) about WARNING and DEPRECATED pragmas
-
-
-```
-{-# SUPPRESS foo  #-}
-
---some code here
-
-foo :: IORef Int
-foo = unsafePerformIO (newIORef 10)
-```
-
-
-Or as seen [
-here](https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/pragmas.html) for INLINE pragma one can write
-
-
-```
-foo :: IORef Int
-foo = unsafePerformIO (newIORef 10)
+bar :: a -> b -> c 
 {-# SUPPRESS foo #-}
+bar x y = foo y $ x
 ```
+
+
+We are suppressing warnings for one particular function
+
+
+```
+{-# SUPPRESS return #-}
+instance Applicative m => Monad m where
+    (>>=) = ...
+
+```
+
+
+And here we are suppressing warnings about incomplete minimal 
+
+
