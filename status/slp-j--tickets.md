@@ -68,7 +68,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 - [\#10321](https://gitlab.staging.haskell.org/ghc/ghc/issues/10321): normalising a type in `:type` in GHCi
 - [\#10018](https://gitlab.staging.haskell.org/ghc/ghc/issues/10018): fixity for data constructors in GHCi
-- [\#10318](https://gitlab.staging.haskell.org/ghc/ghc/issues/10318), [\#10592](https://gitlab.staging.haskell.org/ghc/ghc/issues/10592): recursive superclasses
+- [\#10318](https://gitlab.staging.haskell.org/ghc/ghc/issues/10318), [\#10592](https://gitlab.staging.haskell.org/ghc/ghc/issues/10592), [\#11067](https://gitlab.staging.haskell.org/ghc/ghc/issues/11067): recursive superclasses
 - [\#10179](https://gitlab.staging.haskell.org/ghc/ghc/issues/10179): displaying kinds
 - [\#10089](https://gitlab.staging.haskell.org/ghc/ghc/issues/10089): better warnings for unused data types (involves instances)
 - [\#8581](https://gitlab.staging.haskell.org/ghc/ghc/issues/8581): bidirectional pattern synonyms (with different constraints)
