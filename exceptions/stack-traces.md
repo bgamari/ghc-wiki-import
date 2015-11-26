@@ -69,7 +69,7 @@ them. In fact, it is trivial to realize `unsafePerformIO` equipped with them,
 For this reason, `base` implements a far safer interface on top of this mechanism.
 
 
-## `Control.Excecption`
+## `Control.Exception`
 
 
 
