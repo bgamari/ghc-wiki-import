@@ -1,4 +1,4 @@
-# Plan for stack traces on exceptions
+# Plan for providing exception stack-traces
 
 
 
