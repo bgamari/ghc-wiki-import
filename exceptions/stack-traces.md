@@ -25,7 +25,7 @@ review how exception handling currently works in GHC Haskell.
 
 
 
-All exception handling in GHC is built on a few primitive operations,
+All (synchronous) exception handling in GHC is built on a few primitive operations,
 
 
 ```
