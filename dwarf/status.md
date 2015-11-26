@@ -5,7 +5,7 @@
 
 
 
-These are in various states of completion which I'll encode with the
+These are in various states of completion which I (Ben Gamari) will encode with the
 following designations,
 
 
