@@ -95,6 +95,8 @@ unwind all the way back to `_start`,
   Phab:D1225](https://phabricator.haskell.org/D1225): cmm: Expose machine's stack pointer and return address registers
 - \[MERGED\]  [
   Phab:D1223](https://phabricator.haskell.org/D1223): StgStartup: Add DWARF unwinding annotations for stg\_stop\_thread
+- \[READY\]   [
+  Phab:D1532](https://phabricator.haskell.org/D1532): Dwarf: Assume first block in a proc has an info table
 
 
 This should be enough to get reasonable backtraces for error-handling
