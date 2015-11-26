@@ -107,7 +107,7 @@ itself along with an `Exception` dictionary,
 
 
 ```
-data SomeException = SomeException (forall e. Exception e => e)
+data SomeException = forall e. Exception e => SomeException e
 ```
 
 
@@ -183,8 +183,7 @@ field, using pattern synonyms to preserve the existing interface,
 -- | Some notion of a stack trace
 data StackTrace
 
-data SomeException = SomeExceptionWithStack !(Maybe StackTrace)
-                                            (forall e. Exception e => e)
+data SomeException = forall e. Exception e => SomeExceptionWithStack !(Maybe StackTrace) e
 
 -- | Preserve compatibility for existing users
 pattern SomeException e <- SomeExceptionWithStack _ e where
