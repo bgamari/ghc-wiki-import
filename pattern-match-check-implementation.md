@@ -28,7 +28,7 @@ We explain each one separately below.
 The module exports the following data types:
 
 
-```wiki
+```
 data PmExpr = PmExprVar   Id
             | PmExprCon   DataCon [PmExpr]
             | PmExprLit   PmLit
@@ -48,7 +48,7 @@ and the rest are wrapped in a `PmExprOther`. Note that `PmExprEq` is not functio
 is used for non-overloaded literals. E.g. the constraint \*x is not equal to 5\* is represented as (False \~ (x \~ 5)):
 
 
-```wiki
+```
 PmExprEq (PmExprCon <False> []) (PmExprEq (PmExprVar <x>) (PmExprLit (PmSLit <5>)))
 ```
 
@@ -57,7 +57,7 @@ Literals `PmLit` are separately defined because (as we explain below) appear in 
 `PmLit` is exported too, with signature:
 
 
-```wiki
+```
 eqPmLit :: PmLit -> PmLit -> Maybe Bool
 ```
 
@@ -84,7 +84,7 @@ E.g. { x \~ False, x \~ (y \~ 5) } gets simplified to { False \~ (y \~ 5) } whic
 The term oracle lives in `deSugar/TmOracle.hs` and has the following signature:
 
 
-```wiki
+```
 tmOracle :: TmState -> [SimpleEq] -> Maybe TmState
 ```
 
@@ -92,7 +92,7 @@ tmOracle :: TmState -> [SimpleEq] -> Maybe TmState
 The state of the oracle `TmState` is represented as follows:
 
 
-```wiki
+```
 type PmVarEnv    = Map.Map Id PmExpr
 type TmOracleEnv = (Bool, PmVarEnv)
 type TmState     = ([ComplexEq], TmOracleEnv)
@@ -134,7 +134,7 @@ The strategy of the term oracle is quite simplistic and proceeds as follows (for
 The essence of the oracle is function `solveSimpleEq` which implements the above:
 
 
-```wiki
+```
 solveSimpleEq :: TmState -> SimpleEq -> Maybe TmState
 solveSimpleEq solver_env@(_,(_,env)) simple
   = solveComplexEq solver_env
@@ -158,7 +158,7 @@ the oracle).
 The check itself is implemented in module `deSugar/Check.hs`. Exported functions:
 
 
-```wiki
+```
 -- Issue warnings
 dsPmWarn :: DynFlags -> DsMatchContext -> DsM PmResult -> DsM ()
 
@@ -191,7 +191,7 @@ Before explaining what each function does, we first discuss the types used.
 The `PmPat` data type is defined in `deSugar/Check.hs` as:
 
 
-```wiki
+```
 data PmPat p = PmCon { pm_con_con     :: DataCon
                      , pm_con_arg_tys :: [Type]  -- The univeral arg types, 1-1 with the universal
                                                  --   tyvars of the constructor
@@ -219,7 +219,7 @@ Apart from the literal patterns, both value abstractions and patterns look exact
 paper, and are both based on the `PmPat` type:
 
 
-```wiki
+```
 newtype ValAbs = VA (PmPat ValAbs) -- Value Abstractions
 
 data Pattern = PmGuard PatVec PmExpr      -- Guard Patterns
@@ -235,7 +235,7 @@ another form: guard patterns.
 Pattern vectors and value vector abstractions are simply lists of the respective types:
 
 
-```wiki
+```
 type PatVec    = [Pattern] -- Pattern Vectors
 type ValVecAbs = [ValAbs]  -- Value Vector Abstractions
 ```
@@ -259,7 +259,7 @@ represented in our type:
 arity of the value set abstraction.
 
 
-```wiki
+```
 data ValSetAbs
   = Empty                               -- {}
   | Union ValSetAbs ValSetAbs           -- S1 u S2
@@ -290,14 +290,14 @@ The algorithm process as follows:
 - Translate a clause (which contains `Pat`s, defined in `hsSyn/HsPat.hs`) to `PatVec`s (`translatePat`
   is the workhorse):
 
-  ```wiki
+  ```
   translatePat    :: Pat Id -> UniqSM PatVec
   translateGuards :: [GuardStmt Id] -> UniqSM PatVec
   translateMatch  :: LMatch Id (LHsExpr Id) -> UniqSM (PatVec,[PatVec])
   ```
 - Call function `patVectProc` on the transformed clause:
 
-  ```wiki
+  ```
   patVectProc :: (PatVec, [PatVec]) -> ValSetAbs -> PmM (Bool, Bool, ValSetAbs) -- Covers? Forces? U(n+1)?
   patVectProc (vec,gvs) vsa = do
     us <- getUniqueSupplyM
@@ -348,7 +348,7 @@ against. The three matchers `cMatcher`, `uMatcher` and `dMatcher` essentially im
 `uncovered` and `divergent` as described in the paper.
 
 
-```wiki
+```
 pmTraverse :: UniqSupply
            -> ValSetAbs -- guard continuation
            -> PmMatcher -- what to do
@@ -372,7 +372,7 @@ divergent us gvsa vec vsa = pmTraverse us gvsa dMatcher vec vsa
 Note the signatures:
 
 
-```wiki
+```
 covered, uncovered, divergent :: UniqSupply -> ValSetAbs -> PatVec -> ValSetAbs -> ValSetAbs
 ```
 
@@ -390,7 +390,7 @@ Since we want to handle nested pattern matching too, two more functions are expo
 which are used to generate constraints for case expressions:
 
 
-```wiki
+```
 genCaseTmCs1 :: Maybe (LHsExpr Id) -> [Id] -> Bag SimpleEq
 genCaseTmCs2 :: Maybe (LHsExpr Id) -- Scrutinee
              -> [Pat Id]           -- LHS       (should have length 1)
@@ -405,7 +405,7 @@ genCaseTmCs2 :: Maybe (LHsExpr Id) -- Scrutinee
   generates the set of constraints `{ x ~ e, x ~ to_expr(p) }`. How is this useful? Consider the following
   example:
 
-  ```wiki
+  ```
   f :: Bool -> ()
   f y = case y of
           x@True ->                 -- genCaseTmCs2 generates: y ~ True, y ~ x
@@ -438,7 +438,7 @@ in GHC required several approximations and simplifications:
   is transferred to the guard pattern so resolution is postponed until the term oracle. Consider the following
   example:
 
-  ```wiki
+  ```
   f :: Bool -> ()
   f x@True  = ()
   f y@False = ()
@@ -456,7 +456,7 @@ in GHC required several approximations and simplifications:
 
   In summary, the following will be generated:
 
-  ```wiki
+  ```
   f :: Bool -> ()
   f True  (x <- True)  = () -- uncovered: { False |> { x ~ True } }
   f False (y <- False) = () -- uncovered: {}
