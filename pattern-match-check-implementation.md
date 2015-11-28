@@ -1,5 +1,4 @@
-#
-Exhaustiveness/Redundancy Check Implementation \[THE PAGE IS CURRENTLY UNDER CONSTRUCTION\]
+# Exhaustiveness/Redundancy Check Implementation
 
 
 
