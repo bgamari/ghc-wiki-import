@@ -286,7 +286,7 @@ The package database contains both entries for old-fashioned definite units/pack
 
 
 
-A unit ID is a recursive data structure which is defined to be a component ID (specified by Cabal) plus a mapping from module names to modules, where a module is a a unit ID plus a module name.
+A unit ID is a recursive data structure which is defined to be a component ID (specified by Cabal) plus a mapping from module names to modules, where a module is a a unit ID plus a module name. In common parlance, components and units are the same, but we've adopted the convention that a "unit ID" also includes an instantiation, while a component does not.  The component ID represents "source code"; we call it a component and not a unit because it coincides with the preexisting Cabal notion of a component.
 
 
 
