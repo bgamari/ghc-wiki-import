@@ -90,7 +90,8 @@ Below are the major highlights of 8.0.
   Phab:D808](https://phabricator.haskell.org/D808))
 
 - A huge improvement to pattern matching (including much better coverage of GADTs), based on the work of Simon PJ and Georgios Karachalias. For more details, see [
-  their paper](http://research.microsoft.com/en-us/um/people/simonpj/papers/pattern-matching/gadtpm.pdf).
+  their paper](http://people.cs.kuleuven.be/~george.karachalias/papers/p424-karachalias.pdf). ([
+  Phab:D1535](https://phabricator.haskell.org/D1535))
 
 - Backpack is chugging along; we have a new user-facing syntax which allows multiple modules to be defined a single file, and are hoping to release at least the ability to publish multiple "units" in a single Cabal file.
 
