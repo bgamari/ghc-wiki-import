@@ -20,17 +20,6 @@ Backpack](http://plv.mpi-sws.org/backpack/) is a proposal for retrofitting Haske
 see also [CabalDependency](cabal-dependency)
 
 
-## Design philosophy
-
-
-
-**Backpack files are a better way of writing command line flags.**
-
-
-
-**Separation of concerns between GHC and Cabal.**
-
-
 ## Implementation notes
 
 
@@ -97,7 +86,15 @@ An external tool like Cabal may use this information to construct an entry in th
 
 
 
-TODO Implementation doesn't understand component IDs here yet.
+TODO Why can't GHC just write this information directly to the package database? In the current database design, an entry needs a lot more information, including Cabal-specific information (package name, version, homepage, etc.) which GHC knows nothing about.
+
+
+
+TODO Why can't the package database be divided into two parts, a Cabal part indexed by ComponentId (which GHC never interacts with), and a GHC part indexed by UnitId (which Cabal doesn't interact with, except maybe because it needs to sometimes read out this data and install it to a global database beyond the inplace one. Unclear what the new `ghc-pkg` interface under this realm looks like.
+
+
+
+TODO Implementation doesn't understand component IDs in the relevant positions yet.
 
 
 
@@ -113,6 +110,10 @@ import-dirs: .
 
 
 TODO Should `-sig-of` default to building interface files to the current directory, or `p-0.1-xxx-YYYYYYYY`?
+
+
+
+TODO Why can't GHC just directly build things it depends on?  Because we're not supposed to rely on source saved in the package database, so GHC doesn't actually have access to any of this. Also the package might have a custom build system.
 
 
 
