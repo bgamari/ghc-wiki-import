@@ -3,7 +3,7 @@
 
 
 The amazing people at [
-http://futurice.com/\|Futureice](http://futurice.com/|Futureice) host a 2015 Mac Mini for use by GHC developers.
+Futureice](http://futurice.com/) host a 2015 Mac Mini for use by GHC developers.
 
 
 
