@@ -1,5 +1,9 @@
+# Mac OS X Build Machine
 
-The amazing people at \[Futureice\] host a 2015 Mac Mini for use by GHC developers.
+
+
+The amazing people at [
+http://futurice.com/\|Futureice](http://futurice.com/|Futureice) host a 2015 Mac Mini for use by GHC developers.
 
 
 
