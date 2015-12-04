@@ -1,4 +1,4 @@
-# Exhaustiveness/Redundancy check
+# Exhaustiveness/Redundancy Check \[To Be Updated Soon\]
 
 
 
@@ -53,6 +53,15 @@ Related tickets (ones that are closed are still useful examples in the wild; the
 - [\#10116](https://gitlab.staging.haskell.org/ghc/ghc/issues/10116)
 - [\#10600](https://gitlab.staging.haskell.org/ghc/ghc/issues/10600)
 - [\#10746](https://gitlab.staging.haskell.org/ghc/ghc/issues/10746)
+
+
+Performance related tickets:
+
+
+- [\#11160](https://gitlab.staging.haskell.org/ghc/ghc/issues/11160)
+- [\#11161](https://gitlab.staging.haskell.org/ghc/ghc/issues/11161)
+- [\#11162](https://gitlab.staging.haskell.org/ghc/ghc/issues/11162)
+- [\#11163](https://gitlab.staging.haskell.org/ghc/ghc/issues/11163)
 
 # The main problem we wish to solve
 
