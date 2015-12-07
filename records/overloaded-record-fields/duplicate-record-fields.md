@@ -433,3 +433,4 @@ Phab:D1486](https://phabricator.haskell.org/D1486)).
 
 - [\#11103](https://gitlab.staging.haskell.org/ghc/ghc/issues/11103) - `DuplicateRecordFields` + `TemplateHaskell`
 - [\#11167](https://gitlab.staging.haskell.org/ghc/ghc/issues/11167) - Fixity of field-deconstructors incorrect
+- [\#11173](https://gitlab.staging.haskell.org/ghc/ghc/issues/11173) - Infix declarations for record fields with [DuplicateRecordFields](records/overloaded-record-fields/duplicate-record-fields) are broken
