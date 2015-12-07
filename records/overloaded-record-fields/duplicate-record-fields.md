@@ -428,4 +428,8 @@ Phab:D1486](https://phabricator.haskell.org/D1486)).
 
 - Haddock compiles, but probably needs updates to document modules with [DuplicateRecordFields](records/overloaded-record-fields/duplicate-record-fields) correctly.
 
-- The user manual documentation needs to be adapted to the new format.
+## Tickets
+
+
+- [\#11103](https://gitlab.staging.haskell.org/ghc/ghc/issues/11103) - `DuplicateRecordFields` + `TemplateHaskell`
+- [\#11167](https://gitlab.staging.haskell.org/ghc/ghc/issues/11167) - Fixity of field-deconstructors incorrect
