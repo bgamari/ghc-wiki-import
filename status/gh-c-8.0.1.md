@@ -33,6 +33,19 @@ Release candidate by* mid-December 2015**. Release in **January 2016**.
 Below are the major highlights of 8.0.
 
 
+### In-flight, and likely to land in time
+
+
+- Visible type application
+
+- Support for reasoning about kind equalities, which gives promotion of GADTs to kinds, kind families, heterogeneous equality (kind-indexed GADTs), and `* :: *`. There is some discussion in [DependentHaskell/Phase1](dependent-haskell/phase1), but that's very low-level. I (Richard) have no good user-oriented write-up yet, but there shouldn't be much in the way of new syntax -- just fewer type errors. ([
+  Phab:D808](https://phabricator.haskell.org/D808))
+
+- An [Improved LLVM Backend](improved-llvm-backend) that ships with every major Tier 1 platform.
+
+- Fix [\#10845](https://gitlab.staging.haskell.org/ghc/ghc/issues/10845) with [
+  Phab:1422](https://phabricator.haskell.org/1422) (Rework the Implicit CallStack solver to handle local lets)
+
 ### Landed in HEAD
 
 
@@ -88,16 +101,6 @@ Below are the major highlights of 8.0.
 - Backpack is chugging along; we have a new user-facing syntax which allows multiple modules to be defined a single file, and are hoping to release at least the ability to publish multiple "units" in a single Cabal file.
 
 - Improved [DWARF based debugging support](dwarf) from Peter Wortmann, Arash Rouhani, and Ben Gamari with backtraces from Haskell code.
-
-### In-flight, and likely to land in time
-
-
-- Visible type application
-
-- Support for reasoning about kind equalities, which gives promotion of GADTs to kinds, kind families, heterogeneous equality (kind-indexed GADTs), and `* :: *`. There is some discussion in [DependentHaskell/Phase1](dependent-haskell/phase1), but that's very low-level. I (Richard) have no good user-oriented write-up yet, but there shouldn't be much in the way of new syntax -- just fewer type errors. ([
-  Phab:D808](https://phabricator.haskell.org/D808))
-
-- An [Improved LLVM Backend](improved-llvm-backend) that ships with every major Tier 1 platform.
 
 ### Possible, if the authors push forward fast enough
 
