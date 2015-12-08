@@ -27,6 +27,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 
 - See [PedrosTickets](pedros-tickets)
+- [\#7492](https://gitlab.staging.haskell.org/ghc/ghc/issues/7492): replace `Rec1 f` with `f :.: Par1`
 - [\#11174](https://gitlab.staging.haskell.org/ghc/ghc/issues/11174): traversable for unboxed values
 - [\#11148](https://gitlab.staging.haskell.org/ghc/ghc/issues/11148): failure when Uniques are issued in reverse order
 - [\#10361](https://gitlab.staging.haskell.org/ghc/ghc/issues/10361): `DeriveAnyClass` and associated types
