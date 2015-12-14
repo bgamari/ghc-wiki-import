@@ -6,6 +6,10 @@ This page explains the motivation, semantics, and implementation of the new lang
 
 
 
+Related tickets: [8347](https://gitlab.staging.haskell.org/ghc/ghc/issues/8347), [11182](https://gitlab.staging.haskell.org/ghc/ghc/issues/11182), [11193](https://gitlab.staging.haskell.org/ghc/ghc/issues/11193)
+
+
+
 
 
 ## The Problem
