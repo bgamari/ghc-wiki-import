@@ -36,12 +36,12 @@ Below are the major highlights of 8.0.
 ### In-flight, and likely to land in time
 
 
-- Expose enabled language extensions to [TemplateHaskell](template-haskell) ([
+- Expose enabled language extensions to [TemplateHaskell](template-haskell) (Ben, [
   Phab:D1200](https://phabricator.haskell.org/D1200))
 
-- An [Improved LLVM Backend](improved-llvm-backend) that ships with every major Tier 1 platform.
+- An [Improved LLVM Backend](improved-llvm-backend) that ships with every major Tier 1 platform (Austin)
 
-- Recursive superclasses ([
+- Recursive superclasses (Simon, [
   Phab:D1594](https://phabricator.haskell.org/D1594), [\#11067](https://gitlab.staging.haskell.org/ghc/ghc/issues/11067))
 
 ### Landed in HEAD
