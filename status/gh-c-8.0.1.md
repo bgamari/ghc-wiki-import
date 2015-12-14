@@ -44,7 +44,9 @@ Below are the major highlights of 8.0.
 - Recursive superclasses (Simon, [
   Phab:D1594](https://phabricator.haskell.org/D1594), [\#11067](https://gitlab.staging.haskell.org/ghc/ghc/issues/11067))
 
-- Document for OverloadedLabels (Adam)
+- Documentation for OverloadedLabels (Adam)
+
+- Documentation for `-XTypeInType` (Richard)
 
 ### Landed in HEAD
 
