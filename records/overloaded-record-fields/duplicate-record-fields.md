@@ -414,6 +414,13 @@ Similarly, GHC.Generics currently shows the selector name in the metadata, where
 Phab:D1486](https://phabricator.haskell.org/D1486)).
 
 
+### Fixity and deprecation
+
+
+
+Fixity declarations, and `WARNING` and `DEPRECATED` pragmas, look for a top-level `OccName`.  Thus they apply to all record fields with that label in a single module. The renamer must resolve fixity, so infix duplicate record fields cannot be disambiguated by the typechecker.
+
+
 ### GHC API changes
 
 
@@ -423,8 +430,6 @@ Phab:D1486](https://phabricator.haskell.org/D1486)).
 
 ## Outstanding issues
 
-
-- Deprecations and fixity declarations look for a top-level `OccName`, so they cannot be applied to duplicate record fields. Perhaps this should change: we could make `{-# DEPRECATED foo "Don't use foo" #-}` apply to all the `foo` fields in a module.
 
 - Haddock compiles, but probably needs updates to document modules with [DuplicateRecordFields](records/overloaded-record-fields/duplicate-record-fields) correctly.
 
