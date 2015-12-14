@@ -49,8 +49,6 @@ Below are the major highlights of 8.0.
 ### Landed in HEAD
 
 
-- Visible type application
-
 - Support for reasoning about kind equalities, which gives promotion of GADTs to kinds, kind families, heterogeneous equality (kind-indexed GADTs), and `* :: *`. There is some discussion in [DependentHaskell/Phase1](dependent-haskell/phase1), but that's very low-level. I (Richard) have no good user-oriented write-up yet, but there shouldn't be much in the way of new syntax -- just fewer type errors. ([
   Phab:D808](https://phabricator.haskell.org/D808))
 
@@ -118,6 +116,7 @@ Below are the major highlights of 8.0.
 ### Won't make it, but being actively worked on
 
 
+- Visible type application
 - A new, type-indexed type representation, `data TTypeRep (a :: k)`. See [TypeableT](typeable-t).
 - A (possible) overhaul of GHC's build system to use **Shake** instead of Make.
 
