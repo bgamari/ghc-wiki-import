@@ -26,6 +26,13 @@ Release candidate by* mid-December 2015**. Release in **January 2016**.
 ***
 
 
+## Libraries Status
+
+
+
+See [Libraries](status/gh-c-8.0.1/libraries)
+
+
 ## Release highlights
 
 
