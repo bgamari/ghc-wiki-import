@@ -53,6 +53,7 @@ Kind equalities etc: [DependentHaskell](dependent-haskell), esp [DependentHaskel
 
 
 - See [PedrosTickets](pedros-tickets)
+- [\#9821](https://gitlab.staging.haskell.org/ghc/ghc/issues/9821): `DeriveAnyClass` and higher kinded classes
 - [\#7492](https://gitlab.staging.haskell.org/ghc/ghc/issues/7492): replace `Rec1 f` with `f :.: Par1`
 - [\#11174](https://gitlab.staging.haskell.org/ghc/ghc/issues/11174): traversable for unboxed values
 - [\#11148](https://gitlab.staging.haskell.org/ghc/ghc/issues/11148): failure when Uniques are issued in reverse order
