@@ -690,7 +690,7 @@ The context might end up not being exactly what the user intended. For example, 
 
 
 
-A weakness of generics (prior to GHC 8.0) was that it wasn't expressive enough to represent types of kind `#`. Part of the reason was due to `Rec0` expecting a type of kind `*`, not kind `#`. More importantly, polymorphism over `#` isn't even possible in the first place!
+A weakness of generics (prior to GHC 8.0) was that it wasn't expressive enough to represent types of kind `#`. Part of the reason was due to `Rec0` expecting a type of kind `*`, not kind `#`.
 
 
 
@@ -703,10 +703,6 @@ data IntHash = IntHash Int# deriving (Eq, Ord, Show)
 -- Wouldn't have been allowed!
 deriving instance Generic IntHash
 ```
-
-
-Since polymorphism over `#` is a no-go, a more clever way of encoding unlifted types is needed.
-
 
 ## Attempt 1: re-use `Rec0`
 
@@ -786,7 +782,7 @@ gshowUnlifted = "<unlifted>"
 ```
 
 
-But then she'd be writing `gshow _ = gshowUnlifted` for every single unlifted data type under consideration. That's more boilerplate than any reasonable programmer should have to deal with!
+But then she'd be writing `gshow _ = gshowUnlifted` for every single unlifted data type under consideration. That's more boilerplate than any reasonable generic programmer should have to deal with!
 
 
 ## Attempt 4: use a GADT
@@ -885,7 +881,7 @@ yields:
 ```
 instance Generic IntHash where
   type Rep IntHash =
-    D1 D1IntHash
-      (C1 C1_0IntHash
-        (S1 NoSelector UInt))
+    D1 ('MetaData "IntHash" "Module" "package" 'False)
+      (C1 ('MetaCons "IntHash" 'Prefix 'False)
+        (S1 'MetaNoSel UInt))
 ```
