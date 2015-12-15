@@ -891,7 +891,7 @@ instance Generic IntHash where
 
 
 [
-Trac \#10716](https://ghc.haskell.org/trac/ghc/ticket/10716) proposes encoding metadata into the `Selector` class. Here is my take at implementing this.
+Trac \#10716](https://ghc.haskell.org/trac/ghc/ticket/10716) proposes encoding metadata into the `Selector` class. Here is one take at implementing this.
 
 
 ## Add `selBang` to `Selector`
@@ -936,7 +936,7 @@ data T = T {-# UNPACK #-} !Int
 ```
 
 
-If we were to encode the source unpackedness and strictness of each of `T`'s fields, they were be `SourceUnpack`/`SourceStrict`, `NoSourceUnpackedness`/SourceStrict`, and `NoSourceUnpackedness`/`NoSourceStrictness\`, no matter what. Source unpackedness/strictness is a purely syntactic property.
+If we were to encode the source unpackedness and strictness of each of `T`'s fields, they were be `SourceUnpack`/`SourceStrict`, `NoSourceUnpackedness`/`SourceStrict`, and `NoSourceUnpackedness`/`NoSourceStrictness`, no matter what. Source unpackedness/strictness is a purely syntactic property.
 
 
 
