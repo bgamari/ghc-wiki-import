@@ -23,6 +23,30 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#9725](https://gitlab.staging.haskell.org/ghc/ghc/issues/9725): kind equalities (Richard)
 - [\#9717](https://gitlab.staging.haskell.org/ghc/ghc/issues/9717), [\#9729](https://gitlab.staging.haskell.org/ghc/ghc/issues/9729), [\#10420](https://gitlab.staging.haskell.org/ghc/ghc/issues/10420): orphan modules
 
+## Type families, roles, `Coercible`, `Typeable`, kind polymorphism
+
+
+
+ 
+Kind equalities etc: [DependentHaskell](dependent-haskell), esp [DependentHaskell/Phase1](dependent-haskell/phase1)
+
+
+- [\#7102](https://gitlab.staging.haskell.org/ghc/ghc/issues/7102): type instance overlap in GHCi is unsound
+- [\#10493](https://gitlab.staging.haskell.org/ghc/ghc/issues/10493), [\#10494](https://gitlab.staging.haskell.org/ghc/ghc/issues/10494): Bogus inaccessible code from `Coercible`
+- [\#10362](https://gitlab.staging.haskell.org/ghc/ghc/issues/10362), [\#10359](https://gitlab.staging.haskell.org/ghc/ghc/issues/10359): make tuple constraints into a class
+- [\#9858](https://gitlab.staging.haskell.org/ghc/ghc/issues/9858), [\#10343](https://gitlab.staging.haskell.org/ghc/ghc/issues/10343): `Typeable` and kind polymorphism
+- [\#10347](https://gitlab.staging.haskell.org/ghc/ghc/issues/10347): wrong "unused data constructor" warning for a newtype (using `Coercible`)
+- [\#10184](https://gitlab.staging.haskell.org/ghc/ghc/issues/10184),[\#10185](https://gitlab.staging.haskell.org/ghc/ghc/issues/10185): incompleteness in `Coercible` solver
+- [\#8165](https://gitlab.staging.haskell.org/ghc/ghc/issues/8165): GND for classes with associated types
+- [\#10075](https://gitlab.staging.haskell.org/ghc/ghc/issues/10075): `Constraint` vs `*`
+- [\#10056](https://gitlab.staging.haskell.org/ghc/ghc/issues/10056): more systematic treatment of `(~)` in parser and renamer 
+- [\#9918](https://gitlab.staging.haskell.org/ghc/ghc/issues/9918): closed type families, apartness, and overlapping instances (inconsistency)
+- [\#9118](https://gitlab.staging.haskell.org/ghc/ghc/issues/9118): Eta reduction for `Coercible` (not expressible in Core, yet)
+- [\#6018](https://gitlab.staging.haskell.org/ghc/ghc/issues/6018), [\#10227](https://gitlab.staging.haskell.org/ghc/ghc/issues/10227): injective type families
+- [\#8161](https://gitlab.staging.haskell.org/ghc/ghc/issues/8161): associated type more specific than class decl
+- [\#8177](https://gitlab.staging.haskell.org/ghc/ghc/issues/8177): role signature for type families
+- [\#9547](https://gitlab.staging.haskell.org/ghc/ghc/issues/9547): kinding for empty constraint tuples
+
 ## Generics and DeriveAnyClass
 
 
@@ -96,29 +120,6 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#8171](https://gitlab.staging.haskell.org/ghc/ghc/issues/8171): extended default rules
 - [\#7828](https://gitlab.staging.haskell.org/ghc/ghc/issues/7828), [\#5267](https://gitlab.staging.haskell.org/ghc/ghc/issues/5267), [\#5777](https://gitlab.staging.haskell.org/ghc/ghc/issues/5777), [\#5333](https://gitlab.staging.haskell.org/ghc/ghc/issues/5333), [\#344](https://gitlab.staging.haskell.org/ghc/ghc/issues/344): bugs in arrows
 - [\#7862](https://gitlab.staging.haskell.org/ghc/ghc/issues/7862): overlap beween givens and instances
-
-## Type families, roles, `Coercible`, `Typeable`, kind polymorphism
-
-
-
- 
-
-
-- [\#7102](https://gitlab.staging.haskell.org/ghc/ghc/issues/7102): type instance overlap in GHCi is unsound
-- [\#10493](https://gitlab.staging.haskell.org/ghc/ghc/issues/10493), [\#10494](https://gitlab.staging.haskell.org/ghc/ghc/issues/10494): Bogus inaccessible code from `Coercible`
-- [\#10362](https://gitlab.staging.haskell.org/ghc/ghc/issues/10362), [\#10359](https://gitlab.staging.haskell.org/ghc/ghc/issues/10359): make tuple constraints into a class
-- [\#9858](https://gitlab.staging.haskell.org/ghc/ghc/issues/9858), [\#10343](https://gitlab.staging.haskell.org/ghc/ghc/issues/10343): `Typeable` and kind polymorphism
-- [\#10347](https://gitlab.staging.haskell.org/ghc/ghc/issues/10347): wrong "unused data constructor" warning for a newtype (using `Coercible`)
-- [\#10184](https://gitlab.staging.haskell.org/ghc/ghc/issues/10184),[\#10185](https://gitlab.staging.haskell.org/ghc/ghc/issues/10185): incompleteness in `Coercible` solver
-- [\#8165](https://gitlab.staging.haskell.org/ghc/ghc/issues/8165): GND for classes with associated types
-- [\#10075](https://gitlab.staging.haskell.org/ghc/ghc/issues/10075): `Constraint` vs `*`
-- [\#10056](https://gitlab.staging.haskell.org/ghc/ghc/issues/10056): more systematic treatment of `(~)` in parser and renamer 
-- [\#9918](https://gitlab.staging.haskell.org/ghc/ghc/issues/9918): closed type families, apartness, and overlapping instances (inconsistency)
-- [\#9118](https://gitlab.staging.haskell.org/ghc/ghc/issues/9118): Eta reduction for `Coercible` (not expressible in Core, yet)
-- [\#6018](https://gitlab.staging.haskell.org/ghc/ghc/issues/6018), [\#10227](https://gitlab.staging.haskell.org/ghc/ghc/issues/10227): injective type families
-- [\#8161](https://gitlab.staging.haskell.org/ghc/ghc/issues/8161): associated type more specific than class decl
-- [\#8177](https://gitlab.staging.haskell.org/ghc/ghc/issues/8177): role signature for type families
-- [\#9547](https://gitlab.staging.haskell.org/ghc/ghc/issues/9547): kinding for empty constraint tuples
 
 ## Template Haskell
 
