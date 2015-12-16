@@ -52,6 +52,8 @@ GitHub](https://github.com/) instead of maintaining our own infrastructure for G
 
 - No possibility to mark inline comments 'Done'.
 
+- No way to review diffs with more than 1500 lines.
+
 ### Git repository
 
 
