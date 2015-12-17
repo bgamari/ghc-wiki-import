@@ -5,7 +5,7 @@
 
 
 
-[](http://cdn.meme.am/instances/250x/61128860.jpg)
+[](https://i.imgur.com/lWvuVPd.jpg)
 
 
 
