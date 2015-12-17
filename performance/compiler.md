@@ -62,14 +62,606 @@ Another theme often seen is issues characterized by perceived slowness during co
 While it's possible to fix (1) and (2), (3) is inherent.
 
 
-- [\#8731](https://gitlab.staging.haskell.org/ghc/ghc/issues/8731): long compilation time for module with large data type and partial record selectors 
-- [\#9557](https://gitlab.staging.haskell.org/ghc/ghc/issues/9557): Deriving instances is slow
-- [\#10858](https://gitlab.staging.haskell.org/ghc/ghc/issues/10858): Smaller generated `Ord` instances
-- [\#10980](https://gitlab.staging.haskell.org/ghc/ghc/issues/10980): quadratic behaviour of derived `Read`.
-- [\#5642](https://gitlab.staging.haskell.org/ghc/ghc/issues/5642): Deriving Generic of a big type takes a long time and lots of space
-- [\#9583](https://gitlab.staging.haskell.org/ghc/ghc/issues/9583), [\#9630](https://gitlab.staging.haskell.org/ghc/ghc/issues/9630): code blowup in Generics/Binary
-- [\#9669](https://gitlab.staging.haskell.org/ghc/ghc/issues/9669): Long compile time/high memory usage for modules with many deriving clauses
-- [\#7258](https://gitlab.staging.haskell.org/ghc/ghc/issues/7258): (probably) Compiling DynFlags is jolly slow
+
+
+  
+  
+  
+  
+  
+    
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: keywords: deriving-perf, status: new,
+status: fixed, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: keywords: deriving-perf, status: new, status: fixed,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: keywords: deriving-perf, status: new,
+status: fixed, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: keywords: deriving-perf, status: new,
+status: fixed, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, desc: 1, order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: keywords: deriving-perf, status: new,
+status: fixed, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, order: owner)
+      </th>
+<td>
+    </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#1544](https://gitlab.staging.haskell.org/ghc/ghc/issues/1544)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Derived Read instances for recursive datatypes with infix constructors are too inefficient](https://gitlab.staging.haskell.org/ghc/ghc/issues/1544)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#7258](https://gitlab.staging.haskell.org/ghc/ghc/issues/7258)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Compiling DynFlags is jolly slow](https://gitlab.staging.haskell.org/ghc/ghc/issues/7258)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      simonpj
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#8731](https://gitlab.staging.haskell.org/ghc/ghc/issues/8731)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [long compilation time for module with large data type and partial record selectors](https://gitlab.staging.haskell.org/ghc/ghc/issues/8731)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#9557](https://gitlab.staging.haskell.org/ghc/ghc/issues/9557)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Deriving instances is slow](https://gitlab.staging.haskell.org/ghc/ghc/issues/9557)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#9669](https://gitlab.staging.haskell.org/ghc/ghc/issues/9669)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Long compile time/high memory usage for modules with many deriving clauses](https://gitlab.staging.haskell.org/ghc/ghc/issues/9669)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#10980](https://gitlab.staging.haskell.org/ghc/ghc/issues/10980)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Deriving Read instance from datatype with N fields leads to N\^2 code size growth](https://gitlab.staging.haskell.org/ghc/ghc/issues/10980)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#13280](https://gitlab.staging.haskell.org/ghc/ghc/issues/13280)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      task
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Consider deriving more Foldable methods](https://gitlab.staging.haskell.org/ghc/ghc/issues/13280)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      dfeuer
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr></table>
+
+
+  
+
+
 
 ### Uncategorised compiler performance issues
 
