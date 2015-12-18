@@ -15,7 +15,6 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#9960](https://gitlab.staging.haskell.org/ghc/ghc/issues/9960), [\#9805](https://gitlab.staging.haskell.org/ghc/ghc/issues/9805): `TrieMap` stuff
 - [\#10016](https://gitlab.staging.haskell.org/ghc/ghc/issues/10016): UNPACK support for existentials
 - [\#10803](https://gitlab.staging.haskell.org/ghc/ghc/issues/10803): type signature sections (Lennart)
-- [\#9793](https://gitlab.staging.haskell.org/ghc/ghc/issues/9793), [\#8761](https://gitlab.staging.haskell.org/ghc/ghc/issues/8761), [\#8581](https://gitlab.staging.haskell.org/ghc/ghc/issues/8581), [\#8779](https://gitlab.staging.haskell.org/ghc/ghc/issues/8779), [\#8761](https://gitlab.staging.haskell.org/ghc/ghc/issues/8761), [\#8583](https://gitlab.staging.haskell.org/ghc/ghc/issues/8583), [\#9911](https://gitlab.staging.haskell.org/ghc/ghc/issues/9911), [\#7736](https://gitlab.staging.haskell.org/ghc/ghc/issues/7736), [\#8582](https://gitlab.staging.haskell.org/ghc/ghc/issues/8582), [\#10339](https://gitlab.staging.haskell.org/ghc/ghc/issues/10339), [\#10426](https://gitlab.staging.haskell.org/ghc/ghc/issues/10426), [\#10404](https://gitlab.staging.haskell.org/ghc/ghc/issues/10404): pattern synonyms (Gergo)
 - [\#8634](https://gitlab.staging.haskell.org/ghc/ghc/issues/8634), [\#9267](https://gitlab.staging.haskell.org/ghc/ghc/issues/9267), [\#9227](https://gitlab.staging.haskell.org/ghc/ghc/issues/9227): relaxing functional dependency rules `-XDysFunctionalDependencies`
 - [\#9123](https://gitlab.staging.haskell.org/ghc/ghc/issues/9123): higher order roles
 - [\#9352](https://gitlab.staging.haskell.org/ghc/ghc/issues/9352): allow `State#` in FFI types.
@@ -48,6 +47,16 @@ Kind equalities etc: [DependentHaskell](dependent-haskell), esp [DependentHaskel
 - [\#8161](https://gitlab.staging.haskell.org/ghc/ghc/issues/8161): associated type more specific than class decl
 - [\#8177](https://gitlab.staging.haskell.org/ghc/ghc/issues/8177): role signature for type families
 - [\#9547](https://gitlab.staging.haskell.org/ghc/ghc/issues/9547): kinding for empty constraint tuples
+
+## Pattern matching
+
+
+- [\#11245](https://gitlab.staging.haskell.org/ghc/ghc/issues/11245): "patterns not matched" list is empty
+- [\#9793](https://gitlab.staging.haskell.org/ghc/ghc/issues/9793), [\#8761](https://gitlab.staging.haskell.org/ghc/ghc/issues/8761), [\#8581](https://gitlab.staging.haskell.org/ghc/ghc/issues/8581), [\#8779](https://gitlab.staging.haskell.org/ghc/ghc/issues/8779), [\#8761](https://gitlab.staging.haskell.org/ghc/ghc/issues/8761), [\#8583](https://gitlab.staging.haskell.org/ghc/ghc/issues/8583), [\#9911](https://gitlab.staging.haskell.org/ghc/ghc/issues/9911), [\#7736](https://gitlab.staging.haskell.org/ghc/ghc/issues/7736), [\#8582](https://gitlab.staging.haskell.org/ghc/ghc/issues/8582), [\#10339](https://gitlab.staging.haskell.org/ghc/ghc/issues/10339), [\#10426](https://gitlab.staging.haskell.org/ghc/ghc/issues/10426), [\#10404](https://gitlab.staging.haskell.org/ghc/ghc/issues/10404): pattern synonyms (Gergo)
+- [\#8581](https://gitlab.staging.haskell.org/ghc/ghc/issues/8581): bidirectional pattern synonyms (with different constraints)
+- [\#10183](https://gitlab.staging.haskell.org/ghc/ghc/issues/10183): warning for redundant constraints, and pattern-match overlap warnings
+- [\#9113](https://gitlab.staging.haskell.org/ghc/ghc/issues/9113): pattern match overlap/exhaustiveness checked in Typed TH
+- [\#10393](https://gitlab.staging.haskell.org/ghc/ghc/issues/10393), [\#10116](https://gitlab.staging.haskell.org/ghc/ghc/issues/10116), [\#9951](https://gitlab.staging.haskell.org/ghc/ghc/issues/9951), [\#595](https://gitlab.staging.haskell.org/ghc/ghc/issues/595), [\#5728](https://gitlab.staging.haskell.org/ghc/ghc/issues/5728), [\#3927](https://gitlab.staging.haskell.org/ghc/ghc/issues/3927), [\#5724](https://gitlab.staging.haskell.org/ghc/ghc/issues/5724), [\#5762](https://gitlab.staging.haskell.org/ghc/ghc/issues/5762), [\#4139](https://gitlab.staging.haskell.org/ghc/ghc/issues/4139), [\#6124](https://gitlab.staging.haskell.org/ghc/ghc/issues/6124), [\#7669](https://gitlab.staging.haskell.org/ghc/ghc/issues/7669), [\#322](https://gitlab.staging.haskell.org/ghc/ghc/issues/322), [\#8016](https://gitlab.staging.haskell.org/ghc/ghc/issues/8016), [\#8494](https://gitlab.staging.haskell.org/ghc/ghc/issues/8494), [\#8853](https://gitlab.staging.haskell.org/ghc/ghc/issues/8853), [\#8970](https://gitlab.staging.haskell.org/ghc/ghc/issues/8970), [\#9113](https://gitlab.staging.haskell.org/ghc/ghc/issues/9113), [\#2204](https://gitlab.staging.haskell.org/ghc/ghc/issues/2204): **pattern-match overlap checking**, including with GADTs
 
 ## Generics and DeriveAnyClass
 
@@ -108,7 +117,6 @@ Code-size blowup when using `deriving`; see tickets with keyword `deriving-perf`
 - [\#10318](https://gitlab.staging.haskell.org/ghc/ghc/issues/10318), [\#10592](https://gitlab.staging.haskell.org/ghc/ghc/issues/10592), [\#11067](https://gitlab.staging.haskell.org/ghc/ghc/issues/11067): recursive superclasses
 - [\#10179](https://gitlab.staging.haskell.org/ghc/ghc/issues/10179): displaying kinds
 - [\#10089](https://gitlab.staging.haskell.org/ghc/ghc/issues/10089): better warnings for unused data types (involves instances)
-- [\#8581](https://gitlab.staging.haskell.org/ghc/ghc/issues/8581): bidirectional pattern synonyms (with different constraints)
 - [\#10027](https://gitlab.staging.haskell.org/ghc/ghc/issues/10027): export behaviour for data families
 - [\#9223](https://gitlab.staging.haskell.org/ghc/ghc/issues/9223): error message mentioning untouchables
 - [\#9198](https://gitlab.staging.haskell.org/ghc/ghc/issues/9198): slow typechecker (big types!)
@@ -126,7 +134,6 @@ Code-size blowup when using `deriving`; see tickets with keyword `deriving-perf`
 
 
 - [\#10614](https://gitlab.staging.haskell.org/ghc/ghc/issues/10614): display constraints for typed holes
-- [\#10183](https://gitlab.staging.haskell.org/ghc/ghc/issues/10183): warning for redundant constraints, and pattern-match overlap warnings
 - [\#8171](https://gitlab.staging.haskell.org/ghc/ghc/issues/8171): extended default rules
 - [\#7828](https://gitlab.staging.haskell.org/ghc/ghc/issues/7828), [\#5267](https://gitlab.staging.haskell.org/ghc/ghc/issues/5267), [\#5777](https://gitlab.staging.haskell.org/ghc/ghc/issues/5777), [\#5333](https://gitlab.staging.haskell.org/ghc/ghc/issues/5333), [\#344](https://gitlab.staging.haskell.org/ghc/ghc/issues/344): bugs in arrows
 - [\#7862](https://gitlab.staging.haskell.org/ghc/ghc/issues/7862): overlap beween givens and instances
@@ -148,7 +155,6 @@ See also [TemplateHaskell](template-haskell)
 - [\#10330](https://gitlab.staging.haskell.org/ghc/ghc/issues/10330): better TH error locations
 - [\#6089](https://gitlab.staging.haskell.org/ghc/ghc/issues/6089): nested declaration splices
 - [\#10271](https://gitlab.staging.haskell.org/ghc/ghc/issues/10271): difficulty resolving overloading in typed TH
-- [\#9113](https://gitlab.staging.haskell.org/ghc/ghc/issues/9113): pattern match overlap/exhaustiveness checked in Typed TH
 - [TemplateHaskell/Annotations](template-haskell/annotations) Gergely's work on annotations in TH
 - [\#1475](https://gitlab.staging.haskell.org/ghc/ghc/issues/1475): allow splicing of import declarations (5 in cc list)
 - [\#1012](https://gitlab.staging.haskell.org/ghc/ghc/issues/1012): mutually recursive modules and TH
@@ -370,7 +376,6 @@ See also [TemplateHaskell](template-haskell)
 - [\#4823](https://gitlab.staging.haskell.org/ghc/ghc/issues/4823): strength reduction for array indexing
 - [\#4479](https://gitlab.staging.haskell.org/ghc/ghc/issues/4479): type directed name resolution (TDNR)
 - [\#4426](https://gitlab.staging.haskell.org/ghc/ghc/issues/4426): simpler rule for implicit quantification
-- [\#10393](https://gitlab.staging.haskell.org/ghc/ghc/issues/10393), [\#10116](https://gitlab.staging.haskell.org/ghc/ghc/issues/10116), [\#9951](https://gitlab.staging.haskell.org/ghc/ghc/issues/9951), [\#595](https://gitlab.staging.haskell.org/ghc/ghc/issues/595), [\#5728](https://gitlab.staging.haskell.org/ghc/ghc/issues/5728), [\#3927](https://gitlab.staging.haskell.org/ghc/ghc/issues/3927), [\#5724](https://gitlab.staging.haskell.org/ghc/ghc/issues/5724), [\#5762](https://gitlab.staging.haskell.org/ghc/ghc/issues/5762), [\#4139](https://gitlab.staging.haskell.org/ghc/ghc/issues/4139), [\#6124](https://gitlab.staging.haskell.org/ghc/ghc/issues/6124), [\#7669](https://gitlab.staging.haskell.org/ghc/ghc/issues/7669), [\#322](https://gitlab.staging.haskell.org/ghc/ghc/issues/322), [\#8016](https://gitlab.staging.haskell.org/ghc/ghc/issues/8016), [\#8494](https://gitlab.staging.haskell.org/ghc/ghc/issues/8494), [\#8853](https://gitlab.staging.haskell.org/ghc/ghc/issues/8853), [\#8970](https://gitlab.staging.haskell.org/ghc/ghc/issues/8970), [\#9113](https://gitlab.staging.haskell.org/ghc/ghc/issues/9113), [\#2204](https://gitlab.staging.haskell.org/ghc/ghc/issues/2204): **pattern-match overlap checking**, including with GADTs
 - [\#3701](https://gitlab.staging.haskell.org/ghc/ghc/issues/3701): Implicitly declared existentials: a class as a type
 - [\#3217](https://gitlab.staging.haskell.org/ghc/ghc/issues/3217): better flag handling for GHCi
 - [\#2600](https://gitlab.staging.haskell.org/ghc/ghc/issues/2600), [\#2110](https://gitlab.staging.haskell.org/ghc/ghc/issues/2110): **Bind type variables and constraints in RULES**
