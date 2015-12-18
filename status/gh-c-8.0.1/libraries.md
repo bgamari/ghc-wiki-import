@@ -116,7 +116,7 @@ TODO the upcoming `deepseq-1.4.2.0` release will be used for GHC 8
 
 
 
-TODO
+DONE `directory-1.2.5.0` should be used.
 
 
 ### `filepath`
