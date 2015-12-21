@@ -153,7 +153,7 @@ DONE The release `0.7.2.2` should be used.
 
 
 
-TODO waiting on reaction from hoopl maintainers
+DONE The 3.10.2.1 release shall be used
 
 
 ### `hpc`
