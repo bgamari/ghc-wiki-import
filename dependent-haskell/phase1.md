@@ -2,7 +2,7 @@
 **UPDATE Dec 11, 2015:** The merge is underway. There are a few outstanding issues:
 
 
-- [\#11237](https://gitlab.staging.haskell.org/ghc/ghc/issues/11237)
+- [\#11265](https://gitlab.staging.haskell.org/ghc/ghc/issues/11265): pattern synonym in instance head
 - [\#11266](https://gitlab.staging.haskell.org/ghc/ghc/issues/11266): no match in `tcTyConTyVars`
 - [\#11241](https://gitlab.staging.haskell.org/ghc/ghc/issues/11241): wildcards in kinds
 - [\#11195](https://gitlab.staging.haskell.org/ghc/ghc/issues/11195): `OptCoercion` now takes forever to compile. It seems to be that pattern guards are causing the new completeness-checker to overwork.
