@@ -1,4 +1,4 @@
-# Exhaustiveness/Redundancy Check \[To Be Updated Soon\]
+# Exhaustiveness/Redundancy Check
 
 
 
