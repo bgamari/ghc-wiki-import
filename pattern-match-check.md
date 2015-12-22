@@ -4,11 +4,22 @@
 
 As stated in [\#595](https://gitlab.staging.haskell.org/ghc/ghc/issues/595), GHC's overlapping/non-exhaustive pattern checking is old and
 crufty and misbehaves with several GHC's extensions, notably GADTs. In this page
-we describe the problem and the algorithm we are currently implementing.
+we describe the problem and the algorithm.  It forms part of GHC 8.0.
 
 
 
-Background:
+**Performance related tickets** (to be solved for 8.0):
+
+
+- [\#11160](https://gitlab.staging.haskell.org/ghc/ghc/issues/11160)
+- [\#11161](https://gitlab.staging.haskell.org/ghc/ghc/issues/11161)
+- [\#11162](https://gitlab.staging.haskell.org/ghc/ghc/issues/11162)
+- [\#11163](https://gitlab.staging.haskell.org/ghc/ghc/issues/11163)
+- [\#11195](https://gitlab.staging.haskell.org/ghc/ghc/issues/11195)
+- [\#11276](https://gitlab.staging.haskell.org/ghc/ghc/issues/11276)
+
+
+**Background**:
 
 
 - The paper on which the previous approach were based [
@@ -17,7 +28,7 @@ Background:
   ML's pattern matching compilation and partial evaluation](http://lambda.csail.mit.edu/~chet/papers/others/s/sestoft/sestoft96ml.pdf)
 
 
-Our solution
+**Our solution**
 
 
 - Our paper, describing the algorithm we implemented [
@@ -25,7 +36,7 @@ Our solution
 - [PatternMatchCheckImplementation](pattern-match-check-implementation) talks about the implementation in GHC.
 
 
-Related tickets (ones that are closed are still useful examples in the wild; they were only closed as duplicates):
+**Related tickets** (ones that are closed are still useful examples in the wild; they were only closed as duplicates):
 
 
 - [\#29](https://gitlab.staging.haskell.org/ghc/ghc/issues/29)
@@ -53,15 +64,6 @@ Related tickets (ones that are closed are still useful examples in the wild; the
 - [\#10116](https://gitlab.staging.haskell.org/ghc/ghc/issues/10116)
 - [\#10600](https://gitlab.staging.haskell.org/ghc/ghc/issues/10600)
 - [\#10746](https://gitlab.staging.haskell.org/ghc/ghc/issues/10746)
-
-
-Performance related tickets:
-
-
-- [\#11160](https://gitlab.staging.haskell.org/ghc/ghc/issues/11160)
-- [\#11161](https://gitlab.staging.haskell.org/ghc/ghc/issues/11161)
-- [\#11162](https://gitlab.staging.haskell.org/ghc/ghc/issues/11162)
-- [\#11163](https://gitlab.staging.haskell.org/ghc/ghc/issues/11163)
 
 # The main problem we wish to solve
 
