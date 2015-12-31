@@ -12,6 +12,7 @@ we describe the problem and the algorithm.  It forms part of GHC 8.0.
 
 
 - [\#11160](https://gitlab.staging.haskell.org/ghc/ghc/issues/11160)
+- [\#11303](https://gitlab.staging.haskell.org/ghc/ghc/issues/11303)
 - [\#11316](https://gitlab.staging.haskell.org/ghc/ghc/issues/11316)
 - [\#11161](https://gitlab.staging.haskell.org/ghc/ghc/issues/11161)
 - [\#11162](https://gitlab.staging.haskell.org/ghc/ghc/issues/11162)
