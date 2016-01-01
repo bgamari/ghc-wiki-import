@@ -18,7 +18,11 @@ Recommended procedure for a clean Git history:
 1. create an annotated `ghc-x.yy-start` tag pointing to the commit prepared in step 1.
 
 
- 
+[](/trac/ghc/attachment/wiki/MakingReleases/branch-example.png)
+
+
+
+Example for result of branching procedure described above
 
 
 ### Previous obsolete instructions
