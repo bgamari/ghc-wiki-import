@@ -67,6 +67,26 @@ infixl 6 <+>
 infixl 5 $$, $+$
 ```
 
+
+On the other hand, the popular [
+hackage:ansi-wl-pprint](http://hackage.haskell.org/package/ansi-wl-pprint) package does use right-associative operators:
+
+
+```
+module Text.PrettyPrint.ANSI.Leijen where
+
+infixr 6 <>
+infixr 6 <+>
+```
+
+
+Other pretty printers also using a `infixr 6 <>, <+>` definition:
+
+
+- [
+  hackage:annotated-wl-pprint](http://hackage.haskell.org/package/annotated-wl-pprint)
+- [ hackage:mainland-pretty](http://hackage.haskell.org/package/mainland-pretty)
+
 ### Changing `<>`'s associativity in pretty-printing APIs
 
 
@@ -107,7 +127,7 @@ pointed out by Duncan back in 2011](https://mail.haskell.org/pipermail/libraries
 >
 >
 
-### Unsatisfying Situation Requiring a Solution
+### Unsatisfying Situation Seeking a Long-term Solution
 
 
 
