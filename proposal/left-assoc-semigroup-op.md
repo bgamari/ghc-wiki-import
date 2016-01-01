@@ -115,6 +115,29 @@ Consequently, it's confusing and bad practice to have a soon-to-be-in-Prelude `<
 
 
 
-However, there also seems to be a legitimate use-case for a right-associative `<>` operator.
+However, there also seems to be a legitimate use-case for a left-associative `<>` operator.
 
 
+## Proposed Solution
+
+
+
+Add a standardised alias for `<>` to the `Data.Semigroup` vocabulary, e.g.
+
+
+```
+module Data.Semigroup where
+
+infixl 6 ><
+
+-- | Left-associative alias for (right-associative) 'Semigroup' operation '(<>)'
+(><) :: Semigroup a => a -> a -> a
+(><) = (<>)
+
+```
+
+#### Bikesheds for `><`
+
+
+- `.<>`
+- `<~>`
