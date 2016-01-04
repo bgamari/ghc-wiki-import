@@ -16,63 +16,66 @@ These are not yet implemented, and **will probably not make GHC 8.0.**
 
 
 
-Under this proposal, when GHC encounters a data type declaration with record fields, it generates (or behaves as if it generates -- see "Implementation" below) instances of two new classes, `HasField` and `FieldUpdate`.  For example, given
+Under this proposal, when GHC encounters a data type declaration with record fields, it generates (or behaves as if it generates -- see "Implementation" below) instances of two new classes, `HasField` and `UpdateField`, defined like this:
 
 
-```wiki
-data T = MkT { x :: Int }
+```
+-- | HasField x r a means that r is a record type with a field x of type a
+class HasField (x :: Symbol) r a | x r -> a where
+  -- | Extract the field from the record
+  getField :: Proxy# x -> r -> a
+
+-- | UpdateField x s t b means that s is a record type with a field x
+--   that can be assigned a value of type b, giving a record of type t
+class UpdateField (x :: Symbol) s t b | x t -> b, x s b -> t where
+  -- | Set the field in the record
+  setField :: Proxy# x -> s -> b -> t
 ```
 
+>
+>
+> For example, given
+>
+>
+> ```
+> data T = MkT { x :: Int }
+> ```
 
-GHC will generate
 
 
-```wiki
-instance HasField "x" T where
-  type FieldType "x" T = Int
-  getField _ (MkT x) = x
+GHC will behave as if instances roughly like this were generated:
 
-instance FieldUpdate "x" T Int where
-  type UpdatedRecordType "x" T Int = T
+
+```
+instance HasField "x" T Int where
+  getField _ = x
+
+instance UpdateField "x" T T Int where
   setField _ (MkT _) x = MkT x
 ```
 
 
-These two classes are defined like this:
+There is substantial bikeshedding to be done about the details of these classes (names, parameter number and order, whether to use functional dependencies or type families), but it should not substantially alter the proposal. Note that these classes correspond to the `FieldOwner` class in the `record` library.
 
 
-```wiki
--- | HasField x r means that r is a record type with a field x
-class HasField (x :: Symbol) r where
-  -- | The type of the field x in the record r
-  type FieldType x r
-  -- | Extract the field from the record
-  getField :: Proxy# x -> r -> FieldType x r
 
--- | FieldUpdate x r a means that r is a record type with a field x
---   that can be assigned a value of type a
-class HasField x r => FieldUpdate (x :: Symbol) r a where
-  -- | The type of the updated record
-  type UpdatedRecordType x r a
-  -- | Set the field in the record
-  setField :: Proxy# x -> r -> a -> UpdatedRecordType x r a
+GHC will solve a constraint `HasField "x" (T p q r) t` or `UpdateField "x" (T p q r) (T p' q' r') t` when T has a field `x` that has a rank-0 type containing no existential variables. It will constraint `t` to be equal to the type of the field `x`. (Rank-1 types are out, because they violate the functional dependency on `HasField`, and higher ranks would need impredicative polymorphism.)
+
+
+
+Note the record type appears twice in the arguments to `UpdateField`, because the parameters may vary before and after the update. There are some slightly subtle conditions about when `UpdateField` permits updates to change parameter types, as described in [the original design](records/overloaded-record-fields/design#). For example, if we have
+
+
+```
+data S a = MkS { foo :: a, bar :: a }
 ```
 
 
-These were previously called `Has` and `Upd`, but I suggest using longer and hopefully more meaningful names. There is substantial bikeshedding to be done about the details of these definitions (names, parameter number and order, whether to use functional dependencies or type families), but it should not substantially alter the proposal. Note that these classes correspond to the `FieldOwner` class in the `record` library.
+then a constraint `UpdateField "foo" (S Int) (S Bool) Bool` will not be solved, because an update to the field `foo` alone cannot change the type.
 
 
 
-More precisely, 
-
-
-- GHC will generate a `HasField` instance whenever it currently generates a selector.  Not every field has a selector today, because of existentials (see [
-  user manual](https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/data-type-extensions.html#existential-records)).  Moreover, it will only generate a `HasField` instance if the field type is rank-0, i.e. it has no foralls.  (Even rank-1 types are out, because they violate the functional dependency on `HasField`, and higher ranks would need impredicative polymorphism.)
-
-- Similarly, GHC will generate a `FieldUpdate` instance only for rank-0 fields, that is, ones with no foralls.  (Same reason: impredicativity.)  Plus, of course, ones that do not mention an existential variable.  There are some slightly subtle conditions about when `FieldUpdate` permits updates to change parameter types, as describe in [the original design](records/overloaded-record-fields/design#).
-
-
-Crucially, we must have some kind of relationship between the record type and field type of `HasField` (and similarly for `FieldUpdate`): otherwise, the composition of two fields (using a three-parameter version of `HasField`)
+Crucially, we must have some kind of relationship between the record type and field type of `HasField` (and similarly for `UpdateField`): otherwise, the composition of two fields
 
 
 ```wiki
@@ -91,7 +94,7 @@ has an ambiguous type variable `b`, and we get terrible type inference behaviour
 1. a two-parameter class `HasField x r` with a type family `FieldType x r`
 
 
-Options 2 and 3 were explored in the original `OverloadedRecordFields`, and are pretty much equivalent; we initially thought 2 might give nicer inferred types but in fact they tend to be of the form `HasField x r (FieldType x r)` so we might as well go for the two-parameter class. Option 1 should give prettier inferred types (and be easier to use with the `r { x :: t }` syntactic sugar described below), but the lack of evidence for fundeps, and the inability to mention the type of a field, may be restrictive in hard-to-predict ways. At the moment, this page is written to assume option 3.
+Options 2 and 3 were explored in the original `OverloadedRecordFields`, and are pretty much equivalent; we initially thought 2 might give nicer inferred types but in fact they tend to be of the form `HasField x r (FieldType x r)` so we might as well go for the two-parameter class. Option 1 should give prettier inferred types (and be easier to use with the `r { x :: t }` syntactic sugar described below), but the lack of evidence for fundeps, and the inability to mention the type of a field, may be restrictive in hard-to-predict ways. At the moment, this page is written to assume option 1.
 
 
 
@@ -99,7 +102,15 @@ Options 2 and 3 were explored in the original `OverloadedRecordFields`, and are 
 
 
 
+*Adam*: I've dropped this superclass.
+
+
+
 *Lennart*: I implemented option 1 for `HasField`.
+
+
+
+*Adam*: I'm inclined to agree that option 1 may be better.
 
 
 ### Back to overloaded labels
@@ -110,7 +121,7 @@ How are records and overloaded labels connected?  They are connected by the `IsL
 
 
 ```wiki
-instance (HasField x r, a ~ FieldType x r) => IsLabel x (r -> a) where
+instance (HasField x r a) => IsLabel x (r -> a) where
   fromLabel = getField (proxy# :: Proxy# x)
 ```
 
@@ -120,7 +131,7 @@ which would allow us to freely use `#x` as an overloaded record selector.  Thus:
 
 ```wiki
 xPlusOne r = #x r + 1::Int    -- Inferred type
-                              -- xPlusOne :: (HasField "x" r, FieldType "x" r ~ Int) => r -> Int
+                              -- xPlusOne :: (HasField "x" r Int) => r -> Int
 ```
 
 
@@ -128,7 +139,7 @@ Alternatively, we might choose to give this instance
 
 
 ```wiki
-instance (Functor f, FieldUpdate x s b, a ~ FieldType x s, t ~ UpdatedRecordType x s b)
+instance (Functor f, HasField x s a, UpdateField x s t b)
         => IsLabel x ((a -> f b) -> s -> f t) where
   fromLabel w s = setField (proxy# :: Proxy# x) s <$> w (getField (proxy# :: Proxy# x) s)
 ```
@@ -139,7 +150,7 @@ which would allow us to use `#x` as a lens that identifies record fields of that
 
 ```wiki
 f v = over #x (+1) v -- Inferred type
-                     -- f :: (FieldUpdate "x" r r a a, Num a) => r -> r
+                     -- f :: (UpdateField "x" r r a, Num a) => r -> r
 ```
 
 
@@ -167,7 +178,7 @@ instances and provide additional meanings to the `#x` syntax.  Lens library auth
 
 
 
-It is perfectly fine to write instances of `HasField` or `FieldUpdate` yourself.  For example, suppose we have various types of geometric shapes.
+It is perfectly fine to write instances of `HasField` or `UpdateField` yourself.  For example, suppose we have various types of geometric shapes.
 
 
 ```wiki
@@ -180,11 +191,9 @@ Then we are free to say
 
 
 ```wiki
-instance HasField "area" Triangle where
-   type FieldType "area" Triangle = Float
+instance t ~ Float => HasField "area" Triangle t where
    getField _ (Tri b h _) = 0.5 * b * h
-instance HasField "area" Circle where
-   type FieldType "area" Circle = Float
+instance t ~ Float => HasField "area" Circle t where
    getField _ (Circle r) = pi * r * r
 ```
 
@@ -193,18 +202,22 @@ Now `#area` behaves like a virtual record selector; it is not a field of `Circle
 
 
 
-The exact rules for when user-defined instances are legal will require some care, because to avoid incoherence/soundness issues we must ensure that they do not clash with any automatically generated instances. A user-defined instance `HasField x t` is legal if:
+The exact rules for when user-defined instances are legal might require some care, because to avoid incoherence issues we must ensure that they do not clash with any automatically generated instances. A user-defined instance `HasField x t a` is legal if:
 
 
 - `t` is a data type that has no fields, or
 
 - `x` is a literal string and `t` is a data type that does not have the given field (though it may have other fields).
 
+
+Note that if we use functional dependencies rather than type families, this is merely a coherence issue, not soundness, so we might choose not to bother with the check.
+
+
 ### Representation hiding
 
 
 
-At present, a datatype in one module can declare a field, but if the selector function is not exported, then the field is hidden from clients of the module. It is important to support this. Typeclasses in general have no controls over their scope, but we treat the automatically solved `HasField` and `FieldUpdate` constraints differently.  
+At present, a datatype in one module can declare a field, but if the selector function is not exported, then the field is hidden from clients of the module. It is important to support this. Typeclasses in general have no controls over their scope, but we treat the automatically solved `HasField` and `UpdateField` constraints differently.  
  
 
 
@@ -274,7 +287,7 @@ For example, the following should work fine:
 
 
 ```wiki
-f :: HasField "x" r => r -> FieldType "x" r
+f :: HasField "x" r t => r -> t
 f r = #x r
 
 z :: [r| { x :: Int, y :: Int } |]
@@ -285,24 +298,22 @@ a = f z
 ```
 
 
-For this to be possible, the `Record<n>` tuple datatypes defined by the `record` library would need to have instances for `HasField` and `FieldUpdate` that are polymorphic in the name of the field, like this:
+For this to be possible, the `Record<n>` tuple datatypes defined by the `record` library would need to have instances for `HasField` and `UpdateField` that are polymorphic in the name of the field, like this:
 
 
 ```wiki
 data Record2 (n1 :: Symbol) v1 (n2 :: Symbol) v2 =
   Record2 v1 v2
 
-instance HasField n1 (Record2 n1 v1 n2 v2) where
-  type FieldType n1 (Record2 n1 v1 n2 v2) = v1
+instance HasField n1 (Record2 n1 v1 n2 v2) v1 where
   getField _ (Record2 x _) = x
 
-instance HasField n2 (Record2 n1 v1 n2 v2) where
-  type FieldType n2 (Record2 n1 v1 n2 v2) = v2
+instance HasField n2 (Record2 n1 v1 n2 v2) v2 where
   getField _ (Record2 _ x) = x
 ```
 
 
-These correspond to the existing `FieldOwner` instances in the `record` library. (Actually this doesn't quite work, because the two instances for `FieldType` overlap, but it is possible with a bit more trickery.)
+These correspond to the existing `FieldOwner` instances in the `record` library. (Actually this doesn't quite work, because the two instances overlap, but it is possible with a bit more trickery.)
 
 
 ## Implementation
@@ -321,15 +332,14 @@ generates the instance
 
 
 ```wiki
-instance HasField "x" T where
-  type FieldType "x" T = Int
+instance HasField "x" T Int where
   getField _ (MkT x) = x
 ```
 
 
 but GHC doesn't *actually* have to generate and compile
 a whole instance declaration.  It can simply have a
-built-in constraint solving rule for `(HasField "x" T)` and `(FieldType "x" T)` where `x` is a field of data type `T`.
+built-in constraint solving rule for `(HasField "x" T Int)` where `x` is a field of data type `T`.
 The programmer will not know or care, but it should remove a plethora of instances.
 
 
@@ -343,7 +353,7 @@ Hand written instances are still useful though.
 
 
 
-**Selectors**.  The above code shows the field-selection code as part of the instance declaration, but we may not want ot generate that code repeatedly (in the special-purpose solver).  Field selection may be less trivial than it looks in when we have UNPACK pragmas; e.g.
+**Selectors**.  The above code shows the field-selection code as part of the instance declaration, but we may not want to generate that code repeatedly (in the special-purpose solver).  Field selection may be less trivial than it looks in when we have UNPACK pragmas; e.g.
 
 
 ```wiki
@@ -359,13 +369,12 @@ So we'll probably generate this:
 $sel_T_x :: T -> S
 $sel_T_x (MkT x) = x
 
-instance HasField "x" T where
-  type FieldType "x" T = S
+instance HasField "x" T S where
   getField _ = $sel_T_x
 ```
 
 
-The `HasField` and `FieldUpdate` classes, and `FieldType` and `UpdatedRecordType` type families, will be defined in the module `GHC.Records` in the `base` package.  Contrary to the previous design, we will not generate any dfuns/axioms for these classes \*at all\*.  Instead, the typechecker will implicitly create evidence as required.  This gets rid of a whole lot of complexity.
+The `HasField` and `UpdateField` classes will be defined in the module `GHC.Records` in the `base` package.  Contrary to the previous design, we will not generate any dfuns/axioms for these classes \*at all\*.  Instead, the typechecker will implicitly create evidence as required.  This gets rid of a whole lot of complexity.
 
 
 
@@ -390,6 +399,10 @@ $upd:x:T (MkT _ y) x = MkT x y
 
 
 The updater function will always have a name prefixed with `$upd:`, regardless of whether `OverloadedRecordFields` is enabled.
+
+
+
+**AMG:** I've been considering an alternative implementation that doesn't generate updater functions in advance, but instead produces them on-the-fly when solving constraints. This is perfectly possible, but there is a binary size trade-off.
 
 
 ### GADT record updates
