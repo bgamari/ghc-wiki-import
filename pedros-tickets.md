@@ -20,7 +20,7 @@ Pedro](http://dreixel.net) wants to keep an eye on (it doesn't necessarily mean 
 - [\#9821](https://gitlab.staging.haskell.org/ghc/ghc/issues/9821) (DeriveAnyClass support for higher-kinded classes + some more comments)
 - [\#10087](https://gitlab.staging.haskell.org/ghc/ghc/issues/10087) (DefaultSignatures: error message mentions internal name)
 - [\#10512](https://gitlab.staging.haskell.org/ghc/ghc/issues/10512) (Generic instances missing for Int32, Word64 etc.)
-- [\#10982](https://gitlab.staging.haskell.org/ghc/ghc/issues/10982) (DeriveAnyClass and GND don't work well together)
+- [\#10598](https://gitlab.staging.haskell.org/ghc/ghc/issues/10598) (DeriveAnyClass and GND don't work well together)
 
 
 Closed:
@@ -47,7 +47,7 @@ Closed:
 - [\#10030](https://gitlab.staging.haskell.org/ghc/ghc/issues/10030) (packageName for GHC.Generics.Datatype)
 - [\#10361](https://gitlab.staging.haskell.org/ghc/ghc/issues/10361) (DeriveAnyClass does not fill in associated type defaults)
 - [\#10487](https://gitlab.staging.haskell.org/ghc/ghc/issues/10487) (DeriveGeneric breaks when the same data name is used in different modules)
-- [\#10598](https://gitlab.staging.haskell.org/ghc/ghc/issues/10598) (ghc 7.6.3 Compiler panic with Generics)
+- [\#10513](https://gitlab.staging.haskell.org/ghc/ghc/issues/10513) (ghc 7.6.3 Compiler panic with Generics)
 
 
 Wiki pages:
