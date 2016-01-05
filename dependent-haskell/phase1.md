@@ -9,6 +9,10 @@ This page -- a description of the first phase of integrating full dependent type
 
 
 
+Use Keyword = `TypeInType` to ensure that a ticket ends up on these lists.
+
+
+
 Open Tickets:
 
 <table><tr><th>[\#7503](https://gitlab.staging.haskell.org/ghc/ghc/issues/7503)</th>
@@ -479,17 +483,6 @@ Closed Tickets:
 <td>GHC HEAD type family regression involving invisible arguments</td></tr></table>
 
 
-
-
-Manual tickets:
-
-
-- [\#11266](https://gitlab.staging.haskell.org/ghc/ghc/issues/11266): no match in `tcTyConTyVars`
-- [\#11241](https://gitlab.staging.haskell.org/ghc/ghc/issues/11241): wildcards in kinds
-- [\#11195](https://gitlab.staging.haskell.org/ghc/ghc/issues/11195): `OptCoercion` now takes forever to compile. It seems to be that pattern guards are causing the new completeness-checker to overwork.
-- [\#11196](https://gitlab.staging.haskell.org/ghc/ghc/issues/11196): A handful of performance regressions.
-- [\#11197](https://gitlab.staging.haskell.org/ghc/ghc/issues/11197): Deferred type errors are more eager.
-- [\#11198](https://gitlab.staging.haskell.org/ghc/ghc/issues/11198): A specific error message regression.
 
 # User-facing changes
 
