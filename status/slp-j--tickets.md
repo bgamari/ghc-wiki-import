@@ -27,7 +27,13 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 
  
-Kind equalities etc: [DependentHaskell](dependent-haskell), esp [DependentHaskell/Phase1](dependent-haskell/phase1)
+Major things
+
+
+- `TypeInType`, kind equalities etc: [DependentHaskell](dependent-haskell), esp [DependentHaskell/Phase1](dependent-haskell/phase1)
+
+
+Other tickets
 
 
 - [\#1311](https://gitlab.staging.haskell.org/ghc/ghc/issues/1311): newtypes over unboxed types
