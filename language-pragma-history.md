@@ -14,7 +14,7 @@ See also [
 http://damianfral.github.io/ghcaniuse/](http://damianfral.github.io/ghcaniuse/).
 
 
-## Changes in GHC 8.0 (WIP)
+## Changes in GHC 8.0
 
 
 
@@ -25,6 +25,7 @@ Added LANGUAGE extensions:
 - `[No]DuplicateRecordFields`
 - `[No]StaticPointers`
 - `[No]StrictData`
+- `[No]Strict`
 - `[No]OverloadedLabels`
 - `[No]UndecidableSuperClasses`
 - `[No]TemplateHaskellQuotes`
