@@ -262,6 +262,10 @@ haskell.org$ ~/mk-latest-links | sh
 ```
 
 
+Update the `ANNOUNCE` file.
+
+
+
 Mail `ANNOUNCE` to `glasgow-haskell-users@haskell.org, haskell@haskell.org`, subject `ANNOUNCE: GHC version <<VERSION>>`.
 
 
