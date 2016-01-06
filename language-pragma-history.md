@@ -22,6 +22,7 @@ Added LANGUAGE extensions:
 
 
 - `[No]ApplicativeDo`
+- `[No]DeriveLift`
 - `[No]DuplicateRecordFields`
 - `[No]StaticPointers`
 - `[No]StrictData`
