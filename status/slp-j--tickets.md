@@ -282,6 +282,10 @@ See also [TemplateHaskell](template-haskell)
 ## Cmm and code generation
 
 
+
+See [Edward's collection of code-generation stupidities](commentary/compiler/new-code-gen-stupidity)
+
+
 - [\#10012](https://gitlab.staging.haskell.org/ghc/ghc/issues/10012): Cheap-to-compute values aren't pushed into case branches
 - [\#9718](https://gitlab.staging.haskell.org/ghc/ghc/issues/9718): avoiding `TidyPgm` having to predict arity and CAF-ref-ness
 - [\#9159](https://gitlab.staging.haskell.org/ghc/ghc/issues/9159): jump tables for dense cases
