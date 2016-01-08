@@ -2,8 +2,10 @@
 
 
 
-A patch to implement most of this is here: [
-Phab:D1562](https://phabricator.haskell.org/D1562)
+Patches to implement this: [
+Phab:D1562](https://phabricator.haskell.org/D1562), [
+Phab:D1747](https://phabricator.haskell.org/D1747), [
+Phab:D1748](https://phabricator.haskell.org/D1748)
 
 
 
@@ -26,7 +28,7 @@ There are several reasons for wanting to do this:
 
 - We could **use dynamic linking in GHCi on Windows**, which was previously blocked because GHC itself is too big to make into a dynamic library. (whether this is a good idea or not is debatable, but at least it's technically possible now)
 
-- When compiling Template Haskell code with `-prof`, we wouldn't have to build the code the normal way first, or use `-osuf`.  That annoying restriction (and associated code and build-system nonsense) just goes away.
+- When compiling Template Haskell code with `-prof`, we wouldn't have to build the code the normal way first, or use `-osuf`.  The way this is done currently is inherently unsafe, because we use the profiled `.hi` files with the unprofiled object files, and hope that the two are in sync.  This annoyance (and associated code and build-system nonsense) just goes away with Remote GHCi.
 
 - When compiling Template Haskell code we no longer need to force `-dynamic-too` if GHC is dynamically-linked.
 
