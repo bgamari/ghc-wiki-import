@@ -15,7 +15,7 @@ Tickets should include `PatternMatchWarnings` in their Keywords to appear in the
 
 
 
-Open Tickets:
+**Open Tickets:**
 
 <table><tr><th>[\#10116](https://gitlab.staging.haskell.org/ghc/ghc/issues/10116)</th>
 <td>Closed type families: Warn if it doesn't handle all cases</td></tr>
@@ -79,7 +79,7 @@ Open Tickets:
 
 
 
-Closed Tickets:
+**Closed Tickets:**
 
 <table><tr><th>[\#322](https://gitlab.staging.haskell.org/ghc/ghc/issues/322)</th>
 <td>fromInteger-related pattern match overlap warnings</td></tr>
@@ -175,21 +175,6 @@ Closed Tickets:
 <td>Incorrect non-exhaustive pattern warning with PatternSynonyms</td></tr></table>
 
 
-
-
-**Performance related tickets** (to be solved for 8.0):
-
-
-- [\#11374](https://gitlab.staging.haskell.org/ghc/ghc/issues/11374)
-- [\#11160](https://gitlab.staging.haskell.org/ghc/ghc/issues/11160)
-- [\#11303](https://gitlab.staging.haskell.org/ghc/ghc/issues/11303)
-- [\#11302](https://gitlab.staging.haskell.org/ghc/ghc/issues/11302)
-- [\#11316](https://gitlab.staging.haskell.org/ghc/ghc/issues/11316)
-- [\#11161](https://gitlab.staging.haskell.org/ghc/ghc/issues/11161)
-- [\#11162](https://gitlab.staging.haskell.org/ghc/ghc/issues/11162)
-- [\#11163](https://gitlab.staging.haskell.org/ghc/ghc/issues/11163)
-- [\#11195](https://gitlab.staging.haskell.org/ghc/ghc/issues/11195)
-- [\#11276](https://gitlab.staging.haskell.org/ghc/ghc/issues/11276)
 
 
 **Background**:
