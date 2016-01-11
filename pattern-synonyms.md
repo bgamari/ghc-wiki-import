@@ -7,7 +7,7 @@ This proposal provides the same power for patterns.  See the [implementation](pa
 
 
 
-Tickets should include **PatternSynonym** in their Keywords to appear in these summary lists.
+Tickets should include `PatternSynonyms` in their Keywords to appear in these summary lists.
 
 
 
