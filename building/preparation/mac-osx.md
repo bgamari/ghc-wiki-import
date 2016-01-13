@@ -111,7 +111,7 @@ you can add the line
 
 
 
-`libraries/integer-gmp2_CONFIGURE_OPTS += --configure-option=--with-intree-gmp`
+`libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-intree-gmp`
 
 
 
