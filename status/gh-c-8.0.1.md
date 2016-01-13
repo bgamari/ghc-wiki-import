@@ -22,8 +22,7 @@ If you believe your favourite thing belongs in this list, but isn't there, pleas
 
 
 
-Release candidate by* mid-December 2015**. Release in **January 2016**.
-***
+Release candidate by **mid-January 2016**. Release in **mid-February 2016**.
 
 
 ## Libraries Status
