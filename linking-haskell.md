@@ -57,7 +57,11 @@ Linking the transitive closure as in the static case works for the other cases t
 
 
 
-An object file must be compiled as position independent code (`-fPIC`). Then a temporary dynamic library is produced by `ld` with no other inputs. Undefined symbols are ignored.
+SM: are you talking about the current implementation or your proposal here?
+
+
+
+An object file must be compiled as position independent code (`-fPIC`). Then a temporary dynamic library is produced by `ld` with no other inputs (SM: this is not the case currently). Undefined symbols are ignored.
 
 
 
@@ -69,11 +73,15 @@ Should it be possible to override a symbol defined in a Haskell package? In that
 
 
 
-Do we need to support static libraries in a dynamic GHCi?
+Do we need to support static libraries in a dynamic GHCi? (SM: not necessarily)
 
 
 
-Theoretically, in ELF there should be no difference between a statically linked and a dynamically linked GHCi.
+Theoretically, in ELF there should be no difference between a statically linked and a dynamically linked GHCi.  (SM: you need to elaborate here.  There are big differences between the two: they load different libraries, use different linkers, etc.)
+
+
+
+SM: We now have RemoteGHCi, which means that it will become irrelevant whether GHCi itself is dynamically linked or not, and we'll be able to choose when we start GHCi whether we use dynamic linking or not.  You can try this out: `ghci -fexternal-interpreter -static` uses static linking, and `ghci -fexternal-interpreter -dynamic` uses dynamic linking.
 
 
 ## GHCi with Haskell runtime linker (RTS)
