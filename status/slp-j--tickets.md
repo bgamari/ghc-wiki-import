@@ -7,7 +7,6 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 - [\#11371](https://gitlab.staging.haskell.org/ghc/ghc/issues/11371): bogus in-scope set for substitution
 - [\#9479](https://gitlab.staging.haskell.org/ghc/ghc/issues/9479), [\#10954](https://gitlab.staging.haskell.org/ghc/ghc/issues/10954), [\#9091](https://gitlab.staging.haskell.org/ghc/ghc/issues/9091): more info in "hole" error messages
-- [UnliftedDataTypes](unlifted-data-types) and [UnpackedSumTypes](unpacked-sum-types)
 - [\#10844](https://gitlab.staging.haskell.org/ghc/ghc/issues/10844), [\#10845](https://gitlab.staging.haskell.org/ghc/ghc/issues/10845), [\#10846](https://gitlab.staging.haskell.org/ghc/ghc/issues/10846): implicit call stacks
 - [\#8613](https://gitlab.staging.haskell.org/ghc/ghc/issues/8613), [\#9070](https://gitlab.staging.haskell.org/ghc/ghc/issues/9070), [\#8319](https://gitlab.staging.haskell.org/ghc/ghc/issues/8319), [\#7521](https://gitlab.staging.haskell.org/ghc/ghc/issues/7521), [\#10459](https://gitlab.staging.haskell.org/ghc/ghc/issues/10459), [\#10584](https://gitlab.staging.haskell.org/ghc/ghc/issues/10584), [\#10565](https://gitlab.staging.haskell.org/ghc/ghc/issues/10565): simplifier ticks exhausted (there are others). [\#10459](https://gitlab.staging.haskell.org/ghc/ghc/issues/10459) is clearly a loop; and affects a real package.
 - [\#7262](https://gitlab.staging.haskell.org/ghc/ghc/issues/7262), [\#10333](https://gitlab.staging.haskell.org/ghc/ghc/issues/10333), [\#7672](https://gitlab.staging.haskell.org/ghc/ghc/issues/7672), [\#10083](https://gitlab.staging.haskell.org/ghc/ghc/issues/10083): hs-boot niggles
@@ -34,6 +33,8 @@ Major things
 - `TypeInType`, kind equalities etc: [DependentHaskell](dependent-haskell), esp [DependentHaskell/Phase1](dependent-haskell/phase1)
 - `TypeApplications`: [visible type application](type-application)
 - [Custom type errors](proposal/custom-type-errors)
+- [UnliftedDataTypes](unlifted-data-types)
+- [UnpackedSumTypes](unpacked-sum-types), [\#9214](https://gitlab.staging.haskell.org/ghc/ghc/issues/9214)
 
 
 Other tickets
