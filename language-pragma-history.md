@@ -88,7 +88,7 @@ Added LANGUAGE extensions:
 - `[No]CApiFFI`
 - `[No]ConstraintKinds`
 - `[No]DataKinds`
-- `[No]PolyKinds`
+- `[No]PolyKinds` (Warning: `PolyKinds` yields broken interface files in 7.4! This was fixed in 7.6)
 - `[No]TraditionalRecordSyntax`
 
 
@@ -144,6 +144,5 @@ Added LANGUAGE extensions:
 
 
 TODO
- 
 
 
