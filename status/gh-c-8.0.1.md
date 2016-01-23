@@ -46,6 +46,9 @@ Below are the major highlights of 8.0.
 
 - Documentation for `-XTypeInType` (Richard)
 
+- Option to ignore unrecognised warning flags ([\#10429](https://gitlab.staging.haskell.org/ghc/ghc/issues/10429), Ben, [
+  Phab:D1830](https://phabricator.haskell.org/D1830))
+
 ### Landed in HEAD
 
 
@@ -60,7 +63,7 @@ Below are the major highlights of 8.0.
 - More expressive Generics metadata (Ryan Scott, Trac [\#10716](https://gitlab.staging.haskell.org/ghc/ghc/issues/10716), [\#10697](https://gitlab.staging.haskell.org/ghc/ghc/issues/10697), [
   Phab:D493](https://phabricator.haskell.org/D493))
 
-- Expose enabled language extensions to [TemplateHaskell](template-haskell) (Ben, [
+- Expose enabled language extensions to [TemplateHaskell](template-haskell) ([\#10820](https://gitlab.staging.haskell.org/ghc/ghc/issues/10820), Ben, [
   Phab:D1200](https://phabricator.haskell.org/D1200))
 
 - Recursive superclasses (Simon, [
@@ -68,7 +71,7 @@ Below are the major highlights of 8.0.
 
 - Documentation for OverloadedLabels (Adam)
 
-- Use `Cxt` in Template Haskell's representation of `deriving` clauses ([
+- Use `Cxt` in Template Haskell's representation of `deriving` clauses ([\#10819](https://gitlab.staging.haskell.org/ghc/ghc/issues/10819), Ben, [
   Phab:D1202](https://phabricator.haskell.org/D1202))
 
 - Fix [\#10845](https://gitlab.staging.haskell.org/ghc/ghc/issues/10845) with [
