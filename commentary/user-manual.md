@@ -6,7 +6,7 @@ GHC's user manual contains documentation intended for users of GHC.  They are no
 
 
 
-The user manual is held in [docs/user\_guide](/trac/ghc/browser/ghc/docs/user_guide), and is written in DocBook format (.xml files).  This allows us to typeset it as HTML pages, or as Latex.
+The user manual is held in [docs/user\_guide](/trac/ghc/browser/ghc/docs/user_guide), and is written in ReStructuredText format (`.rst` files).  This allows us to typeset it as HTML pages, or as LaTeX.
 
 
 
@@ -14,13 +14,6 @@ See also the [notes on building the documentation](building/docs).
 
 
 
-Notes on formatting:
+See the "Care and feeding of your GHC User's Guide" section for conventions and a basic introduction to ReST.
 
 
-- Cross-links to Haddock library documtation for module `A.B` in package `foo` should be wrtten thus:
-
-  ```wiki
-   <ulink url="../libraries/foo/A-B.html"> visible link text </ulink>
-  ```
-
-  This relative path will link correctly when the user manual is installed locally, or on GHC's home page. Unfortunately, it won't link correctly in an in-place tree, but that's too bad.
