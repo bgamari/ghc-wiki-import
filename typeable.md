@@ -6,6 +6,14 @@ This page summarises a proposed re-design (again!) of the `Typeable` class, to b
 
 
 
+See also
+
+
+- [TypeableT](typeable-t) really a more concrete variant of this page
+- [Typeable/WithTypeable](typeable/with-typeable) about `withTypeable`.
+- [GhcKinds/PolyTypeable](ghc-kinds/poly-typeable) another rather duplicated page.
+
+
 The names of functions and type constructors is totally up for grabs.
 
 
