@@ -35,6 +35,7 @@ Major things
 - [Custom type errors](proposal/custom-type-errors)
 - [UnliftedDataTypes](unlifted-data-types)
 - [UnpackedSumTypes](unpacked-sum-types), [\#9214](https://gitlab.staging.haskell.org/ghc/ghc/issues/9214)
+- [TypeNats](type-nats): type-level literals
 
 
 Other tickets
