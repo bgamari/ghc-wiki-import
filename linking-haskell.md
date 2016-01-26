@@ -28,7 +28,8 @@ Some Haskell packages use libraries implemented in other languages (for short: C
 
 
 
-Linking against the Haskell package is sufficient. The user of a Haskell package `foo` does not need to know which C libraries and other Haskell packages package `foo` depends on and there is not need to link against those libraries.
+Linking against the Haskell package is sufficient. The user of a Haskell package `foo` does not need to know which C libraries and other Haskell packages package `foo` depends on and there is no need to link against those libraries. Users who have read Ulrich Drepper's paper [
+https://www.akkadia.org/drepper/dsohowto.pdf](https://www.akkadia.org/drepper/dsohowto.pdf) expect that in the dynamic case no dev dependencies are required. 
 
 
 ### Both static
@@ -50,7 +51,7 @@ All Haskell libraries and all directly dependent C libraries must be passed to t
 
 
 TODO
-Linking the transitive closure as in the static case works for the other cases too. Is it worth the bother to treat those cases differently?
+Linking only against Haskell packages should be supported in the dynamic case and it is not difficult to implement that. The hybrid case needs some more thought. 
 
 
 ## GHCi with System Runtime Linker and Loader (RTLD)
@@ -76,7 +77,7 @@ Linking the transitive closure as in the static case works for the other cases t
 
 
 
-Should it be possible to override a symbol defined in a Haskell package? In that case the order of packages and temporary dynamic libraries as one list is important. 
+Should it be possible to override a symbol defined in a Haskell package with a symbol in an object file and vice versa? In that case the order of packages and temporary dynamic libraries as one list is important. 
 
 
 
@@ -89,7 +90,8 @@ Theoretically, in ELF there should be no difference between a statically linked 
 
 - SM: you need to elaborate here.  There are big differences between the two: they load different libraries, use different linkers, etc.) 
 - PT: The current situation is GHCi dynamically linked the use system linker, GHCi statically linked use RTS linker. I think at least on ELF systems you could have a statically linked GHCi and still use the system linker to load dynamic Haskell libraries. Is there anything in the Haskell runtime that would prevent that?
-- SM: On Windows we can't mix dynamic and static Haskell code on the same runtime because there are representation differences.  On ELF systems the symbols of the RTS have to be exposed to the dynamic linker, so if the RTS were static you would at the very least have to link it with `--export-dynamic` when linking GHC.
+- SM: On Windows we can't mix dynamic and static Haskell code on the same runtime because there are representation differences.  On ELF systems the symbols of the RTS have to be exposed to the dynamic linker, so if the RTS were static you would at the very least have to link it with `--export-dynamic` when linking GHC. (Yes, the static GHCi must be prepared so that all its symbols are available to the dynamic linker to match the behavior of a dynamic GHCi). 
+- PT: Would it be OK to have a solution for ELF alone and try OS X later and leave everything like it is for Windows?
 
 
 SM: We now have [RemoteGHCi](remote-gh-ci), which means that it will become irrelevant whether GHCi itself is dynamically linked or not, and we'll be able to choose when we start GHCi whether we use dynamic linking or not.  You can try this out: `ghci -fexternal-interpreter -static` uses static linking, and `ghci -fexternal-interpreter -dynamic` uses dynamic linking. (PT: I would still like to get dynamic linking to work for platforms where we don't have an RTS linker but still want a statically linked GHCi so we can avoid the overhead of creating a separate process. If it cannot be done at least I would like to understand why.)
