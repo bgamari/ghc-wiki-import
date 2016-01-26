@@ -12,6 +12,10 @@ I (Nick Frisby) started this work in April 2012. Then it went stagnant. In Augus
 
 
 
+There are also some useful notes and background on [Frisby2013Q1](frisby2013-q1).
+
+
+
 There is a ticket to track progress: [\#9476](https://gitlab.staging.haskell.org/ghc/ghc/issues/9476).
 
 
