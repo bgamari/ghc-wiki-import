@@ -86,8 +86,7 @@ and then build the Cabal package in the `client/` subdirectory:
 
 ```wiki
 $ cd ghc-builder
-$ cabal install common/
-$ cabal install client/
+$ cabal install common/ client/
 ```
 
 
