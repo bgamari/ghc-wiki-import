@@ -46,6 +46,10 @@ GHC on Windows is supported by the [Windows Task Force](windows-task-force).
 </th></tr></table>
 
 
+
+Note that Vista must be patched with KB2533623.
+
+
 ## Building 32-bit Windows programs
 
 
