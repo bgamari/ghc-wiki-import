@@ -237,7 +237,7 @@ account constraints introduced by GADT matches when reporting warnings. This is
 illustrated in the following example ([\#3927](https://gitlab.staging.haskell.org/ghc/ghc/issues/3927)):
 
 
-```wiki
+```
 data T a where
   T1 :: T Int
   T2 :: T Bool
@@ -266,7 +266,7 @@ they both generate the inconsistent constraint `Int ~ Bool`. This becomes more
 clear if we rewrite the definition of `T` in the equivalent form:
 
 
-```wiki
+```
 data T a where
   T1 :: forall a. (a ~ Int)  => T a
   T2 :: forall a. (a ~ Bool) => T a
@@ -276,7 +276,7 @@ data T a where
 Additionally, if we add one more branch to `f`:
 
 
-```wiki
+```
 f :: T a -> T a -> Bool
 f T1 T1 = True
 f T2 T2 = False
@@ -327,7 +327,7 @@ For example, for function `f` above we have:
 
 - initial\_missing = `[[_ _]]`
 
-  ```wiki
+  ```
   f T1 T1 = True -- first clause
   ```
 - Covers `[[T1 T1]]`
@@ -335,14 +335,14 @@ For example, for function `f` above we have:
 - If 1st argument is `T1` forces the evaluation of the 2nd argument
 - Remain uncovered `[[T2 _], [T1 T2]]`
 
-  ```wiki
+  ```
   f T2 T2 = False -- second clause
   ```
 - Covers `[[T2 T2]]`
 - If 1st argument is `T2` forces the evaluation of the 2nd argument
 - Remain uncovered `[[T2 T1], [T1 T2]]`
 
-  ```wiki
+  ```
   f _  _  = undefined -- third clause (inaccessible)
   ```
 - Covers: `[[T2 T1], [T1 T2]]`
@@ -363,7 +363,7 @@ Even without GADTs, the previous algorithm was not exactly laziness-aware. For
 example, for function `g` below
 
 
-```wiki
+```
 g :: Bool -> Bool -> Bool
 g _    True = True
 g True True = True
