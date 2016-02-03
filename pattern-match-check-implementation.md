@@ -36,7 +36,7 @@ data PmExpr = PmExprVar   Name
 data PmLit = PmSLit HsLit                                    -- simple
            | PmOLit Bool {- is it negated? -} (HsOverLit Id) -- overloaded
 
-type SimpleEq  = (Id, PmExpr) -- We always use this orientation
+type SimpleEq  = (Id, PmExpr)
 type ComplexEq = (PmExpr, PmExpr)
 ```
 
@@ -51,8 +51,8 @@ PmExprEq (PmExprCon <False> []) (PmExprEq (PmExprVar <x>) (PmExprLit (PmSLit <5>
 ```
 
 
-Literals `PmLit` are separately defined since (for efficiency reasons) appear in the pattern language as well. Equality check for
-`PmLit` is exported too, with signature:
+Literals `PmLit` represent literals (both overloaded and non-overloaded). Literal
+equality is defined with signature:
 
 
 ```
@@ -85,11 +85,23 @@ are still used for nested pattern matching (see below).
 
 
 
-The term oracle lives in `deSugar/TmOracle.hs` and has the following signature(s):
+As explained in the paper, the algorithm depends on external solvers for checking
+the satisfiability of term and type constraints. For checking type constraints we
+simply call GHC's existing inference engine (OutsideIn(X)), using a simple interface:
 
 
 ```
-solveOneEq  :: TmState -> ComplexEq   -> Maybe TmState
+tyOracle :: Bag EvVar -> PmM Bool
+```
+
+
+For the satisfiability of term constraints, we have implemented a simple oracle
+(solver). The term oracle lives in `deSugar/TmOracle.hs` and has the following
+signature(s):
+
+
+```
+solveOneEq  :: TmState -> ComplexEq -> Maybe TmState
 tmOracle    :: TmState -> [ComplexEq] -> Maybe TmState
 extendSubst :: Id -> PmExpr -> TmState -> TmState
 ```
@@ -225,8 +237,8 @@ data PmPat :: PatTy -> * where
 ```
 
 
-Literal patterns are not essential for the algorithm to work, but, as we discuss below, it is
-much more efficient to treat them more like constructors by matching against them eagerly than
+Literal patterns are not essential for the algorithm to work, but it is
+more efficient to treat them more like constructors by matching against them eagerly than
 generating equality constraints to feed the term oracle with (as we do in the paper). Additionally,
 we use negative patterns (constructor `PmNLit`), for efficiency also. `PmCon` contains several
 fields, effectively copying constructor `ConPatOut` of type `Pat` (defined in `hsSyn/HsPat.hs`).
