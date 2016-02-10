@@ -331,9 +331,6 @@ There are many pre-defined functions which can be used in this field:
 - **only\_ways(ways)**       do this test certain ways only
 - **extra\_ways(ways)**      add some ways which would normally be disabled
 
-- **omit\_compiler\_types(compilers)**                           skip this test for certain compilers
-- **only\_compiler\_types(compilers)**       do this test for certain compilers only
-
 - **expect\_broken(bug)** this test is a expected not to work due to the indicated trac bug number
 - **expect\_broken\_for(bug, ways)** as expect\_broken, but only for the indicated ways
 
@@ -343,8 +340,6 @@ There are many pre-defined functions which can be used in this field:
 - **exit\_code(n)**          expect an exit code of 'n' from the prog
 
 - **extra\_run\_opts(opts)**  pass some extra opts to the prog
-
-- **no\_clean**              don't clean up after this test
 
 - **extra\_clean(files)**    extra files to clean after the test has completed
 
@@ -380,7 +375,7 @@ There are a number of predicates which can be used:
 
 
 - **doing\_ghci()**          GHCi is available
-- **ghci\_dynamic()**        GHCi uses dynamic libraries
+- **ghc\_dynamic()**         GHC is compiled with `-dynamic` (usually via `DYNAMIC_GHC_PROGRAMS=YES`)
 
 - **fast()**                the testsuite is running in "fast" mode
 
@@ -556,12 +551,6 @@ file. The possible test functions are:
 > >
 > >
 >
-
-- **compile\_and\_run\_with\_prefix**
-  Same as compile\_and\_run, but with command to use to run the execution of the result binary.
-
-- **multimod\_compile\_and\_run\_with\_prefix**
-  Same as multimod\_compile\_and\_run, but with command to use to run the execution of the result binary.
 
 - **run\_command**
   Just run an arbitrary command.  The output is checked
