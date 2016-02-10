@@ -361,7 +361,6 @@ There are many pre-defined functions which can be used in this field:
 - **objcpp\_src**            look for a `.mm` file
 
 - **pre\_cmd(string)**       run this command before running the test (this is preferred over the following 3 where it is possible to use it)
-- **compiler\_cmd\_prefix(string)** prefix this string to the compilation command when run
 - **cmd\_prefix(string)**    prefix this string to the execution command when run
 - **cmd\_wrapper(f)**        applies `f` to the execution command and runs the result instead
 
