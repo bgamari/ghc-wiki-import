@@ -165,7 +165,7 @@ instance Monoid MyType where
     mempty = my_mempty
 ```
 
-## Phases
+## Implementation
 
 
 ###
@@ -196,30 +196,3 @@ Phase 1 (GHC 8.0)  [\#10365](https://gitlab.staging.haskell.org/ghc/ghc/issues/1
 
 
 - Move the now deprecated `mappend` method out of the `Monoid` class, and possibly turn `mappend` into a legacy top-level binding (c.f. "Monad of no `return` Proposal")
-
-## Writing compatible code
-
-
-```
-import Data.Semigroup -- re-exports Data.Monoid (w/ Semigroup((<>)))
-
-instance Semigroup Foo where
-  (<>) = …
-
-instance Monoid Foo where
-  mempty = …
-
-#if !(MIN_VERSION_base(5,0,0))
-  -- assumption: Semigroup becomes superclass w/ base-5.0.0
-  mappend = (<>)
-#endif
-```
-
----
-
-
-
-TODO ...integrate migration roadmap outlined in [
-http://permalink.gmane.org/gmane.comp.lang.haskell.libraries/24526](http://permalink.gmane.org/gmane.comp.lang.haskell.libraries/24526)
-
-
