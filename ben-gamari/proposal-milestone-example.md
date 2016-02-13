@@ -2,11 +2,7 @@
 
 
 
-THIS DESCRIPTION IS STILL WORK IN PROGRESS
-
-
-
-Please comment on ghc:\#10365 if you notice some show-stopper issue
+This is not a real proposal. It is merely intended to demonstrate what I propose a proposal should look like.
 
 
 
@@ -95,8 +91,8 @@ mappend = (<>)
 <th> Add `Semigroup` instances                                         
 </th></tr>
 <tr><th> **warnings become errors** </th>
-<th> TDB               </th>
-<th> TBD               </th>
+<th> 8.6               </th>
+<th> Winter 2019       </th>
 <th> `Semigroup` becomes superclass of `Monoid`                          </th>
 <th>                                                                   
 </th></tr>
@@ -107,12 +103,67 @@ mappend = (<>)
 <th> Remove `mappend` from `Monoid` instances                          
 </th></tr>
 <tr><th> **warnings become errors** </th>
-<th> TDB               </th>
-<th> TBD               </th>
+<th> 8.8               </th>
+<th> Winter 2020       </th>
 <th> `mappend` removed from `Monoid`                                     </th>
 <th>                                                                   
 </th></tr></table>
 
+
+### Adding `Semigroup` instances
+
+
+
+Consider a `Monoid` instance,
+
+
+```
+import Data.Monoid
+
+instance Monoid MyType where
+    mempty  = my_empty
+    mappend = my_mappend
+```
+
+
+Between 8.0 and 8.4 this code would become,
+
+
+```
+import Data.Semigroup
+
+instance Semigroup MyType where
+    (<>) = my_mappend
+
+instance Monoid MyType where
+    mempty = my_mempty
+    mappend = (<>)
+```
+
+
+with an added dependency on the `semigroups` library.
+
+
+
+After 8.4 the `semigroups` dependency can be dropped.
+
+
+### Dropping `mappend`
+
+
+
+`mappend` will remain a method of `Monoid` until 8.8, but can be safely removed after 8.6 resulting in,
+
+
+```
+import Data.Semigroup
+
+instance Semigroup MyType where
+    (<>) = my_mappend
+
+instance Monoid MyType where
+    mempty = my_mempty
+```
 
 ## Phases
 
