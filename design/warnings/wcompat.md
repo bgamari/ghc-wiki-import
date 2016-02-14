@@ -64,7 +64,7 @@ Adding more ad-hoc exceptions than already exist further breaks this expectation
 </td></tr></table>
 
 
-## Arguments **for opt-in**
+## Arguments **for opt-in style**
 
 
 <table><tr><th>Users of `-Wall` will need Cabal file boilerplate to disable `-Wcompat`</th>
