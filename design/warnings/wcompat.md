@@ -28,7 +28,7 @@ This page describes some arguments for and against including `-Wcompat` in `-Wal
   - Users who desire warnings about upcoming changes could use `-Wall`
   - Users who dislike such warnings would use `-Wall -Wno-compat`
 
-## Arguments **for (B) opt-out** / against opt-in style
+## Arguments **for opt-out style**
 
 
 <table><tr><th>Improved discoverability of `-Wcompat`</th>
@@ -64,7 +64,7 @@ Adding more ad-hoc exceptions than already exist further breaks this expectation
 </td></tr></table>
 
 
-## Arguments **for (A) opt-in** / against opt-out style
+## Arguments **for (A) opt-in**
 
 
 <table><tr><th>Users of `-Wall` will need Cabal file boilerplate to disable `-Wcompat`</th>
