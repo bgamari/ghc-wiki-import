@@ -27,10 +27,17 @@ However, there is one important design choice left regarding the default:
 #### Arguments **for (B) opt-out** / against opt-in style
 
 
-- If we don't enable `-Wcompat` by default, discoverability
-  suffers. Most users know mostly about `-Wall` but not about
-  `-Wcompat`, and even if `-Wcompat` becomes better known, maybe they
-  won't bother (or simply forget) to turn on `-Wcompat`.
+
+If we don't enable `-Wcompat` by default, discoverability suffers::
+
+
+>
+>
+> Most users know mostly about `-Wall` but not about
+> `-Wcompat`, and even if `-Wcompat` becomes better known, maybe they
+> won't bother (or simply forget) to turn on `-Wcompat`.
+>
+>
 
 >
 >
@@ -39,9 +46,15 @@ However, there is one important design choice left regarding the default:
 >
 >
 
-- This warnings are just noisy and don't cause actual problems until
-  `-Werror` is enabled (which doesn't cause problems for Hackage since
-  Hackage rejects packages with `-Werror` anyway).
+
+This warnings are just noisy and don't cause actual problems until `-Werror` is enabled::
+
+
+>
+>
+> This means that the change won't cause problems for Hackage since Hackage rejects packages with `-Werror` anyway).
+>
+>
 
 >
 >
@@ -50,37 +63,79 @@ However, there is one important design choice left regarding the default:
 >
 >
 
-- The user may expect that `-Wall` enables all warnings; adding more
-  ad-hoc exceptions than already exist further breaks this expectation.
+
+The user may expect that `-Wall` enables all warnings::
+
+
+>
+>
+> Adding more ad-hoc exceptions than already exist further breaks this expectation.
+>
+>
 
 #### Arguments **for (A) opt-in** / against opt-out style
 
 
-- Packages insisting on `-Wall` cleanliness while supporting pre-GHC-8.0 need to add boilerplate
-  in their cabal files to silence compatibility warnings:
 
-  ```wiki
-    ghc-options: -Wall
-    if impl(ghc >` 8)
-       ghc-options: -Wno-compat
-  ```
+Users of `-Wall` will need Cabal file boilerplate to disable `-Wcompat`::
 
-  However, as [
-  previously](https://mail.haskell.org/pipermail/ghc-devs/2016-January/010955.html|stated),
-  `-Wall` is intended for use during development. Therefore, we discourage the use of `-Wall`
-  in released projects.
 
-- Having `-Wcompat` separate from `-Wall` allows us to include
-  more verbose warnings to `-Wcompat` that would be questionable in `-Wall`
+>
+>
+> Packages insisting on `-Wall` cleanliness while supporting pre-GHC-8.0 need to add boilerplate
+> in their cabal files to silence compatibility warnings:
+>
+>
+> ```wiki
+>   ghc-options: -Wall
+>   if impl(ghc >` 8)
+>      ghc-options: -Wno-compat
+> ```
+>
+>
+> However, as [
+> previously](https://mail.haskell.org/pipermail/ghc-devs/2016-January/010955.html|stated),
+> `-Wall` is intended for use during development. Therefore, we discourage the use of `-Wall`
+> in released projects.
+>
+>
 
-- `-Wcompat` warnings aren't necessarily actionable if backwards
-  compatibility is desired; if they were, they'd be in `-Wall`. The
-  point of `-Wcompat` was to give notice to folks who wanted them as soon
-  as possible, even if they were things they couldn't do, yet moving
-  them into `-Wall` means that this whole thing becomes a big mess of
-  active maintenance
 
-- If `-Wcompat` was on by default, less or maybe no users at all would
-  bother about the 3-release policy at all, as it would add another
-  hoop to jump through, i.e.  requires to actively opt out via
-  `-Wno-compat`.
+Inclusion in `-Wall` raises the bar for inclusion in `-Wcompat`::
+
+
+>
+>
+> Having `-Wcompat` separate from `-Wall` allows us to include
+> more verbose warnings to `-Wcompat` that would be questionable in `-Wall`
+>
+>
+
+
+`-Wcompat` warnings aren't necessarily actionable::
+
+
+>
+>
+> `-Wcompat` warnings aren't necessarily actionable if backwards
+> compatibility is desired; if they were, they'd be in `-Wall`. The
+> point of `-Wcompat` was to give notice to folks who wanted them as soon
+> as possible, even if they were things they couldn't do, yet moving
+> them into `-Wall` means that this whole thing becomes a big mess of
+> active maintenance
+>
+>
+
+
+May deter three-release policy compliance::
+
+
+>
+>
+> If `-Wcompat` was on by default, less or maybe no users at all would
+> bother about the three-release policy at all, as it would add another
+> hoop to jump through, i.e.  requires to actively opt out via
+> `-Wno-compat`.
+>
+>
+
