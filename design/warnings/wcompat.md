@@ -28,7 +28,7 @@ However, there is one important design choice left regarding the default:
 
 
 
-If we don't enable `-Wcompat` by default, discoverability suffers::
+**If we don't enable `-Wcompat` by default, discoverability suffers**::
 
 
 >
@@ -47,7 +47,7 @@ If we don't enable `-Wcompat` by default, discoverability suffers::
 >
 
 
-This warnings are just noisy and don't cause actual problems until `-Werror` is enabled::
+**This warnings are just noisy and don't cause actual problems until `-Werror` is enabled**::
 
 
 >
@@ -64,7 +64,7 @@ This warnings are just noisy and don't cause actual problems until `-Werror` is 
 >
 
 
-The user may expect that `-Wall` enables all warnings::
+**The user may expect that `-Wall` enables all warnings**::
 
 
 >
@@ -77,7 +77,7 @@ The user may expect that `-Wall` enables all warnings::
 
 
 
-Users of `-Wall` will need Cabal file boilerplate to disable `-Wcompat`::
+**Users of `-Wall` will need Cabal file boilerplate to disable `-Wcompat`**::
 
 
 >
@@ -101,7 +101,7 @@ Users of `-Wall` will need Cabal file boilerplate to disable `-Wcompat`::
 >
 
 
-Inclusion in `-Wall` raises the bar for inclusion in `-Wcompat`::
+**Inclusion in `-Wall` raises the bar for inclusion in `-Wcompat`**::
 
 
 >
@@ -127,7 +127,7 @@ Inclusion in `-Wall` raises the bar for inclusion in `-Wcompat`::
 >
 
 
-May deter three-release policy compliance::
+**May deter three-release policy compliance**::
 
 
 >
