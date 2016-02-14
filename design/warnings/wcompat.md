@@ -24,7 +24,7 @@ However, there is one important design choice left regarding the default:
   - Users who desire warnings about upcoming changes: `-Wall`
   - Users who dislike such warnings: `-Wall -Wno-compat`
 
-#### Arguments **for (B) opt-out** / against opt-in style
+## Arguments **for (B) opt-out** / against opt-in style
 
 
 
@@ -73,7 +73,7 @@ However, there is one important design choice left regarding the default:
 >
 >
 
-#### Arguments **for (A) opt-in** / against opt-out style
+## Arguments **for (A) opt-in** / against opt-out style
 
 
 
