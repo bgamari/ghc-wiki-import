@@ -82,7 +82,7 @@ Let n be the number of files that are recursively referenced and m the number of
 The 2 comes from the `.hs`/`.lhs` options.
 
 
-## Proposed solution
+## First Proposed solution
 
 
 
