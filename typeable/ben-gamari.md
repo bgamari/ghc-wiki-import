@@ -45,6 +45,8 @@ pattern TRApp :: forall k2 (fun :: k2). ()
               => forall k1 (a :: k1 -> k2) (b :: k1). (fun ~ a b)
               => TypeRep a -> TypeRep b -> TypeRep fun
 
+-- Open question: Should this pattern include the kind of the constructor?
+-- It seems you often need it.
 pattern TRCon :: forall k (a :: k). TyCon -> TypeRep a
 
 -- decompose functions
@@ -93,12 +95,47 @@ mkTrApp :: forall k1 k2 (a :: k1 -> k2) (b :: k1).
 
 
 
-Serialization of type representations is a bit tricky in this new world,
+Serialization of type representations is a bit tricky in this new world. Let's
+say that we want to serialize (say, using the `binary` package), for instance, a
+type-indexed map,
 
 
 ```
+data TMap a
+lookup :: TypeRepX -> TMap a -> Maybe a
+insert :: TypeRepX -> a -> TMap a -> TMap a
+
+-- we want to support these operations...
+getTMap :: Binary a => Get (TMap a)
+putTMap :: Binary a => TMap a -> Put
+```
+
+
+Of course in order to provide `getTMap` and `putTMap` we need to be able to both
+serialize and deserialize `TypeRepX`s. While there is no particular trouble with
+serialization, deserialization quickly runs into trouble: how do we instantiate
+the type variable `a`? Concretely,
+
 
 ```
+-- For a moment, assume we have this...
+getTypeRep :: Get (TypeRep a)
+getTypeRep = ...
+
+-- We can now implement getTypeRepX... or can we?
+getTypeRepX :: Get TypeRepX
+getTypeRepX =
+    TypeRepX <$> getTypeRep
+    -- What is `a`? We don't know as it is totally unconstrained.
+```
+
+
+This is clearly problematic.
+
+
+
+The solution here may be to use GHC's existing support for static data.
+
 
 ## `Data.Dynamic`
 
@@ -134,7 +171,8 @@ dynApply :: Dynamic -> Dynamic -> Maybe Dynamic
 
 
 Ben Pierce also
-[ suggested](https://ghc.haskell.org/trac/ghc/wiki/TypeableT#Data.Dynamic) this
+[
+https://ghc.haskell.org/trac/ghc/wiki/TypeableT\#Data.Dynamic\|suggested](https://ghc.haskell.org/trac/ghc/wiki/TypeableT#Data.Dynamic|suggested) this
 variant of `Dynamic`, which models a value of dynamic type "inside" of a known
 functor. He p
 
