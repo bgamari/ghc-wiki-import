@@ -245,6 +245,15 @@ Please add: System FC, GADTs, kind polymorphism etc
 
 - [The Concurrent Haskell Foreign Function Interface](http://www.haskell.org/ghc/docs/papers/threads.ps.gz), Wolfgang Thaller. An Addendum to Haskell 98 FFI Report.
 
+## Modules & Packages
+
+
+- [
+  A Formal Specification of the Haskell 98 Module System](http://programatica.cs.pdx.edu/P/diatchi.pdf) (Iavor S. Diatchki, Mark P. Jones, Thomas Hallgren) In Haskell '02.
+
+- [
+  Backpack: Retrofitting Haskell with Interfaces](http://plv.mpi-sws.org/backpack/backpack-paper.pdf) (Scott Scott Kilpatrick, Derek Dreyer, Simon Peyton Jones, Simon Marlow), POPL 2014.
+
 ## Other GHC features
 
 
