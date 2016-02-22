@@ -7,6 +7,10 @@ Generative Type Abstraction and Type-level Computation](http://www.seas.upenn.ed
 
 
 
+Role annotations are enabled using `{-# LANGUAGE RoleAnnotations #-}`.
+
+
+
 See also
 
 
