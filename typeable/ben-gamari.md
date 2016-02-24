@@ -4,9 +4,8 @@
 
 This is Ben Gamari's plan for moving ahead with the type-indexed `Typeable`
 scheme, described most recently in
-\[\[[
-http://research.microsoft.com/en-us/um/people/simonpj/papers/haskell-dynamic/\|A](http://research.microsoft.com/en-us/um/people/simonpj/papers/haskell-dynamic/|A)
-reflection on types\]\].
+[
+A reflection on types](http://research.microsoft.com/en-us/um/people/simonpj/papers/haskell-dynamic).
 
 
 
@@ -300,8 +299,7 @@ dynApply :: Dynamic -> Dynamic -> Maybe Dynamic
 
 
 Ben Pierce also
-[
-https://ghc.haskell.org/trac/ghc/wiki/TypeableT\#Data.Dynamic\|suggested](https://ghc.haskell.org/trac/ghc/wiki/TypeableT#Data.Dynamic|suggested) this
+[ suggested](https://ghc.haskell.org/trac/ghc/wiki/TypeableT#Data.Dynamic) this
 variant of `Dynamic`, which models a value of dynamic type "inside" of a known
 functor. He p
 
