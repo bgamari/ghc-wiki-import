@@ -138,6 +138,7 @@ Happy](http://www.haskell.org/happy/). It is easiest to install them using cabal
 
 
 ```wiki
+mkdir -p /usr/local/bin &&
 curl -L https://www.haskell.org/cabal/release/cabal-install-1.22.0.0/cabal-1.22.0.0-i386-unknown-mingw32.tar.gz | tar -xz -C /usr/local/bin && # for some version of cabal you may need to rename the exe to cabal.exe
 cabal update &&
 cabal install -j --prefix=/usr/local alex happy
