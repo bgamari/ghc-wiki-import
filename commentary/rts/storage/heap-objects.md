@@ -49,7 +49,7 @@ A heap object always begins with a *header*, defined by `StgHeader` in [Closures
 
 ```wiki
 typedef struct {
-    const struct _StgInfoTable* info;
+    const struct StgInfoTable* info;
 #ifdef PROFILING
     StgProfHeader         prof;
 #endif
