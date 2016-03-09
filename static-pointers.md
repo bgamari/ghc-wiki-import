@@ -368,8 +368,8 @@ test x = (static (filter hasZero), c)
 Here's a proposal to have the compiler deal with it:
 
 
-1. Have the renamer compute whether bindings in scope are closed.
-1. When the renamer finds a static form, allow the free vars to be bound at the top-level or be closed local bindings.
+1. Have the typechecker compute whether bindings in scope are closed.
+1. When the typechecker finds a static form, allow the free vars to be bound at the top-level or be closed local bindings.
 1. Desugar the static form. This produces a list of floated Core bindings.
 1. For each such Core binding find the free variables corresponding to local bindings.
 1. Mark all found local definitions and its dependencies to be in level 0.
@@ -443,7 +443,7 @@ In the [FloatOut](float-out) pass renaming occurs when computing the levels. We 
 
 
 
-Whether `hasZero` and `isZero` are given general types or not shouldn't affect the result in this case. However, not generalizing the type can cause troubles:
+Whether `hasZero` and `isZero` are given general types or not shouldn't affect the result in this case. However, constraints can be problematic:
 
 
 ```
@@ -454,8 +454,25 @@ test2 x = static (g x)
 ```
 
 
-`g` is gonna use the `Binary a` dictionary provided to `test2`, which makes the body of `g` not closed. The renamer, however, cannot detect this. We could either:
+`g` is gonna use the `Binary a` dictionary provided to `test2`, which makes the body of `g` not closed. The typechecker needs to report an error in this case. And this is why the renamer cannot check for *closedness*.
 
 
-- implement the test for *closedness* in the typechecker instead, or
-- check *type-closedness* in the typechecker using the flag `tct_closed`.
+
+Another example with `-XScopedTypeVariables` is
+
+
+```
+test3 :: forall a. Typeable a => a -> StaticPtr TypeRep
+test3 _ = static h
+  where
+    h :: TypeRep
+    h = g undefined
+      where
+        g :: a -> TypeRep
+        g = typeOf
+```
+
+
+In this example `h` can only be given the type `TypeRep` and it would appear closed to the renamer, but the typechecker should be able to see that it depends on the `Typeable a` instance given to `test3`, and thus it should produce a compilation error.
+
+
