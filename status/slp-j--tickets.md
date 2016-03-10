@@ -5,6 +5,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Urgent or in-flight
 
 
+- [\#11698](https://gitlab.staging.haskell.org/ghc/ghc/issues/11698): `tct_closed` flag is set wrong
 - [\#11371](https://gitlab.staging.haskell.org/ghc/ghc/issues/11371): bogus in-scope set for substitution
 - [\#9479](https://gitlab.staging.haskell.org/ghc/ghc/issues/9479), [\#10954](https://gitlab.staging.haskell.org/ghc/ghc/issues/10954), [\#9091](https://gitlab.staging.haskell.org/ghc/ghc/issues/9091): more info in "hole" error messages
 - [\#10844](https://gitlab.staging.haskell.org/ghc/ghc/issues/10844), [\#10845](https://gitlab.staging.haskell.org/ghc/ghc/issues/10845), [\#10846](https://gitlab.staging.haskell.org/ghc/ghc/issues/10846): implicit call stacks
