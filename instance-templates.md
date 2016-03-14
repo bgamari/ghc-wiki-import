@@ -5,7 +5,7 @@ This page documents yet another proposal to make class hierarchies easier to dea
 ## Example
 
 
-```wiki
+```
 class Monad m where
   return :: a -> m a
   (>>=) :: m a -> (a -> m b) -> m b
@@ -113,7 +113,7 @@ In a deep class hierarchy (i.e. with long chains of superclasses), it may be con
 For example:
 
 
-```wiki
+```
 class Functor f where
   fmap :: (a -> b) -> f a -> f b
 
@@ -150,7 +150,7 @@ This proposal does not address directly how to split a class into pieces, but th
 Here is a class we want to split:
 
 
-```wiki
+```
 class Num a where
   (+) :: a -> a -> a
   (*) :: a -> a -> a
@@ -160,7 +160,7 @@ class Num a where
 And here is how we might split it:
 
 
-```wiki
+```
 class Additive a where
   add :: a -> a -> a
 class Multiplicative a where
