@@ -226,7 +226,7 @@ deserialize plausibly represents the type `a` that the user requests.
 
 
 
-Instead, let's first consider `TypeRepX`,
+Instead, let's first consider `TypeRepX` (thanks to Adam Gundry for his guidance),
 
 
 ```
