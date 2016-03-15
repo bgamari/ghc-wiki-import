@@ -125,6 +125,14 @@ Examples:
   type family F a where ...            -- No CUSK (neither arg nor result annotated)
 ```
 
+
+If a datatype has a CUSK and its kind has any unsolved metavariables after inference (possible with `-XTypeInType`), an error is reported.
+
+
+
+**Reasons for Update:** It's nice to be able to say `data X :: Proxy k -> *` and get inference to be able to deduce that you mean `X :: forall j (k :: j). Proxy k -> *`. Of course, this is possible only with `-XTypeInType`, so we make it a tad harder to specify a CUSK. Ideally, we'll one day move to a separate `type X :: <X's kind>` syntax that will obviate this delicate syntactic definition.
+
+
 ## A possible variation
 
 
