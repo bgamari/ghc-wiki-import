@@ -11,19 +11,19 @@ A reflection on types](http://research.microsoft.com/en-us/um/people/simonpj/pap
 
 
 
-## `GHC.Reflection`
+## `Type.Reflection`
 
 
 
 The new type-indexed typeable machinery will be exposed via a new module
-(`GHC.Reflection` is chosen here, although this name is still up in the air;
+(`Type.Reflection` is chosen here, although this name is still up in the air;
 `Reflection` in particular has an unfortunate conflict with Edward Kmett's `reflection`
 library). The user-visible interface of `GHC.Reflection` will look like this,
 
 
 ```
 -- The user-facing interface
-module GHC.Reflection where
+module Type.Reflection where
 
 class Typeable (a :: k)
 
