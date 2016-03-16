@@ -318,7 +318,7 @@ so ultimately you should be able to accomplish everything you can with type-inde
 
 
 
-`Dynamic` doesn't really change,
+`Dynamic` is largely unchanged although it would be best to drop the re-export of `Data.Typeable`,
 
 
 ```
