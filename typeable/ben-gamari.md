@@ -465,11 +465,11 @@ data TypeRep (a :: k) where
             -> TypeRep b
             -> TypeRep (a b)
 
-    TrArrow :: forall rep1 rep2 (a :: TYPE rep1) (b :: TYPE rep2).
+    TrArrow :: forall k1 k2.
                !Fingerprint
-            -> TypeRep a
-            -> TypeRep b
-            -> TypeRep (a -> b)
+            -> TypeRep k1
+            -> TypeRep k2
+            -> TypeRep ((->) :: k1 -> k2 -> *)
 
     TrTYPE  :: TypeRep TYPE
     TrType  :: TypeRep (TYPE 'PtrRepLifted)
@@ -479,6 +479,10 @@ data TypeRep (a :: k) where
 ```
 
 
+(although `TrArrow` won't quite work yet due to [\#11714](https://gitlab.staging.haskell.org/ghc/ghc/issues/11714))
+
+
+
 With this we can easily write `typeRepKind`,
 
 
@@ -486,13 +490,11 @@ With this we can easily write `typeRepKind`,
 typeRepKind :: forall k (a :: k). TypeRep a -> TypeRep k
 -- these cases are unchanged...
 typeRepKind (TrTyCon _ _ k) = k
-typeRepKind (TrApp _ f _)   =
-    case typeRepKind f of
-        TRFun _arg res -> res
+typeRepKind (TrApp _ f _)   = case typeRepKind f of TRFun _arg res -> res
 
 -- these are new...
-typeRepKind (TrArrow _ _)   = mkTrArrow (mkTrArrow TrRuntimeRep
-typeRepKind TrTYPE          = mkTrArrow TrRuntimeRep TrType
+typeRepKind (TrArrow x y)   = mkTrApp (mkTrApp (TrArrow TrType TrType) x) y
+typeRepKind TrTYPE          = mkTrApp TrRuntimeRep TrType
 typeRepKind TrType          = TrType
 typeRepKind TrRuntimeRep    = TrType
 typeRepKind Tr'PtrRepLifted = TrRuntimeRep
@@ -517,7 +519,7 @@ data AppResult (t :: k) where
 splitApp :: TypeRep a -> Maybe (AppResult a)
 splitApp (TrTyCon _ _ _) = Nothing
 splitApp (TrApp _ f x)   = Just $ App f x
-splitApp (TrArrow _ f x) = Just $ App (mkTrApp TrArrow f) x
+splitApp (TrArrow _ x y) = Just $ App (mkTrApp (TrArrow (typeRepKind x) (typeRepKind y)) x) y
 splitApp TrTYPE          = Nothing
 splitApp TrType          = Just $ App TrTYPE Tr'PtrRepLifted
 splitApp TrRuntimeRep    = Nothing
