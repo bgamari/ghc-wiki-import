@@ -289,7 +289,7 @@ getTypeRep = do
        Nothing    -> fail "Binary: Type mismatch"
 ```
 
-### Through static data?
+### Alternative: Through static data?
 
 
 
@@ -300,7 +300,7 @@ this is unrealistic: we have no way of enumerating the types that must
 be considered and even if we did, there would be very many of them.
 
 
-## Type-indexed `TyCon`s
+## Alternative: Type-indexed `TyCon`s?
 
 
 
@@ -453,7 +453,7 @@ Instead, the implementation manually defines representations for these types in
 `Data.Typeable.Internal` and using these definitions instead of generated bindings.
 
 
-### An alternative
+### Alternative: Richer `TypeRep`
 
 
 
