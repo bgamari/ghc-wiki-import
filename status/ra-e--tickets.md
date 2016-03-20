@@ -45,6 +45,7 @@
 - [\#10581](https://gitlab.staging.haskell.org/ghc/ghc/issues/10581): Recommend ScopedTypeVariables
 - [\#10836](https://gitlab.staging.haskell.org/ghc/ghc/issues/10836): Continue reporting errors between mut. rec. groups
 - [\#11113](https://gitlab.staging.haskell.org/ghc/ghc/issues/11113): Semantics for type-level reduction
+- [\#11339](https://gitlab.staging.haskell.org/ghc/ghc/issues/11339): Why do pattern bindings always infer types?
 - [\#11715](https://gitlab.staging.haskell.org/ghc/ghc/issues/11715): `Constraint` vs `*`
 
 
