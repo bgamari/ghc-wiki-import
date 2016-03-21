@@ -6,7 +6,7 @@ This page is the main root page for a re-design of the `Typeable` class, to make
 
 
 
-The main ticket for tracking progress is [\#11011](https://gitlab.staging.haskell.org/ghc/ghc/issues/11011).
+The main ticket for tracking progress is [\#11011](https://gitlab.staging.haskell.org/ghc/ghc/issues/11011). There is currently an active implementation effort which is being documented at [Typeable/BenGamari](typeable/ben-gamari)
 
 
 
