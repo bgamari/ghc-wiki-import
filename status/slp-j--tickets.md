@@ -47,7 +47,7 @@ Refactoring/optimisation
 
 
 - [\#11739](https://gitlab.staging.haskell.org/ghc/ghc/issues/11739): coercion axioms applied to types, not coercions
-- [\#11735](https://gitlab.staging.haskell.org/ghc/ghc/issues/11735): `coercionKind`
+- [\#11735](https://gitlab.staging.haskell.org/ghc/ghc/issues/11735), [\#11598](https://gitlab.staging.haskell.org/ghc/ghc/issues/11598): `coercionKind`
 - [\#11196](https://gitlab.staging.haskell.org/ghc/ghc/issues/11196): resurrect `FunTy`
 - Make `CoVar` a proper `Var`
 
