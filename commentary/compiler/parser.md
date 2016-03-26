@@ -52,7 +52,7 @@ There are plenty more examples.  A good feature of this approach is that the err
 
 
 
-The main point is this.  If you are changing the parser, feel free to make it accept more programs than it does at the moment, provided you also add a later test that rejects the bad programs.  Typically you need this flexibility if some new thing you want to add makes the pars ambiguous, and you need more context to disambiguate.  Delicate hacking of the LR grammar is to be discouraged.  It's very hard to maintain and debug.
+The main point is this.  If you are changing the parser, feel free to make it accept more programs than it does at the moment, provided you also add a later test that rejects the bad programs.  Typically you need this flexibility if some new thing you want to add makes the parse ambiguous, and you need more context to disambiguate.  Delicate hacking of the LR grammar is to be discouraged.  It's very hard to maintain and debug.
 
 
 ## Avoiding right-recursion
