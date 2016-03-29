@@ -27,6 +27,8 @@ Tickets with example of code that would benefit from nested CPR:
 
 
 - [\#1600](https://gitlab.staging.haskell.org/ghc/ghc/issues/1600), [\#2289](https://gitlab.staging.haskell.org/ghc/ghc/issues/2289), [\#2387](https://gitlab.staging.haskell.org/ghc/ghc/issues/2387) (see [below](nested-cpr#motivating-examples) for an analysis)
+- (Maybe) [
+  this thread on ghc-devs](https://mail.haskell.org/pipermail/ghc-devs/2016-March/011623.html)
 
 ### Related testcases
 
