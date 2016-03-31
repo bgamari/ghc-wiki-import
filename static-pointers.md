@@ -348,7 +348,7 @@ For now, I propose to deal with type classes via the Dict Trick, which is entire
 
 
 
-The static form so far required expressions whose free variables appear bound at the top level. But this is stricter than necessary. Closed local definitions can be considered static as well.
+See Trac [\#11656](https://gitlab.staging.haskell.org/ghc/ghc/issues/11656).  The static form so far required expressions whose free variables appear bound at the top level. But this is stricter than necessary. Closed local definitions can be considered static as well.
 
 
 
