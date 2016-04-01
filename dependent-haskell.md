@@ -299,7 +299,7 @@ Parsing is a bit of a nightmare for this new language and will require some comp
 
 >
 >
-> **UPDATE:** In a conversation with the denizen's of UPenn's Levine 513, I came up with a nice, clean way to have our cake and eat it too. It all hinges upon the fact that the parser can't currently figure out fixities of operators. While the actual implementation may differ in the details, the parser has to treat `foo bar !# baz %% bum bimini` as just a list of tokens. Only after we rename are the operators resolved to entities with known fixities.
+> **UPDATE:** In a conversation with the denizens of UPenn's Levine 513, I came up with a nice, clean way to have our cake and eat it too. It all hinges upon the fact that the parser can't currently figure out fixities of operators. While the actual implementation may differ in the details, the parser has to treat `foo bar !# baz %% bum bimini` as just a list of tokens. Only after we rename are the operators resolved to entities with known fixities.
 >
 >
 
