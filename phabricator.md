@@ -144,7 +144,7 @@ which submits the HEAD commit to Phabricator. `arc` will then respond with the r
 
 
 
-**NOTE**:  The above assumes you only want to send one commit to start with, which is the current tip of your branch. If you want to send multiple commits at once when you create a revision, simply specify the 'base' commit instead of `HEAD~". `HEAD\~` means "the commit before HEAD", so arcanist generates a diff between "HEAD" and "the commit before HEAD". Those commits can be seen with `git log` by running `git log \<base\>..HEAD` where `\<base\>` is the chosen commit. Simply make sure `git log \<base\>..HEAD` has all the commits you want, and run `arc diff \<base\>\`.
+**NOTE**:  The above assumes you only want to send one commit to start with, which is the current tip of your branch. If you want to send multiple commits at once when you create a revision, simply specify the 'base' commit instead of `HEAD~`. `HEAD~` means "the commit before HEAD", so arcanist generates a diff between "HEAD" and "the commit before HEAD". Those commits can be seen with `git log` by running `git log <base>..HEAD` where `<base>` is the chosen commit. Simply make sure `git log <base>..HEAD` has all the commits you want, and run `arc diff <base>`.
 
 
 
