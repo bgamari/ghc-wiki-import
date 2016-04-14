@@ -10,7 +10,7 @@ There are a few projects using quasiquotes to interface with other languages. At
 
 
 
-A common pattern in this libraries is to collect the content of all quasiquotes that appear in a module, generate a foreign source file based on them, and then link the object code resulting from compiling it.
+A common pattern in these libraries is to collect the content of all quasiquotes that appear in a module, generate a foreign source file based on them, and then link the object code resulting from compiling it.
 
 
 
