@@ -24,7 +24,8 @@ Help/Guide](https://ghc.haskell.org/trac/ghc/wiki/TracGuide) link at the top of 
 
 - Forthcoming planned releases:
 
-  - 8.0.1 (5 open tickets with priority high or highest) 
+  - 8.0.1 (2033 (Ticket query: priority: high, or: , priority: highest, max: 0,
+    order: id) open tickets with priority high or highest) 
 
 - Total open tickets: 1766 (1028 bugs, 566 feature requests, 172 tasks) 
 
