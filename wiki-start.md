@@ -24,8 +24,8 @@ Help/Guide](https://ghc.haskell.org/trac/ghc/wiki/TracGuide) link at the top of 
 
 - Forthcoming planned releases:
 
-  - 8.0.1 (0 (Ticket query: status: open, priority: high, priority: highest,
-    milestone: 8.0.1, max: 0,
+  - [8.0.1](status/gh-c-8.0.1) (0 (Ticket query: status: open, priority: high,
+    priority: highest, milestone: 8.0.1, max: 0,
     order: id) open tickets with priority high or highest) 
 
 - Total open tickets: 3143 (Ticket query: status: !closed, max: 0,
