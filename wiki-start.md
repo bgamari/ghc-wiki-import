@@ -35,7 +35,8 @@ Help/Guide](https://ghc.haskell.org/trac/ghc/wiki/TracGuide) link at the top of 
   type: task, max: 0, order: id) tasks) 
 
 - [ Harbormaster](https://phabricator.haskell.org/diffusion/GHC/history/), the [
-  nightly build bots](http://haskell.inf.elte.hu/builders/) and Travis [](https://travis-ci.org/ghc/ghc.svg) are keeping an eye on our code. See the [Status page](status) for more information. 
+  nightly build bots](http://haskell.inf.elte.hu/builders/) and [
+  Travis](http://travis-ci.org/ghc) [](https://travis-ci.org/ghc/ghc.svg) are keeping an eye on our code. See the [Status page](status) for more information. 
 
 ## Notices
 
