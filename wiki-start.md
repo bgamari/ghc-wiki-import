@@ -34,8 +34,6 @@ Help/Guide](https://ghc.haskell.org/trac/ghc/wiki/TracGuide) link at the top of 
   max: 0, order: id) feature requests, 344 (Ticket query: status: !closed,
   type: task, max: 0, order: id) tasks) 
 
-- The May 2015 Status Report. 
-
 - [ Harbormaster](https://phabricator.haskell.org/diffusion/GHC/history/), the [
   nightly build bots](http://haskell.inf.elte.hu/builders/) and Travis [](https://travis-ci.org/ghc/ghc.svg) are keeping an eye on our code. See the [Status page](status) for more information. 
 
