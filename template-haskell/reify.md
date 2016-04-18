@@ -1,4 +1,4 @@
-# A better Reify
+# Making reify useful for typed foreign language bindings generators
 
 
 
@@ -105,22 +105,30 @@ because by the time the TH finalizer runs, we're no longer in the scope of `x`.
 Can we do anything to improve these use cases of `reify`?
 
 
-## Some approaches
+## Proposals
 
 
-1. Have `addModFinalizer` capture the local typing environment at the call site, and run the finalizer on it when type checking completes.
-1. Have a new function `addGroupFinalizer` like `addModFinalizer`, which should also capture the local typing environment, and that will run the finalizer on it when typechecking of the current declaration group completes. 
-1. Allow `reify` to observe out of scope local variables provided that their names are unique within the module.
+1. Have `addModFinalizer` capture the local typing environment at the call site, and run the finalizer on it when type checking completes. Or,
+1. Have a new function `addGroupFinalizer` like `addModFinalizer`, which should also capture the local typing environment, and that will run the finalizer on it when typechecking of the current declaration group completes. Or,
+1. Allow `reify` to observe out-of-scope local variables provided that their names are unique within the module. Or,
+1. Introduce *typed* quasiquotes, since a quasiquote is syntactic sugar for a splice and typed splices run in the type checker (hence reify has access to the type environment and can therefore return the type of locally defined variables).
 
 
-(1) and (2) are easy to implement for typed splices, which run in the typechecker. Unfortunately, untyped splices run in the renamer, the local typing environment is not yet populated, and thus it cannot be captured. We could either compromise to implement `addGroupFinalizer` in typed splices only, or we would need to overcome this obstacle with a more involved implementation.
+(1) and (2) are easy to implement for typed splices, which run in the typechecker. Unfortunately, untyped splices run in the renamer, the local typing environment is not yet populated, and thus it cannot be captured. If we implement `addGroupFinalizer` in typed splices only, then we still need (4), because currently quasiquotes are syntactic sugar for untyped splices, not typed ones.
 
 
 
-Someone more informed could comment on (3).
+The problem with (4) is that running splices in an incompletely determined typing environment is a bad idea: as [TemplateHaskell/BlogPostChanges](template-haskell/blog-post-changes) argues, the result of `reify` is unstable in the face of changes to the type checker. If (4) was restricted somehow, e.g. to only allow reification of variables outside of the current declaration group, then it would make typed quasiquotes useless for the purposes of this particular use case.
 
 
-### Implementing `addGroupFinalizer` in untyped splices
+
+So that leaves us with the following options:
+
+
+1. Somehow provide `addModFinalizer/addGroupFinalizer` with the local type environment of the call site.
+1. Implement option (3).
+
+### Design proposal for implementing `addGroupFinalizer` in untyped splices
 
 
 
