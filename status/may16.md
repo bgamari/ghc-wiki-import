@@ -33,7 +33,7 @@ As usual, GHC development churns onward - and **GHC 8.0 is right around the corn
 
 - **Support for DWARF based stacktraces** \[DWARF\]. from Peter Wortmann, Arash Rouhani, and Ben Gamari with backtraces from Haskell code.
 
-# Upcoming post-8.0 plans
+# Upcoming plans for GHC 8.2
 
 
 
