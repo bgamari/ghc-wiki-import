@@ -149,13 +149,6 @@ A proposal:
 >
 >
 
->
->
-> **FD** The problem with using `HsSplice` would be that it is removed when the renamer executes the splice and we need it to reach the typechecker. The only alternative I see is to extend the HsExpr type with another constructor instead.
-> **End FD**
->
->
-
 
   
 
