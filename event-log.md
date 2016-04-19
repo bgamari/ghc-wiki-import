@@ -38,6 +38,13 @@ The format of the log file is described by the header EventLogFormat.h that come
 ghc-events](http://hackage.haskell.org/package/ghc-events) library. To dump the contents of a .eventlog file as text, use the tool show-ghc-events that comes with the ghc-events package.
 
 
+## Limitations
+
+
+
+Event logging can produce significant "observer effects". In particular, programs can pause for periods of several milliseconds while writing to the `.eventlog` file. These display in Threadscope as periods of 100% CPU use with no obvious cause. This effect is exacerbated by heavy use of debug tools which expand the eventlog file, such as `Trace.traceMarkerIO`. (This effect was at least seen on OS X. These periods were shown to be due to writing the `.eventlog` file by using `dtruss -a`, which shows long periods of `write_nocancel` syscalls, writing to the `.eventlog` file opened earlier with `open_nocancel`.)
+
+
 ## Design
 
 
