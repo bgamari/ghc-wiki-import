@@ -11,7 +11,7 @@ GHC development churns onward - and **GHC 8.0 is right around the corner**! The 
 - **Support for simple, implicit callstacks with source locations** \[ImplicitCallstacks\] implicit parameters providing callstacks/source locations\], allowing you to have a light-weight means of getting a call-stack in a Haskell application. ([
   Phab:D861](https://phabricator.haskell.org/D861))
 
-- **Injective type families** (\[[InjectiveTypeFamilies](injective-type-families)\|Wiki\], [
+- **Injective type families** ([Wiki](injective-type-families), [
   http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/injective-type-families-acm.pdf\|paper](http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/injective-type-families-acm.pdf|paper)). Allows the expression of one-to-one type-level functions .
 
 - **Applicative do notation** \[[ApplicativeDo](applicative-do)\]. With the new `-XApplicativeDo`, GHC tries to desugar `do`-notation to `Applicative` where possible, giving a more convenient sugar for many common `Applicative` expressions. ([
@@ -27,7 +27,7 @@ GHC development churns onward - and **GHC 8.0 is right around the corner**! The 
 - **Record system enhancements** \[[OverloadedRecordFields](overloaded-record-fields)\]. At long last, `OverloadedRecordFields` will finally be available in GHC 8.0, allowing multiple uses of the same field name and a form of type-directed name resolution.
 
 - A huge improvement to **pattern match checking** (including much better coverage of GADTs), based on the work of Simon PJ and Georgios Karachalias. For more details, see [
-  their paper](http://research.microsoft.com/en-us/um/people/simonpj/papers/pattern-matching/gadtpm.pdf).
+  http://research.microsoft.com/en-us/um/people/simonpj/papers/pattern-matching/gadtpm.pdf their paper](http://research.microsoft.com/en-us/um/people/simonpj/papers/pattern-matching/gadtpm.pdf their paper).
 
 - **Custom type errors** \[CustomTypeErrors\], allowing library authors to offer more descriptive error messages than those offered by GHC.
 
@@ -44,8 +44,8 @@ GHC development churns onward - and **GHC 8.0 is right around the corner**! The 
 
 - Significant improvements in cross-platform support, including a variety of fixes to **Windows linker support** ([
   Phab:D1696](https://phabricator.haskell.org/D1696), [
-  Phab:D1805](https://phabricator.haskell.org/D1805)), great improvements in reliability on ARM ([\#11206](https://gitlab.staging.haskell.org/ghc/ghc/issues/11206)), revived unregisterised \[[
-  support](https://trofi.github.io/posts/191-ghc-on-m68k.html|m68k), and new support for AIX targets (Herbert)
+  Phab:D1805](https://phabricator.haskell.org/D1805)), great improvements in reliability on ARM ([\#11206](https://gitlab.staging.haskell.org/ghc/ghc/issues/11206)), revived unregisterised [
+  m68k support](https://trofi.github.io/posts/191-ghc-on-m68k.html), and new support for AIX targets (Herbert)
 
 # Upcoming plans for GHC 8.2
 
@@ -66,8 +66,8 @@ Of course, GHC only evolves because of its contributors. Please let us know if y
 >
 >
 > GHC 8.2 will address this by introducing indexed type representations, leveraging the type-checker to verify programs using type reflection. This allows facilities like `Data.Dynamic` to be implemented in a fully type-safe manner. See the [
-> http://research.microsoft.com/en-us/um/people/simonpj/papers/haskell-dynamic/\|paper](http://research.microsoft.com/en-us/um/people/simonpj/papers/haskell-dynamic/|paper) for an description of the proposal and the [
-> https://ghc.haskell.org/trac/ghc/wiki/Typeable/BenGamari\|Wiki](https://ghc.haskell.org/trac/ghc/wiki/Typeable/BenGamari|Wiki) for the current status of the implementation.
+> paper](http://research.microsoft.com/en-us/um/people/simonpj/papers/haskell-dynamic/) for an description of the proposal and the [
+> Wiki](https://ghc.haskell.org/trac/ghc/wiki/Typeable/BenGamari) for the current status of the implementation.
 >
 >
 
@@ -105,7 +105,7 @@ Of course, GHC only evolves because of its contributors. Please let us know if y
 
 
 - New shake build system is Really Finally Going to get merged? (Andrey)
-- The \[ImprovedLLVMBackend\|improved LLVM backend plan\] plan didn't make the cut for 8.0, but will for 8.2 (Austin Seipp)
+- The [improved LLVM backend plan](improved-llvm-backend) plan didn't make the cut for 8.0, but will for 8.2 (Austin Seipp)
 - `ghc-pkg` is learning some new tricks, RE: environment files and Cabal changes. (Austin/Duncan?)
 - 
 
@@ -113,12 +113,27 @@ Of course, GHC only evolves because of its contributors. Please let us know if y
 
 
 
-2015 has been a remarkable year for GHC development. Over the course of the year the GHC repository gained nearly 2500 commits by over one hundred authors.
+2015 has been a remarkable year for GHC development. Over the last twelve months the GHC repository gained nearly 2500 commits by over one hundred authors. At the time of writing alone alone there is over a dozen open and actively updated differentials on Phabricator. It seems fair to say that GHC's development community is stronger than ever.
 
 
 
-Insert incredible levels of praise and adoration for contributors like Thomas, Tamar, Ömer, etc, and
-lots of our newer regular contributors like Ryan, Michael Sloan, etc.
+We have been very lucky to have Thomas Miedema, who has devoted countless hours triaging bugs, cleaning up the build system, advising new contributors, and helping out in a multitude of ways which often go un-noticed. We all have benefitted immensely from Thomas' hard work; thanks Thomas!
+
+
+
+Herbert Valerio Riedel has also been as act
+
+
+
+On the Windows front, Tamar Christina has been doing amazing work cleaning up the many nooks that have gone unattended until now. His work on the runtime linker should mean that GHC 8.0 will be considerably more reliable when linking against many Windows libraries.
+
+
+
+The past year has brought a number of new contributors: Ryan Scott and Michael Sloan have picked up various generics and Template Haskell projects, Andrew Farmer has contributed a number of fixes to the cost-centre profiler, and Bartosz Nikita has made numerous contributions improving compiler determinism. We also also saw the beginnings of some very interesting work from Ömer Sinan Ağacan, who is looking at teaching GHC to unpack sum types.
+
+
+
+Insert incredible levels of praise and adoration for contributors like Thomas, Tamar, Ömer, etc, and lots of our newer regular contributors like Ryan, Michael Sloan, etc.
 
 
 # References
