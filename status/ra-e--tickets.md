@@ -17,6 +17,7 @@
 - [\#10756](https://gitlab.staging.haskell.org/ghc/ghc/issues/10756): Impossible patterns
 - [\#10789](https://gitlab.staging.haskell.org/ghc/ghc/issues/10789): Warn about type families stuck on kinds
 - [\#11620](https://gitlab.staging.haskell.org/ghc/ghc/issues/11620): Kind signatures on classes. But with what syntax?
+- [\#11977](https://gitlab.staging.haskell.org/ghc/ghc/issues/11977): Function as pattern return type
 
 
 **Medium**
