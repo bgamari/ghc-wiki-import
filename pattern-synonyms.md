@@ -791,6 +791,10 @@ Because of this, the eagerness of `f` and `g` differ:
 False
 ```
 
+
+This is because we generate the matching function at the definition site. 
+
+
 ## Typed pattern synonyms
 
 
