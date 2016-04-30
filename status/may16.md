@@ -110,7 +110,11 @@ Of course, GHC only evolves because of its contributors. Please let us know if y
 >
 >
 
-- TODO What else?
+- Support for NUMA systems (Simon Marlow, ([
+  in-progress](https://github.com/simonmar/ghc/tree/numa)).  The aim is to reduce the number of remote memory accesses for multi-socket systems that have a mixture of local and remote memory.
+
+- Experimental changes to the scheduler (Simon Marlow, [
+  in progress](https://github.com/simonmar/ghc/commit/7e05ec18b4eda8d97e37015d415e627353de6b50)) that enable the number of threads used for GC to be lower than the `-N` setting.
 
 ## Frontend, build system and miscellaneous changes
 
