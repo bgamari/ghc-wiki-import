@@ -12,11 +12,11 @@ GHC development churns onward - and **GHC 8.0 is right around the corner**! The 
   Phab:D861](https://phabricator.haskell.org/D861))
 
 - **Injective type families** ([Wiki](injective-type-families), [
-  http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/injective-type-families-acm.pdf\|paper](http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/injective-type-families-acm.pdf|paper)). Allows to annotate type families with injectivity information. Correctness of injectivity annotation is then verified by the compiler. Once compiler knows the annotation is correct it can us injectivity information during type checking.
+  paper](http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/injective-type-families-acm.pdf)). Allows to annotate type families with injectivity information. Correctness of injectivity annotation is then verified by the compiler. Once compiler knows the annotation is correct it can us injectivity information during type checking.
 
-- **Applicative do notation** \[[ApplicativeDo](applicative-do)\]. With the new `-XApplicativeDo`, GHC tries to desugar `do`-notation to `Applicative` where possible, giving a more convenient sugar for many common `Applicative` expressions. ([
-  Phab:D729](https://phabricator.haskell.org/D729)) (draft paper: [
-  http://research.microsoft.com/en-us/um/people/simonpj/papers/list-comp/applicativedo.pdf](http://research.microsoft.com/en-us/um/people/simonpj/papers/list-comp/applicativedo.pdf))
+- **Applicative do notation** ([ApplicativeDo](applicative-do), [
+  Phab:D729](https://phabricator.haskell.org/D729)). With the new `-XApplicativeDo`, GHC tries to desugar `do`-notation to `Applicative` where possible, giving a more convenient sugar for many common `Applicative` expressions. See the [
+  draft paper](http://research.microsoft.com/en-us/um/people/simonpj/papers/list-comp/applicativedo.pdf) for details.
 
 - **A beautiful new users guide**. Now rewritten in reStructured Text, and with significantly improved output and documentation.
 
