@@ -32,11 +32,11 @@ GHC uses Git for revision control (version 1.7.8 or newer recommended).
 
 
 
-On Unix-like systems (Linux, OS X), a complete GHC source tree can be obtained (located in `ghc`) by saying:
+A complete GHC source tree can be obtained (located in `ghc`) by running the following command:
 
 
-```wiki
-$ git clone --recursive git://git.haskell.org/ghc.git
+```
+git clone --recursive git://git.haskell.org/ghc.git
 ```
 
 
@@ -72,17 +72,17 @@ To get a branch, you need to get from a repo that contains the branch; in partic
 You can clone a specific branch via:
 
 
-```wiki
-  $ git clone -b <branchname> --recursive git://git.haskell.org/ghc.git ghc-<branchname>
+```
+git clone -b <branchname> --recursive git://git.haskell.org/ghc.git ghc-<branchname>
 ```
 
 
 and switch between branches on an existing clone by
 
 
-```wiki
-  $ git checkout <other-branchname>
-  $ git submodule update --init
+```
+git checkout <other-branchname>
+git submodule update --init
 ```
 
 
@@ -96,9 +96,9 @@ and switch between branches on an existing clone by
 Starting with GHC 7.10.1, you can simply clone a specific tag via:
 
 
-
-`git clone -b ghc-7.10.1-release --recursive git://git.haskell.org/ghc.git ghc-7.10.1`
-
+```
+git clone -b ghc-7.10.1-release --recursive git://git.haskell.org/ghc.git ghc-7.10.1
+```
 
 
 For 7.8 or earlier, follow the [legacy](building/getting-the-sources/legacy) instructions.
