@@ -90,8 +90,8 @@ Of course, GHC only evolves because of its contributors. Please let us know if y
 
 
 - Compact regions (Giovanni Campagna, Edward Yang, [
-  Phab:D1264](https://phabricator.haskell.org/D1264)): [
-  paper](http://ezyang.com/papers/ezyang15-cnf.pdf)
+  Phab:D1264](https://phabricator.haskell.org/D1264), [
+  paper](http://ezyang.com/papers/ezyang15-cnf.pdf)). This runtime system feature allows a referentially "closed" set of heap objects to be collected into a "compact region", allowing cheaper garbage collection, heap-object sharing between processes, and the possibility of inexpensive serialization.
 
 - Refactoring and improvements to the cost-center profiler (Ben Gamari, [
   Phab:D1722](https://phabricator.haskell.org/D1722)): Allow heap profiler samples to be directed to the GHC eventlog, allowing correlation with other program events, enabling easier analysis by tooling and eventual removal of the old, rather crufty `.hp` profile format. 
@@ -141,7 +141,7 @@ The past year has brought a number of new contributors: Ryan Scott and Michael S
 
 
 
-In recent years the growth in the Haskell community has required that better develop our infrastructure for change management. This has lead to the formation of the Core Libraries Committee, which is now in its third year of existence. As such, we are now beginning to see some of the committee's efforts come to fruition. With GHC 8.0 progress was made on all three currently active proposals:
+In recent years the growth of the Haskell community has required that we better develop our infrastructure for change management. This lead to the formation of the Core Libraries Committee, which is now in its third year. As such, we are now beginning to see some of the committee's efforts come to fruition. With GHC 8.0 progress was made on all three active proposals:
 
 
 - `Semigroup`-`Monoid` proposal: the `Data.Semigroup` module is now available in `base` and there are now opt-in warnings for missing `Semigroup` instances in preparation for the eventual addition of `Semigroup` as a superclass of `Monoid`
@@ -155,6 +155,10 @@ In recent years the growth in the Haskell community has required that better dev
 - `ExpandFloating` proposal: `expm1`, `log1p`, `log1pexp`, `log1mexp` have been added to the `Floating` class with defaults
 
 
+We are also excited to see the revitalization of the Haskell Prime process with the formation of the Haskell 2020 committee. This committee will attempt to formalize some of the better-understood GHC language extensions and introduce them into the language standard. We look forward to watching this process progress.
+
+
+
 Of course, GHC has also benefited from countless more contributors who we don't have room to acknowledge here. We'd like to thank everyone who has contributed patches, bug reports, code reviews, and discussion to the GHC community over the last year. GHC only improves through your efforts!
 
 
@@ -163,5 +167,6 @@ Of course, GHC has also benefited from countless more contributors who we don't 
 
 
 Insert many links pointing deeply into the web, so you can read even more.
+e
 
 
