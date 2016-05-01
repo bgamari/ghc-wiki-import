@@ -105,7 +105,7 @@ Of course, GHC only evolves because of its contributors. Please let us know if y
 >
 >
 
-- Support for NUMA systems (Simon Marlow, ([
+- Support for NUMA systems (Simon Marlow, [
   in-progress](https://github.com/simonmar/ghc/tree/numa)).  The aim is to reduce the number of remote memory accesses for multi-socket systems that have a mixture of local and remote memory.
 
 - Experimental changes to the scheduler (Simon Marlow, [
