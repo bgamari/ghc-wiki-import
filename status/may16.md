@@ -1,5 +1,4 @@
-
-tracwiki= GHC Status Report, May 2016 =
+# GHC Status Report, May 2016
 
 
 
@@ -118,7 +117,7 @@ Of course, GHC only evolves because of its contributors. Please let us know if y
 - New Shake-based build system, `hadrian`, will be merged.  (Andrey Mokhov)
 - The [improved LLVM backend plan](improved-llvm-backend) plan didn't make the cut for 8.0, but will for 8.2 (Austin Seipp)
 
-# Development updates and "Thank You"s
+# Development updates and acknowledgments
 
 
 
@@ -126,7 +125,7 @@ Of course, GHC only evolves because of its contributors. Please let us know if y
 
 
 
-We have been very lucky to have Thomas Miedema, who has devoted countless hours triaging bugs, cleaning up the build system, advising new contributors, and generally helping out in a multitude of ways which often go un-noticed. We all have benefitted immensely from Thomas' hard work and generosity; thanks Thomas!
+We have been very lucky to have Thomas Miedema, who has devoted countless hours triaging bugs, cleaning up the build system, advising new contributors, and generally helping out in a multitude of ways which often go un-noticed. We all have benefited immensely from Thomas' hard work and generosity; thanks Thomas!
 
 
 
@@ -156,7 +155,7 @@ In recent years the growth in the Haskell community has required that better dev
 - `ExpandFloating` proposal: `expm1`, `log1p`, `log1pexp`, `log1mexp` have been added to the `Floating` class with defaults
 
 
-Of course, GHC has also benefitted from countless more contributors who we don't have room to acknowledge here. We'd like to thank everyone who has contributed patches, bug reports, code review, and discussion to the GHC community over the last year. GHC only evolves because of you!
+Of course, GHC has also benefited from countless more contributors who we don't have room to acknowledge here. We'd like to thank everyone who has contributed patches, bug reports, code reviews, and discussion to the GHC community over the last year. GHC only improves through your efforts!
 
 
 # References
