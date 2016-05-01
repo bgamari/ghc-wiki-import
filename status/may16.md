@@ -8,7 +8,7 @@ GHC development churns onward - and **GHC 8.0 is right around the corner**! The 
 # Major changes in GHC 8.0.1
 
 
-- **Support for simple, implicit callstacks with source locations** parameters providing callstacks/source locations?, allowing you to have a light-weight means of getting a call-stack in a Haskell application. ([
+- **Support for simple, implicit callstacks with source locations** [Implicit parameters providing callstacks/source locations](explicit-call-stack/implicit-locations), allowing you to have a light-weight means of getting a call-stack in a Haskell application. ([
   Phab:D861](https://phabricator.haskell.org/D861))
 
 - **Injective type families** ([Wiki](injective-type-families), [
