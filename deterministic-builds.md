@@ -180,6 +180,14 @@ It gets more complicated if you take into account that the interface files are l
 work for any subset of interface files present. When you add parallelism this makes Uniques hopelessly random.
 
 
+## Progress
+
+
+
+Current work is focused on making GHC independent of the order of Uniques. That means either removing the call sites of functions that introduce ordering based on Uniques or 
+when the end result is deterministic, documenting it and making sure it stays local. The main sources of non-determinism are: `Ord Unique`, `foldUFM`, `elemsUFM`, `ufmToList`, `keysUFM`.
+
+
 ## Testing
 
 
