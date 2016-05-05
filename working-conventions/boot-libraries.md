@@ -20,8 +20,8 @@ Maintaining a GHC [boot library](commentary/libraries) is generally quite simila
 
 
 
-For tagging the release in Git, [
-''annotated Git tags''](https://git-scm.com/docs/git-tag) shall be used. These are tags which contain a bit more metadata (e.g. creation date, tagger name, a tag message) than the "lightweight" tags created by `git tag` by default. To create a annotated tag use the `--annotate` (`-a`) flag, e.g.
+For tagging the release in Git, **[
+annotated Git tags](https://git-scm.com/docs/git-tag)** shall be used. These are tags which contain a bit more metadata (e.g. creation date, tagger name, a tag message) than the "lightweight" tags created by `git tag` by default. To create a annotated tag use the `--annotate` (`-a`) flag, e.g.
 
 
 ```wiki
