@@ -2,10 +2,10 @@
 
 
 
-Maintaining a GHC [boot library](commentary/libraries) is generally quite similar to any other (well-maintained) Haskell library. However, we do have a few specific requests,
+Maintaining a GHC [boot library](commentary/libraries) is generally quite similar to any other well-maintained Haskell library. However, we do have a few specific requests,
 
 
-- Follow the   [
+- Follow the [
   Package Versioning Policy](https://wiki.haskell.org/Package_versioning_policy)
 
 - Avoid non-fast-forward changes to tracked branches in the repository followed by GHC
@@ -20,7 +20,8 @@ Maintaining a GHC [boot library](commentary/libraries) is generally quite simila
 
 
 
-For tagging the release in Git, 'annotated Git tags'? shall be used. These are tags which contain a bit more metadata (e.g. creation date, tagger name, a tag message) than the "lightweight" tags created by `git tag` by default. To create a annotated tag use the `--annotate` (`-a`) flag, e.g.
+For tagging the release in Git, [
+''annotated Git tags''](https://git-scm.com/docs/git-tag) shall be used. These are tags which contain a bit more metadata (e.g. creation date, tagger name, a tag message) than the "lightweight" tags created by `git tag` by default. To create a annotated tag use the `--annotate` (`-a`) flag, e.g.
 
 
 ```wiki
