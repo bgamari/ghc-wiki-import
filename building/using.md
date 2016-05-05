@@ -329,7 +329,9 @@ Set to `YES` to enable profiling for GHC itself (stage 2).  You'll also need to 
 <td>
 (default: `NO`)
 
-Set to `YES` to pass `-debug` when building GHC (stage 1,2 and 3).
+Set to `YES` to pass `-debug` when building GHC (stage 1, 2 and 3).
+This links GHC (stage 1, 2 and 3) with the [debugging RTS](debugging/runtime-system).
+(It does not imply `GhcStage2HcOpts+=-DDEBUG`, see below for that)
 </td></tr></table>
 
 
@@ -603,8 +605,9 @@ fewer dependencies between modules, so much less stuff is recompiled
 after each modification.
 
 Also we turn on `-DDEBUG`, because that enables assertions and
-debugging code in the compiler itself.  Turning on DEBUG makes
-the compiler about 30% slower.
+debugging code in the compiler itself (Haskell source files only,
+use `GhcDebugged=YES` to link GHC with the debugging RTS, see above).
+Turning on DEBUG makes the compiler about 30% slower.
 </td></tr></table>
 
 
