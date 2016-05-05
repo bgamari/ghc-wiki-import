@@ -12,6 +12,10 @@ Maintaining a GHC [boot library](commentary/libraries) is generally quite simila
 
 - Use annotated and signed tags for releases
 
+
+Beyond this the interactions with GHC should be fairly minimal: we'll ask you before a release what version of your library you'd like for us to include (or request that you push a new release if necessary). It's of course appreciated if these requests are handled promptly as library issues can stall the release process.
+
+
 ## Git tags
 
 
