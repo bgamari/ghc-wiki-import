@@ -50,7 +50,7 @@ Below are the major highlights of 8.2.
 >
 
 - Backpack is targeting to be merged in GHC 8.2. More to come here. (Edward Z Yang)
-- Merge `Bifoldable` and `Bitraversable` into `base` (Edward Kmett, Ryan Scott)
+- Merge `Bifoldable` and `Bitraversable` into `base`, addressing [\#10448](https://gitlab.staging.haskell.org/ghc/ghc/issues/10448) (Edward Kmett, Ryan Scott)
 - Generalize the `deriving` algorithms for `Eq`, `Functor`, etc. to be able to derive the data types in `Data.Functor.Classes` (`Eq1`, `Eq2`, etc.), `Bifunctor`, `Bifoldable`, and `Bitraversable` (Ryan Scott)
 - Deriving strategies (Ryan Scott): grant users the ability to choose explicitly how a class should be `derived` (using a built-in algorithm, `GeneralizedNewtypeDeriving`, `DeriveAnyClass`, or otherwise), addressing [\#10598](https://gitlab.staging.haskell.org/ghc/ghc/issues/10598).
 - Exhaustiveness checking for `EmptyCase`s ([
