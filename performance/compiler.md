@@ -741,3 +741,8 @@ col: owner, order: owner)
 Random note: GHC 7.10's build system actually disabled DPH (half a dozen more packages and probably a hundred extra modules), yet things \*still\* got slower over time!
 
 
+## Interesting third-party library numbers
+
+
+- `megaparsec`'s compilation time on [
+  Travis](https://travis-ci.org/mrkkrp/megaparsec/builds/129353838) has gone from 6 minutes to 40 minutes from 7.6 to 8.0
