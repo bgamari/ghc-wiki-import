@@ -39,7 +39,7 @@ All these data types are implemented as a big record of information that tells y
 
 
 
-So you can see that the GHC data structures for entities is a *graph* not tree: everything points to everything else.  This makes it very convenient for the consumer, because there are accessor functions with simple types, such as `idType :: Id -> Type`.  But it means that there has to be some tricky almost-circular programming ("knot-tying") in the type checker, which constructs the entities.
+So you can see that the GHC data structures for entities is a *graph* not tree: everything points to everything else.  This makes it very convenient for the consumer, because there are accessor functions with simple types, such as `idType :: Id -> Type`.  But it means that there has to be some tricky almost-circular programming ("knot-tying") in the type checker, which constructs the entities. See [tying the knot](commentary/compiler/tying-the-knot) for more details on this process.
 
 
 ## Type variables and term variables
