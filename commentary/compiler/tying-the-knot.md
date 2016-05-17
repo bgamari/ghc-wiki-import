@@ -119,7 +119,7 @@ The net effect is that at the point when we `loadDecls` the declarations, we hav
 
 
 
-**Variation: tying the knot when typechecking mutually recursive interfaces.** Sometimes, recursive declarations can be spread out across several `hi` files (due to an `hs-boot` loop). In this case, laziness plays a similar role; however, instead of consulting per-interface mutable variable, the typechecking process consults the EPS (in the case of `ghc -c`) or the HPT (in the case of `ghc --make`).  As before, laziness plays a critical role: we first add thunks representing all of the declarations to the EPS without doing any interface typechecking; then when we force the thunk the names can be found by doing the lookup.
+**Variation: tying the knot when typechecking mutually recursive interfaces.** Sometimes, recursive declarations can be spread out across several `hi` files (due to an `hs-boot` loop). In this case, laziness plays a similar role; however, instead of consulting per-interface mutable variable, the typechecking process consults the External Package State (EPS) (in the case of `ghc -c`) or the [Home Package Table (HPT)](commentary/compiler/driver) (in the case of `ghc --make`).  As before, laziness plays a critical role: we first add thunks representing all of the declarations to the EPS without doing any interface typechecking; then when we force the thunk the names can be found by doing the lookup.
 
 
 
