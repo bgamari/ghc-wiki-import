@@ -68,6 +68,6 @@ In `Type`, the type constructor application contains the full `TyCon` which cont
 
 
 
-**Converting from interface to graph representation.** 
+**Converting from interface to graph representation.** This process is referred to as *typechecking the interface* (in `TcIface`).  Unlike the conversion to interface format, which is essentially pure, conversion from the interface format involves some global state: the existing graph of type checking entities which we are going to resolve `Name` references to. Generally speaking, there is a \*unique\* such graph, such that every `Name` maps to a unique `TyThing` in the graph, spanning over all of the typechecked entities GHC could possibly know about. In the common case, the only reason we typecheck an interface is to (lazily) load its entities into this global map.
 
 
