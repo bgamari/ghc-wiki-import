@@ -134,7 +134,7 @@ The **home package table** is a mapping containing all of the `ModDetails` of mo
 
 
 
-As we typecheck Haskell source code, we produce `TyCon`s and other type-checking entities for them. If some declarations are mutually recursive, then we need to similarly tie the knot.  There are two primary cases when this can occur:
+As we typecheck Haskell source code, we produce `TyCon`s and other type-checking entities. If some declarations are mutually recursive, then we need to similarly tie the knot.  There are two primary cases when this can occur:
 
 
 
