@@ -66,7 +66,7 @@ We \*clear\* out the home package table in the session (for `--make`, this was e
 
 
 
-ToDo: talk about how we fix up loops after we finish the loop
+When we finish compiling a module loop, we need to retypecheck all of the interfaces in the loop. The details for why we need to do this are in [Tying the Knot](commentary/compiler/tying-the-knot).
 
 
 
