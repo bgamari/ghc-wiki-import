@@ -43,8 +43,7 @@ Help/Guide](https://ghc.haskell.org/trac/ghc/wiki/TracGuide) link at the top of 
   tasks](https://ghc.haskell.org/trac/ghc/query?status=!closed&order=priority&type=task)) 
 
 - [ Harbormaster](https://phabricator.haskell.org/diffusion/GHC/history/), the [
-  nightly build bots](http://haskell.inf.elte.hu/builders/) and [
-  Travis](http://travis-ci.org/ghc) [](https://travis-ci.org/ghc/ghc.svg) are keeping an eye on our code. See the [Status page](status) for more information. 
+  nightly build bots](http://haskell.inf.elte.hu/builders/) and Travis [](http://travis-ci.org/ghc/ghc/builds)  are keeping an eye on our code. See the [Status page](status) for more information. 
 
 ## Notices
 
