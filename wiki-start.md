@@ -24,15 +24,23 @@ Help/Guide](https://ghc.haskell.org/trac/ghc/wiki/TracGuide) link at the top of 
 
 - Forthcoming planned releases:
 
-  - [8.0.1](status/gh-c-8.0.1) (0 (Ticket query: status: open, priority: high,
-    priority: highest, milestone: 8.0.1, max: 0,
-    order: id) open tickets with priority high or highest) 
+  - [8.0.1](status/gh-c-8.0.1) (0 (Ticket query: status: !closed,
+    status: !merge, priority: high, priority: highest, milestone: 8.0.1, max: 0,
+    order: id) [
+    open tickets](https://ghc.haskell.org/trac/ghc/query?status=!closed&priority=high&priority=highest&milestone=8.0.1&order=priority) with priority high or highest) 
 
-- Total open tickets: 3143 (Ticket query: status: !closed, max: 0,
-  order: id) (1939 (Ticket query: status: !closed, type: bug, max: 0,
-  order: id) bugs, 859 (Ticket query: status: !closed, type: feature+request,
-  max: 0, order: id) feature requests, 344 (Ticket query: status: !closed,
-  type: task, max: 0, order: id) tasks) 
+- Total [
+  open tickets](https://ghc.haskell.org/trac/ghc/query?status=!closed&order=priority): 3132
+  (Ticket query: status: !closed, status: !merge, max: 0, order: id) (1929
+  (Ticket query: status: !closed, status: !merge, type: bug, max: 0,
+  order: id) [
+  bugs](https://ghc.haskell.org/trac/ghc/query?status=!closed&order=priority&type=bug), 859
+  (Ticket query: status: !closed, status: !merge, type: feature+request, max: 0,
+  order: id) [
+  feature requests](https://ghc.haskell.org/trac/ghc/query?status=!closed&order=priority&type=feature+request), 343
+  (Ticket query: status: !closed, status: !merge, type: task, max: 0,
+  order: id) [
+  tasks](https://ghc.haskell.org/trac/ghc/query?status=!closed&order=priority&type=task)) 
 
 - [ Harbormaster](https://phabricator.haskell.org/diffusion/GHC/history/), the [
   nightly build bots](http://haskell.inf.elte.hu/builders/) and [
