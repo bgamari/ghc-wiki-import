@@ -18,7 +18,8 @@ We suggest the old import warnings be preserved with a flag which is not turned 
 
 
 [
-Snoyman reports](http://www.yesodweb.com/blog/2016/05/are-unused-import-warnings-harmful) a common CPP anti-pattern in cross-GHC code:
+Snoyman reports](http://www.yesodweb.com/blog/2016/05/are-unused-import-warnings-harmful) (with [
+reddit discussion](https://www.reddit.com/r/haskell/comments/4jvtmh/are_unused_import_warnings_harmful/)) a common CPP anti-pattern in cross-GHC code:
 
 
 ```wiki
