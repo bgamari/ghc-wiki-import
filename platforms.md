@@ -11,10 +11,6 @@ For information about what distributions GHC is part of, see the [
 distribution packages](http://haskell.org/ghc/distribution_packages) page.
 
 
-
-Please be aware that this page is highly unmaintained and may list platforms as tier 2 that didn't see any updates for years.
-
-
 ## Tier 1 platforms
 
 
@@ -43,6 +39,15 @@ Criteria for Tier 1 platforms:
 <tr><th> x86                </th>
 <th> Windows (MinGW) </th>
 <th> i386-unknown-mingw32     </th>
+<th> Yes        </th>
+<th> Yes       </th>
+<th> Yes(\*W)        </th>
+<th> GHC HQ        </th>
+<th> [WindowsGhc](windows-ghc) 
+</th></tr>
+<tr><th> x86-64             </th>
+<th> Windows (MinGW) </th>
+<th> x86\_64-unknown-mingw32   </th>
 <th> Yes        </th>
 <th> Yes       </th>
 <th> Yes(\*W)        </th>
@@ -106,7 +111,7 @@ Criteria for Tier 1 platforms:
 
 
 
-**\*W** Win32 DLL support bitrotten
+**\*W** Windows DLL support currently quite limited due to platform limitations (see [\#5987](https://gitlab.staging.haskell.org/ghc/ghc/issues/5987))
 
 
 ## Tier 2 platforms
@@ -304,7 +309,7 @@ Tier 2 platforms as possible to Tier 1, as soon as they meet the Tier 1 criteria
 
 
 
-In most cases, binaries for the tier 2 platforms can be downloaded from the [Distribution Packages](http://www.haskell.org/ghc/distribution_packages) page, e.g. you can get binaries for most of the Linux platforms from Debian. In some cases, for example the Solaris platforms, you'll need to go to the [download page](http://www.haskell.org/ghc/download) of a particular release to get a bindist.
+In most cases, binaries for the Tier 2 platforms can be downloaded from the [Distribution Packages](http://www.haskell.org/ghc/distribution_packages) page, e.g. you can get binaries for most of the Linux platforms from Debian. In some cases, for example the Solaris platforms, you'll need to go to the [download page](http://www.haskell.org/ghc/download) of a particular release to get a bindist.
 
 
 ## Tier 3 platforms
