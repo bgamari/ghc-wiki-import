@@ -280,6 +280,8 @@ scp -r 7.6.2 haskell.org:/srv/web/haskell.org/ghc/dist/
 Sanity check that the download links work.
 
 
+- Update `http://downloads.haskell.org/~ghc/latest/`.
+
 ## Announcing
 
 
