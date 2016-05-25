@@ -1,17 +1,14 @@
 
 As discussed in [
 \#1965](https://ghc.haskell.org/trac/ghc/ticket/1965), consider this data type declaration
-{{
+
+
+```wiki
 data T where
+  MkT :: !(Foo a) -> T
+```
 
 
-<table><tr><th>MkT</th>
-<td>!(Foo a) -\> T
-</td></tr></table>
-
-
-
-}}}
 So `a` is an existentially bound variable, and we cannot use a newtype for `T`.  And yet, since `MkT` is strict in is only argument, we could (at codegen time) *represent* a value of type `T ty` by a value of type `Foo ty`.  
 
 
