@@ -83,7 +83,8 @@ For example, given
 class This a ~ Int => Foo a
 class Foo a => Bar a where
   data BarType a
-class Bar a => Baz a
+class Bar a => Baz a where
+  prox :: Proxy# a
 ```
 
 
