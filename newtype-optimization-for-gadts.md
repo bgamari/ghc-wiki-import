@@ -29,7 +29,7 @@ Notes
 
   ```wiki
   data T a where
-    MkT :: Int -> T Int
+    MkT :: !Int -> T Int
   ```
 
   The constructor actually has type
@@ -47,7 +47,7 @@ Notes
 >
 
 
-David Feuer: I assume you meant for that `Int` to be strict? A single-constructor GADT can add a payload to something like `Refl`; it could also be used with a strict type-aligned sequence to "count", latering on length indexing. Admittedly not earth-shattering, but not totally useless.
+David Feuer: A single-constructor GADT can add a payload to something like `Refl`; it could also be used with a strict type-aligned sequence to "count", latering on length indexing. Admittedly not earth-shattering, but not totally useless.
 
 
 
