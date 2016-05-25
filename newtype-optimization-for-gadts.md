@@ -38,7 +38,7 @@ Notes
 >
 
 
-Unlike a true `newtype`, pattern matching on the constructor *must* force the contents to maintain type safety.
+Unlike a true `newtype`, pattern matching on the constructor *must* force the contents to maintain type safety. *SLPJ: I do not understand this paragraph.  Example please! *
 
 
 ## Sample uses
