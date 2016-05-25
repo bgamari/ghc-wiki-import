@@ -9,7 +9,7 @@ data T where
 ```
 
 
-So `a` is an existentially bound variable, and we cannot use a newtype for `T`.  And yet, since `MkT` is strict in is only argument, we could (at codegen time) *represent* a value of type `T ty` by a value of type `Foo ty`.  
+So `a` is an existentially bound variable, and we cannot use a newtype for `T`.  And yet, since `MkT` is strict in its only argument, we could (at codegen time) *represent* a value of type `T ty` by a value of type `Foo ty`.  
 
 
 
@@ -25,7 +25,7 @@ Under what conditions can we do this?
 Notes
 
 
-- An equality constraint arising from a GADT has zero width, and thus is covered by (2).  Eg
+- An equality constraint arising from a GADT has zero width, and thus is covered by (2).  E.g.
 
   ```wiki
   data T a where
@@ -48,7 +48,7 @@ Notes
 
 >
 >
-> David Feuer: A single-constructor GADT can add a payload to something like `Refl`; it could also be used with a strict type-aligned sequence to "count", latering on length indexing. Admittedly not earth-shattering, but not totally useless. *SLPJ: I still don't get it.  Could you give an example?*
+> David Feuer: A single-constructor GADT can add a payload to something like `Refl`; it could also be used with a strict type-aligned sequence to "count", latering (layering?) on length indexing. Admittedly not earth-shattering, but not totally useless. *SLPJ: I still don't get it.  Could you give an example?*
 >
 >
 
@@ -76,7 +76,7 @@ data IMGadt (e :: Shape) a where
 ```
 
 
-If the `IntMap` type gets the newtype optimization, then we'd drop the extra indirection on top. *SLPJ: I'm sorry but I do not understand.  Can you show the code you expect to get in the end?  Yes, `IntMap` obeys conditions 1-4, so we should be able to represent an `IntMap` by a pointer to a (boxed) `IMGadt`, but I think you are trying to say something else.*
+If the `IntMap` type gets the newtype-optimization, then we'd drop the extra indirection on top. *SLPJ: I'm sorry but I do not understand.  Can you show the code you expect to get in the end?  Yes, `IntMap` obeys conditions 1-4, so we should be able to represent an `IntMap` by a pointer to a (boxed) `IMGadt`, but I think you are trying to say something else.*
 
 
 
