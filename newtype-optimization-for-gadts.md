@@ -96,8 +96,8 @@ Unlike a true `newtype`, pattern matching on the constructor *must* force the co
 
 
 
-In particular, matching on the constructor reveals an existential and/or type evidence. As Dan Doel found, and pumpkin relayed in [
-https://ghc.haskell.org/trac/ghc/ticket/1965\#comment:16](https://ghc.haskell.org/trac/ghc/ticket/1965#comment:16), we have to be careful not to reveal such evidence without forcing the evidence. Since we're using the newtype optimization, the evidence is in the contained field itself.
+In particular, matching on the constructor reveals an existential and/or type information. As Dan Doel found, and pumpkin relayed in [
+https://ghc.haskell.org/trac/ghc/ticket/1965\#comment:16](https://ghc.haskell.org/trac/ghc/ticket/1965#comment:16), we have to be careful not to reveal such information without forcing the evidence. Since we're using the newtype optimization, the evidence is in the contained field itself.
 
 
 ## Sample uses
