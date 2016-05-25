@@ -68,7 +68,7 @@ data LengthIncrement c p q where
 ```
 
 
-Now `TList (LengthIncrement c) '(m, x) '(n, y)` represents a type-aligned list taking a path from `x` to `y`, and having a length of `m - n`.
+Now `TList (LengthIncrement c) '(m, x) '(n, y)` represents a type-aligned list taking a path from `x` to `y`, and having a length of `m - n`. So while a single-constructor GADT may not be much use *on its own*, it can do something interesting when combined with another, multi-constructor GADT!
 
 
 
