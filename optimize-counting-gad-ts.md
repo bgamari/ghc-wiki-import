@@ -17,7 +17,7 @@ In the simplest case where there are no base fields, this would turn a strict na
 
 
 
-The actual reason I was thinking about this, however, is that Andres Löh had an interesting idea for defunctionalizing functions on finger trees that use such a counting GADT with a non-trivial base case.
+The actual reason I was thinking about this, however, is that Andres Löh had an interesting idea for defunctionalizing functions on finger trees that use a counting GADT with a non-trivial base case. That particular one is not in quite the right form, but can easily be massaged into it.
 
 
 
