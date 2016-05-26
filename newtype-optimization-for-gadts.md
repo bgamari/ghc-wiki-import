@@ -1,6 +1,11 @@
+# Optimising newtype-like data types with existentials
 
-As discussed in [
-\#1965](https://ghc.haskell.org/trac/ghc/ticket/1965), consider this data type declaration
+
+## Motivation
+
+
+
+Consider this data type declaration
 
 
 ```wiki
@@ -9,11 +14,27 @@ data T where
 ```
 
 
-So `a` is an existentially bound variable, and we cannot use a newtype for `T`.  And yet, since `MkT` is strict in its only argument, we could (at codegen time) *represent* a value of type `T` by a value of type `Foo ty`.  
+So `a` is an existentially bound variable, and we cannot use a newtype for `T`.  So, as things stand, a value of type `T` will be represented by a heap-allocated box containing a single pointer to a value of type `(Foo ty)` for some `ty`.  
 
 
 
-Under what conditions can we do this? 
+This is tantalising.  The extra indirection and allocation gains nothing.  Since `MkT` is strict in its only argument, we could (at codegen time) *represent* a value of type `T` by a value of type `Foo ty`.
+
+
+
+*This page does not propose any change whatsoever to the language*. Rather, it proposes
+that we guarantee an efficient unboxed representation for certain data types.
+
+
+
+The ticket to track this idea is [\#1965](https://gitlab.staging.haskell.org/ghc/ghc/issues/1965). 
+
+
+## Main design
+
+
+
+Under what conditions can we represent remove the box for a data type entirely?
 
 
 1. Only one constructor in the data type
@@ -21,62 +42,44 @@ Under what conditions can we do this?
 1. That field is marked strict
 1. That field has a boxed (or polymorphic) type
 
-
-Notes
-
-
-- An equality constraint arising from a GADT has zero width, and thus is covered by (2).  E.g.
-
-  ```wiki
-  data T a where
-    MkT :: !Int -> T Int
-  ```
-
-  The constructor actually has type
-
-  ```wiki
-    MkT :: forall a. (a ~# Int) => Int -> T a
-  ```
-
-  So we could represent a value of type `(MkT a)` by a plain `Int`, without an indirection, because the evidence for `(a ~# Int)` is zero width.
-
->
->
-> Mind you, a single constructor GADT is probably not much use.
->
->
-
->
->
-> David Feuer: A single-constructor GADT can add a payload to something like `Refl`; it could also be used with a strict type-aligned sequence to "count", layering on length indexing. Admittedly not earth-shattering, but not totally useless. *SLPJ: I still don't get it.  Could you give an example?*
->
->
+## Zero-with fields
 
 
-For instance,
+
+Note that an equality constraint arising from a GADT has zero width, and thus is covered by (2).  E.g.
 
 
-```
-data TList c x y where
-  Nil :: TList c x x
-  Cons :: !(c x y) -> TList c y z -> TList c x z
-
-data Nat = Z | S Nat
-
-data LengthIncrement c p q where
-  Inc :: !(c x y) -> LengthIncrement c '(S n, x) '(n, y)
+```wiki
+data T a where
+  MkT :: !Int -> T Int
 ```
 
+>
+>
+> The constructor actually has type
+>
+>
+> ```wiki
+>   MkT :: forall a. (a ~# Int) => Int -> T a
+> ```
+>
+>
+> So we could represent a value of type `(MkT a)` by a plain `Int`, without an indirection, because the evidence for `(a ~# Int)` is zero width.
+>
+>
 
-Now `TList (LengthIncrement c) '(m, x) '(n, y)` represents a type-aligned list taking a path from `x` to `y`, and having a length of `m - n`. So while a single-constructor GADT may not be much use *on its own*, it can do something interesting when combined with another, multi-constructor GADT!
+
+You might think that a single constructor GADT is probably not much use, but see Example 2 below.
+
+
+## Some discussion
+
+
+### Superclasses
 
 
 
-I believe condition 2 can be relaxed very slightly, to allow constraints known to be zero-width. For example, equality constraints should be fine. So should classes that have no methods and no superclasses with methods.  *SLPJ: I do not understand this paragraph.  Example please! *
-
-
-
-For example, given
+David F: I believe condition 2 can be relaxed very slightly, to allow constraints known to be zero-width. For example, equality constraints should be fine. So should classes that have no methods and no superclasses with methods.  For example, given
 
 
 ```
@@ -88,22 +91,29 @@ class Bar a => Baz a where
 ```
 
 
-I *imagine* that `Foo a`, `Bar a`, and `Baz a` contexts are zero-width.
+David F: I *imagine* that `Foo a`, `Bar a`, and `Baz a` contexts are zero-width.
 
 
 
-Unlike a true `newtype`, pattern matching on the constructor *must* force the contents to maintain type safety. *SLPJ: I do not understand this paragraph.  Example please! *
+SLPJ: no, class constraints are always boxed because they can be bottom (with recursive classes).  I don't know how to avoid this.
+
+
+### Strictness
 
 
 
-In particular, matching on the constructor reveals an existential and/or type information. As Dan Doel found, and pumpkin relayed in [
+Unlike a true `newtype`, pattern matching on the constructor *must* force the contents to maintain type safety.  In particular, matching on the constructor reveals an existential and/or type information. As Dan Doel found, and pumpkin relayed in [
 https://ghc.haskell.org/trac/ghc/ticket/1965\#comment:16](https://ghc.haskell.org/trac/ghc/ticket/1965#comment:16), we have to be careful not to reveal such information without forcing the evidence. Since we're using the newtype optimization, the evidence is in the contained field itself.
+
+
+
+*SLPJ: I do not understand this paragraph.  Remember, we propose no change to the source language semantics*.
 
 
 ## Sample uses
 
 
-### Avoiding indirection while maintaining shape invariants
+### Example 1
 
 
 
@@ -139,6 +149,34 @@ data NE a = Bin Prefix Mask (NE a) (NE a)
 No GADTs, no existentials.  But we get an indirection at the root of every non-empty `IntMap`.
 
 
+### Example 2
+
+
+>
+>
+> David Feuer: A single-constructor GADT can add a payload to something like `Refl`; it could also be used with a strict type-aligned sequence to "count", layering on length indexing. Admittedly not earth-shattering, but not totally useless. *SLPJ: I still don't get it.  Could you give an example?*
+>
+>
+
+
+For instance,
+
+
+```
+data TList c x y where
+  Nil :: TList c x x
+  Cons :: !(c x y) -> TList c y z -> TList c x z
+
+data Nat = Z | S Nat
+
+data LengthIncrement c p q where
+  Inc :: !(c x y) -> LengthIncrement c '(S n, x) '(n, y)
+```
+
+
+Now `TList (LengthIncrement c) '(m, x) '(n, y)` represents a type-aligned list taking a path from `x` to `y`, and having a length of `m - n`. So while a single-constructor GADT may not be much use *on its own*, it can do something interesting when combined with another, multi-constructor GADT!
+
+
 ### Layering evidence
 
 
@@ -155,7 +193,7 @@ newtype Quux f a b c = Quux (Baz (Bar Foo) a b c)
 With the newtype optimization, I can layer the `Baz` type information on top of the `Bar` type information on top of the `Foo` type without having to pay a penalty. The alternative today is to make an entirely separate GADT for each combination of type information I want to hold evidence of.
 
 
-# Implementation
+## Implementation
 
 
 
