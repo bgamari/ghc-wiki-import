@@ -180,6 +180,15 @@ It gets more complicated if you take into account that the interface files are l
 work for any subset of interface files present. When you add parallelism this makes Uniques hopelessly random.
 
 
+### cabal sometimes running alex, happy
+
+
+
+This is not a problem with GHC, but comes up when compiling some packages that have `Lexer.x` and `Lexer.hs` files. 
+`Cabal` will sometimes run `alex Lexer.x` to regenerate `Lexer.hs` file. If the versions of `alex` are different you can get different sources.
+See [ \#2311](https://github.com/haskell/cabal/issues/2311).
+
+
 ## Progress
 
 
