@@ -12,7 +12,6 @@ are part of the static data of the program.  Sometimes, a CAF may refer to many 
 again, and so we can deallocate the values that it refers to.
 
 
-
 ---
 
 
@@ -26,7 +25,6 @@ again, and so we can deallocate the values that it refers to.
 
 
 (The term "CAFFY" does not appear in code, just used to describe the property)
-
 
 
 ---
