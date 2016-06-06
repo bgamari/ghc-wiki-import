@@ -1183,7 +1183,7 @@ then a naïve `Generic` instance for `Letter` would be:
 
 ```
 instance Generic Letter where
-  type Rep Letter = D1 ('MetaData ...) ...
+  type Rep Letter = D1 (MetaData ...) ...
 
   to (M1 (L1 (L1 (M1 U1)))) = A
   to (M1 (L1 (R1 (M1 U1)))) = B
@@ -1206,7 +1206,7 @@ Luckily, since the topmost `M1` has the exact same type across every case, we ca
 
 ```
 instance Generic Letter where
-  type Rep Letter = D1 ('MetaData ...) ...
+  type Rep Letter = D1 (MetaData ...) ...
 
   to (M1 x) = case x of
     L1 (L1 (M1 U1)) -> A
