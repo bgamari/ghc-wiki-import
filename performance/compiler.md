@@ -754,3 +754,4 @@ Random note: GHC 7.10's build system actually disabled DPH (half a dozen more pa
   original message](https://mail.haskell.org/pipermail/haskell-cafe/2016-May/123995.html)).
 - GHC takes significantly more memory compiling the `xmlhtml` library with `-j4` than `-j1` (1GB vs 150MB). See [\#9370](https://gitlab.staging.haskell.org/ghc/ghc/issues/9370). 
 - The `Language.Haskell.Exts.Annotated.Syntax` of `haskell-src-exts` takes many tens of seconds to compile. Howeever, this may not be surprising: Consists of roughly 70 data definitions, some with many constructors, `deriving (Eq,Ord,Show,Typeable,Data,Foldable,Traversable)` on most of them as well as defining `Functor`.
+- `vector-algorithms` may be a nice test and reportedly got slower to compile and run in recent GHC releases.
