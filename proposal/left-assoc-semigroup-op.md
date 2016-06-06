@@ -170,7 +170,7 @@ infixr 5 $$, $+$
 
 
 
-Leave `Monoid((<>))` as `infixr 6`, and add a standardised left-associative alias for `<>` to the `Data.Semigroup` vocabulary, e.g.
+Leave `Semigroup((<>))` as `infixr 6`, and add a standardised left-associative alias for `<>` to the `Data.Semigroup` vocabulary, e.g.
 
 
 ```
