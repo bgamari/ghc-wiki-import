@@ -4,6 +4,11 @@
 
 
 
+
+Mailing list discussion in progress on [
+on {libraries,ghc-devs}\@haskell.org](http://thread.gmane.org/gmane.comp.lang.haskell.ghc.devel/12030)
+
+
 ## Problem
 
 
