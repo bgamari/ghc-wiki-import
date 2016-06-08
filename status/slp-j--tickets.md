@@ -7,7 +7,6 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 - [\#11670](https://gitlab.staging.haskell.org/ghc/ghc/issues/11670): how should partial type signatures be generalised?
 - [\#11760](https://gitlab.staging.haskell.org/ghc/ghc/issues/11760): `runST` and lazy blackholing
-- [\#11698](https://gitlab.staging.haskell.org/ghc/ghc/issues/11698): `tct_closed` flag is set wrong
 - [\#11371](https://gitlab.staging.haskell.org/ghc/ghc/issues/11371): bogus in-scope set for substitution
 - [\#9479](https://gitlab.staging.haskell.org/ghc/ghc/issues/9479), [\#10954](https://gitlab.staging.haskell.org/ghc/ghc/issues/10954), [\#9091](https://gitlab.staging.haskell.org/ghc/ghc/issues/9091): more info in "hole" error messages
 - [\#10844](https://gitlab.staging.haskell.org/ghc/ghc/issues/10844), [\#10845](https://gitlab.staging.haskell.org/ghc/ghc/issues/10845), [\#10846](https://gitlab.staging.haskell.org/ghc/ghc/issues/10846): implicit call stacks
@@ -21,7 +20,6 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#8634](https://gitlab.staging.haskell.org/ghc/ghc/issues/8634), [\#9267](https://gitlab.staging.haskell.org/ghc/ghc/issues/9267), [\#9227](https://gitlab.staging.haskell.org/ghc/ghc/issues/9227): relaxing functional dependency rules `-XDysFunctionalDependencies`
 - [\#9123](https://gitlab.staging.haskell.org/ghc/ghc/issues/9123): higher order roles
 - [\#9352](https://gitlab.staging.haskell.org/ghc/ghc/issues/9352): allow `State#` in FFI types.
-- [\#9637](https://gitlab.staging.haskell.org/ghc/ghc/issues/9637): type-level "error" function
 - [\#9725](https://gitlab.staging.haskell.org/ghc/ghc/issues/9725): kind equalities (Richard)
 - [\#9717](https://gitlab.staging.haskell.org/ghc/ghc/issues/9717), [\#9729](https://gitlab.staging.haskell.org/ghc/ghc/issues/9729), [\#10420](https://gitlab.staging.haskell.org/ghc/ghc/issues/10420): orphan modules
 
