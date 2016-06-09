@@ -31,7 +31,7 @@ here](http://hackage.haskell.org/trac/ghc/wiki/Building)
 </th></tr>
 <tr><th> LLVM version </th>
 <th> 3.7 </th>
-<th> 3.5 </th>
+<th> 3.5 (3.5.2 on ARM ([\#9920](https://gitlab.staging.haskell.org/ghc/ghc/issues/9920)) </th>
 <th> ?? </th>
 <th> ?? </th>
 <th> ?? </th>
