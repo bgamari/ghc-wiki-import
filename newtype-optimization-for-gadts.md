@@ -108,16 +108,16 @@ data Foo a b where
 ```
 
 
-is much nicer to write than
+seems rather nicer than the alternative
 
 
 ```
 data Foo a b where
-  Foo :: TF1 a ~# TF2 b => Foo a b
+  Foo :: !(TF1 a :~: TF2 b) -> Foo a b
 ```
 
 
-If the former adds extra junk that seems sad.
+Do such constraints just pile on extra junk?
 
 
 ### Strictness
