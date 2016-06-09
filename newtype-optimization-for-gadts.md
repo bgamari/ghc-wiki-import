@@ -133,7 +133,7 @@ https://ghc.haskell.org/trac/ghc/ticket/1965\#comment:16](https://ghc.haskell.or
 
 
 
-I was simply clarifying that while this is the "newtype optimization", it is \*not\* about an actual `newtype`. In both Haskell and Core it is `data`, although Core could flag it as unusual if that's helpful.
+David F: I was simply clarifying that while this is the "newtype optimization", it is \*not\* about an actual `newtype`. In both Haskell and Core it is `data`, although Core could flag it as unusual if that's helpful.
 
 
 ## Sample uses
