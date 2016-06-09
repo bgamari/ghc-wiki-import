@@ -184,6 +184,12 @@ Required for building the [documentation](building/docs).
 </td></tr></table>
 
 
+<table><tr><th>LLVM</th>
+<td>
+Required for compiling code with the `-fllvm` flag enabled (e.g., if you want to build GHC with the `perf-llvm` build flavour). Version 3.7 or later is required. See also [the LLVM installation page](commentary/compiler/backends/llvm/installing).
+</td></tr></table>
+
+
 <table><tr><th>[ libedit](http://www.thrysoee.dk/editline/)</th>
 <td>
 If libedit is installed, ghci will be built with a nice interactive line-editing interface.  
