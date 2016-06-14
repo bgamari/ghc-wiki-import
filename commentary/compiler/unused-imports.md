@@ -46,7 +46,7 @@ re-exports all of `Foo`, plus `z`:
     import Foo( x, y )	     	     import Foo( x, y )	      
     bar = x + y		     	     bar = x + Bar.y           
  
-  module X6 where                  module X7 whjre	
+  module X6 where                  module X7 where	
     import Foo( x, y ) as Bar	     import FooPlus(x,y)	
     import Foo( x, y ) 		     import FooPlus(y,z)	
     bar = Foo.x + Bar.y		     import FooPlus(z,x)	
@@ -111,7 +111,7 @@ More precisely:
 
 
 The import-item choosing step 2 implies that there is a total order on 
-import-items.  We say import-item A ``dominates`` import-item B if we chooose
+import-items.  We say import-item A *dominates* import-item B if we choose
 A over B.  Here is one possible dominance relationship:
 
 
@@ -152,7 +152,7 @@ program.  We must collect **`RdrNames`** not `Names`:
 
 
 Here both imports are required, but you can only tell that by
-seeing the RdrNames, not by knowing that the name 'x' is used.
+seeing the `RdrNames`, not by knowing that the name `x` is used.
 
 
 
@@ -181,11 +181,11 @@ Other notes
 
 - The unit of "unused import" reporting is one of these `ImportSpecs`.
 
-- Suppose that 'rn' is a used, imported `RdrName`, and 'iss' is 
+- Suppose that `rn` is a used, imported `RdrName`, and `iss` is 
   the `[ImportSpecs]` that brought it into scope.  Then, to a first 
-  approximation all the iss are counted 'used'.  
+  approximation all the `iss` are counted 'used'.
 
-- We can compare `ImportSpecs` for equality by their `SrcSpans`
+- We can compare `ImportSpecs` for equality by their `SrcSpans`.
 
 - In `TcRnDriver.tcRnImports`, save import\_decls in a new
   `tcg_rn_rdr_imports :: Maybe [LImportDecl RdrName]`
