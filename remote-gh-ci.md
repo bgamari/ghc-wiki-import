@@ -9,6 +9,10 @@ Phab:D1748](https://phabricator.haskell.org/D1748)
 
 
 
+Remote GHCi was first available in GHC 8.0.1.  Implementation notes: [Commentary/Compiler/ExternalInterpreter](commentary/compiler/external-interpreter)
+
+
+
 This is a design page for implementing GHCi and Template Haskell by running the interpreted code in a separate process from GHC itself.  
 
 
@@ -52,20 +56,8 @@ There are several reasons for wanting to do this:
 
 
 
-Main pieces:
+See [Commentary/Compiler/ExternalInterpreter](commentary/compiler/external-interpreter)
 
-
-- A server binary, implementing a message-passing protocol
-- A library, implementing a message type and some utilities for communication, imported by both GHC and the server
-- GHC must start up the server and shut it down appropriately, and communicate with it via messages to implement GHCi and Template Haskell functionality.
-
-
-Main functionality areas:
-
-
-- Running interpreted code
-- Running Template Haskell code (implementing the `Quasi` monad via message-passing)
-- The GHCi debugger: breakpoints and inspecting runtime expressions
 
 ## Template Haskell in stage1
 
