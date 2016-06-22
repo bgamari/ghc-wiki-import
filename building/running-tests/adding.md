@@ -348,7 +348,7 @@ There are many pre-defined functions which can be used in this field:
 
 - **extra\_run\_opts(opts)**  pass some extra opts to the prog
 
-- **extra\_files(files)**    extra files that the test depends on. By default the testsuite driver assumes tests only depend on files that start with the name of the test `i.e. (<testname>*)`.
+- **extra\_files(files)**    extra files that the test depends on. By default the testsuite driver assumes tests only depend on files that start with the name of the test `i.e. (<testname>*)`. For the time being, `extra_files` can also be specified in the file `testsuite/driver/extra_files.py`.
 
 ```wiki
 test('prog013', extra_files(['Bad.hs', 'Good.hs']), ghci_script, ['prog013.script'])`
