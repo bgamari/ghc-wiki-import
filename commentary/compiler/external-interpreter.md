@@ -1,13 +1,11 @@
-
-\# The External Interpreter
+# The External Interpreter
 
 
 
 When the flag `-fexternal-interpreter` is used, GHC runs interpreted code in a separate process.  For the rationale, see [RemoteGHCi](remote-gh-ci).
 
 
-
-\#\# Where the code for `-fexternal-interpreter` lives
+## Where the code for `-fexternal-interpreter` lives
 
 
 
@@ -16,10 +14,14 @@ The main pieces are:
 
 - `libraries/ghci`, containing:
 
-  - types for talking about remote values (`GHCi.RemoteTypes`)
-  - the message protocol (`GHCi.Message`)
-  - implementation of the messages (GHCi.Run)
-  - implementation of Template Haskell (GHCi.TH)
+  - types for talking about remote values ([
+    GHCi.RemoteTypes](https://phabricator.haskell.org/diffusion/GHC/browse/master/libraries/ghci/GHCi/RemoteTypes.hs))
+  - the message protocol ([
+    GHCi.Message](https://phabricator.haskell.org/diffusion/GHC/browse/master/libraries/ghci/GHCi/Message.hs))
+  - implementation of the messages ([
+    GHCi.Run](https://phabricator.haskell.org/diffusion/GHC/browse/master/libraries/ghci/GHCi/Run.hs))
+  - implementation of Template Haskell ([
+    GHCi.TH](https://phabricator.haskell.org/diffusion/GHC/browse/master/libraries/ghci/GHCi/TH.hs))
   - a few other things needed to run interpreted code
 
 - `iserv` directory at the top-level, containing the code for the external
@@ -30,8 +32,7 @@ The main pieces are:
   \| GHCi](https://phabricator.haskell.org/diffusion/GHC/browse/master/compiler%2Fghci%2FGHCi.hs) module in `compiler/ghci` which provides the interface to the server used
   by the rest of GHC.
 
-
-\#\# Implementation overview
+## Implementation overview
 
 
 
@@ -59,8 +60,7 @@ GHCi.Message](https://phabricator.haskell.org/diffusion/GHC/browse/master/librar
 There are multiple versions of `iserv`: plain `iserv`, `iserv_p`, and `iserv_dyn`.  The latter two are compiled with `-prof` and `-dynamic` respectively.  One big advantage of `-fexternal-interpreter` is that we can run interpreted code in `-prof` mode without GHC itself being compiled with `-prof`; in order to do that, we invoke `iserv_p` rather than `iserv`.
 
 
-
-\#\#\# How does byte code execution work?
+### How does byte code execution work?
 
 
 
@@ -71,8 +71,7 @@ To run some interpreted code, GHC compiles the Haskell code to byte code as usua
 Any compiled packages and object files are linked into the `iserv` process using either the system dynamic linker or the RTS linker, depending on whether we're using `-dynamic` or not respectively.
 
 
-
-\#\#\# How does Template Haskell work?
+### How does Template Haskell work?
 
 
 
