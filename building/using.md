@@ -369,18 +369,23 @@ of changes it means the build will fail.
 </td></tr></table>
 
 
-<table><tr><th>`BUILD_DOCBOOK_HTML`</th>
+<table><tr><th>`HADDOCK_DOCS`</th>
+<td>
+(default: `YES`)
+
+Build `haddock` and run it on the compiler and libraries source?
+</td></tr></table>
+
+
+<table><tr><th>`BUILD_SPHINX_HTML`</th>
 <td>
 </td></tr>
-<tr><th>`BUILD_DOCBOOK_PS`</th>
-<td>
-</td></tr>
-<tr><th>`BUILD_DOCBOOK_PDF`</th>
+<tr><th>`BUILD_SPHINX_PDF`</th>
 <td>
 (default: `YES` if supported, `NO` otherwise)
 
-When set to `YES`, these build the docbook documentation (e.g. the
-users guide) as HTML, PS and PDF respectively.
+When set to `YES`, these build the sphinx documentation (e.g. the
+users guide) as HTML and PDF respectively.
 </td></tr></table>
 
 
