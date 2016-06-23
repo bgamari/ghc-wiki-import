@@ -106,3 +106,8 @@ GHCi.TH](https://phabricator.haskell.org/diffusion/GHC/browse/master/libraries/g
 TcSplice.hs](https://phabricator.haskell.org/diffusion/GHC/browse/master/compiler%2Ftypecheck%2FTcSplice.hs).
 
 
+
+For more details, see `Note [Remote Template Haskell]` in [
+\| libraries/ghci/GHCi/TH.hs](https://phabricator.haskell.org/diffusion/GHC/browse/master/libraries%2Fghci%2FGHCi%2FTH.hs)
+
+
