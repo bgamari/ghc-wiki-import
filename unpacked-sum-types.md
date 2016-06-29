@@ -9,6 +9,14 @@ This page explains the motivation and implementation of unpacking for sum types.
 See also [UnliftedDataTypes](unlifted-data-types)
 
 
+## Current status
+
+
+
+We're actively working on this. See [
+https://phabricator.haskell.org/D2259](https://phabricator.haskell.org/D2259).
+
+
 ## Motivation
 
 
