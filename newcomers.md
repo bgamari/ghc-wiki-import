@@ -9,7 +9,7 @@ This page is intended to serve as the first stop for those people who say, "I wa
 
 
 
-[Prepare](building/preparation) your machine, [clone](building/getting-the-sources) the git repo, and [build](building/using) GHC. For the short, short version, which may or may not work for your machine, you can try this:
+[Prepare](building/preparation) your machine, [clone](building/getting-the-sources) the git repo, and [Building/QuickStart](building/quick-start) GHC. For the short, short version, which may or may not work for your machine, you can try this:
 
 
 ```
