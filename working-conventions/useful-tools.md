@@ -9,4 +9,4 @@
   ghc-speed-logs](http://github.com/nomeata/ghc-speed-logs) repository
 - Ben Gamari has developed a set of [
   tools](http://github.com/bgamari/ghc-perf-import) for slurping the `ghc-speed-logs` data into a PostgreSQL database and do interesting timeseries analyses on it. See [
-  file:///home/ben/perf-import/web/index.html](file:///home/ben/perf-import/web/index.html).
+  http://home.smart-cactus.org/\~ben/ghc-perf-import/web/](http://home.smart-cactus.org/~ben/ghc-perf-import/web/).
