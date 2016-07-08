@@ -214,6 +214,7 @@ bgmari's summary](https://ghc.haskell.org/trac/ghc/ticket/10843#comment:12)).
 - This would make do blocks consistent with record creation, where parentheses are skipped, allowing things such as return R { x = y}
 - This does not change the meaning of any old programs, only allows new ones that were previously forbidden.
 - This gets rid of the need for a specially-typed $ allowing runSt $ do ... 
+- It allows unparenthesized non-trivial application arguments not only as the last argument (using `$`), but for all arguments, in separate lines, when headed by `do` or another group A construct.
 
 ## Cons
 
