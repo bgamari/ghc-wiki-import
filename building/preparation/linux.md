@@ -102,8 +102,8 @@ But this might install some packages you do not use in your system (e.g. java, d
 
 
 
-To install llvm-3.7, as required by GHC \> 7.10, see [
-http://llvm.org/apt](http://llvm.org/apt).
+Optional: install llvm from [
+http://apt.llvm.org](http://apt.llvm.org) (only necessary to make the `-fllvm` flag work). [Commentary/Compiler/Backends/LLVM/Installing](commentary/compiler/backends/llvm/installing#llvm-support) will tell you which version to install.
 
 
 
