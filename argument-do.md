@@ -46,26 +46,26 @@ withForeignPtr fptr (\ptr -> c_memcpy buf ptr size)
 
 
 The Haskell report [
-defines](https://www.haskell.org/onlinereport/haskell2010/haskellch3.html#x8-220003) the `lexp` nonterminal thus:
+defines](https://www.haskell.org/onlinereport/haskell2010/haskellch3.html#x8-220003) the `lexp` nonterminal thus (`*` indicates a rule of interest):
 
 
 ```wiki
-lexp 	→ 	\ apat1 … apatn -> exp 	    (lambda abstraction, n ≥ 1)
-	| 	let decls in exp 	    (let expression)
-	| 	if exp [;] then exp [;] else exp 	    (conditional)
-	| 	case exp of { alts } 	    (case expression)
-	| 	do { stmts } 	    (do expression)
-	| 	fexp 
+lexp  →  \ apat1 … apatn -> exp            (lambda abstraction, n ≥ 1)  *
+      |  let decls in exp                  (let expression)             *
+      |  if exp [;] then exp [;] else exp  (conditional)                *
+      |  case exp of { alts }              (case expression)            *
+      |  do { stmts }                      (do expression)              *
+      |  fexp 
 
-fexp 	→ 	[fexp] aexp 	    (function application)
+fexp  →  [fexp] aexp                       (function application)
  
-aexp 	→ 	qvar 	                    (variable)
-	| 	gcon 	                    (general constructor)
-	| 	literal
-	| 	( exp ) 	            (parenthesized expression) 
-        |       qcon { fbind1 .. fbindn }   (labeled construction)
-        |       aexp { fbind1 .. fbindn }   (labelled update)
-        ...
+aexp  →  qvar                              (variable)
+      |  gcon                              (general constructor)
+      |  literal
+      |  ( exp )                           (parenthesized expression) 
+      |  qcon { fbind1 … fbindn }          (labeled construction)
+      |  aexp { fbind1 … fbindn }          (labelled update)
+      |  …
 ```
 
 
@@ -77,24 +77,23 @@ The `ArgumentDo` extension would allow all these constructs in argument position
 
 
 ```wiki
-lexp 	→	fexp 
+lexp  →  fexp 
 
-fexp 	→ 	[fexp] aexp 	    (function application)
+fexp  →  [fexp] aexp                       (function application)
  
-aexp 	→ 	qvar 	                    (variable)
-	| 	gcon 	                    (general constructor)
-	| 	literal
-	| 	( exp ) 	            (parenthesized expression) 
-        |       qcon { fbind1 .. fbindn }   (labeled construction)
-        |       aexp { fbind1 .. fbindn }   (labelled update)
-        -- Here are the moved rules
-        | 	\ apat1 … apatn -> exp 	    (lambda abstraction, n ≥ 1)
-	| 	let decls in exp 	    (let expression)
-	| 	if exp [;] then exp [;]
-                           else exp 	    (conditional)
-	| 	case exp of { alts } 	    (case expression)
-	| 	do { stmts } 	            (do expression)
-        ...
+aexp  →  qvar                              (variable)
+      |  gcon                              (general constructor)
+      |  literal
+      |  ( exp )                           (parenthesized expression) 
+      |  qcon { fbind1 … fbindn }          (labeled construction)
+      |  aexp { fbind1 … fbindn }          (labelled update)
+      -- Here are the moved rules
+      |  \ apat1 … apatn -> exp            (lambda abstraction, n ≥ 1)  *
+      |  let decls in exp                  (let expression)             *
+      |  if exp [;] then exp [;] else exp  (conditional)                *
+      |  case exp of { alts }              (case expression)            *
+      |  do { stmts }                      (do expression)              *
+      |  …
 ```
 
 
