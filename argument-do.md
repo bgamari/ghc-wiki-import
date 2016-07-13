@@ -101,7 +101,7 @@ Now the `lexp` nonterminal is redundant and can be dropped from the grammar.
 
 
 
-Note that this change introduces some new ambiguities to the grammar, which will be resolved using an existing meta-rule: 
+Note that this change relies on an existing meta-rule to resolve ambiguities:
 
 
 >
