@@ -14,7 +14,7 @@ See, for instance, `anna/Dependency`, where the former decreases allocations by 
 
 
 
-See [\#11196](https://gitlab.staging.haskell.org/ghc/ghc/issues/11196). Unfortunately, the commit of nokinds merge (67465497/ghc) had a few issues rendering it untestable. This means that the regressions are attributed to an unrelated commit ([b5d5d83122c93c2a25839127edfd6b2df7ed6928](/trac/ghc/changeset/b5d5d83122c93c2a25839127edfd6b2df7ed6928/ghc), Revert .gitmodules changes from 6746549772c5).
+See [\#11196](https://gitlab.staging.haskell.org/ghc/ghc/issues/11196). Unfortunately, the commit of nokinds merge ([6746549772c5cc0ac66c0fce562f297f4d4b80a2](/trac/ghc/changeset/6746549772c5cc0ac66c0fce562f297f4d4b80a2/ghc)) had a few issues rendering it untestable. This means that the regressions are attributed to an unrelated commit ([b5d5d83122c93c2a25839127edfd6b2df7ed6928](/trac/ghc/changeset/b5d5d83122c93c2a25839127edfd6b2df7ed6928/ghc), Revert .gitmodules changes from 6746549772c5).
 
 
 
