@@ -64,10 +64,10 @@ Template Haskell has its own status page at [TemplateHaskell/Status](template-ha
 ## Tickets and patches
 
 
-- 
-  [Summary of open tickets](/trac/ghc/wiki/Status/Tickets), listed by component.
+- [Summary of open tickets](status/tickets), listed by component.
+- [Ticket statistics](status/ticket-stats): the number of tickets created in a certain year, and their current status.
 - [Status/SLPJ-Tickets](status/slp-j--tickets) is a curation of interesting tickets by SPJ
-- The yearly [GHC bug sweep](bug-sweep) attends to lost and forgotten tickets.
+- The [GHC bug sweep](bug-sweep) attends to lost and forgotten tickets.
 
 - [
   A list of all Phabricator patches](https://phabricator.haskell.org/differential/query/dUJ4ndtfSChZ/)
