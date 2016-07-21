@@ -156,9 +156,6 @@ where `(# 0 of 3 | x #)` means `(# x | | #)` and `(# 2 of 6 | y #)` means \`(\# 
 an improvement.
 
 
----
-
-
 ## Implementation
 
 
