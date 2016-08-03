@@ -134,13 +134,19 @@ With `-XDerivingStrategies` in the picture, we can now state how GHC figures out
 
 >
 >
-> (c) Otherwise, if deriving an instance for a newtype and both `-XGeneralizedNewtypeDeriving` and `-XDeriveAnyClass` are enabled, default to `DeriveAnyClass`, but emit a warning stating the ambiguity.
+> (c) Otherwise, if deriving a "standard derivable class" () instance for a newtype, and `-XGeneralizedNewtypeDeriving` is enabled, derive the class using the `GeneralizedNewtypeDeriving` strategy.
 >
 >
 
 >
 >
-> (d) Otherwise, if deriving an instance for a newtype, the datatype and typeclass can be successfully used with `GeneralizedNewtypeDeriving`, and `-XGeneralizedNewtypeDeriving` is enabled, do so.
+> (d) Otherwise, if deriving an instance for a newtype and both `-XGeneralizedNewtypeDeriving` and `-XDeriveAnyClass` are enabled, default to `DeriveAnyClass`, but emit a warning stating the ambiguity.
+>
+>
+
+>
+>
+> (e) Otherwise, if deriving an instance for a newtype, the datatype and typeclass can be successfully used with `GeneralizedNewtypeDeriving`, and `-XGeneralizedNewtypeDeriving` is enabled, do so.
 >
 >
 
@@ -160,6 +166,10 @@ With `-XDerivingStrategies` in the picture, we can now state how GHC figures out
 
 
 Step 2 is massively complicated since GHC tries to use `GeneralizedNewtypeDeriving` in certain special cases whenever it can to optimize the generated instances. In addition, the phrase "can be successfully used with `GeneralizedNewtypeDeriving`" must be invoked since it is possible for `GeneralizedNewtypeDeriving` on certain datatypes. For example, you cannot have a newtype-derived `Functor` instance for `newtype Compose f g a = Compose (f (g a))`, since the last type variable `a` cannot be eta-reduced.
+
+
+
+Step 2.(c) deserves some explanation. As a rule, in the absence of an explicit `anyclass` keyword, GHC will never attempt to derive a "standard derivable class" using the `DeriveAnyClass` strategy, since it is guaranteed that doing so would not produce the instance you'd want. This also applies when derivable a standard derivable class for a newtype when both `-XGeneralizedNewtypeDeriving` and `-XDeriveAnyClass` are enabled, which is why we need the special case of 2.(c) to come before 2.(d) so that `-XDeriveAnyClass` doesn't kick in when it shouldn't. This fixes the problem originally reported in Trac [\#10598](https://gitlab.staging.haskell.org/ghc/ghc/issues/10598).
 
 
 
