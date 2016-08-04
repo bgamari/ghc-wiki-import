@@ -25,6 +25,19 @@ Inlining is essential to remove intermediate representations from generic progra
 - [
   Optimizing SYB Is Easy! (2014)](http://michaeldadams.org/papers/syb-opt/syb-opt-2014-pepm-authors-copy.pdf)
 
+## Newcomer Tickets
+
+
+
+<table><tr><th>[\#4960](https://gitlab.staging.haskell.org/ghc/ghc/issues/4960)</th>
+<td>Better inlining test in CoreUnfold</td></tr>
+<tr><th>[\#9370](https://gitlab.staging.haskell.org/ghc/ghc/issues/9370)</th>
+<td>unfolding info as seen when building a module depends on flags in a previously-compiled module</td></tr>
+<tr><th>[\#11068](https://gitlab.staging.haskell.org/ghc/ghc/issues/11068)</th>
+<td>Make Generic/Generic1 methods inlinable</td></tr></table>
+
+
+
 ## Relevant Tickets
 
 
