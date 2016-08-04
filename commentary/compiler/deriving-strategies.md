@@ -177,6 +177,36 @@ The phrase "standard derivable class" is a bit sloppy since not all such classes
 
 
 
+To help visualize things, here's a table summarizing which typeclasses GHC decides it can use the `newtype` strategy for (thanks to Ørjan Johansen):
+
+
+<table><tr><th> GND equivalence    </th>
+<th> No extension                         </th>
+<th> Requires `-XGeneralizedNewtypeDeriving`                
+</th>
+<th></th>
+<th></th></tr>
+<tr><th> Always             </th>
+<th> 2(a) </th>
+<th> `Eq`, `Ord`, `Ix`, `Bounded` </th>
+<th>                            
+</th>
+<th></th></tr>
+<tr><th> Requires check     </th>
+<th>                                        </th>
+<th> 2(c) </th>
+<th> `Functor`, `Foldable`, `Enum` 
+</th>
+<th></th></tr>
+<tr><th> Never              </th>
+<th> 2(b) </th>
+<th> `Read`, `Show`                    </th>
+<th> 2(b) </th>
+<th> `Data`, `Generic`, `Generic1`, `Typeable`, `Traversable`, `Lift` 
+</th></tr></table>
+
+
+
 This provides another reason to use `-XDerivingStrategies`: trying to memorize this algorithm is almost impossible!
 
 
