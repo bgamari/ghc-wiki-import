@@ -134,7 +134,7 @@ With `-XDerivingStrategies` in the picture, we can now state how GHC figures out
 
 >
 >
-> (c) Otherwise, if deriving a "standard derivable class" (e.g., `Eq`, `Ord`, `Generic`, etc.) instance for a newtype, and `-XGeneralizedNewtypeDeriving` is enabled, derive the class using the `GeneralizedNewtypeDeriving` strategy.
+> (c) Otherwise, if deriving a `Functor`, `Foldable`, or `Enum` instance for a newtype, the datatype and typeclass can be successfully used with `GeneralizedNewtypeDeriving`, and `-XGeneralizedNewtypeDeriving` is enabled, derive the class using the `GeneralizedNewtypeDeriving` strategy.
 >
 >
 
