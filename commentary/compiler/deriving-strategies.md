@@ -134,7 +134,7 @@ With `-XDerivingStrategies` in the picture, we can now state how GHC figures out
 
 >
 >
-> (b) If deriving `Functor`, `Foldable`, or `Enum`(?) for a newtype, the datatype can be successfully used with `GeneralizedNewtypeDeriving`, and `-XGeneralizedNewtypeDeriving` has been enabled, use the `GeneralizedNewtypeDeriving` strategy.
+> (b) If deriving `Functor`, `Foldable`, or `Enum` for a newtype, the datatype can be successfully used with `GeneralizedNewtypeDeriving`, and `-XGeneralizedNewtypeDeriving` has been enabled, use the `GeneralizedNewtypeDeriving` strategy.
 >
 >
 
