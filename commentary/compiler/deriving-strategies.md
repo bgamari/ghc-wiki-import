@@ -187,8 +187,8 @@ Step 2 is fairly intricate since GHC tries to use `GeneralizedNewtypeDeriving` i
 To help visualize things, here's a table summarizing which typeclasses GHC decides it can use the `newtype` strategy for (thanks to Ørjan Johansen):
 
 
-<table><tr><th>                    </th>
-<th> No extension required              </th>
+<table><tr><th>                      </th>
+<th> No extension required            </th>
 <th> Requires language extension to use 
 </th>
 <th></th>
