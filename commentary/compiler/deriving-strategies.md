@@ -124,7 +124,7 @@ With `-XDerivingStrategies` in the picture, we can now state how GHC figures out
 
 1. Look for a deriving strategy. If one is present, use that. This will throw an error if you try to do something impossible, like using the `newtype` strategy on a non-newtype or the `bespoke` keyword with a typeclass that doesn't support `bespoke` instances.
 
-1. If deriving a bespoke typeclass instance:
+1. If deriving a class which supports bespoke instances:
 
 >
 >
@@ -140,11 +140,11 @@ With `-XDerivingStrategies` in the picture, we can now state how GHC figures out
 
 >
 >
-> (c) Otherwise, if deriving a bespoke typeclass instance, and the corresponding language extension is enabled (if necessary), use the bespoke strategy. If the language extension is not enabled, throw an error. 
+> (c) Otherwise, if deriving a class which supports bespoke instances, and the corresponding language extension is enabled (if necessary), use the bespoke strategy. If the language extension is not enabled, throw an error. 
 >
 >
 
-1. If not deriving a bespoke typeclass instance:
+1. If not deriving a class which supports bespoke instances:
 
 >
 >
@@ -171,12 +171,12 @@ With `-XDerivingStrategies` in the picture, we can now state how GHC figures out
 >
 
 
-The phrase "bespoke typeclass" refers to the classes listed [
+The phrase "class which supports bespoke instances" refers to the classes listed [
 here](http://git.haskell.org/ghc.git/blob/8fe1672a9c4229b884b8dcebb9be57efa4c1fdb8:/compiler/typecheck/TcGenDeriv.hs#l123), plus `Generic` and `Generic1`.
 
 
 
-The relationship between bespoke instances and `DeriveAnyClass` can be be summarized as follows: In the absence of an explicit `anyclass` keyword, GHC will never attempt to derive a class using the `DeriveAnyClass` strategy when it would otherwise derive a `bespoke` instance, since it is guaranteed that doing so would not produce the instance you'd want.
+The relationship between bespoke instances and `DeriveAnyClass` can be be summarized as follows: In the absence of an explicit `anyclass` keyword, GHC will never attempt to derive a class using the `DeriveAnyClass` strategy when it supports `bespoke` instances, since it is guaranteed that doing so would not produce the instance you'd want.
 
 
 
