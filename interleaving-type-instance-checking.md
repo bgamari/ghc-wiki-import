@@ -6,11 +6,52 @@ This page is to track the discussions on [\#11348](https://gitlab.staging.haskel
 The essential problem is that type-checking declarations can depend on `type instances` so we must be careful to process `type instance`s in the correct order. 
 
 
+
+The motivating example is
+
+
+```wiki
+{-# LANGUAGE PolyKinds #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE GADTs #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE TypeInType #-}
+
+import Data.Kind
+import Data.Proxy
+
+type family TrivialFamily t :: Type
+type instance TrivialFamily (t :: Type) = Bool
+
+data R where
+    R :: Proxy Bool -> R
+
+type ProblemType t = 'R ('Proxy :: Proxy (TrivialFamily t))
+```
+
+
+Which was rejected with
+
+
+```wiki
+error:
+    • Expected kind ‘Proxy Bool’,
+        but ‘'Proxy’ has kind ‘Proxy (TrivialFamily t)’
+    • In the first argument of ‘R’, namely
+        ‘(Proxy :: Proxy (TrivialFamily t))’
+      In the type ‘R (Proxy :: Proxy (TrivialFamily t))’
+      In the type declaration for ‘ProblemType’
+```
+
+
+GHC was typechecking `ProblemType` before the instance for `TrivialFamily` was processed.
+
+
 # Original Solution
 
 
 
-Alex Vieth partially solved the solution for simple cases where `data` instances depend on `type instances` for example. The solution was
+Alex Vieth partially solved the solution for simple cases where `type` declaractions depend on `type instances` as in the example. The solution was
 to \*eagerly\* process type family instances as soon as it was possible to do so. The solution is inadequate due to the method used to compute dependencies for type instances. 
 
 
@@ -42,7 +83,7 @@ For example, considering
 
 
 
-``\`
+{{{!\#
 data Fin :: N -\> Type where                                                     
 
 
@@ -60,7 +101,7 @@ data T
 
 
 type instance F T FZ = Int
-``\`
+}}}
 
 
 
