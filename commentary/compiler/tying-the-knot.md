@@ -265,7 +265,7 @@ However, this leads to a very intriguing requirement: when we typecheck the inte
 
 
 
-This leads to another complication with `ghc --make`: just how we must retypecheck the interface files after we finish typechecking a module loop, we must also retypecheck the interface files BEFORE we start typechecking, so that the knot-tying can take place. (Actually, hypothetically you could remove the later retypecheck, but we need it so that we can get up-to-date unfoldings, which aren't computed until after we run the optimizer, which is after all the thunks have been forced.)
+This leads to another complication with `ghc --make`: just how we must retypecheck the interface files after we finish typechecking a module loop, we must also retypecheck the interface files BEFORE we start typechecking, so that the knot-tying can take place. Failure to do this lead to [\#12035](https://gitlab.staging.haskell.org/ghc/ghc/issues/12035). (Actually, hypothetically you could remove the later retypecheck, but we need it so that we can get up-to-date unfoldings, which aren't computed until after we run the optimizer, which is after all the thunks have been forced.)
 
 
 ## All of the bits and bobs
