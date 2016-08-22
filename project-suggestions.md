@@ -1,90 +1,114 @@
-CONVERSION ERROR
+# Suggestions for projects related to GHC
 
-Original source:
 
-```trac
-= Suggestions for projects related to GHC =
 
 Here are some suggestions for projects related to GHC that could be undertaken by an intern or undergraduate project student.  There are also lots of ideas in
-  * GHC's [query:"status!=closed&type=task&order=priority" task list]
-  * GHC's [query:"status!=closed&type=feature request&order=priority" feature request list]
 
--------------
-== Projects that should be within reach of a good undergraduate ==
 
-  * '''Implement overlap and exhaustiveness checking for pattern matching'''.  GHC's current overlap and exhaustiveness checker is old and inadequate.  Furthermore, it takes no account of GADTs and type families. See #595 and #2395.  There's an excellent selection of background material:
-    * [http://pauillac.inria.fr/~maranget/papers/warn/warn.pdf Warnings for pattern matching] by Luc Maranget (JFP 17(3), 2007)
-    * [http://www.cs.cmu.edu/~neelk/pattern-popl09.pdf Focusing on pattern matching] by Neelakantan Krishnaswami (POPL 2009)
-    * [http://pauillac.inria.fr/~maranget/papers/ml05e-maranget.pdf Compiling pattern matching to good decision trees] by Luc Maranget, ML Workshop 2008
+- GHC's task list (Ticket query: status: !closed, type: task, order: priority)
+- GHC's feature request list (Ticket query: status: !closed,
+  type: feature+request, order: priority)
 
-  * '''Improve parallel profiling tools'''.  Starting with [http://research.microsoft.com/en-us/projects/threadscope/ ThreadScope], incorporate performance-counter events, visualise more runtime events, include source-code information in the profile.
+---
 
-  * '''Implement some low-level C-- optimisations'''.  During 2011 we expect to have the new C-- code generation route in place, and that will open up new opportunities for doing classic compiler-course optimisations on the imperative C-- code.  There is more than routine stuff here, because we can use our [http://research.microsoft.com/~simonpj/papers/c-- generic dataflow framework] to do the heavy lifting.  Here are some [wiki:BackEndNotes particular ideas for optimisations] we'd like to implement.
 
--------------
-== More ambitious or less-well-defined projects (PhD students / Interns) ==
+## Projects that should be within reach of a good undergraduate
 
-=== Programming environment and tools ===
 
-  * Maintaining an explicit call stack [wiki:ExplicitCallStack]
+- **Implement overlap and exhaustiveness checking for pattern matching**.  GHC's current overlap and exhaustiveness checker is old and inadequate.  Furthermore, it takes no account of GADTs and type families. See [\#595](https://gitlab.staging.haskell.org/ghc/ghc/issues/595) and [\#2395](https://gitlab.staging.haskell.org/ghc/ghc/issues/2395).  There's an excellent selection of background material:
 
-=== Turning GHC into a platform ===
+  - [
+    Warnings for pattern matching](http://pauillac.inria.fr/~maranget/papers/warn/warn.pdf) by Luc Maranget (JFP 17(3), 2007)
+  - [
+    Focusing on pattern matching](http://www.cs.cmu.edu/~neelk/pattern-popl09.pdf) by Neelakantan Krishnaswami (POPL 2009)
+  - [
+    Compiling pattern matching to good decision trees](http://pauillac.inria.fr/~maranget/papers/ml05e-maranget.pdf) by Luc Maranget, ML Workshop 2008
+
+- **Improve parallel profiling tools**.  Starting with [
+  ThreadScope](http://research.microsoft.com/en-us/projects/threadscope/), incorporate performance-counter events, visualise more runtime events, include source-code information in the profile.
+
+- **Implement some low-level C-- optimisations**.  During 2011 we expect to have the new C-- code generation route in place, and that will open up new opportunities for doing classic compiler-course optimisations on the imperative C-- code.  There is more than routine stuff here, because we can use our [
+  generic dataflow framework](http://research.microsoft.com/~simonpj/papers/c--) to do the heavy lifting.  Here are some [particular ideas for optimisations](back-end-notes) we'd like to implement.
+
+---
+
+
+## More ambitious or less-well-defined projects (PhD students / Interns)
+
+
+### Programming environment and tools
+
+
+- Maintaining an explicit call stack [ExplicitCallStack](explicit-call-stack)
+
+### Turning GHC into a platform
+
+
 
 Projects aimed at making GHC into a user-extensible plug-in platform, and less of a monolithic compiler.
-  * '''Allow much finer and more modular control over the way in which rewrite rules and inlining directives are ordered'''.  See this [http://www.haskell.org/pipermail/haskell-cafe/2008-January/038196.html email thread]
+
+
+- **Allow much finer and more modular control over the way in which rewrite rules and inlining directives are ordered**.  See this [
+  email thread](http://www.haskell.org/pipermail/haskell-cafe/2008-January/038196.html)
+
+
   
-=== Types ===
 
- * '''Allow unboxed tuples as function arguments'''.   Currently unboxed tuples are second class; fixing this would be a nice simplification.
 
- * '''Extend kinds beyond * and k1->k2'''.  With GADTs etc we clearly want to have kinds like `Nat`, so that advanced hackery at the type level can be done in a typed language; currently it's all effectively untyped.  A neat approach would be to re-use any data type declaration as a kind declaration.
+### Types
 
- * '''Extensible constraint domains'''.  Andrew Kennedy shows how to incorporate [http://research.microsoft.com/~akenn/units/index.html dimensional analysis] into an ML-like type system.  Maybe we could do an extensible version of this, so that it wasn't restricted to dimensions.  Integer arithmetic is another obvious domain.  
 
- * [[TicketQuery(id=788|0)]]
+- **Allow unboxed tuples as function arguments**.   Currently unboxed tuples are second class; fixing this would be a nice simplification.
 
- * [[TicketQuery(id=1872|0)]]
+- **Extend kinds beyond \* and k1-\>k2**.  With GADTs etc we clearly want to have kinds like `Nat`, so that advanced hackery at the type level can be done in a typed language; currently it's all effectively untyped.  A neat approach would be to re-use any data type declaration as a kind declaration.
 
-=== Runtime system ===
+- **Extensible constraint domains**.  Andrew Kennedy shows how to incorporate [
+  dimensional analysis](http://research.microsoft.com/~akenn/units/index.html) into an ML-like type system.  Maybe we could do an extensible version of this, so that it wasn't restricted to dimensions.  Integer arithmetic is another obvious domain.  
 
-  * Incremental or concurrent GC, for reducing pause-times.  Perhaps via implementing mark-region GC in the old generation.
+### Runtime system
 
-=== Packages ===
 
-  * A package API tool.
+- Incremental or concurrent GC, for reducing pause-times.  Perhaps via implementing mark-region GC in the old generation.
 
-  * fixed package ABIs for binary-upgradable packages.
+### Packages
 
--------------
 
-= Just Hacking =
+- A package API tool.
+
+- fixed package ABIs for binary-upgradable packages.
+
+---
+
+
+# Just Hacking
+
+
 
 Projects for people who want a decent-sized hacking project, with less research content.
 
-== Compiler ==
 
- * [[TicketQuery(id=602|0)]]
- * Whole-program dead-code detection (with {{{--make}}}).
- * Whole-program overloading elimination (with {{{--make}}}).
- * Evolve a better ordering for the optimisation passes using [http://www.coyotegulch.com/products/acovea/ Acovea].
- * [[TicketQuery(id=1341|0)]]
- * [[TicketQuery(id=2979|0)]]
- * [[TicketQuery(id=1884|0)]]
- * [[TicketQuery(id=910|0)]]
- * [[TicketQuery(id=4929|0)]]
-
-== Build system ==
-
- * [[TicketQuery(id=989|0)]]
-
-== Runtime system ==
-
- * [[TicketQuery(id=599|0)]]
- * [[TicketQuery(id=603|0)]]
-
-== Tools ==
-
-  * Update/improve [http://www.haskell.org/visualhaskell Visual Haskell] to use the (free) [http://msdn2.microsoft.com/en-us/vsx2008/products/bb933751.aspx Visual Studio Shell].
+## Compiler
 
 
-```
+- <table><tr><th>[\#602](https://gitlab.staging.haskell.org/ghc/ghc/issues/602)</th>
+  <td>Warning Suppression</td></tr></table>
+
+
+- Whole-program dead-code detection (with `--make`).
+- Whole-program overloading elimination (with `--make`).
+- Evolve a better ordering for the optimisation passes using [
+  Acovea](http://www.coyotegulch.com/products/acovea/).
+
+## Build system
+
+
+- <table><tr><th>[\#989](https://gitlab.staging.haskell.org/ghc/ghc/issues/989)</th>
+  <td>Build GHC on Windows using Microsoft toolchain</td></tr></table>
+
+
+## Tools
+
+
+- Update/improve [
+  Visual Haskell](http://www.haskell.org/visualhaskell) to use the (free) [
+  Visual Studio Shell](http://msdn2.microsoft.com/en-us/vsx2008/products/bb933751.aspx).
