@@ -83,6 +83,10 @@ substitute 'html' for 'pdf' or 'ps' to build other types of documentation. Note 
 of the documentation are automatically generated. 
 
 
+
+After building you can find the html users' guide in `docs/users_guide/build-html`.
+
+
 ## Installing documentation
 
 
