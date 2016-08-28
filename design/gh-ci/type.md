@@ -218,7 +218,10 @@ Phab:2136](https://phabricator.haskell.org/2136), Herbert has reminded us to mak
 
 
 
-I (Richard) collected feedback on May 2, 2016, from ghc-devs, haskell-cafe, on the ticket, and via [
+I (Richard) collected feedback on May 2, 2016, from [
+ghc-devs](https://mail.haskell.org/pipermail/ghc-devs/2016-April/011933.html), [
+haskell-cafe 1](https://mail.haskell.org/pipermail/haskell-cafe/2016-April/123792.html), [
+haskell-cafe 2](https://mail.haskell.org/pipermail/haskell-cafe/2016-May/123843.html), on the ticket, and via [
 reddit](https://www.reddit.com/r/haskell/comments/4gvim4/design_input_opportunity_specializing_types_in/). Here is a summary of the feedback. I have not attached numbers of votes, etc., because the feedback has tended to be unstructured. In my opinion, attaching a number of votes would imply more significant figures than we really have.
 
 
