@@ -153,7 +153,8 @@ $ arc diff HEAD~
 ```
 
 
-which submits the HEAD commit to Phabricator. `arc` will then respond with the revision number and a URL where you can visit your change.
+which submits the `HEAD` commit to Phabricator and use your SSH public key to push a branch to the GHC Differentials [
+repository](https://phabricator.haskell.org/diffusion/GHCDIFF/). If you have not added an SSH key you can skip pushing the branch with the `--skip-staging` flag. `arc` will then respond with the revision number and a URL where you can visit your change.
 
 
 
@@ -169,6 +170,10 @@ $ emacs ...
 $ git commit -asm "fix bug in new feature"
 $ arc diff # update existing review
 ```
+
+
+If you have not added an SSH public key to your account and don't feel like 
+
 
 ## Everything else
 
