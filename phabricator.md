@@ -154,7 +154,11 @@ $ arc diff HEAD~
 
 
 which submits the `HEAD` commit to Phabricator and use your SSH public key to push a branch to the GHC Differentials [
-repository](https://phabricator.haskell.org/diffusion/GHCDIFF/). If you have not added an SSH key you can skip pushing the branch with the `--skip-staging` flag. `arc` will then respond with the revision number and a URL where you can visit your change.
+repository](https://phabricator.haskell.org/diffusion/GHCDIFF/). If you have not added an SSH key you can skip pushing the branch with the `--skip-staging` flag.
+
+
+
+After pushing your new Differential `arc` will respond with the revision number and a URL where you can view and discuss your change.
 
 
 
