@@ -175,10 +175,6 @@ $ git commit -asm "fix bug in new feature"
 $ arc diff # update existing review
 ```
 
-
-If you have not added an SSH public key to your account and don't feel like 
-
-
 ## Everything else
 
 
