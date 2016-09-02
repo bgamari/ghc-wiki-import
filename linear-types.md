@@ -106,7 +106,7 @@ When performing a function call, the context used to check the argument is scale
 
 
 ```wiki
- Γ ⊢ f :ρ S ­> T     Δ ⊢ s :ω S
+ Γ ⊢ f :ρ S -­> T     Δ ⊢ s :ω S
 –––––––––––––––––––––––––––––––––– unrestricted application
           Γ+Δ ⊢ f s  :ρ  T
 
@@ -178,7 +178,7 @@ case x of
 ```
 
 
-In \_ we have `x ::(π×ρ) B`
+In \_ we have `y ::(π×ρ) B`
 
 
 
