@@ -10,6 +10,10 @@ Linear types can be used to encode protocols, in a way very similar to 'session 
 
 
 ```
+type a ⊗ b = ... {- see proposal -}
+type a ⊸ b = ... {- see proposal -}
+type Effect = IO () -- for example
+
 pr :: Double -> Effect -- "prints" a number
 
 type N a = a ⊸ Effect
@@ -25,7 +29,7 @@ type Server = N Client
 exampleClient :: N (N Client)
 exampleClient server = server $ Mul 12 34 $ \(product,server') ->
   -- do something with the product
-  pr product <> server' Terminate
+  pr product >> server' Terminate
 
 exampleServer :: Server
 exampleServer client = case client of
@@ -85,7 +89,19 @@ One then faces two classes of new problems.
 
 
 
-First, any non-linear (precisely non-affine) use of such a representation will **duplicate work**. If one is not careful, one may end up with a program which does not use any intermediate memory, but duplicates a lot of intermediate computations. Linear types solve the problem by preventing such duplications. (Combinators may be still provided to duplicate computation explicitly or store intermediate results explicitly.)
+First, any non-linear (precisely non-affine) use of such a representation will **duplicate work**. For example:
+
+
+```
+example srcs dsts = do
+  ss <- expensiveComputation <$> sourceFs srcs
+  sk <- sinkFs  dsts
+  drainP ss sk
+  drainP ss sk -- expensiveComputation is run a second time here.
+```
+
+
+If one is not careful, one may end up with a program which does not use any intermediate memory, but duplicates a lot of intermediate computations. Linear types solve the problem by preventing such duplications. (Combinators may be still provided to duplicate computation explicitly or store intermediate results explicitly.)
 
 
 
