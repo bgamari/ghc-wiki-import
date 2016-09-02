@@ -57,7 +57,8 @@ The problem with this scheme is that it involves two phases of heuristics (rules
 
 
 
-A partial remedy to this solution is to stop relying on rewrite rules, and use directly non-recursive representations. For example the following representation from Lippmeier et al.:
+A partial remedy to this solution is to stop relying on rewrite rules, and use directly non-recursive representations. For example the following representation from Lippmeier et al. [
+http://benl.ouroborus.net/papers/2016-polarized/dpdf-FHPC2016-preprint.pdf](http://benl.ouroborus.net/papers/2016-polarized/dpdf-FHPC2016-preprint.pdf):
 
 
 ```
@@ -72,8 +73,7 @@ data Sinks i m e = Sinks
 ```
 
 
-Such representations are typically functionals, and thus do not consume memory. One eventually gets code which is guaranteed to be 'fused'. For instance, in the following example from Lippmeier et al. [
-http://benl.ouroborus.net/papers/2016-polarized/dpdf-FHPC2016-preprint.pdf](http://benl.ouroborus.net/papers/2016-polarized/dpdf-FHPC2016-preprint.pdf), neither the source nor the sink represent data in memory.
+Such representations are typically functionals, and thus do not consume memory. One eventually gets code which is guaranteed to be 'fused'. For instance, in the following example from Lippmeier et al., neither the source nor the sink represent data in memory.
 
 
 ```
