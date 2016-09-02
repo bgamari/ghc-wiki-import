@@ -262,7 +262,7 @@ In this proposal, we tackle only the type-checking aspects of linear types. Taki
 
 
 
-The standard solution for managing resources in Haskell is to use monads. In this subsection we compare the lightweight regions monad with linear types. This example is inspired by [Kiselyov and Chan](linear-types#regions).
+The standard solution for managing resources in Haskell is to use monads. In this subsection we compare the lightweight regions monad with linear types. This example is inspired by [Kiselyov and Shan](linear-types#regions).
 
 
 
@@ -277,7 +277,7 @@ Note that one application of managing resource lifespans is doing away with a ga
 
 
 
-The following code is adapted from [Kiselyov and Chan](linear-types#regions). It uses the library developed in the paper. It uses a system of monadic regions to be able to close `file2` as soon as possible (*i.e.* when the sub-region introduced by `newRgn` ends).
+The following code is adapted from [Kiselyov and Shan](linear-types#regions). It uses the library developed in the paper. It uses a system of monadic regions to be able to close `file2` as soon as possible (*i.e.* when the sub-region introduced by `newRgn` ends).
 
 
 ```
