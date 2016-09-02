@@ -57,9 +57,14 @@ A partial remedy to this solution is to stop relying on rewrite rules, and use d
 
 
 ```
-data Sources i m e = Sources
+data Sources i m e = Sources -- 'i' is the array's index type, 'e' the type of elements and 'm' the effects
   { arity :: i
-  , pull  :: i -> (e -> m ()) -> m () -> m () }
+  , pull  :: i -> (e -> m ()) -> m () -> m () } -- 'pull' is an iterator to apply to every elements of the array (like 'traverse')
+
+data Sinks i m e = Sinks
+  { arity :: i
+  , push  :: i -> e -> m ()
+  , eject :: i -> m () }
 ```
 
 
@@ -91,9 +96,13 @@ Second, such representations may contain effects. In this situation, non-linear 
 Quoting Lippmeier et al.:
 
 
+>
+>
+> In general an object of type Sources is an abstract producer of data, and it may not even be possible to rewind it to a previous state — suppose it was connected to a stream of sensor readings. Alas the Haskell type system does not check linearity so we rely on the programmer to enforce it manually.
+>
+>
 
-\<blockquote\>In general an object of type Sources is an abstract producer of data, and it may not even be possible to rewind it to a previous state — suppose it was connected to a stream of sensor readings. Alas the Haskell type system does not check linearity so we rely on the programmer to enforce it manually.
-\</blockquote\>
+
 Literature on this style of non-recursive representations includes additionally:
 
 
