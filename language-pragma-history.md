@@ -14,6 +14,15 @@ See also [
 http://damianfral.github.io/ghcaniuse/](http://damianfral.github.io/ghcaniuse/).
 
 
+## Changes in GHC 8.2
+
+
+
+Added LANGUAGE extensions:
+
+
+- `[No]UnboxedSums`
+
 ## Changes in GHC 8.0
 
 
