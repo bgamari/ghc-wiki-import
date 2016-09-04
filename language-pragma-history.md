@@ -65,6 +65,12 @@ Added LANGUAGE extensions:
 - `[No]PatternSynonyms`
 - `[No]RoleAnnotations`
 
+
+Removed LANGUAGE extensions:
+
+
+- `[No]MonoPatBinds`
+
 ## Changes in GHC 7.6
 
 
