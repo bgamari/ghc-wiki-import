@@ -696,7 +696,7 @@ pattern TRFun arg res <- TRApp _ (TRApp _ (TrArrow _ _) arg) res where
 ```
 
 
-This approach trades some boilerplate complexity for a more complex
+This approach trades some user-code complexity for a more complex
 representation type. I'm not yet certain whether it would be an improvement over
 the current state of affairs. It has the disadvantage that the implementation
 needs to take care to normalize representations that it builds (e.g. prefer
@@ -704,3 +704,8 @@ needs to take care to normalize representations that it builds (e.g. prefer
 more efficient for the compiler to produce dictionaries in this form.
 
 
+```
+mkApp :: TypeRep a -> TypeRep b -> TypeRep (a b)
+mkApp TrTYPE Tr'PtrRepLifted = TrType
+mkApp TrTYPE 
+```
