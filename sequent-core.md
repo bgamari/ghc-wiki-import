@@ -15,7 +15,7 @@
   - Nullary join points do not take a void argument (as they did before).
   - Join-point Ids survive in Iface unfoldings
 
-## Join Point Analysis (JFP)
+## Join Point Analysis (JPA)
 
 
 
@@ -39,7 +39,41 @@ These places need to be made join-point aware
 
 - Worker/wrapper for strictness: we do want w/w for arguments, but not for the return side (CPR).
 
-- Float-in: floated in a bit too far.  Elaborate!
+- Float In is crucial for finding join points, especially recursive ones. Consider:
+
+  ```wiki
+  f1 x = let j y = ... j z ... in
+         case j x of A -> ...
+                     B -> ...
+  ```
+
+  If neither branch mentions `j`, then `j` *could* be a join point if we moved it inward a bit:
+
+  ```wiki
+  f2 x = case (let join j y = ... j z ... in
+               j x) of A -> ...
+                       B -> ...
+  ```
+
+  Now the call to `j z` is in tail position with respect to `j`'s definition, so `j` can be a join point. However, the existing Float In pass goes a bit too far:
+
+  ```wiki
+  f3 x = case (let j y = ... j z ... in
+               j) x of A -> ...
+                       B -> ...
+  ```
+
+  This is *equivalent* to the second version, but it doesn't follow the join point invariant.
+
+
+  
+
+
+>
+>
+> This is a funny habit of the Float In implementation: it often floats a `let`-bound function inward so far that the body of the `let` becomes just the identifier itself. Normally the simplifier fixes this right up, so it hasn't ever mattered, but the simplifier will just move the `let` all the way out again, turning the third version in this example back into the first. We need Float In to get it exactly right, since handling `case`-of-recursive-join is exactly what lets us do fusion with recursion.
+>
+>
 
 - Float-out.
 
@@ -78,7 +112,21 @@ These places need to be made join-point aware
 > >
 >
 
-- Simplifier, obviously.  Moving the context into the RHS of join points.  Never float a joint-point at all.
+- Simplifier, obviously.  Moving the context into the RHS of join points.  Never float a join point at all.
+
+- Rule matcher does some let-floating of its own.
+
+  ```wiki
+  RULE   f (g x) = x+1
+
+       ...(f (let v = e in g (v-2)))....
+  ==> (rule fires)
+       ...(let v = e in
+           let x = v-2 in
+           x+1)...
+  ```
+
+  Be careful not to do this for join points, since you can't float a join point out of an argument.
 
 - NB: Float-in is a transformation that often creates join points:
 
@@ -122,20 +170,6 @@ Add `testsuite/test/perf/join-points/`
 
 ## Still to do
 
-
-- Rule matcher does some let-floating of its own.
-
-  ```wiki
-  RULE   f (g x) = x+1
-
-       ...(f (let v = e in g (v-2)))....
-  ==> (rule fires)
-       ...(let v = e in
-           let x = v-2 in
-           x+1)...
-  ```
-
-  Be careful not to do this for join points
 
 - Try not propagating join points to occurrences in `findJoinsInPgm`; instead rely on simplifier.
 
