@@ -202,7 +202,7 @@ suspend a = a
 >
 >
 > Note from David Feuer: the indirection problem could be resolved via [
-> https://ghc.haskell.org/trac/ghc/wiki/NewtypeOptimizationForGADTS](https://ghc.haskell.org/trac/ghc/wiki/NewtypeOptimizationForGADTS). There'd still need to be some magic to change the kind of the result.
+> https://ghc.haskell.org/trac/ghc/wiki/NewtypeOptimizationForGADTS](https://ghc.haskell.org/trac/ghc/wiki/NewtypeOptimizationForGADTS), which would be a good thing for other reasons too.
 >
 >
 
