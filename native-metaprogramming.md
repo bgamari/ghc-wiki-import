@@ -320,9 +320,8 @@ Above produces the following code:
 ```
 
 
-Basically, what the extensible does it to add a new parameter to the based
-datatype to stand for extensions, and each extension is projected out in its
-right place by a unique label.
+Basically, what the extensible encoding does is to add a new parameter to the
+datatype to stand for extensions, and each extension is projected out of it by a unique label.
 
 
 
