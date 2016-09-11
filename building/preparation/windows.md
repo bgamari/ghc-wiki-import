@@ -122,7 +122,7 @@ ERROR: Download failed.
 ```
 
 
-To see if you are have the 64-bit MinGW-w64 version of `curl` installed, check if the beginning of the output of `curl --version` is
+to see if you are have the 64-bit MinGW-w64 version of `curl` installed, check if the beginning of the output of `curl --version` is
 
 
 ```wiki
