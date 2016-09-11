@@ -106,7 +106,8 @@ If this `pacman` process fails (as it sometimes does) you can simply re-run it a
 
 
 
-The 64-bit MinGW-w64 version of `curl` is known to fail when used with the `mk/get-win32-tarballs.sh` script:
+The 64-bit MinGW-w64 version of `curl` is known to fail (see [
+this issue](https://github.com/Alexpux/MINGW-packages/issues/1707)) when used with the `mk/get-win32-tarballs.sh` script:
 
 
 ```wiki
