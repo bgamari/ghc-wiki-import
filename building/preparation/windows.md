@@ -122,7 +122,7 @@ ERROR: Download failed.
 ```
 
 
-to see if you are have the 64-bit MinGW-w64 version of `curl` installed, check if the beginning of the output of `curl --version` is
+To see if you are have the 64-bit MinGW-w64 version of `curl` installed, check if the beginning of the output of `curl --version` is
 
 
 ```wiki
@@ -141,7 +141,7 @@ alias curl='/usr/bin/curl'
 
 >
 >
-> To your `~/.bashrc` file.
+> to your `~/.bashrc` file.
 >
 >
 
