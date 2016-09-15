@@ -306,8 +306,7 @@ With linear types we can give a functional interface to streams. (Note that in t
 
 
 
-Some of the types in this example API include `IO` in order to mix well with the IO-monad-based outputing. The type family {{{\\a::\* -\>
-Context ⊸ IO (Stream ⊗ Context)}}} is, implicitly, the application of a linear state monad transformer with the `IO` monad (strictly speaking, linear state is not a monad transformer because it requires a stronger types for the underlying monad *e.g.*: `return :: a ⊸ m a`). It is important that while `open` and `close` are bound to `IO`, `read` is not and gives a pure interface to file traversal.
+Some of the types in this example API include `IO` in order to mix well with the IO-monad-based outputing. The type family ` \a :: * -> Context ⊸ IO (a ⊗ Context)` is, implicitly, the application of a linear state monad transformer with the `IO` monad (strictly speaking, linear state is not a monad transformer because it requires a stronger types for the underlying monad *e.g.*: `return :: a ⊸ m a`). It is important that while `open` and `close` are bound to `IO`, `read` is not and gives a pure interface to file traversal.
 
 
 ```
