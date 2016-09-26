@@ -6,7 +6,7 @@ This page is intended to serve as the first stop for those people who say, "I wa
 
 
 
-If you have any questions along the way, no matter how silly they may seem, don't hesitate to reach out to the community. There are people on the [mailing lists and IRC](mailing-lists-and-irc) who will gladly help you although (although you may need to be patient).
+If you have any questions along the way don't hesitate to reach out to the community. There are people on the [mailing lists and IRC](mailing-lists-and-irc) who will gladly help you (although you may need to be patient). Don't forget that all GHC developers are still learning; your question is never too silly to ask.
 
 
 ## First steps
