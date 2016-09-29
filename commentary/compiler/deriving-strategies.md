@@ -189,7 +189,7 @@ The stock classes are:
 - `Lift` (with `-XDeriveLift`)
 
 
-The relationship between stock classes and `DeriveAnyClass` can be be summarized as follows: In the absence of an explicit `anyclass` keyword, GHC will never attempt to derive a stock class instance using the `DeriveAnyClass`, since it is guaranteed that doing so would not produce the instance you'd want.
+The relationship between stock classes and `DeriveAnyClass` can be be summarized as follows: In the absence of an explicit `anyclass` keyword, GHC will never attempt to derive a stock class instance using `DeriveAnyClass`, since it is guaranteed that doing so would not produce the instance you'd want.
 
 
 
