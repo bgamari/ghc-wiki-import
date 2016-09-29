@@ -61,7 +61,7 @@ Despite our best efforts, the value of `sOne` will be `MkS 1` instead of `1`. Th
 A solution to the above issues is to introduce a syntax extension called *deriving strategies*. They are named as such because they allow users to state explicitly in a deriving clause what approach GHC should take when attempting to derive an instance for a typeclass. There are currently three strategies that GHC is aware of:
 
 
-- Deriving bespoke instances: This is the usual approach that GHC takes. For certain classes that GHC is aware of, such as `Eq`, `Ord`, `Functor`, `Generic`, and others, GHC can use an algorithm to derive an instance of the class for a particular datatype. For example, a bespoke, derived `Eq` instance for `data Foo = Foo Int` is:
+- Deriving stock instances: This is the usual approach that GHC takes. For certain classes that GHC is aware of, such as `Eq`, `Ord`, `Functor`, `Generic`, and others, GHC can use an algorithm to derive an instance of the class for a particular datatype mechanically. For example, a stock derived `Eq` instance for `data Foo = Foo Int` is:
 
 ```
 instance Eq Foo where
@@ -70,7 +70,7 @@ instance Eq Foo where
 
 >
 >
-> It is "bespoke" in the sense that GHC tailor-made the implementation of the instance to fit the definition of `Foo`. The bespoke strategy only requires enabling language extensions in certain cases (`DeriveFunctor`, `DeriveGeneric`, etc.).
+> Stock applies to the "standard" derivable typeclasses mentioned in the Haskell Report like `Eq` and `Show`, as well as some GHC-specific classes like `Data` and `Generic`. The stock strategy only requires enabling language extensions in certain cases (`DeriveFunctor`, `DeriveGeneric`, etc.).
 >
 >
 
@@ -83,9 +83,9 @@ instance Eq Foo where
 While GHC can pick a strategy internally, users don't have a reliable way to pick a strategy other than enabling language extensions and hoping that GHC does the right thing (which it often doesn't, as evidenced in the above problematic examples). The deriving strategies proposal aims to:
 
 
-1. Introduce a new `-XDerivingStrategies` language extension
-1. Allocate three keywords (`bespoke`, `newtype`, and `anyclass`) that can be used in `deriving` clauses or standalone `deriving` declarations to indicate which strategy to use when `-XDerivingStrategies` is enabled
-1. Allow datatypes to have multiple `deriving` clauses when `-XDerivingStrategies` is enabled
+1. Introduce a new `-XDerivingStrategies` language extension.
+1. Allocate three keywords (`stock`, `newtype`, and `anyclass`) that can be used in `deriving` clauses or standalone `deriving` declarations to indicate which strategy to use when `-XDerivingStrategies` is enabled. (Note that `stock` and `anyclass` would still be able to used outside the context of deriving as, say, function argument names.)
+1. Allow datatypes to have multiple `deriving` clauses when `-XDerivingStrategies` is enabled.
 
 ### Examples
 
@@ -104,11 +104,11 @@ Here is an example showing off what `-XDerivingStrategies` allows:
 
 newtype T a = T a
   deriving          Show
-  deriving bespoke  (Eq, Foldable)
+  deriving stock    (Eq, Foldable)
   deriving newtype  Ord
   deriving anyclass Read
 
-deriving bespoke instance Functor T
+deriving stock instance Functor T
 ```
 
 
@@ -122,9 +122,9 @@ This demonstrates why part 3 is important: with multiple `deriving` clauses, one
 With `-XDerivingStrategies` in the picture, we can now state how GHC figures out which deriving strategy to use for a particular derived instance:
 
 
-1. Look for a deriving strategy. If one is present, use that. This will throw an error if you try to do something impossible, like using the `newtype` strategy on a non-newtype or the `bespoke` keyword with a typeclass that doesn't support `bespoke` instances.
+1. Look for a deriving strategy. If one is present, use that. This will throw an error if you try to do something impossible, like using the `newtype` strategy on a non-newtype or the `stock` keyword with a non-stock typeclass.
 
-1. If deriving a class which supports bespoke instances:
+1. If deriving a stock class:
 
 >
 >
@@ -140,11 +140,11 @@ With `-XDerivingStrategies` in the picture, we can now state how GHC figures out
 
 >
 >
-> (c) Otherwise, if deriving a class which supports bespoke instances, and the corresponding language extension is enabled (if necessary), use the bespoke strategy. If the language extension is not enabled, throw an error. 
+> (c) Otherwise, if deriving a stock class and the corresponding language extension is enabled (if necessary), use the stock strategy. If the language extension is not enabled, throw an error. 
 >
 >
 
-1. If not deriving a class which supports bespoke instances:
+1. If not deriving a stock class:
 
 >
 >
@@ -171,12 +171,25 @@ With `-XDerivingStrategies` in the picture, we can now state how GHC figures out
 >
 
 
-The phrase "class which supports bespoke instances" refers to the classes listed [
-here](http://git.haskell.org/ghc.git/blob/8fe1672a9c4229b884b8dcebb9be57efa4c1fdb8:/compiler/typecheck/TcGenDeriv.hs#l123), plus `Generic` and `Generic1`.
+The stock classes are:
 
 
+- `Bounded`
+- `Enum`
+- `Eq`
+- `Ix`
+- `Ord`
+- `Read`
+- `Show`
+- `Functor` (with `-XDeriveFunctor`)
+- `Foldable` (with `-XDeriveFoldable`)
+- `Traversable` (with `-XDeriveTraversable`)
+- `Generic` and `Generic1` (with `-XDeriveGeneric`)
+- `Data` (with `-XDeriveDataTypeable`)
+- `Lift` (with `-XDeriveLift`)
 
-The relationship between bespoke instances and `DeriveAnyClass` can be be summarized as follows: In the absence of an explicit `anyclass` keyword, GHC will never attempt to derive a class using the `DeriveAnyClass` strategy when it supports `bespoke` instances, since it is guaranteed that doing so would not produce the instance you'd want.
+
+The relationship between stock classes and `DeriveAnyClass` can be be summarized as follows: In the absence of an explicit `anyclass` keyword, GHC will never attempt to derive a stock class instance using the `DeriveAnyClass`, since it is guaranteed that doing so would not produce the instance you'd want.
 
 
 
@@ -229,7 +242,7 @@ GHC currently disallows manually implementing `Typeable` instances, and derived 
 
 
 
-GHC also disallows manually implementing `Generic` instances when `-XSafe` is enabled, so the only way to declare `Generic` instances in Safe Haskell is to use the `-XDeriveGeneric` extension. To preserve this property, it is forbidden to derive a `Generic` instance with a deriving strategy other than `bespoke`.
+GHC also disallows manually implementing `Generic` instances when `-XSafe` is enabled, so the only way to declare `Generic` instances in Safe Haskell is to use the `-XDeriveGeneric` extension. To preserve this property, it is forbidden to derive a `Generic` instance with a deriving strategy other than `stock`.
 
 
 ### What `-XDerivingStrategies` is not
@@ -265,11 +278,11 @@ https://mail.haskell.org/pipermail/ghc-devs/2016-July/012442.html](https://mail.
 ```
 newtype T a = T a
   deriving          Show
-  deriving {-# BESPOKE  #-} (Eq, Foldable)
+  deriving {-# STOCK    #-} (Eq, Foldable)
   deriving {-# NEWTYPE  #-} Ord
   deriving {-# ANYCLASS #-} Read
 
-deriving {-# BESPOKE #-} instance Functor T
+deriving {-# STOCK #-} instance Functor T
 ```
 
 >
@@ -281,7 +294,7 @@ deriving {-# BESPOKE #-} instance Functor T
 - Use type synonyms instead of keywords. We could have three builtin type syonyms:
 
 ```
-type Bespoke  (a :: k)  = a
+type Stock    (a :: k)  = a
 type Newtype  (a :: k)  = a
 type AnyClass (a :: k) = a
 ```
@@ -293,8 +306,8 @@ type AnyClass (a :: k) = a
 >
 
 ```
-newtype T a = T a deriving (Bespoke Eq, Newtype Ord, AnyClass Read, Show)
-deriving instance Bespoke (Functor T)
+newtype T a = T a deriving (Stock Eq, Newtype Ord, AnyClass Read, Show)
+deriving instance Stock (Functor T)
 ```
 
 >
@@ -307,23 +320,23 @@ deriving instance Bespoke (Functor T)
 
 ```
 newtype T a = T a
-  deriving ( Show
-           , bespoke Eq
-           , bespoke Foldable
-           , newtype Ord
+  deriving (          Show
+           , stock    Eq
+           , stock    Foldable
+           , newtype  Ord
            , anyclass Read
            )
 ```
 
 >
 >
-> This is cleaner in some respects, as it more closely resembles an English-language description of how to derive all the instances that `T` needs (`Eq` via bespoke, `Ord` via newtype, `Read` via anyclass...). A downside is that this is much trickier (though likely not impossible) to parse, since all-lowercase words can be confused for type variables.
+> This is cleaner in some respects, as it more closely resembles an English-language description of how to derive all the instances that `T` needs (`Eq` via stock, `Ord` via newtype, `Read` via anyclass...). A downside is that this is much trickier (though likely not impossible) to parse, since all-lowercase words can be confused for type variables.
 >
 >
 
 >
 >
-> Another factor to consider is the semantic noise that this suggestion brings. Unlike with multiple `deriving` clauses, this suggestion requires the use of a keyword next to *every* class. This can lead to more keystrokes than the multi-clause suggestion would when you derive several instances with the same deriving strategy. For instance, in the above example you need to type `bespoke` twice, whereas in the multi-clause proposal you need only type `bespoke` once. This can really add up when you derive loads of instances at a time, e.g.,
+> Another factor to consider is the semantic noise that this suggestion brings. Unlike with multiple `deriving` clauses, this suggestion requires the use of a keyword next to *every* class. This can lead to more keystrokes than the multi-clause suggestion would when you derive several instances with the same deriving strategy. For instance, in the above example you need to type `stock` twice, whereas in the multi-clause proposal you need only type `stock` once. This can really add up when you derive loads of instances at a time, e.g.,
 >
 >
 
@@ -361,5 +374,5 @@ newtype T a = T a
 >
 >
 
-- Previous alternative suggestions for the `bespoke` keyword were `builtin`, `magic`, `wiredin`, `standard`, `native`, `original`, and `specialized`. In particular, `builtin` is what I (Ryan) originally suggested, but it was poorly received since *all* deriving extensions are, to some extent, built-in to GHC.
-- A previous alternative suggestion for the `anyclass` keyword was `default`, since it's already a keyword, and the connection to `-XDefaultSignatures` would be evocative of generic programming, which `-XDeriveAnyClass` is often used for. On the other hand, I (Ryan) felt it would be too easy to confuse with what `bespoke` accomplishes (i.e., the "default" GHC behavior when deriving an instance), so I proposed `anyclass` to make it very explicit what's going on there.
+- Previous alternative suggestions for the `stock` keyword were `bespoke`, `builtin`, `magic`, `wiredin`, `standard`, `native`, `original`, and `specialized`. In particular, `builtin` is what I (Ryan) originally suggested, but it was poorly received since *all* deriving extensions are, to some extent, built-in to GHC. I then championed `bespoke`, but others expressed reservations about the word's relative obscurity outside of Commonwealth English.
+- A previous alternative suggestion for the `anyclass` keyword was `default`, since it's already a keyword, and the connection to `-XDefaultSignatures` would be evocative of generic programming, which `-XDeriveAnyClass` is often used for. On the other hand, I (Ryan) felt it would be too easy to confuse with what `stock` accomplishes (i.e., the "default" GHC behavior when deriving an instance), so I proposed `anyclass` to make it very explicit what's going on there.
