@@ -22,7 +22,7 @@ If you believe your favourite thing belongs in this list, but isn't there, pleas
 
 
 
-Very tentative: Release candidate by **late-August 2016**.
+Release candidate by **mid-October 2016**.
 
 
 ## Libraries Status
