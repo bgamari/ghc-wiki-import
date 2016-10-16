@@ -185,6 +185,7 @@ this bug](https://github.com/haskell/cabal/issues/2331).  If so, try using a dif
 
 ```
 mkdir -p /usr/local/bin &&
+pacman -S unzip &&
 curl -LO https://www.haskell.org/cabal/release/cabal-install-1.24.0.0-rc1/cabal-install-1.24.0.0-rc1-x86_64-unknown-mingw32.zip &&
 unzip cabal-install-1.24.0.0-rc1-x86_64-unknown-mingw32.zip -d /usr/local/bin &&
 cabal update &&
