@@ -2,6 +2,9 @@
 
 
 
+
+
+
 This page documents the instructions for setting up a Windows build using [
 MSYS2](http://sourceforge.net/projects/msys2/), which is a fairly complete build of [
 MinGW-w64](http://mingw-w64.org/) + the MSYS2 tools.
