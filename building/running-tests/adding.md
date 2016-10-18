@@ -405,7 +405,7 @@ There are a number of predicates which can be used:
 
 - **compiler\_type(ct)**     a compiler of type `ct` (which could be `'ghc'`, `'hug'`, etc) is being tested
 - **compiler\_lt(ct, v)**    compiler type is `ct`, and the version is less than `v`
-- **compilignoreer\_le(ct, v)**    compiler type is `ct`, and the version is less than or equal to `v`
+- **compiler\_le(ct, v)**    compiler type is `ct`, and the version is less than or equal to `v`
 - **compiler\_gt(ct, v)**    compiler type is `ct`, and the version is greater than `v`
 - **compiler\_ge(ct, v)**    compiler type is `ct`, and the version is greater than or equal to `v`
 - **unregisterised()**      the compiler is unregisterised
