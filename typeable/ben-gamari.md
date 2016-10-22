@@ -90,14 +90,65 @@ On the other hand, (2) lacks these disadvantages but presents a few challenges,
 ### Encoding kind instantiations
 
 
-```
-data KindRep = KindTyCon TyCon
-             | KindForall KindRep
-             | KindVar !Int
 
-data TyCon 
+One approach would be,
+
+
+```
+type KindBndr = Int
+data KindRep = KindTyCon TyCon
+             | KindVar !KindBndr
+
+data TyCon = TyCon { tyConName :: String, ...
+                   , tyConKindRep :: KindRep
+                   }
 data TypeRep (a :: k) where
-    
+  TrCon :: TyCon -> [SomeTypeRep] -> TypeRep a
+  TrApp :: TypeRep a -> TypeRep b -> TypeRep (a b)
+```
+
+
+However this has the unfortunate side-effect of making the production of `TyCon`s (and hence all data types) significantly more expensive due to the need to produce `KindRep`.
+
+
+
+An alternative to this would be to push the `KindRep` out of `TyCon` and into evidence generation,
+
+
+```
+type KindBndr = Int
+data KindRep = KindTyCon TyCon
+             | KindVar !KindBndr
+
+data TyCon = TyCon { tyConName :: String, ...
+                   }
+
+data TypeRep (a :: k) where
+  TrCon :: TyCon -> KindRep -> [SomeTypeRep] -> TypeRep a
+  TrApp :: TypeRep a -> TypeRep b -> TypeRep (a b)
+```
+
+
+This has the advantage of only inflicting the cost of `KindRep` generation on users of `Typeable`. However, this means we lose sharing of `KindRep`s.
+
+
+
+Another alternative would be to drop `KindRep` entirely and instead capture kinds through constraints,
+
+
+```
+data TyCon = TyCon { tyConName :: String, ...
+                   }
+
+data TypeRep (a :: k) where
+  TrCon :: TyCon -> [SomeTypeRep] -> TypeRep a
+  TrApp :: TypeRep a -> TypeRep b -> TypeRep (a b)
+
+class Typeable k => Typeable (a :: k) where
+  typeRep :: TypeRep a
+
+-- Which has slight consequences on withTypeable,
+withTypeable :: Typeable k => TypeRep (a :: k) -> (Typeable a => r) -> r
 ```
 
 ## Notes from meeting with Simon (5 Oct. 2016)
