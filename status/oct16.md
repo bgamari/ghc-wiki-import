@@ -68,6 +68,8 @@ there are a few new features which will likely appear,
 
 - **Support for `StaticPointers` in GHCi**. At long last programs making use of the `StaticPointers` language extension will have first-class interpreter support.
 
+- **Improved idle CPU usage**: A long-standing regression resulting in unnecessary wake-ups in an otherwise idle program was fixed. This should lower CPU utilization and improve power consumption for some programs.
+
 ## Miscellaneous
 
 
