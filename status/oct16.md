@@ -48,7 +48,7 @@ there are a few new features which will likely appear,
 ## Runtime system
 
 
-- Compact regions (Giovanni Campagna, Edward Yang, [
+- **Compact regions** (Giovanni Campagna, Edward Yang, [
   Phab:D1264](https://phabricator.haskell.org/D1264), [
   paper](http://ezyang.com/papers/ezyang15-cnf.pdf)). This runtime system feature allows a referentially "closed" set of heap objects to be collected into a "compact region", allowing cheaper garbage collection, heap-object sharing between processes, and the possibility of inexpensive serialization.
 
