@@ -575,6 +575,10 @@ There are several variants of indirection:
 `BCO`
 
 
+
+Byte-code objects represent bits of code which can be interpreted by GHC's byte-code interpreter (e.g. as used by GHCi).
+
+
 ### Black holes
 
 
