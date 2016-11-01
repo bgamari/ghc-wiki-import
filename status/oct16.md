@@ -39,7 +39,7 @@ there are a few new features which will likely appear,
 >
 >
 
-- **Backpack**: Backpack has merged with GHC, Cabal and cabal-install, allowing you to write libraries which are parametrized by signatures, letting users decide how to instantiate them at a later point in time. If you want to just play around with the signature language, there is a new major mode `ghc --backpack`; at the Cabal syntax level, there are two new fields `signatures` and `mixins` which permit you to define parametrized packages, and instantiate them in a flexible way. More details are at [Backpack](backpack).
+- **Backpack**: Backpack has merged with GHC, Cabal and cabal-install, allowing you to write libraries which are parametrized by signatures, letting users decide how to instantiate them at a later point in time. If you want to just play around with the signature language, there is a new major mode `ghc --backpack`; at the Cabal syntax level, there are two new fields `signatures` and `mixins` which permit you to define parametrized packages, and instantiate them in a flexible way. More details are at [the Backpack wiki page](backpack).
 
 - **`deriving` strategies**: GHC now provides the programmer with a precise mechanism to distinguish between the three ways to derive type class instances: the usual way, the `GeneralizedNewtypeDeriving` way, and the `DeriveAnyClass` way. See the [
   wiki page](https://ghc.haskell.org/trac/ghc/wiki/Commentary/Compiler/DerivingStrategies) for more details.
