@@ -98,6 +98,7 @@ One approach would be,
 type KindBndr = Int
 data KindRep = KindTyCon TyCon
              | KindVar !KindBndr
+             | KindApp KindRep KindRep
 
 data TyCon = TyCon { tyConName :: String, ...
                    , tyConKindRep :: KindRep
@@ -123,6 +124,7 @@ An alternative to this would be to push the `KindRep` out of `TyCon` and into ev
 type KindBndr = Int
 data KindRep = KindTyCon TyCon
              | KindVar !KindBndr
+             | KindApp KindRep KindRep
 
 data TyCon = TyCon { tyConName :: String, ...
                    }
