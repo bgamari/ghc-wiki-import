@@ -105,6 +105,10 @@ data TyCon = TyCon { tyConName :: String, ...
 data TypeRep (a :: k) where
   TrCon :: TyCon -> [SomeTypeRep] -> TypeRep a
   TrApp :: TypeRep a -> TypeRep b -> TypeRep (a b)
+
+data SomeTypeRep where
+    SomeTypeRep :: forall k (a :: k). TypeRep a -> SomeTypeRep
+
 ```
 
 
@@ -126,6 +130,9 @@ data TyCon = TyCon { tyConName :: String, ...
 data TypeRep (a :: k) where
   TrCon :: TyCon -> KindRep -> [SomeTypeRep] -> TypeRep a
   TrApp :: TypeRep a -> TypeRep b -> TypeRep (a b)
+
+data SomeTypeRep where
+    SomeTypeRep :: forall k (a :: k). TypeRep a -> SomeTypeRep
 ```
 
 
