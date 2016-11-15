@@ -55,7 +55,7 @@ We say that a set of conlikes is a **complete** match when a function which is d
 A user declares a complete match using a `COMPLETE` pragma. The definition consists of a list of conlikes. 
 
 
-```wiki
+```
 {-# COMPLETE con_1, ..., con_n #-}
 ```
 
@@ -78,15 +78,14 @@ For a given `COMPLETE` pragma, for a complete matching `c`, if a user writes a f
 `COMPLETE` pragmas are always imported and exported from modules. 
 
 
-
-\# Examples
+# Examples
 
 
 
 The following examples should emit no warnings.
 
 
-```wiki
+```
 pattern P :: A
 pattern P = A
 
@@ -96,7 +95,7 @@ foo :: A -> A
 foo P = A
 ```
 
-```wiki
+```
 
 pattern N :: Maybe a
 pattern N = Nothing
