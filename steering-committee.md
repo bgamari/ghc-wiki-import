@@ -23,6 +23,7 @@ The goal of the committee is to facilitate the process of proposing changes to G
 - Manuel Chakravarty
 - Iavor Diatchki
 - Atze Dijkstra
-- [ Richard Eisenberg](http://cs.brynmawr.edu/~rae) (Bryn Mawr College)
+- [
+  Richard Eisenberg](http://cs.brynmawr.edu/~rae), a.k.a. goldfire(re) (Bryn Mawr College)
 - Ben Gamari
 - Ryan Newton
