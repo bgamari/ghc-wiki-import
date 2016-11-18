@@ -93,6 +93,15 @@ with
 
 
 
-Then I timed the resulting binaries (`python -m timeit -n 10 -r 3 'import os; os.system("./test-fast")';` and found that the change improves runtime by …(waiting)…
+Then I timed the resulting binaries with
+
+
+```
+$ python -m timeit -n 10 -r 3 'import os; os.system("./test-fast")';
+$ python -m timeit -n 10 -r 3 'import os; os.system("./test-slow")';
+```
+
+
+and found that the change improves runtime by …(waiting)…
 
 
