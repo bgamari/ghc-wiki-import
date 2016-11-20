@@ -126,8 +126,12 @@ Running a command like  `export MACOSX_DEPLOYMENT_TARGET=10.7` before building w
 
 
 
-Note that this the deployment target does not affect library availability. This means that builds performed on Sierra (macOS 10.12) systems (which have `clock_gettime`), will be incompatible with previous OS X releases (see [\#12858](https://gitlab.staging.haskell.org/ghc/ghc/issues/12858)). If you need to build a binary distribution on Sierra which is compatible with previous releases, it's best to simply disable `clock_gettime` support at configuration time: `./configure ac_cv_func_clock_gettime=no`.
+Note that this the deployment target does not affect library availability. This means that builds performed on Sierra (macOS 10.12) systems (which have `clock_gettime`), will be incompatible with previous OS X releases (see [\#12858](https://gitlab.staging.haskell.org/ghc/ghc/issues/12858)). If you need to build a binary distribution on Sierra which is compatible with previous releases, it's best to simply disable `clock_gettime` support at configuration time,
 
+
+```wiki
+./configure ac_cv_func_clock_gettime=no
+```
 
 ## Other tools
 
