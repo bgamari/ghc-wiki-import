@@ -11,6 +11,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#12425](https://gitlab.staging.haskell.org/ghc/ghc/issues/12425) "OOM killer"
 - [\#12747](https://gitlab.staging.haskell.org/ghc/ghc/issues/12747)
 - [\#12789](https://gitlab.staging.haskell.org/ghc/ghc/issues/12789)
+- [\#12843](https://gitlab.staging.haskell.org/ghc/ghc/issues/12843)
 
 -  [\#8613](https://gitlab.staging.haskell.org/ghc/ghc/issues/8613), [\#9070](https://gitlab.staging.haskell.org/ghc/ghc/issues/9070), [\#8319](https://gitlab.staging.haskell.org/ghc/ghc/issues/8319), [\#7521](https://gitlab.staging.haskell.org/ghc/ghc/issues/7521), [\#10459](https://gitlab.staging.haskell.org/ghc/ghc/issues/10459), [\#10584](https://gitlab.staging.haskell.org/ghc/ghc/issues/10584), [\#10565](https://gitlab.staging.haskell.org/ghc/ghc/issues/10565), [\#12274](https://gitlab.staging.haskell.org/ghc/ghc/issues/12274): simplifier ticks exhausted (there are others). 
 
