@@ -24,7 +24,7 @@ The goal of the committee is to facilitate the process of proposing changes to G
   UPenn](http://cis.upenn.edu/~joachim))
 - [ Manuel Chakravarty](http://justtesting.org)
 - [ Iavor Diatchki](http://galois.com/team/iavor-diatchki) (Galois Inc.)
-- Atze Dijkstra
+- Atze Dijkstra ([ Standard Chartered Bank](http://www.sc.com))
 - [
   Richard Eisenberg](http://cs.brynmawr.edu/~rae), a.k.a. goldfire(re) (Bryn Mawr College)
 - Ben Gamari
