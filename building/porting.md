@@ -25,7 +25,7 @@ on the way to a full registerised port, we don't mind too much.
 
 
 
-You should go through this process even if your architecture is already
+You should go through this process even if your architecture already
 has registerised support in GHC, but your OS currently isn't supported.
 In this case you probably won't need to port any of the
 architecture-specific parts of the code, and you can proceed straight
