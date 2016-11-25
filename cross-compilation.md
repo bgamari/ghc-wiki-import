@@ -160,7 +160,7 @@ Autoconf's concept and variable $cross\_compiling only gets set if B ≠ H. This
 
 
 
-This leaves us with the issue of how to tell it about parts of HT it can't infer from the stage0 compiler. We need a new set of variables that are how to compile, link and run things on the host, which if cross compiling need to be different. There needs to be some way to pass those on the configure line. Perhaps something like:
+This leaves us with the issue of how to tell it about parts of HT it can't infer from the stage0 compiler. We need a new set of variables that know how to compile, link and run things on the host, which if cross compiling need to be different. There needs to be some way to pass those on the configure line. Perhaps something like:
 
 
 ```wiki
