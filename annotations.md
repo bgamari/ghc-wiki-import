@@ -24,7 +24,8 @@ There is ongoing work to make Annotations usable from [TemplateHaskell](template
 
 
 
-An annotations system was implemented as part of the Compiler Plugins Summer of Code project (Summer 08). It has been submitted to the HEAD, and will appear in GHC 6.12 and later.  Documentation is available at [http://www.haskell.org/ghc/docs/latest/html/users\_guide/extending-ghc.html\#annotation-pragmas](http://www.haskell.org/ghc/docs/latest/html/users_guide/extending-ghc.html#annotation-pragmas).
+An annotations system was implemented as part of the Compiler Plugins Summer of Code project (Summer 08). It has been submitted to the HEAD, and will appear in GHC 6.12 and later.  Documentation is available at [
+http://downloads.haskell.org/\~ghc/latest/docs/html/users\_guide/extending\_ghc.html\#source-annotations](http://downloads.haskell.org/~ghc/latest/docs/html/users_guide/extending_ghc.html#source-annotations).
 
 
 
