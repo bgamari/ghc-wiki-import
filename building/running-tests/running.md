@@ -2,7 +2,7 @@
 
 
 
-This section gives information on how to use the testsuite.
+This section gives information on how to use the testsuite. Note that the testsuite driver requires Python 3.
 
 
 
