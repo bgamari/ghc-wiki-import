@@ -43,6 +43,11 @@ See [Libraries](status/gh-c-8.2.1/libraries)
 Below are the major highlights of 8.2.
 
 
+### Compile time improvements
+
+
+- Discard coercions [\#8095](https://gitlab.staging.haskell.org/ghc/ghc/issues/8095)
+
 ### Front end changes
 
 
