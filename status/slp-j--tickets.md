@@ -2,6 +2,20 @@
 This page collects tickets that Simon PJ is interested in, so that he remembers them
 
 
+## Status pages
+
+
+- `hs-boot` files: [Commentary/Compiler/TyingTheKnot](commentary/compiler/tying-the-knot)
+- Type-indexed type representations: [plan and status](typeable/ben-gamari)
+- `TypeInType`, kind equalities etc: [DependentHaskell](dependent-haskell), esp [DependentHaskell/Phase1](dependent-haskell/phase1)
+- `TypeApplications`: [visible type application](type-application)
+- [Custom type errors](proposal/custom-type-errors)
+- [UnliftedDataTypes](unlifted-data-types)
+- [UnpackedSumTypes](unpacked-sum-types), [\#9214](https://gitlab.staging.haskell.org/ghc/ghc/issues/9214)
+- [TypeNats](type-nats): type-level literals
+- [LevityPolymorphism](levity-polymorphism)
+- [\#11715](https://gitlab.staging.haskell.org/ghc/ghc/issues/11715), [\#11621](https://gitlab.staging.haskell.org/ghc/ghc/issues/11621): `Constraint` vs `*`
+
 ## INLINE problems / ticks exhausted
 
 
@@ -42,21 +56,6 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 
  
-Major things
-
-
-- `hs-boot` files: [Commentary/Compiler/TyingTheKnot](commentary/compiler/tying-the-knot)
-- Type-indexed type representations: [plan and status](typeable/ben-gamari)
-- `TypeInType`, kind equalities etc: [DependentHaskell](dependent-haskell), esp [DependentHaskell/Phase1](dependent-haskell/phase1)
-- `TypeApplications`: [visible type application](type-application)
-- [Custom type errors](proposal/custom-type-errors)
-- [UnliftedDataTypes](unlifted-data-types)
-- [UnpackedSumTypes](unpacked-sum-types), [\#9214](https://gitlab.staging.haskell.org/ghc/ghc/issues/9214)
-- [TypeNats](type-nats): type-level literals
-- `RuntimeRep`; unsaturated use of unlifted type constructors [\#11736](https://gitlab.staging.haskell.org/ghc/ghc/issues/11736)
-- [\#11715](https://gitlab.staging.haskell.org/ghc/ghc/issues/11715), [\#11621](https://gitlab.staging.haskell.org/ghc/ghc/issues/11621): `Constraint` vs `*`
-
-
 Refactoring/optimisation
 
 
