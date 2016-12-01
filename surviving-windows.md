@@ -55,6 +55,6 @@ Cygwin is a runtime library providing a POSIX-like environment, allowing softwar
 
 
 
-The Microsoft Visual C runtime. This is essentially the `libc` of the Windows world.
+The Microsoft Visual C runtime. This is the `libc` of the Windows world.
 
 
