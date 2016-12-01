@@ -1,5 +1,4 @@
-
-\# Surviving Windows as a Unix user: A glossary
+# Surviving Windows as a Unix user: A glossary
 
 
 
