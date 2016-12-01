@@ -88,3 +88,10 @@ The Microsoft Visual C runtime. This is the `libc` of the Windows world.
 ConEmu](https://conemu.github.io/).
 
 
+## Linux on Windows
+
+
+
+Linux on Windows (also known as the Windows Subsystem for Linux or Drawbirdge) is a project undertaken by Microsoft seeking to add a Windows subsystem to the Windows kernel, allowing full user-mode emulation of a Linux environment. Currently we don't use LoW for GHC development.
+
+
