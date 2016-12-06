@@ -16,6 +16,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [LevityPolymorphism](levity-polymorphism)
 - [\#11715](https://gitlab.staging.haskell.org/ghc/ghc/issues/11715), [\#11621](https://gitlab.staging.haskell.org/ghc/ghc/issues/11621): `Constraint` vs `*`
 - [Generic deriving](commentary/compiler/generic-deriving)
+- [Join points](sequent-core)
 
 ## INLINE problems / ticks exhausted
 
