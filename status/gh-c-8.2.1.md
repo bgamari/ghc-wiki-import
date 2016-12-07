@@ -348,6 +348,10 @@ col: priority, col: differential, col: owner, order: owner)
   
   
     
+
+## Status: new (5 matches)
+
+
   
   
 
@@ -355,44 +359,429 @@ col: priority, col: differential, col: owner, order: owner)
       </td>
 <th>
         
-        Ticket (Ticket query: status: new, milestone: 8.2, group: status,
+        Ticket (Ticket query: status: new, milestone: 8.2.1, group: status,
 max: 0, col: id, col: type, col: summary, col: priority, col: owner, order: id)
       </th>
 <th>
         
-        Type (Ticket query: status: new, milestone: 8.2, group: status, max: 0,
-col: id, col: type, col: summary, col: priority, col: owner, order: type)
+        Type (Ticket query: status: new, milestone: 8.2.1, group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+order: type)
       </th>
 <th>
         
-        Summary (Ticket query: status: new, milestone: 8.2, group: status,
+        Summary (Ticket query: status: new, milestone: 8.2.1, group: status,
 max: 0, col: id, col: type, col: summary, col: priority, col: owner,
 order: summary)
       </th>
 <th>
         
-        Priority (Ticket query: status: new, milestone: 8.2, group: status,
+        Priority (Ticket query: status: new, milestone: 8.2.1, group: status,
 max: 0, col: id, col: type, col: summary, col: priority, col: owner, desc: 1,
 order: priority)
       </th>
 <th>
         
-        Owner (Ticket query: status: new, milestone: 8.2, group: status, max: 0,
-col: id, col: type, col: summary, col: priority, col: owner, order: owner)
+        Owner (Ticket query: status: new, milestone: 8.2.1, group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+order: owner)
       </th>
 <td>
-    </td></tr>
+    </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr>
 <tr><td>
-          </td>
-<th>
-            No tickets found
-          </th>
+                
+                  
+                    </td>
+<th>[\#8040](https://gitlab.staging.haskell.org/ghc/ghc/issues/8040)</th>
 <td>
-        </td>
-<td></td>
-<td></td>
-<td></td>
-<td></td></tr></table>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [installed include/HsVersions.h  wants to \#include "../includes/ghcautoconf.h"](https://gitlab.staging.haskell.org/ghc/ghc/issues/8040)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#10010](https://gitlab.staging.haskell.org/ghc/ghc/issues/10010)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [LLVM/optimized code for sqrt incorrect for negative values](https://gitlab.staging.haskell.org/ghc/ghc/issues/10010)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#10249](https://gitlab.staging.haskell.org/ghc/ghc/issues/10249)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [GHCi leaky abstraction: error message mentions \`ghciStepIO\`](https://gitlab.staging.haskell.org/ghc/ghc/issues/10249)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#13194](https://gitlab.staging.haskell.org/ghc/ghc/issues/13194)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Concurrent modifications of package.cache are not safe](https://gitlab.staging.haskell.org/ghc/ghc/issues/13194)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#14503](https://gitlab.staging.haskell.org/ghc/ghc/issues/14503)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Killing a thread will block if there is another process reading from a handle](https://gitlab.staging.haskell.org/ghc/ghc/issues/14503)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr></table>
 
 
   
@@ -410,6 +799,10 @@ col: id, col: type, col: summary, col: priority, col: owner, order: owner)
   
   
     
+
+## Status: infoneeded (1 match)
+
+
   
   
 
@@ -417,46 +810,118 @@ col: id, col: type, col: summary, col: priority, col: owner, order: owner)
       </td>
 <th>
         
-        Ticket (Ticket query: status: infoneeded, milestone: 8.2, group: status,
-max: 0, col: id, col: type, col: summary, col: priority, col: owner, order: id)
+        Ticket (Ticket query: status: infoneeded, milestone: 8.2.1,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, order: id)
       </th>
 <th>
         
-        Type (Ticket query: status: infoneeded, milestone: 8.2, group: status,
+        Type (Ticket query: status: infoneeded, milestone: 8.2.1, group: status,
 max: 0, col: id, col: type, col: summary, col: priority, col: owner,
 order: type)
       </th>
 <th>
         
-        Summary (Ticket query: status: infoneeded, milestone: 8.2,
+        Summary (Ticket query: status: infoneeded, milestone: 8.2.1,
 group: status, max: 0, col: id, col: type, col: summary, col: priority,
 col: owner, order: summary)
       </th>
 <th>
         
-        Priority (Ticket query: status: infoneeded, milestone: 8.2,
+        Priority (Ticket query: status: infoneeded, milestone: 8.2.1,
 group: status, max: 0, col: id, col: type, col: summary, col: priority,
 col: owner, desc: 1, order: priority)
       </th>
 <th>
         
-        Owner (Ticket query: status: infoneeded, milestone: 8.2, group: status,
-max: 0, col: id, col: type, col: summary, col: priority, col: owner,
-order: owner)
+        Owner (Ticket query: status: infoneeded, milestone: 8.2.1,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, order: owner)
       </th>
 <td>
-    </td></tr>
+    </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr>
 <tr><td>
-          </td>
-<th>
-            No tickets found
-          </th>
+                
+                  
+                    </td>
+<th>[\#13739](https://gitlab.staging.haskell.org/ghc/ghc/issues/13739)</th>
 <td>
-        </td>
-<td></td>
-<td></td>
-<td></td>
-<td></td></tr></table>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [very slow linking of executables with ld.bfd \< 2.27](https://gitlab.staging.haskell.org/ghc/ghc/issues/13739)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      high
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr></table>
 
 
   
