@@ -104,6 +104,6 @@ pattern N = Nothing
 
 qux :: Maybe a -> Bool
 qux N = False
-qux (Just 5) = True
+qux (Just x) = True
 
 ```
