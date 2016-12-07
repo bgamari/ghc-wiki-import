@@ -123,7 +123,7 @@ The pattern match checker checks each set of patterns individually and combines 
 
 
 
-We write `C: R<n> U<m>` for the result of matching `C` with `n` redundant matches and `m` uncovered cases. 
+We write `C: R<n> U<m>` for the result of matching `C` which has `n` redundant matches and `m` uncovered cases. 
 
 
 
@@ -132,15 +132,18 @@ For example, for two complete matchings `C1` and `C2`, then
 
 <table><tr><th> `C1: R<0> U<0>`  </th>
 <th> `C2: R<n> U<m>` </th>
-<th> `C1` 
-</th></tr>
-<tr><th> `C1: R<2> U<0>`  </th>
-<th> `C2: R<1> U<0>`  </th>
-<th> `C2` 
+<th> `C1` </th>
+<th>  `C1` is a perfect matching so the function is total. 
 </th></tr>
 <tr><th> `C1: R<1> U<1>`   </th>
 <th> `C2: R<0> U<2>`  </th>
-<th> `C1` 
+<th> `C1` </th>
+<th>  `C1` has fewer uncovered clauses. 
+</th></tr>
+<tr><th> `C1: R<2> U<0>`  </th>
+<th> `C2: R<1> U<0>`  </th>
+<th> `C2` </th>
+<th>  `C1` and `C2` have the same number of uncovered clauses but `C2` has fewer redundant clauses 
 </th></tr></table>
 
 
