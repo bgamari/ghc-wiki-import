@@ -131,13 +131,16 @@ For example, for two complete matchings `C1` and `C2`, then
 
 
 <table><tr><th> `C1: R<0> U<0>`  </th>
-<th> `C2: R<n> U<m> || `C1\` 
+<th> `C2: R<n> U<m>` </th>
+<th> `C1` 
 </th></tr>
 <tr><th> `C1: R<2> U<0>`  </th>
-<th> `C2: R<1> U<0>  || `C2\` 
+<th> `C2: R<1> U<0>`  </th>
+<th> `C2` 
 </th></tr>
 <tr><th> `C1: R<1> U<1>`   </th>
-<th> `C2: R<0> U<2>  || `C1\` 
+<th> `C2: R<0> U<2>`  </th>
+<th> `C1` 
 </th></tr></table>
 
 
