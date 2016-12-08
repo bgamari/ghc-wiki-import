@@ -16,6 +16,10 @@ Not in scope for 8.0:
   Phab:D1242](https://phabricator.haskell.org/D1242))
 - Tweaking optimization settings ([\#11295](https://gitlab.staging.haskell.org/ghc/ghc/issues/11295))
 
+
+The implementation effort is being tracked in [\#10074](https://gitlab.staging.haskell.org/ghc/ghc/issues/10074).
+
+
 # See below for full notes
 
 
