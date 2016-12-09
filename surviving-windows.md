@@ -59,7 +59,8 @@ Cygwin is also a distribution built upon the `Cygwin` runtime providing a Linux-
 
 
 
-`Mingw-w64` is a compiler toolchain based upon `gcc` targeting Windows systems which is packaged with the `msys2` distribution. It started as a fork of the `mingw` toolchain.
+`Mingw-w64` is a compiler toolchain based upon `gcc` targeting Windows systems which is packaged with the `msys2` distribution. It started as a fork of the `mingw` toolchain. A fair amount of useful information about `mingw-w64` can be found on the project's [
+wiki](https://sourceforge.net/p/mingw-w64/wiki2/Home/).
 
 
 
