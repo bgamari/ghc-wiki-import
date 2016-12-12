@@ -25,6 +25,11 @@ The following is a somewhat modified version of the main idea in `Data.Reflectio
 
 
 ```
+-- Edward Kmett found these were necessary for his library, so they're likely necessary here too, for now.
+{-# OPTIONS_GHC -fno-cse #-}
+{-# OPTIONS_GHC -fno-full-laziness #-}
+{-# OPTIONS_GHC -fno-float-in #-}
+
 newtype Tagged s a = Tagged { unTagged :: a }
 
 unproxy :: (Proxy s -> a) -> Tagged s a
