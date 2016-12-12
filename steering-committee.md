@@ -2,7 +2,8 @@
 
 
 
-\[ This is a skeleton page, and will be filled in with more details in due course \]
+See the GHC Steering Committee document in the [
+GHC Proposals repository](https://github.com/ghc-proposals/ghc-proposals/blob/master/steering-committee.rst) for details.
 
 
 ## Remit
