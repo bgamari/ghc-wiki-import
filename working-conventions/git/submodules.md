@@ -129,7 +129,7 @@ So, in order to make change to a submodule you can either:
 
 >
 >
-> 2) Checkout the respective branch the commit is supposed to be pointed at from (normally `master`. See the table on [Repositories](working-conventions/repositories) for the full branch/repo summary). 
+> 2) Checkout the respective branch the commit is supposed to be pointed at from (normally `master`. See the table on [Repositories](repositories) for the full branch/repo summary). 
 >
 >
 
@@ -241,7 +241,7 @@ There are server-side validation hooks in place on `git.haskell.org` to make sur
 
 
 
-Check out the [Repositories](working-conventions/repositories) page for a full breakdown of all the repositories GHC uses.
+Check out the [Repositories](repositories) page for a full breakdown of all the repositories GHC uses.
 
 
 ## TODO
