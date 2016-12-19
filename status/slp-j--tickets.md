@@ -7,7 +7,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 - `hs-boot` files: [Commentary/Compiler/TyingTheKnot](commentary/compiler/tying-the-knot)
 - Type-indexed type representations: [plan and status](typeable/ben-gamari)
-- `TypeInType`, kind equalities etc: [DependentHaskell](dependent-haskell), esp [DependentHaskell/Phase1](dependent-haskell/phase1)
+- [TypeInType](dependent-haskell/phase1): [DependentHaskell](dependent-haskell), esp [\#12919](https://gitlab.staging.haskell.org/ghc/ghc/issues/12919) (outright bug)
 - `TypeApplications`: [visible type application](type-application)
 - [Custom type errors](proposal/custom-type-errors)
 - [UnliftedDataTypes](unlifted-data-types)
