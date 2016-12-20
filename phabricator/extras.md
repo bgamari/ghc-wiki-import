@@ -468,6 +468,6 @@ multi-factor authentication](https://secure.phabricator.com/book/phabricator/art
 
 
 
-If you're waiting to validate or compile, run `arc anoid` to play a game of Arkanoid.
+If you're waiting to validate or compile, run `arc anoid` to play a game of Arkanoid. (requires `python2` in `PATH`)
 
 
