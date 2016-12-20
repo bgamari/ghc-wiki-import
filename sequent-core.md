@@ -7,6 +7,8 @@
 
 - Repo:  `git://github.com/lukemaurer/ghc`, branch `wip/join-points`
 
+- Ticket to track progress: [\#12988](https://gitlab.staging.haskell.org/ghc/ghc/issues/12988)
+
 - New variant of Core.
 
   - IdDetails has a constructor for JoinPointId, with its arity.
