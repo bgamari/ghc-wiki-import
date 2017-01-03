@@ -87,7 +87,7 @@ That's it! **This will even work on Windows, as long as you have PHP available i
 
 
 
-Next, make sure the `.arc-linters/arcanist-external-json-linter` submodule is initialized properly via `git submodule update --init`.  Otherwise, you will get this [
+Next, make sure the `.arc-linters/arcanist-external-json-linter` submodule in the GHC source tree is initialized properly via `git submodule update --init`. Otherwise, you will get this [
 scary error](https://mail.haskell.org/pipermail/ghc-devs/2016-May/012050.html):
 
 
