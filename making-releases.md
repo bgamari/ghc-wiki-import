@@ -68,7 +68,7 @@ Add a corresponding entry to the table-of-contents in `index.rst`.
 
 
 
-Ensure that the changelogs in `libraries/*` are up-to-date.
+Ensure that the changelogs in `libraries/*` are up-to-date. In particular note that several of the packages included in the `ghc` tree have their versions tied to `ghc`'s version. Find these with `git grep libraries/ ProjectVersion` and ensure their changelogs include the new version.
 
 
 ## Updating the tree
