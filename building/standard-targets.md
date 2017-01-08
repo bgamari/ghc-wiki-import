@@ -110,3 +110,28 @@ Makes files `TAGS` (for emacs) and `tags` (for vim) in the top-level directory. 
 </td></tr></table>
 
 
+## Documentation Targets
+
+
+
+The following targets build the users guide:
+
+
+<table><tr><th>`html`</th>
+<td>
+Builds the users guide in HTML format.
+</td></tr></table>
+
+
+<table><tr><th>`pdf`</th>
+<td>
+Builds the users guide in PDF format.
+</td></tr></table>
+
+
+<table><tr><th>`ps`</th>
+<td>
+Builds the users guide in PS format.
+</td></tr></table>
+
+
