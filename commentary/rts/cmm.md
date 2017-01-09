@@ -35,8 +35,7 @@ It can take time to learn Cmm. One unintuitive thing to watch out for is that th
 
 
 
-We say that **Cmm** is GHC's implementation of **C--**. This naming scheme is not done consistently everywhere, unfortunately. If you are interested in C-- (which have diverged from Cmm), you can check out the [
-website](http://www.cminusminus.org/) and the [
+We say that **Cmm** is GHC's implementation of **C--**. This naming scheme is not done consistently everywhere, unfortunately. If you are interested in C-- (which have diverged from Cmm), you can check out its [
 specification](http://www.cs.tufts.edu/~nr/c--/extern/man2.pdf).
 
 
