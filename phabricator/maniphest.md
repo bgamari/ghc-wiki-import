@@ -102,3 +102,7 @@ http://ec2-52-214-147-146.eu-west-1.compute.amazonaws.com/](http://ec2-52-214-14
 - Keywords are hard to discover and apply
 
 - Fine-grained notification support is nearly non-existent
+
+- Notification emails break links if they word wrap and doesn't apply other markup
+
+- Fields are not validated at all, once you start looking there are many cases where input is malformed (Two recent examples: [\#12623](https://gitlab.staging.haskell.org/ghc/ghc/issues/12623) (Owner) [\#13100](https://gitlab.staging.haskell.org/ghc/ghc/issues/13100) (CC field)).
