@@ -2,7 +2,8 @@
 
 
 
-This page discusses the various pros and cons for moving from Trac to Phabricator for ticket management, as proposed on https://mail.haskell.org/pipermail/ghc-devs/2016-December/013442.html?.
+This page discusses the various pros and cons for moving from Trac to Phabricator for ticket management, as proposed on [
+ghc-devs](https://mail.haskell.org/pipermail/ghc-devs/2016-December/013442.html).
 
 
 ## What does Maniphest do well?
