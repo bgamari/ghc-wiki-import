@@ -1,8 +1,5 @@
 
-What does Maniphest do well?
-
-
----
+\#\# What does Maniphest do well?
 
 
 - Actively developed: Phabricator will continue to improve in the
@@ -23,10 +20,7 @@ What does Maniphest do well?
 - Notifications: Herald's rule-based notifications are quite handy.
 
 
-What does Maniphest do poorly?
-
-
----
+\#\# What does Maniphest do poorly?
 
 
 - Flexibility of search: The search options feel a bit more limiting
@@ -43,10 +37,7 @@ What does Maniphest do poorly?
   a more legible, compact presentation option.
 
 
-What does Trac do well?
-
-
----
+\#\# What does Trac do well?
 
 
 - Convenient cross-referencing: while the syntax is a bit odd, once you
@@ -66,10 +57,7 @@ What does Trac do well?
   which can be queried in sophisticated ways .
 
 
-What does Trac do poorly?
-
-
----
+\#\# What does Trac do poorly?
 
 
 - Familiarity: Many users feel rather lost in Trac
