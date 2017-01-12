@@ -34,6 +34,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 ## Urgent or in-flight
 
 
+- [\#12918](https://gitlab.staging.haskell.org/ghc/ghc/issues/12918): default method types simplification
 - [\#12791](https://gitlab.staging.haskell.org/ghc/ghc/issues/12791): specialisation via top level instances (nearly done!)
 - [\#11760](https://gitlab.staging.haskell.org/ghc/ghc/issues/11760): `runST` and lazy blackholing
 - [\#11371](https://gitlab.staging.haskell.org/ghc/ghc/issues/11371): bogus in-scope set for substitution
