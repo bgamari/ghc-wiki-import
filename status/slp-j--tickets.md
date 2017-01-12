@@ -27,6 +27,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [\#13027](https://gitlab.staging.haskell.org/ghc/ghc/issues/13027): let/app invariant
 - [\#12603](https://gitlab.staging.haskell.org/ghc/ghc/issues/12603)
 - [\#12747](https://gitlab.staging.haskell.org/ghc/ghc/issues/12747)
+- [\#12790](https://gitlab.staging.haskell.org/ghc/ghc/issues/12790): too much inlining 
 
 -  [\#8613](https://gitlab.staging.haskell.org/ghc/ghc/issues/8613), [\#9070](https://gitlab.staging.haskell.org/ghc/ghc/issues/9070), [\#8319](https://gitlab.staging.haskell.org/ghc/ghc/issues/8319), [\#7521](https://gitlab.staging.haskell.org/ghc/ghc/issues/7521), [\#10459](https://gitlab.staging.haskell.org/ghc/ghc/issues/10459), [\#10584](https://gitlab.staging.haskell.org/ghc/ghc/issues/10584), [\#10565](https://gitlab.staging.haskell.org/ghc/ghc/issues/10565), [\#12274](https://gitlab.staging.haskell.org/ghc/ghc/issues/12274): simplifier ticks exhausted (there are others). 
 
