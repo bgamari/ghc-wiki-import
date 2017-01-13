@@ -17,9 +17,8 @@ implementation is available as  [
 Phab:D1287](https://phabricator.haskell.org/D1287) and on the
 wip/T10832-generalised-injectivity branch. The relevant Trac ticket is
 [\#10832](https://gitlab.staging.haskell.org/ghc/ghc/issues/10832). See
-\[\[[
-https://ghc.haskell.org/trac/ghc/wiki/InjectiveTypeFamilies\#TypeCinjectivityaka.generalizedinjectivity\|this](https://ghc.haskell.org/trac/ghc/wiki/InjectiveTypeFamilies#TypeCinjectivityaka.generalizedinjectivity|this)
-section below\]\] for more details.
+[
+this section below](https://ghc.haskell.org/trac/ghc/wiki/InjectiveTypeFamilies#TypeCinjectivityaka.generalizedinjectivity) for full details.
 
 
 
