@@ -96,6 +96,31 @@ we assume that the match is covering. This means that the pattern match checker 
 from checking against a `COMPLETE` pragma.
 
 
+
+Different `COMPLETE` pragmas can mention overlapping sets of conlikes. 
+
+
+
+There are no checks to ensure that the set of patterns is actually complete or covering in any way. It is up to the user to get it right.
+
+
+
+`COMPLETE` pragmas are a new source of orphan modules. For example,
+
+
+```
+module M where
+
+import N( pattern P, pattern Q )
+{-# COMPLETE P, Q #-}
+```
+
+
+where neither `P` nor `Q` is defined in M.  Then every module that is
+transitively "above" M would need to read `M.hi` just in case its
+`COMPLETE` pragmas was relevant.
+
+
 ## Typing
 
 
@@ -244,6 +269,20 @@ pattern Q = ()
 Accepted. There is one polymorphic conlike `P` but there is also a monomorphic conlike `Q` which fixes the type of the whole set. Therefore the type of the whole match is `()`. 
 
 
+```
+pattern P :: [Int] 
+pattern P = [5]
+
+pattern Q :: [Char]
+pattern Q = ['a']
+
+{-# COMPLETE P, Q #-}
+```
+
+
+Accepted. The rtc of `P` and `Q` is `[]`. This is despite the fact that `P` and `Q` could never be used in the same pattern match. The check is there as a convenience to the user.
+
+
 # Examples
 
 
@@ -273,17 +312,6 @@ qux N = False
 qux (Just x) = True
 
 ```
-
-# Discussion
-
-
-
-Obviously this feature allows nefarious users to define any set of patterns as complete. This is a consequence of the flexibility of the design.
-
-
-
-Specifically, there are no checks to ensure that the set of patterns is actually complete or covering in any way. It is up to the user to get it right.
-
 
 ## Error Messages
 
