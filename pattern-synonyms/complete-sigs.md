@@ -97,7 +97,8 @@ from checking against a `COMPLETE` pragma.
 
 
 
-Different `COMPLETE` pragmas can mention overlapping sets of conlikes. 
+Different `COMPLETE` pragmas can mention overlapping sets of conlikes. If there is more than one relevant `COMPLETE` pragma then each is tried, if none of them result in a covering match then an error is reported
+as described in the "Error Reporting" section.
 
 
 
@@ -317,7 +318,8 @@ qux (Just x) = True
 
 
 
-The pattern match checker checks each set of patterns individually and combines the results together at the end. 
+When the pattern match checker requests a set of constructors for a type constructor `T`, we now return a list of sets which include the normal data constructor set and also any `COMPLETE` pragmas of type `T`.
+We then try each of these sets, not warning if any of them are a perfect match. In the case the match isn't perfect, we select one of the branches of the search depending on how good the result is.
 
 
 
