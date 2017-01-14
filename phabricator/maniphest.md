@@ -31,6 +31,8 @@ http://ec2-52-214-147-146.eu-west-1.compute.amazonaws.com/](http://ec2-52-214-14
 
 - Notifications: Herald's rule-based notifications are quite handy.
 
+- Works well on mobile as well as in the browser. 
+
 ## What does Maniphest do poorly?
 
 
