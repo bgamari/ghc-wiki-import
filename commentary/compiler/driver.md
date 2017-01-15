@@ -24,7 +24,7 @@ The meat of this logic is in [compiler/main/GhcMake.hs](/trac/ghc/browser/ghc/co
 
 
 
-Dependency analysis is carried out by the `depanal` function; the resulting `ModuleGraph` is stored into `hsc_mod_graph`. Essentially, this pass looks at all of the imports of the target modules (`hsc_targets`), and recursively pulls in all of their dependencies (stopping at package boundaries.) The resulting module graph consists of a list of `ModSummary` (defined in [compiler/main/HscTypes.lhs](/trac/ghc/browser/ghc/compiler/main/HscTypes.lhs)), which record various information about modules prior to compilation (recompilation checking, even), such as their module identity (the current package name plus the module name), whether or not the file is a boot file, where the source file lives. Dependency analysis inside GHC is often referred to as **downsweep**.
+Dependency analysis is carried out by the `depanal` function; the resulting `ModuleGraph` is stored into `hsc_mod_graph`. Essentially, this pass looks at all of the imports of the target modules (`hsc_targets`), and recursively pulls in all of their dependencies (stopping at package boundaries.) The resulting module graph consists of a list of `ModSummary` (defined in [compiler/main/HscTypes.hs](/trac/ghc/browser/ghc/compiler/main/HscTypes.hs)), which record various information about modules prior to compilation (recompilation checking, even), such as their module identity (the current package name plus the module name), whether or not the file is a boot file, where the source file lives. Dependency analysis inside GHC is often referred to as **downsweep**.
 
 
 
@@ -58,7 +58,7 @@ Compilation, also known as **upsweep**, walks the module graph in topological or
 
 
 
-The key data structure which we are filling in as we perform compilation is the **home package table** or HPT (`hsc_HPT`, defined in [compiler/main/HscTypes.lhs](/trac/ghc/browser/ghc/compiler/main/HscTypes.lhs)). As its name suggests, it contains informations from the \*home package\*, i.e. the package we are currently compiling. Its entries, `HomeModInfo`, contain the sum total knowledge of a module after compilation: both its pre-linking interface `ModIface` as well as the post-linking details `ModDetails`.
+The key data structure which we are filling in as we perform compilation is the **home package table** or HPT (`hsc_HPT`, defined in [compiler/main/HscTypes.hs](/trac/ghc/browser/ghc/compiler/main/HscTypes.hs)). As its name suggests, it contains informations from the \*home package\*, i.e. the package we are currently compiling. Its entries, `HomeModInfo`, contain the sum total knowledge of a module after compilation: both its pre-linking interface `ModIface` as well as the post-linking details `ModDetails`.
 
 
 
