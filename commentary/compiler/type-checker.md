@@ -6,7 +6,7 @@ Probably the most important phase in the frontend is the type checker, which is 
 
 
 
-GHC defines the abstract syntax of Haskell programs in [HsSyn](/trac/ghc/browser/ghc/compiler/hsSyn/HsSyn.lhs) using a structure that abstracts over the concrete representation of bound occurences of identifiers and patterns. The module [TcHsSyn](/trac/ghc/browser/ghc/compiler/typecheck/TcHsSyn.lhs) defines a number of helper function required by the type checker. Note that the type [TcRnTypes](/trac/ghc/browser/ghc/compiler/typecheck/TcRnTypes.lhs).`TcId` used to represent identifiers in some signatures during type checking is, in fact, nothing but a synonym for a [plain Id](commentary/compiler/entity-types#type-variables-and-term-variables).
+GHC defines the abstract syntax of Haskell programs in [compiler/hsSyn/HsSyn.hs](/trac/ghc/browser/ghc/compiler/hsSyn/HsSyn.hs) using a structure that abstracts over the concrete representation of bound occurences of identifiers and patterns. The module [compiler/typecheck/TcHsSyn.hs](/trac/ghc/browser/ghc/compiler/typecheck/TcHsSyn.hs) defines a number of helper function required by the type checker. Note that the type [compiler/typecheck/TcRnTypes.hs](/trac/ghc/browser/ghc/compiler/typecheck/TcRnTypes.hs).`TcId` used to represent identifiers in some signatures during type checking is, in fact, nothing but a synonym for a [plain Id](commentary/compiler/entity-types#type-variables-and-term-variables).
 
 
 
@@ -62,7 +62,7 @@ It is also noteworthy, that the representations of types changes during type che
 
 
 
-The interface of the type checker (and [renamer](commentary/compiler/renamer)) to the rest of the compiler is provided by [TcRnDriver](/trac/ghc/browser/ghc/compiler/typecheck/TcRnDriver.lhs). Entire modules are processed by calling `tcRnModule` and GHCi uses `tcRnStmt`, `tcRnExpr`, and `tcRnType` to typecheck statements and expressions, and to kind check types, respectively. Moreover, `tcTopSrcDecls` is used by Template Haskell - more specifically by `TcSplice.tc_bracket` - to type check the contents of declaration brackets.
+The interface of the type checker (and [renamer](commentary/compiler/renamer)) to the rest of the compiler is provided by [compiler/typecheck/TcRnDriver.hs](/trac/ghc/browser/ghc/compiler/typecheck/TcRnDriver.hs). Entire modules are processed by calling `tcRnModule` and GHCi uses `tcRnStmt`, `tcRnExpr`, and `tcRnType` to typecheck statements and expressions, and to kind check types, respectively. Moreover, `tcTopSrcDecls` is used by Template Haskell - more specifically by `TcSplice.tc_bracket` - to type check the contents of declaration brackets.
 
 
 ### Renaming and Type Checking a Module
@@ -116,7 +116,7 @@ Inside this big knot, the first main operation is kind checking, which again inv
 
 During type checking type variables are represented by mutable variables - cf. the [
 variable story](http://darcs.haskell.org/ghc/docs/comm/the-beast/vars.html#TyVar) (TODO Point at new commentary equivalent). Consequently, unification can instantiate type variables by updating those mutable variables. This process of instantiation is (for reasons that elude me) called [
-zonking](http://dictionary.reference.com/browse/zonk) in GHC's sources. The zonking routines for the various forms of Haskell constructs are responsible for most of the code in the module [TcHsSyn](/trac/ghc/browser/ghc/compiler/typecheck/TcHsSyn.lhs), whereas the routines that actually operate on mutable types are defined in [TcMType](/trac/ghc/browser/ghc/compiler/typecheck/TcMType.lhs); this includes the zonking of type variables and type terms, routines to create mutable structures and update them as well as routines that check constraints, such as that type variables in function signatures have not been instantiated during type checking. The actual type unification routine is `uTys` in the module [TcUnify](/trac/ghc/browser/ghc/compiler/typecheck/TcUnify.lhs).
+zonking](http://dictionary.reference.com/browse/zonk) in GHC's sources. The zonking routines for the various forms of Haskell constructs are responsible for most of the code in the module [compiler/typecheck/TcHsSyn.hs](/trac/ghc/browser/ghc/compiler/typecheck/TcHsSyn.hs), whereas the routines that actually operate on mutable types are defined in [compiler/typecheck/TcMType.hs](/trac/ghc/browser/ghc/compiler/typecheck/TcMType.hs); this includes the zonking of type variables and type terms, routines to create mutable structures and update them as well as routines that check constraints, such as that type variables in function signatures have not been instantiated during type checking. The actual type unification routine is `uTys` in the module [compiler/typecheck/TcUnify.hs](/trac/ghc/browser/ghc/compiler/typecheck/TcUnify.hs).
 
 
 
@@ -135,21 +135,21 @@ The representation of types is fixed in the module [TypeRep](/trac/ghc/browser/g
 - The `PredTy` constructor wraps a type constraint argument (dictionary, implicit parameter, or equality).  They are expanded on-demand by `coreView`.
 
 
-As explained in [TcType](/trac/ghc/browser/ghc/compiler/typecheck/TcType.lhs), GHC supports rank-N types, but during type inference maintains the restriction that type variables cannot be instantiated to quantified types (i.e., the type system is predicative).  However the type system of Core is fully impredicative.
+As explained in [compiler/typecheck/TcType.hs](/trac/ghc/browser/ghc/compiler/typecheck/TcType.hs), GHC supports rank-N types, but during type inference maintains the restriction that type variables cannot be instantiated to quantified types (i.e., the type system is predicative).  However the type system of Core is fully impredicative.
 
 
 ### Type Checking Environment
 
 
 
-During type checking, GHC maintains a *type environment* whose type definitions are fixed in the module [TcRnTypes](/trac/ghc/browser/ghc/compiler/typecheck/TcRnTypes.lhs) with the operations defined in [TcEnv](/trac/ghc/browser/ghc/compiler/typecheck/TcEnv.lhs). Among other things, the environment contains all imported and local instances as well as a list of *global* entities (imported and local types and classes together with imported identifiers) and *local* entities (locally defined identifiers). This environment is threaded through the [type checking monad](commentary/compiler/tc-rn-monad).
+During type checking, GHC maintains a *type environment* whose type definitions are fixed in the module [compiler/typecheck/TcRnTypes.hs](/trac/ghc/browser/ghc/compiler/typecheck/TcRnTypes.hs) with the operations defined in [compiler/typecheck/TcEnv.hs](/trac/ghc/browser/ghc/compiler/typecheck/TcEnv.hs). Among other things, the environment contains all imported and local instances as well as a list of *global* entities (imported and local types and classes together with imported identifiers) and *local* entities (locally defined identifiers). This environment is threaded through the [type checking monad](commentary/compiler/tc-rn-monad).
 
 
 ### Expressions
 
 
 
-Expressions are type checked by [compiler/typecheck/TcExpr](/trac/ghc/browser/ghc/compiler/typecheck/TcExpr).
+Expressions are type checked by [compiler/typecheck/TcExpr.hs](/trac/ghc/browser/ghc/compiler/typecheck/TcExpr.hs).
 
 
 
@@ -164,7 +164,7 @@ GHC implements overloading using so-called *dictionaries*. A dictionary is a tup
 
 
 
-This sounds simple enough; however, the actual implementation is a bit more tricky as it wants to keep track of all the instances at which overloaded functions are used in a module. This information is useful to optimise the code. The implementation is the module [Inst](/trac/ghc/browser/ghc/compiler/typecheck/Inst.lhs).
+This sounds simple enough; however, the actual implementation is a bit more tricky as it wants to keep track of all the instances at which overloaded functions are used in a module. This information is useful to optimise the code. The implementation is the module [compiler/typecheck/Inst.hs](/trac/ghc/browser/ghc/compiler/typecheck/Inst.hs).
 
 
 
