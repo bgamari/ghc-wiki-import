@@ -2,7 +2,7 @@
 
 
 
-Source code: [rts/Sanity.c](/trac/ghc/browser/ghc/rts/Sanity.c), [rts/Sanity.h](/trac/ghc/browser/ghc/rts/Sanity.h).
+Source code: [rts/sm/Sanity.c](/trac/ghc/browser/ghc/rts/sm/Sanity.c), [rts/sm/Sanity.h](/trac/ghc/browser/ghc/rts/sm/Sanity.h).
 
 
 
@@ -14,7 +14,7 @@ Sanity checking is turned on by the `+RTS -DS` option.  We treat it like an expe
 
 
 
-Sanity checking does a complete traversal of the heap after each GC to look for dangling pointers (see `checkHeap` in [rts/Sanity.c](/trac/ghc/browser/ghc/rts/Sanity.c)).  For this it needs to ensure that there is no [slop](commentary/rts/storage/slop), which is why we can only do this in a `DEBUG` runtime: the slop-avoiding machinery is only on with `DEBUG`.
+Sanity checking does a complete traversal of the heap after each GC to look for dangling pointers (see `checkHeap` in [rts/sm/Sanity.c](/trac/ghc/browser/ghc/rts/sm/Sanity.c)).  For this it needs to ensure that there is no [slop](commentary/rts/storage/slop), which is why we can only do this in a `DEBUG` runtime: the slop-avoiding machinery is only on with `DEBUG`.
 
 
 
