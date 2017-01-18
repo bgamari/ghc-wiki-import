@@ -44,7 +44,7 @@ A source tree consists of more than one repository: at the top level there is th
 
 
 
-Then read [how to use git with GHC](working-conventions/git) and [how to contribute a patch to GHC](working-conventions/fixing-bugs) (including Git specific guidelines).
+**PLEASE READ THIS:** There are some specific Git workflows which will make GHC development a lot more pleasant; read [how to use git with GHC](working-conventions/git) and [how to contribute a patch to GHC](working-conventions/fixing-bugs) for suggestions about this.
 
 
 
