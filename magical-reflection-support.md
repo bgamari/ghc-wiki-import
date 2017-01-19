@@ -144,6 +144,17 @@ test1 =
     }
 ```
 
+## Principles
+
+
+
+Any solution should be informed by these principles:
+
+
+1. It is highly desirable that the result is expressible in Core, without further extensions.
+
+1. It should work regardless of whether single-method classes are represented by a newtype or a data type.  e.g. Using a data type would allow us to use call-by-value for all constraint arguments, which is quite attractive.
+
 ## Solutions
 
 
@@ -155,7 +166,12 @@ We basically want something that looks a fair bit like `reify'`, but that transl
 
 
 
-Simon Peyton Jones suggests making `reify#` a class method and using the class deriving mechanism to ensure safety. His first choice thus far seems to be
+Simon Peyton Jones suggests making `reify#` a class method and using the class deriving mechanism to ensure safety. This is the natural thing to do, because the implementation of `reify#` varies by class (at least if we satisfy principle (2)), and isn't possible at all for multi-method classes.  So `reify#` is overloaded just like `(+)` is: its implementation varies by type, and is only available at all for some types.   *This is precisely what type classes are for''.
+*
+
+
+
+His first choice thus far seems to be
 
 
 ```
@@ -198,6 +214,10 @@ instance ReflectableDF (Typeable a) where
   reify# f = ...
 ```
 
+
+**SLPJ** Oh, I like this!
+
+
 ### Non-class-based
 
 
@@ -213,3 +233,11 @@ reify# :: (c => r) -> a -> r
 with a special typing rule: `reify# @ c r a` will only be accepted by the type checker if `c` is a single-method class whose method has the same representation as `a`.
 
 
+
+**SPJ**: I don't like this much
+
+
+- The type of reify\#, as written, is obviously too polymorphic!
+- It's a new typing rule, i.e. an extension to COre
+- You cannot use `reify#` in a polymorphic situation
+- It does not satisfy principle (2)
