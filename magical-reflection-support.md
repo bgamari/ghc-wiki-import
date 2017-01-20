@@ -218,6 +218,10 @@ instance ReflectableDF (Typeable a) where
 **SLPJ** Oh, I like this!
 
 
+
+**Iceland\_jack** This could be levity-polymorphic (`RC :: TYPE rep -> Constraint`, `RL :: Constraint -> TYPE rep`)
+
+
 ### Non-class-based
 
 
