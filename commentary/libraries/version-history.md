@@ -676,29 +676,6 @@ See also: [LanguagePragmaHistory](language-pragma-history), which lists the lang
 <th></th>
 <th></th>
 <th></th></tr>
-<tr><th>`parallel` </th>
-<th>  3.2.1.0  </th>
-<th>  *none*  
-</th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th></tr>
 <tr><th>`pretty` </th>
 <th>  1.1.3.3  </th>
 <th>  1.1.2.0  </th>
@@ -746,10 +723,10 @@ See also: [LanguagePragmaHistory](language-pragma-history), which lists the lang
 <th></th>
 <th></th></tr>
 <tr><th>`random` </th>
-<th>  1.1  </th>
 <th>  *none*  </th>
 <th>  1.0.0.3  
 </th>
+<th></th>
 <th></th>
 <th></th>
 <th></th>
@@ -772,29 +749,6 @@ See also: [LanguagePragmaHistory](language-pragma-history), which lists the lang
 <th>  1.0  
 </th>
 <th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th></tr>
-<tr><th>`stm` </th>
-<th>  2.4.4.1  </th>
-<th>  *none*  
-</th>
 <th></th>
 <th></th>
 <th></th>
