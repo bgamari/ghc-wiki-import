@@ -232,6 +232,9 @@ Please add: System FC, GADTs, kind polymorphism etc
 - [
   Imprecise Exceptions, Co-Inductively](http://research.microsoft.com/en-us/um/people/simonpj/Papers/imprecise-exn-sem.htm), Andy Moran, Soeren Lassen, and Simon Peyton Jones, HOOTS'99.
 
+- [
+  Mio: A High-Performance Multicore IO Manager for GHC](http://haskell.cs.yale.edu/wp-content/uploads/2013/08/hask035-voellmy.pdf), Andreas Voellmy, Junchang Wang, Paul Hudak and Kazuhiko Yamamoto. Haskell Symposium 2013.
+
 ## The run-time system, garbage collector, profiling, FFI
 
 
@@ -244,6 +247,9 @@ Please add: System FC, GADTs, kind polymorphism etc
 - [Time and space profiling for non-strict, higher-order functional languages](http://www.haskell.org/ghc/docs/papers/profiling.ps.gz), Patrick M. Sansom and Simon Peyton Jones, POPL 1995.
 
 - [The Concurrent Haskell Foreign Function Interface](http://www.haskell.org/ghc/docs/papers/threads.ps.gz), Wolfgang Thaller. An Addendum to Haskell 98 FFI Report.
+
+- [
+  Extending the Haskell Foreign Function Interface with Concurrency](http://community.haskell.org/~simonmar/papers/conc-ffi.pdf), Simon Marlow, Simon Peyton Jones and Wolfgang Thaller. Haskell Workshop 2004.
 
 ## Modules & Packages
 
