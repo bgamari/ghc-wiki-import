@@ -16,6 +16,7 @@ See also the [notes on building the documentation](building/docs).
 
 
 
-See the "Care and feeding of your GHC User's Guide" section for conventions and a basic introduction to ReST.
+See the [
+Care and feeding of your GHC User's Guide](https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/editing-guide.html) section for conventions and a basic introduction to ReST.
 
 
