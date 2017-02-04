@@ -41,7 +41,7 @@ make -j8 # parallelize to at most 8 parallel jobs; adapt to actual number of cpu
 
 >
 >
-> If your machine has all the prerequisites, this might just work. Expect it all to take roughly an hour.
+> If your machine has all the prerequisites, this might just work. Expect it all to take roughly 30 minutes.
 >
 >
 
