@@ -78,7 +78,7 @@ These settings are made in [ghc/.travis.yml](/trac/ghc/browser/ghc/.travis.yml)[
 >
 >
 > In that case, you can probably ignore the problem. If you are a [
-> of the GitHub GHC team](https://github.com/orgs/ghc/members|member), you can restart the build, to keep the build history tidy.
+> member of the GitHub GHC team](https://github.com/orgs/ghc/people), you can restart the build, to keep the build history tidy.
 >
 >
 
