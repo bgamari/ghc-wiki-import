@@ -8,7 +8,7 @@ ghc-devs](https://mail.haskell.org/pipermail/ghc-devs/2016-December/013442.html)
 
 
 If you want to try it yourself then there is a prototype [
-http://ec2-52-214-147-146.eu-west-1.compute.amazonaws.com/](http://ec2-52-214-147-146.eu-west-1.compute.amazonaws.com/)
+http://104.130.13.28/](http://104.130.13.28/)\]
 
 
 ## What does Maniphest do well?
