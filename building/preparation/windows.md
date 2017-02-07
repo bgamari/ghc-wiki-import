@@ -176,6 +176,26 @@ then try re-running the `pacman` command with the `--force` option (see [
 MSYS2 bug \#31](https://github.com/msys2/msys2.github.io/issues/31)).
 
 
+### Sphinx missing the requests package as dependency
+
+
+
+If you encounter an error while running make with Haddock enabled:
+
+
+```wiki
+pkg_resources.DistributionNotFound: The 'requests' distribution was not found and is required by Sphinx
+```
+
+
+Try installing the package manually. For example by using pip:
+
+
+
+$ pacman -S mingw-w64-x86\_64-python3-pip
+pip3 install requests
+
+
 ### Error setting certificate verify locations
 
 
