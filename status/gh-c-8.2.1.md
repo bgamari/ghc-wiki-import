@@ -63,22 +63,6 @@ TODO
 >
 >
 
-- **Levity polymorphism**.  Richard E is actively involved in consolidating the implementation of levity polymorphism; see [LevityPolymorphism](levity-polymorphism).  This will not include resolving the `Constraint` vs `*` debate [\#11715](https://gitlab.staging.haskell.org/ghc/ghc/issues/11715).
-
-- **Backpack** (Edward Z Yang) is targeting to be merged in GHC 8.2. More to come here. See the tickets with the [
-  backpack](https://ghc.haskell.org/trac/ghc/query?status=!closed&keywords=~backpack) keyword for current status.
-
-- **Exhaustiveness checking**
-
-  - Exhaustiveness checking for `EmptyCase`s ([
-    Phab:D2105](https://phabricator.haskell.org/D2105)), addressing [\#10746](https://gitlab.staging.haskell.org/ghc/ghc/issues/10746). 
-  - Exhaustiveness checking for pattern synonyms, including the ability to define sets of synonyms that constitute a complete match, addressing [\#8779](https://gitlab.staging.haskell.org/ghc/ghc/issues/8779) (Matthew Pickering),
-
-### Optimiser and intermediate language
-
-
-- [Implement join points](sequent-core) (Luke Maurer)
-
 ### Back-end and runtime system
 
 
@@ -90,9 +74,6 @@ TODO
 > DWARF status page](https://ghc.haskell.org/trac/ghc/wiki/DWARF/80Status) for futher information.
 >
 >
-
-- **Live streaming of event-log data** ([
-  Phab:2934](https://phabricator.haskell.org/2934))
 
 ### Build system and miscellaneous changes
 
@@ -108,6 +89,17 @@ TODO
 - **Deriving**:
 
   - Deriving strategies (Ryan Scott): grant users the ability to choose explicitly how a class should be `derived` (using a built-in algorithm, `GeneralizedNewtypeDeriving`, `DeriveAnyClass`, or otherwise), addressing [\#10598](https://gitlab.staging.haskell.org/ghc/ghc/issues/10598).
+
+- **Levity polymorphism**.  Richard E is actively involved in consolidating the implementation of levity polymorphism; see [LevityPolymorphism](levity-polymorphism).  This will not include resolving the `Constraint` vs `*` debate [\#11715](https://gitlab.staging.haskell.org/ghc/ghc/issues/11715).
+
+- **Backpack** (Edward Z Yang) is targeting to be merged in GHC 8.2. More to come here. See the tickets with the [
+  backpack](https://ghc.haskell.org/trac/ghc/query?status=!closed&keywords=~backpack) keyword for current status.
+
+- **Exhaustiveness checking**
+
+  - Exhaustiveness checking for `EmptyCase`s ([
+    Phab:D2105](https://phabricator.haskell.org/D2105)), addressing [\#10746](https://gitlab.staging.haskell.org/ghc/ghc/issues/10746). 
+  - Exhaustiveness checking for pattern synonyms, including the ability to define sets of synonyms that constitute a complete match, addressing [\#8779](https://gitlab.staging.haskell.org/ghc/ghc/issues/8779) (Matthew Pickering),
 
 #### Back-end and runtime system
 
@@ -127,6 +119,14 @@ TODO
   in progress](https://github.com/simonmar/ghc/commit/7e05ec18b4eda8d97e37015d415e627353de6b50)) that enable the number of threads used for GC to be lower than the `-N` setting.
 
 - **Improved idle CPU usage**: A long-standing regression ([\#11965](https://gitlab.staging.haskell.org/ghc/ghc/issues/11965)) resulting in unnecessary wake-ups in an otherwise idle program was fixed. This should lower CPU utilization and improve power consumption for some programs.
+
+- **Live streaming of event-log data** ([
+  Phab:2934](https://phabricator.haskell.org/2934))
+
+### Optimiser and intermediate language
+
+
+- [Implement join points](sequent-core) (Luke Maurer)
 
 #### Library changes
 
