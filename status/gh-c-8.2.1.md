@@ -71,7 +71,7 @@ TODO
 >
 >
 > With stable stack unwinding support comes a number of opportunities for new serial and parallel performance analysis tools (e.g. statistical profiling) and debugging. As GHC's debugging information improves, we expect to see tooling developed to support these applications. See the [
-> DWARF status page](https://ghc.haskell.org/trac/ghc/wiki/DWARF/80Status) for futher information.
+> DWARF status page](https://ghc.haskell.org/trac/ghc/wiki/DWARF/80Status) for further information.
 >
 >
 
