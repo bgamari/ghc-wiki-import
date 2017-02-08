@@ -63,7 +63,7 @@ TODO
 >
 >
 
-- **Levity polymorphism**.  Richard E is actively involved in consolidating the implementation of levity polymorphism; see [LevityPolymorphism](levity-polymorphism).  This should include resolving the `Constraint` vs `*` debate [\#11715](https://gitlab.staging.haskell.org/ghc/ghc/issues/11715).
+- **Levity polymorphism**.  Richard E is actively involved in consolidating the implementation of levity polymorphism; see [LevityPolymorphism](levity-polymorphism).  This will not include resolving the `Constraint` vs `*` debate [\#11715](https://gitlab.staging.haskell.org/ghc/ghc/issues/11715).
 
 - **Backpack** (Edward Z Yang) is targeting to be merged in GHC 8.2. More to come here. See the tickets with the [
   backpack](https://ghc.haskell.org/trac/ghc/query?status=!closed&keywords=~backpack) keyword for current status.
@@ -90,8 +90,6 @@ TODO
 > DWARF status page](https://ghc.haskell.org/trac/ghc/wiki/DWARF/80Status) for futher information.
 >
 >
-
--  The [improved LLVM backend plan](improved-llvm-backend) plan didn't make the cut for 8.0, but will for 8.2 (Austin Seipp)
 
 - **Live streaming of event-log data** ([
   Phab:2934](https://phabricator.haskell.org/2934))
