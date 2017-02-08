@@ -133,7 +133,7 @@ TODO
 
 - Merge `Bifoldable` and `Bitraversable` into `base`, addressing [\#10448](https://gitlab.staging.haskell.org/ghc/ghc/issues/10448) (Edward Kmett, Ryan Scott)
 
-#### Build system and miscellaneous changes ===
+#### Build system and miscellaneous changes
 
 
 - Deterministic builds [DeterministicBuilds](deterministic-builds). Given the same environment, file and flags produce ABI compatible binaries. (Bartosz Nitka, in-progress)
