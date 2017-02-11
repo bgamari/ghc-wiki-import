@@ -229,6 +229,9 @@ If you want to get a taste for possible starting tasks, below is a list of ticke
 
 - Read up on the steps you are expected to take for [contributing a patch to GHC](working-conventions/fixing-bugs).
 
+- See also code reviews in [
+  Phabricator](https://phabricator.haskell.org/differential/). You can refer to how they have been fixed.
+
 ## Less practical advice
 
 
