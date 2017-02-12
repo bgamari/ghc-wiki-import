@@ -6,7 +6,7 @@ Here's a summary of words you will see while working on GHC on Windows. Some oth
 
 
 - the [
-  How does msys2 differ from Cygwin](https://sourceforge.net/p/msys2/wiki/How%20does%20MSYS2%20differ%20from%20Cygwin/) article on the msys2 wiki.
+  How does msys2 differ from Cygwin](https://github.com/msys2/msys2/wiki/How-does-MSYS2-differ-from-Cygwin) article on the msys2 wiki.
 - This [
   Stack Overflow question](http://stackoverflow.com/questions/25019057/how-are-msys-msys2-and-msysgit-related-to-each-other) discussing the relationship between msys and msys2
 
@@ -113,6 +113,6 @@ ConEmu](https://conemu.github.io/).
 
 
 
-Linux on Windows (also known as the Windows Subsystem for Linux or Drawbirdge) is a project undertaken by Microsoft seeking to add a Windows subsystem to the Windows kernel, allowing full user-mode emulation of a Linux environment. Currently we don't use LoW for GHC development.
+Linux on Windows (also known as the Windows Subsystem for Linux or Drawbridge) is a project undertaken by Microsoft seeking to add a Windows subsystem to the Windows kernel, allowing full user-mode emulation of a Linux environment. Currently we don't use LoW for GHC development.
 
 
