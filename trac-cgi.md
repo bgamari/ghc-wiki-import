@@ -1,6 +1,10 @@
 # Installing Trac as CGI
 
 
+
+
+
+
 >
 >
 > *Please note that using Trac via CGI is the slowest deployment method available. It is slower than [mod\_python](trac-mod-python), [FastCGI](trac-fast-cgi) and even [
@@ -9,15 +13,7 @@
 >
 
 
-CGI script is the entrypoint that web-server calls when a web-request to an application is made. To generate the `trac.cgi` script run:
-
-
-```wiki
-trac-admin /path/to/env deploy /path/to/www/trac
-```
-
-
-`trac.cgi` will be in the `cgi-bin` folder inside the given path. *Make sure it is executable by your web server*. This command also copies `static resource` files to a `htdocs` directory of a given destination.
+CGI script is the entrypoint that web-server calls when a web-request to an application is made. The `trac.cgi` script can be created using the `trac-admin <env> deploy <dir>` command which automatically substitutes the required paths, see [TracInstall\#cgi-bin](trac-install#). Make sure the script is executable by your web server.
 
 
 ## Apache web-server configuration
@@ -34,7 +30,7 @@ In [ Apache](http://httpd.apache.org/) there are two ways to run Trac as CGI:
 To make Trac available at `http://yourhost.example.org/trac` add `ScriptAlias` directive to Apache configuration file, changing `trac.cgi` path to match your installation:
 
 
-```wiki
+```
 ScriptAlias /trac /path/to/www/trac/cgi-bin/trac.cgi
 ```
 
@@ -48,7 +44,7 @@ ScriptAlias /trac /path/to/www/trac/cgi-bin/trac.cgi
 If you're using Trac with a single project you need to set its location using the `TRAC_ENV` environment variable:
 
 
-```wiki
+```
 <Location "/trac">
   SetEnv TRAC_ENV "/path/to/projectenv"
 </Location>
@@ -58,7 +54,7 @@ If you're using Trac with a single project you need to set its location using th
 Or to use multiple projects you can specify their common parent directory using the `TRAC_ENV_PARENT_DIR` variable:
 
 
-```wiki
+```
 <Location "/trac">
   SetEnv TRAC_ENV_PARENT_DIR "/path/to/project/parent/dir"
 </Location>
@@ -70,7 +66,7 @@ Or to use multiple projects you can specify their common parent directory using 
 >
 >
 
-```wiki
+```
     import os
     os.environ['TRAC_ENV'] = "/path/to/projectenv"
 ```
@@ -81,7 +77,7 @@ Or to use multiple projects you can specify their common parent directory using 
 >
 >
 
-```wiki
+```
     import os
     os.environ['TRAC_ENV_PARENT_DIR'] = "/path/to/project/parent/dir"
 ```
@@ -89,7 +85,7 @@ Or to use multiple projects you can specify their common parent directory using 
 
 If you are using the [
 Apache suEXEC](http://httpd.apache.org/docs/suexec.html) feature please see [
-http://trac.edgewall.org/wiki/ApacheSuexec](http://trac.edgewall.org/wiki/ApacheSuexec).
+ApacheSuexec](http://trac.edgewall.org/intertrac/ApacheSuexec).
 
 
 
