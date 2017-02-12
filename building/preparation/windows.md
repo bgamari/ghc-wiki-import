@@ -6,7 +6,7 @@
 
 
 This page documents the instructions for setting up a Windows build using [
-MSYS2](http://sourceforge.net/projects/msys2/), which contains [
+MSYS2](http://msys2.org), which contains [
 MinGW-w64 compilers](http://mingw-w64.org/) and the MSYS2 shell utilities.  This guide should get you running in \~5 minutes, modulo download speeds.
 
 
@@ -21,18 +21,18 @@ MinGW-w64 compilers](http://mingw-w64.org/) and the MSYS2 shell utilities.  This
 
 
 Download and run the latest MSYS2 installer: either [
-64-bit (x86-64)](https://sourceforge.net/projects/msys2/files/Base/x86_64/) or [
-32-bit (i686)](http://sourceforge.net/projects/msys2/files/Base/i686/).
+64-bit (x86-64)](http://repo.msys2.org/distrib/x86_64/) or [
+32-bit (i686)](http://repo.msys2.org/distrib/i686/).
 
 
 
 From the [
-MSYS2 installation instructions](http://sourceforge.net/p/msys2/wiki/MSYS2%20installation/):
+MSYS2 installation instructions](https://github.com/msys2/msys2/wiki/MSYS2-installation):
 
 
 >
 >
-> After installing or extracting MSYS2 you should start MSYS2 by executing **msys2\_shell.bat**. (if you did not use an installer and this is first time running of MSYS2 after unpacking, then at this point it will create the files and settings necessary for it to function properly. After this initial run you **MUST** restart MSYS2 so that the settings are correct)
+> After installing or extracting MSYS2 you should start MSYS2 by executing **msys2\_shell.cmd**. (if you did not use an installer and this is first time running of MSYS2 after unpacking, then at this point it will create the files and settings necessary for it to function properly. After this initial run you **MUST** restart MSYS2 so that the settings are correct)
 >
 >
 
@@ -49,7 +49,7 @@ Launch the MinGW shell using the shortcuts added to Start Menu: *MinGW-w64 Win32
 
 
 Do **not** use the *MSYS2 Shell* shortcut.  *MSYS2 Shell* is for building applications that utilize an additional POSIX compatibility layer akin to Cygwin, while the *MinGW-w64* shells are for building native Windows applications.  The latter is the correct environment for building GHC.  For details on the distinction between the two, read the [
-introduction to MSYS2](https://sourceforge.net/p/msys2/wiki/MSYS2%20introduction/).  An easy way to check that you are running the right shell is to check the output of `echo $MSYSTEM`: it should show either `MINGW32` or `MINGW64`.  You can also tell by examining the `$PATH`.
+introduction to MSYS2](https://github.com/msys2/msys2/wiki/MSYS2-introduction).  An easy way to check that you are running the right shell is to check the output of `echo $MSYSTEM`: it should show either `MINGW32` or `MINGW64`.  You can also tell by examining the `$PATH`.
 
 
 
@@ -96,7 +96,7 @@ pacman -Syuu
 
 
 You may need to retry a few times if SourceForge times out.  On the other hand, if your pacman is older, refer to the [
-MSYS2 installation instructions, section III](https://sourceforge.net/p/msys2/wiki/MSYS2%20installation/#iii-updating-packages).
+MSYS2 installation instructions, section III](https://github.com/msys2/msys2/wiki/MSYS2-installation#iii-updating-packages).
 
 
 ## III. Installing packages & tools
