@@ -175,6 +175,7 @@ elaborate configure scripts.)
 <td>
 Required for [running the testsuite](building/running-tests).
 Version 2.6 or later is needed. Python3 should also work.
+Python3 is needed for GHC 8.2.1 or later.
 </td></tr></table>
 
 
