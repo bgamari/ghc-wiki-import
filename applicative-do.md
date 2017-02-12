@@ -35,7 +35,7 @@ When `ApplicativeDo` is turned on, GHC will use a different method for desugarin
 
 
 
-For a type that is a`Monad`, `ApplicativeDo` implements the same semantics as the standard `do`-notation desugaring, provided `<*>` = `ap` for this type.
+For a type that is a `Monad`, `ApplicativeDo` implements the same semantics as the standard `do`-notation desugaring, provided `<*>` = `ap` for this type.
 
 
 
