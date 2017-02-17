@@ -101,6 +101,11 @@ TODO
     Phab:D2105](https://phabricator.haskell.org/D2105)), addressing [\#10746](https://gitlab.staging.haskell.org/ghc/ghc/issues/10746). 
   - Exhaustiveness checking for pattern synonyms, including the ability to define sets of synonyms that constitute a complete match, addressing [\#8779](https://gitlab.staging.haskell.org/ghc/ghc/issues/8779) (Matthew Pickering),
 
+- **Overloaded record fields** (Adam Gundry, [
+  Phab:D2708](https://phabricator.haskell.org/D2708), [
+  Phab:D3144](https://phabricator.haskell.org/D3144)): Changes to `IsLabel` class used by `OverloadedLabels` extension, plus the addition of a `HasField` class supporting polymorphism over record field selectors, but no `OverloadedRecordFields` extension or `IsLabel x (r -> a)` instance. See [
+  the proposal and discussion](https://github.com/ghc-proposals/ghc-proposals/pull/6) for more details.
+
 #### Back-end and runtime system
 
 
