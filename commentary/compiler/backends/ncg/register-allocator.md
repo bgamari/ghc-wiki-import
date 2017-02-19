@@ -78,6 +78,10 @@ For a decription of how to deal with overlapping register sets, which aren't ful
 For an overview of techniques for inserting spill code.
 
 
+
+The following tickets are related to register allocation: [\#8048](https://gitlab.staging.haskell.org/ghc/ghc/issues/8048) [\#10012](https://gitlab.staging.haskell.org/ghc/ghc/issues/10012) [\#12232](https://gitlab.staging.haskell.org/ghc/ghc/issues/12232)
+
+
 ## Register pressure in Haskell code
 
 
