@@ -273,7 +273,7 @@ Here are the submodules we use, and where their upstreams point:
 <td>         </td>
 <th>https://github.com/haskell/time</th>
 <td> </td>
-<th>master</th>
+<th>ghc</th>
 <td> </td>
 <th>Yes</th>
 <td> </td>
