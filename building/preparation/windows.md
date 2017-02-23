@@ -107,7 +107,7 @@ Now we can install GHC's dependencies as follows:
 
 
 ```
-pacman -S --needed git tar bsdtar binutils autoconf make \
+pacman -S --needed git tar bsdtar binutils autoconf make xz \
     curl libtool automake python python2 p7zip patch \
     mingw-w64-$(uname -m)-gcc mingw-w64-$(uname -m)-python3-sphinx
 ```
@@ -130,7 +130,7 @@ Run
 ```
 arch=x86_64 # or i386
 bitness=64 # or 32
-curl -L https://downloads.haskell.org/~ghc/8.0.1/ghc-8.0.1-${arch}-unknown-mingw32.tar.xz | tar -xJ -C /mingw${bitness} --strip-components=1
+curl -L https://downloads.haskell.org/~ghc/8.0.1/ghc-8.0.1-${arch}-unknown-mingw32.tar.xz | tar -xZ -C /mingw${bitness} --strip-components=1
 ```
 
 
