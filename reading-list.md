@@ -41,6 +41,9 @@ Stephen Deihl's Haskell implementation reading list](http://www.stephendiehl.com
 
 
 - [
+  Dependent Types in Haskell: Theory and Practice](https://arxiv.org/abs/1610.07978) (2016), Richard Eisenberg. Eisenber's PhD thesis describes many aspects of GHC's type system, although the "bake" inference algorithm is not yet implemented in GHC.
+
+- [
   System FC, as implemented in GHC](http://git.haskell.org/ghc.git/blob/refs/heads/master:/docs/core-spec/core-spec.pdf) (2013), Richard Eisenberg.
 
 - [
