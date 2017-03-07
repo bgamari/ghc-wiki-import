@@ -15,6 +15,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [TypeNats](type-nats): type-level literals
 - [Exceptions](exceptions): exceptions
 - [LevityPolymorphism](levity-polymorphism)
+- [Type families](type-functions)
 - [\#11715](https://gitlab.staging.haskell.org/ghc/ghc/issues/11715), [\#11621](https://gitlab.staging.haskell.org/ghc/ghc/issues/11621): `Constraint` vs `*`
 - [Generic deriving](commentary/compiler/generic-deriving)
 - [Join points](sequent-core)
