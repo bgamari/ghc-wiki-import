@@ -73,8 +73,12 @@ catchThrowIO m f = IO $ \s ->
 ```
 
 
-Side note: I believe we likely should expose an actual *catchThrowIO* function. Since it doesn't catch imprecise exceptions, it can be treated much more aggressively. For example, `catchThrowIO (putStrLn x) (\_ -> print 2)` can safely be analyzed as strict in `x`, whereas the equivalent expression using `catch` cannot.
+Notes
 
+
+- I believe we likely should expose an actual *catchThrowIO* function. Since it doesn't catch imprecise exceptions, it can be treated much more aggressively. For example, `catchThrowIO (putStrLn x) (\_ -> print 2)` can safely be analyzed as strict in `x`, whereas the equivalent expression using `catch` cannot.
+
+- See `Note [IO hack in the demand analyser]` in `DmdAnal`.  This note would make much more sense with the above semantics for the IO monad.
 
 
 To achieve something like this, we need to fix [\#13380](https://gitlab.staging.haskell.org/ghc/ghc/issues/13380).
