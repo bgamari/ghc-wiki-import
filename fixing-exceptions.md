@@ -88,7 +88,11 @@ To achieve something like this, we need to fix [\#13380](https://gitlab.staging.
 
 
 
-How strict can `catch# m f s` be? We know several things:
+How strict can `catch# m f s` be? See `Note [Exceptions and strictness]` in `Demand`.
+
+
+
+We know several things:
 
 
 1. If `m s` diverges (without throwing an exception), then `catch# m f s` diverges.
