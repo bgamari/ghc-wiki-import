@@ -88,7 +88,7 @@ To achieve something like this, we need to fix [\#13380](https://gitlab.staging.
 
 
 
-How strict can `catch# m f s` be? See `Note [Exceptions and strictness]` in `Demand`.
+How strict can `catch# m f s` be? See `Note [Exceptions and strictness]` in `Demand`.  The `ExnStr` business is pretty horrible.
 
 
 
