@@ -13,7 +13,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [UnliftedDataTypes](unlifted-data-types)
 - [UnpackedSumTypes](unpacked-sum-types), [\#9214](https://gitlab.staging.haskell.org/ghc/ghc/issues/9214)
 - [TypeNats](type-nats): type-level literals
-- \[[wiki:Exceptions](exceptions)}: exceptions
+- [Exceptions](exceptions): exceptions
 - [LevityPolymorphism](levity-polymorphism)
 - [\#11715](https://gitlab.staging.haskell.org/ghc/ghc/issues/11715), [\#11621](https://gitlab.staging.haskell.org/ghc/ghc/issues/11621): `Constraint` vs `*`
 - [Generic deriving](commentary/compiler/generic-deriving)
