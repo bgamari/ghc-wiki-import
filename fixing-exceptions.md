@@ -169,7 +169,7 @@ Operationally, we need `raise#` and `raiseIO#` to set some flag to allow `catchR
 
 
 
-I believe we want `unsafePerformIO` and `unsafeInterleaveIO` to convert precise exceptions into imprecise ones. That is, they should effectively catch any precise exceptions and rethrow them as imprecise ones.
+I believe we want `unsafePerformIO` and `unsafeInterleaveIO` to convert precise exceptions into imprecise ones. That is, they should effectively catch any precise exceptions and rethrow them as imprecise ones. Perhaps we can do this in `runRW#`. Currently, `unsafeInterleaveIO` doesn't *use* `runRW#`, but I think we can and probably should change that.
 
 
 
