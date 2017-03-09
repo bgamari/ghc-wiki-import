@@ -177,6 +177,6 @@ I strongly suspect there is something to be gained by treating expressions using
 
 
 
-It seems to me that a lot of this should interact with things like `has_side_effects`. For example, we don't need to apply the demand analysis I/O case hack to `case readMutVar# v s of`; if we fail to perform that because we forced a bottom, no one will ever know.
+We seem to take some advantage of `has_side_effects` to avoid applying the I/O demand analysis hack too broadly, but perhaps we could do a better job by propagating side effect information as we do demand information. I don't know.
 
 
