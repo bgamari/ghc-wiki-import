@@ -9,7 +9,7 @@ This page explains basics of the so-called demand analysis in GHC, comprising st
 
 
 - The [
-  demand-analyser draft paper](http://research.microsoft.com/en-us/um/people/simonpj/papers/demand-anal/demand.ps) is as yet unpublished, but gives the most accurate overview of the way GHC's demand analyser works.
+  demand-analyser draft paper](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/03/demand-jfp-draft.pdf) is as yet unpublished, but gives the most accurate overview of the way GHC's demand analyser works.
 
 ---
 
@@ -184,7 +184,7 @@ Multiple parts of GHC are sensitive to changes in the nature of demand signature
 
 
 For the [
-Journal version of the demand analysis paper](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/cardinality-jfp-1.pdf) we created some instrumentation
+Journal version of the demand analysis paper](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/03/demand-jfp-draft.pdf) we created some instrumentation
 
 
 - to measure how often a thunk is entered (to see if the update code was useful), and also
