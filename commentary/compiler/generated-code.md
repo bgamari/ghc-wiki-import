@@ -222,7 +222,7 @@ For an example of how these parts work together, consider the
 following code
 
 
-```wiki
+```
 my_fun x zs = map (\y -> y + x) zs
 ```
 
@@ -310,7 +310,7 @@ Application of functions is the bread and butter of the STG
 machine. Correspondingly, this first Haskell program
 
 
-```wiki
+```
 {-# NOINLINE known_fun #-}
 known_fun :: a -> a
 known_fun x = x
@@ -365,7 +365,7 @@ This Haskell code is apparently little more complicated than the
 previous example
 
 
-```wiki
+```
 {-# NOINLINE known_fun_2 #-}
 known_fun_2 :: a -> a -> a
 known_fun_2 x _ = x
@@ -485,7 +485,7 @@ A simple tail call to the new function finishes us off:
 Despite describing an undersaturated call, this Haskell code
 
 
-```wiki
+```
 {-# NOINLINE known_fun_2 #-}
 known_fun_2 :: a -> a -> a
 known_fun_2 x _ = x
@@ -533,7 +533,7 @@ functions. To see what these look like, we are going to use the
 following Haskell code
 
 
-```wiki
+```
 unknown_app :: (Int -> Int) -> Int -> Int
 unknown_app f x = f x
 ```
@@ -648,7 +648,7 @@ deals with all the cases for `f` described above.
 This Haskell code
 
 
-```wiki
+```
 {-# NOINLINE known_fun_2 #-}
 known_fun_2 :: a -> a -> a
 known_fun_2 x _ = x
@@ -793,7 +793,7 @@ Let us look at how a thunk and a data constructor get allocated in
 a simple setting:
 
 
-```wiki
+```
 build_data :: Int -> Maybe Int
 build_data x = Just (x + 1)
 ```
