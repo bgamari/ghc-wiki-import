@@ -331,7 +331,7 @@ Main_knownzuapp_entry() {
 }
 ```
 
-```wiki
+```
 _Main_knownzuapp_entry:
 Lcl3:
     movl L_stg_INTLIKE_closure$non_lazy_ptr,%eax
@@ -392,7 +392,7 @@ Main_knownzuappzu2_entry() {
 }
 ```
 
-```wiki
+```
 _Main_knownzuappzu2_entry:
 LclE:
     leal -4(%ebp),%eax
@@ -506,7 +506,7 @@ Main_knownzuundersaturatedzuapp_entry() {
 }
 ```
 
-```wiki
+```
 _Main_knownzuundersaturatedzuapp_entry:
 Lcmd:
     movl L_stg_INTLIKE_closure$non_lazy_ptr,%eax
@@ -551,7 +551,7 @@ Main_unknownzuapp_entry() {
 }
 ```
 
-```wiki
+```
 _Main_unknownzuapp_entry:
 Lcn0:
     movl (%ebp),%esi
@@ -677,7 +677,7 @@ Main_knownzuoversatzuapp_entry() {
 }
 ```
 
-```wiki
+```
 _Main_knownzuoversatzuapp_entry:
 Lcmj:
     leal -12(%ebp),%eax
@@ -824,6 +824,7 @@ Main_buildzudata_entry() {
 ```
 
 ```wiki
+#asm
 _Main_buildzudata_entry:
 LclE:
     addl $20,%edi
@@ -1092,7 +1093,7 @@ scj_ret() {
 }
 ```
 
-```wiki
+```
 _Main_casezuscrut_entry:
 Lccx:
     movl (%ebp),%esi
@@ -1383,7 +1384,7 @@ soN_ret() {
 }
 ```
 
-```wiki
+```
 _sst_entry:
 Lcph:
     leal -12(%ebp),%eax
@@ -1429,7 +1430,7 @@ actual code for the addition operation on `Int`s, which looks
 something like:
 
 
-```wiki
+```
 plusInt (I# a) (I# b) = I# (a + b)
 ```
 
