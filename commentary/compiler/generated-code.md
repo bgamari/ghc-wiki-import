@@ -823,8 +823,7 @@ Main_buildzudata_entry() {
 }
 ```
 
-```wiki
-#asm
+```
 _Main_buildzudata_entry:
 LclE:
     addl $20,%edi
@@ -1342,7 +1341,7 @@ you, the thunk we saw was constructed by the following Haskell
 code:
 
 
-```wiki
+```
 build_data :: Int -> Maybe Int
 build_data x = Just (x + 1)
 ```
