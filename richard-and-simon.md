@@ -28,10 +28,8 @@
 ```
 data family [] (a :: TYPE (rep :: RuntimeRep)) :: Type
 
-data instance [a :: Type] = [] | a : [a]
-
-data instance [a :: TYPE IntRep] = INil | ICons a [a]
-
+data instance [] (a :: Type)        = []   | a : [a]
+data instance [] (a :: TYPE IntRep) = INil | ICons a [a]
 ...
 ```
 
