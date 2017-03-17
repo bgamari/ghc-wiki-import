@@ -106,7 +106,7 @@ On the other hand
 
 
 ```wiki
-f2 x = error "foo"
+f2 x = error "foo" >> x
 ```
 
 
