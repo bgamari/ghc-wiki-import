@@ -285,11 +285,41 @@ The real culprit is this:
 
 
 
-So I propose that we deal with this duplication issue by think about free state tokens, and treat that as a completely orthogonal issue to the question of primops and their properties.  Indeed I think that might mean we could get rid of `has_side_effects` on primops altogether.
+So I propose that we deal with this duplication issue by think about free state tokens, and treat that as a completely orthogonal issue to the question of primops and their properties.
+
+
+## Pinning down `IO` demand more precisely
 
 
 
-Actually, `has_side_effects`, with its original, documented sense, is useful anyway. Notably, it lets us distinguish things like `readMutVar#` that have "read-only" effects from others. Such primops should behave quite differently for strictness analysis as discussed. They can also be discarded under certain circumstances. If we have
+The `IO` hack in the demand analyzer only applies to *non-primitive*
+`IO` actions. This seems quite unfortunate. Small actions are likely
+to inline and such, escaping the `IO` hack. I think we probably want to
+restore the original meaning of `has_side_effects`, and make sure to apply
+the hack to any primop that has (observable) side effects but not to others.
+If we have
+
+
+```
+case writeMutVar# r v s of
+  s' -> e s'
+```
+
+
+then I think we want to consider this lazy in `e s'`. But if we have
+
+
+```
+case readMutVar# r s of
+  (# s', v #) -> e s'
+```
+
+
+then we want to consider this strict in `e s'`.
+
+
+
+I'm not sure how useful this is, but we can also safely discard non-side-effecting primops. If we have
 
 
 ```
@@ -306,6 +336,7 @@ e [s' -> s] [x -> error "absent"]
 ```
 
 
-I don't know how much the latter matters.
+See [Demand/IO-vs-ST](demand/i-o-vs--st) for some discussion of why we don't want to use the `IO` hack or allow `has_side_effects` to affect
+demand analysis when we're working with strict `ST`.
 
 
