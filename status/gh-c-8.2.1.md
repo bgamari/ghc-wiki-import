@@ -43,7 +43,7 @@ Very tentative: Release candidate by **late March 2017**. Release in **mid-April
 See [Libraries](status/gh-c-8.2.1/libraries)
 
 
-## Release highlights (planned)
+## Release highlights
 
 
 
@@ -54,20 +54,6 @@ Below are the major highlights of 8.2.
 
 
 - A variety of compile-time improvements.
-
-### Front-end changes
-
-
-### Back-end and runtime system
-
-
-### Build system and miscellaneous changes
-
-
-- Consolidate non-determinism changes (Bartosz).
-
-### Landed in `master` branch
-
 
 #### Front-end changes
 
