@@ -35,7 +35,25 @@ has been resolved by our avoiding floating operations that have side
 effects. Has anyone checked?). One option would be to actually add a `FakeWorld`
 type and a `fakeWorld#` primitive to use it. This option is explored
 in [
-phab:D3375](https://phabricator.haskell.org/D3375). One surprising point: the `case` on 
+phab:D3375](https://phabricator.haskell.org/D3375). One surprising point: the `case` on the result needs to be moved
+inside the `runFW#` argument. That is, unlike
+
+
+```
+unsafePerformIO (IO m) = case runRW# m of (# _, a #) -> a
+```
+
+
+we need
+
+
+```
+runST (ST m) = runFW# (\s -> case m s of (# _, a #) -> a)
+```
+
+
+This allows demand analysis to see that we actually use the second component.
+It seems that the demand signature we give to `runRW#` is insufficient for that.
 
 
 
