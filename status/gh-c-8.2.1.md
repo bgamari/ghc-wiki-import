@@ -26,7 +26,7 @@ If you believe your favourite thing belongs in this list, but isn't there, pleas
 
 
 
-As of March 1 all of the major changes have landed in the tree. However, there are a variety of smaller tasks, including some late-breaking regression fixes, which need to be resolved.
+As of March 27 all of the major changes have landed in the tree. However, there are a variety of smaller tasks, including some late-breaking regression fixes, which need to be resolved.
 
 
 ## Dates
