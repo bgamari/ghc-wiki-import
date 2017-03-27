@@ -80,6 +80,10 @@ There are lots of old relevant tickets related to inlining. Perfect for a keen n
 
 
 
+Use `Keyword` = `Inlining` to ensure that a ticket ends up on these lists.
+
+
+
 <table><tr><th>[\#3073](https://gitlab.staging.haskell.org/ghc/ghc/issues/3073)</th>
 <td>Avoid reconstructing dictionaries in recursive instance methods</td></tr>
 <tr><th>[\#3755](https://gitlab.staging.haskell.org/ghc/ghc/issues/3755)</th>
