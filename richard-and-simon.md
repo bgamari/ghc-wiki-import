@@ -20,6 +20,7 @@
   - ...
 - [\#11739](https://gitlab.staging.haskell.org/ghc/ghc/issues/11739) (simplify axioms)
 - Fix all the `TypeInType` bugs
+- Clean up pure unifier to make the fact that kind coercions *only* affect type variables by using, e.g., `getCastedTyVar_maybe`.
 
 
 **Iceland\_jack**: By `[]` as a data family do you mean:
