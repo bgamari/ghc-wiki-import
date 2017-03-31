@@ -11,7 +11,6 @@ See:
 
 - [
   Andre Sansos's thesis](https://www.microsoft.com/en-us/research/publication/compilation-transformation-non-strict-functional-languages/) which has a whole chapter.
-
 - [
   Danvy's lambda-dropping paper](http://ojs.statsbiblioteket.dk/index.php/brics/article/view/18785)
 
