@@ -11,6 +11,8 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - `TypeApplications`: [visible type application](type-application)
 - [Custom type errors](proposal/custom-type-errors)
 - [Inlining](inlining)
+- [SpecConstr](spec-constr)
+- [StaticArgumentTransformation](static-argument-transformation)
 - [Common subexpression (CSE)](more-cse)
 - [UnliftedDataTypes](unlifted-data-types)
 - [UnpackedSumTypes](unpacked-sum-types), [\#9214](https://gitlab.staging.haskell.org/ghc/ghc/issues/9214)
