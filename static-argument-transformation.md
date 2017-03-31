@@ -14,6 +14,10 @@ See:
 - [
   Danvy's lambda-dropping paper](http://ojs.statsbiblioteket.dk/index.php/brics/article/view/18785)
 
+
+In comment:10 of [\#5059](https://gitlab.staging.haskell.org/ghc/ghc/issues/5059), Max notes that SAT provides 20-30% wins in nofib, wow! 
+
+
 ## Tickets
 
 
