@@ -13,365 +13,15 @@ Stuff about Template Haskell
 - [A Proposal for restricted subsets of TH](template-haskell/restricted)
 - [Cross Compilation](template-haskell/cross-compilation)
 
-## Patched TH tickets:
+## Tickets
 
 
 
-These are presumably waiting for review.
+Use Component = `Template Haskell` to ensure that a ticket ends up on these lists.  
 
 
 
-
-  
-  
-  
-  
-  
-    
-  
-  
-
-<table><tr><td>
-      </td>
-<th>
-        
-        Ticket (Ticket query: status: patch, component: Template+Haskell,
-max: 0, col: id, col: differential, col: milestone, col: summary, col: priority,
-col: owner, order: id)
-      </th>
-<th>
-        
-        Differential Rev(s) (Ticket query: status: patch,
-component: Template+Haskell, max: 0, col: id, col: differential, col: milestone,
-col: summary, col: priority, col: owner, order: differential)
-      </th>
-<th>
-        
-        Milestone (Ticket query: status: patch, component: Template+Haskell,
-max: 0, col: id, col: differential, col: milestone, col: summary, col: priority,
-col: owner, order: milestone)
-      </th>
-<th>
-        
-        Summary (Ticket query: status: patch, component: Template+Haskell,
-max: 0, col: id, col: differential, col: milestone, col: summary, col: priority,
-col: owner, order: summary)
-      </th>
-<th>
-        
-        Priority (Ticket query: status: patch, component: Template+Haskell,
-max: 0, col: id, col: differential, col: milestone, col: summary, col: priority,
-col: owner, desc: 1, order: priority)
-      </th>
-<th>
-        
-        Owner (Ticket query: status: patch, component: Template+Haskell, max: 0,
-col: id, col: differential, col: milestone, col: summary, col: priority,
-col: owner, order: owner)
-      </th>
-<td>
-    </td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td></tr>
-<tr><td>
-                
-                  
-                    </td>
-<th>[\#12778](https://gitlab.staging.haskell.org/ghc/ghc/issues/12778)</th>
-<td>
-                    
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      [ Phab:D3003](https://phabricator.haskell.org/D3003)
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      [Expose variables bound in quotations to reify](https://gitlab.staging.haskell.org/ghc/ghc/issues/12778)
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      normal
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-              </td></tr>
-<tr><td>
-                
-                  
-                    </td>
-<th>[\#14671](https://gitlab.staging.haskell.org/ghc/ghc/issues/14671)</th>
-<td>
-                    
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      [ Phab:D5198](https://phabricator.haskell.org/D5198)
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      [Make the Template Haskell class Lift work over typed expressions](https://gitlab.staging.haskell.org/ghc/ghc/issues/14671)
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      normal
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-              </td></tr>
-<tr><td>
-                
-                  
-                    </td>
-<th>[\#10391](https://gitlab.staging.haskell.org/ghc/ghc/issues/10391)</th>
-<td>
-                    
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      [ Phab:D4925](https://phabricator.haskell.org/D4925)
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      [Ability to get export list of TH reified module](https://gitlab.staging.haskell.org/ghc/ghc/issues/10391)
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      low
-                    </th>
-<td>
-                  
-                
-                  
-                    
-                    </td>
-<th>
-                      
-                      
-                      
-                      
-                      mgsloan
-                      
-                      
-                      
-                      
-                    </th>
-<td>
-                  
-                
-              </td></tr></table>
-
-
-  
-
-
-
-## Open TH tickets:
-
-
-
-If you know of a ticket not listed here, please set its "Category" to be "Template Haskell" and it should show up.
+(Sadly this is different to other groupings for which we use the Keywords field.  We could switch to Keyword if we went back and added `TemplateHaskell` as a keyword to all the existing tickets.)
 
 
 
@@ -389,31 +39,33 @@ If you know of a ticket not listed here, please set its "Category" to be "Templa
       </td>
 <th>
         
-        Ticket (Ticket query: status: new, component: Template+Haskell, max: 0,
-col: id, col: milestone, col: summary, col: priority, col: owner, order: id)
+        Ticket (Ticket query: status: new, status: patch,
+component: Template+Haskell, max: 0, col: id, col: milestone, col: summary,
+col: priority, col: owner, order: id)
       </th>
 <th>
         
-        Milestone (Ticket query: status: new, component: Template+Haskell,
-max: 0, col: id, col: milestone, col: summary, col: priority, col: owner,
-order: milestone)
+        Milestone (Ticket query: status: new, status: patch,
+component: Template+Haskell, max: 0, col: id, col: milestone, col: summary,
+col: priority, col: owner, order: milestone)
       </th>
 <th>
         
-        Summary (Ticket query: status: new, component: Template+Haskell, max: 0,
-col: id, col: milestone, col: summary, col: priority, col: owner,
-order: summary)
+        Summary (Ticket query: status: new, status: patch,
+component: Template+Haskell, max: 0, col: id, col: milestone, col: summary,
+col: priority, col: owner, order: summary)
       </th>
 <th>
         
-        Priority (Ticket query: status: new, component: Template+Haskell,
-max: 0, col: id, col: milestone, col: summary, col: priority, col: owner,
-desc: 1, order: priority)
+        Priority (Ticket query: status: new, status: patch,
+component: Template+Haskell, max: 0, col: id, col: milestone, col: summary,
+col: priority, col: owner, desc: 1, order: priority)
       </th>
 <th>
         
-        Owner (Ticket query: status: new, component: Template+Haskell, max: 0,
-col: id, col: milestone, col: summary, col: priority, col: owner, order: owner)
+        Owner (Ticket query: status: new, status: patch,
+component: Template+Haskell, max: 0, col: id, col: milestone, col: summary,
+col: priority, col: owner, order: owner)
       </th>
 <td>
     </td>
@@ -3857,6 +3509,84 @@ col: id, col: milestone, col: summary, col: priority, col: owner, order: owner)
                 
                   
                     </td>
+<th>[\#12778](https://gitlab.staging.haskell.org/ghc/ghc/issues/12778)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Expose variables bound in quotations to reify](https://gitlab.staging.haskell.org/ghc/ghc/issues/12778)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
 <th>[\#12818](https://gitlab.staging.haskell.org/ghc/ghc/issues/12818)</th>
 <td>
                     
@@ -4742,6 +4472,84 @@ col: id, col: milestone, col: summary, col: priority, col: owner, order: owner)
                     </td>
 <th>
                       [Allow qAddDependentFile on directories](https://gitlab.staging.haskell.org/ghc/ghc/issues/14623)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#14671](https://gitlab.staging.haskell.org/ghc/ghc/issues/14671)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Make the Template Haskell class Lift work over typed expressions](https://gitlab.staging.haskell.org/ghc/ghc/issues/14671)
                       
                       
                       
@@ -6340,6 +6148,84 @@ col: id, col: milestone, col: summary, col: priority, col: owner, order: owner)
                       
                       
                       
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#10391](https://gitlab.staging.haskell.org/ghc/ghc/issues/10391)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Ability to get export list of TH reified module](https://gitlab.staging.haskell.org/ghc/ghc/issues/10391)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      low
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      mgsloan
                       
                       
                       
