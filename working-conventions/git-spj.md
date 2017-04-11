@@ -219,6 +219,18 @@ the Git manual](http://www.kernel.org/pub/software/scm/git/docs/user-manual.html
 the Git Book](http://book.git-scm.com/4_undoing_in_git_-_reset,_checkout_and_revert.html) on this topic.
 
 
+### Using someone else's GHC repo
+
+
+
+Suppose John says "my GHC repo here; clone it and try X". Trouble is: the locations of the submodules are specified using relative paths from the main GHC repository, and chances are that John has only made a fork of the main GHC repo, not all the submodules.  So do this
+
+
+- Clone from the main GHC repo (including submodules) however you usually do it (e.g., `git clone --recursive https://git.haskell.org/ghc.git`)
+- Add John's ghc repo as a remote: `git remote add john git@github.com:John/ghc.git` (or whatever repo URL John gave you).
+- Fetch from the new remote: `git fetch john`
+- Check out the branch you want: `git checkout john/<branch-name>`
+
 ---
 
 
