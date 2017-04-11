@@ -30,6 +30,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [The new pattern-match overlap/exhaustiveness checker](pattern-match-check)
 - [Pattern-synonym status page](pattern-synonyms)
 - [Overloaded record fields](records/overloaded-record-fields)
+- [Code generation](commentary/compiler/code-gen)
 
 ## INLINE problems / ticks exhausted
 
