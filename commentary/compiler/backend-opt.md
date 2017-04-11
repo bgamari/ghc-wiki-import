@@ -50,6 +50,12 @@ The current proposal direction is:
 - Ensure that whenever a block address escapes a function, optimization & analysis in LLVM makes conservative decisions about that block (e.g., do not destroy it).
 
 
+Other ideas include playing with [
+deoptimization bundles](http://llvm.org/docs/LangRef.html#deoptimization-operand-bundles) or [
+landing pads](http://llvm.org/docs/LangRef.html#i-landingpad)
+
+
+
 TODO Do further investigation to find the path of least resistance to extend LLVM, compiling a proposal write-up.
 
 
