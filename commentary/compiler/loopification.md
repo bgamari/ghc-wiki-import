@@ -235,7 +235,7 @@ At top level, a "use" includes exports.
 
 
 
-Here's an idea for handling multiple entry points into a mutually recursive loop without copying the body of one of the functions. There is a slight penalty when initially entering the loop due to the case, but it may pay off if since the looping would be more efficient:
+Here's an idea for handling multiple entry points into a mutually recursive loop without copying the body of one of the functions. There is a slight penalty when initially entering the loop due to the case, but it may pay off since the looping would be more efficient:
 
 
 ```wiki
