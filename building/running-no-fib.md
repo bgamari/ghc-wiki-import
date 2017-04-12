@@ -59,8 +59,8 @@ will put the results in the file `nofib-log`.
 
 
 
-If you encounter build errors ("Could not find module QSort") although `make` seems to work for many benchmarks, make sure that you did `make boot`. This will generate the necessary \[Makefile dependencies\]([
-http://ghc.readthedocs.io/en/latest/separate\_compilation.html\#dependency-generation](http://ghc.readthedocs.io/en/latest/separate_compilation.html#dependency-generation)), otherwise almost anything of the `spectral` and later suites won't build.
+If you encounter build errors ("Could not find module QSort") although `make` seems to work for many benchmarks, make sure that you did `make boot`. This will generate the necessary [
+Makefile dependencies](http://ghc.readthedocs.io/en/latest/separate_compilation.html#dependency-generation), otherwise almost anything of the `spectral` and later suites won't build.
 
 
 
