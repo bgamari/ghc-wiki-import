@@ -61,6 +61,15 @@ TODO Do further investigation to find the path of least resistance to extend LLV
 
 
 TODO Float the proposal on the LLVM developers list to get feedback.
+
+
+# Performance Bugs To Look At
+
+
+- [\#12798](https://gitlab.staging.haskell.org/ghc/ghc/issues/12798)
+- [\#12808](https://gitlab.staging.haskell.org/ghc/ghc/issues/12808)
+
+
  
 
 
