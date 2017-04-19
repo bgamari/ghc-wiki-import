@@ -12,6 +12,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [Custom type errors](proposal/custom-type-errors)
 - [ArrowNotation](arrow-notation)
 - [Functional dependencies](fun-deps)
+- [Injective type families](injective-type-families)
 - [TemplateHaskell](template-haskell)
 - [Inlining](inlining)
 - [SpecConstr](spec-constr)
