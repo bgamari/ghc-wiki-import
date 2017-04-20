@@ -252,8 +252,8 @@ pattern Thunk a <- x | let a = Force x
 >
 >
 > ```
-> pattern :: a -> Force a
-> pattern Thunk a <- (\(Force a) -> a)
+> pattern :: Force a -> a
+> pattern Thunk a        <- (Force -> a)
 >   where Thunk (Force a) = a
 > ```
 
