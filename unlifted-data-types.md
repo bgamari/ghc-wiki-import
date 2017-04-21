@@ -190,7 +190,7 @@ with `MyInt# :: #`. GHC already supports coercions over kind `#`, so this should
 
 >
 >
-> **Iceland\_jack**: Use this to wrap `Int#` when used in boolean context in `GHC.Exts`
+> **Iceland\_jack**: Use this to wrap `Int#` when used in boolean context in `GHC.Exts`, `GHC.Prim`
 >
 >
 > ```
