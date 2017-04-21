@@ -188,6 +188,29 @@ newtype MyInt# = MkInt# Int#
 with `MyInt# :: #`. GHC already supports coercions over kind `#`, so this should be very simple to implement.
 
 
+>
+>
+> **Iceland\_jack**: Use this to wrap `Int#` when used in boolean context in `GHC.Exts`
+>
+>
+> ```
+> newtype Bool# = Bool# Int#
+>
+> pattern False# :: Bool#
+> pattern False# = Bool 0#
+>
+> pattern True# :: Bool#
+> pattern True# = Bool 1#
+>
+> (==#)  :: Int#    -> Int#    -> Bool#
+> (==##) :: Double# -> Double# -> Bool#
+> ```
+>
+>
+> and other similar cases.
+>
+>
+
 ## Proposal 4: Allow unlifting existing data types with no overhead
 
 
