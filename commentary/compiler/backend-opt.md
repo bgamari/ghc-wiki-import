@@ -83,7 +83,7 @@ c2mX: // global
 ```
 
 
-Since both branches of the first conditional test lead to a heap check, it's better to commute the conditional tests here so we only have one heap test, since the heap tests produce extra an extra block to enter the GC. The above would transform into:
+Since both branches of the first conditional test lead to a heap check, it's better to commute the conditional tests here so we only have one heap test, since the heap tests produce extra code to enter the GC. The above would transform into:
 
 
 ```wiki
