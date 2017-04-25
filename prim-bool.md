@@ -6,6 +6,14 @@ This page presents motivation and technical details behind implementing new prim
 this page](http://ghc.haskell.org/trac/ghc/wiki/NewPrimopsInGHC7.8) for instructions how to adjust your already existing code to work with new primops.
 
 
+
+See also
+ 
+
+
+- [\#9661](https://gitlab.staging.haskell.org/ghc/ghc/issues/9661)
+- [\#13397](https://gitlab.staging.haskell.org/ghc/ghc/issues/13397)
+
 ## The problem
 
 
