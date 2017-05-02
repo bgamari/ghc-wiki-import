@@ -50,11 +50,11 @@ suggestion](http://lists.llvm.org/pipermail/llvm-dev/2017-April/112214.html) fro
 
 ```wiki
 H:
-  ...
-  if ... goto G; else goto J
+  if x != 0 goto G; else goto J
 
 G:
-  if ... goto needGC; else goto H
+  x = x - 1
+  if SP >= 1000 goto needGC; else goto H
 
 needGC:
   call doGC returns to G  // a non-tail CPS call
