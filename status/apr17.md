@@ -50,7 +50,7 @@ consolidation, it also includes a number of new features.
 >
 
 -   **`deriving` strategies.** GHC now provides the programmer with a precise mechanism to distinguish between the three ways to derive typeclass instances: the usual way, the `GeneralizedNewtypeDeriving` way, and the `DeriveAnyClass` way. See the `DerivingStrategies` [
-  Wiki page](https://ghc.haskell.org/trac/wiki/DerivingStrategies) for more details.
+  Wiki page](https://ghc.haskell.org/trac/ghc/wiki/Commentary/Compiler/DerivingStrategies) for more details.
 
 -   **New classes in `base`.** The `Bifoldable`, and `Bitraversable` typeclasses are now included in the `base` library.
 
