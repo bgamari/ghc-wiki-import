@@ -88,11 +88,9 @@ A preheader merges incoming edges to a loop header that are not back-edges, and 
 
 
 
-Thus, just before emitting LLVM IR, we require that return points are not branched to locally and will introduce a stand-in block if needed.
-
-
-
-Suppose x was loaded from the stack at `SP+8` in `fEntry`. After some optimizations, it would be valid to end up with the following instead:
+Here's an example of Cmm code where this problem may crop up. 
+Suppose x was loaded from the stack at `SP+8` in `fEntry`. 
+After some optimizations, it would be valid, though unlikely, to end up with the following:
 
 
 ```wiki
@@ -115,6 +113,10 @@ R:
   x' = x2 - 1
   ...allocate (I# x') and return...
 ```
+
+
+In this case, we need to introduce a new block that `needGC` returns to, instead of `G`. just before emitting LLVM IR, we require that return points are not branched to locally and will introduce a stand-in block if needed.
+
 
 ---
 
