@@ -200,7 +200,7 @@ in between, please come speak to us either on IRC (`#ghc` on
 >
 >
 > \<[
-> https://downloads.haskell.org/\~ghc/master/users\_guide/](https://downloads.haskell.org/~ghc/master/users_guide/)\>
+> https://downloads.haskell.org/\~ghc/master/users-guide/](https://downloads.haskell.org/~ghc/master/users-guide/)\>
 >
 >
 
