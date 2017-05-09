@@ -377,13 +377,13 @@ packages](http://git.haskell.org/ghc.git/blob_plain/HEAD:/packages) file in the 
 There are a also a variety of repositories which contain infrastructure-related bits. These include,
 
 
-- \<[
-  https://github.com/haskell-infra/phabricator](https://github.com/haskell-infra/phabricator)\>: This is the current state of the tree running our [
-  Phabricator](https://phabricator.haskell.org/) instance.\\
-- \<[
-  https://github.com/haskell-infra/ghc-website](https://github.com/haskell-infra/ghc-website)\>: This contains the sources for \<[
-  https://ghc.haskell.org/](https://ghc.haskell.org/)\>
-- \<[
-  https://github.com/haskell-infra/libphutil-haskell](https://github.com/haskell-infra/libphutil-haskell)\>: This is a small `libphutil` extension providing GHC-specific functionality to Phabricator
-- \<[
-  https://github.com/haskell-infra/trac](https://github.com/haskell-infra/trac)\>: This is the slightly patched Trac version which drives GHC's Trac.
+- [
+  https://github.com/haskell-infra/phabricator](https://github.com/haskell-infra/phabricator): This is the current state of the tree running our [
+  Phabricator](https://phabricator.haskell.org/) instance.
+- [
+  https://github.com/haskell-infra/ghc-website](https://github.com/haskell-infra/ghc-website): This contains the sources for [
+  https://ghc.haskell.org/](https://ghc.haskell.org/)
+- [
+  https://github.com/haskell-infra/libphutil-haskell](https://github.com/haskell-infra/libphutil-haskell): This is a small `libphutil` extension providing GHC-specific functionality to Phabricator
+- [
+  https://github.com/haskell-infra/trac](https://github.com/haskell-infra/trac): This is the slightly patched Trac version which drives GHC's Trac.
