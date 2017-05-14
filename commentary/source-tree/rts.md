@@ -56,7 +56,7 @@ however not all of the RTS follows this convention right now.
 <td>
 Hooks for changing the RTS behaviour from client code, eg. changing the default heap size.
 (see [
-User's Guide for more about hooks](https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/runtime-control.html#rts-hooks)).
+User's Guide for more about hooks](https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/runtime_control.html#rts-hooks)).
 </td></tr></table>
 
 
