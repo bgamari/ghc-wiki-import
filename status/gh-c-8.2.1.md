@@ -87,6 +87,8 @@ Below are the major highlights of 8.2.
   Phab:D3144](https://phabricator.haskell.org/D3144)): Changes to `IsLabel` class used by `OverloadedLabels` extension, plus the addition of a `HasField` class supporting polymorphism over record field selectors, but no `OverloadedRecordFields` extension or `IsLabel x (r -> a)` instance. See [
   the proposal and discussion](https://github.com/ghc-proposals/ghc-proposals/pull/6) for more details.
 
+- **Unpacked sum types** (Ömer Sinan Ağacan, [wiki](unpacked-sum-types)): Allowing for efficient, unpacked representation of sum data types.
+
 #### Back-end and runtime system
 
 
