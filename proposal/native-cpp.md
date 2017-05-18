@@ -108,7 +108,8 @@ Nothing is gained, but since the issue remains unsolved, we may risk to become p
 
 - Probably not as easy to extend/evolve to be more Haskell-syntax-aware
 
-### Plan 2: Embed Malcom's `cpphs` into GHC
+### Plan 2: Embed Malcom's [
+hackage:cpphs](http://hackage.haskell.org/package/cpphs) into GHC
 
 
 
@@ -145,8 +146,17 @@ Nothing is gained, but since the issue remains unsolved, we may risk to become p
 **Disadvantages**
 
 
-- Requires menpower and time
+- Requires manpower and time
 - Additional long-term maintenance effort for GHC-HQ
+
+### Plan 3a: Embed [
+hackage:hpp](http://hackage.haskell.org/package/hpp) into GHC
+
+
+
+Since this wiki page was first written, [
+hackage:hpp](http://hackage.haskell.org/package/hpp) has been written, which is BSD3 licensed.
+
 
 ### Plan 4: Bundle `cpphs`-based executable with GHC
 
