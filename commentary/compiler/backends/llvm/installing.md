@@ -21,6 +21,7 @@ here](http://hackage.haskell.org/trac/ghc/wiki/Building)
 
 <table><tr><th> </th>
 <th> **HEAD** </th>
+<th> **8.2** </th>
 <th> **8.0** </th>
 <th> **7.10** </th>
 <th> **7.8** </th>
@@ -30,6 +31,7 @@ here](http://hackage.haskell.org/trac/ghc/wiki/Building)
 <th> **7.0** 
 </th></tr>
 <tr><th> LLVM version </th>
+<th> 4.0 </th>
 <th> 3.9 </th>
 <th> 3.7 </th>
 <th> 3.5 (3.5.2 on ARM ([\#9920](https://gitlab.staging.haskell.org/ghc/ghc/issues/9920)) </th>
