@@ -47,4 +47,6 @@ Allow new frontends (using GHC API) to use HTML reporting, etc.
 
 
 - split DynFlags to only pass the required info to each pass
+
+  - e.g. only the required hooks
 - use data types to report phase statistics, intermediate representations, etc.
