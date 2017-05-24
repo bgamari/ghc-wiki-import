@@ -85,10 +85,10 @@ It does this by adding a `HsExtension` module to `hsSyn`, defining as
 
 
 ```
-data GHCP
-data GHCR
-data GHCT
-data GHCTH
+data GhsPs -- Parser phase
+data GhcRn -- Renamer
+data GhcTc -- Typechecker
+data GhcTh -- Template Haskell. Currently unused
 ```
 
 
@@ -111,8 +111,8 @@ This is not important for the experiment however, as in practice we would define
 
 
 ```
-type GHCP = GHC '(Compiler Parsed)
-type GHCR = GHC '(Compiler Renamed)
+type GhcPs = GHC '(Compiler Parsed)
+type GhcRn = GHC '(Compiler Renamed)
 ...
 ```
 
@@ -152,16 +152,16 @@ For each compiler pass we define the specific mappings
 
 ```
 -- GHCP
-type instance XHsChar       GHCP = SourceText
-type instance XHsCharPrim   GHCP = SourceText
+type instance XHsChar       GhcPs = SourceText
+type instance XHsCharPrim   GhcPs = SourceText
 ...
-type instance XHsDoublePrim GHCP = ()
+type instance XHsDoublePrim GhsPc = ()
 
 -- GHCR
-type instance XHsChar       GHCR = SourceText
-type instance XHsCharPrim   GHCR = SourceText
+type instance XHsChar       GhcRn = SourceText
+type instance XHsCharPrim   GhcRn = SourceText
 ...
-type instance XHsDoublePrim GHCR = ()
+type instance XHsDoublePrim GhcRn = ()
 
 ...
 ```
@@ -240,15 +240,15 @@ The paper also proposes explicitly using extension points for the `PostRn` and `
 
 ```
 type family PostTC x ty -- Note [Pass sensitive types]
-type instance PostTC GHCP ty = PlaceHolder
-type instance PostTC GHCR ty = PlaceHolder
-type instance PostTC GHCT ty = ty
+type instance PostTc GhcPs ty = PlaceHolder
+type instance PostTc GhcRn ty = PlaceHolder
+type instance PostTc GhcTc ty = ty
 
 -- | Types that are not defined until after renaming
 type family PostRN x ty  -- Note [Pass sensitive types]
-type instance PostRN GHCP ty = PlaceHolder
-type instance PostRN GHCR ty = ty
-type instance PostRN GHCT ty = ty
+type instance PostRn GhcPs ty = PlaceHolder
+type instance PostRn GhcRn ty = ty
+type instance PostRn GhcTc ty = ty
 ```
 
 #### When we actually *need* a specific id type ===
@@ -261,9 +261,9 @@ Many functions and data types need to refer to variables that used to be simply 
 ```
 -- Maps the "normal" id type for a given pass
 type family IdP p
-type instance IdP GHCP = RdrName
-type instance IdP GHCR = Name
-type instance IdP GHCT = Id
+type instance IdP GhcPs = RdrName
+type instance IdP GhcRn = Name
+type instance IdP GhcTc = Id
 ```
 
 
@@ -285,9 +285,9 @@ data Sig pass
 Once the `hsSyn` AST was converted, the conversion process for other modules is straightforward, as it is basically mapping
 
 
-- `RdrName` to `GHCP`
-- `Name` to `GHCR`
-- `Id`  to `GHCT`
+- `RdrName` to `GhcPs`
+- `Name` to `GhcRn`
+- `Id`  to `GhcTc`
 
 
 in type signatures, and making sure that where the original was used "as is" to now wrap it in `IdP`.
