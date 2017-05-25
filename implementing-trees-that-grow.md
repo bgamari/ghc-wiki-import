@@ -20,6 +20,14 @@ I have the following practical plan, which makes it possible to change the AST a
 It is done in four steps.
 
 
+#### Step 0
+
+
+
+We replace the current `HsSyn` with one using a type parameter that can enable the growable base AST, as proposed in [
+https://phabricator.haskell.org/D3609](https://phabricator.haskell.org/D3609)
+
+
 #### Step 1
 
 
