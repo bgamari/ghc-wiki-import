@@ -98,7 +98,7 @@ While `typeRepKind` may seem like a non-essential feature, it ends up being quit
 mkApp :: SomeTypeRep -> SomeTypeRep -> Maybe SomeTypeRep
 mkApp (SomeTypeRep f) (SomeTypeRep x) = do
     FunTy a b <- pure f
-    Refl <- a `eqTypeReq` typeRepKind x
+    Refl <- a `eqTypeRep` typeRepKind x
     return (App f x)
 ```
 
