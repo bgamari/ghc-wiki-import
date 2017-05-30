@@ -169,7 +169,7 @@ For example, to build both the profiling and the debug version of the profiling 
 
 
 ```wiki
-GhcLibWays        += p debug_p
+GhcRTSWays        += p debug_p
 ```
 
 
