@@ -53,6 +53,12 @@ TODO
   - Name: UniqueName
   - Id: TypedName
 
+
+Questions:
+
+
+- Why don't we use the mangled selector name ($sel:foo:MkT) in every cases (not only when we have -XDuplicateRecordFields) instead of using the ambiguous one (foo)?
+
 ## Step 2: clearly separate GHC-the-program and GHC's API
 
 
