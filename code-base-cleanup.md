@@ -83,6 +83,7 @@ TODO
 - Split GHC.Data.Types (was TyCoRep)?
 
   - Contains many data types (TyThing, Coercion, Type, Kind, etc.)
+- Rename CAF into "static thunk"
 
 
 Questions:
