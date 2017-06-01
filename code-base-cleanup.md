@@ -59,6 +59,7 @@ TODO
 
   - header in OccName/RdrName/Name/Id/Var
   - header in GHC.Data.Types
+  - Fix notes referring to old file/module names
 - Maybe rename OccName/RdrName/Name/Id to make them more explicit
 
   - OccName: NSName (NameSpacedName)
