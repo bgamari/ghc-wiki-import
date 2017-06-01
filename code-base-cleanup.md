@@ -75,6 +75,7 @@ TODO
 - CorePrep (prepare Core for codegen) could use a more explicit name
 - GHC.Core.Monad should be GHC.Core.Pipeline
 - Maybe we should use {STG,Core,Cmm}.Transform instead of .Optimise?
+- Maybe rename GHC.Data.RepType
 
 
 Questions:
