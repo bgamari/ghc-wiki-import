@@ -76,6 +76,7 @@ TODO
 - GHC.Core.Monad should be GHC.Core.Pipeline
 - Maybe rename GHC.Data.RepType
 - Module name GHC.Compilers.StgToCmm.Layout seems dubious
+- Rename codeGen function into stgToCmm
 
 
 Questions:
