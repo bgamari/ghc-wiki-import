@@ -1,4 +1,4 @@
-## Implementation of Trees that Grow
+## Implementation of Tees that Grow
 
 
 
