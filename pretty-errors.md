@@ -3,7 +3,7 @@
 
 
 The following was extracted from Ben's response to Siddharth Bhat on [
-ghc-devs](https://mail.haskell.org/pipermail/ghc-devs/2017-June/014280.html),
+ghc-devs](https://mail.haskell.org/pipermail/ghc-devs/2017-June/014280.html) in June 2017,
 
 
 >
