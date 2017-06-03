@@ -38,8 +38,7 @@ this area, we should be careful not to step on each toes. Below I'll
 describe the various facets of the task as I see them.
 
 
-
-\# Choice of pretty printer
+## Choice of pretty printer
 
 
 
@@ -90,8 +89,7 @@ finish up something like Alfredo's `pretty` patches to rid GHC of its
 fork.
 
 
-
-\# Representing rich error messages in GHC
+## Representing rich error messages in GHC
 
 
 
@@ -118,18 +116,12 @@ statically or dynamically typed. In particular, Richard Eisenberg
 advocated that error message documents look like,
 
 
->
->
-> -- A dynamically typed value embedded in an error message
-> data ErrItem = forall a. (Outputable a, Typeable a). ErrItem a
->
->
+```
+-- A dynamically typed value embedded in an error message
+data ErrItem = forall a. (Outputable a, Typeable a). ErrItem a
 
->
->
-> type ErrDoc = Doc ErrItem
->
->
+type ErrDoc = Doc ErrItem
+```
 
 
 Whereas I argue that this would quickly become unmaintainable,
@@ -138,21 +130,14 @@ should encode the "vocabulary" of things that may appear in an error
 message explicitly,
 
 
->
->
-> data ErrItem = ErrType Type
->
->
-> >
-> >
-> > \| ErrSpan Span
-> > \| ErrTerm HsExpr
-> > \| ErrInstance ClsInst
-> > \| ErrVar  Var
-> > \| ...
-> >
-> >
->
+```
+data ErrItem = ErrType Type
+             | ErrSpan Span
+             | ErrTerm HsExpr
+             | ErrInstance ClsInst
+             | ErrVar  Var
+             | ...
+```
 
 
 While there are good arguments for both options, although I think that
@@ -166,8 +151,7 @@ things forward. The change can be made incrementally and for the most
 part should only touch a few modules (with the bulk in TcErrors).
 
 
-
-\#\# What do we represent?
+### What do we represent?
 
 
 
@@ -177,50 +161,16 @@ can think of a variety of items which would more precisely capture
 some common patterns,
 
 
->
->
-> data ErrItem = ...
->
->
-> >
-> >
-> > \| ErrExpectedActual Type Type
-> >
-> >
-> > >
-> > >
-> > > -- <sup> e.g. "Expected type: ty1, Actual type: ty2"
-> > > </sup>
-> > >
-> > >
-> >
-> >
-> > \| ErrContext Type
-> >
-> >
-> > >
-> > >
-> > > -- <sup> Like ErrType but specifically captures a context
-> > > </sup>
-> > >
-> > >
-> >
-> >
-> > \| ErrPotentialInstances \[ClsInst\]
-> >
-> >
-> > >
-> > >
-> > > -- <sup> A list of potentially matching instances
-> > > </sup>
-> > >
-> > >
-> >
-> >
-> > \| ...
-> >
-> >
->
+```
+data ErrItem = ...
+             | ErrExpectedActual Type Type
+               -- ^ e.g. "Expected type: ty1, Actual type: ty2"
+             | ErrContext Type
+               -- ^ Like ErrType but specifically captures a context
+             | ErrPotentialInstances [ClsInst]
+               -- ^ A list of potentially matching instances
+             | ...
+```
 
 
 Exactly how far we want to go is something that would need to be
@@ -229,8 +179,7 @@ proposed and then introduce additional items as we gain experience with
 the scheme.
 
 
-
-\# Using rich error messages
+## Using rich error messages
 
 
 
@@ -247,8 +196,7 @@ have rather strong aesthetic beliefs; keeping things simple while
 satisfying all tastes may be a challenge.
 
 
-
-\# Summary
+## Summary
 
 
 
