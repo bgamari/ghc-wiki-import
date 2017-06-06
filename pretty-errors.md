@@ -38,6 +38,11 @@ this area, we should be careful not to step on each toes. Below I'll
 describe the various facets of the task as I see them.
 
 
+
+There is also a github repo intended to catalogue instances of bad error messages, [
+here](https://github.com/bollu/hask-error-messages-catalog)
+
+
 ## Choice of pretty printer
 
 
