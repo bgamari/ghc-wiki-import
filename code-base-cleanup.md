@@ -56,6 +56,7 @@ Tree logic:
     - Analyse
     - Renamer
     - TypeSystem
+    - [TemplateHaskell](template-haskell)
   - Core
 
     - Analyse
