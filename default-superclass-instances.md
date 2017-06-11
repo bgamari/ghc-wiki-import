@@ -5,7 +5,7 @@
 
 
 
-**Note** a new version of this proposal, [IntrinsicSuperclasses](intrinsic-superclasses), with a revised notation is beginning to appear.
+A new version of this proposal, [IntrinsicSuperclasses](intrinsic-superclasses), with a revised notation is beginning to appear.
 
 
 
