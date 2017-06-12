@@ -108,10 +108,8 @@ Tree logic:
 - Plugin: modules to import to write compiler plugins
 
 
-Actual renaming:
+Actual renaming: see [CodeBaseCleanup/ModuleRenaming](code-base-cleanup/module-renaming)
 
-
-- TODO insert result of `git diff origin/master --summary -M20`
 
 
 Issues:
@@ -129,6 +127,14 @@ TODO
 - Fix comments:
 
   - LaTeX doc (e.g., subsection's names)
+- Fix core-spec (links to module files)
+
+
+TODO in the future:
+
+
+- Fix comments:
+
   - Several references to Note "Remote Template Haskell" (supposedly in libraries/ghci/GHCi/TH.hs) but it doesn't exist. Maybe replaced by Note "Remote GHCi"? 
   - Undefined reference to "fill\_in in PrelPack.hs" from GHC.Entity.Id
   - Undefined reference to CgConTbls.hs from GHC.Compiler.StgToCmm.Binding
@@ -139,10 +145,9 @@ TODO
   - Undefined reference to RegArchBase.hs from GHC.Compiler.CmmToAsm.Register.Allocator.Graph.ArchX86
   - Undefined reference to MachRegs\*.hs and MachRegs.hs from GHC.Compiler.CmmToAsm.Register.Allocator.Graph.ArchBase
 - Binutils 2.17 is from 2011. Maybe we could remove the Hack in GHC.Compiler.CmmToAsm.X86.CodeGen
-- Fix core-spec (links to module files)
 - Rename CAF into "static thunk"?
 - put notes files (e.g. profiling-notes, \*.tex files) into actual notes or in the wiki
-- there are some traces of RnHsSyn that doesn't exist anymore
+- Fix traces of RnHsSyn that doesn't exist anymore
 
 
 Questions:
