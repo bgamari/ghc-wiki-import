@@ -121,15 +121,6 @@ Issues:
   - use GHC.Builtin.Primitive.\* prefix in ghc-prim?
 
 
-TODO
-
-
-- Fix comments:
-
-  - LaTeX doc (e.g., subsection's names)
-- Fix core-spec (links to module files)
-
-
 TODO in the future:
 
 
