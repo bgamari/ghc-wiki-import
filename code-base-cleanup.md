@@ -141,6 +141,7 @@ TODO in the future:
 - Fix traces of RnHsSyn that doesn't exist anymore
 - References to "NCG" should be replaced with reference to "CmmToAsm compiler"
 - Foreign export stubs are generated in GHC.Compiler.HaskellToCore.Foreign.Declaration...
+- Tests still reflect the old hierarchy (e.g., simplCore/should\_compile) but renaming them could break other tools
 
 
 Questions:
