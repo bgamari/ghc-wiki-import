@@ -190,7 +190,7 @@ See [ \#2311](https://github.com/haskell/cabal/issues/2311), [
 \#2940](https://github.com/haskell/cabal/issues/2940).
 
 
-### cabal sometimes finding cpphs
+### cabal sometimes finding cpphs or c2hs from the sandbox
 
 
 
