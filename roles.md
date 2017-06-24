@@ -2,6 +2,9 @@
 
 
 
+
+
+
 The idea of *roles* comes from the paper [
 Generative Type Abstraction and Type-level Computation](http://www.seas.upenn.edu/~sweirich/papers/popl163af-weirich.pdf), published at POPL 2011. The implementation of roles in GHC, however, is somewhat different than stated in that paper. This page focuses on the user-visible features of roles. 
 
