@@ -6,7 +6,7 @@
 
 
 - [
-  Here is the paper about \`SpecConstr\`](https://www.microsoft.com/en-us/research/publication/system-f-with-type-equality-coercions-2/)
+  Here is the paper about SpecConstr](https://www.microsoft.com/en-us/research/publication/system-f-with-type-equality-coercions-2/)
 
 ## Tickets
 
