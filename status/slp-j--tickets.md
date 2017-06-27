@@ -18,6 +18,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [TemplateHaskell](template-haskell)
 - [Inlining](inlining)
 - [SpecConstr](spec-constr)
+- [Specialise](specialise)
 - [StaticArgumentTransformation](static-argument-transformation)
 - [Common subexpression (CSE)](more-cse)
 - [UnliftedDataTypes](unlifted-data-types)
