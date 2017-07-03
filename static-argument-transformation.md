@@ -181,8 +181,7 @@ test2 :: Int -> ((), Int)
 test2 n = crunState (times n (cmodify (+1))) 0
 ```
 
-
-\# Interaction with Join Points
+# Interaction with Join Points
 
 
 
