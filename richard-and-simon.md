@@ -10,6 +10,24 @@
 ... as discussed by Richard and Simon. This page is mostly for our own notes, but others are welcome to read it.
 
 
+
+Big things
+
+
+- [\#11715](https://gitlab.staging.haskell.org/ghc/ghc/issues/11715): constraint vis \*
+- [\#12088](https://gitlab.staging.haskell.org/ghc/ghc/issues/12088): scc for kind inference
+- Homogeneous flattener ([\#12919](https://gitlab.staging.haskell.org/ghc/ghc/issues/12919), [\#13643](https://gitlab.staging.haskell.org/ghc/ghc/issues/13643))
+
+
+Little things
+
+
+- BUGS
+- `uo_thing`
+
+# Fuller list
+
+
 - Change flattener to be homogeneous ([\#12919](https://gitlab.staging.haskell.org/ghc/ghc/issues/12919), [\#13643](https://gitlab.staging.haskell.org/ghc/ghc/issues/13643))
 - Sort out `mkCastTy`
 
