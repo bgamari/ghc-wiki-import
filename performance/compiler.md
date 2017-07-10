@@ -690,6 +690,7 @@ col: owner, order: owner)
 - [\#10800](https://gitlab.staging.haskell.org/ghc/ghc/issues/10800): vector-0.11 compile time increased substantially with 7.10.1
 
   - Regression in `vector` testsuite perhaps due to change in inlinings
+- [\#13639](https://gitlab.staging.haskell.org/ghc/ghc/issues/13639): Skylighting package compilation is glacial 
 
 ## nofib results
 
