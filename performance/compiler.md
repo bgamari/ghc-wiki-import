@@ -737,7 +737,7 @@ col: owner, order: owner)
 
 
 
-**As of April 22nd**:
+**As of April 22nd, 2016**:
 
 
 - GHC HEAD: 14m9s  (via 7.8.3) (because of Joachim's call-arity improvements)
