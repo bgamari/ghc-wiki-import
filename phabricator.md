@@ -215,7 +215,7 @@ $ git rebase --continue
 ```
 
 
-Until you have uploaded all your commits to Phab.  Now you have multiple diffs on Phab.  
+Until you have uploaded all your commits to Phab.  Now you have multiple diffs on Phab. These can be set as depending on each other on Phab by setting Parten/Child Revision accordingly.
 
 
 
