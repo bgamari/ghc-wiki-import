@@ -250,6 +250,9 @@ If you want to get a taste for possible starting tasks, below is a list of ticke
   - [
     Contributing to GHC](http://anniecherkaev.com/projects/contributing-to-ghc) by Annie Cherkaev
 
+- There is a blog post series by Stephen Diehl that provides an overview of many important data structures and contains links to other sources of information: [
+  Dive into GHC](http://www.stephendiehl.com/posts/ghc_01.html)
+
 ## Need help?
 
 
