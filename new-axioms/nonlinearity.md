@@ -61,7 +61,7 @@ This can break existing code. But, a medium-intensity search did not find *any* 
 
 
 (Interestingly, proofs of the soundness of the existing system have been published. For example, see [
-here](http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/fc-tldi.pdf) and [
+here](https://www.microsoft.com/en-us/research/wp-content/uploads/2007/01/tldi22-sulzmann-with-appendix.pdf) and [
 here](http://www.cis.upenn.edu/~stevez/papers/WVPJZ11.pdf). These proofs are not  incorrect, but they  don't allow both undecidable instances and nonlinear family instances.)
 
 
