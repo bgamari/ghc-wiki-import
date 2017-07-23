@@ -55,8 +55,7 @@ Stephen Deihl's Haskell implementation reading list](http://www.stephendiehl.com
   doi](http://dx.doi.org/10.1017/S0956796806006034) [
   technical appendix](http://repository.upenn.edu/cis_reports/58/) Describes type inference for higher-rank types.
 
-- [
-  Papers about type equalities in GHC's intermediate language](http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/)
+- Type equalities in GHC's intermediate language:
 
   - [
     System FC with Explicit Kind Equality](http://www.seas.upenn.edu/~sweirich/papers/fckinds.pdf). Stephanie Weirich, Justin Hsu, Richard A. Eisenberg. ICFP '13. [
