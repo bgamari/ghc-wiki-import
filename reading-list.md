@@ -100,7 +100,7 @@ Stephen Deihl's Haskell implementation reading list](http://www.stephendiehl.com
   doi](http://dx.doi.org/10.1007/978-3-319-04132-2_2) Introduces partial type signatures.
 
 - [
-  Understanding Functional Dependencies via Constraint Handling Rules](http://research-srv.microsoft.com/en-us/um/people/simonpj/papers/fd-chr/jfp06.pdf). Martin Sulzmann, Gregory J. Duck, Simon Peyton Jones, Peter J. Stuckey. JFP '07. [
+  Understanding Functional Dependencies via Constraint Handling Rules](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/jfp06.pdf). Martin Sulzmann, Gregory J. Duck, Simon Peyton Jones, Peter J. Stuckey. JFP '07. [
   doi](http://dx.doi.org/10.1017/S0956796806006137)
 
 - [
