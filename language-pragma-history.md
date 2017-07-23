@@ -14,7 +14,7 @@ See also [
 http://damianfral.github.io/ghcaniuse/](http://damianfral.github.io/ghcaniuse/).
 
 
-## Changes in GHC HEAD
+## Changes in GHC 8.2
 
 
 
