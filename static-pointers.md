@@ -7,7 +7,7 @@ This page lays out thinking about the design of the `StaticPtr` language extensi
 
 
 The basic idea is laid out in the original [
-Cloud Haskell paper](http://research.microsoft.com/~simonpj/papers/parallel).
+Cloud Haskell paper](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/07/remote.pdf).
 
 
 
