@@ -335,6 +335,23 @@ Please test as much as possible; bugs are much cheaper if we find them
 before the release!
 ```
 
+## Book-keeping
+
+
+
+There are a variety of things that should also be done,
+
+
+- Post the announcement on the [
+  GHC blog](https://ghc.haskell.org/trac/ghc/blog)
+- Ensure that the [
+  milestone](https://ghc.haskell.org/trac/ghc/admin/ticket/milestones) is marked as closed
+- Create a new Trac [
+  version](https://ghc.haskell.org/trac/ghc/admin/ticket/versions)
+- Reset `RELEASE=NO` in the stable branch
+- Update [Commentary/Libraries/VersionHistory](commentary/libraries/version-history)
+- Ensure that the submodules in the `master` branch are no older than the submodules in the release
+
 ## Uploading libraries
 
 
