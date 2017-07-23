@@ -6,8 +6,7 @@ This is the launch page for Backpack, actively maintained by Edward (as of Apr 2
 
 
 
-[
-Backpack](http://plv.mpi-sws.org/backpack/) is a proposal for retrofitting Haskell with an applicative, mix-in module system. It has been implemented in GHC 8.2.
+Backpack is a proposal for retrofitting Haskell with an applicative, mix-in module system. It has been implemented in GHC 8.2.
 
 
 
@@ -26,7 +25,8 @@ The documentation for how to use Backpack is a bit scattered about at this point
 
 - Edward Z. Yang's [
   thesis](https://github.com/ezyang/thesis/releases) contains detailed information about the specification and implementation of Backpack. We also have an older [
-  paper draft](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/07/backpack-2016.pdf) which was submitted to ICFP'16.
+  paper draft](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/07/backpack-2016.pdf) which was submitted to ICFP'16. History nuts can also read the original [
+  POPL paper](http://plv.mpi-sws.org/backpack/) but note that Backpack has changed dramatically since then.
 
 - Hackage does not yet support uploads of Backpack-using packages. [
   next.hackage](http://next.hackage.haskell.org:8080/) is a Hackage instances running a development branch of Hackage that can handle Backpack; for now, Backpack-enabled packages should be uploaded here.
