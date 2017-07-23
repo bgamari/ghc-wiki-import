@@ -408,9 +408,9 @@ Examples:
 
 
 - [
-  http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/](http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/)
+  https://ghc.haskell.org/trac/ghc/wiki/ReadingList\#TypeEqualities](https://ghc.haskell.org/trac/ghc/wiki/ReadingList#TypeEqualities)
 - [
-  http://research.microsoft.com/en-us/um/people/simonpj/papers/fd-chr/](http://research.microsoft.com/en-us/um/people/simonpj/papers/fd-chr/)
+  https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/jfp06.pdf](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/jfp06.pdf)
 - [TypeFunctions](type-functions)
 - [TypeFunctionsStatus](type-functions-status)
 - [TypeFunctions/IntegratedSolver](type-functions/integrated-solver)
