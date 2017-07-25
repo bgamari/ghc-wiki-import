@@ -62,7 +62,7 @@ Stephen Deihl's Haskell implementation reading list](http://www.stephendiehl.com
     doi](http://dx.doi.org/10.1145/2500365.2500599) Merges types with kinds, allowing promotion of GADTs and type families. Implementation not yet merged (July 2015).
   - *Equality proofs and deferred type errors*, Simon Peyton Jones, Dimitrios Vytiniotis and Pedro Magalhaes (ICFP 2012).  An exploration of what happens when you take equality proofs seriously in a compiler. [
     doi](http://dx.doi.org/10.1145/2364527.2364554) [
-    pdf](http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/icfp12.pdf)
+    pdf](http://dreixel.net/research/pdf/epdtecp.pdf)
   - *Giving Haskell a promotion*, Brent Yorgey, Stepanie Weirich, Julien Cretin, Simon Peyton Jones, and Dimitrios Vytiniotis (TLDI 2012).  How to (a) add kind polymorphism and (b) promote data types to become data kinds. [
     doi](http://dx.doi.org/10.1145/2103786.2103795) [
     pdf](http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/promotion.pdf)
