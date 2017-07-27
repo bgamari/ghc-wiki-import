@@ -17,7 +17,7 @@ First cd into your ghc directory that you checkout according to [Building/Gettin
 
 
 ```wiki
-     docker run --rm -i -t -v `pwd`:/home/ghc gregweber/ghc-haskell-dev /bin/bash
+   docker run --rm -i -t -v `pwd`:/home/ghc gregweber/ghc-haskell-dev /bin/bash
 ```
 
 
@@ -90,11 +90,12 @@ You can make sure you have all dependencies by
 ```
 
 
-But this might install some packages you do not use in your system (e.g. `java`, `docbook`, `xsltproc`).  Alternatively install the following:
+But this might install some packages you do not use in your system (e.g. Sphinx).  Alternatively install the following:
 
 
 ```wiki
-   sudo apt-get install haskell-platform git autoconf automake libtool make libgmp-dev ncurses-dev g++ python3 bzip2
+   sudo apt-get install git autoconf automake libtool make gcc g++ \
+     libgmp-dev ncurses-dev libtinfo-dev python3 xz-utils
 ```
 
 
@@ -102,12 +103,12 @@ But this might install some packages you do not use in your system (e.g. `java`,
 
 
 
-Optional: install llvm from [
-http://apt.llvm.org](http://apt.llvm.org) (only necessary to make the `-fllvm` flag work). [Commentary/Compiler/Backends/LLVM/Installing](commentary/compiler/backends/llvm/installing#llvm-support) will tell you which version to install.
+Optional: install LLVM from \<[
+http://apt.llvm.org](http://apt.llvm.org)\> (only necessary to make the `-fllvm` flag work). [Commentary/Compiler/Backends/LLVM/Installing](commentary/compiler/backends/llvm/installing#llvm-support) will tell you which version to install.
 
 
 
-Due to the nature of Debian, you may have difficulty building GHC \>7.6 due to version incompatibilities with the Happy and Alex packages.  To alleviate this issue simply install both packages using the haskell-platform provided cabal.
+Due to the nature of Debian, you may have difficulty building GHC \>7.6 due to version incompatibilities with the Happy and Alex packages.  To alleviate this issue simply install both packages using the `haskell-platform` provided `cabal`.
 
 
 ```wiki
@@ -140,11 +141,6 @@ The package `linux-tools` includes `perf`, see [Debugging/LowLevelProfiling/Perf
 
 For [validating patches](testing-patches) :
 
-
-```wiki
-   # GHC >= 8.2:
-   sudo apt-get install python3
-```
 
 ## Arch
 
