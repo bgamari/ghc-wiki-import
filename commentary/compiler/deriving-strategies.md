@@ -5,7 +5,7 @@
 
 
 
-Deriving strategies are a proposed feature to grant users finer-grained control over how instances may be derived.
+Deriving strategies grant users finer-grained control over how instances may be derived. The `DerivingStrategies` language extension landed in GHC 8.2.1.
 
 
 ## Motivation
