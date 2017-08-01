@@ -9,7 +9,7 @@ All about the `deriving` keyword.
 
 
 
-Use **Keyword** = `Deriving` to ensure that a ticket ends up on these lists.
+Use **Keyword** = `deriving` (or `deriving-perf` for performance-related tickets) to ensure that a ticket ends up on these lists.
 
 
 
