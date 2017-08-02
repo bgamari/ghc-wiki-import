@@ -30,6 +30,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [Type families](type-functions)
 - [\#11715](https://gitlab.staging.haskell.org/ghc/ghc/issues/11715), [\#11621](https://gitlab.staging.haskell.org/ghc/ghc/issues/11621): `Constraint` vs `*`
 - [Generic deriving](commentary/compiler/generic-deriving)
+- [Deriving generally](deriving-instances)
 - [Join points](sequent-core)
 - [StaticPointers](static-pointers)
 - [The new pattern-match overlap/exhaustiveness checker](pattern-match-check)
