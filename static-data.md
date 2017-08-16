@@ -156,7 +156,7 @@ these data.
 
 
 
-AFAIK static compact regions only support immutable data. Perhaps we could relax this
+AFAIK compact regions only support immutable data. Perhaps we could relax this
 to support storage of `MutableByteArray#` which don't have references to other data
 (in order to support mutable unboxed vectors for instance).
 
