@@ -43,11 +43,11 @@ The quasiquoter is selected from the type. I.e.,
 
 
 ```
-   class IsStaticString a where
-      fromStaticString :: QuasiQuoter
+   class StringQuote a where
+      fromStringQuote :: QuasiQuoter
 
       -- or directly
-      fromStaticString :: String -> Q Exp
+      fromStringQuote :: String -> Q Exp
 ```
 
 
