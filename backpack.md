@@ -2,11 +2,11 @@
 
 
 
-This is the launch page for Backpack, actively maintained by Edward (as of Apr 2017). 
+This is the launch page for Backpack, actively maintained by Edward (as of Aug 2017). 
 
 
 
-Backpack is a proposal for retrofitting Haskell with an applicative, mix-in module system. It has been implemented in GHC 8.2.
+Backpack is a proposal for retrofitting Haskell with an applicative, mix-in module system. It has been implemented in GHC 8.2 and cabal-install 2.0. If Backpack is used purely internally inside a package (i.e., it's not externally visible), Backpack is also supported by Stack.
 
 
 
@@ -30,6 +30,19 @@ The documentation for how to use Backpack is a bit scattered about at this point
 
 - Hackage does not yet support uploads of Backpack-using packages. [
   next.hackage](http://next.hackage.haskell.org:8080/) is a Hackage instances running a development branch of Hackage that can handle Backpack; for now, Backpack-enabled packages should be uploaded here.
+
+
+You might find it useful to find some code using Backpack.  Here are the biggest examples worth looking at:
+
+
+- [
+  backpack-str](https://github.com/haskell-backpack/backpack-str) defines a signature and implementations for strings. It is quite comprehensive, and the packages are available on next.hackage.
+
+- [
+  streamy](https://github.com/danidiaz/streamy) defines a signature and implementations for "streaming" libraries (e.g., conduit, pipes and streaming). It is experimental but it is a good example of a Backpack package that was not written by ezyang.
+
+- [
+  reflex-backpack](https://github.com/ezyang/reflex-backpack) is a kind of crazy experiment at Backpack'ing Reflex.  Reflex uses a lot of advanced GHC features and it took some coaxing to get Backpack to handle it all, but handle it all it did!
 
 
 Some more out-of-date documents:
