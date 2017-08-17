@@ -6,7 +6,8 @@ This is the launch page for Backpack, actively maintained by Edward (as of Aug 2
 
 
 
-Backpack is a proposal for retrofitting Haskell with an applicative, mix-in module system. It has been implemented in GHC 8.2 and cabal-install 2.0. If Backpack is used purely internally inside a package (i.e., it's not externally visible), Backpack is also supported by Stack.
+Backpack is a system for retrofitting Haskell with an applicative, mix-in module system. It has been implemented in GHC 8.2 and cabal-install 2.0, but it is [
+not supported by Stack](https://github.com/commercialhaskell/stack/issues/2540).
 
 
 
