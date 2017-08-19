@@ -33,9 +33,9 @@ Let's add a StaticStrings extension that desugars to this instead:
 
 
 ```
-   [string|My text] :: String
-   [text|My text]   :: Text
-   [byte|123456]    :: ByteString
+   [string|My text|] :: String
+   [text|My text|]   :: Text
+   [byte|123456|]    :: ByteString
 ```
 
 
