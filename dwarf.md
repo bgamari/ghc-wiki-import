@@ -410,8 +410,7 @@ a bit:
 
 - Windows situation completely unclear.
 
-
-\#\# Design decisions
+## Design decisions
 
 
 
