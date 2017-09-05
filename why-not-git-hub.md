@@ -39,7 +39,7 @@ GitHub](https://github.com/) instead of maintaining our own infrastructure for G
 ### Code review
 
 
-- Every inline comment results in a separate email.
+- ~~Every inline comment results in a separate email~~ (GitHub added support for multi-part code reviews)
 
 - On Github, [\#1234](https://gitlab.staging.haskell.org/ghc/ghc/issues/1234) doesn't link to Trac ticket 1234. You'd have to say: [
   https://ghc.haskell.org/ticket/1234](https://ghc.haskell.org/ticket/1234).
