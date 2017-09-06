@@ -10,7 +10,15 @@ GHC is historically over-reliant on particular individuals and organisations (no
 
 
 
-The mission of the GHC DevOps Group is to take leadership of the devops aspects of GHC, to resource it better, and to broaden the sense of community ownership and control of GHC. As no single entity owns GHC or is responsible for its ongoing development, we require a collection of organisations who are willing to commit to the ongoing supply of these resources. By spreading the load over multiple organisations, we reduce the burden on each and avoid a single point of failure.
+The mission of the GHC DevOps Group is to 
+
+
+- take leadership of the devops aspects of GHC, 
+- to resource it better, and 
+- to broaden the sense of community ownership and control of GHC.
+
+
+Since no single entity owns GHC or is responsible for its ongoing development, we require a collection of organisations who are willing to commit to the ongoing supply of these resources. By spreading the load over multiple organisations, we reduce the burden on each and avoid a single point of failure.
 
 
 
