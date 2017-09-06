@@ -47,6 +47,7 @@ The group is complementary to, not competitive with:
 
 
 - The GHC proposals process, which is about **what** features are agreed for incorporation into GHC. In contrast, the focus of the GHC DevOps group is about **how** and **when** these features are incorporated and released.
+
 - The Cabal, Hackage, and Stack ecosystems.  The focus of the GHC DevOps group is on GHC.
 
 ## Resources
