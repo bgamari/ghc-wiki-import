@@ -39,7 +39,7 @@ These branches are not merged, but they are also not totally dead ended, and the
   http://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-835.html](http://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-835.html)
 
 - `local-gc`: **Capability-local garbage collection**. Simon Marlow & Simon PJ. As described in "Multicore Garbage Collection with Local Heaps": [
-  http://community.haskell.org/\~simonmar/papers/local-gc.pdf](http://community.haskell.org/~simonmar/papers/local-gc.pdf)
+  http://simonmar.github.io/bib/papers/local-gc.pdf](http://simonmar.github.io/bib/papers/local-gc.pdf)
 
 - `wip/nested-cpr`: **Nested CPR**. Works, but results where underwhelming. See [NestedCPR](nested-cpr). Joachim Breitner.
 
