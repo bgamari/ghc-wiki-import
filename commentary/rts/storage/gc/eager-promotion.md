@@ -11,7 +11,7 @@ The key observation is this: when an object P contains a pointer to an object Q 
 
 
 We gave some performance results for this technique in [
-Runtime Support for Multicore Haskell](http://community.haskell.org/~simonmar/papers/multicore-ghc.pdf); the upshot is that it's worth 10% or so.
+Runtime Support for Multicore Haskell](http://simonmar.github.io/bib/papers/multicore-ghc.pdf); the upshot is that it's worth 10% or so.
 
 
 
