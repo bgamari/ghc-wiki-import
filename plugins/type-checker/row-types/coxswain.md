@@ -11,7 +11,7 @@ I've been recently developing a `coxswain` library that defines row types and im
 
 
 
-My motivation are as follows.
+My motivations are as follows.
 
 
 - I think the Haskell community is hungry for row types, especially records and variants.
@@ -337,7 +337,7 @@ rowInsertionOffset :: forall p (l :: k). Lacks p l => Proxy# p -> Proxy# l -> Wo
 ```
 
 
-There's an inductive specification: `Lacks Row0 l` is 0, `Lacks (p .& l1 .= t) l2` is `Lacks p l2` if `l2 < l1` and it's `Lacks p l2` plus one if `l1 > l2`' -- it's a contradiction if `l1 ~ l2`. This is the logic the plugin implements.
+There's an inductive specification: `Lacks Row0 l` is 0, `Lacks (p .& l1 .= t) l2` is `Lacks p l2` if `l2 < l1` and it's `Lacks p l2` plus one if `l1 > l2` -- it's a contradiction if `l1 ~ l2`. This is the logic the plugin implements.
 
 
 
@@ -878,7 +878,7 @@ Now the interesting question was: How to correctly compel GHC into doing that? G
 
 
 
-I seem to have successfully compelled GHC to create my substitution for me, but I'm sadly still not sure that I'm not violating any crucial invariants. Primarily because I don't know what they all are! They're hard to find, and sometimes the listed invariants are perfectly fine to violate (e.g. flatness of `Xi` types in "new" `Ct`s in `TcPluginOk`). Also, they're often out-of-date, either wrong or mysteriously referring to source Notes that no longer exist.
+I seem to have successfully compelled GHC to create my substitution for me, but I'm sadly still not sure that I'm not violating any crucial invariants. Primarily because I don't know what they all are! They're hard to find, and sometimes the listed invariants are perfectly fine to violate (e.g. flatness of `Xi` types in "new" `Ct`s in `TcPluginOk`; this is referenced as "Only canonical constraints that are actually in the inert set carry all the guarantees" in the source `Note [zonkCt behaviour]`). Also, they're often out-of-date, either wrong or mysteriously referring to source Notes that no longer exist.
 
 
 
@@ -933,8 +933,12 @@ These are things I lost hours learning, because I couldn't find any *obviously u
 
 
 `zonkCt` is not expected to work on givens. (Note: Gundry's `uom` plugin does apply `zonkCt` to givens.) In particular, zonking does
-not see the latest RHS for the flatten skolems. It seems I have to do
+not see the latest expansion for the flatten skolems. It seems I have to do
 the unflattening manually.
+
+
+
+(I'm currently wondering if the "out-of-date cached expansion" I'm seeing is because I'm creating ill-formed variables in the Givens. However, there is this quote "NB: we do not expect to see any CFunEqCans, because zonkCt is only called on unflattened constraints." in the source `Note [zonkCt behaviour]`.)
 
 
 ## Preserve `CFunEqCan`
