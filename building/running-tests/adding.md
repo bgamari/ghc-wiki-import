@@ -360,6 +360,9 @@ test('prog013', extra_files(['Bad.hs', 'Good.hs']), ghci_script, ['prog013.scrip
 
 - **ignore\_stdout**         don't try to compare stdout output
 - **ignore\_stderr**         don't try to compare stderr output
+- **normalise\_errmsg\_fun(f)**  pass the stderr through `f` before comparing
+- **grep\_errmsg(needle)**   compare only stderr lines that contain `needle`
+- **check\_errmsg(needle)**  compare stderr only on whether it contains `needle` or not
 
 - **compile\_timeout\_multiplier(n)** and **run\_timeout\_multiplier(n)**
   modify the default timeout (usually 300s, displayed at the beginning of the testsuite) by a given factor for either the compile or the run part of your test. Note that the timeout program returns with exit code 99 when it kills your test. So if you want a timeout to mean success instead of failure, add exit\_code(99) as a setup function.
