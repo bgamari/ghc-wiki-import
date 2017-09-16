@@ -23,11 +23,12 @@ This wiki page outlines the basic design and intended use of the library, use ca
 
 
 
-I'll add a link to my github repo once I "publish" --- the code/repo is not in a suitable state yet for sharing.
-
-
-
 (**DISCLAIMER** In the following text, I make lots of claims about what the plugin does and doesn't do. But it's very much a work in progress (remember, I'm using it to learn). I don't have anything that's anywhere close to approaching a proof of its correctness.)
+
+
+
+The plugin code is on GitHub, BSD3. [
+https://github.com/nfrisby/coxswain](https://github.com/nfrisby/coxswain)
 
 
 # Demonstration
@@ -287,6 +288,10 @@ Unpacking that definition is a helpful overview of the internals of the `sculls`
 
 
 ## The Row Type Basics
+
+
+
+(I've since generalized `Row` to be polykinded in the column type as well as the column name. But I didn't update yet this section.)
 
 
 
@@ -771,14 +776,6 @@ I wasn't expecting that worrying number of coercions or that `fmono2` declaratio
 
 
 # Future Directions
-
-
-## Polykind columns types
-
-
-
-Our labels are polykinded, but our column types are currently
-restricted to `*`. That would be pretty straight-forward to generalize.
 
 
 ## Other Row Relations
