@@ -31,6 +31,17 @@ The plugin code is on GitHub, BSD3. [
 https://github.com/nfrisby/coxswain](https://github.com/nfrisby/coxswain)
 
 
+# Plugin Debug Options
+
+
+
+The plugin understands a couple debugging options, if you want to inspect what it's doing to constraints.
+
+
+- `-fplugin-opt=Coxswain:summarize` This will dump out the "before-and-after" constraints of each time GHC gives the plugin a "task" (e.g. solve the Wanted constraints in some definition's RHS).
+- `-fplugin-opt=Coxswain:trace` This will dump out the constraints and the contradictory or solved/new constraints that the plugin finds every time GHC invokes the plugin (i.e. multiple times per "task").
+- `-fplugin-opt=Coxswain:logfile=<file>` This will write that output to the specified file instead of to the default of `stderr`.
+
 # Demonstration
 
 
