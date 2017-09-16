@@ -302,7 +302,7 @@ Unpacking that definition is a helpful overview of the internals of the `sculls`
 
 
 
-(I've since generalized `Row` to be polykinded in the column type as well as the column name. But I didn't update yet this section.)
+(I've since generalized `Row` to be polykinded in the column type as well as the column name. But I haven't yet updated this section.)
 
 
 
@@ -338,7 +338,7 @@ The whole point of rows is that column order doesn't matter. So `Row0 .& "a" .= 
 
 
 
-Row unification determines what is in a row, but we usually also need to know what is **not** in the row. This is the role of the `Lacks` constraint. `Lacks p l` means that `l` is not the name of a column in `p`. The cleverest bit about `Lacks` constraints is how to evidence them: it's the position in the **sorted** columns of the concrete row at which `l` *would be* inserted to preserve the sorting. So, presuming intuitive order, `Lacks (Row0 .& "b" .= Int) "a"` would be 0, since `b` would be inserted at the front. And `Lacks (Row0 .& "a" .= Int) "b"` would be 1, since `b` would be the second column.
+Row unification determines what is in a row, but we usually also need to know what is **not** in the row. This is the role of the `Lacks` constraint. `Lacks p l` means that `l` is not the name of a column in `p`. The cleverest bit about `Lacks` constraints is how to evidence them: it's the position in the **sorted** columns of the concrete row at which `l` *would be* inserted to preserve the sorting. So, presuming intuitive order, `Lacks (Row0 .& "b" .= Int) "a"` would be 0, since `a` would be inserted at the front. And `Lacks (Row0 .& "a" .= Int) "b"` would be 1, since `b` would be the second column.
 
 
 ```
@@ -1427,7 +1427,7 @@ Test.hs:10:6: error:
 ```
 
 
-The `[WD] hole` Wanted in invocation 1 is GHC' ways of determining whether the signature is ambiguous or not.
+The `[WD] hole` Wanted in invocation 1 is GHC's way of determining whether the signature is ambiguous or not.
 
 
 
