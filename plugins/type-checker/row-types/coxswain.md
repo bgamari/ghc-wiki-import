@@ -57,8 +57,7 @@ documentation page about records in Elm](http://elm-lang.org/docs/records#what-i
 (Please forgive my punny names. Naming is one of the most fun parts for me. If this were to gain enough momentum and "official" adoption, I would suggest renaming it to something plain, like `row-types` and the `RowTypes` module and `record-types` and the `Data.Record` e.g. module.)
 
 
-```
-
+```wiki
 {-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE FlexibleContexts #-}
@@ -133,7 +132,7 @@ frag4 = (
     (mkR .* #x .= 4) `dot` #x
   )
 
------ Pattern Matching
+----- Pattern Matching   -- TODO: record patterns
 
 frag5 !r =
   sqrt (x^2 + y^2)
@@ -146,7 +145,7 @@ frag6 !r =
   where
   age = r `dot` #age
 
------  Updating Records
+-----  Updating R Iecords
 
 frag7 = (
     point2D ./* #y .= 1
@@ -174,7 +173,7 @@ prettify person = person
 input =
   prettify rawInput
 
------ Record Types
+----- R Iecord Types
 
 origin :: R I (Row0 .& "x" .= Float .& "y" .= Float)
 origin = mkR
@@ -220,7 +219,7 @@ getName ::
      (
        Lacks a "name"   -- Necessary difference compared to Elm. Comparable to KnownNat/KnownSymbol/etc.
      ,
-       Short (NumCols a + 1)   -- Merely consequence of particular record implementation.
+       Short (NumCols a)   -- Merely consequence of particular record implemention.
      )
   => R I (Named a) -> String
 getName !r = r `dot` #name
@@ -233,7 +232,7 @@ getPos ::
      (
        Lacks a "y" , Lacks a "x"   -- Necessary difference compared to Elm. Comparable to KnownNat/KnownSymbol/etc.
      ,
-       Short (NumCols a + 1 + 1)   -- Merely consequence of particular record implementation.
+       Short (NumCols a + 1)   -- Merely consequence of particular record implemention.
      )
   => R I (Positioned a) -> (Float,Float)
 getPos !r = (x,y)
@@ -245,22 +244,12 @@ positions :: [(Float,Float)]
 positions =
   [ getPos origin, getPos dude ]
 
-```
-
-## Beyond Elm
-
-
-
-The current `coxswain` and `sculls` library are capable of more than what's shown in the gentle Elm introduction. This is my current favorite example, a generalization of `partitionEithers`.
-
-
-```
+----- BEYOND THE ELM TUTORIAL
 
 vars :: [V I (Row0 .& "x" .= Int .& "y" .= Char .& "z" .= Bool)]
 vars = [inj #z True,inj #x 7,inj #y 'h',inj #z False,inj #y 'i',inj #x 3]
 
-pvars :: R (F []) (Row0 .& "x" .= Int .& "y" .= Char .& "z" .= Bool)
-pvars = partitionVariants vars
+pvars = vpartition vars
 ```
 
 
@@ -275,22 +264,22 @@ At the GHCi prompt, those definitions result in the following.
 ```
 
 
-The `partitionVariants` function is not a primitive! The following is its definition inside `sculls`.
+The `vpartition` function is not a primitive! The following is its definition inside `sculls`.
 
 
 ```
 
 -- | Partition a list of variants into in list-shaped record of the
 -- same row.
-partitionVariants :: forall (p :: Row k). Short (NumCols p) => [V I p] -> R (F []) p
-partitionVariants = foldr cons (rpure (F []))
+vpartition :: forall (p :: Row kl *) f. (Foldable f,Short (NumCols p),Short (NumCols p - 1)) => f (V I p) -> R (F []) p
+vpartition = foldr cons (rpure (F []))
   where
-  cons v !acc = elimV (rmap f rHasCol) v
+  cons v !acc = velim (f /$\ rhas) v
     where
-    f :: forall (l :: k) t. (HasCol p :->: I :->: C (R (F []) p)) l t
+    f :: forall (l :: kl) t. (HasCol p :->: I :->: C (R (F []) p)) l t
     f = A $ \HasCol -> A $ \x -> C $ runIdentity $ rlens (Identity . g x) acc
 
-  g :: forall (l :: k) t. I l t -> F [] l t -> F [] l t
+  g :: forall (l :: kl) t. I l t -> F [] l t -> F [] l t
   g (I x) (F xs) = F (x:xs)
 ```
 
@@ -440,26 +429,26 @@ You can write your own, of course; it's just a type of kind `k -> * -> *`. (We c
 In fact, `HasCol p` has that kind, and we'll see below that it can be very useful as a field.
 
 
-## Back to `partitionVariants`
+## Back to `vpartition`
 
 
 
-Now let's revisit `partitionVariants` to see those pieces in action with some primitive functions on records and variants.
+Now let's revisit `vpartition` to see those pieces in action with some primitive functions on records and variants.
 
 
 ```
 
 -- | Partition a list of variants into in list-shaped record of the
 -- same row.
-partitionVariants :: forall (p :: Row k). Short (NumCols p) => [V I p] -> R (F []) p
-partitionVariants = foldr cons (rpure (F []))
+vpartition :: forall (p :: Row kl *) f. (Foldable f,Short (NumCols p),Short (NumCols p - 1)) => f (V I p) -> R (F []) p
+vpartition = foldr cons (rpure (F []))
   where
-  cons v !acc = elimV (rmap f rHasCol) v
+  cons v !acc = velim (f /$\ rhas) v
     where
-    f :: forall (l :: k) t. (HasCol p :->: I :->: C (R (F []) p)) l t
+    f :: forall (l :: kl) t. (HasCol p :->: I :->: C (R (F []) p)) l t
     f = A $ \HasCol -> A $ \x -> C $ runIdentity $ rlens (Identity . g x) acc
 
-  g :: forall (l :: k) t. I l t -> F [] l t -> F [] l t
+  g :: forall (l :: kl) t. I l t -> F [] l t -> F [] l t
   g (I x) (F xs) = F (x:xs)
 ```
 
@@ -487,7 +476,7 @@ As usual, the objective is for the library to have minimal run-time overhead. Wi
 
 
 
-For example, the `partitionVariants` example from above (repeating here)
+For example, the `vpartition` example from above (repeating here)
 
 
 ```
@@ -496,7 +485,7 @@ vars :: [V I (Row0 .& "x" .= Int .& "y" .= Char .& "z" .= Bool)]
 vars = [inj #z True,inj #x 7,inj #y 'h',inj #z False,inj #y 'i',inj #x 3]
 
 pvars :: R (F []) (Row0 .& "x" .= Int .& "y" .= Char .& "z" .= Bool)
-pvars = partitionVariants vars
+pvars = vpartition vars
 ```
 
 
@@ -604,16 +593,16 @@ Together, records and variants have a few useful interactions.
 ```
 
 -- | Eliminate a variant with a functional record. (Gaster and Jones 1996)
-elimV :: Short (NumCols p) => R (f :->: C a) p -> V f p -> a
+velim :: Short (NumCols p) => R (f :->: C a) p -> V f p -> a
 
 -- | Eliminate a record with a functional variant. (Gaster and Jones 1996)
-elimR :: Short (NumCols p) => V (f :->: C a) p -> R f p -> a
+relimr :: Short (NumCols p) => V (f :->: C a) p -> R f p -> a
 
 -- | Convert each field to a variant of the same row.
-variants :: Short (NumCols p) => R f p -> R (C (V f p)) p
+rvariants :: Short (NumCols p) => R f p -> R (C (V f p)) p
 
 -- | Partition a list of variants into in list-shaped record of the same row.
-partitionVariants :: Short (NumCols p) => [V I p] -> R (F []) p
+vpartition :: Short (NumCols p) => [V I p] -> R (F []) p
 ```
 
 ## Some Light Core Snorkeling
@@ -640,7 +629,7 @@ upd (I x) = I (x + 1)
 
 f ::
     ( Lacks r "f"
-    , Short (NumCols r + 1) )
+    , Short (NumCols r) )
   => R I (r .& "f" .= Int)
   -> R I (r .& "f" .= Int)
 f = over rlens upd
@@ -661,15 +650,15 @@ type Fin (n :: Nat) = Word16
 
 -- | Predicate for supported record sizes.
 class (Applicative (SV n),Traversable (SV n)) => Short (n :: Nat) where
-  select :: SV n a -> Fin n -> a
-  lensSV :: Functor f => (a -> f a) -> SV n a -> Fin n -> f (SV n a)
+  select :: SV (n + 1) a -> Fin (n + 1) -> a
+  lensSV :: Functor f => (a -> f a) -> SV (n + 1) a -> Fin (n + 1) -> f (SV (n + 1) a)
   extend :: SV n a -> a -> Fin (n + 1) -> SV (n + 1) a
-  restrict :: SV (n + 1) a -> Fin (n + 1)-> (a,SV n a)
+  restrict :: SV (n + 1) a -> Fin (n + 1) -> (a,SV n a)
   indices :: SV n (Fin n)
 ```
 
 
-The `SV` data family provides the tuples of `Any` that I currently use to represent records. For example, the `rlens` record primitive is defined by simply coercing the `lensSV` method. I generate `SV` and `Short` instances via Template Haskell. The `SV` instance for `3` and its `lensSV` method definition are as follows.
+The `SV` data family provides the tuples of `Any` that I currently use to represent records. For example, the `rlens` record primitive is defined by simply coercing the `lensSV` method. I generate `SV` and `Short` instances via Template Haskell. The `SV` instance for `2` and its `lensSV` method definition are as follows.
 
 
 ```
@@ -677,7 +666,7 @@ The `SV` data family provides the tuples of `Any` that I currently use to repres
 data instance SV 3 a = V3 !a !a !a
   deriving (Foldable,Functor,Show,Traversable)
 
-instance Short 3 where
+instance Short 2 where
   ...
   {-# INLINE lensSV #-}
   lensSV f (V3 a b c) = \case
