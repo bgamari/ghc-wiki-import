@@ -211,8 +211,7 @@ The core for `any` is then nicely fused as `go` is identified as a join point wh
 This particular style is exactly the kind of code which the static argument transformation produces. Currently it is not enough to turn on `-fstatic-argument-transformation` as the order the transformations are run seems wrong.
 
 
-
-\# Nofib notes
+# Nofib notes
 
 
 - CSD yields a function `$wcstime` which takes 3 static dictionary arguments. Applying SAT to this function allows it to be inlined and a lot of further simplification. 
