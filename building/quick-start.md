@@ -64,3 +64,10 @@ $ make install
 You may need to use `sudo`.
 
 
+## More information
+
+
+
+Has your question not been answered? See [Building](building) for more resources. Also, don't hestitate to [ask for help](mailing-lists-and-irc).
+
+
