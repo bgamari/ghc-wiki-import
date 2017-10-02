@@ -209,3 +209,13 @@ Enable parallel builds in the nix build environment:
 ```wiki
    export NIX_BUILD_CORES=4
 ```
+
+### shell.nix
+
+
+
+If you need more control over your GHC build environment there is a `shell.nix` file that defines (hopefully) all dependencies: [
+https://github.com/supersven/ghc-shell.nix](https://github.com/supersven/ghc-shell.nix)
+You can use it as is or a base for your own.
+
+
