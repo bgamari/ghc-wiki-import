@@ -159,7 +159,7 @@ required tools](https://ghc.haskell.org/trac/ghc/wiki/Building/Preparation/Tools
 
 
 ```wiki
-   sudo pacman -S ghc perl gcc make happy alex cabal-install autoconf automake python python-sphinx libedit
+   sudo pacman -S ghc ghc-static perl gcc make happy alex cabal-install autoconf automake python python-sphinx libedit
 ```
 
 ## Nix/NixOS
