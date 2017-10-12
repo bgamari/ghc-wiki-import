@@ -61,7 +61,7 @@ The founding members of the GHC DevOps Group are (alphabetically)
 
 
 - Mathieu Boespflug (Tweag I/O), 
-- Manuel Chakravarty (Tweag I/O), 
+- Manuel Chakravarty (Tweag I/O) \[chair\], 
 - Duncan Coutts (Well Typed),
 - Iavor Diatchki (Galois),
 - Ben Gamari (Well Typed),
