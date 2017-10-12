@@ -1,6 +1,10 @@
 # Continuous Integration
 
 
+
+This page is to support the discussion of GHC DevOps Group on the CI solution for GHC to provide continuous testing and release artefact generation. See also [\#13716](https://gitlab.staging.haskell.org/ghc/ghc/issues/13716).
+
+
 ## Requirements
 
 
