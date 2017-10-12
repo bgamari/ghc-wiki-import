@@ -84,7 +84,7 @@ For the moment, we explicitly refrain from specifying a more detailed long-term 
 
 
 
-To provide transparency to the wider GHC user community, all discussions will be on `ghc-devops-group @ haskell.org`. Everybody interested in GHC DevOps aspects is welcome to subscribe to the list and to consult the public mailing list archives at [
+To provide transparency to the wider GHC user community, all discussions will be on `ghc-devops-group @ haskell.org`. If there are group meetings, a meeting summary will be posted to the list. Everybody interested in GHC DevOps aspects is welcome to subscribe to the list and to consult the public mailing list archives at [
 https://mail.haskell.org/pipermail/ghc-devops-group/](https://mail.haskell.org/pipermail/ghc-devops-group/)
 
 
