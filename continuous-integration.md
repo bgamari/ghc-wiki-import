@@ -1,0 +1,12 @@
+# Continuous Integration
+
+
+## Requirements
+
+
+## Possible solutions
+
+
+## Todo list
+
+
