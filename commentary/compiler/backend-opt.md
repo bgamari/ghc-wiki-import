@@ -230,6 +230,13 @@ LBB0_1:                       ## %H
 ---
 
 
+## Tuning LLVM IR Passes
+
+
+
+The optimization pass sequence in LLVM is well tested for languages like C/C++, but not Haskell. See [\#11295](https://gitlab.staging.haskell.org/ghc/ghc/issues/11295) for details and progress updates.
+
+
 ## Improving Heap Checks
 
 
