@@ -12,14 +12,15 @@ This page is our road-map for what will be in 8.2.2.
 
 
 
-We aren't there yet.
+The release is currently stabilizing.
 
 
 ## Dates
 
 
 
-TBD.
+8.2.2-rc1 was released on 1 October 2017.
+8.2.2-rc2 will be released the week of 16 October 2017.
 
 
 ## Libraries Status
