@@ -74,7 +74,7 @@ The founding members of the GHC DevOps Group are (alphabetically)
 - Ryan Trinkle (Obsidian Systems).
 
 
-We seek other individuals or organisation, who depend on GHC and are interested in actively contributing. Contact any of the aforementioned persons or send email to `manuel.chakravarty @ tweag.io`.
+If you or your organisation depends on GHC and you want to help with its continued development and maintenance, please contact any of the aforementioned persons or send email to `manuel.chakravarty @ tweag.io`.
 
 
 
