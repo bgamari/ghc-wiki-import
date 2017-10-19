@@ -14,6 +14,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 - [Impredicative types](impredicative-polymorphism)
 - [ArrowNotation](arrow-notation)
 - [Functional dependencies](fun-deps)
+- [Roles, Coercible and coerce](roles)
 - [Injective type families](injective-type-families)
 - [TemplateHaskell](template-haskell)
 - [Inlining](inlining)
