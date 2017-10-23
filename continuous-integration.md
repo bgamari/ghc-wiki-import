@@ -190,15 +190,32 @@ Below, we track all work that needs to be done until we have achieved the follow
 - automatic Linux/x86\_64 build for each PR/Differential on CircleCl, and
 - automatic generation of all release artefacts on Linux/i386, Linux/x86\_64, macOS/x86\_64 & Windows/x86\_64 on CircleCI and AppVeyor at least once per day.
 
+
+**Most of the below should be turned into Trac tickets.**
+
+
 ### Per-commit build on Linux/x86\_64
 
+
+- What is missing from Mathieu's CircleCI build? Does it run `./validate`?
+- Probably easiest to just trigger those builds from GitHub (as all commits are mirrored there anyway).
 
 ### Daily builds on Linux/i386, macOS/x86\_64 & Windows/x86\_64
 
 
+- Implement AppVeyor build config.
+- Jonas has started on macOS CircleCI build. What is the status?
+- Linux/i386 ought to be a small change on Linux/x86\_64, or is there more to it?
+
 ### Per-PR/Differential build on Linux/x86\_64
 
+
+- This is the CircleCI 1.0 documentation on Phabricator integration: [
+  https://circleci.com/docs/1.0/phabricator/](https://circleci.com/docs/1.0/phabricator/) Does this work with CircleCI 2.0 as well? (The CircleCI API 1.1 supposedly can drive both.)
+- Implement CircleCI/GitHub integration for PRs.
 
 ### Daily release artefacts for all Tier 1 platforms
 
 
+- What is missing in Ben's existing scripts?
+- Integrate release artefact building and uploading into all daily builds.
