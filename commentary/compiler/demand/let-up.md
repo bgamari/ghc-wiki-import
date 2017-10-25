@@ -7,11 +7,11 @@ cardinality paper](https://www.microsoft.com/en-us/research/wp-content/uploads/2
 
 
 - **LetDown** is used for top-level bindings, recursive bindings and local, non-recursive functions. It closely mimics semantics of an actual function call, as it unleashes the demand signature of the bound RHS at the call site within the let body.
-- **[LetUp](commentary/compiler/demand/let-up)** is used for local, non-recursive thunks. This works more like a type-system: Analysing the let-body reveals its demand on the identifier, in which the RHS of the bindings is analysed exactly once. Only now it is that the results from the body and the RHS get sequentially combined.
+- **LetUp** is used for local, non-recursive thunks. This works more like a type-system: Analysing the let-body reveals its demand on the identifier, in which the RHS of the bindings is analysed exactly once. Only now it is that the results from the body and the RHS get sequentially combined.
 
 
 There are reasons why we currently need both rules ([
-cardinality paper §3.5 and §3.6](https://www.microsoft.com/en-us/research/wp-content/uploads/2014/01/cardinality-popl14.pdf)), although the general approach of **LetDown** is more flow-sensitive and thus strictly more precise than **[LetUp](commentary/compiler/demand/let-up)**.
+cardinality paper §3.5 and §3.6](https://www.microsoft.com/en-us/research/wp-content/uploads/2014/01/cardinality-popl14.pdf)), although the general approach of **LetDown** is more flow-sensitive and thus strictly more precise than **LetUp**.
 
 
 
@@ -25,7 +25,7 @@ in let x = 2*y
 ```
 
 
-This evaluates `y` only once, but the **[LetUp](commentary/compiler/demand/let-up)** rule (in contrast to **LetDown**) fails to recognise this:
+This evaluates `y` only once, but the **LetUp** rule (in contrast to **LetDown**) fails to recognise this:
 The inner let-body has a demand environment of `[x :-> <L,1*U>, y :-> <L, 1*U>]`, which combines with the DmdEnv of the RHS `[y :-> <L, 1*U>` to a total DmdEnv for the let-expression binding `x` of `[y :-> <L,U>]`.
 E.g., `y` is possibly evaluated multiple times!
 
@@ -34,7 +34,7 @@ E.g., `y` is possibly evaluated multiple times!
 
 
 
-Meanwhile, [Call Arity](call-arity), using a **[LetUp](commentary/compiler/demand/let-up)** strategy at let-bindings exclusively, has countered the exact same loss of precision by employing \*Co-call graphs\*. Instead of having cardinality information stored in a plain identifier map, where identifiers are assumed to be evaluated with each other, co-call graphs additionally assert that some ids are never evaluated during the same evaluation of the containing expression. 
+Meanwhile, [Call Arity](call-arity), using a **LetUp** strategy at let-bindings exclusively, has countered the exact same loss of precision by employing \*Co-call graphs\*. Instead of having cardinality information stored in a plain identifier map, where identifiers are assumed to be evaluated with each other, co-call graphs additionally assert that some ids are never evaluated during the same evaluation of the containing expression. 
 
 
 
