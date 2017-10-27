@@ -42,7 +42,7 @@ The past six months have seen a great deal of activity in GHC's infrastructure. 
 
 
 
-While Jenkins served as a good testing ground for improving GHC's test infrastructure continued work with it revealed a number of issues:
+While Jenkins served as a good testing ground for improving GHC's test infrastructure, continued work with it revealed a number of issues:
 
 
 - It lacked support for testing within `msys2` on Windows 
@@ -50,7 +50,7 @@ While Jenkins served as a good testing ground for improving GHC's test infrastru
 - It required a significant investment of effort to setup, followed by an on-going administrative overhead
 
 
-Seeing these 
+Manuel Chakravarty of the newly formed GHC Devops Committee noted these problems and instead proposed that we try a combination of hosted CI services, Appveyor and CircleCI. 
 
 
 
