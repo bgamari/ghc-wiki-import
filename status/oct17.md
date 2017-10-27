@@ -20,7 +20,8 @@ GHC 8.4 will continue focusing on stability and will include a number of interna
 ### Compiler
 
 
--   A new syntax tree representation based on Trees That Grow?. This will make it easier for external users to l
+-   A new syntax tree representation based on [
+  Trees That Grow](http://www.jucs.org/jucs_23_1/trees_that_grow/jucs_23_01_0042_0062_najd.pdf). This will make it easier for external users to l
 
 -   Improved support for cross-compilation
 
@@ -64,7 +65,7 @@ In his Summer of Code project, Jared refactored the testsuite to instead simply 
 
 
 
-In the compiler itself, Shayan Najd and Alan Zimmerman have been working hard on porting the compiler's frontend AST to use the extensibility mechanism proposed in Shayan's "Trees That Grow" paper. This is a significant refactoring that will allow GHC API users to extend the AST for their own purposes, significantly improving the reusability of the structure. Eventually this will allow us to split the AST types out of the `ghc` package, allowing tooling authors and compiler to use the same AST representation.
+In the compiler itself, Shayan Najd and Alan Zimmerman have been working hard on porting the compiler's frontend AST to use the extensibility mechanism proposed in Shayan's "Trees That Grow" paper. This is a significant refactoring that will allow GHC API users to extend the AST for their own purposes, significantly improving the reusability of the structure. Eventually this will allow us to split the AST types out of the `ghc` package, allowing tooling authors, Template Haskell users, and the compiler itself to use the same AST representation.
 
 
 
