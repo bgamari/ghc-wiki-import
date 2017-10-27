@@ -51,7 +51,7 @@ While Jenkins served as a good testing ground for improving GHC's test infrastru
 
 
 - It lacked support for testing within `msys2` on Windows 
-- It offered little support in ensuring build purity
+- It offered little support in ensuring build purity and reproducibly configuring build environments
 - It required a significant investment of effort to setup, followed by an on-going administrative overhead
 
 
@@ -70,7 +70,11 @@ In his Summer of Code project, Jared refactored the testsuite to instead simply 
 
 
 
-As always, if you are interested in contributing to any facet of GHC, be
+In the compiler itself, Shayan Najd and Alan Zimmerman have been working hard on porting the compiler's frontend AST to use the extensibility mechanism proposed in Shayan's "Trees That Grow" paper. This is a significant refactoring that will allow GHC API users to extend the AST for their own purposes, significantly improving the reusability of the structure. Eventually this will allow us to split the AST types out of the `ghc` package, allowing tooling authors and compiler to use the same AST representation.
+
+
+
+As always, if you are interested in contributing to any facet of GHC, be it
 the runtime system, type-checker, documentation, simplifier, or anything
 in between, please come speak to us either on IRC (`#ghc` on
 `irc.freeenode.net`) or `ghc-devs@haskell.org`. Happy Haskelling!
