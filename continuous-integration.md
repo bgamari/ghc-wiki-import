@@ -178,7 +178,19 @@ one cross-compilation target) and a periodic slow validation and we may
 be at over a dozen machines.
 
 
-## Todo list
+## Status
+
+
+
+Circle CI & AppVeyor integration on the Tweag GHC fork: [
+https://github.com/tweag/ghc/tree/tweag/ci](https://github.com/tweag/ghc/tree/tweag/ci)
+
+
+- Linux/x86\_64 (CircleCI): build & store artefacts.
+- macOS/x86\_64 (CircleCI): build & store artefacts.
+- Windows/x86\_64 (AppVeyor): asked for increased limits
+
+## Todo
 
 
 
@@ -198,12 +210,12 @@ Below, we track all work that needs to be done until we have achieved the follow
 
 
 - Talk to CircleCI about increased limits for the free plan for GHC. Determine how much on top of that we need.
-- AppVeyor is also free for OSS projects, but I couldn't find anything specific about the limits. Determine how much on top of the OSS plan we need and whether they are willing to relax the limits for a visible OSS project.
+- AppVeyor has a 1h limit for OSS projects by default. Determine how much on top of the OSS plan we need and whether they are willing to relax the limits for a visible OSS project.
 
 ### Per-commit build on Linux/x86\_64
 
 
-- What is missing from Mathieu's CircleCI build?
+- CircleCI build needs to run testing
 
   - We want to run `./validate --slow` at some point — see [\#13205](https://gitlab.staging.haskell.org/ghc/ghc/issues/13205).
 - Probably easiest to just trigger those builds from GitHub (as all commits are mirrored there anyway).
@@ -212,7 +224,7 @@ Below, we track all work that needs to be done until we have achieved the follow
 
 
 - Implement AppVeyor build config.
-- Jonas has started on macOS CircleCI build. What is the status?
+- macOS CircleCI build: needs to add testing (there are some failures, but that may just be the state of macOS ATM)
 - Linux/i386 ought to be a small change on Linux/x86\_64, or is there more to it?
 
 ### Per-PR/Differential build on Linux/x86\_64
@@ -226,4 +238,4 @@ Below, we track all work that needs to be done until we have achieved the follow
 
 
 - What is missing in Ben's existing scripts?
-- Integrate release artefact building and uploading into all daily builds.
+- tar balls are currently being put into CircleCI artefacts store, but we also need docs at least.
