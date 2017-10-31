@@ -224,7 +224,7 @@ Below, we track all work that needs to be done until we have achieved the follow
 
 
 - Implement AppVeyor build config.
-- macOS CircleCI build: needs to add testing (there are some failures, but that may just be the state of macOS ATM)
+- macOS CircleCI build: there are some failures (which do not happen in Harbormaster)
 - Linux/i386 ought to be a small change on Linux/x86\_64, or is there more to it?
 
 ### Per-PR/Differential build on Linux/x86\_64
@@ -238,4 +238,7 @@ Below, we track all work that needs to be done until we have achieved the follow
 
 
 - What is missing in Ben's existing scripts?
-- tar balls are currently being put into CircleCI artefacts store, but we also need docs at least.
+- Tar balls are currently being put into CircleCI artefacts store (where they will be kept for one month).
+- Implement S3 upload for longer term storage.
+- Documentation bundle for the website needs to be generated and uploaded. Might be easier with Hadrian: [
+  https://github.com/snowleopard/hadrian/pull/413](https://github.com/snowleopard/hadrian/pull/413)
