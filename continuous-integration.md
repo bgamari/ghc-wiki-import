@@ -203,6 +203,1313 @@ Below, we track all work that needs to be done until we have achieved the follow
 - automatic generation of all release artefacts on Linux/i386, Linux/x86\_64, macOS/x86\_64 & Windows/x86\_64 on CircleCI and AppVeyor at least once per day,
 - end-to-end testing by creating a source distribution, from that a binary distribution, and use that for regression testing. (This has the advantage of also testing the distribution creation process.)
 
+
+
+  
+  
+  
+  
+  
+    
+
+## Status: new (16 matches)
+
+
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: new, component: Continuous+Integration,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, desc: 1, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: new, component: Continuous+Integration,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: new, component: Continuous+Integration,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: new, component: Continuous+Integration,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: new, component: Continuous+Integration,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, order: owner)
+      </th>
+<td>
+    </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#11958](https://gitlab.staging.haskell.org/ghc/ghc/issues/11958)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      task
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Improved testing of cross-compiler](https://gitlab.staging.haskell.org/ghc/ghc/issues/11958)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      low
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      bgamari
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#13122](https://gitlab.staging.haskell.org/ghc/ghc/issues/13122)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      task
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Investigate reporting build errors with harbormaster.sendmessage](https://gitlab.staging.haskell.org/ghc/ghc/issues/13122)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      bgamari
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#14416](https://gitlab.staging.haskell.org/ghc/ghc/issues/14416)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      task
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [CI with CircleCI](https://gitlab.staging.haskell.org/ghc/ghc/issues/14416)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      highest
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      bgamari
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#14475](https://gitlab.staging.haskell.org/ghc/ghc/issues/14475)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      task
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Upload documentation dumps](https://gitlab.staging.haskell.org/ghc/ghc/issues/14475)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#14502](https://gitlab.staging.haskell.org/ghc/ghc/issues/14502)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      task
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Build Alpine Linux binary distributions](https://gitlab.staging.haskell.org/ghc/ghc/issues/14502)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      bgamari
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#14505](https://gitlab.staging.haskell.org/ghc/ghc/issues/14505)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [CircleCI only builds pushed heads](https://gitlab.staging.haskell.org/ghc/ghc/issues/14505)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      bgamari
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#14508](https://gitlab.staging.haskell.org/ghc/ghc/issues/14508)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      task
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Bring up Appveyor for Windows CI](https://gitlab.staging.haskell.org/ghc/ghc/issues/14508)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      mrkkrp
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#14599](https://gitlab.staging.haskell.org/ghc/ghc/issues/14599)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [32-bit Windows test environment](https://gitlab.staging.haskell.org/ghc/ghc/issues/14599)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      bgamari
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#14949](https://gitlab.staging.haskell.org/ghc/ghc/issues/14949)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Perform builds on non-Debian-based systems on Circle CI](https://gitlab.staging.haskell.org/ghc/ghc/issues/14949)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      mrkkrp
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#15011](https://gitlab.staging.haskell.org/ghc/ghc/issues/15011)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      task
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Automate update of VersionHistory table](https://gitlab.staging.haskell.org/ghc/ghc/issues/15011)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      bgamari
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#15582](https://gitlab.staging.haskell.org/ghc/ghc/issues/15582)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Phabricator shows "drafts" by default](https://gitlab.staging.haskell.org/ghc/ghc/issues/15582)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      bgamari
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#15699](https://gitlab.staging.haskell.org/ghc/ghc/issues/15699)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Run sanity checker in more testsuite runs](https://gitlab.staging.haskell.org/ghc/ghc/issues/15699)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      bgamari
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#15749](https://gitlab.staging.haskell.org/ghc/ghc/issues/15749)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Long Harbormaster builds](https://gitlab.staging.haskell.org/ghc/ghc/issues/15749)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      bgamari
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#15972](https://gitlab.staging.haskell.org/ghc/ghc/issues/15972)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Test nofib tests for correctness in CI](https://gitlab.staging.haskell.org/ghc/ghc/issues/15972)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      high
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      bgamari
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#16134](https://gitlab.staging.haskell.org/ghc/ghc/issues/16134)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Continuous integration on FreeBSD](https://gitlab.staging.haskell.org/ghc/ghc/issues/16134)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      bgamari
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#16200](https://gitlab.staging.haskell.org/ghc/ghc/issues/16200)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Mechanical checking of submodule versions for releases](https://gitlab.staging.haskell.org/ghc/ghc/issues/16200)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      bgamari
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr></table>
+
+
+  
+
+
+
 ### General
 
 
