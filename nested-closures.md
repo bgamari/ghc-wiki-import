@@ -1,6 +1,10 @@
 # Nested closure representation in STG
 
 
+
+Progess on this is tracked by Trac [\#14461](https://gitlab.staging.haskell.org/ghc/ghc/issues/14461).
+
+
 ## The problem
 
 
