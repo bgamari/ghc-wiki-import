@@ -21,7 +21,7 @@ Here are the steps to modify it:
 
 1. **Wait** for the reviewers to look at your patches. If this takes more than a week, complain! 
 
-1. **Wait** for bgamari to publish the documentation. (As of Nov 2017, he runs the publish script manually.)  If this takes more than a month, complain on the `#ghc` channel on [
+1. **Wait** for bgamari to publish the documentation. (As of Nov 2017, he runs the publish script manually, about once a month.)  If this takes more than a month, complain on the `#ghc` channel on [
   FreeNode](http://freenode.net/) !  
 
 
