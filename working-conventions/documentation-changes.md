@@ -8,7 +8,7 @@ GHC's documentation](https://downloads.haskell.org/~ghc/latest/docs/html/librari
 
 
 GHC's documentation is included within in its source code, using [
-Haddocks's markup](http://haskell-haddock.readthedocs.io/en/latest/markup.html).
+Haddock's markup](http://haskell-haddock.readthedocs.io/en/latest/markup.html).
 
 
 
@@ -21,7 +21,8 @@ Here are the steps to modify it:
 
 1. **Wait** for the reviewers to look at your patches. If this takes more than a week, complain! 
 
-1. **Wait** for the release manager to land your patches. If this takes more than a week, complain!
+1. **Wait** for bgamari to publish the documentation. (As of Nov 2017, he runs the publish script manually.)  If this takes more than a month, complain on the `#ghc` channel on [
+  FreeNode](http://freenode.net/) !  
 
 
 Then have a beer on us.  We are truly grateful.
