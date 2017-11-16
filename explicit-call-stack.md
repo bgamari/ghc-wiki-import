@@ -30,7 +30,7 @@ Here are the approaches we have under consideration
 
 >
 >
-> You need to compile your whole program with profiling, and you need a profiled version of the packages you install. You can do the latter by adding `--enable-pofiling` to Cabal, and you can put that in your `~/.cabal` file.
+> You need to compile your whole program with profiling, and you need a profiled version of the packages you install. You can do the latter by adding `--enable-profiling` to Cabal, and you can put that in your `~/.cabal` file.
 >
 >
 
