@@ -69,6 +69,12 @@ Some more out-of-date documents:
 
 
 
+**Can I use this with Template Haskell?** Yes, but you need GHC 8.2.2; GHC 8.2.1 has a critical bug which means that most real-world uses of TH will not work. See [
+this issue](https://github.com/haskell/cabal/issues/4755) and [
+this issue](https://github.com/haskell/cabal/issues/4865) for two examples of this occurring in the wild.
+
+
+
 **Make sure cabal-version is recent enough.** ([
 \#4448](https://github.com/haskell/cabal/issues/4448)) If you set the `cabal-version` of your package too low, you may get this error:
 
