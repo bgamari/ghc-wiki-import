@@ -55,7 +55,7 @@ Alan would like to see
 
 
 ```
-deriving instance Data (OverLit (GhcPass p))
+deriving instance Data (HsOverLit (GhcPass p))
 ```
 
 
@@ -89,7 +89,29 @@ make three.
 \[ The spurious constraint problem was resolved by including `deriving instance Typeable c => Data (GhcPass c)`, as recommended by \@RyanGlScott \]
 
 
-### PLAN C
+### PLAN E
+
+
+
+Proceed as per Plan A, but move all the standalone deriving code to a new file, which will produce orphan instances.
+
+
+
+Inside this, use CPP to detect a modern enough compiler (GHC 8.2.1) to generate via Plan B, otherwise fall back to Plan A.
+
+
+
+Eventually improve the standalone deriving sufficiently that it is able to generate a single traversal, instead of the three.
+
+
+
+So for day-to-day work ghc devs can use GHC 8.2.1, and we confirm is still works with GHC 8.0.2 less frequently.
+
+
+## Outdated/Infeasible Plans
+
+
+### PLAN C (Infeasible)
 
 
 
@@ -118,7 +140,7 @@ That is: a no-op `Data` instances.  Traversals would not traverse extension fiel
 That might not be so bad, for now!
 
 
-### PLAN D
+### PLAN D (Infeasible)
 
 
 
@@ -173,23 +195,3 @@ Note:
 -  We are solving a compilation time problem for GHC stage1/stage2. The produced compiler has the same performance regardless of which derivation mechanism.
 
 - Ideally we would like to end up with `data` instances for an arbitrary `OverLit p`, which is an outcome for Plan A. i.e. Plan A will play nice with external index types,for GHC API users.
-
-### PLAN E
-
-
-
-Proceed as per Plan A, but move all the standalone deriving code to a new file, which will produce orphan instances.
-
-
-
-Inside this, use CPP to detect a modern enough compiler (GHC 8.2.1) to generate via Plan B, otherwise fall back to Plan A.
-
-
-
-Eventually improve the standalone deriving sufficiently that it is able to generate a single traversal, instead of the three.
-
-
-
-So for day-to-day work ghc devs can use GHC 8.2.1, and we confirm is still works with GHC 8.0.2 less frequently.
-
-
