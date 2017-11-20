@@ -33,8 +33,9 @@ I propose
 
 
 ```
-  deriving instance (Data (XOverLit (GhcPass p)))
-                 => Data (OverLit (GhcPass p)) where…
+ deriving instance (Typeable p, Data (XOverLit (GhcPass p))) =>
+    Data (HsOverLit (GhcPass p))
+
 ```
 
 
