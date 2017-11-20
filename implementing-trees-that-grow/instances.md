@@ -71,9 +71,9 @@ Alan has discovered that the three instances:
 
 
 ```
-  deriving instance Data (OverLit (GhcPass 'Parsed))
-  deriving instance Data (OverLit (GhcPass 'Renamed))
-  deriving instance Data (OverLit (GhcPass 'Typechecked))
+  deriving instance Data (HsOverLit (GhcPass 'Parsed ))
+  deriving instance Data (HsOverLit (GhcPass 'Renamed))
+  deriving instance Data (HsOverLit (GhcPass 'Typechecked))
 ```
 
 
