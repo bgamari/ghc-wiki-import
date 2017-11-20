@@ -11,6 +11,7 @@ In this page, we discuss the overall plan and details of implementing Trees that
   report](https://ghc.haskell.org/trac/ghc/wiki/NativeMetaprogramming) of a related Summer of Haskell project.
 - [Notes about instances](implementing-trees-that-grow/instances)
 - Main GHC branch: `wip/GrowableAST`
+- [\#14490](https://gitlab.staging.haskell.org/ghc/ghc/issues/14490): TTG snags
 
 
 Main protagonists: Shayan Najd and Alan Zimmerman. 
