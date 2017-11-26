@@ -13,7 +13,8 @@ If you have any questions along the way don't hesitate to reach out to the commu
 
 
 
-[Prepare](building/preparation) your machine, [clone](building/getting-the-sources) the git repo, and [Building/QuickStart](building/quick-start) GHC. For the short, short version, which may or may not work for your machine, you can try this:
+[Prepare](building/preparation) your machine, [clone](building/getting-the-sources) the git repo, and [Building/QuickStart](building/quick-start) GHC. For the short, short version, which may or may not work for your machine, you can try this (note that [
+building older versions of GHC may require having an older version of GHC on your path](https://ghc.haskell.org/trac/ghc/wiki/Building/Preparation/Tools)):
 
 
 ```
