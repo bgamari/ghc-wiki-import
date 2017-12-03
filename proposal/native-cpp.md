@@ -1,6 +1,10 @@
 # Native `{-# LANGUAGE CPP #-}`
 
 
+
+The status of this proposal is tracked by [\#14553](https://gitlab.staging.haskell.org/ghc/ghc/issues/14553).
+
+
 ## Problem Statement
 
 
