@@ -1526,7 +1526,7 @@ col: owner, order: owner)
 Probably easiest to just trigger those builds from GitHub (as all commits are mirrored there anyway).
 
 
-- **Next:** (a) Make sure all CircleCI builds are running as expected and (b) ensure that builds happen for PRs.
+- Need to get builds on every individual commit (e.g.,to do easy bisection) — see [\#14505](https://gitlab.staging.haskell.org/ghc/ghc/issues/14505).
 
 ### Daily builds on Linux/i386, macOS/x86\_64 & Windows/x86\_64
 
