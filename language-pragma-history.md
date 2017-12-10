@@ -14,6 +14,15 @@ See also [
 http://damianfral.github.io/ghcaniuse/](http://damianfral.github.io/ghcaniuse/).
 
 
+## Changes in GHC 8.4
+
+
+
+Added LANGUAGE extensions:
+
+
+- `[No]EmptyDataDeriving`
+
 ## Changes in GHC 8.2
 
 
