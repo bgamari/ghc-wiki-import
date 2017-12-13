@@ -1532,7 +1532,6 @@ Probably easiest to just trigger those builds from GitHub (as all commits are mi
 
 
 - Implement AppVeyor build config. **Blocked:** waiting for AppVeyor to increase time limit. (Apparently, Rust are on a payed plan, so maybe we have to do that, too.)
-- macOS CircleCI build: there are some failures (which do not happen in Harbormaster)
 - Linux/i386 ought to be a small change on Linux/x86\_64, or is there more to it?
 - *Low priority:* Implement end-to-end testing. **Blocked:** on [\#14392](https://gitlab.staging.haskell.org/ghc/ghc/issues/14392), [\#14411](https://gitlab.staging.haskell.org/ghc/ghc/issues/14411) & [\#14412](https://gitlab.staging.haskell.org/ghc/ghc/issues/14412).
 - *Low priority:* We want to run `./validate --slow` at some point — see [\#13205](https://gitlab.staging.haskell.org/ghc/ghc/issues/13205).
