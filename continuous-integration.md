@@ -1526,7 +1526,7 @@ col: owner, order: owner)
 Probably easiest to just trigger those builds from GitHub (as all commits are mirrored there anyway).
 
 
-- Need to get builds on every individual commit (e.g., to do easy bisection) — see [\#14505](https://gitlab.staging.haskell.org/ghc/ghc/issues/14505).
+- Need to get builds on every individual commit (e.g., to do easy bisection) — see [\#14505](https://gitlab.staging.haskell.org/ghc/ghc/issues/14505). **Alternative:** Use GitHub PRs instead of pushing to master directly.
 
 ### Daily builds on Linux/i386, macOS/x86\_64 & Windows/x86\_64
 
