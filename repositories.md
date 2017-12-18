@@ -28,7 +28,7 @@ The SSH host keys of `git.haskell.org` are,
 
 
 These are also mirrored to GitHub under the `ghc` [
-organization](https://github.com/ghc). Note that we do not use GitHub as the primary upstream since GitHub does not allow us to use Git hooks. These hooks are invaluable for verifying consistency between submodules (e.g. that the `ghc` repository refers only to submodule commits which are available upstream).
+organization](https://github.com/ghc). Note that we do not use GitHub as the primary upstream since GitHub does not allow us to use Git hooks. These hooks are invaluable for verifying consistency between submodules (e.g. that the `ghc` repository refers only to submodule commits which are available upstream, see [\#8251](https://gitlab.staging.haskell.org/ghc/ghc/issues/8251)).
 
 
 ## Repository listing
