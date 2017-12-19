@@ -118,7 +118,7 @@ nofib-analyse/nofib-analyse log1 log2
 ```
 
 
-The output of the nofib-analyse tool is quite readable, with two provisios:
+The output of the nofib-analyse tool is quite readable, with two provisos:
 
 
 - Missing values in the output typically mean that the benchmark crashed and may indicate a problem with your optimisation
