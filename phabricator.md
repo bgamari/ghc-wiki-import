@@ -64,6 +64,16 @@ The most important tool you're going to use with Phab is called **arcanist**, wh
 
 
 
+For Windows users, there's a [
+chocolatey package](https://chocolatey.org/packages/arcanist) available, so to install it a simple `cinst -y arcanist` in an Admin shell will get you going.
+For Nix users, there's a derivation available, so `nix-env -i arcanist` suffices.
+
+
+
+If you want to install **arcanist** from source, follow these instructions:
+
+
+
 To install PHP on Debian or Ubuntu, run `apt-get install php5-cli php5-curl` (or `apt-get install php7.0-cli php7.0-curl` on a more recent Ubuntu).
 On OS X PHP is already installed and you can skip directly to grabbing the arcanist sources.
 
