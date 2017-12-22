@@ -23,7 +23,7 @@ Release in February 2018. Cut release branch in November 2017.
 
 
 
-See [Libraries](status/gh-c-8.4.1/libraries)
+See [Libraries](status/gh-c-8.4.1/libraries) and [Migration/8.4](migration/8.4).
 
 
 ## Release highlights (planned)
