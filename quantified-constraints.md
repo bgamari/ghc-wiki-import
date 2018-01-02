@@ -31,6 +31,8 @@ Here are some resources
 
 - [
   An old haskell.org Wiki page about it](http://haskell.org/haskellwiki/Quantified_contexts)
+- [
+  A Libraries thread (Dec 18)](https://mail.haskell.org/pipermail/libraries/2017-December/028377.html).
 
 ## Status
 
