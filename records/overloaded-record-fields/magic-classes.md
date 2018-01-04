@@ -14,8 +14,8 @@ This page describes new built-in magic typeclasses that form part 3 of the [Over
 
 
 
-These are not yet in GHC HEAD. See [
-Phab:D1687](https://phabricator.haskell.org/D1687) for an implementation of the first draft.
+These is merged into GHC, see [
+Phab:D2708](https://phabricator.haskell.org/D2708).
 
 
 ## Design
