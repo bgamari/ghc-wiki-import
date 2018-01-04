@@ -14,7 +14,7 @@ This page describes new built-in magic typeclasses that form part 3 of the [Over
 
 
 
-These is merged into GHC, see [
+The `HasField`-part or the proposal is merged into GHC, see [
 Phab:D2708](https://phabricator.haskell.org/D2708).
 
 
