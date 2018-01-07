@@ -287,4 +287,4 @@ you are likely trying to compile GHC against a `libgmp` compiled for the wrong p
 
 
 - `WORD_SIZE_IN_BITS` is defined as `SIZEOF_HSWORD` in `includes/ghcautoconf.h` (which is produced by `./configure`)
-- `GMP_LIMB_BITS` is defined by `libraries/integer-gmp/gmp/include/gmp/gmp-impl.h`
+- `GMP_LIMB_BITS` is defined by `libraries/integer-gmp/gmp/include/gmp/gmp-impl.h` (if you are compiling with an in-tree GMP).
