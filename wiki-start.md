@@ -48,8 +48,6 @@ Help/Guide](https://ghc.haskell.org/trac/ghc/wiki/TracGuide) link at the top of 
 ## Notices
 
 
-- Volunteer your machine as a [GHC builder](builder). This will help us find and fix issues with GHC on your platform. 
-
 - [Internships](internships) at Microsoft Research, Cambridge, working on Haskell and GHC. 
 
 ## Developer Documentation
