@@ -45,11 +45,6 @@ Help/Guide](https://ghc.haskell.org/trac/ghc/wiki/TracGuide) link at the top of 
 - [ Harbormaster](https://phabricator.haskell.org/diffusion/GHC/history/), the [
   nightly build bots](http://haskell.inf.elte.hu/builders/) and Travis [](http://travis-ci.org/ghc/ghc/builds)  are keeping an eye on our code. See the [Status page](status) for more information. 
 
-## Notices
-
-
-- [Internships](internships) at Microsoft Research, Cambridge, working on Haskell and GHC. 
-
 ## Developer Documentation
 
 
