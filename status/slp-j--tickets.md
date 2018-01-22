@@ -42,6 +42,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
   - [Inlining](inlining)
   - [FloatOut](float-out)
+  - [FloatInwards](float-inwards)
   - [SpecConstr](spec-constr)
   - [Specialise](specialise)
   - [StaticArgumentTransformation](static-argument-transformation)
