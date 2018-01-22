@@ -283,6 +283,15 @@ Here are the submodules we use, and where their upstreams point:
 <th>Yes</th>
 <td> </td>
 <th>Yes</th></tr>
+<tr><th>libraries/transformers</th>
+<td> </td>
+<th>See below</th>
+<td> </td>
+<th></th>
+<td> </td>
+<th>Yes</th>
+<td> </td>
+<th>Yes</th></tr>
 <tr><th>libraries/unix</th>
 <td>         </td>
 <th>https://github.com/haskell/unix</th>
@@ -373,6 +382,14 @@ Here are the submodules we use, and where their upstreams point:
 
 The table above is maintained manually and can sometimes get out of sync. If in doubt, the primary data source is  the [
 packages](http://git.haskell.org/ghc.git/blob_plain/HEAD:/packages) file in the top-level `ghc.git` repo folder.
+
+
+## `transformers`
+
+
+
+The `transformers` library's upstream uses `darcs`. In order to track this library, we maintain a git mirror ([
+http://git.haskell.org/darcs-mirrors/transformers.git](http://git.haskell.org/darcs-mirrors/transformers.git)) generated using `darcs export` mirror which is periodically updated by `git.haskell.org`. However, due to the tendency for the import mechanism to produce non-fast-forward branches, the commits in this mirror need to be manually pulled into the submodule used by GHC, 
 
 
 ## Infrastructure
