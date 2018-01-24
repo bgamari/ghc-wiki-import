@@ -9,6 +9,42 @@ Edsko's Frontend Plugin Proposal](https://ghc.haskell.org/trac/ghc/wiki/Frontend
 - It changes the loading of plugins to be loaded at an earlier stage of the compilation. This is for efficiency reasons. If a plugin is used multiple times, it is better to load it only once. This is in synch with the "Unifying source and core plugins" part of the proposal.
 
 
+Extended interface for Plugins:
+
+
+```
+data Plugin = Plugin {
+    installCoreToDos :: [CommandLineOption] -> [CoreToDo] -> CoreM [CoreToDo]
+    -- ^ Modify the Core pipeline that will be used for compilation.
+    -- This is called as the Core pipeline is built for every module
+    -- being compiled, and plugins get the opportunity to modify the
+    -- pipeline in a nondeterministic order.
+  , tcPlugin :: [CommandLineOption] -> Maybe TcPlugin
+    -- ^ An optional typechecker plugin, which may modify the
+    -- behaviour of the constraint solver.
+  , parsedResultAction :: [CommandLineOption] -> ModSummary -> HsParsedModule 
+                            -> Hsc HsParsedModule
+    -- ^ Modify the module when it is parsed. This is called by
+    -- HscMain when the parsing is successful.
+  , needsRenamedSyntax :: [CommandLineOption] -> ModSummary -> Hsc Bool
+    -- ^ Tell the compilation pipeline if this plugin needs to the
+    -- renamed version of the syntax tree. If True is returned, the
+    -- TcGblEnv is guaranteed to contain the renamed sources.
+  , typeCheckResultAction :: [CommandLineOption] -> ModSummary -> TcGblEnv 
+                               -> Hsc TcGblEnv
+    -- ^ Modify the module when it is type checked. This is called by
+    -- HscMain when the type checking is successful.
+  , spliceRunAction :: [CommandLineOption] -> LHsExpr GhcTc -> TcM (LHsExpr GhcTc)
+    -- ^ Modify the TH splice or quasiqoute before it is run.
+  , interfaceLoadAction :: forall lcl . [CommandLineOption] -> ModIface 
+                                          -> IfM lcl ModIface
+    -- ^ Modify an interface that have been loaded. This is called by 
+    -- LoadIface when an interface is successfully loaded. Not applied to
+    -- the loading of the plugin interface.
+  }
+```
+
+
 **Motivation**:
 
 
