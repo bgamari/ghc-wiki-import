@@ -15,6 +15,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
   - [Pattern-synonym status page](pattern-synonyms)
   - [Overloaded record fields](records/overloaded-record-fields)
   - [StaticPointers](static-pointers)
+  - [Backpack](backpack)
 
 - **Types**:
 
