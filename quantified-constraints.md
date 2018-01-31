@@ -2,7 +2,7 @@
 
 
 
-This wiki page summarises the state of play on the idea of allowing quantification in class contexts.  For example
+This wiki page summarises the state of play on the idea of allowing quantification in class constraints.  For example
 
 
 ```wiki
@@ -39,7 +39,7 @@ Here are some resources
 
 
 
-Use Keyword = `QuantifiedContexts` to ensure that a ticket ends up on these lists.
+Use Keyword = `QuantifiedConstraints` to ensure that a ticket ends up on these lists.
 
 
 
