@@ -22,6 +22,7 @@ Added LANGUAGE extensions:
 
 
 - `[No]NumericUnderscores`
+- `[No]BlockArguments`
 
 ## Changes in GHC 8.4
 
