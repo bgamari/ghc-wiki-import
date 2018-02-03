@@ -2,7 +2,7 @@
 
 
 
-The `OverloadedRecordFields` extension for GHC will allow multiple record datatypes to share the same field names, and make it possible for type information to disambiguate them. For more information, see:
+The `OverloadedRecordFields` family of extensions for GHC allow multiple record datatypes to share the same field names, and make it possible for type information to disambiguate selectors. For more information, see:
 
 
 - [
@@ -11,7 +11,7 @@ The `OverloadedRecordFields` extension for GHC will allow multiple record dataty
 
   - Part 1: [DuplicateRecordFields](records/overloaded-record-fields/duplicate-record-fields) (in GHC 8.0)
   - Part 2: [OverloadedLabels](records/overloaded-record-fields/overloaded-labels) (in GHC 8.0)
-  - Part 3: [Magic type classes](records/overloaded-record-fields/magic-classes) (not yet in GHC HEAD)
+  - Part 3: [Magic type classes](records/overloaded-record-fields/magic-classes) (partly in GHC 8.2)
   - [
     Adam Gundry's blog post](http://www.well-typed.com/blog/2015/03/overloadedrecordfields-revived/)
 - [
@@ -106,7 +106,8 @@ Closed Tickets:
   Phab:D1600](https://phabricator.haskell.org/D1600): `DuplicateRecordFields` extension
 - [ Phab:D1331](https://phabricator.haskell.org/D1331), [
   Phab:D1623](https://phabricator.haskell.org/D1623): `OverloadedLabels` extension
-- [ Phab:D1687](https://phabricator.haskell.org/D1687): magic classes
+- [ Phab:D1687](https://phabricator.haskell.org/D1687), [
+  Phab:D2708](https://phabricator.haskell.org/D2708): magic classes
 - [
   Prototype implementation of the magic typeclasses](https://github.com/adamgundry/records-prototype)
 
