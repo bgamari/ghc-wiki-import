@@ -254,6 +254,6 @@ https://mail.haskell.org/pipermail/ghc-devs/2015-September/009964.html](https://
 
 
 
-[\#12262](https://gitlab.staging.haskell.org/ghc/ghc/issues/12262) - for bit-for-bit determinism
+[\#12262](https://gitlab.staging.haskell.org/ghc/ghc/issues/12262), [\#12935](https://gitlab.staging.haskell.org/ghc/ghc/issues/12935) - for bit-for-bit determinism
 
 
