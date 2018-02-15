@@ -124,7 +124,7 @@ tree!  This is especially easy to mess up when creating new tests, so watch out.
 
 [
 Since Git 2.9, \`git worktree\` works well enough with submodules](https://stackoverflow.com/questions/31871888/what-goes-wrong-when-using-git-worktree-with-git-submodules), so that the [
-\`wtas\` alias](https://stackoverflow.com/a/31872051/388010) does what we want. If you can't get it to work, read on.
+\`wtas\` alias](https://stackoverflow.com/a/31872051/388010) does what we want: `git clone --recursive git://git.haskell.org/ghc.git pristine && cd pristine/ && git wtas ../<feature-worktree>`. If you can't get it to work, read on.
 
 
 
