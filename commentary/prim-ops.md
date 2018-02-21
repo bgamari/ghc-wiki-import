@@ -153,6 +153,18 @@ To add a new primop, you currently need to update the following files:
   - `yourpackage/TheCode.hs`: use `foreign import prim` to import the primops.
 
 
+**Note:** In case of compile errors like
+
+
+```wiki
+Not in scope: ‘GHC.Prim.<newPrimOp>’
+```
+
+
+run `make clean` so the build system will pick up changes to the generated `GHC.Prim` module.
+
+
+
 In addition, if new primtypes are being added, the following files need to be updated:
 
 
