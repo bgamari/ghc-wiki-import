@@ -46,6 +46,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
   - [FloatInwards](float-inwards)
   - [SpecConstr](spec-constr)
   - [Specialise](specialise)
+  - [Late lambda lifting](late-lam-lift)
   - [StaticArgumentTransformation](static-argument-transformation)
   - [Common subexpression (CSE)](more-cse)
   - [Join points](sequent-core)
