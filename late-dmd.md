@@ -25,7 +25,7 @@ The -flate-dmd-anal flag runs the demand analysis a second time just before Core
 
 
 
-It's not on by default yet, but we hope -O2 will eventually imply it, perhaps even for the GHC 7.8 release. UPDATE (2017-02-21): nofib results with `-flate-dmd-anal` were not conclusive, see [\#6087](https://gitlab.staging.haskell.org/ghc/ghc/issues/6087) for results.
+It's not on by default yet, but we hope -O2 will eventually imply it, perhaps even for the GHC 7.8 release. UPDATE (2018-02-21): nofib results with `-flate-dmd-anal` were not conclusive, see [\#6087](https://gitlab.staging.haskell.org/ghc/ghc/issues/6087) for results.
 
 
 
