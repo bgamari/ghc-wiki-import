@@ -21,6 +21,9 @@ The new bit is the `forall` in the context of the instance declaration.
 Here are some resources
 
 
+- The [
+  GHC Proposal discussing quantified constraints](https://github.com/ghc-proposals/ghc-proposals/pull/109)
+
 - [
   Derivable type classes](https://www.microsoft.com/en-us/research/publication/derivable-type-classes), Section 7, where the idea was first proposed (I think).
 
