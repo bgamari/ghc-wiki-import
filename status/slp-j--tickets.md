@@ -38,6 +38,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
   - [Generic deriving](commentary/compiler/generic-deriving)
   - [Deriving generally](deriving-instances)
   - [Typeable](typeable)
+  - [QuantifiedConstraints](quantified-constraints)
 
 - **Optimisation**
 
