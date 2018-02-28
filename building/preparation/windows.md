@@ -67,6 +67,10 @@ This is **required** to ensure that the mingw-w64 variant of tools get priority 
 
 
 
+This method has been reported to be unreliable, so use this at your own risk. The recommended method we use ourselves is "Method A" described above.
+
+
+
 It is possible to set up MSYS indirectly through Stack:
 
 
