@@ -8,9 +8,8 @@ ghc-devs mailing list](http://www.haskell.org/mailman/listinfo/ghc-devs).
 
 
 There is also [
-ghc-tickets](http://www.haskell.org/mailman/listinfo/ghc-tickets), which receives a copy of traffic from the bug tracker, [
-ghc-commits](http://www.haskell.org/mailman/listinfo/ghc-commits), which receives a copy of all commit messages, and [
-ghc-builds](http://www.haskell.org/mailman/listinfo/ghc-builds), which receives reports from the automatic nightly builds.
+ghc-tickets](http://www.haskell.org/mailman/listinfo/ghc-tickets), which receives a copy of traffic from the bug tracker, and [
+ghc-commits](http://www.haskell.org/mailman/listinfo/ghc-commits), which receives a copy of all commit messages.
 
 
 
