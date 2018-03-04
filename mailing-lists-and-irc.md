@@ -25,7 +25,7 @@ FreeNode](http://freenode.net/). This is a good place to ask questions related t
 
 
 
-Signup for [Phabricator](phabricator) to read the [
-chatlogs](https://phabricator.haskell.org/chatlog/).
+Chatlogs can be found at [
+http://ircbrowse.net/browse/ghc](http://ircbrowse.net/browse/ghc).
 
 
