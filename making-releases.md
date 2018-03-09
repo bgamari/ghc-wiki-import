@@ -360,6 +360,8 @@ There are a variety of things that should also be done,
   version](https://ghc.haskell.org/trac/ghc/admin/ticket/versions)
 - Reset `RELEASE=NO` in the stable branch
 - Update [Commentary/Libraries/VersionHistory](commentary/libraries/version-history)
+- Update [
+  https://wiki.haskell.org/Base\_package\#Versions](https://wiki.haskell.org/Base_package#Versions)
 - Ensure that the submodules in the `master` branch are no older than the submodules in the release
 - Update the "Status Updates" section on [WikiStart](wiki-start) and [Status](status)
 - If major release: Update the `FP_COMPARE_VERSIONS([$GhcVersion], ...)` check in `configure.ac`
