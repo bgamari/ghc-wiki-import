@@ -21,16 +21,16 @@ here](http://hackage.haskell.org/trac/ghc/wiki/Building)
 
 <table><tr><th> </th>
 <th> **HEAD** </th>
-<th> **8.4* ***</th>
-<th> *8.2** ***</th>
-<th> 8.0** **</th>
-<th> 7.10** **</th>
-<th> 7.8** **</th>
-<th> 7.6** **</th>
-<th> 7.4** **</th>
-<th> 7.2** **</th>
-<th> 7.0** 
-**</th></tr>
+<th> **8.4** </th>
+<th> **8.2** </th>
+<th> **8.0** </th>
+<th> **7.10** </th>
+<th> **7.8** </th>
+<th> **7.6** </th>
+<th> **7.4** </th>
+<th> **7.2** </th>
+<th> **7.0** 
+</th></tr>
 <tr><th> LLVM version </th>
 <th> 5.0 </th>
 <th> 5.0 </th>
