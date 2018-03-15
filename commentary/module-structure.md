@@ -112,3 +112,7 @@ Dark red edges indicate that only one module in one group depends on a module in
 [](/trac/ghc/attachment/wiki/Commentary/ModuleStructure/dep5.png)
 
 
+
+See also attachment [](/trac/ghc/attachment/wiki/Commentary/ModuleStructure/deps.pdf) showing module dependencies without the most common groups (basicTypes, utils, coreSyn, main, types, prelude) as of March 2018.
+
+
