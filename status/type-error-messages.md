@@ -5,6 +5,12 @@
 Ideas and suggestions for improving type error messages
 
 
+
+Here's the wiki page for it.
+
+
+- [Proposal/CustomTypeErrors](proposal/custom-type-errors)
+
 ## Tickets
 
 
