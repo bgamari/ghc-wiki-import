@@ -24,6 +24,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
   - `TypeApplications`: [visible type application](type-application)
   - [Custom type errors](proposal/custom-type-errors)
   - [TypeErrorMessages](status/type-error-messages)
+  - [Typed holes](holes)
   - [Impredicative types](impredicative-polymorphism)
   - [Functional dependencies](fun-deps)
   - [Roles, Coercible and coerce](roles)
