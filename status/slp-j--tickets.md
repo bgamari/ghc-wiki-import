@@ -25,6 +25,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
   - [Custom type errors](proposal/custom-type-errors)
   - [TypeErrorMessages](status/type-error-messages)
   - [Typed holes](holes)
+  - [PartialTypeSignatures](partial-type-signatures)
   - [Impredicative types](impredicative-polymorphism)
   - [Functional dependencies](fun-deps)
   - [Roles, Coercible and coerce](roles)
