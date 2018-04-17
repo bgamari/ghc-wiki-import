@@ -11,13 +11,12 @@ Desugaring Haskell’s do-notation Into Applicative Operations](https://www.micr
 
 
 
-To jump to the code, see [
-https://phabricator.haskell.org/D729](https://phabricator.haskell.org/D729).
-
-
-
 An implementation was merged for GHC8: [
 https://github.com/ghc/ghc/commit/8ecf6d8f7dfee9e5b1844cd196f83f00f3b6b879](https://github.com/ghc/ghc/commit/8ecf6d8f7dfee9e5b1844cd196f83f00f3b6b879).
+
+
+
+See also [RecursiveDo](recursive-do)
 
 
 ## Tickets
