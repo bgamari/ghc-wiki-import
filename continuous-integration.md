@@ -216,6 +216,10 @@ Below, we track all work that needs to be done until we have achieved the follow
 
 
 
+The following are issues about the CI system itself,
+
+
+
 
   
   
@@ -1507,6 +1511,381 @@ col: owner, order: owner)
                       
                       
                       bgamari
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr></table>
+
+
+  
+
+
+
+
+The following are GHC issues which are currently breaking CI builds,
+
+
+
+
+  
+  
+  
+  
+  
+    
+
+## Status: new (4 matches)
+
+
+  
+  
+
+<table><tr><td>
+      </td>
+<th>
+        
+        Ticket (Ticket query: status: new, keywords: \~ci-breakage,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, desc: 1, order: id)
+      </th>
+<th>
+        
+        Type (Ticket query: status: new, keywords: \~ci-breakage, group: status,
+max: 0, col: id, col: type, col: summary, col: priority, col: owner,
+order: type)
+      </th>
+<th>
+        
+        Summary (Ticket query: status: new, keywords: \~ci-breakage,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, order: summary)
+      </th>
+<th>
+        
+        Priority (Ticket query: status: new, keywords: \~ci-breakage,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, order: priority)
+      </th>
+<th>
+        
+        Owner (Ticket query: status: new, keywords: \~ci-breakage,
+group: status, max: 0, col: id, col: type, col: summary, col: priority,
+col: owner, order: owner)
+      </th>
+<td>
+    </td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#14823](https://gitlab.staging.haskell.org/ghc/ghc/issues/14823)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Test profiling/should\_run/scc001 fails on Circle CI](https://gitlab.staging.haskell.org/ghc/ghc/issues/14823)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      bgamari
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#15059](https://gitlab.staging.haskell.org/ghc/ghc/issues/15059)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [ghcpkg05 fails](https://gitlab.staging.haskell.org/ghc/ghc/issues/15059)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      high
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#15064](https://gitlab.staging.haskell.org/ghc/ghc/issues/15064)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      bug
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [T8089 mysteriously fails when GHC is built with LLVM](https://gitlab.staging.haskell.org/ghc/ghc/issues/15064)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      highest
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      osa1
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+              </td></tr>
+<tr><td>
+                
+                  
+                    </td>
+<th>[\#15072](https://gitlab.staging.haskell.org/ghc/ghc/issues/15072)</th>
+<td>
+                    
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      task
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      [Teach the testsuite driver about response files](https://gitlab.staging.haskell.org/ghc/ghc/issues/15072)
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      normal
+                    </th>
+<td>
+                  
+                
+                  
+                    
+                    </td>
+<th>
+                      
+                      
+                      
+                      
+                      ckoparkar
                       
                       
                       
