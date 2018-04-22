@@ -36,16 +36,11 @@
 - Further improvements in support for cross-compilation (Moritz Angerman)
 
 - Replacement of the `make`-based build system with Hadrian. Hadrian,
-
->
->
-> while being usable in GHC 8.4, should be able to replace `make` in
-> nearly all uses. Moreover, it will have significantly better documentation
-> and support relocatable installation trees, a feature unavailable in the
-> current build system (Andrey Mokhov, Zhen Zhang, Moritz Angerman, Alp
-> Mestanogullari)
->
->
+  while being usable in GHC 8.4, should be able to replace `make` in
+  nearly all uses. Moreover, it will have significantly better documentation
+  and support relocatable installation trees, a feature unavailable in the
+  current build system (Andrey Mokhov, Zhen Zhang, Moritz Angerman, Alp
+  Mestanogullari)
 
 - Many, many bug fixes.
 
@@ -74,7 +69,7 @@ diagnostics messages for typed holes. His
 
 
 
-Ryan Scott has been 
+Ryan Scott has been TODO
 
 
 
@@ -92,7 +87,7 @@ increasing build times in common situations.
 
 
 Joachim Breitner has been continuing his work on improving GHC's treatment of
-exit join points. These
+exit join points. TODO
 
 
 
