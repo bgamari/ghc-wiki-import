@@ -35,6 +35,8 @@ Below are the major highlights of 8.6.
 
 - Improved support for **cross-compilation** (Moritz Angermann)
 
+- Deriving via? (Ryan GL Scott)
+
 ### Build system and miscellaneous changes
 
 
