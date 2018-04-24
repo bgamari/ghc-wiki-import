@@ -123,9 +123,9 @@ introspect the heap
 
 
 
-Andrey Mokhov, Zhen Zhang, Moritz Angermann, and Alp Mestanogullari have all been
-working on the finishing the last mile of the switch to GHC's new Shake-based
-build system, Hadrian.
+Andrey Mokhov, Zhen Zhang, Moritz Angermann, Alp Mestanogullari, Tamar Christina,
+Patrick Dougherty and Tao He have all been working on the finishing the last mile
+of the switch to GHC's new Shake-based build system, Hadrian.
 
 
 
