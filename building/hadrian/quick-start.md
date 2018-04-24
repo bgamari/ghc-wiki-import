@@ -2,7 +2,7 @@
 
 
 
-Below are quick instructions for building GHC with Hadrian. If you are an aspiring GHC developer, read the [Newcomers](newcomers) page instead.
+Below are quick instructions for building GHC with Hadrian.
 
 
 
@@ -14,7 +14,20 @@ Hadrian is much younger than GHC's Make-based build system. If you need a featur
 on the issue tracker](https://github.com/snowleopard/hadrian/issues).
 
 
-## First build
+## tl;dr
+
+
+
+For GHC hackers already used to the Make build system, here is what you need to know:
+
+
+- Use `hadrian/build.{sh, bat}` instead of `make`. It supports `-j`.
+- Hadrian can also run `boot` and `configure` for you, with the `-c` flag.
+- Build products are not in `inplace` anymore, but `_build` by default. Your stage 2 GHC would then be at `_build/stage1/bin/ghc` (because it's built by stage1).
+- The build root is configurable with `--build-root` or `-o`.
+- GHCs built by Hadrian are now relocatable. This means you can move the `<build root>/stage1/{lib, bin}` directories around and GHC will still happily work, as long as both directories stay next to each other.
+
+## Your first build
 
 
 
