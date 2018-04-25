@@ -57,17 +57,7 @@
 GHC is lucky to have a large number of volunteer contributors.
 
 
-
-Last year GHC
-began accepting GitHub pull requests for small changes, particularly to
-documentation. 
-
-
-- Matthías Páll Gissurarson has been adding support for significantly improved
-
-
-diagnostics messages for typed holes. His 
-
+- Matthías Páll Gissurarson has been adding support for significantly improved diagnostics messages for typed holes. His 
 
 - Ryan Scott has been TODO
 
@@ -90,6 +80,12 @@ diagnostics messages for typed holes. His
 - Andrey Mokhov, Zhen Zhang, Moritz Angermann, Alp Mestanogullari, Tamar Christina, Patrick Dougherty and Tao He have all been working on the finishing the last mile of the switch to GHC's new Shake-based build system, Hadrian.
 
 - One of the larger projects in the pipeline for 8.6 is Alan Zimmerman and Shayan Najd's refactoring of GHC to use the extensible Trees That Grow AST structure. 
+
+
+Last year GHC
+began accepting GitHub pull requests for small changes, particularly to
+documentation. 
+
 
 
 As always, if you are interested in contributing to any facet of GHC,
