@@ -14,6 +14,8 @@
 **Type declarations and signatures** (Dec 17)
 
 
+- Let's fix [\#14880](https://gitlab.staging.haskell.org/ghc/ghc/issues/14880)!
+
 - [
   Proposal 83: collapse PolyKinds and TypeInType](https://github.com/ghc-proposals/ghc-proposals/pull/83)
 - [
