@@ -16,6 +16,8 @@
 
 - Let's fix [\#14880](https://gitlab.staging.haskell.org/ghc/ghc/issues/14880)!
 
+  - `uo_thing`, [\#9173](https://gitlab.staging.haskell.org/ghc/ghc/issues/9173), [\#13601](https://gitlab.staging.haskell.org/ghc/ghc/issues/13601)
+
 - [
   Proposal 83: collapse PolyKinds and TypeInType](https://github.com/ghc-proposals/ghc-proposals/pull/83)
 - [
@@ -47,7 +49,6 @@
 
 
 - BUGS
-- `uo_thing`, [\#13601](https://gitlab.staging.haskell.org/ghc/ghc/issues/13601)
 
 # Fuller list
 
