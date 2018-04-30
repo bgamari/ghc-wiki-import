@@ -47,7 +47,7 @@
 
 
 - BUGS
-- `uo_thing`
+- `uo_thing`, [\#13601](https://gitlab.staging.haskell.org/ghc/ghc/issues/13601)
 
 # Fuller list
 
