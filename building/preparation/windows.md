@@ -149,7 +149,7 @@ Happy](http://www.haskell.org/happy/).  They can be installed using `cabal-insta
 
 ```
 mkdir -p /usr/local/bin &&
-curl -L https://www.haskell.org/cabal/release/cabal-install-1.24.0.0/cabal-install-1.24.0.0-${arch}-unknown-mingw32.zip | bsdtar -xzf- -C /usr/local/bin &&
+curl -L https://www.haskell.org/cabal/release/cabal-install-2.2.0.0/cabal-install-2.2.0.0-${arch}-unknown-mingw32.zip | bsdtar -xzf- -C /usr/local/bin &&
 cabal update &&
 cabal install -j --prefix=/usr/local alex happy
 ```
