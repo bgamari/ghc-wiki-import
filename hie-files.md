@@ -47,6 +47,15 @@ https://github.com/haskell/haddock/blob/master/haddock-api/src/Haddock/Backends/
 - Need to coordinate with the Hi Haddock project(Including docstrings in .hi files) as that may push the burden of resolving Names/Symbols in haddock comments onto GHC.
 - Other than this, little interaction with the rest of GHC should be needed.
 
+## Why should we be able to recover file contents exactly?
+
+
+
+Consider the case when the .hs source file that exists on disk doesn't compile, but with still have a stale .hie file generated the last time the source compiled. We would like to recover as much information as possible from the
+stale .hie file to aid the user working on the .hs file. This is possible if we recover the original, compiling source from the .hie file and cross-reference/diff it with the edited file, so that we can still answer user queries for
+portions of the file that haven't been edited(Indeed, this is how haskell-ide-engine currently works, but instead of reading from a .hie file, it maintains an in-memory cache of the last good `TypecheckedModule` corresponding to the source)
+
+
 ## Links to additional discussion
 
 
