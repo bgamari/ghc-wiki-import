@@ -36,6 +36,7 @@ https://github.com/haskell/haddock/blob/master/haddock-api/src/Haddock/Backends/
 
 
 - HIE file generation will be controlled by a GHC flag(--enable-ide-info?)
-- The file will be generated as soon as GHC is done typechecking a file
+- The file will be generated as soon as GHC is done typechecking a file(maybe in [
+  hscIncrementalCompile](https://www.stackage.org/haddock/nightly-2018-05-04/ghc-8.4.2/src/HscMain.html#hscIncrementalCompile)?)
 - Need to coordinate with the Hi Haddock project(Including docstrings in .hi files) as that may push the burden of resolving Names/Symbols in haddock comments onto GHC.
 - Other than this, little interaction with the rest of GHC should be needed.
