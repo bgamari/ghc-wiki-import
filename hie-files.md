@@ -46,7 +46,7 @@ https://github.com/haskell/haddock/blob/master/haddock-api/src/Haddock/Backends/
 
 
 [
-Initial discussion on \#ghc](https://gist.github.com/wz1000/46bb4b2121f0911bbbf4d4743fafaba8)
+Initial discussion on \#ghc](https://gist.github.com/wz1000/46bb4b2121f0911bbbf4d4743fafaba8) (The .hie(.hi Extended) name suggested by mpickering, cbor serialisation suggested by hvr)
 
 
 
