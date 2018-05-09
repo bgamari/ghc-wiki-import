@@ -23,11 +23,23 @@ At the moment, if a tool such as `HaRe`[(1)](implementing-trees-that-grow/ide-su
 
 
 
-Given that we are already compiling in a different mode, and Trees that Grow is now in the `hsSyn` AST, I propose to move the API Annotations to where they belong, inside the AST.
+Given that Trees that Grow is now in the `hsSyn` AST, I propose to move the API Annotations to where they belong, inside the AST.
 
 
 
 This will allow the core `ghc-exacprint` functionality to also move into GHC, meaning that the pretty printer can then reproduce the exact source from a `ParsedSource` AST fragment.
+
+
+
+The existing API Annotations are only kept if requested, as they impose a space penalty which need not be paid under all circumstances, especially when simply compiling code to generate a library / exe.
+
+
+
+A way to avoid this penalty, and to allow the additional information stored to grow relatively freely without having to worry too much about optimising the straight compilation process, is to have two variants of the AST, one for the straight (batch) compilation, and one for the interactive one.
+
+
+
+This can be achieved by making use of the mechanics listed below. If it turns out that the penalty is moderate, and the additional complexity of having two variants is not worth it, this step need not be taken.
 
 
 
