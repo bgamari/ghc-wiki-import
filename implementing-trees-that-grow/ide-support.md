@@ -35,7 +35,7 @@ The existing API Annotations are only kept if requested, as they impose a space 
 
 
 
-A way to avoid this penalty, and to allow the additional information stored to grow relatively freely without having to worry too much about optimising the straight compilation process, is to have two variants of the AST, one for the straight (batch) compilation, and one for the interactive one.
+A way to avoid this penalty, and to allow the additional information stored to grow relatively freely without having to worry too much about optimising the straight compilation process, is to have two variants of the AST, one for compiling with Api Annotations, one for without, as selected by using the `Opt_KeepRawTokenStream` dynamic flag, as used at present.
 
 
 
@@ -63,14 +63,14 @@ data GhcPass (c :: Pass)
 
 data Pass = Parsed Process | Renamed | Typechecked
 
-data Process = Batch | Interactive
+data Process = WithApiAnnotations | WithoutApiAnnotations
 
-type GhcPs   = GhcPass ('Parsed 'Batch)
-type GhcPsI  = GhcPass ('Parsed 'Interactive)
+type GhcPs   = GhcPass ('Parsed 'WithoutApiAnnotations)
+type GhcPsI  = GhcPass ('Parsed 'WithApiAnnotations)
 ```
 
 
-So the current `GhcPs` synonym would still indicate the (normal) batch compilation process, and the new one `GhcPsI` reflects the compiler invoked in interactive mode.
+So the current `GhcPs` synonym would still indicate the (normal) batch compilation process without Api Annotations, and the new one `GhcPsI` reflects the compiler invoked to generate the Api Annotations.
 
 
 
@@ -78,7 +78,11 @@ Since the key feature of Trees that Grow is that different extensions to the AST
 
 
 
-This means the relevant information is stored directly in the AST, making modification of the AST while preserving layout and comments by tooling much simpler. 
+This means the relevant information is stored directly in the AST, making modification of the AST while preserving layout and comments by tooling much simpler.
+
+
+
+There would still be a single parser definition in `Parser.y`, which would make use of functions to add the additional info to the generated source tree, which would be NOPs if the information was not being kept. This is similar to what happens at present with the Api Annotations.
 
 
 ## Phasing
