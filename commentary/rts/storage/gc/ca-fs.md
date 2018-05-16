@@ -49,7 +49,7 @@ So here's what we do:
 - When following the reachable pointers in a closure, the garbage collector also follows the pointer to the SRT
 
 
-For all the details on how SRTs work, see `Note [SRTs]` in `compiler/cmm/CmmBuildInfoTables.hs`.
+For all the details on how SRTs work, see `Note [SRTs]` in [compiler/cmm/CmmBuildInfoTables.hs](/trac/ghc/browser/ghc/compiler/cmm/CmmBuildInfoTables.hs).
 
 
 
@@ -99,7 +99,7 @@ Some implementation details
 
 
 
-For all the details on how SRTs work, see `Note [SRTs]` in `compiler/cmm/CmmBuildInfoTables.hs`.
+For all the details on how SRTs work, see `Note [SRTs]` in [compiler/cmm/CmmBuildInfoTables.hs](/trac/ghc/browser/ghc/compiler/cmm/CmmBuildInfoTables.hs).
 
 
 ## Evacuating Static Objects
