@@ -41,6 +41,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
   - [Deriving generally](deriving-instances)
   - [Typeable](typeable)
   - [QuantifiedConstraints](quantified-constraints)
+  - [Type-checker plugins](plugins/type-checker)
 
 - **Optimisation**
 
