@@ -313,7 +313,7 @@ This is similar to `sfMatchFam`, which gives the definition of built-in type fam
 Phab:D202](https://phabricator.haskell.org/D202) and perhaps even [\#10327](https://gitlab.staging.haskell.org/ghc/ghc/issues/10327). I would love to approach this problem with the idea of making broader changes instead of looking for a minimal change just to support typechecker plugins better. **End Richard**
 
 
-### Under discussion: Embedding CoreExpr in EvTerm
+### Implemented: Embedding CoreExpr in EvTerm
 
 
 
@@ -333,6 +333,10 @@ dsEvTerm (EvCoreExpr e) = return e
 
 
 I'm not very clear on whether we need to extend zonking to work on `CoreExpr`? Or should `EvCoreExpr` take a pre-zonked expression?
+
+
+
+This is now implemented; see [\#14691](https://gitlab.staging.haskell.org/ghc/ghc/issues/14691).
 
 
 ### Under discussion: Evidence for axioms
@@ -371,8 +375,7 @@ Christiaan points out](https://github.com/clash-lang/ghc-typelits-natnormalise/i
 ## Outstanding issues
 
 
-- Dynamic loading seems to be subtly broken on Windows or when using multiple plugins (see [\#10301](https://gitlab.staging.haskell.org/ghc/ghc/issues/10301)). There is a [
-  workaround](https://github.com/clash-lang/ghc-typelits-natnormalise/commit/afc4f2538081b46439e26e1a2bc6b7a5c3751781).
+- The current API does not make it possible to express the fact that a plugin solved some constraints but discovered others were impossible to solve. The only option is to solve the valid constraints and leave the others as unsolved, rather than identifying the contradiction.
 
 - For units of measure, it would be nice to be able to extend the
   pretty-printer for types (so we could get a nicely formatted
