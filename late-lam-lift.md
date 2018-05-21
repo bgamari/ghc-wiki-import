@@ -8,15 +8,27 @@
 
 
 
-I (Nick Frisby) started this work in April 2012. Then it went stagnant. In August 2014, I merged master into it so that hopefully someone else can pick it up. My notes for the current code are growing here.
+Late Lambda Lifting is a not-very-well-explored optimisation for GHC. The basic idea is to transform
 
 
+```wiki
+f x = let g y = ...y...x...
+      in ...(g v1)...(g v2)...
+===>
+g' x y = ...y...x...
+g x = ...(g' x v1)...(g' x v2)...
+```
 
-There are also some useful notes and background on [Frisby2013Q1](frisby2013-q1).
+
+That is, pretty standard lambda-lifting.  The idea is that instead of *allocating a closure* for `g`, we pass extra parameter(s) to it.  More below, under "Background".
 
 
 
 There is a ticket to track progress: [\#9476](https://gitlab.staging.haskell.org/ghc/ghc/issues/9476).
+
+
+
+There are also some useful notes and background on [Frisby2013Q1](frisby2013-q1).
 
 
 ## Quick Start
@@ -48,7 +60,11 @@ in `mk/validate-settings.mk`.
 ## As of mid-2014
 
 
-### Introduction
+
+I (Nick Frisby) started this work in April 2012. Then it went stagnant. In August 2014, I merged master into it so that hopefully someone else can pick it up. My notes for the current code are growing here.
+
+
+### Background
 
 
 
@@ -590,11 +606,11 @@ My measurements don't reveal a very strong correlation for those on the libHSbas
 Here's a couple snippets from my notes about some drastic slowdowns on my Sandy Bridge.
 
 
-#### shootout/n-body slows down 50% elapsed
+#### shootout/n-body
 
 
 
-Slows down 50% at O2!
+shootout/n-body slows down 50% elapsed at O2!
 
 
 
@@ -632,7 +648,11 @@ This one motivates the "llf6" variant in which we don't lift recursive functions
 There's also slowdowns I'm struggling to explain.
 
 
-#### shootout/reverse-complement mode=slow slows down 7% elapsed, 27% runtime
+#### shootout/reverse-complement
+
+
+
+shootout/reverse-complement mode=slow slows down 7% elapsed, 27% runtime
 
 
 
