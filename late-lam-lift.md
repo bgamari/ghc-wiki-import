@@ -48,7 +48,7 @@ The challenge is all about getting consistent speedups.
 
 
 The most current code is on the `wip/llf` branch. Usually, you can merge master into that with easy-to-resolve conflicts (eg in `DynFlags`).
-Sebastian Graf has rebased this branch in mid April 2018. You can't find further progress here: [
+Sebastian Graf has rebased (sadly with not so easy-to-resolve conflicts) this branch in mid April 2018. It currently fails to bootstrap in `./validate` due to some core lint errors, even without activating actual LLF passes. You can find further progress here: [
 https://github.com/sgraf812/ghc/tree/llf](https://github.com/sgraf812/ghc/tree/llf)
 
 
