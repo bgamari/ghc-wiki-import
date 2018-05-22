@@ -154,12 +154,12 @@ Note that `_a1uk` is now `C (a,a)` instead of the `C (a,b)` from the original so
 GHC will also have applied the renaming to any wanteds via `SEQSAME`.
 
 
-### Generating Givens While Solving Wanteds
+### Generating "Hidden" Givens While Solving Wanteds
 
 
 
 If I recall correctly, new givens cannot be generated while simplifying wanteds (the comment on [
-\`TcInteract.runTcPluginsWanted\`](https://github.com/ghc/ghc/blob/57858fc8b519078ae89a4859ce7588adb39f6e96/compiler/typecheck/TcInteract.hs#L269) sounds like I'm recalling correctly). I think this should be allowed, if only as a convenience to plugin authors. They could at least use it to memoize any forwarding chaining/reasoning done by their plugin as it solves wanteds.
+\`TcInteract.runTcPluginsWanted\`](https://github.com/ghc/ghc/blob/57858fc8b519078ae89a4859ce7588adb39f6e96/compiler/typecheck/TcInteract.hs#L269) sounds like I'm recalling correctly). I think this should be allowed, if only as a convenience to plugin authors. They could at least use it to memoize any forwarding chaining/reasoning done by their plugin as it solves wanteds. (For my particular plugin, it might also be nice if these hidden givens could be accompanied by similarly hidden universally quantified variables; in other words, binding this evidence might reveal an existentially quantified variable. This seems like a bigger ask...)
 
 
 
