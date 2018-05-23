@@ -232,6 +232,6 @@ Also note that, in an otherwise empty context, `(Lacks (Set0 .& u) b,Lacks (Set0
 
 
 
-Because we can't solve eg `Lacks (Set0 .& u) b` from `Lacks (Set0 .& u .& v) b`, we must decompose wanteds prematurely; the decomposition must be driven by what evidence is already available and/or already needed.
+Because we can't solve eg `Lacks (Set0 .& u) b` from `Lacks (Set0 .& u .& v) b`, we must not decompose wanteds prematurely; the decomposition must be driven by what evidence is already available and/or already needed.
 
 
