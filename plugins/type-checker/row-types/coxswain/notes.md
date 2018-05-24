@@ -327,7 +327,7 @@ To insert a fully simplified new constraint into the store:
 (Contrary to the implication of the above steps, the implementation should accumulate a difference `dd` instead of continually updating `d` during simplification. This makes it possible to bind `d` to `dd` when discharging a redundant constraint (for which we `d - dd = 0`).)
 
 
-### Alternate and Iterate
+### Alternate and Iterate the Phases
 
 
 
@@ -346,7 +346,7 @@ There are two relevant orderings on types.
 1. O2 `x < y` is "non-deterministic" and total. Because it's total, it can relate free variables. This makes it non-deterministic because free variables have no invariant information that could determine their order. In particular, GHC compares free variables by their `Unique`, which is unpredictable. In particular, the unique for the "same" variable changes unpredictably between each invocation of a typechecker plugin to the next.
 
 
-I mentioned O1 rather explicitly in the `Lacks` Phase section above. My implementation relies on O2 to implement the "set notation" (e.g. `{u,v}`) that I used without explanation also in the `Lacks` Phase section above.
+I mentioned O1 rather explicitly in the `Lacks` Phase section above. My implementation also relies on O2 to implement the "set notation" (e.g. `{u,v}`) that I used without explanation also in the `Lacks` Phase section above via `Data.Set`.
 
 
 ### Querying the Store to Simplify/Solve Wanteds
