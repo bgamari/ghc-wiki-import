@@ -88,7 +88,7 @@ Create a signed annotated git tag,
 
 
 ```wiki
-$ git tag -asu "Ben Gamari <ben@well-typed.com>" ghc-7.10.2-release HEAD
+$ git tag -asu "Benjamin Gamari <ben@well-typed.com>" ghc-8.4.3-release HEAD
 ```
 
 
