@@ -25,6 +25,9 @@ For instance, the AST for GHC's parsing, renaming, and typechecking are defined 
 [
 Here](https://github.com/ghc/ghc/blob/master/compiler/hsSyn/HsPat.hs#L287-L336) is the actual providing such instances for the `Pat` datatype of patterns in the TTG [HsSyn](implementing-trees-that-grow/hs-syn).
  
+
+
+
 Subsuming above five trees fixes the scope of the design space. For example, TTG [HsSyn](implementing-trees-that-grow/hs-syn) is not intended to subsume the AST in the GHC's backend (i.e., GHC Core), but it can indeed be used for other purposes like pretty-printing.
 
 
