@@ -23,7 +23,7 @@ The new [HsSyn](implementing-trees-that-grow/hs-syn) AST supporting the TTG idio
 The subsumption of above five ASTs is done by providing instances for the extension type families.
 For instance, the AST for GHC's parsing, renaming, and typechecking are defined by providing instances of the extension type families using accordingly the indices `GhcPs`, `GhcRn`, and `GhcTc`.
 [
-Here](https://github.com/ghc/ghc/blob/master/compiler/hsSyn/HsPat.hs#L287-L336) is the actual providing such instances for the `Pat` datatype of patterns in the TTG [HsSyn](implementing-trees-that-grow/hs-syn).
+Here](https://github.com/ghc/ghc/blob/master/compiler/hsSyn/HsExpr.hs#L737-L835) is the actual code providing such instances for the `HsExpr` datatype of expressions in the TTG [HsSyn](implementing-trees-that-grow/hs-syn).
  
 
 
@@ -46,7 +46,7 @@ Subsuming above five trees fixes the scope of the design space. For example, TTG
 
 >
 >
-> For example, the `HsExpr GhsPs` expressions of AST Ps should not have the constructor `HsUnboundVar` of the post-renaming phases, or its `MultiIf` constructor should also not have an unused field (of the type `Type`) to store the related type produced in the typechecking phase.
+> For example, the `HsExpr GhsPs` expressions of AST Ps should not have the constructor `HsUnboundVar` of the post-renaming phases, or its `HsMultiIf` constructor should also not have an unused field (of the type `Type`) to store the related type produced in the typechecking phase.
 >
 >
 
