@@ -83,7 +83,7 @@ Subsuming above five trees fixes the scope of the design space. For example, TTG
 
 1. For common constructors, their fields that are not common are grouped together and introduced using TTG's new field extensions.
 
-1. For common constructors, their common fields (within common constructors) with a varying type, are given a type using a new type family that extracts from the phase descriptor the type specific to each AST.
+1. For common constructors, their common fields with a varying type, are given a type using a new type family that extracts from the phase descriptor the type specific to each AST.
 
 >
 >
