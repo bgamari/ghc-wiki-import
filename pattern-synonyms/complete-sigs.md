@@ -1,4 +1,7 @@
 
+
+
+
 The exhaustiveness checker currently chokes on pattern synonyms. 
 They are marked as always fallible patterns which means that we must also always include a catch-all case in order to avoid a warning.
 
