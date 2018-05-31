@@ -10,7 +10,7 @@ GHC is historically over-reliant on particular individuals and organisations (no
 
 
 
-The mission of the GHC DevOps Group is to 
+The mission of the GHC DevOps Group is 
 
 
 - to take leadership of the devops aspects of GHC, 
