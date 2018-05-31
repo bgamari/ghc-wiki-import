@@ -46,7 +46,7 @@ Subsuming above five trees fixes the scope of the design space. For example, TTG
 
 >
 >
-> For example, the `HsExpr GhsPs` expressions of AST Ps should not have the constructor `HsUnboundVar` of the post-renaming phases, or its `HsMultiIf` constructor should also not have an unused field (of the type `Type`) to store the related type produced in the typechecking phase.
+> For example, the `HsExpr GhsPs` expressions of AST GhcPs should not have the constructor `HsUnboundVar` of the post-renaming phases, or its `HsMultiIf` constructor should also not have an unused field (of the type `Type`) to store the related type produced in the typechecking phase.
 >
 >
 
@@ -58,7 +58,7 @@ Subsuming above five trees fixes the scope of the design space. For example, TTG
 
 >
 >
-> For example, if `HsExpr GhsPs` expressions of AST Ps had the constructor `HsUnboundVar` then it had to depend on the code defining `UnboundVar` (a field of `HsUnboundVar`) in the renaming phase, or if its constructor `MultiIf` had a field of type `Type` then it had to depend on the code defining `Type` in the typechecking phase.
+> For example, if `HsExpr GhsPs` expressions of AST GhcPs had the constructor `HsUnboundVar` then it had to depend on the code defining `UnboundVar` (a field of `HsUnboundVar`) in the renaming phase, or if its constructor `MultiIf` had a field of type `Type` then it had to depend on the code defining `Type` in the typechecking phase.
 >
 >
 
