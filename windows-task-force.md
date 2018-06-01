@@ -10,7 +10,6 @@
 - **David Macek** \<david.macek.0@…\>
 - **Michael Steele** \<mikesteele81@…\>
 - **Andrew Klingenberg** \<asklingenberg@…\>
-- **Ryan Scott** \<ryan.gl.scott@…\>
 
 
 Should your name be here? Just edit the page and add yourself 
