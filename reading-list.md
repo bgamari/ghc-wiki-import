@@ -121,6 +121,9 @@ Stephen Deihl's Haskell implementation reading list](http://www.stephendiehl.com
     Pattern Synonyms](https://www.microsoft.com/en-us/research/publication/pattern-synonyms/), Matthew Pickering, Gergő Érdi, Simon Peyton Jones, and Richard A. Eisenberg, Haskell Symposium 2016. (ghc-proposals [
     0016](https://github.com/ghc-proposals/ghc-proposals/blob/master/proposals/0016-as-patterns-synonyms.rst))
   - [
+    Quantified class constraints](https://i.cs.hku.hk/~bruno//papers/hs2017.pdf), Gert-Jan Bottu,  Georgios Karachalias, Tom Schrijvers, Bruno C. d. S. Oliveira, Philip Wadler, Haskell Symposium 2017. (ghc-proposals [
+    0018](https://github.com/ghc-proposals/ghc-proposals/blob/master/proposals/0018-quantified-constraints.rst))
+  - [
     Deriving Via or, How to Turn Hand-Written Instances into an Anti-Pattern](https://www.kosmikus.org/DerivingVia/deriving-via-paper.pdf), Baldur Blöndal, Andres Löh, Ryan Scott, Haskell Symposium 2018. (ghc-proposals [
     0023](https://github.com/ghc-proposals/ghc-proposals/blob/master/proposals/0023-deriving-via.rst))
 
