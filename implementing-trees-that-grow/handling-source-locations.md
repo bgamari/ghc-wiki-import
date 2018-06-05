@@ -114,6 +114,39 @@ There are a couple of ways to implement such a solution:
 
 1. We can extend (using TTG) each datatype to add a wrapper constructor like the current `Located`.
 
+1. The API Annotations are similar to the `SrcSpan`, in that they are additional decorations, and also currently appear wherever there is a `SrcSpan`.
+
+1. We also currently have sections of AST without source locations, such as those generated when converting TH AST to hsSyn AST, or for GHC derived code.
+
+
+We can perhaps deal with these by either defining an additional pass, so
+
+
+```
+data Pass = Parsed | Renamed | Typechecked | Generated
+         deriving (Data)
+```
+
+
+or by making the extra information status dependent on an additional parameter, so
+
+
+```
+data GhcPass (l :: Location) (c :: Pass)
+deriving instance Eq (GhcPass c)
+deriving instance (Typeable l,Typeable c) => Data (GhcPass l c)
+
+data Pass = Parsed | Renamed | Typechecked
+         deriving (Data)
+
+data Location = Located | UnLocated
+```
+
+
+Thanks to Zubin Duggal for bringing the unlocated problem up on IRC.
+ 
+
+
 1. TODO (add your suggestions)
 
 ### Example (Solution A)
@@ -128,7 +161,7 @@ In the code below, as compared to the one above, we have the following key chang
 - a setter/getter typeclass `HasSpan` (and instances) is introduced
 - a pattern synonym for `L` is introduced using the typeclass
 
-```wiki
+```
 {-# LANGUAGE TypeFamilies
            , ConstraintKinds
            , FlexibleInstances
@@ -236,4 +269,22 @@ par :: Exp Ps -> Exp Ps
 par l@(L sp m) = Par sp l
   -- or,
   --           = L sp (Par noLoc l)
+```
+
+### Include API Annotations, Solution D
+
+
+
+The API Annotations can be accommodated via a straightforward extension of the type class approach, by defining
+
+
+```
+data Extra = Extra SrcSpan [(SrcSpan,AnnKeywordId)]
+
+class HasExtra a where
+  getSpan :: a -> SrcSpan
+  setSpan :: a -> SrcSpan -> a
+
+  getApiAnns :: a -> [(SrcSpan,AnnKeywordId)]
+  setApiAnns :: a -> [(SrcSpan,AnnKeywordId)] -> a
 ```
