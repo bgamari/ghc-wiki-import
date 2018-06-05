@@ -186,7 +186,7 @@ Thanks to Zubin Duggal for bringing the unlocated problem up on IRC.
 
 
 
-In the code below, as compared to the one above, we have the following key changes:
+In the code below, as compared to the original one above, we have the following key changes:
 
 
 - `LExp` is replaced with `Exp`
@@ -307,14 +307,18 @@ par l@(L sp m) = Par sp l
 ### Solution C - Example Code
 
 
+
+In the code below, as compared to the original one above, we have the following key changes:
+
+
+- `LExp` is replaced with `Exp`
+- a new constructor extension is introduced to wrap `ExpPs` with a `SrcSpan` 
+- a pattern synonym for `L` is introduced
+
 ```
 {-# LANGUAGE TypeFamilies
            , ConstraintKinds
-           , FlexibleInstances
-           , FlexibleContexts
-           , UndecidableInstances
            , PatternSynonyms
-           , ViewPatterns
 #-}
 module SolutionC where
 
