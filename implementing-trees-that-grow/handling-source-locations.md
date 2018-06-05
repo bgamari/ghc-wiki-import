@@ -28,7 +28,7 @@ For example, here is a simple [
 TTG](https://ghc.haskell.org/trac/ghc/wiki/ImplementingTreesThatGrow/TreesThatGrowGuidance) representation of lambda expressions in the ping-pong style.
 
 
-```wiki
+```
 {-# LANGUAGE TypeFamilies
            , ConstraintKinds
 #-}
@@ -121,7 +121,7 @@ There are a couple of ways to implement such a solution:
 > **SLPJ** It's more than just convenience; it's much more elegant than passing these huge dictionaries.  Show the code; something like
 >
 >
-> ```wiki
+> ```
 > type instance XVar (Ghc p) = Located (XVarGhc p)
 > type family XVarGhc p where
 >   XVarGhc Ps = ()
@@ -133,7 +133,7 @@ There are a couple of ways to implement such a solution:
 > It's quite nice that we get a *closed* type family for the GHC extensions. Now a typical function might look like
 >
 >
-> ```wiki
+> ```
 >   getLoc :: Located x -> SrcSpan   -- As now
 >
 >   rnExpr (Var exts id) = setSrcSpan (getLoc exts) $
@@ -145,7 +145,7 @@ There are a couple of ways to implement such a solution:
 ...etc...
 
 
-1. We can extend (using TTG) each datatype to add a wrapper constructor like the current `Located`.
+1. We can extend (using TTG) each datatype to add a wrapper \*constructor\*, similar in spirit to the current `Located`.
 
 1. The API Annotations are similar to the `SrcSpan`, in that they are additional decorations, and also currently appear wherever there is a `SrcSpan`.
 
@@ -182,7 +182,7 @@ Thanks to Zubin Duggal for bringing the unlocated problem up on IRC.
 
 1. TODO (add your suggestions)
 
-### Example (Solution A)
+### Solution A - Example Code
 
 
 
@@ -203,7 +203,7 @@ In the code below, as compared to the one above, we have the following key chang
            , PatternSynonyms
            , ViewPatterns
 #-}
-module New where
+module SolutionA where
 
 import GHC.Exts(Constraint)
 import Data.Void
@@ -302,6 +302,87 @@ par :: Exp Ps -> Exp Ps
 par l@(L sp m) = Par sp l
   -- or,
   --           = L sp (Par noLoc l)
+```
+
+### Solution C - Example Code
+
+
+```
+{-# LANGUAGE TypeFamilies
+           , ConstraintKinds
+           , FlexibleInstances
+           , FlexibleContexts
+           , UndecidableInstances
+           , PatternSynonyms
+           , ViewPatterns
+#-}
+module SolutionC where
+
+import GHC.Exts(Constraint)
+import Data.Void
+
+-- ...
+
+data RdrName
+-- = the definition of RdrName
+
+data SrcSpan
+-- = the definition of SrcSpan
+
+-- ----------------------------------------------
+-- AST Base
+-- ----------------------------------------------
+
+data Exp x
+  = Var (XVar x) (XId x)
+  | Abs (XAbs x) (XId x) (Exp x)
+  | App (XApp x) (Exp x) (Exp x)
+  | Par (XPar x) (Exp x)
+  | New (XNew x)
+
+type family XVar x
+type family XAbs x
+type family XApp x
+type family XPar x
+type family XNew x
+
+type family XId  x
+
+type ForallX (p :: * -> Constraint) x
+  = ( p (XVar x)
+    , p (XAbs x)
+    , p (XApp x)
+    , p (XPar x)
+    , p (XNew x)
+    )
+
+-- ----------------------------------------------
+-- AST Ps
+-- ----------------------------------------------
+
+data Ps
+
+type ExpPs  = Exp Ps
+
+type instance XVar Ps = ()
+type instance XAbs Ps = ()
+type instance XApp Ps = ()
+type instance XPar Ps = ()
+type instance XNew Ps = (SrcSpan , ExpPs)
+
+type instance XId  Ps = RdrName
+
+
+pattern L :: SrcSpan -> ExpPs -> ExpPs
+pattern L sp m = New (sp , m)
+
+-- ----------------------------------------------
+-- Example Function
+-- ----------------------------------------------
+
+par :: Exp Ps -> Exp Ps
+par l@(L sp m) = L sp (Par () l)
+par m          = m
 ```
 
 ### Include API Annotations, Solution D
