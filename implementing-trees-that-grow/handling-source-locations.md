@@ -321,44 +321,21 @@ In the code below, as compared to the original one above, we have the following 
 - a setter/getter function pair is introduced
 - a pattern synonym for `L` is introduced using the setter/getter function
 
-
-{{{!\#hs
-{-\# OPTIONS\_GHC -Wall
-
-
->
->
-> -fno-warn-unticked-promoted-constructors
->
->
-
-
-\#-}
-{-\# LANGUAGE TypeFamilies
-
-
->
->
-> , ConstraintKinds
-> , [ViewPatterns](view-patterns)
-> , [PatternSynonyms](pattern-synonyms)
-> , DataKinds
->
->
-
-
-\#-}
+```
+{-# OPTIONS_GHC -Wall
+                -fno-warn-unticked-promoted-constructors
+#-}
+{-# LANGUAGE TypeFamilies
+           , ConstraintKinds
+           , ViewPatterns
+           , PatternSynonyms
+           , DataKinds
+#-}
 module SolutionB where
-
-
 
 import Data.Void
 
-
-
 -- ...
-
-
 
 data RdrName
 -- = the definition of RdrName
@@ -373,29 +350,16 @@ data Type
 data UnboundVar
 -- = the definition of UnboundVar
 
-
-
 -- ----------------------------------------------
 -- AST Base
 -- ----------------------------------------------
 
-
-
 data Exp x
-
-
-# Var (XVar x) (XId x)
-
-
->
->
-> \| Abs (XAbs x) (XId x) (Exp x)
-> \| App (XApp x) (Exp x) (Exp x)
-> \| Par (XPar x) (Exp x)
-> \| New (XNew x)
->
->
-
+  = Var (XVar x) (XId x)
+  | Abs (XAbs x) (XId x) (Exp x)
+  | App (XApp x) (Exp x) (Exp x)
+  | Par (XPar x) (Exp x)
+  | New (XNew x)
 
 type family XVar x
 type family XAbs x
@@ -403,19 +367,13 @@ type family XApp x
 type family XPar x
 type family XNew x
 
-
-
 type family XId  x
-
-
 
 -- ----------------------------------------------
 -- GHC-Specific Decorations
 -- ----------------------------------------------
-data Phase = Ps \| Rn \| Tc
+data Phase = Ps | Rn | Tc
 data GHC (p :: Phase)
-
-
 
 type instance XVar (GHC p) = (SrcSpan , XVarGHC p)
 type instance XAbs (GHC p) = (SrcSpan , XAbsGHC p)
@@ -423,105 +381,52 @@ type instance XApp (GHC p) = (SrcSpan , XAppGHC p)
 type instance XPar (GHC p) = (SrcSpan , XParGHC p)
 type instance XNew (GHC p) = (SrcSpan , XNewGHC p)
 
-
-
 type instance XId  (GHC p) = XIdGHC p
 
 
-
 type family XVarGHC (p :: Phase) where
-
-
->
->
-> XVarGHC \_  = ()
->
->
-
+  XVarGHC _  = ()
 
 type family XAbsGHC (p :: Phase) where
-
-
->
->
-> XAbsGHC \_  = ()
->
->
-
+  XAbsGHC _  = ()
 
 type family XAppGHC (p :: Phase) where
-
-
->
->
-> XAppGHC Ps = ()
-> XAppGHC Rn = ()
-> XAppGHC Tc = Type
->
->
-
+  XAppGHC Ps = ()
+  XAppGHC Rn = ()
+  XAppGHC Tc = Type
 
 type family XParGHC (p :: Phase) where
-
-
->
->
-> XParGHC \_  = ()
->
->
-
+  XParGHC _  = ()
 
 type family XNewGHC (p :: Phase) where
-
-
->
->
-> XNewGHC Ps = Void
-> XNewGHC \_  = UnboundVar
->
->
-
+  XNewGHC Ps = Void
+  XNewGHC _  = UnboundVar
 
 type family XIdGHC (p :: Phase) where
-
-
->
->
-> XIdGHC Ps = RdrName
-> XIdGHC Rn = Name
-> XIdGHC Tc = Id
->
->
-
+  XIdGHC Ps = RdrName
+  XIdGHC Rn = Name
+  XIdGHC Tc = Id
 
 type ExpPs = Exp (GHC Ps)
 type ExpRn = Exp (GHC Rn)
 type ExpTc = Exp (GHC Tc)
-
-
 
 -- ----------------------------------------------
 -- getter/setter of Span
 --  (similar to methods of HasSpan)
 -- ----------------------------------------------
 
-
-
-getSpan :: Exp (GHC p) -\> SrcSpan
-getSpan (Var ex \_)      = fst ex
-getSpan (Abs ex \_ \_)    = fst ex
-getSpan (App ex \_ \_)    = fst ex
-getSpan (Par ex \_)      = fst ex
+getSpan :: Exp (GHC p) -> SrcSpan
+getSpan (Var ex _)      = fst ex
+getSpan (Abs ex _ _)    = fst ex
+getSpan (App ex _ _)    = fst ex
+getSpan (Par ex _)      = fst ex
 getSpan (New ex)        = fst ex
 
+setFst :: (a , b) -> a -> (a , b)
+setFst (_ , b) a' = (a' , b)
 
-
-setFst :: (a , b) -\> a -\> (a , b)
-setFst (\_ , b) a' = (a' , b)
-
-
-
-setSpan :: Exp (GHC p) -\> SrcSpan -\> Exp (GHC p)
+setSpan :: Exp (GHC p) -> SrcSpan -> Exp (GHC p)
 setSpan (Var ex x)   sp = Var (setFst ex sp) x
 setSpan (Abs ex x n) sp = Abs (setFst ex sp) x n
 setSpan (App ex l m) sp = App (setFst ex sp) l m
@@ -529,46 +434,26 @@ setSpan (Par ex m)   sp = Par (setFst ex sp) m
 setSpan (New ex)     sp = New (setFst ex sp)
 
 
-
-getSpan' :: Exp (GHC p) -\> (SrcSpan , Exp (GHC p))
+getSpan' :: Exp (GHC p) -> (SrcSpan , Exp (GHC p))
 getSpan' m = (getSpan m , m)
 
-
-
-pattern L :: SrcSpan -\> Exp (GHC p) -\> Exp (GHC p)
-pattern L s m \<- (getSpan' -\> (s , m))
-
-
->
->
-> where
->
->
-> >
-> >
-> > L s m =  setSpan m s
-> >
-> >
->
-
+pattern L :: SrcSpan -> Exp (GHC p) -> Exp (GHC p)
+pattern L s m <- (getSpan' -> (s , m))
+  where
+        L s m =  setSpan m s
 
 -- ----------------------------------------------
 -- Example Function
 -- ----------------------------------------------
 
-
-
-par :: Exp (GHC p) -\> Exp (GHC p)
+par :: Exp (GHC p) -> Exp (GHC p)
 par l@(L sp (App{})) = L sp (Par (noLoc, ()) l)
 par l                = l
-
-
 
 -- can be left undefined, or be an empty SrcSpan
 noLoc :: SrcSpan
 noLoc = undefined
-}}}
-
+```
 
 ### Solution C - Example Code
 
