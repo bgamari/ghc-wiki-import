@@ -134,16 +134,16 @@ There are a couple of ways to implement such a solution:
 >
 >
 > ```
->   getLoc :: Located x -> SrcSpan   -- As now
+> getLoc :: Located x -> SrcSpan   -- As now
 >
->   rnExpr (Var exts id) = setSrcSpan (getLoc exts) $
->                          do { ... }
+> rnExpr (Var exts id) = setSrcSpan (getLoc exts) $
+>                        do { ... }
 > ```
-
-
-
-...etc...
-
+>
+>
+> ...etc...
+>
+>
 
 1. We can extend (using TTG) each datatype to add a wrapper \*constructor\*, similar in spirit to the current `Located`.
 
@@ -151,18 +151,22 @@ There are a couple of ways to implement such a solution:
 
 1. We also currently have sections of AST without source locations, such as those generated when converting TH AST to hsSyn AST, or for GHC derived code.
 
-
-We can perhaps deal with these by either defining an additional pass, so
-
+>
+>
+> We can perhaps deal with these by either defining an additional pass, so
+>
+>
 
 ```
 data Pass = Parsed | Renamed | Typechecked | Generated
-         deriving (Data)
+   deriving (Data)
 ```
 
-
-or by making the extra information status dependent on an additional parameter, so
-
+>
+>
+> or by making the extra information status dependent on an additional parameter, so
+>
+>
 
 ```
 data GhcPass (l :: Location) (c :: Pass)
@@ -170,15 +174,16 @@ deriving instance Eq (GhcPass c)
 deriving instance (Typeable l,Typeable c) => Data (GhcPass l c)
 
 data Pass = Parsed | Renamed | Typechecked
-         deriving (Data)
+  deriving (Data)
 
 data Location = Located | UnLocated
 ```
 
-
-Thanks to Zubin Duggal for bringing the unlocated problem up on IRC.
- 
-
+>
+>
+> Thanks to Zubin Duggal for bringing the unlocated problem up on IRC.
+>
+>
 
 1. TODO (add your suggestions)
 
