@@ -34,7 +34,7 @@ Here](https://github.com/ghc/ghc/blob/master/compiler/hsSyn/HsExpr.hs#L737-L835)
 
 
 
-In general a TTG-idiom data type has
+In general, a TTG-idiom data type has
 
 
 - A type parameter, called the *phase descriptor*, that indexes which particular instantiation is required
@@ -45,10 +45,10 @@ In general a TTG-idiom data type has
 For example:
 
 
-```wiki
+```
 data Exp x
   = Var (XVar x) (IdP x)
-  | Lam (XLam x) (IdP x)  (Exp x)
+  | Lam (XLam x) (IdP x) (Exp x)
   | App (XApp x) (Exp x) (Exp x)
   | New (XNew x)
 
@@ -56,11 +56,10 @@ type family XVar x
 type family XLam x
 type family XApp x
 type family XNew x
-
 ```
 
 
-Here the phase descriptor is `x`.  The first field of each constructor (of type `XVar x` etc) are the extension fields.  The data construcotr `XNew` is the extension constructor.
+Here the phase descriptor is `x`.  The first field of each constructor (of type `XVar x` etc) are the extension fields.  The data constructor `XNew` is the extension constructor.
 
 
 
@@ -78,7 +77,7 @@ The design of TTG [HsSyn](implementing-trees-that-grow/hs-syn) follows these pri
 
 1. Note, however, that the type of a payload field of a constructor may vary with phase.  For example, in `Lam` above, the first payload field has type `Id x`, and that may vary with phase:
 
-  ```wiki
+  ```
   type family IdP x
   type instance IdP GhcPs = RdrName
   type instance IdP GhcRn = Name
@@ -116,7 +115,7 @@ The design of TTG [HsSyn](implementing-trees-that-grow/hs-syn) follows these pri
 Consider the following three simple datatypes `ExpPs`, `ExpRn`, and `ExpTc` representing correspondingly expressions in a parsing, renaming and typechecking phase:
 
 
-```wiki
+```
 module Parsing where
 
 -- the definition of RdrName
@@ -128,7 +127,7 @@ data ExpPs
   | App ExpPs   ExpPs
 ```
 
-```wiki
+```
 module Renaming where
 
 -- the definition of `Name` and `UnboundVar`
@@ -141,7 +140,7 @@ data ExpRn
   | UVar UnboundVar
 ```
 
-```wiki
+```
 module Typechecking where
 
 -- the definition of `Id`, `UnboundVar`, and `Type`
@@ -158,78 +157,99 @@ data ExpTc
 Based on the TTG idiom, we will have a base declaration such as the following.
 
 
-```wiki
+```
+{-# LANGUAGE TypeFamilies , EmptyCase #-}
 module AST where
 
 data Exp x
-  = Var (XVar x) (IdP x)
-  | Lam (XLam x) (IdP x) (Exp x)
+  = Var (XVar x) (XId x)
+  | Abs (XAbs x) (XId x) (Exp x)
   | App (XApp x) (Exp x) (Exp x)
   | New (XNew x)
 
 type family XVar x
-type family XLam x
+type family XAbs x
 type family XApp x
 type family XNew x
 
-type family IdP  x
+type family XId  x
+
+data NoExt = NoExt -- no field extension
+
+data NoNewCon      -- no constructor extension
+
+noNewCon :: NoNewCon -> a
+noNewCon x = case x of {}
 ```
 
 
 and the following three instantiations:
 
 
-```wiki
+```
+{-# LANGUAGE TypeFamilies #-}
 module Parsing where
 
 import AST
--- the definition of RdrName
--- ...
+
+data RdrName -- = ...
 
 data Ps
 
 type ExpPs = Exp Ps
 
-type instance XVar Ps = ()
-type instance XLam Ps = ()
-type instance XApp Ps = ()
-type instance XNew Ps = Void
+type instance XVar Ps = NoExt
+type instance XAbs Ps = NoExt
+type instance XApp Ps = NoExt
+type instance XNew Ps = NoNewCon
 
-type instance IdP  Ps = RdrName
+type instance XId  Ps = RdrName
 ```
 
-```wiki
+```
+{-# LANGUAGE TypeFamilies #-}
 module Renaming where
 
 import AST
--- the definition of `Name` and `UnboundVar`
--- ...
+
+data Name       -- = ...
+data UnboundVar -- = ...
+
 data Rn
 
 type ExpRn = Exp Rn
 
-type instance XVar Rn = ()
-type instance XLam Rn = ()
-type instance XApp Rn = ()
+type instance XVar Rn = NoExt
+type instance XAbs Rn = NoExt
+type instance XApp Rn = NoExt
 type instance XNew Rn = UnboundVar
 
-type instance IdP  Rn = Name
+type instance XId  Rn = Name
 ```
 
-```wiki
+```
+{-# LANGUAGE TypeFamilies #-}
 module Typechecking where
 
 import AST
--- the definition of `Id`, `UnboundVar`, and `Type`
--- ...
+
+data Id         -- = ...
+data UnboundVar -- = ...
+data Type       -- = ...
+
 data Tc
 
 type ExpTc = Exp Tc
 
-type instance XVar Tc = ()
-type instance XLam Tc = ()
+type instance XVar Tc = NoExt
+type instance XAbs Tc = NoExt
 type instance XApp Tc = Type
 type instance XNew Tc = UnboundVar
 
-type instance IdP  Tc = Id
+type instance XId  Tc = Id
 ```
+
+
+Note that we define a specific pair of datatypes to mark and handle empty extension fields and constructors.
+
+
