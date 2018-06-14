@@ -26,7 +26,14 @@ See also
 
 - [ The Repa home page](http://repa.ouroborus.net)
 
-## Status and work plan
+## Status
+
+
+
+Work on the DPH project stopped around 2010 at which point the implementation began to bit-rot. In June 2018 the implementation was removed from the GHC source tree.
+
+
+## Old status and work plan
 
 
 
