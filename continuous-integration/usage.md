@@ -27,8 +27,8 @@ Now that we have built the image we need to give it a name and upload it to Dock
 
 
 ```
-$ sudo -u ben docker tag b6f13cfca0b4 ghcci/x86_64-linux-fedora:0.0.4
-$ sudo -u ben docker push ghcci/x86_64-linux-fedora:0.0.4
+$ docker tag b6f13cfca0b4 ghcci/x86_64-linux-fedora:0.0.4
+$ docker push ghcci/x86_64-linux-fedora:0.0.4
 ```
 
 
