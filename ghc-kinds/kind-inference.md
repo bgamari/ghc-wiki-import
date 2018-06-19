@@ -45,7 +45,7 @@ data Prox k (a :: k)
 ```
 
 
-The kind of `Prox` is `forall k -> k -> Type`. Note that this type contains `forall k ->`, not `forall k .`. If we had assigned `Prox :: kappa`, we would be unable to infer the correct kind for `Prox`.
+The kind of `Prox` is `forall k -> k -> Type`. Note that this type contains `forall k ->`, not `forall k .`. If we had assigned `Prox :: kappa`, we would be unable to infer the correct kind for `Prox`. This kind is currently produced right in `getInitialKind`, with no extra quantification necessary. The `k` is lexically dependent, and so GHC uses `forall k ->` for it.
 
 
 
