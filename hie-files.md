@@ -48,7 +48,7 @@ The RichToken type used in haddock: [
 https://github.com/haskell/haddock/blob/master/haddock-api/src/Haddock/Backends/Hyperlinker/Types.hs\#L35](https://github.com/haskell/haddock/blob/master/haddock-api/src/Haddock/Backends/Hyperlinker/Types.hs#L35)
 
 
-## Scopes information about symbols
+## Scope information about symbols
 
 
 
