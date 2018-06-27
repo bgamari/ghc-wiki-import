@@ -1,5 +1,4 @@
-
-\# Loading GHC into GHCi
+# Loading GHC into GHCi
 
 
 
