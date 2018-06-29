@@ -46,15 +46,15 @@ Note the new return type.
 
 
 
-SLPJ: I hypothesise that `tc_hs_type` would always immediately be followed by `dsHsType`.   For example, given a type signature `f :: Int -> Int`, I want to add `f` to the type environment with its `Type` (emphatically not its `HsType`). 
+**SLPJ**: I hypothesise that `tc_hs_type` would always immediately be followed by `dsHsType`.   For example, given a type signature `f :: Int -> Int`, I want to add `f` to the type environment with its `Type` (emphatically not its `HsType`). 
 
 
 
-Is there ever a case where we do not want to immediately desugar?  End SLPJ.
+Is there ever a case where we do not want to immediately desugar?  **End SLPJ**.
 
 
 
-Problematically, we need to be able to compare types for equality. (We don't do this for terms, at least outside the simplifier.) So storing type-checked types in `HsType` can be troublesome -- we don't want to have to compute equality over `HsType`s. So we'll need to make liberal use of the extension fields to store the `Type` equivalent of each node in the `HsType`. With this, getting from an `HsType GhcTc` to a `TcType` is just a field access.
+Problematically, we need to be able to compare types for equality. **SLPJ**: where, precisely?   (We don't do this for terms, at least outside the simplifier.) So storing type-checked types in `HsType` can be troublesome -- we don't want to have to compute equality over `HsType`s. So we'll need to make liberal use of the extension fields to store the `Type` equivalent of each node in the `HsType`. With this, getting from an `HsType GhcTc` to a `TcType` is just a field access.
 
 
 
@@ -73,7 +73,7 @@ Instead, we can imagine that the first pass produces `TyClDecl GhcTc` that saves
 
 
 
-SLPJ I believe we would still need `TcTyCon`. Consider
+**SLPJ** I believe we would still need `TcTyCon`. Consider
 
 
 ```wiki
@@ -85,7 +85,7 @@ When looking at T's RHS we must have a kind for `T` in the type envt.  The `TcTy
 
 
 
-Moreover in terms we have `AbsBinds`, which allow us to traverse the RHS of the function defn with `f :: alpha` in the type envt, and later generalise it.  We have no equivalent for types.  So we are more or less forced to take two passes.  Perhaps we count the second as "desugaring"; fair enough.   End SLPJ
+Moreover in terms we have `AbsBinds`, which allow us to traverse the RHS of the function defn with `f :: alpha` in the type envt, and later generalise it.  We have no equivalent for types.  So we are more or less forced to take two passes.  Perhaps we count the second as "desugaring"; fair enough.   **End SLPJ**
 
 
 
