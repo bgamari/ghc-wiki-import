@@ -16,7 +16,7 @@ in `compilerbasicTypes/Weight.hs` and is called `Rig` (both the name of the file
 
 
 
-Binders also have a weight attached to them. 
+Core binders also have a multiplicity attached to them. 
 
 
 
