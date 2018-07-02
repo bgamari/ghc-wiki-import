@@ -1,5 +1,5 @@
 
-On this page we describe the principles behind the implementation of the linear types extension as described at \[[LinearTypes](linear-types)\].
+On this page we describe the principles behind the implementation of the linear types extension as described at [LinearTypes](linear-types).
 
 
 
