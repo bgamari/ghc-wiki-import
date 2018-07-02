@@ -4,7 +4,7 @@ On this page we describe the principles behind the implementation of the linear 
 
 
 The current implementation progress can be seen on [
-here](https://github.com/tweag/ghc/tree/wip/linear-types)
+here](https://github.com/tweag/ghc/tree/linear-types)
 
 
 ## Principles
