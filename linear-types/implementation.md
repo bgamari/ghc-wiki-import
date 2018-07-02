@@ -165,7 +165,7 @@ As another note, be warned that the serialisation for inbuilt tuples is differen
 Otherwise, the implementation followed much the same path as levity polymorphism. 
 
 
-### Typechecking
+## Typechecking
 
 
 
@@ -193,7 +193,7 @@ Each constructor represents how many times a variable is allowed to be used. The
 There are two useful functions in this dance. In order to use the normal unification machinery, we 
 
 
-#### The 1 \<= p rule
+### The 1 \<= p rule
 
 
 
@@ -205,7 +205,10 @@ This is implemented by making sure to call `subweight` on the weights before pas
 `tc_extend_local_env` and `tc_sub_type_ds`. At the moment we also get much better error messages by doing this short circuiting.
 
 
-#### Complex constraints
+## Inference
+
+
+### Complex constraints
 
 
 
