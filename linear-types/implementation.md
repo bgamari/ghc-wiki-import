@@ -206,6 +206,10 @@ There are two useful functions in this dance. In order to use the normal unifica
 achieved by calls to `subweight` or `subweightMaybe`. The `flattenRig` function removes redundancy from the representation (by replacing `RigTy omegaDataConTy` with `Omega` and likewise for One).
 
 
+
+It is also important that `subweight` is checked before `rigToType` is called  as there is no representation for Zero as it is not allowed to be written in user programs.
+
+
 ## Solving constraints
 
 
