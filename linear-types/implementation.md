@@ -238,6 +238,12 @@ Multiplication and addition are approximated.
 
 
 
-Unsolved multiplicity variables are specialised to ω by the function `<TODO: function name here, and possibly mechanism>`.
+Unsolved multiplicity variables are specialised to ω by the following functions:
 
 
+
+Calls to `isMultiplicityVar` are used in places where we do defaulting.
+
+
+1. `TcSimplify.defaultTyVarTcS`
+1. `TcMType.defaultTyVar`
