@@ -26,7 +26,7 @@ Linear Haskell: practical linearity in a higher-order polymorphic language](http
 
 
 
-A prototype implementation can be found at [
+The implementation in progress can be found at [
 https://github.com/tweag/ghc/tree/linear-types](https://github.com/tweag/ghc/tree/linear-types) .
 
 
