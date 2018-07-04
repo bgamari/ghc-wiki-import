@@ -36,7 +36,7 @@ There are also some useful notes and background on [Frisby2013Q1](frisby2013-q1)
 
 
 
-One thing that used to hamper us was that there is no point in lambda-lifting join point; but spotting that wasn't very easy.  Nowadays, though, join points are a syntactic form, so are easily spotted, so that problem at least has gone away.
+One thing that used to hamper us was that lifting a function that closes over a join point would spoil it; but spotting that wasn't very easy.  Nowadays, though, join points are a syntactic form, so are easily spotted, so that problem at least has gone away.
 
 
 
@@ -54,6 +54,10 @@ https://github.com/sgraf812/ghc/tree/llf](https://github.com/sgraf812/ghc/tree/l
 
 
 
+In Sebastian's rebase, LLF is enabled at optimization levels 1 and higher in the below llf-nr10-r6 configuration. Anything contradictory below only applies to the dated `wip/llf` branch.
+
+
+
 By default, the LLF is not enabled. To enable it, use the flags found below in the llf-nr10-r6 section. If the LLF pass lifts out a function, it prepends the `llf_` prefix, so look for that in the Core. Also: there's `-ddump-llf` if you're desperate. The LLF happens after `SpecConstr` and before the late demand analysis (which is also off by default, cf `-flate-dmd-anal`).
 
 
@@ -67,8 +71,21 @@ GhcLibHcOpts    += -O -dcore-lint  -fllf -fllf-abstract-undersat -fno-llf-abstra
 
 
 in `mk/custom-settings.mk` or `mk/validate.mk`. After rebasing in 2018 (7bf030a), this still throws core-lint errors.
- 
 
+
+## As of mid-2018
+
+
+
+Sebastian Graf rebased Nick's branch and made the following changes (check the exact commit messages for more info):
+
+
+- A hopefully faithful rebase, removing previous LNE (= join point) detection logic
+- Activate all LLF flags (see the above llf-nr10-r6 configuration) by default
+- Actually use the `-fllf-nonrec-lam-limit` setting
+- Don't stabilise Unfoldings mentioning `makeStatic`
+- Respect RULEs and Unfoldings in the identifier we abstract over (previously, when [SpecConstr](spec-constr) added a RULE mentioning an otherwise absent specialised join point, we would ignore it, which is not in line with how CoreFVs works)
+- Stabilise Unfoldings only when we lifted something out of a function (Not doing so led to a huge regression in veritas' Edlib.lhs)
 
 ## As of mid-2014
 
