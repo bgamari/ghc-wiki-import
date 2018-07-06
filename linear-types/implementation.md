@@ -471,3 +471,7 @@ This means that `Weight`, `UsageEnv` and `Type` all have things added to their `
 adding new definitions into this cycle. This is why \`
 
 
+## Misc
+
+
+- Patterns are type checked in a *context multiplicity* which scales the constructor fields, extending the `case_p` from the paper.
