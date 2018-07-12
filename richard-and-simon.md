@@ -15,6 +15,7 @@ July 18:
 
 
 - [\#14164](https://gitlab.staging.haskell.org/ghc/ghc/issues/14164): comments, invariant, asserts (Richard)
+- [\#14873](https://gitlab.staging.haskell.org/ghc/ghc/issues/14873): make `typeKind` monadic in the type checker
 
 
 **Type declarations and signatures** (Dec 17)
