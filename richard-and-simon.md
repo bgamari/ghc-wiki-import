@@ -11,6 +11,12 @@
 
 
 
+July 18:
+
+
+- [\#14164](https://gitlab.staging.haskell.org/ghc/ghc/issues/14164): comments, invariant, asserts (Richard)
+
+
 **Type declarations and signatures** (Dec 17)
 
 
