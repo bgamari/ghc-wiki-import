@@ -326,7 +326,7 @@ Gah!  Looking at the bindings, transitive closure... horrible.  If every coercio
 
 
 While we'd like to remove heterogeneous coercion variables from Core, they are useful in the solver.
-Specifically, when we're analyzing an equality like `ty1 ~ (ty2 |> co)`, it\[\['s helpful to strip off the `co` and look at `ty1 ~ ty2`. This might discover similarities between `ty1` and `ty2` that can move solving forward. One of `ty1 ~ (ty2 |> co)` or `ty1 ~ ty2` is heterogeneous.
+Specifically, when we're analyzing an equality like `ty1 ~ (ty2 |> co)`, it's helpful to strip off the `co` and look at `ty1 ~ ty2`. This might discover similarities between `ty1` and `ty2` that can move solving forward. One of `ty1 ~ (ty2 |> co)` or `ty1 ~ ty2` is heterogeneous.
 
 
 
