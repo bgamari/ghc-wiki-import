@@ -38,7 +38,21 @@ With the simpler (asymmetrical) forall-coercion rule above, one of the primary m
 
 
 
-Homogeneous equality is simpler than heterogeneous equality so, all else being equal, it's better to have homogeneous equality. However, even beyond simplicity, we are able to prove congruence only with the homogeneous variant. Richard's thesis uses heterogeneous equality, and he was unable to prove congruence there. The ICFP'17 paper, with homogeneous equality, proves congruence. (It's called substitutivity there.) So this seems like a nice step forward. Congruence means that if a type `t` has a free variable `a`, and we have a coercion `co` proving `s1` equals `s2` (and `s1` and `s2` have the same kind), then we can always find a proof that `t[s1/a]` equals `t[s2/a]`. The lack of congruence has no effect in the current (GHC 8.6) implementation because it bites only in the presence of coercion quantification in types. See Section 5.8.5.4 of Richard's thesis. Given that we will need coercion quantification in types in order to have full dependent types \[example needed\], we will want congruence, too.
+We propose to make this change to GHC too.
+
+
+### Why homogeneous equality is good
+
+
+
+Homogeneous equality is simpler than heterogeneous equality so, all else being equal, it's better to have homogeneous equality. However, even beyond simplicity, we are able to prove **congruence** only with the homogeneous variant. Richard's thesis uses heterogeneous equality, and he was unable to prove congruence there. The ICFP'17 paper, with homogeneous equality, proves congruence. (It's called substitutivity there.) So this seems like a nice step forward. 
+
+
+
+Congruence means that if a type `t` has a free variable `a`, and we have a coercion `co` proving `s1` equals `s2` (and `s1` and `s2` have the same kind), then we can always find a proof that `t[s1/a]` equals `t[s2/a]`. The lack of congruence has no effect in the current (GHC 8.6) implementation because it bites only in the presence of coercion quantification in types. See Section 5.8.5.4 of Richard's thesis. Given that we will need coercion quantification in types in order to have full dependent types \[example needed\], we will want congruence, too.
+
+
+### What would homogeneous equality look like in GHC?
 
 
 
@@ -60,6 +74,10 @@ coercionKind :: Coercion -> Pair Type   -- the two types might have different ki
 -- Pair k1 k2 = corcionKind (promoteCoercion co)
 promoteCoercion :: Coercion -> Coercion 
 ```
+
+
+**Note that** `pomoteCoercion` becomes a function that transforms one coercion (tree) into another; it is no longer a coercion constructor (i.e. the existing `KindCo` vanishes).  **SLPJ: is this true?**?
+
 
 ### A small wrinkle: we need coercion quantification back
 
