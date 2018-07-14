@@ -42,6 +42,10 @@ settings page](https://phabricator.haskell.org/settings/), select the *Personal 
 
 
 
+Don't have an SSH key? Generate one with `ssh-keygen`.
+
+
+
 If you use a specific SSH key for GHC or Haskell related work, you should specify that key for `*.haskell.org` because the phabricator `arc` tool doesn't push to the actual GHC repo, but to a staging repo on a different machine in the `haskell.org` domain.
 
 
