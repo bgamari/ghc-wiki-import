@@ -25,6 +25,10 @@ Here are the steps to modify it:
   FreeNode](http://freenode.net/) !  
 
 
+Loathe github? You can update documentation using [Phabricator](phabricator) too!
+
+
+
 Then have a beer on us.  We are truly grateful.
 
 
