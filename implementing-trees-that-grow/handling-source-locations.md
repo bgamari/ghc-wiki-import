@@ -222,7 +222,7 @@ Pros:
 
 >
 >
-> `f (XNew loc e) = setLoc loc $ f e`
+> `f (XNew loc e) = setSrcSpan loc $ f e`
 >
 >
 
@@ -321,9 +321,6 @@ data Located a = L SrcSpan a
 
 getLoc :: Located a -> SrcSpan
 getLoc (L sp _)    = sp
-
-setLoc :: Located a -> SrcSpan -> Located a
-setLoc (L _ x) sp' = L sp' x
 
 noSrcSpan :: SrcSpan
 noSrcSpan = undefined -- or be an empty SrcSpan
