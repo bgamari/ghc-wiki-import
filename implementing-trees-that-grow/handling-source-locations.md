@@ -591,14 +591,14 @@ Here are some extra notes:
   The API Annotations can be accommodated via a straightforward extension of the type class approach, by defining
 
   ```
-                  data Extra = Extra SrcSpan [(SrcSpan,AnnKeywordId)]
+    data Extra = Extra SrcSpan [(SrcSpan,AnnKeywordId)]
                   
-                  class HasExtra a where
-                    getSpan :: a -> SrcSpan
-                    setSpan :: a -> SrcSpan -> a
-                  
-                    getApiAnns :: a -> [(SrcSpan,AnnKeywordId)]
-                    setApiAnns :: a -> [(SrcSpan,AnnKeywordId)] -> a
+    class HasExtra a where
+      getSpan :: a -> SrcSpan
+      setSpan :: a -> SrcSpan -> a
+          
+      getApiAnns :: a -> [(SrcSpan,AnnKeywordId)]
+      setApiAnns :: a -> [(SrcSpan,AnnKeywordId)] -> a
   ```
 
 - We also currently have sections of AST without source locations, such as those generated when converting TH AST to hsSyn AST, or for GHC derived code.
