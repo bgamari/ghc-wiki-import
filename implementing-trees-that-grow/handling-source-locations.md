@@ -170,7 +170,7 @@ sL1 (LL sp _) = LL sp
  
 
 
-- We may, or may not, assume that open extension typefamily instances for GHC-specific decorations are nested, such that they call a closed typefamily to choose the extension based on the index.
+- Although we assume typefamily instances are nested (to help with resolving constraint solving), we may, or may not, assume that these extension typefamily instances for GHC-specific decorations are closed.
 
 >
 >
@@ -179,9 +179,11 @@ sL1 (LL sp _) = LL sp
 >
 
 ```
-type instance XApp (GHC Ps) = ()
-type instance XApp (GHC Rn) = ()
-type instance XApp (GHC Tc) = Type
+type instance XApp (GHC p) = XAppGHC p
+type family   XAppGHC (p :: Phase)
+type instance XAppGHC Ps = ()
+type instance XAppGHC Rn = ()
+type instance XAppGHC Tc = Type
 ```
 
 >
@@ -192,10 +194,10 @@ type instance XApp (GHC Tc) = Type
 
 ```
 type instance XApp (GHC p) = XAppGHC p
-type family XAppGHC (p :: Phase) where
-  XAppGHC Ps = ()
-  XAppGHC Rn = ()
-  XAppGHC Tc = Type
+type family   XAppGHC (p :: Phase) where
+              XAppGHC Ps = ()
+              XAppGHC Rn = ()
+              XAppGHC Tc = Type
 ```
 
 >
