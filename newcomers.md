@@ -96,6 +96,10 @@ If you want to get a taste for possible starting tasks, below is a list of ticke
 
 
 
+You can add tickets to this list by giving them the `newcomer` Trac keyword.
+
+
+
 **Bugs:**
 
 <table><tr><th>[\#8316](https://gitlab.staging.haskell.org/ghc/ghc/issues/8316)</th>
