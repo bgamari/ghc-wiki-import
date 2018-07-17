@@ -638,13 +638,20 @@ data Location = Located | UnLocated
 
   ```
     data Extra = Extra SrcSpan [(SrcSpan,AnnKeywordId)]
-                  
-    class HasExtra a where
-      getSpan :: a -> SrcSpan
-      setSpan :: a -> SrcSpan -> a
-          
-      getApiAnns :: a -> [(SrcSpan,AnnKeywordId)]
-      setApiAnns :: a -> [(SrcSpan,AnnKeywordId)] -> a
+
+    type HasExtra a = Has Extra a
+
+    getSpan :: HasExtra a => a -> SrcSpan
+    getSpan = ...
+
+    setSpan :: HasExtra a => a -> SrcSpan -> a
+    setSpan = ...
+   
+    getApiAnns :: HasExtra a => a -> [(SrcSpan,AnnKeywordId)]
+    getApiAnns = ...
+    
+    setApiAnns :: HasExtra a => a -> [(SrcSpan,AnnKeywordId)] -> a
+    setApiAnns = ...
   ```
 
 
