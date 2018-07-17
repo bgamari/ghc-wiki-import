@@ -423,7 +423,7 @@ type family SrcSpanLess a
 class HasSrcSpan a where
   composeSrcSpan   :: (SrcSpanLess a , SrcSpan) -> a
   decomposeSrcSpan :: a -> (SrcSpanLess a , SrcSpan)
-  {- laws:
+  {- laws (isomorphic relation):
      composeSrcSpan . decomposeSrcSpan = id
      decomposeSrcSpan . composeSrcSpan = id
   -}
@@ -604,16 +604,11 @@ Here are some extra notes:
   ```
 
 - We also currently have sections of AST without source locations, such as those generated when converting TH AST to hsSyn AST, or for GHC derived code.
-
->
->
-> We can perhaps deal with these by either defining an additional pass, so
->
->
+  We can perhaps deal with these by either defining an additional pass, so
 
 ```
 data Pass = Parsed | Renamed | Typechecked | Generated
-   deriving (Data)
+  deriving (Data)
 ```
 
 >
@@ -639,10 +634,19 @@ data Location = Located | UnLocated
 >
 >
 
+
+   
+
+
 - The setter/getter functions can be generalised to set/get anything:
 
   ```
+  type family Without b a
   class Has b a where
-    get :: a -> b
-    set :: a -> b -> a
+    compose   :: (Without b a , b) -> a
+    decompose :: a -> (Without b a , b)
+    {- laws (isomorphic relation):
+       compose . decompose = id
+       decompose . compose = id
+    -}
   ```
