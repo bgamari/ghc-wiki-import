@@ -11,8 +11,12 @@ Cloud Haskell paper](https://www.microsoft.com/en-us/research/wp-content/uploads
 
 
 
-See also [the root page for distributed Haskell](distributed-haskell).
+See also
 
+
+- [the root page for distributed Haskell](distributed-haskell).
+- [
+  Neil Mitchell's blog post](http://neilmitchell.blogspot.com/2017/09/existential-serialisation.html) on static pointers for existentials.
 
 ## Tickets
 
