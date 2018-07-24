@@ -203,6 +203,12 @@ https://github.com/tweag/ghc/tree/tweag/ci](https://github.com/tweag/ghc/tree/tw
 - macOS/x86\_64 (CircleCI): build & store artefacts works
 - Windows/x86\_64 (AppVeyor): asked for increased limits
 
+
+**Update (Jul. 24th, 2018):** We wrote a small web application meant to act as a bridge between Phabricator and Circle CI. We have successfully used it to run Circle CI builds against Phabricator differentials. The code lives [
+here](https://github.com/alpmestan/phab-circleci-bridge). We will soon be deploying it and trying to use it for several job types. See [
+here](https://phabricator.haskell.org/harbormaster/build/49274/) for an example of using this setup.
+
+
 ## Todo
 
 
