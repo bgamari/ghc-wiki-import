@@ -162,6 +162,10 @@ required tools](https://ghc.haskell.org/trac/ghc/wiki/Building/Preparation/Tools
    sudo pacman -S ghc ghc-static perl gcc make happy alex cabal-install autoconf automake python python-sphinx libedit numactl
 ```
 
+
+Note that due to questionable decisions made by Arch's Haskell packaging (namely the decision to package only dynamic objects), it's quite important that you do not attempt to use the `haskell-*` packages to bootstrap your GHC tree. 
+
+
 ## Nix/NixOS
 
 
