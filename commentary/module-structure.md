@@ -6,7 +6,7 @@
 - **NOTE:** Possibly outdated.
 
 
-GHC is built out of about 245 Haskell modules. It can be quite tricky to figure out what the module dependency graph looks like. It can be important, too, because loops in the module dependency graph need to be broken carefully using .hi-boot interface files.
+GHC is built out of about 493 Haskell modules. It can be quite tricky to figure out what the module dependency graph looks like. It can be important, too, because loops in the module dependency graph need to be broken carefully using .hi-boot interface files.
 
 
 
