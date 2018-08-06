@@ -36,6 +36,11 @@ ghcid -c "./inplace/bin/ghc-stage2 \
     -fobject-code"
 ```
 
+
+Once [
+D5015](https://phabricator.haskell.org/D5015) is merged, it will be possible to just run `ghcid` directly without arguments.
+
+
 ## Old GHC
 
 
