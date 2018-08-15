@@ -119,8 +119,8 @@ sources:
 
 
 - [
-  The Haskell Execution Model](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Rts/HaskellExecution)
-- [ Storage](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Rts/Storage)
+  The Haskell Execution Model](http://ghc.haskell.org/trac/ghc/wiki/Commentary/Rts/HaskellExecution)
+- [ Storage](http://ghc.haskell.org/trac/ghc/wiki/Commentary/Rts/Storage)
 - [
   The Spineless Tagless G-machine](http://research.microsoft.com/en-us/um/people/simonpj/Papers/spineless-tagless-gmachine.ps.gz)
 
