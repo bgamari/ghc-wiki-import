@@ -111,7 +111,8 @@ the paper](https://repository.brynmawr.edu/cgi/viewcontent.cgi?article=1002&cont
 ```
 -- this version is wrong!
 data (~~) :: forall k1 k2. k1 -> k2 -> Constraint where
-  MkHEq :: forall k1 k2 (a :: k1) (b :: k2). (k1 ~# k2) -> (a ~# b) -> a ~~ b
+  MkHEq :: forall k1 k2 (a :: k1) (b :: k2). 
+           (k1 ~# k2) -> (a ~# b) -> a ~~ b
 ```
 
 
@@ -120,7 +121,9 @@ Sadly, this is ill-kinded: we're using `a ~# b` even though `a` and `b` have dif
 
 ```
 data (~~) :: forall k1 k2. k1 -> k2 -> Constraint where
-  MkHEq :: forall k1 k2 (a :: k1) (b :: k2). forall (co :: k1 ~# k2) -> ((a |> co) ~# b) -> a ~~ b
+  MkHEq :: forall k1 k2 (a :: k1) (b :: k2). 
+           forall (co :: k1 ~# k2) -> 
+           ((a |> co) ~# b) -> a ~~ b
 ```
 
 
