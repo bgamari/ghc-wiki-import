@@ -126,6 +126,9 @@ Stephen Deihl's Haskell implementation reading list](http://www.stephendiehl.com
   - [
     Deriving Via or, How to Turn Hand-Written Instances into an Anti-Pattern](https://www.kosmikus.org/DerivingVia/deriving-via-paper.pdf), Baldur Blöndal, Andres Löh, Ryan Scott, Haskell Symposium 2018. (ghc-proposals [
     0023](https://github.com/ghc-proposals/ghc-proposals/blob/master/proposals/0023-deriving-via.rst))
+  - [
+    Type variables in patterns](https://arxiv.org/abs/1806.03476), Richard Eisenberg, Joachim Breitner and Simon Peyton Jones, Haskell Symposium 2018. (ghc-proposals [
+    0031](https://github.com/ghc-proposals/ghc-proposals/blob/master/proposals/0031-type-applications-in-patterns.rst))
 
 
 Please add: System FC, GADTs, kind polymorphism etc
