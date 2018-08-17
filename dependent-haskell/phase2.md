@@ -69,14 +69,7 @@ How should this homogeneous equality take form? It's simple: make `~#`, the type
 
 
 
-However, *coercions themselves can remain heterogeneous*, that is, a coercion can witness equality between two types of different kinds.  More precisely (details in  [
-A specification of dependent types for Haskell](https://cs.brynmawr.edu/~rae/papers/2017/dep-haskell-spec/dep-haskell-spec.pdf)):
-
-
-- A coercion *variable* (which has a type `t1 ~# t2`) must be homogeneous
-- A *coercion* can be heterogeneous.  It does not have a type.
-
-
+However, *coercions themselves can remain heterogeneous*, that is, a coercion can witness equality between two types of different kinds.  
 Some things follow from this:
 
 
@@ -107,6 +100,14 @@ Some things follow from this:
 > `promoteCoercion` is a function that transforms one coercion (tree) into another; it is no longer a coercion constructor (i.e. the existing `KindCo` vanishes).
 >
 >
+
+
+Summarising (details in  [
+A specification of dependent types for Haskell](https://cs.brynmawr.edu/~rae/papers/2017/dep-haskell-spec/dep-haskell-spec.pdf)):
+
+
+- A coercion *variable* (which has a type `t1 ~# t2`) must be homogeneous
+- A *coercion* can be heterogeneous.  It does not have a type.
 
 ### A small wrinkle: we need coercion quantification back
 
