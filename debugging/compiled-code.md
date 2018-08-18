@@ -233,7 +233,7 @@ Line 95 of "compiler/basicTypes/NameCache.hs"
 
 
 
-Symbols in GHC are encoded using something called the Z-encoding (see
+Symbols in GHC are encoded using something called the [Z-encoding](commentary/compiler/symbol-names) (see
 [compiler/utils/Encoding.hs](/trac/ghc/browser/ghc/compiler/utils/Encoding.hs)).  Basically special symbols are replaced by sequences
 beginning with `z` or `Z`.  eg. `state#` becomes
 `statezh`.  The letter `z` itself is replaced by `zz`.
