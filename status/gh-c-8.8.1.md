@@ -16,7 +16,7 @@ If you believe your favorite thing belongs in this list, but isn't there, please
 
 
 
-Cut release branch in November 2018. Release in April 2019.
+Cut release branch in November 2018. Release in March 2019.
 
 
 ## Libraries Status
