@@ -7,8 +7,18 @@ flags, including [\#1148](https://gitlab.staging.haskell.org/ghc/ghc/issues/1148
 
 
 
-This page describes a new design.
+This page describes the current design (GHC 8.4 onwards, ore thereabouts).
 
+
+
+NB: GHC 8.4 and 8.6 had a bug (Trac [\#13064](https://gitlab.staging.haskell.org/ghc/ghc/issues/13064)) which meant that GHC did not implement the design advertised below.
+
+
+
+See also 
+
+
+- [Commentary/Compiler/RelaxedUnusedImports](commentary/compiler/relaxed-unused-imports) for a proposed, more sophisticated, design.
 
 ## The current story
 
