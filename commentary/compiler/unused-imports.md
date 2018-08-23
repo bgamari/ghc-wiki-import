@@ -7,7 +7,7 @@ flags, including [\#1148](https://gitlab.staging.haskell.org/ghc/ghc/issues/1148
 
 
 
-This page describes the current design (GHC 8.4 onwards, ore thereabouts).
+This page describes the current design (GHC 8.4 onwards, or thereabouts).
 
 
 
