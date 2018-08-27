@@ -77,7 +77,7 @@ There are 4 things to remember:
   [stage-2](building/architecture/idiom/stages) compiler will be
   rebuilt after this.
 
-1. Use `make fast` to
+1. While in the sub-component directory, use `make fast`
   [skip dependency building](building/using#skip-dependency-building) (except after pulling in changes from others).
 
 
