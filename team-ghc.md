@@ -26,6 +26,7 @@ Lots of people contribute to GHC without yet having commit rights.  This list no
 - Ryan Yates (Rochester).  Trac: fryguybob
 - Sven Tennie (DreamIT).  Trac: supersven
 - Vladislav Zavialov (Serokell).  Trac: int-index
+- David Eichmann (Well Typed). Trac: davide
 
 ## Committers
 
@@ -111,13 +112,6 @@ In order to see emails below, **you must login**.
     https://github.com/bgamari](https://github.com/bgamari)
   - **Committer since**: September, 2014.
   - **Main areas of interest**: Typeable, simplifier, ARM support, LLVM backend
-
-- [ David Eichmann](http://www.well-typed.com/people/davide) 
-
-  - Well Typed LLP - Edinburgh, UK
-  - **Trac**: davide; **email**: davide@…; **github**: [
-    https://github.com/DavidEichmann](https://github.com/DavidEichmann)
-  - **Committer since**: August, 2018.
 
 - [ David Feuer](http://treeowl.github.com/)
 
