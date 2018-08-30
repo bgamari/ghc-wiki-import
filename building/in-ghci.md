@@ -90,7 +90,7 @@ all 500 or so modules will be loaded.
 
 
 
-It can also be used with ghcid.
+It can also be used with `ghcid`.
 
 
 ```wiki
