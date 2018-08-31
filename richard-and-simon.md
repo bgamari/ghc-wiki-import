@@ -15,7 +15,7 @@ Aug 18:
 
 
 - [\#15579](https://gitlab.staging.haskell.org/ghc/ghc/issues/15579): `topNormaliseType`
-- `zonkPromote`: the remaining ones are there for a reason; but Simon still unhappy; see RAE/SLPJ Slack channel 31 Aug; and [\#15588](https://gitlab.staging.haskell.org/ghc/ghc/issues/15588)
+- `zonkPromote`: the remaining ones are there for a reason; but Simon still unhappy; see RAE/SLPJ Slack channel 31 Aug; and [\#15588](https://gitlab.staging.haskell.org/ghc/ghc/issues/15588) and [\#15589](https://gitlab.staging.haskell.org/ghc/ghc/issues/15589)
 - [\#15552](https://gitlab.staging.haskell.org/ghc/ghc/issues/15552): optimising zonking
 - [\#15479](https://gitlab.staging.haskell.org/ghc/ghc/issues/15479): refactoring `tcHsType`
 - [\#14887](https://gitlab.staging.haskell.org/ghc/ghc/issues/14887): telescopes
