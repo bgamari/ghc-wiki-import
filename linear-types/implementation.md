@@ -189,6 +189,36 @@ TODO - this is described somewhat in the minicore document but it is not finishe
 which are never made into join points.
 
 
+## Core to core passes
+
+
+### Pushing function-type coercions
+
+
+
+Coercions of kind `a -> b ~ c -> d` are routinely pushed through lambdas or application as follows
+
+
+```wiki
+(f |> co) u  ~~>  (f (u |> co_arg)) |> co_res
+
+(\x -> u) |> co  ~~>  \x' -> u[x\(x |> co_arg)] |> co_res
+```
+
+
+However, this can't always be done when multiplicities are involved: the multiplicity could be coerced (in particular, by `unsafeCoerce`). So, it's possible that the left hand side of these rules is well-typed, while the right hand side isn't. Here is an example of this phenomenon.
+
+
+```wiki
+-- Assuming co :: (Int -> ()) ~ (Int ->. ())
+
+fun x ::(1) Int -> (fun _ -> () |> co) x  ~~>  fun x ::(1) Int -> (fun _ ::(ω) Int -> ()) x
+```
+
+
+To prevent this, we guard this reduction with the condition that the multiplicity component of the coercion is a reflexivity coercion.
+
+
 ## Polymorphism
 
 
