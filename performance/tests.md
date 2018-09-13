@@ -16,9 +16,6 @@ Running the Testsuite](https://ghc.haskell.org/trac/ghc/wiki/Building/RunningTes
   - A simple CLI tool is provided along side the test driver to analyse previous results.
 - Recording and comparing performance results is always done with respect to a [platform](performance/tests#).
 
-
-
-
 ## Current System
 
 
@@ -103,9 +100,6 @@ With the proposed change, we hope to achieve the following benefits:
   - Expected performance changes only requires an [indication](performance/tests#) that the change exists, rather than having to re-adjust the expected values and/or tolerance.
 - More accurate [local testing](performance/tests#testing-locally).
 
-
-
-
 ### Test results are per platform
 
 
@@ -115,9 +109,6 @@ Performance results can vary between platforms. For example a 64 bit ghc may use
 
 
 In the implementation of this proposal the platform is a string set by the TEST\_ENV environment variable. This is set by all relevant CircleCI jobs (to e.g. 'x86\_64-linux' or 'x86\_64-freebsd') but defaults to 'local' (appropriate for running tests on your local machine).
-
-
-
 
 
 ### Indicating expected performance changes
@@ -137,9 +128,6 @@ Metric Decrease 'bytes allocated':
 
 
 The commit message will be parsed by the test driver and will allow the indicated changes. The exact text required to pass all failing tests will conveniently be output by the test driver if any performance tests fail.
-
-
-
 
 
 ### Testing Locally
@@ -207,9 +195,6 @@ new patch](https://phabricator.haskell.org/D5059), an adapted (and rebased) vers
 - CircleCI must push test results (git notes) to the git.haskell.com repo.
 - Make clear what that plan is regarding the [drift issue](performance/tests#).
 - Hear the concerns of the Haskell community.
-
-
-
 
 #### Drift Issue
 
