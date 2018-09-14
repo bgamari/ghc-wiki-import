@@ -14,6 +14,8 @@
 Aug 18:
 
 
+- [\#15497](https://gitlab.staging.haskell.org/ghc/ghc/issues/15497): coercion quantification and [
+  Phab:D5054](https://phabricator.haskell.org/D5054)
 - [\#15621](https://gitlab.staging.haskell.org/ghc/ghc/issues/15621), [\#14185](https://gitlab.staging.haskell.org/ghc/ghc/issues/14185): using implication constraints to improve error messages
 - [\#15579](https://gitlab.staging.haskell.org/ghc/ghc/issues/15579): `topNormaliseType`; also [\#14729](https://gitlab.staging.haskell.org/ghc/ghc/issues/14729)
 - `zonkPromote`: the remaining ones are there for a reason; but Simon still unhappy; see RAE/SLPJ Slack channel 31 Aug; and [\#15588](https://gitlab.staging.haskell.org/ghc/ghc/issues/15588) and [\#15589](https://gitlab.staging.haskell.org/ghc/ghc/issues/15589)
