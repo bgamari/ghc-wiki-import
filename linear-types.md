@@ -23,7 +23,7 @@ Linear Haskell: practical linearity in a higher-order polymorphic language](http
 
 
 
-Implementation status as of July 2018: [LinearTypes/Implementation](linear-types/implementation)
+Description of the implementation strategy: [LinearTypes/Implementation](linear-types/implementation)
 
 
 
@@ -118,7 +118,7 @@ In the motivations of the proposal, there is a linear IO monad. Isn't linear IO 
 
 
 It is not, but as always, we need to careful about how we type primitives of the `IO` monad. For example, [
-{{{catch}}}](https://github.com/tweag/linear-base/blob/007b884ebb0e3182ea73e450683f9660b7a92f40/src/System/IO/Linear.hs#L144-L146) should not have a linear type. It should be typed as follows:
+catch](https://github.com/tweag/linear-base/blob/007b884ebb0e3182ea73e450683f9660b7a92f40/src/System/IO/Linear.hs#L144-L146) should not have a linear type. It should be typed as follows:
 
 
 ```
@@ -230,7 +230,7 @@ linearly typed library](https://github.com/tweag/linear-base/), uploaded to Hack
 
 
 The centrepiece of our design is to avoid code duplication. Crucially, the same types can be used in linear and non-linear contexts. For example, the [
-{{{linear-base}}}](https://github.com/tweag/linear-base/) library uses the same types as `base`. So libraries developed with `linear-base` will be compatible with libraries developed with `base`.
+linear-base](https://github.com/tweag/linear-base/) library uses the same types as `base`. So libraries developed with `linear-base` will be compatible with libraries developed with `base`.
 
 
 # Is this type for monads in the paper correct?
