@@ -13,7 +13,7 @@ Here are our [release](working-conventions/releases) plans for
 
 
 - [GHC 8.8.1](status/gh-c-8.8.1) (next major release)
-- [GHC 8.6.1](status/gh-c-8.6.1) (previous major release)
+- [GHC 8.6.1](status/gh-c-8.6.1) (current major release)
 
 
 We release GHC on multiple platforms; the [platforms page](platforms) gives details.
