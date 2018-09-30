@@ -168,7 +168,7 @@ Tier 2 platforms as possible to Tier 1, as soon as they meet the Tier 1 criteria
 <th> powerpc-unknown-linux    </th>
 <th> Yes        </th>
 <th> Yes       </th>
-<th> No             </th>
+<th> Yes            </th>
 <th> 
 </th></tr>
 <tr><th> PowerPC            </th>
@@ -183,8 +183,16 @@ Tier 2 platforms as possible to Tier 1, as soon as they meet the Tier 1 criteria
 <th> Linux           </th>
 <th> powerpc64-unknown-linux  </th>
 <th> Yes        </th>
-<th> No        </th>
-<th> No             </th>
+<th> Yes       </th>
+<th> Yes            </th>
+<th> 
+</th></tr>
+<tr><th> PowerPC64le        </th>
+<th> Linux           </th>
+<th> powerpc64le-unknown-linux</th>
+<th> Yes        </th>
+<th> Yes       </th>
+<th> Yes            </th>
 <th> 
 </th></tr>
 <tr><th> Sparc              </th>
