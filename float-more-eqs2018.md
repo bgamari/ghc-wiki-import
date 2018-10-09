@@ -318,3 +318,10 @@ the definition of](https://github.com/ghc/ghc/blob/8bed140099f8ab78e3e728fd2e50d
 TODO So we'll need yet another refinement to ensure that `y` cannot be reintroduced by an outer given.
 
 
+### Comparison to status quo
+
+
+
+`Note [Let-bound skolems]` need not worry about outer givens because `y` is not in scope outside of this implication.
+
+
