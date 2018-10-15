@@ -7,6 +7,10 @@ types and classes, under `-XPolyKinds`.
 Though originally written with respect to [\#9200](https://gitlab.staging.haskell.org/ghc/ghc/issues/9200), there are more issues at play here. Relevant other tickets: [\#9201](https://gitlab.staging.haskell.org/ghc/ghc/issues/9201), [\#9427](https://gitlab.staging.haskell.org/ghc/ghc/issues/9427), [\#14451](https://gitlab.staging.haskell.org/ghc/ghc/issues/14451), [\#14847](https://gitlab.staging.haskell.org/ghc/ghc/issues/14847), [\#15142](https://gitlab.staging.haskell.org/ghc/ghc/issues/15142), and (to a lesser extent) [\#12088](https://gitlab.staging.haskell.org/ghc/ghc/issues/12088), which is all about instances.
 
 
+
+See also [GhcKinds/KindInference/Examples](ghc-kinds/kind-inference/examples) for a growing set of examples to consider when evaluating any new algorithm.
+
+
 ##
 Simplifying `getInitialKinds` ([\#15142](https://gitlab.staging.haskell.org/ghc/ghc/issues/15142))
 
