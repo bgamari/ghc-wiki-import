@@ -41,8 +41,6 @@ Below are the major highlights of 8.8.
   Phab:D4766](https://phabricator.haskell.org/D4766))
 - More efficient code generation for nested closures ([\#14461](https://gitlab.staging.haskell.org/ghc/ghc/issues/14461))
 - [
-  Proposal 83: Collapse \`PolyKinds\` and \`TypeInType\`](https://github.com/ghc-proposals/ghc-proposals/pull/83)
-- [
   Proposal 81: Visible dependent quantification](https://github.com/ghc-proposals/ghc-proposals/pull/81)
 - [
   Proposal 54: Top-level kind signatures: CUSKs](https://github.com/ghc-proposals/ghc-proposals/pull/54)
