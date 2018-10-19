@@ -54,7 +54,7 @@ Congruence means that if a type `t` has a free variable `a`, and we have a coerc
 
 
 
-More practically, congruence is what allows `liftCoSubst` to function. The details aren't germane here, but `liftCoSubst` produces a coercion, which is assumedly well-typed. However, we cannot prove that it is indeed well-typed with heterogeneous equality: this is precisely what the congruence theorem claims. So, currently, the use of this function might induce a Core Lint error. (Ningning: the error would be from the coercion variable restriction in the ForAllCo rule. Could you add a pointer to where this is checked? / From Ningning: **Unfortunately we didn't impose this restriction anywhere.** We should do it in the near future.)  With homogeneous equality, we can prove that this won't be the case.
+More practically, congruence is what allows `liftCoSubst` to function. The details aren't germane here, but `liftCoSubst` produces a coercion, which is assumedly well-typed. However, we cannot prove that it is indeed well-typed with heterogeneous equality: this is precisely what the congruence theorem claims. So, currently, the use of this function might induce a Core Lint error (see `almostDevoidCoVarOfCo` check in `ty_co_subst` in Coercion).  With homogeneous equality, we can prove that this won't be the case.
 
 
 ### What would homogeneous equality look like in GHC?
