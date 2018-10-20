@@ -116,7 +116,7 @@ data DynFlags = DynFlags {
 
 
 
-The original work by Nicolas Frisby started out on the `wip/llf` branch.
+The original work by Nicolas Frisby started out in 2013 as part of his internship on the `wip/llf` branch.
 Sebastian Graf has rebased this branch in mid April 2018. After some debugging
 and fixups, it passed `./validate` (modulo some compiler perf tests) in
 [
