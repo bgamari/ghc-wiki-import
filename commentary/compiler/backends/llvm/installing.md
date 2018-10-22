@@ -21,6 +21,7 @@ here](http://hackage.haskell.org/trac/ghc/wiki/Building)
 
 <table><tr><th> </th>
 <th> **HEAD** </th>
+<th> **8.6** </th>
 <th> **8.4** </th>
 <th> **8.2** </th>
 <th> **8.0** </th>
@@ -42,7 +43,8 @@ here](http://hackage.haskell.org/trac/ghc/wiki/Building)
 <th> ?? </th>
 <th> 2.9 </th>
 <th> 2.7 
-</th></tr></table>
+</th>
+<th></th></tr></table>
 
 
 
