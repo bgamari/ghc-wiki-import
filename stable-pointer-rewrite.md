@@ -97,7 +97,7 @@ We free an entry in a segment by setting (fetch-and-add) the relevant bit in the
 
 
 
-If we like, we can reduce contention on the free-enough list by letting each capability maintain a private free-enough list. When that list exceeds a certain length, we use a CAS loop to transfer multiple segments to the global free-enough list at once. We can let non-Haskell threads maintain private free-enough lists as well, flushing them completely when they reach a certain size and when destroyed.
+If we like, we can reduce contention on the free-enough list in-stack by letting each capability maintain a private free-enough list. When that list exceeds a certain length, we use a CAS loop to transfer multiple segments to the global free-enough list at once. We can let non-Haskell threads maintain private free-enough lists as well, flushing them completely when they reach a certain size and when destroyed.
 
 
 ### Relinquishing a segment
