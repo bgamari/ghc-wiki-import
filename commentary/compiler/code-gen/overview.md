@@ -10,14 +10,14 @@ The goal of the code generator is to convert program from [STG](commentary/compi
 
 
 
-The top-most entry point to the codegen is located in [compiler/main/HscMain.hs](/trac/ghc/browser/ghc/compiler/main/HscMain.hs) in the `tryNewCodegen` function. Code generation is done in two stages:
+The top-most entry point to the codegen is located in [compiler/main/HscMain.hs](/trac/ghc/browser/ghc/compiler/main/HscMain.hs) in the `doCodeGen` function. Code generation is done in two stages:
 
 
 1. Convert STG to Cmm with implicit stack, and native Cmm calls. This whole stage lives in [compiler/codeGen](/trac/ghc/browser/ghc/compiler/codeGen) directory with the entry point being `codeGen` function in [compiler/codeGen/StgCmm.hs](/trac/ghc/browser/ghc/compiler/codeGen/StgCmm.hs) module.
 1. Optimise the Cmm, and CPS-convert it to have an explicit stack, and no native calls. This lives in [compiler/cmm](/trac/ghc/browser/ghc/compiler/cmm) directory with the `cmmPipeline` function from [compiler/cmm/CmmPipeline.hs](/trac/ghc/browser/ghc/compiler/cmm/CmmPipeline.hs) module being the entry point.
 
 
-The CPS-converted Cmm is fed to one of the backends. This is done by `codeOutput` function ([compiler/main/CodeOutput.hs](/trac/ghc/browser/ghc/compiler/main/CodeOutput.hs)) called from `hscGenHardCode` after returning from `tryNewCodegen`.
+The CPS-converted Cmm is fed to one of the backends. This is done by `codeOutput` function ([compiler/main/CodeOutput.hs](/trac/ghc/browser/ghc/compiler/main/CodeOutput.hs)) called from `hscGenHardCode` after returning from `doCodeGen`.
 
 
 ## First stage: STG to Cmm conversion
