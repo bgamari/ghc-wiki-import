@@ -1,4 +1,8 @@
 
+{\#!markdown
+
+
+
 \# GHC Status Report (November 2018)
 
 
@@ -70,25 +74,38 @@ been accepted. Recently
 
 
 - Lower precedence for `\{-# UNPACK #-\}`
+
 - Make rebindable fail work with `OverloadedStrings`
+
 - Replace `atomicModifyMutVar#`
+
+
+ 
+
+
 - Remove the `*` kind syntax (PR [\#143](https://gitlab.staging.haskell.org/ghc/ghc/issues/143))
+
 - Module export deprecation pragmas (PR [\#134](https://gitlab.staging.haskell.org/ghc/ghc/issues/134))
+
 - Allow ScopedTypeVariables to refer to types (PR [\#128](https://gitlab.staging.haskell.org/ghc/ghc/issues/128))
+
 - Type applications in patterns (PR [\#126](https://gitlab.staging.haskell.org/ghc/ghc/issues/126))
+
 - Add more array resizing primitives (PR [\#121](https://gitlab.staging.haskell.org/ghc/ghc/issues/121))
+
 - Deriving Via (PR [\#120](https://gitlab.staging.haskell.org/ghc/ghc/issues/120))
+
 - `UnliftedArray#` (PR [\#112](https://gitlab.staging.haskell.org/ghc/ghc/issues/112))
 
 
 At the time of writing,
 10 proposals are under active discussion by the community
-(\\url{[
-https://github.com/ghc-proposals/ghc-proposals/pulls?q=is\\%3Aopen+is\\%3Apr+no\\%3Alabel](https://github.com/ghc-proposals/ghc-proposals/pulls?q=is\%3Aopen+is\%3Apr+no\%3Alabel)})
+(\<[
+https://github.com/ghc-proposals/ghc-proposals/pulls?q=is\\%3Aopen+is\\%3Apr+no\\%3Alabel](https://github.com/ghc-proposals/ghc-proposals/pulls?q=is\%3Aopen+is\%3Apr+no\%3Alabel)\>)
 and
 9 proposals
-(\\url{[
-https://github.com/ghc-proposals/ghc-proposals/pulls?q=is\\%3Aopen+is\\%3Apr+label\\%3A\\%22Pending+committee+review\\%22](https://github.com/ghc-proposals/ghc-proposals/pulls?q=is\%3Aopen+is\%3Apr+label\%3A\%22Pending+committee+review\%22)})
+(\<[
+https://github.com/ghc-proposals/ghc-proposals/pulls?q=is\\%3Aopen+is\\%3Apr+label\\%3A\\%22Pending+committee+review\\%22](https://github.com/ghc-proposals/ghc-proposals/pulls?q=is\%3Aopen+is\%3Apr+label\%3A\%22Pending+committee+review\%22)\>)
 are under review by the committee.
 
 
@@ -237,4 +254,8 @@ anything in between, please come speak to us either on IRC (`#ghc` on
 > >
 > >
 >
+
+
+}}}
+
 
