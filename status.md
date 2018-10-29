@@ -99,6 +99,8 @@ Here are biannual GHC status reports, published in the [
 Haskell Communities and Activities Report](http://haskell.org/communities/)
 
 
+- [GHC status October 2018](status/oct18)
+- [GHC status April 2018](status/apr18)
 - [GHC status October 2017](status/oct17)
 - [GHC status April 2017](status/apr17)
 - [GHC status October 2016](status/oct16)
