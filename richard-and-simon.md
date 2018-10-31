@@ -11,6 +11,14 @@
 
 
 
+Oct 18:
+
+
+- New module `KcTyClsDecls` that pulls from `TcTyClsDecls` and `TcHsType`.
+- Remove `get_class_tvs` from `kcTyClGroup`, in favor of tracking AT TcTyCons in the class TcTyCon
+- Remove all the work in `tcTyClTyVars`. It's redundant. `correct_binders` is done by `mk_req_tcb` in `generalise`, `reportFloatingKvs` is irrelevant for CUSKS (should move to `generalise` or `checkValidTyCon`), and `findDupTyVarTvs` can move to `generalise`.
+
+
 Aug 18:
 
 
