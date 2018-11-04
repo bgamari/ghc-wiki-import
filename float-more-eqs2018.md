@@ -178,7 +178,7 @@ If L \< B then `gx` itself will stop `w`. If B \<= L, then `y` is of a level \<=
 
 
 
-The lesson is that we need not work out how a level inverting constraint like `gx` affects other givens in its scope, we can just all givens individually. We might judge some incorrectly (`gy`), but only if those farther out (`gx`) will render that judgement irrelevant.  Thus we should not float a constraint at all unless we can float it all the way to its final destination. (Maybe we should just perform the unification instead of floating it? Otherwise, what if we learn something "risky" after having floated only half way to our destination? This might just be a matter of error message quality.)
+The lesson is that we need not work out how a level inverting constraint like `gx` affects other givens in its scope, we can judge all givens individually. We might judge some incorrectly (`gy`), but only if those farther out (`gx`) will render that judgement irrelevant.  Thus we should not float a constraint at all unless we can float it all the way to its final destination. (Maybe we should just perform the unification instead of floating it? Otherwise, what if we learn something "risky" after having floated only half way to our destination? This might just be a matter of error message quality.)
 
 
 
