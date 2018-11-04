@@ -10,7 +10,7 @@ I've created this wiki page to track my learning/research as I try to improve my
 
 
 
-My core hypothesis is that levels can help us determine if a wanted equality `w` can be floated out from under a set `gs` of given constraints without thereby losing access to some possible solutions of `w` (those involving at least one `g` in `gs`). Currently, GHC is quite conservative and does not float `w` if it's possible that one of the givens might be an equality. With more effort, it should be possible to determine that particular givens are not relevant to a particular wanted equality, and that's what I'm exploring. I'm specifically focused on skolems with a higher `TcLevel`, which arise from `RankNTypes`.
+My core hypothesis is that levels can help us determine if a wanted equality `w` can be floated out from under a set `gs` of given constraints without thereby losing access to some possible solutions of `w` (those involving at least one `g` in `gs`). Currently, GHC is quite conservative and does not float `w` if it's possible that one of the givens might be an equality. With more effort, it should be possible to determine that particular givens are not relevant to a particular wanted equality, and that's what I'm exploring. I'm specifically focused on skolems with a greater `TcLevel`, which arise from `RankNTypes`.
 
 
 
@@ -100,7 +100,7 @@ Again, we should not float past `g2`. For example, we might learn `alpha := F`.
 
 
 
-What if the application has tyvars with higher levels?
+What if the application has tyvars with greater levels?
 
 
 ```wiki
@@ -127,7 +127,7 @@ forall[3] (g1 : G x ~ fsk) =>
 
 
 
-The righthand-side of a CTyEqCan is irrelevant, unless it's a tyvar: then the CTyEqCan could flip.
+The righthand-side of a CTyEqCan is irrelevant, unless it's a fsk: then the CTyEqCan could flip.
 
 
 
@@ -161,7 +161,28 @@ The simplifying observation is that floating `w` is ultimately only helpful if w
 
 
 
-The lesson is that we should not float a constraint at all unless we can float it all the way to its final destination. (Maybe we should just perform the unification instead of floating it? Otherwise, what if we learn something "risky" after having floated only half way to our destination? This might just be a matter of error message quality.)
+But what if `w` isn't trying to float past `gx`, only past `gy`? That would mean either `alpha` has a higher-level or `gx` has a lesser level than in the example we just considered. In general:
+
+
+```wiki
+forall[A] x. () =>
+...
+forall[B] (gx : x ~ Maybe y) =>
+...
+forall[C]. (gy : y ~ Int) =>
+  (w : alpha[L] ~ Maybe Int
+```
+
+
+If L \< B then `gx` itself will stop `w`. If B \<= L, then `y` is of a level \<= B (else it's out of scope), hence \<= L, and so `gy` will stop `w` regardless of `gx`.
+
+
+
+The lesson is that we need not work out how a level inverting constraint like `gx` affects other givens in its scope, we can just all givens individually. We might judge some incorrectly (`gy`), but only if those farther out (`gx`) will render that judgement irrelevant.  Thus we should not float a constraint at all unless we can float it all the way to its final destination. (Maybe we should just perform the unification instead of floating it? Otherwise, what if we learn something "risky" after having floated only half way to our destination? This might just be a matter of error message quality.)
+
+
+
+(The way `gx` and `gy` interact here corresponds to the `EQDIFF` given-given interaction rule in `jfp-outsidein.pdf`. GHC doesn't implement that rule as written; it does not add a third constraint `gx_gy : x ~ Maybe Int` alongside `gy`. If it did, then `gx_gy` would be enough to prevent floating `w`. Givens can also interact via `EQSAME`. GHC does implement that as written, so it will modify the inner given. I plan to rely on that, and thus I need to withhold judgements unless the givens are *inert*, so GHC has already resolved `EQSAME` interactions etc.)
 
 
 ### Rule for Consideration
@@ -173,7 +194,7 @@ After working through the above examples, I'm considering the following rule.
 
 >
 >
-> Rule 20181104. Float a (canonical) wanted `w : alpha[L] ~ <t>` from level K \> L to level L if all the constraints given by the levels from L+1 to K are inert and each satifies P\[L\], where
+> Rule 20181104. Float a (canonical) wanted `w : alpha[L] ~ <t>` from level K \> L to level L if all the constraints given by the levels from L+1 to K (inclusive) are inert and each satifies P\[L\], where
 >
 >
 > ```wiki
@@ -187,7 +208,7 @@ After working through the above examples, I'm considering the following rule.
 > P[L] CTyEqCan fsk ~ _ = False   -- example 4
 > P[L] CTyEqCan x[M] ~ fsk = L < M && forall v[N] in nonflat_fvs(fsk). isSkolem(v) || N < M   -- example 5
 > P[L] CTyEqCan x[M] ~ _ = L < M
-> P[L] g = forall v[M] in fvs(g). isSkolem(v) && L < M   -- extrapolating from other examples
+> P[L] g = forall v[M] in fvs(g). isSkolem(v) && L < M   -- assume any fv could become the LHS
 > ```
 >
 >
@@ -391,7 +412,7 @@ forall[2]. (gbeta : beta[tau:1] ~ Int) =>   -- beta must be < level 2, according
 
 
 
-Even if `alpha` were of a higher level
+Even if `alpha` were of a greater level
 
 
 ```wiki
