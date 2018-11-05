@@ -220,7 +220,11 @@ If it weren't for the mutability issue, we could address the `EQSAME` issue by w
 However, an inert set of CTyEqCans might not be inert after one of their LHSs changes, so the mutability issue subverts our planned reliance on inertness.
 
 
-- \* \*
+>
+>
+> 💫 😵 💫
+>
+>
 
 
 I'm getting dizzy. Let's zoom back out. Our basic rule is: float `w` past `g` if `M < L` and do not otherwise. So if we float, and then the LHS of `g` somehow becomes a tyvar with a level \>= L, we might have thus lost a possible solution to `w`.
@@ -243,7 +247,7 @@ So how does `g : x[M] ~ fsk0` with `x` an inert skolem become `g' : tv[N] ~ x`? 
 
 
 
-Thus, the RHS should prevent floating only if it is a flattening skolem whose definition's free non-flattening variables (recurring on free flattening skolems) include a variable with a level N \>= M. If such a free var exists, then the equality might flip, which might enable more `EQSAME` interactions, which we do not wish to anticipate. Even if that didn't happen, the level of the LHS has increased, and so a former decision float might now be revealed as premature. (If we some how knew `EQSAME` interactions were not a risk, we could strengthen the predicate to `N >= L`: let it flip as long as it still can't prevent `w` from floating.)
+Thus, the RHS should prevent floating only if it is a flattening skolem whose definition's free non-flattening variables (recurring on free flattening skolems) include a variable with a level N \>= M. If such a free var exists, then the equality might flip, which might enable more `EQSAME` interactions, which we do not attempt to anticipate, choosing the simpler pessimism. Even if `EQSAME` that didn't happen, the level of the LHS has increased, and so a former decision float might now be revealed as premature; if we some how knew `EQSAME` interactions were not a risk, we could strengthen the predicate to `N >= L`: let it flip as long as it still wouldn't prevent `w` from floating.
 
 
 ### Rule for Consideration
