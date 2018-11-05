@@ -31,7 +31,7 @@ forall[3] (g : x ~ Int) =>
 ```
 
 
-GHC 8.6 conservatively concludes "Yes", just because `g` is an equality. But `g` is indeed not relevant to `w`: allowing the use of `g` does not increase the set of possible solutions of `w`. The intuitive explanation is that `x` does not occur in `w`'s type and cannot be introduced into it when we learn new things. As an example of "learning a new thing", consider if some other constraint somewhere else in the scope of `alpha` causes the solver to assign `alpha := a[1]`. Because of that assignment, GHC would replace `alpha` by `a[1`} thereby introducing `a` as a new free variable of `w`'s type. The fundamental insight is that `x` cannot be introduced that way, because `x` is level 2 while `alpha` is level 1, so it'd be a skolem-escape bug if `alpha` were assigned to something with `x` free.
+GHC 8.6 conservatively concludes "Yes", just because `g` is an equality. But `g` is indeed not relevant to `w`: allowing the use of `g` does not increase the set of possible solutions of `w`. The intuitive explanation is that `x` does not occur in `w`'s type and cannot be introduced into it when we learn new things. As an example of "learning a new thing", consider if some other constraint somewhere else in the scope of `alpha` causes the solver to assign `alpha := a[1]`. Because of that assignment, GHC would replace `alpha` by `a[1]` thereby introducing `a` as a new free variable of `w`'s type. The fundamental insight is that `x` cannot be introduced that way, because `x` is level 2 while `alpha` is level 1, so it'd be a skolem-escape bug if `alpha` were assigned to something with `x` free.
 
 
 >
@@ -247,7 +247,7 @@ So how does `g : x[M] ~ fsk0` with `x` an inert skolem become `g' : tv[N] ~ x`? 
 
 
 
-Thus, the RHS should prevent floating only if it is a flattening skolem whose definition's free non-flattening variables (recurring on free flattening skolems) include a variable with a level N \>= M. If such a free var exists, then the equality might flip, which might enable more `EQSAME` interactions, which we do not attempt to anticipate, choosing the simpler pessimism. Even if `EQSAME` that didn't happen, the level of the LHS has increased, and so a former decision float might now be revealed as premature; if we some how knew `EQSAME` interactions were not a risk, we could strengthen the predicate to `N >= L`: let it flip as long as it still wouldn't prevent `w` from floating.
+Thus, the RHS should prevent floating only if it is a flattening skolem whose definition's free non-flattening variables (recurring on free flattening skolems) include a variable with a level N \>= M. If such a free var exists, then the equality might flip, which might enable more `EQSAME` interactions, which we do not attempt to anticipate, choosing the simpler pessimism. Even if a new `EQSAME` interaction didn't happen, the level of the LHS has increased, and so a former decision to float might now be revealed as premature; if we some how knew `EQSAME` interactions were not a risk, we could strengthen the predicate to `N >= L`: let it flip as long as it still wouldn't prevent `w` from floating.
 
 
 ### Rule for Consideration
@@ -273,7 +273,7 @@ After working through the above examples, I'm considering the following rule. Th
 > P[L] CTyEqCan fsk ~ _ = False   -- see Example 4
 > P[L] CTyEqCan x[M] ~ fsk = L < M && forall v[N] in nonflat_fvs(fsk). N < M   -- see Example 6
 > P[L] CTyEqCan x[M] ~ _ = L < M
-> P[L] g = forall v[M] in fvs(g). isSkolem(v) && L < M   -- assume any fv could become the LHS
+> P[L] g = False   -- it could reduce to a CTEqCan fsk ~ _ or any fv could become the LHS, thereby unlocked EQSAME interactions
 > ```
 >
 >
