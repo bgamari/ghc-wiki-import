@@ -5,7 +5,7 @@ I've created this wiki page to track my learning/research as I try to improve my
 
 
 
-## 20181105 - revises 20181104
+# 20181105 -- revises 20181104
 
 
 
@@ -16,7 +16,7 @@ Two things occurred after I slept on it. Both relate to Example 6 from the 20181
 
 1. If I correctly understand what the "inert substitution" is, then I think I can summarize the (corrected) Rule 20181104 as follows. Let dis\[i\] be the domain of the inert substitution active in the wanteds of TcLevel i. We can safely float a wanted CTyEqCan `w : alpha[L] ~ <t>` from level K to level L if dis\[K\] can never change (which implies dis\[L\] can never change -- ie no CTyEqCan might flip) and if dis\[K\] - dis\[L\] does not include any metavars, any flattening skolems, or any skolems of level \<= L.
 
-## 20181104 - first draft proposal
+# 20181104 -- first draft proposal
 
 
 
@@ -303,7 +303,7 @@ TODO Any other restrictions on `<t>`?
 Edit: The givens shallower than L also matter; see the top-level 20181105 section above.
 
 
-## 20181014 -- work in progress
+# 20181014 -- work in progress
 
 
 
@@ -614,7 +614,7 @@ forall[4] y. (g : x ~ alpha[tau:1]) =>   -- vec [2,1,1,1,1]     (i.e. levels 4,3
 TODO ... I haven't yet thought of anything clever that isn't caught by the inherited attribute test I proposed in the discussion of Example 5, even with type family applications and/or constraint kinds.
 
 
-## 20181013 -- narrowing
+# 20181013 -- narrowing
 
 
 
@@ -648,7 +648,7 @@ The reduction of a type family application `F <X>` cannot introduce new free typ
 An assignment to a uvar `alpha[tau:j]` that occurs in the givens could directly or indirectly (via enabled given-given interactions) yield the given `g` of WAY2.
 
 
-## 20181008 - first notes, learning a lot
+# 20181008 -- first notes, learning a lot
 
 
 
