@@ -45,12 +45,8 @@ can also provide:
 >
 
 - Assuming all code goes through MRs: as a CI pipeline job
-- with a \[\[[
-  https://github.com/gitlabhq/gitlabhq/blob/667c0a909bde1cf71f21d8ec9768e98b1c489030/doc/hooks/custom\_hooks.md](https://github.com/gitlabhq/gitlabhq/blob/667c0a909bde1cf71f21d8ec9768e98b1c489030/doc/hooks/custom_hooks.md)
-
-
-\|custom hook\]\]
-
+- with a [
+  custom hook](https://github.com/gitlabhq/gitlabhq/blob/667c0a909bde1cf71f21d8ec9768e98b1c489030/doc/hooks/custom_hooks.md)
 
 - Code and commit message style checks (this is probably best done as a
   CI pipeline)
