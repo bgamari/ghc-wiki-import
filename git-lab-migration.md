@@ -22,7 +22,7 @@ and start taking MRs via GitLab.
 
 
 
-Currently GHC uses Gitolite and a pile of custom hooks to host the `ghc` repository and a 
+Currently GHC uses Gitolite, Gitweb, and a pile of custom hooks to host the `ghc` repository and its mirrored core libraries.
 
 
 
