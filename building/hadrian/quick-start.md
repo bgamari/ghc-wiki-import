@@ -42,7 +42,7 @@ On Windows:
 
 
 ```
-$ hadrian/build.bat -c -j
+$ hadrian\build.bat -c -j
 ```
 
 
