@@ -11,7 +11,7 @@ The following instructions assume that you have [got the sources](building/getti
 
 
 Hadrian is much younger than GHC's Make-based build system. If you need a feature supported by the Make build system but not by Hadrian, or more generally if you encounter any problem, please let us know [
-on the issue tracker](https://github.com/snowleopard/hadrian/issues).
+on the issue tracker](https://ghc.haskell.org/trac/ghc/newticket).
 
 
 ## tl;dr
