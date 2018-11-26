@@ -52,3 +52,11 @@ tool writers to use the GHC API.
 >
 >
 
+1. Introduce a means to map `RdrNames` in the `ParsedSource` to their corresponding `Name` after renaming.
+
+>
+>
+> Wiki page: [ApiNameMap](api-name-map)
+>
+>
+
