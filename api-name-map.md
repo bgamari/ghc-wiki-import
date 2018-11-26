@@ -47,6 +47,10 @@ This is the approach currently used in `HaRe`, and is presented for inclusion in
 https://phabricator.haskell.org/D5330](https://phabricator.haskell.org/D5330)
 
 
+####
+D. Modify the `RenamedSource` AST so that it also fully represents the parsed source file, when used with the API Annotations.
+
+
 ### Discussion
 
 
@@ -57,6 +61,10 @@ AZ opinions:
 
 Option A is not viable. Option B could work, but would have to be subject to a `DynFlag` otherwise the space penalty would be prohibitive for normal usage.
 Option C is a "bolt-on", but is known to do the job.
+
+
+
+Option D would be the best from a tooling perspective, but would be a massive engineering effort, and hard to justify given the use case.
  
 
 
