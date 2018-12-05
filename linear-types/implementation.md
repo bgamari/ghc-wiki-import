@@ -67,7 +67,7 @@ In binders, where we stored a type, we now store a pair of type and multiplicity
 We need to distinguish `a -> b`, `a ->. b` and `a -->.(m) b` in the surface syntax. The `HsFunTy` constructor has an extra field containing `HsArrow`, which stores this information:
 
 
-```wiki
+```
 data HsArrow pass
   = HsUnrestrictedArrow
     -- ^ a -> b
