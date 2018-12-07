@@ -281,7 +281,7 @@ instance OutputableX p => Outputable (HsExpr p)
 instance OutputableX p => Outputable (HsPat p)
 instance OutputableX p => Outputable (HsType p)
 instance OutputableX p => Outputable (HsBinds p)
-instance (OutputableX idL, OutputableX idR, OutputableX body) => Outputable (StmtLR idL idR body)
+instance (OutputableX idL, OutputableX idR, Outputable body) => Outputable (StmtLR idL idR body)
 ```
 
 
