@@ -24,10 +24,6 @@ Help/Guide](https://ghc.haskell.org/trac/ghc/wiki/TracGuide) link at the top of 
 
 - Forthcoming planned releases:
 
-  - [8.6.3](status/gh-c-8.6.3) (0 (Ticket query: status: !closed,
-    status: !merge, priority: high, priority: highest, milestone: 8.6.3, max: 0,
-    order: id) [
-    open tickets](https://ghc.haskell.org/trac/ghc/query?status=!closed&priority=high&priority=highest&milestone=8.6.3&order=priority) with priority high or highest)
   - [8.8.1](status/gh-c-8.8.1) (37 (Ticket query: status: !closed,
     status: !merge, priority: high, priority: highest, milestone: 8.8.1, max: 0,
     order: id) [
