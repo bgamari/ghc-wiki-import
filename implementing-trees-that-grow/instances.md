@@ -318,7 +318,7 @@ Now, whenever a piece of code needs something from the large constraint set, it 
 ```
 
 
-Inside `withOutputableX @idL`, we have `LargeConstraintSet idL` in context.
+Inside `withOutputableX @p`, we have `LargeConstraintSet p` in context.
 
 
 ### Plan H\*
@@ -330,8 +330,8 @@ Plan H relies on the assumption that calls to `withOutputableX` will not lead to
 
 ```
 class OutputableX p where
-  withOutputableXIPBinds :: (Outputable (XIPBinds p => r) -> r
-  withOutputableXViaStrategy :: (Outputable (XViaStrategy p => r) -> r
+  withOutputableXIPBinds :: (Outputable (XIPBinds p) => r) -> r
+  withOutputableXViaStrategy :: (Outputable (XViaStrategy p) => r) -> r
   ...
   ...
   ... -- and so on, for each extension field
