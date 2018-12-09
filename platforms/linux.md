@@ -12,7 +12,7 @@
 <th> Comments </th>
 <th> Has bindist 
 </th></tr>
-<tr><th> RedHat/Centos           </th>
+<tr><th> **RedHat/Centos**       </th>
 <th>                </th>
 <th>       </th>
 <th>            </th>
@@ -45,7 +45,7 @@
 <th>            </th>
 <th>               
 </th></tr>
-<tr><th> Fedora                  </th>
+<tr><th> **Fedora**              </th>
 <th>                </th>
 <th>       </th>
 <th>            </th>
@@ -100,7 +100,7 @@
 <th>            </th>
 <th>               
 </th></tr>
-<tr><th> Ubuntu                  </th>
+<tr><th> **Ubuntu**              </th>
 <th>                </th>
 <th>       </th>
 <th>            </th>
@@ -166,7 +166,7 @@
 <th>            </th>
 <th>               
 </th></tr>
-<tr><th> Debian                  </th>
+<tr><th> **Debian**              </th>
 <th>                </th>
 <th>       </th>
 <th>            </th>
@@ -208,13 +208,35 @@
 <th> 6.0       </th>
 <th> 5       </th>
 <th>            </th>
-<th>               
+<th> x             
 </th></tr>
 <tr><th> Debian Buster (10)      </th>
 <th>                </th>
 <th>       </th>
 <th>            </th>
 <th> glibc       </th>
+<th> 6.1   </th>
+<th> 6.1       </th>
+<th>         </th>
+<th>            </th>
+<th>               
+</th></tr>
+<tr><th> **Alpine**              </th>
+<th>                </th>
+<th>       </th>
+<th>            </th>
+<th>             </th>
+<th>       </th>
+<th>           </th>
+<th>         </th>
+<th>            </th>
+<th>               
+</th></tr>
+<tr><th> Alpine 3.8              </th>
+<th> Dec 2018       </th>
+<th> 6.4   </th>
+<th> 2.30       </th>
+<th> musl 1.1    </th>
 <th> 6.1   </th>
 <th> 6.1       </th>
 <th>         </th>
