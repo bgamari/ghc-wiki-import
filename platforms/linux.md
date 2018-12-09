@@ -12,6 +12,17 @@
 <th> Comments </th>
 <th> Has bindist 
 </th></tr>
+<tr><th> RedHat/Centos           </th>
+<th>                </th>
+<th>       </th>
+<th>            </th>
+<th>             </th>
+<th>       </th>
+<th>           </th>
+<th>         </th>
+<th>            </th>
+<th>               
+</th></tr>
 <tr><th> RedHat 6                </th>
 <th>                </th>
 <th> 4.4   </th>
@@ -30,6 +41,17 @@
 <th> glibc 2.17  </th>
 <th> 6.0   </th>
 <th> 5.9       </th>
+<th>         </th>
+<th>            </th>
+<th>               
+</th></tr>
+<tr><th> Fedora                  </th>
+<th>                </th>
+<th>       </th>
+<th>            </th>
+<th>             </th>
+<th>       </th>
+<th>           </th>
 <th>         </th>
 <th>            </th>
 <th>               
@@ -74,6 +96,17 @@
 <th> glibc 2.27  </th>
 <th> 6.1   </th>
 <th> 6.1       </th>
+<th>         </th>
+<th>            </th>
+<th>               
+</th></tr>
+<tr><th> Ubuntu                  </th>
+<th>                </th>
+<th>       </th>
+<th>            </th>
+<th>             </th>
+<th>       </th>
+<th>           </th>
 <th>         </th>
 <th>            </th>
 <th>               
@@ -129,6 +162,17 @@
 <th> glibc 2.26  </th>
 <th> 6.0   </th>
 <th> 6.1       </th>
+<th>         </th>
+<th>            </th>
+<th>               
+</th></tr>
+<tr><th> Debian                  </th>
+<th>                </th>
+<th>       </th>
+<th>            </th>
+<th>             </th>
+<th>       </th>
+<th>           </th>
 <th>         </th>
 <th>            </th>
 <th>               
