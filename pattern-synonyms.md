@@ -355,17 +355,13 @@ where *cfunlhs* is like *funlhs*, except that the functions symbol is a *conid* 
 
 
 
-Example:
+Example, using [ViewPatterns](view-patterns):
 
 
 ```wiki
-   pattern Succ n <- n1 | let n = n1-1, n >= 0 where
+   pattern Succ n <- ((\x -> (x-1) <$ guard (x > 0)) -> Just n) where
       Succ n = n + 1
 ```
-
-
-**TODO**: Rewrite this example to not use [ViewPatternsAlternative](view-patterns-alternative)
-
 
 
 The first part as is before and describes the expansion of the synonym in patterns. The second part describes the expansion in expressions.
