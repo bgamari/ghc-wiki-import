@@ -22,7 +22,7 @@ This enables debug information for GHC's boot libraries (e.g. `base`, `bytestrin
 
 
 
-If you would also like to enable the runtime's unwind support (e.g. allowing use of `GHC.ExecutionStack`), you will need to install `libdw` and its development headers, and pass `--enable-dwarf-unwind` to GHC's `configure` script. Note that this is currently only on x86\_64 Linux (although i386 may also work; other platforms will need more implementation). In addition to `GHC.ExecutionStack`, this also enables a  `SIGUSR2` signal handler which dumps a stacktrace to standard error. This can be quite handy while debugging "hung" processes.
+If you would also like to enable the runtime's unwind support (e.g. allowing use of `GHC.ExecutionStack`), you will need to install `libdw` and its development headers, and pass `--enable-dwarf-unwind` to GHC's `configure` script. Note that this is currently only on x86\_64 Linux (although i386 may also work; other platforms will need more implementation). In addition to `GHC.ExecutionStack`, this also enables a  `SIGQUIT (`SIGUSR2\` before GHC 8.4) signal handler which dumps a stacktrace to standard error. This can be quite handy while debugging "hung" processes.
 
 
 
@@ -71,7 +71,7 @@ If you are prepared to accept the potential for segfaults, GHC 8.0.1 now provide
 - GHC's runtime system has support for DWARF stack unwinding on Linux, x86\_64 and i386 via `libdw`. This is exposed in two ways,
 
   - A stack trace will be provided on stderr when runtime system panics
-  - A stack trace will be dumped to stderr when the program receives the `SIGUSR2` signal
+  - A stack trace will be dumped to stderr when the program receives the `SIGUSR2` signal (edit: `SIGQUIT` with GHC \>= 8.4)
   - A stack trace can be requested from Haskell code with the `GHC.ExecutionStack` module
 
 
