@@ -82,6 +82,12 @@ The build system can then persist this dependency information and use it to info
 It may still be possible for API users and plugins to add dependencies which are not tracked by this scheme.
 
 
+## Prior art
+
+
+- [
+  Phab:D3898](https://phabricator.haskell.org/D3898) aimed to resolve a similar issue.
+
 ## Further Additions
 
 
