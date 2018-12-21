@@ -14,9 +14,7 @@ We should be clear about the dependencies between items on this list.
 
 
 - [
-  Proposal 83: collapse PolyKinds and TypeInType](https://github.com/ghc-proposals/ghc-proposals/pull/83)
-- [
-  Proposal 81: Visible dependent quantification](https://github.com/ghc-proposals/ghc-proposals/pull/81)
+  Proposal 81: Visible dependent quantification](https://github.com/ghc-proposals/ghc-proposals/pull/81).  Just syntax!  Lets you say `forall a -> ty` in types.  See [GhcKinds/KindInference](ghc-kinds/kind-inference) and [GhcKinds/KindInference/Examples](ghc-kinds/kind-inference/examples).
 - [
   Proposal 54: top-level kind signatures for type constuctors (depends on Proposal 81)](https://github.com/ghc-proposals/ghc-proposals/pull/54)
 - [
