@@ -377,6 +377,21 @@ I (Matthew) made the matching more robust](https://github.com/tweag/ghc/pull/92/
 as the builtin rule only uses that information for the type of the function.
 
 
+### Do-notation/rebindable syntax
+
+
+
+Type-checking of the do notation relies on typing templates (`SyntaxOpType`). The type of `(>>=)` (in particular), in the context, is matched against its template, returning the type.
+
+
+
+In order to support `(>>=)` operators with varying multiplicities, function templates (`SynFun`) now return their multiplicity. Specifically `SyntaxOpType` now returns a second list of all the multiplicities (from left to right) which it computed.
+
+
+
+I (aspiwack) introduced a second list at a time where there wasn't a correspondence between types and multiplicities. It could be changed to return multiplicities as types in the main list. It's not much of a simplification, though.
+
+
 ## Core
 
 
