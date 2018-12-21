@@ -18,7 +18,7 @@ Authors or the implementation are:
 
 
 The implementation is supported by a [
-document formalising (a simplified version) of linear core](https://ghc.haskell.org/trac/ghc/attachment/wiki/LinearTypes/Implementation/minicore.pdf). This is more complete than the paper. It is work in progress.
+document formalising (a simplified version) of linear core](https://ghc.haskell.org/trac/ghc/attachment/wiki/LinearTypes/Implementation/minicore.2.pdf). This is more complete than the paper. It is work in progress.
 
 
 ## Very high-level summary
@@ -453,6 +453,10 @@ either `splitFunTy` is called and then we must keep track of the additional info
 
 
 #### Rebuilding expressions in the optimiser
+
+
+
+This subsection is somewhat out of date because let-binders now have alias-like quality to be able to float out. However, everything here still apply for the case-of-case transformation.
 
 
 
