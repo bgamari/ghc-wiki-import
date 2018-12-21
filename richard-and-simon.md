@@ -20,6 +20,9 @@ We should be clear about the dependencies between items on this list.
   Proposal 99: explicit specificity](https://github.com/ghc-proposals/ghc-proposals/pull/99).  Lets us write `T :: forall {k} (a :: k).blah`.
 
 - [
+  Proposal 179: tweak printing of foralls](https://github.com/ghc-proposals/ghc-proposals/pull/179)
+
+- [
   Proposal 54: top-level kind signatures for type constuctors](https://github.com/ghc-proposals/ghc-proposals/pull/54) (depends on Proposal 81)
 
 - [
