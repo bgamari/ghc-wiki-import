@@ -18,11 +18,6 @@ building older versions of GHC may require having an older version of GHC on you
 
 
 ```
-# needed only once, URL rewrite rule is persisted in ${HOME}/.gitconfig
-git config --global url."git://gitlab.haskell.org/ghc/packages-".insteadOf git://gitlab.haskell.org/ghc/packages/
-# (if you already cloned using ssh, you'll need this rule instead to make submodules work:)
-# git config --global url."git@gitlab.haskell.org:ghc/packages-".insteadOf git@gitlab.haskell.org:ghc/packages/
-
 # clone GHC's main Git repository (creates './ghc' folder in CWD)
 git clone --recursive git://gitlab.haskell.org/ghc/ghc
 cd ghc/
