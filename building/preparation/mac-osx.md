@@ -9,11 +9,17 @@
 1. Install Homebrew [ http://brew.sh](http://brew.sh)
 1. `brew install autoconf automake python3`
 1. Install a recent GHC version using your method of choice
-1. `cabal install alex happy haddock`
+1. Install the necessary GHC tools
+
+  - `cabal install alex happy haddock`
 1.  Install tools for building the docs:
 
   - `sudo easy_install pip`
   - `sudo pip install sphinx`
+  - Make sure `xelatex` is on your PATH, and works (if you installed MacTeX from [
+    https://www.tug.org/mactex/downloading.html](https://www.tug.org/mactex/downloading.html), it includes `xelatex`)
+  - Download and install (e.g., via `Font Book.app`) DEJAVU fonts Sans, Sans Mono, and Serif from, e.g., [
+    https://www.fontsquirrel.com/fonts/list/foundry/dejavu-fonts](https://www.fontsquirrel.com/fonts/list/foundry/dejavu-fonts) 
 1. Done!
 
 
@@ -30,8 +36,13 @@ then please make sure you have an up to date release of GHC, Currently 7.8.3.
 
 
 
+With the relatively recent Xcode (at the time of this edit, the current version is Xcode-10.1), it is recommended to use Clang rather than GCC, by prepending the configure command with it: `CC=clang ./configure` or `./configure CC=clang`
+
+
+
 You will need to install several tools, using one of  [
-Homebrew](http://mxcl.github.com/homebrew/)  MacPorts or Fink.
+Homebrew](http://mxcl.github.com/homebrew/),  [
+MacPorts](https://www.macports.org/), or Fink.
 
 
 ## Xcode (GCC)
