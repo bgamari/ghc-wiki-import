@@ -19,8 +19,21 @@ building older versions of GHC may require having an older version of GHC on you
 
 ```
 # clone GHC's main Git repository (creates './ghc' folder in CWD)
-git clone --recursive git://gitlab.haskell.org/ghc/ghc
+# Note: you can connect to GitLab using SSH, if you register to GitLab and upload your SSH key.
+# In that case the following line would have "git:" instead of "https:"
+git clone --recursive https://gitlab.haskell.org/ghc/ghc
 cd ghc/
+
+# Note: unless you want to build the latest development version of GHC, you would need to change
+# the branch to one of the stable releases. You can learn what branches are available via command
+# git branch -a
+# The following commented line shows how to switch
+# to the latest stable release of GHC-8.6.x:
+# git checkout ghc-8.6
+
+# If you changed the branches above, you have to update the submodules, using
+# the following commented-out line:
+# git submodule update --init
 
 # configure build
 cp mk/build.mk.sample mk/build.mk
@@ -39,7 +52,7 @@ make -j8 # parallelize to at most 8 parallel jobs; adapt to actual number of cpu
 
 >
 >
-> If your machine has all the prerequisites, this might just work. Expect it all to take roughly 30 minutes.
+> If your machine has all the prerequisites, this might just work. Expect it all to take roughly between 30 minutes and a couple of hours, depending on your CPU speed, and the number of jobs you can run in parallel.
 >
 >
 
