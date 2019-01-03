@@ -6,7 +6,21 @@ If you are an aspiring GHC developer, you may want to read the [Newcomers](newco
 
 
 
-To build GHC, first get the sources by cloning GHC's main Git repository or via an alternative method (see [Getting the Sources](building/getting-the-sources) for more details). Note: you can connect to GitLab using SSH, if you register to GitLab and upload your SSH key. In that case the following line would have "git:" instead of "https:"
+To build GHC, first make sure to:
+
+
+>
+>
+> [Prepare your machine](building/preparation)
+>
+>
+
+
+For Windows users, all the commands below must be executed in the MinGW shell, not Command Prompt or PowerShell.
+
+
+
+Then, get the sources by cloning GHC's main Git repository or via an alternative method (see [Getting the Sources](building/getting-the-sources) for more details). Note: you can connect to GitLab using SSH, if you register to GitLab and upload your SSH key. In that case the following line would have "git:" instead of "https:"
 
 
 ```
@@ -16,10 +30,6 @@ cd ghc/
 
 
 Unless you want to build the latest development version of GHC, [checkout a stable release](building/quick-start#).
-
-
-
-Next, make sure to [install the necessary tools](building/preparation). For Windows users, all the commands below must be executed in the MinGW shell, not Command Prompt or PowerShell.
 
 
 
