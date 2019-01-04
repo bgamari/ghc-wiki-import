@@ -2,7 +2,7 @@
 
 
 
-If you are an aspiring GHC developer, you may want to read the [Newcomers](newcomers) page first.
+If you are an aspiring GHC developer, you may want to read the [Contributing](contributing) page first.
 
 
 
