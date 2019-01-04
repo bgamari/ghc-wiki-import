@@ -10,7 +10,7 @@ doi](http://doi.org/) purports to enable such links.
 
 
 
-You can ask questions on `ghc-devs@haskell.org`. People are friendly.  See also [working on GHC](working-conventions) and [The GHC Team](team-ghc).
+You can ask questions on `ghc-devs@haskell.org`. People are friendly.  See also [contributing to GHC](contributing) and [The GHC Team](team-ghc).
 
 
 
