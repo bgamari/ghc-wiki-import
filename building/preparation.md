@@ -22,6 +22,6 @@ Alternatively:
 - [List of tools needed to build GHC](building/preparation/tools)
 
 
-See the [Newcomers](newcomers) page for how to proceed after this.
+See the [Newcomers](contributing#newcomers-to-ghc) page for how to proceed after this.
 
 
