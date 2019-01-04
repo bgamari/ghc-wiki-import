@@ -24,6 +24,6 @@ Other build system files are in `rules/` and `mk/`.
 
 
 
-The [Coding style guidelines](working-conventions) may be found on the wiki.
+The [Coding style guidelines](contributing#working-conventions) may be found on the wiki.
 
 
