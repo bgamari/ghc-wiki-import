@@ -40,7 +40,7 @@ A complete GHC source tree can be obtained (located in `ghc`) by running the fol
 
 
 ```
-git clone --recursive git://git.haskell.org/ghc.git
+git clone --recursive https://gitlab.haskell.org/ghc/ghc
 ```
 
 
@@ -56,6 +56,34 @@ Notes:
 - If you're behind a **firewall blocking port 9418** (or `git clone git://...` fails for some other reason), try replacing `git://` by `http://` or `https://` in the instructions above.
 
 - The above directions are valid for cloning GHC 7.9 or newer. For cloning GHC 7.8 or earlier, see the [legacy](building/getting-the-sources/legacy) instructions.
+
+### Using a Fork of GHC
+
+
+
+You can create a fork of ghc by logging in and clicking the fork button at [
+https://gitlab.haskell.org/ghc/ghc](https://gitlab.haskell.org/ghc/ghc). Do NOT clone your fork directly. This will cause issues with relative submodule paths. Instead:
+
+
+- Clone the official GHC repo as described [above](building/getting-the-sources#cloning-head).
+- Add your fork as a new remote with the following command. "myFork" can be any name you choose. The exact url is given on your fork's gitlab page.
+
+  ```
+  git remote add myFork git@gitlab.haskell.org:JohnDoe/ghc.git
+  ```
+
+
+You can then e.g. fetch and checkout a branch from your fork:
+
+
+```
+git fetch myFork
+git checkout myFork/myBranch
+```
+
+
+If you really must clone your fork directly, you can use the python script .gitlab-ci/fix-submodules.py which tweaks the git submodule paths to point to gitlab.haskell.org/ghc/ghc.
+
 
 ### Getting a branch
 
