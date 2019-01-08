@@ -101,7 +101,7 @@ You can clone a specific branch via:
 
 
 ```
-git clone -b <branchname> --recursive git://git.haskell.org/ghc.git ghc-<branchname>
+git clone -b <branchname> --recursive https://gitlab.haskell.org/ghc/ghc ghc-<branchname>
 ```
 
 
@@ -125,7 +125,7 @@ Starting with GHC 7.10.1, you can simply clone a specific tag via:
 
 
 ```
-git clone -b ghc-7.10.1-release --recursive git://git.haskell.org/ghc.git ghc-7.10.1
+git clone -b ghc-7.10.1-release --recursive https://gitlab.haskell.org/ghc/ghc ghc-7.10.1
 ```
 
 
