@@ -26,7 +26,7 @@ Initial cloning of GHC HEAD (into the folder `./ghc`) is a simple as:
 
 
 ```
-git clone --recursive git://git.haskell.org/ghc.git
+git clone --recursive https://gitlab.haskell.org/ghc/ghc
 ```
 
 
