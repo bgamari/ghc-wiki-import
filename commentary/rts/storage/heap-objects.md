@@ -176,7 +176,7 @@ The size field gives the size of the payload, and each bit of the bitmap is 1 if
 
 
 
-The macros `MK_BITMAP`, `BITMAP_SIZE`, and `BITMAP_BITS` in [InfoTables.h](/trac/ghc/browser/includes/rts/storage/InfoTables.h)[](/trac/ghc/export/HEAD/ghc/includes/rts/storage/InfoTables.h) provide ways to conveniently operate on small bitmaps.
+The macros `MK_SMALL_BITMAP`, `BITMAP_SIZE`, and `BITMAP_BITS` in [InfoTables.h](/trac/ghc/browser/includes/rts/storage/InfoTables.h)[](/trac/ghc/export/HEAD/ghc/includes/rts/storage/InfoTables.h) provide ways to conveniently operate on small bitmaps.
 
 
 
