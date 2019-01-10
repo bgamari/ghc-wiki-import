@@ -22,7 +22,7 @@ This enables debug information for GHC's boot libraries (e.g. `base`, `bytestrin
 
 
 
-If you would also like to enable the runtime's unwind support (e.g. allowing use of `GHC.ExecutionStack`), you will need to install `libdw` and its development headers, and pass `--enable-dwarf-unwind` to GHC's `configure` script. Note that this is currently only on x86\_64 Linux (although i386 may also work; other platforms will need more implementation). In addition to `GHC.ExecutionStack`, this also enables a  `SIGQUIT (`SIGUSR2\` before GHC 8.4) signal handler which dumps a stacktrace to standard error. This can be quite handy while debugging "hung" processes.
+If you would also like to enable the runtime's unwind support (e.g. allowing use of `GHC.ExecutionStack`), you will need to install `libdw` and its development headers, and pass `--enable-dwarf-unwind` to GHC's `configure` script. Note that this is currently only on x86\_64 Linux (although i386 may also work; other platforms will need more implementation). In addition to `GHC.ExecutionStack`, this also enables a  `SIGQUIT` (`SIGUSR2` before GHC 8.4) signal handler which dumps a stacktrace to standard error. This can be quite handy while debugging "hung" processes.
 
 
 
