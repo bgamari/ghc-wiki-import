@@ -172,7 +172,7 @@ The payload consists of a mixture of pointers and non-pointers, described by a b
 
 
 
-The size field gives the size of the payload, and each bit of the bitmap is 1 if the corresponding word of payload contains a pointer to a live object.
+The size field gives the size of the payload, and each bit of the bitmap is 0 if the corresponding word of payload contains a pointer to a live object.
 
 
 
