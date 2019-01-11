@@ -2,7 +2,7 @@
 
 
 
-This is the launch page for Backpack, actively maintained by Edward (as of Nov 2017). 
+This is the launch page for Backpack, actively maintained by Edward (as of Jan 2019). 
 
 
 
