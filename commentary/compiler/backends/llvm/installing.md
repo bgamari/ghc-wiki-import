@@ -33,6 +33,7 @@ here](http://hackage.haskell.org/trac/ghc/wiki/Building)
 <th> **7.0** 
 </th></tr>
 <tr><th> LLVM version </th>
+<th> 7.0 </th>
 <th> 6.0 </th>
 <th> 5.0 </th>
 <th> 3.9 </th>
@@ -43,8 +44,7 @@ here](http://hackage.haskell.org/trac/ghc/wiki/Building)
 <th> ?? </th>
 <th> 2.9 </th>
 <th> 2.7 
-</th>
-<th></th></tr></table>
+</th></tr></table>
 
 
 
