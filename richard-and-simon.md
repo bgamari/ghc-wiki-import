@@ -36,6 +36,8 @@ We should be clear about the dependencies between items on this list.
 # Refactoring of existing stuff that we'd like to get done
 
 
+- \* [\#15579](https://gitlab.staging.haskell.org/ghc/ghc/issues/15579): `topNormaliseType`; also [\#14729](https://gitlab.staging.haskell.org/ghc/ghc/issues/14729), [\#15549](https://gitlab.staging.haskell.org/ghc/ghc/issues/15549).  This is high priority: it's an outright bug causing Lint failures; it's not hard; and fixing it will close three tickets.
+
 - [\#8095](https://gitlab.staging.haskell.org/ghc/ghc/issues/8095): coercion zapping.  Nearly done!  But not quite.  And will be valuable for everyone.
 
 - [\#15977](https://gitlab.staging.haskell.org/ghc/ghc/issues/15977): restructure typechecking modules. New module `KcTyClsDecls` that pulls from `TcTyClsDecls` and `TcHsType`.
@@ -45,7 +47,6 @@ We should be clear about the dependencies between items on this list.
 - [\#14164](https://gitlab.staging.haskell.org/ghc/ghc/issues/14164): comments, invariant, asserts (Richard)
 - [\#15577](https://gitlab.staging.haskell.org/ghc/ghc/issues/15577): surprising coercions: see comment:5
 - [\#15621](https://gitlab.staging.haskell.org/ghc/ghc/issues/15621), [\#14185](https://gitlab.staging.haskell.org/ghc/ghc/issues/14185): using implication constraints to improve error messages
-- [\#15579](https://gitlab.staging.haskell.org/ghc/ghc/issues/15579): `topNormaliseType`; also [\#14729](https://gitlab.staging.haskell.org/ghc/ghc/issues/14729)
 - `zonkPromote`: the remaining ones are there for a reason; but Simon still unhappy; see RAE/SLPJ Slack channel 31 Aug; and [\#15588](https://gitlab.staging.haskell.org/ghc/ghc/issues/15588), [\#15141](https://gitlab.staging.haskell.org/ghc/ghc/issues/15141), and [\#15589](https://gitlab.staging.haskell.org/ghc/ghc/issues/15589).  Stuff about "fully-known type variables".
 - [\#15474](https://gitlab.staging.haskell.org/ghc/ghc/issues/15474): (small) `Any` etc.
 - [\#15192](https://gitlab.staging.haskell.org/ghc/ghc/issues/15192): `GRefl`: still looking into perf changes
