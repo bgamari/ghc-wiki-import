@@ -46,6 +46,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
 
 - **Optimisation**
 
+  - [The mighty simplifier](simplifier)
   - [Inlining](inlining)
   - [FloatOut](float-out)
   - [FloatInwards](float-inwards)
