@@ -49,6 +49,7 @@ This page collects tickets that Simon PJ is interested in, so that he remembers 
   - [Inlining](inlining)
   - [FloatOut](float-out)
   - [FloatInwards](float-inwards)
+  - [Demand analysis](demand-analysis)
   - [CPR analysis](nested-cpr)
   - [SpecConstr](spec-constr)
   - [Specialise](specialise)
