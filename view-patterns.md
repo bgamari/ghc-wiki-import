@@ -608,7 +608,7 @@ f (view -> "hi") = 2
 ```
 
 
-**Exhaustiveness/Redundancy.**  It is hard to check for completeness of pattern matching; and likewise for overlap.  But guards already make both of these hard; and GADTs make completness tricky too. So matters are not much worse than before.
+**Exhaustiveness/Redundancy.**  It is hard to check for completeness of pattern matching; and likewise for overlap.  But guards already make both of these hard; and GADTs make completeness tricky too. So matters are not much worse than before.
 
 
 ## Features views can have
