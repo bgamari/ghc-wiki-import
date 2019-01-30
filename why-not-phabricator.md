@@ -181,7 +181,7 @@ Compare this to a Github workflow, where you just push your updated branch (with
 
 
 1. [
-  Help! I'm getting a strange error when running arc that I didn't get yesterday](https://ghc.haskell.org/trac/ghc/wiki/Phabricator#HelpImgettingastrangeerrorwhenrunningarcthatIdidntgetyesterday)
+  Help! I'm getting a strange error when running arc that I didn't get yesterday](Phabricator#HelpImgettingastrangeerrorwhenrunningarcthatIdidntgetyesterday)
 1. [
   "I think the amout of contributions would increase significantly if GHC migrated to GitHub and started accepting pull requests." (Sep 2014 @ reddit)](https://www.reddit.com/r/haskell/comments/2hes8m/the_ghc_source_code_contains_1088_todos_please/ckrzyec)
 1. [

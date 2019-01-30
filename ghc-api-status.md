@@ -259,7 +259,7 @@ There are also a few non-functional requirements:
 - [
   GHC as a Library](http://www.haskell.org/haskellwiki/GHC/As_a_library), the Haskell Wiki page
 - [
-  GHC Commentary on the GHC API](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Compiler/API) (may be outdated)
+  GHC Commentary on the GHC API](Commentary/Compiler/API) (may be outdated)
 - [
   hint, an attempt to provide a simplified and stable subset of the GHC API](http://hackage.haskell.org/cgi-bin/hackage-scripts/package/hint-0.2.1)
 

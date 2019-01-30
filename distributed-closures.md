@@ -105,7 +105,7 @@ Notice the pay-as-you-go nature of the instances. Only in instances with polymor
 
 === Implementation in GHC
 
-TODO See [https://ghc.haskell.org/trac/ghc/wiki/StaticPointers/Old old proposal] and [https://ghc.haskell.org/trac/ghc/blog/simonpj/StaticPointers blog post] by Simon PJ.
+TODO See [StaticPointers/Old old proposal] and [https://ghc.haskell.org/trac/ghc/blog/simonpj/StaticPointers blog post] by Simon PJ.
 
 === Implementation of `distributed-closure`
 

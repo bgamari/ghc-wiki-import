@@ -1,5 +1,5 @@
 
-**This page redirects to: **[Records/OverloadedRecordFields](/trac/ghc/wiki/Records/OverloadedRecordFields)
+**This page redirects to: **[Records/OverloadedRecordFields](Records/OverloadedRecordFields)
 
 
 

@@ -179,7 +179,7 @@ sure that your machine has the relevant tools, though:
 >
 >
 > [
-> http://hackage.haskell.org/trac/ghc/wiki/Building/Prerequisites](http://hackage.haskell.org/trac/ghc/wiki/Building/Prerequisites)
+> Building/Prerequisites](Building/Prerequisites)
 >
 >
 
@@ -192,7 +192,7 @@ onto the wiki, the top of which is here:
 >
 >
 > [
-> http://hackage.haskell.org/trac/ghc/wiki/Building](http://hackage.haskell.org/trac/ghc/wiki/Building)
+> Building](Building)
 >
 >
 

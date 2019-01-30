@@ -1,6 +1,6 @@
 
 The proposal is the same as [
-Edsko's Frontend Plugin Proposal](https://ghc.haskell.org/trac/ghc/wiki/FrontendPluginsProposal) with minor changes.
+Edsko's Frontend Plugin Proposal](FrontendPluginsProposal) with minor changes.
 
 
 - Instead of implementing it as a different kind of plugin this solution uses the pre-existing [
@@ -66,7 +66,7 @@ Compiler Plugins](https://downloads.haskell.org/~ghc/latest/docs/html/users_guid
 
 
 [
-Compiler hooks](https://ghc.haskell.org/trac/ghc/wiki/Ghc/Hooks) could be used, but they cannot be controlled by simply configuring GHC at runtime. In order to install new hooks, the tool developer would have to create an alternative compiler executable and users would have to replace their GHC executable with the altered one. This means that it is unlikely that multiple tools could be used together.
+Compiler hooks](Ghc/Hooks) could be used, but they cannot be controlled by simply configuring GHC at runtime. In order to install new hooks, the tool developer would have to create an alternative compiler executable and users would have to replace their GHC executable with the altered one. This means that it is unlikely that multiple tools could be used together.
 
 
 

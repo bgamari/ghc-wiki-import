@@ -237,7 +237,7 @@ suspend a = a
 >
 >
 > Note from David Feuer: the indirection problem could be resolved via [
-> https://ghc.haskell.org/trac/ghc/wiki/NewtypeOptimizationForGADTS](https://ghc.haskell.org/trac/ghc/wiki/NewtypeOptimizationForGADTS), which would be a good thing for other reasons too.
+> NewtypeOptimizationForGADTS](NewtypeOptimizationForGADTS), which would be a good thing for other reasons too.
 >
 >
 

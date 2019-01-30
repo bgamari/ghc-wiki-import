@@ -9,7 +9,7 @@ There are a number of services and tools that GHC developers should be aware of.
 
 == Official tools ==
 
- * Our [[Repositories|git repositories]], which are best used following the [[https://ghc.haskell.org/trac/ghc/wiki/|Working Conventions]]
+ * Our [[Repositories|git repositories]], which are best used following the [[|Working Conventions]]
  * The trac instance you are just using, which hosts the [[/wiki|wiki]] and the [[/report|bug tracker]]
  * Our [[MailingListsAndIRC|mailing lists]]
  * For code review, we use a [[Phabricator]] instance at https://phabricator.haskell.org/

@@ -543,7 +543,7 @@ First, we gather all of the free variables in the type family's kind and mark ea
 
 
 Next, we descend into each defining equation of the type family and inspect the left-hand and right-hand sides. The right-hand sides are analyzed just like the fields of a data constructor; see the [
-Role inference](https://ghc.haskell.org/trac/ghc/wiki/Roles#Roleinference) section above for more details. From the right-hand sides, we learn that the roles of `e`, `f`, and `g` should be (at least) `representational`.
+Role inference](Roles#Roleinference) section above for more details. From the right-hand sides, we learn that the roles of `e`, `f`, and `g` should be (at least) `representational`.
 
 
 

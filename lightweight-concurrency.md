@@ -43,7 +43,7 @@ Although implementing concurrency primitives as a library is hardly a novel idea
 
 
 For a high-level design of the current scheduler, see [
-Scheduler](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Rts/Scheduler).
+Scheduler](Commentary/Rts/Scheduler).
 
 
 ## Concurrency Substrate

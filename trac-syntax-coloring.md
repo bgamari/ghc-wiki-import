@@ -64,7 +64,7 @@ HTML documents are directly rendered only if the `render_unsafe_html` settings a
 
 
 <table><tr><th>MIME Types</th>
-<th>[WikiProcessors](/trac/ghc/wiki/WikiProcessors)</th></tr>
+<th>[WikiProcessors](WikiProcessors)</th></tr>
 <tr><th>`application/atom+xml`</th>
 <th>`xml`</th></tr>
 <tr><th>`application/json`</th>

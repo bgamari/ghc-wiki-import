@@ -8,7 +8,7 @@ In this page, we discuss the overall plan and details of implementing Trees that
 - [
   The Trees that Grow paper](http://www.jucs.org/jucs_23_1/trees_that_grow/jucs_23_01_0042_0062_najd.pdf)
 - The motivation and some background information can be found at the [
-  report](https://ghc.haskell.org/trac/ghc/wiki/NativeMetaprogramming) of a related Summer of Haskell project.
+  report](NativeMetaprogramming) of a related Summer of Haskell project.
 - [Notes about instances](implementing-trees-that-grow/instances)
 - Main GHC branch: `wip/GrowableAST`
 - [\#14490](https://gitlab.staging.haskell.org/ghc/ghc/issues/14490): TTG snags
@@ -40,7 +40,7 @@ A major benefit is that we believe that this re-engineering will
 
 
 - Completely subsume Alan Zimmerman's [
-  Api Annotations](https://ghc.haskell.org/trac/ghc/wiki/ApiAnnotations), making them much easier to use.
+  Api Annotations](ApiAnnotations), making them much easier to use.
 - Allow us to get rid of the annoying alternation between `t` and `Located t`, which pervades `HsSyn`
 
 ## Status
@@ -515,7 +515,7 @@ Can this be done? How?
 >
 > I was talking to Ben, Simon et al about your big patch [
 > https://phabricator.haskell.org/D3935](https://phabricator.haskell.org/D3935), which \> is Step 1 of [
-> https://ghc.haskell.org/trac/ghc/wiki/ImplementingTreesThatGrow](https://ghc.haskell.org/trac/ghc/wiki/ImplementingTreesThatGrow).
+> ImplementingTreesThatGrow](ImplementingTreesThatGrow).
 >
 >
 >

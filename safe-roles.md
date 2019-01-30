@@ -296,9 +296,9 @@ GHC Wiki:
 
 
 - [
-  https://ghc.haskell.org/trac/ghc/wiki/Roles](https://ghc.haskell.org/trac/ghc/wiki/Roles)
+  Roles](Roles)
 - [
-  https://ghc.haskell.org/trac/ghc/wiki/Roles2](https://ghc.haskell.org/trac/ghc/wiki/Roles2)
+  Roles2](Roles2)
 
 
 Email Threads:

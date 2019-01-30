@@ -77,7 +77,7 @@ Activating this extension would have no effect on existing programs. It will onl
 >
 >
 > AntC: This section should also compare to [
-> https://ghc.haskell.org/trac/ghc/wiki/Records/OverloadedRecordFields/DuplicateRecordFields](https://ghc.haskell.org/trac/ghc/wiki/Records/OverloadedRecordFields/DuplicateRecordFields).
+> Records/OverloadedRecordFields/DuplicateRecordFields](Records/OverloadedRecordFields/DuplicateRecordFields).
 > See the discussion starting [
 > https://mail.haskell.org/pipermail/glasgow-haskell-users/2016-May/026225.html](https://mail.haskell.org/pipermail/glasgow-haskell-users/2016-May/026225.html).
 >
